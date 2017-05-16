@@ -1,24 +1,17 @@
-# README
+# Exercism Website
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Development Setup
 
-* Ruby version
+The discussed data model is [here](https://www.lucidchart.com/documents/edit/e07385eb-0214-4359-9755-14b6c4d5ecb4).
 
-* System dependencies
+### Database
 
-* Configuration
+```
+mysql -e "CREATE USER 'exercism_reboot'@'localhost' IDENTIFIED BY 'exercism_reboot'" -u root -p
+mysql -e "create database exercism_reboot_development" -u root -p
+mysql -e "create database exercism_reboot_test" -u root -p
+mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_development.* TO 'exercism_reboot'@'localhost'" -u root -p
+mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'localhost'" -u root -p
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
