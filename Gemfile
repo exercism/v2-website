@@ -9,7 +9,7 @@ gem 'rails', '~> 5.1.0'
 gem 'puma', '~> 3.7'
 gem 'mysql2'
 
-gem 'devise'
+gem 'devise', '~> 4.3'
 gem 'kaminari'
 
 gem 'haml-rails'

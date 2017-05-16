@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+ruby = Track.create!(title: "Ruby")
+bob = Exercise.create!(title: "Ruby")
+ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password')
+
+ruby_bob = TrackExercise.create!(track: ruby, exercise: bob)
+ruby_bob_implementation = Implementation.create!(track_exercise: ruby_bob)
+
+ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
+ihid_ruby_bob = UserImplementation.create!(user: ihid, implementation: ruby_bob_implementation)
+ihid_ruby_bob_submission_1 = Submission.create!(user_implementation: ihid_ruby_bob)
+
+
