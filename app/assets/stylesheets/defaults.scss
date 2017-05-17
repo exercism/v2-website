@@ -1,0 +1,70 @@
+@import 'mixins';
+@import 'variables';
+
+* { box-sizing: border-box }
+
+html {
+    @include normal-font;
+    font-size: 62.5%;
+    letter-spacing: 0;
+}
+
+body {
+    z-index:0;
+    margin: 0;
+    @include normal-font;
+    @include font-size(14);
+    color:#333;
+}
+
+button,
+input,
+select,
+textarea {
+    @include normal-font;
+    @include font-size(14, 14);
+    font-weight:300;
+    color:#333;
+}
+
+.pure-g [class *="pure-u"] {
+    @include normal-font;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #ddd;
+    font-weight:300;
+    font-style:italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #ddd;
+   opacity:  1;
+    font-style:italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #ddd;
+   opacity:  1;
+    font-style:italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #ddd;
+    font-style:italic;
+}
+.pure-button {
+    color:#fff;
+    border-radius:3px;
+}
+h1, h2, h3, h4, h5, h6, p {
+    margin:0;
+    @include font-size(14, 14);
+    font-weight:300;
+}
+input {
+    border:1px solid #aaa;
+    padding:10px;
+    border-radius:2px;
+    &:focus {
+        outline:1px solid #ddd;
+        overflow:hidden;
+    }
+}

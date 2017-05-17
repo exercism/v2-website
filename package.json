@@ -1,5 +1,8 @@
 {
-  "name": "website",
+  "name": "exercism",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "purecss": "^0.6.2"
+  }
 }
