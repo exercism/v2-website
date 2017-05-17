@@ -12,6 +12,8 @@
     = csrf_meta_tags
 
   %body{class: body_class}
+
+    =render_header
     = yield
 
     = javascript_include_tag 'application'
