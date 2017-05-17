@@ -34,6 +34,6 @@ end
 
 group :test do
   gem 'mocha'
-  gem 'minitest'
+  gem 'minitest', '~> 5.10', '!= 5.10.2'
   gem 'timecop'
 end
