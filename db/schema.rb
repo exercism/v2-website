@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20170516141842) do
   create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "track_id", null: false
     t.bigint "specification_id", null: false
+    t.boolean "core", default: false, null: false
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["specification_id"], name: "fk_rails_29226396e4"

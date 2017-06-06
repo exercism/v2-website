@@ -1,6 +1,6 @@
-class CreatesUserTrack
-  def self.create!(*args)
-    new(*args).create!
+class StartsTrack
+  def self.start!(*args)
+    new(*args).start!
   end
 
   attr_reader :user, :track
@@ -9,7 +9,7 @@ class CreatesUserTrack
     @track = track
   end
 
-  def create!
+  def start!
     return false if UserTrack.where(user: user, track: track).exists?
 
     UserTrack.create!(user: user, track: track)

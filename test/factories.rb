@@ -26,6 +26,8 @@ FactoryGirl.define do
   factory :exercise do
     track { create :track }
     specification { create :specification }
+    core false
+    position 1
   end
 
   factory :user do

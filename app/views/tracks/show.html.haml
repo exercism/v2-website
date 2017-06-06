@@ -4,3 +4,18 @@
 
     %p Track Unlocked
 
+    %h2 Core Exercises
+    %ul
+      -@core_exercises_and_solutions.each do |exercise, solution|
+        %li
+          = exercise.title
+          -if solution
+            (Started)
+
+    %h2 Secondary Exercises
+    %ul
+      -@side_exercises_and_solutions.each do |exercise, solution|
+        %li
+          = exercise.title
+          -if solution
+            (Started)
