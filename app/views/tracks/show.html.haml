@@ -8,9 +8,11 @@
     %ul
       -@core_exercises_and_solutions.each do |exercise, solution|
         %li
-          = exercise.title
           -if solution
-            (Started)
+            = link_to exercise.title, solution
+            (#{solution.status})
+          -else
+            = exercise.title
 
     %h2 Secondary Exercises
     %ul

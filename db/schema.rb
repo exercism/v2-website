@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170516141842) do
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "implementation_id", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["implementation_id"], name: "fk_rails_f5a011874c"

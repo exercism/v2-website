@@ -3,6 +3,7 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
     create_table :solutions do |t|
       t.bigint :user_id, null: false
       t.bigint :implementation_id, null: false
+      t.integer :status, null: false, default: 0
 
       t.timestamps
     end
