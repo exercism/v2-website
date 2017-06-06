@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ExerciseTest < ActiveSupport::TestCase
+class IterationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

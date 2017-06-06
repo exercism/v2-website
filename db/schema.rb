@@ -13,61 +13,61 @@
 ActiveRecord::Schema.define(version: 20170516141842) do
 
   create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string "title", null: false
+    t.bigint "track_id", null: false
+    t.bigint "specification_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["specification_id"], name: "fk_rails_29226396e4"
+    t.index ["track_id"], name: "fk_rails_a796d89c21"
   end
 
   create_table "favourites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "submission_id", null: false
+    t.bigint "iteration_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["submission_id"], name: "fk_rails_3471c7f6a1"
+    t.index ["iteration_id"], name: "fk_rails_6ae4b0efef"
   end
 
   create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "submission_id", null: false
+    t.bigint "iteration_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["submission_id"], name: "fk_rails_b10f823c68"
+    t.index ["iteration_id"], name: "fk_rails_265dfdac28"
   end
 
   create_table "implementations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "track_exercise_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["track_exercise_id"], name: "fk_rails_965d0c0d38"
-  end
-
-  create_table "submissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_implementation_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_implementation_id"], name: "fk_rails_486c6d281f"
-  end
-
-  create_table "track_exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "track_id", null: false
     t.bigint "exercise_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exercise_id"], name: "fk_rails_52e659752f"
-    t.index ["track_id"], name: "fk_rails_9a58f06103"
+    t.index ["exercise_id"], name: "fk_rails_17e212a417"
+  end
+
+  create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "solution_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
+  end
+
+  create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "implementation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["implementation_id"], name: "fk_rails_f5a011874c"
+    t.index ["user_id"], name: "fk_rails_f83c42cef4"
+  end
+
+  create_table "specifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_implementations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_id", null: false
-    t.bigint "implementation_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["implementation_id"], name: "fk_rails_95e4b5b401"
-    t.index ["user_id"], name: "fk_rails_00da5637ef"
   end
 
   create_table "user_tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -97,14 +97,14 @@ ActiveRecord::Schema.define(version: 20170516141842) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "favourites", "submissions"
-  add_foreign_key "feedbacks", "submissions"
-  add_foreign_key "implementations", "track_exercises"
-  add_foreign_key "submissions", "user_implementations"
-  add_foreign_key "track_exercises", "exercises"
-  add_foreign_key "track_exercises", "tracks"
-  add_foreign_key "user_implementations", "implementations"
-  add_foreign_key "user_implementations", "users"
+  add_foreign_key "exercises", "specifications"
+  add_foreign_key "exercises", "tracks"
+  add_foreign_key "favourites", "iterations"
+  add_foreign_key "feedbacks", "iterations"
+  add_foreign_key "implementations", "exercises"
+  add_foreign_key "iterations", "solutions"
+  add_foreign_key "solutions", "implementations"
+  add_foreign_key "solutions", "users"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end

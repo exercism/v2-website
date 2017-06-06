@@ -1,3 +1,3 @@
 class Favourite < ApplicationRecord
-  belongs_to :submission
+  belongs_to :iteration
 end

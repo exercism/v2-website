@@ -1,3 +1,3 @@
 class Implementation < ApplicationRecord
-  belongs_to :track_exercise
+  belongs_to :exercise
 end

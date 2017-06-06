@@ -1,30 +1,31 @@
 FactoryGirl.define do
-  factory :exercise do
+  factory :specification do
     title "Bob"
   end
 
   factory :favourite do
-    submission { create :submission }
+    iteration { create :iteration }
   end
 
   factory :feedback do
-    submission { create :submission }
+    iteration { create :iteration }
   end
 
   factory :implementation do
-    track_exercise { create :track_exercise }
+    exercise { create :exercise }
   end
 
-  factory :submission do
-    user_implementation { create :user_implementation }
+  factory :iteration do
+    solution { create :solution }
   end
 
   factory :track do
     title "Ruby"
   end
-  factory :track_exercise do
+
+  factory :exercise do
     track { create :track }
-    exercise { create :exercise }
+    specification { create :specification }
   end
 
   factory :user do
@@ -33,7 +34,7 @@ FactoryGirl.define do
     password "foobar123"
   end
 
-  factory :user_implementation do
+  factory :solution do
     user { create :user }
     implementation { create :implementation }
   end
