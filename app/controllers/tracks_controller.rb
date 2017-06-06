@@ -4,7 +4,10 @@ class TracksController < ApplicationController
   def index
     return index_signed_out unless user_signed_in?
 
-    @tracks = Track.all
+    tracks = Track.all
+    unlocked_track_ids = current_user.user_tracks.pluck(:track_id)
+
+    @unlocked_tracks, @locked_tracks = tracks.partition {|t|unlocked_track_ids.include?(t.id)}
   end
 
   def show

@@ -1,5 +1,7 @@
 ruby = Track.create!(title: "Ruby")
 python = Track.create!(title: "Python")
+cpp = Track.create!(title: "C++")
+
 bob = Specification.create!(title: "Bob")
 ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password')
 

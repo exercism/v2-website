@@ -1,8 +1,15 @@
 #tracks-page
   .lo-container
     %h1 Tracks
+    %h2 Unlocked Tracks
     %ul
-      -@tracks.each do |track|
+      -@unlocked_tracks.each do |track|
         %li= link_to track.title, track
+
+    %h2 Locked Tracks
+    %ul
+      -@locked_tracks.each do |track|
+        %li= link_to track.title, track
+
 
 
