@@ -1,0 +1,8 @@
+#tracks-page
+  .lo-container
+    %h1 Tracks
+    %ul
+      -@tracks.each do |track|
+        %li= link_to track.title, track
+
+

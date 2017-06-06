@@ -1,5 +1,6 @@
 ruby = Track.create!(title: "Ruby")
-bob = Specification.create!(title: "Ruby")
+python = Track.create!(title: "Python")
+bob = Specification.create!(title: "Bob")
 ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password')
 
 ruby_bob = Exercise.create!(track: ruby, specification: bob)

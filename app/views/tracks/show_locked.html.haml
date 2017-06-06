@@ -1,0 +1,8 @@
+#track-locked-page
+  .lo-container
+    %h1= @track.title
+
+    %p Track Locked
+    %p= link_to "Start Track", user_tracks_path(track_id: @track), method: :post
+
+
