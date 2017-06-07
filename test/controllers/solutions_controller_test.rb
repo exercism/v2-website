@@ -1,18 +1,21 @@
 require 'test_helper'
 
 class SolutionsControllerTest < ActionDispatch::IntegrationTest
-  test "the truth" do
-    sign_in!
-    track = create :track
-    exercise1 = create :exercise, track: track, core: true
-    exercise2 = create :exercise, track: track, core: true
-    exercise3 = create :exercise, track: track, core: false
-    exercise4 = create :exercise, track: track, core: false
-    solution = create :solution, user: @current_user, exercise: exercise1
-    solution = create :solution, user: @current_user, exercise: exercise3
+  {
+    unlocked: "solution-unlocked-page",
+    cloned: "solution-cloned-page",
+    iterating: "solution-iterating-page",
+    mentor_approved: "solution-iterating-page",
+    user_completed: "solution-completed-page",
+    mentor_completed: "solution-completed-page"
+  }.each do |status, page|
+    test "shows with status #{status}" do
+      sign_in!
+      solution = create :solution, user: @current_user, status: status
 
-    get solution_url(solution)
-    assert_response :success
-    assert_correct_page "solution-page"
+      get solution_url(solution)
+      assert_response :success
+      assert_correct_page page
+    end
   end
 end

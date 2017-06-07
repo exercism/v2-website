@@ -1,6 +1,6 @@
 class Solution < ApplicationRecord
 
-  enum status: [:unlocked, :started, :submitted, :mentor_approved, :user_completed, :mentor_completed]
+  enum status: [:unlocked, :cloned, :iterating, :mentor_approved, :user_completed, :mentor_completed]
 
   belongs_to :user
   belongs_to :implementation
