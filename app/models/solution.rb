@@ -3,10 +3,7 @@ class Solution < ApplicationRecord
   enum status: [:unlocked, :cloned, :iterating, :mentor_approved, :user_completed, :mentor_completed]
 
   belongs_to :user
-  belongs_to :implementation
-  has_one :exercise, through: :implementation
+  belongs_to :exercise
 
-  def exercise_id
-    implementation.exercise_id
-  end
+  has_many :iterations
 end

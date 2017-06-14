@@ -1,22 +1,17 @@
 FactoryGirl.define do
-  factory :specification do
-    title "Bob"
-  end
-
   factory :favourite do
     iteration { create :iteration }
   end
 
-  factory :feedback do
+  factory :discussion_post do
     iteration { create :iteration }
-  end
-
-  factory :implementation do
-    exercise { create :exercise }
+    user { create :user }
+    content "Some comment here"
   end
 
   factory :iteration do
     solution { create :solution }
+    code "Foobar"
   end
 
   factory :track do
@@ -25,7 +20,7 @@ FactoryGirl.define do
 
   factory :exercise do
     track { create :track }
-    specification { create :specification }
+    title "Bob"
     core false
     position 1
   end
@@ -38,7 +33,7 @@ FactoryGirl.define do
 
   factory :solution do
     user { create :user }
-    implementation { create :implementation }
+    exercise { create :exercise }
   end
 
   factory :user_track do

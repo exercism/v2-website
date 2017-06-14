@@ -4,3 +4,21 @@
 
     %p You're iterating!!
 
+    /=link_to "Mark as completed", complete_submission_path(@submission), method: :patch
+
+    %ul
+      -@solution.iterations.each.with_index do |iteration, idx|
+        %li
+          -if iteration == @iteration
+            = idx + 1
+            (Selected)
+          -else
+            =link_to (idx + 1), solution_path(iteration_id: iteration.id)
+
+    %h2 Code
+    = @iteration.code
+
+    %h2 Discussion
+    - @iteration.discussion_posts.each do |post|
+      %h3= post.user.name
+      %div= post.content

@@ -27,6 +27,15 @@ class SolutionsController < ApplicationController
   end
 
   def show_iterating
+    @iteration = @solution.iterations.find_by_id(params[:iteration_id]) || @solution.iterations.first
+
+    # TODO
+    # If @iteration is null then the following page will break
+    # so we need to guard. However, it means that the solution is
+    # in the wrong state in the first place. Does this mean the
+    # state machine approach is wrong (to be able to allow this)
+    # or something else?
+
     render :show_iterating
   end
 
