@@ -1,6 +1,7 @@
 class SolutionsController < ApplicationController
+  before_action :set_solution
+
   def show
-    @solution = current_user.solutions.find(params[:id])
     @exercise = @solution.exercise
 
     case @solution.status.to_sym
@@ -8,16 +9,25 @@ class SolutionsController < ApplicationController
       show_unlocked
     when :cloned
       show_cloned
-    when :iterating, :mentor_approved
+    when :iterating
       show_iterating
-    when :user_completed, :mentor_completed
+    when :completed_approved, :completed_unapproved
       show_completed
     else
       raise "Solution #{@solution.id} has a corrupt status: #{@solution.status}"
     end
   end
 
+  def complete
+    CompletesSolution.complete!(@solution)
+    redirect_to @solution.exercise.track
+  end
+
   private
+  def set_solution
+    @solution = current_user.solutions.find(params[:id])
+  end
+
   def show_unlocked
     render :show_unlocked
   end

@@ -23,12 +23,14 @@ ActiveRecord::Schema.define(version: 20170516141842) do
 
   create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "track_id", null: false
+    t.bigint "unlocked_by_id"
     t.string "title", null: false
     t.boolean "core", default: false, null: false
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["track_id"], name: "fk_rails_a796d89c21"
+    t.index ["unlocked_by_id"], name: "fk_rails_03ec4ffbf3"
   end
 
   create_table "favourites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -50,8 +52,11 @@ ActiveRecord::Schema.define(version: 20170516141842) do
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
     t.integer "status", default: 0, null: false
+    t.bigint "approved_by_mentor_id"
+    t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["approved_by_mentor_id"], name: "fk_rails_ac9c7ee41e"
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
@@ -90,11 +95,13 @@ ActiveRecord::Schema.define(version: 20170516141842) do
   end
 
   add_foreign_key "discussion_posts", "iterations"
+  add_foreign_key "exercises", "exercises", column: "unlocked_by_id"
   add_foreign_key "exercises", "tracks"
   add_foreign_key "favourites", "iterations"
   add_foreign_key "iterations", "solutions"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
+  add_foreign_key "solutions", "users", column: "approved_by_mentor_id"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end

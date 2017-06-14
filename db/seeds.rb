@@ -4,8 +4,8 @@ cpp = Track.create!(title: "C++")
 
 bob = Exercise.create!(track: ruby, title: "Bob", core: true, position: 1)
 fish = Exercise.create!(track: ruby, title: "Fish", core: true, position: 2)
-cat = Exercise.create!(track: ruby, title: "Cat", core: false, position: 1)
-mouse = Exercise.create!(track: ruby, title: "Mouse", core: false, position: 2)
+cat = Exercise.create!(track: ruby, title: "Cat", core: false, position: 1, unlocked_by: bob)
+mouse = Exercise.create!(track: ruby, title: "Mouse", core: false, position: 2, unlocked_by: fish)
 
 ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password')
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password')

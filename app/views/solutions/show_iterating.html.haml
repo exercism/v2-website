@@ -4,7 +4,7 @@
 
     %p You're iterating!!
 
-    /=link_to "Mark as completed", complete_submission_path(@submission), method: :patch
+    =link_to "Mark as completed", complete_solution_path(@solution), method: :patch
 
     %ul
       -@solution.iterations.each.with_index do |iteration, idx|
