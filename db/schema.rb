@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(version: 20170516141842) do
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
     t.integer "status", default: 0, null: false
-    t.bigint "approved_by_mentor_id"
+    t.bigint "approved_by_id"
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["approved_by_mentor_id"], name: "fk_rails_ac9c7ee41e"
+    t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20170516141842) do
   add_foreign_key "iterations", "solutions"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
-  add_foreign_key "solutions", "users", column: "approved_by_mentor_id"
+  add_foreign_key "solutions", "users", column: "approved_by_id"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end

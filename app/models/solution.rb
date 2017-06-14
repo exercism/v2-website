@@ -4,7 +4,11 @@ class Solution < ApplicationRecord
 
   belongs_to :user
   belongs_to :exercise
-  belongs_to :approved_by_mentor, class_name: "User", optional: true
+  belongs_to :approved_by, class_name: "User", optional: true
 
   has_many :iterations
+
+  def approved?
+    !!approved_by
+  end
 end

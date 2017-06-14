@@ -16,7 +16,7 @@ class StartsSolutionTest < ActiveSupport::TestCase
     Timecop.freeze do
       user = create :user
       mentor = create :user
-      solution = create :solution, user: user, exercise: @core_exercise, approved_by_mentor: mentor
+      solution = create :solution, user: user, exercise: @core_exercise, approved_by: mentor
 
       CompletesSolution.complete!(solution)
 

@@ -5,7 +5,7 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.bigint :exercise_id, null: false
       t.integer :status, null: false, default: 0
 
-      t.bigint :approved_by_mentor_id, null: true
+      t.bigint :approved_by_id, null: true
       t.datetime :completed_at, null: true
 
       t.timestamps
@@ -13,6 +13,6 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
 
     add_foreign_key :solutions, :users
     add_foreign_key :solutions, :exercises
-    add_foreign_key :solutions, :users, column: :approved_by_mentor_id
+    add_foreign_key :solutions, :users, column: :approved_by_id
   end
 end

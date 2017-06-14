@@ -9,7 +9,7 @@ class CompletesSolution
   end
 
   def complete!
-    if solution.approved_by_mentor
+    if solution.approved?
       completed_approved
     else
       completed_unapproved
