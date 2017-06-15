@@ -4,6 +4,7 @@ class CreateDiscussionPosts < ActiveRecord::Migration[5.1]
       t.bigint :iteration_id, null: false
       t.bigint :user_id, null: false
       t.column :content, "LONGTEXT", null: false
+      t.column :html, "LONGTEXT", null: false
 
       t.timestamps
     end

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170516141842) do
     t.bigint "iteration_id", null: false
     t.bigint "user_id", null: false
     t.text "content", limit: 4294967295, null: false
+    t.text "html", limit: 4294967295, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["iteration_id"], name: "fk_rails_f58a02b68e"

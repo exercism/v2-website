@@ -7,6 +7,7 @@ FactoryGirl.define do
     iteration { create :iteration }
     user { create :user }
     content "Some comment here"
+    html "<p>Some comment here</p>"
   end
 
   factory :iteration do

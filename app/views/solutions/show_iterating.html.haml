@@ -21,4 +21,4 @@
     %h2 Discussion
     - @iteration.discussion_posts.each do |post|
       %h3= post.user.name
-      %div= post.content
+      %div= raw post.html

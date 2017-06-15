@@ -1,0 +1,2 @@
+module DiscussionPostsHelper
+end
