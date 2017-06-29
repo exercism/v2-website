@@ -8,6 +8,8 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.bigint :approved_by_id, null: true
       t.datetime :completed_at, null: true
 
+      t.text :notes, null: true
+
       t.timestamps
     end
 

@@ -32,6 +32,16 @@ class SolutionsController < ApplicationController
   end
 
   def reflect
+    @solution.update(notes: params[:notes])
+    params[:mentor_reviews].each do |mentor_id, data|
+      CreatesMentorReview.create(
+        current_user,
+        User.find(mentor_id),
+        @solution,
+        data[:rating],
+        data[:feedback]
+      )
+    end
     render_modal("solution-unlocked", "unlocked")
   end
 

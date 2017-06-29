@@ -2,4 +2,13 @@
 %p What did you learn from this exercise?
 
 =form_tag reflect_solution_path(@solution), method: :patch, remote: true do
+  =text_area :notes, placeholder: "Personal Notes"
+
+  -@solution.mentors.each do |mentor|
+    .mentor-review
+      .name= mentor.name
+      /.stars
+      =number_field_tag "mentor_reviews[#{mentor.id}][rating]"
+      =text_field_tag "mentor_reviews[#{mentor.id}][feedback]"
+
   =button_tag "Save Reflection"

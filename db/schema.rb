@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516141842) do
+ActiveRecord::Schema.define(version: 20170629131724) do
 
   create_table "discussion_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "iteration_id", null: false
@@ -50,12 +50,27 @@ ActiveRecord::Schema.define(version: 20170516141842) do
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
   end
 
+  create_table "mentor_reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "mentor_id", null: false
+    t.bigint "solution_id", null: false
+    t.integer "rating", null: false
+    t.text "feedback"
+    t.boolean "show_to_mentor", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mentor_id"], name: "fk_rails_fd0b77fa40"
+    t.index ["solution_id"], name: "fk_rails_d073b02ecc"
+    t.index ["user_id"], name: "fk_rails_311ec25a41"
+  end
+
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
     t.integer "status", default: 0, null: false
     t.bigint "approved_by_id"
     t.datetime "completed_at"
+    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
@@ -101,6 +116,9 @@ ActiveRecord::Schema.define(version: 20170516141842) do
   add_foreign_key "exercises", "tracks"
   add_foreign_key "favourites", "iterations"
   add_foreign_key "iterations", "solutions"
+  add_foreign_key "mentor_reviews", "solutions"
+  add_foreign_key "mentor_reviews", "users"
+  add_foreign_key "mentor_reviews", "users", column: "mentor_id"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"

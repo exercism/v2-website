@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :mentor_review do
+
+  end
   factory :favourite do
     iteration { create :iteration }
   end
