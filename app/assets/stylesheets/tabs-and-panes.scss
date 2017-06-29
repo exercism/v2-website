@@ -1,0 +1,47 @@
+.tabs-and-panes {
+    &>.tabs {
+        border-bottom:1px solid #ddd;
+        padding-left:10px;
+        .tab {
+          padding:5px 20px;
+          text-align:center;
+          cursor:pointer;
+          display:inline-block;
+          margin-bottom:-1px;
+
+          font-weight:400;
+          color:#999;
+          border:solid #fff;
+          border-width:2px 1px 1px 1px;
+          border-bottom-color:#ddd
+        }
+    }
+    &>.panes {
+        overflow:scroll;
+        .pane {
+            display:none;
+        }
+    }
+
+    &.selected-1>.tabs>.tab-1,
+    &.selected-2>.tabs>.tab-2,
+    &.selected-3>.tabs>.tab-3,
+    &.selected-4>.tabs>.tab-4,
+    &.selected-5>.tabs>.tab-5,
+    &.selected-6>.tabs>.tab-6 {
+        border-left-color:#ddd;
+        border-right-color:#ddd;
+        border-bottom-color:#fff;
+        border-top-color:green;
+        color:#333;
+    }
+
+    &.selected-1>.panes>.pane-1,
+    &.selected-2>.panes>.pane-2,
+    &.selected-3>.panes>.pane-3,
+    &.selected-4>.panes>.pane-4,
+    &.selected-5>.panes>.pane-5,
+    &.selected-6>.panes>.pane-6 {
+        display:block;
+    }
+}

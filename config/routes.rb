@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   resources :discussion_posts do
   end
 
+  post "markdown/parse" => "markdown#parse"
+
   root to: "pages#index"
 end
