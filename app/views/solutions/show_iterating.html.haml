@@ -2,88 +2,77 @@
   .lo-container
     .placeholder-header
     .pure-g.panels
-      .pure-u-1-2.lhs.tabs-and-panes.selected-3
-        .tabs
-          .tab.tab-1
-            Instructions
-          .tab.tab-2
-            Test Suite
-          .tab.tab-3
-            Latest Solution
+      .pure-u-1-2.lhs
+        .lhs-content
+          .tabs-and-panes.selected-3
+            .tabs
+              .tab.tab-1
+                Instructions
+              .tab.tab-2
+                Test Suite
+              .tab.tab-3
+                Latest Solution
 
-        .panes
-          .pane.pane-1
-            Instructions Pane
-          .pane.pane-2
-            Test Suite Pane
-          .pane.pane-3.solution
-            %pre.line-numbers{data: {line: "3,6"}}
-              %code{class: "language-ruby"}
-                = @iteration.code
+            .panes
+              .pane.pane-1
+                Instructions Pane
+              .pane.pane-2
+                Test Suite Pane
+              .pane.pane-3.solution
+                %pre.line-numbers{data: {line: "3,6"}}
+                  %code{class: "language-ruby"}
+                    = @iteration.code
 
-      .pure-u-1-2.rhs.tabs-and-panes.selected-1
-        .tabs
-          .tab.tab-1
-            Discussion
-          .tab.tab-2
-            Community Solutions
-          .tab.tab-3
-            Resources
+      .pure-u-1-2.rhs
+        .discussion
+          .discussion-header
+            =link_to "Scroll to latest comment", ""
+            %h3 Mentor Discussion
+          - @iteration.discussion_posts.each do |post|
+            .post
+              =image_tag post.user.avatar_url, class: 'avatar'
+              .post-body
+                .post-header
+                  .created-at Responded #{time_ago_in_words(post.created_at)} ago
+                  .user-name= post.user.name
+                  .user-status Ruby Mentor
 
-        .panes.main-panes
-          .pane.discussion.pane-1
-            - @iteration.discussion_posts.each do |post|
-              .post
-                =image_tag post.user.avatar_url, class: 'avatar'
-                .post-body
-                  .post-header
-                    .created-at Responded #{time_ago_in_words(post.created_at)} ago
-                    .user-name= post.user.name
-                    .user-status Ruby Mentor
+                .post-html= raw post.html
 
-                  .post-html= raw post.html
+          =form_for DiscussionPost.new(iteration_id: @iteration), remote: true, html: {class: "new-discussion-post-form"} do |f|
+            =f.hidden_field :iteration_id
 
-            =form_for DiscussionPost.new(iteration_id: @iteration), remote: true, html: {class: "new-discussion-post-form"} do |f|
-              =f.hidden_field :iteration_id
+            .tabs-and-panes.selected-1
+              .tabs
+                .tab.tab-1{data: {tab: "markdown"}} Write
+                .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+              .panes
+                .pane.pane-1.markdown
+                  =f.text_area :content, value: "Foo\n\n```\nasdasdas\nasdasdas\n```\n\nqwewqe\nqweqweqw"
+                .pane.pane-2.preview
+                  .preview-area
 
-              .tabs-and-panes.selected-1
-                .tabs
-                  .tab.tab-1{data: {tab: "markdown"}} Write
-                  .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
-                .panes
-                  .pane.pane-1.markdown
-                    =f.text_area :content, value: "Foo\n\n```\nasdasdas\nasdasdas\n```\n\nqwewqe\nqweqweqw"
-                  .pane.pane-2.preview
-                    .preview-area
+            =button_tag "Post Comment"
 
-              =button_tag "Post Comment"
+          .next-steps
+            %h3
+              %i.fa.fa-arrow-right
+              Next Steps
 
-            .next-steps
-              %h3
-                %i.fa.fa-arrow-right
-                Next Steps
-
-              -if @iteration.mentor_status == "pending"
-                %p A mentor will review your submission shortly and provide feedback.
-              -if @iteration.mentor_status == "reply"
-                %p Your mentor has suggested you should discuss this further before continuing.
-              -if @iteration.mentor_status == "refactor"
-                %p Your mentor has suggested that you refactor your code and provide another attempt.
-              -if @iteration.mentor_status == "approved"
-                %p Your mentor has approved this!
-                =button_to "COMPLETE CTA HERE", ""
-
-
-          .pane.pane-2
-            Community Solutions Pane
-          .pane.pane-3
-            Resources Pane
-
+            -if @iteration.mentor_status == "pending"
+              %p A mentor will review your submission shortly and provide feedback.
+            -if @iteration.mentor_status == "reply"
+              %p Your mentor has suggested you should discuss this further before continuing.
+            -if @iteration.mentor_status == "refactor"
+              %p Your mentor has suggested that you refactor your code and provide another attempt.
+            -if @iteration.mentor_status == "approved"
+              %p Your mentor has approved this!
+              =button_to "COMPLETE CTA HERE", ""
 
     .solution-footer
       .pure-g
         .pure-u-1-2
-          Other Solutions
+          /Other Solutions
         .pure-u-1-2
           -if @solution.approved?
             =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true
@@ -109,17 +98,34 @@
       %h2 Discussion
 
 -content_for :js do
-  -#
-
   :coffeescript
 
     setupLayout = =>
+      $lhs = $('.lhs')
+      $lhs_content = $('.lhs-content')
+      $lhs_content.css
+        left: $lhs.position().left
+        width: $lhs.outerWidth()
+
+    $window = $(window)
+    $lhs = $('.lhs')
+    $window.scroll => 
+      if $window.scrollTop() > $lhs.position().top - 10
+        $lhs.addClass('fixed')
+      else
+        $lhs.removeClass('fixed')
+
+
+      ###
       #panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
       panelsHeight = $(window).height() - $('.solution-footer').outerHeight() - 10
       $('.panels').css('max-height', panelsHeight)
+      ###
 
+      ###
       panesHeight = $('.panels').outerHeight() - 50
-      $('.main-panes').css('height', panesHeight)
+      $('.main-panes').css('height',)
+      ###
 
     setupTabs = =>
       $('.tab').click ->

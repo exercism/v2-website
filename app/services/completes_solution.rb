@@ -21,23 +21,20 @@ class CompletesSolution
   private
 
   def completed_approved
-    update_solution_record(:completed_approved)
+    update_solution_record
 
     # Unlock side quests
     solution.exercise.unlocks.each do |exercise|
-      Solution.create(user: solution.user, exercise: exercise, status: :unlocked)
+      Solution.create(user: solution.user, exercise: exercise)
     end
   end
 
   def completed_unapproved
-    update_solution_record(:completed_unapproved)
+    update_solution_record
   end
 
-  def update_solution_record(status)
-    solution.update!(
-      completed_at: DateTime.now,
-      status: status
-    )
+  def update_solution_record
+    solution.update!( completed_at: DateTime.now )
   end
 
   def unlock_next_core_exercise
@@ -46,7 +43,7 @@ class CompletesSolution
                       where("position > ?", solution.exercise.position).
                       first
     if next_exercise
-      Solution.create(user: solution.user, exercise: next_exercise, status: :unlocked)
+      Solution.create(user: solution.user, exercise: next_exercise)
     else
       # TODO - complete track
       raise "Not Implemented"

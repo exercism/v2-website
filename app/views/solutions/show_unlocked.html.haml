@@ -3,3 +3,5 @@
     %h1 #{@exercise.title}
 
     %p Here are a load of instructions on everything.
+
+    =link_to "CREATE A FAKE ITERATION", tmp_create_iteration_path(solution_id: @solution), method: :post

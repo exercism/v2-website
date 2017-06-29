@@ -11,7 +11,7 @@ ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password')
 
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
-ihid_bob = Solution.create!(user: ihid, exercise: bob, status: :iterating, approved_by: kytrinyx)
+ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx)
 ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob, code: %q{
 class Bob
   RESPONSES = {

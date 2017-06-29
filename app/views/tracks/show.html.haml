@@ -10,7 +10,6 @@
         %li
           -if solution
             = link_to exercise.title, solution
-            (#{solution.status})
           -else
             = exercise.title
 
@@ -20,6 +19,5 @@
         %li
           -if solution
             = link_to exercise.title, solution
-            (#{solution.status})
           -else
             = exercise.title

@@ -21,14 +21,13 @@ class StartsSolutionTest < ActiveSupport::TestCase
       CompletesSolution.complete!(solution)
 
       assert_equal DateTime.now.to_i, solution.completed_at.to_i
-      assert_equal "completed_approved", solution.status
 
-      assert Solution.where(user: user, exercise: @next_core_exercise, status: "unlocked").exists?
-      assert Solution.where(user: user, exercise: @side_exercise, status: "unlocked").exists?
+      assert Solution.where(user: user, exercise: @next_core_exercise).exists?
+      assert Solution.where(user: user, exercise: @side_exercise).exists?
 
-      refute Solution.where(user: user, exercise: @other_side_exercise, status: "unlocked").exists?
-      refute Solution.where(user: user, exercise: @other_core_exercise, status: "unlocked").exists?
-      refute Solution.where(user: user, exercise: @another_core_exercise, status: "unlocked").exists?
+      refute Solution.where(user: user, exercise: @other_side_exercise).exists?
+      refute Solution.where(user: user, exercise: @other_core_exercise).exists?
+      refute Solution.where(user: user, exercise: @another_core_exercise).exists?
     end
   end
 
@@ -40,14 +39,13 @@ class StartsSolutionTest < ActiveSupport::TestCase
       CompletesSolution.complete!(solution)
 
       assert_equal DateTime.now.to_i, solution.completed_at.to_i
-      assert_equal "completed_unapproved", solution.status
 
-      assert Solution.where(user: user, exercise: @next_core_exercise, status: "unlocked").exists?
+      assert Solution.where(user: user, exercise: @next_core_exercise).exists?
 
-      refute Solution.where(user: user, exercise: @side_exercise, status: "unlocked").exists?
-      refute Solution.where(user: user, exercise: @other_side_exercise, status: "unlocked").exists?
-      refute Solution.where(user: user, exercise: @other_core_exercise, status: "unlocked").exists?
-      refute Solution.where(user: user, exercise: @another_core_exercise, status: "unlocked").exists?
+      refute Solution.where(user: user, exercise: @side_exercise).exists?
+      refute Solution.where(user: user, exercise: @other_side_exercise).exists?
+      refute Solution.where(user: user, exercise: @other_core_exercise).exists?
+      refute Solution.where(user: user, exercise: @another_core_exercise).exists?
     end
   end
 

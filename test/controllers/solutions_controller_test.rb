@@ -1,29 +1,16 @@
 require 'test_helper'
 
 class SolutionsControllerTest < ActionDispatch::IntegrationTest
+
   {
     unlocked: "solution-unlocked-page",
-    cloned: "solution-cloned-page"
-  }.each do |status, page|
-    test "shows with status #{status}" do
-      sign_in!
-      solution = create :solution, user: @current_user, status: status
-
-      get solution_url(solution)
-      assert_response :success
-      assert_correct_page page
-    end
-  end
-
-  {
     iterating: "solution-iterating-page",
+    completed_unapproved: "solution-completed-page",
     completed_approved: "solution-completed-page",
-    completed_unapproved: "solution-completed-page"
   }.each do |status, page|
     test "shows with status #{status}" do
       sign_in!
-      solution = create :solution, user: @current_user, status: status
-      iteration = create :iteration, solution: solution
+      solution = send("create_#{status}_solution")
 
       get solution_url(solution)
       assert_response :success
@@ -53,5 +40,27 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     solution.reload
     assert_equal solution.notes, notes
     assert_equal 2, MentorReview.count
+  end
+
+  def create_unlocked_solution
+    create :solution, user: @current_user
+  end
+
+  def create_iterating_solution
+    solution = create :solution, user: @current_user
+    iteration = create :iteration, solution: solution
+    solution
+  end
+
+  def create_completed_unapproved_solution
+    solution = create :solution, user: @current_user, completed_at: Date.yesterday
+    iteration = create :iteration, solution: solution
+    solution
+  end
+
+  def create_completed_approved_solution
+    solution = create :solution, user: @current_user, completed_at: Date.yesterday, approved_by: create(:user)
+    iteration = create :iteration, solution: solution
+    solution
   end
 end

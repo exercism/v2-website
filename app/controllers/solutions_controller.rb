@@ -4,17 +4,12 @@ class SolutionsController < ApplicationController
   def show
     @exercise = @solution.exercise
 
-    case @solution.status.to_sym
-    when :unlocked
-      show_unlocked
-    when :cloned
-      show_cloned
-    when :iterating
-      show_iterating
-    when :completed_approved, :completed_unapproved
+    if @solution.completed?
       show_completed
+    elsif @solution.iterations.size > 0
+      show_iterating
     else
-      raise "Solution #{@solution.id} has a corrupt status: #{@solution.status}"
+      show_unlocked
     end
   end
 

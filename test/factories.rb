@@ -1,7 +1,11 @@
 FactoryGirl.define do
   factory :mentor_review do
-
+    user { create :user }
+    mentor { create :user }
+    solution { create :solution }
+    rating 5
   end
+
   factory :favourite do
     iteration { create :iteration }
   end

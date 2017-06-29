@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  # TODO - Delete this
+  post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
+
   devise_for :users
 
   namespace :api do

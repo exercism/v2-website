@@ -1,7 +1,5 @@
 class Solution < ApplicationRecord
 
-  enum status: [:unlocked, :cloned, :iterating, :completed_approved, :completed_unapproved]
-
   belongs_to :user
   belongs_to :exercise
   belongs_to :approved_by, class_name: "User", optional: true
@@ -11,6 +9,10 @@ class Solution < ApplicationRecord
 
   def approved?
     !!approved_by
+  end
+
+  def completed?
+    !!completed_at
   end
 
   def mentors

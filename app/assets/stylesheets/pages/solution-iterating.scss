@@ -16,7 +16,27 @@ body.controller-solutions {
         overflow-y:hidden;
 
         .lhs {
-            overflow-y:hidden;
+            &.fixed {
+                .lhs-content {
+                    overflow-y:hidden;
+                    position:fixed;
+                    top:10px;
+                    bottom:10px;
+                    .panes {
+                        position:absolute;
+                        top:30px;
+                        left:0;
+                        right:0;
+                        bottom:0;
+                    }
+                }
+            }
+            .lhs-content {
+                .panes {
+                    border:solid #ddd;
+                    border-width:0 1px 1px 1px;
+                }
+            }
         }
         .rhs {
             overflow:hidden;
@@ -29,14 +49,31 @@ body.controller-solutions {
     }
     .pane.solution {
         pre {
-            border:1px solid #ccc;
+            margin:0;
             background:#fafafa;
+            padding-bottom:0;
             code[class*="language-"] {
                 font-size:12px;
             }
         }
     }
-    .pane.discussion {
+    .discussion {
+        .discussion-header {
+            padding:10px 0;
+            border-bottom:1px solid #ddd;
+            margin-bottom:20px;
+
+            h3 {
+                font-weight:400;
+                color:#333;
+            }
+            a {
+                @include font-size(12, 12);
+                float:right;
+                color:#666;
+                text-decoration:none;
+            }
+        }
         .post {
             margin-bottom:25px;
             overflow:hidden;
