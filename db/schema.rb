@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170516141842) do
   create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "solution_id", null: false
     t.text "code", limit: 4294967295, null: false
+    t.integer "mentor_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"

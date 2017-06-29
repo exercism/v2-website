@@ -1,24 +1,112 @@
 #solution-iterating-page
   .lo-container
-    %h1 Your solution to #{@exercise.title}
+    .placeholder-header
+    .pure-g.panels
+      .pure-u-1-2.lhs.selected-solution
+        .tabs
+          .tab.instructions{data: {tab: "instructions"}}
+            Instructions
+          .tab.test-suite{data: {tab: "test-suite"}}
+            Test Suite
+          .tab.solution{data: {tab: "solution"}}
+            Latest Solution
 
-    %p You're iterating!!
+        .panes
+          .pane.instructions
+            Instructions Pane
+          .pane.test-suite
+            Test Suite Pane
+          .pane.solution
+            Latest Solution Pane
 
-    =link_to "Mark as completed", complete_solution_path(@solution), method: :patch
+      .pure-u-1-2.rhs.selected-discussion
+        .tabs
+          .tab.discussion{data: {tab: "discussion"}}
+            Discussion
+          .tab.solutions{data: {tab: "solutions"}}
+            Community Solutions
+          .tab.resources{data: {tab: "resources"}}
+            Resources
 
-    %ul
-      -@solution.iterations.each.with_index do |iteration, idx|
-        %li
-          -if iteration == @iteration
-            = idx + 1
-            (Selected)
+        .panes
+          .pane.discussion
+            - @iteration.discussion_posts.each do |post|
+              .post
+                =image_tag post.user.avatar_url, class: 'avatar'
+                .post-body
+                  .post-header
+                    .created-at Responded #{time_ago_in_words(post.created_at)} ago
+                    .user-name= post.user.name
+                    .user-status Ruby Mentor
+
+                  .post-html= raw post.html
+
+            .next-steps
+              %h3
+                %i.fa.fa-arrow-right
+                Next Steps
+
+              -if @iteration.mentor_status == "pending"
+                %p A mentor will review your submission shortly and provide feedback.
+              -if @iteration.mentor_status == "reply"
+                %p Your mentor has suggested you should discuss this further before continuing.
+              -if @iteration.mentor_status == "refactor"
+                %p Your mentor has suggested that you refactor your code and provide another attempt.
+              -if @iteration.mentor_status == "approved"
+                %p Your mentor has approved this!
+                =button_to "COMPLETE CTA HERE", ""
+
+
+          .pane.solutions
+            Community Solutions Pane
+          .pane.resources
+            Resources Pane
+
+
+    .solution-footer
+      .pure-g
+        .pure-u-1-2
+          Other Solutions
+        .pure-u-1-2
+          -if @solution.approved?
+            =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true
           -else
-            =link_to (idx + 1), solution_path(iteration_id: iteration.id)
+            =link_to "Mark as completed", confirm_unapproved_completion_solution_path(@solution), method: :get, remote: true
 
-    %h2 Code
-    = @iteration.code
+    -#
+      %h1 Your solution to #{@exercise.title}
 
-    %h2 Discussion
-    - @iteration.discussion_posts.each do |post|
-      %h3= post.user.name
-      %div= raw post.html
+      %p You're iterating!!
+
+      =link_to "Mark as completed", complete_solution_path(@solution), method: :patch
+
+      %ul
+        -@solution.iterations.each.with_index do |iteration, idx|
+          %li
+            -if iteration == @iteration
+              = idx + 1
+              (Selected)
+            -else
+              =link_to (idx + 1), solution_path(iteration_id: iteration.id)
+
+      %h2 Code
+      = @iteration.code
+
+      %h2 Discussion
+
+-content_for :js do
+  :coffeescript
+    panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
+    panesHeight = panelsHeight - 50
+    $('.panels').css('height', panelsHeight)
+    $('.panes').css('height', panesHeight)
+
+    $('.tab').click ->
+      $container = $(this).parent().parent()
+
+      for c in $container[0].className.split(" ")
+        if c.startsWith("selected-")
+          $container.removeClass(c)
+
+      console.log $(this).data('tab')
+      $container.addClass("selected-\#{$(this).data('tab')}")

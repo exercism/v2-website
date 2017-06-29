@@ -23,6 +23,7 @@ class CreatesDiscussionPost
 
   def user_may_comment?
     return true if user == iteration.solution.user
+
     # TODO - Add mentor permissions
     return false
   end

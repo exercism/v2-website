@@ -1,0 +1,9 @@
+%h1 New Exercises Unlocked
+%p You have unlocked the following exercises
+
+CORE EXERCISE
+
+-if @solution.approved?
+    SIDE EXERCSES
+
+=link_to "Go to track", track_path(@solution.exercise.track)

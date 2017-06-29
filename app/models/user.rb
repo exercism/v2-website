@@ -12,4 +12,9 @@ class User < ApplicationRecord
   def unlocked_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end
+
+  # TODO
+  def avatar_url
+    "http://lorempixel.com/400/400/"
+  end
 end

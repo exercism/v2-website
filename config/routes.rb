@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :user_tracks, only: [:create]
   resources :solutions, only: [:show] do
     member do
+      get :confirm_unapproved_completion
       patch :complete
+      get :reflection
+      patch :reflect
     end
   end
 

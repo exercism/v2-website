@@ -18,9 +18,21 @@ class SolutionsController < ApplicationController
     end
   end
 
+  def confirm_unapproved_completion
+    render_modal('solution-confirm-unapproved-completion', "confirm_unapproved_completion")
+  end
+
   def complete
     CompletesSolution.complete!(@solution)
-    redirect_to @solution.exercise.track
+    render_modal("solution-completed", "complete")
+  end
+
+  def reflection
+    render_modal("solution-reflection", "reflection")
+  end
+
+  def reflect
+    render_modal("solution-unlocked", "unlocked")
   end
 
   private

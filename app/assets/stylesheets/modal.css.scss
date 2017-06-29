@@ -1,0 +1,53 @@
+@import 'mixins';
+@import 'variables';
+
+#modal-wrapper {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:10000000;
+    background:rgba(#fff,0.9);
+
+    #modal {
+        position:relative;
+        max-height:80%;
+        max-width:500px;
+        width:80%;
+        overflow: visible;
+
+        background:#fff;
+        border-radius:5px;
+        border:1px solid #ccc;
+        box-shadow:0 0 3px #666;
+        margin: 50px auto;
+    }
+    #modal-close-button  {
+        position:absolute;
+        top:-15px;
+        right:-15px;
+        width:36px;
+        height:36px;
+        padding:6px 10px;
+        border:1px solid #ccc;
+        border-radius:100%;
+        background:#fff;
+        cursor:pointer;
+        color:#aaa;
+        @include font-size(18, 18);
+        box-shadow:0 0 1px rgba(0,0,0,0.3);
+        z-index:10;
+    }
+    .modal-scroll-wrapper {
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        overflow-y:scroll;
+        padding:20px 40px;
+    }
+}
+

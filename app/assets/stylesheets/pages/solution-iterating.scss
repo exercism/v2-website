@@ -1,0 +1,127 @@
+@import 'variables';
+@import 'mixins';
+
+body.controller-solutions {
+    footer {
+        display:none;
+    }
+}
+
+#solution-iterating-page {
+    .placeholder-header {
+        padding:50px;
+        background:#fff;
+    }
+    .panels {
+        overflow:hidden;
+
+        .lhs {
+            overflow:hidden;
+        }
+        .rhs {
+            overflow:hidden;
+            padding-left:50px;
+            .pane {
+                padding:20px 0;
+            }
+        }
+        .tabs {
+            border-bottom:1px solid #ddd;
+            padding-left:10px;
+            .tab {
+                padding:5px 20px;
+                text-align:center;
+                cursor:pointer;
+                display:inline-block;
+                margin-bottom:-1px;
+
+                font-weight:400;
+                color:#999;
+                border:solid #fff;
+                border-width:2px 1px 1px 1px;
+                border-bottom-color:#ddd
+
+            }
+        }
+        .panes {
+            overflow:scroll;
+            .pane {
+                display:none;
+            }
+        }
+        .lhs.selected-instructions .tab.instructions,
+        .lhs.selected-test-suite .tab.test-suite,
+        .lhs.selected-solution .tab.solution,
+        .rhs.selected-discussion .tab.discussion,
+        .rhs.selected-solutions .tab.solutions,
+        .rhs.selected-resources .tab.resources {
+            border-left-color:#ddd;
+            border-right-color:#ddd;
+            border-bottom-color:#fff;
+            border-top-color:green;
+            color:#333;
+        }
+        .lhs.selected-instructions .pane.instructions,
+        .lhs.selected-test-suite .pane.test-suite,
+        .lhs.selected-solution .pane.solution,
+        .rhs.selected-discussion .pane.discussion,
+        .rhs.selected-solutions .pane.solutions,
+        .rhs.selected-resources .pane.resources {
+            display:block;
+        }
+    }
+    .pane.discussion {
+        .post {
+            margin-bottom:25px;
+            overflow:hidden;
+            .avatar {
+                margin-right:3%;
+                float:left;
+                min-width:35px;
+                width:8%;
+                display:block;
+            }
+            .post-body {
+                min-width:100px;
+                width:89%;
+                float:left;
+            }
+
+            .post-header {
+                padding:10px 0;
+                overflow:hidden;
+                @include font-size(12, 12);
+                height:35px;
+            }
+            .user-name {
+                display:inline-block;
+                color:#333;
+                font-weight:600;
+                margin-right:5px;
+            }
+            .user-status {
+                display:inline-block;
+                color:#999;
+                font-weight:400;
+            }
+            .created-at {
+                float:right;
+                color:#999;
+            }
+        }
+        .next-steps {
+            background:rgba(green, 0.1);
+            padding:20px;
+            h3 {
+                @include font-size(14, 14);
+                font-weight:400;
+                color:rgba(green, 0.5);
+                margin-bottom:10px;
+            }
+            p {
+                @include font-size(14, 18);
+                padding-left:16px;
+            }
+        }
+    }
+}
