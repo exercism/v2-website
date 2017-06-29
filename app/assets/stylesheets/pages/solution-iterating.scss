@@ -13,10 +13,10 @@ body.controller-solutions {
         background:#fff;
     }
     .panels {
-        overflow:hidden;
+        overflow-y:hidden;
 
         .lhs {
-            overflow:hidden;
+            overflow-y:hidden;
         }
         .rhs {
             overflow:hidden;
@@ -70,6 +70,15 @@ body.controller-solutions {
             display:block;
         }
     }
+    .pane.solution {
+        pre {
+            border:1px solid #ccc;
+            background:#fafafa;
+            code[class*="language-"] {
+                font-size:12px;
+            }
+        }
+    }
     .pane.discussion {
         .post {
             margin-bottom:25px;
@@ -92,21 +101,38 @@ body.controller-solutions {
                 overflow:hidden;
                 @include font-size(12, 12);
                 height:35px;
+                .user-name {
+                    display:inline-block;
+                    color:#333;
+                    font-weight:600;
+                    margin-right:5px;
+                }
+                .user-status {
+                    display:inline-block;
+                    color:#999;
+                    font-weight:400;
+                }
+                .created-at {
+                    float:right;
+                    color:#999;
+                }
             }
-            .user-name {
-                display:inline-block;
-                color:#333;
-                font-weight:600;
-                margin-right:5px;
-            }
-            .user-status {
-                display:inline-block;
-                color:#999;
-                font-weight:400;
-            }
-            .created-at {
-                float:right;
-                color:#999;
+            .post-html {
+                * {
+                    @include font-size(14, 19);
+                }
+                &>* {
+                    margin-bottom:10px;
+                }
+                pre {
+                    border:1px solid #f3f3f3;
+                    background:#fafafa;
+                    code[class*="language-"] {
+                        &, * {
+                            font-size:12px;
+                        }
+                    }
+                }
             }
         }
         .next-steps {

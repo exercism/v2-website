@@ -33,7 +33,7 @@ class SolutionsController < ApplicationController
 
   def reflect
     @solution.update(notes: params[:notes])
-    params[:mentor_reviews].each do |mentor_id, data|
+    (params[:mentor_reviews] || {}).each do |mentor_id, data|
       CreatesMentorReview.create(
         current_user,
         User.find(mentor_id),

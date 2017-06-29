@@ -27,7 +27,7 @@ class ParsesMarkdown
   end
 
   def markdown
-    @markdown ||= Redcarpet::Markdown.new(Renderer.new(with_toc_data: true), extensions)
+    @markdown ||= Redcarpet::Markdown.new(Renderer.new(options), extensions)
   end
 
   def preprocessed_text
@@ -35,8 +35,16 @@ class ParsesMarkdown
       text.gsub(/^`{3,}(.*?)`{3,}\s*$/m) { "\n#{$&}\n" }
   end
 
-  def extensions
+  def options
     @options ||= {
+      with_toc_data: false,
+      hard_wrap: true,
+      xhtml: true
+    }
+  end
+
+  def extensions
+    @extensions ||= {
       fenced_code_blocks: true,
       no_intra_emphasis: true,
       autolink: true,
@@ -45,27 +53,33 @@ class ParsesMarkdown
       superscript: true,
       tables: true,
       space_after_headers: true,
-      xhtml: true,
       lax_spacing: true,
     }
   end
 
   class Renderer < Redcarpet::Render::XHTML
-    def lexer
-      Rouge::Lexers::PlainText
-    end
+    #def lexer
+    #  Rouge::Lexers::PlainText
+    #end
 
-    def formatter
-      @formatter ||= Rouge::Formatters::HTML.new(
-        css_class: "highlight #{lexer.tag}",
-        line_numbers: true
-      )
-    end
+    #def formatter
+    #  @formatter ||= Rouge::Formatters::HTML.new(
+    #    css_class: "highlight #{lexer.tag}",
+    #    line_numbers: true
+    #  )
+    #end
 
-    #def block_code(code, language)
+    def block_code(code, language)
+      language ||= "ruby"
+      %Q{<pre><code class="language-#{language}">#{code}</code></pre>}
+      #Rouge::Formatters::HTML.new(
+      #  css_class: "highlight #{lexer.tag}",
+      #  line_numbers: true
+      #)
+
       #formatter.format(lexer.lex(code))
       #SyntaxHighlighter.new(code, language).render
-    #end
+    end
   end
 
 =begin

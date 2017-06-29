@@ -63,9 +63,31 @@ class ToneDeterminer
 end
 %}.strip)
 
-iteration1_discussion1 = ihid_bob_iteration_1.discussion_posts.create!(user: kytrinyx, content: "", html: %q{I really like the adjectives, and the predicate methods that they're used for. I like how the responder allows you to save the text as an instance variable without running into thread-safety issues.\nI feel like the meta-programming is making it hard to see which responses go with which tones, even though you've named the methods in a very expressive way.})
+iteration1_discussion1 = ihid_bob_iteration_1.discussion_posts.create!(user: kytrinyx, content: "", html: %q{<p>I really like the adjectives, and the predicate methods that they're used for. I like how the responder allows you to save the text as an instance variable without running into thread-safety issues.</p><p>I feel like the meta-programming is making it hard to see which responses go with which tones, even though you've named the methods in a very expressive way.</p>})
 
-iteration1_discussion2_content = %q{Great feedback. Thank you.\n\nSo I was split between two ways of doing this. \n1) Either method pairs with adjectives (which I did), \n2) Some sort of data structure (e.g. a hash might look like)\n```{\n->{text.to_s.empty?} => 'Fine. Be that way.',\n->{text.upcase == text} => "Woah, chill out!",\n->{text.end_with?("?")} => "Sure."\n}```\n\nThe main reason for the structure would be to link the response to the tone more clearly, which I entirely agree is unclear with the first option. However, I think the hash is just too ugly, and it seemed to be getting overkill to make a whole new structure, or a multi-dimensional array. I also don't think this idea scales for more complex methods.\n\nA better option might be to have the "respond_to_silent" method, do a check and respond, then return true/false. This would link them better. However, I like the ability have separation between what counts as shouting, and how to respond, for single responsibility of methods.\n\nSplitting the pairs into classes would work well (Shout/Silent/Asking classes with a checker/responder). Feels again a little overkill though.\n\nVery happy to hear any suggestions :)}
+iteration1_discussion2_content = %q{
+Great feedback. Thank you.
+
+So I was split between two ways of doing this.
+1) Either method pairs with adjectives (which I did),
+2) Some sort of data structure (e.g. a hash might look like)
+
+```
+{
+->{text.to_s.empty?} => 'Fine. Be that way.',
+->{text.upcase == text} => "Woah, chill out!",
+->{text.end_with?("?")} => "Sure."
+}
+```
+
+The main reason for the structure would be to link the response to the tone more clearly, which I entirely agree is unclear with the first option. However, I think the hash is just too ugly, and it seemed to be getting overkill to make a whole new structure, or a multi-dimensional array. I also don't think this idea scales for more complex methods.
+
+A better option might be to have the "respond_to_silent" method, do a check and respond, then return true/false. This would link them better. However, I like the ability have separation between what counts as shouting, and how to respond, for single responsibility of methods.
+
+Splitting the pairs into classes would work well (Shout/Silent/Asking classes with a checker/responder). Feels again a little overkill though.
+
+Very happy to hear any suggestions :)
+}
 iteration1_discussion2 = ihid_bob_iteration_1.discussion_posts.create!(user: ihid, content: iteration1_discussion2_content, html: ParsesMarkdown.parse(iteration1_discussion2_content))
 
 #Iteration.create!(solution: ihid_bob, code: "Another go")

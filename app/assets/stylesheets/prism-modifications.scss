@@ -1,0 +1,26 @@
+@import 'variables';
+@import 'mixins';
+
+pre.line-numbers {
+    .line-numbers-rows {
+        span {
+            line-height:16px;
+            padding-bottom:5px;
+            &:before {
+            }
+        }
+    }
+    .line-highlight {
+        background: rgba(0, 255, 0, 0.1);
+        &:before {
+            background:green;
+            width:6px;
+            height:6px;
+            min-width:0;
+            padding:0;
+            border-radius:100%;
+            left:5px;
+            top:7px;
+        }
+    }
+}

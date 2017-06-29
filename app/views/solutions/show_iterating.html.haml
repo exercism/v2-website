@@ -17,7 +17,9 @@
           .pane.test-suite
             Test Suite Pane
           .pane.solution
-            Latest Solution Pane
+            %pre.line-numbers{data: {line: "3,6"}}
+              %code{class: "language-ruby"}
+                = @iteration.code
 
       .pure-u-1-2.rhs.selected-discussion
         .tabs
@@ -78,8 +80,6 @@
 
       %p You're iterating!!
 
-      =link_to "Mark as completed", complete_solution_path(@solution), method: :patch
-
       %ul
         -@solution.iterations.each.with_index do |iteration, idx|
           %li
@@ -90,23 +90,32 @@
               =link_to (idx + 1), solution_path(iteration_id: iteration.id)
 
       %h2 Code
-      = @iteration.code
 
       %h2 Discussion
 
 -content_for :js do
+  -#
+
   :coffeescript
-    panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
-    panesHeight = panelsHeight - 50
-    $('.panels').css('height', panelsHeight)
-    $('.panes').css('height', panesHeight)
 
-    $('.tab').click ->
-      $container = $(this).parent().parent()
+    setupLayout = =>
+      #panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
+      panelsHeight = $(window).height() - $('.solution-footer').outerHeight() - 10
+      $('.panels').css('max-height', panelsHeight)
 
-      for c in $container[0].className.split(" ")
-        if c.startsWith("selected-")
-          $container.removeClass(c)
+      panesHeight = $('.panels').outerHeight() - 50
+      $('.panes').css('height', panesHeight)
 
-      console.log $(this).data('tab')
-      $container.addClass("selected-\#{$(this).data('tab')}")
+    setupTabs = =>
+      $('.tab').click ->
+        $container = $(this).parent().parent()
+
+        for c in $container[0].className.split(" ")
+          if c.startsWith("selected-")
+            $container.removeClass(c)
+
+        console.log $(this).data('tab')
+        $container.addClass("selected-\#{$(this).data('tab')}")
+
+    setupTabs()
+    setupLayout()
