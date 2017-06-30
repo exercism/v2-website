@@ -3,6 +3,8 @@ class CreateExercises < ActiveRecord::Migration[5.1]
     create_table :exercises do |t|
       t.bigint :track_id, null: false
       t.bigint :unlocked_by_id, null: true
+      t.string :uuid, null: false
+      t.string :slug, null: false
 
       t.string :title, null: false
       t.boolean :core, default: false, null: false

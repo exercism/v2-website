@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :auth_tokens
+
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
   has_many :solutions

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629131724) do
+ActiveRecord::Schema.define(version: 20170630181249) do
+
+  create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_0d66c22f4c"
+  end
 
   create_table "discussion_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "iteration_id", null: false
@@ -25,6 +33,8 @@ ActiveRecord::Schema.define(version: 20170629131724) do
   create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "track_id", null: false
     t.bigint "unlocked_by_id"
+    t.string "uuid", null: false
+    t.string "slug", null: false
     t.string "title", null: false
     t.boolean "core", default: false, null: false
     t.integer "position", null: false
@@ -78,6 +88,7 @@ ActiveRecord::Schema.define(version: 20170629131724) do
   end
 
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.string "slug", null: false
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -110,6 +121,7 @@ ActiveRecord::Schema.define(version: 20170629131724) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "auth_tokens", "users"
   add_foreign_key "discussion_posts", "iterations"
   add_foreign_key "exercises", "exercises", column: "unlocked_by_id"
   add_foreign_key "exercises", "tracks"

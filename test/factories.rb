@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :auth_token do
+    token { SecureRandom.uuid }
+  end
+
   factory :mentor_review do
     user { create :user }
     mentor { create :user }
@@ -24,10 +28,13 @@ FactoryGirl.define do
 
   factory :track do
     title "Ruby"
+    slug { "ruby-#{SecureRandom.uuid}" }
   end
 
   factory :exercise do
     track { create :track }
+    uuid { SecureRandom.uuid }
+    slug { "bob-#{SecureRandom.uuid}" }
     title "Bob"
     core false
     position 1

@@ -1,11 +1,11 @@
-ruby = Track.create!(title: "Ruby")
-python = Track.create!(title: "Python")
-cpp = Track.create!(title: "C++")
+ruby = Track.create!(title: "Ruby", slug: "ruby")
+python = Track.create!(title: "Python", slug: "python")
+cpp = Track.create!(title: "C++", slug: "cpp")
 
-bob = Exercise.create!(track: ruby, title: "Bob", core: true, position: 1)
-fish = Exercise.create!(track: ruby, title: "Fish", core: true, position: 2)
-cat = Exercise.create!(track: ruby, title: "Cat", core: false, position: 1, unlocked_by: bob)
-mouse = Exercise.create!(track: ruby, title: "Mouse", core: false, position: 2, unlocked_by: fish)
+bob = Exercise.create!(track: ruby, title: "Bob", slug: "bob", uuid: SecureRandom.uuid, core: true, position: 1)
+fish = Exercise.create!(track: ruby, title: "Fish", slug: "fish", uuid: SecureRandom.uuid, core: true, position: 2)
+cat = Exercise.create!(track: ruby, title: "Cat", slug: "cat", uuid: SecureRandom.uuid, core: false, position: 1, unlocked_by: bob)
+mouse = Exercise.create!(track: ruby, title: "Mouse", slug: "mouse", uuid: SecureRandom.uuid, core: false, position: 2, unlocked_by: fish)
 
 ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password')
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password')

@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   # TODO - Delete this
   post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   namespace :api do
+    resources :tracks, only: [] do
+      resources :exercises, only: [] do
+        resource :solution, only: [:show]
+      end
+    end
   end
 
   resources :tracks, only: [:index, :show]
