@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :auth_token do
+    user { create :user }
     token { SecureRandom.uuid }
   end
 
