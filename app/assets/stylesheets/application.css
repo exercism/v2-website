@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require purecss/build/pure-min.css
+ *= require simplemde/dist/simplemde.min.css
  *= require_tree .
  *= require_self
  */

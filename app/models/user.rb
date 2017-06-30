@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
   has_many :solutions
-  has_many :iteractions, through: :solutions
+  has_many :iterations, through: :solutions
 
   def unlocked_track?(track)
     user_tracks.where(track_id: track.id).exists?

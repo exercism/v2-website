@@ -1,3 +1,5 @@
+$tab-top-color: #009CA8;
+
 .tabs-and-panes {
     &>.tabs {
         border-bottom:1px solid #ddd;
@@ -32,7 +34,7 @@
         border-left-color:#ddd;
         border-right-color:#ddd;
         border-bottom-color:#fff;
-        border-top-color:green;
+        border-top-color:$tab-top-color;
         color:#333;
     }
 

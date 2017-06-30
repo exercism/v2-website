@@ -12,4 +12,5 @@
 //
 //= require rails-ujs
 //= require jquery/dist/jquery.min.js
+//= require simplemde/dist/simplemde.min.js
 //= require_tree .

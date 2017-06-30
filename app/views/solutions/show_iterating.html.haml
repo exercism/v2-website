@@ -19,7 +19,7 @@
               .pane.pane-2
                 Test Suite Pane
               .pane.pane-3.solution
-                %pre.line-numbers{data: {line: "3,6"}}
+                %pre.solution-code.line-numbers{data: {line: "3,6"}}
                   %code{class: "language-ruby"}
                     = @iteration.code
 
@@ -39,8 +39,8 @@
 
                 .post-html= raw post.html
 
-          =form_for DiscussionPost.new(iteration_id: @iteration), remote: true, html: {class: "new-discussion-post-form"} do |f|
-            =f.hidden_field :iteration_id
+          =form_for DiscussionPost.new, remote: true, html: {class: "new-discussion-post-form"} do |f|
+            =hidden_field_tag :iteration_id, @iteration.id
 
             .tabs-and-panes.selected-1
               .tabs
@@ -48,7 +48,7 @@
                 .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
               .panes
                 .pane.pane-1.markdown
-                  =f.text_area :content, value: "Foo\n\n```\nasdasdas\nasdasdas\n```\n\nqwewqe\nqweqweqw"
+                  =f.text_area :content
                 .pane.pane-2.preview
                   .preview-area
 
@@ -109,23 +109,24 @@
 
     $window = $(window)
     $lhs = $('.lhs')
-    $window.scroll => 
+    $window.scroll =>
       if $window.scrollTop() > $lhs.position().top - 10
         $lhs.addClass('fixed')
       else
         $lhs.removeClass('fixed')
 
+    $window.resize setupLayout
 
-      ###
-      #panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
-      panelsHeight = $(window).height() - $('.solution-footer').outerHeight() - 10
-      $('.panels').css('max-height', panelsHeight)
-      ###
+    ###
+    #panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
+    panelsHeight = $(window).height() - $('.solution-footer').outerHeight() - 10
+    $('.panels').css('max-height', panelsHeight)
+    ###
 
-      ###
-      panesHeight = $('.panels').outerHeight() - 50
-      $('.main-panes').css('height',)
-      ###
+    ###
+    panesHeight = $('.panels').outerHeight() - 50
+    $('.main-panes').css('height',)
+    ###
 
     setupTabs = =>
       $('.tab').click ->
@@ -142,8 +143,18 @@
         $container.addClass("selected-\#{tabId}") if tabId
 
     setupNewDiscussionPost = =>
+
+      $textarea = $(".new-discussion-post-form textarea")
+      smde = new SimpleMDE
+        element: $textarea[0]
+        spellChecker: false
+        forceSync: true
+        toolbar: ["bold", "italic", "strikethrough", "|", "quote", "code", "link", "|", "unordered-list", "ordered-list"]
+
+      console.log smde.toolbar
+
       $('.preview-tab').click ->
-        markdown = $(".new-discussion-post-form textarea").val()
+        markdown = $textarea.val()
         $.post "/markdown/parse", {markdown: markdown}, (x,y,z) =>
           console.log x,y,z
           $('.new-discussion-post-form .preview-area').html(x)
