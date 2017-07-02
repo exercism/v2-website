@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   resources :discussion_posts, only: [:create]
+  resources :notifications, only: [:index]
 
   namespace :admin do
     resource :dashboard, only: [:show], controller: "dashboard"

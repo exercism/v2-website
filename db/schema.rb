@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702134612) do
+ActiveRecord::Schema.define(version: 20170702140156) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -83,6 +83,17 @@ ActiveRecord::Schema.define(version: 20170702134612) do
     t.index ["user_id"], name: "fk_rails_a8c6a413eb"
   end
 
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id"
+    t.string "about_type"
+    t.bigint "about_id"
+    t.text "content"
+    t.text "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_b080fb4855"
+  end
+
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
@@ -142,6 +153,7 @@ ActiveRecord::Schema.define(version: 20170702134612) do
   add_foreign_key "mentor_reviews", "users", column: "mentor_id"
   add_foreign_key "mentored_tracks", "tracks"
   add_foreign_key "mentored_tracks", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"

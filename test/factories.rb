@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :notification do
+    user { create :user }
+    content "Foobar"
+    link "http://barfoo.com"
+  end
+
   factory :mentored_track do
     user { create :user }
     track { create :track }
