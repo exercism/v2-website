@@ -1,6 +1,8 @@
 %header.logged-in
   .lo-container
     Logged in as #{current_user.name}
+    &middot;
+    = link_to "Notifications", notifications_path
     -if current_user.admin?
       &middot;
       = link_to "Admin Dashboard", admin_dashboard_path

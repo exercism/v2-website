@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :iteractions, through: :solutions
   has_many :mentored_tracks
 
+  def avatar_url
+    "http://lorempixel.com/400/400/"
+  end
+
   def unlocked_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end
