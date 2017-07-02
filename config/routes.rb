@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   # TODO - Delete this
   post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
 
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: {
+    registrations: 'registrations',
+    omniauth_callbacks: "omniauth_callbacks"
+  }
 
   namespace :api do
     resources :tracks, only: [] do
