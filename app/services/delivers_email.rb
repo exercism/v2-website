@@ -6,8 +6,8 @@ class DeliversEmail
     end
   end
 
-  def self.deliver(*args)
-    new(*args).deliver
+  def self.deliver!(*args)
+    new(*args).deliver!
   end
 
   attr_reader :user, :mail_type, :objects, :mailer, :action
@@ -18,7 +18,7 @@ class DeliversEmail
     @mailer, @action = parse_mail_type
   end
 
-  def deliver
+  def deliver!
     return false unless should_deliver?
 
     "#{mailer}_mailer".classify.constantize.send(action, user, *objects).deliver
@@ -29,7 +29,9 @@ class DeliversEmail
   def parse_mail_type
     case mail_type
     when :new_discussion_post
-      [:notifications, :new_discussion_post]
+      [:user_notifications, :new_discussion_post]
+    when :new_discussion_post_for_mentor
+      [:mentor_notifications, :new_discussion_post]
     else
       raise UnknownMailTypeError.new(mail_type)
     end

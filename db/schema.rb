@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170702161436) do
   create_table "communication_preferences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.boolean "email_on_new_discussion_post", default: true, null: false
+    t.boolean "email_on_new_discussion_post_for_mentor", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20170702161436) do
     t.bigint "user_id"
     t.string "about_type"
     t.bigint "about_id"
+    t.string "type"
     t.text "content"
     t.text "link"
     t.boolean "read", default: false, null: false

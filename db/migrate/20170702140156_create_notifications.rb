@@ -6,6 +6,7 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.string :about_type, null: true
       t.bigint :about_id, null: true
 
+      t.string :type, null: true
       t.text :content, null: true
       t.text :link, null: true
       t.boolean :read, null: false, default: false

@@ -1,9 +1,11 @@
 FactoryGirl.define do
-  factory :communication_preference, class: 'CommunicationPreferences' do
-    
+  factory :communication_preferences do
+    user { create :user }
   end
+
   factory :notification do
     user { create :user }
+    type :some_notification_type
     content "Foobar"
     link "http://barfoo.com"
   end
