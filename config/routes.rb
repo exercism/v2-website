@@ -24,10 +24,22 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :discussion_posts do
+  resources :discussion_posts, only: [:create]
+
+  namespace :admin do
+    resource :dashboard, only: [:show], controller: "dashboard"
+  end
+
+  namespace :mentor do
+    resource :dashboard, only: [:show], controller: "dashboard"
   end
 
   post "markdown/parse" => "markdown#parse"
 
+  %w{
+  donate
+  }.each do |page|
+    get page => "pages##{page}", as: "#{page}_page"
+  end
   root to: "pages#index"
 end
