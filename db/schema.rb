@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170702140156) do
     t.bigint "about_id"
     t.text "content"
     t.text "link"
+    t.boolean "read", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "fk_rails_b080fb4855"

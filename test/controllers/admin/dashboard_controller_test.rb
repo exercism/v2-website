@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AdminControllerTest < ActionDispatch::IntegrationTest
+class Admin::DashboardControllerTest < ActionDispatch::IntegrationTest
 
   test "302 if not signed in" do
     get admin_dashboard_url

@@ -1,0 +1,8 @@
+#notifications-page
+  .lo-container
+    %h1 Notifications
+    - @notifications.each do |notification|
+      .notification
+        =link_to notification.content, notification.link
+
+    =paginate @notifications

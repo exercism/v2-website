@@ -8,6 +8,7 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
 
       t.text :content, null: true
       t.text :link, null: true
+      t.boolean :read, null: false, default: false
 
       t.timestamps
     end

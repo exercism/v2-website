@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MentorControllerTest < ActionDispatch::IntegrationTest
+class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
 
   test "302 if not signed in" do
     get mentor_dashboard_url
