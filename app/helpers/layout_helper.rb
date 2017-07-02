@@ -7,6 +7,25 @@ module LayoutHelper
     classes.join(" ")
   end
 
+  def notice_and_alert
+    tags = []
+    a = alert
+    n = notice
+
+    if devise_controller? && @user && @user.errors.full_messages.present?
+      errors = safe_join(@user.errors.full_messages.each { |msg| msg })
+      tags << content_tag(:div, errors, id: 'errors')
+    end
+
+    tags << content_tag(:div, n, id: "notice") unless n.blank?
+    tags << content_tag(:div, a, id: "alert") unless a.blank?
+    safe_join(tags)
+  end
+
+  # Clear the flash by calling these methods
+  def clear_notice_and_alert
+  end
+
   def render_header
     if devise_controller?
       render "layouts/logged_out_header"

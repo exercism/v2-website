@@ -14,7 +14,7 @@ class CreatesDiscussionPostTest < ActiveSupport::TestCase
     assert_equal post.content, content
   end
 
-  test "notifies and emails mentors" do
+  test "notifies and emails mentors upon user post" do
     iteration = create :iteration
     solution = iteration.solution
     user = solution.user
@@ -40,5 +40,33 @@ class CreatesDiscussionPostTest < ActiveSupport::TestCase
     end
 
     CreatesDiscussionPost.create!(iteration, user, "foooebar")
+  end
+
+  test "notifies and emails user upon mentor post" do
+    iteration = create :iteration
+    solution = iteration.solution
+    user = solution.user
+
+    # Setup mentors
+    mentor1 = create :user
+    mentor2 = create :user
+    create :discussion_post, iteration: iteration, user: mentor1
+    create :discussion_post, iteration: iteration, user: mentor2
+
+    CreatesNotification.expects(:create!).with do |*args|
+      assert_equal user, args[0]
+      assert_equal :new_discussion_post, args[1]
+      assert_equal "#{user.name} has commented on your solution", args[2]
+      assert_equal "http://foobar123.com", args[3]
+      assert_equal DiscussionPost, args[4][:about].class
+    end
+
+    DeliversEmail.expects(:deliver!).with do |*args|
+      assert_equal user, args[0]
+      assert_equal :new_discussion_post, args[1]
+      assert_equal DiscussionPost, args[2].class
+    end
+
+    CreatesDiscussionPost.create!(iteration, mentor1, "foooebar")
   end
 end

@@ -26,6 +26,16 @@ class CreatesDiscussionPost
   end
 
   private
+
+  def create_discussion_post!
+    @discussion_post ||= DiscussionPost.create!(
+      iteration: iteration,
+      user: user,
+      content: content,
+      html: html
+    )
+  end
+
   def notify_mentors
     solution.mentors.each do |mentor|
       CreatesNotification.create!(
@@ -43,12 +53,18 @@ class CreatesDiscussionPost
     end
   end
 
-  def create_discussion_post!
-    @discussion_post ||= DiscussionPost.create!(
-      iteration: iteration,
-      user: user,
-      content: content,
-      html: html
+  def notify_solution_user
+    CreatesNotification.create!(
+      solution.user,
+      :new_discussion_post,
+      "#{solution.user.name} has commented on your solution",
+      "http://foobar123.com", # TODO
+      about: discussion_post
+    )
+    DeliversEmail.deliver!(
+      solution.user,
+      :new_discussion_post,
+      discussion_post
     )
   end
 
@@ -56,7 +72,7 @@ class CreatesDiscussionPost
     return true if posted_by_solution_user?
 
     # TODO - Add mentor permissions
-    return false
+    return true
   end
 
   def posted_by_solution_user?

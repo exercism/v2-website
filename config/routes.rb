@@ -35,6 +35,10 @@ Rails.application.routes.draw do
     resource :dashboard, only: [:show], controller: "dashboard"
   end
 
+  namespace :settings do
+    resource :communication_preferences, only: [:edit, :update]
+  end
+
   post "markdown/parse" => "markdown#parse"
 
   %w{
