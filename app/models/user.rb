@@ -4,19 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :auth_tokens
-
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
   has_many :solutions
-  has_many :iterations, through: :solutions
+  has_many :iteractions, through: :solutions
+  has_many :mentored_tracks
 
   def unlocked_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end
 
-  # TODO
-  def avatar_url
-    "http://lorempixel.com/400/400/"
+  def mentor?
+    mentored_tracks.exists?
   end
 end

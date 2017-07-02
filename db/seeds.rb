@@ -7,8 +7,8 @@ fish = Exercise.create!(track: ruby, title: "Fish", slug: "fish", uuid: SecureRa
 cat = Exercise.create!(track: ruby, title: "Cat", slug: "cat", uuid: SecureRandom.uuid, core: false, position: 1, unlocked_by: bob)
 mouse = Exercise.create!(track: ruby, title: "Mouse", slug: "mouse", uuid: SecureRandom.uuid, core: false, position: 2, unlocked_by: fish)
 
-ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password')
-kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password')
+ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password', admin: true)
+kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password', admin: true)
 
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
 ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx)

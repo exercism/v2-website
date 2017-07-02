@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630181249) do
+ActiveRecord::Schema.define(version: 20170702134612) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(version: 20170630181249) do
     t.index ["user_id"], name: "fk_rails_311ec25a41"
   end
 
+  create_table "mentored_tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id"
+    t.bigint "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "fk_rails_610977bb5c"
+    t.index ["user_id"], name: "fk_rails_a8c6a413eb"
+  end
+
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
@@ -115,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170630181249) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -130,6 +140,8 @@ ActiveRecord::Schema.define(version: 20170630181249) do
   add_foreign_key "mentor_reviews", "solutions"
   add_foreign_key "mentor_reviews", "users"
   add_foreign_key "mentor_reviews", "users", column: "mentor_id"
+  add_foreign_key "mentored_tracks", "tracks"
+  add_foreign_key "mentored_tracks", "users"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"

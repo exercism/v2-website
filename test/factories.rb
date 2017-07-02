@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :mentored_track do
+    user { create :user }
+    track { create :track }
+  end
+
   factory :auth_token do
     user { create :user }
     token { SecureRandom.uuid }
