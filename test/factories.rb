@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :communication_preference, class: 'CommunicationPreferences' do
+    
+  end
   factory :notification do
     user { create :user }
     content "Foobar"

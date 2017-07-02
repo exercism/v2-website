@@ -1,4 +1,11 @@
 class DeliversEmail
+  class UnknownMailTypeError < RuntimeError
+    attr_reader :mail_type
+    def initialize(mail_type)
+      @mail_type = mail_type
+    end
+  end
+
   def self.deliver(*args)
     new(*args).deliver
   end
@@ -24,13 +31,12 @@ class DeliversEmail
     when :new_discussion_post
       [:notifications, :new_discussion_post]
     else
-      raises "Unknown mail type"
+      raise UnknownMailTypeError.new(mail_type)
     end
   end
 
-  # TODO
   def should_deliver?
-    true
+    user.communication_preferences.send("email_on_#{mail_type}")
   end
 end
 

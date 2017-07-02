@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :auth_tokens
+  has_one :communication_preferences
 
   has_many :notifications
 
@@ -13,6 +14,10 @@ class User < ApplicationRecord
   has_many :solutions
   has_many :iteractions, through: :solutions
   has_many :mentored_tracks
+
+  after_create do
+    create_communication_preferences
+  end
 
   def avatar_url
     "http://lorempixel.com/400/400/"

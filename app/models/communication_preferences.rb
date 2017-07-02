@@ -1,0 +1,2 @@
+class CommunicationPreferences < ApplicationRecord
+end
