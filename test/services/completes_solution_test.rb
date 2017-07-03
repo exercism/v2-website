@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StartsSolutionTest < ActiveSupport::TestCase
+class CompletesSolutionTest < ActiveSupport::TestCase
   setup do
     track = create :track
     @core_exercise = create :exercise, track: track, core: true, position: 1

@@ -2,7 +2,7 @@ require 'test_helper'
 
 # TODOGIT
 class GitExerciseTest < ActiveSupport::TestCase
-  test "test solution" do
+  test "test instructions" do
     skip
   end
 

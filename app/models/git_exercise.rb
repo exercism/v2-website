@@ -7,7 +7,7 @@ class GitExercise
   end
 
   # TODOGIT
-  def solution
+  def instructions
   end
 
   # TODOGIT
