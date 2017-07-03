@@ -7,7 +7,7 @@ set :application, @application
 set :repo_url, "git@github.com:exercism/prototyping.git"
 set :branch, 'master'
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/auth.yml}
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :deploy_to, "/opt/#{@application}"
