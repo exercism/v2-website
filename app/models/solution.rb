@@ -18,4 +18,16 @@ class Solution < ApplicationRecord
   def mentors
     @mentors ||= User.where(id: discussion_posts.where.not(user_id: user.id).select(:user_id))
   end
+
+  def instructions
+    git_exercise.instructions
+  end
+
+  def test_suite
+    git_exercise.test_suite
+  end
+
+  def git_exercise
+    @git_exercise ||= GitExercise.new(exercise, git_sha)
+  end
 end

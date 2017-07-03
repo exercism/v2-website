@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170702161436) do
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
+    t.string "git_sha", null: false
     t.bigint "approved_by_id"
     t.datetime "completed_at"
     t.text "notes"

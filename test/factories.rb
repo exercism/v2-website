@@ -66,6 +66,7 @@ FactoryGirl.define do
   factory :solution do
     user { create :user }
     exercise { create :exercise }
+    git_sha { SecureRandom.uuid }
   end
 
   factory :user_track do

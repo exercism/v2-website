@@ -25,7 +25,7 @@ class CompletesSolution
 
     # Unlock side quests
     solution.exercise.unlocks.each do |exercise|
-      Solution.create(user: solution.user, exercise: exercise)
+      CreatesSolution.create!(solution.user, exercise)
     end
   end
 
@@ -43,7 +43,7 @@ class CompletesSolution
                       where("position > ?", solution.exercise.position).
                       first
     if next_exercise
-      Solution.create(user: solution.user, exercise: next_exercise)
+      CreatesSolution.create!(solution.user, next_exercise)
     else
       # TODO - complete track
       raise "Not Implemented"
