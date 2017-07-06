@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
   has_many :solutions
-  has_many :iteractions, through: :solutions
+  has_many :iterations, through: :solutions
   has_many :mentored_tracks
 
   after_create do

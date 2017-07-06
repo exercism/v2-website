@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   private
+  def redirect_if_signed_in!
+    redirect_to dashboard_path if signed_in?
+  end
+
   def render_modal(class_name, template)
     html = EscapesJavascript.escape(render_to_string(template, layout: false))
     render js: %Q{ showModal('#{class_name}', "#{html}") }

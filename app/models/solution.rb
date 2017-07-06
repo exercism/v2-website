@@ -7,6 +7,10 @@ class Solution < ApplicationRecord
   has_many :iterations
   has_many :discussion_posts, through: :iterations
 
+  def self.completed
+    where.not(completed_at: nil)
+  end
+
   def approved?
     !!approved_by
   end

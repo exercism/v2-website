@@ -12,6 +12,92 @@ body.controller-solutions {
         padding:50px;
         background:#fff;
     }
+    .track-header {
+        border:1px solid #ddd;
+        padding:20px;
+        margin-bottom:20px;
+        .icon {
+        }
+        .inner {
+            .stats {
+                float:right;
+                overflow:hidden;
+                .stat {
+                    margin-left:10px;
+                    float:left;
+                    border:1px solid #eee;
+                    padding:5px;
+                    @include font-size(12, 16);
+                    text-align:center;
+                    overflow:hidden;
+                    i {
+                        float:left;
+                    }
+                }
+            }
+            .track-progress {
+                h4 {
+                    display:inline-block;
+                }
+                .dots {
+                    display:inline-block;
+                    overflow:hidden;
+                    .dot {
+                        background:transparent;
+                        border:2px solid #aaa;
+                        border-radius:100%;
+                        display:block;
+                        float:left;
+                        position:relative;
+                        width:10px;
+                        height:10px;
+                        &.current {
+                            border-color:red;
+                        }
+                        &.completed {
+                            background:#aaa;
+                        }
+                        &+.dot {
+                            margin-left:8px;
+                            &:before {
+                                height:2px;
+                                width:10px;
+                                top:2px;
+                                position:absolute;
+                                background:#aaa;
+                                left:-10px;
+                                content: " ";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .approved-bar {
+        background:rgba(green, 0.2);
+        color:green;
+        overflow:hidden;
+        margin-bottom:30px;
+        padding:10px;
+        i {
+            margin-right:5px;
+            vertical-align:bottom;
+            @include font-size(14, 26);
+        }
+        .text {
+            margin-right:5px;
+            vertical-align:bottom;
+            @include font-size(14, 26);
+        }
+        .pure-button {
+            background:transparent;
+            border:1px solid green;
+            color:green;
+            @include font-size(12, 12);
+        }
+    }
     .panels {
         overflow-y:hidden;
 

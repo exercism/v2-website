@@ -11,6 +11,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     test "shows with status #{status}" do
       sign_in!
       solution = send("create_#{status}_solution")
+      create :user_track, user: @current_user, track: solution.exercise.track
 
       get solution_url(solution)
       assert_response :success
@@ -25,7 +26,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     discussion_post_1 = create :discussion_post, iteration: iteration
     discussion_post_2 = create :discussion_post, iteration: iteration
     discussion_post_3 = create :discussion_post, iteration: iteration
-    notes = "foobar!!!"
+    notes = "foobar"
 
     patch reflect_solution_url(solution), params: {
       notes: notes,

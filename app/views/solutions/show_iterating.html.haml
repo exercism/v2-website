@@ -1,6 +1,53 @@
 #solution-iterating-page
+  #nav.lo-internal-nav-bar
+    .lo-container
+      =link_to "Dashboard", root_path
+      &middot;
+      =link_to "#{@track.title}", @track
+      &middot;
+      -if @solution.exercise.core?
+        %span Core Exercises
+      -else
+        %span Side Quests
+
   .lo-container
-    .placeholder-header
+    .track-header
+      .icon
+      .inner
+        .stats
+          .stat
+            %i.fa.fa-graduation
+            .number 12,123
+            .metric students
+          .stat
+            %i.fa.fa-graduation
+            .number 39,233
+            .metric submits
+
+        .track-title= @track.title
+        .track-progress
+          %h4 Track Progress:
+          -num_core_exercises = @track.exercises.core.count
+          -num_completed_exercises = @user_track.num_completed_core_exercies
+          -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
+
+          .dots
+            -num_core_exercises.times do |i|
+              -if i == exercise_idx
+                .dot.current
+              -elsif i < num_completed_exercises
+                .dot.completed
+              -else
+                .dot
+
+    -if @solution.approved?
+      .approved-bar
+        %i.fa.fa-bell
+        %span.text A mentor has approved this solution
+        =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true, class: 'pure-button'
+    /-@notifications.each do |notification|
+    /  .notification
+    /   =notification.content
     .pure-g.panels
       .pure-u-1-2.lhs
         .lhs-content
@@ -15,9 +62,9 @@
 
             .panes
               .pane.pane-1
-                Instructions Pane
+                =@iteration.solution.instructions
               .pane.pane-2
-                Test Suite Pane
+                =@iteration.solution.test_suite
               .pane.pane-3.solution
                 %pre.solution-code.line-numbers{data: {line: "3,6"}}
                   %code{class: "language-ruby"}

@@ -1,0 +1,7 @@
+#dashboard-page
+  .lo-container
+    Your dashboard
+
+    -if @last_solution
+      %h2 Carry on where you left off
+      =link_to @last_solution.exercise.title, @last_solution

@@ -55,6 +55,8 @@ class SolutionsController < ApplicationController
 
   def show_iterating
     @iteration = @solution.iterations.find_by_id(params[:iteration_id]) || @solution.iterations.first
+    @track = @solution.exercise.track
+    @user_track = UserTrack.where(user: current_user, track: @track).first
 
     # TODO
     # If @iteration is null then the following page will break

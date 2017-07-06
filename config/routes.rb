@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :dashboard, only: [:show], controller: "dashboard"
+
   resources :tracks, only: [:index, :show]
   resources :user_tracks, only: [:create]
   resources :solutions, only: [:show] do
