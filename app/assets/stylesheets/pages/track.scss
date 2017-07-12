@@ -138,6 +138,103 @@
             }
         }
     }
+    .progress-section {
+        padding:20px;
+        background:#eee;
+        margin-top:30px;
+        margin-left:30px;
+        h2 {
+            color:green;
+            font-weight:500;
+            text-transform:uppercase;
+            @include font-size(20, 20);
+            text-align:right;
+        }
+        .h2-subtitle {
+            font-weight:500;
+            @include font-size(14, 14);
+            margin-bottom:20px;
+            text-align:right;
+        }
+        .core, .topics, .side {
+            background:#fff;
+            padding:20px 30px;
+            margin-bottom:10px;
+            h3 {
+                border-bottom:1px solid #ddd;
+                color:#999;
+                font-weight:500;
+                margin-bottom:10px;
+                padding-bottom:5px;
+            }
+        }
+        .core {
+            .percentage {
+                color:green;
+                @include font-size(25, 25);
+                font-weight:500;
+                float:left;
+                margin-right:10px;
+            }
+            .number {
+                @include font-size(10, 10);
+            }
+            .completed {
+                @include font-size(14, 14);
+                font-weight:500;
+            }
+        }
+        .topics {
+            .topic {
+                overflow:hidden;
+                margin-bottom:5px;
+                .bar {
+                    width:80%;
+                    float:left;
+                    position:relative;
+                    padding:5px;
+                    .filled {
+                        background:#eee;
+                        position:absolute;
+                        top:0;
+                        bottom:0;
+                        left:0;
+                    }
+                    .title {
+                        position:relative;
+                    }
+                }
+                .percentage {
+                    padding-top:5px;
+                    width:20%;
+                    text-align:right;
+                    float:right;
+                }
+            }
+        }
+        .side {
+            .squares {
+                overflow:hidden;
+                margin-bottom:10px;
+                .square {
+                    margin:3px;
+                    background:#aaa;
+                    width:10px;
+                    height:10px;
+                    float:left;
+                    &.completed {
+                        background:green;
+                    }
+                }
+            }
+            .pure-button {
+                background:green;
+                color:#fff;
+                display:block;
+                width:100%;
+            }
+        }
+    }
     .side-exercises {
         background:#eee;
         padding:30px 0;

@@ -13,6 +13,10 @@ class Exercise < ApplicationRecord
     where(core: false)
   end
 
+  def side?
+    !core
+  end
+
   # TODO
   def topics
     ["strings", "transforming", "regular expressions"]

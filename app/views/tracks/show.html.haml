@@ -16,7 +16,7 @@
 
   .lo-container
     .pure-g
-      .pure-u-3-4
+      .pure-u-2-3
         .core-exercises
           -@core_exercises_and_solutions.each do |exercise, solution|
             -if solution
@@ -36,9 +36,37 @@
                 .status Locked
                 .title= exercise.title
                 .topics= exercise.topics.join(" | ")
-      .pure-u-1-4
+      .pure-u-1-3
+        .progress-section
+          %h2 Your Progress in Ruby
+          .h2-subtitle See how you're doing
 
-  .side-exercises
+          .core
+            %h3 Track
+            .percentage #{(@num_solved_core_exercises.to_f / @core_exercises_and_solutions.size * 100).round}%
+            .number #{@num_solved_core_exercises} / #{@core_exercises_and_solutions.size} core exercises
+            .completed marked as complete
+
+          .topics
+            %h3 Concepts
+            -@topic_percentages.each do |topic, percentage|
+              .topic
+                .percentage #{percentage}%
+                .bar
+                  .filled{style: "width: #{percentage}%"}
+                  .title= topic
+
+          .side
+            %h3 Extras
+            .squares
+              -@num_side_exercises.times do |i|
+                -if i < @num_solved_side_exercises
+                  .square.completed
+                -else
+                  .square
+            =link_to "See all", "#side-exercises", class: 'pure-button'
+
+  #side-exercises.side-exercises
     .lo-container
       %h2 Extra Exercises
       .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
@@ -55,6 +83,6 @@
 
 -content_for :js do
   :coffeescript
-    #updateSideExercises = => 
+    #updateSideExercises = =>
     #  $('.side_exercises_form').trigger('submit.rails')
     $('.side_exercises_form select').change updateSideExercises
