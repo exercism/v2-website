@@ -7,13 +7,18 @@ module LayoutHelper
     classes.join(" ")
   end
 
-  def notice_and_alert
+  def notice_and_alert(object = nil)
     tags = []
     a = alert
     n = notice
 
     if devise_controller? && @user && @user.errors.full_messages.present?
       errors = safe_join(@user.errors.full_messages.each { |msg| msg })
+      tags << content_tag(:div, errors, id: 'errors')
+    end
+
+    if object
+      errors = safe_join(object.errors.full_messages.each { |msg| msg })
       tags << content_tag(:div, errors, id: 'errors')
     end
 

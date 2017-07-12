@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :profile do
+    
+  end
   factory :communication_preferences do
     user { create :user }
   end

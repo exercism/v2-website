@@ -1,0 +1,28 @@
+#profile-page
+  .header
+    .lo-container
+      %h1 #{@profile.name}'s Profile
+      .num-solutions 34 published solutions
+      .h1-subtitle This is a showcase of some of the solutions that #{@profile.name} has submitted on Exercism.
+
+  .lo-container
+    .pure-g
+      .pure-u-1-3.lhs
+        .sidebar
+          =image_tag @profile.avatar_url, class: 'avatar'
+          .name= @profile.name
+          .location Evesham lorem, Lorem Kingdom
+          -if @profile.bio.present?
+            .bio "#{@profile.bio}"
+          .hr
+
+          %h3 On Exercism
+          -if @profile.user.admin?
+            .admin-badge Exercism Admin
+          -@profile.user.mentored_tracks.each do |mentored_track|
+            .mentor-badge #{mentored_track.track.name} Mentor
+
+      .pure-u-2-3.rhs
+        -@solutions.each do |solution|
+          =solution.exercise.title
+

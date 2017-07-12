@@ -1,0 +1,20 @@
+#new-profile-page
+  .lo-container
+    %h1 Update your profile
+    =form_for @profile, url: my_profile_path, method: :patch do |f|
+      %div
+        =f.text_field :name, placeholder: "Your name", required: true
+      %div
+        =f.text_field :slug, placeholder: "http://exercism.io/profiles/SLUG", required: true
+      %div
+        =f.text_field :website, placeholder: "Your website"
+      %div
+        =f.text_field :twitter, placeholder: "Your twitter"
+      %div
+        =f.text_field :github, placeholder: "Your Github"
+      %div
+        =f.text_field :linkedin, placeholder: "Your Linkedin"
+      %div
+        =f.text_field :medium, placeholder: "Your Medium"
+
+      =f.button "Update profile"

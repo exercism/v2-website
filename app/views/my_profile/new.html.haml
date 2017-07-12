@@ -1,0 +1,11 @@
+#new-profile-page
+  .lo-container
+    =notice_and_alert(@profile)
+
+    %h1 You don't have a profile :((((
+    %h2 Create a profile!!!!
+    =form_for @profile, url: my_profile_path do |f|
+      =f.text_field :name, placeholder: "Your name", required: true
+      =f.text_field :slug, placeholder: "http://exercism.io/profiles/SLUG", required: true
+      =f.button "Create profile"
+

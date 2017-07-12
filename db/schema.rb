@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702161436) do
+ActiveRecord::Schema.define(version: 20170710110046) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -105,12 +105,30 @@ ActiveRecord::Schema.define(version: 20170702161436) do
     t.index ["user_id"], name: "fk_rails_b080fb4855"
   end
 
+  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id", null: false
+    t.string "slug", null: false
+    t.string "name", null: false
+    t.text "bio"
+    t.string "twitter"
+    t.string "website"
+    t.string "github"
+    t.string "linkedin"
+    t.string "medium"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_profiles_on_slug", unique: true
+    t.index ["user_id"], name: "fk_rails_e424190865"
+  end
+
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
     t.string "git_sha", null: false
     t.bigint "approved_by_id"
+    t.datetime "cloned_at"
     t.datetime "completed_at"
+    t.datetime "published_at"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -169,6 +187,7 @@ ActiveRecord::Schema.define(version: 20170702161436) do
   add_foreign_key "mentored_tracks", "tracks"
   add_foreign_key "mentored_tracks", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"

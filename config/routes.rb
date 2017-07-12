@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   resources :discussion_posts, only: [:create]
   resources :notifications, only: [:index]
+  resource :my_profile, controller: "my_profile"
+  resources :profiles, only: [:show, :index]
 
   namespace :admin do
     resource :dashboard, only: [:show], controller: "dashboard"

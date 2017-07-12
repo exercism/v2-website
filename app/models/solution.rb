@@ -11,8 +11,20 @@ class Solution < ApplicationRecord
     where.not(completed_at: nil)
   end
 
+  def self.published
+    where.not(published_at: nil)
+  end
+
   def approved?
     !!approved_by
+  end
+
+  def cloned?
+    !!cloned_at
+  end
+
+  def published?
+    !!published_at
   end
 
   def completed?

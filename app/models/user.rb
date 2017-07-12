@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :auth_tokens
   has_one :communication_preferences
 
+  has_one :profile
   has_many :notifications
 
   has_many :user_tracks
@@ -20,6 +21,7 @@ class User < ApplicationRecord
     create_communication_preferences
   end
 
+  # TODO
   def avatar_url
     "http://lorempixel.com/400/400/"
   end

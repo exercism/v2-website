@@ -6,7 +6,9 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.string :git_sha, null: false
 
       t.bigint :approved_by_id, null: true
+      t.datetime :cloned_at, null: true
       t.datetime :completed_at, null: true
+      t.datetime :published_at, null: true
 
       t.text :notes, null: true
 
