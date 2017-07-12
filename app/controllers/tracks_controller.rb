@@ -16,12 +16,13 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     return render :show_locked unless current_user.unlocked_track?(@track)
 
-    exercises = @track.exercises.order('position ASC')
+    exercises = @track.exercises.order('position ASC, title ASC')
     core_exercises, side_exercises = exercises.partition {|e|e.core?}
 
     solutions = current_user.solutions.
                              each_with_object({}) {|s,h| h[s.exercise_id] = s }
 
+    @user_track = UserTrack.where(user: current_user, track: @track).first
     @core_exercises_and_solutions = core_exercises.map{|ce|[ce, solutions[ce.id]]}
     @side_exercises_and_solutions = side_exercises.map{|ce|[ce, solutions[ce.id]]}
   end

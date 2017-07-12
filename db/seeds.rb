@@ -2,15 +2,24 @@ ruby = Track.create!(title: "Ruby", slug: "ruby")
 python = Track.create!(title: "Python", slug: "python")
 cpp = Track.create!(title: "C++", slug: "cpp")
 
-bob = Exercise.create!(track: ruby, title: "Bob", slug: "bob", uuid: SecureRandom.uuid, core: true, position: 1)
-fish = Exercise.create!(track: ruby, title: "Fish", slug: "fish", uuid: SecureRandom.uuid, core: true, position: 2)
-cat = Exercise.create!(track: ruby, title: "Cat", slug: "cat", uuid: SecureRandom.uuid, core: false, position: 1, unlocked_by: bob)
-mouse = Exercise.create!(track: ruby, title: "Mouse", slug: "mouse", uuid: SecureRandom.uuid, core: false, position: 2, unlocked_by: fish)
+slug = Exercise.create!(track: ruby, title: "Slug", slug: "fish", uuid: SecureRandom.uuid, core: true, position: 1)
+bob = Exercise.create!(track: ruby, title: "Bob", slug: "bob", uuid: SecureRandom.uuid, core: true, position: 2)
+fish = Exercise.create!(track: ruby, title: "Fish", slug: "fish", uuid: SecureRandom.uuid, core: true, position: 3)
+Exercise.create!(track: ruby, title: "Snail", slug: "snail", uuid: SecureRandom.uuid, core: true, position: 4)
+Exercise.create!(track: ruby, title: "Desk", slug: "desk", uuid: SecureRandom.uuid, core: true, position: 6)
+Exercise.create!(track: ruby, title: "Coffee", slug: "coffee", uuid: SecureRandom.uuid, core: true, position: 5)
+
+cat = Exercise.create!(track: ruby, title: "Cat", slug: "cat", uuid: SecureRandom.uuid, core: false, unlocked_by: bob)
+mouse = Exercise.create!(track: ruby, title: "Mouse", slug: "mouse", uuid: SecureRandom.uuid, core: false, unlocked_by: fish)
+Exercise.create!(track: ruby, title: "Cover", slug: "cover", uuid: SecureRandom.uuid, core: false)
+Exercise.create!(track: ruby, title: "Laptop", slug: "laptop", uuid: SecureRandom.uuid, core: false)
+Exercise.create!(track: ruby, title: "Bag", slug: "bag", uuid: SecureRandom.uuid, core: false, unlocked_by: slug)
 
 ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password', admin: true)
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password', admin: true)
 
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
+ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_sha: 'foobar', completed_at: DateTime.now)
 ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx, git_sha: 'foobar')
 ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob, code: %q{
 class Bob

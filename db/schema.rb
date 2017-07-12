@@ -46,7 +46,10 @@ ActiveRecord::Schema.define(version: 20170710110046) do
     t.string "slug", null: false
     t.string "title", null: false
     t.boolean "core", default: false, null: false
-    t.integer "position", null: false
+    t.boolean "active", default: false, null: false
+    t.integer "difficulty", default: 1, null: false
+    t.integer "length", default: 1, null: false
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["track_id"], name: "fk_rails_a796d89c21"

@@ -19,8 +19,13 @@ class Solution < ApplicationRecord
     !!approved_by
   end
 
+  # TODO - Check this is being set somewhere
   def cloned?
     !!cloned_at
+  end
+
+  def in_progress?
+    cloned? || iterations.size > 0
   end
 
   def published?

@@ -18,9 +18,11 @@ Rails.application.routes.draw do
 
   resource :dashboard, only: [:show], controller: "dashboard"
 
-  resources :tracks, only: [:index, :show]
+  resources :tracks, only: [:index, :show] do
+    resources :side_exercises, only: [:index]
+  end
   resources :user_tracks, only: [:create]
-  resources :solutions, only: [:show] do
+  resources :solutions, only: [:show, :create] do
     member do
       get :confirm_unapproved_completion
       patch :complete

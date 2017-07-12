@@ -1,23 +1,60 @@
 #track-page
+  .header
+    .visual-section
+      .line
+      .lo-container
+        =image_tag @track.bordered_icon_url, class: 'logo'
+        .status Track in Progress
+    .lo-container
+      %h1 #{@track.title} Track
+      .stats
+        .stat= pluralize @track.exercises.count, "Exercise"
+        .stat= pluralize @track.user_tracks.count, "Students"
+        .stat= pluralize @track.iterations.count, "Submissions"
+        .stat= pluralize @track.mentored_tracks.count, "Mentors"
+      .h1-subtitle Joined on #{@user_track.created_at}
+
   .lo-container
-    %h1= @track.title
+    .pure-g
+      .pure-u-3-4
+        .core-exercises
+          -@core_exercises_and_solutions.each do |exercise, solution|
+            -if solution
+              = link_to solution, class: "exercise #{solution.completed?? "completed" : "in-progress"}" do
+                .circle
+                -if solution.completed?
+                  .status Completed
+                  .button.pure-button Take a look
+                -else
+                  .status In Progress
+                  .button.pure-button Continue
+                .title= exercise.title
+                .topics= exercise.topics.join(" | ")
+            -else
+              .exercise
+                .circle
+                .status Locked
+                .title= exercise.title
+                .topics= exercise.topics.join(" | ")
+      .pure-u-1-4
 
-    %p Track Unlocked
+  .side-exercises
+    .lo-container
+      %h2 Extra Exercises
+      .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
+      .filters
+        =form_tag track_side_exercises_path(@track), remote: true, method: :get, class: "side_exercises_form" do
+          Difficulty
+          =select_tag :difficulty, options_for_select({all: nil, easy: 1, medium: 2, hard: 3}, value: @difficulty), id: nil
+          =select_tag :length, options_for_select({all: nil, short: 1, medium: 2, long: 3}, value: @length), id: nil
+          =select_tag :status, options_for_select({all: nil, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
+          =button_tag "Update"
+      .pure-g.exercises
+        =render "side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
 
-    %h2 Core Exercises
-    %ul
-      -@core_exercises_and_solutions.each do |exercise, solution|
-        %li
-          -if solution
-            = link_to exercise.title, solution
-          -else
-            = exercise.title
 
-    %h2 Secondary Exercises
-    %ul
-      -@side_exercises_and_solutions.each do |exercise, solution|
-        %li
-          -if solution
-            = link_to exercise.title, solution
-          -else
-            = exercise.title
+-content_for :js do
+  :coffeescript
+    #updateSideExercises = => 
+    #  $('.side_exercises_form').trigger('submit.rails')
+    $('.side_exercises_form select').change updateSideExercises

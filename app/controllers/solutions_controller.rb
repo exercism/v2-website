@@ -1,5 +1,19 @@
 class SolutionsController < ApplicationController
-  before_action :set_solution
+  before_action :set_solution, except: [:create]
+
+  def create
+    exercise = Exercise.find(params[:exercise_id])
+
+    # If this is a side exercise that has no unlocked_by
+    # the you can unlock it. This is the only time this method
+    # is allowed to be called.
+    if !exercise.core && !exercise.unlocked_by
+      solution = CreatesSolution.create!(current_user, exercise)
+      redirect_to solution
+    else
+      redirect_to exercise.track
+    end
+  end
 
   def show
     @exercise = @solution.exercise

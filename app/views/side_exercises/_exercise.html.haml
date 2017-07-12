@@ -1,0 +1,14 @@
+.icon
+  .img{style: "background-image:url('#{image_path(exercise.icon_url)}')"}
+.status.locked Locked
+.status.unlocked Unlocked
+.status.in-progress In progress
+.status.completed Completed
+.title= exercise.title
+.stats
+  .length
+    %i.fa.fa-clock-o
+    %span Long
+  .difficulty
+    %i.fa.fa-tachometer
+.topics= exercise.topics.join(" | ")

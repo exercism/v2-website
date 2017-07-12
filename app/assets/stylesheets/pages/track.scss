@@ -1,0 +1,237 @@
+@import 'variables';
+@import 'mixins';
+#track-page {
+    .header {
+        background: $header-color;
+        padding:0 0 35px;
+        .visual-section {
+            position: relative;
+            padding-top:30px;
+            overflow:hidden;
+            .line {
+                position:absolute;
+                top:90px;
+                left:0;
+                right:0;
+                background:white;
+                height:1px;
+            }
+            .logo {
+                position:relative;
+                display:block;
+                float:right;
+                height:120px;
+                margin-left:100px;
+            }
+            .status {
+                position:relative;
+                float:right;
+                margin-top:50px;
+                background:#fff;
+                color:333;
+                @include font-size(11, 11);
+                border-radius:3px;
+                text-transform:uppercase;
+                color:#666;
+                font-weight:500;
+                padding:5px 15px;
+            }
+        }
+        h1 {
+            padding-top:20px;
+            @include font-size(34, 34);
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            @include font-size(12, 14);
+            color:#fff;
+            font-weight:200;
+        }
+        .num-solutions {
+            float:right;
+            color:#ededed;
+            font-weight:$bold;
+            @include font-size(11, 14);
+            text-transform:uppercase;
+        }
+        .stats {
+            float:right;
+            .stat {
+                display:inline-block;
+                color:#fff;
+                @include font-size(11, 14);
+                text-transform:uppercase;
+                margin-left:20px;
+            }
+        }
+    }
+    .core-exercises {
+        padding-top:50px;
+        position:relative;
+        &:before {
+            content: "";
+            position:absolute;
+            top:0px;
+            bottom:50px;
+            left:0;
+            background:green;
+            width:1px;
+        }
+        .exercise {
+            display:block;
+            color:#333;
+            text-decoration:none;
+            border:1px solid #aaa;
+            padding:20px;
+            margin-bottom:30px;
+            margin-left:100px;
+            height:120px;
+            position:relative;
+
+            &:before {
+                position:absolute;
+                content: "";
+                top:50%;
+                left:-72px;
+                width:72px;
+                height:1px;
+                background:green;
+            }
+
+            .circle {
+                position:absolute;
+                top:30px;
+                left:-132px;
+                border:1px solid #aaa;
+                border-radius:100%;
+                width:60px;
+                height:60px;
+                background:#fff;
+            }
+            .status {
+                float:right;
+            }
+            .title {
+                font-weight:700;
+                @include font-size(20, 20);
+            }
+            .button {
+                position:absolute;
+                bottom:20px;
+                right:20px;
+            }
+            &.in-progress {
+                border:2px solid green;
+                .circle {
+                    border:2px solid green;
+                }
+                &:before {
+                    height:2px;
+                    background:green;
+                }
+                .button {
+                    background:green;
+                    color:#fff;
+                }
+            }
+        }
+    }
+    .side-exercises {
+        background:#eee;
+        padding:30px 0;
+        h2 {
+            @include font-size(20, 20);
+            font-weight:500;
+            margin-bottom:10px;
+        }
+        .h2-subtitle {
+            @include font-size(16, 16);
+            margin-bottom:20px;
+        }
+        .exercise {
+            display:block;
+            background:#fff;
+            color:#333;
+            text-decoration:none;
+            border:1px solid #aaa;
+            padding:20px;
+            margin: 0 20px 20px 0;
+            height:120px;
+            position:relative;
+            &.locked {
+                opacity:0.5;
+            }
+
+            &.locked .status.locked,
+            &.unlocked .status.unlocked,
+            &.in-progress .status.in-progress,
+            &.completed .status.completed {
+                display: block;
+            }
+
+            .status {
+                float:right;
+                display:none;
+            }
+
+            .icon {
+                display:block;
+                width:70px;
+                height:70px;
+                padding:10px;
+                float:left;
+                margin-right:15px;
+                background-color:#eee;
+                .img {
+                    width:50px;
+                    height:50px;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center center;
+                }
+            }
+            .title {
+                @include font-size(18, 18);
+                font-weight:900;
+                margin-bottom:10px;
+            }
+            .stats {
+                overflow:hidden;
+                margin-bottom:10px;
+                .length {
+                    float:left;
+                    border:1px solid #ddd;
+                    padding:2px 5px;
+                    border-radius:3px;
+                    background:#eee;
+                    margin-right:10px;
+                    i {
+                        margin-right:2px;
+                        color:#aaa;
+                        @include font-size(12, 15);
+                        vertical-align:middle;
+                    }
+                    span {
+                        text-transform:uppercase;
+                        @include font-size(10, 10);
+                        font-weight:400;
+                        color:#999;
+                    }
+                }
+                .difficulty {
+                    float:left;
+                    color:green;
+                }
+            }
+            .topics {
+                @include font-size(12, 12);
+                font-weight:400;
+                overflow:hidden;
+                white-space:nowrap;
+                text-overflow:ellipsis;
+            }
+        }
+    }
+}
