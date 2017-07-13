@@ -7,8 +7,15 @@ class Solution < ApplicationRecord
   has_many :iterations
   has_many :discussion_posts, through: :iterations
 
+  has_many :mentorships, class_name: "SolutionMentorship"
+  has_many :mentors, through: :mentorships, source: :user
+
   def self.completed
     where.not(completed_at: nil)
+  end
+
+  def self.not_completed
+    where(completed_at: nil)
   end
 
   def self.published
@@ -34,10 +41,6 @@ class Solution < ApplicationRecord
 
   def completed?
     !!completed_at
-  end
-
-  def mentors
-    @mentors ||= User.where(id: discussion_posts.where.not(user_id: user.id).select(:user_id))
   end
 
   def instructions

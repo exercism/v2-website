@@ -1,3 +1,15 @@
 #mentor-dashboard-page
   .lo-container
-    Mentor Dashboard
+    %h1 Mentor Dashboard
+
+    =form_tag mentor_dashboard_path, method: :get do
+      =select_tag :filter, options_for_select({"Require Your Action": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
+      =button_tag "Update"
+
+    %h3 Solutions You're Mentoring
+    -@your_solutions.each do |solution|
+      =link_to solution.user.name, solution
+
+    %h3 Next solutions to mentor
+    -@suggested_solutions.each do |solution|
+      =link_to solution.user.name, solution

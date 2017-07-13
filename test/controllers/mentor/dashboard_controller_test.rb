@@ -15,7 +15,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
 
   test "200 if mentor" do
     user = create :user
-    create :mentored_track, user: user
+    create :track_mentorship, user: user
 
     sign_in!(user)
     get mentor_dashboard_url

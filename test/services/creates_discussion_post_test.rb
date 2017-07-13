@@ -2,16 +2,42 @@ require 'test_helper'
 
 class CreatesDiscussionPostTest < ActiveSupport::TestCase
   test "creates for iteration user" do
-    iteration = create :iteration
-    user = iteration.solution.user
-    content = "foobar"
+    Timecop.freeze do
+      solution = create :solution, last_updated_by_user_at: nil
+      iteration = create :iteration, solution: solution
+      user = solution.user
+      content = "foobar"
 
-    post = CreatesDiscussionPost.create!(iteration, user, content)
+      post = CreatesDiscussionPost.create!(iteration, user, content)
 
-    assert post.persisted?
-    assert_equal post.iteration, iteration
-    assert_equal post.user, user
-    assert_equal post.content, content
+      assert post.persisted?
+      assert_equal post.iteration, iteration
+      assert_equal post.user, user
+      assert_equal post.content, content
+      assert_equal DateTime.now.to_i, solution.last_updated_by_user_at.to_i
+      assert_nil solution.last_updated_by_mentor_at
+    end
+  end
+
+  test "creates for mentor" do
+    Timecop.freeze do
+      solution = create :solution, last_updated_by_user_at: nil
+      iteration = create :iteration, solution: solution
+      user = solution.user
+      content = "foobar"
+
+      mentor = create :user
+      create :solution_mentorship, solution: solution, user: mentor
+
+      post = CreatesDiscussionPost.create!(iteration, mentor, content)
+
+      assert post.persisted?
+      assert_equal post.iteration, iteration
+      assert_equal post.user, mentor
+      assert_equal post.content, content
+      assert_nil solution.last_updated_by_user_at
+      assert_equal DateTime.now.to_i, solution.last_updated_by_mentor_at.to_i
+    end
   end
 
   test "notifies and emails mentors upon user post" do
@@ -22,8 +48,8 @@ class CreatesDiscussionPostTest < ActiveSupport::TestCase
     # Setup mentors
     mentor1 = create :user
     mentor2 = create :user
-    create :discussion_post, iteration: iteration, user: mentor1
-    create :discussion_post, iteration: iteration, user: mentor2
+    create :solution_mentorship, solution: solution, user: mentor1
+    create :solution_mentorship, solution: solution, user: mentor2
 
     CreatesNotification.expects(:create!).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
@@ -50,8 +76,8 @@ class CreatesDiscussionPostTest < ActiveSupport::TestCase
     # Setup mentors
     mentor1 = create :user
     mentor2 = create :user
-    create :discussion_post, iteration: iteration, user: mentor1
-    create :discussion_post, iteration: iteration, user: mentor2
+    create :solution_mentorship, solution: solution, user: mentor1
+    create :solution_mentorship, solution: solution, user: mentor2
 
     CreatesNotification.expects(:create!).with do |*args|
       assert_equal user, args[0]

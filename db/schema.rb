@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170710110046) do
+ActiveRecord::Schema.define(version: 20170713140848) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -72,29 +72,6 @@ ActiveRecord::Schema.define(version: 20170710110046) do
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
   end
 
-  create_table "mentor_reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_id", null: false
-    t.bigint "mentor_id", null: false
-    t.bigint "solution_id", null: false
-    t.integer "rating", null: false
-    t.text "feedback"
-    t.boolean "show_to_mentor", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["mentor_id"], name: "fk_rails_fd0b77fa40"
-    t.index ["solution_id"], name: "fk_rails_d073b02ecc"
-    t.index ["user_id"], name: "fk_rails_311ec25a41"
-  end
-
-  create_table "mentored_tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_id"
-    t.bigint "track_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["track_id"], name: "fk_rails_610977bb5c"
-    t.index ["user_id"], name: "fk_rails_a8c6a413eb"
-  end
-
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id"
     t.string "about_type"
@@ -124,6 +101,20 @@ ActiveRecord::Schema.define(version: 20170710110046) do
     t.index ["user_id"], name: "fk_rails_e424190865"
   end
 
+  create_table "solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id"
+    t.bigint "solution_id"
+    t.boolean "abandoned", default: false, null: false
+    t.boolean "requires_action", default: false, null: false
+    t.integer "rating"
+    t.text "feedback"
+    t.boolean "show_feedback_to_mentor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id"], name: "fk_rails_704ccdde73"
+    t.index ["user_id"], name: "fk_rails_578676d431"
+  end
+
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
@@ -132,12 +123,23 @@ ActiveRecord::Schema.define(version: 20170710110046) do
     t.datetime "cloned_at"
     t.datetime "completed_at"
     t.datetime "published_at"
+    t.datetime "last_updated_by_user_at"
+    t.datetime "last_updated_by_mentor_at"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
+  end
+
+  create_table "track_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "user_id"
+    t.bigint "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "fk_rails_4a81f96f88"
+    t.index ["user_id"], name: "fk_rails_283ecc719a"
   end
 
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -184,16 +186,15 @@ ActiveRecord::Schema.define(version: 20170710110046) do
   add_foreign_key "exercises", "tracks"
   add_foreign_key "favourites", "iterations"
   add_foreign_key "iterations", "solutions"
-  add_foreign_key "mentor_reviews", "solutions"
-  add_foreign_key "mentor_reviews", "users"
-  add_foreign_key "mentor_reviews", "users", column: "mentor_id"
-  add_foreign_key "mentored_tracks", "tracks"
-  add_foreign_key "mentored_tracks", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "solution_mentorships", "solutions"
+  add_foreign_key "solution_mentorships", "users"
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"
+  add_foreign_key "track_mentorships", "tracks"
+  add_foreign_key "track_mentorships", "users"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end

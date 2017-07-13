@@ -11,7 +11,7 @@
         .stat= pluralize @track.exercises.count, "Exercise"
         .stat= pluralize @track.user_tracks.count, "Students"
         .stat= pluralize @track.iterations.count, "Submissions"
-        .stat= pluralize @track.mentored_tracks.count, "Mentors"
+        .stat= pluralize @track.mentorships.count, "Mentors"
       .h1-subtitle Joined on #{@user_track.created_at}
 
   .lo-container

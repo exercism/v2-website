@@ -28,6 +28,9 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     discussion_post_3 = create :discussion_post, iteration: iteration
     notes = "foobar"
 
+    create :solution_mentorship, solution: solution, user: discussion_post_1.user
+    create :solution_mentorship, solution: solution, user: discussion_post_3.user
+
     patch reflect_solution_url(solution), params: {
       notes: notes,
       mentor_reviews: {
@@ -40,7 +43,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     solution.reload
     assert_equal solution.notes, notes
-    assert_equal 2, MentorReview.count
+    assert_equal 2, SolutionMentorship.where.not(rating: nil).count
   end
 
   def create_unlocked_solution

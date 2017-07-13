@@ -15,10 +15,13 @@ class CreatesDiscussionPost
 
     create_discussion_post!
 
-    # TODO - This should be moved to backend job
+    # TODO - Some of this should be moved to backend job
     if posted_by_solution_user?
+      # TODO - set requires_action
+      solution.update!(last_updated_by_user_at: DateTime.now)
       notify_mentors
     else
+      solution.update!(last_updated_by_mentor_at: DateTime.now)
       notify_solution_user
     end
 

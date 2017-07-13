@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
     user = create :user
     refute user.mentor?
 
-    create :mentored_track, user: user
+    create :track_mentorship, user: user
     user.reload
     assert user.mentor?
   end

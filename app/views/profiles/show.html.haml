@@ -19,8 +19,8 @@
           %h3 On Exercism
           -if @profile.user.admin?
             .admin-badge Exercism Admin
-          -@profile.user.mentored_tracks.each do |mentored_track|
-            .mentor-badge #{mentored_track.track.name} Mentor
+          -@profile.user.mentored_tracks.each do |track|
+            .mentor-badge #{track.name} Mentor
 
       .pure-u-2-3.rhs
         -@solutions.each do |solution|

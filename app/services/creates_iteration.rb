@@ -10,9 +10,12 @@ class CreatesIteration
   end
 
   def create!
-    Iteration.create!(
+    iteration = Iteration.create!(
       solution: solution,
       code: code
     )
+    # TODO - iterate requires_action
+    solution.update(last_updated_by_user_at: DateTime.now)
+    iteration
   end
 end

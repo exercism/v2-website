@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :profile do
-    
+    user { create :user }
+    name "Jo Bloggs"
+    slug { SecureRandom.uuid }
   end
+
   factory :communication_preferences do
     user { create :user }
   end
@@ -13,7 +16,7 @@ FactoryGirl.define do
     link "http://barfoo.com"
   end
 
-  factory :mentored_track do
+  factory :track_mentorship do
     user { create :user }
     track { create :track }
   end
@@ -23,11 +26,9 @@ FactoryGirl.define do
     token { SecureRandom.uuid }
   end
 
-  factory :mentor_review do
+  factory :solution_mentorship do
     user { create :user }
-    mentor { create :user }
     solution { create :solution }
-    rating 5
   end
 
   factory :favourite do

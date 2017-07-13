@@ -10,6 +10,9 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.datetime :completed_at, null: true
       t.datetime :published_at, null: true
 
+      t.datetime :last_updated_by_user_at, null: true
+      t.datetime :last_updated_by_mentor_at, null: true
+
       t.text :notes, null: true
 
       t.timestamps

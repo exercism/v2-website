@@ -99,4 +99,22 @@ Very happy to hear any suggestions :)
 }
 iteration1_discussion2 = ihid_bob_iteration_1.discussion_posts.create!(user: ihid, content: iteration1_discussion2_content, html: ParsesMarkdown.parse(iteration1_discussion2_content))
 
-#Iteration.create!(solution: ihid_bob, code: "Another go")
+TrackMentorship.create(user: ihid, track: python)
+user1 = User.create!(name: "User 1", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user2 = User.create!(name: "User 2", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user3 = User.create!(name: "User 3", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user4 = User.create!(name: "User 4", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+
+python_hello_world = Exercise.create!(track: python, title: "Hello World", slug: "hello-world", uuid: SecureRandom.uuid, core: true, position: 2)
+
+user1_hello_world = Solution.create!(user: user1, exercise: python_hello_world, git_sha: 'foobar')
+user1_hello_world_iteration_1 = Iteration.create!(solution: user1_hello_world, code: "foo")
+user1_hello_world_iteration_2 = Iteration.create!(solution: user1_hello_world, code: "bar")
+SolutionMentorship.create(user: ihid, solution: user1_hello_world)
+
+user2_hello_world = Solution.create!(user: user2, exercise: python_hello_world, git_sha: 'foobar')
+user2_hello_world_iteration_1 = Iteration.create!(solution: user2_hello_world, code: "foo")
+SolutionMentorship.create(user: ihid, solution: user2_hello_world)
+
+user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_sha: 'foobar')
+user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")

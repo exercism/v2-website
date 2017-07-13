@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MentorReviewTest < ActiveSupport::TestCase
+class TrackMentorshipTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

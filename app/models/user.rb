@@ -15,7 +15,12 @@ class User < ApplicationRecord
   has_many :tracks, through: :user_tracks
   has_many :solutions
   has_many :iterations, through: :solutions
-  has_many :mentored_tracks
+
+  has_many :track_mentorships
+  has_many :mentored_tracks, through: :track_mentorships, source: :track
+
+  has_many :solution_mentorships
+  has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
   after_create do
     create_communication_preferences
@@ -31,6 +36,6 @@ class User < ApplicationRecord
   end
 
   def mentor?
-    mentored_tracks.exists?
+    track_mentorships.exists?
   end
 end
