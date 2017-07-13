@@ -4,6 +4,7 @@ class Exercise < ApplicationRecord
 
   has_many :unlocks, class_name: "Exercise", foreign_key: :unlocked_by_id
   has_many :solutions
+  has_many :iterations, through: :solutions
 
   def self.core
     where(core: true)

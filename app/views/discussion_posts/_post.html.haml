@@ -1,0 +1,9 @@
+.post{id: "discussion-post-#{post.id}"}
+  =image_tag post.user.avatar_url, class: 'avatar'
+  .post-body
+    .post-header
+      .created-at Responded #{time_ago_in_words(post.created_at)} ago
+      .user-name= post.user.name
+      .user-status Ruby Mentor
+
+    .post-html= raw post.html

@@ -14,30 +14,72 @@ body.controller-solutions {
     }
     .track-header {
         border:1px solid #ddd;
-        padding:20px;
+        padding:30px 20px;
         margin-bottom:20px;
         .icon {
+            display:block;
+            width:80px;
+            height:80px;
+            padding:10px;
+            float:left;
+            margin-right:15px;
+            background-color:#fff;
+            margin-left: -70px;
+            margin-top: -20px;
+            border: 2px solid red;
+            border-radius: 100%;
+            overflow:hidden;
+            .img {
+                width:60px;
+                height:60px;
+                background-repeat:no-repeat;
+                background-size:contain;
+                background-position:center center;
+            }
         }
         .inner {
             .stats {
                 float:right;
                 overflow:hidden;
                 .stat {
-                    margin-left:10px;
                     float:left;
-                    border:1px solid #eee;
-                    padding:5px;
-                    @include font-size(12, 16);
-                    text-align:center;
+                    margin-right:20px;
+                    border-right:1px solid #eee;
+                    padding:10px 20px 10px 0;
+                    @include font-size(12, 13);
                     overflow:hidden;
+                    width:95px;
                     i {
                         float:left;
+                        padding:10px 10px 10px 0;
+                    }
+                }
+                .buttons {
+                    float:left;
+                    .pure-button {
+                        border:1px solid #aaa;
+                        width:150px;
+                        padding:5px;
+                        text-align:center;
+                        color:#999;
+                        background:#fff;
+                        display:block;
+                        @include font-size(12, 12);
+                        &:first-child {
+                            margin-bottom:5px;
+                        }
                     }
                 }
             }
+            h2 {
+                @include font-size(25, 25);
+                font-weight:700;
+                margin-bottom:10px;
+            }
             .track-progress {
-                h4 {
+                h3 {
                     display:inline-block;
+                    font-weight:400;
                 }
                 .dots {
                     display:inline-block;

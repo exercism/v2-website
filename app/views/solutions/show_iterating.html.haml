@@ -13,20 +13,24 @@
   .lo-container
     .track-header
       .icon
+        .img{style: "background-image:url('#{image_path(@exercise.icon_url)}')"}
       .inner
         .stats
           .stat
-            %i.fa.fa-graduation
-            .number 12,123
+            %i.fa.fa-graduation-cap
+            .number= @exercise.solutions.count
             .metric students
           .stat
-            %i.fa.fa-graduation
-            .number 39,233
+            %i.fa.fa-graduation-cap
+            .number= @exercise.iterations.count
             .metric submits
+          .buttons
+            =link_to "Community solutions", "#", class: 'pure-button'
+            =link_to "Recommended reading", "#", class: 'pure-button'
 
-        .track-title= @track.title
+        %h2= @track.title
         .track-progress
-          %h4 Track Progress:
+          %h3 Track Progress:
           -num_core_exercises = @track.exercises.core.count
           -num_completed_exercises = @user_track.num_completed_core_exercies
           -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
@@ -40,7 +44,7 @@
               -else
                 .dot
 
-    -if @solution.approved?
+    -if @solution.approved? && !@solution.completed?
       .approved-bar
         %i.fa.fa-bell
         %span.text A mentor has approved this solution
@@ -75,16 +79,8 @@
           .discussion-header
             =link_to "Scroll to latest comment", ""
             %h3 Mentor Discussion
-          - @iteration.discussion_posts.each do |post|
-            .post
-              =image_tag post.user.avatar_url, class: 'avatar'
-              .post-body
-                .post-header
-                  .created-at Responded #{time_ago_in_words(post.created_at)} ago
-                  .user-name= post.user.name
-                  .user-status Ruby Mentor
-
-                .post-html= raw post.html
+            .posts
+              =render partial: "discussion_posts/post", collection: @iteration.discussion_posts
 
           =form_for DiscussionPost.new, remote: true, html: {class: "new-discussion-post-form"} do |f|
             =hidden_field_tag :iteration_id, @iteration.id
@@ -196,9 +192,8 @@
         element: $textarea[0]
         spellChecker: false
         forceSync: true
+        status: false
         toolbar: ["bold", "italic", "strikethrough", "|", "quote", "code", "link", "|", "unordered-list", "ordered-list"]
-
-      console.log smde.toolbar
 
       $('.preview-tab').click ->
         markdown = $textarea.val()

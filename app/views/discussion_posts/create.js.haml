@@ -1,0 +1,2 @@
+$('.discussion .posts').append("#{j render("post", post: @post)}")
+window.location.href = "#discussion-post-#{@post.id}"
