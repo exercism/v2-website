@@ -23,6 +23,16 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     end
   end
 
+  test "fails for non-mentor" do
+    refute CreatesMentorDiscussionPost.create!(create(:iteration), create(:user), "foobar")
+  end
+
+  test "fails for mentor of different track" do
+    user = create :user
+    create :track_mentorship, user: user
+    refute CreatesMentorDiscussionPost.create!(create(:iteration), user, "foobar")
+  end
+
   test "notifies and emails user upon mentor post" do
     iteration = create :iteration
     solution = iteration.solution

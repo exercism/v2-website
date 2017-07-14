@@ -14,7 +14,7 @@ class CreatesIteration
       solution: solution,
       code: code
     )
-    # TODO - iterate requires_action
+    solution.mentorships.update_all(requires_action: true)
     solution.update(last_updated_by_user_at: DateTime.now)
     iteration
   end

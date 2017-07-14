@@ -44,7 +44,6 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     )
   end
 
-  # TODO - Test this
   def user_may_comment?
     user.mentoring_track?(solution.exercise.track)
   end
