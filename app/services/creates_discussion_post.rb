@@ -10,6 +10,10 @@ class CreatesDiscussionPost
     @content = content
   end
 
+  # Note: This whole method is pretty racey.
+  # I'm relunctant to do locking because I'd rather avoid the
+  # pain of deadlocks and slowdowns for the occasional missed
+  # notification etc.
   def create!
     return false unless user_may_comment?
 
@@ -17,11 +21,13 @@ class CreatesDiscussionPost
 
     # TODO - Some of this should be moved to backend job
     if posted_by_solution_user?
-      # TODO - set requires_action
       solution.update!(last_updated_by_user_at: DateTime.now)
+      solution.mentorships.update_all(requires_action: true)
       notify_mentors
     else
+      mentorship = CreatesSolutionMentorship.create(solution, user)
       solution.update!(last_updated_by_mentor_at: DateTime.now)
+      mentorship.update!(requires_action: false)
       notify_solution_user
     end
 

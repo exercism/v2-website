@@ -95,4 +95,34 @@ class CreatesDiscussionPostTest < ActiveSupport::TestCase
 
     CreatesDiscussionPost.create!(iteration, mentor1, "foooebar")
   end
+
+  test "creates solution_mentorship" do
+    iteration = create :iteration
+    mentor = create :user
+
+    CreatesSolutionMentorship.expects(:create).with(iteration.solution, mentor).returns(mock(update!: false))
+    CreatesDiscussionPost.create!(iteration, mentor, "Foobar")
+  end
+
+  test "cancels a mentor's requires_action when they post" do
+    iteration = create :iteration
+    mentor = create :user
+    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action: true
+
+    CreatesDiscussionPost.create!(iteration, mentor, "Foobar")
+
+    mentorship.reload
+    refute mentorship.requires_action
+  end
+
+  test "set all mentors' requires_action on user post" do
+    iteration = create :iteration
+    mentor = create :user
+    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action: false
+
+    CreatesDiscussionPost.create!(iteration, iteration.solution.user, "Foobar")
+
+    mentorship.reload
+    assert mentorship.requires_action
+  end
 end

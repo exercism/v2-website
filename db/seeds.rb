@@ -110,7 +110,7 @@ python_hello_world = Exercise.create!(track: python, title: "Hello World", slug:
 user1_hello_world = Solution.create!(user: user1, exercise: python_hello_world, git_sha: 'foobar')
 user1_hello_world_iteration_1 = Iteration.create!(solution: user1_hello_world, code: "foo")
 user1_hello_world_iteration_2 = Iteration.create!(solution: user1_hello_world, code: "bar")
-SolutionMentorship.create(user: ihid, solution: user1_hello_world)
+SolutionMentorship.create(user: ihid, solution: user1_hello_world, requires_action: true)
 
 user2_hello_world = Solution.create!(user: user2, exercise: python_hello_world, git_sha: 'foobar')
 user2_hello_world_iteration_1 = Iteration.create!(solution: user2_hello_world, code: "foo")
