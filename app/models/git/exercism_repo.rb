@@ -12,7 +12,7 @@ class Git::ExercismRepo
   def config
     config_pointer = repo.branches['master'].target.tree['config.json']
     config_blob = repo.lookup(config_pointer[:oid])
-    JSON.parse(config_blob.text)
+    JSON.parse(config_blob.text, symbolize_names: true)
   end
 
   def fetch!
