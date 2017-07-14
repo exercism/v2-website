@@ -118,3 +118,6 @@ SolutionMentorship.create(user: ihid, solution: user2_hello_world)
 
 user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_sha: 'foobar')
 user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")
+
+# Seed tracks
+CreatesTrack.create_all!
