@@ -39,6 +39,10 @@ class User < ApplicationRecord
     track_mentorships.exists?
   end
 
+  def mentoring_track?(track)
+    track_mentorships.where(track_id: track.id).exists?
+  end
+
   def mentoring_solution?(solution)
     solution_mentorships.where(solution_id: solution.id).exists?
   end
