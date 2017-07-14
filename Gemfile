@@ -20,6 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'redcarpet', require: false
 gem 'rouge', require: false
+gem 'rugged'
 gem 'loofah'
 
 group :development, :test do
