@@ -16,7 +16,7 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     return render :show_locked unless current_user.unlocked_track?(@track)
 
-    exercises = @track.exercises.order('position ASC, title ASC')
+    exercises = @track.exercises
     core_exercises, side_exercises = exercises.partition {|e|e.core?}
 
     # Make this just for this track maybe?

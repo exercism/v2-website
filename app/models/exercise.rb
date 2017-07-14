@@ -6,6 +6,8 @@ class Exercise < ApplicationRecord
   has_many :solutions
   has_many :iterations, through: :solutions
 
+  default_scope -> { order('position ASC, title ASC') }
+
   def self.core
     where(core: true)
   end

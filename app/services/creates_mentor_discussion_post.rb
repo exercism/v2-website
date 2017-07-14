@@ -5,9 +5,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
 
   attr_reader :iteration, :user, :content, :discussion_post
   def initialize(iteration, user, content)
-    @iteration = iteration
-    @user = user
-    @content = content
+    super
   end
 
   # Note: This whole method is pretty racey.

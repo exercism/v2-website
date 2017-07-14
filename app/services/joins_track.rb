@@ -1,4 +1,4 @@
-class StartsTrack
+class JoinsTrack
   def self.start!(*args)
     new(*args).start!
   end
@@ -13,5 +13,6 @@ class StartsTrack
     return false if UserTrack.where(user: user, track: track).exists?
 
     UserTrack.create!(user: user, track: track)
+    CreatesSolution.create!(user, track.exercises.core.first)
   end
 end

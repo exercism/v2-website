@@ -2,8 +2,7 @@ class SideExercisesController < ApplicationController
   before_action :set_track
 
   def index
-    # TODO - DRY this up with tracks controller to guarantee order
-    exercises = @track.exercises.side.order('position ASC, title ASC')
+    exercises = @track.exercises.side
     exercises = exercises.where(difficulty: params[:difficulty]) if params[:difficulty].present?
     exercises = exercises.where(length: params[:length]) if params[:length].present?
     solutions = current_user.solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
