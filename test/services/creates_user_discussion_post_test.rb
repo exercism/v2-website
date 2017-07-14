@@ -35,7 +35,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
       assert_equal :new_discussion_post_for_mentor, args[1]
       assert_equal "#{user.name} has posted a comment on a solution you are mentoring", args[2]
       assert_equal "http://foobar.com", args[3]
-      assert_equal DiscussionPost, args[4][:about].class
+      assert_equal solution, args[4][:about]
     end
 
     DeliversEmail.expects(:deliver!).twice.with do |*args|

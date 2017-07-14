@@ -27,7 +27,11 @@ class CreatesIteration
         :new_iteration_for_mentor,
         "#{solution.user.name} has posted a new iteration on a solution you are mentoring",
         "http://foobar.com", # TODO
-        about: iteration
+
+        # We want this to be the solution not the iteration
+        # to allow for clearing without a mentor having to
+        # go into every single iteration
+        about: solution
       )
       DeliversEmail.deliver!(
         mentor,

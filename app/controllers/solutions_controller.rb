@@ -17,6 +17,7 @@ class SolutionsController < ApplicationController
 
   def show
     @exercise = @solution.exercise
+    ClearsNotifications.clear!(current_user, @solution)
 
     if @solution.completed?
       show_completed

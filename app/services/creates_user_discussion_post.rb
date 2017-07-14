@@ -32,7 +32,11 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
         :new_discussion_post_for_mentor,
         "#{solution.user.name} has posted a comment on a solution you are mentoring",
         "http://foobar.com", # TODO
-        about: discussion_post
+
+        # We want this to be the solution not the post
+        # to allow for clearing without a mentor having to
+        # go into every single iteration
+        about: solution
       )
       DeliversEmail.deliver!(
         mentor,

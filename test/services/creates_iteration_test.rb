@@ -48,7 +48,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       assert_equal :new_iteration_for_mentor, args[1]
       assert_equal "#{user.name} has posted a new iteration on a solution you are mentoring", args[2]
       assert_equal "http://foobar.com", args[3]
-      assert_equal Iteration, args[4][:about].class
+      assert_equal solution, args[4][:about]
     end
 
     DeliversEmail.expects(:deliver!).twice.with do |*args|
