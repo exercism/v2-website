@@ -19,7 +19,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     end
   end
 
-  test "notifies and emails mentors upon user post" do
+  test "notifies and emails mentors" do
     iteration = create :iteration
     solution = iteration.solution
     user = solution.user
@@ -47,7 +47,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
   end
 
-  test "set all mentors' requires_action on user post" do
+  test "set all mentors' requires_action" do
     iteration = create :iteration
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action: false
@@ -58,4 +58,3 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     assert mentorship.requires_action
   end
 end
-

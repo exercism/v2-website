@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170713140848) do
     t.bigint "user_id", null: false
     t.boolean "email_on_new_discussion_post", default: true, null: false
     t.boolean "email_on_new_discussion_post_for_mentor", default: true, null: false
+    t.boolean "email_on_new_iteration_for_mentor", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"

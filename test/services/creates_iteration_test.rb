@@ -33,5 +33,33 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert mentorship.requires_action
   end
 
+  test "notifies and emails mentors" do
+    solution = create :solution
+    user = solution.user
+
+    # Setup mentors
+    mentor1 = create :user
+    mentor2 = create :user
+    create :solution_mentorship, solution: solution, user: mentor1
+    create :solution_mentorship, solution: solution, user: mentor2
+
+    CreatesNotification.expects(:create!).twice.with do |*args|
+      assert [mentor1, mentor2].include?(args[0])
+      assert_equal :new_iteration_for_mentor, args[1]
+      assert_equal "#{user.name} has posted a new iteration on a solution you are mentoring", args[2]
+      assert_equal "http://foobar.com", args[3]
+      assert_equal Iteration, args[4][:about].class
+    end
+
+    DeliversEmail.expects(:deliver!).twice.with do |*args|
+      assert [mentor1, mentor2].include?(args[0])
+      assert_equal :new_iteration_for_mentor, args[1]
+      assert_equal Iteration, args[2].class
+    end
+
+    CreatesIteration.create!(solution, "foooebar")
+  end
+
+
 end
 

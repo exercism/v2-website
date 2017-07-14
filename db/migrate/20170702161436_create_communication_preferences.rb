@@ -5,6 +5,7 @@ class CreateCommunicationPreferences < ActiveRecord::Migration[5.1]
 
       t.boolean :email_on_new_discussion_post, null: false, default: true
       t.boolean :email_on_new_discussion_post_for_mentor, null: false, default: true
+      t.boolean :email_on_new_iteration_for_mentor, null: false, default: true
 
       t.timestamps
     end
