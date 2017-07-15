@@ -5,9 +5,10 @@ class TracksController < ApplicationController
     return index_signed_out unless user_signed_in?
 
     tracks = Track.all
-    unlocked_track_ids = current_user.user_tracks.pluck(:track_id)
+    tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
+    joined_track_ids = current_user.user_tracks.pluck(:track_id)
 
-    @unlocked_tracks, @locked_tracks = tracks.partition {|t|unlocked_track_ids.include?(t.id)}
+    @joined_tracks, @other_tracks = tracks.partition {|t|joined_track_ids.include?(t.id)}
   end
 
   def show

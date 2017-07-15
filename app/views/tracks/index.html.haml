@@ -1,15 +1,21 @@
 #tracks-page
-  .lo-container
-    %h1 Tracks
-    %h2 Unlocked Tracks
-    %ul
-      -@unlocked_tracks.each do |track|
-        %li= link_to track.title, track
+  .header
+    .lo-container
+      %h1 Language Tracks
+      .h1-subtitle All the tracks you can join.
 
-    %h2 Locked Tracks
-    %ul
-      -@locked_tracks.each do |track|
-        %li= link_to track.title, track
+  .lo-container
+    =form_tag tracks_path, method: :get, remote: true do
+      =text_field_tag :title, @title
+      =button_tag "Update"
+
+    %h2 Tracks You've Joined
+    .joined-tracks.pure-g
+      =render partial: "track", collection: @joined_tracks, locals: {joined: true}
+
+    %h2 Other Tracks
+    .other-tracks.pure-g
+      =render partial: "track", collection: @other_tracks, locals: {joined: false}
 
 
 

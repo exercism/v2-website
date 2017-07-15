@@ -1,0 +1,2 @@
+$('#tracks-page .joined-tracks').html("#{j render(partial: "track", collection: @joined_tracks, locals: {joined: true})}")
+$('#tracks-page .other-tracks').html("#{j render(partial: "track", collection: @other_tracks, locals: {joined: false})}")

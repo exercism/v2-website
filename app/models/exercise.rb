@@ -7,14 +7,9 @@ class Exercise < ApplicationRecord
   has_many :iterations, through: :solutions
 
   default_scope -> { order('position ASC, title ASC') }
-
-  def self.core
-    where(core: true)
-  end
-
-  def self.side
-    where(core: false)
-  end
+  scope :active, -> { where(active: true) }
+  scope :core, -> { where(core: true) }
+  scope :side, -> { where(core: false) }
 
   def side?
     !core

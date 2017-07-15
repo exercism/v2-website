@@ -1,0 +1,13 @@
+.pure-u-1-3
+  =link_to track, class:(joined ? "track joined": "track") do
+    .icon
+      .img{style: "background-image:url('#{image_path(track.icon_url)}')"}
+    .status.locked Locked
+    .status.unlocked Unlocked
+    .status.in-progress In progress
+    .status.completed Completed
+    .title= track.title
+    .num-exercises= pluralize track.exercises.active.count, "exercise"
+    .enrolled
+      %i.fa.fa-group
+      %span #{pluralize track.user_tracks.count, "students"} joined

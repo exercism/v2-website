@@ -6,7 +6,13 @@ class Track < ApplicationRecord
   has_many :mentorships, class_name: "TrackMentorship"
   has_many :mentors, through: :mentorships, source: :user
 
+  # TODO
   def bordered_icon_url
+    'tmp/bordered-track-icon.png'
+  end
+
+  # TODO
+  def icon_url
     'tmp/bordered-track-icon.png'
   end
 end
