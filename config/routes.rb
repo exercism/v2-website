@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :tracks, only: [] do
       resources :exercises, only: [] do
-        resource :solution, only: [:show]
+        resources :solutions, only: [:index, :update]
       end
     end
   end

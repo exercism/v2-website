@@ -2,10 +2,10 @@ class API::SolutionsController < APIController
   before_action :set_track
   before_action :set_exercise
 
-  def show
-    @solution = current_user.solutions.where(exercise_id: @exercise.id).order('id asc').last
+  def index
+    solution = current_user.solutions.where(exercise_id: @exercise.id).order('id asc').last
 
-    render json: {}, status: 403 and return unless @solution
+    render json: {}, status: 403 and return unless solution
 
     render json: {
       solution: {
@@ -17,6 +17,15 @@ class API::SolutionsController < APIController
         iteration: nil
       }
     }
+  end
+
+  def update
+    solution = current_user.solutions.find(params[:id])
+    render json: {}, status: 403 and return unless solution
+
+    CreatesIteration.create!(solution, params[:code])
+
+    render json: {}, status: 201
   end
 
   private
