@@ -15,8 +15,11 @@ Exercise.create!(track: ruby, title: "Cover", slug: "cover", uuid: SecureRandom.
 Exercise.create!(track: ruby, title: "Laptop", slug: "laptop", uuid: SecureRandom.uuid, core: false)
 Exercise.create!(track: ruby, title: "Bag", slug: "bag", uuid: SecureRandom.uuid, core: false, unlocked_by: slug)
 
-topic_1 = Topic.create(slug: "strings")
-slug.topics << topic_1
+topic_strings = Topic.create(slug: "strings")
+slug.topics << topic_strings
+cat.topics << topic_strings
+mouse.topics << topic_strings
+
 
 ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password', admin: true)
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password', admin: true)

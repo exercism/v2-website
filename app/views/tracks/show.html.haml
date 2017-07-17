@@ -47,15 +47,6 @@
             .number #{@num_solved_core_exercises} / #{@core_exercises_and_solutions.size} core exercises
             .completed marked as complete
 
-          .topics
-            %h3 Concepts
-            -@topic_percentages.each do |topic, percentage|
-              .topic
-                .percentage #{percentage}%
-                .bar
-                  .filled{style: "width: #{percentage}%"}
-                  .title= topic
-
           .side
             %h3 Extras
             .squares
@@ -65,6 +56,15 @@
                 -else
                   .square
             =link_to "See all", "#side-exercises", class: 'pure-button'
+
+          .topics
+            %h3 Concepts
+            -@topic_percentages.each do |topic, percentage|
+              .topic
+                .percentage #{percentage.round}%
+                .bar
+                  .filled{style: "width: #{percentage.round}%"}
+                  .title= topic
 
   #side-exercises.side-exercises
     .lo-container

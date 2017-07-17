@@ -32,12 +32,26 @@ class TracksController < ApplicationController
     @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
     @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.completed?}.size
 
-    # TODO
-    @topic_percentages = {
-      strings: 10,
-      transforming: 55,
-      "regular expressions": 95
-    }
+    # TODO - This needs extracting and/or refactoring
+    topic_counts = exercises.each_with_object({}) do |e, topics|
+      e.topics.each do |topic|
+        topics[topic] ||= 0
+        topics[topic] += 1
+      end
+    end
+
+    user_topic_counts = solutions.completed.each_with_object({}) do |s, topics|
+      s.exercise.topics.each do |topic|
+        topics[topic] ||= 0
+        topics[topic] += 1
+      end
+    end
+    p topic_counts
+    p user_topic_counts
+
+    @topic_percentages = topic_counts.each_with_object({}) do |(topic, count), percentages|
+      percentages[topic.name] = (user_topic_counts[topic] || 0).to_f / count * 100
+    end
   end
 
   private
