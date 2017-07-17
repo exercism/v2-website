@@ -17,7 +17,7 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     return render :show_locked unless current_user.unlocked_track?(@track)
 
-    exercises = @track.exercises
+    exercises = @track.exercises.includes(:topics)
     core_exercises, side_exercises = exercises.partition {|e|e.core?}
 
     # Make this just for this track maybe?
@@ -46,8 +46,6 @@ class TracksController < ApplicationController
         topics[topic] += 1
       end
     end
-    p topic_counts
-    p user_topic_counts
 
     @topic_percentages = topic_counts.each_with_object({}) do |(topic, count), percentages|
       percentages[topic.name] = (user_topic_counts[topic] || 0).to_f / count * 100
