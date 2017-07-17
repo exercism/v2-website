@@ -7,8 +7,8 @@ class CreateExercises < ActiveRecord::Migration[5.1]
       t.string :slug, null: false
 
       t.string :title, null: false
-      t.boolean :core, default: false, null: false
-      t.boolean :active, default: false, null: false
+      t.boolean :core, null: false, default: false
+      t.boolean :active, null: false, default: true
 
       t.integer :difficulty, null: false, default: 1
       t.integer :length, null: false, default: 1

@@ -43,7 +43,7 @@
 
           .core
             %h3 Track
-            .percentage #{(@num_solved_core_exercises.to_f / @core_exercises_and_solutions.size * 100).round}%
+            .percentage #{@core_track_completion_percentage}%
             .number #{@num_solved_core_exercises} / #{@core_exercises_and_solutions.size} core exercises
             .completed marked as complete
 
@@ -80,6 +80,19 @@
       .pure-g.exercises
         =render "side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
 
+  #deprecated-exercises.deprecated-exercises
+    .lo-container
+      %h2 Deprecated Exercises
+      .h2-subtitle These exercises are no longer part of Exercism but we've kept them around for you so you don't lose your hard work.
+      .pure-g.exercises
+        -@deprecated_exercises_and_solutions.each do |exercise, solution|
+          .pure-u-1-3
+            .exercise
+              .icon
+                .img{style: "background-image:url('#{image_path(exercise.icon_url)}')"}
+              .status.deprecated Deprecated
+              .title= exercise.title
+              .topics= exercise.topic_names.join(" | ")
 
 -content_for :js do
   :coffeescript

@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20170717120507) do
     t.string "slug", null: false
     t.string "title", null: false
     t.boolean "core", default: false, null: false
-    t.boolean "active", default: false, null: false
+    t.boolean "active", default: true, null: false
     t.integer "difficulty", default: 1, null: false
     t.integer "length", default: 1, null: false
     t.integer "position"
