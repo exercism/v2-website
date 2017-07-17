@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713140848) do
+ActiveRecord::Schema.define(version: 20170717120507) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20170713140848) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["iteration_id"], name: "fk_rails_f58a02b68e"
+  end
+
+  create_table "exercise_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "exercise_id", null: false
+    t.bigint "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_id"], name: "fk_rails_0e58b87007"
+    t.index ["topic_id"], name: "fk_rails_0e642b953e"
   end
 
   create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -135,6 +144,13 @@ ActiveRecord::Schema.define(version: 20170713140848) do
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
 
+  create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "track_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id"
     t.bigint "track_id"
@@ -184,6 +200,8 @@ ActiveRecord::Schema.define(version: 20170713140848) do
   add_foreign_key "auth_tokens", "users"
   add_foreign_key "communication_preferences", "users"
   add_foreign_key "discussion_posts", "iterations"
+  add_foreign_key "exercise_topics", "exercises"
+  add_foreign_key "exercise_topics", "topics"
   add_foreign_key "exercises", "exercises", column: "unlocked_by_id"
   add_foreign_key "exercises", "tracks"
   add_foreign_key "favourites", "iterations"

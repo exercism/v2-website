@@ -2,6 +2,9 @@ class Exercise < ApplicationRecord
   belongs_to :track
   belongs_to :unlocked_by, class_name: "Exercise", optional: true
 
+  has_many :exercise_topics
+  has_many :topics, through: :exercise_topics
+
   has_many :unlocks, class_name: "Exercise", foreign_key: :unlocked_by_id
   has_many :solutions
   has_many :iterations, through: :solutions
@@ -15,9 +18,8 @@ class Exercise < ApplicationRecord
     !core
   end
 
-  # TODO
-  def topics
-    ["strings", "transforming", "regular expressions"]
+  def topic_names
+    @topic_names ||= topics.pluck(:name)
   end
 
   # TODO

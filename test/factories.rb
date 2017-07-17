@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :exercise_topic do
+    
+  end
+  factory :topic do
+    
+  end
   factory :profile do
     user { create :user }
     name "Jo Bloggs"
