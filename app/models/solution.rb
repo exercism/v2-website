@@ -10,6 +10,8 @@ class Solution < ApplicationRecord
   has_many :mentorships, class_name: "SolutionMentorship"
   has_many :mentors, through: :mentorships, source: :user
 
+  has_many :reactions
+
   def self.completed
     where.not(completed_at: nil)
   end

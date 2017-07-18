@@ -11,26 +11,26 @@
 
   .lo-container
     .header
-      =image_tag @profile.avatar_url, class: "avatar"
-      .stats
-        .stat.approve
-          %i.fa.fa-thumbs-up
-          .value 34
+      =image_tag profile_avatar_or_default_url(@solution.user.profile), class: "avatar"
 
-        .stat.smart
+      .stats
+        .stat.applaud
+          %i.fa.fa-thumbs-up
+          .value= @reaction_counts.fetch('applaud', 0)
+
+        .stat.wowed
           %i.fa.fa-sun-o
-          .value 342
+          .value= @reaction_counts.fetch('wowed', 0)
 
         .stat.love
           %i.fa.fa-heart
-          .value 3
+          .value= @reaction_counts.fetch('love', 0)
 
         .stat.comments
           %i.fa.fa-comments
-          .value 8
+          .value= @comments.size
 
-      %h1
-        #{@profile.persisted?? link_to(@profile.name, @profile) : @profile.name}'s solution
+      %h1 #{profile_link_or_anonymous(@solution.user.profile)}'s solution
 
       %h2
         for #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
@@ -71,15 +71,16 @@
               %i.fa.fa-heart
 
         .comments
-          .comment.pure-g
-            .pure-u-1-8
-              %i.fa.fa-thumbs-up
-            .pure-u-7-8
-              .when 3 hours ago
-              .who
-                %strong @iHiD
-                says
-              .text Great solution Charles. I wouldn't have thought to do it like that but I love it.
+          -@comments.each do |reaction|
+            .comment.pure-g
+              .pure-u-1-8
+                %i.fa{class: reaction_icon(reaction)}
+              .pure-u-7-8
+                .when #{time_ago_in_words(reaction.created_at)} ago
+                .who
+                  %strong #{profile_link_or_anonymous reaction.user.profile}
+                  says
+                .text= reaction.comment
 
       .pure-u-1-2.rhs
         .reflection

@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :reaction do
+    solution { create :solution }
+    user { create :user }
+    emotion :love
+    content "The cat was all like and the mat and whatnot"
+  end
+
   factory :maintainer do
     track { create :track }
     name "Jeremy Walker"

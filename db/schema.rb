@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718155236) do
+ActiveRecord::Schema.define(version: 20170718170234) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -140,6 +140,17 @@ ActiveRecord::Schema.define(version: 20170718155236) do
     t.index ["user_id"], name: "fk_rails_e424190865"
   end
 
+  create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "emotion", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id"], name: "fk_rails_51c7d8b8ad"
+    t.index ["user_id"], name: "fk_rails_9f02fc96a0"
+  end
+
   create_table "solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id"
     t.bigint "solution_id"
@@ -239,6 +250,8 @@ ActiveRecord::Schema.define(version: 20170718155236) do
   add_foreign_key "maintainers", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "reactions", "solutions"
+  add_foreign_key "reactions", "users"
   add_foreign_key "solution_mentorships", "solutions"
   add_foreign_key "solution_mentorships", "users"
   add_foreign_key "solutions", "exercises"

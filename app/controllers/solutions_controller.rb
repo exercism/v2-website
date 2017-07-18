@@ -4,9 +4,7 @@ class SolutionsController < ApplicationController
     @exercise = @track.exercises.find(params[:id])
     @solution = @exercise.solutions.published.find(params[:id])
     @iteration = @solution.iterations.last
-    @profile = @solution.user.profile || Profile.new(
-      name: "Anonymous", 
-      avatar_url: "" # TODO
-    )
+    @comments = @solution.reactions.with_comments.includes(user: :profile)
+    @reaction_counts = @solution.reactions.group(:emotion).count.to_h
   end
 end
