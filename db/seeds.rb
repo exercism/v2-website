@@ -1,8 +1,7 @@
-ruby = Track.create!(title: "Ruby", slug: "ruby")
-python = Track.create!(title: "Python", slug: "python")
-cpp = Track.create!(title: "C++", slug: "cpp")
+ruby = Track.create!(title: "Ruby", slug: "seed_ruby")
+python = Track.create!(title: "Python", slug: "seed_python")
 
-slug = Exercise.create!(track: ruby, title: "Slug", slug: "fish", uuid: SecureRandom.uuid, core: true, position: 1)
+slug = Exercise.create!(track: ruby, title: "Slug", slug: "slug", uuid: SecureRandom.uuid, core: true, position: 1)
 bob = Exercise.create!(track: ruby, title: "Bob", slug: "bob", uuid: SecureRandom.uuid, core: true, position: 2)
 fish = Exercise.create!(track: ruby, title: "Fish", slug: "fish", uuid: SecureRandom.uuid, core: true, position: 3)
 Exercise.create!(track: ruby, title: "Snail", slug: "snail", uuid: SecureRandom.uuid, core: true, position: 4)
@@ -79,7 +78,7 @@ class ToneDeterminer
 end
 %}.strip)
 
-iteration1_discussion1 = ihid_bob_iteration_1.discussion_posts.create!(user: kytrinyx, content: "", html: %q{<p>I really like the adjectives, and the predicate methods that they're used for. I like how the responder allows you to save the text as an instance variable without running into thread-safety issues.</p><p>I feel like the meta-programming is making it hard to see which responses go with which tones, even though you've named the methods in a very expressive way.</p>})
+iteration1_discussion1 = ihid_bob_iteration_1.discussion_posts.create!(user: kytrinyx, content: "not-blank", html: %q{<p>I really like the adjectives, and the predicate methods that they're used for. I like how the responder allows you to save the text as an instance variable without running into thread-safety issues.</p><p>I feel like the meta-programming is making it hard to see which responses go with which tones, even though you've named the methods in a very expressive way.</p>})
 
 iteration1_discussion2_content = %q{
 Great feedback. Thank you.

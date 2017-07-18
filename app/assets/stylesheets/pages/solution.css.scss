@@ -71,6 +71,8 @@
     .pane.solution {
         border:solid #ddd;
         border-width:0 1px 1px 1px;
+        margin-bottom:10px;
+
 
         pre {
             margin:0;
@@ -81,7 +83,6 @@
         }
     }
     .react {
-        margin-top:10px;
         margin-bottom:10px;
         border:1px solid #ddd;
         h3 {

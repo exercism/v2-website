@@ -9,9 +9,9 @@ class My::SolutionsController < MyController
     # is allowed to be called.
     if !exercise.core && !exercise.unlocked_by
       solution = CreatesSolution.create!(current_user, exercise)
-      redirect_to solution
+      redirect_to [:my, solution]
     else
-      redirect_to exercise.track
+      redirect_to [:my, exercise.track]
     end
   end
 

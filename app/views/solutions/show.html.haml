@@ -1,4 +1,14 @@
 #solution-page
+  #nav.lo-external-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      &middot;
+      =link_to "Language Tracks", [:tracks]
+      &middot;
+      =link_to @track.title, @track
+      &middot;
+      =link_to @exercise.title, [@track, @exercise]
+
   .lo-container
     .header
       =image_tag @profile.avatar_url, class: "avatar"
@@ -19,7 +29,9 @@
           %i.fa.fa-comments
           .value 8
 
-      %h1 #{@profile.name}'s solution
+      %h1
+        #{@profile.persisted?? link_to(@profile.name, @profile) : @profile.name}'s solution
+
       %h2
         for #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
         =link_to @track, class: "track" do
@@ -47,14 +59,16 @@
               %pre.solution-code.line-numbers{data: {line: "3,6"}}
                 %code{class: "language-ruby"}
                   = @iteration.code
-        .react
-          %h3 React to this solution
-          =link_to "#" do
-            %i.fa.fa-thumbs-up
-          =link_to "#" do
-            %i.fa.fa-sun-o
-          =link_to "#" do
-            %i.fa.fa-heart
+
+        -if user_signed_in?
+          .react
+            %h3 React to this solution
+            =link_to "#" do
+              %i.fa.fa-thumbs-up
+            =link_to "#" do
+              %i.fa.fa-sun-o
+            =link_to "#" do
+              %i.fa.fa-heart
 
         .comments
           .comment.pure-g
@@ -63,7 +77,7 @@
             .pure-u-7-8
               .when 3 hours ago
               .who
-                %strong @iHiD 
+                %strong @iHiD
                 says
               .text Great solution Charles. I wouldn't have thought to do it like that but I love it.
 
