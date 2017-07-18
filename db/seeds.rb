@@ -24,7 +24,9 @@ ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password', admin: true)
 
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
-ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_sha: 'foobar', completed_at: DateTime.now)
+ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_sha: 'foobar', completed_at: DateTime.now, published_at: DateTime.now)
+ihid_slug_iteration_1 = Iteration.create!(solution: ihid_slug, code: "CODE")
+
 ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx, git_sha: 'foobar')
 ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob, code: %q{
 class Bob

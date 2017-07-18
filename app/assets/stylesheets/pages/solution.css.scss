@@ -1,0 +1,133 @@
+@import 'variables';
+@import 'mixins';
+
+#solution-page {
+    .header {
+        border:1px solid #ddd;
+        padding:30px 20px;
+        margin-bottom:20px;
+        .avatar {
+            display:block;
+            width:80px;
+            height:80px;
+            padding:10px;
+            float:left;
+            margin-right:15px;
+            background-color:#fff;
+            margin-left: -70px;
+            margin-top: -20px;
+            border: 2px solid red;
+            border-radius: 100%;
+            overflow:hidden;
+            .img {
+                width:60px;
+                height:60px;
+                background-repeat:no-repeat;
+                background-size:contain;
+                background-position:center center;
+            }
+        }
+        h1 {
+            @include font-size(30, 30);
+            font-weight:500;
+            margin-bottom:10px;
+        }
+        h2 {
+            @include font-size(18, 18);
+            font-weight:400;
+            .exercise {
+                color:#333;
+                text-decoration:none;
+            }
+            .track {
+                display:inline-block;
+                color:#333;
+                text-decoration:none;
+                img {
+                    width:20px;
+                    display:inline-block;
+                }
+                .title {
+                    @include font-size(14, 18);
+                    font-weight:300;
+                    display:inline-block;
+                    color:green;
+                }
+            }
+        }
+        .stats {
+            float:right;
+            background:#eee;
+            .stat {
+                display:inline-block;
+                padding:10px;
+                border-right:1px solid #ddd;
+                .value {
+                    display:inline-block;
+                }
+            }
+        }
+    }
+    .pane.solution {
+        border:solid #ddd;
+        border-width:0 1px 1px 1px;
+
+        pre {
+            margin:0;
+            background:#fafafa;
+            code[class*="language-"] {
+                font-size:12px;
+            }
+        }
+    }
+    .react {
+        margin-top:10px;
+        margin-bottom:10px;
+        border:1px solid #ddd;
+        h3 {
+            display:inline-block;
+            border-right:1px solid #ccc;
+            padding:5px;
+        }
+        a {
+            display:inline-block;
+            padding:5px;
+            color:#666;
+            border-right:1px solid #ccc;
+        }
+    }
+    .comments {
+        .comment {
+            margin-bottom:20px;
+            border:1px solid #ccc;
+            padding:20px;
+            i {
+                float:left;
+                @include font-size(30, 30);
+                padding:10px;
+            }
+            .when {
+                float:right;
+                color:#999;
+                @include font-size(12, 12);
+            }
+            .who {
+                @include font-size(14, 16);
+                vertical-align:bottom;
+                color:#999;
+                margin-bottom:10px;
+                strong {
+                    @include font-size(16, 16);
+                    vertical-align:bottom;
+                    font-weight:900;
+                    color:#333;
+                }
+            }
+            .text {
+                @include font-size(14, 20);
+            }
+        }
+    }
+
+}
+

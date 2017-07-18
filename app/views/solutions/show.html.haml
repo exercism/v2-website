@@ -1,0 +1,88 @@
+#solution-page
+  .lo-container
+    .header
+      =image_tag @profile.avatar_url, class: "avatar"
+      .stats
+        .stat.approve
+          %i.fa.fa-thumbs-up
+          .value 34
+
+        .stat.smart
+          %i.fa.fa-sun-o
+          .value 342
+
+        .stat.love
+          %i.fa.fa-heart
+          .value 3
+
+        .stat.comments
+          %i.fa.fa-comments
+          .value 8
+
+      %h1 #{@profile.name}'s solution
+      %h2
+        for #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
+        =link_to @track, class: "track" do
+          = image_tag @track.icon_url
+          %span.title= @track.title
+
+  .lo-container
+    .pure-g.panels
+      .pure-u-1-2.lhs
+        .tabs-and-panes.selected-3
+          .tabs
+            .tab.tab-1
+              Instructions
+            .tab.tab-2
+              Test Suite
+            .tab.tab-3
+              Solution
+
+          .panes
+            .pane.pane-1
+              =@iteration.solution.instructions
+            .pane.pane-2
+              =@iteration.solution.test_suite
+            .pane.pane-3.solution
+              %pre.solution-code.line-numbers{data: {line: "3,6"}}
+                %code{class: "language-ruby"}
+                  = @iteration.code
+        .react
+          %h3 React to this solution
+          =link_to "#" do
+            %i.fa.fa-thumbs-up
+          =link_to "#" do
+            %i.fa.fa-sun-o
+          =link_to "#" do
+            %i.fa.fa-heart
+
+        .comments
+          .comment.pure-g
+            .pure-u-1-8
+              %i.fa.fa-thumbs-up
+            .pure-u-7-8
+              .when 3 hours ago
+              .who
+                %strong @iHiD 
+                says
+              .text Great solution Charles. I wouldn't have thought to do it like that but I love it.
+
+      .pure-u-1-2.rhs
+        .reflection
+          Some reflection goes here....
+
+-content_for :js do
+  :coffeescript
+    setupTabs = =>
+      $('.tab').click ->
+        $container = $(this).closest('.tabs-and-panes')
+
+        for c in $container[0].className.split(" ")
+          $container.removeClass(c) if c.startsWith("selected-")
+
+        tabId = null
+        for c in this.className.split(" ")
+          tabId = c.replace("tab-", "") if c.startsWith("tab-")
+
+        $container.addClass("selected-\#{tabId}") if tabId
+    setupTabs()

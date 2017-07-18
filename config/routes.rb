@@ -25,8 +25,11 @@ Rails.application.routes.draw do
   }
 
   resources :profiles, only: [:index, :show]
-  resources :tracks, only: [:index, :show]
-  resources :solutions, only: [:index, :show]
+  resources :tracks, only: [:index, :show] do
+    resources :exercises, only: [:index, :show] do
+      resources :solutions, only: [:index, :show]
+    end
+  end
 
   namespace :my do
     resource :dashboard, only: [:show], controller: "dashboard"

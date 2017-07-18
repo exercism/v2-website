@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :maintainer do
+    track { create :track }
+    name "Jeremy Walker"
+    avatar_url "somewhere.jpg"
+  end
+
   factory :exercise_topic do
     exercise { create :exercise }
     topic { create :topic }
@@ -11,6 +17,7 @@ FactoryGirl.define do
   factory :profile do
     user { create :user }
     name "Jo Bloggs"
+    avatar_url "http://foobar.png"
     slug { SecureRandom.uuid }
   end
 

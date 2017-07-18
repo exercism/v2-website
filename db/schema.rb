@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717120507) do
+ActiveRecord::Schema.define(version: 20170718140722) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 20170717120507) do
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
   end
 
+  create_table "maintainers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "track_id", null: false
+    t.bigint "user_id"
+    t.string "name", null: false
+    t.string "avatar_url", null: false
+    t.string "link_text"
+    t.string "link_url"
+    t.text "bio"
+    t.boolean "active", default: true, null: false
+    t.boolean "visible", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "fk_rails_ed46fd11a4"
+    t.index ["user_id"], name: "fk_rails_5b1168410c"
+  end
+
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id"
     t.string "about_type"
@@ -99,6 +115,7 @@ ActiveRecord::Schema.define(version: 20170717120507) do
     t.bigint "user_id", null: false
     t.string "slug", null: false
     t.string "name", null: false
+    t.string "avatar_url", null: false
     t.text "bio"
     t.string "twitter"
     t.string "website"
@@ -206,6 +223,8 @@ ActiveRecord::Schema.define(version: 20170717120507) do
   add_foreign_key "exercises", "tracks"
   add_foreign_key "favourites", "iterations"
   add_foreign_key "iterations", "solutions"
+  add_foreign_key "maintainers", "tracks"
+  add_foreign_key "maintainers", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "solution_mentorships", "solutions"

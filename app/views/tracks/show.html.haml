@@ -1,3 +1,20 @@
 #track-signed-out-page
   .lo-container
     %h1= @track.title
+
+    %h2 Exercises
+    %h3 Core
+    -@track.exercises.core.each do |exercise|
+      =link_to exercise.title, [@track, exercise]
+
+    %h3 Side
+    -@track.exercises.side.each do |exercise|
+      =link_to exercise.title, [@track, exercise]
+
+    %h2 Mentors
+    -@track.mentorships.each do |mentor|
+      =mentor.user.name
+
+    %h2 Maintainers
+    -@track.maintainers.each do |maintainer|
+      =maintainer.user.name
