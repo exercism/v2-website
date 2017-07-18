@@ -1,4 +1,4 @@
-class MyProfileController < ApplicationController
+class My::ProfileController < MyController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_profile_exists!, only: [:new, :create]
   before_action :redirect_unless_profile_exists!, only: [:show, :edit, :update, :destroy]

@@ -1,7 +1,7 @@
 %h1 Reflect
 %p What did you learn from this exercise?
 
-=form_tag reflect_solution_path(@solution), method: :patch, remote: true do
+=form_tag [:reflect, :my, @solution], method: :patch, remote: true do
   =text_area :notes, placeholder: "Personal Notes"
 
   -@solution.mentors.each do |mentor|

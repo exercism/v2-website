@@ -1,4 +1,4 @@
-class SideExercisesController < ApplicationController
+class My::SideExercisesController < MyController
   before_action :set_track
 
   def index

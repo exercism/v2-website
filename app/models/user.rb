@@ -31,7 +31,7 @@ class User < ApplicationRecord
     "http://lorempixel.com/400/400/"
   end
 
-  def unlocked_track?(track)
+  def joined_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end
 

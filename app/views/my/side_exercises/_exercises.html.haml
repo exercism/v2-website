@@ -1,0 +1,11 @@
+-exercises_and_solutions.each do |exercise, solution|
+  .pure-u-1-3
+    -if solution
+      = link_to [:my, solution], class: "exercise #{solution.in_progress?? "in-progress" : "unlocked"}" do
+        =render "my/side_exercises/exercise", exercise: exercise, solution: solution
+    -elsif !exercise.unlocked_by
+      = link_to [:my, :solutions, exercise_id: exercise], method: :post, class: 'exercise unlocked' do
+        =render "my/side_exercises/exercise", exercise: exercise
+    -else
+      .exercise.locked
+        =render "my/side_exercises/exercise", exercise: exercise

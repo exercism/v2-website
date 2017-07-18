@@ -5,7 +5,7 @@
 
     %h1 Update your communication preferences
 
-    =form_for current_user.communication_preferences, url: settings_communication_preferences_path do |f|
+    =form_for current_user.communication_preferences, url: [:my, :settings, :communication_preferences] do |f|
       -if current_user.admin?
         %h2 Admin Communications
 

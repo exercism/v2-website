@@ -3,7 +3,7 @@
     .lo-container
       =link_to "Dashboard", root_path
       &middot;
-      =link_to "#{@track.title}", @track
+      =link_to "#{@track.title}", [:my, @track]
       &middot;
       -if @solution.exercise.core?
         %span Core Exercises
@@ -52,7 +52,7 @@
       .approved-bar
         %i.fa.fa-bell
         %span.text A mentor has approved this solution
-        =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true, class: 'pure-button'
+        =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true, class: 'pure-button'
     /-@notifications.each do |notification|
     /  .notification
     /   =notification.content
@@ -84,9 +84,9 @@
             =link_to "Scroll to latest comment", ""
             %h3 Mentor Discussion
             .posts
-              =render partial: "discussion_posts/post", collection: @iteration.discussion_posts
+              =render partial: "my/discussion_posts/post", collection: @iteration.discussion_posts
 
-          =form_for DiscussionPost.new, remote: true, html: {class: "new-discussion-post-form"} do |f|
+          =form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
             =hidden_field_tag :iteration_id, @iteration.id
 
             .tabs-and-panes.selected-1
@@ -123,9 +123,9 @@
         .pure-u-1-2
           -unless @solution.completed?
             -if @solution.approved?
-              =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true
+              =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
             -else
-              =link_to "Mark as completed", confirm_unapproved_completion_solution_path(@solution), method: :get, remote: true
+              =link_to "Mark as completed", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true
 
     -#
       %h1 Your solution to #{@exercise.title}

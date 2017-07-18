@@ -4,4 +4,4 @@
 
     -if @last_solution
       %h2 Carry on where you left off
-      =link_to @last_solution.exercise.title, @last_solution
+      =link_to @last_solution.exercise.title, [:my, @last_solution]

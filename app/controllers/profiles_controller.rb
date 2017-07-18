@@ -1,10 +1,7 @@
 class ProfilesController < ApplicationController
-  skip_before_action :authenticate_user!
-
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to action: :index
   end
-
 
   def show
     @profile = Profile.find_by_slug!(params[:id])

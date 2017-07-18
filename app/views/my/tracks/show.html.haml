@@ -1,0 +1,101 @@
+#track-page
+  .header
+    .visual-section
+      .line
+      .lo-container
+        =image_tag @track.bordered_icon_url, class: 'logo'
+        .status Track in Progress
+    .lo-container
+      %h1 #{@track.title} Track
+      .stats
+        .stat= pluralize @track.exercises.count, "Exercise"
+        .stat= pluralize @track.user_tracks.count, "Students"
+        .stat= pluralize @track.iterations.count, "Submissions"
+        .stat= pluralize @track.mentorships.count, "Mentors"
+      .h1-subtitle Joined on #{@user_track.created_at}
+
+  .lo-container
+    .pure-g
+      .pure-u-2-3
+        .core-exercises
+          -@core_exercises_and_solutions.each do |exercise, solution|
+            -if solution
+              = link_to [:my, solution], class: "exercise #{solution.completed?? "completed" : "in-progress"}" do
+                .circle
+                -if solution.completed?
+                  .status Completed
+                  .button.pure-button Take a look
+                -else
+                  .status In Progress
+                  .button.pure-button Continue
+                .title= exercise.title
+                .topics= exercise.topic_names.join(" | ")
+            -else
+              .exercise
+                .circle
+                .status Locked
+                .title= exercise.title
+                .topics= exercise.topic_names.join(" | ")
+      .pure-u-1-3
+        .progress-section
+          %h2 Your Progress in Ruby
+          .h2-subtitle See how you're doing
+
+          .core
+            %h3 Track
+            .percentage #{@core_track_completion_percentage}%
+            .number #{@num_solved_core_exercises} / #{@core_exercises_and_solutions.size} core exercises
+            .completed marked as complete
+
+          .side
+            %h3 Extras
+            .squares
+              -@num_side_exercises.times do |i|
+                -if i < @num_solved_side_exercises
+                  .square.completed
+                -else
+                  .square
+            =link_to "See all", "#side-exercises", class: 'pure-button'
+
+          .topics
+            %h3 Concepts
+            -@topic_percentages.each do |topic, percentage|
+              .topic
+                .percentage #{percentage.round}%
+                .bar
+                  .filled{style: "width: #{percentage.round}%"}
+                  .title= topic
+
+  #side-exercises.side-exercises
+    .lo-container
+      %h2 Extra Exercises
+      .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
+      .filters
+        =form_tag [:my, @track, :side_exercises], remote: true, method: :get, class: "side_exercises_form" do
+          Difficulty
+          =select_tag :difficulty, options_for_select({all: nil, easy: 1, medium: 2, hard: 3}, value: @difficulty), id: nil
+          =select_tag :length, options_for_select({all: nil, short: 1, medium: 2, long: 3}, value: @length), id: nil
+          =select_tag :status, options_for_select({all: nil, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
+          =button_tag "Update"
+      .pure-g.exercises
+        =render "my/side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
+
+  #deprecated-exercises.deprecated-exercises
+    .lo-container
+      %h2 Deprecated Exercises
+      .h2-subtitle These exercises are no longer part of Exercism but we've kept them around for you so you don't lose your hard work.
+      .pure-g.exercises
+        -@deprecated_exercises_and_solutions.each do |exercise, solution|
+          .pure-u-1-3
+            .exercise
+              .icon
+                .img{style: "background-image:url('#{image_path(exercise.icon_url)}')"}
+              .status.deprecated Deprecated
+              .title= exercise.title
+              .topics= exercise.topic_names.join(" | ")
+
+-content_for :js do
+  :coffeescript
+    #updateSideExercises = =>
+    #  $('.side_exercises_form').trigger('submit.rails')
+    $('.side_exercises_form select').change updateSideExercises

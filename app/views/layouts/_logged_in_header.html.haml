@@ -4,11 +4,11 @@
     &middot;
     =link_to "Home", root_path
     &middot;
-    = link_to "Tracks", tracks_path
+    = link_to "Tracks", [:my, :tracks]
     &middot;
-    = link_to "Settings", edit_settings_communication_preferences_path
+    = link_to "Settings", [:edit, :my, :settings, :communication_preferences]
     &middot;
-    = link_to "Notifications", notifications_path
+    = link_to "Notifications", [:my, :notifications]
     -if current_user.admin?
       &middot;
       = link_to "Admin Dashboard", admin_dashboard_path
