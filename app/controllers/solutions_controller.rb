@@ -19,10 +19,8 @@ class SolutionsController < ApplicationController
     @exercise = @solution.exercise
     ClearsNotifications.clear!(current_user, @solution)
 
-    if @solution.completed?
-      show_completed
-    elsif @solution.iterations.size > 0
-      show_iterating
+    if @solution.iterations.size > 0
+      show_started
     else
       show_unlocked
     end
@@ -63,11 +61,7 @@ class SolutionsController < ApplicationController
     render :show_unlocked
   end
 
-  def show_cloned
-    render :show_cloned
-  end
-
-  def show_iterating
+  def show_started
     @iteration = @solution.iterations.find_by_id(params[:iteration_id]) || @solution.iterations.first
     @track = @solution.exercise.track
     @user_track = UserTrack.where(user: current_user, track: @track).first
@@ -79,10 +73,6 @@ class SolutionsController < ApplicationController
     # state machine approach is wrong (to be able to allow this)
     # or something else?
 
-    render :show_iterating
-  end
-
-  def show_completed
-    render :show_completed
+    render :show_started
   end
 end

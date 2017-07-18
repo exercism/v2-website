@@ -1,4 +1,4 @@
-#solution-iterating-page
+#solution-started-page
   #nav.lo-internal-nav-bar
     .lo-container
       =link_to "Dashboard", root_path
@@ -44,7 +44,11 @@
               -else
                 .dot
 
-    -if @solution.approved? && !@solution.completed?
+    -if @solution.completed?
+      .approved-bar
+        Solution completed!!
+
+    -elsif @solution.approved?
       .approved-bar
         %i.fa.fa-bell
         %span.text A mentor has approved this solution
@@ -117,10 +121,11 @@
         .pure-u-1-2
           /Other Solutions
         .pure-u-1-2
-          -if @solution.approved?
-            =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true
-          -else
-            =link_to "Mark as completed", confirm_unapproved_completion_solution_path(@solution), method: :get, remote: true
+          -unless @solution.completed?
+            -if @solution.approved?
+              =link_to "Mark as completed", complete_solution_path(@solution), method: :patch, remote: true
+            -else
+              =link_to "Mark as completed", confirm_unapproved_completion_solution_path(@solution), method: :get, remote: true
 
     -#
       %h1 Your solution to #{@exercise.title}

@@ -12,7 +12,9 @@ class JoinsTrack
   def start!
     return false if UserTrack.where(user: user, track: track).exists?
 
-    UserTrack.create!(user: user, track: track)
+    user_track = UserTrack.create!(user: user, track: track)
     CreatesSolution.create!(user, track.exercises.core.first)
+
+    return user_track
   end
 end

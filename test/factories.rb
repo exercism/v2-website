@@ -1,10 +1,13 @@
 FactoryGirl.define do
   factory :exercise_topic do
-    
+    exercise { create :exercise }
+    topic { create :topic }
   end
+
   factory :topic do
-    
+    slug "foobar"
   end
+
   factory :profile do
     user { create :user }
     name "Jo Bloggs"

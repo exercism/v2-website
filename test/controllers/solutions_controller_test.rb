@@ -4,9 +4,9 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
   {
     unlocked: "solution-unlocked-page",
-    iterating: "solution-iterating-page",
-    completed_unapproved: "solution-completed-page",
-    completed_approved: "solution-completed-page",
+    iterating: "solution-started-page",
+    completed_unapproved: "solution-started-page",
+    completed_approved: "solution-started-page",
   }.each do |status, page|
     test "shows with status #{status}" do
       sign_in!
