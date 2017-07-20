@@ -10,7 +10,7 @@ class Git::ExercismRepo
   end
 
   def config
-    config_pointer = repo.branches['master'].target.tree['config.json']
+    config_pointer = head_commit.tree['config.json']
     config_blob = repo.lookup(config_pointer[:oid])
     JSON.parse(config_blob.text, symbolize_names: true)
   end
@@ -19,7 +19,23 @@ class Git::ExercismRepo
     repo.fetch('origin')
   end
 
+  def head
+    head_commit.oid
+  end
+
   private
+
+  def head_commit
+    main_branch.target
+  end
+
+  def main_branch
+    repo.branches[main_branch_ref]
+  end
+
+  def main_branch_ref
+    "origin/master"
+  end
 
   def repo
     @repo ||= if repo_dir_exists?
