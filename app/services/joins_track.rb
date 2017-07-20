@@ -13,7 +13,8 @@ class JoinsTrack
     return false if UserTrack.where(user: user, track: track).exists?
 
     user_track = UserTrack.create!(user: user, track: track)
-    CreatesSolution.create!(user, track.exercises.core.first)
+    first_exercise = track.exercises.core.first
+    CreatesSolution.create!(user, first_exercise) if first_exercise
 
     return user_track
   end

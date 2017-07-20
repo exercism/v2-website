@@ -3,17 +3,17 @@ require 'test_helper'
 class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
   {
-    unlocked: "solution-unlocked-page",
-    iterating: "solution-started-page",
-    completed_unapproved: "solution-started-page",
-    completed_approved: "solution-started-page",
+    unlocked: "my-solution-unlocked-page",
+    iterating: "my-solution-started-page",
+    completed_unapproved: "my-solution-started-page",
+    completed_approved: "my-solution-started-page",
   }.each do |status, page|
     test "shows with status #{status}" do
       sign_in!
       solution = send("create_#{status}_solution")
       create :user_track, user: @current_user, track: solution.exercise.track
 
-      get solution_url(solution)
+      get my_solution_url(solution)
       assert_response :success
       assert_correct_page page
     end
@@ -31,7 +31,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     create :solution_mentorship, solution: solution, user: discussion_post_1.user
     create :solution_mentorship, solution: solution, user: discussion_post_3.user
 
-    patch reflect_solution_url(solution), params: {
+    patch reflect_my_solution_url(solution), params: {
       notes: notes,
       mentor_reviews: {
         discussion_post_1.user_id => { rating: 3, review: "asdasd" },

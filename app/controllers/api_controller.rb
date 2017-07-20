@@ -3,6 +3,8 @@ class APIController < ApplicationController
   #include ActionController::HttpAuthentication::Token::ControllerMethods
 
   skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
+
   layout false
 
   def authenticate_user!

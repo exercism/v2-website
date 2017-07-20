@@ -3,7 +3,7 @@ FactoryGirl.define do
     solution { create :solution }
     user { create :user }
     emotion :love
-    content "The cat was all like and the mat and whatnot"
+    comment "The cat was all like and the mat and whatnot"
   end
 
   factory :maintainer do

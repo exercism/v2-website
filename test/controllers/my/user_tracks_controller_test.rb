@@ -5,10 +5,10 @@ class UserTracksControllerTest < ActionDispatch::IntegrationTest
     sign_in!
     track = create :track
 
-    post user_tracks_url(track_id: track)
+    post my_user_tracks_url(track_id: track)
 
     assert UserTrack.where(track: track, user: @current_user).exists?
-    assert_redirected_to track_path(track)
+    assert_redirected_to my_track_path(track)
   end
 
   test "#create silently ignores duplicate user_track" do
@@ -16,9 +16,9 @@ class UserTracksControllerTest < ActionDispatch::IntegrationTest
     track = create :track
     create :user_track, user: @current_user, track: track
 
-    post user_tracks_url(track_id: track)
+    post my_user_tracks_url(track_id: track)
 
     assert_equal 1, UserTrack.where(track: track, user: @current_user).size
-    assert_redirected_to track_path(track)
+    assert_redirected_to my_track_path(track)
   end
 end

@@ -1,4 +1,5 @@
 class MentorController < ApplicationController
+  before_action :authenticate_user!
   before_action :restrict_to_mentors!
 
   private
