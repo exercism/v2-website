@@ -1,4 +1,9 @@
 #track-signed-out-page
+  #nav.lo-external-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      &middot;
+      =link_to "Language Tracks", [:tracks]
   .lo-container
     %h1= @track.title
 

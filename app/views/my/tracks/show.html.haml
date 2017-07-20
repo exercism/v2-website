@@ -73,9 +73,12 @@
       .filters
         =form_tag [:my, @track, :side_exercises], remote: true, method: :get, class: "side_exercises_form" do
           Difficulty
-          =select_tag :difficulty, options_for_select({all: nil, easy: 1, medium: 2, hard: 3}, value: @difficulty), id: nil
-          =select_tag :length, options_for_select({all: nil, short: 1, medium: 2, long: 3}, value: @length), id: nil
-          =select_tag :status, options_for_select({all: nil, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
+          .styled-select
+            =select_tag :difficulty, options_for_select({all: nil, easy: 1, medium: 2, hard: 3}, value: @difficulty), id: nil
+          .styled-select
+            =select_tag :length, options_for_select({all: nil, short: 1, medium: 2, long: 3}, value: @length), id: nil
+          .styled-select
+            =select_tag :status, options_for_select({all: nil, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
           =button_tag "Update"
       .pure-g.exercises
         =render "my/side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
@@ -94,8 +97,20 @@
               .title= exercise.title
               .topics= exercise.topic_names.join(" | ")
 
--content_for :js do
-  :coffeescript
-    #updateSideExercises = =>
-    #  $('.side_exercises_form').trigger('submit.rails')
-    $('.side_exercises_form select').change updateSideExercises
+-if @track.iterations.count == 0
+  -content_for :js do
+    :javascript
+      showModal("track-start", "#{j(render "started_modal")}")
+
+-if @track_completion_percentage == 100
+  -content_for :js do
+    :javascript
+      showModal("track-finished", "#{j(render "finished_modal")}")
+
+-#
+  -content_for :js do
+    :coffeescript
+      #updateSideExercises = =>
+      #  $('.side_exercises_form').trigger('submit.rails')
+      $('.side_exercises_form select').change updateSideExercises
+

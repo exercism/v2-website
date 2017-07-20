@@ -9,8 +9,9 @@ class CreatesSolutionTest < ActiveSupport::TestCase
     solution = CreatesSolution.create!(user, exercise)
 
     assert solution.persisted?
-    assert_equal solution.exercise, exercise
-    assert_equal solution.user, user
+    assert_equal exercise, solution.exercise
+    assert_equal user, solution.user
+    assert_equal exercise.slug, solution.git_slug
 
     # TODOGIT
     # assert_equal solution.git_sha, git_sha

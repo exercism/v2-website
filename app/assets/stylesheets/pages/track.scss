@@ -333,3 +333,38 @@
         }
     }
 }
+
+#modal.track-started,
+#modal.track-finished {
+    padding:50px;
+    img {
+        display:block;
+        width:100px;
+        margin: 0 auto 30px auto;
+    }
+    h2 {
+        @include font-size(20, 20);
+        font-weight:500;
+        margin-bottom:5px;
+        text-align:center;
+    }
+    h3 {
+        @include font-size(14, 14);
+        font-weight:500;
+        margin-bottom:30px;
+        text-align:center;
+    }
+    p {
+        text-align:center;
+        @include font-size(14, 21);
+        margin-bottom:15px;
+    }
+    .pure-button {
+        background:green;
+        display:block;
+        width:120px;
+        padding:10px 10px;
+        text-align:center;
+        margin: 0 auto;
+    }
+}

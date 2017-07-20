@@ -1,11 +1,13 @@
 window.closeModal = ->
   $('#modal-wrapper').hide()
+  return false
 
 $('#modal-wrapper').click (e) ->
   $e = $(e.target)
 
   closeModal() if $e.attr('id') == 'modal-close-button' ||
                   $e.attr('id') == 'modal-close-button-icon' ||
+                  $e.hasClass('close-modal')
                   $e.data('close-modal')
 
   closeModal() if $e.attr('id') == "modal-wrapper" &&

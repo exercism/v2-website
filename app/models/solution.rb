@@ -54,6 +54,6 @@ class Solution < ApplicationRecord
   end
 
   def git_exercise
-    @git_exercise ||= GitExercise.new(exercise, git_sha)
+    @git_exercise ||= GitExercise.new(exercise, git_slug, git_sha)
   end
 end

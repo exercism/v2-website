@@ -4,5 +4,5 @@ class Reaction < ApplicationRecord
 
   enum emotion: [ :love, :wowed, :applaud ]
 
-  scope :with_comments, -> { where.not(comment: "", comment: nil) }
+  scope :with_comments, -> { where("comment != "" AND comment IS NOT NULL") }
 end

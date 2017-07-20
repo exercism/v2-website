@@ -13,7 +13,8 @@ class CreatesSolution
     Solution.create(
       user: user,
       exercise: exercise,
-      git_sha: git_sha
+      git_sha: git_sha,
+      git_slug: exercise.slug
     )
   end
 

@@ -1,8 +1,16 @@
-.lo-container
-  %h1= @exercise.title
-  %h2 Part of the #{@track.title} Track on Exercism
+#exercise-page
+  #nav.lo-external-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      &middot;
+      =link_to "Language Tracks", [:tracks]
+      &middot;
+      =link_to @track.title, @track
+  .lo-container
+    %h1= @exercise.title
+    %h2 Part of the #{@track.title} Track on Exercism
 
-  %h3 Solutions
-  - @solutions.each do |solution|
-    =link_to solution.user.name, [@track, @exercise, solution]
+    %h3 Solutions
+    - @solutions.each do |solution|
+      =link_to solution.user.name, [@track, @exercise, solution]
 

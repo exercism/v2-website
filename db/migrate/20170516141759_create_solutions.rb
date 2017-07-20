@@ -4,6 +4,7 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.bigint :user_id, null: false
       t.bigint :exercise_id, null: false
       t.string :git_sha, null: false
+      t.string :git_slug, null: false
 
       t.bigint :approved_by_id, null: true
       t.datetime :cloned_at, null: true

@@ -71,3 +71,13 @@ input {
         overflow:hidden;
     }
 }
+.styled-select {
+    display:inline-block;
+    border:1px solid #ccc;
+    border-radius:3px;
+
+    select {
+        border:none;
+        background:transparent;
+    }
+}

@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.bigint "user_id", null: false
     t.bigint "exercise_id", null: false
     t.string "git_sha", null: false
+    t.string "git_slug", null: false
     t.bigint "approved_by_id"
     t.datetime "cloned_at"
     t.datetime "completed_at"

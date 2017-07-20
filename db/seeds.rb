@@ -23,11 +23,11 @@ ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password
 kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password', admin: true)
 
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
-ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_sha: 'foobar', completed_at: DateTime.now, published_at: DateTime.now)
+ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar', completed_at: DateTime.now, published_at: DateTime.now)
 ihid_slug_iteration_1 = Iteration.create!(solution: ihid_slug, code: "CODE")
 ihid_slug_reaction = Reaction.create(user: kytrinyx, solution: ihid_slug, emotion: :wowed, comment: "This is sick")
 
-ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx, git_sha: 'foobar')
+ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar')
 ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob, code: %q{
 class Bob
   RESPONSES = {
@@ -114,16 +114,16 @@ user4 = User.create!(name: "User 4", email: "#{SecureRandom.uuid}@example.com", 
 
 python_hello_world = Exercise.create!(track: python, title: "Hello World", slug: "hello-world", uuid: SecureRandom.uuid, core: true, position: 2)
 
-user1_hello_world = Solution.create!(user: user1, exercise: python_hello_world, git_sha: 'foobar')
+user1_hello_world = Solution.create!(user: user1, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
 user1_hello_world_iteration_1 = Iteration.create!(solution: user1_hello_world, code: "foo")
 user1_hello_world_iteration_2 = Iteration.create!(solution: user1_hello_world, code: "bar")
 SolutionMentorship.create(user: ihid, solution: user1_hello_world, requires_action: true)
 
-user2_hello_world = Solution.create!(user: user2, exercise: python_hello_world, git_sha: 'foobar')
+user2_hello_world = Solution.create!(user: user2, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
 user2_hello_world_iteration_1 = Iteration.create!(solution: user2_hello_world, code: "foo")
 SolutionMentorship.create(user: ihid, solution: user2_hello_world)
 
-user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_sha: 'foobar')
+user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
 user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")
 
 # Seed tracks
