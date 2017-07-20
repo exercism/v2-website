@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "slug", null: false
     t.string "title", null: false
+    t.string "repo_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

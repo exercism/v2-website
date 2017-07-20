@@ -73,6 +73,7 @@ FactoryGirl.define do
   factory :track do
     title "Ruby"
     slug { "ruby-#{SecureRandom.uuid}" }
+    repo_url { "http://example.com/ruby-#{SecureRandom.uuid}.git" }
   end
 
   factory :exercise do
