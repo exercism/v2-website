@@ -34,6 +34,10 @@ class Git::ExercismRepo
     repo.fetch('origin')
   end
 
+  def head
+    head_commit.oid
+  end
+
   private
 
   def head_commit

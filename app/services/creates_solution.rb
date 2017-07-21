@@ -20,9 +20,11 @@ class CreatesSolution
 
   private
 
-  # TODOGIT
-  # This should be the current sha of the exercise
   def git_sha
-    SecureRandom.uuid
+    Git::ExercismRepo.new(repo_url).head
+  end
+
+  def repo_url
+    exercise.track.repo_url
   end
 end
