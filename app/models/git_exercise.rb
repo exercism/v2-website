@@ -8,7 +8,7 @@ class GitExercise
   end
 
   def instructions
-    exercise.readme
+    ParsesMarkdown.parse(exercise.readme)
   end
 
   def test_suite
