@@ -54,7 +54,11 @@
             .pane.pane-1
               =@iteration.solution.instructions
             .pane.pane-2
-              =@iteration.solution.test_suite
+              -@iteration.solution.test_suite.each do |filename, code|
+                %h3= filename
+                %pre.test-suite.line-numbers
+                  %code{class: "language-ruby"}
+                    = code
             .pane.pane-3.solution
               %pre.solution-code.line-numbers{data: {line: "3,6"}}
                 %code{class: "language-ruby"}

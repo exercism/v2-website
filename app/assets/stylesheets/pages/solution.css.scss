@@ -68,12 +68,8 @@
             }
         }
     }
-    .pane.solution {
-        border:solid #ddd;
-        border-width:0 1px 1px 1px;
-        margin-bottom:10px;
 
-
+    .solution, .test-suite {
         pre {
             margin:0;
             background:#fafafa;
@@ -81,6 +77,12 @@
                 font-size:12px;
             }
         }
+    }
+
+    .pane.solution {
+        border:solid #ddd;
+        border-width:0 1px 1px 1px;
+        margin-bottom:10px;
     }
     .react {
         margin-bottom:10px;

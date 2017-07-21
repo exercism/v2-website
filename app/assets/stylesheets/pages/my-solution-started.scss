@@ -175,7 +175,17 @@ body.controller-solutions {
         }
 
     }
-    .pane.solution {
+    .pane.test-suite {
+        h3 {
+            padding:10px;
+            font-weight:500;
+            @include font-size(16, 16);
+        }
+        pre+h3 {
+            margin-top:30px;
+        }
+    }
+    .pane.solution, .pane.test-suite {
         pre {
             margin:0;
             background:#fafafa;
