@@ -5,6 +5,7 @@ class CreateMaintainers < ActiveRecord::Migration[5.1]
       t.bigint :user_id, null: true
       t.string :name, null: false
       t.string :avatar_url, null: false
+      t.string :github_username, null: false
       t.string :link_text
       t.string :link_url
       t.text :bio

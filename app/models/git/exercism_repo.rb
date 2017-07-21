@@ -10,16 +10,47 @@ class Git::ExercismRepo
   end
 
   def config
-    config_pointer = repo.branches['master'].target.tree['config.json']
+    read_commit(head_commit)
+  end
+
+  def read_commit(commit)
+    config_pointer = commit.tree['config.json']
     config_blob = repo.lookup(config_pointer[:oid])
     JSON.parse(config_blob.text, symbolize_names: true)
+  end
+
+  def exercise(exercise_slug, commit_sha)
+    commit = repo.lookup(commit_sha)
+    if commit.type != :commit
+      raise 'not-found'
+    end
+    config = read_commit(commit)
+    Git::ExerciseReader.new(repo, exercise_slug, commit, config)
+  rescue Rugged::OdbError => e
+    raise 'not-found'
   end
 
   def fetch!
     repo.fetch('origin')
   end
 
+  def head
+    head_commit.oid
+  end
+
   private
+
+  def head_commit
+    main_branch.target
+  end
+
+  def main_branch
+    repo.branches[main_branch_ref]
+  end
+
+  def main_branch_ref
+    "origin/master"
+  end
 
   def repo
     @repo ||= if repo_dir_exists?

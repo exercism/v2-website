@@ -1,5 +1,5 @@
-ruby = Track.create!(title: "Ruby", slug: "seed_ruby")
-python = Track.create!(title: "Python", slug: "seed_python")
+ruby = Track.create!(title: "Ruby", slug: "seed_ruby", repo_url: "http://example.com/ruby.git")
+python = Track.create!(title: "Python", slug: "seed_python", repo_url: "http://example.com/python.git")
 
 slug = Exercise.create!(track: ruby, title: "Slug", slug: "slug", uuid: SecureRandom.uuid, core: true, position: 1)
 bob = Exercise.create!(track: ruby, title: "Bob", slug: "bob", uuid: SecureRandom.uuid, core: true, position: 2)
@@ -127,4 +127,4 @@ user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, 
 user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")
 
 # Seed tracks
-CreatesTrack.create_all!
+Git::SeedsTracks.seed!

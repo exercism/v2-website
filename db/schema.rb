@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.bigint "user_id"
     t.string "name", null: false
     t.string "avatar_url", null: false
+    t.string "github_username", null: false
     t.string "link_text"
     t.string "link_url"
     t.text "bio"
@@ -204,6 +205,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "slug", null: false
     t.string "title", null: false
+    t.string "repo_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
