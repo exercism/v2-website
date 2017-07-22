@@ -235,6 +235,31 @@
             }
         }
     }
+    .side-exercises {
+        .filters {
+            margin-bottom:10px;
+            .filter {
+                display:inline-block;
+                margin-right:10px;
+                .title {
+                    float:left;
+                    border:solid #aaa;
+                    border-width:1px 0 1px 1px;
+                    background:#ddd;
+                    padding:5px 5px 6px 5px;
+                }
+                .selectize-control {
+                    float:left;
+                    width:100px;
+                    .selectize-input {
+                        border-radius:0 3px 3px 0;
+                        border:1px solid #aaa;
+                        padding:6px;
+                    }
+                }
+            }
+        }
+    }
     .deprecated-exercises,
     .side-exercises {
         background:#eee;

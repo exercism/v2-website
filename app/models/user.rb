@@ -1,3 +1,4 @@
+# TODO - Validate handle is unique
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -33,6 +34,10 @@ class User < ApplicationRecord
 
   def joined_track?(track)
     user_tracks.where(track_id: track.id).exists?
+  end
+
+  def user_track_for(track)
+    user_tracks.where(track_id: track.id).first
   end
 
   def mentor?

@@ -127,9 +127,6 @@ ActiveRecord::Schema.define(version: 20170718170234) do
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "slug", null: false
-    t.string "name", null: false
-    t.string "avatar_url", null: false
-    t.text "bio"
     t.string "twitter"
     t.string "website"
     t.string "github"
@@ -196,6 +193,11 @@ ActiveRecord::Schema.define(version: 20170718170234) do
   create_table "track_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id"
     t.bigint "track_id"
+    t.string "handle"
+    t.string "avatar_url"
+    t.string "link_text"
+    t.string "link_url"
+    t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["track_id"], name: "fk_rails_4a81f96f88"
@@ -206,6 +208,9 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.string "slug", null: false
     t.string "title", null: false
     t.string "repo_url", null: false
+    t.text "introduction", null: false
+    t.text "about", null: false
+    t.text "code_sample", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -213,6 +218,8 @@ ActiveRecord::Schema.define(version: 20170718170234) do
   create_table "user_tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "track_id", null: false
+    t.boolean "anonymous", default: false, null: false
+    t.string "handle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["track_id"], name: "fk_rails_631b3d694d"
@@ -221,6 +228,9 @@ ActiveRecord::Schema.define(version: 20170718170234) do
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "name", null: false
+    t.string "handle", null: false
+    t.string "avatar_url"
+    t.text "bio"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

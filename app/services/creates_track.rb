@@ -13,7 +13,15 @@ class CreatesTrack
   end
 
   def create!
-    track = Track.create!(title: language, slug: track_slug, repo_url: repo_url)
+    track = Track.create!(
+      title: language,
+      slug: track_slug || repo_url.split("/").last,
+      repo_url: repo_url,
+      introduction: "", #TODOGIT - Work this out
+      about: "", #TODOGIT - Work this out
+      code_sample: "", #TODOGIT - Work this out
+    )
+
     track
 
     # exercises = config[:exercises]

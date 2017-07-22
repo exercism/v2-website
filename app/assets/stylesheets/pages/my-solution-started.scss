@@ -176,13 +176,18 @@ body.controller-solutions {
 
     }
     .pane.test-suite {
-        h3 {
-            padding:10px;
+        .filename {
+            padding:10px 50px 10px 0;
             font-weight:500;
             @include font-size(16, 16);
+            border-bottom:1px solid #ddd;
+            color:#aaa;
         }
         pre+h3 {
             margin-top:30px;
+        }
+        pre {
+            padding-top:10px;;
         }
     }
     .pane.solution, .pane.test-suite {

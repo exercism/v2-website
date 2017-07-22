@@ -4,6 +4,10 @@ require 'mocha/mini_test'
 require 'timecop'
 require 'minitest/pride'
 
+class ActionView::TestCase
+  include FactoryGirl::Syntax::Methods
+end
+
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 end

@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :exercises, only: [:index, :show] do
       resources :solutions, only: [:index, :show]
     end
+    resources :maintainers, only: [:index]
+    resources :mentors, only: [:index]
   end
 
   namespace :my do

@@ -72,14 +72,18 @@
       .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
       .filters
         =form_tag [:my, @track, :side_exercises], remote: true, method: :get, class: "side_exercises_form" do
-          Difficulty
-          .styled-select
-            =select_tag :difficulty, options_for_select({all: nil, easy: 1, medium: 2, hard: 3}, value: @difficulty), id: nil
-          .styled-select
-            =select_tag :length, options_for_select({all: nil, short: 1, medium: 2, long: 3}, value: @length), id: nil
-          .styled-select
-            =select_tag :status, options_for_select({all: nil, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
-          =button_tag "Update"
+          .filter.difficulty
+            .title Difficulty
+            =select_tag :difficulty, options_for_select({all: 0, easy: 1, medium: 2, hard: 3}, value: @difficulty), id: nil
+          .filter.length
+            .title Length
+            =select_tag :length, options_for_select({all: 0, short: 1, medium: 2, long: 3}, value: @length), id: nil
+          .filter.topic
+            .title Topic
+            =select_tag :topic, options_for_select([]), id: nil
+          .filter.status
+            .title Status
+            =select_tag :status, options_for_select({all: 0, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
       .pure-g.exercises
         =render "my/side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
 
@@ -107,10 +111,11 @@
     :javascript
       showModal("track-finished", "#{j(render "finished_modal")}")
 
--#
-  -content_for :js do
-    :coffeescript
-      #updateSideExercises = =>
-      #  $('.side_exercises_form').trigger('submit.rails')
-      $('.side_exercises_form select').change updateSideExercises
+-content_for :js do
+  :coffeescript
+    $('select').selectize()
+
+    updateSideExercises = =>
+      $('.side_exercises_form').trigger('submit.rails')
+    $('.side_exercises_form select').change updateSideExercises
 

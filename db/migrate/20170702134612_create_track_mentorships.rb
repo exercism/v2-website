@@ -4,6 +4,12 @@ class CreateTrackMentorships < ActiveRecord::Migration[5.1]
       t.bigint :user_id
       t.bigint :track_id
 
+      t.string :handle, null: true
+      t.string :avatar_url, null: true
+      t.string :link_text, null: true
+      t.string :link_url, null: true
+      t.text :bio, null: true
+
       t.timestamps
     end
 

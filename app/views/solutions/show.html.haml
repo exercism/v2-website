@@ -11,7 +11,7 @@
 
   .lo-container
     .header
-      =image_tag profile_avatar_or_default_url(@solution.user.profile), class: "avatar"
+      =image_tag display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), class: "avatar"
 
       .stats
         .stat.applaud
@@ -30,7 +30,7 @@
           %i.fa.fa-comments
           .value= @comments.size
 
-      %h1 #{profile_link_or_anonymous(@solution.user.profile)}'s solution
+      %h1 #{display_name(@solution.user, @solution.user.user_track_for(@track))}'s solution
 
       %h2
         for #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
@@ -55,7 +55,7 @@
               =@iteration.solution.instructions
             .pane.pane-2
               -@iteration.solution.test_suite.each do |filename, code|
-                %h3= filename
+                .filename= filename
                 %pre.test-suite.line-numbers
                   %code{class: "language-ruby"}
                     = code
@@ -82,7 +82,7 @@
               .pure-u-7-8
                 .when #{time_ago_in_words(reaction.created_at)} ago
                 .who
-                  %strong #{profile_link_or_anonymous reaction.user.profile}
+                  %strong #{display_name reaction.user}
                   says
                 .text= reaction.comment
 

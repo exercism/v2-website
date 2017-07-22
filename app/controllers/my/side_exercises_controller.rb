@@ -2,9 +2,9 @@ class My::SideExercisesController < MyController
   before_action :set_track
 
   def index
-    exercises = @track.exercises.side
-    exercises = exercises.where(difficulty: params[:difficulty]) if params[:difficulty].present?
-    exercises = exercises.where(length: params[:length]) if params[:length].present?
+    exercises = @track.exercises.side.active
+    exercises = exercises.where(difficulty: params[:difficulty]) if params[:difficulty].to_i > 0
+    exercises = exercises.where(length: params[:length]) if params[:length].to_i > 0
     solutions = current_user.solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
     @exercises_and_solutions = exercises.map{|ce|[ce, solutions[ce.id]]}
     if params[:status] == "locked"

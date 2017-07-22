@@ -1,5 +1,5 @@
-ruby = Track.create!(title: "Ruby", slug: "seed_ruby", repo_url: "http://example.com/ruby.git")
-python = Track.create!(title: "Python", slug: "seed_python", repo_url: "http://example.com/python.git")
+ruby = Track.create!(title: "Ruby", slug: "seed_ruby", repo_url: "http://example.com/ruby.git", introduction: "", about: "", code_sample: "")
+python = Track.create!(title: "Python", slug: "seed_python", repo_url: "http://example.com/python.git", introduction: "", about: "", code_sample: "")
 
 slug = Exercise.create!(track: ruby, title: "Slug", slug: "slug", uuid: SecureRandom.uuid, core: true, position: 1)
 bob = Exercise.create!(track: ruby, title: "Bob", slug: "bob", uuid: SecureRandom.uuid, core: true, position: 2)
@@ -19,8 +19,11 @@ slug.topics << topic_strings
 cat.topics << topic_strings
 mouse.topics << topic_strings
 
-ihid = User.create!(name: "Jeremy Walker", email: "jeremy@thalamus.ai", password: 'password', admin: true)
-kytrinyx = User.create!(name: "Kytrinyx", email: "kytrinyx@thalamus.ai", password: 'password', admin: true)
+ihid = User.create!(name: "Jeremy Walker", handle: 'iHiD', email: "jeremy@thalamus.ai", password: 'password', admin: true)
+kytrinyx = User.create!(name: "Kytrinyx", handle: 'kytrinyx', email: "kytrinyx@thalamus.ai", password: 'password', admin: true)
+
+TrackMentorship.create(user: ihid, track: ruby)
+TrackMentorship.create(user: kytrinyx, track: ruby)
 
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
 ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar', completed_at: DateTime.now, published_at: DateTime.now)
@@ -107,10 +110,10 @@ Very happy to hear any suggestions :)
 iteration1_discussion2 = ihid_bob_iteration_1.discussion_posts.create!(user: ihid, content: iteration1_discussion2_content, html: ParsesMarkdown.parse(iteration1_discussion2_content))
 
 TrackMentorship.create(user: ihid, track: python)
-user1 = User.create!(name: "User 1", email: "#{SecureRandom.uuid}@example.com", password: 'password')
-user2 = User.create!(name: "User 2", email: "#{SecureRandom.uuid}@example.com", password: 'password')
-user3 = User.create!(name: "User 3", email: "#{SecureRandom.uuid}@example.com", password: 'password')
-user4 = User.create!(name: "User 4", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user1 = User.create!(name: "User 1", handle: "u1", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user2 = User.create!(name: "User 2", handle: "u2", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user3 = User.create!(name: "User 3", handle: "u3", email: "#{SecureRandom.uuid}@example.com", password: 'password')
+user4 = User.create!(name: "User 4", handle: "u4", email: "#{SecureRandom.uuid}@example.com", password: 'password')
 
 python_hello_world = Exercise.create!(track: python, title: "Hello World", slug: "hello-world", uuid: SecureRandom.uuid, core: true, position: 2)
 

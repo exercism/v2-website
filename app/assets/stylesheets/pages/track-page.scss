@@ -1,0 +1,100 @@
+@import 'variables';
+@import 'mixins';
+#track-page {
+    .header {
+        background: $header-color;
+        padding:0 0 35px;
+        h1 {
+            padding-top:20px;
+            @include font-size(34, 34);
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        p {
+            @include font-size(12, 14);
+            color:#fff;
+            font-weight:200;
+        }
+    }
+    .overview-section {
+        background:#eee;
+        padding:50px 0;
+        img {
+            display:block;
+            width:100%;
+        }
+        .info {
+            padding-left:20px;
+            padding-right:50px;
+        }
+    }
+    .about-section {
+        padding:50px 0;
+        .code-sample {
+            img {
+                display:block;
+                width:100%;
+            }
+        }
+        h2 {
+            @include font-size(20, 20);
+            font-weight:500;
+        }
+    }
+    .mentors-section,
+    .exercises-section,
+    .maintainers-section {
+        margin-bottom:50px;
+
+        .h2-subtitle {
+            text-align:center;
+            font-style:italic;
+            color:#aaa;
+            @include font-size(15, 15);
+            margin-bottom:10px;
+        }
+        h2 {
+            text-align:center;
+            @include font-size(30, 30);
+            font-weight:500;
+            margin-bottom:10px;
+        }
+        p {
+            text-align:center;
+            @include font-size(16, 21);
+            max-width:600px;
+            margin: 0 auto 20px auto;
+            a {
+                color:#333;
+            }
+        }
+    }
+
+    .mentors-section,
+    .maintainers-section {
+        .mentors, .maintainers {
+            max-width:900px;
+            margin: 0 auto 0 auto;
+        }
+        .mentor, .maintainer {
+            border:1px solid #ccc; 
+            padding:10px;
+            margin:20px;
+            img {
+                display:block;
+                width:100%;
+                padding-right:20px;
+            }
+            h3 {
+                color:green;
+                @include font-size(17, 17);
+                font-weight:500;
+            }
+            p {
+                color:#333;
+                @include font-size(14, 19);
+            }
+        }
+    }
+}

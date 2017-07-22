@@ -14,6 +14,7 @@ class Git::SyncsTrack
   def sync!
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
+    sync_maintainers
     populate_unlocked_by_relationships
   end
 
@@ -84,7 +85,6 @@ class Git::SyncsTrack
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
-    sync_maintainers
   end
 
   def exercises
@@ -110,6 +110,7 @@ class Git::SyncsTrack
       gh_user = m[:github_username]
       name = m[:name]
       next if gh_user.nil? || name.nil?
+
       maintainer_data = {
         active: m.fetch(:active, true),
         visible: m.fetch(:show_on_website, true),
@@ -120,11 +121,10 @@ class Git::SyncsTrack
         avatar_url: (m[:avatar_url] || 'https://example.com')
       }
       puts maintainer_data
-      maintainer = Maintainer.find_or_create_by(track: track, github_username: gh_user) do |mm|
+      maintainer = Maintainer.find_or_create_by!(track: track, github_username: gh_user) do |mm|
         mm.assign_attributes(maintainer_data)
       end
-      maintainer.update(maintainer_data)
+      maintainer.update!(maintainer_data)
     end
   end
-
 end

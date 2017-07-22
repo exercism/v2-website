@@ -12,12 +12,13 @@ gem 'mysql2'
 gem 'devise', '~> 4.3'
 gem 'omniauth-github'
 gem 'kaminari'
+gem 'friendly_id', '~> 5.2'
 
 gem 'haml-rails'
+gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'friendly_id', '~> 5.2'
 
 gem 'redcarpet', require: false
 gem 'rouge', require: false

@@ -1,3 +1,5 @@
+# TODO - Validate handle is unique
+#
 class UserTrack < ApplicationRecord
   belongs_to :user
   belongs_to :track
