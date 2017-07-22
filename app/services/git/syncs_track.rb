@@ -14,7 +14,7 @@ class Git::SyncsTrack
   def sync!
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
-    sync_maintainers
+    sync_maintainers # TODOGIT - care - I moved this up here because it was getting called per-exercise where it was.
     populate_unlocked_by_relationships
   end
 
@@ -81,7 +81,11 @@ class Git::SyncsTrack
       position: position,
       difficulty: exercise.fetch(:difficulty, 1),
       length: exercise.fetch(:length, 1),
-      topics: topics
+      topics: topics,
+
+      #TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
+      # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
+      blurb: ""
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
@@ -109,7 +113,9 @@ class Git::SyncsTrack
     maintainer_descriptions.each do |m|
       gh_user = m[:github_username]
       name = m[:name]
-      next if gh_user.nil? || name.nil?
+      next unless gh_user.present?
+
+      #TODOGIT - Extract name, bio, avatar_url from github if null
 
       maintainer_data = {
         active: m.fetch(:active, true),

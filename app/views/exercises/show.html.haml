@@ -6,10 +6,15 @@
       =link_to "Language Tracks", [:tracks]
       &middot;
       =link_to @track.title, @track
-  .lo-container
-    %h1= @exercise.title
-    %h2 Part of the #{@track.title} Track on Exercism
+  .header
+    .lo-container
+      =image_tag @exercise.icon_url
+      %h2 Part of the #{@track.title} Track on Exercism
+      %h1= @exercise.title
+      =link_to "View all community solutions", [@track, @exercise, :solutions], class: 'pure-button'
+      .topics= @exercise.topic_names.join(" | ")
 
+  .lo-container
     %h3 Solutions
     - @solutions.each do |solution|
       =link_to solution.user.name, [@track, @exercise, solution]

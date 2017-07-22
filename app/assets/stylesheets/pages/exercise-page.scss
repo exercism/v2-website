@@ -1,0 +1,38 @@
+@import 'variables';
+@import 'mixins';
+#exercise-page {
+    .header {
+        background: $header-color;
+        padding:0 0 15px 0;
+        overflow:hidden;
+        img {
+            float:left;
+            margin-right:20px;
+            margin-top:20px;
+            height:80px;
+        }
+        h2 {
+            padding-top:20px;
+            @include font-size(12, 14);
+            color:#fff;
+            font-weight:200;
+            margin-bottom:10px;
+        }
+        h1 {
+            @include font-size(34, 34);
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .pure-button {
+            float:right;
+            background:green;
+            color:#fff;
+        }
+        .topics {
+            @include font-size(12, 14);
+            color:#fff;
+            font-weight:200;
+        }
+    }
+}
