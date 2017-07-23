@@ -1,14 +1,18 @@
 .icon
   .img{style: "background-image:url('#{image_path(exercise.icon_url)}')"}
-.status.locked Locked
-.status.unlocked Unlocked
-.status.in-progress In progress
-.status.completed Completed
+
+%i.fa.fa-lock.status.locked
+%i.fa.fa-unlock.status.unlocked
+%i.fa.fa-spinner.status.in-progress
+%i.fa.fa-check.status.completed
+
 .title= exercise.title
+-length_word = exercise_length_word(exercise)
+-difficulty_word = exercise_difficulty_word(exercise)
 .stats
-  .length
+  .length{class: length_word}
     %i.fa.fa-clock-o
-    %span Long
-  .difficulty
-    %i.fa.fa-tachometer
+    %span= length_word
+  .difficulty{class: difficulty_word}
+    %span= difficulty_word
 .topics= exercise.topic_names.join(" | ")

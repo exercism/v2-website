@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+
 #my-track-page {
     .header {
         background: $header-color;
@@ -273,88 +274,8 @@
             @include font-size(16, 16);
             margin-bottom:20px;
         }
-        .exercise {
-            display:block;
-            background:#fff;
-            color:#333;
-            text-decoration:none;
-            border:1px solid #aaa;
-            padding:20px;
+        .widget-side-exercise {
             margin: 0 20px 20px 0;
-            height:120px;
-            position:relative;
-            &.locked {
-                opacity:0.5;
-            }
-
-            &.locked .status.locked,
-            &.unlocked .status.unlocked,
-            &.in-progress .status.in-progress,
-            &.completed .status.completed {
-                display: block;
-            }
-
-            .status {
-                float:right;
-                display:none;
-            }
-
-            .icon {
-                display:block;
-                width:70px;
-                height:70px;
-                padding:10px;
-                float:left;
-                margin-right:15px;
-                background-color:#eee;
-                .img {
-                    width:50px;
-                    height:50px;
-                    background-repeat:no-repeat;
-                    background-size:contain;
-                    background-position:center center;
-                }
-            }
-            .title {
-                @include font-size(18, 18);
-                font-weight:900;
-                margin-bottom:10px;
-            }
-            .stats {
-                overflow:hidden;
-                margin-bottom:10px;
-                .length {
-                    float:left;
-                    border:1px solid #ddd;
-                    padding:2px 5px;
-                    border-radius:3px;
-                    background:#eee;
-                    margin-right:10px;
-                    i {
-                        margin-right:2px;
-                        color:#aaa;
-                        @include font-size(12, 15);
-                        vertical-align:middle;
-                    }
-                    span {
-                        text-transform:uppercase;
-                        @include font-size(10, 10);
-                        font-weight:400;
-                        color:#999;
-                    }
-                }
-                .difficulty {
-                    float:left;
-                    color:green;
-                }
-            }
-            .topics {
-                @include font-size(12, 12);
-                font-weight:400;
-                overflow:hidden;
-                white-space:nowrap;
-                text-overflow:ellipsis;
-            }
         }
     }
 }

@@ -32,4 +32,16 @@ class Exercise < ApplicationRecord
   def icon_url
     'tmp/exercise-icon.png'
   end
+
+  def length_word
+    case length
+    when 1
+      "Short"
+    when 2
+      "Medium"
+    when 3
+      "Long"
+    end
+  end
+
 end

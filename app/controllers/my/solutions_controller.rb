@@ -2,7 +2,8 @@ class My::SolutionsController < MyController
   before_action :set_solution, except: [:create]
 
   def create
-    exercise = Exercise.find(params[:exercise_id])
+    track = Track.find(params[:track_id])
+    exercise = track.exercises.find(params[:exercise_id])
 
     # If this is a side exercise that has no unlocked_by
     # the you can unlock it. This is the only time this method
@@ -11,7 +12,7 @@ class My::SolutionsController < MyController
       solution = CreatesSolution.create!(current_user, exercise)
       redirect_to [:my, solution]
     else
-      redirect_to [:my, exercise.track]
+      redirect_to [:my, track]
     end
   end
 

@@ -83,7 +83,7 @@
             =select_tag :topic, options_for_select([]), id: nil
           .filter.status
             .title Status
-            =select_tag :status, options_for_select({all: 0, locked: 'locked', unlocked: 'unlocked'}, value: @status), id: nil
+            =select_tag :status, options_for_select({all: 0, "In Progress": :in_progress, "Unlocked": :unlocked, "Completed": :completed, "Locked": :locked}, value: @status), id: nil
       .pure-g.exercises
         =render "my/side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
 
@@ -118,4 +118,3 @@
     updateSideExercises = =>
       $('.side_exercises_form').trigger('submit.rails')
     $('.side_exercises_form select').change updateSideExercises
-
