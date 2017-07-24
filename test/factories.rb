@@ -72,6 +72,11 @@ FactoryGirl.define do
   factory :track do
     title "Ruby"
     slug { "ruby-#{SecureRandom.uuid}" }
+    introduction "Master the Ruby language"
+    about "Placeholder about Ruby"
+    code_sample <<-EOS
+    puts "Hello World"
+    EOS
     repo_url { "http://example.com/ruby-#{SecureRandom.uuid}.git" }
   end
 
