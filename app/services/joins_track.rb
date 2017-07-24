@@ -1,6 +1,6 @@
 class JoinsTrack
-  def self.start!(*args)
-    new(*args).start!
+  def self.join!(*args)
+    new(*args).join!
   end
 
   attr_reader :user, :track
@@ -9,7 +9,7 @@ class JoinsTrack
     @track = track
   end
 
-  def start!
+  def join!
     return false if UserTrack.where(user: user, track: track).exists?
 
     user_track = UserTrack.create!(user: user, track: track)

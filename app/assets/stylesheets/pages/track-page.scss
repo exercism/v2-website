@@ -42,6 +42,38 @@
             font-weight:500;
         }
     }
+    .testimonal-section {
+        padding:50px 0;
+        .frame {
+            position:relative;
+            border:1px solid black;
+            padding:30px;
+            &:after {
+                position:absolute;
+                top:-20px;
+                left:50%;
+                content: "";
+                background:black;
+                width:40px;
+                height:40px;
+                margin:0 0 0 -20px;
+            }
+            max-width:600px;
+            margin:0 auto;
+            padding:20px;
+            h2 {
+                text-align:center;
+            }
+            p {
+                text-align:center;
+            }
+            .byline {
+                text-align:center;
+            }
+
+
+        }
+    }
     .mentors-section,
     .exercises-section,
     .maintainers-section {
