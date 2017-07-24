@@ -75,7 +75,7 @@ FactoryGirl.define do
     introduction "Master the Ruby language"
     about "Placeholder about Ruby"
     code_sample <<-EOS
-    puts "Hello World"
+      puts "Hello World"
     EOS
     repo_url { "http://example.com/ruby-#{SecureRandom.uuid}.git" }
   end
