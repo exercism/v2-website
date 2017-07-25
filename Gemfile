@@ -24,6 +24,7 @@ gem 'redcarpet', require: false
 gem 'rouge', require: false
 gem 'rugged'
 gem 'loofah'
+gem 'octokit'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

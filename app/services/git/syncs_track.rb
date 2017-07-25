@@ -85,10 +85,15 @@ class Git::SyncsTrack
 
       #TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
       # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
-      blurb: ""
+      # blurb: ""
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
+  end
+
+  def sync_maintainers
+    puts "Syncing Maintainers"
+    Git::SyncsMaintainers.sync!(track, repo.maintainer_config)
   end
 
   def exercises
@@ -105,32 +110,5 @@ class Git::SyncsTrack
 
   def repo
     @repo ||= Git::ExercismRepo.new(repo_url, auto_fetch: true)
-  end
-
-  def sync_maintainers
-    puts "Syncing Maintainers"
-    maintainer_descriptions = config.fetch(:maintainers, [])
-    maintainer_descriptions.each do |m|
-      gh_user = m[:github_username]
-      name = m[:name]
-      next unless gh_user.present?
-
-      #TODOGIT - Extract name, bio, avatar_url from github if null
-
-      maintainer_data = {
-        active: m.fetch(:active, true),
-        visible: m.fetch(:show_on_website, true),
-        name: m.fetch(:name, '..'),
-        bio: m.fetch(:bio),
-        link_text: m.fetch(:link_text, '..'),
-        link_url: m.fetch(:link_url, '..'),
-        avatar_url: (m[:avatar_url] || 'https://example.com')
-      }
-      puts maintainer_data
-      maintainer = Maintainer.find_or_create_by!(track: track, github_username: gh_user) do |mm|
-        mm.assign_attributes(maintainer_data)
-      end
-      maintainer.update!(maintainer_data)
-    end
   end
 end
