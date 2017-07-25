@@ -48,7 +48,7 @@ class Git::ExercismRepo
     config_tree_ptr = commit.tree['config']
     return {} if config_tree_ptr.nil?
     config_tree = repo.lookup(config_tree_ptr[:oid])
-    file_pointer = commit.tree['maintainers.json']
+    file_pointer = config_tree["maintainers.json"]
     return {} if file_pointer.nil?
     blob = repo.lookup(file_pointer[:oid])
     JSON.parse(blob.text, symbolize_names: true)
