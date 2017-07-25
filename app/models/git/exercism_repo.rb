@@ -10,13 +10,11 @@ class Git::ExercismRepo
   end
 
   def config
-    read_commit(head_commit)
+    read_config(head_commit)
   end
 
-  def read_commit(commit)
-    config_pointer = commit.tree['config.json']
-    config_blob = repo.lookup(config_pointer[:oid])
-    JSON.parse(config_blob.text, symbolize_names: true)
+  def maintainer_config
+    read_maintainer_config(head_commit)
   end
 
   def exercise(exercise_slug, commit_sha)
@@ -24,7 +22,7 @@ class Git::ExercismRepo
     if commit.type != :commit
       raise 'not-found'
     end
-    config = read_commit(commit)
+    config = read_config(commit)
     Git::ExerciseReader.new(repo, exercise_slug, commit, config)
   rescue Rugged::OdbError => e
     raise 'not-found'
@@ -39,6 +37,22 @@ class Git::ExercismRepo
   end
 
   private
+
+  def read_config(commit)
+    config_pointer = commit.tree['config.json']
+    config_blob = repo.lookup(config_pointer[:oid])
+    JSON.parse(config_blob.text, symbolize_names: true)
+  end
+
+  def read_maintainer_config(commit)
+    config_tree_ptr = commit.tree['config']
+    return {} if config_tree_ptr.nil?
+    config_tree = repo.lookup(config_tree_ptr[:oid])
+    file_pointer = commit.tree['maintainers.json']
+    return {} if file_pointer.nil?
+    blob = repo.lookup(file_pointer[:oid])
+    JSON.parse(blob.text, symbolize_names: true)
+  end
 
   def head_commit
     main_branch.target
