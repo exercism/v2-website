@@ -8,6 +8,7 @@ FactoryGirl.define do
 
   factory :maintainer do
     track { create :track }
+    github_username "iHiD"
     name "Jeremy Walker"
     avatar_url "somewhere.jpg"
   end
