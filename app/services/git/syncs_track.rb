@@ -85,7 +85,7 @@ class Git::SyncsTrack
 
       #TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
       # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
-      blurb: ""
+      # blurb: ""
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
