@@ -21,7 +21,7 @@ class CreatesSolution
   private
 
   def git_sha
-    Git::ExercismRepo.new(repo_url).head
+    Git::ExercismRepo.current_head(repo_url)
   end
 
   def repo_url

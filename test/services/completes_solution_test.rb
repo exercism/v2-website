@@ -10,6 +10,8 @@ class CompletesSolutionTest < ActiveSupport::TestCase
 
     @side_exercise = create :exercise, core: false, unlocked_by: @core_exercise
     @other_side_exercise = create :exercise, core: false, unlocked_by: create(:exercise)
+
+    Git::ExercismRepo.stubs(current_head: "dummy-sha1")
   end
 
   test "completes solution, unlocks next core and side quests when mentor approved" do
@@ -53,5 +55,3 @@ class CompletesSolutionTest < ActiveSupport::TestCase
     skip # TODO
   end
 end
-
-

@@ -1,5 +1,9 @@
 class Git::ExercismRepo
 
+  def self.current_head(repo_url)
+    new(repo_url).head
+  end
+
   REPO_BASE="#{Rails.root}/tmp/git_repo_cache"
 
   attr_reader :repo_url
