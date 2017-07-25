@@ -23,6 +23,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'redcarpet', require: false
 gem 'rouge', require: false
 gem 'rugged'
+gem 'sidekiq'
 gem 'loofah'
 gem 'octokit'
 
