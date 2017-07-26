@@ -1,6 +1,6 @@
 set :stage, :production
 
-server 'web1.exercism.local', user: fetch(:application), roles: %w{app web db}
+server 'web3.exercism.io', user: fetch(:application), roles: %w{app web db}
 
 namespace :puma_service do
   task :restart do
