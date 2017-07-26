@@ -1,0 +1,7 @@
+development:
+  user_name: '3213fc4e9a3f2d38'
+  password: '18efa7fa812f69'
+  address: 'smtp.mailtrap.io'
+  domain: 'smtp.mailtrap.io'
+  port: '2525'
+  authentication: :cram_md5

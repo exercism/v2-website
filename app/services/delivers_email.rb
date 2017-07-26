@@ -20,8 +20,8 @@ class DeliversEmail
 
   def deliver!
     return false unless should_deliver?
-
-    "#{mailer}_mailer".classify.constantize.send(action, user, *objects).deliver
+    mail = "#{mailer}_mailer".classify.constantize.send(action, user, *objects)
+    mail.deliver_later
   end
 
   private
@@ -43,4 +43,3 @@ class DeliversEmail
     user.communication_preferences.send("email_on_#{mail_type}")
   end
 end
-
