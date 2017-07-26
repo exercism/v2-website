@@ -30,21 +30,21 @@ class Exercise < ApplicationRecord
 
   # TODO
   def white_icon_url
-    'tmp/exercise-icon-white.png'
+    super || 'tmp/exercise-icon-white.png'
   end
 
   # TODO
   def dark_icon_url
-    'tmp/exercise-icon-dark.png'
+    super || 'tmp/exercise-icon-dark.png'
   end
 
   # TODO
   def turquoise_icon_url
-    'tmp/exercise-icon-turquoise.png'
+    super || 'tmp/exercise-icon-turquoise.png'
   end
 
   # TODO
   def icon_url
-    'tmp/exercise-icon.png'
+    raise "Deprecated"
   end
 end

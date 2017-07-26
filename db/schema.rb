@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.bigint "unlocked_by_id"
     t.string "uuid", null: false
     t.string "slug", null: false
+    t.string "dark_icon_url"
+    t.string "turquoise_icon_url"
+    t.string "white_icon_url"
     t.string "title", null: false
     t.boolean "core", default: false, null: false
     t.boolean "active", default: true, null: false

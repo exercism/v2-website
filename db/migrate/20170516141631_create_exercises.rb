@@ -6,6 +6,10 @@ class CreateExercises < ActiveRecord::Migration[5.1]
       t.string :uuid, null: false
       t.string :slug, null: false
 
+      t.string :dark_icon_url, null: true
+      t.string :turquoise_icon_url, null: true
+      t.string :white_icon_url, null: true
+
       t.string :title, null: false
       t.boolean :core, null: false, default: false
       t.boolean :active, null: false, default: true

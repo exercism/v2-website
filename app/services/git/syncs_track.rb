@@ -73,6 +73,14 @@ class Git::SyncsTrack
     topic_slugs = exercise.fetch(:topics, [])
     topics = topic_slugs.map { |slug| Topic.find_or_create_by(slug: slug) }
 
+    exercise_image_stem = exercise_slug.gsub("_", "-")
+
+    image_exists = File.file?(Rails.root / "app/assets/images/tmp/exercises/#{exercise_image_stem}-dark.png")
+    p image_exists
+    dark_icon_url = image_exists ? "tmp/exercises/#{exercise_image_stem}-dark.png" : nil
+    turquoise_icon_url = image_exists ? "tmp/exercises/#{exercise_image_stem}-turquoise.png" : nil
+    white_icon_url = image_exists ? "tmp/exercises/#{exercise_image_stem}-white.png" : nil
+
     exercise_data = {
       slug: exercise_slug,
       title: exercise_slug.titleize,
@@ -86,6 +94,13 @@ class Git::SyncsTrack
       #TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
       # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
       # blurb: ""
+
+      #TODOGIT - These point to a file on s3, that we have prepopulated
+      # We'll need to check for the existance of the file when doing this
+      # and set to null if it doesn't exist. For now, it's using tmp images on my hdd.
+      dark_icon_url: dark_icon_url,
+      turquoise_icon_url: turquoise_icon_url,
+      white_icon_url: white_icon_url,
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
