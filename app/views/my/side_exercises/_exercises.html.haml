@@ -12,7 +12,7 @@
           =render "my/side_exercises/exercise", exercise: exercise, solution: solution
     -elsif !exercise.unlocked_by
       = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'widget-side-exercise unlocked' do
-        =render "my/side_exercises/exercise", exercise: exercise
+        =render "my/side_exercises/exercise", exercise: exercise, solution: nil
     -else
       .widget-side-exercise.locked
-        =render "my/side_exercises/exercise", exercise: exercise
+        =render "my/side_exercises/exercise", exercise: exercise, solution: nil

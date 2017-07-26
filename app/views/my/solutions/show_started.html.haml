@@ -15,18 +15,16 @@
       .icon
         .img{style: "background-image:url('#{image_path(@exercise.icon_url)}')"}
       .inner
-        .stats
-          .stat
-            %i.fa.fa-graduation-cap
-            .number= @exercise.solutions.count
-            .metric students
-          .stat
-            %i.fa.fa-graduation-cap
-            .number= @exercise.iterations.count
-            .metric submits
-          .buttons
-            =link_to "Community solutions", "#", class: 'pure-button'
-            =link_to "Recommended reading", "#", class: 'pure-button'
+        .iteration-nav
+          .title Iteration 1 of 3
+          .first
+            %i.fa.fa-fast-backward
+          .prev
+            %i.fa.fa-backward
+          .next
+            %i.fa.fa-forward
+          .last
+            %i.fa.fa-fast-forward
 
         %h2= @exercise.title
         .track-progress
@@ -43,6 +41,8 @@
                 .dot.completed
               -else
                 .dot
+
+    =link_to "Community solutions", "#", class: 'pure-button'
 
     -if @solution.completed?
       .approved-bar

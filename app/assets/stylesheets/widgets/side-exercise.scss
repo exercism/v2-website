@@ -6,18 +6,60 @@
     background:#fff;
     color:#333;
     text-decoration:none;
-    border:1px solid #aaa;
+    border:1px solid $line-color-1;
     padding:20px;
     margin: 0 20px 20px 0;
-    height:120px;
+    height:112px;
     position:relative;
+    border-radius:2px;
+    &:hover {
+        background:$color-2-opaque;
+        border-color:$color-2;
+    }
     &.locked {
         opacity:0.5;
+        &:hover {
+            background:#fff;
+            border-color:$line-color-1;
+        }
+    }
+    &.unlocked {
+        .status { color: #999 }
     }
     &.in-progress {
-        border-color:green;
+        border:2px solid $color-2;
         .icon {
-            background:green;
+            background:#fff;
+            border-color:$color-2;
+        }
+        .status { color: $color-2 }
+    }
+    &.completed {
+        overflow:hidden;
+        border:1px solid $color-2;
+        .icon {
+            background:$color-2;
+            border-color:$color-2;
+        }
+        .status {
+            color: #fff;
+            position:relative;
+            i {
+                margin-right: -11px;
+                margin-top: -11px;
+                display: block;
+            }
+
+            &:before {
+                width:90px;
+                height:90px;
+                position:absolute;
+                right:-70px;
+                top:-70px;
+                content: "";
+                background:$color-2;
+                transform: rotate(45deg);
+            }
         }
     }
 
@@ -31,6 +73,7 @@
     .status {
         float:right;
         display:none;
+        margin-left:10px;
     }
 
     .icon {
@@ -40,58 +83,60 @@
         padding:10px;
         float:left;
         margin-right:15px;
-        background-color:#eee;
+        border-radius:2px;
+        border:1px solid $line-color-1;
+        background:#fff;
+
         .img {
-            width:50px;
-            height:50px;
+            width:48px;
+            height:48px;
             background-repeat:no-repeat;
             background-size:contain;
             background-position:center center;
         }
     }
     .title {
-        @include font-size(18, 18);
-        font-weight:900;
+        @include font-size(18, 19);
+        font-weight:$bold;
         margin-bottom:10px;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
     }
     .stats {
         overflow:hidden;
         margin-bottom:10px;
+        @include font-size(10, 10);
+        text-transform:uppercase;
+
         .length {
             display:inline-block;
-            margin-right:10px;
-            padding-right:10px;
-            border-right:1px solid #ddd;
-            i {
-                margin-right:2px;
-                color:#aaa;
-                @include font-size(12, 12);
-                vertical-align:middle;
-            }
-            span {
-                text-transform:uppercase;
-                @include font-size(10, 10);
-                font-weight:400;
-                color:#999;
-            }
+            margin-right:5px;
+            padding-right:5px;
+            border-right:1px solid #aaa;
+            color:#aaa;
+            font-weight:$regular;
         }
         .difficulty {
             display:inline-block;
-            color:green;
-            text-transform:uppercase;
-            @include font-size(10, 15);
-            font-weight:400;
+            font-weight:$bold;
 
-            .easy { color: green }
-            .medium { color: orange }
-            .hard { color: red }
+            &.easy { color: $color-1; }
+            &.medium { color: #f48b00 }
+            &.hard { color: #f34a56 }
         }
     }
     .topics {
-        @include font-size(12, 12);
-        font-weight:400;
         overflow:hidden;
-        white-space:nowrap;
-        text-overflow:ellipsis;
+        height:21px;
+        .topic {
+            @include font-size(11, 11);
+            display:inline-block;
+            font-weight:$regular;
+            background:#eee;
+            color:#999;
+            padding:3px 6px 4px;
+            border-radius:2px;
+        }
     }
 }

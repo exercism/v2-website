@@ -38,37 +38,10 @@ body.controller-solutions {
             }
         }
         .inner {
-            .stats {
+            .iteration-nav {
                 float:right;
                 overflow:hidden;
                 .stat {
-                    float:left;
-                    margin-right:20px;
-                    border-right:1px solid #eee;
-                    padding:10px 20px 10px 0;
-                    @include font-size(12, 13);
-                    overflow:hidden;
-                    width:95px;
-                    i {
-                        float:left;
-                        padding:10px 10px 10px 0;
-                    }
-                }
-                .buttons {
-                    float:left;
-                    .pure-button {
-                        border:1px solid #aaa;
-                        width:150px;
-                        padding:5px;
-                        text-align:center;
-                        color:#999;
-                        background:#fff;
-                        display:block;
-                        @include font-size(12, 12);
-                        &:first-child {
-                            margin-bottom:5px;
-                        }
-                    }
                 }
             }
             h2 {

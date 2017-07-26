@@ -25,23 +25,26 @@ class Exercise < ApplicationRecord
   end
 
   def topic_names
-    @topic_names ||= topics.pluck(:name)
+    @topic_names ||= topics.pluck(:name).map(&:downcase)
+  end
+
+  # TODO
+  def white_icon_url
+    'tmp/exercise-icon-white.png'
+  end
+
+  # TODO
+  def dark_icon_url
+    'tmp/exercise-icon-dark.png'
+  end
+
+  # TODO
+  def turquoise_icon_url
+    'tmp/exercise-icon-turquoise.png'
   end
 
   # TODO
   def icon_url
     'tmp/exercise-icon.png'
   end
-
-  def length_word
-    case length
-    when 1
-      "Short"
-    when 2
-      "Medium"
-    when 3
-      "Long"
-    end
-  end
-
 end

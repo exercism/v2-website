@@ -3,52 +3,58 @@
 
 #my-track-page {
     .header {
-        background: $header-color;
+        background-color: $header-color-1;
+        background-image:image-url('background-overlay-1.png');
+        background-size:cover;
         padding:0 0 35px;
         .visual-section {
             position: relative;
-            padding-top:30px;
+            padding-top:20px;
             overflow:hidden;
             .line {
                 position:absolute;
-                top:90px;
+                top:73px;
                 left:0;
                 right:0;
                 background:white;
-                height:1px;
+                height:2px;
             }
             .logo {
                 position:relative;
                 display:block;
                 float:right;
-                height:120px;
-                margin-left:100px;
+                height:107px;
+                margin-left:50px;
             }
             .status {
                 position:relative;
                 float:right;
-                margin-top:50px;
+                margin-top:40px;
                 background:#fff;
                 color:333;
-                @include font-size(11, 11);
-                border-radius:3px;
+                @include font-size(10, 10);
+                font-weight:$regular;
+                border-radius:5px;
+                border:1px solid $color-1;
                 text-transform:uppercase;
-                color:#666;
+                color:#555;
                 font-weight:500;
-                padding:5px 15px;
+                padding:9px 15px;
             }
         }
         h1 {
             padding-top:20px;
-            @include font-size(34, 34);
+            @include font-size(40, 40);
+            letter-spacing:-1.56px;
             font-weight:$bold;
             margin-bottom:5px;
             color:#fff;
         }
         .h1-subtitle {
-            @include font-size(12, 14);
+            @include font-size(12, 12);
             color:#fff;
-            font-weight:200;
+            opacity:0.75;
+            font-weight:$light;
         }
         .num-solutions {
             float:right;
@@ -64,12 +70,17 @@
                 color:#fff;
                 @include font-size(11, 14);
                 text-transform:uppercase;
+                padding-left:20px;
                 margin-left:20px;
+                &+.stat {
+                    border-left:1px solid rgba(#fff, 0.5);
+                }
             }
         }
     }
     .core-exercises {
-        padding-top:50px;
+        padding-top:42px;
+        margin-bottom:45px;
         position:relative;
         &:before {
             content: "";
@@ -77,132 +88,261 @@
             top:0px;
             bottom:50px;
             left:0;
-            background:green;
-            width:1px;
+            background:$background-grey-1;
+            width:2px;
         }
         .exercise {
             display:block;
             color:#333;
             text-decoration:none;
-            border:1px solid #aaa;
-            padding:20px;
-            margin-bottom:30px;
-            margin-left:100px;
-            height:120px;
+            border:1px solid $line-color-1;
+            border-radius:2px;
+            padding:20px 25px;
+            margin-bottom:15px;
+            margin-left:60px;
+            height:100px;
             position:relative;
+            background:#fff;
 
-            &:before {
+            &:after {
                 position:absolute;
                 content: "";
                 top:50%;
-                left:-72px;
-                width:72px;
+                left:-36px;
+                width:35px;
                 height:1px;
-                background:green;
+                background:$background-grey-1;
             }
 
             .circle {
                 position:absolute;
-                top:30px;
-                left:-132px;
-                border:1px solid #aaa;
+                top:23px;
+                left:-86px;
                 border-radius:100%;
-                width:60px;
-                height:60px;
-                background:#fff;
+                width:50px;
+                height:50px;
+                background:#eee;
             }
             .status {
                 float:right;
+                @include font-size(12, 12);
+                letter-spacing:-0.5px;
+                text-transform:uppercase;
+                font-weight:$regular;
+                color:#ccc;
+            }
+            .position {
+                @include font-size(10, 10);
+                font-weight:$light;
+                letter-spacing:-0.0px;
+                color:#ccc;
+                margin-bottom:5px;
+                display:none;
             }
             .title {
-                font-weight:700;
+                font-weight:$bold;
                 @include font-size(20, 20);
+                color:#ccc;
+                margin-bottom:7px;
             }
-            .button {
-                position:absolute;
-                bottom:20px;
-                right:20px;
+            .blurb {
+                font-weight:$light;
+                @include font-size(13, 17);
+                color:#ccc;
+                max-height:40px;
+                max-width:400px;
+            }
+            .topics {
+                display:inline-block;
+                vertical-align:bottom;
+                .topic {
+                    display:inline-block;
+                    @include font-size(11, 11);
+                    font-weight:$regular;
+                    margin-left:10px;
+                    background:#eee;
+                    color:#999;
+                    padding:3px 6px 4px;
+                    border-radius:2px;
+                }
+            }
+            &.locked {
+                .circle {
+                    img {
+                        height:25px;
+                        display:block;
+                        margin:14px auto;
+                    }
+                }
             }
             &.in-progress {
-                border:2px solid green;
+                border:1px solid $color-1;
+                box-shadow:0 0 0 1px $color-1;
+                background:#fff;
+                &:after {
+                    left:-34px;
+                    width:33px;
+                }
                 .circle {
-                    border:2px solid green;
+                    border:2px solid $color-1;
+                    background:$color-1;
+                    img {
+                        height:30px;
+                        display:block;
+                        margin:11px auto;
+                    }
+                    &:before {
+                        position:absolute;
+                        content: "";
+                        top:0;
+                        left:0;
+                        right:0;
+                        bottom:0;
+                        border-radius:100%;
+                        border:2px solid #fff;
+                    }
+                    top:21px;
+                    left:-88px;
+                    width:55px;
+                    height:55px;
                 }
-                &:before {
+                &:after {
                     height:2px;
-                    background:green;
+                    background:$color-1;
                 }
-                .button {
-                    background:green;
-                    color:#fff;
+                .status {
+                    color:#999;
                 }
             }
+            &.completed {
+                border-color:$color-1;
+                &:after {
+                    background:$color-1;
+                }
+                .circle {
+                    border:2px solid $color-1;
+                    background:#fff;
+                    img {
+                        width:20px;
+                        display:block;
+                        margin:16px auto;
+                    }
+                }
+                .status {
+                    color:$color-1;
+                }
+            }
+            &.in-progress, &.completed {
+                &:hover {
+                    background:rgba($color-1, 0.05);
+                }
+
+                .title {
+                    color:#333;
+                }
+                .position {
+                    color:#999;
+                }
+                .blurb {
+                    color:#999;
+                }
+
+                .button {
+                }
+
+                &:before {
+                    position:absolute;
+                    content: "";
+                    bottom:50%;
+                    left:-61px;
+                    height:92px;
+                    width:2px;
+                    background:$color-1;
+                }
+            }
+
         }
     }
     .progress-section {
-        padding:20px;
-        background:#eee;
-        margin-top:30px;
-        margin-left:30px;
+        padding:30px 30px;
+        background:#f9f9f9;
+        border-radius:2px;
+        margin-top:42px;
+        margin-left:100px;
         h2 {
-            color:green;
-            font-weight:500;
+            color:$color-2;
+            font-weight:$bold;
             text-transform:uppercase;
-            @include font-size(20, 20);
+            @include font-size(14, 14);
+            letter-spacing:-0.7px;
+            margin-bottom:3px;
             text-align:right;
         }
         .h2-subtitle {
-            font-weight:500;
-            @include font-size(14, 14);
-            margin-bottom:20px;
+            font-weight:$regular;
+            @include font-size(13, 13);
+            letter-spacing:-0.8px;
+            color:#aaa;
+            margin-bottom:30px;
             text-align:right;
         }
         .core, .topics, .side {
             background:#fff;
             padding:20px 30px;
-            margin-bottom:10px;
+            margin-bottom:15px;
             h3 {
-                border-bottom:1px solid #ddd;
-                color:#999;
-                font-weight:500;
-                margin-bottom:10px;
+                @include font-size(13, 13);
+                letter-spacing:-0.4px;
+                font-weight:$regular;
+                border-bottom:1px solid #f1f1f1;
+                color:#777;
+                margin-bottom:15px;
                 padding-bottom:5px;
             }
         }
         .core {
             .percentage {
-                color:green;
+                color:$color-2;
                 @include font-size(25, 25);
-                font-weight:500;
+                font-weight:$regular;
                 float:left;
-                margin-right:10px;
+                margin-right:20px;
             }
             .number {
-                @include font-size(10, 10);
+                @include font-size(12, 12);
+                color:#bbb;
+                font-weight:$regular;
+                margin-bottom:3px;
             }
             .completed {
-                @include font-size(14, 14);
-                font-weight:500;
+                @include font-size(10, 10);
+                font-weight:$regular;
+                color:#bbb;
             }
         }
         .topics {
             .topic {
                 overflow:hidden;
                 margin-bottom:5px;
+                @include font-size(12, 12);
+                color:#9F9F9F;
+                font-weight:$regular;
                 .bar {
                     width:80%;
                     float:left;
                     position:relative;
-                    padding:5px;
+                    padding:5px 5px 6px;
                     .filled {
-                        background:#eee;
+                        background:rgba($color-2, 0.1);
                         position:absolute;
                         top:0;
                         bottom:0;
                         left:0;
+                        border-radius:2px;
                     }
                     .title {
                         position:relative;
+                        font-weight:$regular;
                     }
                 }
                 .percentage {
@@ -214,65 +354,70 @@
             }
         }
         .side {
+            .completed {
+                float:right;
+                @include font-size(11, 11);
+                color:#9F9F9F;
+            }
             .squares {
                 overflow:hidden;
-                margin-bottom:10px;
+                margin-bottom:15px;
                 .square {
                     margin:3px;
-                    background:#aaa;
-                    width:10px;
-                    height:10px;
+                    background:#f3f3f3;
+                    border-radius:2px;
+                    width:15px;
+                    height:15px;
                     float:left;
                     &.completed {
-                        background:green;
+                        background:$color-2;
                     }
                 }
             }
             .pure-button {
-                background:green;
-                color:#fff;
+                background:#fff;
+                color:$color-2;
+                border:1px solid rgba($color-2, 0.5);
+                @include font-size(12, 12);
+                padding:9px;
                 display:block;
                 width:100%;
+                &:hover {
+                    background:$color-2;
+                    border-color:$color-2;
+                    color:#fff;
+                }
             }
         }
     }
+
     .side-exercises {
+        .num-extra-exercises {
+            float:right;
+            padding-top:5px;
+            padding-right:25px;
+            font-weight:$regular;
+            color:#999;
+        }
+
         .filters {
-            margin-bottom:10px;
-            .filter {
-                display:inline-block;
-                margin-right:10px;
-                .title {
-                    float:left;
-                    border:solid #aaa;
-                    border-width:1px 0 1px 1px;
-                    background:#ddd;
-                    padding:5px 5px 6px 5px;
-                }
-                .selectize-control {
-                    float:left;
-                    width:100px;
-                    .selectize-input {
-                        border-radius:0 3px 3px 0;
-                        border:1px solid #aaa;
-                        padding:6px;
-                    }
-                }
-            }
+            margin-bottom:20px;
         }
     }
     .deprecated-exercises,
     .side-exercises {
-        background:#eee;
-        padding:30px 0;
+        background:#f9f9f9;
+        padding:45px 0;
         h2 {
             @include font-size(20, 20);
-            font-weight:500;
-            margin-bottom:10px;
+            font-weight:$bold;
+            margin-bottom:7px;
         }
         .h2-subtitle {
-            @include font-size(16, 16);
-            margin-bottom:20px;
+            @include font-size(14, 14);
+            font-weight:$light;
+            color:#999;
+            margin-bottom:35px;
         }
         .widget-side-exercise {
             margin: 0 20px 20px 0;

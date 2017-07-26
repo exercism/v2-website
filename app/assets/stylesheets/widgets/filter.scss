@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'mixins';
+
+.widget-filter {
+    display:inline-block;
+    margin-right:10px;
+    select {
+        display:none;
+    }
+    .title {
+        float:left;
+        border:solid #d2d2d2;
+        border-width:1px 0 1px 1px;
+        border-radius:2px 0 0 2px;
+        background:#f2f2f2;
+        font-weight:$regular;
+        color:#888;
+        padding:6px 15px 7px 15px;
+    }
+    .selectize-control {
+        float:left;
+        width:100px;
+        .selectize-input {
+            border-radius:0 2px 2px 0;
+            border:1px solid #d2d2d2;
+            box-shadow:none;
+            padding:7px 15px 7px 15px;
+            font-weight:$regular;
+            color:#666;
+            &:after {
+                border-top-color:#ddd;
+            }
+            &.dropdown-active:after {
+                border-bottom-color:#ddd;
+            }
+        }
+        .selectize-dropdown {
+            .option {
+                &.active {
+                    background-color:#f2f2f2;
+                }
+                padding:5px 15px;
+                @include font-size(12, 18);
+            }
+        }
+    }
+}
