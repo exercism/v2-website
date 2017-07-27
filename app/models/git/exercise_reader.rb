@@ -25,6 +25,17 @@ class Git::ExerciseReader
     test_suites
   end
 
+  def solution
+    meta_ptr = exercise_tree[".meta"]
+    meta_tree = repo.lookup(meta_ptr[:oid])
+    solutions_ptr = meta_tree["solutions"]
+    solutions_ptr = meta_tree["solutions"]
+    solutions_tree = repo.lookup(solutions_ptr[:oid])
+    first_file = solutions_tree.first
+    blob = repo.lookup(first_file[:oid])
+    blob.text
+  end
+
   private
 
   def test_pattern

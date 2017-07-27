@@ -12,6 +12,7 @@ class Git::SyncsTrack
   end
 
   def sync!
+    sync_track_metadata
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
     sync_maintainers
@@ -92,20 +93,34 @@ class Git::SyncsTrack
       length: exercise.fetch(:length, 1),
       topics: topics,
 
-      #TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
+      # TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
       # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
       # blurb: ""
 
-      #TODOGIT - These point to a file on s3, that we have prepopulated
+      # TODOGIT - These point to a file on s3, that we have prepopulated
       # We'll need to check for the existance of the file when doing this
       # and set to null if it doesn't exist. For now, it's using tmp images on my hdd.
       dark_icon_url: dark_icon_url,
       turquoise_icon_url: turquoise_icon_url,
-      white_icon_url: white_icon_url,
+      white_icon_url: white_icon_url
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
   end
+
+  def sync_track_metadata
+    intro = config["introduction"] || ""
+    about = repo.about
+    code_sample = repo.snippet_file
+    if code_sample.nil?
+      first_exercise_slug = config[:exercises].first[:slug]
+      puts first_exercise_slug, repo.head
+      ex = repo.exercise(first_exercise_slug, repo.head)
+      code_sample = ex.solution
+    end
+    track.update!(introduction: intro, about: about, code_sample: code_sample)
+  end
+
 
   def sync_maintainers
     puts "Syncing Maintainers"

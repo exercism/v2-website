@@ -24,14 +24,18 @@ class Git::SyncsTracks
       track = next_to_sync
       puts "Next track to sync: #{track.to_s}"
       break if track.nil?
-      puts "Sync track #{track.id}"
-      begin
-        Git::SyncsTrack.sync!(track)
-      rescue => e
-        puts e.message
-        puts e.backtrace
-        track.update!(git_failed_at: DateTime.now)
-      end
+      sync_one(track)
+    end
+  end
+
+  def sync_one(track)
+    puts "Sync track #{track.id}"
+    begin
+      Git::SyncsTrack.sync!(track)
+    rescue => e
+      puts e.message
+      puts e.backtrace
+      track.update!(git_failed_at: DateTime.now)
     end
   end
 

@@ -17,11 +17,12 @@ class CreatesTrack
       title: language,
       slug: track_slug || repo_url.split("/").last,
       repo_url: repo_url,
-      introduction: "", #TODOGIT - Work this out
-      about: "", #TODOGIT - Work this out
+      # Default track metadata to empty for git syncer to populate
+      introduction: "", # Default to empty,
+      about: "",
       code_sample: "", #TODOGIT - Work this out
+      git_sync_required: true
     )
-
     track
   end
 
