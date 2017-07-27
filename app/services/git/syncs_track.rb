@@ -14,8 +14,9 @@ class Git::SyncsTrack
   def sync!
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
-    sync_maintainers # TODOGIT - care - I moved this up here because it was getting called per-exercise where it was.
+    sync_maintainers
     populate_unlocked_by_relationships
+    track.update!(git_synced_at: DateTime.now, git_sync_required: false)
   end
 
   private

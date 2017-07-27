@@ -9,6 +9,10 @@ class CreateTracks < ActiveRecord::Migration[5.1]
       t.text :about, null: false
       t.text :code_sample, null: false
 
+      t.timestamp :git_synced_at
+      t.timestamp :git_failed_at
+      t.boolean :git_sync_required, null: false, default: true
+
       t.timestamps
     end
   end

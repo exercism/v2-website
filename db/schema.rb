@@ -214,6 +214,9 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.text "introduction", null: false
     t.text "about", null: false
     t.text "code_sample", null: false
+    t.timestamp "git_synced_at"
+    t.timestamp "git_failed_at"
+    t.boolean "git_sync_required", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
