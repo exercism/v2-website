@@ -1,25 +1,28 @@
-$tab-top-color: #009CA8;
+@import 'variables';
+@import 'mixins';
 
 .tabs-and-panes {
     &>.tabs {
         border-bottom:1px solid #ddd;
         padding-left:10px;
         .tab {
-            padding:5px 20px;
+            padding:6px 20px;
             text-align:center;
             cursor:pointer;
             display:inline-block;
             margin-bottom:-1px;
 
-            font-weight:400;
+            @include font-size(14, 14);
+            font-weight:$light;
             color:#999;
             border:solid #fff;
             border-width:2px 1px 1px 1px;
-            border-bottom-color:#ddd
+            border-bottom-color:#ddd;
         }
     }
     &>.panes {
         overflow:scroll;
+        margin-top:20px;
         .pane {
             display:none;
         }
@@ -34,8 +37,9 @@ $tab-top-color: #009CA8;
         border-left-color:#ddd;
         border-right-color:#ddd;
         border-bottom-color:#fff;
-        border-top-color:$tab-top-color;
+        border-top-color:$color-1;
         color:#333;
+        font-weight:$regular;
     }
 
     &.selected-1>.panes>.pane-1,

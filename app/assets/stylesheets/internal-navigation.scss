@@ -1,9 +1,30 @@
 @import 'variables';
+@import 'mixins';
 
 #nav.lo-internal-nav-bar {
     background:#eee;
-    padding:10px 0;
     margin-bottom:20px;
+    a, span {
+        @include font-size(12, 12);
+    }
+    a {
+        color:#666;
+        text-decoration:none;
+        font-weight:$regular;
+        padding:5px 5px;
+        span {
+            border-bottom:1px solid #ccc;
+        }
+    }
+    &>span {
+        padding:5px 5px;
+    }
+    img {
+        height:35px;
+        width:13px;
+        display:inline-block;
+        vertical-align:middle;
+    }
 }
 
 #nav.lo-external-nav-bar {

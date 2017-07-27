@@ -1,30 +1,32 @@
 #my-solution-started-page
   #nav.lo-internal-nav-bar
     .lo-container
-      =link_to "Dashboard", root_path
-      &middot;
-      =link_to "#{@track.title}", [:my, @track]
-      &middot;
-      -if @solution.exercise.core?
-        %span Core Exercises
-      -else
-        %span Side Quests
+      =link_to root_path do
+        %span Dashboard
+      =image_tag "nav-divider.png"
+      =link_to [:my, @track] do
+        %span #{@track.title} Track
+      =image_tag "nav-divider.png"
+      %span= @exercise.title
 
   .lo-container
     .track-header
       .icon
-        .img{style: "background-image:url('#{image_path(@exercise.icon_url)}')"}
+        =image_tag @exercise.white_icon_url
       .inner
         .iteration-nav
-          .title Iteration 1 of 3
+          .title
+            Iteration
+            %strong 1
+            of 3
           .first
-            %i.fa.fa-fast-backward
+            %i.fa.fa-fw.fa-fast-backward
           .prev
-            %i.fa.fa-backward
-          .next
-            %i.fa.fa-forward
-          .last
-            %i.fa.fa-fast-forward
+            %i.fa.fa-fw.fa-backward
+          .next.disabled
+            %i.fa.fa-fw.fa-forward
+          .last.disabled
+            %i.fa.fa-fw.fa-fast-forward
 
         %h2= @exercise.title
         .track-progress
@@ -40,22 +42,30 @@
               -elsif i < num_completed_exercises
                 .dot.completed
               -else
-                .dot
+                .dot.locked
 
-    =link_to "Community solutions", "#", class: 'pure-button'
+    .notifications-bar
+      =link_to [@track, @exercise, :solutions], class: 'pure-button community-solutions' do
+        %i.fa.fa-users
+        Community Solutions
 
-    -if @solution.completed?
-      .approved-bar
-        Solution completed!!
+      -if @solution.completed?
+        .notification.action
+          Solution completed!!
 
-    -elsif @solution.approved?
-      .approved-bar
-        %i.fa.fa-bell
-        %span.text A mentor has approved this solution
-        =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true, class: 'pure-button'
-    /-@notifications.each do |notification|
-    /  .notification
-    /   =notification.content
+      -elsif @solution.approved?
+        .approved-bar
+          %i.fa.fa-bell
+          %span.text A mentor has approved this solution
+          =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true, class: 'pure-button'
+      -elsif @iteration.notifications.unread.size > 0
+        .notification
+          New comment
+      -else
+        .notification
+          %i.fa.fa-clock-o
+          Well done on submitting. A mentor will leave you feedback shortly.
+
     .pure-g.panels
       .pure-u-1-2.lhs
         .lhs-content
@@ -69,8 +79,8 @@
                 Latest Solution
 
             .panes
-              .pane.pane-1
-                =@iteration.solution.instructions
+              .pane.pane-1.instructions
+                =raw @iteration.solution.instructions
               .pane.pane-2.test-suite
                 -@iteration.solution.test_suite.each do |filename, code|
                   %h3= filename
@@ -84,11 +94,19 @@
 
       .pure-u-1-2.rhs
         .discussion
-          .discussion-header
-            =link_to "Scroll to latest comment", ""
-            %h3 Mentor Discussion
+          %h3 Mentor Discussion
+          -if @iteration.discussion_posts.size > 0
             .posts
               =render partial: "my/discussion_posts/post", collection: @iteration.discussion_posts
+          -else
+            .next-steps
+              .title ↳ Next Steps
+
+              %p Well done on submitting your iteration. A mentor will check out your work and leave a comment here on your solution soon
+              %p
+                In the meantime why not try a different exercise on the
+                =link_to "#{@track.title} track", [:my, @track]
+                or explore the #{link_to "other Exercism tracks", [:my, :tracks]}.
 
           =form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
             =hidden_field_tag :iteration_id, @iteration.id
@@ -103,33 +121,19 @@
                 .pane.pane-2.preview
                   .preview-area
 
-            =button_tag "Post Comment"
+            =button_tag "Comment", class: 'pure-button'
 
-          .next-steps
-            %h3
-              %i.fa.fa-arrow-right
-              Next Steps
-
-            -if @iteration.mentor_status == "pending"
-              %p A mentor will review your submission shortly and provide feedback.
-            -if @iteration.mentor_status == "reply"
-              %p Your mentor has suggested you should discuss this further before continuing.
-            -if @iteration.mentor_status == "refactor"
-              %p Your mentor has suggested that you refactor your code and provide another attempt.
-            -if @iteration.mentor_status == "approved"
-              %p Your mentor has approved this!
-              =button_to "COMPLETE CTA HERE", ""
-
-    .solution-footer
-      .pure-g
-        .pure-u-1-2
-          /Other Solutions
-        .pure-u-1-2
-          -unless @solution.completed?
-            -if @solution.approved?
-              =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
-            -else
-              =link_to "Mark as completed", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true
+    -#
+      .solution-footer
+        .pure-g
+          .pure-u-1-2
+            /Other Solutions
+          .pure-u-1-2
+            -unless @solution.completed?
+              -if @solution.approved?
+                =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
+              -else
+                =link_to "Mark as completed", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true
 
     -#
       %h1 Your solution to #{@exercise.title}
@@ -161,13 +165,13 @@
 
     $window = $(window)
     $lhs = $('.lhs')
-    $window.scroll =>
-      if $window.scrollTop() > $lhs.position().top - 10
-        $lhs.addClass('fixed')
-      else
-        $lhs.removeClass('fixed')
+    # TODO - Reenalbe and fix the disco
+    #$window.scroll =>
+    #  if $window.scrollTop() > $lhs.position().top - 10
+    #    $lhs.addClass('fixed')
+    #  else
+    #    $lhs.removeClass('fixed')
 
-    $window.resize setupLayout
 
     ###
     #panelsHeight = $(window).height() - $('.panels').position().top - $('.solution-footer').outerHeight() - 10
@@ -195,7 +199,6 @@
         $container.addClass("selected-\#{tabId}") if tabId
 
     setupNewDiscussionPost = =>
-
       $textarea = $(".new-discussion-post-form textarea")
       smde = new SimpleMDE
         element: $textarea[0]
@@ -211,6 +214,11 @@
           $('.new-discussion-post-form .preview-area').html(x)
           Prism.highlightAll()
 
+      $('.CodeMirror').bind 'heightChange', =>
+        $('.preview-area').css(height: $('.CodeMirror').outerHeight())
+
     setupTabs()
-    setupLayout()
+    setupLayout() # TODO - Reenable but stop the disco thing!
     setupNewDiscussionPost()
+
+    $window.resize setupLayout

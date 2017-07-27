@@ -11,9 +11,10 @@ pre.line-numbers {
         }
     }
     .line-highlight {
-        background: rgba(0, 255, 0, 0.1);
+        background: rgba($color-2, 0.1);
+        margin-top:0;
         &:before {
-            background:green;
+            background:$color-2;
             width:6px;
             height:6px;
             min-width:0;

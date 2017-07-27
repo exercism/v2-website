@@ -13,75 +13,112 @@ body.controller-solutions {
         background:#fff;
     }
     .track-header {
-        border:1px solid #ddd;
-        padding:30px 20px;
-        margin-bottom:20px;
+        border:1px solid #e5e5e5;
+        border-radius:2px;
+        padding:22px 20px;
+        margin-bottom:10px;
         .icon {
             display:block;
-            width:80px;
-            height:80px;
+            width:70px;
+            height:70px;
             padding:10px;
             float:left;
-            margin-right:15px;
-            background-color:#fff;
-            margin-left: -70px;
-            margin-top: -20px;
-            border: 2px solid red;
+            margin-right:20px;
+            margin-left: -54px;
+            margin-top: -11px;
             border-radius: 100%;
             overflow:hidden;
-            .img {
-                width:60px;
-                height:60px;
-                background-repeat:no-repeat;
-                background-size:contain;
-                background-position:center center;
+            background:$color-1;
+            border:5px solid #fff;
+            box-shadow:0 0 1px 1px $color-1;
+            img {
+                height:42px;
+                margin: 1px auto;
+                display:block;
             }
         }
         .inner {
             .iteration-nav {
                 float:right;
                 overflow:hidden;
-                .stat {
+                .title {
+                    @include font-size(12, 12);
+                    margin-top:1px;
+                    text-align:right;
+                    border-bottom:1px solid #ddd;
+                    padding-bottom:2px;
+                    margin-bottom:5px;
+                    strong {
+                        font-weight:$regular;
+                    }
+                }
+                .first, .prev, .next, .last{
+                    display:inline-block;
+                    padding:2px 6px 4px;
+                    border:1px solid #ccc;
+                    border-radius:3px;
+                    margin-right:1px;
+                    i {
+                        @include font-size(11, 11);
+                        color:#888;
+                    }
+                    &.disabled {
+                        opacity:0.5;
+                    }
                 }
             }
             h2 {
                 @include font-size(25, 25);
-                font-weight:700;
-                margin-bottom:10px;
+                font-weight:$bold;
+                margin-bottom:5px;
             }
             .track-progress {
                 h3 {
                     display:inline-block;
-                    font-weight:400;
+                    @include font-size(14, 14);
+                    color:#666;
+                    font-weight:$regular;
+                    letter-spacing:-0.2px;
+                    margin-right:7px;
                 }
                 .dots {
                     display:inline-block;
                     overflow:hidden;
                     .dot {
                         background:transparent;
-                        border:2px solid #aaa;
+                        border:1px solid #ddd;
                         border-radius:100%;
                         display:block;
                         float:left;
                         position:relative;
-                        width:10px;
-                        height:10px;
+                        width:11px;
+                        height:11px;
                         &.current {
-                            border-color:red;
+                            border-color:$color-1;
+                        }
+                        &.locked {
+                            background:#f7f7f7;
                         }
                         &.completed {
-                            background:#aaa;
+                            border-color:$color-1;
+                            background:$color-1;
                         }
                         &+.dot {
-                            margin-left:8px;
+                            margin-left:15px;
                             &:before {
-                                height:2px;
-                                width:10px;
-                                top:2px;
+                                height:1px;
+                                width:15px;
+                                top:4px;
                                 position:absolute;
-                                background:#aaa;
-                                left:-10px;
+                                background:#ddd;
+                                left:-16px;
                                 content: " ";
+                            }
+                            &.completed,
+                            &.current {
+                                &:before {
+                                    background:$color-1;
+                                }
                             }
                         }
                     }
@@ -90,27 +127,44 @@ body.controller-solutions {
         }
     }
 
-    .approved-bar {
-        background:rgba(green, 0.2);
-        color:green;
+    .notifications-bar {
         overflow:hidden;
-        margin-bottom:30px;
-        padding:10px;
-        i {
-            margin-right:5px;
-            vertical-align:bottom;
-            @include font-size(14, 26);
-        }
-        .text {
-            margin-right:5px;
-            vertical-align:bottom;
-            @include font-size(14, 26);
-        }
-        .pure-button {
-            background:transparent;
-            border:1px solid green;
-            color:green;
+        margin-bottom:40px;
+        .community-solutions {
+            float:right;
+            border:1px solid #ddd;
+            border-radius:2px;
+            background:#fff;
+            color:#aaa;
             @include font-size(12, 12);
+            font-weight:$regular;
+            padding:9px 20px;
+
+            i {
+                margin-right:3px;
+            }
+        }
+        .notification {
+            margin-right:190px;
+            background:rgba($color-1, 0.05);
+            @include font-size(13, 13);
+            padding:8px 20px;
+            border:1px solid rgba($color-1, 0.2);
+            border-radius:2px;
+            font-weight:$regular;
+            color:$color-1;
+            a {
+                margin-left:3px;
+                color:#333;
+            }
+            i {
+                @include font-size(14, 14);
+                color:$color-1;
+                margin-right:5px;
+            }
+            &.action {
+                border-color:$color-1;
+            }
         }
     }
     .panels {
@@ -134,8 +188,8 @@ body.controller-solutions {
             }
             .lhs-content {
                 .panes {
-                    border:solid #ddd;
-                    border-width:0 1px 1px 1px;
+                    border:1px solid #ddd;
+                    border-radius:2px;
                 }
             }
         }
@@ -148,25 +202,67 @@ body.controller-solutions {
         }
 
     }
-    .pane.test-suite {
-        .filename {
-            padding:10px 50px 10px 0;
-            font-weight:500;
+    .pane.instructions {
+        padding:20px 30px;
+        h1,h2,h3,h4,h5,h6 {
+            font-weight:$regular;
             @include font-size(16, 16);
-            border-bottom:1px solid #ddd;
-            color:#aaa;
+            margin-bottom:7px;
         }
-        pre+h3 {
-            margin-top:30px;
+        h1 {
+            @include font-size(18, 18);
+            font-weight:$bold;
+            margin-bottom:15px;
+        }
+        h2 {
+            @include font-size(14, 14);
+            padding-bottom:3px;
+            border-bottom:1px solid #eee;
+            margin-bottom:10px;
+        }
+        p {
+            @include font-size(14, 20);
+            margin-bottom:7px;
+        }
+        p+h2 {
+            margin-top:20px;
         }
         pre {
-            padding-top:10px;;
+            margin-bottom:10px;
+            background:#f6f6f6;
+        }
+        code {
+            @include font-size(12, 12);
+            color:#666;
+        }
+        a {
+            color:#333;
+        }
+
+    }
+    .pane.test-suite {
+        background:#f9f9f9;
+        h3 {
+            padding:10px 50px 10px 27px;
+            font-weight:500;
+            @include font-size(13, 13);
+            background:#eee;
+            color:#666;
+            border-bottom:1px solid #ddd;
+            margin-bottom:5px;
+        }
+        pre+h3 {
+            margin-top:10px;
+        }
+        pre {
+            padding-top:10px;
         }
     }
     .pane.solution, .pane.test-suite {
         pre {
             margin:0;
-            background:#fafafa;
+            background:#f9f9f9;
+            padding-top:0;
             padding-bottom:0;
             code[class*="language-"] {
                 font-size:12px;
@@ -174,21 +270,40 @@ body.controller-solutions {
         }
     }
     .discussion {
-        .discussion-header {
-            padding:10px 0;
+        h3 {
+            padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:20px;
 
-            h3 {
-                font-weight:400;
-                color:#333;
+            font-weight:400;
+            color:#333;
+        }
+        .next-steps {
+            background:rgba($color-1, 0.05);
+            border-radius:2px;
+            padding:20px 40px 20px 20px;
+            .title {
+                @include font-size(14, 14);
+                font-weight:$regular;
+                color:$color-1;
+                margin-bottom:10px;
             }
-            a {
-                @include font-size(12, 12);
-                float:right;
-                color:#666;
-                text-decoration:none;
+            p {
+                @include font-size(13, 19);
+                padding-left:19px;
+                margin-bottom:10px;
+                &:last-child {
+                    margin-bottom:0;
+                }
+                a {
+                    color:#333;
+                    font-weight:$light;
+                }
             }
+        }
+        .pane.markdown,
+        .pane.preview {
+            padding:0;
         }
         .post {
             margin-bottom:25px;
@@ -236,16 +351,51 @@ body.controller-solutions {
                 }
             }
         }
+        .post, .preview-area {
+            p {
+                @include font-size(14, 20);
+            }
+            blockquote {
+                border-left: 4px solid #eee;
+                padding-left: 15px;
+                margin-left: 10px;
+            }
+            a {
+                color: #333;
+                font-weight: 400;
+                text-decoration: underline;
+            }
+        }
         form {
             margin:20px 0;
             textarea, .preview-area {
                 width:100%;
-                height:200px;
                 resize:none;
-                padding:10px;
+                padding:15px;
                 border:1px solid #ddd;
             }
+            .preview-area {
+                height:253px;
+                overflow:scroll;
+            }
+            .editor-toolbar {
+                border-radius:2px 0 0 2px;
+                &:before, &:after {
+                    display:none;
+                }
+                a {
+                    color:#888 !important;
+                    &:hover, &.active {
+                        border-color:transparent !important;
+                        color:#333 !important;
+                    }
+
+                }
+            }
             .CodeMirror {
+                &, .CodeMirror-scroll {
+                    min-height:200px !important;
+                }
                 .cm-header{color:#00f}
                 .cm-s-default .cm-quote{color:#090}
                 .cm-negative{color:#d44}
@@ -277,6 +427,14 @@ body.controller-solutions {
                 .cm-header-4 { @include font-size(14, 18); color:#333 }
             }
         }
+        .pure-button {
+            background:$color-1;
+            color:#fff;
+            float:right;
+            margin-top:10px;
+            border-radius:2px;
+            padding:8px 25px;
+        }
         .solution pre,
         .post-html pre,
         .new-discussion-post-form .preview-area pre {
@@ -288,19 +446,6 @@ body.controller-solutions {
                 }
             }
         }
-        .next-steps {
-            background:rgba(green, 0.1);
-            padding:20px;
-            h3 {
-                @include font-size(14, 14);
-                font-weight:400;
-                color:rgba(green, 0.5);
-                margin-bottom:10px;
-            }
-            p {
-                @include font-size(14, 18);
-                padding-left:16px;
-            }
-        }
+
     }
 }
