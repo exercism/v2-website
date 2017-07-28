@@ -109,18 +109,31 @@ class Git::SyncsTrack
   end
 
   def sync_track_metadata
-    intro = config["introduction"] || ""
-    about = repo.about
-    code_sample = repo.snippet_file
-    if code_sample.nil?
-      first_exercise_slug = config[:exercises].first[:slug]
-      puts first_exercise_slug, repo.head
-      ex = repo.exercise(first_exercise_slug, repo.head)
-      code_sample = ex.solution
-    end
-    track.update!(introduction: intro, about: about, code_sample: code_sample)
+    track.update!(introduction: track_introduction,
+      about: track_about, 
+      code_sample: code_sample)
   end
 
+  def track_introduction
+    config["introduction"] || ""
+  end
+
+  def track_about
+    repo.about || ""
+  end
+
+  def code_sample
+    code_sample = repo.snippet_file
+    return code_sample unless code_sample.nil?
+    first_exercise = exercises.first
+    first_exercise_slug = first_exercise[:slug]
+    ex = repo.exercise(first_exercise_slug, repo.head)
+    ex.solution || ""
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
+  end
 
   def sync_maintainers
     puts "Syncing Maintainers"
@@ -128,7 +141,7 @@ class Git::SyncsTrack
   end
 
   def exercises
-    config[:exercises]
+    config[:exercises] || []
   end
 
   def config
