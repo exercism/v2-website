@@ -1,23 +1,33 @@
 class Git::SyncsTrack
 
   def self.sync!(track)
-    new(track).sync!
+    new(Git::StateDb.instance, track).sync!
   end
 
-  attr_reader :track
+  attr_reader :state_db, :track
 
-  def initialize(track)
+  def initialize(state_db, track)
+    @state_db = state_db
     @track = track
     @unlocked_by_relationships = {}
   end
 
   def sync!
+    if repo_url.start_with?("http://example.com")
+      puts "Skipping sync for #{repo_url}"
+      state_db.mark_synced(track)
+      return
+    end
+
     sync_track_metadata
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
     sync_maintainers
     populate_unlocked_by_relationships
-    track.update!(git_synced_at: DateTime.now, git_sync_required: false)
+    state_db.mark_synced(track)
+  rescue => e
+    state_db.mark_failed(track)
+    raise
   end
 
   private
@@ -110,7 +120,7 @@ class Git::SyncsTrack
 
   def sync_track_metadata
     track.update!(introduction: track_introduction,
-      about: track_about, 
+      about: track_about,
       code_sample: code_sample)
   end
 

@@ -20,8 +20,7 @@ class CreatesTrack
       # Default track metadata to empty for git syncer to populate
       introduction: "", # Default to empty,
       about: "",
-      code_sample: "", #TODOGIT - Work this out
-      git_sync_required: true
+      code_sample: "" #TODOGIT - Work this out
     )
     track
   end

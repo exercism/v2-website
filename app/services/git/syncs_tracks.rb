@@ -1,11 +1,15 @@
 class Git::SyncsTracks
 
   QUIET_PERIOD = 10.seconds
-  MIN_FETCH_PERIOD = 15.minutes
-  MIN_FAIL_WAIT_PERIOD = 5.minutes
 
   def self.sync
-    new.sync
+    new(Git::StateDb.instance).sync
+  end
+
+  attr_reader :state_db
+
+  def initialize(state_db)
+    @state_db = state_db
   end
 
   def sync
@@ -35,24 +39,14 @@ class Git::SyncsTracks
     rescue => e
       puts e.message
       puts e.backtrace
-      track.update!(git_failed_at: DateTime.now)
     end
   end
 
   def next_to_sync
-    next_requested || next_stale
-  end
-
-  def next_requested
-    selector.where(git_sync_required: true).first
-  end
-
-  def next_stale
-    selector.where('git_synced_at < ?', MIN_FETCH_PERIOD.ago).first
-  end
-
-  def selector
-    Track.where('git_failed_at IS NULL or git_failed_at < ?', MIN_FAIL_WAIT_PERIOD.ago).order('updated_at DESC')
+    next_job = state_db.stale_tracks_before.first
+    return nil if next_job.nil?
+    puts next_job
+    Track.find(next_job[:track_id])
   end
 
 end

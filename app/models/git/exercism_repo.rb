@@ -104,6 +104,11 @@ class Git::ExercismRepo
     else
       Rugged::Repository.clone_at(repo_url, repo_dir, bare: true)
     end
+  rescue => e
+    Rails.logger.error "Failed to clone repo #{repo_url}"
+    puts "Failed to clone repo #{repo_url}"
+    puts e.message
+    raise
   end
 
   def auto_fetch?
