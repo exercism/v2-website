@@ -1,0 +1,10 @@
+.about-section
+  .lo-container
+    .pure-g
+      .pure-u-3-4.about
+        %h2 About #{@track.title}
+        = raw @track.about
+      .pure-u-1-4
+        .code-sample
+          =image_tag "track-page-code-sample-frame.png"
+          =@track.code_sample

@@ -10,7 +10,7 @@ class My::TracksController < MyController
   # TODO - Move all of this into some sort of helper service class
   def show
     @track = Track.find(params[:id])
-    return render :show_not_joined unless current_user.joined_track?(@track)
+    return show_not_joined unless current_user.joined_track?(@track)
 
     exercises = @track.exercises.includes(:topics)
     normal_exercises, deprecated_exercises = exercises.partition {|e|e.active?}
@@ -53,5 +53,14 @@ class My::TracksController < MyController
 
     @core_track_completion_percentage = @core_exercises_and_solutions.size > 0 ? (@num_solved_core_exercises.to_f / @core_exercises_and_solutions.size * 100).round : 0
     @track_completion_percentage = exercises.size > 0 ? ((@num_solved_core_exercises + @num_solved_side_exercises).to_f / exercises.size * 100).round : 0
+  end
+
+  def show_not_joined
+    @track = Track.find(params[:id])
+    @mentors = @track.mentorships
+    @maintainers = @track.maintainers
+    @exercises = @track.exercises.limit(6)
+
+    render :show_not_joined
   end
 end

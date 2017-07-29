@@ -1,36 +1,117 @@
 @import 'variables';
 @import 'mixins';
-#track-page {
+#my-track-page,
+#track-page,
+#my-track-not-joined-page {
     .header {
-        background: $header-color-2;
+        background-image:image-url('background-overlay.png');
+        background-size:cover;
         padding:0 0 35px;
+        .visual-section {
+            position: relative;
+            padding-top:20px;
+            overflow:hidden;
+            .line {
+                position:absolute;
+                top:73px;
+                left:0;
+                right:0;
+                background:white;
+                height:2px;
+            }
+            .logo {
+                position:relative;
+                display:block;
+                float:right;
+                height:107px;
+                margin-left:50px;
+            }
+
+        }
         h1 {
             padding-top:20px;
-            @include font-size(34, 34);
+            @include font-size(40, 40);
+            letter-spacing:-1.56px;
             font-weight:$bold;
             margin-bottom:5px;
             color:#fff;
         }
-        p {
-            @include font-size(12, 14);
+
+    }
+}
+
+#track-page,
+#my-track-not-joined-page {
+    .header {
+        background-color: $header-color-2;
+        h1 {
+            margin-bottom:10px;
             color:#fff;
-            font-weight:200;
+        }
+        .h1-subtitle {
+            max-width:70%;
+            @include font-size(16, 21);
+            color:#fff;
+            font-weight:$light;
+        }
+        .pure-button {
+            float:right;
+            border:1px solid #fff;
+            @include font-size(15, 15);
+            font-weight:$regular;
+            border-radius:2px;
+            background:#00bac9;
+            padding:12px 35px;
+            color:#fff;
         }
     }
     .overview-section {
-        background:#eee;
-        padding:50px 0;
-        img {
-            display:block;
-            width:100%;
+        background:#fafafa;
+        padding:30px 0;
+        border-bottom:1px solid #eee;
+        .pure-u-1-3 {
+            padding-right:60px;
+            overflow:hidden;
+            padding-left:30px;
+            padding-right:30px;
+            &:first-child {
+                padding-left:0;
+                padding-right:60px;
+            }
+            &:last-child {
+                padding-left:60px;
+                padding-right:0;
+            }
+        }
+        .icon {
+            padding:15px 15px 15px 0;
+            float:left;
+            width:60px;
+            border-right:3px solid #ececec;
+            margin-right:15px;
+            img {
+                display:block;
+                height:40px;
+            }
+        }
+        h3 {
+            font-weight:$regular;
+            margin-bottom:5px;
+            @include font-size(15, 15);
+            color:#666;
+            letter-spacing:-0.7px;
         }
         .info {
-            padding-left:20px;
-            padding-right:50px;
+            @include font-size(12, 19);
+            font-weight:$regular;
+            color:#888;
         }
     }
     .about-section {
-        padding:50px 0;
+        padding:60px 0;
+        .about {
+            padding-right:100px;
+        }
         .code-sample {
             img {
                 display:block;
@@ -38,37 +119,68 @@
             }
         }
         h2 {
-            @include font-size(20, 20);
-            font-weight:500;
+            @include font-size(22, 22);
+            font-weight:$regular;
+            margin-bottom:15px;
+        }
+        p {
+            @include font-size(15, 20);
+            color:#555;
+            margin-bottom:12px;
+            font-weight:$light;
+            a {
+                color:#555;
+                text-decoration:underline;
+                font-weight:$light;
+            }
         }
     }
     .testimonal-section {
-        padding:50px 0;
+        padding:70px 0;
+        border:solid #eee;
+        border-width:1px 0;
+        background-image:image-url("hex-background.png");
+        background-size:50px;
+        background-repeat:repeat;
+        background-position:-10px;
+
         .frame {
             position:relative;
-            border:1px solid black;
-            padding:30px;
-            &:after {
-                position:absolute;
-                top:-20px;
-                left:50%;
-                content: "";
-                background:black;
-                width:40px;
-                height:40px;
-                margin:0 0 0 -20px;
-            }
+            border:1px solid $color-2;
+            padding:50px 30px 30px 30px;
+            background:#fff;
             max-width:600px;
             margin:0 auto;
-            padding:20px;
+            border-radius:2px;
+            img {
+                position:absolute;
+                top:-21px;
+                left:50%;
+                content: "";
+                background:$color-2;
+                border-radius:2px;
+                width:42px;
+                height:42px;
+                margin:0 0 0 -20px;
+                padding:13px 10px;
+            }
             h2 {
                 text-align:center;
+                @include font-size(16, 16);
+                color:#333;
+                font-weight:$regular;
+                margin-bottom:10px;
             }
             p {
                 text-align:center;
+                @include font-size(14, 19);
+                margin-bottom:10px;
             }
             .byline {
                 text-align:center;
+                @include font-size(12, 14);
+                font-weight:$regular;
+                color:#aaa;
             }
 
 
@@ -77,26 +189,27 @@
     .mentors-section,
     .exercises-section,
     .maintainers-section {
-        margin-bottom:50px;
+        padding:70px 0;
+        border-bottom:1px solid #eee;
 
         .h2-subtitle {
             text-align:center;
             font-style:italic;
-            color:#aaa;
-            @include font-size(15, 15);
+            color:#999;
+            @include font-size(16, 16);
             margin-bottom:10px;
         }
         h2 {
             text-align:center;
-            @include font-size(30, 30);
+            @include font-size(26, 26);
             font-weight:500;
-            margin-bottom:10px;
+            margin-bottom:15px;
         }
         p {
             text-align:center;
-            @include font-size(16, 21);
+            @include font-size(14, 19);
             max-width:600px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 30px auto;
             a {
                 color:#333;
             }
@@ -106,27 +219,85 @@
     .mentors-section,
     .maintainers-section {
         .mentors, .maintainers {
-            max-width:900px;
+            max-width:800px;
             margin: 0 auto 0 auto;
         }
         .mentor, .maintainer {
-            border:1px solid #ccc; 
-            padding:10px;
-            margin:20px;
+            border:1px solid #ddd;
+            border-radius:2px;
+            padding:15px;
+            margin:10px;
+            background:#f7fcfc;
             img {
                 display:block;
                 width:100%;
                 padding-right:20px;
+                filter: grayscale(100%);
+                border-radius:2px;
             }
             h3 {
-                color:green;
-                @include font-size(17, 17);
-                font-weight:500;
+                color:$color-2;
+                @include font-size(16, 16);
+                font-weight:$bold;
+                margin-bottom:5px;
+                a {
+                    display:inline-block;
+                    margin-left:6px;
+                    padding-left:6px;
+                    border-left:1px solid #aaa;
+                    @include font-size(13, 16);
+                    color:#666;
+                    font-weight:$regular;
+                    text-decoration:underline;
+                }
             }
-            p {
-                color:#333;
-                @include font-size(14, 19);
+            .bio {
+                color:#555;
+                @include font-size(14, 16);
+                letter-spacing:-0.3px;
             }
+        }
+    }
+    .exercises-section {
+        background:#fafafa;
+        p {
+            max-width:700px;
+        }
+        .widget-side-exercise {
+            border-color:#ddd;
+            .title {
+                color:#555;
+            }
+            .status {
+                display:none;
+            }
+            &:hover {
+                background:#fff;
+                border-color:#ddd;
+            }
+        }
+    }
+    .cta-section {
+        background:$color-2;
+        padding:60px 0;
+        h2 {
+            color:#fff;
+            text-align:center;
+            @include font-size(17, 17);
+            font-weight:$light;
+            margin-bottom:20px;
+        }
+        .pure-button {
+            border:1px solid #fff;
+            font-weight:$regular;
+            border-radius:2px;
+            background:#00bac9;
+            padding:12px 35px;
+            @include font-size(16, 16);
+            margin:0 auto;
+            display:block;
+            width:220px;
+            color:#fff;
         }
     }
 }

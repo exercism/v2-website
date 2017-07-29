@@ -16,7 +16,24 @@ class Track < ApplicationRecord
   end
 
   # TODO
+  def bordered_turqioise_icon_url
+    'tmp/bordered-track-icon.png'
+  end
+
+  # TODO
   def hex_icon_url
     'tmp/hex-track-icon.png'
+  end
+
+  # TODO
+  def introduction
+    "Since the announcement that it's being sunsetted, I want to tell you about the strangest Since the announcement that it's being sunsetted, I want to tell you about the strangest thing I know about Flash and Adobe."
+  end
+
+  # TODO
+  def about
+    ParsesMarkdown.parse(%Q{ Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.\n
+Ruby was created as a language of careful balance. Its creator, [Yukihiro “Matz” Matsumoto](https://en.wikipedia.org/wiki/Yukihiro_Matsumoto), blended parts of his favorite languages (Perl, Smalltalk, Eiffel, Ada, and Lisp) to form a new language that balanced functional programming with imperative programming.\n
+He has often said that he is "trying to make Ruby natural, not simple," in a way that mirrors life.})
   end
 end

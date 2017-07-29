@@ -1,0 +1,22 @@
+.overview-section
+  .lo-container
+    .pure-g
+      .pure-u-1-3
+        .icon
+          =image_tag "track-page-mentors.png"
+        %h3= pluralize @track.mentors.size, "Mentor"
+        .info Our mentors are really badass lorem ipsu lorem ipsu lorem ipsu lorem ipsummmm lorem ipsum
+
+      .pure-u-1-3
+        .icon
+          =image_tag "track-page-students.png"
+        %h3= pluralize @track.user_tracks.size, "Student"
+        .info Our students are really badass lorem ipsu lorem ipsu lorem ipsu lorem ipsummmm lorem ipsum
+
+      .pure-u-1-3
+        .icon
+          =image_tag "track-page-exercises.png"
+        %h3= pluralize @track.exercises.size, "Exercise"
+        .info Our exercises are really badass lorem ipsu lorem ipsu lorem ipsu lorem ipsummmm lorem ipsum
+
+

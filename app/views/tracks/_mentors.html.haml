@@ -1,0 +1,20 @@
+.mentors-section
+  .lo-container
+    .h2-subtitle Relaxed. Encouraging. Supportive.
+    %h2 
+      Meet the #{@track.title} Track Mentors
+      %i.fa.fa-comments
+    %p Once you join the #{@track.title} language track, you will receive support and feedback from our team of #{@track.title} mentors. Here are the bios of a few of #{link_to "the mentors of this track", track_mentors_path(@track)}.
+    .pure-g.mentors
+      -@mentors.each do |mentor|
+        .pure-u-1-2
+          .mentor
+            .pure-g
+              .pure-u-1-4
+                =image_tag mentor.avatar_url
+              .pure-u-3-4
+                %h3
+                  = mentor.handle
+                  -if mentor.link_text.present? && mentor.link_url.present?
+                    =link_to mentor.link_text, mentor.link_url, target: "_blank"
+                .bio= mentor.bio
