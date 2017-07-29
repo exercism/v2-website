@@ -2,6 +2,9 @@
 @import 'mixins';
 
 #my-track-page {
+    .lo-internal-nav-bar {
+        margin-bottom:0;
+    }
     .header {
         background-color: $header-color-1;
         background-image:image-url('background-overlay-1.png');
@@ -155,6 +158,10 @@
             .topics {
                 display:inline-block;
                 vertical-align:bottom;
+                max-width: 300px;
+                overflow: hidden;
+                max-height: 23px;
+
                 .topic {
                     display:inline-block;
                     @include font-size(11, 11);
@@ -425,36 +432,42 @@
     }
 }
 
-#modal.track-started,
-#modal.track-finished {
-    padding:50px;
+#modal.my-track-started,
+#modal.my-track-finished {
+    padding:60px 50px 50px 50px;
     img {
         display:block;
         width:100px;
-        margin: 0 auto 30px auto;
+        margin: 0 auto 15px auto;
     }
     h2 {
         @include font-size(20, 20);
-        font-weight:500;
-        margin-bottom:5px;
+        font-weight:$regular;
+        color:#555;
+        margin-bottom:4px;
         text-align:center;
+        i {
+            margin-right:5px;
+        }
     }
     h3 {
         @include font-size(14, 14);
-        font-weight:500;
-        margin-bottom:30px;
+        color:#555;
+        font-weight:$light;
         text-align:center;
+        margin-bottom:30px;
     }
     p {
         text-align:center;
-        @include font-size(14, 21);
-        margin-bottom:15px;
+        color:#555;
+        @include font-size(14, 20);
+        margin-bottom:30px;
     }
     .pure-button {
-        background:green;
+        background:$color-1;
         display:block;
-        width:120px;
-        padding:10px 10px;
+        width:280px;
+        padding:11px 10px;
         text-align:center;
         margin: 0 auto;
     }

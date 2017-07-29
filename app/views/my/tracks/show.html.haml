@@ -1,4 +1,11 @@
 #my-track-page
+  #nav.lo-internal-nav-bar
+    .lo-container
+      =link_to root_path do
+        %span Dashboard
+      =image_tag "nav-divider.png"
+      %span #{@track.title} Track
+
   .header
     .visual-section
       .line
@@ -34,7 +41,7 @@
                   .topics
                     - exercise.topic_names.each do |topic_name|
                       .topic= topic_name
-                .blurb Bob is a lackadaisical teenager. In conversation, his responses are very limited.
+                .blurb= exercise.blurb
             -else
               .exercise.locked
                 .circle= image_tag exercise.dark_icon_url
@@ -114,12 +121,12 @@
 -if @track.iterations.count == 0
   -content_for :js do
     :javascript
-      showModal("track-start", "#{j(render "started_modal")}")
+      showModal("my-track-started", "#{j(render "started_modal")}")
 
 -if @track_completion_percentage == 100
   -content_for :js do
     :javascript
-      showModal("track-finished", "#{j(render "finished_modal")}")
+      showModal("my-track-finished", "#{j(render "finished_modal")}")
 
 -content_for :js do
   :coffeescript

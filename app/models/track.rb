@@ -16,7 +16,7 @@ class Track < ApplicationRecord
   end
 
   # TODO
-  def icon_url
-    'tmp/bordered-track-icon.png'
+  def hex_icon_url
+    'tmp/hex-track-icon.png'
   end
 end

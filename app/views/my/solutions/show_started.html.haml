@@ -1,3 +1,5 @@
+=link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true, class: 'pure-button'
+
 #my-solution-started-page
   #nav.lo-internal-nav-bar
     .lo-container
@@ -14,6 +16,7 @@
       .icon
         =image_tag @exercise.white_icon_url
       .inner
+        / TODO
         .iteration-nav
           .title
             Iteration
@@ -54,10 +57,10 @@
           Solution completed!!
 
       -elsif @solution.approved?
-        .approved-bar
+        .notification.action
           %i.fa.fa-bell
           %span.text A mentor has approved this solution
-          =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true, class: 'pure-button'
+          =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
       -elsif @iteration.notifications.unread.size > 0
         .notification
           New comment

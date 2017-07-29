@@ -9,7 +9,7 @@
     right:0;
     bottom:0;
     z-index:10000000;
-    background:rgba(#fff,0.9);
+    background:rgba(#000,0.5);
 
     #modal {
         position:relative;
@@ -19,9 +19,8 @@
         overflow: visible;
 
         background:#fff;
-        border-radius:5px;
-        border:1px solid #ccc;
-        box-shadow:0 0 3px #666;
+        border-radius:2px;
+        box-shadow:0 0 1px 1px rgba(#000, 0.13);
         margin: 50px auto;
     }
     #modal-close-button  {

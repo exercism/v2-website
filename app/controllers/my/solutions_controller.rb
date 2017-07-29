@@ -32,7 +32,10 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    CompletesSolution.complete!(@solution)
+    #CompletesSolution.complete!(@solution) #TODO - Reenable
+    @exercise = @solution.exercise
+    @track = @exercise.track
+    @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
     render_modal("solution-completed", "complete")
   end
 
@@ -50,6 +53,13 @@ class My::SolutionsController < MyController
         data[:feedback]
       )
     end
+    @track = @solution.exercise.track
+    @next_core_exercise = Solution.not_completed.
+                          where(exercise_id: @track.exercises).
+                          joins(:exercise).where("exercises.core": true).
+                          first.exercise
+    @unlocked_side_exercises = @solution.exercise.unlocks
+
     render_modal("solution-unlocked", "unlocked")
   end
 

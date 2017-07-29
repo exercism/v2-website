@@ -1,14 +1,41 @@
-%h1 Reflect
-%p What did you learn from this exercise?
+.progress
+  %i.fa.fa-circle.filled
+  %i.fa.fa-circle.filled
+  %i.fa.fa-circle
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
-  =text_area :notes, placeholder: "Personal Notes"
+  .pure-g
+    .pure-u-1-2.lhs
+      %h2 Do you want to make your solution public?
+      %p Learning from each other’s attempts is a crucial part of exercism. By making your solution public, other Exercism users will be able to find it and learn from your ideas.
+      .checkbox
+        %i.fa.fa-check-square-o
+        Publish my solution
 
-  -@solution.mentors.each do |mentor|
-    .mentor-review
-      .name= mentor.name
-      /.stars
-      =number_field_tag "mentor_reviews[#{mentor.id}][rating]"
-      =text_field_tag "mentor_reviews[#{mentor.id}][feedback]"
+      =text_area :notes, '', placeholder: "Personal Notes", placeholder: "Leave some notes next to your public solution to tell others what you learnt from this exercise, what you found easy and hard, and about any challenges you battled."
 
-  =button_tag "Save Reflection"
+    .pure-u-1-2.rhs
+      %h2 Rate your mentors
+      %p
+        Help us improve our mentoring by rating your mentors.
+        Your mentors
+        %strong will not
+        see your rating.
+
+      -@solution.mentors.each do |mentor|
+        .mentor-review
+          = image_tag mentor.avatar_url, class: "avatar"
+          .details
+            .name= mentor.name
+            .interactions 4 interactions
+            / TODO ^^
+          .stars
+            %i.fa.fa-star-o
+            %i.fa.fa-star-o
+            %i.fa.fa-star-o
+            %i.fa.fa-star-o
+            %i.fa.fa-star-o
+          /=number_field_tag "mentor_reviews[#{mentor.id}][rating]"
+          /=text_field_tag "mentor_reviews[#{mentor.id}][feedback]"
+
+  =button_tag "Save and continue", class: 'pure-button'

@@ -1,9 +1,30 @@
-%h1 New Exercises Unlocked
-%p You have unlocked the following exercises
+.progress
+  %i.fa.fa-circle.filled
+  %i.fa.fa-circle.filled
+  %i.fa.fa-circle.filled
 
-CORE EXERCISE
+%h2 Exercises Unlocked
+%h3 You have unlocked the following core exercise:
 
--if @solution.approved?
-    SIDE EXERCSES
+-if @next_core_exercise
+  .core-exercise
+    .icon= image_tag @next_core_exercise.white_icon_url
+    .title
+      = @next_core_exercise.title
+      .topics
+        - @next_core_exercise.topic_names.each do |topic_name|
+          .topic= topic_name
+    .blurb
+      = @next_core_exercise.blurb
 
-=link_to "Go to track", [:my, @solution.exercise.track]
+-if @solution.approved? && @unlocked_side_exercises.size > 0
+  .side-exercises
+    %h4
+      You have also unlocked
+      %strong #{@unlocked_side_exercises.size}
+      bonus exercises:
+    -@unlocked_side_exercises.each do |side_exercise|
+      .side-exercise
+        =image_tag side_exercise.turquoise_icon_url
+
+=link_to "Go to track", [:my, @solution.exercise.track], class: 'pure-button'

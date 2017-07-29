@@ -32,23 +32,23 @@ textarea {
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #ddd;
+    color: #ddd;
+    @include font-size(14, 20);
     font-weight:300;
-    font-style:italic;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #ddd;
-   opacity:  1;
-    font-style:italic;
+    color: #ddd;
+    @include font-size(14, 20);
+    opacity: 1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #ddd;
-   opacity:  1;
-    font-style:italic;
+    color: #ddd;
+    @include font-size(14, 20);
+    opacity: 1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-   color:    #ddd;
-    font-style:italic;
+    color: #ddd;
+    @include font-size(14, 20);
 }
 .pure-button {
     color:#fff;
