@@ -115,11 +115,11 @@
                 font-weight:$bold;
                 @include font-size(20, 20);
                 color:#ccc;
-                margin-bottom:7px;
+                margin-bottom:5px;
             }
             .blurb {
-                font-weight:$light;
-                @include font-size(13, 17);
+                font-weight:$regular;
+                @include font-size(13, 16);
                 color:#ccc;
                 max-height:40px;
                 max-width:400px;

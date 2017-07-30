@@ -1,0 +1,283 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+/* -------------------------------------
+		PRE-CUSTOM
+------------------------------------- */
+* {
+    font-family: 'Lato',  "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:400;
+    color:#515151;
+}
+
+
+/* -------------------------------------
+		GLOBAL
+------------------------------------- */
+* {
+	margin:0;
+	padding:0;
+}
+
+img {
+	max-width: 100%;
+}
+strong {
+  font-weight:600;
+  color:#444;
+}
+.collapse {
+	margin:0;
+	padding:0;
+}
+body {
+	-webkit-font-smoothing:antialiased;
+	-webkit-text-size-adjust:none;
+	width: 100%!important;
+	height: 100%;
+}
+
+
+/* -------------------------------------
+		ELEMENTS
+------------------------------------- */
+a {
+color: #4161af;
+text-decoration:underline;
+}
+
+.btn {
+	text-decoration:none;
+	color: #FFF;
+	background-color: #4161AF;
+	padding:10px 16px;
+	font-weight:500;
+	margin-right:10px;
+	text-align:center;
+	cursor:pointer;
+	display: inline-block;
+}
+
+p.callout {
+	padding:15px;
+	background-color:#ECF8FF;
+	margin-bottom: 15px;
+}
+.callout a {
+	font-weight:bold;
+	color: #2BA6CB;
+}
+
+table.social {
+/* 	padding:15px; */
+	background-color: #ebebeb;
+	
+}
+.social .soc-btn {
+	padding: 3px 7px;
+	font-size:12px;
+	margin-bottom:10px;
+	text-decoration:none;
+	color: #FFF;font-weight:bold;
+	display:block;
+	text-align:center;
+}
+a.fb { background-color: #3B5998!important; }
+a.tw { background-color: #1daced!important; }
+a.gp { background-color: #DB4A39!important; }
+a.ms { background-color: #000!important; }
+
+.sidebar .soc-btn {
+	display:block;
+	width:100%;
+}
+
+/* -------------------------------------
+		HEADER
+------------------------------------- */
+table.head-wrap { width: 100%;}
+
+.header.container table td.logo { padding: 15px; }
+.header.container table td.label { padding: 15px; padding-left:0px;}
+
+
+/* -------------------------------------
+		BODY
+------------------------------------- */
+table.body-wrap { width: 100%;}
+
+
+/* -------------------------------------
+		FOOTER
+------------------------------------- */
+table.footer-wrap { width: 100%;	clear:both!important;
+}
+.footer-wrap .container .content p { border-top: 1px solid #eee; padding-top:15px;}
+.footer-wrap .container .content p {
+	font-size:10px;
+	font-weight: bold;
+	
+}
+
+
+/* -------------------------------------
+		TYPOGRAPHY
+------------------------------------- */
+h1,h2,h3,h4,h5,h6 {
+font-family: 'Lato', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; line-height: 1.1; margin-bottom:15px; color:#000;
+}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small { font-size: 50%; color: #999; line-height: 0; text-transform: none; }
+
+h1 { font-weight:200; font-size: 44px;}
+h2 { font-weight:200; font-size: 37px;}
+h3 { font-weight:500; font-size: 27px;}
+h4 { font-weight:500; font-size: 23px; margin-bottom:10px;}
+h5 { font-weight:900; font-size: 17px;}
+h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#eee;}
+
+.collapse { margin:0!important;}
+
+p, ul {
+	margin-bottom: 15px;
+	font-weight: 300;
+	font-size:16px;
+	line-height:1.7;
+}
+p.lead { font-size:16px; line-height:1.4; font-weight:500; }
+p.last { margin-bottom:0px;}
+p.italic { font-style:italic; color:#666}
+
+ul li {
+	margin-left:5px;
+  margin-bottom:8px;
+	list-style-position: inside;
+}
+
+.header-image {
+  height:40px;
+  display:block;
+  margin-bottom:20px;
+}
+
+.content.header {
+    border-bottom:1px solid #eee;
+    margin-bottom:20px;
+}
+
+/* ---------------------------------------------------
+		RESPONSIVENESS
+		Nuke it from orbit. It's the only way to be sure.
+------------------------------------------------------ */
+
+/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+.container {
+	display:block!important;
+	max-width:600px!important;
+	margin:0 auto!important; /* makes it centered */
+	clear:both!important;
+}
+
+/* This should also be a block element, so that it will fill 100% of the .container */
+.content {
+	padding:0px 15px;
+	max-width:600px;
+	margin:0 auto;
+	display:block;
+}
+.section {
+  border-bottom:1px solid #eee;;
+}
+
+/* Let's make sure tables in the content area are 100% wide */
+.content table { width: 100%; }
+
+
+/* Odds and ends */
+.column {
+	width: 300px;
+	float:left;
+}
+.column tr td { padding: 15px; }
+.column-wrap {
+	padding:0!important;
+	margin:0 auto;
+	max-width:600px!important;
+}
+.column table { width:100%;}
+.social .column {
+	width: 280px;
+	min-width: 279px;
+	float:left;
+}
+
+/* Be sure to place a .clear element after each set of columns, just to be safe */
+.clear { display: block; clear: both; }
+
+
+/* -------------------------------------------
+		PHONE
+		For clients that support media queries.
+		Nothing fancy.
+-------------------------------------------- */
+@media only screen and (max-width: 600px) {
+	
+	a[class="btn"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}
+
+	div[class="column"] { width: auto!important; float:none!important;}
+	
+	table.social div[class="column"] {
+		width:auto!important;
+	}
+}
+
+
+/* ------------------
+        POST CUSTOM
+-------------------------------------------- */
+
+.h2 {
+    font-weight:600;
+    font-size:22px;
+    line-height:29px;
+	margin-bottom: 15px;
+}
+p, ul {
+	margin-bottom: 10px;
+	font-weight: 400;
+	font-size:16px;
+	line-height:22px;
+    a {
+        color:#333;
+        font-weight:600;
+    }
+
+}
+.hr {
+    border-bottom:1px solid #eee;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.signoff {
+	font-size:16px;
+	line-height:22px;
+    margin-bottom:35px;
+    font-weight:400;
+}
+.footer {
+    //font-weight:600;
+    font-size:11px;
+    line-height:11px;
+    margin-bottom:10px;
+    color:#999;
+    text-align:center;
+    a {
+        color:#666;
+        font-weight:600;
+    }
+}
+
+.footer-image {
+  width:100%;
+  display:block;
+  margin-bottom:20px;
+}
+
