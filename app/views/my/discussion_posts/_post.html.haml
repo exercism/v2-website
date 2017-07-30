@@ -2,8 +2,12 @@
   =image_tag post.user.avatar_url, class: 'avatar'
   .post-body
     .post-header
-      .created-at Responded #{time_ago_in_words(post.created_at)} ago
+      .created-at #{time_ago_in_words(post.created_at)} ago
       .user-name= post.user.name
-      .user-status Ruby Mentor
+      .user-status
+        -if post.user == @solution.user
+          Student
+        -else
+          Mentor
 
     .post-html= raw post.html
