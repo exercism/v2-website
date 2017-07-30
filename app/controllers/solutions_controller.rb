@@ -1,7 +1,30 @@
 class SolutionsController < ApplicationController
+  def index
+    @track = Track.find(params[:track_id])
+    @exercise = @track.exercises.find(params[:exercise_id])
+
+    # TODO - Restrict to published
+    @solutions = @exercise.solutions.published.includes(:user)
+
+    if user_signed_in?
+      @solutions = @solutions.where.not(user_id: current_user.id)
+      @current_user_track = UserTrack.where(user: current_user, track: @track).first
+      @user_solution = current_user.solutions.
+                                    where(exercise_id: @exercise.id).
+                                    where("EXISTS(select id from iterations where solution_id = solutions.id)").
+                                    first
+    end
+
+    @total_solutions = @solutions.count
+    @solutions = @solutions.page(params[:page]).per(20)
+
+    @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
+                             each_with_object({}) { |ut, h| h[ut.user_id] = ut }
+  end
+
   def show
     @track = Track.find(params[:track_id])
-    @exercise = @track.exercises.find(params[:id])
+    @exercise = @track.exercises.find(params[:exercise_id])
     @solution = @exercise.solutions.published.find(params[:id])
     @iteration = @solution.iterations.last
     @comments = @solution.reactions.with_comments.includes(user: :profile)

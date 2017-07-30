@@ -17,7 +17,7 @@ class Track < ApplicationRecord
 
   # TODO
   def bordered_turqioise_icon_url
-    'tmp/track-hex-green-bordered.png'
+    'tmp/track-hex-turquoise-bordered.png'
   end
 
   # TODO
@@ -34,7 +34,6 @@ class Track < ApplicationRecord
   def hex_white_icon_url
     'tmp/track-hex-white.png'
   end
-
 
   # TODO
   def introduction

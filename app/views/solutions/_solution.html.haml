@@ -1,0 +1,20 @@
+=link_to [@track, @exercise, solution], class: 'solution' do
+  .person
+    =image_tag display_avatar_url(solution.user, user_track)
+    .handle= display_name(solution.user, user_track)
+    .published-at Published #{time_ago_in_words(solution.published_at)} ago
+  / TOOD
+  .reactions
+    .reaction
+      %i.fa.fa-fw.fa-thumbs-up
+      .count 10
+    .reaction.highlight
+      %i.fa.fa-fw.fa-heart
+      .count 18
+    .reaction
+      =image_tag "genius.png"
+      .count 10
+    .reaction
+      %i.fa.fa-fw.fa-comment
+      .count 12
+

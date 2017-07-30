@@ -13,11 +13,19 @@
         text-decoration:none;
         font-weight:$regular;
         padding:5px 5px;
-        span {
-            border-bottom:1px solid #ccc;
+        position:relative;
+        &:before {
+            content: "";
+            content: "";
+            bottom: 4px;
+            left: 5px;
+            right: 5px;
+            position: absolute;
+            height: 1px;
+            background: #ccc;
         }
     }
-    &>.lo-container>span {
+    span {
         padding:5px 5px;
     }
     img {

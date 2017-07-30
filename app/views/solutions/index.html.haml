@@ -1,0 +1,74 @@
+#solutions-page
+  #nav.lo-nav-bar
+    .lo-container
+      -if user_signed_in?
+        =link_to "Dashboard", root_path
+        =image_tag "nav-divider.png"
+        =link_to "Language Tracks", [:my, :tracks]
+        =image_tag "nav-divider.png"
+        =link_to "#{@track.title} Track", [:my, @track]
+        =image_tag "nav-divider.png"
+        -if @user_solution
+          =link_to "Your Solution to #{@exercise.title}", [:my, @user_solution]
+          =image_tag "nav-divider.png"
+        %span Community Solutions
+      -else
+        =link_to "Language Tracks", :tracks
+        =image_tag "nav-divider.png"
+        =link_to "#{@track.title} Track", @track
+        =image_tag "nav-divider.png"
+        =link_to "Exercises", [@track, :exercises]
+        =image_tag "nav-divider.png"
+        =link_to @exercise.title, [@track, @exercise]
+        =image_tag "nav-divider.png"
+        %span Solutions
+
+  .header
+    .lo-container
+      .track
+        = image_tag @track.bordered_turqioise_icon_url
+        .title #{@track.title} Track
+      .icon
+        =image_tag @exercise.white_icon_url
+      %h1
+        Solutions to
+        %strong= @exercise.title
+      .h1-subtitle
+        Explore #{@total_solutions} community solutions.
+
+  .info-section
+    .lo-container
+      %h2 About this Exercise
+      -length_word = exercise_length_word(@exercise)
+      -difficulty_word = exercise_difficulty_word(@exercise)
+      .difficulty{class: difficulty_word}= difficulty_word
+      .length{class: length_word}= length_word
+
+      %p.blurb= @exercise.blurb
+      .topics
+        -@exercise.topic_names.each do |topic_name|
+          .topic= topic_name
+
+  .lo-container
+    .pure-g
+      -if @user_solution
+        .pure-u-1-3
+          -if @user_solution.published?
+            =render "solution", solution: @user_solution, user_track: @current_user_track
+          -else
+            =link_to [:my, @user_solution], class: 'user-solution' do
+              .person
+                %i.fa.fa-eye-slash.not-published-icon
+                =image_tag display_avatar_url(current_user, @current_user_track)
+                .handle 
+                  Your Solution
+                  .hidden-box Hidden
+                -if @user_solution.completed?
+                  .published-at Completed #{time_ago_in_words(@user_solution.completed_at)} ago
+
+              .no-reactions
+                Publish your solution to see others' reactions
+
+      -@solutions.each do |solution|
+        .pure-u-1-3
+          =render "solution", solution: solution, user_track: @user_tracks[solution.user_id]
