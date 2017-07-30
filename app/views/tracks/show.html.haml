@@ -1,107 +1,32 @@
-#track-page
-  #nav.lo-external-nav-bar
+#my-track-not-joined-page
+  #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      &middot;
+      =image_tag "nav-divider.png"
       =link_to "Language Tracks", [:tracks]
+      =image_tag "nav-divider.png"
+      %span #{@track.title} Track
 
   .header
+    .visual-section
+      .line
+      .lo-container
+        =image_tag @track.bordered_turqioise_icon_url, class: 'logo'
     .lo-container
       %h1= @track.title
-      %p= @track.introduction
+      / TODO - Work out where this button should go
+      = link_to "Join the #{@track.title} Track", [:my, :user_tracks, track_id: @track], method: :post, class: 'pure-button'
+      .h1-subtitle= @track.introduction
 
-  .overview-section
+  =render "tracks/overview"
+  =render "tracks/about"
+  =render "tracks/testimonial"
+  =render "tracks/mentors"
+  =render "tracks/exercises"
+  =render "tracks/maintainers"
+
+  .cta-section
     .lo-container
-      .pure-g
-        .pure-u-1-3
-          .pure-g
-            .pure-u-1-4
-              =image_tag "track-page-mentors.png"
-            .pure-u-3-4.info
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-
-        .pure-u-1-3
-          .pure-g
-            .pure-u-1-4
-              =image_tag "track-page-students.png"
-            .pure-u-3-4.info
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-
-        .pure-u-1-3
-          .pure-g
-            .pure-u-1-4
-              =image_tag "track-page-exercises.png"
-            .pure-u-3-4.info
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-
-  .about-section
-    .lo-container
-      .pure-g
-        .pure-u-3-4
-          %h2 About #{@track.title}
-          %p= @track.about
-        .pure-u-1-4
-          .code-sample
-            =image_tag "track-page-code-sample-frame.png"
-            =@track.code_sample
-
-  .testimonal-section
-    .lo-container
-      .frame
-        %h2 I learnt an incredible amount from the Ruby Track.
-        %p Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.
-        .byline Joe Bloggs, United Kingdom
-
-  .mentors-section
-    .lo-container
-      .h2-subtitle Relaxed. Encouraging. Supportive.
-      %h2 Meet the #{@track.title} Track Mentors
-      %p Once you join the #{@track.title} language track, you will receive support and feedback from our team of #{@track.title} mentors. Here are the bios of a few of #{link_to "the mentors of this track", track_mentors_path(@track)}.
-      .pure-g.mentors
-        -@mentors.each do |mentor|
-          .pure-u-1-2
-            .mentor
-              .pure-g
-                .pure-u-1-5
-                  =image_tag mentor.avatar_url
-                .pure-u-4-5
-                  %h3= mentor.handle
-                  %p= mentor.bio
-                  -if mentor.link_text.present? && mentor.link_url.present?
-                    %p= link_to mentor.link_url, mentor.link_text, target: "_blank"
-
-  .exercises-section
-    .lo-container
-      .h2-subtitle Fun. Challenging. Interesting
-      %h2 Community-sourced #{@track.title} Exercises
-      %p These are a few of the #{@track.exercises.active.count} exercises on the #{@track.title} track. You can see #{link_to "all the exercises here", track_exercises_path(@track)}.
-      .pure-g.exercises
-        -@exercises.each do |exercise|
-          -#
-            .pure-u-1-2
-              .exercise
-                .pure-g
-                  .pure-u-1-5
-                    =image_tag exercise.icon_url
-                  .pure-u-4-5
-                    %h3= exercise.title
-
-  .maintainers-section
-    .lo-container
-      .h2-subtitle Passionate. Knowledgeable. Creative.
-      %h2 Meet the #{@track.title} Track Maintainers
-      %p lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum. Here are the bios of a few of #{link_to "the maintainers of this track", track_maintainers_path(@track)}.
-      .pure-g.maintainers
-        -@maintainers.each do |maintainer|
-          .pure-u-1-2
-            .maintainer
-              .pure-g
-                .pure-u-1-5
-                  =image_tag maintainer.avatar_url
-                .pure-u-4-5
-                  %h3= maintainer.handle
-                  %p= maintainer.bio
-                  -if maintainer.link_text.present? && maintainer.link_url.present?
-                    %p= link_to maintainer.link_url, maintainer.link_text, target: "_blank"
-
-
+      %h2 Get started with the #{@track.title} track. As with everything on Exercism, it's 100% free.
+      / TODO - Work out where this button should go
+      = link_to "Join the #{@track.title} Track", [:my, :user_tracks, track_id: @track], method: :post, class: 'pure-button'

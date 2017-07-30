@@ -1,4 +1,11 @@
 #my-tracks-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to root_path do
+        %span Dashboard
+      =image_tag "nav-divider.png"
+      %span Language Tracks
+
   .header
     .lo-container
       %h1 Language Tracks
@@ -6,13 +13,31 @@
 
   .lo-container
     =form_tag [:my, :tracks], method: :get, remote: true do
-      =text_field_tag :title, @title
-      =button_tag "Update"
+      =text_field_tag :title, @title, placeholder: "Search for a language", autocomplete: "off"
+      =button_tag "Search", class: "pure-button"
 
-    %h2 Tracks You've Joined
-    .joined-tracks.pure-g
-      =render partial: "track", collection: @joined_tracks, locals: {joined: true}
+    .no-results
+      %h4 No results found.
+      %p 
+        Try searching for similar concepts or complimentary languages. We’re always concidering which language to add next so if there’s something you’d like to see on Exercism, please 
+        #{link_to "let us know", "mailto:hello@exercism.io"}
+        and we’ll work on building a track for the most popular suggestion as soon as we can.
 
-    %h2 Other Tracks
-    .other-tracks.pure-g
-      =render partial: "track", collection: @other_tracks, locals: {joined: false}
+    .joined-tracks
+      .num-tracks
+        Showing
+        %strong.num #{@joined_tracks.size}
+        tracks
+
+      %h2 Tracks You've Joined
+      .tracks.pure-g
+        =render partial: "track", collection: @joined_tracks, locals: {joined: true}
+
+    .other-tracks
+      .num-tracks
+        Showing
+        %strong.num #{@other_tracks.size}
+        tracks
+      %h2 Other Tracks
+      .tracks.pure-g
+        =render partial: "track", collection: @other_tracks, locals: {joined: false}

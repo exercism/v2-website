@@ -1,9 +1,11 @@
 #my-track-not-joined-page
-  #nav.lo-external-nav-bar
+  #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      &middot;
+      =image_tag "nav-divider.png"
       =link_to "Language Tracks", [:tracks]
+      =image_tag "nav-divider.png"
+      %span #{@track.title} Track
 
   .header
     .visual-section

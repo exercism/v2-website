@@ -1,10 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
-#nav.lo-internal-nav-bar {
+#nav.lo-nav-bar {
     background:#eee;
-    margin-bottom:20px;
+    //margin-bottom:20px;
     a, span {
+        display:inline-block;
         @include font-size(12, 12);
     }
     a {
@@ -16,7 +17,7 @@
             border-bottom:1px solid #ccc;
         }
     }
-    &>span {
+    &>.lo-container>span {
         padding:5px 5px;
     }
     img {

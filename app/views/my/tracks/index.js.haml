@@ -1,2 +1,18 @@
-$('#tracks-page .joined-tracks').html("#{j render(partial: "track", collection: @joined_tracks, locals: {joined: true})}")
-$('#tracks-page .other-tracks').html("#{j render(partial: "track", collection: @other_tracks, locals: {joined: false})}")
+-if @joined_tracks.empty? && @other_tracks.empty?
+  $('.no-results').show()
+-else
+  $('.no-results').hide()
+
+-if @joined_tracks.size > 0
+  $('#my-tracks-page .joined-tracks').show()
+  $('#my-tracks-page .joined-tracks .num-tracks .num').html('#{@joined_tracks.size}')
+  $('#my-tracks-page .joined-tracks .tracks').html("#{j render(partial: "track", collection: @joined_tracks, locals: {joined: true})}")
+-else
+  $('#my-tracks-page .joined-tracks').hide()
+
+-if @other_tracks.size > 0
+  $('#my-tracks-page .other-tracks').show()
+  $('#my-tracks-page .other-tracks .num-tracks .num').html('#{@other_tracks.size}')
+  $('#my-tracks-page .other-tracks .tracks').html("#{j render(partial: "track", collection: @other_tracks, locals: {joined: false})}")
+-else
+  $('#my-tracks-page .other-tracks').hide()

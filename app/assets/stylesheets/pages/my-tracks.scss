@@ -2,49 +2,114 @@
 @import 'mixins';
 #my-tracks-page {
     .header {
-        background: $header-color-1;
-        padding:0 0 35px;
+        background-color:$color-2;
+        background-image:image-url('background-overlay.png');
+        background-size:cover;
+        padding:100px 0 35px;
+        margin-bottom:35px;
 
         h1 {
             padding-top:20px;
-            @include font-size(34, 34);
+            @include font-size(40, 40);
+            letter-spacing:-1.56px;
             font-weight:$bold;
             margin-bottom:5px;
             color:#fff;
         }
         .h1-subtitle {
-            @include font-size(12, 14);
+            max-width:70%;
+            @include font-size(16, 21);
             color:#fff;
-            font-weight:200;
+            font-weight:$light;
         }
     }
     form {
         margin-bottom:20px;
-        padding:10px 0 0 0;
-        input {
-            @include font-size(12, 12);
-            border:1px solid #aaa;
-            padding:5px 10px;
+        position: relative;
+        &:before {
+            font-family:FontAwesome;
+            content: "\f002";
+            position: absolute;
+            left: 10px;
+            top: 8px;
+            color:#bbb;
         }
+        input {
+            @include font-size(14, 14);
+            border:1px solid #ddd;
+            padding:7px 10px 7px 30px;
+            border-radius:2px;
+            width:350px;
+            vertical-align:middle;
+            margin-right:5px;
+        }
+        button {
+            border:1px solid #ddd;
+            padding:7px 20px;
+            font-weight:$regular;
+            border-radius:2px;
+            background:#f6f6f6;
+            color:#666;
+        }
+
+    }
+    .joined-tracks {
+        margin-top:40px;
+    }
+    .other-tracks {
+        margin-top:30px;
     }
     h2 {
-        @include font-size(20, 20);
-        font-weight:$bold;
-        margin-bottom:10px;
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin-bottom:15px;
+    }
+    .no-results {
+        display:none;
+        padding-bottom:30px;
+        h4 {
+            @include font-size(16, 16);
+            color:#555;
+            font-weight:$regular;
+            margin-bottom:10px;
+        }
+        p {
+            @include font-size(14, 19);
+            max-width:650px;
+            border-left:7px solid #eee;
+            padding-left:15px;
+            color:#999;
+            a {
+                text-decoration:underline;
+                color:#999;
+            }
+        }
+
+    }
+    .num-tracks {
+        float:right;
+        margin-right:20px;
+        color:#666;
+        margin-top:5px;
+        @include font-size(12, 12);
+        strong {
+            font-weight:$regular;
+        }
     }
     .track {
         display:block;
         background:#fff;
         color:#333;
         text-decoration:none;
-        border:1px solid #aaa;
-        padding:20px;
+        border:1px solid #c2c3c3;
+        border-radius:2px;
+        padding:10px 20px;
         margin: 0 20px 20px 0;
-        height:120px;
         position:relative;
+        overflow:hidden;
 
         &:hover {
-            border-color:green;
+            border-color:$color-2;
         }
 
         .status {
@@ -52,43 +117,50 @@
             display:none;
         }
 
-        .icon {
-            display:block;
+        img {
+            height:78px;
             width:70px;
-            height:70px;
-            padding:10px;
+            display:block;
             float:left;
             margin-right:15px;
-            background-color:#eee;
-            .img {
-                width:50px;
-                height:50px;
-                background-repeat:no-repeat;
-                background-size:contain;
-                background-position:center center;
-            }
         }
         .title {
             @include font-size(18, 18);
-            font-weight:900;
-            margin-bottom:10px;
+            font-weight:$bold;
             margin-right:5px;
             display:inline-block;
+            vertical-align:bottom;
+            margin-bottom:7px;
+            margin-top:20px;
+        }
+        .num-exercises,
+        .progress {
+            padding:4px 7px;
+            display:inline-block;
+            margin-bottom:7px;
+            @include font-size(10, 10);
+            font-weight:$regular;
+            color:#999;
         }
         .num-exercises {
-            background:#eee;
-            @include font-size(10, 10);
-            //text-transform:uppercase;
-            padding:3px 7px;
-            display:inline-block;
+            background:#f3f3f3;
+        }
+        .progress {
+            background:#fff;
+            border:1px solid #dcf2f3;
+            position:relative;
+            .filled {
+                position:absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                background:#dcf2f3;
+            }
         }
         .enrolled {
-            i {
-                color:#aaa;
-            }
-            span {
-                @include font-size(12, 12);
-            }
+            @include font-size(12, 12);
+            font-weight:$regular;
+            color:#999;
         }
 
         &.joined {

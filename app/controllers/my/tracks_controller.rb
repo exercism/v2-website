@@ -1,6 +1,6 @@
 class My::TracksController < MyController
   def index
-    tracks = Track.all
+    tracks = Track.order('title ASC')
     tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
     joined_track_ids = current_user.user_tracks.pluck(:track_id)
 
