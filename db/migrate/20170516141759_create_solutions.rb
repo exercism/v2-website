@@ -15,7 +15,7 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.datetime :last_updated_by_mentor_at, null: true
       t.integer :num_mentors, null: false, default: 0
 
-      t.text :notes, null: true
+      t.text :reflection, null: true
 
       t.timestamps
     end

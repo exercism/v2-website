@@ -8,11 +8,8 @@ body.controller-solutions {
 }
 
 #my-solution-started-page {
-    .placeholder-header {
-        padding:50px;
-        background:#fff;
-    }
     .track-header {
+        margin-top:20px;
         border:1px solid #e5e5e5;
         border-radius:2px;
         padding:22px 20px;
@@ -186,12 +183,6 @@ body.controller-solutions {
                     }
                 }
             }
-            .lhs-content {
-                .panes {
-                    border:1px solid #ddd;
-                    border-radius:2px;
-                }
-            }
         }
         .rhs {
             overflow:hidden;
@@ -201,73 +192,6 @@ body.controller-solutions {
             }
         }
 
-    }
-    .pane.instructions {
-        padding:20px 30px;
-        h1,h2,h3,h4,h5,h6 {
-            font-weight:$regular;
-            @include font-size(16, 16);
-            margin-bottom:7px;
-        }
-        h1 {
-            @include font-size(18, 18);
-            font-weight:$bold;
-            margin-bottom:15px;
-        }
-        h2 {
-            @include font-size(14, 14);
-            padding-bottom:3px;
-            border-bottom:1px solid #eee;
-            margin-bottom:10px;
-        }
-        p {
-            @include font-size(14, 20);
-            margin-bottom:7px;
-        }
-        p+h2 {
-            margin-top:20px;
-        }
-        pre {
-            margin-bottom:10px;
-            background:#f6f6f6;
-        }
-        code {
-            @include font-size(12, 12);
-            color:#666;
-        }
-        a {
-            color:#333;
-        }
-
-    }
-    .pane.test-suite {
-        background:#f9f9f9;
-        h3 {
-            padding:10px 50px 10px 27px;
-            font-weight:500;
-            @include font-size(13, 13);
-            background:#eee;
-            color:#666;
-            border-bottom:1px solid #ddd;
-            margin-bottom:5px;
-        }
-        pre+h3 {
-            margin-top:10px;
-        }
-        pre {
-            padding-top:10px;
-        }
-    }
-    .pane.solution, .pane.test-suite {
-        pre {
-            margin:0;
-            background:#f9f9f9;
-            padding-top:0;
-            padding-bottom:0;
-            code[class*="language-"] {
-                font-size:12px;
-            }
-        }
     }
     .discussion {
         h3 {

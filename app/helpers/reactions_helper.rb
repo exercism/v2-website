@@ -1,12 +1,12 @@
 module ReactionsHelper
   def reaction_icon(reaction)
     case reaction.emotion.to_sym
+    when :like
+      "fa-thumbs-up"
     when :love
       "fa-heart"
-    when :wowed
-      "fa-sun-o"
-    when :applaud
-      "fa-thumbs-up"
+    when :genius
+      "fa-sun-o" # TODO
     end
   end
 end
