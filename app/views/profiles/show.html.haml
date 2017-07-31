@@ -2,7 +2,7 @@
   .header
     .lo-container
       -if user_signed_in? && current_user == @profile.user
-        =link_to [:edit, :my, :profile], class: "pure-button edit-button" do
+        =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
           %i.fa.fa-cogs
           Edit Public Profile 
       %h1 #{@profile.display_name}'s Profile

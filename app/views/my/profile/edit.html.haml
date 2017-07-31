@@ -1,20 +1,37 @@
-#new-profile-page
-  .lo-container
-    %h1 Update your profile
-    =form_for @profile, url: my_profile_path, method: :patch do |f|
-      %div
-        =f.text_field :name, placeholder: "Your name", required: true
-      %div
-        =f.text_field :slug, placeholder: "http://exercism.io/profiles/SLUG", required: true
-      %div
-        =f.text_field :website, placeholder: "Your website"
-      %div
-        =f.text_field :twitter, placeholder: "Your twitter"
-      %div
-        =f.text_field :github, placeholder: "Your Github"
-      %div
-        =f.text_field :linkedin, placeholder: "Your Linkedin"
-      %div
-        =f.text_field :medium, placeholder: "Your Medium"
+%h2 Update your profile
+.h2-subtitle Tell the Exercism community a little about yourself.
+=form_for @profile, url: my_profile_path, method: :patch do |f|
+  =fields_for @profile.user do |uf|
+    .pure-g
+      .pure-u-1-2.lhs
+        .avatar-section
+          %h3 Avatar
+          =image_tag @profile.user.avatar_url
+          .file-selector
+            Change Image
+            =uf.file_field :avatar
+          %p Try and choose a square photo that works with rounded.
 
-      =f.button "Update profile"
+        .bio-section
+          %h3 Bio
+          =uf.text_area :bio, placeholder: "Tell the world a little about who you are"
+
+      .pure-u-1-2.rhs
+        %h3 Elsewhere Online
+        .field
+          %i.fa.fa-globe
+          =f.text_field :website, placeholder: "Your website"
+        .field.twitter
+          %i.fa.fa-twitter
+          =f.text_field :twitter, placeholder: "handle"
+        .field.github
+          %i.fa.fa-github
+          =f.text_field :github, placeholder: "handle"
+        .field
+          %i.fa.fa-linkedin
+          =f.text_field :linkedin, placeholder: "Your Linkedin"
+        .field.medium
+          %i.fa.fa-medium
+          =f.text_field :medium, placeholder: "handle"
+
+    =f.button "Update profile", class: 'pure-button'

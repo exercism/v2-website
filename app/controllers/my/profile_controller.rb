@@ -26,6 +26,7 @@ class My::ProfileController < MyController
   end
 
   def edit
+    render_modal("edit-profile", "edit")
   end
 
   def update
