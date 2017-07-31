@@ -8,10 +8,10 @@ smtp_domain = smtp_config["domain"]
 smtp_port = smtp_config["port"]
 
 Rails.application.config.action_mailer.smtp_settings = {
-  :user_name => '3213fc4e9a3f2d38',
-  :password => '18efa7fa812f69',
-  :address => 'smtp.mailtrap.io',
-  :domain => 'smtp.mailtrap.io',
-  :port => '2525',
+  :user_name => smtp_user,
+  :password => smtp_pw,
+  :address => smtp_address,
+  :domain => smtp_domain,
+  :port => smtp_port,
   :authentication => :cram_md5
 }
