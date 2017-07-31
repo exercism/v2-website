@@ -1,6 +1,7 @@
 class Git::FetchesTracks
 
-  QUIET_PERIOD = 10.seconds
+  QUIET_PERIOD = 30.seconds
+  ERROR_BACKOFF_PERIOD = 10.seconds
 
   def self.run
     new.run
@@ -12,7 +13,7 @@ class Git::FetchesTracks
         fetch(track)
         sleep 1.second
       end
-      sleep 1.second
+      sleep QUIET_PERIOD
     end
   end
 
@@ -29,7 +30,7 @@ class Git::FetchesTracks
   rescue => e
     puts e.message
     puts e.backtrace
-    sleep QUIET_PERIOD
+    sleep ERROR_BACKOFF_PERIOD
   end
 
 end
