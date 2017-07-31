@@ -4,17 +4,17 @@
     %h2
       Meet the #{@track.title} Track Maintainers
       %i.fa.fa-wrench
-    %p lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum. Here are the bios of a few of #{link_to "the maintainers of this track", track_maintainers_path(@track)}.
+    %p The #{@track.title} Maintainers are the brains behind the #{@track.title} Track. They spend their spare time creating interesting and challenging exercises that we can all learn from. We are incredibly grateful for their hard work. Here are the bios of a few of #{link_to "the maintainers of this track", track_maintainers_path(@track)}.
     .pure-g.maintainers
       -@maintainers.each do |maintainer|
         .pure-u-1-2
           .maintainer
             .pure-g
-              .pure-u-1-5
+              .pure-u-1-4
                 =image_tag maintainer.avatar_url
-              .pure-u-4-5
-                %h3= maintainer.name
-                %p= maintainer.bio
-                -if maintainer.link_text.present? && maintainer.link_url.present?
-                  %p= link_to maintainer.link_url, maintainer.link_text, target: "_blank"
-
+              .pure-u-3-4
+                %h3
+                  = maintainer.name
+                  -if maintainer.link_text.present? && maintainer.link_url.present?
+                    =link_to maintainer.link_text, maintainer.link_url, target: "_blank"
+                .bio= maintainer.bio
