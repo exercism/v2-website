@@ -7,14 +7,21 @@ class API::SolutionsController < APIController
 
     render json: {}, status: 403 and return unless solution
 
+    # TODOGIT - Populate this.
+    files = []
+    iteration_output = iteration ? {submitted_at: iteration.created_at } : nil
     render json: {
       solution: {
+        id: solution.id,
         exercise: {
-          instructions_url: "",
-          test_suite_url: "",
-          template_url: ""
-        },
-        iteration: nil
+          id: solution.exercise.id,
+          instructions_url: my_solution_url(solution),
+          track: {
+            id: solution.exercise.track.id
+          }
+        }
+        files: files,
+        iteration: iteration_output
       }
     }
   end

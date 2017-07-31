@@ -15,8 +15,8 @@ class My::ProfileController < MyController
   def create
     @profile = CreatesProfile.create(
       current_user,
-      params[:profile][:name],
-      params[:profile][:slug]
+      #params[:profile][:name],
+      #params[:profile][:slug]
     )
     if @profile.persisted?
       redirect_to action: :edit

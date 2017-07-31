@@ -7,6 +7,7 @@ class Git::SeedsTracks
     https://github.com/exercism/bash
     https://github.com/exercism/javascript
     https://github.com/ccare/delphi
+    https://github.com/exercism/r
   }
 
   def self.seed!

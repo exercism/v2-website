@@ -6,24 +6,26 @@ class CreatesProfile
     new(*args).create
   end
 
-  attr_reader :user, :name, :slug
-  def initialize(user, name, slug)
+  attr_reader :user
+  def initialize(user)
     @user = user
-    @name = name
-    @slug = sanitize_slug(slug)
   end
 
   def create
     Profile.create(
       user: user,
-      name: name,
+      display_name: display_name,
       slug: slug
     )
   end
 
   private
 
-  def sanitize_slug(s)
-    s.gsub(/[^[a-zA-Z0-9]]/, '').downcase
+  def display_name
+    user.name.present?? user.name : user.handle
+  end
+
+  def slug
+    user.handle.gsub(/[^[a-zA-Z0-9]]/, '').downcase
   end
 end

@@ -82,7 +82,7 @@
                 .percentage #{percentage.round}%
                 .bar
                   .filled{style: "width: #{percentage.round}%"}
-                  .title= topic.downcase
+                  .title= topic.titleize
 
   #side-exercises.side-exercises
     .lo-container
@@ -129,8 +129,6 @@
 
 -content_for :js do
   :coffeescript
-    $('select').selectize()
-
     updateSideExercises = =>
       $('.side_exercises_form').trigger('submit.rails')
     $('.side_exercises_form select').change updateSideExercises

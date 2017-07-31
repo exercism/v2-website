@@ -16,3 +16,6 @@
 //= require simplemde/dist/simplemde.min.js
 //= require selectize/dist/js/standalone/selectize.js
 //= require_tree .
+
+$('select').selectize()
+

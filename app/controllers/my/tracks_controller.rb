@@ -17,9 +17,7 @@ class My::TracksController < MyController
     normal_exercises, deprecated_exercises = exercises.partition {|e|e.active?}
     core_exercises, side_exercises = normal_exercises.partition {|e|e.core?}
 
-    # TODO - Make this just for this track maybe?
-    # Not sure whether it'll make it faster or slower
-    solutions = current_user.solutions.includes(:exercise)
+    solutions = current_user.solutions.includes(:exercise).where('exercises.track_id': @track.id)
     mapped_solutions = solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
 
     @user_track = UserTrack.where(user: current_user, track: @track).first

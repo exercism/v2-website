@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
 
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
+    t.string "display_name", null: false
     t.string "slug", null: false
     t.string "twitter"
     t.string "website"

@@ -235,7 +235,7 @@
     .mentors-section,
     .maintainers-section {
         .mentors, .maintainers {
-            max-width:800px;
+            max-width:1000px;
             margin: 0 auto 0 auto;
         }
         .mentor, .maintainer {
@@ -269,7 +269,7 @@
             }
             .bio {
                 color:#555;
-                @include font-size(14, 16);
+                @include font-size(14, 17);
                 letter-spacing:-0.3px;
             }
         }
