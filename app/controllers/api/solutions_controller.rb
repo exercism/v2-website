@@ -1,29 +1,28 @@
 class API::SolutionsController < APIController
-  before_action :set_track
-  before_action :set_exercise
+  def latest
+    begin
+      track = Track.find(params[:track_id])
+    rescue
+      return render json: {error: "Track not found", fallback_url: tracks_url}, status: 404
+    end
 
-  def index
-    solution = current_user.solutions.where(exercise_id: @exercise.id).order('id asc').last
+    begin
+      exercise = track.exercises.find(params[:exercise_id])
+    rescue
+      return render json: {error: "Exercise not found", fallback_url: track_url(track)}, status: 404
+    end
 
-    render json: {}, status: 403 and return unless solution
+    solution = exercise.solutions.last
+    return head 404 unless solution
 
-    # TODOGIT - Populate this.
-    files = []
-    iteration_output = iteration ? {submitted_at: iteration.created_at } : nil
-    render json: {
-      solution: {
-        id: solution.id,
-        exercise: {
-          id: solution.exercise.id,
-          instructions_url: my_solution_url(solution),
-          track: {
-            id: solution.exercise.track.id
-          }
-        }
-        files: files,
-        iteration: iteration_output
-      }
-    }
+    unless current_user == solution.user ||
+           solution.published? ||
+           current_user.mentoring_track?(track)
+      return render json: {}, status: 403
+    end
+
+    responder = API::SolutionResponder.new(solution, current_user)
+    render json: responder.to_hash
   end
 
   def update

@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
 
   namespace :api do
-    resources :tracks, only: [] do
-      resources :exercises, only: [] do
-        resources :solutions, only: [:index, :update]
+    resources :solutions, only: [:update] do
+      collection do
+        get :latest
       end
     end
   end

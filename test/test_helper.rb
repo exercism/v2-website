@@ -4,6 +4,8 @@ require 'mocha/mini_test'
 require 'timecop'
 require 'minitest/pride'
 
+Rails.application.routes.default_url_options = { :host => "https://exercism.io" }
+
 class ActionView::TestCase
   include FactoryGirl::Syntax::Methods
 end
