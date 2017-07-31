@@ -55,8 +55,6 @@ class Git::StateDb
           elsif state[:success]
             to_sync << state if state[:last_sync] < stale_cut_off
           else
-            puts failure_cooloff_period.ago
-            puts state
             failures_to_retry << state if state[:last_sync] < failure_cut_off
           end
           item = cursor.next

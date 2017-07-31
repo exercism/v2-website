@@ -13,6 +13,10 @@ class Git::ExerciseReader
     return nil if readme_ptr.nil?
     blob = repo.lookup(readme_ptr[:oid])
     blob.text
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
   end
 
   def tests
@@ -24,6 +28,10 @@ class Git::ExerciseReader
       test_suites[name] = blob.text
     end
     test_suites
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    nil
   end
 
   def solution
@@ -37,6 +45,10 @@ class Git::ExerciseReader
     return nil if first_file.nil?
     blob = repo.lookup(first_file[:oid])
     blob.text
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
   end
 
   private
