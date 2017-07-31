@@ -1,8 +1,11 @@
 #profile-page
   .header
     .lo-container
+      -if user_signed_in? && current_user == @profile.user
+        =link_to [:edit, :my, :profile], class: "pure-button edit-button" do
+          %i.fa.fa-cogs
+          Edit Public Profile 
       %h1 #{@profile.display_name}'s Profile
-      .num-solutions 34 published solutions
       .h1-subtitle This is a showcase of some of the solutions that #{@profile.user.name} has submitted on Exercism.
 
   .lo-container
@@ -25,12 +28,12 @@
               .badge.maintainer #{track.title} Maintainer
           .member-since
             %i.fa.fa-fw.fa-calendar
-            since #{@profile.user.created_at.strftime("%b %Y")}
+            Since #{@profile.user.created_at.strftime("%b %Y")}
 
           -if @helped_count > 0
             .helped-count
               %i.fa.fa-fw.fa-handshake-o
-              helped
+              Helped
               .count #{@helped_count}
               students
           .hr
@@ -62,6 +65,7 @@
               %span Medium
 
       .pure-u-18-24.rhs
+        .num-solutions Showing #{pluralize @solutions.size, "solution"}
         .filters
           .widget-filter
             .title Language:
