@@ -10,8 +10,13 @@ class Git::ExerciseReader
 
   def readme
     readme_ptr = exercise_tree['README.md']
+    return nil if readme_ptr.nil?
     blob = repo.lookup(readme_ptr[:oid])
     blob.text
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
   end
 
   def tests
@@ -23,6 +28,27 @@ class Git::ExerciseReader
       test_suites[name] = blob.text
     end
     test_suites
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    nil
+  end
+
+  def solution
+    meta_ptr = exercise_tree[".meta"]
+    return nil if meta_ptr.nil?
+    meta_tree = repo.lookup(meta_ptr[:oid])
+    solutions_ptr = meta_tree["solutions"]
+    return nil if solutions_ptr.nil?
+    solutions_tree = repo.lookup(solutions_ptr[:oid])
+    first_file = solutions_tree.first
+    return nil if first_file.nil?
+    blob = repo.lookup(first_file[:oid])
+    blob.text
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
   end
 
   private

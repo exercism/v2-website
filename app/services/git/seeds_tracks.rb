@@ -24,7 +24,6 @@ class Git::SeedsTracks
       Git::SeedsTrack.seed!(repo_url)
     end
     Track.find_each do |track|
-      next if track.repo_url.start_with?("http://example.com")
       Git::SyncsTrack.sync!(track)
     end
   end

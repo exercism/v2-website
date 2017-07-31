@@ -26,6 +26,7 @@ gem 'rouge', require: false
 gem 'rugged'
 gem 'sidekiq'
 gem 'loofah'
+gem 'lmdb'
 gem 'octokit'
 
 group :development, :test do

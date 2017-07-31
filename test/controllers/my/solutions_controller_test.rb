@@ -2,6 +2,14 @@ require 'test_helper'
 
 class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
+  def setup
+    @mock_exercise = stub(
+      instructions: "instructions",
+      test_suite: { test_file: "test_suite" }
+    )
+    GitExercise.stubs(new: @mock_exercise)
+  end
+
   {
     unlocked: "my-solution-unlocked-page",
     iterating: "my-solution-started-page",
@@ -21,18 +29,19 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
   test "reflects properly" do
     sign_in!
+    exercise = create :exercise
     solution = create :solution, user: @current_user
     iteration = create :iteration, solution: solution
     discussion_post_1 = create :discussion_post, iteration: iteration
     discussion_post_2 = create :discussion_post, iteration: iteration
     discussion_post_3 = create :discussion_post, iteration: iteration
-    notes = "foobar"
+    reflection = "foobar"
 
     create :solution_mentorship, solution: solution, user: discussion_post_1.user
     create :solution_mentorship, solution: solution, user: discussion_post_3.user
 
     patch reflect_my_solution_url(solution), params: {
-      notes: notes,
+      reflection: reflection,
       mentor_reviews: {
         discussion_post_1.user_id => { rating: 3, review: "asdasd" },
         discussion_post_3.user_id => { rating: 2, review: "asdaqweqwewqewq" }
@@ -42,7 +51,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     solution.reload
-    assert_equal solution.notes, notes
+    assert_equal solution.reflection, reflection
     assert_equal 2, SolutionMentorship.where.not(rating: nil).count
   end
 

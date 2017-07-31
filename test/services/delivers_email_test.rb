@@ -8,7 +8,7 @@ class DeliversEmailTest < ActiveSupport::TestCase
     test "mail_type: #{mail_type}" do
       user = create :user
 
-      mailer_action = mock(:deliver)
+      mailer_action = mock(:deliver_later)
       mailer.expects(action).with(user).returns(mailer_action)
       notification = DeliversEmail.deliver!(user, mail_type)
     end
@@ -19,7 +19,7 @@ class DeliversEmailTest < ActiveSupport::TestCase
     discussion_post = mock
     mail_type = :new_discussion_post
 
-    mailer_action = mock(:deliver)
+    mailer_action = mock(:deliver_later)
     UserNotificationsMailer.expects(:new_discussion_post).with(user, discussion_post).returns(mailer_action)
     notification = DeliversEmail.deliver!(user, mail_type, discussion_post)
   end

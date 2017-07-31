@@ -1,21 +1,33 @@
 class Git::SyncsTrack
 
   def self.sync!(track)
-    new(track).sync!
+    new(Git::StateDb.instance, track).sync!
   end
 
-  attr_reader :track
+  attr_reader :state_db, :track
 
-  def initialize(track)
+  def initialize(state_db, track)
+    @state_db = state_db
     @track = track
     @unlocked_by_relationships = {}
   end
 
   def sync!
+    if repo_url.start_with?("http://example.com")
+      puts "Skipping sync for #{repo_url}"
+      state_db.mark_synced(track)
+      return
+    end
+
+    sync_track_metadata
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
-    sync_maintainers # TODOGIT - care - I moved this up here because it was getting called per-exercise where it was.
+    sync_maintainers
     populate_unlocked_by_relationships
+    state_db.mark_synced(track)
+  rescue => e
+    state_db.mark_failed(track)
+    raise
   end
 
   private
@@ -91,19 +103,46 @@ class Git::SyncsTrack
       length: exercise.fetch(:length, 1),
       topics: topics,
 
-      #TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
+      # TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
       # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
       # blurb: ""
 
-      #TODOGIT - These point to a file on s3, that we have prepopulated
+      # TODOGIT - These point to a file on s3, that we have prepopulated
       # We'll need to check for the existance of the file when doing this
       # and set to null if it doesn't exist. For now, it's using tmp images on my hdd.
       dark_icon_url: dark_icon_url,
       turquoise_icon_url: turquoise_icon_url,
-      white_icon_url: white_icon_url,
+      white_icon_url: white_icon_url
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
+  end
+
+  def sync_track_metadata
+    track.update!(introduction: track_introduction,
+      about: track_about,
+      code_sample: code_sample)
+  end
+
+  def track_introduction
+    config["introduction"] || ""
+  end
+
+  def track_about
+    repo.about || ""
+  end
+
+  def code_sample
+    code_sample = repo.snippet_file
+    return code_sample unless code_sample.nil?
+    first_exercise = exercises.first
+    first_exercise_slug = first_exercise[:slug]
+    ex = repo.exercise(first_exercise_slug, repo.head)
+    ex.solution || ""
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
   end
 
   def sync_maintainers
@@ -112,7 +151,7 @@ class Git::SyncsTrack
   end
 
   def exercises
-    config[:exercises]
+    config[:exercises] || []
   end
 
   def config

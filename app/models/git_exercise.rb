@@ -7,16 +7,16 @@ class GitExercise
   end
 
   def instructions
-    ParsesMarkdown.parse(repo_exercise.readme)
+    ParsesMarkdown.parse(exercise_reader.readme)
   end
 
   def test_suite
-    repo_exercise.tests
+    exercise_reader.tests
   end
 
   private
 
-  def repo_exercise
+  def exercise_reader
     @repo_exercise ||= repo.exercise(git_slug, git_sha)
   end
 

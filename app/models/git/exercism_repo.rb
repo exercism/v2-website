@@ -13,6 +13,14 @@ class Git::ExercismRepo
     @auto_fetch = auto_fetch
   end
 
+  def snippet_file
+    read_snippet(head_commit)
+  end
+
+  def about
+    read_about(head_commit)
+  end
+
   def config
     read_config(head_commit)
   end
@@ -41,6 +49,24 @@ class Git::ExercismRepo
   end
 
   private
+
+  def read_about(commit)
+    read_docs(commit, "ABOUT.md")
+  end
+
+  def read_snippet(commit)
+    read_docs(commit, "SNIPPET.txt")
+  end
+
+  def read_docs(commit, file_name)
+    docs_tree_ptr = commit.tree['docs']
+    return nil if docs_tree_ptr.nil?
+    docs_tree = repo.lookup(docs_tree_ptr[:oid])
+    file_pointer = docs_tree[file_name]
+    return nil if file_pointer.nil?
+    blob = repo.lookup(file_pointer[:oid])
+    blob.text
+  end
 
   def read_config(commit)
     config_pointer = commit.tree['config.json']
@@ -78,6 +104,11 @@ class Git::ExercismRepo
     else
       Rugged::Repository.clone_at(repo_url, repo_dir, bare: true)
     end
+  rescue => e
+    Rails.logger.error "Failed to clone repo #{repo_url}"
+    puts "Failed to clone repo #{repo_url}"
+    puts e.message
+    raise
   end
 
   def auto_fetch?
