@@ -29,8 +29,8 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
   test "reflects properly" do
     sign_in!
-    exercise = create :exercise
-    solution = create :solution, user: @current_user
+    exercise = create :exercise, core: true
+    solution = create :solution, user: @current_user, exercise: exercise
     iteration = create :iteration, solution: solution
     discussion_post_1 = create :discussion_post, iteration: iteration
     discussion_post_2 = create :discussion_post, iteration: iteration
@@ -39,6 +39,10 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     create :solution_mentorship, solution: solution, user: discussion_post_1.user
     create :solution_mentorship, solution: solution, user: discussion_post_3.user
+
+    # Create next core exercise for user
+    next_exercise = create :exercise, track: exercise.track, position: 2, core: true
+    create :solution, user: @current_user, exercise: next_exercise
 
     patch reflect_my_solution_url(solution), params: {
       reflection: reflection,
@@ -53,6 +57,10 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     solution.reload
     assert_equal solution.reflection, reflection
     assert_equal 2, SolutionMentorship.where.not(rating: nil).count
+  end
+
+  test "reflects without next core exercise" do
+    skip
   end
 
   def create_unlocked_solution

@@ -24,7 +24,6 @@ FactoryGirl.define do
 
   factory :profile do
     user { create :user }
-    avatar_url "http://foobar.png"
     slug { SecureRandom.uuid }
   end
 

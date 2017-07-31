@@ -32,7 +32,7 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    #CompletesSolution.complete!(@solution) #TODO - Reenable
+    CompletesSolution.complete!(@solution)
     @exercise = @solution.exercise
     @track = @exercise.track
     @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
@@ -44,7 +44,7 @@ class My::SolutionsController < MyController
   end
 
   def reflect
-    @solution.update(notes: params[:notes])
+    @solution.update(reflection: params[:reflection])
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewsSolutionMentoring.review!(
         @solution,
@@ -54,10 +54,14 @@ class My::SolutionsController < MyController
       )
     end
     @track = @solution.exercise.track
-    @next_core_exercise = Solution.not_completed.
-                          where(exercise_id: @track.exercises).
-                          joins(:exercise).where("exercises.core": true).
+
+    # TODO - if this is a side exercise, it won't unlock a core.
+    @next_core_exercise = current_user.solutions.not_completed.
+                          joins(:exercise).
+                          where("exercises.track_id": @track.id).
+                          where("exercises.core": true).
                           first.exercise
+
     @unlocked_side_exercises = @solution.exercise.unlocks
 
     render_modal("solution-unlocked", "unlocked")
