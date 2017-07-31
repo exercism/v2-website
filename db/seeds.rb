@@ -28,7 +28,7 @@ TrackMentorship.create(user: kytrinyx, track: ruby)
 ihid_ruby = UserTrack.create!(user: ihid, track: ruby)
 ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar', completed_at: DateTime.now, published_at: DateTime.now)
 ihid_slug_iteration_1 = Iteration.create!(solution: ihid_slug, code: "CODE")
-ihid_slug_reaction = Reaction.create(user: kytrinyx, solution: ihid_slug, emotion: :wowed, comment: "This is sick")
+ihid_slug_reaction = Reaction.create(user: kytrinyx, solution: ihid_slug, emotion: :genius, comment: "This is sick")
 
 ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar')
 ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob, code: %q{

@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.datetime "last_updated_by_user_at"
     t.datetime "last_updated_by_mentor_at"
     t.integer "num_mentors", default: 0, null: false
-    t.text "notes"
+    t.text "reflection"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
