@@ -1,7 +1,6 @@
 class My::SideExercisesController < MyController
   before_action :set_track
 
-  # TODO - Update the num_exercise in the template
   def index
     exercises = @track.exercises.side.active.includes(:topics)
     exercises = exercises.where(difficulty: params[:difficulty]) if params[:difficulty].to_i > 0
