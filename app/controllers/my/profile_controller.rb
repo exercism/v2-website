@@ -9,7 +9,7 @@ class My::ProfileController < MyController
 
   def new
     redirect_to profile_path if current_user.profile
-    @profile = Profile.new(name: current_user.name)
+    @profile = Profile.new(user: current_user)
   end
 
   def create

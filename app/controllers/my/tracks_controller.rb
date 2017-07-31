@@ -5,6 +5,7 @@ class My::TracksController < MyController
     joined_track_ids = current_user.user_tracks.pluck(:track_id)
 
     @joined_tracks, @other_tracks = tracks.partition {|t|joined_track_ids.include?(t.id)}
+    @exercise_counts = current_user.solutions.completed.joins(:exercise).group(:track_id).count
   end
 
   # TODO - Move all of this into some sort of helper service class

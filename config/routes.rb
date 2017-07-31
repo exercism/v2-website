@@ -52,7 +52,7 @@ Rails.application.routes.draw do
 
     resources :discussion_posts, only: [:create]
     resources :notifications, only: [:index]
-    resource :profile
+    resource :profile, controller: "profile"
 
     namespace :settings do
       resource :communication_preferences, only: [:edit, :update]

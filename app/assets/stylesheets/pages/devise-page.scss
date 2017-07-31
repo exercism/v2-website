@@ -81,6 +81,19 @@
         border-radius:2px;
         border:none;
         @include font-size(15, 15);
+        margin-bottom:20px;
+    }
+    .sign-up,
+    .log-in,
+    .reset-password {
+        color:#666;
+        @include font-size(14, 14);
+        margin-bottom:10px;
+        a {
+            text-decoration:underline;
+            color:#555;
+            font-weight:$regular;
+        }
     }
 }
 

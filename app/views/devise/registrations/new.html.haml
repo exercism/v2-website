@@ -1,30 +1,26 @@
-#sign-up-page
+#log-in-page.lo-devise-page
   .lo-container
-    %h2 Sign up
+    .pure-g
+      .pure-u-3-5.lhs
+        =image_tag "code-person.jpg"
+      .pure-u-2-5.rhs
+        .frame
+          %h1 Sign Up
 
-    =link_to "Sign in with Github", user_github_omniauth_authorize_path
+          =link_to user_github_omniauth_authorize_path, class: 'github-button pure-button' do
+            %i.fa.fa-github
+            with
+            %strong Github
 
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = devise_error_messages!
-      .field
-        = f.label :name
-        %br/
-        = f.text_field :name, autofocus: true
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true
-      .field
-        = f.label :password
-        - if @minimum_password_length
-          %em
-            (#{@minimum_password_length} characters minimum)
-        %br/
-        = f.password_field :password, autocomplete: "off"
-      .field
-        = f.label :password_confirmation
-        %br/
-        = f.password_field :password_confirmation, autocomplete: "off"
-      .actions
-        = f.submit "Sign up"
-    = render "devise/shared/links"
+          .or or
+          .instruction Enter your log in details to access your account.
+
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = devise_error_messages!
+            = f.text_field :name, autofocus: true, placeholder: "Name", required: true
+            = f.text_field :handle, autofocus: true, placeholder: "Your Handle", required: true
+            = f.email_field :email, autofocus: true, placeholder: "Email", required: true
+            = f.password_field :password, autocomplete: "off", placeholder: "Password ((#{@minimum_password_length} characters minimum)", required: true
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password", required: true
+            = f.button "Sign up", class: 'pure-button'
+          = render "devise/shared/links"

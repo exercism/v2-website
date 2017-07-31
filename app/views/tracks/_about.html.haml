@@ -6,5 +6,6 @@
         = raw @track.about
       .pure-u-1-4
         .code-sample
-          =image_tag "track-page-code-sample-frame.png"
-          =@track.code_sample
+          %pre
+            %code{class: "language-ruby"}
+              =@track.code_sample
