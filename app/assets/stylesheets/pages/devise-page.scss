@@ -1,0 +1,87 @@
+@import 'variables';
+@import 'mixins';
+
+.lo-devise-page {
+    .lhs {
+        img {
+            width:516px;
+        }
+    }
+    .rhs {
+        padding-top:50px;
+        padding-left:20px;
+        .frame {
+            background:#f7f7f7;
+            padding:25px 45px;
+        }
+    }
+    h1 {
+        font-family:Dosis;
+        font-weight:800;
+        @include font-size(30, 30);
+        color:$color-2;
+        margin-bottom:20px;
+    }
+    .github-button {
+        background:#5c5c5c;
+        width:100%;
+        color:#fff;
+        @include font-size(15, 22);
+        border-radius:2px;
+        margin-bottom:15px;
+        padding:14px;
+        i {
+            @include font-size(22, 22);
+            vertical-align:bottom;
+            margin-right:3px;
+        }
+        strong {
+            font-weight:$regular;
+        }
+    }
+    .or {
+        text-align:center;
+        position:relative;
+        text-transform:uppercase;
+        @include font-size(14, 14);
+        color:#aaa;
+        margin-bottom:15px;
+
+        &:before,
+        &:after {
+            position:absolute;
+            content: '';
+            border-top:1px solid #d4d4d4;
+            top:50%;
+            width:41%;
+        }
+        &:before {
+            left:0;
+        }
+        &:after {
+            right:0;
+        }
+    }
+    .instruction {
+        @include font-size(14, 14);
+        margin-bottom:12px;
+    }
+    input {
+        border:1px solid #cfcfcf;
+        border-radius:2px;
+        padding:15px;
+        width:100%;
+        margin-bottom:12px;
+    }
+    button {
+        background:$color-2;
+        color:#fff;
+        width:100%;
+        padding:15px;
+        border-radius:2px;
+        border:none;
+        @include font-size(15, 15);
+    }
+}
+
+

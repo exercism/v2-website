@@ -159,7 +159,7 @@
                 }
                 .count {
                     display:inline-block;
-                    @include font-size(12, 12);
+                    @include font-size(13, 13);
                     font-weight:$regular;
                     color:#888;
                     color:$color-2;
@@ -170,13 +170,13 @@
                 }
 
                 i {
-                    @include font-size(16, 16);
+                    @include font-size(20, 20);
                     color:#aaa;
                     color:$color-2;
                 }
                 img {
                     vertical-align:bottom;
-                    height:16px;
+                    height:20px;
                 }
             }
         }
@@ -187,7 +187,7 @@
         margin-bottom:10px;
         border:1px solid #ddd;
         padding:10px;
-        width:300px;
+        width:310px;
         float:right;
         h3 {
             display:inline-block;
@@ -251,12 +251,12 @@
             }
 
             i {
-                @include font-size(16, 16);
+                @include font-size(20, 20);
                 color:#aaa;
             }
             img {
-                vertical-align:text-top;
-                height:16px;
+                vertical-align:text-bottom;
+                height:20px;
             }
         }
     }

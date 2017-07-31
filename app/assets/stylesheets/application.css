@@ -14,5 +14,6 @@
  *= require simplemde/dist/simplemde.min.css
  *= require selectize/dist/css/selectize.default.css
  *= require_tree .
+ *= stub mailer
  *= require_self
  */
