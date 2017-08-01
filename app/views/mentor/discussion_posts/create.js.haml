@@ -1,3 +1,2 @@
 $('.discussion .posts').show().append("#{j render("post", post: @post, solution: @iteration.solution)}")
-$('.discussion .next-steps').hide()
 window.location.href = "#discussion-post-#{@post.id}"

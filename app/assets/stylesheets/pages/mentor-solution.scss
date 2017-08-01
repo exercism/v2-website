@@ -9,32 +9,20 @@ body.controller-solutions {
 
 #mentor-solution-page {
     .track-header {
-        margin-top:20px;
-        border:1px solid #e5e5e5;
-        border-radius:2px;
-        padding:22px 20px;
-        margin-bottom:10px;
-        .icon {
-            display:block;
-            width:70px;
-            height:70px;
-            padding:10px;
+        overflow:hidden;
+        background:$color-1;
+        padding:20px 0;
+        margin-bottom:40px;
+        img {
             float:left;
-            margin-right:20px;
-            margin-left: -54px;
-            margin-top: -11px;
-            border-radius: 100%;
-            overflow:hidden;
-            background:$color-1;
-            border:5px solid #fff;
-            box-shadow:0 0 1px 1px $color-1;
-            img {
-                height:42px;
-                margin: 1px auto;
-                display:block;
-            }
+            margin-right:15px;
+            height:50px;
+            display:block;
+            border:1px solid #fff;
+            border-radius:2px;
         }
         .inner {
+            color:#fff;
             .iteration-nav {
                 float:right;
                 overflow:hidden;
@@ -52,12 +40,12 @@ body.controller-solutions {
                 .first, .prev, .next, .last{
                     display:inline-block;
                     padding:2px 6px 4px;
-                    border:1px solid #ccc;
+                    border:1px solid #ddd;
                     border-radius:3px;
                     margin-right:1px;
                     i {
                         @include font-size(11, 11);
-                        color:#888;
+                        color:#fff;
                     }
                     &.disabled {
                         opacity:0.5;
@@ -65,61 +53,16 @@ body.controller-solutions {
                 }
             }
             h2 {
-                @include font-size(25, 25);
-                font-weight:$bold;
-                margin-bottom:5px;
+                @include font-size(22, 22);
+                font-weight:$regular;
+                margin-bottom:3px;
+                padding-top:5px;
+                strong {
+                    font-weight:$bold;
+                }
             }
-            .track-progress {
-                h3 {
-                    display:inline-block;
-                    @include font-size(14, 14);
-                    color:#666;
-                    font-weight:$regular;
-                    letter-spacing:-0.2px;
-                    margin-right:7px;
-                }
-                .dots {
-                    display:inline-block;
-                    overflow:hidden;
-                    .dot {
-                        background:transparent;
-                        border:1px solid #ddd;
-                        border-radius:100%;
-                        display:block;
-                        float:left;
-                        position:relative;
-                        width:11px;
-                        height:11px;
-                        &.current {
-                            border-color:$color-1;
-                        }
-                        &.locked {
-                            background:#f7f7f7;
-                        }
-                        &.completed {
-                            border-color:$color-1;
-                            background:$color-1;
-                        }
-                        &+.dot {
-                            margin-left:15px;
-                            &:before {
-                                height:1px;
-                                width:15px;
-                                top:4px;
-                                position:absolute;
-                                background:#ddd;
-                                left:-16px;
-                                content: " ";
-                            }
-                            &.completed,
-                            &.current {
-                                &:before {
-                                    background:$color-1;
-                                }
-                            }
-                        }
-                    }
-                }
+            .byline {
+                @include font-size(14, 14);
             }
         }
     }
@@ -202,29 +145,6 @@ body.controller-solutions {
             font-weight:400;
             color:#333;
         }
-        .next-steps {
-            background:rgba($color-1, 0.05);
-            border-radius:2px;
-            padding:20px 40px 20px 20px;
-            .title {
-                @include font-size(14, 14);
-                font-weight:$regular;
-                color:$color-1;
-                margin-bottom:10px;
-            }
-            p {
-                @include font-size(13, 19);
-                padding-left:19px;
-                margin-bottom:10px;
-                &:last-child {
-                    margin-bottom:0;
-                }
-                a {
-                    color:#333;
-                    font-weight:$light;
-                }
-            }
-        }
         .pane.markdown,
         .pane.preview {
             padding:0;
@@ -302,11 +222,11 @@ body.controller-solutions {
                 text-decoration: underline;
             }
         }
-        .posts+form {
-            margin-top:40px;
+        .posts {
+            margin-bottom:40px;
         }
         form {
-            margin:20px 0 20px 0;
+            margin:0px 0 20px 0;
             textarea, .preview-area {
                 width:100%;
                 resize:none;

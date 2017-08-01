@@ -1,5 +1,3 @@
-=link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true, class: 'pure-button'
-
 #my-solution-started-page
   #nav.lo-nav-bar
     .lo-container
@@ -98,7 +96,7 @@
           %h3 Mentor Discussion
           -if @iteration.discussion_posts.size > 0
             .posts
-              =render partial: "my/discussion_posts/post", collection: @iteration.discussion_posts
+              =render partial: "my/discussion_posts/post", collection: @iteration.discussion_posts, locals: {solution: @solution}
           -else
             .posts{style: "display:none"}
             .next-steps

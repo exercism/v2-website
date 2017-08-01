@@ -9,5 +9,6 @@ class Mentor::SolutionsController < MentorController
     @iteration = @solution.iterations.last
     @comments = @solution.reactions.with_comments.includes(user: :profile)
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
+    @solution_user_track = UserTrack.where(user: @solution.user, track: @track)
   end
 end

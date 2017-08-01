@@ -7,10 +7,9 @@
       =image_tag "nav-divider.png"
       %span= @exercise.title
 
-  .lo-container
-    .track-header
-      .icon
-        =image_tag @exercise.white_icon_url
+  .track-header
+    .lo-container
+      =image_tag display_avatar_url @solution.user, @solution_user_track
       .inner
         .iteration-nav
           .title
@@ -25,8 +24,12 @@
             %i.fa.fa-fw.fa-forward
           .last.disabled
             %i.fa.fa-fw.fa-fast-forward
-        %h2= @exercise.title
+        %h2
+          Solution to
+          %strong #{@exercise.title}
+        .byline by #{display_name(@solution.user, @solution_user_track)}
 
+  .lo-container
     .pure-g.panels
       .pure-u-1-2.lhs
         .lhs-content
@@ -58,19 +61,11 @@
           %h3 Mentor Discussion
           -if @iteration.discussion_posts.size > 0
             .posts
-              =render partial: "my/discussion_posts/post", collection: @iteration.discussion_posts
+              =render partial: "mentor/discussion_posts/post", collection: @iteration.discussion_posts, locals: {solution: @solution}
           -else
             .posts{style: "display:none"}
-            .next-steps
-              .title ↳ Next Steps
 
-              %p Well done on submitting your iteration. A mentor will check out your work and leave a comment here on your solution soon
-              %p
-                In the meantime why not try a different exercise on the
-                =link_to "#{@track.title} track", [:my, @track]
-                or explore the #{link_to "other Exercism tracks", [:my, :tracks]}.
-
-          =form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+          =form_for [:mentor, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
             =hidden_field_tag :iteration_id, @iteration.id
 
             .tabs-and-panes.selected-1
