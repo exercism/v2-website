@@ -1,11 +1,9 @@
 #mentor-solution-page
   #nav.lo-nav-bar
     .lo-container
-      =link_to "Dashboard", root_path
+      =link_to "Mentor Dashboard", [:mentor, :dashboard]
       =image_tag "nav-divider.png"
-      =link_to "#{@track.title} Track", [:my, @track]
-      =image_tag "nav-divider.png"
-      %span= @exercise.title
+      %span #{display_name(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
