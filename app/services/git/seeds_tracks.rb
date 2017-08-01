@@ -8,6 +8,7 @@ class Git::SeedsTracks
     https://github.com/exercism/javascript
     https://github.com/ccare/delphi
     https://github.com/exercism/r
+    https://github.com/exercism/coq
   }
 
   def self.seed!

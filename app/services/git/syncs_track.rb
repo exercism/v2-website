@@ -87,11 +87,8 @@ class Git::SyncsTrack
 
     exercise_image_stem = exercise_slug.gsub("_", "-")
 
-    image_exists = File.file?(Rails.root / "app/assets/images/tmp/exercises/#{exercise_image_stem}-dark.png")
-    p image_exists
-    dark_icon_url = image_exists ? "tmp/exercises/#{exercise_image_stem}-dark.png" : nil
-    turquoise_icon_url = image_exists ? "tmp/exercises/#{exercise_image_stem}-turquoise.png" : nil
-    white_icon_url = image_exists ? "tmp/exercises/#{exercise_image_stem}-white.png" : nil
+    ex = repo.exercise(exercise_slug, repo.head)
+    blurb = ex.blurb || standard_blurb_for(exercise_slug)
 
     exercise_data = {
       slug: exercise_slug,
@@ -102,11 +99,7 @@ class Git::SyncsTrack
       difficulty: exercise.fetch(:difficulty, 1),
       length: exercise.fetch(:length, 1),
       topics: topics,
-
-      # TODOGIT - Talk to iHiD about this. This is either in metadata.yml in problem-specifications or in the exercise/:slug/.meta/metadata.yml (if it's a custom exercise)
-      # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
-      # blurb: ""
-
+      blurb: blurb,
       dark_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-dark.png",
       turquoise_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-turquoise.png",
       white_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-white.png",
@@ -161,5 +154,19 @@ class Git::SyncsTrack
 
   def repo
     @repo ||= Git::ExercismRepo.new(repo_url, auto_fetch: true)
+  end
+
+  def standard_blurb_for(exercise_slug)
+    ex = problem_specifications.exercises[exercise_slug]
+    return nil if ex.nil?
+    ex.blurb
+  end
+
+  def problem_specifications
+    @problem_specifications ||= begin
+      ps = Git::ProblemSpecifications.head
+      ps.fetch!
+      ps
+    end
   end
 end

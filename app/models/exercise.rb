@@ -47,8 +47,4 @@ class Exercise < ApplicationRecord
   def icon_url
     raise "Deprecated"
   end
-
-  def blurb
-    "Bob is a lackadaisical teenager. In conversation, his responses are very limited."
-  end
 end

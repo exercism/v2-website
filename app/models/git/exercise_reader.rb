@@ -51,6 +51,21 @@ class Git::ExerciseReader
     ""
   end
 
+  def blurb
+    meta_ptr = exercise_tree[".meta"]
+    return nil if meta_ptr.nil?
+    meta_tree = repo.lookup(meta_ptr[:oid])
+    metadata_ptr = meta_tree["metadata.yml"]
+    return nil if metadata_ptr.nil?
+    metadata_yml = repo.lookup(metadata_ptr[:oid])
+    metadata = YAML.load(metadata_yml.text).symbolize_keys
+    metadata[:blurb]
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    nil
+  end
+
   private
 
   def test_pattern
