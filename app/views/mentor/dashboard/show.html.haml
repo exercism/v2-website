@@ -23,4 +23,22 @@
         -@suggested_solutions.each do |solution|
           -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
           =render "solution", solution: solution, user_track: user_track
+
       .pure-u-1-3
+        .contributions-section
+          %h2 Your Contribution
+          .h2-subtitle see how you're helping
+          .box
+            You have mentored
+            %strong #{pluralize @total_solutions_count, "solution"}
+            and helped
+            %strong #{pluralize @total_students_count, "student"}
+            since you became a mentor.
+
+        -if @feedbacks.size > 0
+          .celebration-section
+            %h2 Celebration Stream
+            .h2-subtitle see your latest feedback
+            -@feedbacks.each do |feedback|
+              .box
+                =feedback

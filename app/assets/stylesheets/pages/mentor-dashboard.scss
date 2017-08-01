@@ -23,14 +23,15 @@
         }
     }
     h2 {
-        padding-top:3px;
         @include font-size(18, 18);
         font-weight:$regular;
         margin-bottom:15px;
     }
+    form+h2 {
+        padding-top:15px;
+    }
     .your-solutions {
         clear:both;
-        padding-top:20px;
         margin-bottom:40px;
     }
     .widget-filter {
@@ -41,41 +42,149 @@
         }
     }
     .solution {
-        border:1px solid #eee;
+        border:1px solid #ddd;
         border-radius:2px;
         margin:0 0 20px 0;
         padding:20px;
         display:block;
         text-decoration:none;
+        overflow:hidden;
         &:hover {
             border-color:$color-2;
         }
-        .person {
-            overflow:hidden;
-            margin-bottom:15px;
-            img {
+        .icons {
+            position:relative;
+            float:left;
+            margin-right:20px;
+            .exercise {
+                overflow:hidden;
+                background:$color-2;
+                padding:10px;
+                width:50px;
+                height:50px;
+                padding:7px;
+                float:left;
+                border-radius:2px;
+
+                img {
+                    height:100%;
+                    margin:0 auto;
+                    display:block;
+                }
+            }
+            .track {
+                width: 20px;
+                position: absolute;
+                top: -10px;
+                left: 40px;
+            }
+            .joiner {
+                float:left;
+                height:25px;
+                width:20px;
+                border-bottom:2px solid $color-2;
+            }
+            .person {
                 border-radius:100%;
-                width:40px;
-                height:40px;
+                border:1px solid $color-2;
+                width:50px;
+                height:50px;
                 float:left;
                 display:block;
-                margin-right:10px;
             }
-            .handle {
-                padding-top:5px;
-                @include font-size(18, 18);
-                color:#666;
-                font-weight:$regular;
-                margin-bottom:3px;
-
-            }
-            .submitted-at {
+        }
+        .details {
+            overflow:hidden;
+            margin-bottom:6px;
+            padding-left:10px;
+            border-left:2px solid #ddd;
+            margin-top:6px;
+            .difficulty {
+                display:inline-block;
+                float:right;
+                font-weight:$bold;
                 @include font-size(10, 10);
+                text-transform:uppercase;
+
+                &.easy { color: $color-1; }
+                &.medium { color: #f48b00 }
+                &.hard { color: #f34a56 }
+            }
+            .title {
+                @include font-size(18, 20);
+                color:#666;
+                margin-bottom:5px;
+                font-weight:$regular;
+                max-width: 480px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                .name {
+                    display:inline-block;
+                    font-weight:$bold;
+                    color:#333;
+                }
+                .exercise {
+                    display:inline-block;
+                }
+            }
+
+            .extra {
+                @include font-size(12, 12);
                 color:#bbb;
                 font-weight:$regular;
+
+                .iteration {
+                    display:inline-block;
+                }
+                .divider {
+                    margin:0 5px;
+                    display:inline-block;
+                    border-right:1px solid #bbb;
+                }
+                .submitted-at {
+                    display:inline-block;
+                }
             }
         }
 
     }
+    .contributions-section {
+        margin-top:42px;
+        margin-bottom:20px;
+    }
+    .contributions-section,
+    .celebration-section {
+        padding:30px 30px;
+        background:#f9f9f9;
+        border-radius:2px;
+        margin-left:50px;
+        h2 {
+            color:$color-2;
+            font-weight:$bold;
+            text-transform:uppercase;
+            @include font-size(14, 14);
+            letter-spacing:-0.7px;
+            margin-bottom:3px;
+            text-align:right;
+        }
+        .h2-subtitle {
+            font-weight:$regular;
+            @include font-size(13, 13);
+            letter-spacing:-0.8px;
+            color:#aaa;
+            margin-bottom:20px;
+            text-align:right;
+        }
+        .box {
+            background:#fff;
+            padding:10px;
+            @include font-size(13, 16);
+            strong {
+                color:$color-2;
+                font-weight:$regular;
+            }
+        }
+    }
 }
-

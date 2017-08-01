@@ -10,5 +10,7 @@ class CreateUserTracks < ActiveRecord::Migration[5.1]
     end
     add_foreign_key :user_tracks, :users
     add_foreign_key :user_tracks, :tracks
+    add_index :user_tracks, [:track_id, :user_id], unique: true
+
   end
 end

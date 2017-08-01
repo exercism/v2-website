@@ -47,10 +47,14 @@ class Solution < ApplicationRecord
 
   def instructions
     git_exercise.instructions
+  rescue
+    ""
   end
 
   def test_suite
     git_exercise.test_suite
+  rescue
+    []
   end
 
   def git_exercise
