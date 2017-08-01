@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   namespace :mentor do
     resource :dashboard, only: [:show], controller: "dashboard"
+    resources :solutions, only: [:show]
   end
 
   devise_for :users, controllers: {

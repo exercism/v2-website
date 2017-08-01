@@ -1,15 +1,26 @@
-#mentor-dashboard-page
+#mentor-dashboard
+  .header
+    .lo-container
+      %h1 Mentor Dashboard
+      .h1-subtitle Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+
   .lo-container
-    %h1 Mentor Dashboard
+    .pure-g
+      .pure-u-2-3
+        =form_tag mentor_dashboard_path, method: :get do
+          .widget-filter
+            .title Status:
+            =select_tag :filter, options_for_select({"Require Your Action": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
+          / TODO - Autoupdate on change ^^
 
-    =form_tag mentor_dashboard_path, method: :get do
-      =select_tag :filter, options_for_select({"Require Your Action": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
-      =button_tag "Update"
+        %h2 Solutions you're mentoring
+        .your-solutions
+          -@your_solutions.each do |solution|
+            -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
+            =render "solution", solution: solution, user_track: user_track
 
-    %h3 Solutions You're Mentoring
-    -@your_solutions.each do |solution|
-      =link_to solution.user.name, solution
-
-    %h3 Next solutions to mentor
-    -@suggested_solutions.each do |solution|
-      =link_to solution.user.name, solution
+        %h2 Next solutions to mentor
+        -@suggested_solutions.each do |solution|
+          -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
+          =render "solution", solution: solution, user_track: user_track
+      .pure-u-1-3

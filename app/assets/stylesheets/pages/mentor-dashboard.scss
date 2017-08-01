@@ -1,0 +1,81 @@
+@import 'variables';
+@import 'mixins';
+
+#mentor-dashboard {
+    .header {
+        background: $color-2;
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        padding:100px 0 35px;
+        margin-bottom:35px;
+        h1 {
+            @include font-size(34, 34);
+            letter-spacing:-0.67px;
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            max-width:70%;
+            @include font-size(15, 15);
+            color:#fff;
+            font-weight:$light;
+        }
+    }
+    h2 {
+        padding-top:3px;
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin-bottom:15px;
+    }
+    .your-solutions {
+        clear:both;
+        padding-top:20px;
+        margin-bottom:40px;
+    }
+    .widget-filter {
+        float:right;
+        margin-right:0;
+        .selectize-control {
+            width:180px;
+        }
+    }
+    .solution {
+        border:1px solid #eee;
+        border-radius:2px;
+        margin:0 0 20px 0;
+        padding:20px;
+        display:block;
+        text-decoration:none;
+        &:hover {
+            border-color:$color-2;
+        }
+        .person {
+            overflow:hidden;
+            margin-bottom:15px;
+            img {
+                border-radius:100%;
+                width:40px;
+                height:40px;
+                float:left;
+                display:block;
+                margin-right:10px;
+            }
+            .handle {
+                padding-top:5px;
+                @include font-size(18, 18);
+                color:#666;
+                font-weight:$regular;
+                margin-bottom:3px;
+
+            }
+            .submitted-at {
+                @include font-size(10, 10);
+                color:#bbb;
+                font-weight:$regular;
+            }
+        }
+
+    }
+}
+
