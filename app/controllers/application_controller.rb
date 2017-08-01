@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     render js: %Q{ showModal('#{class_name}', "#{html}") }
   end
 
+  def current_user_has_notifications?
+    user_signed_in? && current_user.notifications.unread.exists?
+  end
+  helper_method :current_user_has_notifications?
+
   class EscapesJavascript
     extend ActionView::Helpers::JavaScriptHelper
     def self.escape(html)

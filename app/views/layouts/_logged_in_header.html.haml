@@ -1,19 +1,31 @@
 %header.logged-in
   .lo-container
-    #{current_user.name}
-    &middot;
-    =link_to "Home", root_path
-    &middot;
-    = link_to "Tracks", [:my, :tracks]
-    &middot;
-    = link_to "Settings", [:edit, :my, :settings, :communication_preferences]
-    &middot;
-    = link_to "Notifications", [:my, :notifications]
-    -if current_user.admin?
-      &middot;
-      = link_to "Admin Dashboard", admin_dashboard_path
-    -if current_user.mentor?
-      &middot;
-      = link_to "Mentor Dashboard", mentor_dashboard_path
-    &middot;
-    = link_to "Log out", destroy_user_session_path, method: :delete
+    .misc-menu
+      .in-situ
+        =image_tag current_user.avatar_url
+        %i.fa.fa-caret-down
+      .dropdown
+        %i.fa.fa-caret-up
+        .person
+          Logged in as
+          %strong #{current_user.handle}
+        .hr
+        = link_to "Your profile", [:my, :profile]
+        = link_to "Solutions you've liked", "#"
+        .hr
+        -if current_user.admin?
+          = link_to "Admin Dashboard", admin_dashboard_path
+        -if current_user.mentor?
+          = link_to "Mentor Dashboard", mentor_dashboard_path
+        .hr
+        = link_to "Settings", [:edit, :my, :settings, :communication_preferences]
+        = link_to "Sign out", destroy_user_session_path, method: :delete
+
+    = link_to [:my, :notifications], class: "notifications #{current_user_has_notifications?? 'active' : ''}" do
+      %i.fa.fa-bell-o
+
+    .links-menu
+
+    =link_to root_path, class: 'logo' do
+      =image_tag "logo-white.png"
+

@@ -10,6 +10,18 @@ class Track < ApplicationRecord
   has_many :mentors, through: :mentorships, source: :user
   has_many :maintainers
 
+  [:bordered_green_icon_url,
+   :bordered_turquoise_icon_url,
+   :hex_green_icon_url,
+   :hex_turquoise_icon_url,
+   :hex_white_icon_url,
+   :hex_green_icon_url,
+  ].each do |icon|
+    define_method icon do
+      super() || "tmp/track-#{icon.to_s.dasherize}.png"
+    end
+  end
+
   # TODO
   def introduction
     "Since the announcement that it's being sunsetted, I want to tell you about the strangest Since the announcement that it's being sunsetted, I want to tell you about the strangest thing I know about Flash and Adobe."

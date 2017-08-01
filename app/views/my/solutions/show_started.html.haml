@@ -1,7 +1,9 @@
 #my-solution-started-page
   #nav.lo-nav-bar
     .lo-container
-      =link_to "Dashboard", root_path
+      /=link_to "Dashboard", root_path
+      /=image_tag "nav-divider.png"
+      =link_to "Language Tracks", [:my, :tracks]
       =image_tag "nav-divider.png"
       =link_to "#{@track.title} Track", [:my, @track]
       =image_tag "nav-divider.png"

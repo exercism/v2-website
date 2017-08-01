@@ -24,7 +24,6 @@
         }
         .icon {
             float:left;
-            width:55px;
             height:55px;
             padding-right:15px;
             border-right:1px solid rgba(#fff, 0.5);
@@ -32,6 +31,8 @@
             img {
                 display:block;
                 height:100%;
+                height:55px;
+                width:55px;
             }
         }
 
@@ -40,7 +41,7 @@
             letter-spacing:-0.30px;
             font-weight:$regular;
             margin-bottom:5px;
-            padding-top:5px;
+            padding-top:6px;
             color:#fff;
             strong {
                 font-weight:$bold;

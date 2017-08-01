@@ -13,7 +13,7 @@ class My::ProfileController < MyController
   end
 
   def create
-    @profile = if current_user_profile
+    @profile = if current_user.profile
         current_user.profile
       else
         CreatesProfile.create( current_user )
