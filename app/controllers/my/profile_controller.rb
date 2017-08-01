@@ -13,13 +13,16 @@ class My::ProfileController < MyController
   end
 
   def create
-    @profile = CreatesProfile.create(
-      current_user,
-      #params[:profile][:name],
-      #params[:profile][:slug]
-    )
+    @profile = if current_user_profile
+        current_user.profile
+      else
+        CreatesProfile.create( current_user )
+      end
+
+    User.find(current_user.id).update(user_params)
+
     if @profile.persisted?
-      redirect_to action: :edit
+      redirect_to action: :show
     else
       render action: :new
     end
@@ -31,6 +34,7 @@ class My::ProfileController < MyController
 
   def update
     @profile.update(profile_params)
+    User.find(current_user.id).update(user_params)
     redirect_to @profile
   end
 
@@ -40,6 +44,12 @@ class My::ProfileController < MyController
     params.require(:profile).permit(
       :name, :slug, :bio,
       :website, :twitter, :github, :linkedin, :medium
+    )
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :bio
     )
   end
 

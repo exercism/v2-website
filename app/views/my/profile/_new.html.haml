@@ -1,0 +1,31 @@
+.page-1
+  .progress
+    %i.fa.fa-circle.filled
+    %i.fa.fa-circle
+
+  %h2 Showcase your solutions
+  %p Create a public profile to showcase the solutions you’re proud of and help others learn from your work.
+  %ul
+    %li Have complete control over which solutions you make public
+    %li Choose your own public name and URL
+    %li Add links to where you exist elsewhere on the internet (e.g. Twitter and GitHub)
+
+  =button_tag "Continue", class: 'pure-button'
+
+.page-2
+  .progress
+    %i.fa.fa-circle.filled
+    %i.fa.fa-circle.filled
+
+  %h2 Add a bio
+  %p Tell us a little bit about yourself. A couple of sentences is perfect. You can edit this later.
+  =form_for @profile, url: my_profile_path do |f|
+    =fields_for :user do |uf|
+      =uf.text_area :bio, placeholder: "Tell us a little bit about yourself"
+      =f.button "Create profile", class: 'pure-button'
+
+:javascript
+  $('#modal.new-profile .page-1 button').click(function() {
+    $('#modal.new-profile .page-1').hide()
+    $('#modal.new-profile .page-2').show()
+  })

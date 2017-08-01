@@ -1,11 +1,11 @@
 #new-profile-page
+  .header
+    .lo-container
+      %h1 #{current_user.name}'s Profile
+      .h1-subtitle This is a showcase of some of the solutions that #{current_user.name} has submitted on Exercism.
   .lo-container
-    =notice_and_alert(@profile)
+    =image_tag "profile-blanked-out.png"
 
-    %h1 You don't have a profile :((((
-    %h2 Create a profile!!!!
-    =form_for @profile, url: my_profile_path do |f|
-      /=f.text_field :name, placeholder: "Your name", required: true
-      /=f.text_field :slug, placeholder: "http://exercism.io/profiles/SLUG", required: true
-      =f.button "Create profile"
-
+-content_for :js do
+  :javascript
+    showModal('new-profile', "#{j render("new")}")

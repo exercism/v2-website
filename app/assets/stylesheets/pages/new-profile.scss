@@ -1,0 +1,99 @@
+@import 'variables';
+@import 'mixins';
+
+#new-profile-page {
+    .header {
+        background: $color-1;
+        background-image:image-url('background-overlay-1.png');
+        background-size:cover;
+        padding:100px 0 35px;
+        margin-bottom:35px;
+        h1 {
+            @include font-size(34, 34);
+            letter-spacing:-0.67px;
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            max-width:70%;
+            @include font-size(15, 15);
+            color:#fff;
+            font-weight:$light;
+        }
+    }
+    img {
+        display:block;
+        width:100%;
+    }
+}
+
+#modal.new-profile {
+    padding:20px 35px 25px;
+    .progress {
+        display:block;
+        text-align:center;
+        margin-bottom:20px;
+        i {
+            color:#ddd;
+            @include font-size(10, 10);
+            margin:0 3px;
+            &.filled {
+                color:$color-1;
+            }
+        }
+    }
+    h2 {
+        color:#444;
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin-bottom:10px;
+    }
+    p, li {
+        @include font-size(14, 18);
+        color:#666;
+    }
+    p {
+        margin-bottom:15px;
+    }
+    .pure-button {
+        background:$color-1;
+        color:#fff;
+        width:100%;
+        margin-top:10px;
+        padding:12px;
+    }
+    .page-1 {
+        p {
+            margin-bottom:15px;
+        }
+        ul {
+            padding-left:20px;
+            margin-bottom:20px;
+            list-style-image: image-url('li-tick.png');
+            li {
+                margin-bottom:6px;
+            }
+
+        }
+    }
+    .page-2 {
+        display:none;
+
+        p {
+            margin-bottom:15px;
+        }
+        textarea {
+            margin-bottom:5px;
+            border:1px solid #ddd;
+            border-radius:2px;
+            padding:10px;
+            resize:none;
+            width:100%;
+            height:95px;
+        }
+        button {
+            display:block;
+        }
+    }
+}
