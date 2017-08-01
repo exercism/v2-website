@@ -107,12 +107,9 @@ class Git::SyncsTrack
       # https://github.com/exercism/docs/blob/f8d51ca364de4f97d8a2af27a48313ec45499bf0/language-tracks/exercises/README.md
       # blurb: ""
 
-      # TODOGIT - These point to a file on s3, that we have prepopulated
-      # We'll need to check for the existance of the file when doing this
-      # and set to null if it doesn't exist. For now, it's using tmp images on my hdd.
-      dark_icon_url: dark_icon_url,
-      turquoise_icon_url: turquoise_icon_url,
-      white_icon_url: white_icon_url
+      dark_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-dark.png",
+      turquoise_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-turquoise.png",
+      white_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-white.png",
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
