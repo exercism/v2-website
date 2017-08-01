@@ -6,6 +6,7 @@ smtp_pw = smtp_config["password"]
 smtp_address = smtp_config["address"]
 smtp_domain = smtp_config["domain"]
 smtp_port = smtp_config["port"]
+smtp_authentication = smtp_config["authentication"].to_s
 
 Rails.application.config.action_mailer.smtp_settings = {
   :user_name => smtp_user,
@@ -13,5 +14,5 @@ Rails.application.config.action_mailer.smtp_settings = {
   :address => smtp_address,
   :domain => smtp_domain,
   :port => smtp_port,
-  :authentication => :cram_md5
+  :authentication => smtp_authentication
 }
