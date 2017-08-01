@@ -11,31 +11,6 @@ class Track < ApplicationRecord
   has_many :maintainers
 
   # TODO
-  def bordered_icon_url
-    'tmp/track-hex-green-bordered.png'
-  end
-
-  # TODO
-  def bordered_turqioise_icon_url
-    'tmp/track-hex-turquoise-bordered.png'
-  end
-
-  # TODO
-  def hex_icon_url
-    'tmp/track-hex-green.png'
-  end
-
-  # TODO
-  def hex_turqioise_icon_url
-    'tmp/track-hex-turquoise.png'
-  end
-
-  # TODO
-  def hex_white_icon_url
-    'tmp/track-hex-white.png'
-  end
-
-  # TODO
   def introduction
     "Since the announcement that it's being sunsetted, I want to tell you about the strangest Since the announcement that it's being sunsetted, I want to tell you about the strangest thing I know about Flash and Adobe."
   end

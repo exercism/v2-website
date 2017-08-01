@@ -216,6 +216,11 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.text "introduction", null: false
     t.text "about", null: false
     t.text "code_sample", null: false
+    t.string "bordered_green_icon_url"
+    t.string "bordered_turquoise_icon_url"
+    t.string "hex_green_icon_url"
+    t.string "hex_turquoise_icon_url"
+    t.string "hex_white_icon_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -227,7 +232,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.string "handle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["track_id"], name: "fk_rails_631b3d694d"
+    t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_99e944edbc"
   end
 
