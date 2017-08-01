@@ -108,7 +108,19 @@ class API::SolutionsControllerTest < API::TestBase
 
     CreatesIteration.expects(:create!).with(solution, code)
 
-    patch api_track_exercise_solution_path(track.slug, exercise.slug, solution.id, code: code), headers: @headers, as: :json
+    test_image = Rails.root / "app/assets/images/logo.png"
+    info = Rack::Test::UploadedFile.new(__FILE__, "text/json")
+    keys = ['file1', 'file2']
+    file1 = Rack::Test::UploadedFile.new(__FILE__, "text/plain")
+    file2 = Rack::Test::UploadedFile.new(__FILE__, "text/plain")
+
+    patch api_solution_path(solution.id),
+          params: {
+            files_list: keys,
+            keys[0] => file1, keys[1] => file2
+          },
+          headers: @headers,
+          as: :json
 
     assert_response :success
   end

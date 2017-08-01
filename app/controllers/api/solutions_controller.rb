@@ -26,6 +26,7 @@ class API::SolutionsController < APIController
   end
 
   def update
+    files_list = params[:files_list]
     solution = current_user.solutions.find(params[:id])
     render json: {}, status: 403 and return unless solution
 
