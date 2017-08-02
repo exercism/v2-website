@@ -25,8 +25,7 @@ class CreatesTrack
       bordered_turquoise_icon_url: track_image_url("#{track_slug}-bordered-turquoise.png"),
       hex_green_icon_url: track_image_url("#{track_slug}-hex-green.png"),
       hex_turquoise_icon_url: track_image_url("#{track_slug}-hex-turquoise.png"),
-      hex_white_icon_url: track_image_url("#{track_slug}-hex-white.png"),
-      hex_green_icon_url: track_image_url("#{track_slug}-hex-green.png")
+      hex_white_icon_url: track_image_url("#{track_slug}-hex-white.png")
     )
     track
   end
