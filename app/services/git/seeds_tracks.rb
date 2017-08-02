@@ -6,7 +6,7 @@ class Git::SeedsTracks
     https://github.com/exercism/prolog
     https://github.com/exercism/bash
     https://github.com/exercism/javascript
-    https://github.com/ccare/delphi
+    https://github.com/exercism/delphi
     https://github.com/exercism/r
     https://github.com/exercism/coq
   }
