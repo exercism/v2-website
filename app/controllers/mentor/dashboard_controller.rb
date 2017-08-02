@@ -1,6 +1,4 @@
 class Mentor::DashboardController < MentorController
-
-  # TODO - Remove n+1s
   def show
     @filter = params[:filter].try(:to_sym)
     @your_solutions = RetrieveSolutionsForMentor.retrieve(current_user, @filter)

@@ -13,7 +13,8 @@ module UserHelper
 
   def display_avatar_url(user, user_track = nil)
     if user_track && user_track.anonymous?
-      user_track.avatar_url
+      "blank.png"
+      #user_track.avatar_url #TODO
     else
       user.avatar_url
     end

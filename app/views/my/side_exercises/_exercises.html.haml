@@ -16,6 +16,5 @@
         = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'widget-side-exercise unlocked' do
           =render "my/side_exercises/exercise", exercise: exercise, solution: nil
       -else
-        =cache("my/side-exercises/locked", skip_digest: true) do
-          .widget-side-exercise.locked
-            =render "my/side_exercises/exercise", exercise: exercise, solution: nil
+        .widget-side-exercise.locked
+          =render "my/side_exercises/exercise", exercise: exercise, solution: nil

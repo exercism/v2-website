@@ -27,7 +27,9 @@ class SelectsSuggestedSolutionsForMentor
 
       # Order by number of mentors (least first), 
       # then age (oldest first)
-      order("num_mentors ASC, last_updated_by_user_at ASC")
+      order("num_mentors ASC, last_updated_by_user_at ASC").
+
+      includes(iterations: [], exercise: {track: []}, user: [:profile])
   end
 
   def tracks

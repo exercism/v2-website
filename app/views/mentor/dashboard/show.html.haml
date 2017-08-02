@@ -7,17 +7,14 @@
   .lo-container
     .pure-g
       .pure-u-2-3
-        =form_tag mentor_dashboard_path, method: :get do
+        =form_tag mentor_dashboard_path, method: :get, remote: true do
           .widget-filter
             .title Status:
             =select_tag :filter, options_for_select({"Require Your Action": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
-          / TODO - Autoupdate on change ^^
 
         %h2 Solutions you're mentoring
         .your-solutions
-          -@your_solutions.each do |solution|
-            -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
-            =render "solution", solution: solution, user_track: user_track
+          = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
 
         %h2 Next solutions to mentor
         -@suggested_solutions.each do |solution|
@@ -42,3 +39,7 @@
             -@feedbacks.each do |feedback|
               .box
                 =feedback
+
+-content_for :js do
+  :javascript
+    submitOnChange($('select'))

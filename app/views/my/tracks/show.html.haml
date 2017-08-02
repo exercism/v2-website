@@ -131,7 +131,4 @@
 
   -content_for :js do
     :javascript
-      updateSideExercises = function() {
-        $('.side_exercises_form').trigger('submit.rails')
-      })
-      $('.side_exercises_form select').change(updateSideExercises)
+      submitOnChange($('.side_exercises_form select'))

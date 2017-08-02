@@ -10,11 +10,12 @@ class RetrieveSolutionsForMentor
   end
 
   def retrieve
-    if filter.present? && respond_to?("retrieve_#{filter}")
-      send("retrieve_#{filter}")
-    else
-      retrieve_require_action
-    end
+    solutions = if filter.present? && respond_to?("retrieve_#{filter}")
+        send("retrieve_#{filter}")
+      else
+        retrieve_require_action
+      end
+    solutions.includes(iterations: [], exercise: {track: []}, user: [:profile])
   end
 
   def retrieve_require_action
