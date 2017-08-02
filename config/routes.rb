@@ -56,7 +56,7 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index]
     resource :profile, controller: "profile"
 
-    namespace :settings do
+    resource :settings do
       resource :communication_preferences, only: [:edit, :update]
     end
 

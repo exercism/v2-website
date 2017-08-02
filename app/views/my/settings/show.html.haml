@@ -1,0 +1,32 @@
+#settings-page
+  .lo-container
+    .pure-g
+      .pure-u-1-2
+        %h1 Account Settings
+        %h2 Change your password
+        =form_for @user, url: [:my, :settings] do |f|
+          .field
+            =label_tag :old_password, "Enter your current password"
+            =text_field_tag :old_password
+
+          .field
+            =f.label :password, "Enter your current password"
+            =f.text_field :password
+
+          .field
+            =f.label :password_confirmation, "Enter your current password"
+            =f.text_field :password_confirmation
+
+          =button_tag "Update Settings", class: 'pure-button'
+      .pure-u-1-2
+        %h2 Privacy
+        %p You can choose to be anonymous on each track.
+        =form_for :track_settings, url: [:my, :settings] do |f|
+          -@user_tracks.each do |user_track|
+            .track
+              .title=user_track.track.title
+              =check_box_tag "foobar"
+              .toggles
+                %i.fa.fa-toggle-on
+                %i.fa.fa-toggle-off
+              =f.text_field "user_tracks[#{user_track.id}]", placeholder: "Choose an alias for this track"

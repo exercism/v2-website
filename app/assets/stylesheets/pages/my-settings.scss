@@ -1,0 +1,70 @@
+@import 'variables';
+@import 'mixins';
+
+#settings-page {
+    padding:30px 0;
+    h1 {
+        @include font-size(20, 20);
+        margin-bottom:20px;
+    }
+    h2 {
+        @include font-size(16, 16);
+        margin-bottom:20px;
+    }
+    .field {
+        margin-bottom:10px;
+        label {
+            display:block;
+            color:#999;
+            margin-bottom:4px;
+        }
+        input {
+            padding:5px 10px;
+        }
+    }
+    p {
+        margin-bottom:20px;
+    }
+    .track {
+        margin-bottom:10px;
+        position:relative;
+        .title {
+            display:inline-block;
+            width:100px;
+        }
+        input[type='checkbox'] {
+            display:inline-block;
+            position:absolute;
+            width:20px;
+            height:40px;
+            cursor:pointer;
+            opacity:0;
+            &:checked {
+                &+.toggles {
+                    i.fa.fa-toggle-on { display:block; }
+                    i.fa.fa-toggle-off { display:none; }
+                }
+                &+.toggles+input {
+                    visibility:visible;
+                }
+            }
+        }
+        .toggles {
+            display:inline-block;
+            @include font-size(16, 16);
+            margin-right:15px;
+            i.fa.fa-toggle-on {
+                display:none;
+                color: $color-1;
+            }
+            i.fa.fa-toggle-off { 
+                display:block;
+                color: #aaa;
+            }
+        }
+        input[type='text'] {
+            visibility: hidden;
+            width:220px;
+        }
+    }
+}
