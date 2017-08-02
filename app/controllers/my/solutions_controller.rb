@@ -77,17 +77,15 @@ class My::SolutionsController < MyController
   end
 
   def show_started
-    @iteration = @solution.iterations.find_by_id(params[:iteration_id]) || @solution.iterations.first
+    @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
+    @iteration = @solution.iterations.last unless @iteration
+    @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
+    @num_iterations = @solution.iterations.count
+
     @track = @solution.exercise.track
     @user_track = UserTrack.where(user: current_user, track: @track).first
 
-    # TODO
-    # If @iteration is null then the following page will break
-    # so we need to guard. However, it means that the solution is
-    # in the wrong state in the first place. Does this mean the
-    # state machine approach is wrong (to be able to allow this)
-    # or something else?
 
-    render :show_started
+    render :show
   end
 end

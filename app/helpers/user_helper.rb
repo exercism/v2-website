@@ -3,6 +3,14 @@ module UserHelper
     if user_track && user_track.anonymous?
       user_track.handle
     else
+      user.handle
+    end
+  end
+
+  def display_name_link(user, user_track = nil)
+    if user_track && user_track.anonymous?
+      user_track.handle
+    else
       if user.profile
         link_to(user.handle, user.profile)
       else

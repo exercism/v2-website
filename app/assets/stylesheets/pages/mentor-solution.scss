@@ -63,6 +63,9 @@ body.controller-solutions {
             }
             .byline {
                 @include font-size(14, 14);
+                a {
+                    color:#fff;
+                }
             }
         }
     }

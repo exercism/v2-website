@@ -1,4 +1,4 @@
-#my-solution-started-page
+#my-solution-page
   #nav.lo-nav-bar
     .lo-container
       /=link_to "Dashboard", root_path
@@ -14,20 +14,7 @@
       .icon
         =image_tag @exercise.white_icon_url
       .inner
-        / TODO
-        .iteration-nav
-          .title
-            Iteration
-            %strong 1
-            of 3
-          .first
-            %i.fa.fa-fw.fa-fast-backward
-          .prev
-            %i.fa.fa-fw.fa-backward
-          .next.disabled
-            %i.fa.fa-fw.fa-forward
-          .last.disabled
-            %i.fa.fa-fw.fa-fast-forward
+        =render "solutions/iteration_nav", url_parts: [:my, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
 
         %h2= @exercise.title
         .track-progress

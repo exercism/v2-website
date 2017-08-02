@@ -9,23 +9,11 @@
     .lo-container
       =image_tag display_avatar_url @solution.user, @solution_user_track
       .inner
-        .iteration-nav
-          .title
-            Iteration
-            %strong 1
-            of 3
-          .first
-            %i.fa.fa-fw.fa-fast-backward
-          .prev
-            %i.fa.fa-fw.fa-backward
-          .next.disabled
-            %i.fa.fa-fw.fa-forward
-          .last.disabled
-            %i.fa.fa-fw.fa-fast-forward
+        =render "solutions/iteration_nav", url_parts: [:mentor, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
         %h2
           Solution to
           %strong #{@exercise.title}
-        .byline by #{display_name(@solution.user, @solution_user_track)}
+        .byline by #{display_name_link(@solution.user, @solution_user_track)}
 
   .lo-container
     .pure-g.panels
