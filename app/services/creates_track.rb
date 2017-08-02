@@ -18,11 +18,23 @@ class CreatesTrack
       slug: track_slug || repo_url.split("/").last,
       repo_url: repo_url,
       # Default track metadata to empty for git syncer to populate
-      introduction: "", # Default to empty,
+      introduction: "",
       about: "",
-      code_sample: "" #TODOGIT - Work this out
+      code_sample: "",
+      bordered_green_icon_url: track_image_url("#{track_slug}-bordered-green.png"),
+      bordered_turquoise_icon_url: track_image_url("#{track_slug}-bordered-turquoise.png"),
+      hex_green_icon_url: track_image_url("#{track_slug}-hex-green.png"),
+      hex_turquoise_icon_url: track_image_url("#{track_slug}-hex-turquoise.png"),
+      hex_white_icon_url: track_image_url("#{track_slug}-hex-white.png"),
+      hex_green_icon_url: track_image_url("#{track_slug}-hex-green.png")
     )
     track
+  end
+
+  private
+
+  def track_image_url(file_name)
+    "https://s3-eu-west-1.amazonaws.com/exercism-static/tracks/#{file_name}"
   end
 
 end
