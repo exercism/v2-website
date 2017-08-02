@@ -17,7 +17,7 @@ module LayoutHelper
       tags << content_tag(:div, errors, id: 'errors')
     end
 
-    if object
+    if object && object.errors.full_messages.present?
       errors = safe_join(object.errors.full_messages.each { |msg| msg })
       tags << content_tag(:div, errors, id: 'errors')
     end

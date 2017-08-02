@@ -1,32 +1,53 @@
-#settings-page
+#my-settings-page
+  #nav.lo-nav-bar
+    .lo-container
+      /=link_to "Dashboard", root_path
+      /=image_tag "nav-divider.png"
+      %span Settings
+
   .lo-container
+    = notice_and_alert(current_user)
     .pure-g
       .pure-u-1-2
         %h1 Account Settings
         %h2 Change your password
-        =form_for @user, url: [:my, :settings] do |f|
-          .field
-            =label_tag :old_password, "Enter your current password"
-            =text_field_tag :old_password
+        -if current_user.provider?
+          You are using Github to authenticate
+        -else
+          =form_for current_user, url: [:my, :settings] do |f|
+            .field
+              =label_tag :old_password, "Enter your current password"
+              =text_field_tag :old_password
 
-          .field
-            =f.label :password, "Enter your current password"
-            =f.text_field :password
+            .field
+              =f.label :password, "Enter your new password"
+              =f.text_field :password
 
-          .field
-            =f.label :password_confirmation, "Enter your current password"
-            =f.text_field :password_confirmation
+            .field
+              =f.label :password_confirmation, "Confirm your current password"
+              =f.text_field :password_confirmation
 
-          =button_tag "Update Settings", class: 'pure-button'
+            =button_tag "Update Settings", class: 'pure-button'
+
       .pure-u-1-2
         %h2 Privacy
         %p You can choose to be anonymous on each track.
-        =form_for :track_settings, url: [:my, :settings] do |f|
+        =form_tag [:update_user_tracks, :my, :settings], method: :patch do |f|
           -@user_tracks.each do |user_track|
             .track
               .title=user_track.track.title
-              =check_box_tag "foobar"
+              =check_box_tag "user_tracks[#{user_track.id}][anonymous]", 1, user_track.anonymous?, class: 'anonymous-toggle'
               .toggles
                 %i.fa.fa-toggle-on
                 %i.fa.fa-toggle-off
-              =f.text_field "user_tracks[#{user_track.id}]", placeholder: "Choose an alias for this track"
+              =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, placeholder: "Choose an alias for this track", required: user_track.anonymous?
+
+          =button_tag "Update Settings", class: 'pure-button'
+
+-content_for :js do
+  :javascript
+    $('.anonymous-toggle').change(function(){
+      var $checkbox = $(this)
+      var $handle = $checkbox.next().next()
+      $handle.attr('required', $checkbox.prop('checked'))
+    })

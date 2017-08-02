@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resource :profile, controller: "profile"
 
     resource :settings do
+      patch :update_user_tracks
       resource :communication_preferences, only: [:edit, :update]
     end
 

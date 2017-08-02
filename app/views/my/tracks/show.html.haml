@@ -119,18 +119,19 @@
                 .topic deprecated
 
 
--if @track.iterations.count == 0
+  -if @track.iterations.count == 0
+    -content_for :js do
+      :javascript
+        showModal("my-track-started", "#{j(render "started_modal")}")
+
+  -if @track_completion_percentage == 100
+    -content_for :js do
+      :javascript
+        showModal("my-track-finished", "#{j(render "finished_modal")}")
+
   -content_for :js do
     :javascript
-      showModal("my-track-started", "#{j(render "started_modal")}")
-
--if @track_completion_percentage == 100
-  -content_for :js do
-    :javascript
-      showModal("my-track-finished", "#{j(render "finished_modal")}")
-
--content_for :js do
-  :coffeescript
-    updateSideExercises = =>
-      $('.side_exercises_form').trigger('submit.rails')
-    $('.side_exercises_form select').change updateSideExercises
+      updateSideExercises = function() {
+        $('.side_exercises_form').trigger('submit.rails')
+      })
+      $('.side_exercises_form select').change(updateSideExercises)

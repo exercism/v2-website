@@ -1,8 +1,10 @@
 @import 'variables';
 @import 'mixins';
 
-#settings-page {
-    padding:30px 0;
+#my-settings-page {
+    #nav {
+        margin-bottom:30px;
+    }
     h1 {
         @include font-size(20, 20);
         margin-bottom:20px;

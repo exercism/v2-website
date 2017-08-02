@@ -3,3 +3,15 @@
     width:1200px;
     margin:0 auto;
 }
+
+#alert, #errors {
+    background:red;
+    color:#fff;
+    padding:10px;
+}
+
+#notice {
+    background:green;
+    color:#fff;
+    padding:10px;
+}
