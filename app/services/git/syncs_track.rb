@@ -62,17 +62,25 @@ class Git::SyncsTrack
     exercises.each.with_index do |exercise, position|
       exercise_slug = exercise[:slug]
       exercise_uuid = exercise[:uuid]
+      deprecated = !!exercise[:deprecated]
       puts "UUID: #{exercise_uuid}"
-
-      # HACK!!! TODOGIT this will ultimately be removed
-      exercise_uuid = exercise_slug if exercise_uuid.nil?
-
       if exercise_slug.nil? || exercise_uuid.nil?
         puts "Skipping exercise #{exercise}"
+      elsif deprecated
+        ex = Exercise.find_by(uuid: exercise_uuid)
+        if ex.nil?
+          sync_exercise(exercise_slug, exercise_uuid, exercise, position)
+        end
+        ex.update!(active: false)
       else
         sync_exercise(exercise_slug, exercise_uuid, exercise, position)
       end
     end
+  end
+
+  def deprecate_exercise(exercise_uuid)
+    ex = Exercise.find_by(uuid: exercise_uuid)
+    ex.update!(active: false) unless ex.nil?
   end
 
   def sync_exercise(exercise_slug, exercise_uuid, exercise, position)
@@ -142,10 +150,6 @@ class Git::SyncsTrack
 
   def exercises
     config[:exercises] || []
-  end
-
-  def deprecated?
-    !!config[:deprecated]
   end
 
   def config
