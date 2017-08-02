@@ -24,8 +24,6 @@
     = link_to [:my, :notifications], class: "notifications #{current_user_has_notifications?? 'active' : ''}" do
       %i.fa.fa-bell-o
 
-    .links-menu
-
     =link_to root_path, class: 'logo' do
       =image_tag "logo-white.png"
 

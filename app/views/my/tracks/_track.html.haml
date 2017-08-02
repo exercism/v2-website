@@ -13,7 +13,7 @@
       .progress
         - percentage = @exercise_counts[track.id].to_f / track.exercises.active.count * 100
         .filled{style: "width:#{percentage}%"}
-        #{@exercise_counts[track.id]} / #{track.exercises.active.count} exercises
+        #{@exercise_counts[track.id].to_i} / #{track.exercises.active.count} exercises
     -else
       .num-exercises= pluralize track.exercises.active.count, "exercise"
     .enrolled Joined by #{pluralize track.user_tracks.count, "students"}

@@ -1,6 +1,35 @@
+@import 'variables';
+@import 'mixins';
+
 header.logged-out {
-    padding:10px 0;
-    border-bottom:1px solid #ddd;
-    margin-bottom:10px;
+    background:#22333b;
+    height:50px;
+    border-bottom:1px solid #22333b;
+
+    a.logo {
+        display:inline-block;
+        padding:14px 0;
+        vertical-align:middle;
+        img {
+            display:block;
+            height:22px;
+        }
+    }
+    .options {
+        float:right;
+        a {
+            display:inline-block;
+            color:rgba(#fff, 0.9);
+            margin:13px 0;
+            padding:5px 0;
+            text-decoration:none;
+            @include font-size(13, 13);
+            &+a {
+                padding-left:10px;
+                margin-left:10px;
+                border-left:1px solid rgba(#fff, 0.3);
+            }
+        }
+    }
 }
 
