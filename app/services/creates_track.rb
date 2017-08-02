@@ -8,14 +8,14 @@ class CreatesTrack
 
   def initialize(language, track_slug, repo_url)
     @language = language
-    @track_slug = track_slug
     @repo_url = repo_url
+    @track_slug = track_slug || repo_url.split("/").last
   end
 
   def create!
     track = Track.create!(
       title: language,
-      slug: track_slug || repo_url.split("/").last,
+      slug: track_slug,
       repo_url: repo_url,
       # Default track metadata to empty for git syncer to populate
       introduction: "",

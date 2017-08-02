@@ -1,9 +1,9 @@
 .pure-u-1-3
   =link_to [:my, track], class: (joined ? "track joined": "track") do
     -if joined
-      =image_tag image_path(track.hex_turquoise_icon_url)
+      =image_tag track.hex_turquoise_icon_url
     -else
-      =image_tag image_path(track.hex_white_icon_url)
+      =image_tag track.hex_white_icon_url
     .status.locked Locked
     .status.unlocked Unlocked
     .status.in-progress In progress

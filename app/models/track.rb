@@ -18,7 +18,7 @@ class Track < ApplicationRecord
    :hex_green_icon_url,
   ].each do |icon|
     define_method icon do
-      super() || "tmp/track-#{icon.to_s.dasherize}.png"
+      super() || "https://s3-eu-west-1.amazonaws.com/exercism-static/tracks/default-#{icon.to_s.gsub(/_icon_url/,'').dasherize}.png"
     end
   end
 
