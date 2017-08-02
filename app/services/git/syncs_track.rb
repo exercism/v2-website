@@ -18,7 +18,6 @@ class Git::SyncsTrack
       state_db.mark_synced(track)
       return
     end
-    return if deprecated?
     sync_track_metadata
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
