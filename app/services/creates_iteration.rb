@@ -3,17 +3,22 @@ class CreatesIteration
     new(*args).create!
   end
 
-  attr_reader :solution, :code, :iteration
-  def initialize(solution, code)
+  attr_reader :solution, :files, :iteration
+  def initialize(solution, files)
     @solution = solution
-    @code = code
+    @files = files
   end
 
   def create!
-    @iteration = Iteration.create!(
-      solution: solution,
-      code: code
-    )
+    @iteration = Iteration.create!( solution: solution )
+    files.each do |file|
+      iteration.files.create!(
+        filename: File.basename(file.original_filename),
+        content_type: file.content_type,
+        file_contents: file.read
+      )
+    end
+
     solution.mentorships.update_all(requires_action: true)
     solution.update(last_updated_by_user_at: DateTime.now)
     notify_mentors

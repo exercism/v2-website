@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :iteration_file do
+    
+  end
   factory :reaction do
     solution { create :solution }
     user { create :user }

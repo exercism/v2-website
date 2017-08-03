@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718170234) do
+ActiveRecord::Schema.define(version: 20170803095548) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -89,9 +89,18 @@ ActiveRecord::Schema.define(version: 20170718170234) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "iteration_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "iteration_id", null: false
+    t.string "filename", null: false
+    t.string "content_type", null: false
+    t.binary "file_contents", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iteration_id"], name: "fk_rails_56b435457f"
+  end
+
   create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "solution_id", null: false
-    t.text "code", limit: 4294967295, null: false
     t.integer "mentor_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -268,6 +277,7 @@ ActiveRecord::Schema.define(version: 20170718170234) do
   add_foreign_key "exercises", "exercises", column: "unlocked_by_id"
   add_foreign_key "exercises", "tracks"
   add_foreign_key "favourites", "iterations"
+  add_foreign_key "iteration_files", "iterations"
   add_foreign_key "iterations", "solutions"
   add_foreign_key "maintainers", "tracks"
   add_foreign_key "maintainers", "users"

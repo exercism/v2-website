@@ -1,4 +1,6 @@
 class API::SolutionsController < APIController
+  NUM_BYTES_IN_MEGABYTE = 1048576
+
   def latest
     begin
       track = Track.find(params[:track_id])
@@ -26,11 +28,23 @@ class API::SolutionsController < APIController
   end
 
   def update
-    files_list = params[:files_list]
-    solution = current_user.solutions.find(params[:id])
-    render json: {}, status: 403 and return unless solution
+    begin
+      solution = current_user.solutions.find(params[:id])
+    rescue
+      # This covers both a non-existing solution and a solution
+      # belonging to someone else. We might want seperate messages
+      # but I'm choosing not to leak the existance of a solution
+      # at this stage, but unifying the errors.
+      return render json: {error: "Solution not found"}, status: 404
+    end
 
-    CreatesIteration.create!(solution, params[:code])
+    params[:files].each do |file|
+      if file.size.to_f > NUM_BYTES_IN_MEGABYTE
+        return render json: {error: "#{file.original_filename} is too large"}, status: 404
+      end
+    end
+
+    iteration = CreatesIteration.create!(solution, params[:files])
 
     render json: {}, status: 201
   end

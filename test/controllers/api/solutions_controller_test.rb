@@ -98,6 +98,24 @@ class API::SolutionsControllerTest < API::TestBase
     assert_equal expected, actual
   end
 
+  test "update should return 401 with incorrect token" do
+    patch api_solution_path(1), headers: @headers, as: :json
+    assert_response 401
+  end
+
+  test "update should 404 if the solution doesn't exist" do
+    setup_user
+    patch api_solution_path(999), headers: @headers, as: :json
+    assert_response 404
+  end
+
+  test "update should 404 if the solution belongs to someone else" do
+    setup_user
+    solution = create :solution
+    patch api_solution_path(solution.id), headers: @headers, as: :json
+    assert_response 404
+  end
+
   test "update should create iteration" do
     skip
     setup_user
