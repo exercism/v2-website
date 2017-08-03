@@ -40,7 +40,6 @@ class Git::SyncsTrack
   end
 
   def create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
-    puts "Syncing exercise #{exercise_uuid}"
     if current_exercises_uuids.include?(exercise_uuid)
       ex = Exercise.find_by(uuid: exercise_uuid)
       ex.update!(exercise_data)
@@ -62,7 +61,6 @@ class Git::SyncsTrack
       exercise_slug = exercise[:slug]
       exercise_uuid = exercise[:uuid]
       deprecated = !!exercise[:deprecated]
-      puts "UUID: #{exercise_uuid}"
       if exercise_slug.nil? || exercise_uuid.nil?
         puts "Skipping exercise #{exercise}"
       elsif deprecated
