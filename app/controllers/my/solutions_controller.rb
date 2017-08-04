@@ -69,7 +69,7 @@ class My::SolutionsController < MyController
 
   private
   def set_solution
-    @solution = current_user.solutions.find(params[:id])
+    @solution = current_user.solutions.find_by_uuid!(params[:id])
   end
 
   def show_unlocked

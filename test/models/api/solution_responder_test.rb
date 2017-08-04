@@ -7,14 +7,14 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     responder = API::SolutionResponder.new(solution, solution.user)
     expected = {
       solution: {
-        id: solution.id,
+        id: solution.uuid,
         user: {
           handle: solution.user.handle,
           is_requester: true
         },
         exercise: {
-          id: solution.exercise.id,
-          instructions_url: "https://exercism.io/my/solutions/#{solution.id}",
+          id: solution.exercise.slug,
+          instructions_url: "https://exercism.io/my/solutions/#{solution.uuid}",
           track: {
             id: solution.exercise.track.slug
           }

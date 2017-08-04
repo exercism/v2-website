@@ -24,6 +24,14 @@ class Solution < ApplicationRecord
     where.not(published_at: nil)
   end
 
+  before_create do
+    self.uuid = SecureRandom.uuid
+  end
+
+  def to_param
+    uuid
+  end
+
   def approved?
     !!approved_by
   end

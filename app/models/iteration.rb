@@ -5,4 +5,8 @@ class Iteration < ApplicationRecord
   has_many :notifications, as: :about
 
   enum mentor_status: [:pending, :reply, :refactor, :approved]
+
+  #def code
+  #  files.first.file_contents
+  #end
 end

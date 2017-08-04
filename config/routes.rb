@@ -5,7 +5,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     scope :v1 do
-      resources :solutions, only: [:update] do
+      get "ping" => "ping#index"
+
+    # TODO
+    #there's download other people's solutions
+    #and "/tracks/:id/setup"
+    #and "/cli/settings"
+      resources :solutions, only: [:show, :update] do
         collection do
           get :latest
         end

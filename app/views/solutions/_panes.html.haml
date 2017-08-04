@@ -1,0 +1,22 @@
+.panes
+  .pane.pane-1.instructions
+    =raw iteration.solution.instructions
+  .pane.pane-2.test-suite
+    -iteration.solution.test_suite.each do |filename, code|
+      %h3= filename
+      %pre.line-numbers
+        %code{class: "language-ruby"}
+          = code
+  .pane.pane-3
+    -if iteration.files.size == 1
+      .solution.single-file
+        %pre.solution-code
+          %code{class: "language-ruby"}
+            = iteration.files.first.file_contents
+    -else
+      -iteration.files.each do |file|
+        .solution.multi-file
+          %h3= file.filename
+          %pre.solution-code
+            %code{class: "language-ruby"}
+              = file.file_contents

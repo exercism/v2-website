@@ -25,7 +25,7 @@ class SolutionsController < ApplicationController
   def show
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
-    @solution = @exercise.solutions.published.find(params[:id])
+    @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
     @iteration = @solution.iterations.last
     @comments = @solution.reactions.with_comments.includes(user: :profile)
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h

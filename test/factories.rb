@@ -1,7 +1,11 @@
 FactoryGirl.define do
   factory :iteration_file do
-    
+    iteration { create :iteration }
+    filename "foobar.rb"
+    content_type "text/plain"
+    file_contents "something = :else"
   end
+
   factory :reaction do
     solution { create :solution }
     user { create :user }
@@ -28,6 +32,7 @@ FactoryGirl.define do
   factory :profile do
     user { create :user }
     slug { SecureRandom.uuid }
+    display_name { user.name }
   end
 
   factory :communication_preferences do
@@ -69,7 +74,6 @@ FactoryGirl.define do
 
   factory :iteration do
     solution { create :solution }
-    code "Foobar"
   end
 
   factory :track do

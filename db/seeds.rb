@@ -29,11 +29,14 @@ UserTrack.create!(user: ihid, track: ruby)
 UserTrack.create!(user: ihid, track: python)
 
 ihid_slug = Solution.create!(user: ihid, exercise: slug, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar', completed_at: DateTime.now, published_at: DateTime.now)
-ihid_slug_iteration_1 = Iteration.create!(solution: ihid_slug, code: "CODE")
+ihid_slug_iteration_1 = Iteration.create!(solution: ihid_slug)
 ihid_slug_reaction = Reaction.create(user: kytrinyx, solution: ihid_slug, emotion: :genius, comment: "This is sick")
 
 ihid_bob = Solution.create!(user: ihid, exercise: bob, approved_by: kytrinyx, git_slug: 'foobar', git_sha: 'foobar')
-ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob, code: %q{
+ihid_bob_iteration_1 = Iteration.create!(solution: ihid_bob)
+=begin
+IterationFile.create(iteration: ihid_bob_iteration_1
+, code: %q{
 class Bob
   RESPONSES = {
     silent:   'Fine. Be that way.',
@@ -110,6 +113,7 @@ Splitting the pairs into classes would work well (Shout/Silent/Asking classes wi
 Very happy to hear any suggestions :)
 }
 iteration1_discussion2 = ihid_bob_iteration_1.discussion_posts.create!(user: ihid, content: iteration1_discussion2_content, html: ParsesMarkdown.parse(iteration1_discussion2_content))
+=end
 
 TrackMentorship.create(user: ihid, track: python)
 user1 = User.create!(name: "User 1", handle: "u1", email: "#{SecureRandom.uuid}@example.com", password: 'password')
@@ -120,16 +124,16 @@ user4 = User.create!(name: "User 4", handle: "u4", email: "#{SecureRandom.uuid}@
 python_hello_world = Exercise.create!(track: python, title: "Hello World", slug: "hello-world", uuid: SecureRandom.uuid, core: true, position: 2)
 
 user1_hello_world = Solution.create!(user: user1, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
-user1_hello_world_iteration_1 = Iteration.create!(solution: user1_hello_world, code: "foo")
-user1_hello_world_iteration_2 = Iteration.create!(solution: user1_hello_world, code: "bar")
-SolutionMentorship.create(user: ihid, solution: user1_hello_world, requires_action: true)
+#user1_hello_world_iteration_1 = Iteration.create!(solution: user1_hello_world, code: "foo")
+#user1_hello_world_iteration_2 = Iteration.create!(solution: user1_hello_world, code: "bar")
+#SolutionMentorship.create(user: ihid, solution: user1_hello_world, requires_action: true)
 
-user2_hello_world = Solution.create!(user: user2, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
-user2_hello_world_iteration_1 = Iteration.create!(solution: user2_hello_world, code: "foo")
-SolutionMentorship.create(user: ihid, solution: user2_hello_world)
+#user2_hello_world = Solution.create!(user: user2, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
+#user2_hello_world_iteration_1 = Iteration.create!(solution: user2_hello_world, code: "foo")
+#SolutionMentorship.create(user: ihid, solution: user2_hello_world)
 
-user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
-user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")
+#user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
+#user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")
 
 # Seed tracks
 Git::SeedsTracks.seed!

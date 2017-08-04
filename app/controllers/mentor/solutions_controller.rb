@@ -1,6 +1,6 @@
 class Mentor::SolutionsController < MentorController
   def show
-    @solution = Solution.find(params[:id])
+    @solution = Solution.find_by_uuid!(params[:id])
     @exercise = @solution.exercise
     @track = @exercise.track
 

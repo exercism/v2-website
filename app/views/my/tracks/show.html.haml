@@ -122,7 +122,7 @@
   -if @track.iterations.count == 0
     -content_for :js do
       :javascript
-        showModal("my-track-started", "#{j(render "started_modal")}")
+        showModal("my-track-started", "#{j(render "started_modal", track: @track)}")
 
   -if @track_completion_percentage == 100
     -content_for :js do

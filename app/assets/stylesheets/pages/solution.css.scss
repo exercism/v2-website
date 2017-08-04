@@ -3,7 +3,7 @@
 
 #solution-page, 
 #mentor-solution-page, 
-#my-solution-started-page {
+#my-solution-page {
     .pane.instructions {
         padding:20px 30px;
         h1,h2,h3,h4,h5,h6 {
@@ -42,7 +42,8 @@
         }
 
     }
-    .pane.test-suite {
+    .test-suite,
+    .solution.multi-file {
         background:#f9f9f9;
         h3 {
             padding:10px 50px 10px 27px;
@@ -60,7 +61,7 @@
             padding-top:10px;
         }
     }
-    .pane.solution, .pane.test-suite {
+    .solution, .test-suite {
         pre {
             margin:0;
             background:#f9f9f9;

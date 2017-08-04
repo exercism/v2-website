@@ -4,12 +4,22 @@ class CreatesIterationTest < ActiveSupport::TestCase
   test "creates for iteration user" do
     solution = create :solution
     code = "foobar"
+    filename = "foobar.rb"
+    content_type = "text/plain"
+    file_contents = "something = :else"
 
-    iteration = CreatesIteration.create!(solution, code)
+    file = mock(original_filename: filename, content_type: content_type, read: file_contents)
+
+    iteration = CreatesIteration.create!(solution, [file])
 
     assert iteration.persisted?
     assert_equal iteration.solution, solution
-    assert_equal iteration.code, code
+    assert_equal 1, iteration.files.count
+
+    saved_file = iteration.files.first
+    assert_equal filename, saved_file.filename
+    assert_equal content_type, saved_file.content_type
+    assert_equal file_contents, saved_file.file_contents
   end
 
   test "updates last updated by" do
@@ -17,7 +27,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       solution = create :solution, last_updated_by_user_at: nil
       assert_nil solution.last_updated_by_user_at
 
-      CreatesIteration.create!(solution, "Foobar")
+      CreatesIteration.create!(solution, [])
       assert_equal DateTime.now.to_i, solution.last_updated_by_user_at.to_i
     end
   end
@@ -27,7 +37,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action: false
 
-    CreatesIteration.create!(solution, "Foobar")
+    CreatesIteration.create!(solution, [])
 
     mentorship.reload
     assert mentorship.requires_action
@@ -57,7 +67,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       assert_equal Iteration, args[2].class
     end
 
-    CreatesIteration.create!(solution, "foooebar")
+    CreatesIteration.create!(solution, [])
   end
 
 

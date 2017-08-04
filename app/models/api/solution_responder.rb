@@ -10,13 +10,13 @@ class API::SolutionResponder
   def to_hash
     {
       solution: {
-        id: solution.id,
+        id: solution.uuid,
         user: {
           handle: user_handle,
           is_requester: solution.user_id == requester.id
         },
         exercise: {
-          id: solution.exercise.id,
+          id: solution.exercise.slug,
           instructions_url: instructions_url,
           track: {
             id: solution.exercise.track.slug

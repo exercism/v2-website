@@ -1,6 +1,23 @@
 class API::SolutionsController < APIController
   NUM_BYTES_IN_MEGABYTE = 1048576
 
+  def show
+    begin
+      solution = Solution.find_by_uuid!(params[:id])
+    rescue
+      return render json: {error: "Solution not found"}, status: 404
+    end
+
+    unless current_user == solution.user ||
+           solution.published? ||
+           current_user.mentoring_track?(solution.exercise.track)
+      return render json: {}, status: 403
+    end
+
+    responder = API::SolutionResponder.new(solution, current_user)
+    render json: responder.to_hash
+  end
+
   def latest
     begin
       track = Track.find(params[:track_id])
@@ -14,13 +31,10 @@ class API::SolutionsController < APIController
       return render json: {error: "Exercise not found", fallback_url: track_url(track)}, status: 404
     end
 
-    solution = exercise.solutions.last
-    return head 404 unless solution
-
-    unless current_user == solution.user ||
-           solution.published? ||
-           current_user.mentoring_track?(track)
-      return render json: {}, status: 403
+    begin
+      solution = current_user.solutions.where(exercise_id: exercise.id).last!
+    rescue
+      return render json: {error: "Solution not found"}, status: 404
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
@@ -29,7 +43,7 @@ class API::SolutionsController < APIController
 
   def update
     begin
-      solution = current_user.solutions.find(params[:id])
+      solution = current_user.solutions.find_by_uuid!(params[:id])
     rescue
       # This covers both a non-existing solution and a solution
       # belonging to someone else. We might want seperate messages
