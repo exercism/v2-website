@@ -11,6 +11,7 @@ class API::SolutionResponder
     {
       solution: {
         id: solution.uuid,
+        url: solution_url,
         user: {
           handle: user_handle,
           is_requester: solution.user_id == requester.id
@@ -37,8 +38,17 @@ class API::SolutionResponder
     end
   end
 
+  def solution_url
+    if solution.user == requester
+      routes.my_solution_url(solution)
+    elsif solution.published?
+      routes.track_exercise_solution_url(solution.exercise.track, solution.exercise, solution)
+    else
+      routes.mentor_solution_url(solution)
+    end
+  end
+
   def instructions_url
-    routes = Rails.application.routes.url_helpers
     routes.my_solution_url(solution)
   end
 
@@ -54,5 +64,9 @@ class API::SolutionResponder
     {
       submitted_at: iteration.created_at
     }
+  end
+
+  def routes 
+    @routes ||= Rails.application.routes.url_helpers
   end
 end

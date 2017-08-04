@@ -8,6 +8,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     expected = {
       solution: {
         id: solution.uuid,
+        url: "https://exercism.io/my/solutions/#{solution.uuid}",
         user: {
           handle: solution.user.handle,
           is_requester: true
@@ -55,5 +56,40 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     created_at = Time.now.getutc - 1.week
     iteration = create :iteration, solution: solution, created_at: created_at
     assert_equal created_at.to_i, responder.to_hash[:solution][:iteration][:submitted_at].to_i
+  end
+
+  test "solution_url should be /mentor/solutions if mentor" do
+    solution = create :solution
+    user_track = create :user_track, user: solution.user, track: solution.exercise.track
+    mentor = create :user
+    create :track_mentorship, user: mentor, track: solution.exercise.track
+    responder = API::SolutionResponder.new(solution, mentor)
+    assert_equal "https://exercism.io/mentor/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+  end
+
+  test "instructions_url should be /my/solutions for solution user if published" do
+    solution = create :solution, published_at: DateTime.now - 1.week
+    track = solution.exercise.track
+    user_track = create :user_track, user: solution.user, track: track
+    responder = API::SolutionResponder.new(solution, solution.user)
+    assert_equal "https://exercism.io/my/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+  end
+
+  test "instructions_url should be /solutions for other user if published" do
+    solution = create :solution, published_at: DateTime.now - 1.week
+    track = solution.exercise.track
+    user_track = create :user_track, user: solution.user, track: track
+    responder = API::SolutionResponder.new(solution, create(:user))
+    assert_equal "https://exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+  end
+
+  test "instructions_url should be /solutions if mentor and published" do
+    solution = create :solution, published_at: DateTime.now - 1.week
+    track = solution.exercise.track
+    user_track = create :user_track, user: solution.user, track: solution.exercise.track
+    mentor = create :user
+    create :track_mentorship, user: mentor, track: solution.exercise.track
+    responder = API::SolutionResponder.new(solution, mentor)
+    assert_equal "https://exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
   end
 end
