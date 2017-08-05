@@ -3,7 +3,7 @@
 
 #exercises-page {
     .header {
-        background-color: $header-color-1;
+        background-color: $color-2;
         .h1-subtitle {
             @include font-size(12, 12);
             color:#fff;
@@ -26,7 +26,7 @@
             @include font-size(10, 10);
             font-weight:$regular;
             border-radius:5px;
-            border:1px solid $color-1;
+            border:1px solid $color-2;
             text-transform:uppercase;
             color:#555;
             font-weight:500;
@@ -80,7 +80,7 @@
                 float:left;
                 margin-right:15px;
                 border-radius:2px;
-                border:1px solid $line-color-1;
+                border:1px solid $color-2;
                 background:#fff;
 
                 .img {
