@@ -22,21 +22,22 @@
         #{link_to "let us know", "mailto:hello@exercism.io"}
         and we’ll work on building a track for the most popular suggestion as soon as we can.
 
-    .joined-tracks
-      .num-tracks
-        Showing
-        %strong.num #{@joined_tracks.size}
-        tracks
+    -if @joined_tracks.size > 0
+      .joined-tracks
+        .num-tracks
+          Showing
+          %strong.num #{@joined_tracks.size}
+          tracks
 
-      %h2 Tracks You've Joined
-      .tracks.pure-g
-        =render partial: "track", collection: @joined_tracks, locals: {joined: true}
+        %h2 Tracks You've Joined
+        .tracks.pure-g
+          =render partial: "track", collection: @joined_tracks, locals: {joined: true}
 
     .other-tracks
       .num-tracks
         Showing
         %strong.num #{@other_tracks.size}
         tracks
-      %h2 Other Tracks
+      %h2 Available Tracks
       .tracks.pure-g
         =render partial: "track", collection: @other_tracks, locals: {joined: false}

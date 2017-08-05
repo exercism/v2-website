@@ -30,11 +30,6 @@ class User < ApplicationRecord
     create_communication_preferences
   end
 
-  # TODO
-  def avatar_url
-    "http://lorempixel.com/400/400/"
-  end
-
   def joined_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end
