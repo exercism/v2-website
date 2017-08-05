@@ -12,7 +12,8 @@
         .hr
         = link_to "Your profile", [:my, :profile]
         = link_to "Solutions you've liked", "#"
-        .hr
+        -if current_user.admin? || current_user.mentor?
+          .hr
         -if current_user.admin?
           = link_to "Admin Dashboard", admin_dashboard_path
         -if current_user.mentor?

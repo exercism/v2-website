@@ -1,38 +1,196 @@
 @import 'variables';
 @import 'mixins';
-#exercise-page {
+
+#exercise-page,
+#solutions-page {
     .header {
-        background: $header-color-1;
-        padding:0 0 15px 0;
+        background-size:cover;
+        background-color:$color-2;
+        padding:20px 0;
         overflow:hidden;
-        img {
-            float:left;
+        margin-bottom:20px;
+        .track {
             margin-right:20px;
-            margin-top:20px;
-            height:80px;
-        }
-        h2 {
-            padding-top:20px;
-            @include font-size(12, 14);
-            color:#fff;
-            font-weight:200;
-            margin-bottom:10px;
-        }
-        h1 {
-            @include font-size(34, 34);
-            font-weight:$bold;
-            margin-bottom:5px;
-            color:#fff;
-        }
-        .pure-button {
             float:right;
-            background:green;
-            color:#fff;
+            img {
+                width:50px;
+                display:inline-block;
+                vertical-align:middle;
+            }
+            .title {
+                display:none;
+                font-weight:$regular;
+                color:#fff;
+            }
         }
-        .topics {
-            @include font-size(12, 14);
+        .icon {
+            float:left;
+            height:55px;
+            padding-right:15px;
+            border-right:1px solid rgba(#fff, 0.5);
+            margin-right:15px;
+            img {
+                display:block;
+                height:100%;
+                height:55px;
+                width:55px;
+            }
+        }
+
+        h1 {
+            @include font-size(25, 25);
+            letter-spacing:-0.30px;
+            font-weight:$regular;
+            margin-bottom:6px;
+            padding-top:6px;
             color:#fff;
-            font-weight:200;
+            strong {
+                font-weight:$bold;
+            }
+        }
+        .h1-subtitle {
+            color:#eee;
+            @include font-size(12, 12);
+            a {
+                font-weight:$light;
+                color:#fff;
+            }
         }
     }
 }
+
+#exercise-page {
+    .info-section {
+        padding-bottom:20px;
+        border-bottom:1px solid #ddd;
+        margin-bottom:30px;
+        .difficulty, .length {
+            float:right;
+            text-transform:uppercase;
+            @include font-size(11, 11);
+        }
+        .length {
+            display:inline-block;
+            margin-right:5px;
+            padding-right:5px;
+            border-right:1px solid #aaa;
+            color:#aaa;
+            font-weight:$regular;
+        }
+        .difficulty {
+            display:inline-block;
+            font-weight:$bold;
+
+            &.easy { color: $color-1; }
+            &.medium { color: #f48b00 }
+            &.hard { color: #f34a56 }
+        }
+
+        h2 {
+            @include font-size(16, 16);
+            font-weight:$regular;
+            margin-bottom:8px;
+        }
+        p.blurb {
+            margin-bottom:8px;
+        }
+        .topics {
+            overflow:hidden;
+            height:21px;
+            .topic {
+                @include font-size(11, 11);
+                display:inline-block;
+                font-weight:$regular;
+                background:#eee;
+                color:#999;
+                padding:3px 6px 4px;
+                border-radius:2px;
+            }
+        }
+    }
+    .solution {
+        border:1px solid #eee;
+        border-radius:2px;
+        margin:0 20px 20px 0;
+        padding:20px;
+        display:block;
+        text-decoration:none;
+        &:hover {
+            border-color:$color-2;
+        }
+        .person {
+            overflow:hidden;
+            margin-bottom:15px;
+            img {
+                border-radius:100%;
+                width:40px;
+                height:40px;
+                float:left;
+                display:block;
+                margin-right:10px;
+            }
+            .handle {
+                padding-top:5px;
+                @include font-size(18, 18);
+                color:#666;
+                font-weight:$regular;
+                margin-bottom:3px;
+
+            }
+            .published-at {
+                @include font-size(10, 10);
+                color:#bbb;
+                font-weight:$regular;
+            }
+        }
+        .reactions {
+            background:#fafafa;
+            border:1px solid #eee;
+            border-radius:2px;
+            overflow:hidden;
+            .reaction {
+                float:left;
+                border-right:1px solid #eee;
+                padding:10px 16px;
+                &:last-child {
+                    border:none;
+                }
+                &.highlight {
+                    i, .count {
+                        color:$color-2;
+                    }
+                }
+                .count {
+                    display:inline-block;
+                    @include font-size(12, 12);
+                    font-weight:$regular;
+                    color:#888;
+                }
+                i, img {
+                    display:inline-block;
+                    margin-right:5px;
+                }
+
+                i {
+                    @include font-size(16, 16);
+                    color:#aaa;
+                }
+                img {
+                    vertical-align:bottom;
+                    height:16px;
+                }
+            }
+        }
+    }
+    .more-button {
+        display:block;
+        width:100%;
+        padding:20px;
+        border:1px solid $color-2;
+        color:$color-2;
+        background:#fff;
+        font-weight:$regular;
+        margin-bottom:20px;
+    }
+}
+

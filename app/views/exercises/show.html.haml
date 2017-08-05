@@ -1,21 +1,44 @@
 #exercise-page
-  #nav.lo-external-nav-bar
+  #nav.lo-nav-bar
     .lo-container
-      =link_to "Home", root_path
-      &middot;
-      =link_to "Language Tracks", [:tracks]
-      &middot;
-      =link_to @track.title, @track
+      =link_to "Language Tracks", :tracks
+      =image_tag "nav-divider.png"
+      =link_to "#{@track.title} Track", @track
+      =image_tag "nav-divider.png"
+      =link_to "Exercises", [@track, :exercises]
+      =image_tag "nav-divider.png"
+      =link_to @exercise.title, [@track, @exercise]
+      =image_tag "nav-divider.png"
+      %span Solutions
+
   .header
     .lo-container
-      =image_tag @exercise.white_icon_url
-      %h2 Part of the #{@track.title} Track on Exercism
+      .track
+        = bordered_turquoise_track_icon(@track)
+        .title #{@track.title} Track
+      .icon
+        =image_tag @exercise.white_icon_url
       %h1= @exercise.title
-      =link_to "View all community solutions", [@track, @exercise, :solutions], class: 'pure-button'
-      .topics= @exercise.topic_names.join(" | ")
+      .h1-subtitle
+        An exercise from the #{link_to "#{@exercise.track.title} Track"}
+
+  .info-section
+    .lo-container
+      %h2 About this Exercise
+      -length_word = exercise_length_word(@exercise)
+      -difficulty_word = exercise_difficulty_word(@exercise)
+      .difficulty{class: difficulty_word}= difficulty_word
+      .length{class: length_word}= length_word
+
+      %p.blurb= @exercise.blurb
+      .topics
+        -@exercise.topic_names.each do |topic_name|
+          .topic= topic_name
 
   .lo-container
-    %h3 Solutions
-    - @solutions.each do |solution|
-      =link_to solution.user.name, [@track, @exercise, solution]
+    .pure-g
+      -@solutions.each do |solution|
+        .pure-u-1-3
+          =render "solution", solution: solution, user_track: @user_tracks[solution.user_id]
+    =link_to "View all solutions", [@track, @exercise, :solutions], class: 'pure-button more-button'
 

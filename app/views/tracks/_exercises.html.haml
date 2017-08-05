@@ -2,17 +2,12 @@
   .lo-container
     .h2-subtitle Fun. Challenging. Interesting
     %h2 Community-sourced #{@track.title} Exercises
-    %p These are a few of the #{@track.exercises.active.count} exercises on the #{@track.title} track. You can see #{link_to "all the exercises here", track_exercises_path(@track)}.
+    %p
+      These are a few of the #{@track.exercises.active.count} exercises on the #{@track.title} track.
+      -unless user_signed_in?
+        You can see #{link_to "all the exercises here", track_exercises_path(@track)}.
     .pure-g.exercises
       -@exercises.each do |exercise|
         .pure-u-1-3
           .widget-side-exercise.completed
             =render "my/side_exercises/exercise", exercise: exercise, solution: Solution.new(completed_at: DateTime.now - 1.second)
-        -#
-          .pure-u-1-2
-            .exercise
-              .pure-g
-                .pure-u-1-5
-                  =image_tag exercise.icon_url
-                .pure-u-4-5
-                  %h3= exercise.title
