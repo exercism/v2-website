@@ -36,19 +36,6 @@
       .h1-subtitle
         Explore #{@total_solutions} community solutions.
 
-  .info-section
-    .lo-container
-      %h2 About this Exercise
-      -length_word = exercise_length_word(@exercise)
-      -difficulty_word = exercise_difficulty_word(@exercise)
-      .difficulty{class: difficulty_word}= difficulty_word
-      .length{class: length_word}= length_word
-
-      %p.blurb= @exercise.blurb
-      .topics
-        -@exercise.topic_names.each do |topic_name|
-          .topic= topic_name
-
   .lo-container
     .pure-g
       -if @user_solution
