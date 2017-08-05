@@ -5,7 +5,9 @@
       /=image_tag "nav-divider.png"
       =link_to "Language Tracks", [:my, :tracks]
       =image_tag "nav-divider.png"
-      %span #{@track.title} Track
+      =link_to "#{@track.title} Track", [:my, :tracks]
+      =image_tag "nav-divider.png"
+      %span Exercises
 
   .header
     .visual-section
@@ -13,7 +15,7 @@
       .lo-container
         =bordered_green_track_icon(@track, class: 'logo')
     .lo-container
-      %h1 #{@track.title} Track
+      %h1 Exercises on the #{@track.title} Track
       .stats
         .stat= pluralize @track.exercises.count, "Exercise"
         .stat= pluralize @track.user_tracks.count, "Students"
@@ -23,11 +25,25 @@
 
   .exercises
     .lo-container
-      %h2 Exercises
-      .h2-subtitle These all the exercises on the #{@track.title} language track on Exercism.
       .pure-g
         -@exercises.each do |exercise|
           =cache(["my/exercises/index", exercise], skip_digest: true) do
-            .pure-u-1-3
-              = link_to [@track, exercise], class: "widget-side-exercise unlocked" do
-                =render "my/side_exercises/exercise", exercise: exercise, solution: nil
+            .pure-u-1-2
+              = link_to [@track, exercise], class: "exercise" do
+                .icon
+                  .img{style: "background-image:url('#{image_path(exercise.dark_icon_url)}')"}
+
+                -length_word = exercise_length_word(exercise)
+                -difficulty_word = exercise_difficulty_word(exercise)
+                .stats
+                  .length{class: length_word}= length_word
+                  .difficulty{class: difficulty_word}= difficulty_word
+                %h3= exercise.title
+                .details
+                  %summary= exercise.blurb
+                  .topics
+                    -if exercise.topic_names.size > 0
+                      - exercise.topic_names.each do |topic_name|
+                        .topic= topic_name
+                    -else
+                      .topic misc

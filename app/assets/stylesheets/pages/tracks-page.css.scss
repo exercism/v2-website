@@ -45,7 +45,7 @@
         text-decoration:none;
         border:1px solid #c2c3c3;
         border-radius:2px;
-        padding:10px 20px;
+        padding:20px 20px;
         margin: 0 20px 20px 0;
         position:relative;
         overflow:hidden;
@@ -66,14 +66,13 @@
             float:left;
             margin-right:15px;
         }
-        .title {
+        h2 {
             @include font-size(18, 18);
             font-weight:$bold;
             margin-right:5px;
             display:inline-block;
             vertical-align:bottom;
             margin-bottom:7px;
-            margin-top:20px;
         }
         .num-exercises {
             padding:4px 7px;
@@ -84,10 +83,13 @@
             color:#999;
             background:#f3f3f3;
         }
-        .enrolled {
-            @include font-size(12, 12);
-            font-weight:$regular;
-            color:#999;
+        summary {
+            @include font-size(14, 19);
+            display:inline-block;
+            vertical-align:bottom;
+            max-width:390px;
+            height:76px;
+            overflow:hidden;
         }
     }
 }

@@ -22,6 +22,11 @@ class Track < ApplicationRecord
     end
   end
 
+  # TODO
+  def introduction
+    "Go is a compiled, open source programming language with a small, consistent syntax, a powerful standard library, and fantastic tooling. It's a great fit for web backends and command-line tools."
+  end
+
   def about
     ParsesMarkdown.parse(super)
   end
