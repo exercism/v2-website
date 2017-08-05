@@ -1,4 +1,3 @@
-# TODO - Validate handle is unique
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -24,6 +23,8 @@ class User < ApplicationRecord
 
   has_many :solution_mentorships
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
+
+  validates :handle, presence: true, handle: true
 
   after_create do
     create_communication_preferences

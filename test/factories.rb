@@ -98,7 +98,7 @@ FactoryGirl.define do
 
   factory :user do
     name "Jeremy Walker"
-    handle "iHiD"
+    handle { SecureRandom.uuid }
     email { "jez.walker+#{SecureRandom.uuid}@gmail.com" }
     password "foobar123"
   end

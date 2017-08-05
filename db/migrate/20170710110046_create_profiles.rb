@@ -3,7 +3,6 @@ class CreateProfiles < ActiveRecord::Migration[5.1]
     create_table :profiles do |t|
       t.bigint :user_id, null: false
       t.string :display_name, null: false
-      t.string :slug, null: false
 
       t.string :twitter, null: true
       t.string :website, null: true

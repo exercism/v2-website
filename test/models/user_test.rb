@@ -18,4 +18,32 @@ class UserTest < ActiveSupport::TestCase
     user.reload
     assert user.mentor?
   end
+
+  test "record cannot be saved without a handle" do
+    user = build :user, handle: nil
+    refute user.valid?
+    assert user.errors.keys.include?(:handle)
+  end
+
+  test "record can be updated without handle blowing up" do
+    user = create :user, handle: "foobar"
+    user.name = "Foobar!"
+    user.save!
+  end
+
+  test "handle must be unique across user_tracks" do
+    handle = SecureRandom.uuid
+    create :user_track, handle: handle
+    user = build :user, handle: handle
+    refute user.valid?
+    assert user.errors.keys.include?(:handle)
+  end
+
+  test "handle must be unique across users" do
+    handle = SecureRandom.uuid
+    create :user, handle: handle
+    u = build :user, handle: handle
+    refute u.valid?
+    assert u.errors.keys.include?(:handle)
+  end
 end

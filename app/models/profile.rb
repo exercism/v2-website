@@ -1,12 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  # TODO - We probably want to do some sort of
-  # locking here to avoid a race.
-  validates :slug, uniqueness: true
-
   def to_param
-    slug
+    user.handle
   end
 
   # TODO
