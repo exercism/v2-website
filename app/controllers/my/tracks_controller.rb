@@ -8,7 +8,7 @@ class My::TracksController < MyController
     @exercise_counts = current_user.solutions.completed.joins(:exercise).group(:track_id).count
   end
 
-  # TODO - Move all of this into some sort of helper service class
+  # OPTIMISE - Move all of this into some sort of helper service class
   def show
     @track = Track.find(params[:id])
     return show_not_joined unless current_user.joined_track?(@track)
@@ -31,7 +31,6 @@ class My::TracksController < MyController
     @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
     @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.completed?}.size
 
-    # TODO - This needs extracting and/or refactoring
     topic_counts = exercises.each_with_object({}) do |e, topics|
       e.topics.each do |topic|
         topics[topic] ||= 0
