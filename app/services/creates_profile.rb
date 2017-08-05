@@ -14,8 +14,7 @@ class CreatesProfile
   def create
     Profile.create(
       user: user,
-      display_name: display_name,
-      slug: slug
+      display_name: display_name
     )
   end
 

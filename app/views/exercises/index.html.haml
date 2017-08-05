@@ -1,0 +1,33 @@
+#exercises-page
+  #nav.lo-nav-bar
+    .lo-container
+      /=link_to "Dashboard", root_path
+      /=image_tag "nav-divider.png"
+      =link_to "Language Tracks", [:my, :tracks]
+      =image_tag "nav-divider.png"
+      %span #{@track.title} Track
+
+  .header
+    .visual-section
+      .line
+      .lo-container
+        =bordered_green_track_icon(@track, class: 'logo')
+    .lo-container
+      %h1 #{@track.title} Track
+      .stats
+        .stat= pluralize @track.exercises.count, "Exercise"
+        .stat= pluralize @track.user_tracks.count, "Students"
+        /.stat= pluralize @track.iterations.count, "Submissions"
+        .stat= pluralize @track.mentorships.count, "Mentors"
+      .h1-subtitle #{@track.exercises.count} exercises to help you amster #{@track.title}
+
+  .exercises
+    .lo-container
+      %h2 Exercises
+      .h2-subtitle These all the exercises on the #{@track.title} language track on Exercism.
+      .pure-g
+        -@exercises.each do |exercise|
+          =cache(["my/exercises/index", exercise], skip_digest: true) do
+            .pure-u-1-3
+              = link_to [@track, exercise], class: "widget-side-exercise unlocked" do
+                =render "my/side_exercises/exercise", exercise: exercise, solution: nil

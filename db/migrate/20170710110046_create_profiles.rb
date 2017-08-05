@@ -13,7 +13,6 @@ class CreateProfiles < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_index :profiles, :slug, unique: true
     add_foreign_key :profiles, :users
   end
 end

@@ -8,7 +8,7 @@
       =link_to @track.title, @track
   .header
     .lo-container
-      =image_tag @exercise.icon_url
+      =image_tag @exercise.white_icon_url
       %h2 Part of the #{@track.title} Track on Exercism
       %h1= @exercise.title
       =link_to "View all community solutions", [@track, @exercise, :solutions], class: 'pure-button'

@@ -1,7 +1,31 @@
-#tracks-page
-  .lo-container
-    %h1 Tracks
-    %ul
-      -@tracks.each do |track|
-        %li= link_to track.title, track
+#my-tracks-page
+  #nav.lo-nav-bar
+    .lo-container
+      /=link_to "Dashboard", root_path
+      /=image_tag "nav-divider.png"
+      %span Language Tracks
 
+  .header
+    .lo-container
+      %h1 Language Tracks
+      .h1-subtitle All the tracks exercism has to offer
+
+  .lo-container
+    .tracks
+      .num-tracks
+        Showing
+        %strong.num #{@tracks.size}
+        tracks
+
+      %h2 Language Tracks
+      .tracks.pure-g
+        -@tracks.each do |track|
+          .pure-u-1-3
+            -num_exercises = @all_exercise_counts[track.id].to_f
+            -num_users = @all_user_tracks_counts[track.id].to_f
+
+            =link_to track, class: 'track' do
+              =hex_turquoise_track_icon(track)
+              .title= track.title
+              .num-exercises= pluralize num_exercises.to_i, "exercise"
+              .enrolled Joined by #{pluralize num_users.to_i, "students"}

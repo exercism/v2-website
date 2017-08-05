@@ -17,8 +17,8 @@
 
     .no-results
       %h4 No results found.
-      %p 
-        Try searching for similar concepts or complimentary languages. We’re always concidering which language to add next so if there’s something you’d like to see on Exercism, please 
+      %p
+        Try searching for similar concepts or complimentary languages. We’re always concidering which language to add next so if there’s something you’d like to see on Exercism, please
         #{link_to "let us know", "mailto:hello@exercism.io"}
         and we’ll work on building a track for the most popular suggestion as soon as we can.
 
@@ -31,7 +31,7 @@
 
         %h2 Tracks You've Joined
         .tracks.pure-g
-          =render partial: "track", collection: @joined_tracks, locals: {joined: true}
+          =render 'tracks', joined: true, tracks: @joined_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts
 
     .other-tracks
       .num-tracks
@@ -40,4 +40,4 @@
         tracks
       %h2 Available Tracks
       .tracks.pure-g
-        =render partial: "track", collection: @other_tracks, locals: {joined: false}
+        =render 'tracks', joined: false, tracks: @other_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts

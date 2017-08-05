@@ -1,12 +1,15 @@
 class TracksController < ApplicationController
   def index
-    @tracks = Track.all
-    return redirect_to [:my, :tracks] if user_signed_in? 
+    return redirect_to [:my, :tracks] if user_signed_in?
+
+    @tracks = Track.order('title ASC')
+    @all_exercise_counts = Exercise.where(track_id: @tracks).group(:track_id).count
+    @all_user_tracks_counts = UserTrack.where(track_id: @tracks).group(:track_id).count
   end
 
   def show
     @track = Track.find(params[:id])
-    return redirect_to [:my, @track] if user_signed_in? 
+    return redirect_to [:my, @track] if user_signed_in?
 
     @mentors = @track.mentorships
     @maintainers = @track.maintainers

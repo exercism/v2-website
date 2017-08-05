@@ -140,7 +140,6 @@ ActiveRecord::Schema.define(version: 20170803095548) do
   create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "display_name", null: false
-    t.string "slug", null: false
     t.string "twitter"
     t.string "website"
     t.string "github"
@@ -148,7 +147,6 @@ ActiveRecord::Schema.define(version: 20170803095548) do
     t.string "medium"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_profiles_on_slug", unique: true
     t.index ["user_id"], name: "fk_rails_e424190865"
   end
 

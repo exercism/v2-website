@@ -6,13 +6,13 @@
 -if @joined_tracks.size > 0
   $('#my-tracks-page .joined-tracks').show()
   $('#my-tracks-page .joined-tracks .num-tracks .num').html('#{@joined_tracks.size}')
-  $('#my-tracks-page .joined-tracks .tracks').html("#{j render(partial: "track", collection: @joined_tracks, locals: {joined: true})}")
+  $('#my-tracks-page .joined-tracks .tracks').html("#{j render('tracks', joined: true, tracks: @joined_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts) }")
 -else
   $('#my-tracks-page .joined-tracks').hide()
 
 -if @other_tracks.size > 0
   $('#my-tracks-page .other-tracks').show()
   $('#my-tracks-page .other-tracks .num-tracks .num').html('#{@other_tracks.size}')
-  $('#my-tracks-page .other-tracks .tracks').html("#{j render(partial: "track", collection: @other_tracks, locals: {joined: false})}")
+  $('#my-tracks-page .other-tracks .tracks').html("#{j render('tracks', joined: false, tracks: @other_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts) }")
 -else
   $('#my-tracks-page .other-tracks').hide()

@@ -1,0 +1,93 @@
+@import 'variables';
+@import 'mixins';
+#tracks-page {
+    .header {
+        background-color:$color-2;
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        padding:100px 0 35px;
+        margin-bottom:35px;
+
+        h1 {
+            padding-top:20px;
+            @include font-size(40, 40);
+            letter-spacing:-1.56px;
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            max-width:70%;
+            @include font-size(16, 21);
+            color:#fff;
+            font-weight:$light;
+        }
+    }
+    h2 {
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin-bottom:15px;
+    }
+    .num-tracks {
+        float:right;
+        margin-right:20px;
+        color:#666;
+        margin-top:5px;
+        @include font-size(12, 12);
+        strong {
+            font-weight:$regular;
+        }
+    }
+    .track {
+        display:block;
+        background:#fff;
+        color:#333;
+        text-decoration:none;
+        border:1px solid #c2c3c3;
+        border-radius:2px;
+        padding:10px 20px;
+        margin: 0 20px 20px 0;
+        position:relative;
+        overflow:hidden;
+
+        &:hover {
+            border-color:$color-2;
+        }
+
+        .status {
+            float:right;
+            display:none;
+        }
+
+        img {
+            height:78px;
+            width:70px;
+            display:block;
+            float:left;
+            margin-right:15px;
+        }
+        .title {
+            @include font-size(18, 18);
+            font-weight:$bold;
+            margin-right:5px;
+            display:inline-block;
+            vertical-align:bottom;
+            margin-bottom:7px;
+            margin-top:20px;
+        }
+        .num-exercises {
+            padding:4px 7px;
+            display:inline-block;
+            margin-bottom:7px;
+            @include font-size(10, 10);
+            font-weight:$regular;
+            color:#999;
+            background:#f3f3f3;
+        }
+        .enrolled {
+            @include font-size(12, 12);
+            font-weight:$regular;
+            color:#999;
+        }
+    }
+}

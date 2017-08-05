@@ -1,0 +1,72 @@
+@import 'variables';
+@import 'mixins';
+
+#exercises-page {
+    .header {
+        background-color: $header-color-1;
+        .h1-subtitle {
+            @include font-size(12, 12);
+            color:#fff;
+            opacity:0.75;
+            font-weight:$light;
+        }
+        .num-solutions {
+            float:right;
+            color:#ededed;
+            font-weight:$bold;
+            @include font-size(11, 14);
+            text-transform:uppercase;
+        }
+        .status {
+            position:relative;
+            float:right;
+            margin-top:40px;
+            background:#fff;
+            color:333;
+            @include font-size(10, 10);
+            font-weight:$regular;
+            border-radius:5px;
+            border:1px solid $color-1;
+            text-transform:uppercase;
+            color:#555;
+            font-weight:500;
+            padding:9px 15px;
+        }
+        .stats {
+            float:right;
+            .stat {
+                display:inline-block;
+                color:#fff;
+                @include font-size(11, 14);
+                text-transform:uppercase;
+                padding-left:20px;
+                margin-left:20px;
+                &+.stat {
+                    border-left:1px solid rgba(#fff, 0.5);
+                }
+            }
+        }
+    }
+    .exercises {
+        background:#f9f9f9;
+        padding:45px 0;
+
+        h2 {
+            @include font-size(20, 20);
+            font-weight:$bold;
+            margin-bottom:7px;
+        }
+        .h2-subtitle {
+            @include font-size(14, 14);
+            font-weight:$light;
+            color:#999;
+            margin-bottom:35px;
+        }
+        .widget-side-exercise {
+            margin: 0 20px 20px 0;
+        }
+        .pure-g {
+            clear:both;
+        }
+    }
+}

@@ -111,13 +111,17 @@ class Git::SyncsTrack
   end
 
   def sync_track_metadata
-    track.update!(introduction: track_introduction,
+    track.update!(
+      introduction: track_introduction,
       about: track_about,
-      code_sample: code_sample)
+      code_sample: code_sample
+    )
   end
 
   def track_introduction
-    config["introduction"] || ""
+    # TODOGIT - FYI, I changed this from introduction to blurb in case
+    # you need to change it in any tests.
+    config[:blurb] || ""
   end
 
   def track_about

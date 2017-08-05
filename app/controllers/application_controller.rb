@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
   def redirect_if_signed_in!
-    redirect_to my_dashboard_path if signed_in?
+    redirect_to my_dashboard_path if user_signed_in?
   end
 
   def render_modal(class_name, template)
