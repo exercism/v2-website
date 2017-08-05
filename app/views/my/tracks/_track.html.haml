@@ -1,9 +1,9 @@
 .pure-u-1-3
   =link_to [:my, track], class: (joined ? "track joined": "track") do
     -if joined
-      =hex_turquoise_icon track
+      =hex_turquoise_track_icon(track)
     -else
-      =hex_white_icon track
+      =hex_white_track_icon(track)
     .status.locked Locked
     .status.unlocked Unlocked
     .status.in-progress In progress
