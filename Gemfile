@@ -51,4 +51,5 @@ group :test do
   gem 'mocha'
   gem 'minitest', '~> 5.10', '!= 5.10.2'
   gem 'timecop'
+  gem 'rails-controller-testing'
 end

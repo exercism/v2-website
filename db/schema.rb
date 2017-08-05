@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 20170803095548) do
     t.bigint "track_id", null: false
     t.boolean "anonymous", default: false, null: false
     t.string "handle"
+    t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true

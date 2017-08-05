@@ -41,8 +41,7 @@ class Git::RepoBase
     end
   rescue => e
     Rails.logger.error "Failed to clone repo #{repo_url}"
-    puts "Failed to clone repo #{repo_url}"
-    puts e.message
+    Rails.logger.error e.message
     raise
   end
 

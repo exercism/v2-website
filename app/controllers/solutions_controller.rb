@@ -3,7 +3,6 @@ class SolutionsController < ApplicationController
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
 
-    # TODO - Restrict to published
     @solutions = @exercise.solutions.published.includes(:user)
 
     if user_signed_in?
@@ -25,7 +24,13 @@ class SolutionsController < ApplicationController
   def show
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
-    @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
+
+    begin
+      @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
+    rescue
+      return redirect_to [@track, @exercise]
+    end
+
     @iteration = @solution.iterations.last
     @comments = @solution.reactions.with_comments.includes(user: :profile)
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
