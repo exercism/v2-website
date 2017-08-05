@@ -6,7 +6,7 @@ class SolutionTest < ActiveSupport::TestCase
     instructions = mock
     test_suite = mock
     git_exercise = mock(instructions: instructions, test_suite: test_suite)
-    GitExercise.expects(:new).
+    Git::Exercise.expects(:new).
                 with(solution.exercise, solution.git_slug, solution.git_sha).
                 returns(git_exercise)
 

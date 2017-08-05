@@ -1,4 +1,4 @@
-class GitExercise
+class Git::Exercise
   attr_reader :track, :git_slug, :git_sha
   def initialize(exercise, git_slug, git_sha)
     @track = exercise.track

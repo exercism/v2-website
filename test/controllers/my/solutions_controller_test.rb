@@ -7,7 +7,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       instructions: "instructions",
       test_suite: { test_file: "test_suite" }
     )
-    GitExercise.stubs(new: @mock_exercise)
+    Git::Exercise.stubs(new: @mock_exercise)
   end
 
   {
