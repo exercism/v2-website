@@ -1,15 +1,15 @@
 #exercise-page
   #nav.lo-nav-bar
     .lo-container
+      =link_to "Home", root_path
+      =image_tag "nav-divider.png"
       =link_to "Language Tracks", :tracks
       =image_tag "nav-divider.png"
       =link_to "#{@track.title} Track", @track
       =image_tag "nav-divider.png"
       =link_to "Exercises", [@track, :exercises]
       =image_tag "nav-divider.png"
-      =link_to @exercise.title, [@track, @exercise]
-      =image_tag "nav-divider.png"
-      %span Solutions
+      %span= @exercise.title
 
   .header
     .lo-container

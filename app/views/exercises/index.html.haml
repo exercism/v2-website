@@ -1,11 +1,11 @@
 #exercises-page
   #nav.lo-nav-bar
     .lo-container
-      /=link_to "Dashboard", root_path
-      /=image_tag "nav-divider.png"
-      =link_to "Language Tracks", [:my, :tracks]
+      =link_to "Home", root_path
       =image_tag "nav-divider.png"
-      =link_to "#{@track.title} Track", [:my, :tracks]
+      =link_to "Language Tracks", [:tracks]
+      =image_tag "nav-divider.png"
+      =link_to "#{@track.title} Track", @track
       =image_tag "nav-divider.png"
       %span Exercises
 
@@ -13,7 +13,7 @@
     .visual-section
       .line
       .lo-container
-        =bordered_green_track_icon(@track, class: 'logo')
+        =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
       %h1 Exercises on the #{@track.title} Track
       .stats
