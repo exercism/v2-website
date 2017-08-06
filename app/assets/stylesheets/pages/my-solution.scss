@@ -7,6 +7,7 @@ body.controller-solutions {
     }
 }
 
+#my-solution-unlocked-page,
 #my-solution-page {
     .track-header {
         margin-top:20px;
@@ -123,7 +124,8 @@ body.controller-solutions {
             }
         }
     }
-
+}
+#my-solution-page {
     .notifications-bar {
         overflow:hidden;
         margin-bottom:40px;
@@ -173,7 +175,7 @@ body.controller-solutions {
                     overflow-y:hidden;
                     position:fixed;
                     top:10px;
-                    bottom:10px;
+                    bottom:20px;
                     .panes {
                         position:absolute;
                         top:32px;

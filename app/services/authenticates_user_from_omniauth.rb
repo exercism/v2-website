@@ -19,7 +19,6 @@ class AuthenticatesUserFromOmniauth
     user = User.where(email: auth.info.email).first
     return user if user
 
-    # TODO - catch any omniauth errors and do something sensible (currently you get a 500)
     user = User.create!(
       provider: auth.provider,
       uid: auth.uid,

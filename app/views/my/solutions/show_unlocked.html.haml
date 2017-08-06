@@ -1,7 +1,22 @@
 #my-solution-unlocked-page
+  =link_to "CREATE A FAKE ITERATION", tmp_create_iteration_path(solution_id: @solution), method: :post
+  =render "nav_and_header"
   .lo-container
-    %h1 #{@exercise.title}
+    .pure-g
 
-    %p Here are a load of instructions on everything.
+      .pure-u-1-2
+        .experienced
+          %h2 Been here before?
+          .h2-subtitle If you understand how all this works, you can just run the following command.
+          .pre-frame
+            %pre
+              %code
+                exercism download #{@exercise.slug} --track=#{@track.slug}
 
-    =link_to "CREATE A FAKE ITERATION", tmp_create_iteration_path(solution_id: @solution), method: :post
+        .newbie
+          %h2 Need help getting started?
+
+      .pure-u-1-2
+        %h2 Instructions
+        .instructions
+          .rendered= raw @solution.instructions 

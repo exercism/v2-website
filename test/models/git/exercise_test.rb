@@ -10,4 +10,3 @@ class GitExerciseTest < ActiveSupport::TestCase
     skip
   end
 end
-

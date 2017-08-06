@@ -20,6 +20,9 @@ class My::SolutionsController < MyController
     @exercise = @solution.exercise
     ClearsNotifications.clear!(current_user, @solution)
 
+    @track = @solution.exercise.track
+    @user_track = UserTrack.where(user: current_user, track: @track).first
+
     if @solution.iterations.size > 0
       show_started
     else
@@ -82,10 +85,6 @@ class My::SolutionsController < MyController
     @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
     @num_iterations = @solution.iterations.count
 
-    @track = @solution.exercise.track
-    @user_track = UserTrack.where(user: current_user, track: @track).first
-
-
-    render :show
+   render :show
   end
 end

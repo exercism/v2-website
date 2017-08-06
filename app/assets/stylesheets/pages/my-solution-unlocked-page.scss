@@ -1,0 +1,73 @@
+@import 'variables';
+@import 'mixins';
+
+#my-solution-unlocked-page {
+    .track-header {
+        margin-bottom:30px !important;
+    }
+    h2 {
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin-bottom:10px;
+    }
+    .h2-subtitle {
+        @include font-size(14, 19);
+        font-weight:$light;
+        margin-bottom:10px;
+    }
+
+    .instructions {
+        .rendered {
+            h1,h2,h3,h4,h5,h6 {
+                font-weight:$regular;
+                @include font-size(16, 16);
+                margin-bottom:7px;
+            }
+            h1 {
+                @include font-size(18, 18);
+                font-weight:$regular;
+                margin-bottom:15px;
+            }
+            h2 {
+                @include font-size(14, 14);
+                padding-bottom:3px;
+                border-bottom:1px solid #eee;
+                margin-bottom:10px;
+            }
+            p {
+                @include font-size(14, 20);
+                margin-bottom:7px;
+            }
+            p+h2 {
+                margin-top:20px;
+            }
+            pre {
+                margin-bottom:10px;
+                background:#f6f6f6;
+            }
+            code {
+                @include font-size(12, 12);
+                color:#666;
+            }
+            a {
+                color:#333;
+            }
+
+        }
+    }
+
+    .experienced {
+        margin-bottom:30px;
+
+        .pre-frame {
+            pre {
+                background:#eee;
+                padding:10px;
+                display:inline-block;
+                margin:0;
+            }
+        }
+    }
+    .newbie {
+    }
+}
