@@ -31,7 +31,6 @@ FactoryGirl.define do
 
   factory :profile do
     user { create :user }
-    slug { SecureRandom.uuid }
     display_name { user.name }
   end
 
@@ -97,7 +96,7 @@ FactoryGirl.define do
   end
 
   factory :user do
-    name "Jeremy Walker"
+    name { "Jeremy Walker #{SecureRandom.random_number}" }
     handle { SecureRandom.uuid }
     email { "jez.walker+#{SecureRandom.uuid}@gmail.com" }
     password "foobar123"

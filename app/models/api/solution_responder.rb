@@ -66,7 +66,7 @@ class API::SolutionResponder
     }
   end
 
-  def routes 
+  def routes
     @routes ||= Rails.application.routes.url_helpers
   end
 end

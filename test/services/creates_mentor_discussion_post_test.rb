@@ -49,8 +49,8 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     CreatesNotification.expects(:create!).with do |*args|
       assert_equal user, args[0]
       assert_equal :new_discussion_post, args[1]
-      assert_equal "#{user.name} has commented on your solution", args[2]
-      assert_equal "http://foobar123.com", args[3]
+      assert_equal "#{mentor1.name} has commented on your solution", args[2]
+      assert_equal "https://exercism.io/my/solutions/#{solution.uuid}", args[3]
       assert_equal solution, args[4][:about]
     end
 

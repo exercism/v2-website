@@ -31,7 +31,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
         mentor,
         :new_discussion_post_for_mentor,
         "#{solution.user.name} has posted a comment on a solution you are mentoring",
-        "http://foobar.com", # TODO
+        routes.mentor_solution_url(solution),
 
         # We want this to be the solution not the post
         # to allow for clearing without a mentor having to
@@ -48,5 +48,9 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
 
   def user_may_comment?
     user == solution.user
+  end
+
+  def routes
+    @routes ||= Rails.application.routes.url_helpers
   end
 end

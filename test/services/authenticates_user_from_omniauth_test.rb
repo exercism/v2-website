@@ -54,10 +54,10 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     auth = mock
     auth.stubs(provider: "qwe", uid: "asdasa", info: info)
 
-    SecureRandom.stubs(:random_number).with(10000).returns(num1, num2)
     create :user, handle: handle
     create :user, handle: "#{handle}-#{num1}"
 
+    SecureRandom.stubs(:random_number).with(10000).returns(num1, num2)
     user = AuthenticatesUserFromOmniauth.authenticate(auth)
     assert user.persisted?
     assert_equal "#{handle}-#{num2}", user.handle

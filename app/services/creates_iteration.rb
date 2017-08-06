@@ -31,9 +31,9 @@ class CreatesIteration
         mentor,
         :new_iteration_for_mentor,
         "#{solution.user.name} has posted a new iteration on a solution you are mentoring",
-        "http://foobar.com", # TODO
+        routes.mentor_solution_url(solution),
 
-        # We want this to be the solution not the iteration
+        # Note: This is deliberately the solution not the iteration
         # to allow for clearing without a mentor having to
         # go into every single iteration
         about: solution
@@ -44,5 +44,9 @@ class CreatesIteration
         iteration
       )
     end
+  end
+
+  def routes
+    @routes ||= Rails.application.routes.url_helpers
   end
 end

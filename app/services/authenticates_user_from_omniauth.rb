@@ -36,7 +36,6 @@ class AuthenticatesUserFromOmniauth
           User.where(handle: attempt).exists?
       attempt = "#{auth.info.nickname}-#{SecureRandom.random_number(10000)}"
     end
-
     attempt
   end
 end

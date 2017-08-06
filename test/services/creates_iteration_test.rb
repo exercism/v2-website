@@ -57,7 +57,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_iteration_for_mentor, args[1]
       assert_equal "#{user.name} has posted a new iteration on a solution you are mentoring", args[2]
-      assert_equal "http://foobar.com", args[3]
+      assert_equal "https://exercism.io/mentor/solutions/#{solution.uuid}", args[3]
       assert_equal solution, args[4][:about]
     end
 

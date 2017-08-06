@@ -31,8 +31,8 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     CreatesNotification.create!(
       solution.user,
       :new_discussion_post,
-      "#{solution.user.name} has commented on your solution",
-      "http://foobar123.com", # TODO
+      "#{user.name} has commented on your solution",
+      routes.my_solution_url(solution),
 
       # We want this to be the solution not the post
       # to allow for clearing without a mentor having to
@@ -56,5 +56,9 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
 
   def solution
     iteration.solution
+  end
+
+  def routes
+    @routes ||= Rails.application.routes.url_helpers
   end
 end
