@@ -27,5 +27,4 @@
   .cta-section
     .lo-container
       %h2 Get started with the #{@track.title} track. As with everything on Exercism, it's 100% free.
-      / TODO - Work out where this button should go
-      = link_to "Join the #{@track.title} Track", [:my, :user_tracks, track_id: @track], method: :post, class: 'pure-button'
+      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'

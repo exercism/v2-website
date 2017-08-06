@@ -26,6 +26,16 @@ class User < ApplicationRecord
 
   validates :handle, presence: true, handle: true
 
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.github_data"]
+        user.name = data["info"]["name"] if user.name.blank?
+        user.email = data["info"]["email"] if user.email.blank?
+        user.handle = data["info"]["nickname"] if user.handle.blank?
+      end
+    end
+  end
+
   after_create do
     create_communication_preferences
   end

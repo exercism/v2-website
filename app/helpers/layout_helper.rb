@@ -13,12 +13,12 @@ module LayoutHelper
     n = notice
 
     if devise_controller? && @user && @user.errors.full_messages.present?
-      errors = safe_join(@user.errors.full_messages.each { |msg| msg })
+      errors = safe_join(@user.errors.full_messages.each { |msg| msg }, "<br/>".html_safe)
       tags << content_tag(:div, errors, id: 'errors')
     end
 
     if object && object.errors.full_messages.present?
-      errors = safe_join(object.errors.full_messages.each { |msg| msg })
+      errors = safe_join(object.errors.full_messages.each { |msg| msg }, "<br/>".html_safe)
       tags << content_tag(:div, errors, id: 'errors')
     end
 
