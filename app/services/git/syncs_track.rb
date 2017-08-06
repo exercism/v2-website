@@ -32,9 +32,9 @@ class Git::SyncsTrack
   private
 
   def populate_unlocked_by_relationships
-    @unlocked_by_relationships.each do |exercise_uuid, unlocked_by_uuid|
+    @unlocked_by_relationships.each do |exercise_uuid, unlocked_by_slug|
       a = Exercise.find_by(uuid: exercise_uuid)
-      b = Exercise.find_by(uuid: unlocked_by_uuid)
+      b = a.track.exercises.find_by(slug: unlocked_by_slug)
       a.update!( unlocked_by: b )
     end
   end
