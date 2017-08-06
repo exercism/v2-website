@@ -2,6 +2,7 @@ class Track < ApplicationRecord
   extend FriendlyId
   friendly_id :slug, use: [:history]
 
+  has_many :testimonials
   has_many :user_tracks
   has_many :exercises
   has_many :solutions, through: :exercises

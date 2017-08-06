@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803095548) do
+ActiveRecord::Schema.define(version: 20170806133728) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -196,6 +196,16 @@ ActiveRecord::Schema.define(version: 20170803095548) do
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
 
+  create_table "testimonials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "track_id"
+    t.string "headline", null: false
+    t.text "content", null: false
+    t.string "byline", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "fk_rails_c5eac2171d"
+  end
+
   create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -290,6 +300,7 @@ ActiveRecord::Schema.define(version: 20170803095548) do
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"
+  add_foreign_key "testimonials", "tracks"
   add_foreign_key "track_mentorships", "tracks"
   add_foreign_key "track_mentorships", "users"
   add_foreign_key "user_tracks", "tracks"

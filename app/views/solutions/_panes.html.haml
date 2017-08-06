@@ -10,13 +10,13 @@
   .pane.pane-3
     -if iteration.files.size == 1
       .solution.single-file
-        %pre.solution-code
+        %pre.solution-code.line-numbers
           %code{class: "language-ruby"}
-            = iteration.files.first.file_contents
+            = iteration.files.first.file_contents.force_encoding('utf-8')
     -else
       -iteration.files.each do |file|
         .solution.multi-file
           %h3= file.filename
-          %pre.solution-code
+          %pre.solution-code.line-numbers
             %code{class: "language-ruby"}
-              = file.file_contents
+              = file.file_contents.force_encoding('utf-8')

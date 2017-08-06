@@ -38,7 +38,7 @@ class ParsesMarkdown
   def options
     @options ||= {
       with_toc_data: false,
-      hard_wrap: true,
+      hard_wrap: false,
       xhtml: true
     }
   end

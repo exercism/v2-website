@@ -7,10 +7,12 @@ Rails.application.routes.draw do
     scope :v1 do
       get "ping" => "ping#index"
 
-    # TODO
-    #there's download other people's solutions
-    #and "/tracks/:id/setup"
-    #and "/cli/settings"
+      resource :cli_settings, only: [:show]
+      resources :tracks, only: [] do
+        member do
+          get :setup
+        end
+      end
       resources :solutions, only: [:show, :update] do
         collection do
           get :latest

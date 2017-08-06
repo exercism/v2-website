@@ -11,9 +11,11 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     return redirect_to [:my, @track] if user_signed_in?
 
-    @mentors = @track.mentorships
-    @maintainers = @track.maintainers
-    @exercises = @track.exercises.limit(6)
+    @mentors = @track.mentorships.reorder('rand()')
+    @maintainers = @track.maintainers.visible.reorder('active DESC, rand()')
+    @exercises = @track.exercises.active.reorder('rand()').limit(6)
+    @testimonial = @track.testimonials.order('rand()').first
+    @testimonial = Testimonial.generic.order('rand()').first unless @testimonial
 
     return redirect_to @track, :status => :moved_permanently if request.path != track_path(@track)
   end

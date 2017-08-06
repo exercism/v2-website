@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :testimonial do
+    
+  end
   factory :iteration_file do
     iteration { create :iteration }
     filename "foobar.rb"
