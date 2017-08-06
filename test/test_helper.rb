@@ -5,6 +5,7 @@ require 'timecop'
 require 'minitest/pride'
 
 Rails.application.routes.default_url_options = { :host => "https://exercism.io" }
+OmniAuth.config.test_mode = true
 
 class ActionView::TestCase
   include FactoryGirl::Syntax::Methods

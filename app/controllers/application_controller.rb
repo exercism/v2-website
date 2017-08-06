@@ -1,9 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
-  #before_action :authenticate_user
+  after_action :store_location
 
   private
+
+  # This saves the current user location for devise
+  def store_location
+    return if user_signed_in?
+    return if devise_controller?
+    return if request.xhr?
+
+    session["user_return_to"] = request.fullpath
+  end
+
   def redirect_if_signed_in!
     redirect_to my_dashboard_path if user_signed_in?
   end

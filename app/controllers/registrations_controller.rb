@@ -3,12 +3,13 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
      super do |user|
-       return unless user.persisted?
-       BootstrapsUser.bootstrap(user)
+       if user.persisted?
+         BootstrapsUser.bootstrap(user)
+       end
      end
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :handle])
   end
 end
