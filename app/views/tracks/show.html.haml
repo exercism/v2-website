@@ -14,8 +14,7 @@
         =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
       %h1= @track.title
-      / TODO - Work out where this button should go
-      = link_to "Join the #{@track.title} Track", [:my, :user_tracks, track_id: @track], method: :post, class: 'pure-button'
+      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
       .h1-subtitle= @track.introduction
 
   =render "tracks/overview"

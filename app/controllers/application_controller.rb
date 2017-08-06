@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     return if user_signed_in?
     return if devise_controller?
     return if request.xhr?
+    return unless request.get?
 
     session["user_return_to"] = request.fullpath
   end

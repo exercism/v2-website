@@ -83,4 +83,64 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to my_track_path(track)
   end
+
+  test "password sign up joins track" do
+    password = "foobar"
+    user = create :user, password: password
+
+    track = create :track
+    get track_path(track)
+    assert_response :success
+
+    post join_track_path(track)
+    assert_response :redirect
+    follow_redirect!
+
+    email = "#{SecureRandom.uuid}@asdasda.com"
+    post "/users", params: {user: {
+      name: "Jo Bloggs", handle: SecureRandom.uuid, email: email,
+      password: "foobar", password_confirmation: "foobar"
+    }}
+
+    assert_redirected_to track_path(track)
+    assert_response :redirect
+    follow_redirect!
+
+    assert_redirected_to my_track_path(track)
+
+    user = User.find_by_email!(email)
+    assert_equal [track], user.tracks
+  end
+
+  test "oauth sign up joins track" do
+    provider = "foobar"
+    uid = "12321321"
+    email = "#{SecureRandom.uuid}@erwerew.com"
+
+    track = create :track
+    get track_path(track)
+    assert_response :success
+
+    post join_track_path(track)
+    assert_response :redirect
+    follow_redirect!
+
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+      provider: provider, uid: uid,
+      info: {
+        nickname: SecureRandom.uuid, email: email, name: "qwe asd", image: "http://a.com/j.jpg"
+      }
+    })
+
+    post user_github_omniauth_callback_path
+
+    assert_redirected_to track_path(track)
+    assert_response :redirect
+    follow_redirect!
+
+    assert_redirected_to my_track_path(track)
+
+    user = User.find_by_email!(email)
+    assert_equal [track], user.tracks
+  end
 end

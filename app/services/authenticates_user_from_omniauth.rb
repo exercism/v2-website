@@ -4,9 +4,10 @@ class AuthenticatesUserFromOmniauth
     new(*args).authenticate
   end
 
-  attr_reader :auth
-  def initialize(auth)
+  attr_reader :auth, :initial_track_id
+  def initialize(auth, initial_track_id = nil)
     @auth = auth
+    @initial_track_id = initial_track_id
   end
 
   def authenticate
@@ -26,7 +27,7 @@ class AuthenticatesUserFromOmniauth
       handle: handle,
       avatar_url: auth.info.image
     )
-    BootstrapsUser.bootstrap(user)
+    BootstrapsUser.bootstrap(user, initial_track_id)
     user
   end
 
