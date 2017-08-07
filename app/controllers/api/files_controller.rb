@@ -10,10 +10,17 @@ class API::FilesController < APIController
       return render_403(:user_may_not_download_solution, "You may not download this solution")
     end
 
-    begin
-      content = exercise_reader.read_file(params[:filepath])
-    rescue
-      return render_file_not_found
+    if @solution.iterations.last
+      file = @solution.iterations.last.files.where(filename: params[:filepath]).first
+      content = file.try(:file_contents)
+    end
+
+    unless content
+      begin
+        content = exercise_reader.read_file(params[:filepath])
+      rescue
+        return render_file_not_found
+      end
     end
 
     return render_file_not_found unless content

@@ -4,6 +4,7 @@ FactoryGirl.define do
     content "Wowowowowow!!!"
     byline "Nicky from the block"
   end
+
   factory :iteration_file do
     iteration { create :iteration }
     filename { "foobar-#{SecureRandom.uuid}.rb"}

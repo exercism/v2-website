@@ -82,4 +82,16 @@ class API::FilesControllerTest < API::TestBase
     end
   end
 
+  test "gets solution file" do
+    setup_user
+    solution = create :solution, user: @current_user
+    iteration = create :iteration, solution: solution
+    file = create :iteration_file, iteration: iteration
+
+    @mock_exercise.expects(:read_file).never
+
+    get "/api/v1/solutions/#{solution.uuid}/files/#{file.filename}", headers: @headers, as: :json
+    assert_response 200
+    assert file.file_contents, response.body
+  end
 end
