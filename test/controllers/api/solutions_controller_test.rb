@@ -16,10 +16,10 @@ class API::SolutionsControllerTest < API::TestBase
     assert_response 401
   end
 
-  test "latest should return 404 when there is no track" do
+  test "latest should return 404 when the track doesn't exist" do
     setup_user
     exercise = create :exercise
-    get latest_api_solutions_path(exercise_id: exercise.slug), headers: @headers, as: :json
+    get latest_api_solutions_path(exercise_id: exercise.slug, track_id: SecureRandom.uuid), headers: @headers, as: :json
     assert_response 404
     expected = {error: {
       type: "track_not_found",
@@ -39,6 +39,36 @@ class API::SolutionsControllerTest < API::TestBase
       type: "exercise_not_found",
       message: "Exercise not found",
       fallback_url: track_url(track)
+    }}
+    actual = JSON.parse(response.body, symbolize_names: true)
+    assert_equal expected, actual
+  end
+
+  test "latest should return 200 when the track can be guessed" do
+    setup_user
+    exercise = create :exercise
+    create :solution, user: @current_user, exercise: exercise
+    create :user_track, user: @current_user, track: exercise.track
+    get latest_api_solutions_path(exercise_id: exercise.slug), headers: @headers, as: :json
+    assert_response 200
+  end
+
+  test "latest should return array of possible tracks if multiple are possible" do
+    setup_user
+    exercise1 = create :exercise
+    exercise2 = create :exercise, slug: exercise1.slug
+    exercise3 = create :exercise
+
+    create :solution, user: @current_user, exercise: exercise1
+    create :solution, user: @current_user, exercise: exercise2
+    create :solution, user: @current_user, exercise: exercise3
+
+    get latest_api_solutions_path(exercise_id: exercise1.slug), headers: @headers, as: :json
+    assert_response 400
+    expected = {error: {
+      type: "track_ambiguous",
+      message: "Please specify a track id",
+      possible_track_ids: [exercise1.track.slug, exercise2.track.slug]
     }}
     actual = JSON.parse(response.body, symbolize_names: true)
     assert_equal expected, actual

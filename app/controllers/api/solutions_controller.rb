@@ -18,22 +18,35 @@ class API::SolutionsController < APIController
   end
 
   def latest
-    begin
-      track = Track.find(params[:track_id])
-    rescue
-      return render_404(:track_not_found, fallback_url: tracks_url)
-    end
+    if params[:track_id].present?
+      begin
+        track = Track.find(params[:track_id])
+      rescue
+        return render_404(:track_not_found, fallback_url: tracks_url)
+      end
 
-    begin
-      exercise = track.exercises.find(params[:exercise_id])
-    rescue
-      return render_404(:exercise_not_found, fallback_url: track_url(track))
-    end
+      begin
+        exercise = track.exercises.find(params[:exercise_id])
+      rescue
+        return render_404(:exercise_not_found, fallback_url: track_url(track))
+      end
 
-    begin
-      solution = current_user.solutions.where(exercise_id: exercise.id).last!
-    rescue
-      return render_solution_not_found
+      begin
+        solution = current_user.solutions.where(exercise_id: exercise.id).last!
+      rescue
+        return render_solution_not_found
+      end
+
+    # No track id provided
+    else
+      solutions = current_user.solutions.joins(:exercise).where("exercises.slug": params[:exercise_id]).includes(exercise: :track)
+      if solutions.size == 0
+        return render_404(:exercise_not_found)
+      elsif solutions.size > 1
+        return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)
+      else
+        solution = solutions.first
+      end
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
