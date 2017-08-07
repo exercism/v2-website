@@ -9,6 +9,7 @@ gem 'rails', '~> 5.1.0'
 gem 'puma', '~> 3.7'
 gem 'mysql2'
 
+gem 'dalli'
 gem 'devise', '~> 4.3'
 gem 'omniauth-github'
 gem 'kaminari'

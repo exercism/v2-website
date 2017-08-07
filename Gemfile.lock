@@ -83,6 +83,7 @@ GEM
     connection_pool (2.2.1)
     css_parser (1.4.10)
       addressable
+    dalli (2.7.6)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -309,6 +310,7 @@ DEPENDENCIES
   capistrano-yarn
   capybara (~> 2.13.0)
   coffee-rails (~> 4.2)
+  dalli
   devise (~> 4.3)
   factory_girl_rails
   friendly_id (~> 5.2)
