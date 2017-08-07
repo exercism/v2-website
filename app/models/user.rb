@@ -40,6 +40,13 @@ class User < ApplicationRecord
     create_communication_preferences
   end
 
+  def may_view_solution?(solution)
+    return true if id == solution.user_id
+    return true if solution.published?
+    return true if mentoring_track?(solution.exercise.track)
+    false
+  end
+
   def joined_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end

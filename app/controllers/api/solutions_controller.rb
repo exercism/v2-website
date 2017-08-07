@@ -8,9 +8,7 @@ class API::SolutionsController < APIController
       return render_solution_not_found
     end
 
-    unless current_user == solution.user ||
-           solution.published? ||
-           current_user.mentoring_track?(solution.exercise.track)
+    unless current_user.may_view_solution?(solution)
       return render_403(:user_may_not_download_solution, "You may not download this solution")
     end
 

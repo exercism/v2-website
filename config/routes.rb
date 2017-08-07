@@ -18,7 +18,7 @@ Rails.application.routes.draw do
           get :latest
         end
 
-        get 'files/*filepath', to: 'files#show', format: false
+        get 'files/*filepath', to: 'files#show', format: false, as: "file"
       end
     end
   end

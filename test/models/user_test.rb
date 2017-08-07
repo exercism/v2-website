@@ -46,4 +46,28 @@ class UserTest < ActiveSupport::TestCase
     refute u.valid?
     assert u.errors.keys.include?(:handle)
   end
+
+  test "may_view_solution? for random user" do
+    solution = create :solution, published_at: DateTime.now - 1.week
+    user = create :user
+    refute user.may_view_solution?(solution)
+  end
+
+  test "may_view_solution? for solution_user" do
+    solution = create :solution
+    assert solution.user.may_view_solution?(solution)
+  end
+
+  test "may_view_solution? for published solution" do
+    solution = create :solution, published_at: DateTime.now - 1.week
+    user = create :user
+    assert user.may_view_solution?(solution)
+  end
+
+  test "may_view_solution? for mentor" do
+    solution = create :solution, published_at: DateTime.now - 1.week
+    user = create :user
+    create :track_mentorship, track: solution.exercise.track, user: user
+    assert user.may_view_solution?(solution)
+  end
 end

@@ -26,5 +26,4 @@ class UserTrackTest < ActiveSupport::TestCase
     refute ut.valid?
     assert ut.errors.keys.include?(:handle)
   end
-
 end
