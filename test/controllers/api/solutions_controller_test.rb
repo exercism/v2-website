@@ -1,6 +1,13 @@
 require_relative './test_base'
 
 class API::SolutionsControllerTest < API::TestBase
+
+  def setup
+    @mock_exercise = stub(files: [])
+    @mock_repo = stub(exercise: @mock_exercise)
+    Git::ExercismRepo.stubs(new: @mock_repo)
+  end
+
   ###
   # LATEST
   ###

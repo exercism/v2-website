@@ -119,8 +119,6 @@ class Git::SyncsTrack
   end
 
   def track_introduction
-    # TODOGIT - FYI, I changed this from introduction to blurb in case
-    # you need to change it in any tests.
     config[:blurb] || ""
   end
 
