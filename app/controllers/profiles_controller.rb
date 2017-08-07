@@ -4,7 +4,8 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find_by_slug!(params[:id])
+    @user = User.find_by_handle!(params[:id])
+    @profile = @user.profile
     @track = Track.find_by_id(params[:track_id])
     @solutions = @profile.user.solutions.published.includes(exercise: :track)
     @solutions = @solutions.where(track_id: track.id) if @track

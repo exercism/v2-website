@@ -1,6 +1,15 @@
 @import 'variables';
 @import 'mixins';
 
+
+body.controller-tracks.action-show,
+body.controller-my-tracks.action-show {
+    footer {
+        margin-top:0;
+    }
+}
+
+
 #my-track-page,
 #track-page,
 #exercises-page,

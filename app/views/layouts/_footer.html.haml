@@ -2,18 +2,27 @@
   .lo-container
     .pure-g
       .pure-u-1-6
-        %h2 Company
+        %h4 Company
         =link_to "Exercism", root_path
+        =link_to "Terms", "#"
+        =link_to "Privacy", "#"
+      .pure-u-1-6
+        %h4 Help
+        =link_to "FAQs", "#"
+        =link_to "How Exercism Works", "#"
+        =link_to "Exercism in Bootcamps", "#"
+      .pure-u-1-6
+        %h4 Get Involved
+        =link_to "Become a mentor", "#"
+        =link_to "Become a mantainer", "#"
       .pure-u-1-6
       .pure-u-1-6
-      .pure-u-1-6
-      .pure-u-1-6
-        %h2 Keep in touch
+        %h4 Keep in touch
         =link_to "Newsletter", "https://tinyletter.com/exercism"
         =link_to "Discuss on Github", "https://github.com/exercism/discussions"
         =link_to "Email us", "mailto:hello@exercism.io"
       .pure-u-1-6
-        %h2 Follow
+        %h4 Follow
         =link_to "https://twitter.com/exercism_io", class: 'icon' do
           %i.fa.fa-twitter
         =link_to "https://facebook.com/exercism.io", class: 'icon' do
@@ -22,6 +31,4 @@
           %i.fa.fa-github
 
     .legal
-      =link_to "Terms", "#"
-      =link_to "Privacy", "#"
       .copyright © #{DateTime.now.year} Exercism, Inc

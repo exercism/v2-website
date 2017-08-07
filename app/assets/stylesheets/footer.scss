@@ -2,29 +2,27 @@
 @import 'mixins';
 
 footer {
-    padding:10px 0;
-    border-top:1px solid #ddd;
+    padding:60px 0 0 0;
+    border-top:1px solid #f3f3f3;
     margin-top:100px;
-    padding-top:40px;
-    h2 {
+    background:#fafafa;
+    h4 {
         @include font-size(16, 16);
-        color:#666;
+        color:#333;
         font-weight:$bold;
-        margin-bottom:20px;
+        margin-bottom:15px;
     }
     a {
         text-decoration:none;
         font-weight:$regular;
-        color:$color-2;
+        color:#507679;
         @include font-size(13, 13);
         display:block;
-        padding:5px 0;
+        margin-bottom:12px;
         &.icon {
-            padding:10px 0;
             margin-right:20px;
             display:inline-block;
             i {
-                color:#666;
                 @include font-size(25, 25);
             }
         }
@@ -33,12 +31,11 @@ footer {
     .legal {
         margin-top:30px;
         padding:10px 0;
-        border-top:1px solid #ddd;
+        border-top:1px solid #eee;
         text-align:right;
         .copyright, a {
-            color:#ccc;
-            font-weight:$regular;
-            @include font-size(13, 13);
+            color:#aaa;
+            @include font-size(13, 20);
             padding-left:30px;
             display:inline-block;
         }
