@@ -71,8 +71,9 @@ class Git::ExerciseReader
     meta_ptr = exercise_tree[".meta"]
     return nil if meta_ptr.nil?
     meta_tree = repo.lookup(meta_ptr[:oid])
-    desc_ptr = meta_tree["descrition.md"]
+    desc_ptr = meta_tree["description.md"]
     return nil if desc_ptr.nil?
+    p "HERE3"
     blob = repo.lookup(desc_ptr[:oid])
     blob.text
   rescue => e
