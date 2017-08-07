@@ -20,7 +20,8 @@ class API::SolutionResponder
           id: solution.exercise.slug,
           instructions_url: instructions_url,
           track: {
-            id: solution.exercise.track.slug
+            id: solution.exercise.track.slug,
+            language: solution.exercise.track.title
           }
         },
         file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
@@ -54,16 +55,18 @@ class API::SolutionResponder
   end
 
   def files
-    exercise_reader.files
+    fs = Set.new(exercise_reader.files)
+    fs += iteration.files.pluck(:filename) if iteration
+    fs
   end
 
   def iteration_hash
-    iteration = solution.iterations.last
     return nil unless iteration
+    { submitted_at: iteration.created_at }
+  end
 
-    {
-      submitted_at: iteration.created_at
-    }
+  def iteration
+    @iteration ||= solution.iterations.last
   end
 
   def routes
@@ -77,5 +80,4 @@ class API::SolutionResponder
     track_url = solution.exercise.track.repo_url
     Git::ExercismRepo.new(track_url).exercise(exercise_slug)
   end
-
 end

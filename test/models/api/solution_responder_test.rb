@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class API::SolutionResponderTest < ActiveSupport::TestCase
+  def setup
+    @mock_exercise = stub(files: [])
+    @mock_repo = stub(exercise: @mock_exercise)
+    Git::ExercismRepo.stubs(new: @mock_repo)
+  end
+
   test "basic to_hash" do
     solution = create :solution
     user_track = create :user_track, user: solution.user, track: solution.exercise.track
@@ -17,10 +23,12 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
           id: solution.exercise.slug,
           instructions_url: "https://exercism.io/my/solutions/#{solution.uuid}",
           track: {
-            id: solution.exercise.track.slug
+            id: solution.exercise.track.slug,
+            language: solution.exercise.track.title
           }
         },
-        files: [],
+        file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
+        files: Set.new([]),
         iteration: nil
       }
     }
@@ -91,5 +99,21 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor, track: solution.exercise.track
     responder = API::SolutionResponder.new(solution, mentor)
     assert_equal "https://exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+  end
+
+  test "files includes solution files" do
+    solution = create :solution
+    iteration = create :iteration, solution: solution
+    exercise_filepath_1 = "foobar.js"
+    exercise_filepath_2 = "barfoo.go"
+    file1 = create :iteration_file, iteration: iteration
+    file2 = create :iteration_file, iteration: iteration
+    file3 = create :iteration_file, iteration: iteration, filename: exercise_filepath_2
+    user_track = create :user_track, user: solution.user, track: solution.exercise.track
+
+    responder = API::SolutionResponder.new(solution, solution.user)
+    @mock_exercise.expects(:files).returns([exercise_filepath_1, exercise_filepath_2])
+    expected = Set.new([exercise_filepath_1, exercise_filepath_2, file1.filename, file2.filename])
+    assert_equal expected, responder.to_hash[:solution][:files]
   end
 end

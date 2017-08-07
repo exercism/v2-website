@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
   factory :iteration_file do
     iteration { create :iteration }
-    filename "foobar.rb"
+    filename { "foobar-#{SecureRandom.uuid}.rb"}
     content_type "text/plain"
     file_contents "something = :else"
   end
