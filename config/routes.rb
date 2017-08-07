@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         collection do
           get :latest
         end
+        resources :files, only: [:show]
       end
     end
   end

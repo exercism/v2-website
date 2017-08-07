@@ -23,6 +23,7 @@ class API::SolutionResponder
             id: solution.exercise.track.slug
           }
         },
+        file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
         files: files,
         iteration: iteration_hash
       }
@@ -52,9 +53,8 @@ class API::SolutionResponder
     routes.my_solution_url(solution)
   end
 
-  # TODOGIT - Populate this.
   def files
-    []
+    exercise_reader.files
   end
 
   def iteration_hash
@@ -69,4 +69,13 @@ class API::SolutionResponder
   def routes
     @routes ||= Rails.application.routes.url_helpers
   end
+
+  private
+
+  def exercise_reader
+    exercise_slug = solution.exercise.slug
+    track_url = solution.exercise.track.repo_url
+    Git::ExercismRepo.new(track_url).exercise(exercise_slug)
+  end
+
 end

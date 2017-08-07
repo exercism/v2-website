@@ -69,14 +69,17 @@ class Git::ExerciseReader
 
   def files
     exercise_files.map do |file_defn|
-      {
-        file: file_defn[:full],
-        filemode: file_defn[:filemode].to_s(8),
-        github_raw: github_raw_url(file_defn[:full]),
-        content: read_blob(file_defn[:oid])
-      }
+      file_defn[:full]
     end
   end
+
+  def read_file(path)
+    files = exercise_files.map { |x| [x[:full], x[:oid]] }.flatten
+    available_files = Hash[*files]
+    return nil unless available_files.has_key?(path)
+    read_blob(available_files[path])
+  end
+
 
   private
 
