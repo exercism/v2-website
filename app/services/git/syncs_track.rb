@@ -91,6 +91,7 @@ class Git::SyncsTrack
 
     ex = repo.exercise(exercise_slug, repo.head)
     blurb = ex.blurb || standard_blurb_for(exercise_slug)
+    description = ex.description || standard_description_for(exercise_slug)
 
     exercise_data = {
       slug: exercise_slug,
@@ -102,6 +103,7 @@ class Git::SyncsTrack
       length: exercise.fetch(:length, 1),
       topics: topics,
       blurb: blurb,
+      description: description,
       dark_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-dark.png",
       turquoise_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-turquoise.png",
       white_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-white.png",
@@ -160,10 +162,20 @@ class Git::SyncsTrack
     @repo ||= Git::ExercismRepo.new(repo_url, auto_fetch: true)
   end
 
+  def standard_description_for(exercise_slug)
+    ex = standard_spec_for(exercise_slug)
+    return nil if ex.nil?
+    ex.description
+  end
+
   def standard_blurb_for(exercise_slug)
-    ex = problem_specifications.exercises[exercise_slug]
+    ex = standard_spec_for(exercise_slug)
     return nil if ex.nil?
     ex.blurb
+  end
+
+  def standard_spec_for(exercise_slug)
+    problem_specifications.exercises[exercise_slug]
   end
 
   def problem_specifications
