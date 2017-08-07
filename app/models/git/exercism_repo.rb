@@ -30,7 +30,7 @@ class Git::ExercismRepo < Git::RepoBase
       raise 'not-found'
     end
     config = read_config(commit)
-    Git::ExerciseReader.new(repo, exercise_slug, commit, config)
+    Git::ExerciseReader.new(repo, repo_url, exercise_slug, commit, config)
   rescue Rugged::OdbError => e
     raise 'not-found'
   end

@@ -1,8 +1,9 @@
 class Git::ExerciseReader
 
-  attr_reader :repo, :exercise_slug, :commit, :config
-  def initialize(repo, exercise_slug, commit, config)
+  attr_reader :repo, :repo_url, :exercise_slug, :commit, :config
+  def initialize(repo, repo_url, exercise_slug, commit, config)
     @repo = repo
+    @repo_url = repo_url
     @exercise_slug = exercise_slug
     @commit = commit
     @config = config
@@ -66,7 +67,30 @@ class Git::ExerciseReader
     nil
   end
 
+  def files
+    exercise_files.map do |file_defn|
+      {
+        file: file_defn[:full],
+        filemode: file_defn[:filemode].to_s(8),
+        github_raw: github_raw_url(file_defn[:full]),
+        content: read_blob(file_defn[:oid])
+      }
+    end
+  end
+
   private
+
+  def github_raw_url(file)
+    repo_identifier = repo_url.gsub('https://github.com/','')
+    commit_id = commit.oid
+    "https://raw.githubusercontent.com/#{repo_identifier}/#{commit.oid}/exercises/#{exercise_slug}/#{file}"
+  end
+
+  def read_blob(oid)
+    blob = repo.lookup(oid)
+    return nil if blob.nil?
+    blob.text
+  end
 
   def test_pattern
     pattern = config[:test_pattern]
