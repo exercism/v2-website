@@ -67,6 +67,20 @@ class Git::ExerciseReader
     nil
   end
 
+  def description
+    meta_ptr = exercise_tree[".meta"]
+    return nil if meta_ptr.nil?
+    meta_tree = repo.lookup(meta_ptr[:oid])
+    desc_ptr = meta_tree["descrition.md"]
+    return nil if desc_ptr.nil?
+    blob = repo.lookup(desc_ptr[:oid])
+    blob.text
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    nil
+  end
+
   def files
     exercise_files.map do |file_defn|
       file_defn[:full]
