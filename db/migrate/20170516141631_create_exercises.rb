@@ -14,11 +14,13 @@ class CreateExercises < ActiveRecord::Migration[5.1]
       t.boolean :core, null: false, default: false
       t.boolean :active, null: false, default: true
       t.text :blurb, null: true
+      t.text :description, null: true
 
       t.integer :difficulty, null: false, default: 1
       t.integer :length, null: false, default: 1
 
       t.integer :position, null: true
+
 
       t.timestamps
     end

@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170806133728) do
     t.boolean "core", default: false, null: false
     t.boolean "active", default: true, null: false
     t.text "blurb"
+    t.text "description"
     t.integer "difficulty", default: 1, null: false
     t.integer "length", default: 1, null: false
     t.integer "position"
