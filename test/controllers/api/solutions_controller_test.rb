@@ -21,7 +21,11 @@ class API::SolutionsControllerTest < API::TestBase
     exercise = create :exercise
     get latest_api_solutions_path(exercise_id: exercise.slug), headers: @headers, as: :json
     assert_response 404
-    expected = {error: "Track not found", fallback_url: tracks_url}
+    expected = {error: {
+      type: "track_not_found",
+      message: "Track not found",
+      fallback_url: tracks_url
+    }}
     actual = JSON.parse(response.body, symbolize_names: true)
     assert_equal expected, actual
   end
@@ -31,7 +35,11 @@ class API::SolutionsControllerTest < API::TestBase
     track = create :track
     get latest_api_solutions_path(track_id: track.slug), headers: @headers, as: :json
     assert_response 404
-    expected = {error: "Exercise not found", fallback_url: track_url(track)}
+    expected = {error: {
+      type: "exercise_not_found",
+      message: "Exercise not found",
+      fallback_url: track_url(track)
+    }}
     actual = JSON.parse(response.body, symbolize_names: true)
     assert_equal expected, actual
   end

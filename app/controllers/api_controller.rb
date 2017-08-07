@@ -21,4 +21,25 @@ class APIController < ApplicationController
   def render_401
     render json: {}, status: 401
   end
+
+  def render_403(type, message)
+    render_error(403, type, message)
+  end
+
+  def render_404(type, data = {})
+    render_error(404, type, type.to_s.humanize, data)
+  end
+
+  def render_solution_not_found
+    render_404(:solution_not_found) 
+  end
+
+  def render_error(status, type, message, data = {})
+    render json: {
+      error: {
+        type: type,
+        message: message
+      }.merge(data)
+    }, status: status
+  end
 end

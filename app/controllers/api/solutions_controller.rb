@@ -5,13 +5,13 @@ class API::SolutionsController < APIController
     begin
       solution = Solution.find_by_uuid!(params[:id])
     rescue
-      return render json: {error: "Solution not found"}, status: 404
+      return render_solution_not_found
     end
 
     unless current_user == solution.user ||
            solution.published? ||
            current_user.mentoring_track?(solution.exercise.track)
-      return render json: {}, status: 403
+      return render_403(:user_may_not_download_solution, "You may not download this solution")
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
@@ -23,19 +23,19 @@ class API::SolutionsController < APIController
     begin
       track = Track.find(params[:track_id])
     rescue
-      return render json: {error: "Track not found", fallback_url: tracks_url}, status: 404
+      return render_404(:track_not_found, fallback_url: tracks_url)
     end
 
     begin
       exercise = track.exercises.find(params[:exercise_id])
     rescue
-      return render json: {error: "Exercise not found", fallback_url: track_url(track)}, status: 404
+      return render_404(:exercise_not_found, fallback_url: track_url(track))
     end
 
     begin
       solution = current_user.solutions.where(exercise_id: exercise.id).last!
     rescue
-      return render json: {error: "Solution not found"}, status: 404
+      return render_solution_not_found
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
@@ -51,12 +51,12 @@ class API::SolutionsController < APIController
       # belonging to someone else. We might want seperate messages
       # but I'm choosing not to leak the existance of a solution
       # at this stage, but unifying the errors.
-      return render json: {error: "Solution not found"}, status: 404
+      return render_solution_not_found
     end
 
     params[:files].each do |file|
       if file.size.to_f > NUM_BYTES_IN_MEGABYTE
-        return render json: {error: "#{file.original_filename} is too large"}, status: 404
+        render_error(400, :file_too_large, "#{file.original_filename} is too large")
       end
     end
 
