@@ -30,6 +30,8 @@ class Exercise < ApplicationRecord
 
   def description
     ParsesMarkdown.parse(super)
+  rescue
+    ""
   end
 
   # TODO

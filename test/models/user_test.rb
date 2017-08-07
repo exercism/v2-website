@@ -48,7 +48,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "may_view_solution? for random user" do
-    solution = create :solution, published_at: DateTime.now - 1.week
+    solution = create :solution, published_at: nil
     user = create :user
     refute user.may_view_solution?(solution)
   end
