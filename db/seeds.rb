@@ -1,4 +1,7 @@
-ruby = Track.create!(title: "Ruby", slug: "seed_ruby", repo_url: "http://example.com/ruby.git", introduction: "", about: "", code_sample: "")
+ihid = User.create!(name: "Jeremy Walker", handle: 'iHiD', email: "jeremy@thalamus.ai", password: 'password', admin: true)
+
+=begin
+ruby = Track.create!(title: "Ruby", slug: "seed_ruby", repo_url: "http://example.com/ruby.git", introduction: "", about: "", code_sample: "", syntax_highligher_language: )
 python = Track.create!(title: "Python", slug: "seed_python", repo_url: "http://example.com/python.git", introduction: "", about: "", code_sample: "")
 
 slug = Exercise.create!(track: ruby, title: "Slug", slug: "slug", uuid: SecureRandom.uuid, core: true, position: 1)
@@ -113,7 +116,6 @@ Splitting the pairs into classes would work well (Shout/Silent/Asking classes wi
 Very happy to hear any suggestions :)
 }
 iteration1_discussion2 = ihid_bob_iteration_1.discussion_posts.create!(user: ihid, content: iteration1_discussion2_content, html: ParsesMarkdown.parse(iteration1_discussion2_content))
-=end
 
 TrackMentorship.create(user: ihid, track: python)
 user1 = User.create!(name: "User 1", handle: "u1", email: "#{SecureRandom.uuid}@example.com", password: 'password')
@@ -134,6 +136,8 @@ user1_hello_world = Solution.create!(user: user1, exercise: python_hello_world, 
 
 #user3_hello_world = Solution.create!(user: user3, exercise: python_hello_world, git_slug: 'foobar', git_sha: 'foobar')
 #user3_hello_world_iteration_1 = Iteration.create!(solution: user3_hello_world, code: "foo")
+
+=end
 
 # Seed tracks
 Git::SeedsTracks.seed!

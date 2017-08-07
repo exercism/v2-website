@@ -13,10 +13,21 @@ class CreatesTrack
   end
 
   def create!
+    prism_language = track_slug
+    unless PrismLanguages.include?(prism_language)
+      if mapping = PrismLanguageMappings[prism_language]
+        prism_language = mapping
+      else
+        p "Warning: #{track_slug} is not a Prism Language"
+      end
+    end
+
     track = Track.create!(
       title: language,
       slug: track_slug,
+      syntax_highligher_language: prism_language,
       repo_url: repo_url,
+
       # Default track metadata to empty for git syncer to populate
       introduction: "",
       about: "",

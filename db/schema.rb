@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(version: 20170806133728) do
     t.text "introduction", null: false
     t.text "about", null: false
     t.text "code_sample", null: false
+    t.string "syntax_highligher_language", null: false
     t.string "bordered_green_icon_url"
     t.string "bordered_turquoise_icon_url"
     t.string "hex_green_icon_url"
