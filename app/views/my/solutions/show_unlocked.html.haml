@@ -1,22 +1,28 @@
 #my-solution-unlocked-page
-  =link_to "CREATE A FAKE ITERATION", tmp_create_iteration_path(solution_id: @solution), method: :post
+  /=link_to "CREATE A FAKE ITERATION", tmp_create_iteration_path(solution_id: @solution), method: :post
   =render "nav_and_header"
   .lo-container
     .pure-g
-
-      .pure-u-1-2
-        .experienced
-          %h2 Been here before?
-          .h2-subtitle If you understand how all this works, you can just run the following command.
-          .pre-frame
-            %pre
-              %code
-                exercism download #{@exercise.slug} --track=#{@track.slug}
-
-        .newbie
-          %h2 Need help getting started?
-
-      .pure-u-1-2
-        %h2 Instructions
+      .pure-u-14-24.lhs
         .instructions
-          .rendered= raw @solution.instructions 
+          %h2 Introduction
+          .rendered= raw @solution.exercise.description
+
+      .pure-u-10-24.rhs
+        .newbie
+          %h3 Get started
+          %p We've created a step-by-step set of instructions to help you quickly install Exercism and get started, so you can start learning.
+          =link_to "Begin Walk-Through", "#", class: 'pure-button'
+        .experienced
+          %h3 Been here before?
+          .code-frame
+            =button_tag "copy", class: 'pure-button copy-button'
+            %input.download-code{value: "exercism download #{@exercise.slug} --track=#{@track.slug}"}
+
+
+-content_for :js do
+  :javascript
+    $('button.copy-button').click(function() {
+      $('input.download-code').select();
+      document.execCommand('copy');
+    })

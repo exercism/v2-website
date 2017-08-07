@@ -5,18 +5,22 @@
     .track-header {
         margin-bottom:30px !important;
     }
-    h2 {
-        @include font-size(18, 18);
-        font-weight:$regular;
-        margin-bottom:10px;
+
+    .lhs {
+        padding-right:60px;
     }
-    .h2-subtitle {
-        @include font-size(14, 19);
-        font-weight:$light;
-        margin-bottom:10px;
+    .rhs {
+        padding-left:60px;
+        border-left:1px solid #e5e5e5;
     }
 
     .instructions {
+        h2 {
+            @include font-size(18, 18);
+            font-weight:$regular;
+            margin-bottom:15px;
+        }
+
         .rendered {
             h1,h2,h3,h4,h5,h6 {
                 font-weight:$regular;
@@ -51,23 +55,78 @@
             }
             a {
                 color:#333;
+                text-decoration:none;
+                border-bottom:1px solid #ccc;
+                font-weight:$light;
             }
 
         }
     }
 
     .experienced {
-        margin-bottom:30px;
+        padding:20px;
+        border:1px solid #e5e5e5;
+        border-radius:2px;
 
-        .pre-frame {
-            pre {
-                background:#eee;
-                padding:10px;
-                display:inline-block;
+        h3 {
+            font-weight:$regular;
+            @include font-size(16, 16);
+            margin-bottom:12px;
+        }
+        .code-frame {
+            border:1px solid #e5e5e5;
+            position:relative;
+            padding:8px 10px;
+            background:#fafafa;
+            button {
+                position:absolute;
+                right:-1px;
+                top:-1px;
+                bottom:-1px;
+                background:$color-1;
+                border-radius:2px 2px 0 0;
+                @include font-size(12, 12);
+                font-weight:$regular;
+                padding:0 10px;
+            }
+            input {
+                background:transparent;
+                display:block;
+                border:none;
+                border-radius:2px;
                 margin:0;
+                color:#999;
+                white-space:normal;
+                padding:0;
+                font-family:monospace;
+                @include font-size(12, 12);
+                outline:none;
+                width:280px;
             }
         }
     }
     .newbie {
+        background:#fafffe;
+        border:1px solid $color-1;
+        padding:20px;
+        border-radius:2px;
+        margin-bottom:30px;
+
+        h3 {
+            font-weight:$regular;
+            @include font-size(16, 16);
+            margin-bottom:10px;
+        }
+        p {
+            @include font-size(13, 18);
+            margin-bottom:10px;
+        }
+        .pure-button {
+            background:$color-1;
+            color:#fff;
+            display:block;
+            width:100%;
+            padding:10px;
+        }
     }
 }

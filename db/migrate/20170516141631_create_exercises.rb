@@ -21,7 +21,6 @@ class CreateExercises < ActiveRecord::Migration[5.1]
 
       t.integer :position, null: true
 
-
       t.timestamps
     end
 
