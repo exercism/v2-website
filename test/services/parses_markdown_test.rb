@@ -5,9 +5,12 @@ class ParsesMarkdownTest < ActiveSupport::TestCase
     expected = <<-HTML
 <h1>OHAI</h1>
 
-<p>So I was split between two ways of doing this.<br>
-1) Either method pairs with adjectives (which I did),<br>
-2) Some sort of data structure (e.g. a hash might look like)</p>
+<p>So I was split between two ways of doing this.</p>
+
+<ol>
+<li>Either method pairs with adjectives (which I did),</li>
+<li>Some sort of data structure (e.g. a hash might look like)</li>
+</ol>
 
 <p>Watch this:</p>
 <pre><code class="language-ruby">$ go home
@@ -18,8 +21,9 @@ class ParsesMarkdownTest < ActiveSupport::TestCase
 # OHAI
 
 So I was split between two ways of doing this.
-1) Either method pairs with adjectives (which I did),
-2) Some sort of data structure (e.g. a hash might look like)
+
+1. Either method pairs with adjectives (which I did),
+2. Some sort of data structure (e.g. a hash might look like)
 
 Watch this:
 

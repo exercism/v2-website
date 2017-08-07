@@ -40,14 +40,19 @@ class API::SolutionsControllerTest < API::TestBase
   end
 
   test "latest should return 200 if user is solution_user" do
-    setup_user
-    exercise = create :exercise
-    track = exercise.track
-    solution = create :solution, user: @current_user, exercise: exercise
-    create :user_track, user: solution.user, track: track
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :solution, user: @current_user, exercise: exercise
+      create :user_track, user: solution.user, track: track
 
-    get latest_api_solutions_path(track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
-    assert_response :success
+      get latest_api_solutions_path(track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+      assert_response :success
+
+      solution.reload
+      assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
+    end
   end
 
   test "latest should return 404 if user is mentor" do
@@ -111,14 +116,19 @@ class API::SolutionsControllerTest < API::TestBase
   end
 
   test "show should return 200 if user is solution_user" do
-    setup_user
-    exercise = create :exercise
-    track = exercise.track
-    solution = create :solution, user: @current_user, exercise: exercise
-    create :user_track, user: solution.user, track: track
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :solution, user: @current_user, exercise: exercise
+      create :user_track, user: solution.user, track: track
 
-    get api_solution_path(solution), headers: @headers, as: :json
-    assert_response :success
+      get api_solution_path(solution), headers: @headers, as: :json
+      assert_response :success
+
+      solution.reload
+      assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
+    end
   end
 
   test "show should return 200 if user is mentor" do
@@ -131,6 +141,9 @@ class API::SolutionsControllerTest < API::TestBase
 
     get api_solution_path(solution), headers: @headers, as: :json
     assert_response :success
+
+    solution.reload
+    assert_nil solution.downloaded_at
   end
 
   test "show should return 200 if solution is published" do
@@ -142,6 +155,9 @@ class API::SolutionsControllerTest < API::TestBase
 
     get api_solution_path(solution), headers: @headers, as: :json
     assert_response :success
+
+    solution.reload
+    assert_nil solution.downloaded_at
   end
 
   test "show should return 403 for a normal user when the solution is not published" do

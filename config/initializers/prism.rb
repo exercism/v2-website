@@ -20,6 +20,7 @@ bison
 brainfuck
 bro
 c
+clojure
 csharp
 cpp
 coffeescript

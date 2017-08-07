@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :testimonial do
-    
+    headline "Love it"
+    content "Wowowowowow!!!"
+    byline "Nicky from the block"
   end
   factory :iteration_file do
     iteration { create :iteration }
@@ -81,6 +83,7 @@ FactoryGirl.define do
   factory :track do
     title "Ruby"
     slug { "ruby-#{SecureRandom.uuid}" }
+    syntax_highligher_language { slug }
     introduction "Master the Ruby language"
     about "Placeholder about Ruby"
     code_sample <<-EOS

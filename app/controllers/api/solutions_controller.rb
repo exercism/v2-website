@@ -15,6 +15,7 @@ class API::SolutionsController < APIController
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
+    solution.update(downloaded_at: DateTime.now) if current_user == solution.user
     render json: responder.to_hash
   end
 
@@ -38,6 +39,7 @@ class API::SolutionsController < APIController
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
+    solution.update(downloaded_at: DateTime.now)
     render json: responder.to_hash
   end
 

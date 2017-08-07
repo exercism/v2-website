@@ -11,8 +11,6 @@ class AuthenticatesUserFromOmniauth
   end
 
   def authenticate
-    raise "FOOBAR"
-
     user = User.where(provider: auth.provider, uid: auth.uid).first
     return user if user
 
