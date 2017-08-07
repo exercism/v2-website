@@ -1,3 +1,27 @@
 %footer
   .lo-container
-    Copyright Exercism Inc
+    .pure-g
+      .pure-u-1-6
+        %h2 Company
+        =link_to "Exercism", root_path
+      .pure-u-1-6
+      .pure-u-1-6
+      .pure-u-1-6
+      .pure-u-1-6
+        %h2 Keep in touch
+        =link_to "Newsletter", "https://tinyletter.com/exercism"
+        =link_to "Discuss on Github", "https://github.com/exercism/discussions"
+        =link_to "Email us", "mailto:hello@exercism.io"
+      .pure-u-1-6
+        %h2 Follow
+        =link_to "https://twitter.com/exercism_io", class: 'icon' do
+          %i.fa.fa-twitter
+        =link_to "https://facebook.com/exercism.io", class: 'icon' do
+          %i.fa.fa-facebook-official
+        =link_to "https://github.com/exercism", class: 'icon' do
+          %i.fa.fa-github
+
+    .legal
+      =link_to "Terms", "#"
+      =link_to "Privacy", "#"
+      .copyright © #{DateTime.now.year} Exercism, Inc

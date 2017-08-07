@@ -1,5 +1,47 @@
+@import 'variables';
+@import 'mixins';
+
 footer {
     padding:10px 0;
     border-top:1px solid #ddd;
+    margin-top:100px;
+    padding-top:40px;
+    h2 {
+        @include font-size(16, 16);
+        color:#666;
+        font-weight:$bold;
+        margin-bottom:20px;
+    }
+    a {
+        text-decoration:none;
+        font-weight:$regular;
+        color:$color-2;
+        @include font-size(13, 13);
+        display:block;
+        padding:5px 0;
+        &.icon {
+            padding:10px 0;
+            margin-right:20px;
+            display:inline-block;
+            i {
+                color:#666;
+                @include font-size(25, 25);
+            }
+        }
+
+    }
+    .legal {
+        margin-top:30px;
+        padding:10px 0;
+        border-top:1px solid #ddd;
+        text-align:right;
+        .copyright, a {
+            color:#ccc;
+            font-weight:$regular;
+            @include font-size(13, 13);
+            padding-left:30px;
+            display:inline-block;
+        }
+    }
 }
 
