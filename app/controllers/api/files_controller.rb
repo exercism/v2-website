@@ -8,16 +8,13 @@ class API::FilesController < APIController
       return render json: { error: "Solution not found" }, status: 404
     end
 
-    # TODO I had to manually add the '.cs' extension here
-    @file_path = params[:id] + ".cs"
-
     begin
-      @content = exercise_reader.read_file(@file_path)
+      @content = exercise_reader.read_file(params[:filepath])
     rescue
       return render json: { error: "File not found" }, status: 404
     end
 
-    if @content.nil?
+    unless @content
       return render json: { error: "File not found" }, status: 404
     end
 
