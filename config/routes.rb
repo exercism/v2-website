@@ -82,10 +82,8 @@ Rails.application.routes.draw do
 
   post "markdown/parse" => "markdown#parse"
 
-  %w{
-  donate
-  }.each do |page|
-    get page => "pages##{page}", as: "#{page}_page"
+  PagesController::PAGES.each do |page|
+    get page.dasherize => "pages##{page}", as: "#{page}_page"
   end
   root to: "pages#index"
 end
