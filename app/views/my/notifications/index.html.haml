@@ -1,8 +1,24 @@
 #notifications-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Language Files", :tracks
+      =image_tag "nav-divider.png"
+      %span Notifications
+
+  .header
+    .lo-container
+      %h1 Your Notifications
+      .h1-subtitle What's changed since you were last here?
+
   .lo-container
-    %h1 Notifications
+    %h2 New Notifications
     - @notifications.each do |notification|
       .notification
-        =link_to notification.content, notification.link
+        =link_to notification.link, class: 'icon' do
+          %i{class: notification_icon(notification)}
+        =link_to notification.link, class: 'info' do
+          .content= notification.content
+          .when #{time_ago_in_words(notification.created_at)} ago
+        =link_to "Mark as Read", "#", class: 'pure-button'
 
     =paginate @notifications

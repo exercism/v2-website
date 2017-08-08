@@ -24,7 +24,8 @@ class API::SolutionResponder
             language: solution.exercise.track.title
           }
         },
-        file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
+        #file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
+        file_download_base_url: "http://3e4f0dc8.ngrok.io/api/v1/solutions/#{solution.uuid}/files/",
         files: files,
         iteration: iteration_hash
       }
