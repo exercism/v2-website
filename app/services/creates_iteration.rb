@@ -12,8 +12,11 @@ class CreatesIteration
   def create!
     @iteration = Iteration.create!( solution: solution )
     files.each do |file|
+      filename = file.headers.split("\r\n").detect{|s|s.start_with?("Content-Disposition: ")}.split(";").map(&:strip).detect{|s|s.start_with?('filename=')}.split("=").last.gsub('"', '').gsub(/^\//, '')
+      p filename
       iteration.files.create!(
-        filename: File.basename(file.original_filename),
+        #filename: File.basename(file.headers.filename),
+        filename: filename,
         content_type: file.content_type,
         file_contents: file.read
       )
