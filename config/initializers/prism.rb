@@ -131,5 +131,3 @@ PrismLanguageMappings = {
   "perl6" => "perl",
   "plsql" => "sql"
 }
-
-

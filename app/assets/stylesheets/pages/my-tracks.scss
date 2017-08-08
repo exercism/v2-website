@@ -125,6 +125,11 @@
             margin-right:15px;
         }
         .title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        h2 {
             @include font-size(18, 18);
             font-weight:$bold;
             margin-right:5px;
