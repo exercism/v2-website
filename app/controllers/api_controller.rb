@@ -3,6 +3,8 @@ class APIController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
+  rescue_from ActionController::RoutingError, with: -> { render_404  }
+
   layout false
 
   def authenticate_user!
@@ -26,12 +28,12 @@ class APIController < ApplicationController
     render_error(403, type, message)
   end
 
-  def render_404(type, data = {})
+  def render_404(type = :resource_not_found, data = {})
     render_error(404, type, type.to_s.humanize, data)
   end
 
   def render_solution_not_found
-    render_404(:solution_not_found) 
+    render_404(:solution_not_found)
   end
 
   def render_error(status, type, message, data = {})

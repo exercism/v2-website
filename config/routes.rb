@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  get "api/(*url)", to: 'api#render_404'
 
   namespace :admin do
     resource :dashboard, only: [:show], controller: "dashboard"
