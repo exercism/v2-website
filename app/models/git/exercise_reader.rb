@@ -35,21 +35,26 @@ class Git::ExerciseReader
     nil
   end
 
-  def solution
-    meta_ptr = exercise_tree[".meta"]
-    return nil if meta_ptr.nil?
-    meta_tree = repo.lookup(meta_ptr[:oid])
-    solutions_ptr = meta_tree["solutions"]
-    return nil if solutions_ptr.nil?
-    solutions_tree = repo.lookup(solutions_ptr[:oid])
-    first_file = solutions_tree.first
-    return nil if first_file.nil?
-    blob = repo.lookup(first_file[:oid])
-    blob.text
+  def solutions
+    files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_pattern) }
+    solutions = {}
+    puts files
+    files.each do |file|
+      name = file[:name]
+      blob = repo.lookup(file[:oid])
+      solutions[name] = blob.text unless blob.nil?
+    end
+    solutions || {}
   rescue => e
     puts e.message
     puts e.backtrace
-    ""
+    {}
+  end
+
+  def solution
+    ss = solutions
+    return "" if ss.empty?
+    ss.first[1]
   end
 
   def blurb
@@ -115,13 +120,19 @@ class Git::ExerciseReader
     Regexp.new(pattern)
   end
 
-  def exercise_files
+  def solution_pattern
+    pattern = config[:solution_pattern]
+    return /[eE]xample/ if pattern.nil?
+    Regexp.new(pattern)
+  end
+
+  def exercise_files(exclude_meta=true)
     @exercise_files ||= begin
       exercise_files = []
       exercise_tree.walk(:preorder) do |r, t|
         path = "#{r}#{t[:name]}"
         t[:full] = path
-        exercise_files.push(t) unless path.start_with?(".meta")
+        exercise_files.push(t) unless exclude_meta && path.start_with?(".meta")
       end
       exercise_files
     end
