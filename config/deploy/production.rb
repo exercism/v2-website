@@ -37,19 +37,6 @@ namespace :sidekiq do
   end
 end
 
-namespace :sidekiq do
-  task :shutdown do
-    on roles(:processor), in: :groups, limit: 3, wait: 10 do
-      execute "[ -e /opt/exercism/current/tmp/pids/sidekiq.pid ] && kill -TERM `cat /opt/exercism/current/tmp/pids/sidekiq.pid`; exit 0"
-    end
-  end
-  task :restart do
-    on roles(:processor), in: :groups, limit: 3, wait: 10 do
-      execute "sudo /usr/sbin/service exercism-sidekiq restart"
-    end
-  end
-end
-
 after "deploy:starting", "sidekiq:shutdown"
 after "deploy:published", "puma_service:restart"
 after "deploy:published", "sidekiq:restart"
