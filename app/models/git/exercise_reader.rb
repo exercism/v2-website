@@ -35,7 +35,6 @@ class Git::ExerciseReader
   def solutions
     files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_pattern) }
     solutions = {}
-    puts files
     files.each do |file|
       name = file[:name]
       solution_text = read_blob(file[:oid])
@@ -87,7 +86,6 @@ class Git::ExerciseReader
     return nil unless available_files.has_key?(path)
     read_blob(available_files[path])
   end
-
 
   private
 

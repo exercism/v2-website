@@ -11,11 +11,8 @@ class PagesController < ApplicationController
 
   PAGES.each do |page|
     define_method page do
-      # TODOGIT Read from
-      # https://github.com/exercism/website_copy
-      # pages/#{page}.md
-      markdown = ""
-
+      puts page
+      markdown = Git::WebsiteContent.head.pages[page] || ""
       @content = ParsesMarkdown.parse(markdown.to_s)
     end
   end
