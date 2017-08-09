@@ -1,5 +1,89 @@
-#index-page
-  .lo-container
-    Home
+#landing-page
 
-    =link_to "Tracks", tracks_path
+  .welcome-section
+    .lo-container
+      .pure-g
+        .pure-u-1-2.lhs= code_person_widget
+        .pure-u-1-2.rhs
+          %h1 Exercism
+          %h2 Code Practice and Mentorship
+          %p
+            Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{Track.count} languages, and mentoring from our dedicated team of volunteers.
+            Exercism is
+            =succeed('.') do
+              %strong 100% free forever
+          =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
+          =link_to "Explore languages", "#explore-languages", class: "pure-button languages-button"
+
+  .tracks-section#explore-languages
+    .lo-container
+      %h2 Our Language Tracks
+      %p With 37 different #{link_to "language tracks", tracks_path}, we have a huge amount for you to learn.
+      .tracks
+        -idx = 0
+        -while @tracks.present?
+          -idx += 1
+          .row{class: idx.odd?? "long" : "short"}
+            -@tracks.slice!(0, idx.odd?? 10 : 9).each do |track|
+              =link_to track, class: 'track', style: "background-image:url('#{track.hex_white_icon_url}')" do
+                .title= track.slug == "lfe" ? "LFE" : track.title
+
+  .how-section
+    .lo-container
+      %h2 How Exercism works
+      .step.pure-g.lalign
+        .pure-u-1-3
+          =image_tag "how-step-1.png"
+        .pure-u-1-12
+        .pure-u-7-12
+          %h3 1. Choose a language to master
+          %p Object oriented, functional, popular, emerging, or just plain obscure. With 39 different languages to explore, Exercism has something for you!
+      .step.pure-g
+        .pure-u-1-3
+          /=image_tag "how-step-2.png"
+        .pure-u-1-12
+        .pure-u-7-12
+          %h3 2. Complete a coding challenge on your computer
+          %p All the coding happens on your machine in an environment you're familiar with. Download the template and solve the problem.
+
+      .step.pure-g
+        .pure-u-1-3
+          =image_tag "how-step-3.png"
+        .pure-u-1-12
+        .pure-u-7-12
+          %h3 3. Upload your solution and review it with a mentor
+          %p Discussing code is one of the best ways to learn. Our friendly mentors will introduce you to new ideas and techniques.
+
+      .step.step-4.pure-g
+        .pure-u-1-3
+          .waterfall
+          =image_tag "how-step-4.png"
+
+        .pure-u-1-12
+        .pure-u-7-12
+          %h3 4. Unlock different concepts and exercises
+          %p Our tracks have been 40 and 100 exercise each - some are fun, some are tricky, some are weird, but all will teach you something new.
+
+      .step.pure-g
+        .pure-u-1-3
+          /=image_tag "how-step-2.png"
+        .pure-u-1-12
+        .pure-u-7-12
+          %h3 5. Complete the language track and achieve fluency
+          %p At the end of your language track you will have mastered the core concepts and idoms of your language and be ready to use it in the real world.
+
+-content_for :js do
+  :javascript
+    $.fn.animateBgPosition = function( y, speed ) {
+      var pos = this.css( "background-position" ).split( " " );
+      this.y = parseInt( pos[1], 10 ) || 0;
+      $.Animation( this, {
+          y: y
+        }, { duration: speed, easing: 'linear' }).
+        progress( function( e ) {
+          this.css( "background-position", "0px " + e.tweens[0].now + "px" );
+        })
+
+      return this;
+    };
+    $('.step-4 .waterfall').animateBgPosition( 50000, 1500000 )

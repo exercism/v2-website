@@ -1,4 +1,4 @@
-PrismLanguages = %w{
+Exercism::PrismLanguages = %w{
 markup
 css
 clike
@@ -124,7 +124,7 @@ xojo
 yaml
 }
 
-PrismLanguageMappings = {
+Exercism::PrismLanguageMappings = {
   "delphi" => "pascal",
   "objective-c" => "c",
   "perl5" => "perl",

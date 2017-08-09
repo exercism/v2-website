@@ -14,8 +14,8 @@ class CreatesTrack
 
   def create!
     prism_language = track_slug
-    unless PrismLanguages.include?(prism_language)
-      if mapping = PrismLanguageMappings[prism_language]
+    unless Exercism::PrismLanguages.include?(prism_language)
+      if mapping = Exercism::PrismLanguageMappings[prism_language]
         prism_language = mapping
       else
         p "Warning: #{track_slug} is not a Prism Language"

@@ -1,12 +1,12 @@
 @import 'variables';
 @import 'mixins';
 
+#landing-page .welcome-section .lhs,
+.lo-devise-page .lhs {
+
+}
+
 .lo-devise-page {
-    .lhs {
-        img {
-            width:516px;
-        }
-    }
     .rhs {
         padding-top:50px;
         padding-left:20px;
@@ -16,8 +16,7 @@
         }
     }
     h1 {
-        font-family:Dosis;
-        font-weight:800;
+        @include header-font;
         @include font-size(30, 30);
         color:$color-2;
         margin-bottom:20px;

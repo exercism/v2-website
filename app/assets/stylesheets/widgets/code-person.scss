@@ -1,0 +1,14 @@
+#widget-code-person {
+    height:490px;
+    width:550px;
+    background-image:image-url('code-background.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    position:relative;
+    img {
+        position:absolute;
+        bottom:0;
+        right:100px;
+        height:300px;
+    }
+}

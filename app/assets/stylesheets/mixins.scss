@@ -4,6 +4,12 @@
     font-size-adjust: 0.488;
 }
 
+@mixin header-font {
+    font-family: "Dosis", "Lato", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-size-adjust: 0.488;
+}
+
 @mixin font-size($size: 16, $line_height: null) {
     font-size: $size  + px;
     @if $line_height == null {

@@ -1,0 +1,158 @@
+@import 'variables';
+@import 'mixins';
+
+
+#landing-page {
+    .welcome-section {
+        .lhs {
+        }
+        .rhs {
+            padding-top:100px;
+            h1 {
+                @include header-font;
+                @include font-size(30, 30);
+                color:$color-2;
+                margin-bottom:10px;
+            }
+            h2 {
+                @include header-font;
+                @include font-size(26, 26);
+                margin-bottom:10px;
+            }
+            p {
+                font-weight:$regular;
+                @include font-size(16, 22);
+                max-width:450px;
+                margin-bottom:20px;
+            }
+            .pure-button {
+                @include font-size(16, 16);
+                font-weight:$regular;
+                &.sign-up-button {
+                    background:$color-2;
+                    color:#fff;
+                    margin-right:5px;
+                    padding:15px 70px;
+                }
+                &.languages-button {
+                    border:1px solid $color-2;
+                    color:$color-2;
+                    background:#fff;
+                    padding:15px 30px;
+                }
+            }
+        }
+    }
+    .tracks-section {
+        margin-top:50px;
+        background:#fafafa;
+        border:solid #eee;
+        border-width:1px 0;
+        padding:60px 0;
+        h2 {
+            text-align:center;
+            @include font-size(24, 24);
+            font-weight:$regular;
+            margin-bottom:10px;
+        }
+        p {
+            text-align:center;
+            @include font-size(16, 16);
+            margin-bottom:40px;
+            a {
+                text-decoration:none;
+                color:#333;
+                &:hover {
+                    text-decoration:underline;
+                }
+            }
+        }
+        .tracks {
+            padding:0 40px;
+            .row {
+                overflow:hidden;
+                margin-top:-10px;
+                &.short {
+                    padding-left:50px;
+                }
+                &:first-child {
+                    margin-top:0;
+                }
+                .track {
+                    display:block;
+                    text-decoration:none;
+                    width:93px;
+                    height:101px;
+                    float:left;
+                    margin-right:10px;
+                    background-size:93px;
+                    background-repeat: no-repeat;
+                    background-position:center center;
+                    &:last-child {
+                        margin-right:0;
+                    }
+
+                    img {
+                        display:none;
+                        width:100%;
+                    }
+                    .title {
+                        @include font-size(14, 101);
+                        font-weight:400;
+                        text-align:center;
+                        display:none;
+                        color:#fff;
+                    }
+                    &:hover {
+                        background-image:image-url("turquoise-hex.png") !important;
+                        .title {
+                            display:block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .how-section {
+        h2 {
+            @include header-font;
+            @include font-size(26, 26);
+            padding-top:50px;
+            margin-bottom:40px;
+            text-align:center;
+        }
+        .step {
+            overflow:hidden;
+            margin:0 auto 60px;
+            width:700px;
+            img {
+                display:block;
+                width:100%;
+            }
+            h3 {
+                margin-top:30px;
+                @include header-font;
+                @include font-size(20, 20);
+                margin-bottom:10px;
+            }
+            p {
+                @include font-size(16, 22);
+            }
+            &.step-4 {
+              position:relative;
+              img {
+                  position:relative;
+              }
+              .waterfall {
+                  position:absolute;
+                  width:235px;
+                  height:145px;
+                  top:0px;
+                  left:0px;
+                  background-image:image-url("how-step-4-exercises.png");
+                  background-size:100%;
+              }
+            }
+        }
+    }
+}

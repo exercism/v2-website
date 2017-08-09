@@ -11,9 +11,12 @@ class PagesController < ApplicationController
 
   PAGES.each do |page|
     define_method page do
-      puts page
       markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
       @content = ParsesMarkdown.parse(markdown.to_s)
     end
+  end
+
+  def index
+    @tracks = Track.reorder("rand()").to_a
   end
 end
