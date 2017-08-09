@@ -17,19 +17,31 @@ class Git::RepoBase
     head_commit.oid
   end
 
+  def read_blob(oid, default=nil)
+    blob = lookup(oid)
+    return default if blob.nil?
+    blob.text
+  end
+
+  def lookup(oid)
+    repo.lookup(oid)
+  end
+
+  def read_json_blob(oid)
+    raw = read_blob(oid)
+    JSON.parse(raw, symbolize_names: true)
+  end
+
+  def read_yaml_blob(oid, default={})
+    raw = read_blob(oid)
+    YAML.load(raw).symbolize_keys
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    default
+  end
+
   private
-
-  def head_commit
-    main_branch.target
-  end
-
-  def main_branch
-    repo.branches[main_branch_ref]
-  end
-
-  def main_branch_ref
-    "origin/master"
-  end
 
   def repo
     @repo ||= if repo_dir_exists?
@@ -43,6 +55,18 @@ class Git::RepoBase
     Rails.logger.error "Failed to clone repo #{repo_url}"
     Rails.logger.error e.message
     raise
+  end
+
+  def head_commit
+    main_branch.target
+  end
+
+  def main_branch
+    repo.branches[main_branch_ref]
+  end
+
+  def main_branch_ref
+    "origin/master"
   end
 
   def auto_fetch?

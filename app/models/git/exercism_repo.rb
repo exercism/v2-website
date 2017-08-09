@@ -25,22 +25,26 @@ class Git::ExercismRepo < Git::RepoBase
   end
 
   def exercise(exercise_slug, commit_sha=head)
-    commit = repo.lookup(commit_sha)
+    commit = lookup(commit_sha)
     if commit.type != :commit
       raise 'not-found'
     end
     config = read_config(commit)
-    Git::ExerciseReader.new(repo, repo_url, exercise_slug, commit, config)
+    Git::ExerciseReader.new(self, exercise_slug, commit, config)
   rescue Rugged::OdbError => e
     raise 'not-found'
   end
 
-  def fetch!
-    repo.fetch('origin')
+  def test_pattern
+    pattern = config[:test_pattern]
+    return /test/i if pattern.nil?
+    Regexp.new(pattern)
   end
 
-  def head
-    head_commit.oid
+  def solution_pattern
+    pattern = config[:solution_pattern]
+    return /[eE]xample/ if pattern.nil?
+    Regexp.new(pattern)
   end
 
   private
@@ -56,26 +60,25 @@ class Git::ExercismRepo < Git::RepoBase
   def read_docs(commit, file_name)
     docs_tree_ptr = commit.tree['docs']
     return nil if docs_tree_ptr.nil?
-    docs_tree = repo.lookup(docs_tree_ptr[:oid])
+    docs_tree = lookup(docs_tree_ptr[:oid])
     file_pointer = docs_tree[file_name]
     return nil if file_pointer.nil?
-    blob = repo.lookup(file_pointer[:oid])
+    blob = lookup(file_pointer[:oid])
     blob.text
   end
 
   def read_config(commit)
     config_pointer = commit.tree['config.json']
-    config_blob = repo.lookup(config_pointer[:oid])
-    JSON.parse(config_blob.text, symbolize_names: true)
+    config_blob = lookup(config_pointer[:oid])
+    read_json_blob(config_pointer[:oid])
   end
 
   def read_maintainer_config(commit)
     config_tree_ptr = commit.tree['config']
     return {} if config_tree_ptr.nil?
-    config_tree = repo.lookup(config_tree_ptr[:oid])
+    config_tree = lookup(config_tree_ptr[:oid])
     file_pointer = config_tree["maintainers.json"]
     return {} if file_pointer.nil?
-    blob = repo.lookup(file_pointer[:oid])
-    JSON.parse(blob.text, symbolize_names: true)
+    read_json_blob(file_pointer[:oid])
   end
 end

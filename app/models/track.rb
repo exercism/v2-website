@@ -26,4 +26,8 @@ class Track < ApplicationRecord
   def about
     ParsesMarkdown.parse(super)
   end
+
+  def repo
+    Git::ExercismRepo.new(repo_url)
+  end
 end

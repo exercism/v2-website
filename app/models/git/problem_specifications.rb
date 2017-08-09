@@ -6,6 +6,14 @@ class Git::ProblemSpecifications < Git::RepoBase
     new(REPO_URL)
   end
 
+  def initialize(repo_url, auto_fetch=false)
+    super
+  end
+
+  def exercises
+    Exercises.new(self, head_commit)
+  end
+
   class Exercise
     attr_reader :repo, :exercise_tree
 
@@ -16,18 +24,12 @@ class Git::ProblemSpecifications < Git::RepoBase
 
     def metadata
       ptr = exercise_tree["metadata.yml"]
-      blob = repo.lookup(ptr[:oid])
-      YAML.load(blob.text).symbolize_keys
-    rescue => e
-      puts e.message
-      puts e.backtrace
-      {}
+      repo.read_yaml_blob(ptr[:oid], {})
     end
 
     def description
       ptr = exercise_tree["description.md"]
-      blob = repo.lookup(ptr[:oid])
-      blob.text
+      repo.read_blob(ptr[:oid], "")
     rescue => e
       puts e.message
       puts e.backtrace
@@ -66,21 +68,5 @@ class Git::ProblemSpecifications < Git::RepoBase
       exercises_ptr = head_commit.tree['exercises']
       repo.lookup(exercises_ptr[:oid])
     end
-  end
-
-  def initialize(repo_url, auto_fetch=false)
-    super
-  end
-
-  def exercises
-    Exercises.new(repo, head_commit)
-  end
-
-  def fetch!
-    repo.fetch('origin')
-  end
-
-  def head
-    head_commit.oid
   end
 end

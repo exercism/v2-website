@@ -7,7 +7,7 @@ class API::TracksController < APIController
     end
 
     # TODOGIT - Set test_pattern from git
-    test_pattern = ""
+    test_pattern = Track.first.repo.test_pattern
     render json: {
       track: {
         test_pattern: test_pattern

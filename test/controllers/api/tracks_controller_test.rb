@@ -16,9 +16,15 @@ class API::SolutionsControllerTest < API::TestBase
   end
 
   test "setup should return 200 with valid track" do
+    @mock_repo = mock(test_pattern: ".*")
+    Git::ExercismRepo.stubs(new: @mock_repo)
+
     setup_user
     track = create :track
     get setup_api_track_path(track.slug), headers: @headers, as: :json
     assert_response 200
+
+    actual = JSON.parse(response.body, symbolize_names: true)
+    assert_equal ".*", actual[:track][:test_pattern]
   end
 end

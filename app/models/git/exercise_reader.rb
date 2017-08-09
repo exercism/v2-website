@@ -1,9 +1,8 @@
 class Git::ExerciseReader
 
-  attr_reader :repo, :repo_url, :exercise_slug, :commit, :config
-  def initialize(repo, repo_url, exercise_slug, commit, config)
-    @repo = repo
-    @repo_url = repo_url
+  attr_reader :ex_repo, :exercise_slug, :commit, :config
+  def initialize(ex_repo, exercise_slug, commit, config)
+    @ex_repo = ex_repo
     @exercise_slug = exercise_slug
     @commit = commit
     @config = config
@@ -12,8 +11,7 @@ class Git::ExerciseReader
   def readme
     readme_ptr = exercise_tree['README.md']
     return nil if readme_ptr.nil?
-    blob = repo.lookup(readme_ptr[:oid])
-    blob.text
+    read_blob(readme_ptr[:oid], "")
   rescue => e
     puts e.message
     puts e.backtrace
@@ -25,8 +23,7 @@ class Git::ExerciseReader
     test_suites = {}
     files.each do |file|
       name = file[:name]
-      blob = repo.lookup(file[:oid])
-      test_suites[name] = blob.text
+      test_suites[name] = read_blob(file[:oid])
     end
     test_suites
   rescue => e
@@ -41,8 +38,8 @@ class Git::ExerciseReader
     puts files
     files.each do |file|
       name = file[:name]
-      blob = repo.lookup(file[:oid])
-      solutions[name] = blob.text unless blob.nil?
+      solution_text = read_blob(file[:oid])
+      solutions[name] = solution_text unless solution_text.nil?
     end
     solutions || {}
   rescue => e
@@ -60,11 +57,11 @@ class Git::ExerciseReader
   def blurb
     meta_ptr = exercise_tree[".meta"]
     return nil if meta_ptr.nil?
-    meta_tree = repo.lookup(meta_ptr[:oid])
+    meta_tree = lookup(meta_ptr[:oid])
     metadata_ptr = meta_tree["metadata.yml"]
     return nil if metadata_ptr.nil?
-    metadata_yml = repo.lookup(metadata_ptr[:oid])
-    metadata = YAML.load(metadata_yml.text).symbolize_keys
+    metadata_yml = read_blob(metadata_ptr[:oid])
+    metadata = YAML.load(metadata_yml).symbolize_keys
     metadata[:blurb]
   rescue => e
     puts e.message
@@ -75,11 +72,10 @@ class Git::ExerciseReader
   def description
     meta_ptr = exercise_tree[".meta"]
     return nil if meta_ptr.nil?
-    meta_tree = repo.lookup(meta_ptr[:oid])
+    meta_tree = lookup(meta_ptr[:oid])
     desc_ptr = meta_tree["description.md"]
     return nil if desc_ptr.nil?
-    blob = repo.lookup(desc_ptr[:oid])
-    blob.text
+    read_blob(desc_ptr[:oid])
   rescue => e
     puts e.message
     puts e.backtrace
@@ -102,28 +98,20 @@ class Git::ExerciseReader
 
   private
 
-  def github_raw_url(file)
-    repo_identifier = repo_url.gsub('https://github.com/','')
-    commit_id = commit.oid
-    "https://raw.githubusercontent.com/#{repo_identifier}/#{commit.oid}/exercises/#{exercise_slug}/#{file}"
+  def lookup(oid)
+    ex_repo.lookup(oid)
   end
 
   def read_blob(oid)
-    blob = repo.lookup(oid)
-    return nil if blob.nil?
-    blob.text
+    ex_repo.read_blob(oid)
   end
 
   def test_pattern
-    pattern = config[:test_pattern]
-    return /test/i if pattern.nil?
-    Regexp.new(pattern)
+    ex_repo.test_pattern
   end
 
   def solution_pattern
-    pattern = config[:solution_pattern]
-    return /[eE]xample/ if pattern.nil?
-    Regexp.new(pattern)
+    ex_repo.solution_pattern
   end
 
   def exercise_files(exclude_meta=true)
@@ -144,10 +132,10 @@ class Git::ExerciseReader
 
   def exercise_tree
     oid = tree['exercises'][:oid]
-    t = repo.lookup(oid)
+    t = lookup(oid)
     entry = t[exercise_slug]
     oid = entry[:oid]
-    repo.lookup(oid)
+    lookup(oid)
   end
 
 end
