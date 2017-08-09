@@ -1,8 +1,8 @@
 class Git::ExerciseReader
 
-  attr_reader :ex_repo, :exercise_slug, :commit, :config
-  def initialize(ex_repo, exercise_slug, commit, config)
-    @ex_repo = ex_repo
+  attr_reader :repo, :exercise_slug, :commit, :config
+  def initialize(repo, exercise_slug, commit, config)
+    @repo = repo
     @exercise_slug = exercise_slug
     @commit = commit
     @config = config
@@ -55,9 +55,6 @@ class Git::ExerciseReader
   end
 
   def blurb
-    meta_ptr = exercise_tree[".meta"]
-    return nil if meta_ptr.nil?
-    meta_tree = lookup(meta_ptr[:oid])
     metadata_ptr = meta_tree["metadata.yml"]
     return nil if metadata_ptr.nil?
     metadata_yml = read_blob(metadata_ptr[:oid])
@@ -70,9 +67,6 @@ class Git::ExerciseReader
   end
 
   def description
-    meta_ptr = exercise_tree[".meta"]
-    return nil if meta_ptr.nil?
-    meta_tree = lookup(meta_ptr[:oid])
     desc_ptr = meta_tree["description.md"]
     return nil if desc_ptr.nil?
     read_blob(desc_ptr[:oid])
@@ -98,20 +92,26 @@ class Git::ExerciseReader
 
   private
 
+  def meta_tree
+    meta_ptr = exercise_tree[".meta"]
+    return nil if meta_ptr.nil?
+    meta_tree = lookup(meta_ptr[:oid])
+  end
+
   def lookup(oid)
-    ex_repo.lookup(oid)
+    repo.lookup(oid)
   end
 
   def read_blob(oid)
-    ex_repo.read_blob(oid)
+    repo.read_blob(oid)
   end
 
   def test_pattern
-    ex_repo.test_pattern
+    repo.test_pattern
   end
 
   def solution_pattern
-    ex_repo.solution_pattern
+    repo.solution_pattern
   end
 
   def exercise_files(exclude_meta=true)

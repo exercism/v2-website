@@ -7,8 +7,9 @@ class CreatesIterationTest < ActiveSupport::TestCase
     filename = "foobar.rb"
     content_type = "text/plain"
     file_contents = "something = :else"
+    headers = ""
 
-    file = mock(original_filename: filename, content_type: content_type, read: file_contents)
+    file = mock(original_filename: filename, content_type: content_type, read: file_contents, headers: "headers")
 
     iteration = CreatesIteration.create!(solution, [file])
 
@@ -72,4 +73,3 @@ class CreatesIterationTest < ActiveSupport::TestCase
 
 
 end
-
