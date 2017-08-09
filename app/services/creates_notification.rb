@@ -16,12 +16,13 @@ class CreatesNotification
     new(*args).create!
   end
 
-  attr_reader :user, :type, :content, :link, :about
-  def initialize(user, type, content, link, about: nil)
+  attr_reader :user, :type, :content, :link, :trigger, :about
+  def initialize(user, type, content, link, trigger: nil, about: nil)
     @user = user
     @type = type.to_sym
     @content = content
     @link = link
+    @trigger = trigger
     @about = about
   end
 
@@ -33,6 +34,7 @@ class CreatesNotification
       type: type,
       content: content,
       link: link,
+      trigger: trigger,
       about: about,
     )
   end

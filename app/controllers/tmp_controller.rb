@@ -5,7 +5,9 @@ class TmpController < ApplicationController
     files = (rand(2) + 1).times.map {
       tempfile = Tempfile.new
       tempfile.write("foobar")
-      ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'foobar.rb', type: 'text/plain')
+      file = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, type: 'text/plain')
+      file.headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"/lib/three.py\"\r\nContent-Type: application/octet-stream\r\n"
+      file
     }
     CreatesIteration.create!(@solution, files)
     redirect_to [:my, @solution]

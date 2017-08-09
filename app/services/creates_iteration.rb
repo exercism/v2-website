@@ -40,6 +40,7 @@ class CreatesIteration
         :new_iteration_for_mentor,
         "#{solution.user.name} has posted a new iteration on a solution you are mentoring",
         routes.mentor_solution_url(solution),
+        trigger: iteration,
 
         # Note: This is deliberately the solution not the iteration
         # to allow for clearing without a mentor having to

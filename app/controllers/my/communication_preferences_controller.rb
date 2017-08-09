@@ -1,4 +1,4 @@
-class My::Settings::CommunicationPreferencesController < MyController
+class My::CommunicationPreferencesController < MyController
   def edit
   end
 

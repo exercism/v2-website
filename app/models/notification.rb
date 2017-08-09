@@ -3,6 +3,7 @@ class Notification < ApplicationRecord
 
   belongs_to :user
   belongs_to :about, polymorphic: true, optional: true
+  belongs_to :trigger, polymorphic: true, optional: true
 
   def self.unread
     where(read: false)

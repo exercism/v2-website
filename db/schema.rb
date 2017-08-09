@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(version: 20170806133728) do
     t.bigint "user_id"
     t.string "about_type"
     t.bigint "about_id"
+    t.string "trigger_type"
+    t.bigint "trigger_id"
     t.string "type"
     t.text "content"
     t.text "link"

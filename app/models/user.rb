@@ -40,6 +40,11 @@ class User < ApplicationRecord
     create_communication_preferences
   end
 
+  def avatar_url
+    img = super
+    img.present?? img : "blank.png"
+  end
+
   def may_view_solution?(solution)
     return true if id == solution.user_id
     return true if solution.published?

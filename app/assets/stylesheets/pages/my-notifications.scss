@@ -3,13 +3,10 @@
 #notifications-page {
     .header {
         background-color:$color-2;
-        background-image:image-url('background-overlay-2.png');
-        background-size:cover;
-        padding:35px 0;
+        padding:35px 0 20px 0;
         margin-bottom:35px;
 
         h1 {
-            padding-top:20px;
             @include font-size(30, 30);
             letter-spacing:-0.56px;
             font-weight:$bold;
@@ -18,54 +15,80 @@
         }
         .h1-subtitle {
             max-width:70%;
-            @include font-size(16, 21);
+            @include font-size(15, 21);
             color:#fff;
             font-weight:$light;
         }
     }
-    h2 {
-        margin-bottom:10px;
-        @include font-size(16, 16);
-        font-weight:$regular;
-    }
-    .notification {
-        border:1px solid #aaa;
+    .header-bar {
         overflow:hidden;
         margin-bottom:20px;
-        position:relative;
-        width:650px;
-        .icon {
+        .mark-all-button {
+            float:right;
             display:block;
+            background:#fff;
+            border:1px solid $color-2;
+            color:$color-2;
+        }
+        h2 {
+            padding-top:8px;
+            @include font-size(18, 18);
+            font-weight:$regular;
+        }
+    }
+    .notification {
+        border:1px solid #ccc;
+        border-radius:2px;
+        margin-bottom:15px;
+        position:relative;
+        .image {
+            display:block;
+            position:absolute;
+            top:0;
+            left:0;
+            bottom:0;
+            width:60px;
             text-decoration:none;
             color:#333;
-            float:left;
-            padding:20px;
             text-align:center;
+            background-repeat:no-repeat;
+            background-size:50px;
+            background-position:center center;
+            border-right:1px solid #ccc;
+
         }
         .info {
             display:block;
             text-decoration:none;
             color:#333;
-            float:left;
-            width:460px;
-            padding:15px;
-            border-left:1px solid #aaa;
-            border-right:1px solid #aaa;
+            width:600px;
+            margin-left:60px;
+            margin-right:60px;
+            padding:12px 15px;
 
             .content {
-                @include font-size(16, 16);
+                @include font-size(14, 19);
                 margin-bottom:5px;
             }
             .when {
                 @include font-size(11, 11);
+                font-weight:$regular;
+                color:#aaa;
             }
         }
-        .pure-button {
+        .mark-as-read-button {
             display:block;
             position:absolute;
-            top:10px;
-            bottom:10px;
-            right:10px;
+            top:-1px;
+            bottom:-1px;
+            right:-1px;
+            width:60px;
+            background-color:$color-2;
+            background-image:image-url('tick-white.png');
+            background-repeat:no-repeat;
+            background-size:15px;
+            background-position:center center;
+            border-radius:2px 2px 0 0;
         }
     }
 }

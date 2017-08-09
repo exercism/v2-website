@@ -1,10 +1,12 @@
 module NotificationsHelper
-  def notification_icon(notification)
+  def notification_image(notification)
     case notification.type
     when 'new_discussion_post'
-      "fa fa-comments"
+      notification.trigger.user.avatar_url
     when 'new_discussion_post_for_mentor'
+      notification.trigger.user.avatar_url
     when 'new_iteration_for_mentor'
+      notification.about.user
     end
   end
 end

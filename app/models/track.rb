@@ -23,6 +23,11 @@ class Track < ApplicationRecord
     end
   end
 
+  def introduction
+    i = super
+    i.present?? i : "TODO: The maintainers have not provided a description for this track."
+  end
+
   def about
     ParsesMarkdown.parse(super)
   end

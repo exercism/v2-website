@@ -19,7 +19,8 @@
         -if current_user.mentor?
           = link_to "Mentor Dashboard", mentor_dashboard_path
         .hr
-        = link_to "Settings", [:edit, :my, :settings, :communication_preferences]
+        = link_to "Settings", [:my, :settings]
+        = link_to "Preferences", [:edit, :my, :settings, :communication_preferences]
         = link_to "Sign out", destroy_user_session_path, method: :delete
 
     = link_to [:my, :notifications], class: "notifications #{current_user_has_notifications?? 'active' : ''}" do

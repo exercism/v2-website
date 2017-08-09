@@ -31,8 +31,9 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     CreatesNotification.create!(
       solution.user,
       :new_discussion_post,
-      "#{user.name} has commented on your solution",
+      "#{user.name} has commented on your solution to #{solution.exercise.title} on the #{solution.exercise.track.title} track.",
       routes.my_solution_url(solution),
+      trigger: discussion_post,
 
       # We want this to be the solution not the post
       # to allow for clearing without a mentor having to

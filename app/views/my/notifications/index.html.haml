@@ -8,17 +8,22 @@
   .header
     .lo-container
       %h1 Your Notifications
-      .h1-subtitle What's changed since you were last here?
+      .h1-subtitle What's changed since you were last on Exercism?
 
   .lo-container
-    %h2 New Notifications
-    - @notifications.each do |notification|
-      .notification
-        =link_to notification.link, class: 'icon' do
-          %i{class: notification_icon(notification)}
-        =link_to notification.link, class: 'info' do
-          .content= notification.content
-          .when #{time_ago_in_words(notification.created_at)} ago
-        =link_to "Mark as Read", "#", class: 'pure-button'
+    .pure-g
+      .pure-u-2-3
+        .header-bar
+          =link_to "Mark all as read", "#", class: "pure-button mark-all-button"
+          /%h2 Notifications
+        - @notifications.each do |notification|
+          .notification
+            =link_to "", notification.link, class: 'image', style: "background-image:url(#{notification_image(notification)})"
+            =link_to notification.link, class: 'info' do
+              .content
+                = notification.content
+                /= notification.content
+              .when #{time_ago_in_words(notification.created_at)} ago
+            =link_to "", "#", class: 'mark-as-read-button'
 
-    =paginate @notifications
+        =paginate @notifications
