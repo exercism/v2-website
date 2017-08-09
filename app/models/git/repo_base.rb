@@ -21,6 +21,9 @@ class Git::RepoBase
     blob = lookup(oid)
     return default if blob.nil?
     blob.text
+  rescue => e
+    puts e.message
+    default
   end
 
   def lookup(oid)
@@ -37,7 +40,6 @@ class Git::RepoBase
     YAML.load(raw).symbolize_keys
   rescue => e
     puts e.message
-    puts e.backtrace
     default
   end
 

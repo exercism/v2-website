@@ -57,8 +57,7 @@ class Git::ExerciseReader
   def blurb
     metadata_ptr = meta_tree["metadata.yml"]
     return nil if metadata_ptr.nil?
-    metadata_yml = read_blob(metadata_ptr[:oid])
-    metadata = YAML.load(metadata_yml).symbolize_keys
+    metadata = repo.read_yaml_blob(metadata_ptr[:oid], {})
     metadata[:blurb]
   rescue => e
     puts e.message
@@ -93,9 +92,11 @@ class Git::ExerciseReader
   private
 
   def meta_tree
-    meta_ptr = exercise_tree[".meta"]
-    return nil if meta_ptr.nil?
-    meta_tree = lookup(meta_ptr[:oid])
+    @meta_tree ||= begin
+      meta_ptr = exercise_tree[".meta"]
+      return {} if meta_ptr.nil?
+      lookup(meta_ptr[:oid])
+    end
   end
 
   def lookup(oid)
