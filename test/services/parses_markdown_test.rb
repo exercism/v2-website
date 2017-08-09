@@ -12,6 +12,8 @@ class ParsesMarkdownTest < ActiveSupport::TestCase
 <li>Some sort of data structure (e.g. a hash might look like)</li>
 </ol>
 
+<p><a href="http://example.com" target="_blank">Some link</a></p>
+
 <p>Watch this:</p>
 <pre><code class="language-ruby">$ go home
 </code></pre>
@@ -24,6 +26,8 @@ So I was split between two ways of doing this.
 
 1. Either method pairs with adjectives (which I did),
 2. Some sort of data structure (e.g. a hash might look like)
+
+[Some link](http://example.com)
 
 Watch this:
 

@@ -1,6 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
+body.namespace-my.controller-tracks.action-show {
+    footer {
+        background:#fff;
+    }
+}
 #my-track-page {
     .lo-internal-nav-bar {
         margin-bottom:0;

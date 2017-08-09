@@ -1,7 +1,11 @@
 module LayoutHelper
   def body_class
+    controller_parts = controller.class.name.underscore.split("/")
+    namespace = controller_parts.size > 1 ? controller_parts[0] : 'none'
+
     classes = []
     classes << "devise" if devise_controller?
+    classes << "namespace-#{namespace}"
     classes << "controller-#{controller_name}"
     classes << "action-#{action_name}"
     classes.join(" ")

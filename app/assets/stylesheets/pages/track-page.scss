@@ -160,6 +160,19 @@ body.controller-my-tracks.action-show {
                 font-weight:$light;
             }
         }
+        .pure-button {
+            margin-top:15px;
+            background:#fff;
+            border:1px solid $color-2;
+            color:$color-2;
+            padding:15px 30px;
+            @include font-size(15, 15);
+            font-weight:$regular;
+            &:hover {
+                background:$color-2;
+                color:#fff;
+            }
+        }
     }
     .testimonal-section {
         padding:70px 0;

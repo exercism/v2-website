@@ -69,6 +69,13 @@ class ParsesMarkdown
     #  )
     #end
 
+    def link(link, title, content)
+      elem = %Q{<a href="#{link}" target="_blank"}
+      elem += %Q{ target="_blank"}
+      elem += %Q{>#{content}</a>}
+      elem
+    end
+
     def block_code(code, language)
       language ||= "ruby"
       %Q{<pre><code class="language-#{language}">#{code}</code></pre>}
