@@ -1,0 +1,6 @@
+-topic_percentages.each do |topic, percentage|
+  .topic
+    .percentage #{percentage.round}%
+    .bar
+      .filled{style: "width: #{percentage.round}%"}
+      .title= topic.titleize

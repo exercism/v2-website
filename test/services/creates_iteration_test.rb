@@ -4,12 +4,11 @@ class CreatesIterationTest < ActiveSupport::TestCase
   test "creates for iteration user" do
     solution = create :solution
     code = "foobar"
-    filename = "foobar.rb"
+    filename = "dog/foobar.rb"
     content_type = "text/plain"
     file_contents = "something = :else"
-    headers = ""
-
-    file = mock(original_filename: filename, content_type: content_type, read: file_contents, headers: "headers")
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
+    file = mock(content_type: content_type, read: file_contents, headers: headers)
 
     iteration = CreatesIteration.create!(solution, [file])
 

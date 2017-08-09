@@ -50,6 +50,9 @@
             }
         }
     }
+    .top-section {
+        border-bottom:5px solid #fff;
+    }
     .core-exercises {
         padding-top:42px;
         margin-bottom:45px;
@@ -131,6 +134,7 @@
                 max-width: 300px;
                 overflow: hidden;
                 max-height: 23px;
+                margin-bottom:0px;
 
                 .topic {
                     display:inline-block;
@@ -238,7 +242,7 @@
         }
     }
     .progress-section {
-        padding:30px 30px;
+        padding: 30px 30px 15px 30px;
         background:#f9f9f9;
         border-radius:2px;
         margin-top:42px;
@@ -295,6 +299,25 @@
             }
         }
         .topics {
+            .extra-button {
+                display:block;
+                background:#fff;
+                color:$color-2;
+                border:1px solid rgba($color-2, 0.5);
+                @include font-size(12, 12);
+                padding:9px;
+                width:100%;
+                margin:10px 0;
+                &:hover {
+                    background:$color-2;
+                    border-color:$color-2;
+                    color:#fff;
+                }
+            }
+            .extra {
+                display:none;
+            }
+
             .topic {
                 overflow:hidden;
                 margin-bottom:5px;
