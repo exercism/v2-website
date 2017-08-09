@@ -9,6 +9,8 @@ class Git::FetchesTracks
 
   def run
     loop do
+      Git::ProblemSpecifications.head.fetch!
+      Git::WebsiteContent.head.fetch!
       Track.find_each do |track|
         fetch(track)
         sleep 1.second
