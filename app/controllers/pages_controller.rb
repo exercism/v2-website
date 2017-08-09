@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   PAGES.each do |page|
     define_method page do
       puts page
-      markdown = Git::WebsiteContent.head.pages[page] || ""
+      markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
       @content = ParsesMarkdown.parse(markdown.to_s)
     end
   end
