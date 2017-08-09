@@ -66,22 +66,27 @@
             float:left;
             margin-right:15px;
         }
-        h2 {
-            @include font-size(18, 18);
-            font-weight:$bold;
-            margin-right:5px;
-            display:inline-block;
-            vertical-align:bottom;
-            margin-bottom:7px;
-        }
-        .num-exercises {
-            padding:4px 7px;
-            display:inline-block;
-            margin-bottom:7px;
-            @include font-size(10, 10);
-            font-weight:$regular;
-            color:#999;
-            background:#f3f3f3;
+        .title {
+            width:400px;
+            overflow:hidden;
+            white-space:nowrap;
+            h2 {
+                @include font-size(18, 18);
+                font-weight:$bold;
+                margin-right:5px;
+                display:inline-block;
+                vertical-align:bottom;
+                margin-bottom:7px;
+            }
+            .num-exercises {
+                padding:4px 7px;
+                display:inline-block;
+                margin-bottom:7px;
+                @include font-size(10, 10);
+                font-weight:$regular;
+                color:#999;
+                background:#f3f3f3;
+            }
         }
         summary {
             @include font-size(14, 19);

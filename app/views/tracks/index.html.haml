@@ -19,6 +19,7 @@
 
           =link_to track, class: 'track' do
             =hex_turquoise_track_icon(track)
-            %h2= track.title
-            .num-exercises= pluralize num_exercises.to_i, "exercise"
+            .title
+              %h2= track.title
+              .num-exercises= pluralize num_exercises.to_i, "exercise"
             %summary= track.introduction
