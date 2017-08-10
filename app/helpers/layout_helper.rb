@@ -11,6 +11,10 @@ module LayoutHelper
     classes.join(" ")
   end
 
+  def clear_flash
+    flash.clear
+  end
+
   def notice_and_alert(object = nil)
     tags = []
     a = alert

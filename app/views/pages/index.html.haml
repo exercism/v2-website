@@ -72,6 +72,17 @@
           %h3 5. Complete the language track and achieve fluency
           %p At the end of your language track you will have mastered the core concepts and idoms of your language and be ready to use it in the real world.
 
+  .pr-section
+    .lo-container
+      %h2 Featured In
+      .logos
+        =link_to image_tag("pr-logos/changelog.png"), "#", target: "blank"
+        =link_to image_tag("pr-logos/codeship.png"), "#", target: "blank"
+        =link_to image_tag("pr-logos/wired.png"), "#", target: "blank"
+        =link_to image_tag("pr-logos/open-source.png"), "#", target: "blank"
+        =link_to image_tag("pr-logos/sd-times.png"), "#", target: "blank"
+
+
 -content_for :js do
   :javascript
     $.fn.animateBgPosition = function( y, speed ) {

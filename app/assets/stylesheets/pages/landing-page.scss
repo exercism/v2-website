@@ -155,4 +155,25 @@
             }
         }
     }
+    .pr-section {
+        h2 {
+            @include header-font;
+            @include font-size(26, 26);
+            padding-top:50px;
+            margin-bottom:40px;
+            text-align:center;
+        }
+        .logos {
+            text-align:center;
+            a {
+                display:inline-block;
+                text-decoration:none;
+                margin:0 25px;
+                img {
+                    display:block;
+                    height:25px;
+                }
+            }
+        }
+    }
 }
