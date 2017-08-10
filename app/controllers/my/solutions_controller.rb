@@ -30,6 +30,10 @@ class My::SolutionsController < MyController
     end
   end
 
+  def walkthrough
+    render_modal("solution-walkthrough autoclose", "walkthrough")
+  end
+
   def confirm_unapproved_completion
     render_modal('solution-confirm-unapproved-completion', "confirm_unapproved_completion")
   end

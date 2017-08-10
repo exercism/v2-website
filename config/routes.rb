@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     resources :user_tracks, only: [:create]
     resources :solutions, only: [:show, :create] do
       member do
+        get :walkthrough
         get :confirm_unapproved_completion
         patch :complete
         get :reflection

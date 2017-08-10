@@ -11,7 +11,7 @@ $('#modal-wrapper').click (e) ->
                   $e.data('close-modal')
 
   closeModal() if $e.attr('id') == "modal-wrapper" &&
-                  $e.hasClass('autoclose')
+                  $e.find("#modal").hasClass('autoclose')
 
 
 window.showModal = (className, html, options = {}) ->
