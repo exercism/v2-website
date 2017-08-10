@@ -42,8 +42,9 @@ body.controller-my-tracks.action-show {
         h1 {
             padding-top:20px;
             @include font-size(40, 40);
-            letter-spacing:-1.56px;
-            font-weight:$bold;
+            @include header-font;
+            font-weight:700;
+            letter-spacing:-0.56px;
             margin-bottom:5px;
             color:#fff;
         }
@@ -72,6 +73,9 @@ body.controller-my-tracks.action-show {
             border-radius:2px;
             background:#00bac9;
             padding:12px 35px;
+            color:#fff;
+
+            background:$color-3;
             color:#fff;
         }
     }
@@ -165,12 +169,11 @@ body.controller-my-tracks.action-show {
             background:#fff;
             border:1px solid $color-2;
             color:$color-2;
+
             padding:15px 30px;
             @include font-size(15, 15);
             font-weight:$regular;
             &:hover {
-                background:$color-2;
-                color:#fff;
             }
         }
     }

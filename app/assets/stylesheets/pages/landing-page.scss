@@ -53,15 +53,14 @@ body.controller-pages.action-index {
         }
     }
     .tracks-section,
-    .how-section,
-    .pr-section {
+    .how-section {
         padding:80px 0;
         .title-block {
             h2 {
                 @include header-font;
                 font-weight:600;
                 text-align:center;
-                @include font-size(28, 28);
+                @include font-size(30, 30);
                 margin-bottom:15px;
             }
             p {
@@ -82,13 +81,6 @@ body.controller-pages.action-index {
     .tracks-section {
         background:#fafefe;
         padding:70px 0;
-        //background:rgba(#5d4e6d, 0.1);
-        //background:#5d4e6d;
-
-        //background-image:image-url("landing-page-background.png");
-        background-size:700px;
-        background-repeat:repeat;
-        background-position:-10px;
         border:solid #eee;
         border-width:1px 0;
 

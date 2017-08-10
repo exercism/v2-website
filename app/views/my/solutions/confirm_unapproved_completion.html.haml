@@ -1,4 +1,21 @@
 #modal-close-button x
-Warning. This solution is not approved.
+.warning-bar
+  %i.fa.fa-warning
+  Mentor hasn’t marked this solution as complete
+.content
+  %h2 Mark #{@solution.exercise.title} as Complete
+  %p
+    To get the most out of Exercism
+    %strong we recommend that you continue to work on this exercise
+    until your mentor thinks you’re ready to move on and marks the exercise as complete.
+  %p If you’re eager to move on now, we understand that too. When you mark this exercise as complete yourself, please note that:
+  %ul
+    %li you'll no longer get mentor feedback on this exercise
+    %li you won't unlock #{@solution.exercise.title}'s side quests
+    %li you'll not recieve a laptop sticker once you've finished the Track
+    %li you will be able to reactive the exercise in the future
 
-=link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
+  =form_tag [:complete, :my, @solution], method: :patch, remote: true do
+    =check_box_tag :agree, 1, false, required: true
+    =label_tag :agree, "I understand and agree to continue."
+    =button_tag "Mark as completed", class: "pure-button"

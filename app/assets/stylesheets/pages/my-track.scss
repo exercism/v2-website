@@ -253,7 +253,7 @@ body.namespace-my.controller-tracks.action-show {
         margin-top:42px;
         margin-left:100px;
         h2 {
-            color:$color-2;
+            color:$color-1;
             font-weight:$bold;
             text-transform:uppercase;
             @include font-size(14, 14);
@@ -285,7 +285,7 @@ body.namespace-my.controller-tracks.action-show {
         }
         .core {
             .percentage {
-                color:$color-2;
+                color:$color-1;
                 @include font-size(25, 25);
                 font-weight:$regular;
                 float:left;
@@ -307,15 +307,15 @@ body.namespace-my.controller-tracks.action-show {
             .extra-button {
                 display:block;
                 background:#fff;
-                color:$color-2;
-                border:1px solid rgba($color-2, 0.5);
+                color:$color-1;
+                border:1px solid rgba($color-1, 0.5);
                 @include font-size(12, 12);
                 padding:9px;
                 width:100%;
                 margin:10px 0;
                 &:hover {
-                    background:$color-2;
-                    border-color:$color-2;
+                    background:$color-1;
+                    border-color:$color-1;
                     color:#fff;
                 }
             }
@@ -335,7 +335,7 @@ body.namespace-my.controller-tracks.action-show {
                     position:relative;
                     padding:5px 5px 6px;
                     .filled {
-                        background:rgba($color-2, 0.1);
+                        background:rgba($color-1, 0.1);
                         position:absolute;
                         top:0;
                         bottom:0;
@@ -372,21 +372,21 @@ body.namespace-my.controller-tracks.action-show {
                     height:15px;
                     float:left;
                     &.completed {
-                        background:$color-2;
+                        background:$color-1;
                     }
                 }
             }
             .pure-button {
                 background:#fff;
-                color:$color-2;
-                border:1px solid rgba($color-2, 0.5);
+                color:$color-1;
+                border:1px solid rgba($color-1, 0.5);
                 @include font-size(12, 12);
                 padding:9px;
                 display:block;
                 width:100%;
                 &:hover {
-                    background:$color-2;
-                    border-color:$color-2;
+                    background:$color-1;
+                    border-color:$color-1;
                     color:#fff;
                 }
             }

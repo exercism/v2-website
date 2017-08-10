@@ -368,13 +368,32 @@ body.controller-solutions.action-show {
                 .cm-header-4 { @include font-size(14, 18); color:#333 }
             }
         }
-        .pure-button {
-            background:$color-1;
-            color:#fff;
-            float:right;
+        .complete-button,
+        .comment-button {
             margin-top:10px;
             border-radius:2px;
             padding:8px 25px;
+        }
+        .complete-button {
+            &.unapproved {
+                background:#fff;
+                border:1px solid #ddd;
+                color:#ddd;
+                &:hover {
+                    border:1px solid red;
+                    color:red;
+                }
+            }
+            &.approved {
+                background:#fff;
+                border:1px solid $color-3;
+                color:$color-3;
+            }
+        }
+        .comment-button {
+            background:$color-1;
+            color:#fff;
+            float:right;
         }
         .solution pre,
         .post-html pre,
@@ -388,6 +407,44 @@ body.controller-solutions.action-show {
             }
         }
 
+    }
+}
+
+#modal.solution-confirm-unapproved-completion {
+    padding-top:20px;
+    .warning-bar {
+        background:#ffe3e3;
+        padding:10px;
+        text-align:center;
+        color:#f34a56;
+        i {
+        }
+    }
+    .content {
+        padding:20px 40px;
+        h2 {
+            @include font-size(16, 16);
+            font-weight:$regular;
+            color:#555;
+            margin-bottom:15px;
+        }
+        p {
+            color:#555;
+            @include font-size(14, 20);
+            margin-bottom:10px;
+        }
+        label {
+            padding-left:5px;
+        }
+        .pure-button {
+            display:block;
+            margin-top:20px;
+            width:100%;
+            border:1px solid #ccc;
+            background:#fff;
+            color:#333;
+            border-radius:2px;
+        }
     }
 }
 

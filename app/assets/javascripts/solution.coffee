@@ -20,7 +20,6 @@ window.setupSolution = ->
   setupTabs = =>
     $('.tab').click ->
       $container = $(this).closest('.tabs-and-panes')
-      console.log $container
 
       for c in $container[0].className.split(" ")
         $container.removeClass(c) if c.startsWith("selected-")
@@ -29,7 +28,7 @@ window.setupSolution = ->
       for c in this.className.split(" ")
         tabId = c.replace("tab-", "") if c.startsWith("tab-")
 
-      $container.addClass("selected-\#{tabId}") if tabId
+      $container.addClass("selected-#{tabId}") if tabId
 
   setupNewDiscussionPost = =>
     $textarea = $(".new-discussion-post-form textarea")

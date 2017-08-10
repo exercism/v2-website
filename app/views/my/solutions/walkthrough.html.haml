@@ -19,7 +19,7 @@
       header: "Are you familiar with the terminal?",
       content: "Do you know what a 'terminal' is how to use it?"
       answers: [
-        ["Yes", [['cli_installed', "run_command"], ['cli_not_installed', "install_cli"], "cli_check"], "knows_terminal"]
+        ["Yes", [['cli_installed', "run_command"], ['cli_not_installed', "determine_os"], "cli_check"], "knows_terminal"]
         ["No", "determine_os", "does_not_know_terminal"]
       ]
 
@@ -32,15 +32,39 @@
       header: "What operating System are you on?",
       content: "Each one takes a different pathway"
       answers: [
-        ["Mac", "mac_install"]
-        ["Linux", "linux_install"]
-        ["Windows", "linux_install"]
+        ["Mac", [["knows_terminal", "mac_check_brew"], ["does_not_know_terminal", "mac_open_terminal"]]]
+        ["Linux", [["knows_terminal", "linux_install"], ["does_not_know_terminal", "linux_open_terminal"]]]
+        ["Windows", [["knows_terminal", "windows_install"], ["does_not_know_terminal", "windows_open_terminal"]]]
       ]
 
-    install_cli:
-      header: "Install the CLI",
-      content: "You need to install the CLI. Here's how"
-      answers: [ ]
+    mac_open_terminal:
+      header: "How do use the terminal",
+      content: "This is some info about the terminal and how to open it..."
+      answers: [
+        ["OK", "mac_check_brew"]
+      ]
+
+    mac_check_brew:
+      header: "Do you have HomeBrew installed?",
+      content: "The exercism CLI is installed through HomeBrew. Do you have it installed?"
+      answers: [
+        ["Yes", "mac_install_cli"]
+        ["No", "mac_install_homebrew"]
+      ]
+
+    mac_install_homebrew:
+      header: "Install Homebrew",
+      content: "Instructions on how to install homebrew"
+      answers: [
+        ["Done", "mac_install_cli"]
+      ]
+
+    mac_install_cli:
+      header: "Install via Homebrew",
+      content: "Run brew install exercism"
+      answers: [
+        ["Done", "run_command"]
+      ]
 
     run_command:
       header: "Run the command",
@@ -71,6 +95,8 @@
                 executeStep(nextStepPath)
                 break
               else
+                console.log(flags)
+                console.log(nextStepPath)
                 if flags.indexOf(nextStepPath[0]) != -1
                   executeStep(nextStepPath[1])
                   break

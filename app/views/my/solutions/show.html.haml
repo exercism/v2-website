@@ -15,7 +15,7 @@
         .notification.action
           %i.fa.fa-bell
           %span.text A mentor has approved this solution
-          =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
+          =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
       -elsif @iteration.notifications.unread.size > 0
         .notification
           New comment
@@ -68,7 +68,12 @@
                 .pane.pane-2.preview
                   .preview-area
 
-            =button_tag "Comment", class: 'pure-button'
+            -unless @solution.approved?
+              =link_to "Complete Exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
+            /  =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+            /-else
+
+            =button_tag "Comment", class: 'comment-button pure-button'
 
 -content_for :js do
   :javascript
