@@ -2,6 +2,20 @@
 @import 'mixins';
 
 #modal-wrapper #modal.solution-walkthrough {
-    padding:20px;
+    padding:25px;
+    .header {
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin-bottom:10px;
+    }
+    .content {
+        @include font-size(14, 21);
+        margin-bottom:15px;
+    }
+    button {
+        background:$color-1;
+        color:#fff;
+        margin-right:5px;
+    }
 }
 

@@ -14,6 +14,7 @@
         ["No", "terminal_check", "cli_not_installed"]
         ["I don't know", "terminal_check"]
       ]
+
     terminal_check:
       header: "Are you familiar with the terminal?",
       content: "Do you know what a 'terminal' is how to use it?"
@@ -21,22 +22,26 @@
         ["Yes", [['cli_installed', "run_command"], ['cli_not_installed', "install_cli"], "cli_check"], "knows_terminal"]
         ["No", "determine_os", "does_not_know_terminal"]
       ]
+
     cli_check:
       header: "Do you have the CLI?",
       content: "Let's work out if you have the CLI. Here's how."
       answers: [ ]
+
     determine_os:
       header: "What operating System are you on?",
       content: "Each one takes a different pathway"
       answers: [
-        ["Mac", ""]
-        ["Linux", ""]
-        ["Windows", ""]
+        ["Mac", "mac_install"]
+        ["Linux", "linux_install"]
+        ["Windows", "linux_install"]
       ]
+
     install_cli:
       header: "Install the CLI",
       content: "You need to install the CLI. Here's how"
       answers: [ ]
+
     run_command:
       header: "Run the command",
       content: "You're all set. Run xyz to download the exercise and get going"
@@ -54,7 +59,7 @@
     $content.html(step.content)
     $buttons.html("")
     for [answer, nextStepPaths, flag] in step.answers
-      $button = $("<button>\#{answer}</button>")
+      $button = $("<button class='pure-button'>\#{answer}</button>")
       do (nextStepPaths, flag) ->
         $button.click =>
           flags.push(flag) if flag

@@ -1,10 +1,16 @@
 @import 'variables';
 @import 'mixins';
 
+body.controller-pages.action-index {
+    footer {
+        margin-top:0;
+    }
+}
 
 #landing-page {
     .welcome-section {
         .lhs {
+            padding-bottom:50px;
         }
         .rhs {
             padding-top:100px;
@@ -16,11 +22,13 @@
             }
             h2 {
                 @include header-font;
+                font-weight:600;
                 @include font-size(26, 26);
                 margin-bottom:10px;
             }
             p {
                 font-weight:$regular;
+                color:#333;
                 @include font-size(16, 22);
                 max-width:450px;
                 margin-bottom:20px;
@@ -28,8 +36,9 @@
             .pure-button {
                 @include font-size(16, 16);
                 font-weight:$regular;
+                border-radius:2px;
                 &.sign-up-button {
-                    background:$color-2;
+                    background:$color-3;
                     color:#fff;
                     margin-right:5px;
                     padding:15px 70px;
@@ -43,32 +52,66 @@
             }
         }
     }
+    .tracks-section,
+    .how-section,
+    .pr-section {
+        padding:80px 0;
+        .title-block {
+            h2 {
+                @include header-font;
+                font-weight:600;
+                text-align:center;
+                @include font-size(28, 28);
+                margin-bottom:15px;
+            }
+            p {
+                text-align:center;
+                @include font-size(17, 22);
+                max-width: 600px;
+                margin: 0px auto 40px auto;
+                a {
+                    text-decoration:none;
+                    color:#333;
+                    &:hover {
+                        text-decoration:underline;
+                    }
+                }
+            }
+        }
+    }
     .tracks-section {
-        margin-top:50px;
-        background:#fafafa;
+        background:#fafefe;
+        padding:70px 0;
+        //background:rgba(#5d4e6d, 0.1);
+        //background:#5d4e6d;
+
+        //background-image:image-url("landing-page-background.png");
+        background-size:700px;
+        background-repeat:repeat;
+        background-position:-10px;
         border:solid #eee;
         border-width:1px 0;
-        padding:60px 0;
-        h2 {
-            text-align:center;
-            @include font-size(24, 24);
-            font-weight:$regular;
-            margin-bottom:10px;
-        }
-        p {
-            text-align:center;
-            @include font-size(16, 16);
-            margin-bottom:40px;
-            a {
-                text-decoration:none;
-                color:#333;
-                &:hover {
-                    text-decoration:underline;
+
+        .title-block {
+            h2 {
+                @include font-size(30, 30);
+                margin-bottom:15px;
+            }
+            p {
+                @include font-size(16, 21);
+                color:#666;
+                max-width:400px;
+                margin-bottom:20px;
+                a {
+                    color:#666;
                 }
             }
         }
         .tracks {
-            padding:0 40px;
+            margin:0 20px;
+            padding:20px 20px 0 20px;
+            border-radius:10px;
+            //background:rgba(#fff, 0.5);
             .row {
                 overflow:hidden;
                 margin-top:-10px;
@@ -114,16 +157,16 @@
         }
     }
     .how-section {
-        h2 {
-            @include header-font;
-            @include font-size(26, 26);
-            padding-top:50px;
-            margin-bottom:40px;
+        .divider {
             text-align:center;
+            margin-bottom:30px;
+            margin:0 400px 30px;
+            border-bottom:1px solid #eee;
         }
+
         .step {
             overflow:hidden;
-            margin:0 auto 60px;
+            margin:0 auto 30px;
             width:700px;
             img {
                 display:block;
@@ -131,8 +174,8 @@
             }
             h3 {
                 margin-top:30px;
-                @include header-font;
-                @include font-size(20, 20);
+                font-weight:$regular;
+                @include font-size(18, 18);
                 margin-bottom:10px;
             }
             p {
@@ -156,24 +199,51 @@
         }
     }
     .pr-section {
+        background:#f9f9f9;
+        border-top:1px solid #f0f0f0;
+        padding:30px 0;
         h2 {
-            @include header-font;
-            @include font-size(26, 26);
-            padding-top:50px;
-            margin-bottom:40px;
+            font-weight:$regular;
             text-align:center;
+            @include font-size(14, 14);
+            color:#ccc;
+            margin-bottom:20px;
         }
         .logos {
             text-align:center;
             a {
                 display:inline-block;
                 text-decoration:none;
-                margin:0 25px;
+                margin:0 20px;
                 img {
                     display:block;
-                    height:25px;
+                    height:30px;
                 }
             }
         }
     }
+    .cta-section {
+        background:$color-2;
+        padding:60px 0;
+        h2 {
+            color:#fff;
+            text-align:center;
+            @include font-size(17, 17);
+            font-weight:$light;
+            margin-bottom:20px;
+        }
+        .pure-button {
+            border:1px solid #fff;
+            font-weight:$regular;
+            border-radius:2px;
+            background:#00bac9;
+            padding:12px 35px;
+            @include font-size(16, 16);
+            margin:0 auto;
+            display:block;
+            width:280px;
+            color:#fff;
+        }
+    }
+
 }
