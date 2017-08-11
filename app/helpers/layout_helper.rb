@@ -1,14 +1,18 @@
 module LayoutHelper
   def body_class
-    controller_parts = controller.class.name.underscore.split("/")
-    namespace = controller_parts.size > 1 ? controller_parts[0] : 'none'
-
     classes = []
     classes << "devise" if devise_controller?
-    classes << "namespace-#{namespace}"
+    classes << "namespace-#{namespace_name}"
     classes << "controller-#{controller_name}"
     classes << "action-#{action_name}"
     classes.join(" ")
+  end
+
+  def namespace_name
+    @namespace_name ||= begin
+      controller_parts = controller.class.name.underscore.split("/")
+      controller_parts.size > 1 ? controller_parts[0] : 'none'
+    end
   end
 
   def clear_flash
