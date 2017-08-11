@@ -27,7 +27,6 @@
         =link_to image_tag("pr-logos/sd-times.png"), "http://sdtimes.com/sd-times-github-project-week-exercism/", target: "blank"
         =link_to image_tag("pr-logos/linux.png"), "", target: "blank"
 
-
   .tracks-section#explore-languages
     .lo-container
       .title-block
@@ -39,8 +38,13 @@
           -idx += 1
           .row{class: idx.odd?? "long" : "short"}
             -@tracks.slice!(0, idx.odd?? 10 : 9).each do |track|
-              =link_to track, class: 'track', style: "background-image:url('#{track.hex_white_icon_url}')" do
+              =link_to track, class: "track #{track.slug=="go"?"go":""}", style: "background-image:url('#{track.hex_white_icon_url}')" do
                 .title= track.slug == "lfe" ? "LFE" : track.title
+                -if track.slug == "go"
+                  .left-eye
+                    .pupil
+                  .right-eye
+                    .pupil
 
   .how-section
     .lo-container
@@ -113,3 +117,44 @@
       return this;
     };
     $('.step-4 .waterfall').animateBgPosition( 50000, 1500000 )
+
+    setupGopher = function() {
+      $leftEye = $('.go .left-eye')
+      $rightEye = $('.go .right-eye')
+      $pupils = $('.go .pupil')
+      $honeycomb = $('.tracks-section .tracks')
+
+      honeycombHeight = $honeycomb.height()
+      honeycombWidth = $honeycomb.width()
+      eyesCenterX = $leftEye.offset().left - $honeycomb.offset().left + 15
+      eyesCenterY = $leftEye.offset().top - $honeycomb.offset().top + 5
+
+      spaceToLeft = honeycombWidth - (honeycombWidth - eyesCenterX)
+      spaceToRight = honeycombWidth - spaceToLeft
+      spaceToTop = honeycombHeight - (honeycombHeight - eyesCenterY)
+      spaceToBottom = honeycombHeight - spaceToTop
+
+      $honeycomb.mousemove(function(e) {
+        mouseX = e.pageX - $honeycomb.offset().left
+        mouseToEyesOffsetX = eyesCenterX - mouseX
+        if(mouseToEyesOffsetX > 0) {
+          // mouse is to the left
+          $pupils.css('left', 5 - (mouseToEyesOffsetX / spaceToLeft * 5))
+        } else {
+          // mouse is to the right
+          $pupils.css('left', 5 + (-mouseToEyesOffsetX / spaceToRight * 5))
+        }
+
+        mouseY = e.pageY - $honeycomb.offset().top
+        mouseToEyesOffsetY = eyesCenterY - mouseY
+        if(mouseToEyesOffsetY > 0) {
+          // mouse is to the left
+          $pupils.css('top', 5 - (mouseToEyesOffsetY / spaceToTop * 5))
+        } else {
+          // mouse is to the right
+          $pupils.css('top', 5 + (-mouseToEyesOffsetY / spaceToBottom * 5))
+        }
+
+      })
+    }
+    setupGopher()

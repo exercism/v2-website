@@ -115,6 +115,7 @@ body.controller-pages.action-index {
                 }
                 .track {
                     display:block;
+                    position:relative;
                     text-decoration:none;
                     width:93px;
                     height:101px;
@@ -143,6 +144,38 @@ body.controller-pages.action-index {
                         .title {
                             display:block;
                         }
+                        .left-eye,
+                        .right-eye {
+                            display:none;
+                        }
+                    }
+                    .left-eye,
+                    .right-eye {
+                        position:absolute;
+                        background:white;
+                        border-radius:100%;
+                        .pupil {
+                            width:2px;
+                            height:2px;
+                            background:#000;
+                            left:5px;
+                            top:5px;
+                            border-radius:100%;
+                            position:relative;
+                        }
+                    }
+                    .left-eye {
+                        top: 35px;
+                        left: 32px;
+                        width:12px;
+                        height:11px;
+
+                    }
+                    .right-eye {
+                        top: 34px;
+                        left: 49px;
+                        width: 11px;
+                        height: 11px;
                     }
                 }
             }
