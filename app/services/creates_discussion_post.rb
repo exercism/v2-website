@@ -24,4 +24,8 @@ class CreatesDiscussionPost
   def solution
     iteration.solution
   end
+
+  def strong(text)
+    "<strong>#{text}</strong>"
+  end
 end

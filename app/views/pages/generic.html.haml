@@ -1,4 +1,21 @@
 #generic-page
-  =render "header"
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      =image_tag "nav-divider.png"
+      %span #{@title}
+  .header
+    .lo-container
+      %h1= @title
   .lo-container
-    =raw @content
+    .pure-g
+      .pure-u-2-3.lhs
+        .content=raw @content
+        .changes
+          %h3 Something need changing on this page?
+          %p
+            If you've spotted something incorrect or missing from this page,
+            please #{link_to "edit this file on GitHub", "https://github.com/exercism/website-copy/blob/master/pages/#{@page}.md"}. That will submit a pull request to the website team, which we can then review and push live. 
+          %p Thank you!!
+      .pure-u-1-3
+        =code_person_widget

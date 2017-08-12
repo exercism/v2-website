@@ -1,0 +1,51 @@
+@import 'variables';
+@import 'mixins';
+
+#generic-page {
+    .header {
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        background-color:$color-2;
+        padding:40px 0 20px 0;
+        margin-bottom:40px;
+        h1 {
+            @include font-size(38, 38);
+            @include header-font;
+            font-weight:600;
+            letter-spacing:-0.3px;
+            color:#fff;
+        }
+    }
+    .lhs {
+        padding-right:40px;
+    }
+    .changes {
+        margin-top:50px;
+        padding-top:20px;
+        border-top:1px solid #eee;
+    }
+
+    h3 {
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin:30px 0 10px 0;
+        &:first-child {
+            margin-top:0px;
+        }
+    }
+    p {
+        @include font-size(16, 21);
+        margin-bottom:15px;
+    }
+    #widget-code-person {
+        margin-left:30px;
+        opacity:0.5;
+        width:336px;
+        height:265px;
+        img {
+            right:50px;
+            width:150px;
+        }
+    }
+
+}

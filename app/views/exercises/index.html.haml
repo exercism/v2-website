@@ -15,13 +15,14 @@
       .lo-container
         =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
+      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
       %h1 Exercises on the #{@track.title} Track
-      .stats
-        .stat= pluralize @track.exercises.count, "Exercise"
-        .stat= pluralize @track.user_tracks.count, "Students"
-        /.stat= pluralize @track.iterations.count, "Submissions"
-        .stat= pluralize @track.mentorships.count, "Mentors"
-      .h1-subtitle #{@track.exercises.count} exercises to help you amster #{@track.title}
+      /.stats
+      /  .stat= pluralize @track.exercises.count, "Exercise"
+      /  .stat= pluralize @track.user_tracks.count, "Students"
+      /  /.stat= pluralize @track.iterations.count, "Submissions"
+      /  .stat= pluralize @track.mentorships.count, "Mentors"
+      .h1-subtitle #{@track.exercises.count} exercises to help you master #{@track.title}
 
   .exercises
     .lo-container

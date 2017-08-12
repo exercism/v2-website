@@ -1,4 +1,6 @@
 class My::TracksController < MyController
+  skip_before_action :authenticate_user!, only: [:show]
+
   def index
     tracks = Track.order('title ASC')
     tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
@@ -13,6 +15,7 @@ class My::TracksController < MyController
   # OPTIMISE - Move all of this into some sort of helper service class
   def show
     @track = Track.find(params[:id])
+    return redirect_to @track unless user_signed_in?
     return show_not_joined unless current_user.joined_track?(@track)
 
     exercises = @track.exercises.includes(:topics)

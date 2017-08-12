@@ -38,7 +38,7 @@ class CreatesIteration
       CreatesNotification.create!(
         mentor,
         :new_iteration_for_mentor,
-        "#{solution.user.name} has posted a new iteration on a solution you are mentoring",
+        "<strong>#{solution.user.name}</strong> has posted a new iteration on a solution you are mentoring",
         routes.mentor_solution_url(solution),
         trigger: iteration,
 

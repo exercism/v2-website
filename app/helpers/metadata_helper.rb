@@ -1,4 +1,4 @@
-module MetatagHelper
+module MetadataHelper
   def metadata_title
     @metadata_title ||= metadata.try(:fetch, :title, nil) || "Exercism"
   end
@@ -23,6 +23,14 @@ module MetatagHelper
         nil
       else
         case controller_name
+        when "pages"
+          case action_name
+          when :index
+          else
+            {
+              title: @title
+            }
+          end
         when "tracks"
           case action_name
           when "show"

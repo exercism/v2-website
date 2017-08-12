@@ -8,14 +8,20 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
     assert_correct_page "my-tracks-page"
   end
 
-  test "show signed in locked renders" do
+  test "show logged out redirects" do
+    track = create :track
+    get my_track_url(track)
+    assert_redirected_to track_url(track)
+  end
+
+  test "show locked renders" do
     sign_in!
     get my_track_url(create :track)
     assert_response :success
     assert_correct_page "my-track-not-joined-page"
   end
 
-  test "show signed in unlocked renders" do
+  test "show unlocked renders" do
     sign_in!
 
     track = create :track
