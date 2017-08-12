@@ -525,11 +525,11 @@ body.controller-solutions.action-show {
 #modal.solution-reflection {
     max-width:850px !important;
 
-    .lhs {
+    .modal-lhs {
         padding-right:20px;
         border-right:1px solid #e9e9e9;
     }
-    .rhs {
+    .modal-rhs {
         padding-left:20px;
     }
     h2 {
@@ -580,19 +580,30 @@ body.controller-solutions.action-show {
         }
         .stars {
             display:inline-block;
-            i {
-                @include font-size(18, 18);
-                &.fa-star-o {
-                    color:#bbb;
-                    &:hover {
-                    }
-                }
-                &.fa-star {
-                    color:#ffcd00;
-                }
-            }
-        }
 
+            input { display: none; }
+            label:before {
+              margin: 5px;
+              font-size: 1.25em;
+              font-family: FontAwesome;
+              display: inline-block;
+              content: "\f005";
+            }
+
+            label {
+              color: #ddd;
+              float: right;
+            }
+
+            input:checked ~ label,
+            &:not(:checked) > label:hover,
+            &:not(:checked) > label:hover ~ label { color: #FFD700;  }
+
+            input:checked + label:hover,
+            input:checked ~ label:hover,
+            label:hover ~ input:checked ~ label,
+            input:checked ~ label:hover ~ label { color: #FFED85;  }
+        }
     }
 
     textarea {

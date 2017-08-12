@@ -39,7 +39,7 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    CompletesSolution.complete!(@solution)
+    #CompletesSolution.complete!(@solution)
     @exercise = @solution.exercise
     @track = @exercise.track
     @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
@@ -47,6 +47,8 @@ class My::SolutionsController < MyController
   end
 
   def reflection
+    @mentor_interations = @solution.discussion_posts.group(:user_id).count
+    p @mentor_interations
     render_modal("solution-reflection", "reflection")
   end
 
