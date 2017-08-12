@@ -13,7 +13,6 @@
     =render_header
     = yield
     =render "layouts/footer"
-    =clear_flash
 
     #modal-wrapper
       #modal
@@ -23,3 +22,6 @@
 
     -if Rails.env.production?
       =render "layouts/tracking_hotjar"
+      =render "layouts/tracking_js"
+
+    -clear_flash

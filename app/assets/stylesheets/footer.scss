@@ -32,12 +32,13 @@ footer {
         margin-top:30px;
         padding:10px 0;
         border-top:1px solid #eee;
-        text-align:right;
-        .copyright, a {
+        .copyright, a, .created-by {
             color:#aaa;
             @include font-size(13, 20);
-            padding-left:30px;
             display:inline-block;
+        }
+        .copyright {
+            float:right;
         }
     }
 }
