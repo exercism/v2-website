@@ -24,7 +24,14 @@ class API::SolutionsControllerTest < API::TestBase
     get setup_api_track_path(track.slug), headers: @headers, as: :json
     assert_response 200
 
+    expected = {
+      track: {
+        id: track.slug,
+        language: track.title,
+        test_pattern: ".*"
+      }
+    }
     actual = JSON.parse(response.body, symbolize_names: true)
-    assert_equal ".*", actual[:track][:test_pattern]
+    assert_equal expected, actual
   end
 end
