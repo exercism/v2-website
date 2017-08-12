@@ -48,7 +48,6 @@ class My::SolutionsController < MyController
 
   def reflection
     @mentor_interations = @solution.discussion_posts.group(:user_id).count
-    p @mentor_interations
     render_modal("solution-reflection", "reflection")
   end
 

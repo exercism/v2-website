@@ -164,7 +164,6 @@
                     @include font-size(13, 13);
                     font-weight:$regular;
                     color:#888;
-                    color:$color-2;
                 }
                 i, img {
                     display:inline-block;
@@ -174,7 +173,6 @@
                 i {
                     @include font-size(20, 20);
                     color:#aaa;
-                    color:$color-2;
                 }
                 img {
                     vertical-align:bottom;

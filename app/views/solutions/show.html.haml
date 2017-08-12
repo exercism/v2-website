@@ -32,18 +32,25 @@
     .header
       =image_tag display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), class: "avatar"
 
+      -like_count = @reaction_counts.fetch('like', 0)
+      -love_count = @reaction_counts.fetch('love', 0)
+      -genius_count = @reaction_counts.fetch('genius', 0)
+      -genius_count_largest = genius_count > love_count && genius_count > like_count
       .reactions
-        .reaction
+        .reaction{class: like_count > love_count && like_count > genius_count ? "highlight": ""}
           %i.fa.fa-fw.fa-thumbs-up
-          .count= @reaction_counts.fetch('applaud', 0)
+          .count= like_count
 
-        .reaction
+        .reaction{class: love_count > like_count && love_count > genius_count ? "highlight": ""}
           %i.fa.fa-fw.fa-heart
-          .count= @reaction_counts.fetch('love', 0)
+          .count= love_count
 
-        .reaction
-          =image_tag "genius-turquoise.png"
-          .count= @reaction_counts.fetch('wowed', 0)
+        .reaction{class: genius_count_largest ? "highlight": ""}
+          -if genius_count_largest
+            =image_tag "genius-turquoise.png"
+          -else
+            =image_tag "genius.png"
+          .count= genius_count
 
         .reaction
           %i.fa.fa-fw.fa-comment
@@ -68,7 +75,8 @@
               .tab.tab-3
                 Solution
 
-            =render "solutions/panes", iteration: @iteration
+            -if @iteration
+              =render "solutions/panes", iteration: @iteration
 
         -if user_signed_in?
           .react
@@ -107,7 +115,12 @@
           -@comments.each do |reaction|
             .comment.pure-g
               .pure-u-2-24
-                %i.fa{class: reaction_icon(reaction)}
+                -if reaction.emotion == "like"
+                  %i.fa.fa-thumbs-up
+                -if reaction.emotion == "love"
+                  %i.fa.fa-heart
+                -if reaction.emotion == "genius"
+                  =image_tag "genius-turquoise.png"
               .pure-u-22-24.content
                 .when #{time_ago_in_words(reaction.created_at)} ago
                 .who

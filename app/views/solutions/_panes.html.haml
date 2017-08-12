@@ -1,24 +1,22 @@
--solution = iteration.solution
--language = solution.exercise.track.syntax_highligher_language
 .panes
   .pane.pane-1.instructions
-    =raw solution.instructions
+    =raw iteration.solution.instructions
   .pane.pane-2.test-suite
-    -solution.test_suite.each do |filename, code|
+    -iteration.solution.test_suite.each do |filename, code|
       %h3= filename
       %pre.line-numbers
-        %code{class: "language-#{language}"}
+        %code{class: "language-ruby"}
           = code
   .pane.pane-3
     -if iteration.files.size == 1
       .solution.single-file
-        %pre.solution-code.line-numbers
-          %code{class: "language-#{language}"}
-            = iteration.files.first.file_contents.force_encoding('utf-8')
-    -else
+        %pre.solution-code
+          %code{class: "language-ruby"}
+            = iteration.files.first.file_contents
+    -elsif iteration
       -iteration.files.each do |file|
         .solution.multi-file
           %h3= file.filename
-          %pre.solution-code.line-numbers
-            %code{class: "language-#{language}"}
-              = file.file_contents.force_encoding('utf-8')
+          %pre.solution-code
+            %code{class: "language-ruby"}
+              = file.file_contents

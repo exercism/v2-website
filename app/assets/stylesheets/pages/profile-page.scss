@@ -134,6 +134,9 @@
         }
         .filters {
             margin-bottom:10px;
+            .selectize-input {
+                width:180px;
+            }
         }
         .solutions {
             .pure-u-1-2 {
@@ -218,6 +221,7 @@
                         .count {
                             display:inline-block;
                             @include font-size(12, 12);
+                            width:16px;
                             font-weight:$regular;
                             color:#888;
                         }

@@ -4,7 +4,7 @@
       -if user_signed_in? && current_user == @profile.user
         =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
           %i.fa.fa-cogs
-          Edit Public Profile 
+          Edit Public Profile
       %h1 #{@profile.display_name}'s Profile
       .h1-subtitle This is a showcase of some of the solutions that #{@profile.user.name} has submitted on Exercism.
 
@@ -69,8 +69,7 @@
         .filters
           .widget-filter
             .title Language:
-            / TODO
-            =select_tag :language, options_for_select({"Ruby": 0, "Javascript": 1, "Go": 2}, value: @language), id: nil
+            =select_tag :language, options_for_select(@tracks.map{|l|[l.title, l.id]}, value: @track), id: nil
         .solutions.pure-g
           -@solutions.each do |solution|
             -exercise = solution.exercise
@@ -81,17 +80,16 @@
                 .title-bar
                   .title= exercise.title
                   .track #{exercise.track.title} Track
-                / TOOD - Implement these buttons!
                 .reactions
                   .reaction
                     %i.fa.fa-fw.fa-thumbs-up
-                    .count 10
+                    .count= @reaction_counts[[solution.id, "like"]].to_i
                   .reaction.highlight
                     %i.fa.fa-fw.fa-heart
-                    .count 18
+                    .count= @reaction_counts[[solution.id, "love"]].to_i
                   .reaction
                     =image_tag "genius.png"
-                    .count 10
+                    .count= @reaction_counts[[solution.id, "genius"]].to_i
                   .reaction
                     %i.fa.fa-fw.fa-comment
-                    .count 12
+                    .count= @comment_counts[solution.id].to_i
