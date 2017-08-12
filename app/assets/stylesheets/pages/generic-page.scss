@@ -34,8 +34,13 @@
         }
     }
     p {
-        @include font-size(16, 21);
+        @include font-size(16, 23);
         margin-bottom:15px;
+        a {
+            color:#333;
+            text-decoration:none;
+            border-bottom:1px solid #aaa;
+        }
     }
     #widget-code-person {
         margin-left:30px;
