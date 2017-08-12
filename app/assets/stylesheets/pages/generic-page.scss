@@ -33,13 +33,22 @@
             margin-top:0px;
         }
     }
-    p {
+    p+ul {
+        margin-top:-10px;
+    }
+    p,ul {
         @include font-size(16, 23);
         margin-bottom:15px;
+        strong {
+            font-weight:$regular;
+        }
         a {
             color:#333;
             text-decoration:none;
             border-bottom:1px solid #aaa;
+        }
+        li {
+            margin-bottom:2px;
         }
     }
     #widget-code-person {

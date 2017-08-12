@@ -5,6 +5,7 @@ class PagesController < ApplicationController
     "Terms and Conditions": :terms,
     "Privacy Policy": :privacy,
     "Frequently Asked Questions": :faqs,
+    "Exercism's Values": :values,
     "How Exercism Works": :about,
     "Become a Mentor": :become_a_mentor,
     "Become a Maintainer": :become_a_maintainer
