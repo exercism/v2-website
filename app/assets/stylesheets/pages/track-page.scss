@@ -264,43 +264,8 @@ body.controller-my-tracks.action-show {
             max-width:1000px;
             margin: 0 auto 0 auto;
         }
-        .mentor, .maintainer {
-            border:1px solid #ddd;
-            border-radius:2px;
-            padding:15px;
+        .widget-mentor, .widget-maintainer {
             margin:10px;
-            //background:#f7fcfc;
-            img {
-                display:block;
-                width:100%;
-                padding-right:20px;
-                filter: grayscale(100%);
-                border-radius:2px;
-            }
-            h3 {
-                color:$color-2;
-                @include font-size(16, 16);
-                font-weight:$bold;
-                margin-bottom:5px;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                white-space:nowrap;
-                a {
-                    display:inline-block;
-                    margin-left:6px;
-                    padding-left:6px;
-                    border-left:1px solid #aaa;
-                    @include font-size(13, 16);
-                    color:#666;
-                    font-weight:$regular;
-                    text-decoration:underline;
-                }
-            }
-            .bio {
-                color:#555;
-                @include font-size(14, 17);
-                letter-spacing:-0.3px;
-            }
         }
     }
     .exercises-section {

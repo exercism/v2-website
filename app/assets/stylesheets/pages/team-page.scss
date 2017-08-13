@@ -1,0 +1,153 @@
+@import 'variables';
+@import 'mixins';
+
+#team-page {
+    .header {
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        background-color:$color-2;
+        padding:40px 0 20px 0;
+        margin-bottom:40px;
+        h1 {
+            @include font-size(38, 38);
+            @include header-font;
+            font-weight:600;
+            letter-spacing:-0.3px;
+            color:#fff;
+        }
+    }
+    .lhs {
+        padding-right:40px;
+    }
+    .changes {
+        margin-top:50px;
+        padding-top:20px;
+        border-top:1px solid #eee;
+    }
+
+    h2 {
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin:30px 0 5px 0;
+        &:first-child {
+            margin-top:0px;
+        }
+    }
+    p {
+        @include font-size(16, 19);
+        font-weight:$light;
+        color:#999;
+        margin-bottom:20px;
+    }
+    .core, .maintainers {
+        border-bottom:1px solid #ccc;
+        padding-bottom:30px;
+        margin-bottom:30px;
+    }
+    .widget-maintainer {
+        margin:10px;
+        img {
+            filter:none;
+        }
+    }
+    .core {
+        .pure-u-1-2 {
+            &:nth-child(odd) {
+                .core-person {
+                    padding-right:20px;
+                }
+            }
+            &:nth-child(even) {
+                .core-person {
+                    padding-left:20px;
+                }
+            }
+        }
+        .core-person {
+            display:block;
+            text-decoration:none;
+            margin-top:10px;
+            margin-bottom:30px;
+
+            img {
+                display:block;
+                width:100%;
+                padding-right:20px;
+                border-radius:2px;
+            }
+            h3 {
+                color:$color-2;
+                @include font-size(18, 18);
+                font-weight:$bold;
+                margin-bottom:5px;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                a {
+                    display:inline-block;
+                    margin-left:6px;
+                    padding-left:6px;
+                    border-left:1px solid #aaa;
+                    @include font-size(13, 16);
+                    color:#666;
+                    font-weight:$regular;
+                    text-decoration:underline;
+                }
+            }
+            .bio {
+                color:#555;
+                @include font-size(14, 17);
+                letter-spacing:-0.3px;
+            }
+        }
+
+    }
+
+    .contributors {
+        .contributor {
+            border:1px solid #ddd;
+            border-radius:2px;
+            display:block;
+            text-decoration:none;
+            color:#333;
+            margin:10px;
+            clear:both;
+
+            img {
+                display:block;
+                width:100%;
+                margin-right:20px;
+                border-radius:2px;
+                float:left;
+                width:66px;
+                height:66px;
+                border-right:1px solid #ddd;
+            }
+            h3 {
+                color:$color-2;
+                @include font-size(16, 16);
+                font-weight:$bold;
+                margin-bottom:5px;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                padding:15px 15px 0 0;
+            }
+            .num-contributions {
+                color:#555;
+                @include font-size(12, 15);
+                letter-spacing:-0.3px;
+                padding:0 15px 15px 0;
+            }
+        }
+        .pure-button {
+            margin-top:10px;
+            border:1px solid $color-2;
+            background:#fff;
+            color:$color-2;
+            width:100%;
+            padding:15px;
+            @include font-size(16, 16);
+        }
+    }
+}

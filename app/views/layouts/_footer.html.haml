@@ -2,11 +2,10 @@
   .lo-container
     .pure-g
       .pure-u-1-6
-        %h4 Company
+        %h4 About
         =link_to "Exercism", root_path
         =link_to "Our Values", values_page_path
-        =link_to "Terms", terms_page_path
-        =link_to "Privacy", privacy_page_path
+        =link_to "Our Team", team_page_path
       .pure-u-1-6
         %h4 Help
         =link_to "FAQs", faqs_page_path
@@ -17,6 +16,9 @@
         =link_to "Become a mentor", become_a_mentor_page_path
         =link_to "Become a mantainer", become_a_maintainer_page_path
       .pure-u-1-6
+        %h4 Legal Things
+        =link_to "Terms", terms_page_path
+        =link_to "Privacy", privacy_page_path
       .pure-u-1-6
         %h4 Keep in touch
         =link_to "Newsletter", "https://tinyletter.com/exercism"
@@ -34,6 +36,7 @@
     .legal
       .copyright © #{DateTime.now.year} Exercism, Inc
       .created-by
-        Created by #{link_to "Katrina Owen", "http://kytrinyx.com"},
+        Made with ❤️  by
+        #{link_to "Katrina Owen", "http://kytrinyx.com"},
         #{link_to "Thalamus", "http://thalamus.ai"}
         and #{link_to "1567 wonderful volunteers", "#"}.

@@ -1,0 +1,4 @@
+=link_to "https://github.com/#{contributor.github_username}", class: "contributor" do
+  = image_tag contributor.avatar_url
+  %h3 @#{contributor.github_username}
+  .num-contributions= pluralize contributor.num_contributions, "contribution"

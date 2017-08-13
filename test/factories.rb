@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :contributor do
+    
+  end
   factory :testimonial do
     headline "Love it"
     content "Wowowowowow!!!"

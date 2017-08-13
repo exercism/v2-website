@@ -1,0 +1,11 @@
+.widget-mentor
+  .pure-g
+    .pure-u-1-4
+      =image_tag mentor.avatar_url ? mentor.avatar_url : 'blank.png'
+    .pure-u-3-4
+      %h3
+        = mentor.handle
+        -if mentor.link_text.present? && mentor.link_url.present?
+          =link_to mentor.link_text, mentor.link_url, target: "_blank"
+      .bio= mentor.bio
+

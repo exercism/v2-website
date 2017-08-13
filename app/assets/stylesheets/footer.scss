@@ -34,8 +34,13 @@ footer {
         border-top:1px solid #eee;
         .copyright, a, .created-by {
             color:#aaa;
-            @include font-size(13, 20);
+            @include font-size(13, 15);
             display:inline-block;
+        }
+        a {
+            &:hover {
+                border-bottom:1px solid #ccc;
+            }
         }
         .copyright {
             float:right;

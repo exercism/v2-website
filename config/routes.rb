@@ -82,5 +82,7 @@ Rails.application.routes.draw do
   PagesController::PAGES.values.each do |page|
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
+  get "team" => "pages#team", as: "team_page"
+  get "contributors" => "pages#contributors", as: "contributors_page"
   root to: "pages#index"
 end
