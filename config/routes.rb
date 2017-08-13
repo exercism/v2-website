@@ -8,11 +8,7 @@ Rails.application.routes.draw do
       get "ping" => "ping#index"
 
       resource :cli_settings, only: [:show]
-      resources :tracks, only: [] do
-        member do
-          get :setup
-        end
-      end
+      resources :tracks, only: [:show]
       resources :solutions, only: [:show, :update] do
         collection do
           get :latest

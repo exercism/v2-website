@@ -1,5 +1,5 @@
 class API::TracksController < APIController
-  def setup
+  def show
     begin
       track = Track.find(params[:id])
     rescue
