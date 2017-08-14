@@ -1,4 +1,5 @@
 window.closeModal = ->
+  $('body').removeClass('with-modal')
   $('#modal-wrapper').hide()
   return false
 
@@ -21,4 +22,5 @@ window.showModal = (className, html, options = {}) ->
   $("#modal-wrapper #modal").html(html)
   $("#modal-wrapper #modal").prepend("<div id='modal-close-button'><i id='modal-close-button-icon' class='fa fa-times'></i></div>") if options['close_button']
   $("#modal-wrapper").show()
+  $('body').addClass('with-modal')
 

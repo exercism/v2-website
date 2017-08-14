@@ -1,42 +1,43 @@
-%footer
-  .lo-container
-    .pure-g
-      .pure-u-1-6
-        %h4 About
-        =link_to "Exercism", root_path
-        =link_to "Our Values", values_page_path
-        =link_to "Our Team", team_page_path
-      .pure-u-1-6
-        %h4 Help
-        =link_to "FAQs", faqs_page_path
-        =link_to "How Exercism Works", about_page_path
-        =link_to "Exercism in Bootcamps", "#"
-      .pure-u-1-6
-        %h4 Get Involved
-        =link_to "Become a mentor", become_a_mentor_page_path
-        =link_to "Become a mantainer", become_a_maintainer_page_path
-      .pure-u-1-6
-        %h4 Legal Things
-        =link_to "Terms", terms_page_path
-        =link_to "Privacy", privacy_page_path
-      .pure-u-1-6
-        %h4 Keep in touch
-        =link_to "Newsletter", "https://tinyletter.com/exercism"
-        =link_to "Discuss on Github", "https://github.com/exercism/discussions"
-        =link_to "Email us", "mailto:hello@exercism.io"
-      .pure-u-1-6
-        %h4 Follow
-        =link_to "https://twitter.com/exercism_io", class: 'icon' do
-          %i.fa.fa-twitter
-        =link_to "https://facebook.com/exercism.io", class: 'icon' do
-          %i.fa.fa-facebook-official
-        =link_to "https://github.com/exercism", class: 'icon' do
-          %i.fa.fa-github
+=cache ["layouts/footer", "1", Date.today.to_s] do
+  %footer
+    .lo-container
+      .pure-g
+        .pure-u-1-6
+          %h4 About
+          =link_to "Exercism", root_path
+          =link_to "Our Values", values_page_path
+          =link_to "Our Team", team_page_path
+        .pure-u-1-6
+          %h4 Help
+          =link_to "FAQs", faqs_page_path
+          =link_to "How Exercism Works", about_page_path
+          =link_to "Exercism in Bootcamps", "#"
+        .pure-u-1-6
+          %h4 Get Involved
+          =link_to "Become a mentor", become_a_mentor_page_path
+          =link_to "Become a mantainer", become_a_maintainer_page_path
+        .pure-u-1-6
+          %h4 Legal Things
+          =link_to "Terms", terms_page_path
+          =link_to "Privacy", privacy_page_path
+        .pure-u-1-6
+          %h4 Keep in touch
+          =link_to "Newsletter", "https://tinyletter.com/exercism"
+          =link_to "Discuss on Github", "https://github.com/exercism/discussions"
+          =link_to "Email us", "mailto:hello@exercism.io"
+        .pure-u-1-6
+          %h4 Follow
+          =link_to "https://twitter.com/exercism_io", class: 'icon' do
+            %i.fa.fa-twitter
+          =link_to "https://facebook.com/exercism.io", class: 'icon' do
+            %i.fa.fa-facebook-official
+          =link_to "https://github.com/exercism", class: 'icon' do
+            %i.fa.fa-github
 
-    .legal
-      .copyright © #{DateTime.now.year} Exercism, Inc
-      .created-by
-        Made with ❤️  by
-        #{link_to "Katrina Owen", "http://kytrinyx.com"},
-        #{link_to "Thalamus", "http://thalamus.ai"}
-        and #{link_to "1567 wonderful volunteers", "#"}.
+      .legal
+        .copyright © #{DateTime.now.year} Exercism, Inc
+        .created-by
+          Made with ❤️  by
+          #{link_to "Katrina Owen", "http://kytrinyx.com"},
+          #{link_to "Thalamus", "http://thalamus.ai"}
+          and #{link_to "#{number_with_delimiter Contributor.count} wonderful volunteers", team_page_path}.

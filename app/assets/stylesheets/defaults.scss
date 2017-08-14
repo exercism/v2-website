@@ -16,6 +16,9 @@ body {
     @include font-size(14);
     color:#333;
     min-width:1200px;
+    &.with-modal {
+        overflow:hidden;
+    }
 }
 
 button,

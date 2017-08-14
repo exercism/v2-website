@@ -1,0 +1,13 @@
+@import 'variables';
+@import 'mixins';
+
+.beta-bar {
+    background:#ffe3e3;
+    padding:10px;
+    text-align:center;
+    color:darken(#f34a56, 5%);
+    a {
+        color:#f34a56;
+        font-weight:normal;
+    }
+}

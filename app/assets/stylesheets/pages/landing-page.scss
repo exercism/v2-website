@@ -272,3 +272,34 @@ body.controller-pages.action-index {
     }
 
 }
+
+#modal.beta-announcement {
+    padding:60px 50px 50px 50px;
+    img {
+        width:50px;
+        display:block;
+        width:100px;
+        margin: 0 auto 15px auto;
+    }
+    h2 {
+        @include font-size(20, 20);
+        font-weight:$regular;
+        color:#555;
+        margin-bottom:30px;
+        text-align:center;
+    }
+    p {
+        text-align:center;
+        color:#555;
+        @include font-size(14, 20);
+        margin-bottom:10px;
+    }
+    .pure-button {
+        background:$color-1;
+        display:block;
+        width:280px;
+        padding:11px 10px;
+        text-align:center;
+        margin: 30px auto 0 auto;
+    }
+}

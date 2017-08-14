@@ -17,11 +17,13 @@
         max-width:500px;
         width:80%;
         overflow: visible;
+        overflow-y: scroll;
+        overflow-x: visible;
 
         background:#fff;
         border-radius:2px;
         box-shadow:0 0 1px 1px rgba(#000, 0.13);
-        margin: 50px auto;
+        margin: 60px auto;
     }
     #modal-close-button  {
         position:absolute;
