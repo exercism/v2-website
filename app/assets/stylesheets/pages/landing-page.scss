@@ -293,6 +293,9 @@ body.controller-pages.action-index {
         color:#555;
         @include font-size(14, 20);
         margin-bottom:10px;
+        a {
+            color:#555;
+        }
     }
     .pure-button {
         background:$color-1;

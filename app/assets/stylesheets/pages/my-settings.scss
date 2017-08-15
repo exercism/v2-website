@@ -5,34 +5,61 @@
     #nav {
         margin-bottom:30px;
     }
+    .lhs {
+        border-right:1px solid #eee;
+        padding-right:30px;
+    }
+    .rhs {
+        padding-left:30px;
+    }
     h1 {
-        @include font-size(20, 20);
-        margin-bottom:20px;
+        @include font-size(25, 25);
+        font-weight:$bold;
+        margin-bottom:30px;
+        color:#555;
     }
     h2 {
-        @include font-size(16, 16);
-        margin-bottom:20px;
+        @include font-size(18, 18);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+    }
+    p {
+        @include font-size(14, 14);
+        font-weight:$light;
+        margin-bottom:15px;
+        padding-bottom:15px;
+        display:inline-block;
+        color:#999;
+        border-bottom:1px solid #eee;
+
     }
     .field {
-        margin-bottom:10px;
+        margin-bottom:15px;
         label {
             display:block;
             color:#999;
-            margin-bottom:4px;
+            @include font-size(14, 14);
+            margin-bottom:6px;
         }
         input {
-            padding:5px 10px;
+            padding:8px 10px;
+            width:250px;
+            border:1px solid #ddd;
+            border-radius:2px;
         }
     }
-    p {
-        margin-bottom:20px;
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+        padding:8px 20px;
     }
     .track {
         margin-bottom:10px;
         position:relative;
         .title {
             display:inline-block;
-            width:100px;
+            width:180px;
         }
         input[type='checkbox'] {
             display:inline-block;
@@ -57,7 +84,7 @@
             margin-right:15px;
             i.fa.fa-toggle-on {
                 display:none;
-                color: $color-1;
+                color: $color-2;
             }
             i.fa.fa-toggle-off { 
                 display:block;
@@ -67,6 +94,10 @@
         input[type='text'] {
             visibility: hidden;
             width:220px;
+            padding:8px 10px;
+            width:250px;
+            border:1px solid #ddd;
+            border-radius:2px;
         }
     }
 }

@@ -7,10 +7,12 @@
 
   .lo-container
     = notice_and_alert(current_user)
+    %h1 Account Settings
     .pure-g
-      .pure-u-1-2
-        %h1 Account Settings
+      .pure-u-1-3.lhs
         %h2 Change your password
+        %p You can change your password at any point.
+
         -if current_user.provider?
           You are using Github to authenticate
         -else
@@ -27,9 +29,9 @@
               =f.label :password_confirmation, "Confirm your current password"
               =f.text_field :password_confirmation
 
-            =button_tag "Update Settings", class: 'pure-button'
+            =button_tag "Update Password", class: 'pure-button'
 
-      .pure-u-1-2
+      .pure-u-2-3.rhs
         %h2 Privacy
         %p You can choose to be anonymous on each track.
         =form_tag [:update_user_tracks, :my, :settings], method: :patch do |f|
@@ -42,7 +44,7 @@
                 %i.fa.fa-toggle-off
               =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, placeholder: "Choose an alias for this track", required: user_track.anonymous?
 
-          =button_tag "Update Settings", class: 'pure-button'
+          =button_tag "Update Privacy Settings", class: 'pure-button'
 
 -content_for :js do
   :javascript
