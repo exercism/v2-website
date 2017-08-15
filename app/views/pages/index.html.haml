@@ -105,6 +105,7 @@
 -content_for :js do
   :javascript
     setupLandingPage()
+
 -unless session[:beta_modal_shown]
   - session[:beta_modal_shown] = true
   -content_for :js do
