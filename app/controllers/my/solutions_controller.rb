@@ -39,7 +39,7 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    #CompletesSolution.complete!(@solution)
+    CompletesSolution.complete!(@solution)
     @exercise = @solution.exercise
     @track = @exercise.track
     @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
@@ -63,16 +63,21 @@ class My::SolutionsController < MyController
     end
     @track = @solution.exercise.track
 
-    # TODO - if this is a side exercise, it won't unlock a core.
-    @next_core_exercise = current_user.solutions.not_completed.
-                          joins(:exercise).
-                          where("exercises.track_id": @track.id).
-                          where("exercises.core": true).
-                          first.exercise
+    if @solution.exercise.core?
+      @next_core_exercise = current_user.solutions.not_completed.
+                            joins(:exercise).
+                            where("exercises.track_id": @track.id).
+                            where("exercises.core": true).
+                            first.try(&:exercise)
+    end
 
     @unlocked_side_exercises = @solution.exercise.unlocks
 
-    render_modal("solution-unlocked", "unlocked")
+    if @next_core_exercise || @unlocked_side_exercises.present?
+      render_modal("solution-unlocked", "unlocked")
+    else
+      js_redirect_to(@track)
+    end
   end
 
   private

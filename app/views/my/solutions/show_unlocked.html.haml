@@ -1,5 +1,4 @@
 #my-solution-unlocked-page
-  =link_to "CREATE A FAKE ITERATION", tmp_create_iteration_path(solution_id: @solution), method: :post
   =render "nav_and_header"
   .lo-container
     .pure-g
@@ -7,6 +6,7 @@
         .instructions
           %h2 Introduction
           .rendered= raw @solution.exercise.description
+          =link_to "Create fake iteration (BETA ONLY) ", tmp_create_iteration_path(solution_id: @solution), method: :post, class: "pure-button"
 
       .pure-u-10-24.rhs
         .newbie

@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     render js: %Q{ showModal('#{class_name}', "#{html}") }
   end
 
+  def js_redirect_to(*objs)
+    render js: %Q{ window.location = "#{url_for(objs)}"}
+  end
+
   def current_user_has_notifications?
     user_signed_in? && current_user.notifications.unread.exists?
   end
