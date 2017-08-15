@@ -404,6 +404,13 @@ body.namespace-my.controller-tracks.action-show {
 
         .filters {
             margin-bottom:20px;
+            .widget-filter {
+                &.status {
+                    .selectize-control {
+                        width:120px;
+                    }
+                }
+            }
         }
     }
     .deprecated-exercises,
