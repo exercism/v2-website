@@ -2,7 +2,7 @@
   .header
     .lo-container
       %h1 Mentor Dashboard
-      .h1-subtitle Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+      .h1-subtitle You can keep track on what needs responding to here.
 
   .lo-container
     .pure-g
@@ -13,13 +13,21 @@
             =select_tag :filter, options_for_select({"Require Your Action": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
 
         %h2 Solutions you're mentoring
-        .your-solutions
-          = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
+        -if @your_solutions.present?
+          .your-solutions
+            = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
+        -else
+          .no-solutions
+            You currently have no solutions that need mentoring.
 
         %h2 Next solutions to mentor
-        -@suggested_solutions.each do |solution|
-          -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
-          =render "solution", solution: solution, user_track: user_track
+        -if @suggested_solutions.present?
+          -@suggested_solutions.each do |solution|
+            -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
+            =render "solution", solution: solution, user_track: user_track
+        -else
+          .no-solutions
+            There are currently no solutions that need claiming.
 
       .pure-u-1-3
         .contributions-section

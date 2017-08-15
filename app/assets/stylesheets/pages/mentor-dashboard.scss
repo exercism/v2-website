@@ -30,6 +30,11 @@
     form+h2 {
         padding-top:15px;
     }
+    .no-solutions {
+        color:#999;
+        @include font-size(14, 14);
+        margin-bottom:40px;
+    }
     .your-solutions {
         clear:both;
         margin-bottom:40px;

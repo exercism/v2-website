@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 #notifications-page {
+    min-height: 380px;
     .header {
         background-color:$color-2;
         padding:35px 0 20px 0;
@@ -91,4 +92,9 @@
             border-radius:2px 2px 0 0;
         }
     }
+    .no-notifications {
+        color:#999;
+        @include font-size(16, 16);
+    }
+
 }
