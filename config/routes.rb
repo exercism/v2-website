@@ -63,8 +63,10 @@ Rails.application.routes.draw do
         patch :complete
         get :reflection
         patch :reflect
+        patch :publish
       end
     end
+    resource :reactions, only: [:create]
 
     resources :discussion_posts, only: [:create]
     resources :notifications, only: [:index]

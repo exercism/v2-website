@@ -32,29 +32,7 @@
     .header
       =image_tag display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), class: "avatar"
 
-      -like_count = @reaction_counts.fetch('like', 0)
-      -love_count = @reaction_counts.fetch('love', 0)
-      -genius_count = @reaction_counts.fetch('genius', 0)
-      -genius_count_largest = genius_count > love_count && genius_count > like_count
-      .reactions
-        .reaction{class: like_count > love_count && like_count > genius_count ? "highlight": ""}
-          %i.fa.fa-fw.fa-thumbs-up
-          .count= like_count
-
-        .reaction{class: love_count > like_count && love_count > genius_count ? "highlight": ""}
-          %i.fa.fa-fw.fa-heart
-          .count= love_count
-
-        .reaction{class: genius_count_largest ? "highlight": ""}
-          -if genius_count_largest
-            =image_tag "genius-turquoise.png"
-          -else
-            =image_tag "genius.png"
-          .count= genius_count
-
-        .reaction
-          %i.fa.fa-fw.fa-comment
-          .count= @comments.size
+      =render "reactions"
 
       %h1 #{display_name(@solution.user, @solution.user.user_track_for(@track))}'s solution
 
@@ -81,16 +59,16 @@
         -if user_signed_in?
           .react
             %h3 React to this solution
-            =link_to "#" do
+            =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
               .hover Well done
               %i.fa.fa-fw.fa-thumbs-up
-            =link_to "#" do
+            =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
               .hover Love it!
               %i.fa.fa-fw.fa-heart
-            =link_to "#" do
+            =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
               .hover Genius!
-              =image_tag "genius.png"
-
+              =image_tag "genius.png", class: 'not-selected'
+              =image_tag "genius-turquoise.png", class: 'selected'
 
       .pure-u-1-2.rhs
         -if @solution.reflection.present?

@@ -257,6 +257,12 @@
             img {
                 vertical-align:text-bottom;
                 height:20px;
+                &.selected { display:none; }
+            }
+            &.selected {
+                i { color: $color-2 }
+                img.selected { display:inline-block; }
+                img.not-selected { display:none }
             }
         }
     }

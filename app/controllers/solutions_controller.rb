@@ -35,5 +35,7 @@ class SolutionsController < ApplicationController
     @iteration = @solution.iterations.last
     @comments = @solution.reactions.with_comments.includes(user: :profile)
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
+
+    @user_reaction = Reaction.where(user: current_user, solution: @solution).first if user_signed_in?
   end
 end

@@ -8,8 +8,14 @@
         Community Solutions
 
       -if @solution.completed?
-        .notification.action
-          Solution completed!!
+        -if @solution.published?
+          .notification
+            Your solution has been published.
+            =link_to "View published solution", [@solution.exercise.track, @solution.exercise, @solution], method: :get
+        -else
+          .notification
+            Well done! Your solution is completed.
+            =link_to "Publish your solution", [:publish, :my, @solution], method: :patch
 
       -elsif @solution.approved?
         .notification.action

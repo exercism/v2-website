@@ -83,6 +83,11 @@ class My::SolutionsController < MyController
     end
   end
 
+  def publish
+    @solution.update(published_at: DateTime.now) if params[:publish]
+    redirect_to [@solution.exercise.track, @solution.exercise, @solution]
+  end
+
   private
   def set_solution
     @solution = current_user.solutions.find_by_uuid!(params[:id])
