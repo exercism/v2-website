@@ -1,4 +1,5 @@
 .content
   %p Hi there,
-  %p lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-  %p Have a great day.
+  %p
+    A mentor has posted a comment on your solution to #{@solution.exercise.title} on the #{@solution.exercise.track.title} track.
+    You can #{link_to "view it here", [:my, @solution]}.

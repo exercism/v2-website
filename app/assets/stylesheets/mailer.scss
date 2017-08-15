@@ -152,13 +152,14 @@ ul li {
 }
 
 .header-image {
-  height:40px;
+  height:27px;
   display:block;
+  margin-top:20px;
   margin-bottom:20px;
 }
 
 .content.header {
-    border-bottom:1px solid #eee;
+    //border-bottom:1px solid #eee;
     margin-bottom:20px;
 }
 
@@ -245,7 +246,7 @@ p, ul {
 	font-size:16px;
 	line-height:22px;
     a {
-        color:#333;
+        color:#009cab;
         font-weight:600;
     }
 
@@ -260,6 +261,7 @@ p, ul {
 	font-size:16px;
 	line-height:22px;
     margin-bottom:35px;
+    color:#aaa;
     font-weight:400;
 }
 .footer {

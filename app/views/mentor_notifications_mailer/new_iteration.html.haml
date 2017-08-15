@@ -1,0 +1,5 @@
+.content
+  %p Hi there,
+  %p
+    A student you are mentoring has posted a new iteration of their solution to #{@solution.exercise.title} on the #{@solution.exercise.track.title} track.
+    You can #{link_to "view it here", [:mentor, @solution]}.
