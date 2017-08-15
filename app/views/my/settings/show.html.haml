@@ -14,7 +14,7 @@
         %p You can change your password at any point.
 
         -if current_user.provider?
-          You are using Github to authenticate
+          You are using GitHub to authenticate
         -else
           =form_for current_user, url: [:my, :settings] do |f|
             .field
