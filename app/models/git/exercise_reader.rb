@@ -101,8 +101,8 @@ class Git::ExerciseReader
     repo.lookup(oid)
   end
 
-  def read_blob(oid)
-    repo.read_blob(oid)
+  def read_blob(oid, default_value="")
+    repo.read_blob(oid, default_value)
   end
 
   def test_pattern
