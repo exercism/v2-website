@@ -411,7 +411,7 @@ body.controller-solutions.action-show {
 }
 
 #modal.solution-confirm-unapproved-completion {
-    padding-top:20px;
+    padding-top:25px;
     .warning-bar {
         background:#ffe3e3;
         padding:10px;
@@ -551,6 +551,9 @@ body.controller-solutions.action-show {
         color:#555;
         margin-bottom:15px;
         font-weight:$regular;
+        input {
+            margin-right:5px;
+        }
     }
     .mentor-review {
         margin-bottom:10px;

@@ -39,7 +39,7 @@ class CompletesSolution
 
   def unlock_next_core_exercise
     next_exercise = solution.exercise.track.exercises.where(core: true).
-                      order('position ASC').
+                      reorder('position ASC').
                       where("position > ?", solution.exercise.position).
                       first
     if next_exercise

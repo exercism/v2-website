@@ -19,7 +19,6 @@
             =button_tag "copy", class: 'pure-button copy-button'
             %input.download-code{value: "exercism download #{@exercise.slug} --track=#{@track.slug}"}
 
-
 -content_for :js do
   :javascript
     $('button.copy-button').click(function() {

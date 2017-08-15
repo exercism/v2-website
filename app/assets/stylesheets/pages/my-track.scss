@@ -155,7 +155,7 @@ body.namespace-my.controller-tracks.action-show {
             &.locked {
                 .circle {
                     img {
-                        height:30px;
+                        height:31px;
                         display:block;
                         margin:10px auto;
                     }
@@ -173,9 +173,9 @@ body.namespace-my.controller-tracks.action-show {
                     border:2px solid $color-1;
                     background:$color-1;
                     img {
-                        height:30px;
+                        height:31px;
                         display:block;
-                        margin:11px auto;
+                        margin:10px auto;
                     }
                     &:before {
                         position:absolute;

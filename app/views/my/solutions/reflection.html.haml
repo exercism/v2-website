@@ -9,8 +9,10 @@
       %h2 Do you want to make your solution public?
       %p Learning from each other’s attempts is a crucial part of exercism. By making your solution public, other Exercism users will be able to find it and learn from your ideas.
       .checkbox
-        %i.fa.fa-check-square-o
-        Publish my solution
+        =check_box_tag :publish, 1, true
+        /%i.fa.fa-check-square-o
+        =label_tag :publish do
+          Publish my solution
 
       =text_area :reflection, '', placeholder: "Leave some notes next to your public solution to tell others what you learnt from this exercise, what you found easy and hard, and about any challenges you battled."
 

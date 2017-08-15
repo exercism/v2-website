@@ -53,6 +53,8 @@ class My::SolutionsController < MyController
 
   def reflect
     @solution.update(reflection: params[:reflection])
+    @solution.update(published_at: DateTime.now) if params[:publish]
+
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewsSolutionMentoring.review!(
         @solution,
@@ -61,6 +63,7 @@ class My::SolutionsController < MyController
         data[:feedback]
       )
     end
+
     @track = @solution.exercise.track
 
     if @solution.exercise.core?
