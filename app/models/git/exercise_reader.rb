@@ -11,7 +11,7 @@ class Git::ExerciseReader
   def readme
     readme_ptr = exercise_tree['README.md']
     return nil if readme_ptr.nil?
-    read_blob(readme_ptr[:oid]) || ""
+    read_blob(readme_ptr[:oid], "")
   rescue => e
     puts e.message
     puts e.backtrace
