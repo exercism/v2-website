@@ -1,8 +1,8 @@
 class CreateSolutionMentorships < ActiveRecord::Migration[5.1]
   def change
     create_table :solution_mentorships do |t|
-      t.bigint :user_id
-      t.bigint :solution_id
+      t.bigint :user_id, null: false
+      t.bigint :solution_id, null: false
 
       t.boolean :abandoned, null: false, default: false
       t.boolean :requires_action, null: false, default: false

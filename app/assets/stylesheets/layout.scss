@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'mixins';
+
 .lo-container {
     padding:0 50px;
     width:1200px;
@@ -5,13 +8,15 @@
 }
 
 #alert, #errors {
-    background:red;
-    color:#fff;
-    padding:10px;
+    background:$error-red-color;
+    color:$error-red-text-color;
+    padding:8px 10px;
+    text-align:center;
 }
 
 #notice {
-    background:green;
-    color:#fff;
-    padding:10px;
+    background:#f5fdfb;
+    color:$color-1;
+    padding:8px 10px;
+    text-align:center;
 }

@@ -1,7 +1,7 @@
 class CreateNotifications < ActiveRecord::Migration[5.1]
   def change
     create_table :notifications do |t|
-      t.bigint :user_id
+      t.bigint :user_id, null: false
 
       t.string :about_type, null: true
       t.bigint :about_id, null: true

@@ -6,16 +6,15 @@
         .frame
           %h1 Sign Up
 
-          =notice_and_alert
-
           =link_to user_github_omniauth_authorize_path, class: 'github-button pure-button' do
             %i.fa.fa-github
             with
             %strong Github
 
           .or or
-          .instruction Enter your log in details to access your account.
+          =notice_and_alert
 
+          .instruction Enter your log in details to access your account.
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
             = f.text_field :name, autofocus: true, placeholder: "Name", required: true
             = f.text_field :handle, autofocus: true, placeholder: "Your Handle", required: true

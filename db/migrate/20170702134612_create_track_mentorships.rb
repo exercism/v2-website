@@ -1,8 +1,8 @@
 class CreateTrackMentorships < ActiveRecord::Migration[5.1]
   def change
     create_table :track_mentorships do |t|
-      t.bigint :user_id
-      t.bigint :track_id
+      t.bigint :user_id, null: false
+      t.bigint :track_id, null: false
 
       t.string :handle, null: true
       t.string :avatar_url, null: true

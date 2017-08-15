@@ -16,6 +16,9 @@ class JoinsTrack
     first_exercise = track.exercises.core.first
     CreatesSolution.create!(user, first_exercise) if first_exercise
 
+    # BETA
+    TrackMentorship.create!(user: user, track: track)
+
     return user_track
   end
 end

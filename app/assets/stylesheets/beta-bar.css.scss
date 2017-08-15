@@ -2,10 +2,10 @@
 @import 'mixins';
 
 .beta-bar {
-    background:#ffe3e3;
+    background:$error-red-color;
     padding:10px;
     text-align:center;
-    color:darken(#f34a56, 5%);
+    color:$error-red-text-color;
     a {
         color:#f34a56;
         font-weight:normal;

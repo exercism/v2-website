@@ -26,48 +26,54 @@
     }
 
     h2 {
-        @include font-size(18, 18);
-        font-weight:$regular;
-        margin:30px 0 5px 0;
-        &:first-child {
-            margin-top:0px;
-        }
+        @include header-font;
+        font-weight:600;
+        text-align:center;
+        @include font-size(30, 30);
+        margin-bottom:10px;
     }
-    p {
-        @include font-size(16, 19);
-        font-weight:$light;
+    p.subheading {
+        text-align:center;
+        @include font-size(17, 23);
+        max-width: 800px;
         color:#999;
-        margin-bottom:20px;
+        margin: 0px auto 30px auto;
     }
     .core, .maintainers {
-        border-bottom:1px solid #ccc;
+        border-bottom:1px solid #eee;
         padding-bottom:30px;
-        margin-bottom:30px;
+        margin-bottom:60px;
     }
     .widget-maintainer {
-        margin:10px;
+        margin:0 20px 40px 20px;
         img {
             filter:none;
+        }
+        .bio {
+            color:#555;
+            @include font-size(14, 20);
+            letter-spacing:-0.3px;
         }
     }
     .core {
         .pure-u-1-2 {
             &:nth-child(odd) {
-                .core-person {
-                    padding-right:20px;
-                }
+                padding-right:20px;
             }
             &:nth-child(even) {
-                .core-person {
-                    padding-left:20px;
-                }
+                padding-left:20px;
             }
         }
         .core-person {
             display:block;
             text-decoration:none;
-            margin-top:10px;
             margin-bottom:30px;
+            border:1px solid #ddd;
+            border-radius:2px;
+            padding:15px;
+            &:hover {
+                background: #fafafa;
+            }
 
             img {
                 display:block;
@@ -83,20 +89,10 @@
                 overflow:hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
-                a {
-                    display:inline-block;
-                    margin-left:6px;
-                    padding-left:6px;
-                    border-left:1px solid #aaa;
-                    @include font-size(13, 16);
-                    color:#666;
-                    font-weight:$regular;
-                    text-decoration:underline;
-                }
             }
             .bio {
                 color:#555;
-                @include font-size(14, 17);
+                @include font-size(14, 20);
                 letter-spacing:-0.3px;
             }
         }
@@ -112,12 +108,15 @@
             color:#333;
             margin:10px;
             clear:both;
+            &:hover {
+                background:#fafafa;
+            }
 
             img {
                 display:block;
                 width:100%;
                 margin-right:20px;
-                border-radius:2px;
+                border-radius:2px 0 0 2px;
                 float:left;
                 width:66px;
                 height:66px;
@@ -125,19 +124,26 @@
             }
             h3 {
                 color:$color-2;
-                @include font-size(16, 16);
+                @include font-size(16, 18);
                 font-weight:$bold;
                 margin-bottom:5px;
                 overflow:hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
-                padding:15px 15px 0 0;
+                padding:12px 15px 0 0;
             }
             .num-contributions {
                 color:#555;
-                @include font-size(12, 15);
+                @include font-size(10, 10);
                 letter-spacing:-0.3px;
-                padding:0 15px 15px 0;
+                margin:0 15px 11px 0;
+                color:#999;
+                font-weight:$regular;
+                background:#eee;
+                border:1px solid #ddd;
+                border-radius:2px;
+                display:inline-block;
+                padding:3px 6px;
             }
         }
         .pure-button {
@@ -147,7 +153,11 @@
             color:$color-2;
             width:100%;
             padding:15px;
-            @include font-size(16, 16);
+            @include font-size(15, 15);
+            &:hover {
+                background:$color-2;
+                color:#fff;
+            }
         }
     }
 }

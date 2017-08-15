@@ -12,7 +12,6 @@ module ExerciseHelper
   end
 
   def exercise_difficulty_word(exercise)
-    p exercise.difficulty
     case exercise.difficulty
     when 1,2,3
       "easy"

@@ -94,6 +94,8 @@
             font-weight:$regular;
         }
     }
+    #alert, #errors,
+    #notice {
+        margin-bottom:15px;
+    }
 }
-
-
