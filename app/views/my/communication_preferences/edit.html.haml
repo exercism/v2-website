@@ -1,4 +1,4 @@
-#communication-preferences-pages
+#my-communication-preferences-page
   #nav.lo-nav-bar
     .lo-container
       =link_to "Settings", my_settings_path
@@ -11,8 +11,8 @@
     %h1 Update your communication preferences
 
     =form_for current_user.communication_preferences, url: [:my, :settings, :communication_preferences] do |f|
-      -if current_user.admin?
-        %h2 Admin Communications
+      /-if current_user.admin?
+      /  %h2 Admin Communications
 
       -if current_user.mentor?
         %h2 Mentor Communications
@@ -20,10 +20,9 @@
           =f.check_box :email_on_new_discussion_post_for_mentor
           %span Email when a student comments on a solution I'm mentoring
 
-
       %h2 General Communications
       =f.label :email_on_new_discussion_post do
         =f.check_box :email_on_new_discussion_post
         %span Email when a mentor comments on my solution
 
-      =f.button "Save settings"
+      =f.button "Save settings", class: 'pure-button'
