@@ -34,7 +34,14 @@ class API::SolutionsController < APIController
       begin
         solution = current_user.solutions.where(exercise_id: exercise.id).last!
       rescue
-        return render_solution_not_found
+        # If this is a side exercise that has no unlocked_by
+        # the you can unlock it. This is the only time this method
+        # is allowed to be called.
+        if !exercise.core && !exercise.unlocked_by
+          solution = CreatesSolution.create!(current_user, exercise)
+        else
+          return render_solution_not_found
+        end
       end
 
     # No track id provided
