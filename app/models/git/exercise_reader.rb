@@ -19,7 +19,7 @@ class Git::ExerciseReader
   end
 
   def tests
-    files = exercise_files.select { |f| f[:name].match(test_pattern) }
+    files = exercise_files.select { |f| f[:name].match(test_regexp) }
     test_suites = {}
     files.each do |file|
       name = file[:name]
@@ -33,7 +33,7 @@ class Git::ExerciseReader
   end
 
   def solutions
-    files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_pattern) }
+    files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_regexp) }
     solutions = {}
     files.each do |file|
       name = file[:name]
@@ -109,8 +109,12 @@ class Git::ExerciseReader
     repo.test_pattern
   end
 
-  def solution_pattern
-    repo.solution_pattern
+  def test_regexp
+    repo.test_regexp
+  end
+
+  def solution_regexp
+    repo.solution_regexp
   end
 
   def exercise_files(exclude_meta=true)

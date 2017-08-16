@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :contributor do
-    
+    github_username { SecureRandom.uuid }
+    avatar_url "asd.jpg"
+    num_contributions 20
   end
+
   factory :testimonial do
     headline "Love it"
     content "Wowowowowow!!!"

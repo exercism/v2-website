@@ -10,7 +10,7 @@ class Iteration < ApplicationRecord
     @files_to_display ||= begin
       exercise_slug = solution.exercise.slug
       track_url = solution.exercise.track.repo_url
-      exercise_reader = Git::ExercismRepo.new(track_url).exercise(exercise_slug)
+      exercise_reader = solution.exercise.track.repo.exercise(exercise_slug)
       filenames_to_ignore = exercise_reader.files
 
       fs = []

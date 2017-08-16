@@ -37,19 +37,17 @@ class Git::ExercismRepo < Git::RepoBase
 
   def test_pattern
     pattern = config[:test_pattern]
-    return /test/i if pattern.nil?
-    Regexp.new(pattern)
+    pattern.present?? pattern : "[tT]est"
   end
 
-  def ignore_pattern
+  def ignore_regexp
     pattern = config[:ignore_pattern]
-    pattern.present?? Regexp.new(pattern) : /example/i
+    pattern.present?? Regexp.new(pattern) : /[eE]xample/
   end
 
-  def solution_pattern
+  def solution_regexp
     pattern = config[:solution_pattern]
-    return /[eE]xample/ if pattern.nil?
-    Regexp.new(pattern)
+    pattern.present?? Regexp.new(pattern) : /[eE]xample/
   end
 
   private

@@ -5,9 +5,12 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @mock_exercise = stub(
       instructions: "instructions",
-      test_suite: { test_file: "test_suite" }
+      test_suite: { test_file: "test_suite" },
+      files: []
     )
+    @mock_repo = stub( exercise: @mock_exercise)
     Git::Exercise.stubs(new: @mock_exercise)
+    Git::ExercismRepo.stubs(new: @mock_repo)
   end
 
   {

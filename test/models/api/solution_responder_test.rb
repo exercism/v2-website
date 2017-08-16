@@ -3,7 +3,7 @@ require 'test_helper'
 class API::SolutionResponderTest < ActiveSupport::TestCase
   def setup
     @mock_exercise = stub(files: [])
-    @mock_repo = stub(exercise: @mock_exercise, ignore_pattern: /example/i)
+    @mock_repo = stub(exercise: @mock_exercise, ignore_regexp: /example/i)
     Git::ExercismRepo.stubs(new: @mock_repo)
   end
 
@@ -101,7 +101,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     assert_equal "https://exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
   end
 
-  test "files honours ignore_pattern" do
+  test "files honours ignore_regexp" do
     track = create :track
     exercise = create :exercise, track: track
     solution = create :solution

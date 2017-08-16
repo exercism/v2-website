@@ -4,7 +4,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   def setup
     @mock_exercise = stub(files: [])
-    @mock_repo = stub(exercise: @mock_exercise)
+    @mock_repo = stub(exercise: @mock_exercise, ignore_regexp: /somethingtoignore/)
     Git::ExercismRepo.stubs(new: @mock_repo)
   end
 
@@ -18,7 +18,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return 404 when the track doesn't exist" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     get latest_api_solutions_path(exercise_id: exercise.slug, track_id: SecureRandom.uuid), headers: @headers, as: :json
     assert_response 404
     expected = {error: {
@@ -46,7 +46,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return 200 when the track can be guessed" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     create :solution, user: @current_user, exercise: exercise
     create :user_track, user: @current_user, track: exercise.track
     get latest_api_solutions_path(exercise_id: exercise.slug), headers: @headers, as: :json
@@ -55,9 +55,9 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return array of possible tracks if multiple are possible" do
     setup_user
-    exercise1 = create :exercise
-    exercise2 = create :exercise, slug: exercise1.slug
-    exercise3 = create :exercise
+    exercise1 = create :exercise, core: true
+    exercise2 = create :exercise, slug: exercise1.slug, core: true
+    exercise3 = create :exercise, core: true
 
     create :solution, user: @current_user, exercise: exercise1
     create :solution, user: @current_user, exercise: exercise2
@@ -77,7 +77,7 @@ class API::SolutionsControllerTest < API::TestBase
   test "index should return 404 when solution is missing" do
     setup_user
     track = create :track
-    exercise = create :exercise, track: track
+    exercise = create :exercise, track: track, core: true
 
     get latest_api_solutions_path(track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
 
@@ -87,7 +87,7 @@ class API::SolutionsControllerTest < API::TestBase
   test "latest should return 200 if user is solution_user" do
     Timecop.freeze do
       setup_user
-      exercise = create :exercise
+      exercise = create :exercise, core: true
       track = exercise.track
       solution = create :solution, user: @current_user, exercise: exercise
       create :user_track, user: solution.user, track: track
@@ -102,7 +102,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return 404 if user is mentor" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     track = exercise.track
     create :track_mentorship, user: @current_user, track: track
     solution = create :solution, exercise: exercise
@@ -114,7 +114,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return 404 even if solution is published" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     track = exercise.track
     solution = create :solution, exercise: exercise, published_at: DateTime.yesterday
     create :user_track, user: solution.user, track: track
@@ -125,7 +125,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return 404 for a normal user when the solution is not published" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     track = exercise.track
     solution = create :solution, exercise: exercise
     create :user_track, user: solution.user, track: track
@@ -136,7 +136,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "latest should return solution when solution is unlocked" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     track = exercise.track
     solution = create :solution, user: @current_user, exercise: exercise
 
@@ -256,7 +256,7 @@ class API::SolutionsControllerTest < API::TestBase
 
   test "update should create iteration" do
     setup_user
-    exercise = create :exercise
+    exercise = create :exercise, core: true
     track = exercise.track
     solution = create :solution, user: @current_user, exercise: exercise
 

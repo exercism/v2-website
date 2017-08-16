@@ -57,7 +57,7 @@ class API::SolutionResponder
   def files
     fs = Set.new
     exercise_reader.files.each do |filepath|
-      fs.add(filepath) unless filepath =~ track.repo.ignore_pattern
+      fs.add(filepath) unless filepath =~ track.repo.ignore_regexp
     end
     fs += iteration.files.pluck(:filename) if iteration
     fs
