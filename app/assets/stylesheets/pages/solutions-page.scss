@@ -1,7 +1,8 @@
 @import 'variables';
 @import 'mixins';
 
-#solutions-page {
+#solutions-page,
+#my-reactions-page {
     .user-solution,
     .solution {
         border:1px solid #eee;

@@ -66,7 +66,7 @@ Rails.application.routes.draw do
         patch :publish
       end
     end
-    resource :reactions, only: [:create]
+    resources :reactions, only: [:index, :create]
 
     resources :discussion_posts, only: [:create]
     resources :notifications, only: [:index]

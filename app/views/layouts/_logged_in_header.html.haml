@@ -11,13 +11,13 @@
           %strong #{current_user.handle}
         .hr
         = link_to "Your profile", [:my, :profile]
-        = link_to "Solutions you've liked", "#"
+        = link_to "Solutions you've liked", [:my, :reactions]
         -if current_user.admin? || current_user.mentor?
           .hr
         -if current_user.admin?
-          = link_to "Admin Dashboard", admin_dashboard_path
+          = link_to "Admin Dashboard", [:admin, :dashboard]
         -if current_user.mentor?
-          = link_to "Mentor Dashboard", mentor_dashboard_path
+          = link_to "Mentor Dashboard", [:mentor, :dashboard]
         .hr
         = link_to "Settings", [:my, :settings]
         = link_to "Preferences", [:edit, :my, :settings, :communication_preferences]

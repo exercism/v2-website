@@ -24,6 +24,8 @@ class User < ApplicationRecord
   has_many :solution_mentorships
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
+  has_many :reactions
+
   validates :handle, presence: true, handle: true
 
   def self.new_with_session(params, session)
