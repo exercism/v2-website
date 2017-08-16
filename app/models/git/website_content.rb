@@ -11,32 +11,34 @@ class Git::WebsiteContent < Git::RepoBase
   end
 
   def pages
-    Pages.new(self, head_commit)
+    FolderReader.new(self, head_commit, 'pages')
   end
 
-  class Pages
-    attr_reader :repo, :head_commit
+  def walkthrough
+    FolderReader.new(self, head_commit, 'walkthrough')
+  end
 
-    def initialize(repo, head_commit)
+  class FolderReader
+    attr_reader :repo, :head_commit, :folder_name
+
+    def initialize(repo, head_commit, folder_name)
       @repo = repo
       @head_commit = head_commit
+      @folder_name = folder_name
     end
 
     def [](slug)
-      page = pages_tree[slug]
-      return nil if page.nil?
-      repo.read_blob(page[:oid])
+      file = ptr_for(slug)
+      return nil if file.nil?
+      repo.read_blob(file[:oid])
     end
 
-    def exercise_tree(slug)
-      ptr = exercises_tree[slug]
-      return nil if ptr.nil?
-      repo.lookup(ptr[:oid])
-    end
-
-    def pages_tree
-      pages_ptr = head_commit.tree['pages']
-      repo.lookup(pages_ptr[:oid])
+    def ptr_for(slug)
+      folder_ptr = head_commit.tree[folder_name]
+      return nil if folder_ptr.nil?
+      tree = repo.lookup(pages_ptr[:oid])
+      return nil if tree.nil?
+      tree[slug]
     end
   end
 end
