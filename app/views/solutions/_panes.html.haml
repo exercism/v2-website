@@ -8,13 +8,13 @@
         %code{class: "language-ruby"}
           = code
   .pane.pane-3
-    -if iteration.files.size == 1
+    -if iteration.files_to_display.size == 1
       .solution.single-file
         %pre.solution-code
           %code{class: "language-ruby"}
-            = iteration.files.first.file_contents
+            = iteration.files_to_display.first.file_contents
     -elsif iteration
-      -iteration.files.each do |file|
+      -iteration.files_to_display.each do |file|
         .solution.multi-file
           %h3= file.filename
           %pre.solution-code
