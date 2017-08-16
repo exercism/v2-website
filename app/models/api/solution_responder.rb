@@ -20,12 +20,11 @@ class API::SolutionResponder
           id: solution.exercise.slug,
           instructions_url: instructions_url,
           track: {
-            id: solution.exercise.track.slug,
-            language: solution.exercise.track.title
+            id: track.slug,
+            language: track.title
           }
         },
         file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
-        #file_download_base_url: "http://3e4f0dc8.ngrok.io/api/v1/solutions/#{solution.uuid}/files/",
         files: files,
         iteration: iteration_hash
       }
@@ -33,7 +32,7 @@ class API::SolutionResponder
   end
 
   def user_handle
-    user_track = UserTrack.where(track: solution.exercise.track, user: solution.user).first
+    user_track = UserTrack.where(track: track, user: solution.user).first
     if user_track.anonymous?
       user_track.handle
     else
@@ -45,7 +44,7 @@ class API::SolutionResponder
     if solution.user == requester
       routes.my_solution_url(solution)
     elsif solution.published?
-      routes.track_exercise_solution_url(solution.exercise.track, solution.exercise, solution)
+      routes.track_exercise_solution_url(track, solution.exercise, solution)
     else
       routes.mentor_solution_url(solution)
     end
@@ -56,7 +55,10 @@ class API::SolutionResponder
   end
 
   def files
-    fs = Set.new(exercise_reader.files)
+    fs = Set.new
+    exercise_reader.files.each do |filepath|
+      fs.add(filepath) unless filepath =~ track.repo.ignore_pattern
+    end
     fs += iteration.files.pluck(:filename) if iteration
     fs
   end
@@ -80,5 +82,9 @@ class API::SolutionResponder
     exercise_slug = solution.exercise.slug
     track_url = solution.exercise.track.repo_url
     Git::ExercismRepo.new(track_url).exercise(exercise_slug)
+  end
+
+  def track
+    @track ||= solution.exercise.track
   end
 end

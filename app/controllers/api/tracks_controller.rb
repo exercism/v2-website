@@ -6,7 +6,7 @@ class API::TracksController < APIController
       return render json: {error: "Track not found", fallback_url: tracks_url}, status: 404
     end
 
-    test_pattern = Track.first.repo.test_pattern
+    test_pattern = track.repo.test_pattern
     render json: {
       track: {
         id: track.slug,

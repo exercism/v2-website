@@ -84,7 +84,7 @@
         }
         .toggles {
             display:inline-block;
-            @include font-size(16, 16);
+            @include font-size(18, 18);
             margin-right:15px;
             i.fa.fa-toggle-on {
                 display:none;

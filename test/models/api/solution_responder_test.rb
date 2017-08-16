@@ -3,7 +3,7 @@ require 'test_helper'
 class API::SolutionResponderTest < ActiveSupport::TestCase
   def setup
     @mock_exercise = stub(files: [])
-    @mock_repo = stub(exercise: @mock_exercise)
+    @mock_repo = stub(exercise: @mock_exercise, ignore_pattern: /example/i)
     Git::ExercismRepo.stubs(new: @mock_repo)
   end
 
@@ -99,6 +99,21 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor, track: solution.exercise.track
     responder = API::SolutionResponder.new(solution, mentor)
     assert_equal "https://exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+  end
+
+  test "files honours ignore_pattern" do
+    track = create :track
+    exercise = create :exercise, track: track
+    solution = create :solution
+    file_1 = "foobar.js"
+    file_2 = "barfoo.go"
+    file_3 = "some_example.json"
+    user_track = create :user_track, user: solution.user, track: solution.exercise.track
+
+    responder = API::SolutionResponder.new(solution, solution.user)
+    @mock_exercise.expects(:files).returns([file_1, file_2, file_3])
+    expected = Set.new([file_1, file_2])
+    assert_equal expected, responder.to_hash[:solution][:files]
   end
 
   test "files includes solution files" do

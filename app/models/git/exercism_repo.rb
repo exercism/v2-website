@@ -41,6 +41,11 @@ class Git::ExercismRepo < Git::RepoBase
     Regexp.new(pattern)
   end
 
+  def ignore_pattern
+    pattern = config[:ignore_pattern]
+    pattern.present?? Regexp.new(pattern) : /example/i
+  end
+
   def solution_pattern
     pattern = config[:solution_pattern]
     return /[eE]xample/ if pattern.nil?

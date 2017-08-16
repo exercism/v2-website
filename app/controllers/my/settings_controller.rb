@@ -13,7 +13,7 @@ class My::SettingsController < MyController
       )
     end
 
-    flash.notice = "Tracks updated successfully"
+    flash.notice = "Your track settings have been updated"
     redirect_to action: :show
   end
 
