@@ -31,7 +31,7 @@ class My::SolutionsController < MyController
   end
 
   def walkthrough
-    @walkthrough_json = {}
+    @walkthrough_json = Git::WebsiteContent.head.walkthrough['walkthrough.json']
     render_modal("solution-walkthrough autoclose", "walkthrough")
   end
 

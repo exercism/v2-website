@@ -11,7 +11,7 @@ window.setupWalkthrough = (walkthrough) ->
     $content.html(step.content)
     $buttons.html("")
     for [answer, nextStepPaths, flag] in step.answers
-      $button = $("<button class='pure-button'>\#{answer}</button>")
+      $button = $("<button class='pure-button'>#{answer}</button>")
       do (nextStepPaths, flag) ->
         $button.click =>
           flags.push(flag) if flag
