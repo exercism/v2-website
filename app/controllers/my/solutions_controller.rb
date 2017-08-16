@@ -31,6 +31,7 @@ class My::SolutionsController < MyController
   end
 
   def walkthrough
+    @walkthrough_json = {}
     render_modal("solution-walkthrough autoclose", "walkthrough")
   end
 
