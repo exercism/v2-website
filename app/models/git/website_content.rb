@@ -36,7 +36,7 @@ class Git::WebsiteContent < Git::RepoBase
     def ptr_for(slug)
       folder_ptr = head_commit.tree[folder_name]
       return nil if folder_ptr.nil?
-      tree = repo.lookup(pages_ptr[:oid])
+      tree = repo.lookup(folder_ptr[:oid])
       return nil if tree.nil?
       tree[slug]
     end
