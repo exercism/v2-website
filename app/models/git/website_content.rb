@@ -1,6 +1,6 @@
 class Git::WebsiteContent < Git::RepoBase
 
-  REPO_URL="https://github.com/exercism/website_copy"
+  REPO_URL="https://github.com/exercism/website-copy"
 
   def self.head
     new(REPO_URL)
