@@ -19,7 +19,7 @@ class My::SettingsController < MyController
 
   def update
     if params[:user][:password].present?
-      if current_user.valid_password?(params[:old_password])
+      if current_user.provider? || current_user.valid_password?(params[:old_password])
         if current_user.update(
             password: params[:user][:password],
             password_confirmation: params[:user][:password_confirmation]

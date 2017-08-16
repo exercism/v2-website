@@ -5,31 +5,29 @@
       /=image_tag "nav-divider.png"
       %span Settings
 
+  = notice_and_alert(current_user)
   .lo-container
-    = notice_and_alert(current_user)
     %h1 Account Settings
     .pure-g
       .pure-u-1-3.lhs
         %h2 Change your password
         %p You can change your password at any point.
 
-        -if current_user.provider?
-          You are using GitHub to authenticate
-        -else
-          =form_for current_user, url: [:my, :settings] do |f|
+        =form_for current_user, url: [:my, :settings] do |f|
+          -unless current_user.provider?
             .field
               =label_tag :old_password, "Enter your current password"
-              =text_field_tag :old_password
+              =password_field :old_password
 
-            .field
-              =f.label :password, "Enter your new password"
-              =f.text_field :password
+          .field
+            =f.label :password, "Enter your new password"
+            =f.password_field :password
 
-            .field
-              =f.label :password_confirmation, "Confirm your current password"
-              =f.text_field :password_confirmation
+          .field
+            =f.label :password_confirmation, "Confirm your current password"
+            =f.password_field :password_confirmation
 
-            =button_tag "Update Password", class: 'pure-button'
+          =button_tag "Update Password", class: 'pure-button'
 
       .pure-u-2-3.rhs
         %h2 Privacy
@@ -37,7 +35,7 @@
         =form_tag [:update_user_tracks, :my, :settings], method: :patch do |f|
           -@user_tracks.each do |user_track|
             .track
-              .title=user_track.track.title
+              .title #{user_track.track.title} Track
               =check_box_tag "user_tracks[#{user_track.id}][anonymous]", 1, user_track.anonymous?, class: 'anonymous-toggle'
               .toggles
                 %i.fa.fa-toggle-on

@@ -5,6 +5,10 @@
     #nav {
         margin-bottom:30px;
     }
+    #notice, #alert, #errors {
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
     .lhs {
         border-right:1px solid #eee;
         padding-right:30px;
@@ -59,7 +63,7 @@
         position:relative;
         .title {
             display:inline-block;
-            width:180px;
+            width:210px;
         }
         input[type='checkbox'] {
             display:inline-block;
