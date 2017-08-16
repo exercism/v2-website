@@ -1,11 +1,12 @@
 # Exercism Website
 
-
 ## Development Setup
 
-The discussed data model is [here](https://www.lucidchart.com/documents/edit/e07385eb-0214-4359-9755-14b6c4d5ecb4).
+This is a Ruby on Rails (5.1) application backed by MySQL.
 
 ### Database
+
+Something like this will get a working database setup.
 
 ```
 mysql -e "CREATE USER 'exercism_reboot'@'localhost' IDENTIFIED BY 'exercism_reboot'" -u root -p
@@ -15,3 +16,12 @@ mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_development.* TO 'exercism_reb
 mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'localhost'" -u root -p
 ```
 
+### Running the application
+
+Something like this will get a working webserver on http://localhost:3000.
+
+```
+bundle install
+bundle exec rake db:migrate db:seed
+bundle exec rails s
+```
