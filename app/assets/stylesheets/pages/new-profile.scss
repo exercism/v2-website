@@ -62,6 +62,16 @@
         width:100%;
         margin-top:10px;
         padding:12px;
+        &.start {
+            width:70%;
+            margin-right:3%;
+        }
+        &.cancel {
+            width:25%;
+            border:1px solid $color-1;
+            color:$color-1;
+            background:#fff;
+        }
     }
     .page-1 {
         p {
