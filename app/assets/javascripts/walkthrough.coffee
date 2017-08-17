@@ -32,8 +32,8 @@ window.setupWalkthrough = (walkthrough, authToken, exerciseCommand) ->
       $buttons.append($button)
 
   parseContent = (content) =>
-    content.replace("{authToken}", authToken)
-    content.replace("{exerciseCommand}", exerciseCommand)
+    content.replace("{authToken}", authToken).
+            replace("{exerciseCommand}", exerciseCommand)
 
   executeStep("start")
 
