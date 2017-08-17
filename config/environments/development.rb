@@ -53,4 +53,4 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
 
-Rails.application.routes.default_url_options = { :host => "https://exercism.io" }
+Rails.application.routes.default_url_options = { :host => "https://v2.exercism.io" }
