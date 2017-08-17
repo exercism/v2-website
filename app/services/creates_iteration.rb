@@ -27,9 +27,14 @@ class CreatesIteration
       )
     end
 
-    solution.mentorships.update_all(requires_action: true)
     solution.update(last_updated_by_user_at: DateTime.now)
-    notify_mentors
+
+    if solution.exercise.auto_approve?
+      solution.update(approved_by: solution.user)
+    else
+      solution.mentorships.update_all(requires_action: true)
+      notify_mentors
+    end
     iteration
   end
 

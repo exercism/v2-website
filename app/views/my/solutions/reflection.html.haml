@@ -18,23 +18,26 @@
 
     .pure-u-1-2.modal-rhs
       %h2 Rate your mentors
-      %p
-        Help us improve our mentoring by rating your mentors.
-        Your mentors
-        %strong will not
-        see your rating.
+      -if @solution.mentors.size == 0
+        %p You had no mentors for this solution.
+      -else
+        %p
+          Help us improve our mentoring by rating your mentors.
+          Your mentors
+          %strong will not
+          see your rating.
 
-      -@solution.mentors.each do |mentor|
-        .mentor-review
-          = image_tag mentor.avatar_url, class: "avatar"
-          .details
-            .name= mentor.name
-            .interactions= pluralize @mentor_interations[mentor.id], "interaction"
-          .stars
-            -[5,4,3,2,1].each do |i|
-              =radio_button_tag "mentor_reviews[#{mentor.id}][rating]", i
-              =label_tag "mentor_reviews_#{mentor.id}_rating_#{i}", ""
+        -@solution.mentors.each do |mentor|
+          .mentor-review
+            = image_tag mentor.avatar_url, class: "avatar"
+            .details
+              .name= mentor.name
+              .interactions= pluralize @mentor_interations[mentor.id], "interaction"
+            .stars
+              -[5,4,3,2,1].each do |i|
+                =radio_button_tag "mentor_reviews[#{mentor.id}][rating]", i
+                =label_tag "mentor_reviews_#{mentor.id}_rating_#{i}", ""
 
-          /=text_field_tag "mentor_reviews[#{mentor.id}][feedback]"
+            /=text_field_tag "mentor_reviews[#{mentor.id}][feedback]"
 
   =button_tag "Save and continue", class: 'pure-button'

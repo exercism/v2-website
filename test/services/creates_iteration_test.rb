@@ -70,5 +70,14 @@ class CreatesIterationTest < ActiveSupport::TestCase
     CreatesIteration.create!(solution, [])
   end
 
+  test "auto approve when auto_approve is set" do
+    exercise = create :exercise, auto_approve: true
+    solution = create :solution, exercise: exercise
+
+    CreatesIteration.create!(solution, [])
+
+    solution.reload
+    assert solution.user, solution.approved_by
+  end
 
 end

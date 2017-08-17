@@ -13,6 +13,7 @@ class CreateExercises < ActiveRecord::Migration[5.1]
       t.string :title, null: false
       t.boolean :core, null: false, default: false
       t.boolean :active, null: false, default: true
+      t.boolean :auto_approve, null: false, default: false
       t.text :blurb, null: true
       t.text :description, null: true
 

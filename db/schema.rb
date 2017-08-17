@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170813141158) do
     t.boolean "is_core", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["is_maintainer", "is_core", "num_contributions"], name: "main_find_idx"
   end
 
   create_table "discussion_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170813141158) do
     t.string "title", null: false
     t.boolean "core", default: false, null: false
     t.boolean "active", default: true, null: false
+    t.boolean "auto_approve", default: false, null: false
     t.text "blurb"
     t.text "description"
     t.integer "difficulty", default: 1, null: false
@@ -136,7 +138,7 @@ ActiveRecord::Schema.define(version: 20170813141158) do
   end
 
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.string "about_type"
     t.bigint "about_id"
     t.string "trigger_type"
@@ -175,8 +177,8 @@ ActiveRecord::Schema.define(version: 20170813141158) do
   end
 
   create_table "solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_id"
-    t.bigint "solution_id"
+    t.bigint "user_id", null: false
+    t.bigint "solution_id", null: false
     t.boolean "abandoned", default: false, null: false
     t.boolean "requires_action", default: false, null: false
     t.integer "rating"
@@ -227,8 +229,8 @@ ActiveRecord::Schema.define(version: 20170813141158) do
   end
 
   create_table "track_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "user_id"
-    t.bigint "track_id"
+    t.bigint "user_id", null: false
+    t.bigint "track_id", null: false
     t.string "handle"
     t.string "avatar_url"
     t.string "link_text"

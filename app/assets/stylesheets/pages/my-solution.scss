@@ -209,10 +209,11 @@ body.controller-solutions.action-show {
             border-radius:2px;
             padding:20px 40px 20px 20px;
             .title {
-                @include font-size(14, 14);
+                @include font-size(16, 16);
                 font-weight:$regular;
                 color:$color-1;
-                margin-bottom:10px;
+                letter-spacing: -0.5px;
+                margin-bottom:13px;
             }
             p {
                 @include font-size(13, 19);
@@ -225,6 +226,9 @@ body.controller-solutions.action-show {
                     color:#333;
                     font-weight:$light;
                 }
+            }
+            .pure-button {
+                margin-left:20px;
             }
         }
         .pane.markdown,
