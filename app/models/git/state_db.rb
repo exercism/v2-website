@@ -65,6 +65,13 @@ class Git::StateDb
     ff = failures_to_retry.sort_by { |s| s[:last_sync] || DateTime.new(0) }.reverse
     ss = to_sync.sort_by { |s| s[:last_sync] || DateTime.new(0) }.reverse
     ss + ff
+  rescue LMDB::Error::NOTFOUND => e
+    puts e.message
+    []
+  end
+
+  def delete_id(track_id)
+    primary_db.delete(key_for_id(track_id))
   end
 
   private
@@ -91,7 +98,11 @@ class Git::StateDb
   end
 
   def key_for(track)
-    "track-#{track.id}"
+    key_for_id(track.id)
+  end
+
+  def key_for_id(track_id)
+    "track-#{track_id}"
   end
 
 end

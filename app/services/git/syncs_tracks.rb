@@ -16,6 +16,7 @@ class Git::SyncsTracks
     loop do
       puts "Syncing outstanding tracks"
       sync_outstanding
+      # ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
       puts "Sleeping"
       sleep QUIET_PERIOD
     end
@@ -47,6 +48,8 @@ class Git::SyncsTracks
     return nil if next_job.nil?
     puts next_job
     Track.find(next_job[:track_id])
+  rescue ActiveRecord::RecordNotFound => e
+    state_db.delete_id(next_job[:track_id])
   end
 
 end
