@@ -7,6 +7,8 @@ class Iteration < ApplicationRecord
   enum mentor_status: [:pending, :reply, :refactor, :approved]
 
   def files_to_display
+    return files
+
     @files_to_display ||= begin
       exercise_slug = solution.exercise.slug
       track_url = solution.exercise.track.repo_url
