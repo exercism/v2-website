@@ -48,7 +48,7 @@ class User < ApplicationRecord
 
   def avatar_url
     img = super
-    img.present?? img : "blank.png"
+    img.present?? img : "anonymous.png"
   end
 
   def may_view_solution?(solution)

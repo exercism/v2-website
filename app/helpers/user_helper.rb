@@ -25,6 +25,6 @@ module UserHelper
       else
         user.avatar_url
       end
-    avatar_url.present?? avatar_url : "blank.png"
+    avatar_url.present?? avatar_url : "anonymous.png"
   end
 end
