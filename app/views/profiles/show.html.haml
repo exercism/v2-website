@@ -35,7 +35,7 @@
               %i.fa.fa-fw.fa-handshake-o
               Helped
               .count #{@helped_count}
-              students
+              = "student".pluralize(@helped_count)
           .hr
           %h3 Elsewhere on the web
 
