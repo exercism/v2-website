@@ -65,6 +65,7 @@ class Git::SeedsTracks
         puts e.message
       end
     end
+    ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
   end
 
 end

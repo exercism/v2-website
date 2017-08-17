@@ -16,7 +16,7 @@ class Git::SyncsTracks
     loop do
       puts "Syncing outstanding tracks"
       sync_outstanding
-      # ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
+      ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
       puts "Sleeping"
       sleep QUIET_PERIOD
     end
