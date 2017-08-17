@@ -13,7 +13,7 @@
     %li you'll no longer get mentor feedback on this exercise
     %li you won't unlock #{@solution.exercise.title}'s side quests
     %li you'll not recieve a laptop sticker once you've finished the Track
-    %li you will be able to reactive the exercise in the future
+    %li you will be able to reactivate the exercise in the future
 
   =form_tag [:complete, :my, @solution], method: :patch, remote: true do
     =check_box_tag :agree, 1, false, required: true
