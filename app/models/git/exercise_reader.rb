@@ -29,7 +29,7 @@ class Git::ExerciseReader
   rescue => e
     puts e.message
     puts e.backtrace
-    nil
+    []
   end
 
   def solutions

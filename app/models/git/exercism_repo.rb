@@ -40,6 +40,10 @@ class Git::ExercismRepo < Git::RepoBase
     pattern.present?? pattern : "[tT]est"
   end
 
+  def test_regexp
+    Regexp.new(test_pattern)
+  end
+
   def ignore_regexp
     pattern = config[:ignore_pattern]
     pattern.present?? Regexp.new(pattern) : /[eE]xample/
