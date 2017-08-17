@@ -385,15 +385,19 @@ body.controller-solutions.action-show {
                 }
             }
             &.approved {
-                background:#fff;
-                border:1px solid $color-3;
-                color:$color-3;
+                background:$color-1;
+                color:#fff;
             }
         }
         .comment-button {
             background:$color-1;
             color:#fff;
             float:right;
+            &.faded {
+                background:#fff;
+                border:1px solid #aaa;
+                color:#666;
+            }
         }
         .solution pre,
         .post-html pre,

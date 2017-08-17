@@ -22,8 +22,7 @@
               =link_to "", notification.link, class: 'image', style: "background-image:url(#{notification_image(notification)})"
               =link_to notification.link, class: 'info' do
                 .content
-                  = notification.content
-                  /= notification.content
+                  = raw notification.content
                 .when #{time_ago_in_words(notification.created_at)} ago
               =link_to "", "#", class: 'mark-as-read-button'
 

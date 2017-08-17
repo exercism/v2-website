@@ -70,6 +70,9 @@
             .content {
                 @include font-size(14, 19);
                 margin-bottom:5px;
+                strong {
+                    font-weight:400;
+                }
             }
             .when {
                 @include font-size(11, 11);

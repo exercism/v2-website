@@ -51,4 +51,8 @@ class RetrieveSolutionsForMentor
     user.mentored_solutions.
       where("solution_mentorships.abandoned": true)
   end
+
+  def retrieve_unsubscribed
+    Solution.where("1=0")
+  end
 end

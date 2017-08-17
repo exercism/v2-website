@@ -1,1 +1,6 @@
-$('.your-solutions').html("#{j render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks}")
+-if @your_solutions.size > 0
+  $('.your-solutions').show().html("#{j render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks}")
+  $('.no-solutions.personal').hide()
+-else
+  $('.your-solutions').hide()
+  $('.no-solutions.personal').show().html("You have no solutions in this category.")

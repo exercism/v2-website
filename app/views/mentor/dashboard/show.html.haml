@@ -10,15 +10,13 @@
         =form_tag mentor_dashboard_path, method: :get, remote: true do
           .widget-filter
             .title Status:
-            =select_tag :filter, options_for_select({"Require Your Action": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
+            =select_tag :filter, options_for_select({"Requires action from you": :require_action, "Waiting for Them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :unsubscribed}, @filter)
 
         %h2 Solutions you're mentoring
-        -if @your_solutions.present?
-          .your-solutions
-            = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
-        -else
-          .no-solutions
-            You currently have no solutions that need mentoring.
+        .your-solutions{style: @your_solutions.present?? "display:block" : "display:none"}
+          = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
+        .no-solutions.personal{style: @your_solutions.empty?? "display:block" : "display:none"}
+          You currently have no solutions that need mentoring.
 
         %h2 Next solutions to mentor
         -if @suggested_solutions.present?
@@ -26,7 +24,7 @@
             -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
             =render "solution", solution: solution, user_track: user_track
         -else
-          .no-solutions
+          .no-solutions.general
             There are currently no solutions that need claiming.
 
       .pure-u-1-3

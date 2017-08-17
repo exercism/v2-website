@@ -24,7 +24,7 @@
           =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
       -elsif @iteration.notifications.unread.size > 0
         .notification
-          New comment
+          A mentor has left you a new comment
       -else
         .notification
           %i.fa.fa-clock-o
@@ -76,10 +76,12 @@
                 .pane.pane-2.preview
                   .preview-area
 
-            -unless @solution.approved?
+            -if @solution.approved?
+              =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+            -else
               =link_to "Complete Exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
 
-            =button_tag "Comment", class: 'comment-button pure-button'
+            =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"
 
 -content_for :js do
   :javascript
