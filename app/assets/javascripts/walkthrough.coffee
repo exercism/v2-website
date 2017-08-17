@@ -1,4 +1,4 @@
-window.setupWalkthrough = (walkthrough, authToken) ->
+window.setupWalkthrough = (walkthrough, authToken, exerciseCommand) ->
   $header = $('#modal.solution-walkthrough .header')
   $content = $('#modal.solution-walkthrough .content')
   $buttons = $('#modal.solution-walkthrough .buttons')
@@ -33,6 +33,7 @@ window.setupWalkthrough = (walkthrough, authToken) ->
 
   parseContent = (content) =>
     content.replace("{authToken}", authToken)
+    content.replace("{exerciseCommand}", exerciseCommand)
 
   executeStep("start")
 

@@ -11,10 +11,23 @@
     .content {
         @include font-size(14, 21);
         margin-bottom:15px;
+        a {
+            color:#333;
+        }
+        p {
+            @include font-size(14, 21);
+            margin-bottom:10px;
+        }
+        * {
+            &:last-child {
+                margin-bottom:0;
+            }
+        }
         pre {
             border: 1px solid #ddd;
             padding: 10px;
             background:#fafafa;
+            @include font-size(12);
         }
     }
     button {

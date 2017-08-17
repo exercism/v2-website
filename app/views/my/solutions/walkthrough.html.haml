@@ -4,4 +4,4 @@
 .buttons
 
 :javascript
-  setupWalkthrough(#{raw @walkthrough_json}, "#{current_user.auth_token}")
+  setupWalkthrough(#{raw @walkthrough_json}, "#{current_user.auth_token}", "#{@solution.exercise.download_command}")

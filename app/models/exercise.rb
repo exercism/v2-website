@@ -20,6 +20,11 @@ class Exercise < ApplicationRecord
   scope :core, -> { where(core: true) }
   scope :side, -> { where(core: false) }
 
+  # BETA
+  def download_command
+    "nextercism download #{slug} --track=#{track.slug}"
+  end
+
   def side?
     !core
   end

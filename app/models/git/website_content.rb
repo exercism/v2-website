@@ -1,6 +1,10 @@
 class Git::WebsiteContent < Git::RepoBase
 
-  REPO_URL="https://github.com/exercism/website-copy"
+  if Rails.env.development?
+    REPO_URL="file://#{Rails.root}/../website-copy"
+  else
+    REPO_URL="https://github.com/exercism/website-copy"
+  end
 
   def self.head
     new(REPO_URL)

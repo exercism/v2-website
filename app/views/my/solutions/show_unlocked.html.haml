@@ -15,4 +15,4 @@
           =link_to "Begin Walk-Through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button'
         .experienced
           %h3 Been here before?
-          =render "widgets/code_snippet", code: "nextercism download #{@exercise.slug} --track=#{@track.slug}"
+          =render "widgets/code_snippet", code: @exercise.download_command
