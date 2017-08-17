@@ -47,12 +47,21 @@ class API::SolutionsController < APIController
     # No track id provided
     else
       solutions = current_user.solutions.joins(:exercise).where("exercises.slug": params[:exercise_id]).includes(exercise: :track)
-      if solutions.size == 0
-        return render_404(:exercise_not_found)
+      if solutions.size == 1
+        solution = solutions.first
+
       elsif solutions.size > 1
         return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)
+
       else
-        solution = solutions.first
+        exercises = Exercise.side.where(unlocked_by: nil).where(track_id: current_user.tracks).where(slug: params[:exercise_id]).includes(:track)
+        if exercises.size == 1
+          solution = CreatesSolution.create!(current_user, exercises.first)
+        elsif exercises.size == 0
+          return render_404(:exercise_not_found)
+        elsif exercises.size > 1
+          return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)
+        end
       end
     end
 
