@@ -21,7 +21,7 @@
           -unless current_user.provider?
             .field
               =label_tag :old_password, "Enter your current password"
-              =password_field :old_password
+              =password_field_tag :old_password
 
           .field
             =f.label :password, "Enter your new password"
@@ -35,7 +35,7 @@
 
       .pure-u-2-3.rhs
         %h2 Privacy
-        %p You can choose to be anonymous on each track.
+        %p You can choose to be anonymous on each track. <br/>(At the moment your avatar will be blanked out, but soon you will be able to add a custom avatar).
         =form_tag [:update_user_tracks, :my, :settings], method: :patch do |f|
           -@user_tracks.each do |user_track|
             .track

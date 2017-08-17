@@ -12,5 +12,6 @@ class Mentor::DiscussionPostsController < MentorController
     end
 
     @post = CreatesMentorDiscussionPost.create!(@iteration, current_user, params[:discussion_post][:content])
+    @user_track = UserTrack.where(user: current_user, track: @iteration.solution.exercise.track).first
   end
 end

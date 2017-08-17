@@ -1,9 +1,12 @@
+-avatar_url = post.user == solution.user ?  display_avatar_url(post.user, user_track) : post.user.avatar_url
+-user_name = post.user == solution.user ? display_name(post.user, user_track) : post.user.name
+
 .post{id: "discussion-post-#{post.id}"}
-  =image_tag (post.user.avatar_url ? post.user.avatar_url : "blank.png"), class: 'avatar'
+  =image_tag avatar_url, class: 'avatar'
   .post-body
     .post-header
       .created-at #{time_ago_in_words(post.created_at)} ago
-      .user-name= post.user.name
+      .user-name= user_name
       .user-status
         -if post.user == solution.user
           Student

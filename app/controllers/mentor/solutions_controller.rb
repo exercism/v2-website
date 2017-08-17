@@ -15,6 +15,9 @@ class Mentor::SolutionsController < MentorController
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
     @solution_user_track = UserTrack.where(user: @solution.user, track: @track)
 
+    @user_tracks = UserTrack.where(track: @track, user_id: @iteration.discussion_posts.map(&:user_id)).
+                             each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
+
     if current_user == @iteration.solution.user
       return redirect_to [:my, @solution]
     end

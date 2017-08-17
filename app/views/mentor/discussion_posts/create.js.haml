@@ -1,4 +1,4 @@
-$('.discussion .posts').show().append("#{j render("post", post: @post, solution: @iteration.solution)}")
+$('.discussion .posts').show().append("#{j render("post", post: @post, solution: @iteration.solution, user_track: @user_track)}")
 $('.new-discussion-post-form textarea').val("")
 $('.CodeMirror')[0].CodeMirror.setValue("")
 $('.CodeMirror')[0].CodeMirror.clearHistory()

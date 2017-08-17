@@ -35,7 +35,9 @@
           %h3 Mentor Discussion
           -if @iteration.discussion_posts.size > 0
             .posts
-              =render partial: "mentor/discussion_posts/post", collection: @iteration.discussion_posts, locals: {solution: @solution}
+              -@iteration.discussion_posts.each do |post|
+                -user_track = @user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
+                =render "mentor/discussion_posts/post", post: post, solution: @solution, user_track: user_track
           -else
             .posts{style: "display:none"}
 
