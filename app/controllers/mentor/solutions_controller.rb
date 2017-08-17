@@ -4,7 +4,7 @@ class Mentor::SolutionsController < MentorController
     @exercise = @solution.exercise
     @track = @exercise.track
 
-    #return redirect_to [:mentor, :dashboard] unless current_user.mentoring_track?(@track)
+    return redirect_to [:mentor, :dashboard] unless current_user.mentoring_track?(@track)
 
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
@@ -14,5 +14,9 @@ class Mentor::SolutionsController < MentorController
     @comments = @solution.reactions.with_comments.includes(user: :profile)
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
     @solution_user_track = UserTrack.where(user: @solution.user, track: @track)
+
+    if current_user == @iteration.solution.user
+      return redirect_to [:my, @solution]
+    end
   end
 end

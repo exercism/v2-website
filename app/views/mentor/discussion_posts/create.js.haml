@@ -1,2 +1,9 @@
 $('.discussion .posts').show().append("#{j render("post", post: @post, solution: @iteration.solution)}")
+$('.new-discussion-post-form textarea').val("")
+$('.CodeMirror')[0].CodeMirror.setValue("")
+$('.CodeMirror')[0].CodeMirror.clearHistory()
+
+-if @approved
+  $('.approved.pure-button').hide()
+
 window.location.href = "#discussion-post-#{@post.id}"

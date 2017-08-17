@@ -296,6 +296,12 @@ body.controller-solutions {
             margin-top:10px;
             border-radius:2px;
             padding:8px 25px;
+            &.approved {
+                color:$color-1;
+                background:#fff;
+                border:1px solid $color-1;
+                margin-right:5px;
+            }
         }
         .solution pre,
         .post-html pre,

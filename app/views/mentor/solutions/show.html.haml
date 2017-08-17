@@ -53,6 +53,8 @@
                   .preview-area
 
             =button_tag "Comment", class: 'pure-button'
+            -unless @solution.approved?
+              =button_tag "Mark as approved and comment", class: 'approved pure-button', value: "approved"
 
     -#
       .solution-footer

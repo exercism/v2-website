@@ -19,6 +19,9 @@ class SelectsSuggestedSolutionsForMentor
       # Not things you already mentor
       where.not(id: user.mentored_solutions).
 
+      # Not your own solutions
+      where.not(user_id: user.id).
+
       # Where the person has posted at least one iteration
       where("EXISTS(SELECT NULL FROM iterations WHERE solution_id = solutions.id)").
 
