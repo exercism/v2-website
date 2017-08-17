@@ -12,7 +12,7 @@
         %td
         %td.container{bgcolor:"#ffffff"}
           .content.header
-            =image_tag "mailers/logo.png", class: 'header-image', alt: ''
+            =image_tag image_url("mailers/logo.png"), class: 'header-image', alt: ''
             .hr
 
           = yield
@@ -20,7 +20,7 @@
           .content
             .hr
             .signoff The Exercism Team
-            =image_tag "mailers/footer-bar.png", class: 'footer-image', alt: ''
+            =image_tag image_url("mailers/footer-bar.png"), class: 'footer-image', alt: ''
             .footer
               This email sent by Exercism, Inc
             .footer
