@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'mixins';
+
+.widget-code-snippet {
+    border:1px solid #e5e5e5;
+    position:relative;
+    padding:8px 10px;
+    background:#fafafa;
+    button {
+        position:absolute;
+        right:-1px;
+        top:-1px;
+        bottom:-1px;
+        background:$color-1;
+        border-radius:2px 2px 0 0;
+        @include font-size(12, 12);
+        font-weight:$regular;
+        padding:0 10px;
+    }
+    input {
+        background:transparent;
+        display:block;
+        border:none;
+        border-radius:2px;
+        margin:0;
+        color:#999;
+        white-space:normal;
+        padding:0;
+        font-family:monospace;
+        @include font-size(12, 12);
+        outline:none;
+        width:280px;
+    }
+}
+

@@ -5,4 +5,4 @@
 .buttons
 
 :javascript
-  setupWalkthrough(#{raw @walkthrough_json})
+  setupWalkthrough(#{raw @walkthrough_json}, "#{current_user.auth_token}")

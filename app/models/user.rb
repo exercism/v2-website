@@ -42,6 +42,10 @@ class User < ApplicationRecord
     create_communication_preferences
   end
 
+  def auth_token
+    @auth_token ||= auth_tokens.first.token
+  end
+
   def avatar_url
     img = super
     img.present?? img : "blank.png"

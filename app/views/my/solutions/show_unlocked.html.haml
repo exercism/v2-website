@@ -15,13 +15,4 @@
           =link_to "Begin Walk-Through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button'
         .experienced
           %h3 Been here before?
-          .code-frame
-            =button_tag "copy", class: 'pure-button copy-button'
-            %input.download-code{value: "exercism download #{@exercise.slug} --track=#{@track.slug}"}
-
--content_for :js do
-  :javascript
-    $('button.copy-button').click(function() {
-      $('input.download-code').select();
-      document.execCommand('copy');
-    })
+          =render "widgets/code_snippet", code: "exercism download #{@exercise.slug} --track=#{@track.slug}"

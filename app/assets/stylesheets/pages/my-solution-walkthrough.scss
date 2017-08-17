@@ -11,6 +11,11 @@
     .content {
         @include font-size(14, 21);
         margin-bottom:15px;
+        pre {
+            border: 1px solid #ddd;
+            padding: 10px;
+            background:#fafafa;
+        }
     }
     button {
         background:$color-1;

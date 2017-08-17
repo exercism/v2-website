@@ -1,4 +1,4 @@
-window.setupWalkthrough = (walkthrough) ->
+window.setupWalkthrough = (walkthrough, authToken) ->
   $header = $('#modal.solution-walkthrough .header')
   $content = $('#modal.solution-walkthrough .content')
   $buttons = $('#modal.solution-walkthrough .buttons')
@@ -6,9 +6,11 @@ window.setupWalkthrough = (walkthrough) ->
   flags = []
 
   executeStep = (stepCode) =>
+    return closeModal() if stepCode == "close"
+
     step = walkthrough[stepCode]
     $header.html(step.header)
-    $content.html(step.content)
+    $content.html(parseContent(step.content))
     $buttons.html("")
     for [answer, nextStepPaths, flag] in step.answers
       $button = $("<button class='pure-button'>#{answer}</button>")
@@ -23,13 +25,14 @@ window.setupWalkthrough = (walkthrough) ->
                 executeStep(nextStepPath)
                 break
               else
-                console.log(flags)
-                console.log(nextStepPath)
                 if flags.indexOf(nextStepPath[0]) != -1
                   executeStep(nextStepPath[1])
                   break
 
       $buttons.append($button)
+
+  parseContent = (content) =>
+    content.replace("{authToken}", authToken)
 
   executeStep("start")
 

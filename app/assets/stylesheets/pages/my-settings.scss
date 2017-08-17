@@ -28,15 +28,24 @@
         margin-bottom:10px;
         color:#555;
     }
-    p {
+    p,
+    .token-explanation {
         @include font-size(14, 14);
         font-weight:$light;
+        color:#999;
+    }
+    .token-explanation {
+        margin-bottom:10px;
+    }
+    p {
+        display:inline-block;
         margin-bottom:15px;
         padding-bottom:15px;
-        display:inline-block;
-        color:#999;
         border-bottom:1px solid #eee;
 
+    }
+    .widget-code-snippet {
+        margin-bottom:30px;
     }
     .field {
         margin-bottom:15px;
