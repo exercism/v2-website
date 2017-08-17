@@ -28,6 +28,9 @@
             padding: 10px;
             background:#fafafa;
             @include font-size(12);
+            code {
+                white-space: pre-wrap;
+            }
         }
     }
     button {

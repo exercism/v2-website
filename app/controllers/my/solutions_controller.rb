@@ -32,7 +32,7 @@ class My::SolutionsController < MyController
 
   def walkthrough
     @walkthrough_json = Git::WebsiteContent.head.walkthrough['walkthrough.json']
-    render_modal("solution-walkthrough autoclose", "walkthrough")
+    render_modal("solution-walkthrough", "walkthrough")
   end
 
   def confirm_unapproved_completion
