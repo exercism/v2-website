@@ -10,6 +10,8 @@
       .user-status
         -if post.user == solution.user
           Student
+          -if user_track && user_track.anonymous?
+            (Anonymous Mode)
         -else
           Mentor
 
