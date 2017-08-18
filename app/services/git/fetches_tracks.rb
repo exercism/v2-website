@@ -1,21 +1,15 @@
 class Git::FetchesTracks
 
-  QUIET_PERIOD = 30.seconds
-  ERROR_BACKOFF_PERIOD = 10.seconds
-
   def self.run
     new.run
   end
 
   def run
-    loop do
-      Git::ProblemSpecifications.head.fetch!
-      Git::WebsiteContent.head.fetch!
-      Track.find_each do |track|
-        fetch(track)
-        sleep 1.second
-      end
-      sleep QUIET_PERIOD
+    Git::ProblemSpecifications.head.fetch!
+    Git::WebsiteContent.head.fetch!
+    Track.find_each do |track|
+      fetch(track)
+      sleep 1.second
     end
   end
 

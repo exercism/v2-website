@@ -1,7 +1,5 @@
 class Git::SyncsTracks
 
-  QUIET_PERIOD = 10.seconds
-
   def self.sync
     new(Git::StateDb.instance).sync
   end
@@ -13,13 +11,9 @@ class Git::SyncsTracks
   end
 
   def sync
-    loop do
-      puts "Syncing outstanding tracks"
-      sync_outstanding
-      ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
-      puts "Sleeping"
-      sleep QUIET_PERIOD
-    end
+    puts "Syncing outstanding tracks"
+    sync_outstanding
+    ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
   end
 
   private
