@@ -80,4 +80,43 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert solution.user, solution.approved_by
   end
 
+  test "works for not-duplicate files" do
+    filename1 = "foobar"
+    filename2 = "barfoo"
+    file_contents1 = "foobar123"
+    file_contents2 = "barfoo123"
+    solution = create :solution
+    iteration = create :iteration, solution: solution
+    create :iteration_file, iteration: iteration, filename: filename1, file_contents: file_contents1
+    create :iteration_file, iteration: iteration, filename: filename2, file_contents: file_contents2
+
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename1}\"\r\nContent-Type: application/octet-stream\r\n"
+    file1 = mock(content_type: "text/plain", read: file_contents1, headers: headers)
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename2}\"\r\nContent-Type: application/octet-stream\r\n"
+    file2 = mock(content_type: "text/plain", read: (file_contents2 + "456"), headers: headers)
+
+    iteration = CreatesIteration.create!(solution, [file1, file2])
+    assert iteration.persisted?
+    assert_equal 2, iteration.files.count
+  end
+
+  test "raises for duplicate files" do
+    filename1 = "foobar"
+    filename2 = "barfoo"
+    file_contents1 = "foobar123"
+    file_contents2 = "barfoo123"
+    solution = create :solution
+    iteration = create :iteration, solution: solution
+    create :iteration_file, iteration: iteration, filename: filename1, file_contents: file_contents1
+    create :iteration_file, iteration: iteration, filename: filename2, file_contents: file_contents2
+
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename1}\"\r\nContent-Type: application/octet-stream\r\n"
+    file1 = mock(content_type: "text/plain", read: file_contents1, headers: headers)
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename2}\"\r\nContent-Type: application/octet-stream\r\n"
+    file2 = mock(content_type: "text/plain", read: file_contents2, headers: headers)
+
+    assert_raises do
+      CreatesIteration.create!(solution, [file1, file2])
+    end
+  end
 end

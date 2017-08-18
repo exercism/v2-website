@@ -1,3 +1,6 @@
+class DuplicateIterationError < RuntimeError
+end
+
 class CreatesIteration
   def self.create!(*args)
     new(*args).create!
@@ -10,20 +13,14 @@ class CreatesIteration
   end
 
   def create!
-    @iteration = Iteration.create!( solution: solution )
-    files.each do |file|
-      filename = file.headers.split("\r\n").
-                      detect{|s|s.start_with?("Content-Disposition: ")}.
-                      split(";").
-                      map(&:strip).
-                      detect{|s|s.start_with?('filename=')}.
-                      split("=").last.
-                      gsub('"', '').gsub(/^\//, '')
+    check_not_duplicate!
 
+    @iteration = Iteration.create!( solution: solution )
+    parsed_files.each do |file|
       iteration.files.create!(
-        filename: filename,
-        content_type: file.content_type,
-        file_contents: file.read
+        filename: file[:filename],
+        content_type: file[:content_type],
+        file_contents: file[:file_contents]
       )
     end
 
@@ -58,6 +55,38 @@ class CreatesIteration
         iteration
       )
     end
+  end
+
+  def parsed_files
+    @parsed_files ||= begin
+      files.map do |file|
+        filename = file.headers.split("\r\n").
+                        detect{|s|s.start_with?("Content-Disposition: ")}.
+                        split(";").
+                        map(&:strip).
+                        detect{|s|s.start_with?('filename=')}.
+                        split("=").last.
+                        gsub('"', '').gsub(/^\//, '')
+
+        file_contents = file.read
+        {
+          filename: filename,
+          content_type: file.content_type,
+          file_contents: file_contents,
+          file_contents_digest: IterationFile.generate_digest(file_contents)
+        }
+      end
+    end
+  end
+
+  private
+  def check_not_duplicate!
+    last_iteration = solution.iterations.last
+    return unless last_iteration
+
+    prev_files = last_iteration.files.map {|f| "#{f.filename}|#{f.file_contents_digest}" }.sort
+    new_files = parsed_files.map {|f| "#{f[:filename]}|#{f[:file_contents_digest]}" }.sort
+    raise DuplicateIterationError.new if prev_files == new_files
   end
 
   def routes

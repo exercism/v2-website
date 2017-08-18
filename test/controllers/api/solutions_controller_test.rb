@@ -275,4 +275,22 @@ class API::SolutionsControllerTest < API::TestBase
 
     assert_response :success
   end
+
+  test "update should catch duplicate iteration" do
+    setup_user
+    exercise = create :exercise, core: true
+    track = exercise.track
+    solution = create :solution, user: @current_user, exercise: exercise
+
+    CreatesIteration.expects(:create!).raises(DuplicateIterationError)
+
+    file = File.open(__FILE__)
+    patch api_solution_path(solution),
+          params: { files: [ file, file ] },
+          headers: @headers,
+          as: :json
+
+    assert_response 400
+    assert_equal 'duplicate_iteration', JSON.parse(response.body, symbolize_names: true)[:error][:type]
+  end
 end

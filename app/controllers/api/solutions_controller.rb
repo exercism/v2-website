@@ -87,7 +87,11 @@ class API::SolutionsController < APIController
       end
     end
 
-    iteration = CreatesIteration.create!(solution, params[:files])
+    begin
+      CreatesIteration.create!(solution, params[:files])
+    rescue DuplicateIterationError
+      return render_error(400, :duplicate_iteration, "No files have changed since your last attempt")
+    end
 
     render json: {}, status: 201
   end

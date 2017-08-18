@@ -28,7 +28,7 @@
         .preview-area
 
   -if @solution.approved?
-    =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
   -else
     =link_to "Complete Exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
 
