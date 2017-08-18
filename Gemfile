@@ -29,6 +29,7 @@ gem 'sidekiq'
 gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
+gem "bugsnag"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

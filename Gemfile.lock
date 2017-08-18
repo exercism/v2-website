@@ -45,6 +45,7 @@ GEM
     arel (8.0.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bugsnag (5.3.3)
     builder (3.2.3)
     byebug (9.0.6)
     capistrano (3.8.2)
@@ -303,6 +304,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bugsnag
   byebug
   capistrano (~> 3.6)
   capistrano-rails (~> 1.1)
