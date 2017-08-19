@@ -33,7 +33,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     CreatesNotification.expects(:create!).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_discussion_post_for_mentor, args[1]
-      assert_equal "<strong>#{user.name}</strong> has posted a comment on a solution you are mentoring", args[2]
+      assert_equal "<strong>#{user.handle}</strong> has posted a comment on a solution you are mentoring", args[2]
       assert_equal "https://v2.exercism.io/mentor/solutions/#{solution.uuid}", args[3]
       assert_equal solution, args[4][:about]
     end

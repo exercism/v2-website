@@ -34,7 +34,7 @@
 
       =render "reactions"
 
-      %h1 #{display_name(@solution.user, @solution.user.user_track_for(@track))}'s solution
+      %h1 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s solution
 
       %h2
         to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
@@ -73,7 +73,7 @@
       .pure-u-1-2.rhs
         -if @solution.reflection.present?
           .reflection
-            %h3 #{display_name(@solution.user, @solution.user.user_track_for(@track))}'s Reflection
+            %h3 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s Reflection
             =simple_format @solution.reflection
         -else
           .no-reflection

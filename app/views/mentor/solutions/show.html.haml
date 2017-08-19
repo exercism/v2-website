@@ -3,7 +3,7 @@
     .lo-container
       =link_to "Mentor Dashboard", [:mentor, :dashboard]
       =image_tag "nav-divider.png"
-      %span #{display_name(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
+      %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
@@ -13,7 +13,7 @@
         %h2
           Solution to
           %strong #{@exercise.title}
-        .byline by #{display_name_link(@solution.user, @solution_user_track)}
+        .byline by #{display_handle_link(@solution.user, @solution_user_track)}
 
   .lo-container
     .pure-g.panels

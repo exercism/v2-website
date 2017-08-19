@@ -30,7 +30,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
       CreatesNotification.create!(
         mentor,
         :new_discussion_post_for_mentor,
-        "#{strong solution.user.name} has posted a comment on a solution you are mentoring",
+        "#{strong solution.user.handle} has posted a comment on a solution you are mentoring",
         routes.mentor_solution_url(solution),
         trigger: discussion_post,
 

@@ -1,5 +1,5 @@
 module UserHelper
-  def display_name(user, user_track = nil)
+  def display_handle(user, user_track = nil)
     if user_track && user_track.anonymous?
       user_track.handle
     else
@@ -7,7 +7,7 @@ module UserHelper
     end
   end
 
-  def display_name_link(user, user_track = nil)
+  def display_handle_link(user, user_track = nil)
     if user_track && user_track.anonymous?
       user_track.handle
     else

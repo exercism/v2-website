@@ -31,7 +31,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     CreatesNotification.create!(
       solution.user,
       :new_discussion_post,
-      "#{strong user.name} has commented on your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",
+      "#{strong user.handle} has commented on your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",
       routes.my_solution_url(solution),
       trigger: discussion_post,
 

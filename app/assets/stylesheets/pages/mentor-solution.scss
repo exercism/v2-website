@@ -176,7 +176,7 @@ body.controller-solutions {
             .post-header {
                 overflow:hidden;
                 margin-bottom:5px;
-                .user-name {
+                .user-handle {
                     display:inline-block;
                     color:#333;
                     font-weight:$regular;
@@ -436,7 +436,7 @@ body.controller-solutions {
             width:130px;
             margin-right:5px;
             vertical-align:middle;
-            .name {
+            .handle {
                 @include font-size(14, 12);
                 color:#333;
                 margin-bottom:5px;

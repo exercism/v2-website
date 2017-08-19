@@ -12,4 +12,3 @@ class TmpController < ApplicationController
     redirect_to [:my, @solution]
   end
 end
-

@@ -31,7 +31,7 @@
           .mentor-review
             = image_tag mentor.avatar_url, class: "avatar"
             .details
-              .name= mentor.name
+              .handle= mentor.handle
               .interactions= pluralize @mentor_interations[mentor.id], "interaction"
             .stars
               -[5,4,3,2,1].each do |i|
