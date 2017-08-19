@@ -70,4 +70,16 @@ class UserTest < ActiveSupport::TestCase
     create :track_mentorship, track: solution.exercise.track, user: user
     assert user.may_view_solution?(solution)
   end
+
+  test "handle is valid" do
+    user = build :user
+
+    assert ((user.handle = "foo") and user.valid?)
+    assert ((user.handle = "123foo321") and user.valid?)
+    assert ((user.handle = "1-23foo32-1") and user.valid?)
+
+    refute ((user.handle = "") and user.valid?)
+    refute ((user.handle = "-23foo32-1") and user.valid?)
+    refute ((user.handle = "1-23foo32-") and user.valid?)
+  end
 end
