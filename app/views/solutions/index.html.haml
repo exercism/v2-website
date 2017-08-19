@@ -43,7 +43,7 @@
       -if @user_solution
         .pure-u-1-3
           -if @user_solution.published?
-            =render "solution", solution: @user_solution, user_track: @current_user_track
+            =render "solution", solution: @user_solution, track: @track, exercise: @exercise, user_track: @current_user_track
           -else
             =link_to [:my, @user_solution], class: 'user-solution' do
               .person
