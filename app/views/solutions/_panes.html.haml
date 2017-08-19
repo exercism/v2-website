@@ -12,11 +12,11 @@
       .solution.single-file
         %pre.solution-code
           %code{class: "language-ruby"}
-            = iteration.files.first.file_contents
+            = iteration.files.first.file_contents.force_encoding('utf-8')
     -elsif iteration
       -iteration.files.each do |file|
         .solution.multi-file
           %h3= file.filename
           %pre.solution-code
             %code{class: "language-ruby"}
-              = file.file_contents
+              = file.file_contents.force_encoding('utf-8')
