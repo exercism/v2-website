@@ -79,7 +79,7 @@ class UserTest < ActiveSupport::TestCase
     assert ((user.handle = "1-23foo32-1") and user.valid?)
 
     refute ((user.handle = "") and user.valid?)
-    refute ((user.handle = "-23foo32-1") and user.valid?)
-    refute ((user.handle = "1-23foo32-") and user.valid?)
+    refute ((user.handle = "_23foo32") and user.valid?)
+    refute ((user.handle = "foo'bar") and user.valid?)
   end
 end
