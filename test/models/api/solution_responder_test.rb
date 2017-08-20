@@ -22,6 +22,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
         exercise: {
           id: solution.exercise.slug,
           instructions_url: "https://v2.exercism.io/my/solutions/#{solution.uuid}",
+          auto_approve: solution.exercise.auto_approve,
           track: {
             id: solution.exercise.track.slug,
             language: solution.exercise.track.title
@@ -130,5 +131,13 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     @mock_exercise.expects(:files).returns([exercise_filepath_1, exercise_filepath_2])
     expected = Set.new([exercise_filepath_1, exercise_filepath_2, file1.filename, file2.filename])
     assert_equal expected, responder.to_hash[:solution][:files]
+  end
+
+  test "honours auto_approve true" do
+    exercise = create :exercise, auto_approve: true
+    solution = create :solution, exercise: exercise
+    user_track = create :user_track, user: solution.user, track: solution.exercise.track
+    responder = API::SolutionResponder.new(solution, solution.user)
+    assert responder.to_hash[:solution][:exercise][:auto_approve]
   end
 end
