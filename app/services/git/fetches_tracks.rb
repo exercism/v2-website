@@ -26,7 +26,6 @@ class Git::FetchesTracks
   rescue => e
     puts e.message
     puts e.backtrace
-    sleep ERROR_BACKOFF_PERIOD
   end
 
 end
