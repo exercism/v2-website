@@ -9,11 +9,13 @@ class Webhooks::TrackUpdatesControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
-  test "create should enqueue UpdateTracksJob when pushed to master" do
+  test "create should enqueue UpdateTrackJob when pushed to master" do
     webhook = load_json("test/fixtures/github/push_event.json")
     webhook["ref"] = "refs/heads/master"
+    webhook["repository"]["name"] = "ruby"
+    track = create(:track, slug: "ruby")
 
-    assert_enqueued_with(job: UpdateTracksJob) do
+    assert_enqueued_with(job: UpdateTrackJob, args: [track]) do
       post webhooks_track_updates_path, params: webhook
     end
   end
