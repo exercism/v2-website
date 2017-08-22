@@ -47,7 +47,9 @@ class Git::FetchesTracks
       Rails.logger.info "Skipping fetch for #{repo_url}"
     else
       Rails.logger.info "Fetching #{repo_url}"
-      head_commit = Git::ExercismRepo.new(repo_url, auto_fetch: true).head
+      repo = Git::ExercismRepo.new(repo_url)
+      repo.fetch!
+      head_commit = repo.head
       Rails.logger.info "Done #{repo_url}. Current HEAD commit is #{head_commit}"
     end
   rescue => e
