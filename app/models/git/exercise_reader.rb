@@ -122,8 +122,10 @@ class Git::ExerciseReader
       exercise_files = []
       exercise_tree.walk(:preorder) do |r, t|
         path = "#{r}#{t[:name]}"
+        next if exclude_meta && path.start_with?(".meta")
+        next if t[:type] == :tree
         t[:full] = path
-        exercise_files.push(t) unless exclude_meta && path.start_with?(".meta")
+        exercise_files.push(t)
       end
       exercise_files
     end
