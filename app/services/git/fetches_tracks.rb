@@ -9,8 +9,8 @@ class Git::FetchesTracks
 
   def run
     loop do
-      Git::ProblemSpecifications.head.fetch!
-      Git::WebsiteContent.head.fetch!
+      fetch_problem_specs
+      fetch_website_content
       Track.find_each do |track|
         fetch(track)
         sleep 1.second
@@ -21,17 +21,39 @@ class Git::FetchesTracks
 
   private
 
+  def fetch_problem_specs
+    Rails.logger.info "Fetching problem specs"
+    Git::ProblemSpecifications.head.fetch!
+  rescue => e
+    Rails.logger.error "Exception while problem specs"
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace
+    sleep ERROR_BACKOFF_PERIOD
+  end
+
+  def fetch_website_content
+    Rails.logger.info "Fetching website content"
+    Git::WebsiteContent.head.fetch!
+  rescue => e
+    Rails.logger.error "Exception while website content"
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace
+    sleep ERROR_BACKOFF_PERIOD
+  end
+
   def fetch(track)
     repo_url = track.repo_url
     if repo_url.start_with?("http://example.com")
-      puts "Skipping fetch for #{repo_url}"
+      Rails.logger.info "Skipping fetch for #{repo_url}"
     else
-      puts "Fetching #{repo_url}"
-      Git::ExercismRepo.new(repo_url, auto_fetch: true)
+      Rails.logger.info "Fetching #{repo_url}"
+      head_commit = Git::ExercismRepo.new(repo_url, auto_fetch: true).head
+      Rails.logger.info "Done #{repo_url}. Current HEAD commit is #{head_commit}"
     end
   rescue => e
-    puts e.message
-    puts e.backtrace
+    Rails.logger.error "Exception while fetching track"
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace
     sleep ERROR_BACKOFF_PERIOD
   end
 
