@@ -126,4 +126,8 @@ FactoryGirl.define do
     user { create :user }
     track { create :track }
   end
+
+  factory :track_update do
+    track { create :track }
+  end
 end

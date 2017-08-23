@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819200230) do
+ActiveRecord::Schema.define(version: 20170823065541) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -243,6 +243,14 @@ ActiveRecord::Schema.define(version: 20170819200230) do
     t.index ["user_id"], name: "fk_rails_283ecc719a"
   end
 
+  create_table "track_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "track_id", null: false
+    t.timestamp "synced_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "index_track_updates_on_track_id"
+  end
+
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "slug", null: false
     t.string "title", null: false
@@ -320,6 +328,7 @@ ActiveRecord::Schema.define(version: 20170819200230) do
   add_foreign_key "testimonials", "tracks"
   add_foreign_key "track_mentorships", "tracks"
   add_foreign_key "track_mentorships", "users"
+  add_foreign_key "track_updates", "tracks"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end
