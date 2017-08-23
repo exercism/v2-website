@@ -17,6 +17,7 @@ class Git::SyncsTracks
       puts "Syncing all tracks"
       Track.find_each do |track|
         sync_one(track)
+        sleep 10.seconds
       end
       sleep QUIET_PERIOD
     end
