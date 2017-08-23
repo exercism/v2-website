@@ -1,6 +1,6 @@
 class Git::SyncsTracks
 
-  QUIET_PERIOD = 10.seconds
+  QUIET_PERIOD = 5.minutes
 
   def self.sync
     new(Git::StateDb.instance).sync
@@ -14,26 +14,27 @@ class Git::SyncsTracks
 
   def sync
     loop do
-      puts "Syncing outstanding tracks"
-      sync_outstanding
-      ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
-      puts "Sleeping"
+      puts "Syncing all tracks"
+      Track.find_each do |track|
+        sync_one(track)
+      end
       sleep QUIET_PERIOD
     end
   end
 
   private
 
-  def sync_outstanding
-    loop do
-      track = next_to_sync
-      puts "Next track to sync: #{track.to_s}"
-      break if track.nil?
-      sync_one(track)
-    end
-  end
+  # def sync_outstanding
+  #   loop do
+  #     track = next_to_sync
+  #     puts "Next track to sync: #{track.to_s}"
+  #     break if track.nil?
+  #     sync_one(track)
+  #   end
+  # end
 
   def sync_one(track)
+    return nil unless track
     puts "Sync track #{track.id}"
     begin
       Git::SyncsTrack.sync!(track)
@@ -43,13 +44,13 @@ class Git::SyncsTracks
     end
   end
 
-  def next_to_sync
-    next_job = state_db.stale_tracks_before.first
-    return nil if next_job.nil?
-    puts next_job
-    Track.find(next_job[:track_id])
-  rescue ActiveRecord::RecordNotFound => e
-    state_db.delete_id(next_job[:track_id])
-  end
+  # def next_to_sync
+  #   next_job = state_db.stale_tracks_before.first
+  #   return nil if next_job.nil?
+  #   puts next_job
+  #   Track.find(next_job[:track_id])
+  # rescue ActiveRecord::RecordNotFound => e
+  #   state_db.delete_id(next_job[:track_id])
+  # end
 
 end
