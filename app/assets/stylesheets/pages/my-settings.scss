@@ -30,7 +30,7 @@
     }
     p,
     .token-explanation {
-        @include font-size(14, 14);
+        @include font-size(14, 18);
         font-weight:$light;
         color:#999;
     }
@@ -67,17 +67,54 @@
         color:#fff;
         padding:8px 20px;
     }
+    .tracks {
+        margin-bottom:15px;
+        th {
+            text-align:left;
+            padding:10px;
+            font-weight:400;
+            border-bottom:1px solid #eee;
+        }
+    }
     .track {
         margin-bottom:10px;
         position:relative;
-        .title {
-            display:inline-block;
-            width:210px;
+        width:auto;
+
+        td {
+            padding:10px;
+        }
+
+        .anonymous { 
+            text-align:center;
+        }
+        .default,
+        .anon {
+            vertical-align:middle;
+            img {
+                display:inline-block;
+                height:35px;
+                border-radius:2px;
+                margin-right:5px;
+                vertical-align:bottom;
+            }
+            .handle {
+                display:inline-block;
+                padding:8px 5px;
+                font-weight:400;
+                color:#666;
+            }
+            input[type='text'] {
+                padding:8px 10px;
+                width:210px;
+                border:1px solid #ddd;
+                border-radius:2px;
+            }
         }
         input[type='checkbox'] {
             display:inline-block;
             position:absolute;
-            width:20px;
+            width:25px;
             height:40px;
             cursor:pointer;
             opacity:0;
@@ -86,14 +123,11 @@
                     i.fa.fa-toggle-on { display:block; }
                     i.fa.fa-toggle-off { display:none; }
                 }
-                &+.toggles+input {
-                    visibility:visible;
-                }
             }
         }
         .toggles {
             display:inline-block;
-            @include font-size(18, 18);
+            @include font-size(20, 20);
             margin-right:15px;
             i.fa.fa-toggle-on {
                 display:none;
@@ -104,13 +138,6 @@
                 color: #aaa;
             }
         }
-        input[type='text'] {
-            visibility: hidden;
-            width:220px;
-            padding:8px 10px;
-            width:250px;
-            border:1px solid #ddd;
-            border-radius:2px;
-        }
+
     }
 }

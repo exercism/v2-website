@@ -28,6 +28,12 @@ class SelectsSuggestedSolutionsForMentor
       # Where there < 3 mentors
       where("num_mentors < 3").
 
+      # Not approved
+      where(approved_by: nil).
+
+      # Not completed
+      where(completed_at: nil).
+
       # Order by number of mentors (least first), 
       # then age (oldest first)
       order("num_mentors ASC, last_updated_by_user_at ASC").

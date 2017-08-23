@@ -11,8 +11,9 @@
       .inner
         =render "solutions/iteration_nav", url_parts: [:mentor, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
         %h2
-          Solution to
           %strong #{@exercise.title}
+          on the
+          %strong #{@exercise.track.title} Track
         .byline by #{display_handle_link(@solution.user, @solution_user_track)}
 
   .lo-container

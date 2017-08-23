@@ -678,11 +678,31 @@ body.controller-solutions.action-show {
         }
 
         .title {
-            padding:10px 15px 0 115px;
+            padding:10px 15px 0 15px;
             font-weight:$bold;
             @include font-size(18, 18);
             color:#333;
             margin-bottom:7px;
+            white-space:nowrap;
+            overflow: hidden;
+            margin:10px 15px 7px 0;
+            padding:0 0 0 15px;
+
+            .topics {
+                display:inline-block;
+                vertical-align:bottom;
+                margin-left:10px;
+
+                .topic {
+                    display:inline-block;
+                    @include font-size(11, 11);
+                    font-weight:$regular;
+                    background:#eee;
+                    color:#999;
+                    padding:3px 6px 4px;
+                    border-radius:2px;
+                }
+            }
         }
         .blurb {
             font-weight:$light;
@@ -691,30 +711,12 @@ body.controller-solutions.action-show {
             max-height:40px;
             padding:0 15px 0 115px;
         }
-        .topics {
-            display:inline-block;
-            vertical-align:text-bottom;
-            max-width: 150px;
-            overflow: hidden;
-            max-height: 23px;
 
-            .topic {
-                display:inline-block;
-                @include font-size(11, 11);
-                font-weight:$regular;
-                margin-left:10px;
-                background:#eee;
-                color:#999;
-                padding:3px 6px 4px;
-                border-radius:2px;
-            }
-        }
     }
     .side-exercises {
         overflow:hidden;
         margin-bottom:15px;
-        padding:15px 10px;
-        //border:1px solid $color-2;
+        padding:15px 0;
         text-align:center;
         h4 {
             font-weight:$light;
@@ -729,7 +731,7 @@ body.controller-solutions.action-show {
             display:inline-block;
             width:50px;
             height:50px;
-            margin:2px;
+            margin:2px 1px;
             padding:10px;
             border:1px solid $color-2;
             border-radius:2px;

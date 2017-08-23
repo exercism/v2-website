@@ -53,6 +53,28 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(user).sort
   end
 
+  test "does not select approved solutions" do
+    user, track = create_user_and_track
+
+    bad_solution = create :solution, exercise: create(:exercise, track: track), approved_by: create(:user)
+    good_solution = create :solution, exercise: create(:exercise, track: track), approved_by: nil
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+
+    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(user).sort
+  end
+
+  test "does not select completed solutions" do
+    user, track = create_user_and_track
+
+    bad_solution = create :solution, exercise: create(:exercise, track: track), completed_at: DateTime.now - 1.minute
+    good_solution = create :solution, exercise: create(:exercise, track: track), completed_at: nil
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+
+    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(user).sort
+  end
+
   test "orders by number of mentors then time" do
     user, track = create_user_and_track
 

@@ -19,6 +19,7 @@ class API::SolutionResponder
         exercise: {
           id: solution.exercise.slug,
           instructions_url: instructions_url,
+          auto_approve: solution.exercise.auto_approve,
           track: {
             id: track.slug,
             language: track.title
