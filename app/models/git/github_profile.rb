@@ -1,7 +1,10 @@
 class Git::GithubProfile
 
   def self.for_user(username)
-    client = Octokit::Client.new
+    auth_config = Rails.application.config_for("auth")
+    github_key = auth_config["github_key"]
+    github_secret = auth_config["github_secret"]
+    client = Octokit::Client.new(client_id: github_key, client_secret: github_secret)
     user = client.user(username)
     self.new(user)
   end
