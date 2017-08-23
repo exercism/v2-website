@@ -77,4 +77,10 @@ class User < ApplicationRecord
   def mentoring_solution?(solution)
     solution_mentorships.where(solution_id: solution.id).exists?
   end
+
+  def test_user?
+    return false if email.blank?
+    return true  if email.downcase.include?('+testexercismuser')
+    false
+  end
 end

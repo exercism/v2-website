@@ -82,4 +82,18 @@ class UserTest < ActiveSupport::TestCase
     refute ((user.handle = "_23foo32") and user.valid?)
     refute ((user.handle = "foo'bar") and user.valid?)
   end
+
+  test "test_user?" do
+    user = build :user
+    refute user.test_user?
+
+    user.email = nil
+    refute user.test_user?
+
+    user.email = "humpty.dumpty+testexercismuser1@example.com"
+    assert user.test_user?
+
+    user.email = "humpty.dumpty+TESTEXERCISMUSER2@example.com"
+    assert user.test_user?
+  end
 end

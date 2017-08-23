@@ -21,8 +21,10 @@
     =javascript_include_tag 'application'
     =yield(:js)
 
-    -if Rails.env.production?
+    -if hotjar_enabled?
       =render "layouts/tracking_hotjar"
+
+    -if Rails.env.production?
       =render "layouts/tracking_ga"
 
     -clear_flash

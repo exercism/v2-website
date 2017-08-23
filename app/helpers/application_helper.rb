@@ -8,4 +8,11 @@ module ApplicationHelper
   def random_person_image_url
     Exercism::PeopleImagesPath / Exercism::PeopleImages.sample
   end
+
+  def hotjar_enabled?
+    return false unless Rails.env.production?
+    return true  if current_user.nil?
+    return false if current_user.admin? || current_user.test_user?
+    true
+  end
 end
