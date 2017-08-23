@@ -2,7 +2,6 @@ set :stage, :production
 
 server 'web1.exercism.io', user: fetch(:application), roles: %w{app web db git_fetch}
 server 'web2.exercism.io', user: fetch(:application), roles: %w{app web db git_fetch}
-server 'web3.exercism.io', user: fetch(:application), roles: %w{app web db}
 server 'processor.exercism.io', user: fetch(:application), roles: %w{app web db processor git_sync}
 
 namespace :puma_service do
