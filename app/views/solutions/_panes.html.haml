@@ -13,13 +13,13 @@
     -if iteration.files.size == 1
       -file = iteration.files.first
       .solution.single-file
-        %pre.solution-code
+        %pre.line-numbers.solution-code
           %code{class: syntax_highlighter_for_filename(file.filename, track)}
             = file.file_contents.force_encoding('utf-8')
     -elsif iteration
       -iteration.files.each do |file|
         .solution.multi-file
           %h3= file.filename
-          %pre.solution-code
+          %pre.line-numbers.solution-code
             %code{class: syntax_highlighter_for_filename(file.filename, track)}
               = file.file_contents.force_encoding('utf-8')
