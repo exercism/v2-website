@@ -1,22 +1,25 @@
+-solution = iteration.solution
+-track = solution.exercise.track
 .panes
   .pane.pane-1.instructions
-    =raw iteration.solution.instructions
+    =raw solution.instructions
   .pane.pane-2.test-suite
-    -iteration.solution.test_suite.each do |filename, code|
+    -solution.test_suite.each do |filename, code|
       %h3= filename
       %pre.line-numbers
-        %code{class: "language-ruby"}
+        %code{class: syntax_highlighter_for_filename(filename, track)}
           = code
   .pane.pane-3
     -if iteration.files.size == 1
+      -file = iteration.files.first
       .solution.single-file
         %pre.solution-code
-          %code{class: "language-ruby"}
-            = iteration.files.first.file_contents.force_encoding('utf-8')
+          %code{class: syntax_highlighter_for_filename(file.filename, track)}
+            = file.file_contents.force_encoding('utf-8')
     -elsif iteration
       -iteration.files.each do |file|
         .solution.multi-file
           %h3= file.filename
           %pre.solution-code
-            %code{class: "language-ruby"}
+            %code{class: syntax_highlighter_for_filename(file.filename, track)}
               = file.file_contents.force_encoding('utf-8')
