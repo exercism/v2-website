@@ -32,6 +32,13 @@ footer {
         margin-top:30px;
         padding:10px 0;
         border-top:1px solid #eee;
+        .created-by {
+            i {
+                color:#B31B1B;
+                margin:0 1px;
+                @include font-size(12, 15);
+            }
+        }
         .copyright, a, .created-by {
             color:#aaa;
             @include font-size(13, 15);
