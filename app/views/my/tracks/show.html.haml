@@ -95,7 +95,7 @@
         =form_tag [:my, @track, :side_exercises], remote: true, method: :get, class: "side_exercises_form" do
           .widget-filter.difficulty
             .title Difficulty:
-            =select_tag :difficulty, options_for_select({"All": 0, "Easy": 1, "Medium": 2, "Hard": 3}, value: @difficulty), id: nil
+            =select_tag :difficulty, options_for_select({"All": '', "Easy": 'easy', "Medium": 'medium', "Hard": 'hard'}, value: @difficulty), id: nil
           .widget-filter.length
             .title Length:
             =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil

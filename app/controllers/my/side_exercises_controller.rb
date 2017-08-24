@@ -3,7 +3,18 @@ class My::SideExercisesController < MyController
 
   def index
     exercises = @track.exercises.side.active.includes(:topics)
-    exercises = exercises.where(difficulty: params[:difficulty]) if params[:difficulty].to_i > 0
+
+    if params[:difficulty].present?
+      case params[:difficulty]
+      when 'easy'
+        exercises = exercises.where(difficulty: [1,2,3])
+      when 'medium'
+        exercises = exercises.where(difficulty: [4,5,6,7])
+      when 'hard'
+        exercises = exercises.where(difficulty: [8,9,10])
+      end
+    end
+
     exercises = exercises.where(length: params[:length]) if params[:length].to_i > 0
     solutions = current_user.solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
     @exercises_and_solutions = exercises.map{|ce|[ce, solutions[ce.id]]}
