@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824161513) do
+ActiveRecord::Schema.define(version: 20170824161657) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -98,7 +98,6 @@ ActiveRecord::Schema.define(version: 20170824161513) do
   create_table "iteration_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "iteration_id", null: false
     t.string "filename", null: false
-    t.string "content_type", null: false
     t.binary "file_contents", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

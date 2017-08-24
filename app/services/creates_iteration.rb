@@ -19,7 +19,6 @@ class CreatesIteration
     parsed_files.each do |file|
       iteration.files.create!(
         filename: file[:filename],
-        content_type: file[:content_type],
         file_contents: file[:file_contents]
       )
     end
@@ -71,7 +70,6 @@ class CreatesIteration
         file_contents = file.read
         {
           filename: filename,
-          content_type: file.content_type,
           file_contents: file_contents,
           file_contents_digest: IterationFile.generate_digest(file_contents)
         }
