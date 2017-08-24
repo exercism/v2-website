@@ -34,7 +34,8 @@ footer {
         border-top:1px solid #eee;
         .created-by {
             i {
-                color:#B31B1B;
+                //color:#B31B1B;
+                color:#999;
                 margin:0 1px;
                 @include font-size(12, 15);
             }
