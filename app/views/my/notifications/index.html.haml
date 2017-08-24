@@ -15,8 +15,7 @@
       .pure-g
         .pure-u-2-3
           .header-bar
-            =link_to "Mark all as read", "#", class: "pure-button mark-all-button"
-            /%h2 Notifications
+            =link_to "Mark all as read", read_batch_my_notifications_path(ids: @notifications.map(&:id)), method: :patch, remote: true, class: "pure-button mark-all-button"
           - @notifications.each do |notification|
             .notification
               =link_to "", notification.link, class: 'image', style: "background-image:url(#{notification_image(notification)})"
@@ -24,9 +23,19 @@
                 .content
                   = raw notification.content
                 .when #{time_ago_in_words(notification.created_at)} ago
-              =link_to "", "#", class: 'mark-as-read-button'
+              =link_to "", read_my_notification_path(notification), remote: true, method: :patch, class: 'mark-as-read-button'
 
           =paginate @notifications
     -else
       .no-notifications
         You have no notifications at the moment.
+
+-content_for :js do
+  :javascript
+    $('.mark-as-read-button').click(function() {
+      $(this).parents('.notification').addClass('read')
+    });
+
+    $('.mark-all-button').click(function() {
+      $('.notification').addClass('read')
+    });
