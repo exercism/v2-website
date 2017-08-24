@@ -72,10 +72,6 @@ FactoryGirl.define do
     solution { create :solution }
   end
 
-  factory :favourite do
-    iteration { create :iteration }
-  end
-
   factory :discussion_post do
     iteration { create :iteration }
     user { create :user }
