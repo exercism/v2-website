@@ -130,4 +130,9 @@ FactoryGirl.define do
   factory :track_update do
     track { create :track }
   end
+
+  factory :track_update_fetch do
+    track_update { create :track_update }
+    host "host-1"
+  end
 end
