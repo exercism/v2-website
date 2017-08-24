@@ -4,7 +4,7 @@ class My::SideExercisesController < MyController
   def index
     exercises = @track.exercises.side.active.includes(:topics)
 
-    if params[:difficulty].present?
+    if params[:difficulty].strip.present?
       case params[:difficulty]
       when 'easy'
         exercises = exercises.where(difficulty: [1,2,3])
@@ -15,8 +15,10 @@ class My::SideExercisesController < MyController
       end
     end
 
+    exercises = exercises.joins(:exercise_topics).where("exercise_topics.topic_id": params[:topic_id]) if params[:topic_id].to_i > 0
     exercises = exercises.where(length: params[:length]) if params[:length].to_i > 0
     solutions = current_user.solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
+
     @exercises_and_solutions = exercises.map{|ce|[ce, solutions[ce.id]]}
     if params[:status] == "unlocked"
       @exercises_and_solutions.keep_if {|e,s|(s && !s.in_progress?) || (!s && !e.unlocked_by)}

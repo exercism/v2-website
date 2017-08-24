@@ -50,6 +50,9 @@ class My::TracksController < MyController
       end
     end
 
+    @topics_for_select = topic_counts.keys.map{|t|[t.name.titleize, t.id]}.sort_by{|t|t[0]}.unshift(["Any", 0])
+    p @topics_for_select
+
     @topic_percentages = topic_counts.each_with_object({}) { |(topic, count), percentages|
       percentages[topic.name] = (user_topic_counts[topic] || 0).to_f / count * 100
     }.to_a.sort_by {|t,p|-p}
