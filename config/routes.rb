@@ -36,7 +36,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks"
   }
 
-  resources :profiles, only: [:index, :show]
+  resources :profiles, only: [:index, :show] do
+    get :solutions, on: :member
+  end
   resources :tracks, only: [:index, :show] do
     member do
       post :join
