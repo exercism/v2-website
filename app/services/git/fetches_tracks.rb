@@ -1,25 +1,26 @@
 class Git::FetchesTracks
 
-  QUIET_PERIOD = 30.seconds
   ERROR_BACKOFF_PERIOD = 10.seconds
 
-  def self.run
-    new.run
+  def self.fetch(tracks)
+    new(tracks).fetch
   end
 
-  def run
-    loop do
-      fetch_problem_specs
-      fetch_website_content
-      Track.find_each do |track|
-        fetch(track)
-        sleep 1.second
-      end
-      sleep QUIET_PERIOD
+  def initialize(tracks)
+    @tracks = tracks
+  end
+
+  def fetch
+    fetch_problem_specs
+    fetch_website_content
+    tracks.each do |track|
+      fetch_track(track)
+      sleep 1.second
     end
   end
 
   private
+  attr_reader :tracks
 
   def fetch_problem_specs
     Rails.logger.info "Fetching problem specs"
@@ -41,7 +42,7 @@ class Git::FetchesTracks
     sleep ERROR_BACKOFF_PERIOD
   end
 
-  def fetch(track)
+  def fetch_track(track)
     repo_url = track.repo_url
     if repo_url.start_with?("http://example.com")
       Rails.logger.info "Skipping fetch for #{repo_url}"
