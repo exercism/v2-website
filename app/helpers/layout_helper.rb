@@ -19,13 +19,17 @@ module LayoutHelper
     flash.clear
   end
 
-  def notice_and_alert(object = nil)
+  def notice_and_alert(object = nil, html_messages: false)
     tags = []
     a = alert
     n = notice
 
     if devise_controller? && @user && @user.errors.full_messages.present?
-      errors = safe_join(@user.errors.full_messages.each { |msg| msg }, "<br/>".html_safe)
+      errors = if html_messages
+          @user.errors.full_messages.join("<br/>").html_safe
+        else
+          safe_join(@user.errors.full_messages.each { |msg| msg }, "<br/>".html_safe)
+        end
       tags << content_tag(:div, errors, id: 'errors')
     end
 
