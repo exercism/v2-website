@@ -79,6 +79,9 @@
             @include font-size(16, 16);
             margin-bottom:12px;
         }
+        .widget-code-snippet input {
+            width:287px;
+        }
     }
     .newbie {
         background:#fafffe;

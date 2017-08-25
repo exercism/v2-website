@@ -1,9 +1,14 @@
 class User < ApplicationRecord
+
+  # Remove this so devise can't use it.
+  def self.validates_uniqueness_of(*args)
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:github]
+         :recoverable, :rememberable, :trackable,
+         :validatable, :omniauthable, omniauth_providers: [:github]
 
   has_many :auth_tokens
   has_one :communication_preferences
@@ -26,6 +31,7 @@ class User < ApplicationRecord
 
   has_many :reactions
 
+  validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
 
   def self.new_with_session(params, session)

@@ -66,30 +66,14 @@
 
       .pure-u-18-24.rhs
         .num-solutions Showing #{pluralize @solutions.size, "solution"}
-        .filters
+        =form_tag [:solutions, @profile], method: :get, remote: true, class: "filters" do
           .widget-filter
             .title Language:
-            =select_tag :language, options_for_select(@tracks.map{|l|[l.title, l.id]}, value: @track), id: nil
+            =select_tag :track_id, options_for_select(@tracks_for_select, value: @track), id: nil
         .solutions.pure-g
-          -@solutions.each do |solution|
-            -exercise = solution.exercise
-            .pure-u-1-2
-              =link_to [exercise.track, exercise, solution], class: 'solution' do
-                .icon
-                  .img{style: "background-image:url('#{image_path(exercise.white_icon_url)}')"}
-                .title-bar
-                  .title= exercise.title
-                  .track #{exercise.track.title} Track
-                .reactions
-                  .reaction
-                    %i.fa.fa-fw.fa-thumbs-up
-                    .count= @reaction_counts[[solution.id, "like"]].to_i
-                  .reaction.highlight
-                    %i.fa.fa-fw.fa-heart
-                    .count= @reaction_counts[[solution.id, "love"]].to_i
-                  .reaction
-                    =image_tag "genius.png"
-                    .count= @reaction_counts[[solution.id, "genius"]].to_i
-                  .reaction
-                    %i.fa.fa-fw.fa-comment
-                    .count= @comment_counts[solution.id].to_i
+          =render "solutions", solutions: @solutions, reaction_counts: @reaction_counts, comment_counts: @comment_counts
+
+
+  -content_for :js do
+    :javascript
+      submitOnChange($('.filters select'))

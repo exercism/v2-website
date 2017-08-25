@@ -42,6 +42,14 @@
         border-radius:2px;
         margin-bottom:15px;
         position:relative;
+        transition:opacity 0.2s;
+        &.read {
+            opacity:0.4;
+            .mark-as-read-button {
+                display:none;
+            }
+        }
+
         .image {
             display:block;
             position:absolute;

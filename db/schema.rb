@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823075632) do
+ActiveRecord::Schema.define(version: 20170824162220) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -83,13 +83,6 @@ ActiveRecord::Schema.define(version: 20170823075632) do
     t.index ["unlocked_by_id"], name: "fk_rails_03ec4ffbf3"
   end
 
-  create_table "favourites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.bigint "iteration_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["iteration_id"], name: "fk_rails_6ae4b0efef"
-  end
-
   create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -105,7 +98,6 @@ ActiveRecord::Schema.define(version: 20170823075632) do
   create_table "iteration_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "iteration_id", null: false
     t.string "filename", null: false
-    t.string "content_type", null: false
     t.binary "file_contents", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,7 +107,6 @@ ActiveRecord::Schema.define(version: 20170823075632) do
 
   create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "solution_id", null: false
-    t.integer "mentor_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
@@ -207,6 +198,7 @@ ActiveRecord::Schema.define(version: 20170823075632) do
     t.text "reflection"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_legacy", default: false, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
@@ -321,7 +313,6 @@ ActiveRecord::Schema.define(version: 20170823075632) do
   add_foreign_key "exercise_topics", "topics"
   add_foreign_key "exercises", "exercises", column: "unlocked_by_id"
   add_foreign_key "exercises", "tracks"
-  add_foreign_key "favourites", "iterations"
   add_foreign_key "iteration_files", "iterations"
   add_foreign_key "iterations", "solutions"
   add_foreign_key "maintainers", "tracks"

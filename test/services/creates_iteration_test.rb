@@ -5,10 +5,9 @@ class CreatesIterationTest < ActiveSupport::TestCase
     solution = create :solution
     code = "foobar"
     filename = "dog/foobar.rb"
-    content_type = "text/plain"
     file_contents = "something = :else"
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
-    file = mock(content_type: content_type, read: file_contents, headers: headers)
+    file = mock(read: file_contents, headers: headers)
 
     iteration = CreatesIteration.create!(solution, [file])
 
@@ -18,7 +17,6 @@ class CreatesIterationTest < ActiveSupport::TestCase
 
     saved_file = iteration.files.first
     assert_equal filename, saved_file.filename
-    assert_equal content_type, saved_file.content_type
     assert_equal file_contents, saved_file.file_contents
   end
 
@@ -91,9 +89,9 @@ class CreatesIterationTest < ActiveSupport::TestCase
     create :iteration_file, iteration: iteration, filename: filename2, file_contents: file_contents2
 
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename1}\"\r\nContent-Type: application/octet-stream\r\n"
-    file1 = mock(content_type: "text/plain", read: file_contents1, headers: headers)
+    file1 = mock(read: file_contents1, headers: headers)
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename2}\"\r\nContent-Type: application/octet-stream\r\n"
-    file2 = mock(content_type: "text/plain", read: (file_contents2 + "456"), headers: headers)
+    file2 = mock(read: (file_contents2 + "456"), headers: headers)
 
     iteration = CreatesIteration.create!(solution, [file1, file2])
     assert iteration.persisted?
@@ -111,9 +109,9 @@ class CreatesIterationTest < ActiveSupport::TestCase
     create :iteration_file, iteration: iteration, filename: filename2, file_contents: file_contents2
 
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename1}\"\r\nContent-Type: application/octet-stream\r\n"
-    file1 = mock(content_type: "text/plain", read: file_contents1, headers: headers)
+    file1 = mock(read: file_contents1, headers: headers)
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename2}\"\r\nContent-Type: application/octet-stream\r\n"
-    file2 = mock(content_type: "text/plain", read: file_contents2, headers: headers)
+    file2 = mock(read: file_contents2, headers: headers)
 
     assert_raises do
       CreatesIteration.create!(solution, [file1, file2])

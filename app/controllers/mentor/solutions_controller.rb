@@ -21,5 +21,7 @@ class Mentor::SolutionsController < MentorController
     if current_user == @iteration.solution.user
       return redirect_to [:my, @solution]
     end
+
+    ClearsNotifications.clear!(current_user, @solution)
   end
 end

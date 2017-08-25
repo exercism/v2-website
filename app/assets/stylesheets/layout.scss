@@ -12,6 +12,12 @@
     color:$error-red-text-color;
     padding:8px 10px;
     text-align:center;
+    @include font-size(14, 20);
+    a {
+        color:$error-red-text-color;
+        font-weight:400;
+        text-decoration:underline;
+    }
 }
 
 #notice {

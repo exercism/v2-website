@@ -1,4 +1,4 @@
-=cache ["layouts/footer", "1", Date.today.to_s] do
+=cache ["layouts/footer", "2", Date.today.to_s] do
   %footer
     .lo-container
       .pure-g
@@ -37,7 +37,11 @@
       .legal
         .copyright © #{DateTime.now.year} Exercism, Inc
         .created-by
-          Made with ❤️  by
+          Made with
+          %i.fa.fa-heart
+          and
+          %i.fa.fa-coffee
+          by
           #{link_to "Katrina Owen", "http://kytrinyx.com"},
           #{link_to "Thalamus", "http://thalamus.ai"}
           and #{link_to "#{number_with_delimiter Contributor.count} wonderful volunteers", team_page_path}.

@@ -50,9 +50,15 @@ class My::TracksController < MyController
       end
     end
 
+    @topics_for_select = topic_counts.keys.map{|t|[t.name.titleize, t.id]}.sort_by{|t|t[0]}.unshift(["Any", 0])
+
     @topic_percentages = topic_counts.each_with_object({}) { |(topic, count), percentages|
       percentages[topic.name] = (user_topic_counts[topic] || 0).to_f / count * 100
-    }.to_a.sort_by {|t,p|-p}
+    }.to_a.sort {|t1,t2|
+      # Sort by percentage completed and then topic name
+      diff = t1[1] <=> t2[1]
+      diff == 0 ? t1[0] <=> t2[0] : -diff
+    }
 
     @core_track_completion_percentage = @core_exercises_and_solutions.size > 0 ? (@num_solved_core_exercises.to_f / @core_exercises_and_solutions.size * 100).round : 0
     @track_completion_percentage = exercises.size > 0 ? ((@num_solved_core_exercises + @num_solved_side_exercises).to_f / exercises.size * 100).round : 0

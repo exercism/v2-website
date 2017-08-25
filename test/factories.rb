@@ -14,7 +14,6 @@ FactoryGirl.define do
   factory :iteration_file do
     iteration { create :iteration }
     filename { "foobar-#{SecureRandom.uuid}.rb"}
-    content_type "text/plain"
     file_contents "something = :else"
   end
 
@@ -70,10 +69,6 @@ FactoryGirl.define do
   factory :solution_mentorship do
     user { create :user }
     solution { create :solution }
-  end
-
-  factory :favourite do
-    iteration { create :iteration }
   end
 
   factory :discussion_post do

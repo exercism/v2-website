@@ -101,6 +101,7 @@
             resize:none;
             width:100%;
             height:95px;
+            @include font-size(14, 17);
         }
         button {
             display:block;

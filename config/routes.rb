@@ -40,7 +40,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks"
   }
 
-  resources :profiles, only: [:index, :show]
+  resources :profiles, only: [:index, :show] do
+    get :solutions, on: :member
+  end
   resources :tracks, only: [:index, :show] do
     member do
       post :join
@@ -73,7 +75,10 @@ Rails.application.routes.draw do
     resources :reactions, only: [:index, :create]
 
     resources :discussion_posts, only: [:create]
-    resources :notifications, only: [:index]
+    resources :notifications, only: [:index] do
+      patch :read, on: :member
+      patch :read_batch, on: :collection
+    end
     resource :profile, controller: "profile"
 
     resource :settings do

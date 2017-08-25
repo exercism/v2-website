@@ -12,7 +12,7 @@
             %strong GitHub
 
           .or or
-          =notice_and_alert
+          =notice_and_alert(html_messages: true)
 
           .instruction Enter your log in details to access your account.
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|

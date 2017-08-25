@@ -22,7 +22,7 @@
   %p Tell us a little bit about yourself. A couple of sentences is perfect. You can edit this later.
   =form_for @profile, url: my_profile_path do |f|
     =fields_for :user do |uf|
-      =uf.text_area :bio, placeholder: "Tell us a little bit about yourself"
+      =uf.text_area :bio, placeholder: "Tell us a little bit about yourself (max 230 chars)", maxlength: 230
       =f.button "Create profile", class: 'pure-button'
 
 :javascript
