@@ -25,6 +25,11 @@ class Mentor::SolutionsController < MentorController
     ClearsNotifications.clear!(current_user, @solution)
   end
 
+  def approve
+    @solution = Solution.find_by_uuid!(params[:id])
+    @solution.update(approved_by: current_user)
+  end
+
   def ignore
     @solution = Solution.find_by_uuid!(params[:id])
     IgnoredSolutionMentorship.find_or_create_by(user: current_user, solution: @solution)

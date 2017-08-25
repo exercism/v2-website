@@ -27,8 +27,11 @@ Rails.application.routes.draw do
   namespace :mentor do
     resource :dashboard, only: [:show], controller: "dashboard"
     resources :solutions, only: [:show] do
-      patch :abandon, on: :member
-      patch :ignore, on: :member
+      member do
+        patch :approve
+        patch :abandon
+        patch :ignore
+      end
     end
     resources :discussion_posts, only: [:create]
   end

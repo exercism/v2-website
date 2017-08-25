@@ -2,8 +2,12 @@ $('.discussion .posts').show().append("#{j render("post", post: @post, solution:
 $('.new-discussion-post-form textarea').val("")
 $('.CodeMirror')[0].CodeMirror.setValue("")
 $('.CodeMirror')[0].CodeMirror.clearHistory()
+Prism.highlightAll()
 
 -if @approved
-  $('.approved.pure-button').hide()
+  $('.approved').show()
+  $('.approve-button').remove()
+  $('.approve-and-comment-button').remove()
+  $('.leave-button').remove()
 
 window.location.href = "#discussion-post-#{@post.id}"

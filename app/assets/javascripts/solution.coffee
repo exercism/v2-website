@@ -48,7 +48,7 @@ window.setupSolution = ->
     $('.CodeMirror').bind 'heightChange', =>
       $('.preview-area').css(height: $('.CodeMirror').outerHeight())
 
-  $window.resize setupLayout
+  $window.resize(setupLayout)
   setupLayout()
   setupTabs()
   setupNewDiscussionPost()

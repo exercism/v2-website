@@ -214,6 +214,10 @@ body.controller-solutions {
         .posts {
             margin-bottom:40px;
         }
+        .approved {
+            color:$color-1;
+            padding-top:17px;
+        }
         .pure-button {
             margin-bottom:20px;
             background:$color-1;
@@ -223,12 +227,17 @@ body.controller-solutions {
             margin-top:10px;
             border-radius:2px;
             padding:8px 25px;
-            &.approve-button {
+            &.approve-button,
+            &.approve-and-comment-button {
                 color:$color-1;
                 background:#fff;
                 border:1px solid $color-1;
                 margin-right:5px;
             }
+            &.approve-and-comment-button {
+                display:none;
+            }
+
             &.leave-button,
             &.pass-button {
                 background:#fff;

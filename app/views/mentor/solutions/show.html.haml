@@ -57,45 +57,30 @@
 
             =button_tag "Comment", class: 'pure-button'
 
+            .approved{style: @solution.approved?? "" : "display:none"}
+              %i.fa.fa-check
+              Solution Approved
             -if current_user.mentoring_solution?(@solution)
-              =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button'
+              -unless @solution.approved?
+                =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button'
             -else
               =link_to "I'll pass, thanks", [:ignore, :mentor, @solution], method: :patch, class: 'pure-button pass-button'
 
             -unless @solution.approved?
-              =button_tag "Approve and comment", class: 'approve-button pure-button', value: "approved"
-
-    -#
-      .solution-footer
-        .pure-g
-          .pure-u-1-2
-            /Other Solutions
-          .pure-u-1-2
-            -unless @solution.completed?
-              -if @solution.approved?
-                =link_to "Mark as completed", [:complete, :my, @solution], method: :patch, remote: true
-              -else
-                =link_to "Mark as completed", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true
-
-    -#
-      %h1 Your solution to #{@exercise.title}
-
-      %p You're iterating!!
-
-      %ul
-        -@solution.iterations.each.with_index do |iteration, idx|
-          %li
-            -if iteration == @iteration
-              = idx + 1
-              (Selected)
-            -else
-              =link_to (idx + 1), solution_path(iteration_id: iteration.id)
-
-      %h2 Code
-
-      %h2 Discussion
+              =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button', value: "approved"
+              =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button', value: "approved"
 
 -content_for :js do
   :javascript
     setupSolution()
-
+    $textarea = $(".new-discussion-post-form textarea")
+    $textarea.keyup(function(){
+      if($textarea.val() == "") {
+        $('.approve-button').show()
+        $('.approve-and-comment-button').hide()
+      }
+      else {
+        $('.approve-button').hide()
+        $('.approve-and-comment-button').show()
+      }
+    })
