@@ -47,12 +47,8 @@ class RetrieveSolutionsForMentor
       where("last_updated_by_user_at <= ?", DateTime.now - 7.days)
   end
 
-  def retrieve_abandoned
+  def retrieve_unsubscribed
     user.mentored_solutions.
       where("solution_mentorships.abandoned": true)
-  end
-
-  def retrieve_unsubscribed
-    Solution.where("1=0")
   end
 end

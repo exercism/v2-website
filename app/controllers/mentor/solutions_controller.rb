@@ -24,4 +24,17 @@ class Mentor::SolutionsController < MentorController
 
     ClearsNotifications.clear!(current_user, @solution)
   end
+
+  def ignore
+    @solution = Solution.find_by_uuid!(params[:id])
+    IgnoredSolutionMentorship.find_or_create_by(user: current_user, solution: @solution)
+    redirect_to [:mentor, :dashboard]
+  end
+
+  def abandon
+    @solution = Solution.find_by_uuid!(params[:id])
+    @mentor_solution = SolutionMentorship.where(user: current_user, solution: @solution).first
+    @mentor_solution.update(abandoned: true)
+    redirect_to [:mentor, :dashboard]
+  end
 end

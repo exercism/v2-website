@@ -75,6 +75,18 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(user).sort
   end
 
+  test "does not select ignored solutions" do
+    user, track = create_user_and_track
+
+    bad_solution = create :solution, exercise: create(:exercise, track: track)
+    good_solution = create :solution, exercise: create(:exercise, track: track)
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+    create :ignored_solution_mentorship, solution: bad_solution, user: user
+
+    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(user).sort
+  end
+
   test "orders by number of mentors then time" do
     user, track = create_user_and_track
 

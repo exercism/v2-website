@@ -19,6 +19,9 @@ class SelectsSuggestedSolutionsForMentor
       # Not things you already mentor
       where.not(id: user.mentored_solutions).
 
+      # Not things you've ignored
+      where.not(id: user.ignored_solutions).
+
       # Not your own solutions
       where.not(user_id: user.id).
 

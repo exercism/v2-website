@@ -56,8 +56,14 @@
                   .preview-area
 
             =button_tag "Comment", class: 'pure-button'
+
+            -if current_user.mentoring_solution?(@solution)
+              =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button'
+            -else
+              =link_to "I'll pass, thanks", [:ignore, :mentor, @solution], method: :patch, class: 'pure-button pass-button'
+
             -unless @solution.approved?
-              =button_tag "Mark as approved and comment", class: 'approved pure-button', value: "approved"
+              =button_tag "Approve and comment", class: 'approve-button pure-button', value: "approved"
 
     -#
       .solution-footer

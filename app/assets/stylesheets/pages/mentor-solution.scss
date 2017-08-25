@@ -215,18 +215,34 @@ body.controller-solutions {
             margin-bottom:40px;
         }
         .pure-button {
+            margin-bottom:20px;
             background:$color-1;
+            border:1px solid $color-1;
             color:#fff;
             float:right;
             margin-top:10px;
             border-radius:2px;
             padding:8px 25px;
-            &.approved {
+            &.approve-button {
                 color:$color-1;
                 background:#fff;
                 border:1px solid $color-1;
                 margin-right:5px;
             }
+            &.leave-button,
+            &.pass-button {
+                background:#fff;
+                border:1px solid #ccc;
+                color:#999;
+                float:left;
+                &:hover {
+                    background:$color-1;
+                    border-color:$color-1;
+                    color:#fff;
+                }
+            }
+            &.leave-button { padding:8px 12px; }
+            &.pass-button { padding:8px 15px; }
         }
     }
 }

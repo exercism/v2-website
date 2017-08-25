@@ -29,6 +29,9 @@ class User < ApplicationRecord
   has_many :solution_mentorships
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
+  has_many :ignored_solution_mentorships
+  has_many :ignored_solutions, through: :ignored_solution_mentorships, source: :solution
+
   has_many :reactions
 
   validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?

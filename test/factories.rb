@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :ignored_solution_mentorship do
+    user { create :user }
+    solution { create :solution }
+  end
+
   factory :contributor do
     github_username { SecureRandom.uuid }
     avatar_url "asd.jpg"
