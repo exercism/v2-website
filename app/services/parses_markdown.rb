@@ -77,7 +77,7 @@ class ParsesMarkdown
     end
 
     def block_code(code, language)
-      language ||= "ruby"
+      language ||= "plain"
       %Q{<pre><code class="language-#{language}">#{code}</code></pre>}
       #Rouge::Formatters::HTML.new(
       #  css_class: "highlight #{lexer.tag}",

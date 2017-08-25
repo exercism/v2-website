@@ -42,7 +42,6 @@ window.setupSolution = ->
     $('.preview-tab').click ->
       markdown = $textarea.val()
       $.post "/markdown/parse", {markdown: markdown}, (x,y,z) =>
-        console.log x,y,z
         $('.new-discussion-post-form .preview-area').html(x)
         Prism.highlightAll()
 

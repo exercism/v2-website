@@ -10,6 +10,10 @@
     font-size-adjust: 0.488;
 }
 
+@mixin code-font {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
 @mixin font-size($size: 16, $line_height: null) {
     font-size: $size  + px;
     @if $line_height == null {

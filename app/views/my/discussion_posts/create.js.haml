@@ -4,3 +4,4 @@ $('.new-discussion-post-form textarea').val("")
 $('.CodeMirror')[0].CodeMirror.setValue("")
 $('.CodeMirror')[0].CodeMirror.clearHistory()
 window.location.href = "#discussion-post-#{@post.id}"
+Prism.highlightAll()
