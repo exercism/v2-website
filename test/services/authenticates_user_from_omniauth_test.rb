@@ -69,7 +69,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     old_email = "foo@users1.noreply.github.com"
     user = create :user, provider: provider, uid: uid, email: old_email
 
-    auth = mock(provider: provider, uid: uid, info: mock(email: "dog@cat.com"))
+    auth = mock(provider: provider, uid: uid)
     actual = AuthenticatesUserFromOmniauth.authenticate(auth)
     assert_equal user, actual
 

@@ -41,7 +41,6 @@ class RetrieveSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [completed, completed_and_stale], RetrieveSolutionsForMentor.retrieve(user, :completed)
     assert_equal [awaiting_user_and_stale], RetrieveSolutionsForMentor.retrieve(user, :stale)
     assert_equal [abandoned_and_awaiting_user, abandoned_and_requires_action, abandoned_and_completed, abandoned_and_stale].sort, RetrieveSolutionsForMentor.retrieve(user, :abandoned).sort
-
   end
 end
 

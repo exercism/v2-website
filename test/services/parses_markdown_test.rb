@@ -15,7 +15,7 @@ class ParsesMarkdownTest < ActiveSupport::TestCase
 <p><a href="http://example.com" target="_blank">Some link</a></p>
 
 <p>Watch this:</p>
-<pre><code class="language-ruby">$ go home
+<pre><code class="language-plain">$ go home
 </code></pre>
     HTML
 
