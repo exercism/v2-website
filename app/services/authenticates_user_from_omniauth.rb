@@ -12,7 +12,10 @@ class AuthenticatesUserFromOmniauth
 
   def authenticate
     user = User.where(provider: auth.provider, uid: auth.uid).first
-    return user if user
+    if user
+      user.update(email: auth.info.email) if user.email.ends_with?("@users.noreply.github.com")
+      return user
+    end
 
     user = User.where(email: auth.info.email).first
     return user if user

@@ -62,4 +62,32 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     assert user.persisted?
     assert_equal "#{handle}-#{num2}", user.handle
   end
+
+  test "does not updates email if it's not @users.noreply.github.com" do
+    provider = "foobar"
+    uid = "bizzzz"
+    old_email = "foo@users1.noreply.github.com"
+    user = create :user, provider: provider, uid: uid, email: old_email
+
+    auth = mock(provider: provider, uid: uid, info: mock(email: "dog@cat.com"))
+    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    assert_equal user, actual
+
+    user.reload
+    assert_equal old_email, user.email
+  end
+
+  test "updates email if it's @users.noreply.github.com" do
+    provider = "foobar"
+    uid = "bizzzz"
+    new_email = "dog@cat.com"
+    user = create :user, provider: provider, uid: uid, email: "foo@users.noreply.github.com"
+
+    auth = mock(provider: provider, uid: uid, info: mock(email: new_email))
+    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    assert_equal user, actual
+
+    user.reload
+    assert_equal new_email, user.email
+  end
 end
