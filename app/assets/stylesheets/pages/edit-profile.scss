@@ -10,6 +10,12 @@
     .rhs {
         padding-left:20px;
         border-left:1px solid #eee;
+        h3 {
+            color:#444;
+            @include font-size(15, 15);
+            font-weight:$regular;
+            margin-bottom:10px;
+        }
     }
     .pure-g {
         margin-bottom:25px;
@@ -25,15 +31,12 @@
         color:#999;
         margin-bottom:20px;
     }
-    h3 {
-        color:#444;
-        @include font-size(15, 15);
-        font-weight:$regular;
-        margin-bottom:10px;
-    }
+
     .avatar-section {
-        overflow:hidden;
-        margin-bottom:35px;
+        margin-bottom:25px;
+        h3 {
+            padding-top:5px;
+        }
         img {
             width:80px;
             height:80px;
@@ -76,17 +79,42 @@
             @include font-size(12, 15);
             color:#aaa;
             float:left;
-            width:270px;
+            width:200px;
         }
     }
+    .avatar-section,
+    .name-section,
     .bio-section {
+        overflow:hidden;
+        h3 {
+            float:left;
+            width:60px;
+            color:#444;
+            @include font-size(14, 14);
+            font-weight:$regular;
+        }
+    }
+    .name-section,
+    .bio-section {
+        h3 {
+            padding-top:10px;
+        }
+        input,
         textarea {
             @include font-size(14, 18);
             color:#555;
             border:1px solid #ddd;
             padding:8px;
             border-radius:2px;
-            width:100%;
+            width:310px;
+        }
+    }
+
+    .name-section {
+        margin-bottom:15px;
+    }
+    .bio-section {
+        textarea {
             height:89px;
             resize:none;
         }
@@ -128,7 +156,7 @@
                 padding-left:165px;
             }
         }
-        &.twitter { 
+        &.twitter {
             &:before { content: "https://twitter.com/"; }
             input { padding-left:165px; }
         }

@@ -9,14 +9,17 @@ class My::ProfileController < MyController
 
   def new
     redirect_to profile_path if current_user.profile
-    @profile = Profile.new(user: current_user)
+    @profile = Profile.new(
+      user: current_user,
+      display_name: current_user.name.present?? current_user.name : current_user.handle
+    )
   end
 
   def create
     @profile = if current_user.profile
         current_user.profile
       else
-        CreatesProfile.create( current_user )
+        CreatesProfile.create(current_user, params[:profile][:display_name])
       end
 
     User.find(current_user.id).update(user_params)
@@ -42,7 +45,7 @@ class My::ProfileController < MyController
 
   def profile_params
     params.require(:profile).permit(
-      :name, :slug, :bio,
+      :display_name, :bio,
       :website, :twitter, :github, :linkedin, :medium
     )
   end

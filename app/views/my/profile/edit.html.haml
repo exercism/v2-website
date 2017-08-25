@@ -13,6 +13,10 @@
             =uf.file_field :avatar
           %p Try and choose a square photo that works with rounded.
 
+
+        .name-section
+          %h3 Name
+          =f.text_field :display_name, placeholder: "Most people choose their name or handle"
         .bio-section
           %h3 Bio
           =uf.text_area :bio, placeholder: "Tell the world a little about who you are (max 230 chars)", maxlength: 230

@@ -18,9 +18,13 @@
     %i.fa.fa-circle.filled
     %i.fa.fa-circle.filled
 
-  %h2 Add a bio
-  %p Tell us a little bit about yourself. A couple of sentences is perfect. You can edit this later.
   =form_for @profile, url: my_profile_path do |f|
+    %h2 Choose your display name
+    %p Choose how you'd like your name to appear on the profile.
+    =f.text_field :display_name, placeholder: "Most people choose their name or handle"
+
+    %h2 Add a bio
+    %p Tell us a little bit about yourself. A couple of sentences is perfect. You can edit this later.
     =fields_for :user do |uf|
       =uf.text_area :bio, placeholder: "Tell us a little bit about yourself (max 230 chars)", maxlength: 230
       =f.button "Create profile", class: 'pure-button'

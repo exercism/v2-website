@@ -90,8 +90,19 @@
     .page-2 {
         display:none;
 
+        h2 {
+            margin-bottom:7px;
+        }
         p {
             margin-bottom:15px;
+        }
+        input {
+            margin-bottom:20px;
+            border:1px solid #ddd;
+            border-radius:2px;
+            padding:10px;
+            width:100%;
+            @include font-size(14, 17);
         }
         textarea {
             margin-bottom:5px;
