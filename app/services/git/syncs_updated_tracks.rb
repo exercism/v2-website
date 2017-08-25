@@ -34,7 +34,7 @@ class Git::SyncsUpdatedTracks
       where(synced_at: nil).
       where.not(track_update_fetches: { completed_at: nil }).
       group("track_update_fetches.id").
-      having("count(track_update_id) = #{ENV["NUM_WEBSERVERS"]}").
+      having("count(track_update_id) = #{ClusterConfig.num_webservers}").
       first
   end
 
