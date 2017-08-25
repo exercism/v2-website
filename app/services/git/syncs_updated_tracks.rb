@@ -39,6 +39,6 @@ class Git::SyncsUpdatedTracks
   end
 
   def sync_track_update
-    SyncTrackUpdateJob.perform_later(track_update)
+    SyncTrackUpdateJob.perform_later(track_update.id)
   end
 end
