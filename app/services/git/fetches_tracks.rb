@@ -1,6 +1,7 @@
 class Git::FetchesTracks
 
   ERROR_BACKOFF_PERIOD = 10.seconds
+  TRACK_BACKOFF_PERIOD = 1.second
 
   def self.fetch(tracks)
     new(tracks).fetch
@@ -15,7 +16,7 @@ class Git::FetchesTracks
     fetch_website_content
     tracks.each do |track|
       fetch_track(track)
-      sleep 1.second
+      sleep TRACK_BACKOFF_PERIOD
     end
   end
 
