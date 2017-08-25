@@ -27,15 +27,22 @@ class Git::FetchesUpdatedTracks
   attr_reader :track_update, :track_update_fetch
 
   def find_track_update
-   @track_update = TrackUpdate.
-     includes(:track_update_fetches).
-     where(synced_at: nil).
-     find_by(track_update_fetches: { track_update_id: nil }) ||
-     TrackUpdate.
-     includes(:track_update_fetches).
-     where(synced_at: nil).
-     where.not(track_update_fetches: { host: Socket.gethostname }).
-     first
+    @track_update = track_updates_without_fetches || track_updates_not_fetched
+  end
+
+  def track_updates_without_fetches
+    TrackUpdate.
+      includes(:track_update_fetches).
+      where(synced_at: nil).
+      find_by(track_update_fetches: { track_update_id: nil })
+  end
+
+  def track_updates_not_fetched
+    TrackUpdate.
+      includes(:track_update_fetches).
+      where(synced_at: nil).
+      where.not(track_update_fetches: { host: Socket.gethostname }).
+      first
   end
 
   def fetch_track_update
