@@ -260,6 +260,3 @@ Testimonial.create!(
   byline: "Rob Phoenix"
 )
 #https://avatars1.githubusercontent.com/u/9257284?v=4&s=460
-
-
-

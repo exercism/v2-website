@@ -629,7 +629,7 @@ body.controller-solutions.action-show {
 
     }
     .side-exercises {
-        overflow:hidden;
+        //overflow:hidden;
         margin-bottom:15px;
         padding:15px 0;
         text-align:center;
@@ -646,16 +646,73 @@ body.controller-solutions.action-show {
             display:inline-block;
             width:50px;
             height:50px;
-            margin:2px 1px;
+            margin:2px 2px;
             padding:10px;
             border:1px solid $color-2;
             border-radius:2px;
+            text-decoration:none;
+            position:relative;
             img {
                 display:block;
                 height:100%;
                 margin: 0 auto;
+                &.white {
+                    display:none;
+                }
             }
+            .tooltip {
+                display:none;
+                background:#fff;
+                color:#666;
+                font-weight:$regular;
+                border: 1px solid rgba(0,0,0,0.3);
+                box-shadow: 0 0 1px rgba(0,0,0, 0.2);
+                padding:6px 8px;
+                width:100px;
+                @include font-size(13, 13);
+                position:absolute;
+                bottom:45px;
+                left: 50%;
+                margin-left: -50px;
+                border-radius:2px;
+                text-align:center;
+                z-index:10;
 
+                &:before,
+                &:after {
+                    content: "\f0d7";
+                    font-family:FontAwesome;
+                    position:absolute;
+                    left:50%;
+                }
+                &:before {
+                    bottom:-11px;
+                    @include font-size(17, 17);
+                    margin-left:-5px;
+                    color:#ccc;
+                }
+                &:after {
+                    bottom:-9px;
+                    @include font-size(14, 14);
+                    color:#fff;
+                    margin-left:-4px;
+                    bottom:-9px;
+                }
+            }
+            &:hover {
+                background:$color-2;
+                .tooltip {
+                    display:block;
+                }
+                img {
+                    &.turquoise {
+                        display:none;
+                    }
+                    &.white {
+                        display:block;
+                    }
+                }
+            }
         }
     }
     .pure-button {
