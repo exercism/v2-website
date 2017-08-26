@@ -296,17 +296,17 @@
         margin-bottom:10px;
         border:1px solid #ddd;
         padding:10px;
-        width:310px;
+        width:315px;
         float:right;
         h3 {
-            display:inline-block;
+            float:left;
             border-right:2px solid #aaa;
-            margin:5px 0 5px 0;
-            padding:5px 10px 5px 10px;
+            margin:5px 5px 5px 0;
+            padding:8px 10px;
             font-weight:$regular;
         }
         a {
-            display:inline-block;
+            float:left;
             padding:10px;
             color:#666;
             position:relative;
