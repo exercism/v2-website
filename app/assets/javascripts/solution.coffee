@@ -32,6 +32,7 @@ window.setupSolution = ->
 
   setupNewDiscussionPost = =>
     $textarea = $(".new-discussion-post-form textarea")
+    return if $textarea.length == 0
     smde = new SimpleMDE
       element: $textarea[0]
       spellChecker: false

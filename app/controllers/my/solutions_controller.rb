@@ -75,7 +75,14 @@ class My::SolutionsController < MyController
                             first.try(&:exercise)
     end
 
-    @unlocked_side_exercises = @solution.exercise.unlocks
+    unlocked_side_exercises = @solution.exercise.unlocks
+    unlocked_solutions = current_user.solutions.
+                                      where(exercise_id: unlocked_side_exercises).
+                                      each_with_object({}) { |s,h| h[s.exercise_id] = s }
+    @unlocked_side_exercises_and_solutions = unlocked_side_exercises.each_with_object([]) do |e, a|
+      a << [e, unlocked_solutions[e.id]]
+    end
+    p @unlocked_side_exercises_and_solutions
 
     if @next_core_exercise || @unlocked_side_exercises.present?
       render_modal("solution-unlocked", "unlocked")
