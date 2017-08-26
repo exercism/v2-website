@@ -11,7 +11,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     assert_equal user, actual
   end
 
-  test "works with correct details" do
+  test "creates with correct details" do
     provider = "foobar"
     uid = "bizzzz"
     email = "asdas@asdasda.com"
@@ -24,6 +24,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     auth = mock
     auth.stubs(provider: provider, uid: uid, info: info)
 
+    DeviseMailer.expects(:confirmation_instructions).never
     user = AuthenticatesUserFromOmniauth.authenticate(auth)
     assert user.persisted?
     assert_equal provider, user.provider
@@ -80,7 +81,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
 
   test "updates email if it's @users.noreply.github.com" do
     provider = "foobar"
-    uid = "bizzzz"
+    uid = SecureRandom.uuid
     new_email = "dog@cat.com"
     user = create :user, provider: provider, uid: uid, email: "foo@users.noreply.github.com"
 
@@ -92,15 +93,15 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     assert_equal new_email, user.email
   end
 
-  test "updates provider and uuid" do
-    provider = "foobar"
-    uid = "bizzzz"
-    email = "dog@cat.com"
-    user = create :user, email: email
+  test "updates provider, uid with email match" do
+    user = create :user
 
+    provider = "asda"
+    uid = SecureRandom.uuid
+    info = mock
+    info.stubs(email: user.email)
     auth = mock
-    auth.stubs(provider: provider, uid: uid, info: mock(email: email))
-
+    auth.stubs(provider: provider, uid: uid, info: info)
     actual = AuthenticatesUserFromOmniauth.authenticate(auth)
     assert_equal user, actual
 
@@ -108,5 +109,4 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     assert_equal provider, user.provider
     assert_equal uid, user.uid
   end
-
 end

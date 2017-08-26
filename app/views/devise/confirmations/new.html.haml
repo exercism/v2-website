@@ -1,10 +1,16 @@
-%h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-  .actions
-    = f.submit "Resend confirmation instructions"
-= render "devise/shared/links"
+#new-confirmation-page.lo-devise-page
+  .lo-container
+    .pure-g
+      .pure-u-3-5.lhs= code_person_widget
+      .pure-u-2-5.rhs
+        .frame
+          %h1 Resend confirmation instructions
+          .instruction Not got your confirmation instructions? We can resend them to you.
+
+          =notice_and_alert
+
+          = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+            = devise_error_messages!
+            = f.email_field :email, autofocus: true, placeholder: "Your email address", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+            = f.button "Resend confirmation instructions", class: 'pure-button'
+          = render "devise/shared/links"

@@ -4,6 +4,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
   test "password log in respects page you were on" do
     password = "foobar"
     user = create :user, password: password
+    user.confirm
 
     track = create :track
     get track_path(track)
@@ -18,12 +19,8 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     assert_redirected_to my_track_path(track)
   end
 
-  test "password sign up respects page you were on" do
-    password = "foobar"
-    user = create :user, password: password
-
-    track = create :track
-    get track_path(track)
+  test "password sign up redirects you to confirmation pending page" do
+    get root_path
     assert_response :success
 
     post "/users", params: {user: {
@@ -31,17 +28,16 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
       password: "foobar", password_confirmation: "foobar"
     }}
 
-    assert_redirected_to track_path(track)
-    assert_response :redirect
+    assert_redirected_to confirmation_required_path
     follow_redirect!
-
-    assert_redirected_to my_track_path(track)
+    assert_response :success
   end
 
   test "oauth log in respects page you were on" do
     provider = "foobar"
     uid = "12321321"
     user = create :user, provider: provider, uid: uid
+    user.confirm
 
     track = create :track
     get track_path(track)
@@ -101,12 +97,6 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
       name: "Jo Bloggs", handle: SecureRandom.uuid, email: email,
       password: "foobar", password_confirmation: "foobar"
     }}
-
-    assert_redirected_to track_path(track)
-    assert_response :redirect
-    follow_redirect!
-
-    assert_redirected_to my_track_path(track)
 
     user = User.find_by_email!(email)
     assert_equal [track], user.tracks
