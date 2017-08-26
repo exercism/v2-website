@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:index, :show] do
     get :solutions, on: :member
   end
+  resources :solutions, only: [:show]
   resources :tracks, only: [:index, :show] do
     member do
       post :join

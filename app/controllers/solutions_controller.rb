@@ -23,13 +23,25 @@ class SolutionsController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:track_id])
-    @exercise = @track.exercises.find(params[:exercise_id])
+    @solution = Solution.published.find_by_uuid!(params[:id])
 
-    begin
-      @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
-    rescue
-      return redirect_to [@track, @exercise]
+    # Allow /solutions/uuid to redirect, or if the solution isn't
+    # valid (not published etc) then redirect to sensible place if
+    # possible.
+    if @solution
+      @exercise = @solution.exercise
+      @track = @exercise.track
+      return redirect_to [@track, @exercise, @solution], :status => :moved_permanently if request.path != track_exercise_solution_path(@track, @exercise, @solution)
+
+    else
+      @track = Track.find(params[:track_id])
+      @exercise = @track.exercises.find(params[:exercise_id])
+
+      begin
+        @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
+      rescue
+        return redirect_to [@track, @exercise]
+      end
     end
 
     @iteration = @solution.iterations.last

@@ -17,7 +17,7 @@
       %h1 #{@track.title} Track
       .stats
         .stat= pluralize @track.exercises.count, "Exercise"
-        .stat= pluralize @track.user_tracks.count, "Students"
+        .stat #{number_with_delimiter(@track.user_tracks.count)} Students
         /.stat= pluralize @track.iterations.count, "Submissions"
         .stat= pluralize @track.mentorships.count, "Mentors"
       .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
