@@ -19,6 +19,11 @@ class My::ReactionsController < MyController
     else
       @reaction = Reaction.create(user: current_user, solution: @solution, emotion: params[:emotion])
     end
+
+    Solution.where(id: solution).update_all(
+      "num_reactions = (SELECT COUNT(*) from reactions where solution_id = #{solution.id})"
+    )
+
     @comments = @solution.reactions.with_comments.includes(user: :profile)
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
   end
