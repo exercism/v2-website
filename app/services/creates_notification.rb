@@ -8,6 +8,7 @@ class CreatesNotification
 
   VALID_NOTIFICATION_TYPES = %i{
     new_discussion_post
+    new_reaction
     new_discussion_post_for_mentor
     new_iteration_for_mentor
   }
