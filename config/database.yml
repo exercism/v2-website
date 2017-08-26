@@ -1,7 +1,10 @@
 default: &default
   adapter: mysql2
-  encoding: utf8
-  collation: utf8_unicode_ci
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+  #encoding: utf8
+  #collation: utf8_unicode_ci
   username: exercism_reboot
   password: exercism_reboot
   host: localhost
