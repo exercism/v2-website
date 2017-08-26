@@ -455,7 +455,16 @@
                 }
             }
             .text {
-                @include font-size(14, 20);
+                &, * {
+                    @include font-size(14, 20);
+                }
+                p {
+                    @include font-size(14, 20);
+                    margin-bottom:10px;
+                    &:last-child {
+                        margin-bottom:0;
+                    }
+                }
             }
         }
     }

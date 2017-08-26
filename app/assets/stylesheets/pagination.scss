@@ -1,0 +1,35 @@
+.pagination {
+    margin-bottom:20px;
+    text-align:center;
+    background:#fff;
+    padding:10px;
+    border:none;
+    .page, .next, .last, .prev, .first {
+        border:1px solid #ddd;
+        margin-right:8px;
+        margin-bottom:8px;
+        text-align:center;
+        display:inline-block;
+
+        &.current {
+            background:#aaa;
+            color:#fff;
+            border:1px solid #aaa;
+        }
+        &.current, &.gap, a {
+            padding:5px 11px;
+        }
+        &.gap {
+            border:none;
+            color: #ccc;
+            padding:0 0;
+        }
+        a {
+            color:#999;
+            text-decoration:none;
+            display:block;
+        }
+    }
+}
+
+

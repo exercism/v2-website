@@ -10,7 +10,7 @@
       .pure-u-1-3
         .icon
           =image_tag "track-page-students.png"
-        %h3= pluralize @track.user_tracks.size, "Student"
+        %h3 #{number_with_delimiter @track.user_tracks.size} Students
         .info 
           Join 
           -if @track.user_tracks.size >= 2000

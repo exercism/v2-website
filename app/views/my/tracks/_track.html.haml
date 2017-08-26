@@ -18,4 +18,4 @@
           #{num_completed_exercises.to_i} / #{num_exercises.to_i} exercises
       -else
         .num-exercises= pluralize num_exercises.to_i, "exercise"
-    .enrolled Joined by #{pluralize num_users.to_i, "students"}
+    .enrolled Joined by #{number_with_delimiter(num_users.to_i)} students
