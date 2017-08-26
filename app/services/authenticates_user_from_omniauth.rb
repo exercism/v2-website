@@ -23,7 +23,25 @@ class AuthenticatesUserFromOmniauth
 
     user = User.where(email: auth.info.email).first
     if user
-      user.update(provider: auth.provider, uid: auth.uid)
+      user.provider = auth.provider
+      user.uid = auth.uid
+
+      # If the user was not previously confirmed then
+      # we need to confirm them so they don't get blocked
+      # when trying to log in.
+      unless user.confirmed?
+        user.confirmed_at = DateTime.now
+
+        # We need to protect against:
+        # - Malicious person signs up with email/password
+        # - Real user oauths + confirms account
+        # - Malicious person can now use original password
+        #   to sign in
+        new_password = SecureRandom.uuid
+        user.password = new_password
+      end
+      user.save!
+
       return user
     end
 

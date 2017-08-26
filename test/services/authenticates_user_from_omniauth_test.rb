@@ -109,4 +109,26 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     assert_equal provider, user.provider
     assert_equal uid, user.uid
   end
+
+  test "confirms user and resets password on email match" do
+    Timecop.freeze do
+      user = create :user
+
+      new_password = "foobarqwe"
+      uid = SecureRandom.uuid
+      info = mock
+      info.stubs(email: user.email)
+      auth = mock
+      auth.stubs(provider: 'asd', uid: 'qwe', info: info)
+
+      SecureRandom.stubs(uuid: new_password)
+      actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+      assert_equal user, actual
+
+      user.reload
+      assert_equal DateTime.now.to_i, user.confirmed_at.to_i
+      assert user.valid_password?(new_password)
+    end
+  end
+
 end
