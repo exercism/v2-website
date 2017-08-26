@@ -14,6 +14,8 @@
       solution to
       .exercise #{solution.exercise.title}
     .extra
+      .language #{solution.exercise.track.title}
+      .divider &nbsp;
       .iteration Iteration ##{solution.iterations.count}
       .divider &nbsp;
       .submitted-at Submitted #{time_ago_in_words(solution.iterations.last.created_at)} ago
