@@ -57,6 +57,9 @@
                   .anon{style: user_track.anonymous?? "" : "display:none"}
                     =image_tag "anonymous.png"
                     =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, class: 'handle', placeholder: "Choose an alias for this track", required: user_track.anonymous?
+                %td
+                  -if user_track.errors.present?
+                    .error Not saved
 
           =button_tag "Update Privacy Settings", class: 'pure-button'
 
@@ -75,6 +78,7 @@
       } else {
         $default.show()
         $anon.hide()
+        $anon.find("input").val("")
       }
       $handle.attr('required', anon)
     })
