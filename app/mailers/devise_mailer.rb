@@ -5,4 +5,11 @@ class DeviseMailer < Devise::Mailer
     options[:subject] = "Reset password request from Exercism"
     super
   end
+
+  def confirmation_instructions(user, token, options={})
+    @user = user
+    @token = token
+    options[:subject] = "Confirm your Exercism account"
+    super
+  end
 end

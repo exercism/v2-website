@@ -13,7 +13,11 @@ class AuthenticatesUserFromOmniauth
   def authenticate
     user = User.where(provider: auth.provider, uid: auth.uid).first
     if user
-      user.update(email: auth.info.email) if user.email.ends_with?("@users.noreply.github.com")
+      if user.email.ends_with?("@users.noreply.github.com")
+        user.email = auth.info.email
+        user.skip_reconfirmation!
+        user.save!
+      end
       return user
     end
 
@@ -23,7 +27,7 @@ class AuthenticatesUserFromOmniauth
       return user
     end
 
-    user = User.create!(
+    user = User.new(
       provider: auth.provider,
       uid: auth.uid,
       email: auth.info.email,
@@ -32,6 +36,9 @@ class AuthenticatesUserFromOmniauth
       handle: handle,
       avatar_url: auth.info.image
     )
+    user.skip_confirmation!
+    user.save!
+
     BootstrapsUser.bootstrap(user, initial_track_id)
     user
   end

@@ -1,19 +1,14 @@
 @import 'variables';
 @import 'mixins';
 
-#landing-page .welcome-section .lhs,
-.lo-devise-page .lhs {
-
-}
-
 .lo-devise-page {
     .rhs {
         padding-top:30px;
         padding-left:20px;
-        .frame {
-            background:#f7f7f7;
-            padding:25px 45px;
-        }
+    }
+    .frame {
+        background:#f7f7f7;
+        padding:25px 45px;
     }
     h1 {
         @include header-font;
@@ -62,7 +57,7 @@
         }
     }
     .instruction {
-        @include font-size(14, 14);
+        @include font-size(14, 18);
         margin-bottom:12px;
     }
     input {
@@ -84,7 +79,8 @@
     }
     .sign-up,
     .log-in,
-    .reset-password {
+    .reset-password,
+    .confirmation-instructions {
         color:#666;
         @include font-size(14, 14);
         margin-bottom:10px;
@@ -98,4 +94,10 @@
     #notice {
         margin-bottom:15px;
     }
+    #notice {
+        border:1px solid #f5fdfb;
+        background:#fff;
+    }
+}
+#confirmation-required-page {
 }

@@ -5,10 +5,11 @@ class User < ApplicationRecord
   end
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
-         :validatable, :omniauthable, omniauth_providers: [:github]
+         :confirmable, :validatable,
+         :omniauthable, omniauth_providers: [:github]
 
   has_many :auth_tokens
   has_one :communication_preferences

@@ -1,0 +1,11 @@
+#confirmation-required-page.lo-devise-page
+  .lo-container
+    .pure-g
+      .pure-u-3-5.lhs= code_person_widget
+      .pure-u-2-5.rhs
+        .frame
+          %h1 Please check your email
+          .instruction Thanks for signing up!
+          .instruction To protect against abuse, we require that all emails are confirmed before you can use the site.
+          .instruction If you don't get an email, we can #{link_to "resend confirmation instructions", new_confirmation_path(resource_name)}.
+

@@ -39,8 +39,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',
+    confirmations: 'confirmations',
     omniauth_callbacks: "omniauth_callbacks"
   }
+
+  devise_scope :user do
+    get "confirmations/required" => "confirmations#required", as: 'confirmation_required'
+  end
 
   resources :profiles, only: [:index, :show] do
     get :solutions, on: :member

@@ -108,15 +108,14 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.bigint "iteration_id", null: false
     t.string "filename", null: false
     t.binary "file_contents", null: false
+    t.text "file_contents_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "file_contents_digest", null: false
     t.index ["iteration_id"], name: "fk_rails_56b435457f"
   end
 
   create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "solution_id", null: false
-    t.integer "mentor_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
@@ -206,9 +205,10 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.datetime "last_updated_by_mentor_at"
     t.integer "num_mentors", default: 0, null: false
     t.text "reflection"
+    t.boolean "is_legacy", default: false, null: false
+    t.boolean "boolean", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_legacy", default: false, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
@@ -289,12 +289,18 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.string "provider"
     t.string "uid"
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["handle"], name: "index_users_on_handle", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
