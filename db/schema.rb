@@ -116,7 +116,6 @@ ActiveRecord::Schema.define(version: 20170825173701) do
 
   create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.bigint "solution_id", null: false
-    t.integer "mentor_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
@@ -245,6 +244,24 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_283ecc719a"
   end
 
+  create_table "track_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.timestamp "completed_at"
+    t.bigint "track_update_id", null: false
+    t.string "host", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_update_id", "host"], name: "index_track_update_fetches_on_track_update_id_and_host", unique: true
+    t.index ["track_update_id"], name: "index_track_update_fetches_on_track_update_id"
+  end
+
+  create_table "track_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.bigint "track_id", null: false
+    t.timestamp "synced_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "index_track_updates_on_track_id"
+  end
+
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "slug", null: false
     t.string "title", null: false
@@ -323,6 +340,8 @@ ActiveRecord::Schema.define(version: 20170825173701) do
   add_foreign_key "testimonials", "tracks"
   add_foreign_key "track_mentorships", "tracks"
   add_foreign_key "track_mentorships", "users"
+  add_foreign_key "track_update_fetches", "track_updates"
+  add_foreign_key "track_updates", "tracks"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end

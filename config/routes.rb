@@ -36,6 +36,10 @@ Rails.application.routes.draw do
     resources :discussion_posts, only: [:create]
   end
 
+  namespace :webhooks do
+    resources :track_updates, only: [:create]
+  end
+
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',

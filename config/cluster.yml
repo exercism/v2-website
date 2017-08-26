@@ -1,0 +1,5 @@
+development:
+  num_webservers: 1
+
+production:
+  num_webservers: 3
