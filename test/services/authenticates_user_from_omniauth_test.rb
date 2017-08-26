@@ -39,7 +39,8 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
 
     info = mock
     info.stubs(email: user.email)
-    auth = mock(provider: "asda", uid: "12312", info: info)
+    auth = mock
+    auth.stubs(provider: 'asda', uid: '12312', info: info)
     actual = AuthenticatesUserFromOmniauth.authenticate(auth)
     assert_equal user, actual
   end
@@ -90,4 +91,22 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     user.reload
     assert_equal new_email, user.email
   end
+
+  test "updates provider and uuid" do
+    provider = "foobar"
+    uid = "bizzzz"
+    email = "dog@cat.com"
+    user = create :user, email: email
+
+    auth = mock
+    auth.stubs(provider: provider, uid: uid, info: mock(email: email))
+
+    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    assert_equal user, actual
+
+    user.reload
+    assert_equal provider, user.provider
+    assert_equal uid, user.uid
+  end
+
 end

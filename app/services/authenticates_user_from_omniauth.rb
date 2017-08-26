@@ -18,7 +18,10 @@ class AuthenticatesUserFromOmniauth
     end
 
     user = User.where(email: auth.info.email).first
-    return user if user
+    if user
+      user.update(provider: auth.provider, uid: auth.uid)
+      return user
+    end
 
     user = User.create!(
       provider: auth.provider,
