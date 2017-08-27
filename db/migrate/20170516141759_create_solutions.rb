@@ -19,7 +19,7 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
 
       t.text :reflection, null: true
 
-      t.boolean :is_legacy, :boolean, null: false, default: false
+      t.boolean :is_legacy, null: false, default: false
 
       t.timestamps
     end
