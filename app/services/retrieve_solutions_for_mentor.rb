@@ -15,7 +15,8 @@ class RetrieveSolutionsForMentor
       else
         retrieve_require_action
       end
-    solutions.includes(iterations: [], exercise: {track: []}, user: [:profile])
+    solutions.includes(iterations: [], exercise: {track: []}, user: [:profile]).
+              limit(20) # TODO - Paginate
   end
 
   def retrieve_require_action
