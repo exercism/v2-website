@@ -13,17 +13,39 @@ class AuthenticatesUserFromOmniauth
   def authenticate
     user = User.where(provider: auth.provider, uid: auth.uid).first
     if user
-      user.update(email: auth.info.email) if user.email.ends_with?("@users.noreply.github.com")
+      if user.email.ends_with?("@users.noreply.github.com")
+        user.email = auth.info.email
+        user.skip_reconfirmation!
+        user.save!
+      end
       return user
     end
 
     user = User.where(email: auth.info.email).first
     if user
-      user.update(provider: auth.provider, uid: auth.uid)
+      user.provider = auth.provider
+      user.uid = auth.uid
+
+      # If the user was not previously confirmed then
+      # we need to confirm them so they don't get blocked
+      # when trying to log in.
+      unless user.confirmed?
+        user.confirmed_at = DateTime.now
+
+        # We need to protect against:
+        # - Malicious person signs up with email/password
+        # - Real user oauths + confirms account
+        # - Malicious person can now use original password
+        #   to sign in
+        new_password = SecureRandom.uuid
+        user.password = new_password
+      end
+      user.save!
+
       return user
     end
 
-    user = User.create!(
+    user = User.new(
       provider: auth.provider,
       uid: auth.uid,
       email: auth.info.email,
@@ -32,6 +54,9 @@ class AuthenticatesUserFromOmniauth
       handle: handle,
       avatar_url: auth.info.image
     )
+    user.skip_confirmation!
+    user.save!
+
     BootstrapsUser.bootstrap(user, initial_track_id)
     user
   end

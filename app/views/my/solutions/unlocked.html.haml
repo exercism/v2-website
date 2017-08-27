@@ -17,14 +17,16 @@
     .blurb
       = @next_core_exercise.blurb
 
--if @solution.approved? && @unlocked_side_exercises.size > 0
+-if @unlocked_side_exercises_and_solutions.size > 0
   .side-exercises
     %h4
       You have also unlocked
-      %strong #{@unlocked_side_exercises.size}
+      %strong #{@unlocked_side_exercises_and_solutions.size}
       bonus exercises:
-    -@unlocked_side_exercises.each do |side_exercise|
-      .side-exercise
-        =image_tag side_exercise.turquoise_icon_url
+    -@unlocked_side_exercises_and_solutions.each do |exercise, solution|
+      =link_to [:my, solution], target: "_blank", class: 'side-exercise' do
+        =image_tag exercise.turquoise_icon_url, class: 'turquoise'
+        =image_tag exercise.white_icon_url, class: 'white'
+        .tooltip= exercise.title
 
 =link_to "Go to track", [:my, @solution.exercise.track], class: 'pure-button'

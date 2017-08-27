@@ -15,8 +15,11 @@ class CreateSolutions < ActiveRecord::Migration[5.1]
       t.datetime :last_updated_by_user_at, null: true
       t.datetime :last_updated_by_mentor_at, null: true
       t.integer :num_mentors, null: false, default: 0
+      t.integer :num_reactions, null: false, default: 0
 
       t.text :reflection, null: true
+
+      t.boolean :is_legacy, null: false, default: false
 
       t.timestamps
     end

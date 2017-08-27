@@ -84,28 +84,31 @@
               %li What compromises have been made?
               %li Are there new concepts here that I could read more about to develop my understanding?
 
--#
-  .comments-section
-    .lo-container
-      .pure-g
-        .pure-u-1-2
-          %h2 Community Comments
-          .h2-subtitle See what others have said about this solution
-          -@comments.each do |reaction|
-            .comment.pure-g
-              .pure-u-2-24
-                -if reaction.emotion == "like"
-                  %i.fa.fa-thumbs-up
-                -if reaction.emotion == "love"
-                  %i.fa.fa-heart
-                -if reaction.emotion == "genius"
-                  =image_tag "genius-turquoise.png"
-              .pure-u-22-24.content
-                .when #{time_ago_in_words(reaction.created_at)} ago
-                .who
-                  %strong #{display_name reaction.user}
-                  says
-                .text= reaction.comment
+  -if @comments.size > 0
+    .comments-section
+      .lo-container
+        .pure-g
+          .pure-u-1-2
+            %h2 Community Comments
+            .h2-subtitle See what others have said about this solution
+            -@comments.each do |reaction|
+              .comment.pure-g
+                .pure-u-2-24
+                  -if reaction.emotion == "like"
+                    %i.fa.fa-thumbs-up
+                  -elsif reaction.emotion == "love"
+                    %i.fa.fa-heart
+                  -elsif reaction.emotion == "genius"
+                    =image_tag "genius-turquoise.png"
+                  -else reaction.emotion == "legacy"
+                    %i.fa.fa-comment
+
+                .pure-u-22-24.content
+                  .when #{time_ago_in_words(reaction.created_at)} ago
+                  .who
+                    %strong #{reaction.user.handle}
+                    says
+                  .text= simple_format reaction.comment
 
 -content_for :js do
   :coffeescript

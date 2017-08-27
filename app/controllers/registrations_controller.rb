@@ -9,6 +9,10 @@ class RegistrationsController < Devise::RegistrationsController
      end
   end
 
+  def after_inactive_sign_up_path_for(resource)
+    confirmation_required_path
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :handle])
   end

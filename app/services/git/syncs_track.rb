@@ -96,7 +96,7 @@ class Git::SyncsTrack
     exercise_data = {
       slug: exercise_slug,
       title: exercise_slug.titleize,
-      core: (position <= 10),
+      core: respect_core?? exercise.fetch(:core, false) : (position <= 10),
       active: exercise.fetch(:active, true),
       position: position,
       difficulty: exercise.fetch(:difficulty, 1),
@@ -184,5 +184,10 @@ class Git::SyncsTrack
       ps.fetch!
       ps
     end
+  end
+
+  def respect_core?
+    return @respect_core unless @respect_core === nil
+    @respect_core = exercises.any? { |e| e[:core] }
   end
 end

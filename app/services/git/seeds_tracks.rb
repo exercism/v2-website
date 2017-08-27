@@ -7,7 +7,7 @@ class Git::SeedsTracks
     https://github.com/exercism/cpp
     https://github.com/exercism/clojure
     https://github.com/exercism/coffeescript
-    https://github.com/exercism/lisp
+    https://github.com/exercism/common-lisp
     https://github.com/exercism/crystal
     https://github.com/exercism/d
     https://github.com/exercism/delphi
@@ -58,6 +58,13 @@ class Git::SeedsTracks
       Git::SeedsTrack.seed!(repo_url)
     end
     Track.find_each do |track|
+      puts "===== Fetching #{track.slug} ====="
+      begin
+        Git::FetchTrack.sync!(track)
+      rescue => e
+        puts e.message
+      end
+
       puts "===== Syncing #{track.slug} ====="
       begin
         Git::SyncsTrack.sync!(track)
@@ -67,5 +74,4 @@ class Git::SeedsTracks
     end
     ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
   end
-
 end

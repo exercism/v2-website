@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170825173701) do
 
-  create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "token", null: false
     t.datetime "created_at", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_0d66c22f4c"
   end
 
-  create_table "communication_preferences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "communication_preferences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.boolean "email_on_new_discussion_post", default: true, null: false
     t.boolean "email_on_new_discussion_post_for_mentor", default: true, null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
-  create_table "contributors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "contributors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "github_username", null: false
     t.string "avatar_url", null: false
     t.integer "num_contributions", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["is_maintainer", "is_core", "num_contributions"], name: "main_find_idx"
   end
 
-  create_table "discussion_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "discussion_posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "iteration_id", null: false
     t.bigint "user_id", null: false
     t.text "content", limit: 4294967295, null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["iteration_id"], name: "fk_rails_f58a02b68e"
   end
 
-  create_table "exercise_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "exercise_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "exercise_id", null: false
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["topic_id"], name: "fk_rails_0e642b953e"
   end
 
-  create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "track_id", null: false
     t.bigint "unlocked_by_id"
     t.string "uuid", null: false
@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["unlocked_by_id"], name: "fk_rails_03ec4ffbf3"
   end
 
-  create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "slug", null: false
+  create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.string "slug", limit: 190, null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
-    t.string "scope"
+    t.string "scope", limit: 190
     t.datetime "created_at"
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "ignored_solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "ignored_solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "solution_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -104,25 +104,24 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_7b8f6c3112"
   end
 
-  create_table "iteration_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "iteration_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "iteration_id", null: false
     t.string "filename", null: false
     t.binary "file_contents", null: false
+    t.text "file_contents_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "file_contents_digest", null: false
     t.index ["iteration_id"], name: "fk_rails_56b435457f"
   end
 
-  create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "iterations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "solution_id", null: false
-    t.integer "mentor_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
   end
 
-  create_table "maintainers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "maintainers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "track_id", null: false
     t.bigint "user_id"
     t.string "name", null: false
@@ -139,7 +138,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_5b1168410c"
   end
 
-  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "about_type"
     t.bigint "about_id"
@@ -154,7 +153,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_b080fb4855"
   end
 
-  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "display_name", null: false
     t.string "twitter"
@@ -167,7 +166,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_e424190865"
   end
 
-  create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "solution_id", null: false
     t.bigint "user_id", null: false
     t.integer "emotion", null: false
@@ -178,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_9f02fc96a0"
   end
 
-  create_table "solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "solution_id", null: false
     t.boolean "abandoned", default: false, null: false
@@ -192,7 +191,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_578676d431"
   end
 
-  create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "uuid", null: false
     t.bigint "exercise_id", null: false
@@ -205,16 +204,18 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.datetime "last_updated_by_user_at"
     t.datetime "last_updated_by_mentor_at"
     t.integer "num_mentors", default: 0, null: false
+    t.integer "num_reactions", default: 0, null: false
     t.text "reflection"
+    t.boolean "is_legacy", default: false, null: false
+    t.boolean "boolean", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_legacy", default: false, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
 
-  create_table "testimonials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "testimonials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "track_id"
     t.string "headline", null: false
     t.text "content", null: false
@@ -224,14 +225,14 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["track_id"], name: "fk_rails_c5eac2171d"
   end
 
-  create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "track_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "track_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "track_id", null: false
     t.string "handle"
@@ -245,7 +246,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_283ecc719a"
   end
 
-  create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "slug", null: false
     t.string "title", null: false
     t.string "repo_url", null: false
@@ -262,7 +263,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "track_id", null: false
     t.boolean "anonymous", default: false, null: false
@@ -274,14 +275,14 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_99e944edbc"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
-    t.string "handle", null: false
+    t.string "handle", limit: 190, null: false
     t.string "avatar_url"
     t.text "bio"
-    t.string "email", default: "", null: false
+    t.string "email", limit: 190, default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "reset_password_token", limit: 190
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
@@ -289,15 +290,26 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "confirmation_token", limit: 190
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.string "provider"
     t.string "uid"
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["handle"], name: "index_users_on_handle", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "auth_tokens", "users"
+  add_foreign_key "communication_preferences", "users"
+  add_foreign_key "discussion_posts", "iterations"
+  add_foreign_key "exercise_topics", "exercises"
+  add_foreign_key "exercise_topics", "topics"
   add_foreign_key "exercises", "exercises", column: "unlocked_by_id"
   add_foreign_key "exercises", "tracks"
   add_foreign_key "ignored_solution_mentorships", "solutions"

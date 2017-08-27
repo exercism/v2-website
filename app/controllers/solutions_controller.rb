@@ -3,7 +3,7 @@ class SolutionsController < ApplicationController
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
 
-    @solutions = @exercise.solutions.published.includes(:user)
+    @solutions = @exercise.solutions.published.reorder('solutions.num_reactions DESC').includes(:user)
 
     if user_signed_in?
       @solutions = @solutions.where.not(user_id: current_user.id)
@@ -15,7 +15,7 @@ class SolutionsController < ApplicationController
     end
 
     @total_solutions = @solutions.count
-    @solutions = @solutions.page(params[:page]).per(20)
+    @solutions = @solutions.page(params[:page]).per(21)
     @reaction_counts = Reaction.where(solution_id: @solutions.map(&:id)).group(:solution_id, :emotion).count
     @comment_counts = Reaction.where(solution_id: @solutions.map(&:id)).with_comments.group(:solution_id).count
     @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
@@ -23,13 +23,25 @@ class SolutionsController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:track_id])
-    @exercise = @track.exercises.find(params[:exercise_id])
+    @solution = Solution.published.find_by_uuid!(params[:id])
 
-    begin
-      @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
-    rescue
-      return redirect_to [@track, @exercise]
+    # Allow /solutions/uuid to redirect, or if the solution isn't
+    # valid (not published etc) then redirect to sensible place if
+    # possible.
+    if @solution
+      @exercise = @solution.exercise
+      @track = @exercise.track
+      return redirect_to [@track, @exercise, @solution], :status => :moved_permanently if request.path != track_exercise_solution_path(@track, @exercise, @solution)
+
+    else
+      @track = Track.find(params[:track_id])
+      @exercise = @track.exercises.find(params[:exercise_id])
+
+      begin
+        @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
+      rescue
+        return redirect_to [@track, @exercise]
+      end
     end
 
     @iteration = @solution.iterations.last
