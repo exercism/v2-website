@@ -37,11 +37,13 @@ class SelectsSuggestedSolutionsForMentor
       # Not completed
       where(completed_at: nil).
 
-      # Order by number of mentors (least first), 
+      # Order by number of mentors (least first),
       # then age (oldest first)
       order("num_mentors ASC, last_updated_by_user_at ASC").
 
-      includes(iterations: [], exercise: {track: []}, user: [:profile])
+      includes(iterations: [], exercise: {track: []}, user: [:profile]).
+
+      limit(20)
   end
 
   def tracks
