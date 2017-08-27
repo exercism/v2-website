@@ -31,6 +31,7 @@ class Git::SeedsTracks
     https://github.com/exercism/plsql
     https://github.com/exercism/perl5
     https://github.com/exercism/perl6
+    https://github.com/exercism/purescript
     https://github.com/exercism/python
     https://github.com/exercism/r
     https://github.com/exercism/racket
