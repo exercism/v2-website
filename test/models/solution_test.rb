@@ -13,4 +13,9 @@ class SolutionTest < ActiveSupport::TestCase
     assert_equal instructions, solution.instructions
     assert_equal test_suite, solution.test_suite
   end
+
+  test "uuid has no hyphens" do
+    solution = create :solution
+    refute solution.uuid.include?('-')
+  end
 end
