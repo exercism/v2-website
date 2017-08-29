@@ -1,5 +1,6 @@
 class RepoUpdate < ApplicationRecord
   validates :slug, presence: true
+  validates :repo, presence: true
 
   has_many :repo_update_fetches, dependent: :destroy
 
@@ -10,7 +11,13 @@ class RepoUpdate < ApplicationRecord
     when "website-copy"
       Git::WebsiteContent.head
     else
-      Track.find_by!(slug: slug).repo
+      track.repo
     end
+  end
+
+  private
+
+  def track
+    Track.find_by(slug: slug) || NullTrack.new
   end
 end
