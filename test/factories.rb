@@ -126,4 +126,8 @@ FactoryGirl.define do
     user { create :user }
     track { create :track }
   end
+
+  factory :repo_update do
+    slug "go"
+  end
 end

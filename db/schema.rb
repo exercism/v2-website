@@ -177,6 +177,13 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_9f02fc96a0"
   end
 
+  create_table "repo_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.timestamp "synced_at"
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "solution_mentorships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.bigint "solution_id", null: false
