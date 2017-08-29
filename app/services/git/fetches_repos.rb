@@ -1,62 +1,34 @@
 class Git::FetchesRepos
 
-  QUIET_PERIOD = 30.seconds
   ERROR_BACKOFF_PERIOD = 10.seconds
+  FETCH_BACKOFF_PERIOD = 1.second
 
-  def self.run
-    new.run
+  def self.fetch(repos)
+    new(repos).fetch
   end
 
-  def run
-    loop do
-      fetch_problem_specs
-      fetch_website_content
-      Track.find_each do |track|
-        fetch(track)
-        sleep 1.second
-      end
-      sleep QUIET_PERIOD
+  def initialize(repos)
+    @repos = repos
+  end
+
+  def fetch
+    repos.each do |repo|
+      fetch_repo(repo)
+      sleep FETCH_BACKOFF_PERIOD
     end
   end
 
   private
+  attr_reader :repos
 
-  def fetch_problem_specs
-    Rails.logger.info "Fetching problem specs"
-    Git::ProblemSpecifications.head.fetch!
+  def fetch_repo(repo)
+    Rails.logger.info "Fetching #{repo.repo_url}"
+    repo.fetch!
+    Rails.logger.info "Done #{repo.repo_url}. Current HEAD commit is #{repo.head}"
   rescue => e
-    Rails.logger.error "Exception while problem specs"
+    Rails.logger.error "Exception while fetching repo"
     Rails.logger.error e.message
     Rails.logger.error e.backtrace
     sleep ERROR_BACKOFF_PERIOD
   end
-
-  def fetch_website_content
-    Rails.logger.info "Fetching website content"
-    Git::WebsiteContent.head.fetch!
-  rescue => e
-    Rails.logger.error "Exception while website content"
-    Rails.logger.error e.message
-    Rails.logger.error e.backtrace
-    sleep ERROR_BACKOFF_PERIOD
-  end
-
-  def fetch(track)
-    repo_url = track.repo_url
-    if repo_url.start_with?("http://example.com")
-      Rails.logger.info "Skipping fetch for #{repo_url}"
-    else
-      Rails.logger.info "Fetching #{repo_url}"
-      repo = Git::ExercismRepo.new(repo_url)
-      repo.fetch!
-      head_commit = repo.head
-      Rails.logger.info "Done #{repo_url}. Current HEAD commit is #{head_commit}"
-    end
-  rescue => e
-    Rails.logger.error "Exception while fetching track"
-    Rails.logger.error e.message
-    Rails.logger.error e.backtrace
-    sleep ERROR_BACKOFF_PERIOD
-  end
-
 end

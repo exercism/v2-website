@@ -10,6 +10,6 @@ namespace :git do
     trap('SIGINT') { puts "Fetch Processor interrupted"; exit }
     trap('SIGTERM') { puts "Fetch Processor terminated"; exit }
     Rails.logger = Logger.new(STDOUT)
-    Git::FetchesTracks.run
+    Git::FetchesUpdatedRepos.run
   end
 end
