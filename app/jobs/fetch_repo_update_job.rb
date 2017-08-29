@@ -6,7 +6,7 @@ class FetchRepoUpdateJob < ApplicationJob
 
     repo_update_fetch = RepoUpdateFetch.create!(
       repo_update: repo_update,
-      host: Socket.gethostname
+      host: ClusterConfig.server_identity
     )
 
     job.repo_update_fetch_id = repo_update_fetch.id

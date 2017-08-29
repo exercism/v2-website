@@ -41,7 +41,7 @@ class Git::FetchesUpdatedRepos
     RepoUpdate.
       includes(:repo_update_fetches).
       where(synced_at: nil).
-      where.not(repo_update_fetches: { host: Socket.gethostname }).
+      where.not(repo_update_fetches: { host: ClusterConfig.server_identity }).
       first
   end
 

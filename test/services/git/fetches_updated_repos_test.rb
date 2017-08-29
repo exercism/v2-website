@@ -9,7 +9,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
     repo_update_fetch = create(:repo_update_fetch,
                                 repo_update: repo_update,
                                 host: host_name)
-    Socket.stubs(:gethostname).returns(host_name)
+    ClusterConfig.stubs(:server_identity).returns(host_name)
 
     assert_no_enqueued_jobs do
       Git::FetchesUpdatedRepos.fetch
@@ -29,7 +29,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
     repo_update_fetch = create(:repo_update_fetch,
                                 repo_update: repo_update,
                                 host: "host-1")
-    Socket.stubs(:gethostname).returns("host-2")
+    ClusterConfig.stubs(:server_identity).returns("host-2")
 
     assert_no_enqueued_jobs do
       Git::FetchesUpdatedRepos.fetch
@@ -49,7 +49,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
     repo_update_fetch = create(:repo_update_fetch,
                          repo_update: repo_update,
                          host: "host-1")
-    Socket.stubs(:gethostname).returns("host-2")
+    ClusterConfig.stubs(:server_identity).returns("host-2")
 
     assert_enqueued_with(job: FetchRepoUpdateJob, args: [repo_update.id]) do
       Git::FetchesUpdatedRepos.fetch

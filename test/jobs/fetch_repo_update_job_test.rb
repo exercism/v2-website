@@ -6,7 +6,7 @@ class FetchRepoUpdateJobTest < ActiveJob::TestCase
     track = create(:track, slug: "ruby")
     repo_update = create(:repo_update, slug: "ruby")
     host_name = "host"
-    Socket.stubs(:gethostname).returns(host_name)
+    ClusterConfig.stubs(:server_identity).returns(host_name)
 
     FetchRepoUpdateJob.perform_now(repo_update.id)
 
@@ -29,7 +29,7 @@ class FetchRepoUpdateJobTest < ActiveJob::TestCase
     track = create(:track, slug: "ruby")
     repo_update = create(:repo_update, slug: "ruby")
     host_name = "host"
-    Socket.stubs(:gethostname).returns(host_name)
+    ClusterConfig.stubs(:server_identity).returns(host_name)
 
     FetchRepoUpdateJob.perform_now(repo_update.id)
 

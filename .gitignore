@@ -24,3 +24,5 @@
 .byebug_history
 
 /app/assets/images/tmp
+
+server_identity
