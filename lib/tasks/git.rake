@@ -3,7 +3,7 @@ namespace :git do
     trap('SIGINT') { puts "Sync Processor interrupted"; exit }
     trap('SIGTERM') { puts "Sync Processor terminated"; exit }
     Rails.logger = Logger.new(STDOUT)
-    Git::SyncsTracks.sync
+    Git::SyncsUpdatedRepos.run
   end
 
   task :fetch => :environment do
