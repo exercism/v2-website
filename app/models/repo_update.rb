@@ -1,6 +1,8 @@
 class RepoUpdate < ApplicationRecord
   validates :slug, presence: true
 
+  has_many :repo_update_fetches, dependent: :destroy
+
   def repo
     case slug
     when "problem-specifications"

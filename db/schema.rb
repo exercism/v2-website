@@ -177,6 +177,16 @@ ActiveRecord::Schema.define(version: 20170825173701) do
     t.index ["user_id"], name: "fk_rails_9f02fc96a0"
   end
 
+  create_table "repo_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.timestamp "completed_at"
+    t.bigint "repo_update_id", null: false
+    t.string "host", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repo_update_id", "host"], name: "index_repo_update_fetches_on_repo_update_id_and_host", unique: true
+    t.index ["repo_update_id"], name: "index_repo_update_fetches_on_repo_update_id"
+  end
+
   create_table "repo_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.timestamp "synced_at"
     t.string "slug", null: false
@@ -329,6 +339,7 @@ ActiveRecord::Schema.define(version: 20170825173701) do
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "solutions"
   add_foreign_key "reactions", "users"
+  add_foreign_key "repo_update_fetches", "repo_updates"
   add_foreign_key "solution_mentorships", "solutions"
   add_foreign_key "solution_mentorships", "users"
   add_foreign_key "solutions", "exercises"
