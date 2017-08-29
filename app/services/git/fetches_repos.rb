@@ -1,4 +1,4 @@
-class Git::FetchesTracks
+class Git::FetchesRepos
 
   QUIET_PERIOD = 30.seconds
   ERROR_BACKOFF_PERIOD = 10.seconds
