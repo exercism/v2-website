@@ -54,6 +54,10 @@ class Git::ExercismRepo < Git::RepoBase
     pattern.present?? Regexp.new(pattern) : /[eE]xample/
   end
 
+  def ==(other)
+    repo_url == other.repo_url
+  end
+
   private
 
   def read_about(commit)
