@@ -25,7 +25,12 @@ class Solution < ApplicationRecord
   end
 
   before_create do
-    self.uuid = SecureRandom.uuid
+    # Search engines derive meaning by using hyphens
+    # as word-boundaries in URLs. Since we use the
+    # solution UUID for URLs, we're removing the hyphen
+    # to remove any spurious, accidental, and arbitrary
+    # meaning.
+    self.uuid = SecureRandom.uuid.gsub('-', '')
   end
 
   def to_param
