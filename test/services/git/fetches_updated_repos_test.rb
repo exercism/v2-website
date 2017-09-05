@@ -11,17 +11,17 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
                                 host: host_name)
     ClusterConfig.stubs(:server_identity).returns(host_name)
 
-    assert_no_enqueued_jobs do
-      Git::FetchesUpdatedRepos.fetch
-    end
+    FetchRepoUpdateJob.expects(:perform_now).never
+
+    Git::FetchesUpdatedRepos.fetch
   end
 
   test "does not fetch an already synced repo update" do
     repo_update = create(:repo_update, synced_at: Time.current)
 
-    assert_no_enqueued_jobs do
-      Git::FetchesUpdatedRepos.fetch
-    end
+    FetchRepoUpdateJob.expects(:perform_now).never
+
+    Git::FetchesUpdatedRepos.fetch
   end
 
   test "does not fetch an already synced repo update with previous fetches" do
@@ -31,17 +31,17 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
                                 host: "host-1")
     ClusterConfig.stubs(:server_identity).returns("host-2")
 
-    assert_no_enqueued_jobs do
-      Git::FetchesUpdatedRepos.fetch
-    end
+    FetchRepoUpdateJob.expects(:perform_now).never
+
+    Git::FetchesUpdatedRepos.fetch
   end
 
   test "fetches a repo update if no fetches by any host yet" do
     repo_update = create(:repo_update, repo_update_fetches: [])
 
-    assert_enqueued_with(job: FetchRepoUpdateJob, args: [repo_update.id]) do
-      Git::FetchesUpdatedRepos.fetch
-    end
+    FetchRepoUpdateJob.expects(:perform_now).with(repo_update.id)
+
+    Git::FetchesUpdatedRepos.fetch
   end
 
   test "fetches a repo update if not yet fetched by host" do
@@ -51,8 +51,8 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
                          host: "host-1")
     ClusterConfig.stubs(:server_identity).returns("host-2")
 
-    assert_enqueued_with(job: FetchRepoUpdateJob, args: [repo_update.id]) do
-      Git::FetchesUpdatedRepos.fetch
-    end
+    FetchRepoUpdateJob.expects(:perform_now).with(repo_update.id)
+
+    Git::FetchesUpdatedRepos.fetch
   end
 end

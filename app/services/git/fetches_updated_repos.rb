@@ -46,6 +46,6 @@ class Git::FetchesUpdatedRepos
   end
 
   def fetch_repo_update
-    FetchRepoUpdateJob.perform_later(repo_update.id)
+    FetchRepoUpdateJob.perform_now(repo_update.id)
   end
 end
