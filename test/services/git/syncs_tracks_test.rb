@@ -17,4 +17,15 @@ class Git::SyncsTracksTest < ActiveSupport::TestCase
 
     Git::SyncsTracks.sync([track])
   end
+
+  test "approves hello world exercises" do
+    Git::ProblemSpecifications.stubs(:head).returns(stub(:fetch!))
+    exercise = create(:exercise, slug: "hello-world", auto_approve: false)
+
+    Git::SyncsTracks.sync([])
+
+    exercise.reload
+
+    assert exercise.auto_approve?
+  end
 end
