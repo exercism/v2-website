@@ -36,7 +36,17 @@ namespace :sidekiq do
   end
 end
 
+namespace :memcached do
+  task :restart do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      execute "sudo /usr/sbin/service memcached restart"
+    end
+  end
+end
+
 after "deploy:starting", "sidekiq:shutdown"
 after "deploy:published", "puma_service:restart"
 after "deploy:published", "sidekiq:restart"
 after "deploy:published", "git_sync:restart"
+
+
