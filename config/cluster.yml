@@ -4,7 +4,7 @@ development:
 
 production:
   num_webservers: 2
-  server_identity_file: /etc/exercism/server_identity
+  server_identity_file: /etc/exercism/server-identity
 
 test:
   server_identity_file: test/fixtures/server_identity
