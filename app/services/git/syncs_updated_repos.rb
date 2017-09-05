@@ -33,7 +33,7 @@ class Git::SyncsUpdatedRepos
       joins(:repo_update_fetches).
       where(synced_at: nil).
       where.not(repo_update_fetches: { completed_at: nil }).
-      group("repo_update_fetches.id").
+      group("repo_update_id").
       having("count(repo_update_id) = #{ClusterConfig.num_webservers}").
       first
   end

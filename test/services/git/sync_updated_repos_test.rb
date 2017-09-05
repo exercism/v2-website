@@ -2,10 +2,10 @@ require 'test_helper'
 
 class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
   test "syncs a fully fetched track update" do
-    ClusterConfig.stubs(:num_webservers).returns(1)
+    ClusterConfig.stubs(:num_webservers).returns(2)
     repo_update = create(:repo_update)
     create_list(:repo_update_fetch,
-                1,
+                2,
                 repo_update: repo_update,
                 completed_at: Time.current)
 

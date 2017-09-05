@@ -133,6 +133,6 @@ FactoryGirl.define do
 
   factory :repo_update_fetch do
     repo_update { create(:repo_update) }
-    host "host-1"
+    host { |n| "host-#{n}" }
   end
 end
