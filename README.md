@@ -16,6 +16,12 @@ mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_development.* TO 'exercism_reb
 mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'localhost'" -u root -p
 ```
 
+### Server identity
+
+```bash
+$ echo "host" > server_identity
+```
+
 ### Running the application
 
 Something like this will get a working webserver on http://localhost:3000.

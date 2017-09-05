@@ -14,6 +14,10 @@ class Git::WebsiteContent < Git::RepoBase
     super
   end
 
+  def ==(other)
+    repo_url == other.repo_url
+  end
+
   def pages
     FolderReader.new(self, head_commit, 'pages')
   end

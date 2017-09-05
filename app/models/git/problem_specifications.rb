@@ -10,6 +10,10 @@ class Git::ProblemSpecifications < Git::RepoBase
     super
   end
 
+  def ==(other)
+    repo_url == other.repo_url
+  end
+
   def exercises
     Exercises.new(self, head_commit)
   end

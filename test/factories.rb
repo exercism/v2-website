@@ -126,4 +126,13 @@ FactoryGirl.define do
     user { create :user }
     track { create :track }
   end
+
+  factory :repo_update do
+    slug "website-copy"
+  end
+
+  factory :repo_update_fetch do
+    repo_update { create(:repo_update) }
+    host "host-1"
+  end
 end

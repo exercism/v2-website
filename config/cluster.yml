@@ -1,0 +1,10 @@
+development:
+  num_webservers: 1
+  server_identity_file: server_identity
+
+production:
+  num_webservers: 2
+  server_identity_file: /etc/exercism/server_identity
+
+test:
+  server_identity_file: test/fixtures/server_identity
