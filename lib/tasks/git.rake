@@ -1,4 +1,8 @@
 namespace :git do
+  task :update_repos => :environment do
+    Git::UpdatesRepos.update
+  end
+
   task :sync => :environment do
     trap('SIGINT') { puts "Sync Processor interrupted"; exit }
     trap('SIGTERM') { puts "Sync Processor terminated"; exit }
