@@ -1,4 +1,7 @@
 class RepoUpdate < ApplicationRecord
+  PROBLEM_SPEC_SLUG = "problem-specifications"
+  WEBSITE_COPY_SLUG = "website-copy"
+
   validates :slug, presence: true
   validates :repo, presence: true
 
@@ -6,9 +9,9 @@ class RepoUpdate < ApplicationRecord
 
   def repo
     case slug
-    when "problem-specifications"
+    when PROBLEM_SPEC_SLUG
       Git::ProblemSpecifications.head
-    when "website-copy"
+    when WEBSITE_COPY_SLUG
       Git::WebsiteContent.head
     else
       track.repo
