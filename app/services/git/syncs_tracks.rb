@@ -11,12 +11,25 @@ class Git::SyncsTracks
 
   def sync
     puts "Syncing tracks"
-    tracks.each { |track| sync_track(track) }
-    ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
+    fetch_problem_specs
+    sync_tracks
+    approve_hello_world_exercises
   end
 
   private
   attr_reader :tracks
+
+  def fetch_problem_specs
+    Git::ProblemSpecifications.head.fetch!
+  end
+
+  def sync_tracks
+    tracks.each { |track| sync_track(track) }
+  end
+
+  def approve_hello_world_exercises
+    ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
+  end
 
   def sync_track(track)
     puts "Sync track #{track.id}"
