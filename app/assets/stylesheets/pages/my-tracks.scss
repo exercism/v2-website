@@ -161,6 +161,9 @@
                 left:0;
                 background:#dcf2f3;
             }
+            .num {
+                position:relative;
+            }
         }
         .enrolled {
             @include font-size(12, 12);
