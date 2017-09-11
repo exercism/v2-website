@@ -36,33 +36,35 @@
               Helped
               .count #{@helped_count}
               = "student".pluralize(@helped_count)
-          .hr
-          %h3 Elsewhere on the web
 
-          -if @profile.website.present?
-            =link_to @profile.website, target: "_blank", class: 'external-link' do
-              %i.fa.fa-fw.fa-globe
-              %span My Website
+          -if @profile.has_external_links?
+            .hr
+            %h3 Elsewhere on the web
 
-          -if @profile.github.present?
-            =link_to "https://github.com/#{@profile.github}", target: "_blank", class: 'external-link' do
-              %i.fa.fa-fw.fa-github
-              %span GitHub
+            -if @profile.website.present?
+              =link_to @profile.website, target: "_blank", class: 'external-link' do
+                %i.fa.fa-fw.fa-globe
+                %span My Website
 
-          -if @profile.twitter.present?
-            =link_to "https://twitter.com/#{@profile.twitter}", target: "_blank", class: 'external-link' do
-              %i.fa.fa-fw.fa-twitter
-              %span Twitter
+            -if @profile.github.present?
+              =link_to "https://github.com/#{@profile.github}", target: "_blank", class: 'external-link' do
+                %i.fa.fa-fw.fa-github
+                %span GitHub
 
-          -if @profile.linkedin.present?
-            =link_to @profile.linkedin, target: "_blank", class: 'external-link' do
-              %i.fa.fa-fw.fa-linkedin
-              %span LinkedIn
+            -if @profile.twitter.present?
+              =link_to "https://twitter.com/#{@profile.twitter}", target: "_blank", class: 'external-link' do
+                %i.fa.fa-fw.fa-twitter
+                %span Twitter
 
-          -if @profile.medium.present?
-            =link_to "https://medium.com/#{@profile.medium}", target: "_blank", class: 'external-link' do
-              %i.fa.fa-fw.fa-medium
-              %span Medium
+            -if @profile.linkedin.present?
+              =link_to @profile.linkedin, target: "_blank", class: 'external-link' do
+                %i.fa.fa-fw.fa-linkedin
+                %span LinkedIn
+
+            -if @profile.medium.present?
+              =link_to "https://medium.com/#{@profile.medium}", target: "_blank", class: 'external-link' do
+                %i.fa.fa-fw.fa-medium
+                %span Medium
 
       .pure-u-18-24.rhs
         .num-solutions Showing #{pluralize @solutions.size, "solution"}
