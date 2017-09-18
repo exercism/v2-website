@@ -25,7 +25,10 @@
         %h3 Elsewhere Online
         .field
           %i.fa.fa-globe
-          =f.text_field :website, placeholder: "Your website"
+          =f.url_field :website,
+            placeholder: "Your website",
+            pattern: "https?://.+",
+            title: "Please enter a URL starting with http:// or https://"
         .field.twitter
           %i.fa.fa-twitter
           =f.text_field :twitter, placeholder: "handle"
