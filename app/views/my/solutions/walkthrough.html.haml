@@ -1,7 +1,5 @@
 #modal-close-button x
 .header
-.content
+.content.walkthrough
+  = @walkthrough.html_safe
 .buttons
-
-:javascript
-  setupWalkthrough(#{raw @walkthrough_json}, "#{current_user.auth_token}", "#{@solution.exercise.download_command}")
