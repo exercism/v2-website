@@ -1,7 +1,7 @@
 class Mentor::DashboardController < MentorController
   def show
-    @filter = params[:filter].try(:to_sym)
-    @your_solutions = RetrieveSolutionsForMentor.retrieve(current_user, @filter)
+    @status = params[:status]
+    @your_solutions = RetrievesSolutionsForMentor.retrieve(current_user, @status)
     @suggested_solutions = SelectsSuggestedSolutionsForMentor.select(current_user, params[:page])
 
     user_ids = @your_solutions.pluck(:user_id) + @suggested_solutions.pluck(:user_id)

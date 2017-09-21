@@ -10,7 +10,7 @@
         =form_tag mentor_dashboard_path, method: :get, remote: true do
           .widget-filter
             .title Status:
-            =select_tag :filter, options_for_select({"Requires action from you": :require_action, "Waiting for them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :abandoned}, @filter)
+            =select_tag :status, options_for_select({"Requires action from you": :require_action, "Waiting for them": :awaiting_user, "Completed": :completed, "Stale": :stale, "Unsubscribed": :abandoned}, @filter)
 
         %h2 Solutions you're mentoring
         .your-solutions{style: @your_solutions.present?? "display:block" : "display:none"}

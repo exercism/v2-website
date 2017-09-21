@@ -17,7 +17,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Completed", id: :filter
+    select_option "Completed", id: :status
 
     assert page.has_link?(href: mentor_solution_path(solution))
   end

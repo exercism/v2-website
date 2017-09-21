@@ -20,5 +20,4 @@ class RetrievesSolutionsForMentor
   def filter_by_status!
     @solutions = FiltersSolutionsByStatus.filter(solutions, filter)
   end
-
 end
