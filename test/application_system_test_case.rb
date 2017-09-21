@@ -1,7 +1,9 @@
 require "test_helper"
+require "support/selectize_helpers"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Devise::Test::IntegrationHelpers
+  include SelectizeHelpers
 
   driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
 
