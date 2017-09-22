@@ -4,4 +4,8 @@ class Maintainer < ApplicationRecord
 
   scope :active, -> { where(alumnus: nil) }
   scope :visible, -> { where(visible: true) }
+
+  def active?
+    alumnus.blank?
+  end
 end

@@ -7,4 +7,16 @@ class MaintainerTest < ActiveSupport::TestCase
 
     assert_equal 6, Maintainer.active.count
   end
+
+  test "active when no alumnus string" do
+    maintainer = build(:maintainer, alumnus: nil)
+
+    assert maintainer.active?
+  end
+
+  test "not active when alumnus string exists" do
+    maintainer = build(:maintainer, alumnus: "alumnus")
+
+    refute maintainer.active?
+  end
 end
