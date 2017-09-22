@@ -12,11 +12,23 @@ class Mentor::DashboardController < MentorController
     @track_id_options = current_user.
       mentored_tracks.
       map { |track| [track.title, track.id] }
+    @exercise_id = params[:exercise_id]
+    @track = Track.find_by(id: @track_id)
+    @exercise_id_options = if @track
+                             @track.
+                               exercises.
+                               map do |exercise|
+                                 { text: exercise.title, value: exercise.id }
+                               end
+                           else
+                             []
+                           end
 
     @your_solutions = RetrievesSolutionsForMentor.retrieve(
       current_user,
       status: @status,
-      track_id: @track_id
+      track_id: @track_id,
+      exercise_id: @exercise_id
     )
     @suggested_solutions = SelectsSuggestedSolutionsForMentor.select(current_user, params[:page])
 

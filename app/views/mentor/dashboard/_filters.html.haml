@@ -1,9 +1,14 @@
 =form_tag mentor_dashboard_path, method: :get, remote: true do
   .widget-filter
     .title Status:
-    =select_tag :status, options_for_select(@status_options, @status)
+    =select_tag :status, options_for_select(status_options, status)
   .widget-filter
     .title Track:
     = select_tag :track_id,
-      options_for_select(@track_id_options, @track_id),
+      options_for_select(track_id_options, track_id),
+      include_blank: true
+  .widget-filter
+    .title Exercise:
+    = select_tag :exercise_id,
+      options_for_select(exercise_id_options, exercise_id),
       include_blank: true

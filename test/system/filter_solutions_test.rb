@@ -48,4 +48,31 @@ class FilterSolutionsTest < ApplicationSystemTestCase
     assert page.has_link?(href: mentor_solution_path(solution_ruby))
     assert page.has_no_link?(href: mentor_solution_path(solution_cpp))
   end
+
+  test "filters solutions by exercise" do
+    ruby = create(:track, title: "Ruby")
+    mentor = create(:user, mentored_tracks: [ruby])
+    hello_world = create(:exercise, title: "Hello World", track: ruby)
+    sorting = create(:exercise, title: "Sorting", track: ruby)
+    hello_world_solution = create(:solution, exercise: hello_world)
+    create(:iteration, solution: hello_world_solution)
+    create(:solution_mentorship,
+           user: mentor,
+           solution: hello_world_solution,
+           requires_action: true)
+    sorting_solution = create(:solution, exercise: sorting)
+    create(:iteration, solution: sorting_solution)
+    create(:solution_mentorship,
+           user: mentor,
+           solution: sorting_solution,
+           requires_action: true)
+
+    sign_in!(mentor)
+    visit mentor_dashboard_path
+    select_option "Ruby", id: :track_id
+    select_option "Sorting", id: :exercise_id
+
+    assert page.has_link?(href: mentor_solution_path(sorting_solution))
+    assert page.has_no_link?(href: mentor_solution_path(hello_world_solution))
+  end
 end
