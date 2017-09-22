@@ -5,7 +5,6 @@
   $('.your-solutions').hide()
   $('.no-solutions.personal').show().html("You have no solutions in this category.")
 
-- if @track && @exercise_id.blank?
+- if @track_id && @exercise_id.blank?
   var select = $('#exercise_id')[0].selectize;
-  select.clearOptions();
-  select.addOption(#{@exercise_id_options.to_json.html_safe});
+  updateOptions(select, #{@exercise_id_options.to_json.html_safe});
