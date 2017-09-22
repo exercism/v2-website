@@ -46,7 +46,6 @@ class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
            user: user,
            solution: solution_ruby,
            requires_action: true)
-    create(:iteration, solution: solution_cpp)
     create(:solution_mentorship,
            user: user,
            solution: solution_cpp,
@@ -63,5 +62,36 @@ class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
 
     assert_equal [solution_cpp], cpp_solutions
     assert_equal [solution_ruby], ruby_solutions
+  end
+
+  test "filters mentored solutions by exercise" do
+    ruby = create(:track, title: "Ruby")
+    user = create(:user, mentored_tracks: [ruby])
+    hello_world = create(:exercise, title: "Hello World", track: ruby)
+    sorting = create(:exercise, title: "Sorting", track: ruby)
+    hello_world_solution = create(:solution, exercise: hello_world)
+    create(:solution_mentorship,
+           user: user,
+           solution: hello_world_solution,
+           requires_action: true)
+    sorting_solution = create(:solution, exercise: sorting)
+    create(:solution_mentorship,
+           user: user,
+           solution: sorting_solution,
+           requires_action: true)
+
+    hello_world_solutions = RetrievesSolutionsForMentor.retrieve(
+      user,
+      track_id: ruby.id,
+      exercise_id: hello_world.id
+    )
+    sorting_solutions = RetrievesSolutionsForMentor.retrieve(
+      user,
+      track_id: ruby.id,
+      exercise_id: sorting.id
+    )
+
+    assert_equal [hello_world_solution], hello_world_solutions
+    assert_equal [sorting_solution], sorting_solutions
   end
 end
