@@ -1,7 +1,23 @@
 class Mentor::DashboardController < MentorController
   def show
     @status = params[:status]
-    @your_solutions = RetrievesSolutionsForMentor.retrieve(current_user, @status)
+    @status_options = {
+      "Requires action from you": :require_action,
+      "Waiting for them": :awaiting_user,
+      "Completed": :completed,
+      "Stale": :stale,
+      "Unsubscribed": :abandoned
+    }
+    @track_id = params[:track_id]
+    @track_id_options = current_user.
+      mentored_tracks.
+      map { |track| [track.title, track.id] }
+
+    @your_solutions = RetrievesSolutionsForMentor.retrieve(
+      current_user,
+      status: @status,
+      track_id: @track_id
+    )
     @suggested_solutions = SelectsSuggestedSolutionsForMentor.select(current_user, params[:page])
 
     user_ids = @your_solutions.pluck(:user_id) + @suggested_solutions.pluck(:user_id)
