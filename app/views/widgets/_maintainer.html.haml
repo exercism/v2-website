@@ -1,4 +1,6 @@
-.widget-maintainer{class: maintainer.active ? "active" : "alumnus"}
+.widget-maintainer
+  - unless maintainer.active?
+    = render "widgets/banner", text: maintainer.alumnus.capitalize
   .pure-g
     .pure-u-1-4
       =image_tag maintainer.avatar_url

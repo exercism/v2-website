@@ -40,22 +40,19 @@
         @include font-size(14, 17);
         letter-spacing:-0.3px;
     }
-    &.alumnus {
-        &:before {
-            content: "Alumnus";
-            position:absolute;
-            width:140px;
-            height:20px;
-            position:absolute;
-            left:-45px;
-            top:15px;
-            background:$color-2;
-            font-weight:$regular;
-            text-align:center;
-            color:#fff;
-            transform: rotate(-45deg);
-            @include font-size(12, 20);
-            z-index:5;
-        }
-    }
+  .banner {
+    position:absolute;
+    width:140px;
+    height:20px;
+    position:absolute;
+    left:-45px;
+    top:15px;
+    background:$color-2;
+    font-weight:$regular;
+    text-align:center;
+    color:#fff;
+    transform: rotate(-45deg);
+    @include font-size(12, 20);
+    z-index:5;
+  }
 }
