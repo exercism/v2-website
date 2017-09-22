@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922081759) do
+ActiveRecord::Schema.define(version: 20170922082233) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(version: 20170922081759) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "alumnus"
-    t.boolean "active", default: true, null: false
     t.index ["track_id"], name: "fk_rails_ed46fd11a4"
     t.index ["user_id"], name: "fk_rails_5b1168410c"
   end
