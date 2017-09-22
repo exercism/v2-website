@@ -1,4 +1,5 @@
 class Git::SyncsMaintainers
+  DEFAULT_ALUMNUS_STRING = "alumnus"
 
   def self.sync!(track, maintainer_config)
     new(track, maintainer_config).sync!
@@ -37,7 +38,9 @@ class Git::SyncsMaintainers
     return unless gh_user.present? && show_on_website.present?
     return unless show_on_website
 
-    alumnus = m.fetch(:alumnus, false) || false
+    alumnus = m[:alumnus]
+
+    alumnus = DEFAULT_ALUMNUS_STRING if alumnus == true
 
     gh_profile = Git::GithubProfile.for_user(gh_user)
 
@@ -45,7 +48,7 @@ class Git::SyncsMaintainers
     link_text = m.fetch(:link_text, link_url)
 
     maintainer_data = {
-      active: !alumnus,
+      alumnus: alumnus,
       name: (m[:name] || gh_profile.name),
       bio: (m[:bio] || gh_profile.bio),
       avatar_url: (m[:avatar_url] || gh_profile.avatar_url),
