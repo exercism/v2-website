@@ -1,13 +1,7 @@
 class Mentor::DashboardController < MentorController
   def show
     @status = params[:status]
-    @status_options = {
-      "Requires action from you": :require_action,
-      "Waiting for them": :awaiting_user,
-      "Completed": :completed,
-      "Stale": :stale,
-      "Unsubscribed": :abandoned
-    }
+    @status_options = SolutionMentorship::STATUSES
     @track_id = params[:track_id]
     @track_id_options = current_user.
       mentored_tracks.
