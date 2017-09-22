@@ -3,21 +3,29 @@ class RetrievesSolutionsForMentor
     new(*args).retrieve
   end
 
-  def initialize(mentor, filter)
+  def initialize(mentor, status: nil, track_id: nil)
     @solutions = mentor.mentored_solutions
-    @filter = filter
+    @status = status
+    @track_id = track_id
   end
 
   def retrieve
-    filter_by_status! if filter
+    filter_by_status! if status.present?
+    filter_by_track! if track_id.present?
 
     solutions
   end
 
   private
-  attr_reader :solutions, :filter
+  attr_reader :solutions, :status, :track_id
 
   def filter_by_status!
-    @solutions = FiltersSolutionsByStatus.filter(solutions, filter)
+    @solutions = FiltersSolutionsByStatus.filter(solutions, status)
+  end
+
+  def filter_by_track!
+    @solutions = @solutions.
+      joins(:exercise).
+      where(exercises: { track_id: track_id })
   end
 end
