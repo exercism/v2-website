@@ -73,6 +73,22 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
     assert_equal "alumnus", @track.maintainers.first.alumnus
   end
 
+  test "alumnus field defaults to nil if false" do
+    maintainers_config = {
+      maintainers: [
+        {
+          github_username: "jo1",
+          show_on_website: true,
+          name: "Joanne Bloggs",
+          alumnus: false
+        }
+      ]
+    }
+    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+
+    assert_nil @track.maintainers.first.alumnus
+  end
+
   test "drops maintainers with no gh_user or show_on_website" do
     maintainers_config = {
       maintainers: [
