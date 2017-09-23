@@ -3,7 +3,7 @@ class CreateRepoUpdateFetches < ActiveRecord::Migration[5.1]
     create_table :repo_update_fetches do |t|
       t.timestamp :completed_at
       t.belongs_to :repo_update, foreign_key: true, null: false
-      t.string :host, null: false
+      t.string :host, null: false, limit: 190
 
       t.timestamps
     end
