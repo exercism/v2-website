@@ -22,6 +22,35 @@ class FilterSolutionsTest < ApplicationSystemTestCase
     assert page.has_link?(href: mentor_solution_path(solution))
   end
 
+  test "displays solutions requiring action by default" do
+    track = create(:track)
+    mentor = create(:user, mentored_tracks: [track])
+    hello_world = create(:exercise, track: track)
+    action_required_solution = create(:solution,
+                                      exercise: hello_world)
+    completed_solution = create(:solution,
+                                exercise: hello_world,
+                                completed_at: Date.new(2016, 12, 25))
+    create(:iteration, solution: action_required_solution)
+    create(:iteration, solution: completed_solution)
+    create(:solution_mentorship,
+           user: mentor,
+           solution: action_required_solution,
+           abandoned: false,
+           requires_action: true)
+    create(:solution_mentorship,
+           user: mentor,
+           solution: completed_solution,
+           abandoned: false,
+           requires_action: false)
+
+    sign_in!(mentor)
+    visit mentor_dashboard_path
+
+    assert page.has_link?(href: mentor_solution_path(action_required_solution))
+    assert page.has_no_link?(href: mentor_solution_path(completed_solution))
+  end
+
   test "filters solutions by track" do
     ruby = create(:track, title: "Ruby")
     cpp = create(:track, title: "C++")

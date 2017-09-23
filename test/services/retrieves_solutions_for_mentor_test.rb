@@ -1,14 +1,15 @@
 require "test_helper"
 
 class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
-  test "returns mentored solutions" do
+  test "filters by status by default" do
     user = create(:user)
     solution = create(:solution)
-    create(:solution_mentorship, user: user, solution: solution)
+    create(:solution_mentorship,
+           user: user,
+           solution: solution)
+    FiltersSolutionsByStatus.expects(:filter).with([solution], nil)
 
-    mentored_solutions = RetrievesSolutionsForMentor.retrieve(user)
-
-    assert_equal [solution], mentored_solutions
+    RetrievesSolutionsForMentor.retrieve(user)
   end
 
   test "filters mentored solutions by status" do

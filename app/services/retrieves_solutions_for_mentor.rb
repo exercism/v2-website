@@ -11,7 +11,7 @@ class RetrievesSolutionsForMentor
   end
 
   def retrieve
-    filter_by_status! if status.present?
+    filter_by_status!
     filter_by_track! if track_id.present?
     filter_by_exercise! if exercise_id.present?
 
