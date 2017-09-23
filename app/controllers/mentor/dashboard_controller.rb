@@ -1,7 +1,22 @@
 class Mentor::DashboardController < MentorController
   def show
-    @filter = params[:filter].try(:to_sym)
-    @your_solutions = RetrieveSolutionsForMentor.retrieve(current_user, @filter)
+    @status = params[:status]
+    @status_options = SolutionMentorship::STATUSES
+
+    @track_id = params[:track_id]
+    @track_id_options = OptionsHelper.as_options(current_user.mentored_tracks,
+                                                 :title,
+                                                 :id)
+
+    @exercise_id = params[:exercise_id]
+    @exercise_id_options = exercise_id_options
+
+    @your_solutions = RetrievesSolutionsForMentor.retrieve(
+      current_user,
+      status: @status,
+      track_id: @track_id,
+      exercise_id: @exercise_id
+    )
     @suggested_solutions = SelectsSuggestedSolutionsForMentor.select(current_user, params[:page])
 
     user_ids = @your_solutions.pluck(:user_id) + @suggested_solutions.pluck(:user_id)
@@ -11,6 +26,15 @@ class Mentor::DashboardController < MentorController
     @total_solutions_count = current_user.mentored_solutions.count
     @total_students_count = current_user.mentored_solutions.select(:user_id).distinct.count
     @feedbacks = current_user.solution_mentorships.where(show_feedback_to_mentor: true).order('updated_at desc').limit(5).pluck(:feedback)
+  end
+
+  private
+
+  def exercise_id_options
+    track = Track.find_by(id: @track_id)
+    return [] unless track
+
+    OptionsHelper.as_options(track.exercises, :title, :id)
   end
 end
 

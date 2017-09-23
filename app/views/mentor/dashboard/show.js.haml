@@ -4,3 +4,7 @@
 -else
   $('.your-solutions').hide()
   $('.no-solutions.personal').show().html("You have no solutions in this category.")
+
+- if @track_id && @exercise_id.blank?
+  var select = $('#exercise_id')[0].selectize;
+  updateOptions(select, #{@exercise_id_options.to_json.html_safe});
