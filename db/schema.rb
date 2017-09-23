@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923144117) do
+ActiveRecord::Schema.define(version: 20170923211552) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20170923144117) do
   create_table "contributors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "github_username", null: false
     t.string "avatar_url", null: false
-    t.integer "num_contributions", null: false
+    t.integer "num_contributions", default: 0, null: false
     t.boolean "is_maintainer", default: false, null: false
     t.boolean "is_core", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "github_id"
     t.index ["is_maintainer", "is_core", "num_contributions"], name: "main_find_idx"
   end
 
