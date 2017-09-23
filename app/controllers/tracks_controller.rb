@@ -12,7 +12,7 @@ class TracksController < ApplicationController
     return redirect_to [:my, @track] if user_signed_in?
 
     @mentors = @track.mentorships.reorder('rand()')
-    @maintainers = @track.maintainers.visible.reorder('active DESC, rand()')
+    @active_maintainers = @track.maintainers.visible.active.order('alumnus DESC, rand()')
     @exercises = @track.exercises.active.reorder('rand()').limit(6)
     @testimonial = @track.testimonials.order('rand()').first
     @testimonial = Testimonial.generic.order('rand()').first unless @testimonial

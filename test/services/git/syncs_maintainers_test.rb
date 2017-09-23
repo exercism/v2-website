@@ -55,6 +55,24 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
     assert_empty @track.maintainers
   end
 
+  test "alumnus field defaults to 'alumnus' if true" do
+    maintainers_config = {
+      maintainers: [
+        {
+          github_username: "jo1",
+          show_on_website: true,
+          name: "Joanne Bloggs",
+          alumnus: true
+        }
+      ]
+    }
+    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+
+    assert_equal 1, @track.maintainers.size
+    assert_equal false, @track.maintainers.first.active?
+    assert_equal "alumnus", @track.maintainers.first.alumnus
+  end
+
   test "drops maintainers with no gh_user or show_on_website" do
     maintainers_config = {
       maintainers: [
@@ -190,39 +208,6 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
     Git::SyncsMaintainers.sync!(@track, maintainers_config)
 
     assert_empty @track.maintainers
-  end
-
-  test "alumnus field populates active property, and defaults to false if absent" do
-    maintainers_config = {
-      maintainers: [
-        {
-          github_username: "jo1",
-          show_on_website: true,
-          name: "Joanne Bloggs",
-          alumnus: true
-        }
-      ]
-    }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
-
-    assert_equal 1, @track.maintainers.size
-    assert_equal false, @track.maintainers.first.active?
-  end
-
-  test "alumnus field defaults to false (active=true) if absent" do
-    maintainers_config = {
-      maintainers: [
-        {
-          github_username: "jo1",
-          show_on_website: true,
-          name: "Joanne Bloggs"
-        }
-      ]
-    }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
-
-    assert_equal 1, @track.maintainers.size
-    assert_equal true, @track.maintainers.first.active?
   end
 
   test "avatar_url defaults to your GitHub avatar if null or absent" do

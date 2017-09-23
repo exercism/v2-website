@@ -33,7 +33,7 @@ FactoryGirl.define do
     track { create :track }
     github_username "iHiD"
     name "Jeremy Walker"
-    avatar_url "somewhere.jpg"
+    avatar_url "http://website.com/somewhere.jpg"
   end
 
   factory :exercise_topic do
