@@ -38,9 +38,7 @@ class Git::SyncsMaintainers
     return unless gh_user.present? && show_on_website.present?
     return unless show_on_website
 
-    alumnus = m[:alumnus]
-
-    alumnus = DEFAULT_ALUMNUS_STRING if alumnus == true
+    alumnus = alumnus_string(m[:alumnus])
 
     gh_profile = Git::GithubProfile.for_user(gh_user)
 
@@ -65,6 +63,17 @@ class Git::SyncsMaintainers
 
   def remove_old_maintainers
     Maintainer.where(track: track).where.not(id: @maintainer_ids).delete_all
+  end
+
+  def alumnus_string(alumnus)
+    case alumnus
+    when true
+      DEFAULT_ALUMNUS_STRING
+    when false
+       nil
+    else
+      alumnus
+    end
   end
 
 end
