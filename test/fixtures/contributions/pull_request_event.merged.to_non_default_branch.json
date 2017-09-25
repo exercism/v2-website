@@ -1,0 +1,19 @@
+{
+  "action": "closed",
+  "pull_request": {
+    "user": {
+      "login": "bob",
+      "id": 2,
+      "avatar_url": "https://example.com/bob.png",
+      "type": "User"
+    },
+    "base": {
+      "ref": "contributing-guide"
+    },
+    "merged": true
+  },
+  "repository": {
+    "private": false,
+    "default_branch": "master"
+  }
+}

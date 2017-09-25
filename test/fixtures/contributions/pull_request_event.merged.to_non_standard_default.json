@@ -1,0 +1,19 @@
+{
+  "action": "closed",
+  "pull_request": {
+    "user": {
+      "login": "eu-jin",
+      "id": 5,
+      "avatar_url": "https://example.com/eu-jin.png",
+      "type": "User"
+    },
+    "base": {
+      "ref": "production"
+    },
+    "merged": true
+  },
+  "repository": {
+    "private": false,
+    "default_branch": "production"
+  }
+}

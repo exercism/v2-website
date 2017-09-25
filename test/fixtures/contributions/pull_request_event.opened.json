@@ -1,0 +1,19 @@
+{
+  "action": "opened",
+  "pull_request": {
+    "user": {
+      "login": "darius",
+      "id": 4,
+      "avatar_url": "https://example.com/darius.png",
+      "type": "User"
+    },
+    "base": {
+      "ref": "master"
+    },
+    "merged": false
+  },
+  "repository": {
+    "private": false,
+    "default_branch": "master"
+  }
+}
