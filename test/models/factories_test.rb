@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class Factories < ActiveSupport::TestCase
   FactoryGirl.factories.map(&:name).each do |factory|

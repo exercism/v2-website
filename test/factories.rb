@@ -6,6 +6,7 @@ FactoryGirl.define do
 
   factory :contributor do
     github_username { SecureRandom.uuid }
+    sequence(:github_id)
     avatar_url "asd.jpg"
     num_contributions 20
   end
