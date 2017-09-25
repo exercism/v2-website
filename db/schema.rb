@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20170923211552) do
   create_table "repo_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.timestamp "completed_at"
     t.bigint "repo_update_id", null: false
-    t.string "host", null: false
+    t.string "host", limit: 190, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repo_update_id", "host"], name: "index_repo_update_fetches_on_repo_update_id_and_host", unique: true
@@ -225,7 +225,6 @@ ActiveRecord::Schema.define(version: 20170923211552) do
     t.integer "num_reactions", default: 0, null: false
     t.text "reflection"
     t.boolean "is_legacy", default: false, null: false
-    t.boolean "boolean", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
