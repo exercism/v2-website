@@ -26,8 +26,10 @@ class CompletesSolution
     update_solution_record
 
     # Unlock side quests
+    existing_exercise_ids = user.solutions.pluck(:exercise_id)
     solution.exercise.unlocks.each do |exercise|
-      CreatesSolution.create!(solution.user, exercise)
+      next if existing_exercise_ids.include?(exercise.id)
+      CreatesSolution.create!(user, exercise)
     end
   end
 
@@ -45,11 +47,18 @@ class CompletesSolution
                       where("position > ?", solution.exercise.position).
                       first
     if next_exercise
-      CreatesSolution.create!(solution.user, next_exercise)
+      # Don't double-create
+      unless user.solutions.where(exercise_id: next_exercise.id).exists?
+        CreatesSolution.create!(user, next_exercise)
+      end
     else
       # TODO - complete track
       raise "Not Implemented"
     end
+  end
+
+  def user
+    solution.user
   end
 end
 
