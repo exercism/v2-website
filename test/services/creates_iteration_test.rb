@@ -20,6 +20,44 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert_equal file_contents, saved_file.file_contents
   end
 
+  test "unlocks one side exercise" do
+    Timecop.freeze do
+      core_exercise = create :exercise, core: true, position: 1
+      side_exercise1 = create :exercise, core: false, unlocked_by: core_exercise
+      side_exercise2 = create :exercise, core: false, unlocked_by: core_exercise
+
+      solution = create :solution, exercise: core_exercise
+      CreatesSolution.expects(:create!).once.with(solution.user, side_exercise1)
+      CreatesIteration.create!(solution, [])
+    end
+  end
+
+  test "does not unlock side exercise if there is only 1" do
+    Timecop.freeze do
+      core_exercise = create :exercise, core: true, position: 1
+      side_exercise = create :exercise, core: false, unlocked_by: core_exercise
+
+      solution = create :solution, exercise: core_exercise
+      CreatesSolution.expects(:create!).never
+      CreatesIteration.create!(solution, [])
+    end
+  end
+
+  test "does not unlock side exercise if there already is one" do
+    Timecop.freeze do
+      core_exercise = create :exercise, core: true, position: 1
+      side_exercise1 = create :exercise, core: false, unlocked_by: core_exercise
+      side_exercise2 = create :exercise, core: false, unlocked_by: core_exercise
+
+      user = create :user
+      create :solution, user: user, exercise: side_exercise1
+      solution = create :solution, user: user, exercise: core_exercise
+      CreatesSolution.expects(:create!).never
+      CreatesIteration.create!(solution, [])
+    end
+  end
+
+
   test "updates last updated by" do
     Timecop.freeze do
       solution = create :solution, last_updated_by_user_at: nil

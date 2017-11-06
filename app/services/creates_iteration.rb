@@ -26,12 +26,25 @@ class CreatesIteration
     solution.update(last_updated_by_user_at: DateTime.now)
 
     if solution.exercise.auto_approve?
-      solution.update(approved_by: solution.user)
+      solution.update(approved_by: user)
     else
       solution.mentorships.update_all(requires_action: true)
       notify_mentors
     end
+
+    unlock_side_exercise!
+
     iteration
+  end
+
+  private
+  def unlock_side_exercise!
+    return if solution.exercise.unlocks.count < 2
+    side_exercise_to_unlock = solution.exercise.unlocks.first
+
+    return if user.solutions.where(exercise_id: side_exercise_to_unlock.id).exists?
+
+    CreatesSolution.create!(user, side_exercise_to_unlock)
   end
 
   def notify_mentors
@@ -39,7 +52,7 @@ class CreatesIteration
       CreatesNotification.create!(
         mentor,
         :new_iteration_for_mentor,
-        "<strong>#{solution.user.handle}</strong> has posted a new iteration on a solution you are mentoring",
+        "<strong>#{user.handle}</strong> has posted a new iteration on a solution you are mentoring",
         routes.mentor_solution_url(solution),
         trigger: iteration,
 
@@ -77,7 +90,6 @@ class CreatesIteration
     end
   end
 
-  private
   def check_not_duplicate!
     last_iteration = solution.iterations.last
     return unless last_iteration
@@ -89,5 +101,9 @@ class CreatesIteration
 
   def routes
     @routes ||= Rails.application.routes.url_helpers
+  end
+
+  def user
+    solution.user
   end
 end
