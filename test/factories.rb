@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ignored_solution_mentorship do
     user { create :user }
     solution { create :solution }

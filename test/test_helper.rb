@@ -8,11 +8,11 @@ Rails.application.routes.default_url_options = { :host => "https://v2.exercism.i
 OmniAuth.config.test_mode = true
 
 class ActionView::TestCase
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 end
 
 class ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 end
 
 class ActionDispatch::IntegrationTest
