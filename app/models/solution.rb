@@ -37,6 +37,12 @@ class Solution < ApplicationRecord
     uuid
   end
 
+  def enable_mentoring!
+    user_track = user.user_track_for(exercise.track)
+    return if user_track.mentoring_allowance_used_up?
+    update(mentoring_enabled: true)
+  end
+
   def approved?
     !!approved_by
   end

@@ -33,6 +33,11 @@ class My::SolutionsController < MyController
     render_modal("solution-walkthrough", "walkthrough")
   end
 
+  def request_mentoring
+    @solution.enable_mentoring!
+    redirect_to action: :show
+  end
+
   def confirm_unapproved_completion
     render_modal('solution-confirm-unapproved-completion', "confirm_unapproved_completion")
   end

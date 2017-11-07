@@ -203,11 +203,22 @@ body.controller-solutions.action-show {
 
             font-weight:400;
             color:#333;
+            &.disabled {
+                color:#ccc;
+
+            }
+        }
+        p.disabled {
+            @include font-size(14, 18);
+            a {
+                color:#333;
+            }
         }
         .next-steps {
             background:rgba($color-1, 0.05);
             border-radius:2px;
             padding:20px 40px 20px 20px;
+            margin-bottom:20px;
             .title {
                 @include font-size(16, 16);
                 font-weight:$regular;
