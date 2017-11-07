@@ -64,21 +64,24 @@ class My::SolutionsController < MyController
     end
 
     @track = @solution.exercise.track
+    user_track = UserTrack.where(user: current_user, track: @track).first
 
-    if @solution.exercise.core?
-      @next_core_exercise = current_user.solutions.not_completed.
-                            joins(:exercise).
-                            where("exercises.track_id": @track.id).
-                            where("exercises.core": true).
-                            first.try(&:exercise)
-    end
+    if user_track.normal_mode?
+      if @solution.exercise.core?
+        @next_core_exercise = current_user.solutions.not_completed.
+                              joins(:exercise).
+                              where("exercises.track_id": @track.id).
+                              where("exercises.core": true).
+                              first.try(&:exercise)
+      end
 
-    unlocked_side_exercises = @solution.exercise.unlocks
-    unlocked_solutions = current_user.solutions.
-                                      where(exercise_id: unlocked_side_exercises).
-                                      each_with_object({}) { |s,h| h[s.exercise_id] = s }
-    @unlocked_side_exercises_and_solutions = unlocked_side_exercises.each_with_object([]) do |e, a|
-      a << [e, unlocked_solutions[e.id]]
+      unlocked_side_exercises = @solution.exercise.unlocks
+      unlocked_solutions = current_user.solutions.
+                                        where(exercise_id: unlocked_side_exercises).
+                                        each_with_object({}) { |s,h| h[s.exercise_id] = s }
+      @unlocked_side_exercises_and_solutions = unlocked_side_exercises.each_with_object([]) do |e, a|
+        a << [e, unlocked_solutions[e.id]]
+      end
     end
 
     if @next_core_exercise || @unlocked_side_exercises.present?
