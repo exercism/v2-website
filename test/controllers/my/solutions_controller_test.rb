@@ -32,7 +32,10 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
   test "reflects properly" do
     sign_in!
-    exercise = create :exercise, core: true
+    track = create :track
+    user_track = create :user_track, track: track, user: @current_user
+
+    exercise = create :exercise, core: true, track: track
     solution = create :solution, user: @current_user, exercise: exercise
     iteration = create :iteration, solution: solution
     discussion_post_1 = create :discussion_post, iteration: iteration
