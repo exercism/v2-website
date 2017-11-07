@@ -27,7 +27,12 @@ class ProfilesController < ApplicationController
   end
 
   def setup_solutions
-    @solutions = @profile.user.solutions.published.includes(exercise: :track)
+    @solutions = @profile.
+      user.
+      solutions.
+      published.
+      reorder('solutions.num_reactions DESC').
+      includes(exercise: :track)
 
     @tracks_for_select = Track.where(id: @solutions.joins(:exercise).select(:track_id)).
       map{|l|[l.title, l.id]}.
