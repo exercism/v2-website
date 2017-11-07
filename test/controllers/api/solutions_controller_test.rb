@@ -84,6 +84,17 @@ class API::SolutionsControllerTest < API::TestBase
     assert_response 404
   end
 
+  test "latest should return 200 for a locked exercise in independent mode" do
+    setup_user
+    track = create :track
+    core = create :exercise, track: track
+    exercise = create :exercise, unlocked_by: core, track: track
+    create :solution, user: @current_user, exercise: exercise
+    create :user_track, user: @current_user, track: track
+    get latest_api_solutions_path(exercise_id: exercise.slug), headers: @headers, as: :json
+    assert_response 200
+  end
+
   test "latest should return 200 if user is solution_user" do
     Timecop.freeze do
       setup_user

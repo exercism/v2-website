@@ -31,7 +31,7 @@
   -else
     =render "show_normal_mode"
 
-  -if @track.iterations.count == 0
+  -if @user_track.independent_mode === nil
     -content_for :js do
       :javascript
         showModal("my-track-started", "#{j(render "started_modal", track: @track)}")

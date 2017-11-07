@@ -96,4 +96,22 @@ class UserTest < ActiveSupport::TestCase
     user.email = "humpty.dumpty+TESTEXERCISMUSER2@example.com"
     assert user.test_user?
   end
+
+  test "may_unlock_user?" do
+    user = create :user
+    track = create :track
+    user_track = create :user_track, user: user, track: track
+    core_exercise = create :exercise, track: track, core: true
+    side_exercise_with_unlock = create :exercise, track: track, core: false, unlocked_by: core_exercise
+    side_exercise_without_unlock = create :exercise, track: track, core: false
+
+    refute user.may_unlock_exercise?(user_track, core_exercise)
+    refute user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
+    assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
+
+    user_track.update(independent_mode: true)
+    assert user.may_unlock_exercise?(user_track, core_exercise)
+    assert user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
+    assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
+  end
 end

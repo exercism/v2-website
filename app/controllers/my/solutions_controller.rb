@@ -3,12 +3,10 @@ class My::SolutionsController < MyController
 
   def create
     track = Track.find(params[:track_id])
+    user_track = UserTrack.where(user: current_user, track: track).first
     exercise = track.exercises.find(params[:exercise_id])
 
-    # If this is a side exercise that has no unlocked_by
-    # the you can unlock it. This is the only time this method
-    # is allowed to be called.
-    if !exercise.core && !exercise.unlocked_by
+    if current_user.may_unlock_exercise?(user_track, exercise)
       solution = CreatesSolution.create!(current_user, exercise)
       redirect_to [:my, solution]
     else

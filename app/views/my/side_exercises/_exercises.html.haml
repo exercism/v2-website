@@ -7,12 +7,12 @@
           = link_to [:my, solution], class: "widget-side-exercise completed" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
         -elsif solution.in_progress?
-          = link_to [:my, solution], class: "widget-side-exercise     in-progress" do
+          = link_to [:my, solution], class: "widget-side-exercise in-progress" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
         -else
           = link_to [:my, solution], class: "widget-side-exercise unlocked" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
-      -elsif !exercise.unlocked_by
+      -elsif @user_track.independent_mode? || !exercise.unlocked_by
         = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'widget-side-exercise unlocked' do
           =render "my/side_exercises/exercise", exercise: exercise, solution: nil
       -else

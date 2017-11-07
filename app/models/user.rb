@@ -76,6 +76,14 @@ class User < ApplicationRecord
     user_tracks.where(track_id: track.id).first
   end
 
+  def may_unlock_exercise?(user_track, exercise)
+    # If one of:
+    # - we're in indepdenent mode
+    # - this is a side exercise that has no unlocked_by
+    # then we create a solution to unlock it.
+    user_track.try(:independent_mode?) || (!exercise.core && !exercise.unlocked_by)
+  end
+
   def mentor?
     track_mentorships.exists?
   end

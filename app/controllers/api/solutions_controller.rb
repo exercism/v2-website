@@ -21,6 +21,7 @@ class API::SolutionsController < APIController
     if params[:track_id].present?
       begin
         track = Track.find(params[:track_id])
+        user_track = UserTrack.where(user: current_user, track: track).first
       rescue
         return render_404(:track_not_found, fallback_url: tracks_url)
       end
@@ -34,10 +35,7 @@ class API::SolutionsController < APIController
       begin
         solution = current_user.solutions.where(exercise_id: exercise.id).last!
       rescue
-        # If this is a side exercise that has no unlocked_by
-        # the you can unlock it. This is the only time this method
-        # is allowed to be called.
-        if !exercise.core && !exercise.unlocked_by
+        if current_user.may_unlock_exercise?(user_track, exercise)
           solution = CreatesSolution.create!(current_user, exercise)
         else
           return render_solution_not_found
