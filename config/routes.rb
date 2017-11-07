@@ -74,7 +74,12 @@ Rails.application.routes.draw do
       resources :side_exercises, only: [:index]
     end
 
-    resources :user_tracks, only: [:create]
+    resources :user_tracks, only: [:create] do
+      member do
+        patch :set_normal_mode
+        patch :set_independent_mode
+      end
+    end
     resources :solutions, only: [:show, :create] do
       member do
         get :walkthrough

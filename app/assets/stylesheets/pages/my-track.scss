@@ -441,7 +441,7 @@ body.namespace-my.controller-tracks.action-show {
 
 #modal.my-track-started,
 #modal.my-track-finished {
-    padding:60px 50px 50px 50px;
+    padding:50px 50px 50px 50px;
     img {
         display:block;
         width:100px;
@@ -462,13 +462,13 @@ body.namespace-my.controller-tracks.action-show {
         color:#555;
         font-weight:$light;
         text-align:center;
-        margin-bottom:30px;
+        margin-bottom:20px;
     }
     p {
         text-align:center;
         color:#555;
         @include font-size(14, 20);
-        margin-bottom:30px;
+        margin-bottom:20px;
     }
     .pure-button {
         background:$color-1;
@@ -476,6 +476,53 @@ body.namespace-my.controller-tracks.action-show {
         width:280px;
         padding:11px 10px;
         text-align:center;
-        margin: 0 auto;
+        margin: 0 auto 0;
+    }
+}
+
+#modal.my-track-started {
+    .pure-button {
+        margin: 0 auto 20px auto;
+    }
+    .independent-mode-option {
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+
+        @include font-size(13, 16);
+        text-align:center;
+        a {
+            display:block;
+            color:#333;
+        }
+    }
+    .independent-mode-section {
+        display:none;
+        text-align:center;
+        p {
+            &.question {
+                font-weight:400;
+                border-top:1px solid #ddd;
+                padding-top:15px;
+                margin-top:15px;
+                margin-bottom:10px;
+            }
+        }
+        .buttons {
+            .pure-button {
+                display:inline-block;
+                width:auto;
+                border:1px solid $color-1;
+                padding: 10px 20px;
+                font-weight:400;
+                margin-bottom:0;
+                &.independent-mode-button {
+                    border:1px solid $color-1;
+                    background:#fff;
+                    color:$color-1;
+                    font-weight:300;
+                }
+            }
+        }
     }
 }

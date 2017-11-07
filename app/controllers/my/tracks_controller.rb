@@ -36,7 +36,6 @@ class My::TracksController < MyController
 
     @topics_for_select = topic_counts.keys.map{|t|[t.name.titleize, t.id]}.sort_by{|t|t[0]}.unshift(["Any", 0])
 
-
     @user_track = UserTrack.where(user: current_user, track: @track).first
 
     if @user_track.independent_mode?
