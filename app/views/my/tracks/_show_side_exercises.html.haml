@@ -1,0 +1,35 @@
+#side-exercises.side-exercises
+  .lo-container
+    -if @user_track.normal_mode?
+      %h2 Extra Exercises
+      .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
+
+    .num-extra-exercises= pluralize exercises_and_solutions.size, "Exercise"
+    .filters
+      =form_tag [:my, @track, :side_exercises], remote: true, method: :get, class: "side_exercises_form" do
+        .widget-filter.difficulty
+          .title Difficulty:
+          =select_tag :difficulty, options_for_select({"All": ' ', "Easy": 'easy', "Medium": 'medium', "Hard": 'hard'}, value: @difficulty), id: nil
+        .widget-filter.length
+          .title Length:
+          =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil
+        .widget-filter.topic
+          .title Topic:
+          =select_tag :topic_id, options_for_select(@topics_for_select), id: nil
+        .widget-filter.status
+          .title Status:
+          =select_tag :status, options_for_select({"All": 0, "In Progress": :in_progress, "Unlocked": :unlocked, "Completed": :completed, "Locked": :locked}, value: @status), id: nil
+    .pure-g.exercises
+      =render "my/side_exercises/exercises", exercises_and_solutions: exercises_and_solutions
+
+      -@deprecated_exercises_and_solutions.each do |exercise, solution|
+        .pure-u-1-3
+          .exercise.completed
+            .icon
+              .img{style: "background-image:url('#{image_path(exercise.white_icon_url)}')"}
+            .status.deprecated Deprecated
+            .title= exercise.title
+            .topics
+              .topic deprecated
+
+

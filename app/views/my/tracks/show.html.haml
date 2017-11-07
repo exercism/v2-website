@@ -12,112 +12,24 @@
       .line
       .lo-container
         =bordered_green_track_icon(@track, class: 'logo')
-        .status Track in Progress
+        .status
+          -if @user_track.independent_mode?
+            Independent Mode
+          -else
+            Track in Progress
     .lo-container
       %h1 #{@track.title} Track
       .stats
         .stat= pluralize @track.exercises.count, "Exercise"
         .stat #{number_with_delimiter(@track.user_tracks.count)} Students
-        /.stat= pluralize @track.iterations.count, "Submissions"
         .stat= pluralize @track.mentorships.count, "Mentors"
+
       .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
 
-  .top-section
-    .lo-container
-      .pure-g
-        .pure-u-7-12
-          .core-exercises
-            -num_core_exercises = @core_exercises_and_solutions.size
-            -@core_exercises_and_solutions.each.with_index do |(exercise, solution), idx|
-              -if solution
-                = link_to [:my, solution], class: "exercise #{solution.completed?? "completed" : "in-progress"}" do
-                  -if solution.completed?
-                    .circle= image_tag "tick-color-1.png"
-                    .status Completed
-                  -else
-                    .circle= image_tag exercise.white_icon_url
-                    .status In Progress
-                  .position Exercise #{idx + 1} of #{num_core_exercises} in #{@track.title} Track
-                  .title
-                    = exercise.title
-                    .topics
-                      - exercise.topic_names.each do |topic_name|
-                        .topic= topic_name
-                  .blurb= exercise.blurb
-              -else
-                .exercise.locked
-                  .circle= image_tag exercise.dark_icon_url
-                  .status Locked
-                  .position Exercise #{idx + 1} of #{num_core_exercises} in #{@track.title} Track
-                  .title
-                    = exercise.title
-                    .topics
-                      - exercise.topic_names.each do |topic_name|
-                        .topic= topic_name
-                  .blurb= exercise.blurb
-
-        .pure-u-5-12
-          .progress-section
-            %h2 Your Progress in #{@track.title}
-            .h2-subtitle see how you're doing
-
-            .core
-              %h3 Track progression
-              .percentage #{@core_track_completion_percentage}%
-              .number #{@num_solved_core_exercises} of #{@core_exercises_and_solutions.size} core exercises
-              .completed completed successfully
-
-            .side
-              .completed= @num_solved_side_exercises
-              %h3 Extra exercises completed
-              .squares
-                -@num_side_exercises.times do |i|
-                  -if i < @num_solved_side_exercises
-                    .square.completed
-                  -else
-                    .square
-              =link_to "See all extra exercises", "#side-exercises", class: 'pure-button'
-
-            .topics
-              %h3 Concepts
-              =render "topic_percentages", topic_percentages: @topic_percentages[0..10]
-              -if @topic_percentages.size > 10
-                =link_to "Show More", "#", class: 'pure-button extra-button'
-                .extra
-                  =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
-
-  #side-exercises.side-exercises
-    .lo-container
-      %h2 Extra Exercises
-      .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
-      .num-extra-exercises= pluralize @side_exercises_and_solutions.size, "Exercise"
-      .filters
-        =form_tag [:my, @track, :side_exercises], remote: true, method: :get, class: "side_exercises_form" do
-          .widget-filter.difficulty
-            .title Difficulty:
-            =select_tag :difficulty, options_for_select({"All": ' ', "Easy": 'easy', "Medium": 'medium', "Hard": 'hard'}, value: @difficulty), id: nil
-          .widget-filter.length
-            .title Length:
-            =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil
-          .widget-filter.topic
-            .title Topic:
-            =select_tag :topic_id, options_for_select(@topics_for_select), id: nil
-          .widget-filter.status
-            .title Status:
-            =select_tag :status, options_for_select({"All": 0, "In Progress": :in_progress, "Unlocked": :unlocked, "Completed": :completed, "Locked": :locked}, value: @status), id: nil
-      .pure-g.exercises
-        =render "my/side_exercises/exercises", exercises_and_solutions: @side_exercises_and_solutions
-
-        -@deprecated_exercises_and_solutions.each do |exercise, solution|
-          .pure-u-1-3
-            .exercise.completed
-              .icon
-                .img{style: "background-image:url('#{image_path(exercise.white_icon_url)}')"}
-              .status.deprecated Deprecated
-              .title= exercise.title
-              .topics
-                .topic deprecated
-
+  -if @user_track.independent_mode?
+    =render "show_side_exercises", exercises_and_solutions: @exercises_and_solutions
+  -else
+    =render "show_normal_mode"
 
   -if @track.iterations.count == 0
     -content_for :js do

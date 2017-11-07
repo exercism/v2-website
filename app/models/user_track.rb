@@ -12,4 +12,8 @@ class UserTrack < ApplicationRecord
                          "exercises.track_id": track_id).
                    count
   end
+
+  def normal_mode?
+    !independent_mode?
+  end
 end

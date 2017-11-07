@@ -1,0 +1,65 @@
+.top-section
+  .lo-container
+    .pure-g
+      .pure-u-7-12
+        .core-exercises
+          -num_core_exercises = @core_exercises_and_solutions.size
+          -@core_exercises_and_solutions.each.with_index do |(exercise, solution), idx|
+            -if solution
+              = link_to [:my, solution], class: "exercise #{solution.completed?? "completed" : "in-progress"}" do
+                -if solution.completed?
+                  .circle= image_tag "tick-color-1.png"
+                  .status Completed
+                -else
+                  .circle= image_tag exercise.white_icon_url
+                  .status In Progress
+                .position Exercise #{idx + 1} of #{num_core_exercises} in #{@track.title} Track
+                .title
+                  = exercise.title
+                  .topics
+                    - exercise.topic_names.each do |topic_name|
+                      .topic= topic_name
+                .blurb= exercise.blurb
+            -else
+              .exercise.locked
+                .circle= image_tag exercise.dark_icon_url
+                .status Locked
+                .position Exercise #{idx + 1} of #{num_core_exercises} in #{@track.title} Track
+                .title
+                  = exercise.title
+                  .topics
+                    - exercise.topic_names.each do |topic_name|
+                      .topic= topic_name
+                .blurb= exercise.blurb
+
+      .pure-u-5-12
+        .progress-section
+          %h2 Your Progress in #{@track.title}
+          .h2-subtitle see how you're doing
+
+          .core
+            %h3 Track progression
+            .percentage #{@core_track_completion_percentage}%
+            .number #{@num_solved_core_exercises} of #{@core_exercises_and_solutions.size} core exercises
+            .completed completed successfully
+
+          .side
+            .completed= @num_solved_side_exercises
+            %h3 Extra exercises completed
+            .squares
+              -@num_side_exercises.times do |i|
+                -if i < @num_solved_side_exercises
+                  .square.completed
+                -else
+                  .square
+            =link_to "See all extra exercises", "#side-exercises", class: 'pure-button'
+
+          .topics
+            %h3 Concepts
+            =render "topic_percentages", topic_percentages: @topic_percentages[0..10]
+            -if @topic_percentages.size > 10
+              =link_to "Show More", "#", class: 'pure-button extra-button'
+              .extra
+                =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
+
+=render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions

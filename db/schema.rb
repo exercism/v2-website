@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923230700) do
+ActiveRecord::Schema.define(version: 20171107030936) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -178,17 +178,17 @@ ActiveRecord::Schema.define(version: 20170923230700) do
     t.index ["user_id"], name: "fk_rails_9f02fc96a0"
   end
 
-  create_table "repo_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "repo_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.timestamp "completed_at"
     t.bigint "repo_update_id", null: false
-    t.string "host", limit: 190, null: false
+    t.string "host", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repo_update_id", "host"], name: "index_repo_update_fetches_on_repo_update_id_and_host", unique: true
     t.index ["repo_update_id"], name: "index_repo_update_fetches_on_repo_update_id"
   end
 
-  create_table "repo_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "repo_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.timestamp "synced_at"
     t.string "slug", null: false
     t.datetime "created_at", null: false
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 20170923230700) do
     t.integer "num_reactions", default: 0, null: false
     t.text "reflection"
     t.boolean "is_legacy", default: false, null: false
+    t.boolean "boolean", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
@@ -288,6 +289,7 @@ ActiveRecord::Schema.define(version: 20170923230700) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "independent_mode"
     t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_99e944edbc"
   end
