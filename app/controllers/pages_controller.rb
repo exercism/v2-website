@@ -27,6 +27,7 @@ class PagesController < ApplicationController
   end
 
   def team
+    @title = "The Exercism Team"
     @maintainers_last_updated_at = Maintainer.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @maintainers = Maintainer.visible.reorder('LENGTH(bio) DESC').to_a.
                    group_by(&:github_username).map {|_, ms|
