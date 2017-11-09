@@ -5,39 +5,8 @@
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
   .pure-g
-    .pure-u-1-2.modal-lhs
-      %h2 Do you want to make your solution public?
-      %p Learning from each other’s attempts is a crucial part of exercism. By making your solution public, other Exercism users will be able to find it and learn from your ideas.
-      .checkbox
-        =check_box_tag :publish, 1, true
-        /%i.fa.fa-check-square-o
-        =label_tag :publish do
-          Publish my solution
-
-      =text_area_tag :reflection, '', placeholder: "Leave some notes next to your public solution to tell others what you learnt from this exercise, what you found easy and hard, and about any challenges you battled."
-
-    .pure-u-1-2.modal-rhs
-      %h2 Rate your mentors
-      -if @solution.mentors.size == 0
-        %p You had no mentors for this solution.
-      -else
-        %p
-          Help us improve our mentoring by rating your mentors.
-          Your mentors
-          %strong will not
-          see your rating.
-
-        -@solution.mentors.each do |mentor|
-          .mentor-review
-            = image_tag mentor.avatar_url, class: "avatar"
-            .details
-              .handle= mentor.handle
-              .interactions= pluralize @mentor_interations[mentor.id], "interaction"
-            .stars
-              -[5,4,3,2,1].each do |i|
-                =radio_button_tag "mentor_reviews[#{mentor.id}][rating]", i
-                =label_tag "mentor_reviews_#{mentor.id}_rating_#{i}", ""
-
-            /=text_field_tag "mentor_reviews[#{mentor.id}][feedback]"
+    = render "my/solutions/reflection/form",
+    solution: @solution,
+    mentor_iterations: @mentor_iterations
 
   =button_tag "Save and continue", class: 'pure-button'

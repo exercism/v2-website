@@ -51,7 +51,7 @@ class My::SolutionsController < MyController
   end
 
   def reflection
-    @mentor_interations = @solution.discussion_posts.group(:user_id).count
+    @mentor_iterations = @solution.discussion_posts.group(:user_id).count
     render_modal("solution-reflection", "reflection")
   end
 
