@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     define_method page do
       markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
       @page = page
-      @title = title
+      @page_title = title
       @content = ParsesMarkdown.parse(markdown.to_s)
       render action: "generic"
     end
@@ -27,7 +27,7 @@ class PagesController < ApplicationController
   end
 
   def team
-    @title = "The Exercism Team"
+    @page_title = "The Exercism Team"
     @maintainers_last_updated_at = Maintainer.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @maintainers = Maintainer.visible.reorder('LENGTH(bio) DESC').to_a.
                    group_by(&:github_username).map {|_, ms|

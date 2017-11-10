@@ -34,7 +34,7 @@ module MetadataHelper
           case action_name
           when :index
           else
-            { title: @title }
+            { title: @page_title }
           end
         when "tracks"
           case action_name
