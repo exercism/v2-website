@@ -1,6 +1,6 @@
 module MetadataHelper
   def metadata_title
-    @metadata_title ||= metadata.try(:fetch, :title, nil) || "Exercism"
+    @metadata_title ||= format_title(metadata.try(:fetch, :title, nil))
   end
 
   def metadata_description
@@ -16,6 +16,13 @@ module MetadataHelper
   end
 
   private
+
+  def format_title(title)
+    return "Exercism" unless title
+
+    "#{title} | Exercism"
+  end
+
   def metadata
     @metadata ||=
       case namespace_name
@@ -27,19 +34,34 @@ module MetadataHelper
           case action_name
           when :index
           else
-            {
-              title: @title
-            }
+            { title: @page_title }
           end
         when "tracks"
           case action_name
+          when "index"
+            { title: "Language Tracks" }
           when "show"
             {
-              title: "#{@track.title} on Exercism",
+              title: "#{@track.title}",
               description: @track.introduction,
               image_url: @track.bordered_turquoise_icon_url
             }
           end
+        when "exercises"
+          case action_name
+          when "index"
+            { title: "Exercises on the #{@track.title} Track" }
+          when "show"
+            { title: @exercise.title }
+          end
+        when "registrations"
+          { title: "Sign up" }
+        when "sessions"
+          { title: "Sign in" }
+        when "passwords"
+          { title: "Reset your password" }
+        when "confirmations"
+          { title: "Resend confirmation email" }
         end
       end
   end
