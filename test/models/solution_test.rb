@@ -18,4 +18,16 @@ class SolutionTest < ActiveSupport::TestCase
     solution = create :solution
     refute solution.uuid.include?('-')
   end
+
+  test "returns auto approved" do
+    exercise = build(:exercise, auto_approve: true)
+    solution = build(:solution, exercise: exercise)
+
+    assert solution.auto_approve?
+
+    exercise = build(:exercise, auto_approve: false)
+    solution = build(:solution, exercise: exercise)
+
+    refute solution.auto_approve?
+  end
 end

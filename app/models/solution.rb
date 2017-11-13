@@ -12,6 +12,8 @@ class Solution < ApplicationRecord
 
   has_many :reactions
 
+  delegate :auto_approve?, to: :exercise
+
   def self.completed
     where.not(completed_at: nil)
   end
