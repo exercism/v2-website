@@ -16,6 +16,9 @@ class SelectsSuggestedSolutionsForMentor
       joins(:exercise).
       where("exercises.track_id": tracks).
 
+      joins(user: :user_tracks).
+      where("user_tracks.track_id = exercises.track_id").
+
       # Not things you already mentor
       where.not(id: user.mentored_solutions).
 
@@ -37,9 +40,10 @@ class SelectsSuggestedSolutionsForMentor
       # Not completed
       where(completed_at: nil).
 
-      # Order by number of mentors (least first),
+      # Order standard mode tracks first,
+      # then by number of mentors (least first),
       # then age (oldest first)
-      order("num_mentors ASC, last_updated_by_user_at ASC").
+      order("independent_mode DESC, num_mentors ASC, last_updated_by_user_at ASC").
 
       includes(iterations: [], exercise: {track: []}, user: [:profile]).
 
