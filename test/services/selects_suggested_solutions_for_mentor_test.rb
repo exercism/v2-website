@@ -185,11 +185,11 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create(:user_track,
            user: mentee,
            independent_mode: true,
-           track: track)
+           track: independent_track)
     create(:user_track,
            user: mentee,
            independent_mode: false,
-           track: independent_track)
+           track: track)
     exercise = create(:exercise, track: track)
     independent_exercise = create(:exercise, track: independent_track)
     independent_solution = create(:solution,

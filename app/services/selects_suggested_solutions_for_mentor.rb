@@ -43,7 +43,7 @@ class SelectsSuggestedSolutionsForMentor
       # Order standard mode tracks first,
       # then by number of mentors (least first),
       # then age (oldest first)
-      order("independent_mode DESC, num_mentors ASC, last_updated_by_user_at ASC").
+      order("independent_mode ASC, num_mentors ASC, last_updated_by_user_at ASC").
 
       includes(iterations: [], exercise: {track: []}, user: [:profile]).
 
