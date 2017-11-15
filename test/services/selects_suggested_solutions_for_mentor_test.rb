@@ -205,6 +205,26 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal expected.map(&:id), actual.map(&:id)
   end
 
+  test "puts core exercises first" do
+    mentor, track = create_mentor_and_track
+    mentee = create_mentee([track])
+
+    side_solution = create(:solution,
+                           exercise: create(:exercise, track: track, core: false),
+                           user: mentee)
+    core_solution = create(:solution,
+                           exercise: create(:exercise, track: track, core: true),
+                           user: mentee)
+    [core_solution, side_solution].each do |solution|
+      create :iteration, solution: solution
+    end
+
+    assert_equal(
+      [core_solution, side_solution],
+      SelectsSuggestedSolutionsForMentor.select(mentor)
+    )
+  end
+
   def create_mentor_and_track
     mentor = create :user
     track = create :track
