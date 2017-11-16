@@ -116,6 +116,23 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert solution.user, solution.approved_by
   end
 
+  test "sends a notification when a solution is auto approved" do
+    exercise = create :exercise, auto_approve: true
+    solution = create :solution, exercise: exercise
+
+    CreatesNotification.
+      expects(:create!).
+      with(solution.user,
+           :exercise_auto_approved,
+           "Your solution to <strong>#{solution.exercise.title}</strong> on the "\
+           "<strong>#{solution.exercise.track.title}</strong> track has been "\
+           "auto approved.",
+            Rails.application.routes.url_helpers.my_solution_url(solution),
+            about: solution)
+
+    CreatesIteration.create!(solution, [])
+  end
+
   test "works for not-duplicate files" do
     filename1 = "foobar"
     filename2 = "barfoo"
