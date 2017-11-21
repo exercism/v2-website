@@ -10,7 +10,7 @@ class ExercisesController < ApplicationController
   def show
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:id])
-    @solutions = @exercise.solutions.published.reorder('num_reactions DESC').includes(:user).limit(6)
+    @solutions = @exercise.solutions.published.reorder(num_reactions: :desc).includes(:user).limit(6)
 
     @reaction_counts = Reaction.where(solution_id: @solutions.map(&:id)).group(:solution_id, :emotion).count
     @comment_counts = Reaction.where(solution_id: @solutions.map(&:id)).with_comments.group(:solution_id).count
