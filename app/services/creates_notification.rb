@@ -11,6 +11,7 @@ class CreatesNotification
     new_reaction
     new_discussion_post_for_mentor
     new_iteration_for_mentor
+    exercise_auto_approved
   }
 
   def self.create!(*args)

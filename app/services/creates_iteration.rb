@@ -27,6 +27,14 @@ class CreatesIteration
 
     if solution.exercise.auto_approve?
       solution.update(approved_by: user)
+      CreatesNotification.create!(
+        solution.user,
+        :exercise_auto_approved,
+        "Your solution to <strong>#{solution.exercise.title}</strong> on the "\
+        "<strong>#{solution.exercise.track.title}</strong> track has been "\
+        "auto approved.",
+        Rails.application.routes.url_helpers.my_solution_url(solution),
+        about: solution)
     else
       solution.mentorships.update_all(requires_action: true)
       notify_mentors
