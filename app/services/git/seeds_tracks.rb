@@ -2,6 +2,10 @@ class Git::SeedsTracks
 
   # NB generate this with Trackler.tracks.select(&:active?).map {|t| "https://github.com/exercism/#{t.id}" }
 
+  def self.tracks
+    TRACKS
+  end
+
   TRACKS = %w{
     https://github.com/exercism/csharp
     https://github.com/exercism/cpp
@@ -44,7 +48,7 @@ class Git::SeedsTracks
   }
 
   def self.seed!
-    new(TRACKS).seed!
+    new(tracks).seed!
   end
 
   attr_reader :repository_urls
@@ -60,7 +64,7 @@ class Git::SeedsTracks
     Track.find_each do |track|
       puts "===== Fetching #{track.slug} ====="
       begin
-        Git::FetchTrack.sync!(track)
+        Git::FetchesRepo.fetch(track.repo)
       rescue => e
         puts e.message
       end
