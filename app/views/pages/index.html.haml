@@ -39,7 +39,7 @@
           .row{class: idx.odd?? "long" : "short"}
             -@tracks.slice!(0, idx.odd?? 10 : 9).each do |track|
               =link_to track, class: "track #{track.slug=="go"?"go":""}", style: "background-image:url('#{track.hex_white_icon_url}')" do
-                .title= track.slug == "lfe" ? "LFE" : track.title
+                .title= track.title
                 -if track.slug == "go"
                   .left-eye
                     .pupil
