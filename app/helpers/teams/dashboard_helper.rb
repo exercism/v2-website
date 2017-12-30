@@ -1,0 +1,2 @@
+module Teams::DashboardHelper
+end

@@ -1,0 +1,13 @@
+-if @pending_team_memberships.present?
+  %h2 Pending Invitiations
+  %ul
+    -@pending_team_memberships.each do |membership|
+      %li= membership.team.name
+
+%h2 Your Teams
+-if @teams.present?
+  %ul
+    -@teams.each do |team|
+      %li= link_to team.name, team
+
+%li= link_to "Create a new team", [:new, :teams, :team]

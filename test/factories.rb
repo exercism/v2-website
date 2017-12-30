@@ -1,4 +1,13 @@
 FactoryBot.define do
+  factory :team_membership do
+    
+  end
+  factory :team do
+    
+  end
+  factory :team_solution do
+    
+  end
   factory :ignored_solution_mentorship do
     user { create :user }
     solution { create :solution }

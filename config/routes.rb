@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # TODO - Delete this
   post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
 
+  # ### #
+  # API #
+  # ### #
   namespace :api do
     scope :v1 do
       get "ping" => "ping#index"
@@ -20,10 +23,16 @@ Rails.application.routes.draw do
   end
   get "api/(*url)", to: 'api#render_404'
 
+  # ##### #
+  # Admin #
+  # ##### #
   namespace :admin do
     resource :dashboard, only: [:show], controller: "dashboard"
   end
 
+  # ###### #
+  # Mentor #
+  # ###### #
   namespace :mentor do
     resource :dashboard, only: [:show], controller: "dashboard"
     resources :solutions, only: [:show] do
@@ -36,11 +45,9 @@ Rails.application.routes.draw do
     resources :discussion_posts, only: [:create]
   end
 
-  namespace :webhooks do
-    resources :repo_updates, only: [:create]
-    resources :contributors, only: [:create]
-  end
-
+  # #### #
+  # Auth #
+  # #### #
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',
@@ -52,6 +59,9 @@ Rails.application.routes.draw do
     get "confirmations/required" => "confirmations#required", as: 'confirmation_required'
   end
 
+  # ######## #
+  # External #
+  # ######## #
   resources :profiles, only: [:index, :show] do
     get :solutions, on: :member
   end
@@ -67,6 +77,9 @@ Rails.application.routes.draw do
     resources :mentors, only: [:index]
   end
 
+  # ######## #
+  # Internal #
+  # ######## #
   namespace :my do
     resource :dashboard, only: [:show], controller: "dashboard"
 
@@ -104,15 +117,39 @@ Rails.application.routes.draw do
       patch :update_user_tracks
       resource :communication_preferences, only: [:edit, :update]
     end
-
   end
 
-  post "markdown/parse" => "markdown#parse"
+  # ##### #
+  # Teams #
+  # ##### #
+  namespace :teams do
+    get "dashboard" => "dashboard#index"
+    resources :teams
 
+    Teams::PagesController::PAGES.values.each do |page|
+      get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
+    end
+  end
+  get "teams" => "teams/pages#index"
+
+  # ##### #
+  # Pages #
+  # ##### #
   PagesController::PAGES.values.each do |page|
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
+
   get "team" => "pages#team", as: "team_page"
   get "contributors" => "pages#contributors", as: "contributors_page"
+
+  # ############ #
+  # Weird things #
+  # ############ #
+  namespace :webhooks do
+    resources :repo_updates, only: [:create]
+    resources :contributors, only: [:create]
+  end
+  post "markdown/parse" => "markdown#parse"
+
   root to: "pages#index"
 end

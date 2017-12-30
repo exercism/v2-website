@@ -233,6 +233,33 @@ ActiveRecord::Schema.define(version: 20171231162945) do
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
 
+  create_table "team_memberships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "admin", default: false, null: false
+    t.boolean "pending", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "fk_rails_61c29b529e"
+    t.index ["user_id"], name: "fk_rails_5aba9331a7"
+  end
+
+  create_table "team_solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "user_id", null: false
+    t.string "uuid", null: false
+    t.bigint "exercise_id", null: false
+    t.string "git_sha", null: false
+    t.string "git_slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "testimonials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "track_id"
     t.string "headline", null: false
@@ -348,6 +375,8 @@ ActiveRecord::Schema.define(version: 20171231162945) do
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"
+  add_foreign_key "team_memberships", "teams"
+  add_foreign_key "team_memberships", "users"
   add_foreign_key "testimonials", "tracks"
   add_foreign_key "track_mentorships", "tracks"
   add_foreign_key "track_mentorships", "users"

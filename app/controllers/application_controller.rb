@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   after_action :store_location
+  before_action :set_site_context
 
   private
 
@@ -12,6 +13,22 @@ class ApplicationController < ActionController::Base
     return unless request.get?
 
     session["user_return_to"] = request.fullpath
+  end
+
+  def set_site_context
+    return unless request.get?
+    return if devise_controller?
+
+    session["site_context"] = "normal"
+  end
+
+  def layout_from_site_context
+    case session["site_context"]
+    when "teams"
+      "teams"
+    else
+      "application"
+    end
   end
 
   def redirect_if_signed_in!

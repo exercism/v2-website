@@ -17,6 +17,11 @@ class User < ApplicationRecord
   has_one :profile
   has_many :notifications
 
+  has_many :team_memberships, -> { not_pending }
+  has_many :teams, through: :team_memberships
+
+  has_many :pending_team_memberships, -> { pending }, class_name: "TeamMembership"
+
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
   has_many :solutions

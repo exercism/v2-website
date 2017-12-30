@@ -14,6 +14,7 @@ gem 'devise', '~> 4.3'
 gem 'omniauth-github'
 gem 'kaminari'
 gem 'friendly_id', '~> 5.2'
+gem 'mandate'
 
 gem 'haml-rails'
 gem 'jquery-rails'
