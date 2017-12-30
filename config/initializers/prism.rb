@@ -126,10 +126,15 @@ Exercism::PrismLanguages = %w{
 
 Exercism::PrismLanguageMappings = {
   "delphi" => "pascal",
+  "ecmascript" => "javascript",
+  "idris" => "haskell", # close enough for now
   "objective-c" => "c",
   "perl5" => "perl",
   "perl6" => "perl",
-  "plsql" => "sql"
+  "plsql" => "sql",
+  "pony" => "scala", # close enough for now
+  "sml" => "ocaml", # close enough for now
+  "vimscript" => "vim",
 }
 
 Exercism::PrismFileMappings = {
