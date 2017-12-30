@@ -82,9 +82,9 @@ class Git::SyncsTrack
     @unlocked_by_relationships[exercise_uuid] = unlocked_by unless unlocked_by.nil?
 
     # Some tracks have old config without keys and others
-    # have new config with keys. Using fetch helps us out
-    # with some sensible defaults where we're on the old config
-    topic_slugs = exercise.fetch(:topics, [])
+    # have new config with keys. Even when the keys are present,
+    # they're sometimes set to null.
+    topic_slugs = exercise[:topics] || []
     topics = topic_slugs.map { |slug| Topic.find_or_create_by(slug: slug) }
 
     exercise_image_stem = exercise_slug.gsub("_", "-")
