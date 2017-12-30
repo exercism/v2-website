@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # TODO - Delete this
   post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
+  post "tmp/create_team_iteration" => "tmp#create_team_iteration", as: :tmp_create_team_iteration
 
   # ### #
   # API #
@@ -124,7 +125,12 @@ Rails.application.routes.draw do
   # ##### #
   namespace :teams do
     get "dashboard" => "dashboard#index"
-    resources :teams
+    resources :teams do
+      resources :my_solutions
+      resources :solutions
+      resources :memberships, only: [:index, :destroy]
+      resources :invitations, only: [:new, :create, :destroy]
+    end
 
     Teams::PagesController::PAGES.values.each do |page|
       get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"

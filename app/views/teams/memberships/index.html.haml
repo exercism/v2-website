@@ -1,0 +1,14 @@
+%h1 Members
+-if @invitations.present?
+  %h2 Pending
+  %ul
+    -@invitations.each do |invitation|
+      %li= invitation.email
+
+-if @memberships.present?
+  %h2 Accepted
+  %ul
+    -@memberships.each do |membership|
+      %li= membership.user.name
+
+=link_to "Invite new member", [:new, :teams, @team, :invitation]

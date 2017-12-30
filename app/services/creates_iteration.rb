@@ -22,7 +22,15 @@ class CreatesIteration
         file_contents: file[:file_contents]
       )
     end
+    if solution.is_a?(Solution)
+      update_solution
+    else
+    end
 
+    iteration
+  end
+
+  def update_solution
     solution.update(last_updated_by_user_at: DateTime.now)
 
     if solution.exercise.auto_approve?
@@ -41,8 +49,6 @@ class CreatesIteration
     end
 
     unlock_side_exercise!
-
-    iteration
   end
 
   private

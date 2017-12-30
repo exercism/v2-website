@@ -1,0 +1,2 @@
+module Teams::InvitationsHelper
+end

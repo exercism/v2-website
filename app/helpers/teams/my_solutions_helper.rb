@@ -1,0 +1,2 @@
+module Teams::MySolutionsHelper
+end

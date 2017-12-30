@@ -8,6 +8,6 @@
 -if @teams.present?
   %ul
     -@teams.each do |team|
-      %li= link_to team.name, team
+      %li= link_to team.name, [:teams, team]
 
 %li= link_to "Create a new team", [:new, :teams, :team]

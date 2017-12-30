@@ -11,8 +11,7 @@ class CreateTeam
     team = Team.create!(name: name)
     team.memberships.create!(
       user: user,
-      admin: true,
-      pending: false
+      admin: true
     )
     team
   end

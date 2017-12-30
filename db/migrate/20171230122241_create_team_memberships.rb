@@ -5,7 +5,6 @@ class CreateTeamMemberships < ActiveRecord::Migration[5.1]
       t.bigint :user_id, null: false
 
       t.boolean :admin, null: false, default: false
-      t.boolean :pending, null: false, default: true
 
       t.timestamps
     end

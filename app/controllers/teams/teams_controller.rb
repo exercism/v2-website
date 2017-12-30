@@ -1,10 +1,10 @@
-class Teams::TeamsController < ApplicationController
-
-  before_action :redirect_if_pending, only: [:show, :edit, :update, :destroy]
+class Teams::TeamsController < ::TeamsController
+  before_action :authenticate_user!
+  skip_before_action :find_team, only: [:index, :new, :create]
 
   def index
     @teams = current_user.teams
-    @pending_team_memberships = current_user.pending_team_memberships.includes(:team)
+    @invitations = TeamInvitation.for_user(current_user).includes(:team)
   end
 
   def show
@@ -23,12 +23,8 @@ class Teams::TeamsController < ApplicationController
     redirect_to [:teams, @team]
   end
 
-  private
-
-  def redirect_if_pending
-    pending_membership = current_user.pending_team_memberships.where(team_id: params[:id]).first
-    if pending_membership
-      redirect_to [:teams, pending_membership]
-    end
+  def find_team
+    params[:team_id] = params[:id]
+    super
   end
 end

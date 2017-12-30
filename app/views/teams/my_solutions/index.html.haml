@@ -1,0 +1,5 @@
+-@solutions.each do |solution|
+  =link_to teams_team_my_solution_path(@team, solution) do
+    =solution.exercise.track.title
+    \-
+    =solution.exercise.title

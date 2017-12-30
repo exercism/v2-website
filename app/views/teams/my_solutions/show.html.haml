@@ -1,0 +1,25 @@
+#my-solution-page
+  .lo-container
+    .pure-g.panels
+      .pure-u-1-2.lhs
+        .lhs-content
+          .tabs-and-panes.selected-3
+            .tabs
+              .tab.tab-1
+                Instructions
+              .tab.tab-2
+                Test Suite
+              .tab.tab-3
+                Latest Solution
+
+            =render "solutions/panes", iteration: @iteration
+
+      .pure-u-1-2.rhs
+        .discussion
+          %h3 Team Feedback
+          /=render "discussion"
+
+-content_for :js do
+  :javascript
+    setupSolution()
+
