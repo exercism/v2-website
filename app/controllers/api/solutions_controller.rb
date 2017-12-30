@@ -3,7 +3,7 @@ class API::SolutionsController < APIController
 
   def show
     begin
-      solution = Solution.find_by_uuid!(params[:id])
+      solution = SolutionBase.find_by_uuid!(params[:id])
     rescue
       return render_solution_not_found
     end
@@ -18,7 +18,13 @@ class API::SolutionsController < APIController
   end
 
   def latest
-    if params[:track_id].present?
+    if params[:team_id].present?
+      begin
+        team = Team.find(params[:team_id])
+      rescue
+        return render_404(:team_not_found, fallback_url: teams_url)
+      end
+
       begin
         track = Track.find(params[:track_id])
         user_track = UserTrack.where(user: current_user, track: track).first
@@ -32,33 +38,50 @@ class API::SolutionsController < APIController
         return render_404(:exercise_not_found, fallback_url: track_url(track))
       end
 
-      begin
-        solution = current_user.solutions.where(exercise_id: exercise.id).last!
-      rescue
-        if current_user.may_unlock_exercise?(user_track, exercise)
-          solution = CreatesSolution.create!(current_user, exercise)
-        else
-          return render_solution_not_found
-        end
-      end
-
-    # No track id provided
+      solution = TeamSolution.where(user_id: current_user.id, team_id: team.id, exercise_id: exercise.id).last!
     else
-      solutions = current_user.solutions.joins(:exercise).where("exercises.slug": params[:exercise_id]).includes(exercise: :track)
-      if solutions.size == 1
-        solution = solutions.first
+      if params[:track_id].present?
+        begin
+          track = Track.find(params[:track_id])
+          user_track = UserTrack.where(user: current_user, track: track).first
+        rescue
+          return render_404(:track_not_found, fallback_url: tracks_url)
+        end
 
-      elsif solutions.size > 1
-        return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)
+        begin
+          exercise = track.exercises.find(params[:exercise_id])
+        rescue
+          return render_404(:exercise_not_found, fallback_url: track_url(track))
+        end
 
+        begin
+          solution = current_user.solutions.where(exercise_id: exercise.id).last!
+        rescue
+          if current_user.may_unlock_exercise?(user_track, exercise)
+            solution = CreatesSolution.create!(current_user, exercise)
+          else
+            return render_solution_not_found
+          end
+        end
+
+      # No track id provided
       else
-        exercises = Exercise.side.where(unlocked_by: nil).where(track_id: current_user.tracks).where(slug: params[:exercise_id]).includes(:track)
-        if exercises.size == 1
-          solution = CreatesSolution.create!(current_user, exercises.first)
-        elsif exercises.size == 0
-          return render_404(:exercise_not_found)
-        elsif exercises.size > 1
+        solutions = current_user.solutions.joins(:exercise).where("exercises.slug": params[:exercise_id]).includes(exercise: :track)
+        if solutions.size == 1
+          solution = solutions.first
+
+        elsif solutions.size > 1
           return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)
+
+        else
+          exercises = Exercise.side.where(unlocked_by: nil).where(track_id: current_user.tracks).where(slug: params[:exercise_id]).includes(:track)
+          if exercises.size == 1
+            solution = CreatesSolution.create!(current_user, exercises.first)
+          elsif exercises.size == 0
+            return render_404(:exercise_not_found)
+          elsif exercises.size > 1
+            return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)
+          end
         end
       end
     end
@@ -70,7 +93,7 @@ class API::SolutionsController < APIController
 
   def update
     begin
-      solution = current_user.solutions.find_by_uuid!(params[:id])
+      solution = SolutionBase.find_by_uuid!(params[:id], current_user.id)
     rescue
       # This covers both a non-existing solution and a solution
       # belonging to someone else. We might want seperate messages

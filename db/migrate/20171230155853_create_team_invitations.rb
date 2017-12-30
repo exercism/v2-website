@@ -8,8 +8,8 @@ class CreateTeamInvitations < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
+    add_index :team_invitations, [:team_id, :email], unique: true
     add_foreign_key :team_invitations, :teams
     add_foreign_key :team_invitations, :users, column: :invited_by_id
-    add_index :team_invitations, [:team_id, :email], unique: true
   end
 end

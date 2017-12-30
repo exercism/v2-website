@@ -1,0 +1,9 @@
+=link_to teams_team_solution_path(@team, solution), class: 'solution' do
+  .person
+    =image_tag solution.user.avatar_url
+    .handle= solution.user.handle
+  .icon
+    .img{style: "background-image:url('#{image_path(solution.exercise.white_icon_url)}')"}
+  .title-bar
+    .title= solution.exercise.title
+    .track #{solution.exercise.track.title} Track

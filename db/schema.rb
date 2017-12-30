@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(version: 20171231162945) do
     t.bigint "exercise_id", null: false
     t.string "git_sha", null: false
     t.string "git_slug", null: false
+    t.datetime "downloaded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exercise_id"], name: "fk_rails_ba74ecfdce"
@@ -270,8 +271,10 @@ ActiveRecord::Schema.define(version: 20171231162945) do
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
+    t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_teams_on_slug", unique: true
   end
 
   create_table "testimonials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

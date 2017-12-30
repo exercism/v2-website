@@ -71,6 +71,26 @@ class UserTest < ActiveSupport::TestCase
     assert user.may_view_solution?(solution)
   end
 
+  test "may_view_solution? for team_solution and random user" do
+    solution = create :team_solution
+    user = create :user
+    refute user.may_view_solution?(solution)
+  end
+
+  test "may_view_solution? for team_solution and solution_user" do
+    solution = create :team_solution
+    assert solution.user.may_view_solution?(solution)
+  end
+
+  test "may_view_solution? for team_solution and team member" do
+    team = create :team
+    solution = create :team_solution, team: team
+
+    user = create :user
+    create :team_membership, user: user, team: team
+    assert user.may_view_solution?(solution)
+  end
+
   test "handle is valid" do
     user = build :user
 

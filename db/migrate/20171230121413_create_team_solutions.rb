@@ -9,6 +9,8 @@ class CreateTeamSolutions < ActiveRecord::Migration[5.1]
       t.string :git_sha, null: false
       t.string :git_slug, null: false
 
+      t.datetime :downloaded_at, null: true
+
       t.timestamps
     end
 

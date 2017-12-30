@@ -3,6 +3,16 @@ require 'active_support/concern'
 module SolutionBase
   extend ActiveSupport::Concern
 
+  def self.find_by_uuid!(uuid, user_id = nil)
+    scope = Solution
+    scope = scope.where(user_id: user_id) if user_id
+    scope.find_by_uuid!(uuid)
+  rescue ActiveRecord::RecordNotFound
+    scope = TeamSolution
+    scope = scope.where(user_id: user_id) if user_id
+    scope.find_by_uuid!(uuid)
+  end
+
   included do
     belongs_to :user
     belongs_to :exercise

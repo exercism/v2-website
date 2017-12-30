@@ -1,7 +1,6 @@
 require_relative './test_base'
 
 class API::SolutionsControllerTest < API::TestBase
-
   def setup
     @mock_exercise = stub(files: [])
     @mock_repo = stub(exercise: @mock_exercise, ignore_regexp: /somethingtoignore/)
@@ -163,6 +162,64 @@ class API::SolutionsControllerTest < API::TestBase
   end
 
   ###
+  # LATEST FOR TEAMS
+  ###
+  test "latest should return 200 for team_solution" do
+    Timecop.freeze do
+      setup_user
+
+      team = create :team
+      exercise = create :exercise, core: true
+      solution = create :team_solution, user: @current_user, exercise: exercise, team: team
+
+      get latest_api_solutions_path(team_id: team.slug, track_id: exercise.track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+      assert_response :success
+
+      solution.reload
+      assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
+    end
+  end
+
+  test "latest should return 404 for team_solution if exercise is wrong" do
+    Timecop.freeze do
+      setup_user
+
+      team = create :team
+      exercise = create :exercise, core: true
+      solution = create :team_solution, user: @current_user, exercise: exercise, team: team
+
+      get latest_api_solutions_path(team_id: team.slug, track_id: exercise.track.slug, exercise_id: "foobar"), headers: @headers, as: :json
+      assert_response 404
+    end
+  end
+
+  test "latest should return 404 for team_solution if track is wrong" do
+    Timecop.freeze do
+      setup_user
+
+      team = create :team
+      exercise = create :exercise, core: true
+      solution = create :team_solution, user: @current_user, exercise: exercise, team: team
+
+      get latest_api_solutions_path(team_id: team.slug, track_id: "vasdasd", exercise_id: exercise.slug), headers: @headers, as: :json
+      assert_response 404
+    end
+  end
+
+  test "latest should return 404 for team_solution if team is wrong" do
+    Timecop.freeze do
+      setup_user
+
+      team = create :team
+      exercise = create :exercise, core: true
+      solution = create :team_solution, user: @current_user, exercise: exercise, team: team
+
+      get latest_api_solutions_path(team_id: "asdasdqweqw", track_id: exercise.track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+      assert_response 404
+    end
+  end
+
+  ###
   # SHOW
   ###
   test "show should return 404 when solution is missing" do
@@ -171,13 +228,28 @@ class API::SolutionsControllerTest < API::TestBase
     assert_response 404
   end
 
-  test "show should return 200 if user is solution_user" do
+  test "show should return 200 for solution if user is solution_user" do
     Timecop.freeze do
       setup_user
       exercise = create :exercise
       track = exercise.track
       solution = create :solution, user: @current_user, exercise: exercise
       create :user_track, user: solution.user, track: track
+
+      get api_solution_path(solution), headers: @headers, as: :json
+      assert_response :success
+
+      solution.reload
+      assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
+    end
+  end
+
+  test "show should return 200 for team_solution if user is solution_user" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :team_solution, user: @current_user, exercise: exercise
 
       get api_solution_path(solution), headers: @headers, as: :json
       assert_response :success
@@ -208,6 +280,23 @@ class API::SolutionsControllerTest < API::TestBase
     track = exercise.track
     solution = create :solution, exercise: exercise, published_at: DateTime.yesterday
     create :user_track, user: solution.user, track: track
+
+    get api_solution_path(solution), headers: @headers, as: :json
+    assert_response :success
+
+    solution.reload
+    assert_nil solution.downloaded_at
+  end
+
+  test "show should return 200 for team_solution if user is teammate" do
+    setup_user
+    team = create :team
+    exercise = create :exercise
+
+    teammate = create :user
+    create :team_membership, user: @current_user, team: team
+
+    solution = create :team_solution, exercise: exercise, team: team, user: teammate
 
     get api_solution_path(solution), headers: @headers, as: :json
     assert_response :success
@@ -274,7 +363,6 @@ class API::SolutionsControllerTest < API::TestBase
     file = File.open(__FILE__)
     CreatesIteration.expects(:create!).with do |passed_solution, files|
       assert_equal solution, passed_solution
-      #assert_equal [file, file], files
     end
 
     patch api_solution_path(solution),
@@ -284,6 +372,26 @@ class API::SolutionsControllerTest < API::TestBase
           headers: @headers,
           as: :json
 
+    assert_response :success
+  end
+
+  test "update should succeed with team_solution" do
+    setup_user
+    exercise = create :exercise, core: true
+    track = exercise.track
+    solution = create :team_solution, user: @current_user, exercise: exercise
+
+    file = File.open(__FILE__)
+    CreatesIteration.expects(:create!).with do |passed_solution, files|
+      assert_equal solution, passed_solution
+    end
+
+    patch api_solution_path(solution),
+          params: {
+            files: [ file, file ]
+          },
+          headers: @headers,
+          as: :json
     assert_response :success
   end
 

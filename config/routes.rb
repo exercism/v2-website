@@ -123,8 +123,11 @@ Rails.application.routes.draw do
   # ##### #
   # Teams #
   # ##### #
-  namespace :teams do
+  #namespace :teams do
+  namespace :teams, path: '', constraints: { subdomain: 'teams' } do
+    get "/" => "pages#index"
     get "dashboard" => "dashboard#index"
+
     resources :teams do
       resources :my_solutions
       resources :solutions
@@ -133,10 +136,9 @@ Rails.application.routes.draw do
     end
 
     Teams::PagesController::PAGES.values.each do |page|
-      get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
+      get page.to_s.dasherize => "pages##{page}"#, as: "teams_#{page}_page"
     end
   end
-  get "teams" => "teams/pages#index"
 
   # ##### #
   # Pages #

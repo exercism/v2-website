@@ -1,0 +1,9 @@
+#solutions-page
+  %h1 Team solutions
+  .lo-container
+    .pure-g
+      -@solutions.each do |solution|
+        .pure-u-1-3
+          =render "solution", solution: solution
+
+    =paginate @solutions

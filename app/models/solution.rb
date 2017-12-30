@@ -25,6 +25,10 @@ class Solution < ApplicationRecord
     where.not(published_at: nil)
   end
 
+  def team_solution?
+    false
+  end
+
   def enable_mentoring!
     user_track = user.user_track_for(exercise.track)
     return if user_track.mentoring_allowance_used_up?

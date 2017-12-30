@@ -66,8 +66,14 @@ class User < ApplicationRecord
 
   def may_view_solution?(solution)
     return true if id == solution.user_id
-    return true if solution.published?
-    return true if mentoring_track?(solution.exercise.track)
+
+    if solution.team_solution?
+      return true if solution.team.members.include?(self)
+    else
+      return true if solution.published?
+      return true if mentoring_track?(solution.exercise.track)
+    end
+
     false
   end
 

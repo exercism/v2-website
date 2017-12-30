@@ -17,6 +17,9 @@ FactoryBot.define do
   factory :team_solution do
     team { create :team }
     user { create :user }
+    exercise { create :exercise }
+    git_sha { SecureRandom.uuid }
+    git_slug { SecureRandom.uuid }
   end
 
   factory :ignored_solution_mentorship do

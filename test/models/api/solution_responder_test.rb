@@ -15,6 +15,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
       solution: {
         id: solution.uuid,
         url: "https://v2.exercism.io/my/solutions/#{solution.uuid}",
+        team: nil,
         user: {
           handle: solution.user.handle,
           is_requester: true
@@ -140,4 +141,19 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     responder = API::SolutionResponder.new(solution, solution.user)
     assert responder.to_hash[:solution][:exercise][:auto_approve]
   end
+
+  test "to_hash with team_solution" do
+    user = create :user
+    solution = create :team_solution
+
+    responder = API::SolutionResponder.new(solution, user)
+    assert_equal solution.user.handle, responder.to_hash[:solution][:user][:handle]
+
+    team_json = {
+      name: solution.team.name,
+      slug: solution.team.slug
+    }
+    assert_equal team_json, responder.to_hash[:solution][:team]
+  end
+
 end
