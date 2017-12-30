@@ -31,7 +31,7 @@
     .lo-container
       .title-block
         %h2 Available Language Tracks
-        %p There are 37 different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
+        %p There are #{@tracks.size} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
       .tracks
         -idx = 0
         -while @tracks.present?
