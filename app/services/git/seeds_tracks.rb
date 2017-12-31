@@ -1,6 +1,6 @@
 class Git::SeedsTracks
 
-  # NB generate this with Trackler.tracks.select(&:active?).map {|t| "https://github.com/exercism/#{t.id}" }
+  # NB generate this with Trackler.tracks.select(&:active?).map {|t| "https://github.com/exercism/#{t.id}" }.sort
 
   def self.tracks
     TRACKS
