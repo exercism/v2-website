@@ -23,7 +23,7 @@ class PagesController < ApplicationController
 
   # Landing page
   def index
-    @tracks = Track.reorder("rand()").to_a
+    @tracks = Track.active.reorder("rand()").to_a
   end
 
   def team

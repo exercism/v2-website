@@ -2,7 +2,7 @@ class My::TracksController < MyController
   skip_before_action :authenticate_user!, only: [:show]
 
   def index
-    tracks = Track.order('title ASC')
+    tracks = Track.active.order('title ASC')
     tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
     joined_track_ids = current_user.user_tracks.pluck(:track_id)
 
