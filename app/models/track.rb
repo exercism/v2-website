@@ -11,6 +11,8 @@ class Track < ApplicationRecord
   has_many :mentors, through: :mentorships, source: :user
   has_many :maintainers
 
+  scope :active, ->{ where(active: true) }
+
   [:bordered_green_icon_url,
    :bordered_turquoise_icon_url,
    :hex_green_icon_url,
