@@ -7,8 +7,10 @@ class Git::SeedsTracks
   end
 
   TRACKS = %w{
+    https://github.com/exercism/c
     https://github.com/exercism/csharp
     https://github.com/exercism/cpp
+    https://github.com/exercism/cfml
     https://github.com/exercism/clojure
     https://github.com/exercism/coffeescript
     https://github.com/exercism/common-lisp
@@ -25,6 +27,7 @@ class Git::SeedsTracks
     https://github.com/exercism/haskell
     https://github.com/exercism/java
     https://github.com/exercism/javascript
+    https://github.com/exercism/julia
     https://github.com/exercism/kotlin
     https://github.com/exercism/lfe
     https://github.com/exercism/lua
@@ -35,6 +38,7 @@ class Git::SeedsTracks
     https://github.com/exercism/plsql
     https://github.com/exercism/perl5
     https://github.com/exercism/perl6
+    https://github.com/exercism/purescript
     https://github.com/exercism/python
     https://github.com/exercism/r
     https://github.com/exercism/racket
@@ -42,6 +46,7 @@ class Git::SeedsTracks
     https://github.com/exercism/rust
     https://github.com/exercism/scala
     https://github.com/exercism/scheme
+    https://github.com/exercism/sml
     https://github.com/exercism/swift
     https://github.com/exercism/typescript
     https://github.com/exercism/vimscript
