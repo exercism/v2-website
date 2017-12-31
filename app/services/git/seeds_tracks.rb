@@ -8,19 +8,19 @@ class Git::SeedsTracks
 
   TRACKS = %w{
     https://github.com/exercism/c
-    https://github.com/exercism/csharp
-    https://github.com/exercism/cpp
     https://github.com/exercism/cfml
     https://github.com/exercism/clojure
     https://github.com/exercism/coffeescript
     https://github.com/exercism/common-lisp
+    https://github.com/exercism/cpp
     https://github.com/exercism/crystal
+    https://github.com/exercism/csharp
     https://github.com/exercism/d
     https://github.com/exercism/delphi
     https://github.com/exercism/ecmascript
+    https://github.com/exercism/elisp
     https://github.com/exercism/elixir
     https://github.com/exercism/elm
-    https://github.com/exercism/elisp
     https://github.com/exercism/erlang
     https://github.com/exercism/fsharp
     https://github.com/exercism/go
@@ -32,12 +32,12 @@ class Git::SeedsTracks
     https://github.com/exercism/lfe
     https://github.com/exercism/lua
     https://github.com/exercism/mips
-    https://github.com/exercism/ocaml
     https://github.com/exercism/objective-c
-    https://github.com/exercism/php
-    https://github.com/exercism/plsql
+    https://github.com/exercism/ocaml
     https://github.com/exercism/perl5
     https://github.com/exercism/perl6
+    https://github.com/exercism/php
+    https://github.com/exercism/plsql
     https://github.com/exercism/purescript
     https://github.com/exercism/python
     https://github.com/exercism/r
