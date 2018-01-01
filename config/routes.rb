@@ -133,6 +133,7 @@ Rails.application.routes.draw do
         get :possible_exercises, on: :collection
       end
       resources :solutions
+      resources :discussion_posts, only: [:create]
       resources :memberships, only: [:index, :destroy]
       resources :invitations, only: [:new, :create, :destroy]
     end

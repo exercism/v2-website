@@ -25,6 +25,9 @@ class User < ApplicationRecord
   has_many :solutions
   has_many :iterations, through: :solutions
 
+  has_many :team_solutions
+  has_many :team_iterations, through: :team_solutions, source: :iterations
+
   has_many :track_mentorships
   has_many :mentored_tracks, through: :track_mentorships, source: :track
   has_many :track_mantainerships, class_name: "Maintainer"

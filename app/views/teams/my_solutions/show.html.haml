@@ -17,7 +17,31 @@
       .pure-u-1-2.rhs
         .discussion
           %h3 Team Feedback
-          /=render "discussion"
+
+          -if @iteration.discussion_posts.size > 0
+            .posts
+              -@iteration.discussion_posts.each do |post|
+                =render "teams/discussion_posts/post", post: post, solution: @solution
+          -else
+            .posts{style: "display:none"}
+            .next-steps
+              .title ↳ Next Steps
+
+              %p Well done on submitting your iteration. Your team can now post comments giving feedback, suggestions and ideas.
+
+          =form_for [:teams, @team, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+            =hidden_field_tag :iteration_id, @iteration.id
+
+            .tabs-and-panes.selected-1
+              .tabs
+                .tab.tab-1{data: {tab: "markdown"}} Write
+                .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+              .panes
+                .pane.pane-1.markdown
+                  =f.text_area :content
+                .pane.pane-2.preview
+                  .preview-area
+            =button_tag "Comment", class: "comment-button pure-button"
 
 -content_for :js do
   :javascript
