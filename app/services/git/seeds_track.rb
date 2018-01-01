@@ -13,7 +13,7 @@ class Git::SeedsTrack
   def seed!
     puts "Seeding #{repo_url}"
     unless Track.exists?(repo_url: repo_url)
-      CreatesTrack.create!(language, track_slug, repo_url)
+      CreatesTrack.create!(language, track_slug, repo_url, active: config[:active])
     end
   end
 

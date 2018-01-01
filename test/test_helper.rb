@@ -3,6 +3,7 @@ require 'rails/test_help'
 require 'mocha/mini_test'
 require 'timecop'
 require 'minitest/pride'
+require 'minitest/stub_const'
 
 Rails.application.routes.default_url_options = { :host => "https://v2.exercism.io" }
 OmniAuth.config.test_mode = true

@@ -1,15 +1,16 @@
 class CreatesTrack
 
-  def self.create!(language, track_slug, repo_url)
-    new(language, track_slug, repo_url).create!
+  def self.create!(language, track_slug, repo_url, active:)
+    new(language, track_slug, repo_url, active: active).create!
   end
 
-  attr_reader :language, :track_slug, :repo_url
+  attr_reader :language, :track_slug, :repo_url, :active
 
-  def initialize(language, track_slug, repo_url)
+  def initialize(language, track_slug, repo_url, active:)
     @language = language
     @repo_url = repo_url
     @track_slug = track_slug || repo_url.split("/").last
+    @active = active
   end
 
   def create!
@@ -27,6 +28,7 @@ class CreatesTrack
       slug: track_slug,
       syntax_highligher_language: prism_language,
       repo_url: repo_url,
+      active: active,
 
       # Default track metadata to empty for git syncer to populate
       introduction: "",
