@@ -1,13 +1,11 @@
 @mixin normal-font {
-    font-family: "Lato", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 300;
-    //font-size-adjust: 0.488;
 }
 
 @mixin header-font {
     font-family: "Dosis", "Lato", 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 800;
-    font-size-adjust: 0.488;
 }
 
 @mixin code-font {
