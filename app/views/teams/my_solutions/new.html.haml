@@ -1,0 +1,20 @@
+.lo-container
+  %h2 Start new exercise
+  =form_tag teams_team_my_solutions_path(@team), method: :post do
+    .widget-filter
+      .title Track:
+      = select_tag :track_id,
+        options_for_select(OptionsHelper.format_options(@track_id_options)),
+        include_blank: true
+
+    .exercises
+      .placeholder Choose a track to see exercises
+
+    =button_tag "Start exercise"
+
+-content_for :js do
+  :javascript
+    $('#track_id').change(function() {
+      var track_id = $(this).val()
+      $.get("#{possible_exercises_teams_team_my_solutions_path(@team)}?track_id=" + track_id)
+    })

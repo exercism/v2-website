@@ -129,7 +129,9 @@ Rails.application.routes.draw do
     get "dashboard" => "dashboard#index"
 
     resources :teams do
-      resources :my_solutions
+      resources :my_solutions do
+        get :possible_exercises, on: :collection
+      end
       resources :solutions
       resources :memberships, only: [:index, :destroy]
       resources :invitations, only: [:new, :create, :destroy]

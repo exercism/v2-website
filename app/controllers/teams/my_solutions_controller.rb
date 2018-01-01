@@ -15,6 +15,20 @@ class Teams::MySolutionsController < TeamsController
     end
   end
 
+  def new
+    @track_id_options = OptionsHelper.as_options(Track.all, :title, :id)
+  end
+
+  def possible_exercises
+    @exercises = Track.find(params[:track_id]).exercises.active
+  end
+
+  def create
+    @team_solution = CreateTeamSolution.(current_user, @team, Exercise.find(params[:exercise_id]))
+    redirect_to teams_team_my_solution_path(@team, @team_solution)
+  end
+
+  private
   def show_unlocked
     render :show_unlocked
   end
@@ -25,4 +39,6 @@ class Teams::MySolutionsController < TeamsController
     @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
     @num_iterations = @solution.iterations.count
   end
+
+
 end

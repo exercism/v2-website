@@ -1,0 +1,4 @@
+-@exercises.each do |exercise|
+  =radio_button_tag :exercise_id, exercise.id
+  =label_tag "exercise_id[#{exercise.id}]" do
+    =exercise.title

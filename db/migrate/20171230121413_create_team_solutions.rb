@@ -17,5 +17,6 @@ class CreateTeamSolutions < ActiveRecord::Migration[5.1]
     add_foreign_key :team_solutions, :teams
     add_foreign_key :team_solutions, :users
     add_foreign_key :team_solutions, :exercises
+    add_foreign_key :team_solutions, [:user_id, :team_id, :exercise_id], unique: true
   end
 end
