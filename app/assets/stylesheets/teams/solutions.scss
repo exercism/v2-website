@@ -1,3 +1,183 @@
-// Place all the styles related to the teams/solutions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+@import 'mixins';
+
+#teams-solutions-page {
+    .num-solutions {
+        float:right;
+        padding-top:5px;
+        padding-right:25px;
+        font-weight:$regular;
+        color:#999;
+    }
+
+    .filters {
+        margin-bottom:20px;
+        .widget-filter {
+            &.topic_id {
+                .selectize-control {
+                    width:200px;
+                }
+            }
+            &.exercise_id {
+                .selectize-control {
+                    width:350px;
+                }
+            }
+        }
+    }
+    .widget-side-exercise {
+        .stats {
+            text-transform:none;
+            @include font-size(12, 14);
+            margin-bottom:10px;
+            .language {
+                display: inline-block;
+                margin-right: 5px;
+                padding-right: 5px;
+                border-right: 1px solid #aaa;
+                color: #aaa;
+                font-weight: 400;
+            }
+            .num-iterations {
+                display: inline-block;
+                color: #aaa;
+                font-weight: 400;
+            }
+        }
+        .status {
+            float: none;
+            display: block;
+            margin-left: 0;
+            @include font-size(12, 14);
+            color:#666;
+            font-weight: $bold;
+        }
+    }
+
+    .pure-u-1-2 {
+        &:nth-child(odd) .solution {
+            margin-right:10px;
+        }
+        &:nth-child(even) .solution {
+            margin-left:10px;
+        }
+    }
+    .solution {
+        border:1px solid #ddd;
+        border-radius:2px;
+        margin:0 0 20px 0;
+        padding:20px;
+        display:block;
+        text-decoration:none;
+        overflow:hidden;
+        &:hover {
+            border-color:$color-2;
+        }
+        .icons {
+            position:relative;
+            float:left;
+            margin-right:20px;
+            .exercise {
+                overflow:hidden;
+                background:#fff;
+                border:1px solid $color-2;
+                padding:10px;
+                width:60px;
+                height:60px;
+                padding:7px;
+                float:left;
+                border-radius:2px;
+
+                img {
+                    height:100%;
+                    margin:0 auto;
+                    display:block;
+                }
+            }
+            .track {
+                width: 30px;
+                position: absolute;
+                top: -15px;
+                left: 45px;
+            }
+            .joiner {
+                float:left;
+                height:25px;
+                width:20px;
+                border-bottom:2px solid $color-2;
+            }
+            .person {
+                border-radius:2px;
+                border:1px solid $color-2;
+                width:60px;
+                height:60px;
+                float:left;
+                display:block;
+            }
+        }
+        .details {
+            overflow:hidden;
+            padding-left:10px;
+            border-left:2px solid #ddd;
+            .difficulty {
+                display:inline-block;
+                float:right;
+                font-weight:$bold;
+                @include font-size(10, 10);
+                text-transform:uppercase;
+
+                &.easy { color: $color-1; }
+                &.medium { color: #f48b00 }
+                &.hard { color: #f34a56 }
+            }
+            .title {
+                @include font-size(18, 20);
+                color:#666;
+                margin-bottom:5px;
+                font-weight:$regular;
+                max-width: 480px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                .handle {
+                    display:inline-block;
+                    font-weight:$bold;
+                    color:#333;
+                }
+                .exercise {
+                    display:inline-block;
+                }
+            }
+
+            .extra {
+                @include font-size(12, 12);
+                color:#bbb;
+                font-weight:$regular;
+                margin-bottom:10px;
+
+                .language {
+                    display:inline-block;
+                }
+                .iteration {
+                    display:inline-block;
+                }
+                .divider {
+                    margin:0 5px;
+                    display:inline-block;
+                    border-right:1px solid #bbb;
+                }
+                .submitted-at {
+                    display:inline-block;
+                }
+            }
+            .status {
+                color:#666;
+                font-weight:$bold;
+                @include font-size(12, 12);
+            }
+        }
+
+    }
+
+}

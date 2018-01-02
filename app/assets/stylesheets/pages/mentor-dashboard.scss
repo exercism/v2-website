@@ -41,8 +41,14 @@
     }
     .widget-filter {
         margin-right:0;
-        .selectize-control {
-            width:220px;
+        &.status .selectize-control {
+            width:200px;
+        }
+        &.track_id .selectize-control {
+            width:130px;
+        }
+        &.exercise_id .selectize-control {
+            width:155px;
         }
     }
 

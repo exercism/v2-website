@@ -194,5 +194,6 @@ class CreatesIterationTest < ActiveSupport::TestCase
     solution.reload
     assert solution.needs_feedback
     refute solution.has_unseen_feedback
+    assert_equal 1, solution.num_iterations
   end
 end

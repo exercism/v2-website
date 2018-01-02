@@ -10,6 +10,7 @@ class Team < ApplicationRecord
   end
 
   has_many :solutions, class_name: "TeamSolution"
+  has_many :iterations, through: :solutions
 
   has_many :invitations, class_name: "TeamInvitation"
   has_many :memberships, class_name: "TeamMembership"

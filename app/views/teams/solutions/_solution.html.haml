@@ -1,9 +1,25 @@
 =link_to teams_team_solution_path(@team, solution), class: 'solution' do
-  .person
-    =image_tag solution.user.avatar_url
-    .handle= solution.user.handle
-  .icon
-    .img{style: "background-image:url('#{image_path(solution.exercise.white_icon_url)}')"}
-  .title-bar
-    .title= solution.exercise.title
-    .track #{solution.exercise.track.title} Track
+  .icons
+    .exercise
+      = image_tag solution.exercise.turquoise_icon_url
+    = image_tag solution.exercise.track.hex_turquoise_icon_url, class: 'track'
+    .joiner
+    = image_tag solution.user.avatar_url, class: 'person'
+
+  -difficulty_word = exercise_difficulty_word(solution.exercise)
+  .details
+    .title
+      .handle= solution.user.handle
+      solution to
+      .exercise #{solution.exercise.title}
+    .extra
+      .language #{solution.exercise.track.title}
+      .divider &nbsp;
+      .iteration Iteration ##{solution.iterations.count}
+      .divider &nbsp;
+      .submitted-at Submitted #{time_ago_in_words(solution.iterations.last.created_at)} ago
+    .status
+      -if solution.needs_feedback?
+        %i.fa.fa-comments-o
+        View and Give Feedback
+

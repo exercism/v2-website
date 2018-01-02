@@ -55,7 +55,8 @@ class CreatesIteration
   def update_team_solution
     solution.update(
       needs_feedback: true,
-      has_unseen_feedback: false
+      has_unseen_feedback: false,
+      num_iterations: solution.iterations.count
     )
   end
 

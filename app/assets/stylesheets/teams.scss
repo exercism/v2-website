@@ -1,8 +1,8 @@
 @import 'mixins';
 @import 'variables';
 
-.teams-page {
-    padding-top:20px;
+.teams-page,
+.team-page {
     h1 {
         font-weight:$bold;
         @include font-size(16, 16);
@@ -10,6 +10,14 @@
         padding-bottom:5px;
         border-bottom:1px solid #aaa;
     }
+    h2 {
+        font-weight:$bold;
+        @include font-size(14, 14);
+        margin-bottom:10px;
+    }
+}
+.teams-page {
+    padding-top:20px;
 }
 
 .team-page {

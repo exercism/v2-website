@@ -11,15 +11,16 @@ class CreateTeamSolutions < ActiveRecord::Migration[5.1]
 
       t.boolean :needs_feedback, null: false, default: false
       t.boolean :has_unseen_feedback, null: false, default: false
+      t.integer :num_iterations, null: false, default: 0
 
       t.datetime :downloaded_at, null: true
 
       t.timestamps
     end
 
+    add_index :team_solutions, [:user_id, :team_id, :exercise_id], unique: true
     add_foreign_key :team_solutions, :teams
     add_foreign_key :team_solutions, :users
     add_foreign_key :team_solutions, :exercises
-    add_index :team_solutions, [:user_id, :team_id, :exercise_id], unique: true
   end
 end

@@ -1,8 +1,9 @@
 @import 'variables';
 @import 'mixins';
 
-#teams-solution-page.team-page,
-#teams-my-solution-page.team-page {
+#teams-solution-page,
+#teams-my-solution-page,
+#teams-my-solution-unlocked-page {
     #team-header {
         margin-bottom:0;
     }
@@ -10,7 +11,7 @@
         overflow:hidden;
         background:$color-1;
         padding:20px 0;
-        margin-bottom:40px;
+        margin-bottom:30px;
         img {
             float:left;
             margin-right:15px;

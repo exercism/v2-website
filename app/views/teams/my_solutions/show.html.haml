@@ -1,18 +1,6 @@
 #teams-my-solution-page.team-page
   =teams_header
-  .solution-header
-    .lo-container
-      .icon
-        =image_tag @exercise.white_icon_url
-      .inner
-        -if @iteration
-          =render "solutions/iteration_nav", url_path: :teams_team_my_solution_path, url_parts: [@team, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
-
-        %h2
-          %strong #{@exercise.title}
-          in
-          %strong #{@exercise.track.title}
-        .byline started #{@solution.created_at.strftime("%e#{@solution.created_at.day.ordinalize} %b %Y")}
+  =render "solution_header"
 
   .lo-container
     .pure-g.panels

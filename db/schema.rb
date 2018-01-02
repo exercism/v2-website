@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 20171231162945) do
     t.string "git_slug", null: false
     t.boolean "needs_feedback", default: false, null: false
     t.boolean "has_unseen_feedback", default: false, null: false
+    t.integer "num_iterations", default: 0, null: false
     t.datetime "downloaded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
