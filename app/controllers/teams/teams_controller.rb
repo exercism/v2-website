@@ -20,6 +20,12 @@ class Teams::TeamsController < ::TeamsController
       current_user,
       params[:team][:name]
     )
+
+    emails = params[:emails].to_s.split("\n").map(&:strip).compact
+    emails.each do |email|
+      CreateTeamInvitation.(@team, current_user, email)
+    end
+
     redirect_to [:teams, @team]
   end
 

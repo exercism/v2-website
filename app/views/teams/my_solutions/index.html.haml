@@ -1,7 +1,26 @@
--@solutions.each do |solution|
-  =link_to teams_team_my_solution_path(@team, solution) do
-    =solution.exercise.track.title
-    \-
-    =solution.exercise.title
+#teams-my-solutions-page.team-page
+  =teams_header
+  .lo-container
+    .num-solutions= pluralize @solutions.size, "Solutions"
+    .filters
+      =form_tag [:teams, @team, :my_solutions], remote: true, method: :get, class: "my_solutions_form" do
+        .widget-filter.difficulty
+          .title Difficulty:
+          =select_tag :difficulty, options_for_select({"All": ' ', "Easy": 'easy', "Medium": 'medium', "Hard": 'hard'}, value: @difficulty), id: nil
+        .widget-filter.length
+          .title Length:
+          =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil
+        .widget-filter.topic
+          .title Topic:
+          =select_tag :topic_id, options_for_select(@topics_for_select), id: nil
+        .widget-filter.status
+          .title Status:
+          =select_tag :status, options_for_select({"All": 0, "In Progress": :in_progress, "Unlocked": :unlocked, "Completed": :completed, "Locked": :locked}, value: @status), id: nil
+    .pure-g.solutions
+      =render "teams/my_solutions/solutions", solutions: @solutions
 
-=link_to "New solution", new_teams_team_my_solution_path
+    =link_to "New solution", new_teams_team_my_solution_path
+
+  -content_for :js do
+    :javascript
+      submitOnChange($('.my_solutions_form select'))

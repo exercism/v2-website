@@ -1,5 +1,8 @@
-%h1 Members
-%h2 Invite new user
-=form_tag [:teams, @team, :invitations] do
-  =text_area_tag :emails, '', placeholder: "Email addresses - 1 per line"
-  =button_tag "Invite new members"
+#teams-invitations-page.team-page
+  =teams_header
+  .lo-container
+    %h1 Members
+    %h2 Invite new user
+    =form_tag [:teams, @team, :invitations] do
+      =text_area_tag :emails, '', placeholder: "Email addresses - 1 per line"
+      =button_tag "Invite new members"

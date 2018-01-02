@@ -1,3 +1,40 @@
-// Place all the styles related to the teams/teams controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'mixins';
+@import 'variables';
+
+#teams-teams-page {
+    .team,
+    .new-team {
+        display:block;
+        text-decoration:none;
+        border:1px solid #aaa;
+        border-radius:3px;
+        padding:10px;
+        color:#333;
+        margin-right:10px;
+        height:62px;
+        &:hover {
+            border-color:red;
+        }
+    }
+    .team {
+        h3 {
+            font-weight:$bold;
+            @include font-size(16, 16);
+            margin-bottom:5px;
+        }
+        .text {
+            display:inline-block;
+        }
+    }
+    .new-team {
+        display:table;
+        width:100%;
+        .text {
+            font-weight:$bold;
+            @include font-size(16, 16);
+            margin-bottom:5px;
+            display:table-cell;
+            vertical-align:middle;
+        }
+    }
+}

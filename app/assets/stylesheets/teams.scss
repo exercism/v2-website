@@ -1,0 +1,34 @@
+@import 'mixins';
+@import 'variables';
+
+.teams-page {
+    padding-top:20px;
+    h1 {
+        font-weight:$bold;
+        @include font-size(16, 16);
+        margin-bottom:20px;
+        padding-bottom:5px;
+        border-bottom:1px solid #aaa;
+    }
+}
+
+.team-page {
+    #team-header {
+        background:#eee;
+        .name {
+            display:inline-block;
+        }
+        a {
+            text-decoration:none;
+            padding:5px 0;
+            display:inline-block;
+            color:#999;
+            margin-left:20px;
+            &.selected {
+                color:#333;
+                font-weight:500;
+                border-bottom:3px solid #333;
+            }
+        }
+    }
+}

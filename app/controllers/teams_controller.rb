@@ -16,6 +16,11 @@ class TeamsController < ApplicationController
     end
   end
 
+  def current_team_membership 
+    @current_team_membership ||= current_user.team_memberships.where(team_id: @team.id).first
+  end
+  helper_method :current_team_membership
+
   def set_site_context
     session["site_context"] = "teams"
   end

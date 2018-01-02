@@ -1,3 +1,28 @@
-// Place all the styles related to the teams/my_solutions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+@import 'mixins';
+
+#teams-my-solutions-page {
+    .num-solutions {
+        float:right;
+        padding-top:5px;
+        padding-right:25px;
+        font-weight:$regular;
+        color:#999;
+    }
+
+    .filters {
+        margin-bottom:20px;
+        .widget-filter {
+            &.topic {
+                .selectize-control {
+                    width:250px;
+                }
+            }
+            &.status {
+                .selectize-control {
+                    width:120px;
+                }
+            }
+        }
+    }
+}

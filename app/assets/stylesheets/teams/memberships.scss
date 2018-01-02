@@ -1,3 +1,26 @@
-// Place all the styles related to the teams/memberships controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'mixins';
+@import 'variables';
+
+#teams-memberships-page {
+    h2 {
+        margin-top:20px;
+        margin-bottom:5px;
+        font-weight:$bold;
+        @include font-size(16, 16);
+    }
+    p {
+    }
+    table {
+        tr {
+            &:nth-child(odd) {
+                background:#eee;
+            }
+        }
+        td {
+            padding:10px;
+            &:last-child {
+                padding-right:50px;
+            }
+        }
+    }
+}
