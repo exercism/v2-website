@@ -3,7 +3,9 @@
 
 #solution-page,
 #mentor-solution-page,
-#my-solution-page {
+#my-solution-page,
+#teams-solution-page,
+#teams-my-solution-page {
     .pane.instructions {
         padding:20px 30px;
         h1,h2,h3,h4,h5,h6 {
@@ -62,13 +64,19 @@
             margin-right: 10px;
         }
     }
+    .test-suite pre {
+        background:#f9f9f9;
+    }
+    .solution pre {
+        background:#fff;
+    }
+
     .solution, .test-suite {
         pre {
-            background:#f9f9f9;
             padding-top:0;
             padding-bottom:0;
             code[class*="language-"] {
-                font-size:12px;
+                //font-size:12px;
             }
         }
     }

@@ -1,12 +1,13 @@
+-url_path ||= nil
 .iteration-nav
   .title
     Iteration
     %strong #{iteration_idx}
     of #{num_iterations}
   -if iteration_idx > 1
-    =link_to url_parts + [iteration_idx: 1], class: 'first' do
+    =link_to iteration_path(url_path, url_parts + [iteration_idx: 1]), class: 'first' do
       %i.fa.fa-fw.fa-fast-backward
-    =link_to url_parts + [iteration_idx: iteration_idx - 1], class: 'prev' do
+    =link_to iteration_path(url_path, url_parts + [iteration_idx: iteration_idx - 1]), class: 'prev' do
       %i.fa.fa-fw.fa-backward
   -else
     .first.disabled
@@ -15,9 +16,9 @@
       %i.fa.fa-fw.fa-backward
 
   -if iteration_idx < num_iterations
-    =link_to url_parts + [iteration_idx: iteration_idx + 1], class: 'last' do
+    =link_to iteration_path(url_path, url_parts + [iteration_idx: iteration_idx + 1]), class: 'last' do
       %i.fa.fa-fw.fa-forward
-    =link_to url_parts + [iteration_idx: num_iterations], class: 'last' do
+    =link_to iteration_path(url_path, url_parts + [iteration_idx: num_iterations]), class: 'last' do
       %i.fa.fa-fw.fa-fast-forward
   -else
     .next.disabled

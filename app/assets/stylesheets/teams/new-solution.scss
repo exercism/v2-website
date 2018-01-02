@@ -1,0 +1,41 @@
+@import 'variables';
+@import 'mixins';
+
+#teams-new-solution-page {
+    .widget-filter .selectize-control {
+        width:250px;
+    }
+    .exercise-radio-button {
+        display:none;
+        &:checked+.widget-side-exercise {
+            border-color: #009cab;
+            box-shadow: 0 0 0 1px #009cab;
+
+        }
+    }
+    .widget-side-exercise {
+        cursor:pointer;
+        padding:15px;
+        height:92px;
+        .icon {
+            width:60px;
+            height:60px;
+
+            .img {
+                width:38px;
+                height:38px;
+            }
+        }
+        .title {
+            padding-top:9px;
+            margin-bottom:7px;
+        }
+
+        .topics {
+
+        }
+    }
+    .pure-button {
+        background:$color-2;
+    }
+}

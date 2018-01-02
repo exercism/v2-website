@@ -7,8 +7,8 @@
           %li= membership.team.name
 
     %h2 Your Teams
-    -if @teams.present?
-      .pure-g
+    .pure-g
+      -if @teams.present?
         -@teams.each do |team|
           .pure-u-1-5
             = link_to [:teams, team], class: "team" do
@@ -19,6 +19,6 @@
                   = team.members.count
                   Members
 
-        .pure-u-1-5
-          = link_to [:new, :teams, :team], class: 'new-team' do
-            .text Create a new team
+      .pure-u-1-5
+        = link_to [:new, :teams, :team], class: 'new-team' do
+          .text Create a new team

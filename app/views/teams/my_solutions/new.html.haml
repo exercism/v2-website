@@ -1,16 +1,19 @@
-.lo-container
-  %h2 Start new exercise
-  =form_tag teams_team_my_solutions_path(@team), method: :post do
-    .widget-filter
-      .title Track:
-      = select_tag :track_id,
-        options_for_select(OptionsHelper.format_options(@track_id_options)),
-        include_blank: true
+#teams-new-solution-page.team-page
+  =teams_header
+  .lo-container
+    %h1 Start new exercise
+    %h2 1) Choose a language
+    =form_tag teams_team_my_solutions_path(@team), method: :post do
+      .widget-filter
+        .title Track:
+        = select_tag :track_id,
+          options_for_select(OptionsHelper.format_options(@track_id_options)),
+          include_blank: true
 
-    .exercises
-      .placeholder Choose a track to see exercises
+      %h2 2) Choose an exercise
+      .exercises
+        .placeholder Choose a track to see exercises
 
-    =button_tag "Start exercise"
 
 -content_for :js do
   :javascript

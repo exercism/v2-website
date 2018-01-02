@@ -22,9 +22,10 @@ class CreatesIteration
         file_contents: file[:file_contents]
       )
     end
-    if solution.is_a?(Solution)
-      update_solution
+    if solution.team_solution?
+      update_team_solution
     else
+      update_solution
     end
 
     iteration
@@ -49,6 +50,13 @@ class CreatesIteration
     end
 
     unlock_side_exercise!
+  end
+
+  def update_team_solution
+    solution.update(
+      needs_feedback: true,
+      has_unseen_feedback: false
+    )
   end
 
   private

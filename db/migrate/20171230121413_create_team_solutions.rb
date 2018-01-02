@@ -9,6 +9,9 @@ class CreateTeamSolutions < ActiveRecord::Migration[5.1]
       t.string :git_sha, null: false
       t.string :git_slug, null: false
 
+      t.boolean :needs_feedback, null: false, default: false
+      t.boolean :has_unseen_feedback, null: false, default: false
+
       t.datetime :downloaded_at, null: true
 
       t.timestamps
@@ -17,6 +20,6 @@ class CreateTeamSolutions < ActiveRecord::Migration[5.1]
     add_foreign_key :team_solutions, :teams
     add_foreign_key :team_solutions, :users
     add_foreign_key :team_solutions, :exercises
-    add_foreign_key :team_solutions, [:user_id, :team_id, :exercise_id], unique: true
+    add_index :team_solutions, [:user_id, :team_id, :exercise_id], unique: true
   end
 end

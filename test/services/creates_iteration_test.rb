@@ -172,4 +172,27 @@ class CreatesIterationTest < ActiveSupport::TestCase
       CreatesIteration.create!(solution, [file1, file2])
     end
   end
+
+  test "sets flags for team solution" do
+    solution = create :team_solution, needs_feedback: false, has_unseen_feedback: true
+    code = "foobar"
+    filename = "dog/foobar.rb"
+    file_contents = "something = :else"
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
+    file = mock(read: file_contents, headers: headers)
+
+    iteration = CreatesIteration.create!(solution, [file])
+
+    assert iteration.persisted?
+    assert_equal iteration.solution, solution
+    assert_equal 1, iteration.files.count
+
+    saved_file = iteration.files.first
+    assert_equal filename, saved_file.filename
+    assert_equal file_contents, saved_file.file_contents
+
+    solution.reload
+    assert solution.needs_feedback
+    refute solution.has_unseen_feedback
+  end
 end

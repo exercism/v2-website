@@ -29,7 +29,14 @@ class Teams::MySolutionsController < TeamsController
   def show
     @solution = TeamSolution.find_by_uuid_for_team_and_user(params[:id], @team, current_user)
     @exercise = @solution.exercise
+
+    @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
+    @iteration = @solution.iterations.last unless @iteration
+    @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
+    @num_iterations = @solution.iterations.count
+
     ClearsNotifications.clear!(current_user, @solution)
+    @solution.update(has_unseen_feedback: false)
 
     if @solution.iterations.size > 0
       show_started
@@ -43,7 +50,7 @@ class Teams::MySolutionsController < TeamsController
   end
 
   def possible_exercises
-    @exercises = Track.find(params[:track_id]).exercises.active
+    @exercises = Track.find(params[:track_id]).exercises.active.reorder(:title)
   end
 
   def create

@@ -1,4 +1,16 @@
--@exercises.each do |exercise|
-  =radio_button_tag :exercise_id, exercise.id
-  =label_tag "exercise_id[#{exercise.id}]" do
-    =exercise.title
+.pure-g
+  -@exercises.each do |exercise|
+    .pure-u-1-4
+      =radio_button_tag :exercise_id, exercise.id, 1, class: 'exercise-radio-button'
+      =label_tag "exercise_id[#{exercise.id}]", class: "widget-side-exercise unlocked" do
+        .icon
+          .img{style: "background-image:url('#{image_path(exercise.dark_icon_url)}')"}
+
+        .title= exercise.title
+        -length_word = exercise_length_word(exercise)
+        -difficulty_word = exercise_difficulty_word(exercise)
+        .stats
+          .length{class: length_word}= length_word
+          .difficulty{class: difficulty_word}= difficulty_word
+
+=button_tag "Start exercise", class: 'pure-button'
