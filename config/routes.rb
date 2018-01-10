@@ -123,8 +123,8 @@ Rails.application.routes.draw do
   # ##### #
   # Teams #
   # ##### #
-  #namespace :teams do
-  namespace :teams do #, path: '', constraints: { subdomain: 'teams' } do
+  # namespace :teams do
+  namespace :teams, path: '', constraints: { subdomain: 'teams' } do
     get "/" => "pages#index"
     get "dashboard" => "dashboard#index"
 
