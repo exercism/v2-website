@@ -2,7 +2,9 @@
   =teams_header
   .lo-container
     %h1 Members
-    %h2 Invite new user
+    %h2 Invite new users
+    %p Enter your teammates' email addresses, one on each line.
     =form_tag [:teams, @team, :invitations] do
-      =text_area_tag :emails, '', placeholder: "Email addresses - 1 per line"
-      =button_tag "Invite new members"
+      .field
+        =text_area_tag :emails, '', placeholder: "Email addresses - 1 per line"
+      =button_tag "Invite new members", class: 'pure-button'

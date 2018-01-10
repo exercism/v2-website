@@ -17,7 +17,7 @@
     .pure-g.solutions
       =render "teams/my_solutions/solutions", solutions: @solutions
 
-    =link_to "New solution", new_teams_team_my_solution_path
+    =link_to "Start new solution", new_teams_team_my_solution_path, class: "pure-button"
 
   -content_for :js do
     :javascript

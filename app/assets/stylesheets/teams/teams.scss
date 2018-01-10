@@ -6,32 +6,48 @@
     .new-team {
         display:block;
         text-decoration:none;
-        border:1px solid #aaa;
+        border:1px solid #ccc;
         border-radius:3px;
         padding:10px;
         color:#333;
         margin-right:10px;
-        height:62px;
+        height:58px;
         &:hover {
             border-color:red;
+        }
+        .img {
+            border:1px solid #aaa;
+            background:#eee;
+            height:100%;
+            float: left;
+            margin-right: 10px;
+            width: 36px;
         }
     }
     .team {
         h3 {
             font-weight:$bold;
-            @include font-size(16, 16);
-            margin-bottom:5px;
+            @include font-size(15, 16);
+            margin-bottom:8px;
         }
-        .text {
-            display:inline-block;
+        .members {
+            color:#aaa;
+            @include font-size(12,12);
+            i {
+                @include font-size(10,12);
+            }
+            .text {
+                display:inline-block;
+                font-weight:$regular;
+            }
         }
     }
     .new-team {
         display:table;
         width:100%;
-        .text {
+        h3 {
             font-weight:$bold;
-            @include font-size(16, 16);
+            @include font-size(15, 16);
             margin-bottom:5px;
             display:table-cell;
             vertical-align:middle;

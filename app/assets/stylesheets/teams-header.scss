@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'mixins';
+
+header.logged-in.teams {
+    #team-selector {
+        float:right;
+        .selectize-control {
+            width:200px;
+            margin-top:10px;
+            .selectize-input {
+                padding:5px;
+            }
+        }
+    }
+}
+
+

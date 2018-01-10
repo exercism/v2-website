@@ -56,4 +56,15 @@ module LayoutHelper
       render "layouts/logged_out_header"
     end
   end
+
+  def render_teams_header
+    if devise_controller?
+      render "layouts/logged_out_teams_header"
+    elsif user_signed_in?
+      render "layouts/logged_in_teams_header"
+    else
+      render "layouts/logged_out_teams_header"
+    end
+  end
+
 end

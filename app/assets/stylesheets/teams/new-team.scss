@@ -4,20 +4,26 @@
 #teams-new-team-page {
     form {
         .field {
-            margin-bottom:10px;
+            margin-bottom:20px;
             h3 {
-                @include font-size(16, 16);
-                margin-bottom:5px;
+                @include font-size(15, 15);
+                margin-bottom:7px;
                 font-weight:500;
             }
             p {
-                margin-bottom:5px;
+                margin-bottom:7px;
+                color:#999;
             }
             textarea {
                 width:300px;
                 height:200px;
                 padding:10px;
+                border:1px solid #aaa;
+                border-radius:3px;
             }
+        }
+        .pure-button {
+            background:$color-2;
         }
     }
 }
