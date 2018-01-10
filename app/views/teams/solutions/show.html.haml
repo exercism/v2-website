@@ -1,0 +1,63 @@
+#teams-solution-page.team-page
+  =teams_header
+
+  .solution-header
+    .lo-container
+      =image_tag display_avatar_url @solution.user, @solution_user_track
+      .inner
+        =render "solutions/iteration_nav", url_path: :teams_team_solution_path, url_parts: [@team, @solution], iteration_idx: @iteration_idx, num_iterations: @solution.num_iterations
+        %h2
+          %strong #{@exercise.title}
+          in
+          %strong #{@exercise.track.title}
+        .byline by #{@solution.user.handle}
+
+  .lo-container
+    .pure-g.panels
+      .pure-u-1-2.lhs
+        .lhs-content
+          .tabs-and-panes.selected-3
+            .tabs
+              .tab.tab-1
+                Instructions
+              .tab.tab-2
+                Test Suite
+              .tab.tab-3
+                Latest Solution
+
+            =render "solutions/panes", iteration: @iteration
+
+      .pure-u-1-2.rhs
+        .discussion
+          %h3 Team Feedback
+
+          -if @iteration.discussion_posts.size > 0
+            .posts
+              -@iteration.discussion_posts.each do |post|
+                =render "teams/discussion_posts/post", post: post, solution: @solution
+          -else
+            .posts{style: "display:none"}
+            .next-steps
+              .title ↳ Help out!
+
+              %p Help your teammate by leaving feedback on their post. Try and be encouraging and helpful!
+
+          =form_for [:teams, @team, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+            =hidden_field_tag :iteration_id, @iteration.id
+
+            .tabs-and-panes.selected-1
+              .tabs
+                .tab.tab-1{data: {tab: "markdown"}} Write
+                .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+              .panes
+                .pane.pane-1.markdown
+                  =f.text_area :content
+                .pane.pane-2.preview
+                  .preview-area
+            =button_tag "Comment", class: "comment-button pure-button"
+
+-content_for :js do
+  :javascript
+    setupSolution()
+
+

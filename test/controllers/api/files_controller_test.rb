@@ -3,7 +3,7 @@ require_relative './test_base'
 class API::FilesControllerTest < API::TestBase
 
   def setup
-    @mock_exercise = stub(read_file: "")
+    @mock_exercise = stub(read_file: "some_content")
     @mock_repo = stub(exercise: @mock_exercise)
     Git::ExercismRepo.stubs(new: @mock_repo)
   end
@@ -20,16 +20,14 @@ class API::FilesControllerTest < API::TestBase
   end
 
   test "show should return 200 if user is solution_user" do
-    Timecop.freeze do
-      setup_user
-      exercise = create :exercise
-      track = exercise.track
-      solution = create :solution, user: @current_user, exercise: exercise
-      create :user_track, user: solution.user, track: track
+    setup_user
+    exercise = create :exercise
+    track = exercise.track
+    solution = create :solution, user: @current_user, exercise: exercise
+    create :user_track, user: solution.user, track: track
 
-      get api_solution_file_path(solution, "foobar"), headers: @headers, as: :json
-      assert_response :success
-    end
+    get api_solution_file_path(solution, "fqweqwoobar"), headers: @headers, as: :json
+    assert_response :success
   end
 
   test "show should return 200 if user is mentor" do
@@ -53,9 +51,6 @@ class API::FilesControllerTest < API::TestBase
 
     get api_solution_file_path(solution, "foobar"), headers: @headers, as: :json
     assert_response :success
-
-    solution.reload
-    assert_nil solution.downloaded_at
   end
 
   test "show should return 403 for a normal user when the solution is not published" do
@@ -64,6 +59,39 @@ class API::FilesControllerTest < API::TestBase
     track = exercise.track
     solution = create :solution, exercise: exercise
     create :user_track, user: solution.user, track: track
+
+    get api_solution_file_path(solution, "foobar"), headers: @headers, as: :json
+    assert_response 403
+  end
+
+  test "show should return 200 for team_solution if user is solution_user" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :team_solution, user: @current_user, exercise: exercise
+
+      get api_solution_file_path(solution, "foobar"), headers: @headers, as: :json
+      assert_response :success
+    end
+  end
+
+  test "show should return 200 for team_solution if user is teammate" do
+    setup_user
+    exercise = create :exercise
+    team = create :team
+    create :team_membership, user: @current_user, team: team
+
+    solution = create :team_solution, exercise: exercise, team: team
+
+    get api_solution_file_path(solution, "foobar"), headers: @headers, as: :json
+    assert_response :success
+  end
+
+  test "show should return 403 for a random user for a team solution" do
+    setup_user
+    exercise = create :exercise
+    solution = create :team_solution, exercise: exercise
 
     get api_solution_file_path(solution, "foobar"), headers: @headers, as: :json
     assert_response 403

@@ -1,7 +1,7 @@
 class API::FilesController < APIController
   def show
     begin
-      @solution = Solution.find_by_uuid!(params[:solution_id])
+      @solution = SolutionBase.find_by_uuid!(params[:solution_id])
     rescue
       return render_solution_not_found
     end
@@ -23,9 +23,10 @@ class API::FilesController < APIController
       end
     end
 
+    # Should this be content.present? ie should we 404 on empty files?
     return render_file_not_found unless content
 
-    render plain:  content
+    render plain: content
   end
 
   private

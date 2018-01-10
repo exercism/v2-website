@@ -1,0 +1,20 @@
+@import 'mixins';
+@import 'variables';
+
+#teams-memberships-page {
+    p {
+    }
+    table {
+        tr {
+            &:nth-child(odd) {
+                background:#eee;
+            }
+        }
+        td {
+            padding:10px;
+            &:last-child {
+                padding-right:50px;
+            }
+        }
+    }
+}

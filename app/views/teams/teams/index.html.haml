@@ -1,0 +1,25 @@
+#teams-teams-page.teams-page
+  .lo-container
+    %h1 Your Teams
+
+    -if @pending_team_memberships.present?
+      %h2 Pending Invitiations
+      %ul
+        -@pending_team_memberships.each do |membership|
+          %li= membership.team.name
+
+    .pure-g
+      -if @teams.present?
+        -@teams.each do |team|
+          .pure-u-1-5
+            = link_to [:teams, team], class: "team" do
+              %h3= team.name
+              .members
+                %i.fa.fa-group
+                .text
+                  = team.members.count
+                  Members
+
+      .pure-u-1-5
+        = link_to [:new, :teams, :team], class: 'new-team' do
+          .text Create a new team

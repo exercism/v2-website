@@ -27,6 +27,7 @@ $ echo "host" > server_identity
 ### Running the application
 
 Something like this will get a working webserver on http://localhost:3000.
+Note: Teams will be avaliable on http://teams.localhost:3000.
 
 ```
 bundle install

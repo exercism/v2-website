@@ -1,0 +1,25 @@
+#teams-memberships-page.team-page
+  =teams_header
+  .lo-container
+    %h1 Your Team
+    -if @invitations.present?
+      %h2 Pending Invitations
+      %p These are people who have been invited to this team.
+      %table
+        -@invitations.each do |invitation|
+          %tr
+            %td= invitation.email
+            -if @current_team_membership.admin?
+              %td= link_to "Resend invite", "#"
+
+    -if @memberships.present?
+      %h2 Members
+      %p These are full members of this team who can attempt solutions or give feedback.
+      %table
+        -@memberships.each do |membership|
+          %tr
+            %td= membership.user.name
+            -if current_team_membership.admin?
+              %td= link_to "Remove", "#"
+
+    =link_to "Invite new member", [:new, :teams, @team, :invitation]

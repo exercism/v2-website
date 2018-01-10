@@ -1,7 +1,6 @@
 class Solution < ApplicationRecord
+  include SolutionBase
 
-  belongs_to :user
-  belongs_to :exercise
   belongs_to :approved_by, class_name: "User", optional: true
 
   has_many :iterations
@@ -26,17 +25,8 @@ class Solution < ApplicationRecord
     where.not(published_at: nil)
   end
 
-  before_create do
-    # Search engines derive meaning by using hyphens
-    # as word-boundaries in URLs. Since we use the
-    # solution UUID for URLs, we're removing the hyphen
-    # to remove any spurious, accidental, and arbitrary
-    # meaning.
-    self.uuid = SecureRandom.uuid.gsub('-', '')
-  end
-
-  def to_param
-    uuid
+  def team_solution?
+    false
   end
 
   def enable_mentoring!
@@ -63,21 +53,5 @@ class Solution < ApplicationRecord
 
   def completed?
     !!completed_at
-  end
-
-  def instructions
-    git_exercise.instructions
-  rescue
-    ""
-  end
-
-  def test_suite
-    git_exercise.test_suite
-  rescue
-    []
-  end
-
-  def git_exercise
-    @git_exercise ||= Git::Exercise.new(exercise, git_slug, git_sha)
   end
 end

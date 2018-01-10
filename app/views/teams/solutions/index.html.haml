@@ -1,0 +1,26 @@
+#teams-solutions-page.team-page
+  =teams_header
+  .lo-container
+    %h1 Your Team's Solutions
+    .num-solutions= pluralize @solutions.size, "Solutions"
+    .filters
+      =form_tag [:teams, @team, :solutions], remote: true, method: :get, class: "solutions-form" do
+        .widget-filter.topic_id
+          .title Track:
+          = select_tag :track_id,
+            options_for_select(OptionsHelper.format_options(@track_id_options), @track_id),
+            include_blank: true
+        .widget-filter.exercise_id
+          .title Exercise:
+          = select_tag :exercise_id,
+            options_for_select(OptionsHelper.format_options(@exercise_id_options), @exercise_id),
+            include_blank: true
+
+    .pure-g.solutions
+      =render "teams/solutions/solutions", solutions: @solutions
+
+    =paginate @solutions
+
+  -content_for :js do
+    :javascript
+      submitOnChange($('.solutions-form select'))

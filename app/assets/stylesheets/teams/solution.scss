@@ -1,0 +1,73 @@
+@import 'variables';
+@import 'mixins';
+
+#teams-solution-page,
+#teams-my-solution-page,
+#teams-my-solution-unlocked-page {
+    #team-header {
+        margin-bottom:0;
+    }
+    .solution-header {
+        overflow:hidden;
+        background:$color-1;
+        padding:20px 0;
+        margin-bottom:30px;
+        img {
+            float:left;
+            margin-right:15px;
+            height:50px;
+            display:block;
+            border:1px solid #fff;
+            border-radius:2px;
+        }
+        .inner {
+            color:#fff;
+            .iteration-nav {
+                float:right;
+                overflow:hidden;
+                .title {
+                    @include font-size(12, 12);
+                    margin-top:1px;
+                    text-align:right;
+                    border-bottom:1px solid #ddd;
+                    padding-bottom:2px;
+                    margin-bottom:5px;
+                    strong {
+                        font-weight:$regular;
+                    }
+                }
+                .first, .prev, .next, .last{
+                    display:inline-block;
+                    padding:2px 6px 4px;
+                    border:1px solid #ddd;
+                    border-radius:3px;
+                    margin-right:1px;
+                    i {
+                        @include font-size(11, 11);
+                        color:#fff;
+                    }
+                    &.disabled {
+                        opacity:0.5;
+                    }
+                }
+            }
+            h2 {
+                @include font-size(22, 22);
+                font-weight:$regular;
+                margin-bottom:3px;
+                padding-top:5px;
+                strong {
+                    font-weight:$bold;
+                }
+            }
+            .byline {
+                @include font-size(14, 14);
+                a {
+                    color:#fff;
+                }
+            }
+        }
+    }
+
+}
+

@@ -1,0 +1,9 @@
+#teams-team-page.team-page
+  =teams_header
+  .lo-container
+    %h1 Team #{@team.name}
+
+    %ul
+      %li= link_to "Members", [:teams, @team, :memberships]
+      %li= link_to "Your solutions", [:teams, @team, :my_solutions]
+      %li= link_to "Everyone's solutions", [:teams, @team, :solutions]

@@ -1,0 +1,3 @@
+$('#teams-my-solutions-page .solutions').html("#{j render("teams/my_solutions/solutions", solutions: @solutions)}")
+$('#teams-my-solutions-page .num-solutions').html("#{j pluralize @solutions.size, "Solutions"}")
+

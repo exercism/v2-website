@@ -1,0 +1,56 @@
+@import 'variables';
+@import 'mixins';
+
+#teams-my-solutions-page {
+    .num-solutions {
+        float:right;
+        padding-top:5px;
+        padding-right:25px;
+        font-weight:$regular;
+        color:#999;
+    }
+
+    .filters {
+        margin-bottom:20px;
+        .widget-filter {
+            &.topic {
+                .selectize-control {
+                    width:250px;
+                }
+            }
+            &.status {
+                .selectize-control {
+                    width:120px;
+                }
+            }
+        }
+    }
+    .widget-side-exercise {
+        .stats {
+            text-transform:none;
+            @include font-size(12, 14);
+            margin-bottom:10px;
+            .language {
+                display: inline-block;
+                margin-right: 5px;
+                padding-right: 5px;
+                border-right: 1px solid #aaa;
+                color: #aaa;
+                font-weight: 400;
+            }
+            .num-iterations {
+                display: inline-block;
+                color: #aaa;
+                font-weight: 400;
+            }
+        }
+        .status {
+            float: none;
+            display: block;
+            margin-left: 0;
+            @include font-size(12, 14);
+            color:#666;
+            font-weight: $bold;
+        }
+    }
+}

@@ -12,6 +12,7 @@ class API::SolutionResponder
       solution: {
         id: solution.uuid,
         url: solution_url,
+        team: team_hash,
         user: {
           handle: user_handle,
           is_requester: solution.user_id == requester.id
@@ -32,7 +33,22 @@ class API::SolutionResponder
     }
   end
 
+  def team_hash
+    return nil unless solution.team_solution?
+
+    {
+      name: solution.team.name,
+      slug: solution.team.slug
+    }
+  end
+
   def user_handle
+    # No anonymity in teams
+    if solution.team_solution?
+      return solution.user.handle
+    end
+
+    # Handles can change on anonymous tracks
     user_track = UserTrack.where(track: track, user: solution.user).first
     if user_track.anonymous?
       user_track.handle
@@ -42,7 +58,9 @@ class API::SolutionResponder
   end
 
   def solution_url
-    if solution.user == requester
+    if solution.team_solution?
+      routes.teams_team_solution_url(solution.team, solution)
+    elsif solution.user == requester
       routes.my_solution_url(solution)
     elsif solution.published?
       routes.track_exercise_solution_url(track, solution.exercise, solution)

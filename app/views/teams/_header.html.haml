@@ -1,0 +1,6 @@
+#team-header
+  .lo-container
+    .name= team.name
+    =link_to "Your Solutions", teams_team_my_solutions_path(@team), class: (selected == :my_solutions ? "selected" : "")
+    =link_to "Others' Solutions", teams_team_solutions_path(@team), class: (selected == :solutions ? "selected" : "")
+    =link_to "Members", teams_team_memberships_path(@team), class: (selected == :memberships ? "selected" : "")

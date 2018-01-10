@@ -1,0 +1,23 @@
+#teams-new-solution-page.team-page
+  =teams_header
+  .lo-container
+    %h1 Start new exercise
+    %h2 1) Choose a language
+    =form_tag teams_team_my_solutions_path(@team), method: :post do
+      .widget-filter
+        .title Track:
+        = select_tag :track_id,
+          options_for_select(OptionsHelper.format_options(@track_id_options)),
+          include_blank: true
+
+      %h2 2) Choose an exercise
+      .exercises
+        .placeholder Choose a track first to see exercises.
+
+
+-content_for :js do
+  :javascript
+    $('#track_id').change(function() {
+      var track_id = $(this).val()
+      $.get("#{possible_exercises_teams_team_my_solutions_path(@team)}?track_id=" + track_id)
+    })

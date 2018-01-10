@@ -1,0 +1,21 @@
+#teams-my-solution-unlocked-page.team-page
+  =teams_header
+  =render "solution_header"
+
+  .lo-container
+    .pure-g
+      .pure-u-14-24.lhs
+        .instructions
+          %h2 Introduction
+          .rendered= raw @solution.exercise.description
+          =link_to "Create fake iteration (BETA ONLY) ", tmp_create_team_iteration_path(solution_id: @solution, team_id: @team.id), method: :post, class: "pure-button"
+
+      .pure-u-10-24.rhs
+        .newbie
+          %h3 Get started
+          %p We've created a step-by-step set of instructions to help you quickly install Exercism and get started, so you can start learning.
+          =link_to "Begin Walk-Through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button'
+        .experienced
+          %h3 Been here before?
+          =render "widgets/code_snippet", code: @exercise.download_command
+

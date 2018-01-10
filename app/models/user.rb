@@ -17,10 +17,16 @@ class User < ApplicationRecord
   has_one :profile
   has_many :notifications
 
+  has_many :team_memberships
+  has_many :teams, through: :team_memberships
+
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
   has_many :solutions
   has_many :iterations, through: :solutions
+
+  has_many :team_solutions
+  has_many :team_iterations, through: :team_solutions, source: :iterations
 
   has_many :track_mentorships
   has_many :mentored_tracks, through: :track_mentorships, source: :track
@@ -63,8 +69,14 @@ class User < ApplicationRecord
 
   def may_view_solution?(solution)
     return true if id == solution.user_id
-    return true if solution.published?
-    return true if mentoring_track?(solution.exercise.track)
+
+    if solution.team_solution?
+      return true if solution.team.members.include?(self)
+    else
+      return true if solution.published?
+      return true if mentoring_track?(solution.exercise.track)
+    end
+
     false
   end
 

@@ -1,0 +1,23 @@
+@import 'mixins';
+@import 'variables';
+
+#teams-new-team-page {
+    form {
+        .field {
+            margin-bottom:10px;
+            h3 {
+                @include font-size(16, 16);
+                margin-bottom:5px;
+                font-weight:500;
+            }
+            p {
+                margin-bottom:5px;
+            }
+            textarea {
+                width:300px;
+                height:200px;
+                padding:10px;
+            }
+        }
+    }
+}

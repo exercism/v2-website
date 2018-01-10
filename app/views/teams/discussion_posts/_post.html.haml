@@ -1,0 +1,14 @@
+.post{id: "discussion-post-#{post.id}"}
+  =image_tag post.user.avatar_url, class: 'avatar'
+  .post-body
+    .post-header
+      .created-at #{time_ago_in_words(post.created_at)} ago
+      .user-handle= post.user.handle
+      .user-status
+        -if post.user == solution.user
+          Student
+        -else
+          Teammate
+
+    .post-html= raw post.html
+

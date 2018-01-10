@@ -1,0 +1,2 @@
+module Teams::MembershipsHelper
+end

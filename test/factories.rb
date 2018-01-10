@@ -1,4 +1,27 @@
 FactoryBot.define do
+  factory :team_invitation do
+    team { create :team }
+    invited_by { create :user }
+    email "someone@somewhere.com"
+  end
+
+  factory :team_membership do
+    team { create :team }
+    user { create :user }
+  end
+
+  factory :team do
+    name "The best team"
+  end
+
+  factory :team_solution do
+    team { create :team }
+    user { create :user }
+    exercise { create :exercise }
+    git_sha { SecureRandom.uuid }
+    git_slug { SecureRandom.uuid }
+  end
+
   factory :ignored_solution_mentorship do
     user { create :user }
     solution { create :solution }
