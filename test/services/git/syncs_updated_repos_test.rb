@@ -10,7 +10,7 @@ class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
                 completed_at: Time.current)
 
     assert_enqueued_with(job: SyncRepoUpdateJob) do
-      Git::SyncsUpdatedRepos.sync
+      Git::SyncsUpdatedRepos.sync(stdout: StringIO.new)
     end
   end
 
