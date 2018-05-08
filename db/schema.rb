@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171231162945) do
+ActiveRecord::Schema.define(version: 20180508121234) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(version: 20171231162945) do
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["slug"], name: "index_teams_on_slug", unique: true
   end
 
