@@ -10,7 +10,7 @@ class Git::SeedsTracksTest < ActiveSupport::TestCase
     Git::FetchesRepo.expects(:fetch).with(track.repo)
     Git::SyncsTrack.expects(:sync!).with(track)
 
-    Git::SeedsTracks.seed!
+    Git::SeedsTracks.seed!(stdout: StringIO.new, stderr: StringIO.new)
 
     exercise.reload
     assert exercise.auto_approve?
