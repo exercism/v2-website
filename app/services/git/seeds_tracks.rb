@@ -67,14 +67,16 @@ class Git::SeedsTracks
     https://github.com/exercism/vimscript
   }
 
-  def self.seed!
-    new(tracks).seed!
+  def self.seed!(stdout: STDOUT, stderr: STDERR)
+    new(tracks, stdout: stdout, stderr: stderr).seed!
   end
 
   attr_reader :repository_urls
 
-  def initialize(repository_urls)
+  def initialize(repository_urls, stdout:, stderr:)
     @repository_urls = repository_urls
+    @stdout = stdout
+    @stderr = stderr
   end
 
   def seed!
@@ -82,20 +84,23 @@ class Git::SeedsTracks
       Git::SeedsTrack.seed!(repo_url)
     end
     Track.find_each do |track|
-      puts "===== Fetching #{track.slug} ====="
+      stdout.puts "===== Fetching #{track.slug} ====="
       begin
         Git::FetchesRepo.fetch(track.repo)
       rescue => e
-        puts e.message
+        stderr.puts e.message
       end
 
-      puts "===== Syncing #{track.slug} ====="
+      stdout.puts "===== Syncing #{track.slug} ====="
       begin
         Git::SyncsTrack.sync!(track)
       rescue => e
-        puts e.message
+        stderr.puts e.message
       end
     end
     ::Exercise.where(slug: "hello-world").update_all(auto_approve: true)
   end
+
+  private
+  attr_reader :stdout, :stderr
 end
