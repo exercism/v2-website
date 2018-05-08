@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class Git::SyncsTracksTest < ActiveSupport::TestCase
   test "fetches problem specs" do
