@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
   test "syncs a fully fetched track update" do
