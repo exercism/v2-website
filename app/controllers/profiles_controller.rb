@@ -31,14 +31,11 @@ class ProfilesController < ApplicationController
   end
 
   def setup_solutions
-    @solutions = @profile.
-      user.
-      solutions.
-      published.
-      reorder('solutions.num_reactions DESC').
-      includes(exercise: :track)
 
-    @tracks_for_select = Track.where(id: @solutions.joins(:exercise).select(:track_id)).
+    @solutions = @profile.solutions.includes(exercise: :track)
+
+    track_ids = Exercise.where(id: @solutions.map(&:exercise_id)).distinct.pluck(:track_id)
+    @tracks_for_select = Track.where(id: track_ids).
       map{|l|[l.title, l.id]}.
       unshift(["Any", 0])
     @track = Track.find_by_id(params[:track_id]) if params[:track_id].to_i > 0
@@ -46,5 +43,7 @@ class ProfilesController < ApplicationController
     @solutions = @solutions.joins(:exercise).where("exercises.track_id": @track.id) if @track
     @reaction_counts = Reaction.where(solution_id: @solutions).group(:solution_id, :emotion).count
     @comment_counts = Reaction.where(solution_id: @solutions).with_comments.group(:solution_id).count
+
+    render nothing: true
   end
 end

@@ -9,4 +9,15 @@ class Profile < ApplicationRecord
     website.present? || github.present? || twitter.present? ||
     linkedin.present? || medium.present?
   end
+
+  def solutions
+    user.
+    solutions.
+    published.
+    joins(:exercise).
+    joins("INNER JOIN user_tracks ON user_tracks.track_id = exercises.track_id").
+    where("user_tracks.user_id = #{user_id}").
+    where("user_tracks.anonymous": false).
+    reorder('solutions.num_reactions DESC')
+  end
 end
