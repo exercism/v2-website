@@ -1,18 +1,22 @@
 class Git::SyncsUpdatedRepos
   QUIET_PERIOD = 10.seconds
 
-  def self.run
-    new.run
+  def self.run(stdout: STDOUT)
+    new(stdout: stdout).run
   end
 
-  def self.sync
-    new.sync
+  def self.sync(stdout: STDOUT)
+    new(stdout: stdout).sync
+  end
+
+  def initialize(stdout:)
+    @stdout = stdout
   end
 
   def run
     loop do
       sync
-      puts "Sleeping"
+      stdout.puts "Sleeping"
       sleep QUIET_PERIOD
     end
   end
@@ -20,13 +24,13 @@ class Git::SyncsUpdatedRepos
   def sync
     find_repo_update
     if repo_update
-      puts "Syncing outstanding repos"
+      stdout.puts "Syncing outstanding repos"
       sync_repo_update
     end
   end
 
   private
-  attr_reader :repo_update
+  attr_reader :repo_update, :stdout
 
   def find_repo_update
     @repo_update = RepoUpdate.

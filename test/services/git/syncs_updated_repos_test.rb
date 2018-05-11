@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
   test "syncs a fully fetched track update" do
@@ -10,7 +10,7 @@ class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
                 completed_at: Time.current)
 
     assert_enqueued_with(job: SyncRepoUpdateJob) do
-      Git::SyncsUpdatedRepos.sync
+      Git::SyncsUpdatedRepos.sync(stdout: StringIO.new)
     end
   end
 
