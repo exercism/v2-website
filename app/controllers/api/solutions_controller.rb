@@ -104,7 +104,7 @@ class API::SolutionsController < APIController
 
     params[:files].each do |file|
       if file.size.to_f > NUM_BYTES_IN_MEGABYTE
-        render_error(400, :file_too_large, "#{file.original_filename} is too large")
+        return render_error(400, :file_too_large, "#{file.original_filename} is too large")
       end
     end
 
