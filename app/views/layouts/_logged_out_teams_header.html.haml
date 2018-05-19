@@ -1,0 +1,11 @@
+%header.logged-out
+  .lo-container
+    .options
+      = link_to "Sign up", new_user_registration_path
+      = link_to "Log in", new_user_session_path
+
+    // TODO - This should be the teams logo
+    =link_to root_path, class: 'logo' do
+      =image_tag "logo-white.png"
+      %span teams edition
+
