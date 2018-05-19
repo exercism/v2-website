@@ -2,10 +2,10 @@
   .lo-container
     %h1 Your Teams
 
-    -if @pending_team_memberships.present?
+    -if @invitations.present?
       %h2 Pending Invitiations
       %ul
-        -@pending_team_memberships.each do |membership|
+        -@invitations.each do |membership|
           %li= membership.team.name
 
     .pure-g
