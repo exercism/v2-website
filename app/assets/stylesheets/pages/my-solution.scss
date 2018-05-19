@@ -168,35 +168,6 @@ body.controller-solutions.action-show {
             }
         }
     }
-    .panels {
-        overflow-y:hidden;
-
-        .lhs {
-            &.fixed {
-                .lhs-content {
-                    overflow-y:hidden;
-                    position:fixed;
-                    top:10px;
-                    bottom:20px;
-                    .panes {
-                        position:absolute;
-                        top:32px;
-                        left:0;
-                        right:0;
-                        bottom:0;
-                    }
-                }
-            }
-        }
-        .rhs {
-            overflow:hidden;
-            padding-left:50px;
-            .pane {
-                padding:20px 0;
-            }
-        }
-
-    }
     .discussion {
         h3 {
             padding:7px 0;
@@ -207,7 +178,6 @@ body.controller-solutions.action-show {
             color:#333;
             &.disabled {
                 color:#ccc;
-
             }
         }
         p.disabled {
@@ -306,10 +276,6 @@ body.controller-solutions.action-show {
                 resize:none;
                 padding:15px;
                 border:1px solid #ddd;
-            }
-            .preview-area {
-                height:253px;
-                overflow:scroll;
             }
         }
         .complete-button,

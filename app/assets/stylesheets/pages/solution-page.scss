@@ -44,6 +44,14 @@
         }
 
     }
+    .solution.single-file {
+        .solution-code {
+            min-height:200px;
+            margin:0;
+            padding:10px 15px 10px 55px;
+        }
+    }
+
     .test-suite,
     .solution.multi-file {
         background:#f9f9f9;
@@ -136,8 +144,8 @@
                 border:1px solid #ddd;
             }
             .preview-area {
-                height:253px;
-                overflow:scroll;
+                height:231px;
+                overflow:auto;
             }
 
             .editor-toolbar {
@@ -158,6 +166,7 @@
             .CodeMirror {
                 &, .CodeMirror-scroll {
                     min-height:200px !important;
+                    max-height:200px !important;
                 }
                 .cm-header{color:#00f}
                 .cm-s-default .cm-quote{color:#090}

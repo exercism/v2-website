@@ -11,8 +11,11 @@ window.setupSolution = ->
       minHeight: $window.height()
 
   $lhs = $('.lhs')
+  $notificationsBar = $('.notifications-bar')
   $window.scroll =>
-    if $window.scrollTop() > $lhs.position().top - 10
+    console.log($window.scrollTop())
+    console.log($notificationsBar.position().top)
+    if $window.scrollTop() >= 300#$notificationsBar.position().top - 10
       $lhs.addClass('fixed')
     else
       $lhs.removeClass('fixed')
@@ -49,7 +52,7 @@ window.setupSolution = ->
     $('.CodeMirror').bind 'heightChange', =>
       $('.preview-area').css(height: $('.CodeMirror').outerHeight())
 
-  $window.resize(setupLayout)
-  setupLayout()
+  #$window.resize(setupLayout)
+  #setupLayout()
   setupTabs()
   setupNewDiscussionPost()

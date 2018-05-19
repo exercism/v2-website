@@ -110,35 +110,6 @@ body.controller-solutions {
             }
         }
     }
-    .panels {
-        overflow-y:hidden;
-
-        .lhs {
-            &.fixed {
-                .lhs-content {
-                    overflow-y:hidden;
-                    position:fixed;
-                    top:10px;
-                    bottom:10px;
-                    .panes {
-                        position:absolute;
-                        top:32px;
-                        left:0;
-                        right:0;
-                        bottom:0;
-                    }
-                }
-            }
-        }
-        .rhs {
-            overflow:hidden;
-            padding-left:50px;
-            .pane {
-                padding:20px 0;
-            }
-        }
-
-    }
     .discussion {
         h3 {
             padding:7px 0;
