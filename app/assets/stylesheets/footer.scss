@@ -1,7 +1,19 @@
 @import 'variables';
 @import 'mixins';
 
+html {
+    height:100%;
+}
+body {
+    position:relative;
+    padding-bottom:350px;
+    min-height: 100%;
+}
 footer {
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
     padding:60px 0 0 0;
     border-top:1px solid #f3f3f3;
     margin-top:100px;
