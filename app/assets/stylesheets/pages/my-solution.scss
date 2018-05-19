@@ -636,8 +636,9 @@ body.controller-solutions.action-show {
             font-weight:$light;
             @include font-size(13, 17);
             color:#666;
-            max-height:40px;
-            padding:0 15px 0 115px;
+            max-height:50px;
+            padding:0 15px 0 15px;
+            overflow:hidden;
         }
 
     }
