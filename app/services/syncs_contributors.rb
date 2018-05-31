@@ -13,11 +13,11 @@ class SyncsContributors
     contributors.each do |_, contributor_data|
       begin
         data = {
+          github_username: contributor_data[:username],
           avatar_url: contributor_data[:avatar],
           num_contributions: contributor_data[:repositories].sum{|r|r[:contributions]},
         }
-        username = contributor_data[:username]
-        contributor = Contributor.find_or_create_by!(github_username: username) do |c|
+        contributor = Contributor.find_or_create_by!(github_id: contributor_data[:id]) do |c|
           c.assign_attributes(data)
         end
         contributor.update!(data)
