@@ -46,7 +46,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     #  solution.user,
     #  :new_discussion_post,
     #  discussion_post
-    )
+    #)
   end
 
   def user_may_comment?
