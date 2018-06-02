@@ -40,10 +40,12 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
       # go into every single iteration
       about: solution
     )
-    DeliversEmail.deliver!(
-      solution.user,
-      :new_discussion_post,
-      discussion_post
+
+    # TODO - Re-enable this when we launch
+    #DeliversEmail.deliver!(
+    #  solution.user,
+    #  :new_discussion_post,
+    #  discussion_post
     )
   end
 
