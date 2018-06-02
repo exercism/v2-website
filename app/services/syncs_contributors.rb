@@ -17,12 +17,12 @@ class SyncsContributors
           avatar_url: contributor_data[:avatar],
           num_contributions: contributor_data[:repositories].sum{|r|r[:contributions]},
         }
-        contributor = Contributor.find_or_create_by!(github_id: contributor_data[:id]) do |c|
+        contributor = Contributor.find_or_create_by!(github_id: contributor_data[:github_id]) do |c|
           c.assign_attributes(data)
         end
         contributor.update!(data)
-      rescue
-        puts "Failed to processed #{contributor_data}"
+      #rescue
+      #  puts "Failed to processed #{contributor_data}"
       end
     end
 
