@@ -16,4 +16,5 @@ class Team < ApplicationRecord
   has_many :memberships, class_name: "TeamMembership"
   has_many :members, through: :memberships, source: :user
 
+  has_secure_token :token
 end
