@@ -129,7 +129,7 @@ Rails.application.routes.draw do
     get "dashboard" => "dashboard#index"
 
     resources :teams, only: [], param: :token do
-      resource :join, controller: "teams/join"
+      resource :join
     end
 
     resources :teams do
