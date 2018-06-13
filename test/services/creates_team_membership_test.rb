@@ -12,4 +12,14 @@ class CreateTeamMembershipTest < ActiveSupport::TestCase
     assert_equal user, membership.user
     assert_equal team, membership.team
   end
+
+  test "deletes redundant team invites" do
+    user = create(:user)
+    team = create(:team)
+    create(:team_invitation, email: user.email, team: team)
+
+    CreateTeamMembership.(user, team)
+
+    assert_equal 0, TeamInvitation.count
+  end
 end
