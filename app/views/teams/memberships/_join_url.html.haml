@@ -1,0 +1,7 @@
+- return unless team.url_join_allowed?
+
+%p.text-muted Share this link with people you want to join your team:
+= text_field_tag :join_url,
+  teams_team_join_url(team.token),
+  readonly: true,
+  class: "team-join-url"

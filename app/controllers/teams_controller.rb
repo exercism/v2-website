@@ -3,6 +3,12 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_team
 
+  def update
+    @team.update(team_params)
+
+    redirect_to teams_team_memberships_path(@team)
+  end
+
   private
 
   def find_team
@@ -27,5 +33,9 @@ class TeamsController < ApplicationController
 
   def redirect_if_signed_in!
     redirect_to teams_dashboard_path if user_signed_in?
+  end
+
+  def team_params
+    params.require(:team).permit(:url_join_allowed)
   end
 end
