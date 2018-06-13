@@ -10,7 +10,7 @@ class Teams::JoinsController < TeamsController
   def create
     team = Team.find_by!(token: params[:team_token], url_join_allowed: true)
 
-    TeamMembership.create!(team: team, user: current_user)
+    CreateTeamMembership.(current_user, team)
 
     redirect_to teams_team_path(team)
   end
