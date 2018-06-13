@@ -30,4 +30,23 @@ class CreateTeamInvitationTest < ActiveSupport::TestCase
     assert_includes email.text_part.decoded, "https://teams.exercism.io"
     assert_includes email.html_part.decoded, "https://teams.exercism.io"
   end
+
+  test "sends an email to an existing user" do
+    inviter = create(:user, name: "Leader")
+    create(:user, email: "test@example.com")
+    team = create(:team)
+
+    perform_enqueued_jobs do
+      CreateTeamInvitation.(team, inviter, "test@example.com")
+    end
+
+    email = ActionMailer::Base.deliveries.last
+    assert_equal(
+      "Leader has invited you to join their team",
+      email.subject
+    )
+    assert_equal "test@example.com", email.to[0]
+    assert_includes email.text_part.decoded, "https://teams.exercism.io"
+    assert_includes email.html_part.decoded, "https://teams.exercism.io"
+  end
 end
