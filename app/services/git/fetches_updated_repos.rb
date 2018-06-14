@@ -26,21 +26,13 @@ class Git::FetchesUpdatedRepos
   attr_reader :repo_update, :repo_update_fetch
 
   def repo_updates
-    repo_updates_without_fetches + repo_updates_not_fetched
-  end
-
-  def repo_updates_without_fetches
-    RepoUpdate.
+    fetched = RepoUpdate.
       includes(:repo_update_fetches).
-      where(synced_at: nil).
-      where(repo_update_fetches: { repo_update_id: nil })
-  end
+      where(repo_update_fetches: { host: ClusterConfig.server_identity })
 
-  def repo_updates_not_fetched
     RepoUpdate.
-      includes(:repo_update_fetches).
       where(synced_at: nil).
-      where.not(repo_update_fetches: { host: ClusterConfig.server_identity })
+      where.not(id: fetched.pluck(:id))
   end
 
   def fetch_repo_update
