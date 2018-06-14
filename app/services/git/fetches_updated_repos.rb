@@ -18,31 +18,29 @@ class Git::FetchesUpdatedRepos
   end
 
   def fetch
-    find_repo_update
-    fetch_repo_update if repo_update
+    repo_updates.each { |update| FetchRepoUpdateJob.perform_now(update.id) }
   end
 
   private
 
   attr_reader :repo_update, :repo_update_fetch
 
-  def find_repo_update
-    @repo_update = repo_updates_without_fetches || repo_updates_not_fetched
+  def repo_updates
+    repo_updates_without_fetches + repo_updates_not_fetched
   end
 
   def repo_updates_without_fetches
     RepoUpdate.
       includes(:repo_update_fetches).
       where(synced_at: nil).
-      find_by(repo_update_fetches: { repo_update_id: nil })
+      where(repo_update_fetches: { repo_update_id: nil })
   end
 
   def repo_updates_not_fetched
     RepoUpdate.
       includes(:repo_update_fetches).
       where(synced_at: nil).
-      where.not(repo_update_fetches: { host: ClusterConfig.server_identity }).
-      first
+      where.not(repo_update_fetches: { host: ClusterConfig.server_identity })
   end
 
   def fetch_repo_update
