@@ -6,7 +6,10 @@ class GenerateTeamJoinUrlTest < ApplicationSystemTestCase
     Capybara.app_host = "http://teams.lvh.me"
     team_admin = create(:user)
     team = create(:team, token: "TOKEN", url_join_allowed: false)
-    create(:team_membership, user: team_admin, team: team)
+    create(:team_membership,
+           user: team_admin,
+           team: team,
+           admin: true)
 
     sign_in!(team_admin)
     visit teams_team_memberships_path(team)
