@@ -13,10 +13,8 @@ class Teams::RemoveMemberTest < ApplicationSystemTestCase
 
     sign_in!(team_admin)
     visit teams_team_memberships_path(team)
-    within("tr", text: /Team member/) do
-      accept_confirm do
-        click_on "Remove"
-      end
+    accept_confirm do
+      click_on "Remove"
     end
 
     assert page.has_no_content?("Team member")

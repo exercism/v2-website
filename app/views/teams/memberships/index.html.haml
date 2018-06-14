@@ -19,7 +19,7 @@
         -@memberships.each do |membership|
           %tr
             %td= membership.name
-            -if current_team_membership.admin?
+            - if current_team_membership.admin? && membership != current_team_membership
               %td= link_to "Remove",
                 teams_team_membership_path(membership),
                 method: :delete,
