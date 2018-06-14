@@ -25,9 +25,5 @@
                 %td= link_to "Remove", "#"
         = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
-    .section
-      %h2 Settings
-      .section-inner
-        = render "settings", team: @team
-      .section-inner
-        = render "join_url", team: @team
+    - if @team.admin?(current_user)
+      = render "teams/memberships/sections/settings", team: @team
