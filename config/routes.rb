@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     scope :v1 do
       get "ping" => "ping#index"
+      get "validate_token" => "validate_token#index"
 
       resource :cli_settings, only: [:show]
       resources :tracks, only: [:show]
