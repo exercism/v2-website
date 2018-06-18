@@ -3,7 +3,7 @@ class Teams::TeamMembershipsController < ApplicationController
 
   def destroy
     team_membership = TeamMembership.
-      where(team_id: current_user.teams_managed.pluck(:id)).
+      where(team_id: current_user.managed_teams.pluck(:id)).
       find(params[:id])
 
     team_membership.destroy
