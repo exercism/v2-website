@@ -1,3 +1,11 @@
 .team-join-page {
-  margin-top: 2rem;
+    margin-top: 2rem;
+
+    .section {
+        margin-bottom: 20px;
+
+        > .section-inner {
+            margin-bottom: 10px;
+        }
+    }
 }
