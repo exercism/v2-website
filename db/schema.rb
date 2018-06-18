@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613074446) do
+ActiveRecord::Schema.define(version: 20180617190428) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -179,17 +179,17 @@ ActiveRecord::Schema.define(version: 20180613074446) do
     t.index ["user_id"], name: "fk_rails_9f02fc96a0"
   end
 
-  create_table "repo_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "repo_update_fetches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.timestamp "completed_at"
     t.bigint "repo_update_id", null: false
-    t.string "host", null: false
+    t.string "host", limit: 190, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repo_update_id", "host"], name: "index_repo_update_fetches_on_repo_update_id_and_host", unique: true
     t.index ["repo_update_id"], name: "index_repo_update_fetches_on_repo_update_id"
   end
 
-  create_table "repo_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "repo_updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.timestamp "synced_at"
     t.string "slug", null: false
     t.datetime "created_at", null: false
@@ -226,11 +226,11 @@ ActiveRecord::Schema.define(version: 20180613074446) do
     t.integer "num_reactions", default: 0, null: false
     t.text "reflection"
     t.boolean "is_legacy", default: false, null: false
-    t.boolean "boolean", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "mentoring_enabled"
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
+    t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
     t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
