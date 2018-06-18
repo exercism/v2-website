@@ -20,9 +20,12 @@
         %table
           -@memberships.each do |membership|
             %tr
-              %td= membership.user.name
-              -if current_team_membership.admin?
-                %td= link_to "Remove", "#"
+              %td= membership.name
+              - if current_team_membership.admin? && membership != current_team_membership
+                %td= link_to "Remove",
+                  teams_team_membership_path(membership),
+                  method: :delete,
+                  data: { confirm: "Are you sure you want to remove #{membership.name} from your team?" }
         = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
     - if @team.admin?(current_user)

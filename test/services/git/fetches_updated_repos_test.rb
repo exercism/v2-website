@@ -9,6 +9,9 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
     repo_update_fetch = create(:repo_update_fetch,
                                 repo_update: repo_update,
                                 host: host_name)
+    create(:repo_update_fetch,
+           repo_update: repo_update,
+           host: "host-2")
     ClusterConfig.stubs(:server_identity).returns(host_name)
 
     FetchRepoUpdateJob.expects(:perform_now).never

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     scope :v1 do
       get "ping" => "ping#index"
+      get "validate_token" => "validate_token#index"
 
       resource :cli_settings, only: [:show]
       resources :tracks, only: [:show]
@@ -131,6 +132,7 @@ Rails.application.routes.draw do
     resources :teams, only: [], param: :token do
       resource :join
     end
+    resources :team_memberships, only: [:destroy]
 
     resources :teams do
       resources :my_solutions do

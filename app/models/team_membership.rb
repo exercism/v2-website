@@ -7,4 +7,5 @@ class TeamMembership < ApplicationRecord
   belongs_to :user
 
   delegate :name, to: :team, prefix: true
+  delegate :name, to: :user
 end

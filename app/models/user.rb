@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   has_many :team_memberships
   has_many :teams, through: :team_memberships
+  has_many :managed_teams, -> { where(team_memberships: { admin: true }) }, through: :team_memberships, source: :team
 
   has_many :user_tracks
   has_many :tracks, through: :user_tracks
