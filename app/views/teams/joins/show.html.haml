@@ -1,0 +1,12 @@
+.team-join-page
+  .lo-container
+    .section
+      .section-inner
+        %h1
+          You have been invited to join
+          = succeed "." do
+            %strong #{@team_membership.team_name}
+
+      .section-inner
+        = form_for @team_membership, url: teams_team_join_path do
+          = submit_tag "Join team"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508121234) do
+ActiveRecord::Schema.define(version: 20180613074446) do
 
   create_table "auth_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
@@ -279,7 +279,10 @@ ActiveRecord::Schema.define(version: 20180508121234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.string "token", null: false
+    t.boolean "url_join_allowed", default: true, null: false
     t.index ["slug"], name: "index_teams_on_slug", unique: true
+    t.index ["token"], name: "index_teams_on_token", unique: true
   end
 
   create_table "testimonials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

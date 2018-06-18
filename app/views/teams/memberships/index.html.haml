@@ -3,26 +3,30 @@
   .lo-container
     %h1 Your Team
     -if @invitations.present?
-      %h2 Pending Invitations
-      %p These are people who have been invited to this team.
-      %table
-        -@invitations.each do |invitation|
-          %tr
-            %td= invitation.email
-            -if current_team_membership.admin?
-              %td= link_to "Resend invite", "#"
+      .section
+        %h2 Pending Invitations
+        %p These are people who have been invited to this team.
+        %table
+          -@invitations.each do |invitation|
+            %tr
+              %td= invitation.email
+              -if current_team_membership.admin?
+                %td= link_to "Resend invite", "#"
 
     -if @memberships.present?
-      %h2 Members
-      %p These are full members of this team who can attempt solutions or give feedback.
-      %table
-        -@memberships.each do |membership|
-          %tr
-            %td= membership.name
-            - if current_team_membership.admin? && membership != current_team_membership
-              %td= link_to "Remove",
-                teams_team_membership_path(membership),
-                method: :delete,
-                data: { confirm: "Are you sure you want to remove #{membership.name} from your team?" }
+      .section
+        %h2 Members
+        %p These are full members of this team who can attempt solutions or give feedback.
+        %table
+          -@memberships.each do |membership|
+            %tr
+              %td= membership.name
+              - if current_team_membership.admin? && membership != current_team_membership
+                %td= link_to "Remove",
+                  teams_team_membership_path(membership),
+                  method: :delete,
+                  data: { confirm: "Are you sure you want to remove #{membership.name} from your team?" }
+        = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
-    =link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
+    - if @team.admin?(current_user)
+      = render "teams/memberships/sections/settings", team: @team

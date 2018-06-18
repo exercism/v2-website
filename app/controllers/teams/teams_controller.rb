@@ -29,8 +29,20 @@ class Teams::TeamsController < ::TeamsController
     redirect_to [:teams, @team]
   end
 
+  def update
+    @team.update(team_params) if @team.admin?(current_user)
+
+    redirect_to teams_team_memberships_path(@team)
+  end
+
   def find_team
     params[:team_id] = params[:id]
     super
+  end
+
+  private
+
+  def team_params
+    params.require(:team).permit(:url_join_allowed)
   end
 end
