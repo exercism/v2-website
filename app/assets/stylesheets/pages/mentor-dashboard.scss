@@ -30,6 +30,27 @@
     form+h2 {
         padding-top:15px;
     }
+    .no-solutions-section {
+        border:1px solid #ddd;
+        border-radius:3px;
+        text-align:center;
+        padding:20px;
+        i {
+            @include font-size(50, 50);
+            color:#aaa;
+            margin-bottom:10px;
+        }
+        h2 {
+            @include font-size(20, 20);
+            color:$color-2;
+            font-weight:$black;
+            margin:0 0 10px 0;
+        }
+        p {
+            @include font-size(14, 17);
+            color:#666;
+        }
+    }
     .no-solutions {
         color:#999;
         @include font-size(14, 14);
@@ -166,7 +187,7 @@
 
     }
     .contributions-section {
-        margin-top:42px;
+        margin-top:0; //42px;
         margin-bottom:20px;
     }
     .contributions-section,
