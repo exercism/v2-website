@@ -11,10 +11,10 @@
             %td
               %ul.inline-list
                 %li= link_to "Accept",
-                accept_teams_team_invitation_path(invite.id),
+                accept_teams_invitation_path(invite.id),
                 method: :post
                 %li= link_to "Reject",
-                reject_teams_team_invitation_path(invite.id),
+                reject_teams_invitation_path(invite.id),
                 method: :post,
                 data: { confirm: "Are you sure you want to reject your invitation to #{invite.team_name}?" }
 

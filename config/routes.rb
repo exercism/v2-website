@@ -134,7 +134,7 @@ Rails.application.routes.draw do
     end
     resources :team_memberships, only: [:destroy]
 
-    resources :team_invitations, only: [] do
+    resources :invitations, only: [] do
       post :accept, on: :member
       post :reject, on: :member
     end
