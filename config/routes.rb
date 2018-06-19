@@ -136,6 +136,7 @@ Rails.application.routes.draw do
 
     resources :team_invitations, only: [] do
       post :accept, on: :member
+      post :reject, on: :member
     end
 
     resources :teams do
