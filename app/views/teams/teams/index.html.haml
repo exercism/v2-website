@@ -4,9 +4,13 @@
 
     -if @invitations.present?
       %h2 Pending Invitiations
-      %ul
-        -@invitations.each do |membership|
-          %li= membership.team.name
+      %table.teams-table
+        - @invitations.each do |invite|
+          %tr
+            %td= invite.team_name
+            %td= link_to "Accept",
+            accept_teams_team_invitation_path(invite.id),
+            method: :post
 
     .pure-g
       -if @teams.present?
