@@ -1,5 +1,5 @@
 class Teams::InvitationsController < TeamsController
-  skip_before_action :find_team, only: [:accept, :reject]
+  skip_before_action :find_team, only: [:accept, :reject, :destroy]
 
   def create
     emails = params[:emails].to_s.split("\n").map(&:strip).compact
@@ -28,5 +28,15 @@ class Teams::InvitationsController < TeamsController
     invite.destroy!
 
     redirect_to teams_teams_path
+  end
+
+  def destroy
+    invitation = TeamInvitation.
+      where(team_id: current_user.managed_teams.select(:id)).
+      find(params[:id])
+
+    invitation.destroy!
+
+    redirect_to teams_team_memberships_path(invitation.team)
   end
 end

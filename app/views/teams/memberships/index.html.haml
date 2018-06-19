@@ -9,9 +9,16 @@
         %table.teams-table
           -@invitations.each do |invitation|
             %tr
-              %td= invitation.email
+              %td
+                = invitation.email
               -if current_team_membership.admin?
-                %td= link_to "Resend invite", "#"
+                %td
+                  %ul.inline-list
+                    %li= link_to "Resend invite", "#"
+                    %li= link_to "Remove",
+                      teams_invitation_path(invitation.id),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to reject your invitation to #{invitation.email}?" }
 
     -if @memberships.present?
       .section
