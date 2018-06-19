@@ -1,0 +1,14 @@
+%h2 Solutions you're mentoring
+-if  @your_solutions.present?
+  = render "filters",
+    status: @status,
+    status_options: @status_options,
+    track_id: @track_id,
+    track_id_options: @track_id_options,
+    exercise_id: @exercise_id,
+    exercise_id_options: @exercise_id_options
+
+.your-solutions{style: @your_solutions.present?? "display:block" : "display:none"}
+  = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
+.no-solutions.personal{style: @your_solutions.empty?? "display:block" : "display:none"}
+  You currently have no solutions that need mentoring.
