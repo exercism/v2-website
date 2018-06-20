@@ -43,6 +43,6 @@ class Git::SyncsUpdatedRepos
   end
 
   def sync_repo_update
-    SyncRepoUpdateJob.perform_later(repo_update.id)
+    SyncRepoUpdateJob.perform_now(repo_update.id)
   end
 end

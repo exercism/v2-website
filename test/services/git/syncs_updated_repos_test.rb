@@ -9,9 +9,9 @@ class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
                 repo_update: repo_update,
                 completed_at: Time.current)
 
-    assert_enqueued_with(job: SyncRepoUpdateJob) do
-      Git::SyncsUpdatedRepos.sync(stdout: StringIO.new)
-    end
+    SyncRepoUpdateJob.expects(:perform_now).with(repo_update.id)
+
+    Git::SyncsUpdatedRepos.sync(stdout: StringIO.new)
   end
 
   test "does not sync an unfetched track update" do
@@ -21,10 +21,9 @@ class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
                 1,
                 repo_update: repo_update,
                 completed_at: nil)
+    SyncRepoUpdateJob.expects(:perform_now).never
 
-    assert_no_enqueued_jobs do
-      Git::SyncsUpdatedRepos.sync
-    end
+    Git::SyncsUpdatedRepos.sync
   end
 
   test "does not sync a track update not fetched by all webservers" do
@@ -34,10 +33,9 @@ class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
                 1,
                 repo_update: repo_update,
                 completed_at: Time.current)
+    SyncRepoUpdateJob.expects(:perform_now).never
 
-    assert_no_enqueued_jobs do
-      Git::SyncsUpdatedRepos.sync
-    end
+    Git::SyncsUpdatedRepos.sync
   end
 
   test "does not sync a synced track update" do
@@ -47,9 +45,8 @@ class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
                 1,
                 repo_update: repo_update,
                 completed_at: Time.current)
+    SyncRepoUpdateJob.expects(:perform_now).never
 
-    assert_no_enqueued_jobs do
-      Git::SyncsUpdatedRepos.sync
-    end
+    Git::SyncsUpdatedRepos.sync
   end
 end
