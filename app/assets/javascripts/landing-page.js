@@ -21,8 +21,8 @@ window.setupLandingPage = function() {
 
     honeycombHeight = $honeycomb.height()
     honeycombWidth = $honeycomb.width()
-    eyesCenterX = $leftEye.offset().left - $honeycomb.offset().left + 15
-    eyesCenterY = $leftEye.offset().top - $honeycomb.offset().top + 5
+    eyesCenterX = 0.5 * ($leftEye.offset().left + $leftEye.width() + $rightEye.offset().left - $honeycomb.offset().left)
+    eyesCenterY = $leftEye.offset().top + ($leftEye.height() / 2) - $honeycomb.offset().top
 
     spaceToLeft = honeycombWidth - (honeycombWidth - eyesCenterX)
     spaceToRight = honeycombWidth - spaceToLeft
@@ -34,20 +34,20 @@ window.setupLandingPage = function() {
       mouseToEyesOffsetX = eyesCenterX - mouseX
       if(mouseToEyesOffsetX > 0) {
         // mouse is to the left
-        $pupils.css('left', 5 - (mouseToEyesOffsetX / spaceToLeft * 5))
+        $pupils.css('left', Math.max(5 - (mouseToEyesOffsetX / spaceToLeft * 2), 0))
       } else {
         // mouse is to the right
-        $pupils.css('left', 5 + (-mouseToEyesOffsetX / spaceToRight * 5))
+        $pupils.css('left', Math.min(5 + (-mouseToEyesOffsetX / spaceToRight * 2), 9))
       }
 
       mouseY = e.pageY - $honeycomb.offset().top
       mouseToEyesOffsetY = eyesCenterY - mouseY
       if(mouseToEyesOffsetY > 0) {
-        // mouse is to the left
-        $pupils.css('top', 5 - (mouseToEyesOffsetY / spaceToTop * 5))
+        // mouse is to the top
+        $pupils.css('top', Math.max(5 - (mouseToEyesOffsetY / spaceToTop * 2), 0))
       } else {
-        // mouse is to the right
-        $pupils.css('top', 5 + (-mouseToEyesOffsetY / spaceToBottom * 5))
+        // mouse is to the bottom
+        $pupils.css('top', Math.min(5 + (-mouseToEyesOffsetY / spaceToBottom * 2), 9))
       }
 
     })
