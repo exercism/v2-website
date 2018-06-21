@@ -1,5 +1,6 @@
 set :stage, :production
 set :rails_env, :staging
+set :branch, 'mentors'
 
 # TODO cap file should write /opt/exercism/rails_env=staging
 
