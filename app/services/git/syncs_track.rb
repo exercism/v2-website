@@ -115,7 +115,6 @@ class Git::SyncsTrack
   def sync_track_metadata
     track.update!(
       introduction: track_introduction,
-      about: track_about,
       code_sample: code_sample
     )
   end
