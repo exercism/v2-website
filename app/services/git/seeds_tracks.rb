@@ -1,12 +1,13 @@
 class Git::SeedsTracks
 
-  # NB generate this with Trackler.tracks.select(&:active?).map {|t| "https://github.com/exercism/#{t.id}" }.sort
+  # NB generate this with Trackler.tracks.map(&:repository).sort
 
   def self.tracks
     TRACKS
   end
 
   TRACKS = %w{
+    https://github.com/exercism/ballerina
     https://github.com/exercism/bash
     https://github.com/exercism/c
     https://github.com/exercism/ceylon
@@ -47,6 +48,7 @@ class Git::SeedsTracks
     https://github.com/exercism/ocaml
     https://github.com/exercism/perl5
     https://github.com/exercism/perl6
+    https://github.com/exercism/pharo
     https://github.com/exercism/php
     https://github.com/exercism/plsql
     https://github.com/exercism/pony
@@ -56,6 +58,7 @@ class Git::SeedsTracks
     https://github.com/exercism/python
     https://github.com/exercism/r
     https://github.com/exercism/racket
+    https://github.com/exercism/reasonml
     https://github.com/exercism/ruby
     https://github.com/exercism/rust
     https://github.com/exercism/scala
