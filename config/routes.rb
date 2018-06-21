@@ -77,6 +77,10 @@ Rails.application.routes.draw do
     end
     resources :maintainers, only: [:index]
     resources :mentors, only: [:index]
+
+    Git::ExercismRepo::PAGES.each do |page|
+      get page => "track_pages##{page}", as: "#{page}_page"
+    end
   end
 
   # ######## #

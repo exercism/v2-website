@@ -73,6 +73,7 @@
         padding:20px;
         border:1px solid #e5e5e5;
         border-radius:2px;
+        margin-bottom:20px;
 
         h3 {
             font-weight:$regular;
@@ -88,7 +89,7 @@
         border:1px solid $color-1;
         padding:20px;
         border-radius:2px;
-        margin-bottom:30px;
+        margin-bottom:20px;
 
         h3 {
             font-weight:$regular;
@@ -107,4 +108,23 @@
             padding:10px;
         }
     }
+
+    .page-links {
+        padding:20px;
+        border:1px solid #e5e5e5;
+        border-radius:2px;
+
+        h3 {
+            font-weight:$regular;
+            @include font-size(16, 16);
+            margin-bottom:12px;
+        }
+        a {
+            color:#333;
+        }
+        ul {
+            margin-bottom:0;
+        }
+    }
+
 }

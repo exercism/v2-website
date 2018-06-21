@@ -1,5 +1,6 @@
 class Track < ApplicationRecord
   extend FriendlyId
+
   friendly_id :slug, use: [:history]
 
   has_many :testimonials
