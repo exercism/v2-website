@@ -1,8 +1,9 @@
 set :stage, :production
 set :rails_env, :staging
 
+# TODO cap file should write /opt/exercism/rails_env=staging
 
-server 'ec2-34-254-91-47.eu-west-1.compute.amazonaws.com', user: fetch(:application), roles: %w{app web db git_fetch}
+server 'ec2-34-247-238-198.eu-west-1.compute.amazonaws.com', user: fetch(:application), roles: %w{app web db git_fetch}
 namespace :puma_service do
   task :restart do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
