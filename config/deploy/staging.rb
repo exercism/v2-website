@@ -1,4 +1,6 @@
 set :stage, :production
+set :rails_env, :staging
+
 
 server 'ec2-34-254-91-47.eu-west-1.compute.amazonaws.com', user: fetch(:application), roles: %w{app web db git_fetch}
 namespace :puma_service do
