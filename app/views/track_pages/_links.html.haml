@@ -1,0 +1,8 @@
+-target ||= ""
+%ul.track-page-links
+  -Git::ExercismRepo::PAGES.each do |page|
+    -if track.repo.send("#{page}_present?")
+      %li= link_to title_for_track_page(track, page), send("track_#{page}_page_path", track), target: target
+
+  /%li= link_to "Getting Help", "#"
+  /%li= link_to "Remind me how to set up the CLI", "#"

@@ -6,6 +6,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     user = create :user, password: password
     user.confirm
 
+    Track.any_instance.stubs(repo: repo_mock)
     track = create :track
     get track_path(track)
     assert_response :success
@@ -39,6 +40,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     user = create :user, provider: provider, uid: uid
     user.confirm
 
+    Track.any_instance.stubs(repo: repo_mock)
     track = create :track
     get track_path(track)
     assert_response :success
@@ -60,6 +62,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     provider = "foobar"
     uid = "12321321"
 
+    Track.any_instance.stubs(repo: repo_mock)
     track = create :track
     get track_path(track)
     assert_response :success
@@ -84,6 +87,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     password = "foobar"
     user = create :user, password: password
 
+    Track.any_instance.stubs(repo: repo_mock)
     track = create :track
     get track_path(track)
     assert_response :success
@@ -107,6 +111,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     uid = "12321321"
     email = "#{SecureRandom.uuid}@erwerew.com"
 
+    Track.any_instance.stubs(repo: repo_mock)
     track = create :track
     get track_path(track)
     assert_response :success

@@ -9,6 +9,7 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show logged out redirects" do
+    Track.any_instance.stubs(repo: repo_mock)
     track = create :track
     get my_track_url(track)
     assert_redirected_to track_url(track)
@@ -16,6 +17,8 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
 
   test "show locked renders" do
     sign_in!
+
+    Track.any_instance.stubs(repo: repo_mock)
     get my_track_url(create :track)
     assert_response :success
     assert_correct_page "my-track-not-joined-page"

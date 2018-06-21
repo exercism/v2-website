@@ -1,4 +1,6 @@
 class Git::ExercismRepo < Git::RepoBase
+  PAGES = %w{installation tests learning resources}
+  GIT_PAGE_FILES = %w{about} + PAGES
 
   def self.current_head(repo_url)
     new(repo_url).head
@@ -12,8 +14,14 @@ class Git::ExercismRepo < Git::RepoBase
     read_snippet(head_commit)
   end
 
-  def about
-    read_about(head_commit)
+  GIT_PAGE_FILES.each do |page|
+    define_method "#{page}_present?" do
+      send(page).present?
+    end
+
+    define_method page do
+      send("read_#{page}", head_commit)
+    end
   end
 
   def config
@@ -60,12 +68,18 @@ class Git::ExercismRepo < Git::RepoBase
 
   private
 
-  def read_about(commit)
-    read_docs(commit, "ABOUT.md")
-  end
-
   def read_snippet(commit)
     read_docs(commit, "SNIPPET.txt")
+  end
+
+  GIT_PAGE_FILES.each do |page|
+    define_method "read_#{page}" do |commit|
+      read_docs(commit, "#{page.upcase}.md")
+    end
+  end
+
+  def read_installation(commit)
+    read_docs(commit, "INSTALLATION.md")
   end
 
   def read_docs(commit, file_name)

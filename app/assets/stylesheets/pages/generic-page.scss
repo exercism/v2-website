@@ -19,12 +19,13 @@
     .lhs {
         padding-right:40px;
     }
-    .changes {
+    .changes, .links {
         margin-top:50px;
         padding-top:20px;
         border-top:1px solid #eee;
     }
 
+    h2,
     h3 {
         @include font-size(18, 18);
         font-weight:$regular;

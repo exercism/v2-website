@@ -1,5 +1,6 @@
 class Track < ApplicationRecord
   extend FriendlyId
+
   friendly_id :slug, use: [:history]
 
   has_many :testimonials
@@ -31,7 +32,7 @@ class Track < ApplicationRecord
   end
 
   def about
-    ParsesMarkdown.parse(super)
+    ParsesMarkdown.parse(repo.about)
   end
 
   def repo

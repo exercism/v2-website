@@ -32,7 +32,6 @@ class CreatesTrack
 
       # Default track metadata to empty for git syncer to populate
       introduction: "",
-      about: "",
       code_sample: "",
       bordered_green_icon_url: track_image_url("#{track_slug}-bordered-green.png"),
       bordered_turquoise_icon_url: track_image_url("#{track_slug}-bordered-turquoise.png"),

@@ -13,6 +13,12 @@
           %h3 Get started
           %p We've created a step-by-step set of instructions to help you quickly install Exercism and get started, so you can start learning.
           =link_to "Begin Walk-Through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button'
+
         .experienced
           %h3 Been here before?
           =render "widgets/code_snippet", code: @exercise.download_command
+
+        .page-links
+          %h3 Still Stuck?
+          %p These guides should help you.
+          =render "track_pages/links", track: @track, target: "_blank"

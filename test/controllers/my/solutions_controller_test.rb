@@ -6,11 +6,16 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     @mock_exercise = stub(
       instructions: "instructions",
       test_suite: { "test_file" => "test_suite" },
-      files: []
+      files: [],
+      about_present: false
     )
-    @mock_repo = stub( exercise: @mock_exercise)
+
+    @mock_repo = stub(exercise: @mock_exercise)
     Git::Exercise.stubs(new: @mock_exercise)
     Git::ExercismRepo.stubs(new: @mock_repo)
+    Git::ExercismRepo::PAGES.each do |page|
+      @mock_repo.stubs("#{page}_present?", false)
+    end
   end
 
   {
@@ -22,6 +27,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     test "shows with status #{status}" do
       sign_in!
       solution = send("create_#{status}_solution")
+      solution.exercise.track.stubs(repo: @mock_repo)
       create :user_track, user: @current_user, track: solution.exercise.track
 
       get my_solution_url(solution)
