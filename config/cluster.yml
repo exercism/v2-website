@@ -6,5 +6,9 @@ production:
   num_webservers: 2
   server_identity_file: /etc/exercism/server-identity
 
+staging:
+  num_webservers: 1
+  server_identity_file: /etc/exercism/server-identity
+
 test:
   server_identity_file: test/fixtures/server_identity
