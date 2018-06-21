@@ -30,4 +30,13 @@ class ActionDispatch::IntegrationTest
   def assert_correct_page(page)
     assert_includes @response.body, "<div id='#{page}'>"
   end
+
+  def repo_mock
+    content = ""
+    head = "SOME_HEAD_SHA"
+    repo = Git::ExercismRepo.new("https://github.com/exercism/go")
+    repo.stubs(:head_commit).returns(head)
+    repo.stubs(:read_docs).with(head, "ABOUT.md").returns(content)
+    repo
+  end
 end

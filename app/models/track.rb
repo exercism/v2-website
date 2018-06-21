@@ -32,7 +32,7 @@ class Track < ApplicationRecord
   end
 
   def about
-    ParsesMarkdown.parse(super)
+    ParsesMarkdown.parse(repo.about)
   end
 
   def repo

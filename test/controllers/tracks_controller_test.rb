@@ -8,6 +8,7 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show renders" do
+    Track.any_instance.stubs(repo: repo_mock)
     get track_url(create :track)
     assert_response :success
     assert_correct_page "track-page"

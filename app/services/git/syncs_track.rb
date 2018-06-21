@@ -124,10 +124,6 @@ class Git::SyncsTrack
     config[:blurb] || ""
   end
 
-  def track_about
-    repo.about || ""
-  end
-
   def code_sample
     code_sample = repo.snippet_file
     return code_sample unless code_sample.nil?
