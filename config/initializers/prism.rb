@@ -1,140 +1,175 @@
 Exercism::PrismLanguages = %w{
-  abap
-  actionscript
-  ada
-  apacheconf
-  apl
-  applescript
-  asciidoc
-  aspnet
-  autoit
-  autohotkey
-  bash
-  basic
-  batch
-  bison
-  brainfuck
-  bro
-  c
-  clojure
-  csharp
-  css
-  clike
-  cpp
-  coffeescript
-  crystal
-  css-extras
-  d
-  dart
-  django
-  diff
-  docker
-  eiffel
-  elixir
-  erlang
-  fsharp
-  fortran
-  gherkin
-  git
-  glsl
-  go
-  graphql
-  groovy
-  haml
-  handlebars
-  haskell
-  haxe
-  http
-  icon
-  inform7
-  ini
-  j
-  jade
-  java
-  javascript
-  jolie
-  json
-  julia
-  keyman
-  kotlin
-  latex
-  less
-  livescript
-  lolcode
-  lua
-  makefile
-  markdown
-  markup
-  matlab
-  mel
-  mizar
-  monkey
-  nasm
-  nginx
-  nim
-  nix
-  nsis
-  objectivec
-  ocaml
-  oz
-  parigp
-  parser
-  pascal
-  perl
-  php
-  php-extras
-  powershell
-  processing
-  prolog
-  properties
-  protobuf
-  puppet
-  pure
-  python
-  q
-  qore
-  r
-  jsx
-  reason
-  rest
-  rip
-  roboconf
-  ruby
-  rust
-  sas
-  sass
-  scss
-  scala
-  scheme
-  smalltalk
-  smarty
-  sql
-  stylus
-  swift
-  tcl
-  textile
-  twig
-  typescript
-  vbnet
-  verilog
-  vhdl
-  vim
-  wiki
-  xojo
-  yaml
+markup
+css
+clike
+javascript
+
+abap
+actionscript
+ada
+apacheconf
+apl
+applescript
+arduino
+arff
+asciidoc
+asm6502
+aspnet
+autohotkey
+autoit
+bash
+basic
+batch
+bison
+brainfuck
+bro
+c
+csharp
+cpp
+coffeescript
+clojure
+crystal
+csp
+css-extras
+d
+dart
+diff
+django
+docker
+eiffel
+elixir
+elm
+erb
+erlang
+fsharp
+flow
+fortran
+gedcom
+git
+glsl
+go
+graphql
+groovy
+haml
+handlebars
+haskell
+haxe
+http
+hpkp
+hsts
+ichigojam
+icon
+inform7
+ini
+io
+j
+java
+jolie
+json
+julia
+keyman
+kotlin
+latex
+less
+liquid
+lisp
+livescript
+lolcode
+lua
+makefile
+markdown
+markup-templating
+matlab
+mel
+mizar
+monkey
+n4js
+nasm
+nginx
+nim
+nix
+nsis
+objectivec
+ocaml
+opencl
+oz
+parigp
+parser
+pascal
+perl
+php
+php-extras
+plsql
+powershell
+processing
+prolog
+properties
+protobuf
+pug
+puppet
+pure
+python
+q
+qore
+r
+jsx
+tsx
+renpy
+reason
+rest
+rip
+roboconf
+ruby
+rust
+sas
+sass
+scss
+scala
+scheme
+smalltalk
+smarty
+sql
+soy
+stylus
+swift
+tap
+tcl
+textile
+tt2
+twig
+typescript
+vbnet
+velocity
+verilog
+vhdl
+vim
+visual-basic
+wasm
+wiki
+xeora
+xojo
+xquery
+yaml
 }
 
 Exercism::PrismLanguageMappings = {
-  "delphi" => "pascal",
-  "ecmascript" => "javascript",
-  "idris" => "haskell", # close enough for now
-  "objective-c" => "c",
+  "common-lisp" => "lisp",
+  "elisp" => "lisp",
+
   "perl5" => "perl",
   "perl6" => "perl",
+
+  "ballerina" => "go",
+  "delphi" => "pascal",
+  "ecmascript" => "javascript",
+  "gnu-apl" => "apl",
+  "idris" => "haskell", # close enough for now
+  "objective-c" => "objectivec",
   "plsql" => "sql",
   "pony" => "scala", # close enough for now
   "sml" => "ocaml", # close enough for now
   "vimscript" => "vim",
+  "reasonml" => "reason",
 }
 
 Exercism::PrismFileMappings = {
@@ -173,10 +208,9 @@ Exercism::PrismFileMappings = {
   "erlang": %w{erl hrl },
   "fsharp": %w{fs fsx},
   "fortran": %w{},
-  "gherkin": %w{},
   "git": %w{},
   "glsl": %w{},
-  "go": %w{go},
+  "go": %w{go bal},
   "graphql": %w{},
   "groovy": %w{groovy},
   "haml": %w{},
@@ -234,7 +268,7 @@ Exercism::PrismFileMappings = {
   "qore": %w{},
   "r": %w{r},
   "jsx": %w{},
-  "reason": %w{},
+  "reason": %w{re},
   "rest": %w{},
   "rip": %w{},
   "roboconf": %w{},
