@@ -155,6 +155,7 @@ yaml
 Exercism::PrismLanguageMappings = {
   "common-lisp" => "lisp",
   "elisp" => "lisp",
+  "lfe" => "lisp",
 
   "perl5" => "perl",
   "perl6" => "perl",
@@ -165,6 +166,7 @@ Exercism::PrismLanguageMappings = {
   "gnu-apl" => "apl",
   "idris" => "haskell", # close enough for now
   "objective-c" => "objectivec",
+  "purescript" => "haskell",
   "plsql" => "sql",
   "pony" => "scala", # close enough for now
   "sml" => "ocaml", # close enough for now
@@ -268,7 +270,7 @@ Exercism::PrismFileMappings = {
   "qore": %w{},
   "r": %w{r},
   "jsx": %w{},
-  "reason": %w{re},
+  "reason": %w{re rei},
   "rest": %w{},
   "rip": %w{},
   "roboconf": %w{},
