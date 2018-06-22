@@ -33,18 +33,7 @@
         %h2 Available Language Tracks
         %p There are #{@tracks.size} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
       .tracks
-        -idx = 0
-        -while @tracks.present?
-          -idx += 1
-          .row{class: idx.odd?? "long" : "short"}
-            -@tracks.slice!(0, idx.odd?? 10 : 9).each do |track|
-              =link_to track, class: "track #{track.slug=="go"?"go":""}", style: "background-image:url('#{track.hex_white_icon_url}')" do
-                .title= track.title
-                -if track.slug == "go"
-                  .left-eye
-                    .pupil
-                  .right-eye
-                    .pupil
+        =render 'tracks_display', :tracks => @tracks
 
   .how-section
     .lo-container
