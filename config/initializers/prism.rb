@@ -161,13 +161,16 @@ Exercism::PrismLanguageMappings = {
   "perl6" => "perl",
 
   "ballerina" => "go",
+  "ceylon" => "kotlin",
+  "cfml" => "markup",
   "delphi" => "pascal",
   "ecmascript" => "javascript",
   "gnu-apl" => "apl",
   "idris" => "haskell", # close enough for now
   "objective-c" => "objectivec",
-  "purescript" => "haskell",
+  "pharo" => "smalltalk",
   "plsql" => "sql",
+  "purescript" => "haskell",
   "pony" => "scala", # close enough for now
   "sml" => "ocaml", # close enough for now
   "vimscript" => "vim",
@@ -281,7 +284,7 @@ Exercism::PrismFileMappings = {
   "scss": %w{},
   "scala": %w{pony scala},
   "scheme": %w{},
-  "smalltalk": %w{},
+  "smalltalk": %w{st},
   "smarty": %w{},
   "sql": %w{},
   "stylus": %w{},
