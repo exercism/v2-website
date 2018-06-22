@@ -7,7 +7,7 @@ require 'timecop'
 require 'minitest/pride'
 require 'minitest/stub_const'
 
-Rails.application.routes.default_url_options = { :host => "https://v2.exercism.io" }
+Rails.application.routes.default_url_options = { :host => "https://test.exercism.io" }
 OmniAuth.config.test_mode = true
 
 class ActionView::TestCase

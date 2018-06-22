@@ -14,7 +14,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     expected = {
       solution: {
         id: solution.uuid,
-        url: "https://v2.exercism.io/my/solutions/#{solution.uuid}",
+        url: "https://test.exercism.io/my/solutions/#{solution.uuid}",
         team: nil,
         user: {
           handle: solution.user.handle,
@@ -22,14 +22,14 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
         },
         exercise: {
           id: solution.exercise.slug,
-          instructions_url: "https://v2.exercism.io/my/solutions/#{solution.uuid}",
+          instructions_url: "https://test.exercism.io/my/solutions/#{solution.uuid}",
           auto_approve: solution.exercise.auto_approve,
           track: {
             id: solution.exercise.track.slug,
             language: solution.exercise.track.title
           }
         },
-        file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
+        file_download_base_url: "https://test.exercism.io/api/v1/solutions/#{solution.uuid}/files/",
         files: Set.new([]),
         iteration: nil
       }
@@ -74,7 +74,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     mentor = create :user
     create :track_mentorship, user: mentor, track: solution.exercise.track
     responder = API::SolutionResponder.new(solution, mentor)
-    assert_equal "https://v2.exercism.io/mentor/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+    assert_equal "https://test.exercism.io/mentor/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
   end
 
   test "instructions_url should be /my/solutions for solution user if published" do
@@ -82,7 +82,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     track = solution.exercise.track
     user_track = create :user_track, user: solution.user, track: track
     responder = API::SolutionResponder.new(solution, solution.user)
-    assert_equal "https://v2.exercism.io/my/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+    assert_equal "https://test.exercism.io/my/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
   end
 
   test "instructions_url should be /solutions for other user if published" do
@@ -90,7 +90,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     track = solution.exercise.track
     user_track = create :user_track, user: solution.user, track: track
     responder = API::SolutionResponder.new(solution, create(:user))
-    assert_equal "https://v2.exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+    assert_equal "https://test.exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
   end
 
   test "instructions_url should be /solutions if mentor and published" do
@@ -100,7 +100,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     mentor = create :user
     create :track_mentorship, user: mentor, track: solution.exercise.track
     responder = API::SolutionResponder.new(solution, mentor)
-    assert_equal "https://v2.exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
+    assert_equal "https://test.exercism.io/tracks/#{track.slug}/exercises/#{solution.exercise.slug}/solutions/#{solution.uuid}", responder.to_hash[:solution][:url]
   end
 
   test "files honours ignore_regexp" do

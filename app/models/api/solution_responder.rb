@@ -26,7 +26,7 @@ class API::SolutionResponder
             language: track.title
           }
         },
-        file_download_base_url: "https://api.exercism.io/v1/solutions/#{solution.uuid}/files/",
+        file_download_base_url: "#{Rails.application.routes.default_url_options[:host]}/api/v1/solutions/#{solution.uuid}/files/",
         files: files,
         iteration: iteration_hash
       }
