@@ -10,7 +10,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
       assert_equal solution.user, args[0]
       assert_equal :new_reaction, args[1]
       assert_equal "<strong>#{user.handle}</strong> has reacted to your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
-      assert_equal "https://v2.exercism.io/solutions/#{solution.uuid}", args[3]
+      assert_equal "https://test.exercism.io/solutions/#{solution.uuid}", args[3]
       assert_equal Reaction, args[4][:trigger].class
       assert_equal solution, args[4][:about]
     end
