@@ -3,7 +3,7 @@
   %h2 Getting Started
   %h3 on the #{track.title} Track
 
-  %p Welcome to the #{track.title} Track. To get started click on the first exercise (#{@track.exercises.core.first.title}) and follow the instructions.
+  %p Welcome to the #{track.title} Track. To get started, click on the first exercise (#{@track.exercises.core.first.title}) and follow the instructions.
   =link_to "Continue", set_normal_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: "pure-button"
   .independent-mode-option
     If you don't want Mentor Feedback but would like to work through the exercises by yourself, you can continue in Independent Mode.
