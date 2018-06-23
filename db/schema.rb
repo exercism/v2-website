@@ -231,7 +231,6 @@ ActiveRecord::Schema.define(version: 20180621150555) do
     t.boolean "mentoring_enabled"
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
-    t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
 
