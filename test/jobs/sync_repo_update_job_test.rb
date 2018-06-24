@@ -10,8 +10,16 @@ class SyncRepoUpdateJobTest < ActiveJob::TestCase
     SyncRepoUpdateJob.perform_now(repo_update.id)
   end
 
-  test "does not sync non-tracks" do
+  test "syncs website-copy repo" do
     repo_update = create(:repo_update, slug: "website-copy")
+
+    Git::SyncsWebsiteCopy.expects(:call)
+
+    SyncRepoUpdateJob.perform_now(repo_update.id)
+  end
+
+  test "does not sync unregistered repos" do
+    repo_update = create(:repo_update, slug: "problem-specifications")
 
     Git::SyncsTracks.expects(:sync).never
 
@@ -19,7 +27,8 @@ class SyncRepoUpdateJobTest < ActiveJob::TestCase
   end
 
   test "records sync time after performing" do
-    repo_update = create(:repo_update)
+    repo_update = create(:repo_update, slug: "website-copy")
+    Git::SyncsWebsiteCopy.stubs(:call)
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
 
