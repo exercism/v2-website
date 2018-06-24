@@ -14,4 +14,22 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
 
     refute_equal repo, another_repo
   end
+
+  test "returns mentor data" do
+    repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+
+    expected = [
+      {
+        github_username: "kytrinyx",
+        name: "Katrina Owen",
+        link_text: nil,
+        link_url: nil,
+        avatar_url: nil,
+        bio: "Bio",
+        track: "go"
+      }
+    ]
+
+    assert_equal expected, repo.mentors
+  end
 end

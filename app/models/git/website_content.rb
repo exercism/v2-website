@@ -30,6 +30,24 @@ class Git::WebsiteContent < Git::RepoBase
     FolderReader.new(self, head_commit, 'walkthrough')
   end
 
+  def mentors
+    ptr = head_commit.tree["mentors"]
+    tree = repo.lookup(ptr[:oid])
+
+    mentors = []
+
+    tree.walk_blobs do |root, file|
+      track_slug = root.chomp("/")
+      mentor_jsons = read_json_blob(file[:oid])
+
+      mentor_jsons.each do |json|
+        mentors << json.merge(track: track_slug)
+      end
+    end
+
+    mentors
+  end
+
   class FolderReader
     attr_reader :repo, :head_commit, :folder_name
 
