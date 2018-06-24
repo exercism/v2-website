@@ -32,7 +32,7 @@ class Track < ApplicationRecord
   end
 
   def about
-    ParsesMarkdown.parse(repo.about)
+    repo.about.present?? ParsesMarkdown.parse(repo.about) : nil
   end
 
   def repo

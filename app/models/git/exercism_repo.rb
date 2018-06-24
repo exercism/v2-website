@@ -8,6 +8,7 @@ class Git::ExercismRepo < Git::RepoBase
 
   def initialize(repo_url, auto_fetch=false)
     super
+    @retrieved_pages = {}
   end
 
   def snippet_file
@@ -20,7 +21,7 @@ class Git::ExercismRepo < Git::RepoBase
     end
 
     define_method page do
-      send("read_#{page}", head_commit)
+      @retrieved_pages[page] ||= send("read_#{page}", head_commit)
     end
   end
 
