@@ -140,6 +140,17 @@ ActiveRecord::Schema.define(version: 20180621150555) do
     t.index ["user_id"], name: "fk_rails_5b1168410c"
   end
 
+  create_table "mentors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "track_id", null: false
+    t.string "name", null: false
+    t.string "avatar_url"
+    t.string "github_username", null: false
+    t.string "link_text"
+    t.string "link_url"
+    t.text "bio"
+    t.index ["track_id"], name: "index_mentors_on_track_id"
+  end
+
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "about_type"
@@ -387,6 +398,7 @@ ActiveRecord::Schema.define(version: 20180621150555) do
   add_foreign_key "iteration_files", "iterations"
   add_foreign_key "maintainers", "tracks"
   add_foreign_key "maintainers", "users"
+  add_foreign_key "mentors", "tracks"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "reactions", "solutions"

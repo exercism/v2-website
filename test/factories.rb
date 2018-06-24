@@ -159,4 +159,10 @@ FactoryBot.define do
     repo_update { create(:repo_update) }
     host { |n| "host-#{n}" }
   end
+
+  factory :mentor do
+    track
+    name "Mentor"
+    github_username "mentor"
+  end
 end
