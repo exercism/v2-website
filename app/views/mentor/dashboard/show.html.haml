@@ -7,11 +7,13 @@
   .lo-container
     .pure-g
       .pure-u-2-3
-        -if @your_solutions.present? || @suggested_solutions.present?
-          - if @your_solutions.present?
-            =render "your_solutions_section"
-          -if @suggested_solutions.present?
-            =render "next_solutions_section"
+        /-if @your_solutions.present? || @suggested_solutions.present?
+        /- if @your_solutions.present?
+
+        =render "your_solutions_section"
+
+        -if @suggested_solutions.present?
+          =render "next_solutions_section"
         -else
           =render "no_solutions_section"
 
