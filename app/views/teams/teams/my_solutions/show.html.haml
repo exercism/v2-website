@@ -15,7 +15,7 @@
               .tab.tab-3
                 Solution
 
-            =render "solutions/panes", iteration: @iteration
+            =render "teams/teams/solutions/panes", iteration: @iteration
 
       .pure-u-1-2.rhs
         .discussion
@@ -24,7 +24,7 @@
           -if @iteration.discussion_posts.size > 0
             .posts
               -@iteration.discussion_posts.each do |post|
-                =render "teams/discussion_posts/post", post: post, solution: @solution
+                =render "teams/teams/discussion_posts/post", post: post, solution: @solution
           -else
             .posts{style: "display:none"}
             .next-steps

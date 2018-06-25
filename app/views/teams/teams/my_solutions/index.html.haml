@@ -15,7 +15,7 @@
           .title Topic:
           =select_tag :topic_id, options_for_select(@topics_for_select), id: nil
     .pure-g.solutions
-      =render "teams/my_solutions/solutions", solutions: @solutions
+      =render "teams/teams/my_solutions/solutions", solutions: @solutions
 
     =link_to "Start new solution", new_teams_team_my_solution_path, class: "pure-button"
 

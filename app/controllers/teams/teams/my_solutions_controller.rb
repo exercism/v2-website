@@ -1,4 +1,4 @@
-class Teams::MySolutionsController < TeamsController
+class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
   def index
     @solutions = TeamSolution.for_team_and_user(@team, current_user).joins(:exercise).includes(:exercise)
 

@@ -1,6 +1,4 @@
-class Teams::DashboardController < TeamsController
-  skip_before_action :find_team
-
+class Teams::DashboardController < Teams::BaseController
   def index
     redirect_to teams_teams_path
   end

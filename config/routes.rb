@@ -134,9 +134,8 @@ Rails.application.routes.draw do
     get "dashboard" => "dashboard#index"
 
     resources :teams, only: [], param: :token do
-      resource :join
+      resource :join, controller: "teams/joins"
     end
-    resources :team_memberships, only: [:destroy]
 
     resources :invitations, only: [] do
       post :accept, on: :member
@@ -144,13 +143,19 @@ Rails.application.routes.draw do
     end
 
     resources :teams do
-      resources :my_solutions do
+      resources :my_solutions, controller: "teams/my_solutions" do
         get :possible_exercises, on: :collection
       end
-      resources :solutions
-      resources :discussion_posts, only: [:create]
-      resources :memberships, only: [:index, :destroy]
-      resources :invitations, only: [:new, :create, :destroy]
+      resources :solutions, controller: "teams/solutions"
+      resources :discussion_posts,
+        only: [:create],
+        controller: "teams/discussion_posts"
+      resources :memberships,
+        only: [:index, :destroy],
+        controller: "teams/memberships"
+      resources :invitations,
+        only: [:new, :create, :destroy],
+        controller: "teams/invitations"
     end
 
     Teams::PagesController::PAGES.values.each do |page|

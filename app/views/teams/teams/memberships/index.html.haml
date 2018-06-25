@@ -9,9 +9,16 @@
         %table.teams-table
           -@invitations.each do |invitation|
             %tr
-              %td= invitation.email
+              %td
+                = invitation.email
               -if current_team_membership.admin?
-                %td= link_to "Resend invite", "#"
+                %td
+                  %ul.inline-list
+                    %li= link_to "Resend invite", "#"
+                    %li= link_to "Remove",
+                      teams_team_invitation_path(invitation.team, invitation),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to reject your invitation to #{invitation.email}?" }
 
     -if @memberships.present?
       .section
@@ -23,10 +30,10 @@
               %td= membership.name
               - if current_team_membership.admin? && membership != current_team_membership
                 %td= link_to "Remove",
-                  teams_team_membership_path(membership),
+                  teams_team_membership_path(membership.team, membership),
                   method: :delete,
                   data: { confirm: "Are you sure you want to remove #{membership.name} from your team?" }
         = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
     - if @team.admin?(current_user)
-      = render "teams/memberships/sections/settings", team: @team
+      = render "teams/teams/memberships/sections/settings", team: @team

@@ -1,6 +1,5 @@
-class Teams::TeamsController < ::TeamsController
-  before_action :authenticate_user!
-  skip_before_action :find_team, only: [:index, :new, :create]
+class Teams::TeamsController < Teams::BaseController
+  before_action :find_team, only: [:show, :update]
 
   def index
     @teams = current_user.teams

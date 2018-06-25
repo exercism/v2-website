@@ -1,6 +1,5 @@
-class Teams::PagesController < ::TeamsController
+class Teams::PagesController < Teams::BaseController
   skip_before_action :authenticate_user!
-  skip_before_action :find_team
 
   before_action :redirect_if_signed_in!, only: [:index]
 
