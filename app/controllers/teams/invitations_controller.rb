@@ -1,15 +1,4 @@
-class Teams::InvitationsController < TeamsController
-  skip_before_action :find_team, only: [:accept, :reject, :destroy]
-
-  def create
-    emails = params[:emails].to_s.split("\n").map(&:strip).compact
-    emails.each do |email|
-      CreateTeamInvitation.(@team, current_user, email)
-    end
-
-    redirect_to [:teams, @team, :memberships]
-  end
-
+class Teams::InvitationsController < Teams::BaseController
   def accept
     invite = TeamInvitation.
       for_user(current_user).

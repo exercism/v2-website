@@ -36,4 +36,4 @@
         = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
     - if @team.admin?(current_user)
-      = render "teams/memberships/sections/settings", team: @team
+      = render "teams/teams/memberships/sections/settings", team: @team

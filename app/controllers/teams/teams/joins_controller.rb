@@ -1,6 +1,6 @@
-class Teams::JoinsController < TeamsController
-  before_action :check_team_membership!
+class Teams::Teams::JoinsController < Teams::Teams::BaseController
   skip_before_action :find_team
+  before_action :check_team_membership!
 
   def show
     @team_membership = TeamMembership.new(team: team)

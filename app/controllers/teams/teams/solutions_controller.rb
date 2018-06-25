@@ -1,4 +1,4 @@
-class Teams::SolutionsController < TeamsController
+class Teams::Teams::SolutionsController < Teams::Teams::BaseController
   def index
 
     @possible_tracks = Track.where(id: @team.solutions.where.not(user_id: current_user.id).

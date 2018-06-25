@@ -1,6 +1,4 @@
-class Teams::TeamMembershipsController < ApplicationController
-  before_action :authenticate_user!
-
+class Teams::TeamMembershipsController < Teams::BaseController
   def destroy
     team_membership = TeamMembership.
       where(team_id: current_user.managed_teams.select(:id)).
