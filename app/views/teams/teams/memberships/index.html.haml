@@ -16,7 +16,7 @@
                   %ul.inline-list
                     %li= link_to "Resend invite", "#"
                     %li= link_to "Remove",
-                      teams_invitation_path(invitation.id),
+                      teams_team_invitation_path(invitation.team, invitation),
                       method: :delete,
                       data: { confirm: "Are you sure you want to reject your invitation to #{invitation.email}?" }
 

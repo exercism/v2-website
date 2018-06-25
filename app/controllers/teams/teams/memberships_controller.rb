@@ -13,12 +13,4 @@ class Teams::Teams::MembershipsController < Teams::Teams::BaseController
 
     redirect_to teams_team_memberships_path(@team)
   end
-
-  private
-
-  def check_admin!
-    unless current_user.managed_teams.include?(@team)
-      redirect_to teams_team_memberships_path(@team)
-    end
-  end
 end

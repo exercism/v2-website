@@ -1,4 +1,6 @@
 class Teams::Teams::InvitationsController < Teams::Teams::BaseController
+  before_action :check_admin!, only: :destroy
+
   def create
     emails = params[:emails].to_s.split("\n").map(&:strip).compact
     emails.each do |email|
@@ -6,5 +8,13 @@ class Teams::Teams::InvitationsController < Teams::Teams::BaseController
     end
 
     redirect_to [:teams, @team, :memberships]
+  end
+
+  def destroy
+    invitation = @team.invitations.find(params[:id])
+
+    invitation.destroy!
+
+    redirect_to teams_team_memberships_path(invitation.team)
   end
 end

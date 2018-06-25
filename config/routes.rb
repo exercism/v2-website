@@ -133,8 +133,6 @@ Rails.application.routes.draw do
     get "/" => "pages#index"
     get "dashboard" => "dashboard#index"
 
-    resources :invitations, only: [:destroy]
-
     resources :teams, only: [], param: :token do
       resource :join, controller: "teams/joins"
     end
