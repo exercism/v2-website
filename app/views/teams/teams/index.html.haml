@@ -4,9 +4,19 @@
 
     -if @invitations.present?
       %h2 Pending Invitiations
-      %ul
-        -@invitations.each do |membership|
-          %li= membership.team.name
+      %table.teams-table
+        - @invitations.each do |invite|
+          %tr
+            %td= invite.team_name
+            %td
+              %ul.inline-list
+                %li= link_to "Accept",
+                accept_teams_invitation_path(invite.id),
+                method: :post
+                %li= link_to "Reject",
+                reject_teams_invitation_path(invite.id),
+                method: :post,
+                data: { confirm: "Are you sure you want to reject your invitation to #{invite.team_name}?" }
 
     .pure-g
       -if @teams.present?

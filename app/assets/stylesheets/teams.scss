@@ -36,8 +36,23 @@ body.namespace-teams {
         margin-bottom:10px;
     }
 }
+
 .teams-page {
     padding-top:20px;
+
+    ul.inline-list {
+        padding: 0;
+        margin: 0;
+
+        > li {
+          display: inline-block;
+          margin-right: 5px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+    }
 }
 
 .team-page {

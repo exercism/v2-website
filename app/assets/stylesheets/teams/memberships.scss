@@ -5,29 +5,6 @@
     p {
         margin-bottom:10px;
     }
-    table {
-        margin-bottom:20px;
-        tr {
-            &:nth-child(odd) {
-                background:#fafafa;
-            }
-        }
-        td {
-            padding:10px;
-            &:first-child {
-                width:300px;
-            }
-            &:last-child {
-                padding-right:50px;
-                width:160px;
-            }
-            a {
-                color:$color-2;
-                font-weight:$bold;
-                text-decoration:none;
-            }
-        }
-    }
     .pure-button {
         background:$color-2;
     }

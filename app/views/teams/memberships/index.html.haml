@@ -6,7 +6,7 @@
       .section
         %h2 Pending Invitations
         %p These are people who have been invited to this team.
-        %table
+        %table.teams-table
           -@invitations.each do |invitation|
             %tr
               %td= invitation.email
