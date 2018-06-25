@@ -138,7 +138,6 @@ Rails.application.routes.draw do
     resources :teams, only: [], param: :token do
       resource :join, controller: "teams/joins"
     end
-    resources :team_memberships, only: [:destroy]
 
     resources :invitations, only: [] do
       post :accept, on: :member

@@ -16,11 +16,8 @@ class Teams::TeamMembershipsControllerTest < ActionDispatch::IntegrationTest
                         admin: false)
 
     sign_in!(non_admin)
-    assert_raises(ActiveRecord::RecordNotFound) do
-      delete teams_team_membership_url(membership)
-    end
+    delete teams_team_membership_url(team, membership)
 
-    team.reload
-    assert_includes team.members, member
+    assert_redirected_to teams_team_path(team)
   end
 end
