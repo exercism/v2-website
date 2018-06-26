@@ -45,4 +45,31 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
     UnlocksNextCoreExercise.(solution)
   end
 
+  test "unlocks oldest core exercise not completed" do
+    track = create(:track)
+    user = create(:user)
+    core_exercise = create(:exercise,
+                           track: track,
+                           core: true,
+                           position: 2)
+    old_core_exercise = create(:exercise,
+                                track: track,
+                                core: true,
+                                position: 1)
+    next_core_exercise = create(:exercise,
+                                track: track,
+                                core: true,
+                                position: 3)
+    solution = create(:solution,
+                      user: user,
+                      exercise: core_exercise,
+                      completed_at: Date.new(2016, 12, 25))
+    create(:solution,
+           exercise: old_core_exercise,
+           completed_at: Date.new(2016, 12, 25))
+    UnlocksCoreExercise.expects(:call).with(user, old_core_exercise)
+    UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
+
+    UnlocksNextCoreExercise.(solution)
+  end
 end
