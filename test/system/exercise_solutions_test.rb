@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class ExercisesTest < ApplicationSystemTestCase
+class ExerciseSolutionsTest < ApplicationSystemTestCase
   test "shows exercise solutions ordered by number of reactions" do
     exercise = create(:exercise)
     solution1 = create(:solution,
