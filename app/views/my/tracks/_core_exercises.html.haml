@@ -1,0 +1,29 @@
+.core-exercises
+  - num_core_exercises = core_exercises.size
+  - core_exercises.each.with_index do |(exercise, solution), idx|
+    - if solution
+      = link_to [:my, solution], class: "exercise #{solution.completed?? "completed" : "in-progress"}" do
+        - if solution.completed?
+          .circle= image_tag "tick-color-1.png"
+          .status Completed
+        - else
+          .circle= image_tag exercise.white_icon_url
+          .status In Progress
+        .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
+        .title
+          = exercise.title
+          .topics
+            - exercise.topic_names.each do |topic_name|
+              .topic= topic_name
+        .blurb= exercise.blurb
+    -else
+      .exercise.locked
+        .circle= image_tag exercise.dark_icon_url
+        .status Locked
+        .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
+        .title
+          = exercise.title
+          .topics
+            - exercise.topic_names.each do |topic_name|
+              .topic= topic_name
+        .blurb= exercise.blurb
