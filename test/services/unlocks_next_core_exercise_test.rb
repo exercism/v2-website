@@ -64,9 +64,6 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
            user: user,
            exercise: core_exercise,
            completed_at: Date.new(2016, 12, 25))
-    create(:solution,
-           exercise: old_core_exercise,
-           completed_at: Date.new(2016, 12, 25))
     UnlocksCoreExercise.expects(:call).with(user, old_core_exercise)
     UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
 

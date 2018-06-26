@@ -20,6 +20,17 @@ class Exercise < ApplicationRecord
   scope :core, -> { where(core: true) }
   scope :side, -> { where(core: false) }
 
+  scope :locked_for, -> (user) {
+    joins(
+      sanitize_sql_array([
+        "LEFT OUTER JOIN `solutions` ON `solutions`.`exercise_id` = `exercises`.`id` AND `solutions`.`user_id` = ?",
+        user.id
+      ])
+    ).
+    where(solutions: { id: nil }).
+    where(core: true)
+  }
+
   # BETA
   def download_command
     "nextercism download #{slug} --track=#{track.slug}"

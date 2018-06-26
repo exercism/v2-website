@@ -9,12 +9,7 @@ class UnlocksNextCoreExercise
   def call
     return if core_exercises_in_progress?
 
-    next_exercise = track.
-      exercises.
-      joins("LEFT OUTER JOIN `solutions` ON `solutions`.`exercise_id` = `exercises`.`id` AND `solutions`.`user_id` = #{user.id}").
-      where(solutions: { id: nil }).
-      order(:position).
-      first
+    next_exercise = track.exercises.locked_for(user).order(:position).first
 
     if next_exercise
       UnlocksCoreExercise.(user, next_exercise)
