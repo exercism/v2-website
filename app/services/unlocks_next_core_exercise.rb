@@ -11,9 +11,7 @@ class UnlocksNextCoreExercise
                       where("position > ?", exercise.position).
                       first
     if next_exercise
-      unless next_exercise.unlocked_by_user?(user)
-        CreatesSolution.create!(user, next_exercise)
-      end
+      UnlocksCoreExercise.(user, next_exercise)
     else
       # TODO - complete track
       raise "Not Implemented"
