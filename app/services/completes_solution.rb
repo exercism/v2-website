@@ -42,7 +42,7 @@ class CompletesSolution
   end
 
   def unlock_next_core_exercise
-    UnlocksNextCoreExercise.(solution)
+    UnlocksNextCoreExercise.(solution.track, solution.user)
   end
 
   def user

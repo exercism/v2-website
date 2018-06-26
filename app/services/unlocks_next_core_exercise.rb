@@ -1,15 +1,15 @@
 class UnlocksNextCoreExercise
   include Mandate
 
-  def initialize(solution)
-    @solution = solution
+  def initialize(track, user)
+    @track = track
+    @user = user
   end
 
   def call
     return if core_exercises_in_progress?
 
-    next_exercise = exercise.
-      track.
+    next_exercise = track.
       exercises.
       joins("LEFT OUTER JOIN `solutions` ON `solutions`.`exercise_id` = `exercises`.`id` AND `solutions`.`user_id` = #{user.id}").
       where(solutions: { id: nil }).
@@ -25,16 +25,13 @@ class UnlocksNextCoreExercise
   end
 
   private
-  attr_reader :solution
-
-  delegate :user, to: :solution
-  delegate :exercise, to: :solution
+  attr_reader :track, :user
 
   def core_exercises_in_progress?
     user.
       solutions.
       joins(:exercise).
-      where(exercises: { track: exercise.track, core: true }).
+      where(exercises: { track: track, core: true }).
       where(completed_at: nil).
       exists?
   end

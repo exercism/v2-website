@@ -11,13 +11,13 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
            user: user,
            exercise: old_core_exercise,
            completed_at: nil)
-    solution = create(:solution,
-                      user: user,
-                      exercise: core_exercise,
-                      completed_at: Date.new(2016, 12, 25))
+    create(:solution,
+           user: user,
+           exercise: core_exercise,
+           completed_at: Date.new(2016, 12, 25))
     UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
 
-    UnlocksNextCoreExercise.(solution)
+    UnlocksNextCoreExercise.(track, user)
   end
 
   test "unlocks next core exercise" do
@@ -35,14 +35,14 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
                                 track: track,
                                 core: true,
                                 position: 3)
-    solution = create(:solution,
-                      user: user,
-                      exercise: core_exercise,
-                      completed_at: Date.new(2016, 12, 25))
+    create(:solution,
+           user: user,
+           exercise: core_exercise,
+           completed_at: Date.new(2016, 12, 25))
     UnlocksCoreExercise.expects(:call).with(user, next_core_exercise)
     UnlocksCoreExercise.expects(:call).with(user, other_core_exercise).never
 
-    UnlocksNextCoreExercise.(solution)
+    UnlocksNextCoreExercise.(track, user)
   end
 
   test "unlocks oldest core exercise not completed" do
@@ -60,16 +60,16 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
                                 track: track,
                                 core: true,
                                 position: 3)
-    solution = create(:solution,
-                      user: user,
-                      exercise: core_exercise,
-                      completed_at: Date.new(2016, 12, 25))
+    create(:solution,
+           user: user,
+           exercise: core_exercise,
+           completed_at: Date.new(2016, 12, 25))
     create(:solution,
            exercise: old_core_exercise,
            completed_at: Date.new(2016, 12, 25))
     UnlocksCoreExercise.expects(:call).with(user, old_core_exercise)
     UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
 
-    UnlocksNextCoreExercise.(solution)
+    UnlocksNextCoreExercise.(track, user)
   end
 end
