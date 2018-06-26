@@ -4,9 +4,11 @@ class PagesController < ApplicationController
   PAGES = {
     "Terms and Conditions": :terms,
     "Privacy Policy": :privacy,
+    "Code of Conduct": :code_of_conduct,
     "Frequently Asked Questions": :faqs,
     "Exercism's Values": :values,
-    "How Exercism Works": :about,
+    "About Exercism": :about,
+    "Getting Started": :getting_started,
     "Become a Mentor": :become_a_mentor,
     "Become a Maintainer": :become_a_maintainer
   }
