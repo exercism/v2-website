@@ -201,6 +201,7 @@ Exercism::PrismFileMappings = {
   "clike": %w{},
   "cpp": %w{},
   "coffeescript": %w{},
+  "common-lisp": %w{lisp},
   "crystal": %w{},
   "css-extras": %w{},
   "d": %w{},
