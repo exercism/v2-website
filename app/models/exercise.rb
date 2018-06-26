@@ -29,6 +29,10 @@ class Exercise < ApplicationRecord
     !core
   end
 
+  def unlocked_by_user?(user)
+    solutions.find_by(user: user).present?
+  end
+
   def topic_names
     @topic_names ||= topics.pluck(:name).map(&:downcase)
   end

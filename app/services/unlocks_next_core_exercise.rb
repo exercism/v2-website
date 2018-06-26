@@ -11,8 +11,7 @@ class UnlocksNextCoreExercise
                       where("position > ?", exercise.position).
                       first
     if next_exercise
-      # Don't double-create
-      unless user.solutions.where(exercise_id: next_exercise.id).exists?
+      unless next_exercise.unlocked_by_user?(user)
         CreatesSolution.create!(user, next_exercise)
       end
     else

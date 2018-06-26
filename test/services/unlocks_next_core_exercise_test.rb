@@ -21,8 +21,8 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
 
     UnlocksNextCoreExercise.(solution)
 
-    assert Solution.where(user: user, exercise: next_core_exercise).exists?
-    refute Solution.where(user: user, exercise: other_core_exercise).exists?
+    assert next_core_exercise.unlocked_by_user?(user)
+    refute other_core_exercise.unlocked_by_user?(user)
   end
 
   test "does not double-unlock core" do
