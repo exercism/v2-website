@@ -42,19 +42,7 @@ class CompletesSolution
   end
 
   def unlock_next_core_exercise
-    next_exercise = solution.exercise.track.exercises.where(core: true).
-                      reorder('position ASC').
-                      where("position > ?", solution.exercise.position).
-                      first
-    if next_exercise
-      # Don't double-create
-      unless user.solutions.where(exercise_id: next_exercise.id).exists?
-        CreatesSolution.create!(user, next_exercise)
-      end
-    else
-      # TODO - complete track
-      raise "Not Implemented"
-    end
+    UnlocksNextCoreExercise.(solution)
   end
 
   def user
