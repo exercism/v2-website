@@ -22,6 +22,11 @@ class Exercise < ApplicationRecord
 
   delegate :title, to: :track, prefix: true
 
+  scope :locked_for, -> (user) {
+    where.not(id: user.solutions.select(:exercise_id)).
+    where(core: true)
+  }
+
   # BETA
   def download_command
     "nextercism download #{slug} --track=#{track.slug}"
@@ -29,6 +34,10 @@ class Exercise < ApplicationRecord
 
   def side?
     !core
+  end
+
+  def unlocked_by_user?(user)
+    solutions.where(user_id: user.id).exists?
   end
 
   def topic_names
