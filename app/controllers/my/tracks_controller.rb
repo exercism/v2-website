@@ -43,7 +43,23 @@ class My::TracksController < MyController
     else
       core_exercises, side_exercises = normal_exercises.partition {|e|e.core?}
 
-      @core_exercises_and_solutions = core_exercises.map{|e|[e, mapped_solutions[e.id]]}
+      core_exercises = core_exercises.map do |e|
+        ExerciseWithSolution.new(e, mapped_solutions[e.id])
+      end
+
+      @core_exercises_and_solutions = core_exercises.
+        inject([[], [], []]) do |collection, exercise|
+          if exercise.completed?
+            collection[0] << exercise
+          elsif exercise.unlocked?
+            collection[1] << exercise
+          elsif exercise.locked?
+            collection[2] << exercise
+          end
+
+          collection
+        end.
+        flatten
       @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}
 
       @num_side_exercises = @track.exercises.side.count
