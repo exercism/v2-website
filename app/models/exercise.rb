@@ -21,13 +21,7 @@ class Exercise < ApplicationRecord
   scope :side, -> { where(core: false) }
 
   scope :locked_for, -> (user) {
-    joins(
-      sanitize_sql_array([
-        "LEFT OUTER JOIN `solutions` ON `solutions`.`exercise_id` = `exercises`.`id` AND `solutions`.`user_id` = ?",
-        user.id
-      ])
-    ).
-    where(solutions: { id: nil }).
+    where.not(id: user.solutions.select(:exercise_id)).
     where(core: true)
   }
 
@@ -41,7 +35,7 @@ class Exercise < ApplicationRecord
   end
 
   def unlocked_by_user?(user)
-    solutions.find_by(user: user).present?
+    solutions.where(user_id: user.id).exists?
   end
 
   def topic_names
