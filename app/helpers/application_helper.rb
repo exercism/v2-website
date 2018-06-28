@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def random_person_image_url
-    Exercism::PeopleImagesPath / Exercism::PeopleImages.sample
+    (Exercism::PeopleImagesPath / Exercism::PeopleImages.sample).to_s
   end
 
   def hotjar_enabled?
