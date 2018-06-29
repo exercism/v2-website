@@ -8,9 +8,10 @@
         .widget-filter.difficulty
           .title Difficulty:
           =select_tag :difficulty, options_for_select({"All": ' ', "Easy": 'easy', "Medium": 'medium', "Hard": 'hard'}, value: @difficulty), id: nil
-        .widget-filter.length
-          .title Length:
-          =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil
+        / TODO Length
+        /.widget-filter.length
+        /  .title Length:
+        /  =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil
         .widget-filter.topic
           .title Topic:
           =select_tag :topic_id, options_for_select(@topics_for_select), id: nil

@@ -1,6 +1,9 @@
 module ExerciseHelper
 
+  # TODO Length
   def exercise_length_word(exercise)
+    return "medium"
+
     case exercise.length
     when 1
       "short"
