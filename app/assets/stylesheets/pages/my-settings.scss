@@ -28,6 +28,11 @@
         margin-bottom:10px;
         color:#555;
     }
+    .settings-section {
+        border-bottom:1px solid #ddd;
+        padding-bottom:20px;
+        margin-bottom:20px;
+    }
     p,
     .token-explanation {
         @include font-size(14, 18);
@@ -40,12 +45,11 @@
     p {
         display:inline-block;
         margin-bottom:15px;
-        padding-bottom:15px;
-        border-bottom:1px solid #eee;
+        //padding-bottom:15px;
+        //border-bottom:1px solid #eee;
 
     }
     .widget-code-snippet {
-        margin-bottom:30px;
         input {
             width:252px;
         }

@@ -10,28 +10,41 @@
     %h1 Account Settings
     .pure-g
       .pure-u-1-3.lhs
-        %h2 CLI Token
-        .token-explanation Your authentication token for the CLI is:
-        =render "widgets/code_snippet", code: current_user.auth_token
+        .settings-section
+          %h2 CLI Token
+          .token-explanation Your authentication token for the CLI is:
+          =render "widgets/code_snippet", code: current_user.auth_token
 
-        %h2 Change your password
-        %p You can change your password at any point.
+        .settings-section
+          %h2 Change your password
+          %p You can change your password at any point.
 
-        =form_for current_user, url: [:my, :settings] do |f|
-          -unless current_user.provider?
+          =form_for current_user, url: [:my, :settings] do |f|
+            -unless current_user.provider?
+              .field
+                =label_tag :old_password, "Enter your current password"
+                =password_field_tag :old_password
+
             .field
-              =label_tag :old_password, "Enter your current password"
-              =password_field_tag :old_password
+              =f.label :password, "Enter your new password"
+              =f.password_field :password, placeholder: "Enter your new password"
 
-          .field
-            =f.label :password, "Enter your new password"
-            =f.password_field :password
+            .field
+              =f.password_field :password_confirmation, placeholder: "Confirm your current password"
 
-          .field
-            =f.label :password_confirmation, "Confirm your current password"
-            =f.password_field :password_confirmation
+            =button_tag "Update Password", class: 'pure-button'
 
-          =button_tag "Update Password", class: 'pure-button'
+        .settings-section
+          %h2 Change your handle
+          %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes reguarly.
+          %p Note that you can change the name that appears on your profile seperately by using the "Edit Profile" button in your profile.
+
+          =form_for current_user, url: [:my, :settings] do |f|
+            .field
+              =f.label :handle, "Enter your new handle"
+              =f.text_field :handle
+
+            =button_tag "Update Handle", class: 'pure-button'
 
       .pure-u-2-3.rhs
         %h2 Privacy
