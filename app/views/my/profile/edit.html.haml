@@ -1,4 +1,3 @@
-#modal-close-button
 %h2 Update your profile
 .h2-subtitle Tell the Exercism community a little about yourself.
 =form_for @profile, url: my_profile_path, method: :patch do |f|
@@ -41,4 +40,5 @@
           %i.fa.fa-medium
           =f.text_field :medium, placeholder: "handle"
 
-    =f.button "Update profile", class: 'pure-button'
+    =f.button "Update profile", class: 'pure-button update-button'
+    =content_tag :span, "Cancel", class: 'pure-button cancel-button close-modal'

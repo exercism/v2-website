@@ -173,6 +173,16 @@
         background:$color-1;
         padding:12px;
         width:100%;
+        &.update-button {
+            width:70%;
+            margin-right:3%;
+        }
+        &.cancel-button {
+            width:25%;
+            border:1px solid $color-1;
+            color:$color-1;
+            background:#fff;
+        }
     }
 }
 
