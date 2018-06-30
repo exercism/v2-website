@@ -1,9 +1,15 @@
+-if @solution.approved?
+  .completed-info
+    .title ↳ Solution Approved!
+    %p Your solution has been approved by a mentor. Congratulations! You can now complete the exercise and move forward on the track.
+    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+
 -if @iteration.discussion_posts.size > 0
   .posts
     -@iteration.discussion_posts.each do |post|
       -user_track = @post_user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
       =render "my/discussion_posts/post", post: post, solution: @solution, user_track: user_track
--else
+-elsif !@solution.approved?
   .posts{style: "display:none"}
   .next-steps
     .title ↳ Next Steps
@@ -13,6 +19,8 @@
       In the meantime why not try a different exercise on the
       =link_to "#{@track.title} track", [:my, @track]
       or explore the #{link_to "other Exercism tracks", [:my, :tracks]}.
+-else
+  .posts{style: "display:none"}
 
 =form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
   =hidden_field_tag :iteration_id, @iteration.id
@@ -27,9 +35,7 @@
       .pane.pane-2.preview
         .preview-area
 
-  -if @solution.approved?
-    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
-  -else
+  -if !@solution.approved?
     =link_to "Complete Exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
 
   =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"

@@ -8,10 +8,12 @@
             &.fixed {
                 .lhs-content {
                     overflow-y:hidden;
-                    position:relative;
-                    top:0px;
+                    //position:relative;
+                    position:fixed;
+                    top:20px;
                     //height:98%;
                     height: 97vh;
+                    width:550px;
                     .panes {
                         position:absolute;
                         top:29px;

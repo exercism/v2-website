@@ -186,7 +186,8 @@ body.controller-solutions.action-show {
                 color:#333;
             }
         }
-        .next-steps {
+        .next-steps,
+        .completed-info {
             background:rgba($color-1, 0.05);
             border-radius:2px;
             padding:20px 40px 20px 20px;
