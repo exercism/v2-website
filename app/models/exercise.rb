@@ -25,9 +25,12 @@ class Exercise < ApplicationRecord
     where(core: true)
   }
 
-  # BETA
   def download_command
-    "nextercism download #{slug} --track=#{track.slug}"
+    "exercism download #{slug} --track=#{track.slug}"
+  end
+
+  def submit_command
+    "exercism submit /path/to/directory"
   end
 
   def side?

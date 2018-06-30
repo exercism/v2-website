@@ -15,8 +15,18 @@
           =link_to "Begin Walk-Through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button'
 
         .experienced
-          %h3 Been here before?
-          =render "widgets/code_snippet", code: @exercise.download_command
+          /%h3 Been here before?
+          .step
+            %h3 1. Download
+            =render "widgets/code_snippet", code: @exercise.download_command
+
+          .step
+            %h3 2. Solve
+            %p Use your code editor to solve the problem locally.
+
+          .step
+            %h3 3. Submit
+            =render "widgets/code_snippet", code: @exercise.submit_command
 
         .page-links
           %h3 Still Stuck?

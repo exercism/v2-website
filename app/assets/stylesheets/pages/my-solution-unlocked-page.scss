@@ -77,11 +77,17 @@
 
         h3 {
             font-weight:$regular;
-            @include font-size(16, 16);
-            margin-bottom:12px;
+            @include font-size(14, 14);
+            margin-bottom:6px;
         }
         .widget-code-snippet input {
             width:287px;
+        }
+        .step {
+            margin-bottom:20px;
+            &:last-child {
+                margin-bottom:0;
+            }
         }
     }
     .newbie {
