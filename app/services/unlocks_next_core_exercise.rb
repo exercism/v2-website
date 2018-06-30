@@ -14,8 +14,8 @@ class UnlocksNextCoreExercise
     if next_exercise
       UnlocksCoreExercise.(user, next_exercise)
     else
-      # TODO - complete track
-      raise "Not Implemented"
+      # TODO Complete
+      # raise "Not Implemented"
     end
   end
 

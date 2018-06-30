@@ -12,7 +12,7 @@ class CompletesSolution
     if solution.approved?
       completed_approved
     else
-      # Beta ?
+      # TODO Beta
       completed_approved
       #completed_unapproved
     end
