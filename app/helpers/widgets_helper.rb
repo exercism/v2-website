@@ -5,6 +5,12 @@ module WidgetsHelper
     end
   end
 
+  def mentor_widget(mentor)
+    cache_widget("mentor", mentor) do
+      render("widgets/mentor", mentor: mentor)
+    end
+  end
+
   def contributor_widget(contributor)
     cache_widget("contributor", contributor) do
       render("widgets/contributor", contributor: contributor)

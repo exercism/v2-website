@@ -1,0 +1,21 @@
+#team-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      =image_tag "nav-divider.png"
+      =link_to "The Exercism Team", team_page_path
+      =image_tag "nav-divider.png"
+      %span Our Contributors
+  =render "header"
+
+  %h2 Our Track Mentors
+  %p.subheading Our mentors are the lynchpins of the language tracks and exercises on Exercism.
+  =cache ["pages/team/mentors", @last_updated_at] do
+    .mentors
+      .lo-container
+        .pure-g
+          -@mentors.each do |mentor|
+            .pure-u-1-2= mentor_widget(mentor)
+
+
+

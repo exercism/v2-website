@@ -1,0 +1,20 @@
+#team-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      =image_tag "nav-divider.png"
+      =link_to "The Exercism Team", team_page_path
+      =image_tag "nav-divider.png"
+      %span Our Contributors
+  =render "header"
+
+  %h2 Our Track Maintainers
+  %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
+  =cache ["pages/team/maintainers", @last_updated_at] do
+    .maintainers
+      .lo-container
+        .pure-g
+          -@maintainers.each do |maintainer|
+            .pure-u-1-2= maintainer_widget(maintainer)
+
+

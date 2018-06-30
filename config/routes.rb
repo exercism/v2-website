@@ -170,8 +170,11 @@ Rails.application.routes.draw do
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
 
-  get "team" => "pages#team", as: "team_page"
-  get "contributors" => "pages#contributors", as: "contributors_page"
+  resource :team_page, only: [:show], path: "team" do
+    get :maintainers
+    get :mentors
+    get :contributors
+  end
 
   # ############ #
   # Weird things #
