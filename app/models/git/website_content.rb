@@ -6,8 +6,12 @@ class Git::WebsiteContent < Git::RepoBase
     REPO_URL="https://github.com/exercism/website-copy"
   end
 
+  def self.repo_url
+    REPO_URL
+  end
+
   def self.head
-    new(REPO_URL)
+    new(repo_url)
   end
 
   def initialize(repo_url, auto_fetch=false)
@@ -24,6 +28,24 @@ class Git::WebsiteContent < Git::RepoBase
 
   def walkthrough
     FolderReader.new(self, head_commit, 'walkthrough')
+  end
+
+  def mentors
+    ptr = head_commit.tree["mentors"]
+    tree = repo.lookup(ptr[:oid])
+
+    mentors = []
+
+    tree.walk_blobs do |root, file|
+      track_slug = root.chomp("/")
+      mentor_jsons = read_json_blob(file[:oid])
+
+      mentor_jsons.each do |json|
+        mentors << json.merge(track: track_slug)
+      end
+    end
+
+    mentors
   end
 
   class FolderReader
