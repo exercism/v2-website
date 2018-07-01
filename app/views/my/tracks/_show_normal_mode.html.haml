@@ -33,5 +33,8 @@
               =link_to "Show More", "#", class: 'pure-button extra-button'
               .extra
                 =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
+          .danger-zone
+            %h3 Danger Zone
+            =link_to "Leave Track", "#", class: 'pure-button leave-track-btn'
 
 =render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions

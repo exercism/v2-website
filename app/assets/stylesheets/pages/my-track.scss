@@ -269,7 +269,7 @@ body.namespace-my.controller-tracks.action-show {
             margin-bottom:30px;
             text-align:right;
         }
-        .core, .topics, .side {
+        .core, .topics, .side, .danger-zone {
             background:#fff;
             padding:20px 30px;
             margin-bottom:15px;
@@ -352,6 +352,23 @@ body.namespace-my.controller-tracks.action-show {
                     width:20%;
                     text-align:right;
                     float:right;
+                }
+            }
+        }
+        .danger-zone {
+            .leave-track-btn {
+                display:block;
+                background:#fff;
+                color:$color-1;
+                border:1px solid rgba($color-1, 0.5);
+                @include font-size(12, 12);
+                padding:9px;
+                width:100%;
+                margin:10px 0;
+                &:hover {
+                    background:$color-1;
+                    border-color:$color-1;
+                    color:#fff;
                 }
             }
         }
