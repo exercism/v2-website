@@ -164,7 +164,12 @@
             }
 
             .CodeMirror {
-                &, .CodeMirror-scroll {
+                //&, .CodeMirror-scroll {
+                min-height:220px !important;
+                max-height:220px !important;
+                //}
+
+                .CodeMirror-scroll {
                     min-height:200px !important;
                     max-height:200px !important;
                 }
