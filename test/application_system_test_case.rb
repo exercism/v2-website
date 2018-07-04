@@ -1,9 +1,11 @@
 require "test_helper"
 require "support/selectize_helpers"
+require "support/stub_repo_cache"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Devise::Test::IntegrationHelpers
   include SelectizeHelpers
+  include StubRepoCache
 
   driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
 
