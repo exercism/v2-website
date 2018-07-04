@@ -58,4 +58,5 @@ group :test do
   gem 'mocha'
   gem 'rails-controller-testing'
   gem 'timecop'
+  gem 'chromedriver-helper'
 end
