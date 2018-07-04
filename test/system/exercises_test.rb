@@ -1,25 +1,42 @@
 require 'application_system_test_case'
 
-class ExercisesTest < ApplicationSystemTestCase
-  test "shows exercise solutions ordered by number of reactions" do
-    exercise = create(:exercise)
-    solution1 = create(:solution,
-                       num_reactions: 2,
-                       exercise: exercise,
-                       published_at: Time.current)
-    solution2 = create(:solution,
-                       num_reactions: 1,
-                       exercise: exercise,
-                       published_at: Time.current)
-    expected_solutions = [solution1, solution2]
+class ExerciseTest < ApplicationSystemTestCase
+  test "shows exercises in order" do
+    Git::ExercismRepo.stubs(current_head: "dummy-sha1")
+    user = create(:user)
+    track = create(:track)
+    create(:user_track, user: user, track: track, independent_mode: false)
+    unlocked_exercise = create(:exercise,
+                                  track: track,
+                                  title: "Hello World",
+                                  core: true)
+    completed_exercise = create(:exercise,
+                                track: track,
+                                title: "Strings",
+                                core: true)
+    locked_exercise = create(:exercise,
+                             track: track,
+                             title: "Locked",
+                             core: true)
+    create(:solution,
+           user: user,
+           completed_at: nil,
+           exercise: unlocked_exercise)
+    create(:solution,
+           user: user,
+           completed_at: Date.new(2016, 12, 25),
+           exercise: completed_exercise)
 
-    visit track_exercise_path(exercise.track, exercise)
+    sign_in!(user)
+    visit my_track_path(track)
 
-    actual_solutions = page.
-      find_all(".solution").
-      map { |solution| solution[:href] }
-    0..actual_solutions.length do |i|
-      assert_match expected_solutions[i], actual_solutions[i]
-    end
+    exercises = find_all(".exercise")
+
+    assert_equal "exercise completed", exercises[0][:class]
+    assert_equal "exercise in-progress", exercises[1][:class]
+    assert_equal "exercise locked", exercises[2][:class]
+    within(".exercise.completed") { assert_text "Strings" }
+    within(".exercise.in-progress") { assert_text "Hello World" }
+    within(".exercise.locked") { assert_text "Locked" }
   end
 end

@@ -20,6 +20,8 @@ class Exercise < ApplicationRecord
   scope :core, -> { where(core: true) }
   scope :side, -> { where(core: false) }
 
+  delegate :title, to: :track, prefix: true
+
   scope :locked_for, -> (user) {
     where.not(id: user.solutions.select(:exercise_id)).
     where(core: true)
