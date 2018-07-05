@@ -21,6 +21,7 @@ class Git::SyncsTrack
     sync_track_metadata
     current_exercises_uuids = track.exercises.map { |ex| ex.uuid }
     setup_exercises
+    return
     sync_maintainers
     populate_unlocked_by_relationships
     state_db.mark_synced(track)
@@ -57,16 +58,20 @@ class Git::SyncsTrack
   end
 
   def setup_exercises
+    puts exercises
     exercises.each.with_index do |exercise, position|
       exercise_slug = exercise[:slug]
       exercise_uuid = exercise[:uuid]
+      puts exercise_slug
       deprecated = !!exercise[:deprecated]
       if exercise_slug.blank? || exercise_uuid.blank?
         puts "Skipping exercise #{exercise}"
       elsif deprecated
-        sync_exercise(exercise_slug, exercise_uuid, exercise, position) unless Exercise.exists?(uuid: exercise_uuid)
+        puts "HERE1" if exercise_slug == "two-fer"
+        sync_exercise(exercise_slug, exercise_uuid, exercise, position) # unless Exercise.exists?(uuid: exercise_uuid)
         deprecate_exercise(exercise_uuid)
       else
+        puts "HERE2" if exercise_slug == "two-fer"
         sync_exercise(exercise_slug, exercise_uuid, exercise, position)
       end
     end
@@ -186,3 +191,4 @@ class Git::SyncsTrack
     @respect_core = exercises.any? { |e| e[:core] }
   end
 end
+Git::SyncsTrack.sync!(track)
