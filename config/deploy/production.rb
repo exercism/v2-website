@@ -48,5 +48,4 @@ after "deploy:starting", "sidekiq:shutdown"
 after "deploy:published", "puma_service:restart"
 after "deploy:published", "sidekiq:restart"
 after "deploy:published", "git_sync:restart"
-
-
+after "deploy:failed", "sidekiq:restart"
