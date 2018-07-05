@@ -32,4 +32,19 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
 
     assert_equal expected, repo.mentors
   end
+
+  test "returns walkthrough content" do
+    Git::WebsiteContent.
+      stubs(:repo_url).
+      returns("file://#{Rails.root}/test/fixtures/website-copy")
+
+    stub_repo_cache! do
+      repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+
+      assert_equal(
+        "Welcome to the Exercism installation guide!\n",
+        repo.walkthrough
+      )
+    end
+  end
 end

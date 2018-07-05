@@ -6,6 +6,7 @@ class WalkthroughTest < ApplicationSystemTestCase
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
     user = create(:user)
+    create(:auth_token, user: user)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     create(:user_track, user: user, track: track)
     exercise = create(:exercise, track: track)
