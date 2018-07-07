@@ -54,4 +54,8 @@ class Solution < ApplicationRecord
   def completed?
     !!completed_at
   end
+
+  def user_track
+    UserTrack.find_by(user_id: user_id, track_id: exercise.track_id)
+  end
 end
