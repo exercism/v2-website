@@ -4,6 +4,7 @@ class UserTrack < ApplicationRecord
 
   validates :handle, handle: true
 
+  scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
 
   def originated_in_v1?
