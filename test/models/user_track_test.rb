@@ -42,4 +42,11 @@ class UserTrackTest < ActiveSupport::TestCase
     assert archived.archived?
     refute unarchived.archived?
   end
+
+  test "unarchived user tracks" do
+    archived = create(:user_track, archived_at: Date.new(2016, 12, 25))
+    unarchived = create(:user_track, archived_at: nil)
+
+    assert_equal [unarchived], UserTrack.unarchived
+  end
 end

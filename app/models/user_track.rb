@@ -4,6 +4,8 @@ class UserTrack < ApplicationRecord
 
   validates :handle, handle: true
 
+  scope :unarchived, -> { where(archived_at: nil) }
+
   def originated_in_v1?
     created_at < Exercism::V2_MIGRATED_AT
   end
