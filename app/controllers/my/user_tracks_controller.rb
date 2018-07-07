@@ -29,7 +29,7 @@ class My::UserTracksController < MyController
   def leave
     user_track = current_user.user_tracks.find(params[:id])
 
-    user_track.update(archived_at: Time.current)
+    user_track.update!(archived_at: Time.current)
 
     redirect_to my_tracks_path
   end
