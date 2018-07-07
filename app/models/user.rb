@@ -81,6 +81,13 @@ class User < ApplicationRecord
     false
   end
 
+  def previously_joined_track?(track)
+    user_tracks.
+      archived.
+      where(track_id: track.id).
+      exists?
+  end
+
   def joined_track?(track)
     user_tracks.where(track_id: track.id).exists?
   end
