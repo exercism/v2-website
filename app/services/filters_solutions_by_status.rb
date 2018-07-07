@@ -38,7 +38,7 @@ class FiltersSolutionsByStatus
       where("solution_mentorships.abandoned": false).
       not_completed.
       where("solution_mentorships.requires_action": false).
-      where("last_updated_by_user_at > ?", DateTime.now - 7.days)
+      where("last_updated_by_user_at > ?", Time.current - 7.days)
   end
 
   def filter_stale
@@ -46,7 +46,7 @@ class FiltersSolutionsByStatus
       where("solution_mentorships.abandoned": false).
       not_completed.
       where("solution_mentorships.requires_action": false).
-      where("last_updated_by_user_at <= ?", DateTime.now - 7.days)
+      where("last_updated_by_user_at <= ?", Time.current - 7.days)
   end
 
   def filter_abandoned

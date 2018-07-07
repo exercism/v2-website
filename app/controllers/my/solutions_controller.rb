@@ -60,7 +60,7 @@ class My::SolutionsController < MyController
 
   def reflect
     @solution.update(reflection: params[:reflection])
-    @solution.update(published_at: DateTime.now) if params[:publish]
+    @solution.update(published_at: Time.current) if params[:publish]
 
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewsSolutionMentoring.review!(
@@ -100,7 +100,7 @@ class My::SolutionsController < MyController
   end
 
   def publish
-    @solution.update(published_at: DateTime.now) if params[:publish]
+    @solution.update(published_at: Time.current) if params[:publish]
     redirect_to [@solution.exercise.track, @solution.exercise, @solution]
   end
 
