@@ -1,8 +1,11 @@
 class Git::RepoBase
-
   REPO_BASE_DIR="#{Rails.root}/tmp/git_repo_cache"
 
   attr_reader :repo_url
+
+  def self.repo_base_dir
+    REPO_BASE_DIR
+  end
 
   def initialize(repo_url, auto_fetch=false)
     @repo_url = repo_url
@@ -80,7 +83,7 @@ class Git::RepoBase
   end
 
   def repo_dir
-    "#{REPO_BASE_DIR}/#{url_hash}-#{local_name}"
+    "#{self.class.repo_base_dir}/#{url_hash}-#{local_name}"
   end
 
   def url_hash
