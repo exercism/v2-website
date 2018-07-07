@@ -71,6 +71,8 @@ Rails.application.routes.draw do
   resources :tracks, only: [:index, :show] do
     member do
       post :join
+      get :mentors
+      get :maintainers
     end
     resources :exercises, only: [:index, :show] do
       resources :solutions, only: [:index, :show]

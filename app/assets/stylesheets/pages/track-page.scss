@@ -12,6 +12,8 @@ body.controller-my-tracks.action-show {
 
 #my-track-page,
 #track-page,
+#track-maintainers-page,
+#track-mentors-page,
 #exercises-page,
 #my-track-not-joined-page {
     .header {
@@ -52,6 +54,8 @@ body.controller-my-tracks.action-show {
 }
 
 #track-page,
+#track-maintainers-page,
+#track-mentors-page,
 #my-track-not-joined-page {
     .header {
         background-color: $header-color-2;
@@ -308,6 +312,34 @@ body.controller-my-tracks.action-show {
             display:block;
             width:280px;
             color:#fff;
+        }
+    }
+}
+
+#track-maintainers-page,
+#track-mentors-page {
+    .header {
+        margin-bottom:30px;
+    }
+    .widget-maintainer, .widget-mentor {
+        img {
+            filter:none;
+        }
+        .bio {
+            color:#555;
+            @include font-size(14, 20);
+            letter-spacing:-0.3px;
+        }
+    }
+    .pure-g.people {
+        &>.pure-u-1-2 {
+            padding-bottom:20px;
+            &:nth-child(odd) {
+                padding-right:10px;
+            }
+            &:nth-child(even) {
+                padding-left:10px;
+            }
         }
     }
 }
