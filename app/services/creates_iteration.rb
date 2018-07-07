@@ -32,7 +32,7 @@ class CreatesIteration
   end
 
   def update_solution
-    solution.update(last_updated_by_user_at: DateTime.now)
+    solution.update(last_updated_by_user_at: Time.current)
 
     if solution.exercise.auto_approve?
       solution.update(approved_by: user)

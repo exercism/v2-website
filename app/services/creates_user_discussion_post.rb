@@ -16,7 +16,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
 
     create_discussion_post!
 
-    solution.update!(last_updated_by_user_at: DateTime.now)
+    solution.update!(last_updated_by_user_at: Time.current)
     solution.mentorships.update_all(requires_action: true) unless solution.approved?
     notify_mentors
 
