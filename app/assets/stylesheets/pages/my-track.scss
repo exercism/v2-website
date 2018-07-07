@@ -460,7 +460,8 @@ body.namespace-my.controller-tracks.action-show {
 #modal.my-track-started,
 #modal.my-track-finished,
 #modal.my-track-v1-migration,
-#modal.change-to-independent-mode {
+#modal.change-to-independent-mode,
+#modal.leave-track {
     max-width:540px;
     padding:50px 50px 50px 50px;
     img {
@@ -571,7 +572,8 @@ body.namespace-my.controller-tracks.action-show {
     }
 }
 
-#modal.change-to-independent-mode {
+#modal.change-to-independent-mode,
+#modal.leave-track {
     .pure-button {
         margin: 0 auto;
 
@@ -581,10 +583,10 @@ body.namespace-my.controller-tracks.action-show {
         padding: 10px 13px;
         font-weight:400;
 
-        &.independent-mode {
+        &.action-button {
             width:69%;
         }
-        &.cancel {
+        &.cancel-button {
             border:1px solid $color-1;
             background:#fff;
             color:$color-1;

@@ -41,6 +41,12 @@
 
 =render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions
 
+-content_for :js do
+  :javascript
+    $('.leave-track-btn').click(function() {
+      showModal("leave-track", "#{j(render "leave_track_modal", track: @track)}")
+    })
+
 -if !@user_track.independent_mode?
   -content_for :js do
     :javascript

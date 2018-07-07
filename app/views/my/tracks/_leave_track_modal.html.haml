@@ -1,0 +1,9 @@
+=hex_green_track_icon(track)
+.main-section
+  %h2 Leave the #{track.title} Track
+
+  %p Leaving this track will remove it from your list of tracks and remove your progress. Are you sure you want to continue?
+  .buttons
+    =link_to "Leave Track", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button action-button'
+    =link_to "Cancel", "#", class: "pure-button close-modal cancel-button"
+
