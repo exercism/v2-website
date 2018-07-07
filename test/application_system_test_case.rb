@@ -12,7 +12,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   protected
 
   def sign_in!(user = nil)
-    @current_user = user || create(:user)
+    @current_user = user || create(:user, accepted_terms_at: DateTime.new(2000,1,1), accepted_privacy_policy_at: DateTime.new(2000,1,1))
     @current_user.confirm
     sign_in @current_user
   end

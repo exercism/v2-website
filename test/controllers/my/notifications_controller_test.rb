@@ -8,10 +8,9 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "200 with notifications" do
-    user = create :user
-    notification = create :notification, user: user
+    sign_in!
+    notification = create :notification, user: @current_user
 
-    sign_in!(user)
     get my_notifications_url
     assert_response :success
     assert_correct_page "notifications-page"
