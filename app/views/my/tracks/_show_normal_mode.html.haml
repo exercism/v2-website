@@ -33,5 +33,23 @@
               =link_to "Show More", "#", class: 'pure-button extra-button'
               .extra
                 =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
+          .danger-zone
+            %h3 Danger Zone
+            =link_to "Leave Track", "#", class: 'pure-button leave-track-btn'
+            -if !@user_track.independent_mode?
+              =link_to "Switch to Independent Mode", "#", class: 'pure-button change-to-independent-btn'
 
 =render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions
+
+-content_for :js do
+  :javascript
+    $('.leave-track-btn').click(function() {
+      showModal("leave-track", "#{j(render "leave_track_modal", track: @track)}")
+    })
+
+-if !@user_track.independent_mode?
+  -content_for :js do
+    :javascript
+      $('.change-to-independent-btn').click(function() {
+        showModal("change-to-independent-mode", "#{j(render "change_to_independent_mode_modal", track: @track)}")
+      })
