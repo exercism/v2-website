@@ -1,0 +1,69 @@
+@import 'variables';
+@import 'mixins';
+
+#onboarding-page {
+    .lhs {
+        padding-right:30px;
+        padding-top:20px;
+    }
+    .rhs {
+        padding-left:50px;
+        img {
+        }
+    }
+    h1 {
+        @include font-size(25, 25);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+        strong {
+            font-weight:$black;
+            @include font-size(22, 25);
+        }
+    }
+    .section {
+        padding-top:15px;
+        margin-bottom:15px;
+        border-top:1px solid #dadada;
+    }
+    p+section {
+    }
+    h2 {
+        @include font-size(18, 18);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+    }
+    p {
+        @include font-size(14, 17);
+        padding-bottom:15px;
+        strong {
+            font-weight:$bold;
+        }
+        a {
+            color:#666;
+            font-weight:$regular;
+        }
+    }
+
+
+    .field {
+        label {
+            display:inline-block;
+            @include font-size(14, 14);
+            margin-bottom:10px;
+        }
+        input {
+            margin-right:5px;
+        }
+    }
+
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+        margin-top:20px;
+        padding:8px 20px;
+        display:block;
+    }
+}
+

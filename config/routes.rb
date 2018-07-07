@@ -61,6 +61,10 @@ Rails.application.routes.draw do
     get "confirmations/required" => "confirmations#required", as: 'confirmation_required'
   end
 
+  resource :onboarding, only: [:show, :update] do
+    get "migrate_to_v2"
+  end
+
   # ######## #
   # External #
   # ######## #
