@@ -1,9 +1,15 @@
 class UserTrack < ApplicationRecord
-
   belongs_to :user
   belongs_to :track
 
   validates :handle, handle: true
+
+  scope :archived, -> { where.not(archived_at: nil) }
+  scope :unarchived, -> { where(archived_at: nil) }
+
+  def originated_in_v1?
+    created_at < Exercism::V2_MIGRATED_AT
+  end
 
   def normal_mode?
     !independent_mode?
@@ -25,5 +31,9 @@ class UserTrack < ApplicationRecord
   def solutions
     user.solutions.joins(:exercise).
                    where("exercises.track_id": track_id)
+  end
+
+  def archived?
+    archived_at.present?
   end
 end

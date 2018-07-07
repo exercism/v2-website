@@ -2,35 +2,7 @@
   .lo-container
     .pure-g
       .pure-u-7-12
-        .core-exercises
-          -num_core_exercises = @core_exercises_and_solutions.size
-          -@core_exercises_and_solutions.each.with_index do |(exercise, solution), idx|
-            -if solution
-              = link_to [:my, solution], class: "exercise #{solution.completed?? "completed" : "in-progress"}" do
-                -if solution.completed?
-                  .circle= image_tag "tick-color-1.png"
-                  .status Completed
-                -else
-                  .circle= image_tag exercise.white_icon_url
-                  .status In Progress
-                .position Exercise #{idx + 1} of #{num_core_exercises} in #{@track.title} Track
-                .title
-                  = exercise.title
-                  .topics
-                    - exercise.topic_names.each do |topic_name|
-                      .topic= topic_name
-                .blurb= exercise.blurb
-            -else
-              .exercise.locked
-                .circle= image_tag exercise.dark_icon_url
-                .status Locked
-                .position Exercise #{idx + 1} of #{num_core_exercises} in #{@track.title} Track
-                .title
-                  = exercise.title
-                  .topics
-                    - exercise.topic_names.each do |topic_name|
-                      .topic= topic_name
-                .blurb= exercise.blurb
+        = render "core_exercises", core_exercises: @core_exercises_and_solutions
 
       .pure-u-5-12
         .progress-section
@@ -61,5 +33,23 @@
               =link_to "Show More", "#", class: 'pure-button extra-button'
               .extra
                 =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
+          .danger-zone
+            %h3 Danger Zone
+            =link_to "Leave Track", "#", class: 'pure-button leave-track-btn'
+            -if !@user_track.independent_mode?
+              =link_to "Switch to Independent Mode", "#", class: 'pure-button change-to-independent-btn'
 
 =render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions
+
+-content_for :js do
+  :javascript
+    $('.leave-track-btn').click(function() {
+      showModal("leave-track", "#{j(render "leave_track_modal", track: @track)}")
+    })
+
+-if !@user_track.independent_mode?
+  -content_for :js do
+    :javascript
+      $('.change-to-independent-btn').click(function() {
+        showModal("change-to-independent-mode", "#{j(render "change_to_independent_mode_modal", track: @track)}")
+      })

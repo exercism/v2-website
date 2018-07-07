@@ -29,7 +29,10 @@ class My::SolutionsController < MyController
   end
 
   def walkthrough
-    @walkthrough = Git::WebsiteContent.head.walkthrough['index.html']
+    @walkthrough = RendersUserWalkthrough.(
+      current_user,
+      Git::WebsiteContent.head.walkthrough
+    )
     render_modal("solution-walkthrough", "walkthrough")
   end
 

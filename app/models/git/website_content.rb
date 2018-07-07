@@ -27,7 +27,7 @@ class Git::WebsiteContent < Git::RepoBase
   end
 
   def walkthrough
-    FolderReader.new(self, head_commit, 'walkthrough')
+    FolderReader.new(self, head_commit, 'walkthrough')["index.html"]
   end
 
   def mentors

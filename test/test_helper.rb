@@ -7,6 +7,8 @@ require 'timecop'
 require 'minitest/pride'
 require 'minitest/stub_const'
 
+require "support/stub_repo_cache"
+
 Rails.application.routes.default_url_options = { :host => "https://test.exercism.io" }
 OmniAuth.config.test_mode = true
 
@@ -16,6 +18,7 @@ end
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
+  include StubRepoCache
 end
 
 class ActionDispatch::IntegrationTest

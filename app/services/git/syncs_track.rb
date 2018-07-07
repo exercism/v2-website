@@ -64,7 +64,7 @@ class Git::SyncsTrack
       if exercise_slug.blank? || exercise_uuid.blank?
         puts "Skipping exercise #{exercise}"
       elsif deprecated
-        sync_exercise(exercise_slug, exercise_uuid, exercise, position) unless Exercise.exists?(uuid: exercise_uuid)
+        sync_exercise(exercise_slug, exercise_uuid, exercise, position)
         deprecate_exercise(exercise_uuid)
       else
         sync_exercise(exercise_slug, exercise_uuid, exercise, position)

@@ -4,7 +4,7 @@ class My::TracksController < MyController
   def index
     tracks = Track.active.order('title ASC')
     tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
-    joined_track_ids = current_user.user_tracks.pluck(:track_id)
+    joined_track_ids = current_user.user_tracks.unarchived.pluck(:track_id)
 
     @joined_tracks, @other_tracks = tracks.partition {|t|joined_track_ids.include?(t.id)}
     @completed_exercise_counts = current_user.solutions.completed.joins(:exercise).group(:track_id).count
@@ -43,7 +43,23 @@ class My::TracksController < MyController
     else
       core_exercises, side_exercises = normal_exercises.partition {|e|e.core?}
 
-      @core_exercises_and_solutions = core_exercises.map{|e|[e, mapped_solutions[e.id]]}
+      core_exercises = core_exercises.map do |e|
+        ExerciseWithSolution.new(e, mapped_solutions[e.id])
+      end
+
+      @core_exercises_and_solutions = core_exercises.
+        inject([[], [], []]) do |collection, exercise|
+          if exercise.completed?
+            collection[0] << exercise
+          elsif exercise.unlocked?
+            collection[1] << exercise
+          elsif exercise.locked?
+            collection[2] << exercise
+          end
+
+          collection
+        end.
+        flatten
       @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}
 
       @num_side_exercises = @track.exercises.side.count

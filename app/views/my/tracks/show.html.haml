@@ -33,8 +33,12 @@
 
   -if @user_track.independent_mode === nil
     -content_for :js do
-      :javascript
-        showModal("my-track-started", "#{j(render "started_modal", track: @track)}")
+      -if @user_track.originated_in_v1?
+        :javascript
+          showModal("my-track-v1-migration", "#{j(render "v1_migration_modal", track: @track)}")
+      -else
+        :javascript
+          showModal("my-track-started", "#{j(render "started_modal", track: @track)}")
 
   -if @track_completion_percentage == 100
     -content_for :js do
