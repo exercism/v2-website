@@ -34,4 +34,12 @@ class UserTrackTest < ActiveSupport::TestCase
     assert old.originated_in_v1?
     refute new.originated_in_v1?
   end
+
+  test "archived?" do
+    archived = build(:user_track, archived_at: Date.new(2016, 12, 25))
+    unarchived = build(:user_track, archived_at: nil)
+
+    assert archived.archived?
+    refute unarchived.archived?
+  end
 end

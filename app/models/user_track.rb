@@ -29,4 +29,8 @@ class UserTrack < ApplicationRecord
     user.solutions.joins(:exercise).
                    where("exercises.track_id": track_id)
   end
+
+  def archived?
+    archived_at.present?
+  end
 end
