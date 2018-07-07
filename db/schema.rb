@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2018_07_09_140439) do
     t.boolean "email_on_new_iteration_for_mentor", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "receive_product_updates", default: true, null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
@@ -384,6 +385,8 @@ ActiveRecord::Schema.define(version: 2018_07_09_140439) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "accepted_privacy_policy_at"
+    t.datetime "accepted_terms_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true

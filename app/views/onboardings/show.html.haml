@@ -1,0 +1,44 @@
+#onboarding-page
+  .lo-container
+  .lo-container
+    .pure-g
+      .pure-u-3-5.lhs
+        =form_for @current_user, url: onboarding_path, method: :patch do |f|
+
+          %h1 Welcome To Exercism!
+          %p We're really happy you're here and hope that Exercism will be a valuable and fun experience for you.
+          %p We need to get a couple of quick legal bits out of the way to ensure you get the experience you expect, and to protect our community.
+
+          .section
+            %h2 Our Terms &amp; Conditions
+            %p
+              In brief our Terms and Conditions say that you can use Exercism for improving your coding skills, but that if you act in a way that is not in line with Exercism's values of inclusiveness and respect, we have the right to ban you.
+              You can #{link_to "read it in full here", terms_page_path, target: "_blank"}.
+            .field
+              =f.check_box :accepted_terms_at, required: true
+              =f.label :accepted_terms_at, "Accept terms and conditions"
+
+          .section
+            %h2 Our Privacy Policy 
+            %p
+              In brief our Privacy Policy says that we 
+              %strong will never share your details with anyone.
+              You can #{link_to "read it in full here", privacy_page_path, target: "_blank"}.
+            .field
+              =f.check_box :accepted_privacy_policy_at, required: true
+              =f.label :accepted_privacy_policy_at, "Accept privacy policy"
+
+          .section
+            %h2 Communication Preferences
+            %p By default, we will email you when a mentor comments on one of your solutions, and we will send you occasional updates to tell you about new features, languages and exercises. You can edit your communication preferences at any time from the main menu.
+            %p We don't send marketing emails.
+            .field
+              =f.check_box :email_on_new_discussion_post, required: true, checked: true
+              =f.label :email_on_new_discussion_post, "Email me when a mentor comments on my solution"
+            .field
+              =f.check_box :receive_product_updates, required: true, checked: true
+              =f.label :receive_product_updates, "Send me updates about new features, languages and exercises"
+
+          =f.button "Save and continue to Exercism", class: 'pure-button'
+
+      .pure-u-2-5.rhs= code_person_widget

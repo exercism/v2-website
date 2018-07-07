@@ -163,4 +163,16 @@ class UserTest < ActiveSupport::TestCase
     refute mentor_post.destroyed?
     assert_nil mentor_post.user
   end
+
+  test "onboarded?" do
+    not_onboarded_1 = create :user, accepted_terms_at: nil, accepted_privacy_policy_at: nil
+    not_onboarded_2 = create :user, accepted_terms_at: DateTime.now - 1.day, accepted_privacy_policy_at: nil
+    not_onboarded_3 = create :user, accepted_terms_at: nil, accepted_privacy_policy_at: DateTime.now - 1.day
+    onboarded = create :user, accepted_terms_at: DateTime.now - 1.day, accepted_privacy_policy_at: DateTime.now - 1.day
+
+    assert onboarded.onboarded?
+    refute not_onboarded_1.onboarded?
+    refute not_onboarded_2.onboarded?
+    refute not_onboarded_3.onboarded?
+  end
 end
