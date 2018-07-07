@@ -195,7 +195,7 @@ body.controller-my-tracks.action-show {
             border:1px solid $color-2;
             padding:50px 30px 30px 30px;
             background:#fff;
-            max-width:600px;
+            max-width:650px;
             margin:0 auto;
             border-radius:5px;
             img {
@@ -268,8 +268,20 @@ body.controller-my-tracks.action-show {
             max-width:1000px;
             margin: 0 auto 0 auto;
         }
-        .widget-mentor, .widget-maintainer {
-            margin:10px;
+        .pure-g.mentors,
+        .pure-g.maintainers {
+            &>.pure-u-1-2 {
+                margin-bottom:20px;
+                &:nth-child(odd) {
+                    padding-right:10px;
+                }
+                &:nth-child(even) {
+                    padding-left:10px;
+                }
+            }
+            .widget-maintainer, .widget-mentor {
+                height:100%;
+            }
         }
     }
     .exercises-section {
@@ -321,24 +333,26 @@ body.controller-my-tracks.action-show {
     .header {
         margin-bottom:30px;
     }
-    .widget-maintainer, .widget-mentor {
-        img {
-            filter:none;
-        }
-        .bio {
-            color:#555;
-            @include font-size(14, 20);
-            letter-spacing:-0.3px;
-        }
-    }
     .pure-g.people {
         &>.pure-u-1-2 {
-            padding-bottom:20px;
+            margin-bottom:20px;
             &:nth-child(odd) {
                 padding-right:10px;
             }
             &:nth-child(even) {
                 padding-left:10px;
+            }
+        }
+        .widget-maintainer, .widget-mentor {
+            height:100%;
+
+            img {
+                filter:none;
+            }
+            .bio {
+                color:#555;
+                @include font-size(14, 20);
+                letter-spacing:-0.3px;
             }
         }
     }

@@ -11,8 +11,8 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     return redirect_to [:my, @track] if user_signed_in?
 
-    @mentors = @track.mentorships.reorder(SQLSnippets.random)
-    @active_maintainers = @track.maintainers.visible.active.order('alumnus DESC', SQLSnippets.random)
+    @mentors = @track.mentors.reorder(SQLSnippets.random).limit(6)
+    @active_maintainers = @track.maintainers.visible.active.order('alumnus DESC', SQLSnippets.random).limit(6)
     @exercises = @track.exercises.active.reorder(SQLSnippets.random).limit(6)
     @testimonial = @track.testimonials.order(SQLSnippets.random).first
     @testimonial = Testimonial.generic.order(SQLSnippets.random).first unless @testimonial
