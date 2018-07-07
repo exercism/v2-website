@@ -440,7 +440,8 @@ body.namespace-my.controller-tracks.action-show {
 }
 
 #modal.my-track-started,
-#modal.my-track-finished {
+#modal.my-track-finished,
+#modal.my-track-v1-migration {
     padding:50px 50px 50px 50px;
     img {
         display:block;
@@ -513,7 +514,7 @@ body.namespace-my.controller-tracks.action-show {
                 display:inline-block;
                 width:auto;
                 border:1px solid $color-1;
-                padding: 10px 20px;
+                padding: 10px 13px;
                 font-weight:400;
                 margin-bottom:0;
                 &.independent-mode-button {
@@ -523,6 +524,29 @@ body.namespace-my.controller-tracks.action-show {
                     font-weight:300;
                 }
             }
+        }
+    }
+}
+
+#modal.my-track-v1-migration {
+    .pure-button {
+        margin: 0 auto;
+
+        display:inline-block;
+        width:auto;
+        border:1px solid $color-1;
+        padding: 10px 13px;
+        font-weight:400;
+
+        &.normal-mode {
+            width:59%;
+        }
+        &.independent-mode {
+            border:1px solid $color-1;
+            background:#fff;
+            color:$color-1;
+            font-weight:300;
+            width:40%;
         }
     }
 }

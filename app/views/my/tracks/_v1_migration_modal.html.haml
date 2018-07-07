@@ -1,0 +1,9 @@
+=hex_green_track_icon(track)
+.main-section
+  %h2 Getting Started
+  %h3 on the #{track.title} Track
+
+  %p Hello! We've migrated your progress on the #{track.title} Track onto the new Exercism website.
+  %p Tracks on the new website can be completed in normal mode where you receive mentor feedback on your solutions, and independant mode - where you work by yourself. We highly recommend normal mode, but the choice is yours!
+  =link_to "Normal Mode", set_normal_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: "pure-button normal-mode"
+  =link_to "Independent Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode'

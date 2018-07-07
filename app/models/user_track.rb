@@ -1,9 +1,12 @@
 class UserTrack < ApplicationRecord
-
   belongs_to :user
   belongs_to :track
 
   validates :handle, handle: true
+
+  def originated_in_v1?
+    created_at < Exercism::V2_MIGRATED_AT
+  end
 
   def normal_mode?
     !independent_mode?

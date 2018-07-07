@@ -26,4 +26,12 @@ class UserTrackTest < ActiveSupport::TestCase
     refute ut.valid?
     assert ut.errors.keys.include?(:handle)
   end
+
+  test "originated_in_v1" do
+    old = create :user_track, created_at: Exercism::V2_MIGRATED_AT - 1.minute
+    new = create :user_track, created_at: Exercism::V2_MIGRATED_AT + 1.minute
+
+    assert old.originated_in_v1?
+    refute new.originated_in_v1?
+  end
 end
