@@ -1,0 +1,9 @@
+=hex_green_track_icon(track)
+.main-section
+  %h2 Switch to Independent Mode
+  %h3 on the #{track.title} Track
+
+  %p In Independent Mode all of the exercises within a Track are unlocked and students can work through them freely. Note that in this mode Mentor feedback is disabled. This mode is for people who want to do fast deep-dives into a track and is not recommended for those that want the full Exercism experience.
+  .buttons
+    =link_to "Independent Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode'
+    =link_to "Cancel", "#", class: "pure-button close-modal cancel"

@@ -356,7 +356,8 @@ body.namespace-my.controller-tracks.action-show {
             }
         }
         .danger-zone {
-            .leave-track-btn {
+            .leave-track-btn,
+            .change-to-independent-btn {
                 display:block;
                 background:#fff;
                 color:$color-1;
@@ -458,7 +459,9 @@ body.namespace-my.controller-tracks.action-show {
 
 #modal.my-track-started,
 #modal.my-track-finished,
-#modal.my-track-v1-migration {
+#modal.my-track-v1-migration,
+#modal.change-to-independent-mode {
+    max-width:540px;
     padding:50px 50px 50px 50px;
     img {
         display:block;
@@ -564,6 +567,29 @@ body.namespace-my.controller-tracks.action-show {
             color:$color-1;
             font-weight:300;
             width:40%;
+        }
+    }
+}
+
+#modal.change-to-independent-mode {
+    .pure-button {
+        margin: 0 auto;
+
+        display:inline-block;
+        width:auto;
+        border:1px solid $color-1;
+        padding: 10px 13px;
+        font-weight:400;
+
+        &.independent-mode {
+            width:69%;
+        }
+        &.cancel {
+            border:1px solid $color-1;
+            background:#fff;
+            color:$color-1;
+            font-weight:300;
+            width:30%;
         }
     }
 }
