@@ -99,6 +99,7 @@ Rails.application.routes.draw do
       member do
         patch :set_normal_mode
         patch :set_independent_mode
+        post :leave
       end
     end
     resources :solutions, only: [:show, :create] do

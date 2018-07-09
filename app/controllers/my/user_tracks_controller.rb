@@ -1,7 +1,15 @@
 class My::UserTracksController < MyController
   def create
     track = Track.find(params[:track_id])
-    JoinsTrack.join!(current_user, track)
+
+    if current_user.previously_joined_track?(track)
+      user_track = current_user.user_tracks.find_by(track: track)
+
+      user_track.update!(archived_at: nil)
+    else
+      JoinsTrack.join!(current_user, track)
+    end
+
     redirect_to [:my, track]
   end
 
@@ -18,4 +26,11 @@ class My::UserTracksController < MyController
     redirect_to [:my, track]
   end
 
+  def leave
+    user_track = current_user.user_tracks.find(params[:id])
+
+    user_track.update!(archived_at: Time.current)
+
+    redirect_to my_tracks_path
+  end
 end

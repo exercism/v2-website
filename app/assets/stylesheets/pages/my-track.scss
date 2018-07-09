@@ -284,7 +284,7 @@ body.namespace-my.controller-tracks.action-show {
             margin-bottom:30px;
             text-align:right;
         }
-        .core, .topics, .side {
+        .core, .topics, .side, .danger-zone {
             background:#fff;
             padding:20px 30px;
             margin-bottom:15px;
@@ -367,6 +367,24 @@ body.namespace-my.controller-tracks.action-show {
                     width:20%;
                     text-align:right;
                     float:right;
+                }
+            }
+        }
+        .danger-zone {
+            .leave-track-btn,
+            .change-to-independent-btn {
+                display:block;
+                background:#fff;
+                color:$color-1;
+                border:1px solid rgba($color-1, 0.5);
+                @include font-size(12, 12);
+                padding:9px;
+                width:100%;
+                margin:10px 0;
+                &:hover {
+                    background:$color-1;
+                    border-color:$color-1;
+                    color:#fff;
                 }
             }
         }
@@ -456,7 +474,10 @@ body.namespace-my.controller-tracks.action-show {
 
 #modal.my-track-started,
 #modal.my-track-finished,
-#modal.my-track-v1-migration {
+#modal.my-track-v1-migration,
+#modal.change-to-independent-mode,
+#modal.leave-track {
+    max-width:540px;
     padding:50px 50px 50px 50px;
     img {
         display:block;
@@ -562,6 +583,30 @@ body.namespace-my.controller-tracks.action-show {
             color:$color-1;
             font-weight:300;
             width:40%;
+        }
+    }
+}
+
+#modal.change-to-independent-mode,
+#modal.leave-track {
+    .pure-button {
+        margin: 0 auto;
+
+        display:inline-block;
+        width:auto;
+        border:1px solid $color-1;
+        padding: 10px 13px;
+        font-weight:400;
+
+        &.action-button {
+            width:69%;
+        }
+        &.cancel-button {
+            border:1px solid $color-1;
+            background:#fff;
+            color:$color-1;
+            font-weight:300;
+            width:30%;
         }
     }
 }
