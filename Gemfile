@@ -50,6 +50,7 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-yarn'
+  gem 'letter_opener'
 end
 
 group :test do
