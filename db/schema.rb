@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_132112) do
+ActiveRecord::Schema.define(version: 2018_07_09_140439) do
 
   create_table "auth_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_07_07_132112) do
 
   create_table "discussion_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "iteration_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.text "content", limit: 4294967295, null: false
     t.text "html", limit: 4294967295, null: false
     t.datetime "created_at", null: false
