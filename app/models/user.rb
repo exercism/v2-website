@@ -11,36 +11,38 @@ class User < ApplicationRecord
          :confirmable, :validatable,
          :omniauthable, omniauth_providers: [:github]
 
-  has_many :auth_tokens
-  has_one :communication_preferences
+  has_many :auth_tokens, dependent: :destroy
+  has_one :communication_preferences, dependent: :destroy
 
-  has_one :profile
-  has_many :notifications
+  has_one :profile, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
-  has_many :team_memberships
+  has_many :team_memberships, dependent: :destroy
   has_many :teams, through: :team_memberships
   has_many :managed_teams, -> { where(team_memberships: { admin: true }) }, through: :team_memberships, source: :team
 
-  has_many :user_tracks
+  has_many :user_tracks, dependent: :destroy
   has_many :tracks, through: :user_tracks
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
   has_many :iterations, through: :solutions
 
-  has_many :team_solutions
+  has_many :team_solutions, dependent: :destroy
   has_many :team_iterations, through: :team_solutions, source: :iterations
 
-  has_many :track_mentorships
+  has_many :track_mentorships, dependent: :destroy
   has_many :mentored_tracks, through: :track_mentorships, source: :track
-  has_many :track_mantainerships, class_name: "Maintainer"
+  has_many :track_mantainerships, class_name: "Maintainer", dependent: :nullify
   has_many :maintained_tracks, through: :track_mantainerships, source: :track
 
-  has_many :solution_mentorships
+  has_many :solution_mentorships, dependent: :destroy
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
-  has_many :ignored_solution_mentorships
+  has_many :ignored_solution_mentorships, dependent: :destroy
   has_many :ignored_solutions, through: :ignored_solution_mentorships, source: :solution
 
-  has_many :reactions
+  has_many :reactions, dependent: :destroy
+
+  has_many :discussion_posts, dependent: :nullify
 
   validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
