@@ -20,10 +20,7 @@ class RendersUserWalkthrough
   def substitute_tokens!
     walkthrough.gsub!(
       CONFIGURE_COMMAND_TOKEN,
-      ApplicationController.render(
-        partial: "widgets/code_snippet",
-        locals: { code: configure_command(user.auth_token) }
-      )
+      configure_command(user.auth_token)
     )
   end
 
