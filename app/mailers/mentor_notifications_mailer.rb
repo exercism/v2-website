@@ -1,11 +1,13 @@
 class MentorNotificationsMailer < ApplicationMailer
-  def new_discussion_post(user, discussion_post)
+  add_template_helper(UserHelper)
+
+  def new_discussion_post(mentor, discussion_post)
     @solution = discussion_post.solution
-    mail(subject: "New discussion post", to: user.email)
+    mail(subject: "[Exercism Mentor Notification] New comment", to: mentor.email)
   end
 
-  def new_iteration(user, iteration)
+  def new_iteration(mentor, iteration)
     @solution = iteration.solution
-    mail(subject: "New iteration created", to: user.email)
+    mail(subject: "[Exercism Mentor Notification] New iteration", to: mentor.email)
   end
 end
