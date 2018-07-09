@@ -5,7 +5,15 @@ class DiscussionPost < ApplicationRecord
 
   validates :content, presence: true
 
+  delegate :handle, :avatar_url, to: :delegated_user
+
   def solution
     iteration.solution
+  end
+
+  private
+
+  def delegated_user
+    user || NullUser.new
   end
 end
