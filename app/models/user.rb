@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  DEFAULT_AVATAR = "anonymous.png"
 
   # Remove this so devise can't use it.
   def self.validates_uniqueness_of(*args)
@@ -67,7 +68,7 @@ class User < ApplicationRecord
 
   def avatar_url
     img = super
-    img.present?? img : "anonymous.png"
+    img.present?? img : User::DEFAULT_AVATAR
   end
 
   def may_view_solution?(solution)
