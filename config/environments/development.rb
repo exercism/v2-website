@@ -66,4 +66,4 @@ Rails.application.configure do
   config.active_storage.service = :local
 end
 
-Rails.application.routes.default_url_options = { :host => "https://v2.exercism.io" }
+Rails.application.routes.default_url_options = { :host => "localhost:3000" }
