@@ -32,6 +32,7 @@ gem 'lmdb'
 gem 'octokit'
 gem "bugsnag"
 gem 'aws-sdk-s3'
+gem 'image_processing', '~> 1.2'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
