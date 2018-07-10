@@ -7,7 +7,10 @@ var ImagePreview = {
         var reader = new FileReader();
 
         reader.onload = function(e) {
-          $('.js-image-preview-container').attr('src', e.target.result);
+          $('.js-image-preview-container').css(
+            'background-image',
+            'url("' + e.target.result + '")'
+          );
         }
 
         reader.readAsDataURL(input.files[0]);
