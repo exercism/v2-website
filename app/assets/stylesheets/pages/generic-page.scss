@@ -37,7 +37,7 @@
     p+ul {
         margin-top:-10px;
     }
-    p,ul {
+    p,ul,ol {
         @include font-size(16, 23);
         margin-bottom:15px;
         strong {
@@ -49,7 +49,7 @@
             border-bottom:1px solid #aaa;
         }
         li {
-            margin-bottom:2px;
+            margin-bottom:5px;
         }
     }
     #widget-code-person {
