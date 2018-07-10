@@ -25,8 +25,7 @@ Note: Teams will be avaliable on http://teams.localhost:3000.
 
 ```
 bundle install
-bundle exec rake db:schema:load
-bundle exec rake db:seed
+bundle exec rake bin/setup
 bundle exec rails r "Git::UpdatesRepos.update"
 bundle exec rails s
 ```
@@ -37,3 +36,12 @@ bundle exec rails s
 ```bash
 $ echo "host" > server_identity
 ```
+
+### Deleting an account
+
+ To delete a user, run `user.destroy.`
+
+The user record is deleted, as well as associated objects except the ff:
+
+- Discussion posts where they are a mentor.
+- Maintainer records where their user record is associated.

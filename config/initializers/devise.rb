@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = 'b429a6673554c258fdddd028a737afa0d82c0e9478b889ed5dcdeff59d0b47e8825c35d31b418231731b230fce19bbdd3a8d04c653c02cca0785c5d385ef7887'
+  # config.secret_key = 'USE_RAILS_SECRET_KEY'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -250,11 +250,10 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  auth_config = Rails.application.config_for("auth")
-
-  github_key = auth_config["github_key"]
-  github_secret = auth_config["github_secret"]
-  config.omniauth :github, github_key, github_secret, scope: "user:email"
+  config.omniauth :github,
+    Rails.application.secrets.github_key,
+    Rails.application.secrets.github_secret,
+    scope: "user:email"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

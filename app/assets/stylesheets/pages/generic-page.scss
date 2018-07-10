@@ -34,10 +34,17 @@
             margin-top:0px;
         }
     }
+    h4 {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        text-decoration: underline;
+    }
+
     p+ul {
         margin-top:-10px;
     }
-    p,ul {
+    p,ul,ol {
         @include font-size(16, 23);
         margin-bottom:15px;
         strong {
@@ -49,8 +56,13 @@
             border-bottom:1px solid #aaa;
         }
         li {
-            margin-bottom:2px;
+            margin-bottom:5px;
         }
+    }
+    pre {
+        background: #f6f6f6;
+        border: 1px solid #ddd;
+        border-radius: 3px;
     }
     #widget-code-person {
         margin-left:30px;

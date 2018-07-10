@@ -1,5 +1,5 @@
-=hex_green_track_icon(track)
 .main-section
+  =hex_green_track_icon(track)
   %h2 Getting Started
   %h3 on the #{track.title} Track
 
@@ -13,7 +13,7 @@
   %h2 What is Independent Mode?
   %h3 on the #{track.title} Track
   %p In Independent Mode all of the exercises within a Track are unlocked and students can work through them freely. Note that in this mode Mentor feedback is disabled. This mode is for people who want to do fast deep-dives into a track and is not recommended for those that want the full Exercism experience.
-  %p.question Which mode do you want to complete the #{track.title} Track in?
+  %p.question Which mode do you want to complete this track in?
   .buttons
     =link_to "Independent Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode-button'
     =link_to "Normal Mode (Recommended)", set_normal_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button normal-mode-button'

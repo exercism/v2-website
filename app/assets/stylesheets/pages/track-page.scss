@@ -12,6 +12,8 @@ body.controller-my-tracks.action-show {
 
 #my-track-page,
 #track-page,
+#track-maintainers-page,
+#track-mentors-page,
 #exercises-page,
 #my-track-not-joined-page {
     .header {
@@ -52,6 +54,8 @@ body.controller-my-tracks.action-show {
 }
 
 #track-page,
+#track-maintainers-page,
+#track-mentors-page,
 #my-track-not-joined-page {
     .header {
         background-color: $header-color-2;
@@ -116,7 +120,7 @@ body.controller-my-tracks.action-show {
             letter-spacing:-0.7px;
         }
         .info {
-            @include font-size(12, 19);
+            @include font-size(12, 17);
             font-weight:$regular;
             color:#888;
         }
@@ -138,7 +142,7 @@ body.controller-my-tracks.action-show {
                 background:#fafafa;
                 @include font-size(10, 13);
                 padding:2px 5px;
-                max-height:154px;
+                height:154px;
                 code {
                     background:#f8f8f8;
                 }
@@ -154,7 +158,7 @@ body.controller-my-tracks.action-show {
             margin-bottom:15px;
         }
         p {
-            @include font-size(15, 20);
+            @include font-size(15, 21);
             color:#555;
             margin-bottom:12px;
             font-weight:$light;
@@ -191,7 +195,7 @@ body.controller-my-tracks.action-show {
             border:1px solid $color-2;
             padding:50px 30px 30px 30px;
             background:#fff;
-            max-width:600px;
+            max-width:650px;
             margin:0 auto;
             border-radius:5px;
             img {
@@ -264,8 +268,20 @@ body.controller-my-tracks.action-show {
             max-width:1000px;
             margin: 0 auto 0 auto;
         }
-        .widget-mentor, .widget-maintainer {
-            margin:10px;
+        .pure-g.mentors,
+        .pure-g.maintainers {
+            &>.pure-u-1-2 {
+                margin-bottom:20px;
+                &:nth-child(odd) {
+                    padding-right:10px;
+                }
+                &:nth-child(even) {
+                    padding-left:10px;
+                }
+            }
+            .widget-maintainer, .widget-mentor {
+                height:100%;
+            }
         }
     }
     .exercises-section {
@@ -308,6 +324,36 @@ body.controller-my-tracks.action-show {
             display:block;
             width:280px;
             color:#fff;
+        }
+    }
+}
+
+#track-maintainers-page,
+#track-mentors-page {
+    .header {
+        margin-bottom:30px;
+    }
+    .pure-g.people {
+        &>.pure-u-1-2 {
+            margin-bottom:20px;
+            &:nth-child(odd) {
+                padding-right:10px;
+            }
+            &:nth-child(even) {
+                padding-left:10px;
+            }
+        }
+        .widget-maintainer, .widget-mentor {
+            height:100%;
+
+            img {
+                filter:none;
+            }
+            .bio {
+                color:#555;
+                @include font-size(14, 20);
+                letter-spacing:-0.3px;
+            }
         }
     }
 }

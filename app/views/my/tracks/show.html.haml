@@ -18,13 +18,15 @@
           -else
             Track in Progress
     .lo-container
-      %h1 #{@track.title} Track
       .stats
-        .stat= pluralize @track.exercises.count, "Exercise"
+        .stat= pluralize @track.exercises.active.count, "Exercise"
         .stat #{number_with_delimiter(@track.user_tracks.count)} Students
-        .stat= pluralize @track.mentorships.count, "Mentors"
+        .stat= link_to pluralize(@track.mentorships.count, "Mentors"), track_mentors_path(@track)
+        .stat= link_to pluralize(@track.maintainers.count, "Maintainers"), track_maintainers_path(@track)
 
-      .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
+      .title
+        %h1 #{@track.title} Track
+        .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
 
   -if @user_track.independent_mode?
     =render "show_side_exercises", exercises_and_solutions: @exercises_and_solutions

@@ -1,7 +1,0 @@
-development:
-  github_key: f19303e181ab6a2b6413
-  github_secret: d077b52d7432e3f95d474b64af2a32f1e7a36ac5
-
-production:
-  github_key: LIVE-KEY-HERE
-  github_secret: LIVE-SECRET-HERE
