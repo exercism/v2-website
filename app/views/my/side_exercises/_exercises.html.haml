@@ -1,7 +1,5 @@
 -if exercises_and_solutions.present?
   -exercises_and_solutions.each do |exercise, solution|
-    /-args = ["my/side-exercises/_exercises", exercise, solution].compact
-    /=cache(args, skip_digest: true) do
     .pure-u-1-3
       -if solution
         -if solution.completed?
@@ -14,12 +12,13 @@
           = link_to [:my, solution], class: "widget-side-exercise unlocked" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
       -elsif @user_track.independent_mode? || !exercise.unlocked_by
-        = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'widget-side-exercise unlocked' do
-          =render "my/side_exercises/exercise", exercise: exercise, solution: nil
+        =cache(["my/side-exercises/_exercises", "unlockable-exercise", exercise], skip_digest: true) do
+          = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'widget-side-exercise unlocked' do
+            =render "my/side_exercises/exercise", exercise: exercise, solution: nil
       -else
-        .widget-side-exercise.locked
-          =render "my/side_exercises/exercise", exercise: exercise, solution: nil
+        =cache(["my/side-exercises/_exercises", "locked-exercise", exercise], skip_digest: true) do
+          .widget-side-exercise.locked
+            =render "my/side_exercises/exercise", exercise: exercise, solution: nil
 -else
   .pure-u-1-1
     .no-results Sorry, no exercises match these criteria.
-

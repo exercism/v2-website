@@ -2,7 +2,11 @@ class My::SideExercisesController < MyController
   before_action :set_track
 
   def index
-    exercises = @track.exercises.side.active.includes(:topics)
+    exercises = if @user_track.normal_mode?
+        @track.exercises.side.active.includes(:topics)
+      else
+        @track.exercises.active.includes(:topics)
+      end
 
     if params[:difficulty].strip.present?
       case params[:difficulty]
@@ -34,6 +38,7 @@ class My::SideExercisesController < MyController
   private
   def set_track
     @track = Track.find(params[:track_id])
+    @user_track = UserTrack.find_by_user_id_and_track_id!(current_user.id, @track.id)
   end
 end
 
