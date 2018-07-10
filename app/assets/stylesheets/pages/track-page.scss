@@ -120,7 +120,7 @@ body.controller-my-tracks.action-show {
             letter-spacing:-0.7px;
         }
         .info {
-            @include font-size(12, 19);
+            @include font-size(12, 17);
             font-weight:$regular;
             color:#888;
         }
@@ -142,7 +142,7 @@ body.controller-my-tracks.action-show {
                 background:#fafafa;
                 @include font-size(10, 13);
                 padding:2px 5px;
-                max-height:154px;
+                height:154px;
                 code {
                     background:#f8f8f8;
                 }
@@ -158,7 +158,7 @@ body.controller-my-tracks.action-show {
             margin-bottom:15px;
         }
         p {
-            @include font-size(15, 20);
+            @include font-size(15, 21);
             color:#555;
             margin-bottom:12px;
             font-weight:$light;
