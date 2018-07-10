@@ -97,7 +97,7 @@
         }
     }
     .title {
-        @include font-size(18, 19);
+        @include font-size(18, 20);
         font-weight:$bold;
         margin-bottom:10px;
         text-overflow:ellipsis;
