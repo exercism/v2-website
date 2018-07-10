@@ -48,7 +48,6 @@ class Git::SeedsTracks
     https://github.com/exercism/ocaml
     https://github.com/exercism/perl5
     https://github.com/exercism/perl6
-    https://github.com/exercism/pharo
     https://github.com/exercism/php
     https://github.com/exercism/plsql
     https://github.com/exercism/pony
