@@ -3,11 +3,11 @@ class Teams::BaseController < ApplicationController
   before_action :authenticate_user!
 
   def set_site_context
-    session["site_context"] = "teams"
-  end
-
-  def redirect_if_signed_in!
-    redirect_to teams_dashboard_path if user_signed_in?
+    cookies["site_context"] = {
+      value: "teams",
+      domain: :all,
+      tld_length: 2
+    }
   end
 
   def find_team

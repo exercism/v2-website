@@ -1,0 +1,24 @@
+#track-maintainers-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      =image_tag "nav-divider.png"
+      =link_to "Language Tracks", [:tracks]
+      =image_tag "nav-divider.png"
+      =link_to "#{@track.title} Track", @track
+      =image_tag "nav-divider.png"
+      %span Maintainers
+
+  .header
+    .visual-section
+      .line
+      .lo-container
+        =bordered_turquoise_track_icon(@track, class: 'logo')
+    .lo-container
+      %h1 #{@track.title} Maintainers
+      .h1-subtitle Our maintainers are the lynchpins of the language tracks and exercises on Exercism. This group of wonderful people maintain the #{@track.title} Track, creating and updating the exercises and tooling for #{@track.title}.
+
+  .lo-container
+    .pure-g.people
+      -@maintainers.each do |maintainer|
+        .pure-u-1-2= maintainer_widget(maintainer)

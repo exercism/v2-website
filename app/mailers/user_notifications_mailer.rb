@@ -5,7 +5,7 @@ class UserNotificationsMailer < ApplicationMailer
     @solution = discussion_post.solution
     mail(
       to: @user.email,
-      subject: "A mentor has commented on your solution"
+      subject: "[Exercism] A mentor has commented on your solution"
     )
   end
 end
