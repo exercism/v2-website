@@ -4,37 +4,41 @@
 #onboarding-page {
     .lhs {
         padding-right:30px;
-        padding-top:20px;
+        padding-top:30px;
     }
     .rhs {
         padding-left:50px;
-    }
-    h1 {
-        @include font-size(25, 25);
-        font-weight:$bold;
-        margin-bottom:10px;
-        color:#555;
-        strong {
-            font-weight:$black;
-            @include font-size(22, 25);
+        #widget-code-person {
+            width:460px;
         }
     }
-    .section {
-        padding-top:15px;
+    h1 {
+        @include font-size(22, 22);
+        font-weight:$light;
+        color:#555;
+        border-bottom:1px solid #ddd;
+        padding-bottom:10px;
         margin-bottom:15px;
-        border-top:1px solid #dadada;
+    }
+    .section {
+        padding-top:20px;
+        //margin-bottom:15px;
+    }
+    h1+p {
+        padding-bottom:0;
     }
     p+section {
+        margin-top:10px;
     }
     h2 {
-        @include font-size(18, 18);
-        font-weight:$bold;
-        margin-bottom:10px;
-        color:#555;
+        @include font-size(16, 16);
+        font-weight:$regular;
+        margin-bottom:7px;
+        color:$color-2;
     }
     p {
         @include font-size(14, 18);
-        padding-bottom:15px;
+        padding-bottom:12px;
         strong {
             font-weight:$bold;
         }
@@ -44,15 +48,19 @@
         }
     }
 
-
-    .field {
-        label {
-            display:inline-block;
-            @include font-size(14, 14);
-            margin-bottom:10px;
-        }
+    label {
+        background:rgba($color-2, 0.1);
+        padding:10px;
+        border-radius:2px;
+        margin-bottom:10px;
+        display:block;
+        cursor:pointer;
+        @include font-size(14, 16);
         input {
-            margin-right:5px;
+            float:left;
+            margin-right:8px;
+            @include font-size(16, 16);
+            margin-top:1px;
         }
     }
 
@@ -60,8 +68,9 @@
         background:$color-2;
         color:#fff;
         margin-top:20px;
-        padding:8px 20px;
+        padding:10px 20px;
         display:block;
+        width:100%;
     }
 }
 
