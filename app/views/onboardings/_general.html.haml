@@ -1,5 +1,5 @@
 .section
-  %h2 Our Terms &amp; Conditions
+  %h2 Our Terms of Service
   %p
     Our Terms of Service say that you must act in a way that is in line with Exercism's values of respect and empathy per our
     #{link_to "Code of Conduct", code_of_conduct_page_path, target: "_blank"}.
@@ -10,8 +10,9 @@
     licences respectively.
     You can #{link_to "read it in full here", terms_page_path, target: "_blank"}.
   .field
-    =f.check_box :accepted_terms_at, required: true
-    =f.label :accepted_terms_at, "Accept terms and conditions"
+    =f.label :accepted_terms_at do
+      =f.check_box :accepted_terms_at, required: true
+      .text Accept terms and conditions
 
 .section
   %h2 Our Privacy Policy
@@ -20,8 +21,9 @@
     %strong will never share your details with anyone.
     You can #{link_to "read it in full here", privacy_page_path, target: "_blank"}.
   .field
-    =f.check_box :accepted_privacy_policy_at, required: true
-    =f.label :accepted_privacy_policy_at, "Accept privacy policy"
+    =f.label :accepted_privacy_policy_at do
+      =f.check_box :accepted_privacy_policy_at, required: true
+      .text Accept privacy policy
 
 .section
   %h2 Communication Preferences
@@ -29,11 +31,13 @@
     By default, we will email you when a mentor comments on one of your solutions, and we will send you occasional updates to tell you about new features, languages and exercises. You can edit your communication preferences at any time from the main menu.
     We don't send marketing emails.
   .field
-    =f.check_box :email_on_new_discussion_post, required: true, checked: true
-    =f.label :email_on_new_discussion_post, "Email me when a mentor comments on my solution"
+    =f.label :email_on_new_discussion_post do
+      =f.check_box :email_on_new_discussion_post, required: true, checked: true
+      .text Email me when a mentor comments on my solution
   .field
-    =f.check_box :receive_product_updates, required: true, checked: true
-    =f.label :receive_product_updates, "Send me updates about new features, languages and exercises"
+    =f.label :receive_product_updates do
+      =f.check_box :receive_product_updates, required: true, checked: true
+      Send me updates about new features, languages and exercises
 
 =f.button "Save and continue to Exercism", class: 'pure-button'
 

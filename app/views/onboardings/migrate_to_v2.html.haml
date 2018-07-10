@@ -5,10 +5,7 @@
       .pure-u-3-5.lhs
         =form_for @current_user, url: onboarding_path, method: :patch do |f|
 
-          %h1
-            Welcome to
-            new version of
-            Exercism!
+          %h1 Welcome to the new version of Exercism
           %p As part of our update to Exercism we need to ensure you agree with out terms of usage, privacy policy, and that your communication preferences are set correctly.
 
           =render "general", f: f
