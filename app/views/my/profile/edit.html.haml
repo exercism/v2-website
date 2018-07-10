@@ -6,10 +6,10 @@
       .pure-u-1-2.lhs
         .avatar-section
           %h3 Avatar
-          =image_tag @profile.user.avatar_url
+          = image_tag @profile.user.avatar_url, class: "js-image-preview-container"
           .file-selector
             Change Image
-            =uf.file_field :avatar
+            =uf.file_field :avatar, class: "js-image-preview-file"
           %p Try and choose a square photo that works when rounded.
 
         .name-section
@@ -42,3 +42,6 @@
 
     =f.button "Update profile", class: 'pure-button update-button'
     =content_tag :span, "Cancel", class: 'pure-button cancel-button close-modal'
+
+  :javascript
+    $(ImagePreview.bindEvents);
