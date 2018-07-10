@@ -340,8 +340,8 @@ body.namespace-my.controller-tracks.action-show {
 
             .topic {
                 overflow:hidden;
-                margin-bottom:5px;
-                @include font-size(12, 12);
+                margin-bottom:2px;
+                @include font-size(12, 15);
                 color:#9F9F9F;
                 font-weight:$regular;
                 .bar {
