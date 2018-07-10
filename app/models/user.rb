@@ -67,7 +67,14 @@ class User < ApplicationRecord
 
   def avatar_url
     img = super
-    img.present?? img : "anonymous.png"
+
+    if avatar.attached?
+      Rails.application.routes.url_helpers.url_for(avatar)
+    elsif img.present?
+      img
+    else
+      "anonymous.png"
+    end
   end
 
   def may_view_solution?(solution)

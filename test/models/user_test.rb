@@ -148,4 +148,18 @@ class UserTest < ActiveSupport::TestCase
     assert user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
     assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
   end
+
+  test "avatar_url" do
+    attached = create(:user)
+    attached.avatar.attach(
+      io: File.open("test/fixtures/test.png"),
+      filename: "test.png"
+    )
+    from_github = create(:user, avatar_url: "github.png")
+    no_image = create(:user, avatar_url: nil)
+
+    assert_includes attached.avatar_url, "test.png"
+    assert_equal "github.png", from_github.avatar_url
+    assert_equal "anonymous.png", no_image.avatar_url
+  end
 end
