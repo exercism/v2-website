@@ -177,6 +177,10 @@ Rails.application.routes.draw do
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
 
+  PagesController::LICENCES.values.each do |licence|
+    get "licences/#{licence.to_s.dasherize}" => "pages##{licence}", as: "#{licence}_licence"
+  end
+
   resource :team_page, only: [:show], path: "team" do
     get :maintainers
     get :mentors
