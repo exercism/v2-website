@@ -7,5 +7,9 @@
         = mentor.name
         -if mentor.link_text.present? && mentor.link_url.present?
           =link_to mentor.link_text, mentor.link_url, target: "_blank"
-      .bio= mentor.bio
+      .bio
+        -if mentor.bio.present?
+          = mentor.bio
+        -else
+          .holding-text This mentor has not added their bio yet.
 
