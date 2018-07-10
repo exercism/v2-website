@@ -69,7 +69,7 @@ class User < ApplicationRecord
     img = super
 
     if avatar.attached?
-      Rails.application.routes.url_helpers.url_for(avatar)
+      avatar_thumbnail_url
     elsif img.present?
       img
     else
@@ -129,5 +129,19 @@ class User < ApplicationRecord
     return false if email.blank?
     return true  if email.downcase.include?('+testexercismuser')
     false
+  end
+
+  private
+
+  def avatar_thumbnail_url
+    avatar_thumbnail = avatar.variant(
+      combine_options: {
+        thumbnail: "200x200^",
+        extent: "200x200",
+        gravity: :center
+      }
+    )
+
+    Rails.application.routes.url_helpers.url_for(avatar_thumbnail)
   end
 end
