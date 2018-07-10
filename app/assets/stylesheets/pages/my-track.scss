@@ -12,6 +12,11 @@ body.namespace-my.controller-tracks.action-show {
     }
     .header {
         background-color: $header-color-1;
+        overflow:hidden;
+        .title {
+            float:left
+        }
+
         .h1-subtitle {
             @include font-size(12, 12);
             color:#fff;
@@ -42,6 +47,7 @@ body.namespace-my.controller-tracks.action-show {
         }
         .stats {
             float:right;
+            margin-top:58px;
             .stat {
                 display:inline-block;
                 color:#fff;
@@ -51,6 +57,15 @@ body.namespace-my.controller-tracks.action-show {
                 margin-left:20px;
                 &+.stat {
                     border-left:1px solid rgba(#fff, 0.5);
+                }
+                a {
+                    color:#fff;
+                    text-decoration:none;
+                    display:block;
+                    border-bottom:1px solid rgba(#fff, 0.5);
+                    &:hover {
+                        border-bottom-color:#fff
+                    }
                 }
             }
         }
@@ -325,8 +340,8 @@ body.namespace-my.controller-tracks.action-show {
 
             .topic {
                 overflow:hidden;
-                margin-bottom:5px;
-                @include font-size(12, 12);
+                margin-bottom:2px;
+                @include font-size(12, 15);
                 color:#9F9F9F;
                 font-weight:$regular;
                 .bar {
@@ -435,6 +450,9 @@ body.namespace-my.controller-tracks.action-show {
                 }
             }
         }
+        .no-results {
+            color:#999;
+        }
     }
     .deprecated-exercises,
     .side-exercises {
@@ -448,7 +466,7 @@ body.namespace-my.controller-tracks.action-show {
         .h2-subtitle {
             @include font-size(14, 14);
             font-weight:$light;
-            color:#999;
+            color:#666;
             margin-bottom:35px;
         }
         .widget-side-exercise {

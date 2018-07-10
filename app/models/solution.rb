@@ -3,7 +3,7 @@ class Solution < ApplicationRecord
 
   belongs_to :approved_by, class_name: "User", optional: true
 
-  has_many :iterations
+  has_many :iterations, dependent: :destroy
   has_many :discussion_posts, through: :iterations
 
   has_many :mentorships, class_name: "SolutionMentorship"
@@ -53,5 +53,9 @@ class Solution < ApplicationRecord
 
   def completed?
     !!completed_at
+  end
+
+  def user_track
+    UserTrack.find_by(user_id: user_id, track_id: exercise.track_id)
   end
 end

@@ -8,7 +8,7 @@
           %h1 Exercism
           %h2 Code Practice and Mentorship for Everyone
           %p
-            Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{Track.count} languages, and insightful discussion with our dedicated team of welcoming mentors.
+            Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{@tracks.size} languages, and insightful discussion with our dedicated team of welcoming mentors.
             Exercism is
             =succeed('.') do
               %strong 100% free forever
@@ -47,7 +47,7 @@
         .pure-u-1-12
         .pure-u-7-12
           %h3 1. Choose a language to master
-          %p Object oriented, functional, popular, emerging, or just plain obscure. With 39 different languages to explore, Exercism has something for you!
+          %p Object oriented, functional, popular, emerging, or just plain obscure. With #{@tracks.size} different languages to explore, Exercism has something for you!
       .divider
 
       .step.pure-g

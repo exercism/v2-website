@@ -19,11 +19,15 @@ class ApplicationController < ActionController::Base
     return unless request.get?
     return if devise_controller?
 
-    session["site_context"] = "normal"
+    cookies["site_context"] = {
+      value: "normal",
+      domain: :all,
+      tld_length: 2
+    }
   end
 
   def layout_from_site_context
-    case session["site_context"]
+    case cookies["site_context"]
     when "teams"
       "teams"
     else
@@ -32,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_signed_in!
-    redirect_to my_dashboard_path if user_signed_in?
+    redirect_to signed_in_path if user_signed_in?
   end
 
   def render_modal(class_name, template)
@@ -53,6 +57,14 @@ class ApplicationController < ActionController::Base
     extend ActionView::Helpers::JavaScriptHelper
     def self.escape(html)
       escape_javascript(html)
+    end
+  end
+
+  def signed_in_path
+    if cookies["site_context"] == "teams"
+      teams_dashboard_path
+    else
+      my_dashboard_path
     end
   end
 end

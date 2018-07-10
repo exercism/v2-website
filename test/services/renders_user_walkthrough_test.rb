@@ -12,9 +12,9 @@ class RendersUserWalkthroughTest < ActiveSupport::TestCase
     user = create(:user)
     auth_token = create(:auth_token, user: user, token: "TOKEN")
 
-    assert_includes(
-      RendersUserWalkthrough.(user, "[CONFIGURE_COMMAND]"),
-      "exercism configure --token=TOKEN"
+    assert_equal(
+      "exercism configure --token=TOKEN",
+      RendersUserWalkthrough.(user, "[CONFIGURE_COMMAND]")
     )
   end
 end
