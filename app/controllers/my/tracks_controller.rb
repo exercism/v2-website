@@ -40,6 +40,7 @@ class My::TracksController < MyController
 
     if @user_track.independent_mode?
       @exercises_and_solutions = normal_exercises.map{|e|[e, mapped_solutions[e.id]]}
+
     else
       core_exercises, side_exercises = normal_exercises.partition {|e|e.core?}
 
