@@ -1,0 +1,74 @@
+require 'test_helper'
+
+class MentorNotificationsMailerTest < ActionMailer::TestCase
+   test "new_discussion_post" do
+    discussion_post = create :discussion_post
+    user = discussion_post.iteration.solution.user
+    user_track = create :user_track, user: user, track: discussion_post.iteration.solution.exercise.track
+    mentor = create :user
+
+    email = MentorNotificationsMailer.new_discussion_post(mentor, discussion_post)
+
+    assert_emails 1 do
+      email.deliver_now
+    end
+
+    assert_equal ["hello@exercism.io"], email.from
+    assert_equal [mentor.email], email.to
+    assert_equal '[Exercism Mentor Notification] New comment', email.subject
+
+    str = "A student you are mentoring (#{user.handle}) has posted"
+    assert_body_includes email, str
+    assert_text_includes email, str
+  end
+
+  test "new_discussion_post with anon handle" do
+    handle = "foobar-ftw"
+    discussion_post = create :discussion_post
+    user = discussion_post.iteration.solution.user
+    user_track = create :user_track, handle: handle, anonymous: true, user: user, track: discussion_post.iteration.solution.exercise.track
+
+    mentor = create :user
+
+    email = MentorNotificationsMailer.new_discussion_post(mentor, discussion_post)
+    str = "A student you are mentoring (#{handle}) has posted"
+    assert_body_includes email, str
+    assert_text_includes email, str
+  end
+
+  test "new_iteration" do
+    iteration = create :iteration
+    user = iteration.solution.user
+    user_track = create :user_track, user: user, track: iteration.solution.exercise.track
+    mentor = create :user
+
+    email = MentorNotificationsMailer.new_iteration(mentor, iteration)
+
+    assert_emails 1 do
+      email.deliver_now
+    end
+
+    assert_equal ["hello@exercism.io"], email.from
+    assert_equal [mentor.email], email.to
+    assert_equal '[Exercism Mentor Notification] New iteration', email.subject
+
+    str = "A student you are mentoring (#{user.handle}) has posted"
+    assert_body_includes email, str
+    assert_text_includes email, str
+  end
+
+  test "new_iteration with anon handle" do
+    handle = "foobar-ftw"
+    iteration = create :iteration
+    user = iteration.solution.user
+    user_track = create :user_track, handle: handle, anonymous: true, user: user, track: iteration.solution.exercise.track
+
+    mentor = create :user
+
+    email = MentorNotificationsMailer.new_iteration(mentor, iteration)
+    str = "A student you are mentoring (#{handle}) has posted"
+    assert_body_includes email, str
+    assert_text_includes email, str
+  end
+end
+

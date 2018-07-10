@@ -92,7 +92,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # SMTP configuration
+  # SMTP setup
   config.action_mailer.delivery_method = :smtp
 
   smtp_config = Rails.application.config_for("smtp")

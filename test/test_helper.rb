@@ -21,6 +21,16 @@ class ActiveSupport::TestCase
   include StubRepoCache
 end
 
+class ActionMailer::TestCase
+  def assert_body_includes(email, string)
+    assert email.html_part.body.to_s.gsub("\n", ' ').include?(string)
+  end
+
+  def assert_text_includes(email, string)
+    assert email.text_part.body.to_s.include?(string)
+  end
+end
+
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
