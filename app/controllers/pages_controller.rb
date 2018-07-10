@@ -14,7 +14,12 @@ class PagesController < ApplicationController
     "Report Abuse": :report_abuse,
   }
 
-  PAGES.each do |title, page|
+  LICENCES = { 
+    "MIT": :mit,
+    "CC-BY-SA-4.0": :cc_sa_4
+  }
+
+  PAGES.merge(LICENCES).each do |title, page|
     define_method page do
       markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
       @page = page
