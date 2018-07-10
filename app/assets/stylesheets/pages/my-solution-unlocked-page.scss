@@ -60,6 +60,12 @@
                 border-bottom:1px solid #ccc;
                 font-weight:$light;
             }
+            li {
+                margin-bottom: 4px;
+                li {
+                    margin-bottom:0;
+                }
+            }
 
         }
         .pure-button {
