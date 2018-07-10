@@ -1,6 +1,6 @@
 %h2 Update your profile
 .h2-subtitle Tell the Exercism community a little about yourself.
-=form_for @profile, url: my_profile_path, method: :patch do |f|
+=form_for @profile, url: my_profile_path, method: :patch, html: { multipart: true } do |f|
   =fields_for @profile.user do |uf|
     .pure-g
       .pure-u-1-2.lhs
