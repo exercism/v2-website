@@ -25,8 +25,7 @@ Note: Teams will be avaliable on http://teams.localhost:3000.
 
 ```
 bundle install
-bundle exec rake db:schema:load
-bundle exec rake db:seed
+bundle exec rake bin/setup
 bundle exec rails r "Git::UpdatesRepos.update"
 bundle exec rails s
 ```
