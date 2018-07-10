@@ -31,6 +31,7 @@ gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
 gem "bugsnag"
+gem 'aws-sdk-s3'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
