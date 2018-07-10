@@ -42,6 +42,8 @@ class User < ApplicationRecord
 
   has_many :reactions
 
+  has_one_attached :avatar
+
   validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
 
