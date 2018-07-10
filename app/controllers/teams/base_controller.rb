@@ -10,10 +10,6 @@ class Teams::BaseController < ApplicationController
     }
   end
 
-  def redirect_if_signed_in!
-    redirect_to teams_dashboard_path if user_signed_in?
-  end
-
   def find_team
     @team = current_user.teams.find(params[:team_id])
   rescue
