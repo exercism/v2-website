@@ -1,0 +1,25 @@
+#track-mentors-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      =image_tag "nav-divider.png"
+      =link_to "Language Tracks", [:tracks]
+      =image_tag "nav-divider.png"
+      =link_to "#{@track.title} Track", @track
+      =image_tag "nav-divider.png"
+      %span Mentors
+
+  .header
+    .visual-section
+      .line
+      .lo-container
+        =bordered_turquoise_track_icon(@track, class: 'logo')
+    .lo-container
+      %h1 #{@track.title} Mentors
+      .h1-subtitle Our mentors are the lynchpins of the language tracks and exercises on Exercism. This group of wonderful people maintain the #{@track.title} Track, creating and updating the exercises and tooling for #{@track.title}.
+
+  .lo-container
+    .pure-g.people
+      -@mentors.each do |mentor|
+        .pure-u-1-2= mentor_widget(mentor)
+
