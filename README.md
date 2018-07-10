@@ -36,3 +36,12 @@ bundle exec rails s
 ```bash
 $ echo "host" > server_identity
 ```
+
+### Deleting an account
+
+ To delete a user, run `user.destroy.`
+
+The user record is deleted, as well as associated objects except the ff:
+
+- Discussion posts where they are a mentor.
+- Maintainer records where their user record is associated.
