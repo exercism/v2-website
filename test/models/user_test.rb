@@ -160,6 +160,21 @@ class UserTest < ActiveSupport::TestCase
 
     assert_includes attached.avatar_url, "test.png"
     assert_equal "github.png", from_github.avatar_url
-    assert_equal "anonymous.png", no_image.avatar_url
+    assert_equal User::DEFAULT_AVATAR, no_image.avatar_url
+  end
+
+  test "destroying a user preserves discussions as a mentor and deletes discussions as a learner" do
+    user = create(:user)
+    mentor_post = create(:discussion_post, user: user)
+    solution = create(:solution, user: user)
+    iteration = create(:iteration, solution: solution)
+    learner_post = create(:discussion_post, iteration: iteration, user: user)
+
+    user.destroy
+
+    refute DiscussionPost.exists?(learner_post.id)
+    mentor_post.reload
+    refute mentor_post.destroyed?
+    assert_nil mentor_post.user
   end
 end

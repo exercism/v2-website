@@ -18,7 +18,7 @@
     }
     h3 {
         color:$color-2;
-        @include font-size(16, 16);
+        @include font-size(16, 19);
         font-weight:$bold;
         margin-bottom:5px;
         overflow:hidden;
@@ -26,7 +26,7 @@
         white-space:nowrap;
         a {
             display:inline-block;
-            margin-left:6px;
+            margin-left:3px;
             padding-left:6px;
             border-left:1px solid #aaa;
             @include font-size(13, 16);
@@ -38,21 +38,23 @@
     .bio {
         color:#555;
         @include font-size(14, 17);
-        letter-spacing:-0.3px;
+        .holding-text {
+            color:#aaa;
+        }
     }
-  .banner {
-    position:absolute;
-    width:140px;
-    height:20px;
-    position:absolute;
-    left:-45px;
-    top:15px;
-    background:$color-2;
-    font-weight:$regular;
-    text-align:center;
-    color:#fff;
-    transform: rotate(-45deg);
-    @include font-size(12, 20);
-    z-index:5;
-  }
+   .banner {
+        position:absolute;
+        width:140px;
+        height:20px;
+        position:absolute;
+        left:-45px;
+        top:15px;
+        background:$color-2;
+        font-weight:$regular;
+        text-align:center;
+        color:#fff;
+        transform: rotate(-45deg);
+        @include font-size(12, 20);
+        z-index:5;
+    }
 }

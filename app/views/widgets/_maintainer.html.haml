@@ -9,4 +9,8 @@
         = maintainer.name
         -if maintainer.link_text.present? && maintainer.link_url.present?
           =link_to maintainer.link_text, maintainer.link_url, target: "_blank"
-      .bio= maintainer.bio
+      .bio
+        -if maintainer.bio.present?
+          = maintainer.bio
+        -else
+          .holding-text This maintainer has not added their bio yet.

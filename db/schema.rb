@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2018_07_10_112642) do
 
   create_table "discussion_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "iteration_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.text "content", limit: 4294967295, null: false
     t.text "html", limit: 4294967295, null: false
     t.datetime "created_at", null: false
@@ -169,8 +169,6 @@ ActiveRecord::Schema.define(version: 2018_07_10_112642) do
     t.string "link_text"
     t.string "link_url"
     t.text "bio"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["track_id"], name: "index_mentors_on_track_id"
   end
 
@@ -265,7 +263,6 @@ ActiveRecord::Schema.define(version: 2018_07_10_112642) do
     t.boolean "mentoring_enabled"
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
-    t.index ["exercise_id"], name: "fk_rails_8c0841e614"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
   end
 

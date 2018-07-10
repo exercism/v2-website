@@ -1,4 +1,9 @@
--if @solution.approved?
+-if @solution.completed?
+  .completed-info
+    .title ↳ Solution Completed
+    %p Your solution has been completed. You can continue working adding further iterations or move on to new challenges. Well done!
+
+-elsif @solution.approved?
   .completed-info
     .title ↳ Solution Approved!
     %p Your solution has been approved by a mentor. Congratulations! You can now complete the exercise and move forward on the track.

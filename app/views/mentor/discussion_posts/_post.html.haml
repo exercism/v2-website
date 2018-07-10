@@ -1,5 +1,5 @@
--avatar_url = post.user == solution.user ?  display_avatar_url(post.user, user_track) : post.user.avatar_url
--user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.user.handle
+-avatar_url = post.user == solution.user ?  display_avatar_url(post.user, user_track) : post.avatar_url
+-user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.handle
 
 .post{id: "discussion-post-#{post.id}"}
   =image_tag avatar_url, class: 'avatar'
