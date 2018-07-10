@@ -3,7 +3,7 @@ class Solution < ApplicationRecord
 
   belongs_to :approved_by, class_name: "User", optional: true
 
-  has_many :iterations
+  has_many :iterations, dependent: :destroy
   has_many :discussion_posts, through: :iterations
 
   has_many :mentorships, class_name: "SolutionMentorship"
