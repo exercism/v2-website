@@ -20,7 +20,7 @@
         =image_tag @exercise.white_icon_url
       %h1= @exercise.title
       .h1-subtitle
-        An exercise from the #{link_to "#{@exercise.track.title} Track"}
+        An exercise from the #{link_to "#{@exercise.track.title} Track", @exercise.track}
 
   .info-section
     .lo-container
@@ -41,4 +41,3 @@
         .pure-u-1-3
           =render "solutions/solution", solution: solution, user_track: @user_tracks[solution.user_id]
     =link_to "View all solutions", [@track, @exercise, :solutions], class: 'pure-button more-button'
-
