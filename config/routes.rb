@@ -196,5 +196,11 @@ Rails.application.routes.draw do
   end
   post "markdown/parse" => "markdown#parse"
 
+
+  # ################ #
+  # Legacy redirects #
+  # ################ #
+  get "submissions/:uuid" => "legacy_routes#submission_to_solution"
+
   root to: "pages#index"
 end
