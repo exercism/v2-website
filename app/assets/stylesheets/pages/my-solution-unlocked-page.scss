@@ -95,6 +95,11 @@
                 margin-bottom:0;
             }
         }
+        p {
+            margin-top:7px;
+            color:#999;
+            @include font-size(13, 13);
+        }
     }
     .newbie {
         background:#fafffe;
