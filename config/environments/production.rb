@@ -116,6 +116,8 @@ Rails.application.configure do
     :port => smtp_port,
     :authentication => smtp_authentication
   }
+
+  config.active_storage.service = :amazon
 end
 
 Rails.application.routes.default_url_options = { :host => "https://v2.exercism.io" } 
