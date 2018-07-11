@@ -38,7 +38,7 @@ class CompletesSolution
   end
 
   def update_solution_record
-    solution.update!( completed_at: DateTime.now )
+    solution.update!( completed_at: Time.current )
   end
 
   def unlock_next_core_exercise
