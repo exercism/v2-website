@@ -12,9 +12,11 @@ class PagesController < ApplicationController
     "Become a Mentor": :become_a_mentor,
     "Become a Maintainer": :become_a_maintainer,
     "Report Abuse": :report_abuse,
+    "Contact": :contact,
+    "Contribute": :contribute,
   }
 
-  LICENCES = { 
+  LICENCES = {
     "MIT": :mit,
     "CC-BY-SA-4.0": :cc_sa_4
   }
