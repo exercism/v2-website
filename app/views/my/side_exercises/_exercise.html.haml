@@ -5,24 +5,25 @@
 -else
   -img_url = exercise.dark_icon_url
 
-.icon
-  .img{style: "background-image:url('#{image_path(img_url)}')"}
+%div{id: "exercise-#{exercise.slug}"}
+  .icon
+    .img{style: "background-image:url('#{image_path(img_url)}')"}
 
-%i.fa.fa-lock.status.locked
-%i.fa.fa-unlock.status.unlocked
-%i.fa.fa-adjust.status.in-progress
-.status.completed
-  %i.fa.fa-check
+  %i.fa.fa-lock.status.locked
+  %i.fa.fa-unlock.status.unlocked
+  %i.fa.fa-adjust.status.in-progress
+  .status.completed
+    %i.fa.fa-check
 
-.title= exercise.title
--length_word = exercise_length_word(exercise)
--difficulty_word = exercise_difficulty_word(exercise)
-.stats
-  .length{class: length_word}= length_word
-  .difficulty{class: difficulty_word}= difficulty_word
-.topics
-  -if exercise.topic_names.size > 0
-    - exercise.topic_names.each do |topic_name|
-      .topic= topic_name
-  -else
-    .topic misc
+  .title= exercise.title
+  -length_word = exercise_length_word(exercise)
+  -difficulty_word = exercise_difficulty_word(exercise)
+  .stats
+    .length{class: length_word}= length_word
+    .difficulty{class: difficulty_word}= difficulty_word
+  .topics
+    -if exercise.topic_names.size > 0
+      - exercise.topic_names.each do |topic_name|
+        .topic= topic_name
+    -else
+      .topic misc

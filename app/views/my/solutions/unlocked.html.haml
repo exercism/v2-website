@@ -7,7 +7,7 @@
 %h3 You have unlocked the following core exercise:
 
 -if @next_core_exercise
-  .core-exercise
+  =link_to [:my, @next_core_solution], class: 'core-exercise' do
     .icon= image_tag @next_core_exercise.white_icon_url
     .title
       = @next_core_exercise.title

@@ -26,3 +26,5 @@
 /app/assets/images/tmp
 
 /server_identity
+
+storage/

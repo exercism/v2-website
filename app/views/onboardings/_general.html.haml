@@ -12,7 +12,7 @@
   .field
     =f.label :accepted_terms_at do
       =f.check_box :accepted_terms_at, required: true
-      .text Accept terms and conditions
+      .text Accept Terms of Service
 
 .section
   %h2 Our Privacy Policy
@@ -23,7 +23,7 @@
   .field
     =f.label :accepted_privacy_policy_at do
       =f.check_box :accepted_privacy_policy_at, required: true
-      .text Accept privacy policy
+      .text Accept Privacy Policy
 
 .section
   %h2 Communication Preferences
@@ -32,11 +32,11 @@
     We don't send marketing emails.
   .field
     =f.label :email_on_new_discussion_post do
-      =f.check_box :email_on_new_discussion_post, required: true, checked: true
+      =f.check_box :email_on_new_discussion_post, checked: true
       .text Email me when a mentor comments on my solution
   .field
     =f.label :receive_product_updates do
-      =f.check_box :receive_product_updates, required: true, checked: true
+      =f.check_box :receive_product_updates, checked: true
       Send me updates about new features, languages and exercises
 
 =f.button "Save and continue to Exercism", class: 'pure-button'

@@ -149,6 +149,20 @@ class UserTest < ActiveSupport::TestCase
     assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
   end
 
+  test "avatar_url" do
+    attached = create(:user)
+    attached.avatar.attach(
+      io: File.open("test/fixtures/test.png"),
+      filename: "test.png"
+    )
+    from_github = create(:user, avatar_url: "github.png")
+    no_image = create(:user, avatar_url: nil)
+
+    assert_includes attached.avatar_url, "test.png"
+    assert_equal "github.png", from_github.avatar_url
+    assert_equal User::DEFAULT_AVATAR, no_image.avatar_url
+  end
+
   test "destroying a user preserves discussions as a mentor and deletes discussions as a learner" do
     user = create(:user)
     mentor_post = create(:discussion_post, user: user)
