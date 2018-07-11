@@ -38,7 +38,7 @@
 
       %h2
         to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
-        in the #{link_to "#{@track.title} Track", class: "track"}
+        in the #{link_to "#{@track.title} Track", @track, class: "track"}
 
   .lo-container
     .pure-g.panels
