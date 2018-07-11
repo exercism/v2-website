@@ -61,6 +61,10 @@ Rails.application.routes.draw do
     get "confirmations/required" => "confirmations#required", as: 'confirmation_required'
   end
 
+  resource :onboarding, only: [:show, :update] do
+    get "migrate_to_v2"
+  end
+
   # ######## #
   # External #
   # ######## #
@@ -171,6 +175,10 @@ Rails.application.routes.draw do
   # ##### #
   PagesController::PAGES.values.each do |page|
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
+  end
+
+  PagesController::LICENCES.values.each do |licence|
+    get "licences/#{licence.to_s.dasherize}" => "pages##{licence}", as: "#{licence}_licence"
   end
 
   resource :team_page, only: [:show], path: "team" do

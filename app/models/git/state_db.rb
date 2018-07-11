@@ -20,11 +20,11 @@ class Git::StateDb
   end
 
   def mark_synced(track)
-    set(track, { last_sync: DateTime.now, success: true, track_id: track.id } )
+    set(track, { last_sync: Time.current, success: true, track_id: track.id } )
   end
 
   def mark_failed(track)
-    set(track, { last_sync: DateTime.now, success: false, track_id: track.id } )
+    set(track, { last_sync: Time.current, success: false, track_id: track.id } )
   end
 
   def reset(track)
@@ -41,8 +41,8 @@ class Git::StateDb
   end
 
   def stale_tracks_before(min_fetch_period=MIN_FETCH_PERIOD)
-    stale_cut_off = DateTime.now - min_fetch_period
-    failure_cut_off = DateTime.now - failure_cooloff_period
+    stale_cut_off = Time.current - min_fetch_period
+    failure_cut_off = Time.current - failure_cooloff_period
     failures_to_retry = []
     to_sync = []
     lmdb.transaction do |txn|

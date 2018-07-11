@@ -30,7 +30,7 @@ class AuthenticatesUserFromOmniauth
       # we need to confirm them so they don't get blocked
       # when trying to log in.
       unless user.confirmed?
-        user.confirmed_at = DateTime.now
+        user.confirmed_at = Time.current
 
         # We need to protect against:
         # - Malicious person signs up with email/password

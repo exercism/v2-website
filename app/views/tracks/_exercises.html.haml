@@ -10,4 +10,4 @@
       -@exercises.each do |exercise|
         .pure-u-1-3
           .widget-side-exercise.completed
-            =render "my/side_exercises/exercise", exercise: exercise, solution: Solution.new(completed_at: DateTime.now - 1.second)
+            =render "my/side_exercises/exercise", exercise: exercise, solution: Solution.new(completed_at: Time.current - 1.second)

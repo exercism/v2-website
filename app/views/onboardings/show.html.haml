@@ -1,0 +1,14 @@
+#onboarding-page
+  .lo-container
+  .lo-container
+    .pure-g
+      .pure-u-3-5.lhs
+        =form_for @current_user, url: onboarding_path, method: :patch do |f|
+
+          %h1 Welcome To Exercism!
+          %p We're really happy you're here and hope that Exercism will be a valuable and fun experience for you.
+          %p We need to get a couple of quick legal bits out of the way to ensure you get the experience you expect, and to protect our community.
+
+          =render "general", f: f
+
+      .pure-u-2-5.rhs= code_person_widget

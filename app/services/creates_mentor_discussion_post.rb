@@ -18,7 +18,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     create_discussion_post!
 
     mentorship = CreatesSolutionMentorship.create(solution, user)
-    solution.update!(last_updated_by_mentor_at: DateTime.now)
+    solution.update!(last_updated_by_mentor_at: Time.current)
     mentorship.update!(requires_action: false)
     notify_solution_user
 

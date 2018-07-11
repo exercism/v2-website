@@ -66,6 +66,11 @@ class User < ApplicationRecord
     @auth_token ||= auth_tokens.first.token
   end
 
+  def onboarded?
+    accepted_terms_at.present? &&
+    accepted_privacy_policy_at.present?
+  end
+
   def avatar_url
     img = super
     img.present?? img : User::DEFAULT_AVATAR
