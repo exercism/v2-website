@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_112642) do
+ActiveRecord::Schema.define(version: 2018_07_11_154145) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 2018_07_10_112642) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "solution_type", default: "Solution", null: false
+    t.string "legacy_uuid"
     t.index ["solution_id"], name: "fk_rails_5d9f1bf4bd"
   end
 
