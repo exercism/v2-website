@@ -1,4 +1,28 @@
+@import "mixins";
+
 .walkthrough {
+  @include normal-font;
+  @include font-size(14, 21);
+
+  h1 {
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  a {
+    color: #333;
+  }
+
+  a[data-passage] {
+    font-size: 16px;
+  }
+
+  p {
+    @include font-size(14, 21);
+    margin-bottom:10px;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     margin-bottom: 20px;
     font-weight: bold;
@@ -13,9 +37,40 @@
 
   img {
     width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   hr {
+    height: 1px;
     margin-bottom: 20px;
+
+    border: none;
+
+    color: #e5e5e5;
+    background-color: #e5e5e5;
+  }
+
+  #passage {
+    max-width: 100%;
+
+    h2, h3 {
+      margin-top: 20px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  pre {
+    @include font-size(12);
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 10px;
+    background: #fafafa;
+    code {
+        white-space: pre-wrap;
+    }
   }
 }

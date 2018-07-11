@@ -2,41 +2,10 @@
 @import 'mixins';
 
 #modal-wrapper #modal.solution-walkthrough {
-    padding:25px;
-    .header {
-        @include font-size(18, 18);
-        font-weight:$regular;
-        margin-bottom:10px;
-    }
-    .content {
-        @include font-size(14, 21);
-        margin-bottom:15px;
-        a {
-            color:#333;
-        }
-        p {
-            @include font-size(14, 21);
-            margin-bottom:10px;
-        }
-        * {
-            &:last-child {
-                margin-bottom:0;
-            }
-        }
-        pre {
-            border: 1px solid #ddd;
-            padding: 10px;
-            background:#fafafa;
-            @include font-size(12);
-            code {
-                white-space: pre-wrap;
-            }
-        }
-    }
-    button {
-        background:$color-1;
-        color:#fff;
-        margin-right:5px;
-    }
+  max-width: 100%;
+  padding: 40px;
 }
 
+#modal-wrapper #modal-close-button {
+  padding: 15px 19px;
+}
