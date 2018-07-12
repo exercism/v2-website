@@ -18,15 +18,11 @@ class TeamPagesController < ApplicationController
   end
 
   def mentors
+    @page = params[:page]
     @mentors_last_updated_at = Mentor.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
-    @mentors = Mentor.reorder('LENGTH(bio) DESC').to_a.
-                   group_by(&:github_username).map {|_, ms|
-                      if ms.length == 1
-                        ms[0]
-                      else
-                        ms.sort_by{|m|-m.bio.to_s.length}.first
-                      end
-                    }
+    @mentors = Mentor.reorder('LENGTH(bio) DESC').
+                      page(@page).
+                      per(10)
   end
 
   def contributors
