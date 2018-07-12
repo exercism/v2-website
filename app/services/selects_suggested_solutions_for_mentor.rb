@@ -45,7 +45,7 @@ class SelectsSuggestedSolutionsForMentor
       # then age (oldest first)
       order("independent_mode ASC, core DESC, num_mentors ASC, last_updated_by_user_at ASC").
 
-      includes(iterations: [], exercise: {track: []}, user: [:profile]).
+      includes(iterations: [], exercise: {track: []}, user: [:profile, { avatar_attachment: :blob }]).
 
       # TODO - Paginate
       limit(20)
