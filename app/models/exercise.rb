@@ -28,7 +28,7 @@ class Exercise < ApplicationRecord
   }
 
   def download_command
-    "exercism download #{slug} --track=#{track.slug}"
+    "exercism download --exercise=#{slug} --track=#{track.slug}"
   end
 
   def submit_command
