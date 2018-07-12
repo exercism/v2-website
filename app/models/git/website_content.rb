@@ -37,11 +37,13 @@ class Git::WebsiteContent < Git::RepoBase
     mentors = []
 
     tree.walk_blobs do |root, file|
-      track_slug = root.chomp("/")
-      mentor_jsons = read_json_blob(file[:oid])
+      if File.extname(file[:name]) == ".json"
+        track_slug = root.chomp("/")
+        mentor_jsons = read_json_blob(file[:oid])
 
-      mentor_jsons.each do |json|
-        mentors << json.merge(track: track_slug)
+        mentor_jsons.each do |json|
+          mentors << json.merge(track: track_slug)
+        end
       end
     end
 
