@@ -76,11 +76,12 @@ class My::SolutionsController < MyController
 
     if user_track.normal_mode?
       if @solution.exercise.core?
-        @next_core_exercise = current_user.solutions.not_completed.
+        @next_core_solution = current_user.solutions.not_completed.
                               joins(:exercise).
                               where("exercises.track_id": @track.id).
                               where("exercises.core": true).
-                              first.try(&:exercise)
+                              first
+        @next_core_exercise = @next_core_solution.try(&:exercise)
       end
 
       unlocked_side_exercises = @solution.exercise.unlocks

@@ -1,6 +1,12 @@
 @import 'variables';
 @import 'mixins';
 
+body.controller-solutions.action-show {
+    footer {
+        display:none;
+    }
+}
+
 #solution-page,
 #mentor-solution-page,
 #my-solution-page,

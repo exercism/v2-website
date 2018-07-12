@@ -67,8 +67,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "exercism_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'v2.exercism.io', protocol: 'https' }
-  config.action_mailer.asset_host = 'https://v2.exercism.io'
+  config.action_mailer.default_url_options = { host: 'exercism.io', protocol: 'https' }
+  config.action_mailer.asset_host = 'https://exercism.io'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -116,6 +116,8 @@ Rails.application.configure do
     :port => smtp_port,
     :authentication => smtp_authentication
   }
+
+  config.active_storage.service = :amazon
 end
 
-Rails.application.routes.default_url_options = { :host => "https://v2.exercism.io" } 
+Rails.application.routes.default_url_options = { :host => "https://exercism.io" } 

@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  # TODO - Delete this
-  post "tmp/create_iteration" => "tmp#create_iteration", as: :tmp_create_iteration
-  post "tmp/create_team_iteration" => "tmp#create_team_iteration", as: :tmp_create_team_iteration
-
   # ### #
   # API #
   # ### #
@@ -195,6 +191,12 @@ Rails.application.routes.draw do
     resources :contributors, only: [:create]
   end
   post "markdown/parse" => "markdown#parse"
+
+
+  # ################ #
+  # Legacy redirects #
+  # ################ #
+  get "submissions/:uuid" => "legacy_routes#submission_to_solution"
 
   root to: "pages#index"
 end

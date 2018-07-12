@@ -45,6 +45,8 @@ class User < ApplicationRecord
 
   has_many :discussion_posts, dependent: :nullify
 
+  has_one_attached :avatar
+
   validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
 
@@ -73,7 +75,13 @@ class User < ApplicationRecord
 
   def avatar_url
     img = super
-    img.present?? img : User::DEFAULT_AVATAR
+    if avatar.attached?
+      avatar_thumbnail_url
+    elsif img.present?
+      img
+    else
+      User::DEFAULT_AVATAR
+    end
   end
 
   def may_view_solution?(solution)
@@ -128,5 +136,19 @@ class User < ApplicationRecord
     return false if email.blank?
     return true  if email.downcase.include?('+testexercismuser')
     false
+  end
+
+  private
+
+  def avatar_thumbnail_url
+    avatar_thumbnail = avatar.variant(
+      combine_options: {
+        thumbnail: "200x200^",
+        extent: "200x200",
+        gravity: :center
+      }
+    )
+
+    Rails.application.routes.url_helpers.url_for(avatar_thumbnail)
   end
 end

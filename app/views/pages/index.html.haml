@@ -95,8 +95,8 @@
   :javascript
     setupLandingPage()
 
--unless session[:beta_modal_shown]
-  - session[:beta_modal_shown] = true
+-unless session[:announcement_modal_shown]
+  - session[:announcement_modal_shown] = true
   -content_for :js do
     :javascript
-      showModal('beta-announcement', '#{j render "beta_announcement"}')
+      showModal('announcement', '#{j render "announcement"}')

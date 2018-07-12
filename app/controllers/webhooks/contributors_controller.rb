@@ -31,7 +31,7 @@ class Webhooks::ContributorsController < WebhooksController
   end
 
   def secret
-    ENV['GITHUB_WEBHOOK_SECRET'] || 'hot fudge sundae' # default for test env
+    Rails.application.secrets.github_webhook_secret
   end
 
   def github_signature

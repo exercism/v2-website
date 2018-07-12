@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_action :redirect_if_signed_in!, only: [:index]
 
   PAGES = {
-    "Terms and Conditions": :terms,
+    "Terms of Service": :terms_of_service,
     "Privacy Policy": :privacy,
     "Code of Conduct": :code_of_conduct,
     "Frequently Asked Questions": :faqs,
@@ -12,9 +12,12 @@ class PagesController < ApplicationController
     "Become a Mentor": :become_a_mentor,
     "Become a Maintainer": :become_a_maintainer,
     "Report Abuse": :report_abuse,
+    "Contact": :contact,
+    "Contribute": :contribute,
+    "About the new site": :about_v1_to_v2,
   }
 
-  LICENCES = { 
+  LICENCES = {
     "MIT": :mit,
     "CC-BY-SA-4.0": :cc_sa_4
   }
