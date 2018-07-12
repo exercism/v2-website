@@ -1,18 +1,19 @@
 -idx = 0
 -first_row_count = 0
+-tracks = @tracks.clone
 
--if ((@tracks.count % 19) < 5)
+-if ((tracks.count % 19) < 5)
     -# If the overflow row will contain less than 5 elements, we will add five elements to it from another row
-    -first_row_count = (@tracks.count % 19) + (5 - (@tracks.count % 19))
--elsif ((@tracks.count % 19) > 10 && (@tracks.count % 19) < 15)
+    -first_row_count = (tracks.count % 19) + (5 - (tracks.count % 19))
+-elsif ((tracks.count % 19) > 10 && (tracks.count % 19) < 15)
     -# If the overflow row contains between 11 and 14 elements, we will add five elements to it from another row
-    -first_row_count = ((@tracks.count % 19) - 10) + (15 - (@tracks.count % 19))
+    -first_row_count = ((tracks.count % 19) - 10) + (15 - (tracks.count % 19))
 
--while @tracks.present?
+-while tracks.present?
     -idx += 1
 
     -# Calculate the number of items in this row, based on the index/upper limit
-    -row_count = idx == 1 && first_row_count > 0 ? first_row_count : [(idx.odd?? 10 : 9),@tracks.count].min
+    -row_count = idx == 1 && first_row_count > 0 ? first_row_count : [(idx.odd?? 10 : 9),tracks.count].min
     -# Add empty items to center each row
     -items_before = row_count <= 0 ? 0 : [(idx.odd?? (9/2 - row_count/2) : (8/2 - row_count/2)),0].max
 
@@ -21,7 +22,7 @@
         -items_before.times do |track|
             .track
                 .title=""
-        -@tracks.slice!(0, row_count).each do |track|
+        -tracks.slice!(0, row_count).each do |track|
             =link_to track, class: "track #{track.slug=="go"?"go":""}", style: "background-image:url('#{track.hex_white_icon_url}')" do
                 .title= track.title
                 -if track.slug == "go"
