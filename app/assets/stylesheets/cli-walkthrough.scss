@@ -1,11 +1,11 @@
 @import "mixins";
 
-.walkthrough {
+#cli-walkthrough {
   @include normal-font;
-  @include font-size(14, 21);
+  @include font-size;
 
   h1 {
-    font-size: 16px;
+    @include font-size(16);
     padding-bottom: 10px;
     border-bottom: 1px solid #e5e5e5;
   }
@@ -15,7 +15,7 @@
   }
 
   a[data-passage] {
-    font-size: 16px;
+    @include font-size(16);
   }
 
   p {
