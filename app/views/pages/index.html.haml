@@ -1,5 +1,6 @@
-#landing-page
+-num_tracks = @tracks.size
 
+#landing-page
   .welcome-section
     .lo-container
       .pure-g
@@ -10,7 +11,7 @@
             exercism
           %h2 Code Practice and Mentorship for Everyone
           %p
-            Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{@tracks.size} languages, and insightful discussion with our dedicated team of welcoming mentors.
+            Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{num_tracks} languages, and insightful discussion with our dedicated team of welcoming mentors.
             Exercism is
             =succeed('.') do
               %strong 100% free forever
@@ -33,9 +34,9 @@
     .lo-container
       .title-block
         %h2 Available Language Tracks
-        %p There are #{@tracks.size} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
+        %p There are #{num_tracks} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
       .tracks
-        =render 'tracks_display', :tracks => @tracks
+        =render 'tracks_display', tracks: @tracks
 
   .how-section
     .lo-container
@@ -49,7 +50,7 @@
         .pure-u-1-12
         .pure-u-7-12
           %h3 1. Choose a language to master
-          %p Object oriented, functional, popular, emerging, or just plain obscure. With #{@tracks.size} different languages to explore, Exercism has something for you!
+          %p Object oriented, functional, popular, emerging, or just plain obscure. With #{num_tracks} different languages to explore, Exercism has something for you!
       .divider
 
       .step.pure-g
