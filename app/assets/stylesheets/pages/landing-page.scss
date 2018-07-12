@@ -273,8 +273,10 @@ body.controller-pages.action-index {
 
 }
 
-#modal.beta-announcement {
-    padding:60px 50px 50px 50px;
+#modal.announcement {
+    padding:50px;
+    margin:40px auto !important;
+    max-height:85% !important;
     img {
         width:50px;
         display:block;
