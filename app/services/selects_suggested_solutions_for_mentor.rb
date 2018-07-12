@@ -14,7 +14,7 @@ class SelectsSuggestedSolutionsForMentor
 
       # Only mentored tracks
       joins(:exercise).
-      where("exercises.track_id": tracks).
+      where("exercises.track_id": track_ids).
 
       joins(user: :user_tracks).
       where("user_tracks.track_id = exercises.track_id").
@@ -51,7 +51,7 @@ class SelectsSuggestedSolutionsForMentor
       limit(20)
   end
 
-  def tracks
-    @tracks ||= user.mentored_tracks
+  def track_ids
+    @track_ids ||= user.track_mentorships.pluck(:track_id)
   end
 end
