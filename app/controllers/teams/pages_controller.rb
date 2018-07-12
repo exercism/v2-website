@@ -4,7 +4,7 @@ class Teams::PagesController < Teams::BaseController
   before_action :redirect_if_signed_in!, only: [:index]
 
   PAGES = {
-    "Terms and Conditions": :terms,
+    "Terms of Service": :terms_of_service,
     "Privacy Policy": :privacy,
     "Exercism's Values": :values,
   }

@@ -5,7 +5,9 @@
       .pure-g
         .pure-u-1-2.lhs= code_person_widget
         .pure-u-1-2.rhs
-          %h1 Exercism
+          %h1
+            =image_tag "logo-green.png", title: "Exercism", alt: "Exercism"
+            exercism
           %h2 Code Practice and Mentorship for Everyone
           %p
             Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{@tracks.size} languages, and insightful discussion with our dedicated team of welcoming mentors.
@@ -95,8 +97,8 @@
   :javascript
     setupLandingPage()
 
--unless session[:beta_modal_shown]
-  - session[:beta_modal_shown] = true
+-unless session[:announcement_modal_shown]
+  - session[:announcement_modal_shown] = true
   -content_for :js do
     :javascript
-      showModal('beta-announcement', '#{j render "beta_announcement"}')
+      showModal('announcement', '#{j render "announcement"}')

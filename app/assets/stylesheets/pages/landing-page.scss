@@ -16,9 +16,17 @@ body.controller-pages.action-index {
             padding-top:100px;
             h1 {
                 @include header-font;
-                @include font-size(30, 30);
+                @include font-size(32,24);
                 color:$color-2;
                 margin-bottom:10px;
+                position:relative;
+                img {
+                    height:25px;
+                    background:white;
+                    position:absolute;
+                    top:0;
+                    left:0;
+                }
             }
             h2 {
                 @include header-font;
@@ -273,8 +281,10 @@ body.controller-pages.action-index {
 
 }
 
-#modal.beta-announcement {
-    padding:60px 50px 50px 50px;
+#modal.announcement {
+    padding:50px;
+    margin:40px auto !important;
+    max-height:85% !important;
     img {
         width:50px;
         display:block;

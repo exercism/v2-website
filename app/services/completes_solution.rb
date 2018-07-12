@@ -12,9 +12,7 @@ class CompletesSolution
     if solution.approved?
       completed_approved
     else
-      # TODO Beta
-      completed_approved
-      #completed_unapproved
+      completed_unapproved
     end
 
     unlock_next_core_exercise if solution.exercise.core?
