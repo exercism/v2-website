@@ -32,7 +32,7 @@ class Exercise < ApplicationRecord
   end
 
   def submit_command
-    "exercism submit /path/to/directory"
+    "exercism submit /path/to/file [/path/to/file2 ...]"
   end
 
   def side?
