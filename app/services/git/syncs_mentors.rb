@@ -31,13 +31,15 @@ class Git::SyncsMentors
       github_username: mentor_data[:github_username]
     )
 
+    github_profile = Git::GithubProfile.for_user(mentor_data[:github_username])
+
     mentor.tap do |mentor|
       mentor.assign_attributes(
-        name: mentor_data[:name],
-        avatar_url: mentor_data[:avatar_url],
-        link_url: mentor_data[:link_url],
-        link_text: mentor_data[:link_text],
-        bio: mentor_data[:bio]
+        name: mentor_data[:name] || github_profile.name,
+        avatar_url: mentor_data[:avatar_url] || github_profile.avatar_url,
+        link_url: mentor_data[:link_url] || github_profile.link_url,
+        link_text: mentor_data[:link_text] || github_profile.link_url,
+        bio: mentor_data[:bio] || github_profile.bio
       )
       mentor.save!
     end

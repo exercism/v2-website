@@ -10,9 +10,9 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
         {
           github_username: "kytrinyx",
           name: "Katrina Owen",
-          link_text: nil,
-          link_url: nil,
-          avatar_url: nil,
+          link_text: "Link",
+          link_url: "example.com",
+          avatar_url: "avatar.png",
           bio: "Bio",
           track: "go"
         }
@@ -25,10 +25,10 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
     mentor = Mentor.last
     assert_equal track, mentor.track
     assert_equal "Katrina Owen", mentor.name
-    assert_nil mentor.avatar_url
+    assert "avatar.png", mentor.avatar_url
     assert_equal "kytrinyx", mentor.github_username
-    assert_nil mentor.link_text
-    assert_nil mentor.link_url
+    assert "example.com", mentor.link_text
+    assert "Link", mentor.link_url
     assert_equal "Bio", mentor.bio
   end
 
@@ -37,7 +37,9 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
     mentor = create(:mentor,
                     track: track,
                     github_username: "kytrinyx",
-                    avatar_url: "avatars.com/avatar.png")
+                    avatar_url: "avatars.com/avatar.png",
+                    link_text: nil,
+                    link_url: nil)
     repo = mock()
     repo.
       stubs(:mentors).
@@ -45,9 +47,9 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
         {
           github_username: "kytrinyx",
           name: "Katrina Owen",
-          link_text: nil,
-          link_url: nil,
-          avatar_url: nil,
+          link_text: "Link",
+          link_url: "example.com",
+          avatar_url: "avatar.png",
           bio: "Bio",
           track: "go"
         }
@@ -58,7 +60,9 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
     end
 
     mentor.reload
-    assert_nil mentor.avatar_url
+    assert "avatar.png", mentor.avatar_url
+    assert "example.com", mentor.link_text
+    assert "Link", mentor.link_url
   end
 
   test "deletes mentors" do
@@ -84,5 +88,42 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
     end
 
     assert_equal 1, Mentor.count
+  end
+
+  test "retrieves Github Profile data for empty fields" do
+    track = create(:track, slug: "go")
+    Git::GithubProfile.stubs(
+      for_user: stub(
+        name: "Name",
+        avatar_url: "avatar.png",
+        bio: "Bio",
+        link_url: "example.com"
+      )
+    )
+    repo = mock()
+    repo.
+      stubs(:mentors).
+      returns([
+        {
+          github_username: "kytrinyx",
+          name: nil,
+          link_text: nil,
+          link_url: nil,
+          avatar_url: nil,
+          bio: nil,
+          track: "go"
+        }
+      ])
+
+    stub_repo_cache! do
+      Git::SyncsMentors.(repo)
+    end
+
+    mentor = Mentor.last
+    assert_equal "Name", mentor.name
+    assert_equal "avatar.png", mentor.avatar_url
+    assert_equal "Bio", mentor.bio
+    assert_equal "example.com", mentor.link_url
+    assert_equal "example.com", mentor.link_text
   end
 end

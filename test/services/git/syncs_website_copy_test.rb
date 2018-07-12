@@ -12,7 +12,9 @@ class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
     mentor = Mentor.last
     assert_equal track, mentor.track
     assert_equal "Katrina Owen", mentor.name
-    assert_nil mentor.avatar_url
+    assert_equal "Link", mentor.link_text
+    assert_equal "example.com", mentor.link_url
+    assert_equal "avatar.png", mentor.avatar_url
     assert_equal "kytrinyx", mentor.github_username
   end
 end
