@@ -29,7 +29,7 @@ module TracksHelper
   end
 
   def track_icon(type, color, track, options={})
-    options[:onerror] = "this.onerror=null;this.src='https://s3-eu-west-1.amazonaws.com/exercism-static/tracks/default-#{type}-#{color}.png'"
+    options[:onerror] = "this.onerror=null;this.src='https://assets.exercism.io/tracks/default-#{type}-#{color}.png'"
     image_tag(track.send("#{type}_#{color}_icon_url"), options)
   end
 
