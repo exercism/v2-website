@@ -12,11 +12,11 @@
           = link_to [:my, solution], class: "widget-side-exercise unlocked" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
       -elsif @user_track.independent_mode? || !exercise.unlocked_by
-        =cache(["my/side-exercises/_exercises", "unlockable-exercise", exercise], skip_digest: true) do
+        =cache(["my/side-exercises/_exercises", "unlockable-exercise", exercise], skip_digest: true, expires_in: 1.day) do
           = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'widget-side-exercise unlocked' do
             =render "my/side_exercises/exercise", exercise: exercise, solution: nil
       -else
-        =cache(["my/side-exercises/_exercises", "locked-exercise", exercise], skip_digest: true) do
+        =cache(["my/side-exercises/_exercises", "locked-exercise", exercise], skip_digest: true, expires_in: 1.day) do
           .widget-side-exercise.locked
             =render "my/side_exercises/exercise", exercise: exercise, solution: nil
 -else
