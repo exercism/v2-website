@@ -11,4 +11,5 @@
 .your-solutions{style: @your_solutions.present?? "display:block" : "display:none"}
   = render "your_solutions", your_solutions: @your_solutions, user_tracks: @user_tracks
 .no-solutions.personal{style: @your_solutions.empty?? "display:block" : "display:none"}
-  You currently have no solutions that need mentoring.
+  %p No action required on any solutions you're currently giving feedback on.
+  %p Please choose a solution from the "Next solutions to mentor" list below to continue mentoring.
