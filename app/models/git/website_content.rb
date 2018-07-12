@@ -41,7 +41,7 @@ class Git::WebsiteContent < Git::RepoBase
         track_slug = root.chomp("/")
         mentor_jsons = read_json_blob(file[:oid])
 
-        mentor_jsons.each do |json|
+        Array.wrap(mentor_jsons).each do |json|
           mentors << json.merge(track: track_slug)
         end
       end
