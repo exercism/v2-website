@@ -71,6 +71,9 @@ GEM
     bugsnag (6.7.3)
       concurrent-ruby (~> 1.0)
     builder (3.2.3)
+    bullet (5.7.5)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11.0)
     byebug (10.0.2)
     capistrano (3.11.0)
       airbrussh (>= 1.0.0)
@@ -340,6 +343,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.11.0)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.6.2)
@@ -360,6 +364,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   bugsnag
+  bullet
   byebug
   capistrano (~> 3.6)
   capistrano-rails (~> 1.1)

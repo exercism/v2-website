@@ -57,6 +57,7 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-yarn'
   gem 'letter_opener'
+  gem 'bullet'
 end
 
 group :test do
