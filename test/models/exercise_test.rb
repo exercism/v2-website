@@ -21,7 +21,7 @@ class ExerciseTest < ActiveSupport::TestCase
     user = create(:user)
     core_exercise = create(:exercise, track: track, core: true)
     other_core_exercise = create(:exercise, track: track, core: true)
-    another_core_exercise = create(:exercise, track: track, core: true)
+    side_exercise = create(:exercise, track: track, core: false)
     create(:solution,
            user: user,
            exercise: core_exercise,
@@ -31,7 +31,7 @@ class ExerciseTest < ActiveSupport::TestCase
            completed_at: Date.new(2016, 12, 25))
 
     assert_equal(
-      [other_core_exercise, another_core_exercise],
+      [other_core_exercise, side_exercise],
       Exercise.locked_for(user)
     )
   end

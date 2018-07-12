@@ -9,7 +9,10 @@ class UnlocksNextCoreExercise
   def call
     return if core_exercises_in_progress?
 
-    next_exercise = track.exercises.locked_for(user).order(:position).first
+    next_exercise = track.exercises.core.
+                                    locked_for(user).
+                                    order(:position).
+                                    first
 
     if next_exercise
       UnlocksCoreExercise.(user, next_exercise)
