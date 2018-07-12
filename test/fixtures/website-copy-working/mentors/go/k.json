@@ -1,10 +1,8 @@
-[
-  {
-    "github_username": "kytrinyx",
-    "name": "Katrina Owen",
-    "link_text": null,
-    "link_url": null,
-    "avatar_url": null,
-    "bio": "Bio"
-  }
-]
+{
+  "github_username": "kytrinyx",
+  "name": "Katrina Owen",
+  "link_text": null,
+  "link_url": null,
+  "avatar_url": null,
+  "bio": "Bio"
+}
