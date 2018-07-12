@@ -17,21 +17,28 @@
         }
         .h1-subtitle {
             max-width:70%;
-            @include font-size(15, 15);
+            @include font-size(15, 19);
             color:#fff;
             font-weight:$light;
+            a {
+                color:#fff;
+                font-weight:$regular;
+            }
         }
     }
     h2 {
         @include font-size(18, 18);
         font-weight:$regular;
+        margin-bottom:5px;
+    }
+    .subheading {
+        color:#666;
         margin-bottom:15px;
     }
-    form+h2 {
-        padding-top:15px;
+    h2+form {
+        padding-top:10px;
     }
     .no-solutions-section {
-        border:1px solid #ddd;
         border-radius:3px;
         text-align:center;
         padding:20px;
@@ -52,9 +59,21 @@
         }
     }
     .no-solutions {
-        color:#999;
+        background:rgba($color-2, 0.05);
+        border:1px solid $color-2;
+        padding:15px 15px;
+        margin-top:5px;
+        border-radius:2px;
+
+        color:#333;
         @include font-size(14, 14);
         margin-bottom:40px;
+        p {
+            @include font-size(14, 17);
+            &+p {
+                margin-top:3px;
+            }
+        }
     }
     .your-solutions {
         clear:both;

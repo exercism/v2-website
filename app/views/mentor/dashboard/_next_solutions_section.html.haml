@@ -1,5 +1,6 @@
 %h2 Next solutions to mentor
 -if @suggested_solutions.present?
+  .subheading These are new solutions that need feedback.
   -@suggested_solutions.each do |solution|
     -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
     =render "solution", solution: solution, user_track: user_track

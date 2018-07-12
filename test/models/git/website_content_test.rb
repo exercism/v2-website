@@ -23,9 +23,9 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
         {
           github_username: "kytrinyx",
           name: "Katrina Owen",
-          link_text: nil,
-          link_url: nil,
-          avatar_url: nil,
+          link_text: "Link",
+          link_url: "example.com",
+          avatar_url: "avatar.png",
           bio: "Bio",
           track: "go"
         }
