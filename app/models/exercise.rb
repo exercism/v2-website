@@ -23,8 +23,7 @@ class Exercise < ApplicationRecord
   delegate :title, to: :track, prefix: true
 
   scope :locked_for, -> (user) {
-    where.not(id: user.solutions.select(:exercise_id)).
-    where(core: true)
+    where.not(id: user.solutions.select(:exercise_id))
   }
 
   def download_command
