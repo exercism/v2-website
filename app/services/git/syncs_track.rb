@@ -104,9 +104,9 @@ class Git::SyncsTrack
       topics: topics,
       blurb: blurb,
       description: description,
-      dark_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-dark.png",
-      turquoise_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-turquoise.png",
-      white_icon_url: "https://s3-eu-west-1.amazonaws.com/exercism-static/exercises/#{exercise_slug}-white.png",
+      dark_icon_url: "https://assets.exercism.io/exercises/#{exercise_slug}-dark.png",
+      turquoise_icon_url: "https://assets.exercism.io/exercises/#{exercise_slug}-turquoise.png",
+      white_icon_url: "https://assets.exercism.io/exercises/#{exercise_slug}-white.png",
     }
 
     create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
