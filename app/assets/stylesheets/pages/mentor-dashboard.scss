@@ -17,9 +17,13 @@
         }
         .h1-subtitle {
             max-width:70%;
-            @include font-size(15, 15);
+            @include font-size(15, 19);
             color:#fff;
             font-weight:$light;
+            a {
+                color:#fff;
+                font-weight:$regular;
+            }
         }
     }
     h2 {

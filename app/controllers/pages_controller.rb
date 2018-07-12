@@ -15,6 +15,8 @@ class PagesController < ApplicationController
     "Contact": :contact,
     "Contribute": :contribute,
 
+    "Mentoring Guide": :mentor_guide,
+
     "About the new site": :about_v1_to_v2,
     "Migrating to the new CLI": :cli_v1_to_v2,
   }
