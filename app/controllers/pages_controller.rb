@@ -14,7 +14,9 @@ class PagesController < ApplicationController
     "Report Abuse": :report_abuse,
     "Contact": :contact,
     "Contribute": :contribute,
+
     "About the new site": :about_v1_to_v2,
+    "Migrating to the new CLI": :cli_v1_to_v2,
   }
 
   LICENCES = {

@@ -8,6 +8,17 @@ class SyncRepoUpdateJob < ApplicationJob
   def perform(repo_update_id)
     repo_update = RepoUpdate.find(repo_update_id)
 
+    fetch_repo!(repo_update)
+    sync_repo!(repo_update)
+  end
+
+  private
+
+  def fetch_repo!(repo_update)
+    Git::FetchesRepo.fetch(repo_update.repo)
+  end
+
+  def sync_repo!(repo_update)
     case repo_update.slug
     when "website-copy"
       Git::SyncsWebsiteCopy.()

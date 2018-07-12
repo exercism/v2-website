@@ -68,5 +68,5 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
     UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
 
     UnlocksNextCoreExercise.(track, user)
+    end
   end
-end

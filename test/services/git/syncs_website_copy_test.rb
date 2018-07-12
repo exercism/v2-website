@@ -5,7 +5,9 @@ class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
     Git::WebsiteContent.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/website-copy")
     track = create(:track, slug: "go")
 
-    Git::SyncsWebsiteCopy.()
+    stub_repo_cache! do
+      Git::SyncsWebsiteCopy.()
+    end
 
     mentor = Mentor.last
     assert_equal track, mentor.track
@@ -25,7 +27,9 @@ class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
                     github_username: "kytrinyx",
                     avatar_url: "avatars.com/avatar.png")
 
-    Git::SyncsWebsiteCopy.()
+    stub_repo_cache! do
+      Git::SyncsWebsiteCopy.()
+    end
 
     mentor.reload
     assert_nil mentor.avatar_url
@@ -36,7 +40,9 @@ class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
     track = create(:track, slug: "go")
     create(:mentor, github_username: "other_mentor")
 
-    Git::SyncsWebsiteCopy.()
+    stub_repo_cache! do
+      Git::SyncsWebsiteCopy.()
+    end
 
     assert_equal 1, Mentor.count
   end

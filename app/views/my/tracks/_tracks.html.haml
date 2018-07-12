@@ -2,5 +2,5 @@
   -num_completed_exercises = completed_exercise_counts[track.id].to_f
   -num_exercises = all_exercise_counts[track.id].to_f
   -num_users = all_user_tracks_counts[track.id].to_f
-  =cache_unless(joined, ["my/tracks/_tracks/:unjoined", track], skip_digest: true) do
+  =cache_unless(joined, ["my/tracks/_tracks/:unjoined", track], skip_digest: true, expires_in: 1.hour) do
     =render 'track', joined: joined, track: track, num_completed_exercises: num_completed_exercises, num_exercises: num_exercises, num_users: num_users

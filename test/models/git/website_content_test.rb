@@ -16,21 +16,23 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
   end
 
   test "returns mentor data" do
-    repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+    stub_repo_cache! do
+      repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
 
-    expected = [
-      {
-        github_username: "kytrinyx",
-        name: "Katrina Owen",
-        link_text: nil,
-        link_url: nil,
-        avatar_url: nil,
-        bio: "Bio",
-        track: "go"
-      }
-    ]
+      expected = [
+        {
+          github_username: "kytrinyx",
+          name: "Katrina Owen",
+          link_text: nil,
+          link_url: nil,
+          avatar_url: nil,
+          bio: "Bio",
+          track: "go"
+        }
+      ]
 
-    assert_equal expected, repo.mentors
+      assert_equal expected, repo.mentors
+    end
   end
 
   test "returns walkthrough content" do

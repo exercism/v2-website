@@ -10,7 +10,7 @@
 
   %h2 Our Track Mentors
   %p.subheading Our mentors are the lynchpins of the language tracks and exercises on Exercism.
-  =cache ["pages/team/mentors", @last_updated_at] do
+  =cache ["pages/team/mentors", @last_updated_at, @page] do
     .mentors
       .lo-container
         .pure-g
@@ -18,4 +18,4 @@
             .pure-u-1-2.mentor-wrapper= mentor_widget(mentor)
 
 
-
+  =paginate @mentors
