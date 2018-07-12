@@ -41,12 +41,11 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
       about: solution
     )
 
-    # TODO - Re-enable this when we launch
-    #DeliversEmail.deliver!(
-    #  solution.user,
-    #  :new_discussion_post,
-    #  discussion_post
-    #)
+    DeliversEmail.deliver!(
+      solution.user,
+      :new_discussion_post,
+      discussion_post
+    )
   end
 
   def user_may_comment?
