@@ -36,6 +36,10 @@ gem 'image_processing', '~> 1.2'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
+group :production do
+  gem "skylight"
+end
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 3.0'
