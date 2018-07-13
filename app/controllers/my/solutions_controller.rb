@@ -77,23 +77,20 @@ class My::SolutionsController < MyController
     if user_track.normal_mode?
       if @solution.exercise.core?
         @next_core_solution = current_user.solutions.not_completed.
-                              joins(:exercise).
+                              includes(exercise: :topics).
                               where("exercises.track_id": @track.id).
                               where("exercises.core": true).
                               first
-        @next_core_exercise = @next_core_solution.try(&:exercise)
       end
 
-      unlocked_side_exercises = @solution.exercise.unlocks
-      unlocked_solutions = current_user.solutions.
-                                        where(exercise_id: unlocked_side_exercises).
-                                        each_with_object({}) { |s,h| h[s.exercise_id] = s }
-      @unlocked_side_exercises_and_solutions = unlocked_side_exercises.each_with_object([]) do |e, a|
-        a << [e, unlocked_solutions[e.id]]
-      end
+      @unlocked_side_exercise_solutions = current_user.
+        solutions.
+        not_completed.
+        includes(:exercise).
+        where("exercises.id": @solution.exercise.unlocks.side)
     end
 
-    if @next_core_exercise || @unlocked_side_exercises.present?
+    if @next_core_solution || @unlocked_side_exercise_solutions.present?
       render_modal("solution-unlocked", "unlocked")
     else
       js_redirect_to(@track)
