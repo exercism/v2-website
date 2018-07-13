@@ -4,7 +4,7 @@ class API::Webhooks::ContributorsController < API::WebhooksController
   before_action :verify_github_webhook
 
   def create
-    contribution = OpenSource::Contribution.new(request.request_parameters)
+    contribution = OpenSource::Contribution.new(payload_params)
 
     unless contribution.complete?
       head :no_content and return
@@ -22,8 +22,12 @@ class API::Webhooks::ContributorsController < API::WebhooksController
 
   private
 
+  def payload_params
+    params.require(:payload).permit(:action, { pull_request: [:merged, { base: :ref }, user: [:login, :id, :avatar_url]], repository: [:default_branch] })
+  end
+
   def verify_github_webhook
-    payload = request.raw_post
+    payload = request.body.read
     signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), secret, payload)
     if !Rack::Utils.secure_compare(signature, github_signature)
       render json: {error: 'invalid signature - delivery: %s' % github_delivery}, status: 500

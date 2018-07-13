@@ -37,18 +37,14 @@ class API::Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTes
   private
 
   def default_options(payload)
+    body = { payload: payload }.to_json
     {
       headers: {
+        'Content-Type' => "application/json",
         'X-GitHub-Delivery' => 'abc-123',
-        # Signature is pre-calculated to match the post body 'fake'.
-        # Under normal circumstances, the request.raw_post is the actual raw
-        # post body that was received.
-        'X-Hub-Signature' => 'sha1=cfbe1b6a0950b651e6f07e951476bb818051ae16',
+        'X-Hub-Signature' => 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), Rails.application.secrets.github_webhook_secret, body)
       },
-      env: {
-        'action_dispatch.request.request_parameters' => payload,
-        'action_dispatch.request.raw_post' => 'fake',
-      }
+      params: body
     }
   end
 
