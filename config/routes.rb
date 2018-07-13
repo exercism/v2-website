@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # Mentor #
   # ###### #
   namespace :mentor do
+    resource :configure, only: [:show, :update], controller: "configure"
     resource :dashboard, only: [:show], controller: "dashboard"
     resources :solutions, only: [:show] do
       member do
