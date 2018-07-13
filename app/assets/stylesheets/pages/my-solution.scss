@@ -128,6 +128,25 @@ body.controller-solutions.action-show {
 #my-solution-page,
 #teams-my-solution-page,
 #teams-solution-page {
+    .migration-bar {
+        background:rgba(red, 0.05);
+        @include font-size(14, 14);
+        padding:10px 20px;
+        border:1px solid rgba(red, 0.2);
+        border-radius:2px;
+        font-weight:$regular;
+        color:red;
+        margin-bottom:25px;
+        text-align:center;
+        a {
+            color:#333;
+        }
+        i {
+            @include font-size(14, 14);
+            color:$color-1;
+            margin-right:5px;
+        }
+    }
     .notifications-bar {
         overflow:hidden;
         margin-bottom:40px;
