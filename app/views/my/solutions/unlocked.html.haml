@@ -6,27 +6,27 @@
 %h2 Exercises Unlocked
 %h3 You have unlocked the following core exercise:
 
--if @next_core_exercise
+-if @next_core_solution
   =link_to [:my, @next_core_solution], class: 'core-exercise' do
-    .icon= image_tag @next_core_exercise.white_icon_url
+    .icon= image_tag @next_core_solution.exercise.white_icon_url
     .title
-      = @next_core_exercise.title
+      = @next_core_solution.exercise.title
       .topics
-        - @next_core_exercise.topic_names.each do |topic_name|
+        - @next_core_solution.exercise.topic_names.each do |topic_name|
           .topic= topic_name
     .blurb
-      = @next_core_exercise.blurb
+      = @next_core_solution.exercise.blurb
 
--if @unlocked_side_exercises_and_solutions.size > 0
+-if @unlocked_side_exercise_solutions.size > 0
   .side-exercises
     %h4
       You have also unlocked
-      %strong #{@unlocked_side_exercises_and_solutions.size}
+      %strong #{@unlocked_side_exercise_solutions.size}
       bonus exercises:
-    -@unlocked_side_exercises_and_solutions.each do |exercise, solution|
+    -@unlocked_side_exercise_solutions.each do |solution|
       =link_to [:my, solution], target: "_blank", class: 'side-exercise' do
-        =image_tag exercise.turquoise_icon_url, class: 'turquoise'
-        =image_tag exercise.white_icon_url, class: 'white'
-        .tooltip= exercise.title
+        =image_tag solution.exercise.turquoise_icon_url, class: 'turquoise'
+        =image_tag solution.exercise.white_icon_url, class: 'white'
+        .tooltip= solution.exercise.title
 
 =link_to "Go to track", [:my, @solution.exercise.track], class: 'pure-button'
