@@ -6,7 +6,7 @@ module NotificationsHelper
     when 'new_discussion_post_for_mentor'
       notification.trigger.user.avatar_url
     when 'new_iteration_for_mentor'
-      notification.about.user
+      notification.about.user.avatar_url
     end
   end
 end

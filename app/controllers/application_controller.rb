@@ -12,7 +12,11 @@ class ApplicationController < ActionController::Base
     return if request.xhr?
     return unless request.get?
 
-    session["user_return_to"] = request.fullpath
+    session["return_to"] = request.fullpath
+  end
+
+  def after_sign_in_path_for(resource)
+    session["return_to"] || signed_in_path
   end
 
   def set_site_context

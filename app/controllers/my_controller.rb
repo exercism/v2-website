@@ -5,8 +5,11 @@ class MyController < ApplicationController
   private
 
   def ensure_onboarded!
+    return unless user_signed_in?
     unless current_user.onboarded?
       redirect_to onboarding_path
+      false
     end
+    true
   end
 end
