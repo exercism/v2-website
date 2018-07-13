@@ -118,6 +118,8 @@ Rails.application.routes.draw do
         patch :reflect
         patch :publish
       end
+
+      resources :iterations, only: [:show]
     end
     resources :reactions, only: [:index, :create]
 
