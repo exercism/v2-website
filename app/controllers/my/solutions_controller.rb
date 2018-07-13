@@ -105,6 +105,11 @@ class My::SolutionsController < MyController
     redirect_to [@solution.exercise.track, @solution.exercise, @solution]
   end
 
+  def migrate_to_v2
+    @solution.update(completed_at: nil, published_at: nil, last_updated_by_user_at: Time.now, updated_at: Time.now)
+    redirect_to action: :show
+  end
+
   private
   def set_solution
     @solution = current_user.solutions.find_by_uuid!(params[:id])
