@@ -14,7 +14,7 @@ class API::Webhooks::RepoUpdatesController < API::WebhooksController
   private
 
   def payload_params
-    params.require(:payload).permit(:ref, { repository: :name })
+    params.permit(:ref, { repository: :name })
   end
 
   def pushed_to_master?

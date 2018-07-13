@@ -52,7 +52,7 @@ class API::Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def default_options(payload)
-    body = { payload: payload }.to_json
+    body = payload.to_json
     {
       headers: {
         'Content-Type' => "application/json",
