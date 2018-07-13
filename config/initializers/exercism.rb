@@ -1,5 +1,5 @@
 module Exercism
-  V2_MIGRATED_AT = Time.new(2018, 7, 13, 10, 01, 29, 0)
+  V2_MIGRATED_AT = Time.new(2018, 7, 13, 10, 1, 29, 0)
 
   module Magic
     HandleRegexp = /^[a-zA-Z0-9-]+$/
