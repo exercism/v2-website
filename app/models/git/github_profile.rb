@@ -1,11 +1,20 @@
 class Git::GithubProfile
 
+  class NotFoundError < StandardError
+  end
+
   def self.for_user(username)
     client = Octokit::Client.new(
       client_id: Rails.application.secrets.github_key,
       client_secret: Rails.application.secrets.github_secret
     )
-    user = client.user(username)
+
+    begin
+      user = client.user(username)
+    rescue Octokit::NotFound
+      raise NotFoundError
+    end
+
     self.new(user)
   end
 

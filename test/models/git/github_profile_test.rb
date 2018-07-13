@@ -1,19 +1,9 @@
 require 'test_helper'
+require "webmock/minitest"
 
 class Git::GithubProfileTest < ActiveSupport::TestCase
-
-  def setup
-    @username = "dummy-user"
-    @stub_gh_user = stub(
-      login: @username,
-      avatar_url: "dummy_avatar_url",
-      name: "A. Dummy Name",
-      bio: "Me Coder.",
-      html_url: "dummy_profile_url"
-    )
-  end
-
   test "provides access to underlying GitHub user" do
+    setup_stubs!
     Octokit::Client.any_instance.expects(:user).with(@username).returns(@stub_gh_user)
     profile = Git::GithubProfile.for_user(@username)
 
@@ -21,6 +11,7 @@ class Git::GithubProfileTest < ActiveSupport::TestCase
   end
 
   test "reads info from GitHub user" do
+    setup_stubs!
     Octokit::Client.any_instance.expects(:user).with(@username).returns(@stub_gh_user)
     profile = Git::GithubProfile.for_user(@username)
 
@@ -31,6 +22,7 @@ class Git::GithubProfileTest < ActiveSupport::TestCase
   end
 
   test "uses username if name is nil" do
+    setup_stubs!
     @stub_gh_user = stub(
       login: @username,
       avatar_url: "dummy_avatar_url",
@@ -46,6 +38,7 @@ class Git::GithubProfileTest < ActiveSupport::TestCase
   end
 
   test "uses username if name is blank" do
+    setup_stubs!
     @stub_gh_user = stub(
       login: @username,
       avatar_url: "dummy_avatar_url",
@@ -61,6 +54,7 @@ class Git::GithubProfileTest < ActiveSupport::TestCase
   end
 
   test "seeds empty bio if blank" do
+    setup_stubs!
     @stub_gh_user = stub(
       avatar_url: "dummy_avatar_url",
       name: "A. Dummy Name",
@@ -72,5 +66,26 @@ class Git::GithubProfileTest < ActiveSupport::TestCase
     profile = Git::GithubProfile.for_user(@username)
 
     assert_equal "", profile.bio
+  end
+
+  test "raises an error when receiving a 404" do
+    stub_request(:get, "https://api.github.com/users/user").to_return(status: 404)
+
+    assert_raises Git::GithubProfile::NotFoundError do
+      Git::GithubProfile.for_user("user")
+    end
+  end
+
+  private
+
+  def setup_stubs!
+    @username = "dummy-user"
+    @stub_gh_user = stub(
+      login: @username,
+      avatar_url: "dummy_avatar_url",
+      name: "A. Dummy Name",
+      bio: "Me Coder.",
+      html_url: "dummy_profile_url"
+    )
   end
 end
