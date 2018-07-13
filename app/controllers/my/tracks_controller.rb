@@ -1,6 +1,5 @@
 class My::TracksController < MyController
   skip_before_action :authenticate_user!, only: [:show]
-  skip_before_action :ensure_onboarded!, only: [:show]
 
   def index
     tracks = Track.active.order('title ASC')
