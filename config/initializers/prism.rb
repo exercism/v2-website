@@ -260,7 +260,7 @@ Exercism::PrismFileMappings = {
   "parser": %w{},
   "pascal": %w{pas dfm},
   "perl": %w{},
-  "php": %w{},
+  "php": %w{php},
   "php-extras": %w{},
   "powershell": %w{},
   "processing": %w{},
