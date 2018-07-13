@@ -225,6 +225,27 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     )
   end
 
+  test "puts legacy exercises last" do
+    mentor, track = create_mentor_and_track
+    mentee = create_mentee([track])
+
+    side_solution = create(:solution,
+                           exercise: create(:exercise, track: track, core: false),
+                           user: mentee)
+    legacy_core_solution = create(:solution,
+                                   exercise: create(:exercise, track: track, core: true),
+                                   last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.week,
+                                   user: mentee)
+    [legacy_core_solution, side_solution].each do |solution|
+      create :iteration, solution: solution
+    end
+
+    assert_equal(
+      [side_solution, legacy_core_solution],
+      SelectsSuggestedSolutionsForMentor.select(mentor)
+    )
+  end
+
   def create_mentor_and_track
     mentor = create :user
     track = create :track
