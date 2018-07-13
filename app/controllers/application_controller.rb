@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  after_action :store_location
+  before_action :store_location
   before_action :set_site_context
 
   private
