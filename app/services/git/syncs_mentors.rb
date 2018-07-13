@@ -31,7 +31,11 @@ class Git::SyncsMentors
       github_username: mentor_data[:github_username]
     )
 
-    github_profile = Git::GithubProfile.for_user(mentor_data[:github_username])
+    github_profile = begin
+                       Git::GithubProfile.for_user(mentor_data[:github_username])
+                     rescue Git::GithubProfile::NotFoundError
+                       Git::NullGithubProfile.new
+                     end
 
     mentor.tap do |mentor|
       mentor.assign_attributes(

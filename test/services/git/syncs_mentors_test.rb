@@ -129,4 +129,36 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
     assert_equal "example.com", mentor.link_url
     assert_equal "example.com", mentor.link_text
   end
+
+  test "skips Github Profile data when unable to retrieve them" do
+    track = create(:track, slug: "go")
+    Git::GithubProfile.
+      stubs(:for_user).
+      raises(Git::GithubProfile::NotFoundError)
+    repo = mock()
+    repo.
+      stubs(:mentors).
+      returns([
+        {
+          github_username: "kytrinyx",
+          name: "Name",
+          link_text: nil,
+          link_url: nil,
+          avatar_url: nil,
+          bio: nil,
+          track: "go"
+        }
+      ])
+
+    stub_repo_cache! do
+      Git::SyncsMentors.(repo)
+    end
+
+    mentor = Mentor.last
+    assert_equal "Name", mentor.name
+    assert_nil mentor.link_text
+    assert_nil mentor.link_url
+    assert_nil mentor.avatar_url
+    assert_nil mentor.bio
+  end
 end
