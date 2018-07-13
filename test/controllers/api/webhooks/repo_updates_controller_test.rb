@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
+class API::Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
   test "create should create a RepoUpdate record when pushed to master" do
@@ -9,7 +9,7 @@ class Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
     webhook["ref"] = "refs/heads/master"
     webhook["repository"]["name"] = "ruby"
 
-    post webhooks_repo_updates_path, default_options(webhook)
+    post api_webhooks_repo_updates_path, default_options(webhook)
 
     repo_update = RepoUpdate.last
     assert_equal "ruby", repo_update.slug
@@ -18,7 +18,7 @@ class Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
   test "create should not create a RepoUpdate when not pushed to master" do
     webhook = load_json("test/fixtures/github/push_event.json")
 
-    post webhooks_repo_updates_path, default_options(webhook)
+    post api_webhooks_repo_updates_path, default_options(webhook)
 
     assert_nil RepoUpdate.last
   end
@@ -28,7 +28,7 @@ class Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
     webhook["ref"] = "refs/heads/master"
     webhook["repository"]["name"] = "unknown"
 
-    post webhooks_repo_updates_path, default_options(webhook)
+    post api_webhooks_repo_updates_path, default_options(webhook)
 
     assert_nil RepoUpdate.last
   end
@@ -38,7 +38,7 @@ class Webhooks::RepoUpdatesControllerTest < ActionDispatch::IntegrationTest
     options = default_options(webhook)
     options[:headers]['X-Hub-Signature'] = 'ZOMG wrong signature'
 
-    post webhooks_repo_updates_path, options
+    post api_webhooks_repo_updates_path, options
 
     assert_equal 500, response.status
     assert_match "abc-123", JSON.parse(response.body)['error']
