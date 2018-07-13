@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_13_095823) do
+ActiveRecord::Schema.define(version: 2018_07_13_164812) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_095823) do
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
+    t.index ["uuid"], name: "index_solutions_on_uuid"
   end
 
   create_table "team_invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
