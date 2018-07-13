@@ -68,5 +68,18 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
     UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
 
     UnlocksNextCoreExercise.(track, user)
-    end
   end
+
+  test "does not unlock side exercise" do
+    track = create(:track)
+    user = create(:user)
+
+    side_exercise = create(:exercise,
+                           track: track,
+                           core: false,
+                           position: 2)
+
+    UnlocksCoreExercise.expects(:call).with(user, side_exercise).never
+    UnlocksNextCoreExercise.(track, user)
+  end
+end

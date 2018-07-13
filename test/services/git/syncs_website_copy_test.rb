@@ -1,8 +1,23 @@
 require_relative '../../test_helper'
+require "webmock/minitest"
 
 class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
-  test "creates mentors" do
+  test "syncs mentors" do
     Git::WebsiteContent.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/website-copy")
+    stub_request(:get, "https://api.github.com/users/kytrinyx").
+      to_return(
+        status: 200,
+        body: {
+          login: "",
+          avatar_url: "",
+          html_url: "ht",
+          name: "",
+          company: "",
+          email: "",
+          bio: ""
+        }.to_json,
+        headers: { "Content-Type" => "application/json" }
+    )
     track = create(:track, slug: "go")
 
     stub_repo_cache! do
@@ -12,38 +27,9 @@ class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
     mentor = Mentor.last
     assert_equal track, mentor.track
     assert_equal "Katrina Owen", mentor.name
-    assert_nil mentor.avatar_url
+    assert_equal "Link", mentor.link_text
+    assert_equal "example.com", mentor.link_url
+    assert_equal "avatar.png", mentor.avatar_url
     assert_equal "kytrinyx", mentor.github_username
-    assert_nil mentor.link_text
-    assert_nil mentor.link_url
-    assert_equal "Bio", mentor.bio
-  end
-
-  test "updates mentors" do
-    Git::WebsiteContent.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/website-copy")
-    track = create(:track, slug: "go")
-    mentor = create(:mentor,
-                    track: track,
-                    github_username: "kytrinyx",
-                    avatar_url: "avatars.com/avatar.png")
-
-    stub_repo_cache! do
-      Git::SyncsWebsiteCopy.()
-    end
-
-    mentor.reload
-    assert_nil mentor.avatar_url
-  end
-
-  test "deletes mentors" do
-    Git::WebsiteContent.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/website-copy")
-    track = create(:track, slug: "go")
-    create(:mentor, github_username: "other_mentor")
-
-    stub_repo_cache! do
-      Git::SyncsWebsiteCopy.()
-    end
-
-    assert_equal 1, Mentor.count
   end
 end

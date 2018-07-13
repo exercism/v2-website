@@ -2,7 +2,7 @@ set :stage, :production
 
 server 'web1.exercism.io', user: fetch(:application), roles: %w{app web db git_fetch}
 server 'web2.exercism.io', user: fetch(:application), roles: %w{app web db git_fetch}
-server 'processor.exercism.io', user: fetch(:application), roles: %w{app web db processor git_sync}
+server 'processor.exercism.io', user: fetch(:application), roles: %w{app assets web db processor git_sync}
 
 namespace :puma_service do
   task :restart do
@@ -44,9 +44,16 @@ namespace :memcached do
   end
 end
 
+namespace :assets do
+  task :upload do
+    on roles(:assets), in: :groups, limit: 1, wait: 10 do
+      execute "aws s3 sync --acl=public-read /opt/exercism/current/public/assets/ s3://exercism-assets/assets/"
+    end
+  end
+end
+
+after "deploy:assets:precompile", "assets:upload"
 after "deploy:starting", "sidekiq:shutdown"
 after "deploy:published", "puma_service:restart"
 after "deploy:published", "sidekiq:restart"
 after "deploy:published", "git_sync:restart"
-
-

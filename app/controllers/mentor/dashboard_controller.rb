@@ -16,8 +16,8 @@ class Mentor::DashboardController < MentorController
       status: @status,
       track_id: @track_id,
       exercise_id: @exercise_id
-    )
-    @suggested_solutions = SelectsSuggestedSolutionsForMentor.select(current_user, params[:page])
+    ).to_a
+    @suggested_solutions = SelectsSuggestedSolutionsForMentor.select(current_user, params[:page]).to_a
 
     user_ids = @your_solutions.pluck(:user_id) + @suggested_solutions.pluck(:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).

@@ -11,7 +11,7 @@ class My::ReactionsController < MyController
     @solution = Solution.published.find_by_uuid!(params[:solution_id])
     @reaction = CreatesReaction.create!(current_user, @solution, params[:emotion])
 
-    @comments = @solution.reactions.with_comments.includes(user: :profile)
+    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
   end
 end

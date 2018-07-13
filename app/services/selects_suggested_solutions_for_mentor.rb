@@ -14,7 +14,7 @@ class SelectsSuggestedSolutionsForMentor
 
       # Only mentored tracks
       joins(:exercise).
-      where("exercises.track_id": tracks).
+      where("exercises.track_id": track_ids).
 
       joins(user: :user_tracks).
       where("user_tracks.track_id = exercises.track_id").
@@ -45,13 +45,13 @@ class SelectsSuggestedSolutionsForMentor
       # then age (oldest first)
       order("independent_mode ASC, core DESC, num_mentors ASC, last_updated_by_user_at ASC").
 
-      includes(iterations: [], exercise: {track: []}, user: [:profile]).
+      includes(iterations: [], exercise: {track: []}, user: [:profile, { avatar_attachment: :blob }]).
 
       # TODO - Paginate
       limit(20)
   end
 
-  def tracks
-    @tracks ||= user.mentored_tracks
+  def track_ids
+    @track_ids ||= user.track_mentorships.pluck(:track_id)
   end
 end

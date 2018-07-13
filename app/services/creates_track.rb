@@ -45,7 +45,7 @@ class CreatesTrack
   private
 
   def track_image_url(file_name)
-    "https://s3-eu-west-1.amazonaws.com/exercism-static/tracks/#{file_name}"
+    "https://assets.exercism.io/tracks/#{file_name}"
   end
 
 end
