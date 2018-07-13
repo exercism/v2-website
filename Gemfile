@@ -67,4 +67,5 @@ group :test do
   gem 'rails-controller-testing'
   gem 'timecop'
   gem 'chromedriver-helper'
+  gem 'webmock'
 end

@@ -2,6 +2,7 @@ require_relative '../../test_helper'
 
 class Git::SyncsMentorsTest < ActiveSupport::TestCase
   test "creates mentors" do
+    Git::GithubProfile.stubs(:for_user)
     track = create(:track, slug: "go")
     repo = mock()
     repo.
@@ -33,6 +34,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
   end
 
   test "updates mentors" do
+    Git::GithubProfile.stubs(:for_user)
     track = create(:track, slug: "go")
     mentor = create(:mentor,
                     track: track,
@@ -66,6 +68,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
   end
 
   test "deletes mentors" do
+    Git::GithubProfile.stubs(:for_user)
     track = create(:track, slug: "go")
     create(:mentor, github_username: "other_mentor")
     repo = mock()
@@ -75,9 +78,9 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
         {
           github_username: "kytrinyx",
           name: "Katrina Owen",
-          link_text: nil,
-          link_url: nil,
-          avatar_url: nil,
+          link_text: "Link",
+          link_url: "example.com",
+          avatar_url: "avatar.png",
           bio: "Bio",
           track: "go"
         }
