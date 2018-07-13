@@ -45,7 +45,7 @@ class SolutionsController < ApplicationController
     end
 
     @iteration = @solution.iterations.last
-    @comments = @solution.reactions.with_comments.includes(user: :profile)
+    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
 
     @user_reaction = Reaction.where(user: current_user, solution: @solution).first if user_signed_in?

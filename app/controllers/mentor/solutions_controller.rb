@@ -11,7 +11,7 @@ class Mentor::SolutionsController < MentorController
     @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
     @num_iterations = @solution.iterations.count
 
-    @comments = @solution.reactions.with_comments.includes(user: :profile)
+    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
     @solution_user_track = UserTrack.where(user: @solution.user, track: @track).first
 

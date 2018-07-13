@@ -64,6 +64,10 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.active_storage.service = :local
+
+  config.after_initialize do
+    Bullet.enable = true
+  end
 end
 
 Rails.application.routes.default_url_options = { :host => "localhost:3000" }
