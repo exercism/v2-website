@@ -117,6 +117,7 @@ Rails.application.routes.draw do
         get :reflection
         patch :reflect
         patch :publish
+        patch :migrate_to_v2
       end
     end
     resources :reactions, only: [:index, :create]
