@@ -29,7 +29,7 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
             language: solution.exercise.track.title
           }
         },
-        file_download_base_url: "https://test.exercism.io/api/v1/solutions/#{solution.uuid}/files/",
+        file_download_base_url: "https://test-api.exercism.io/v1/solutions/#{solution.uuid}/files/",
         files: Set.new([]),
         iteration: nil
       }

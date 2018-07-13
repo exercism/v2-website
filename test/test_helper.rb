@@ -9,7 +9,6 @@ require 'minitest/stub_const'
 
 require "support/stub_repo_cache"
 
-Rails.application.routes.default_url_options = { :host => "https://test.exercism.io" }
 OmniAuth.config.test_mode = true
 
 class ActionView::TestCase

@@ -120,4 +120,6 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 end
 
-Rails.application.routes.default_url_options = { :host => "https://exercism.io" } 
+Rails.application.routes.default_url_options = {
+  host: "https://exercism.io"
+}
