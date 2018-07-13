@@ -57,6 +57,7 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-yarn'
   gem 'letter_opener'
+  gem 'bullet'
 end
 
 group :test do
@@ -66,4 +67,5 @@ group :test do
   gem 'rails-controller-testing'
   gem 'timecop'
   gem 'chromedriver-helper'
+  gem 'webmock'
 end
