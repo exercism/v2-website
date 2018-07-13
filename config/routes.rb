@@ -17,6 +17,11 @@ Rails.application.routes.draw do
 
         get 'files/*filepath', to: 'files#show', format: false, as: "file"
       end
+
+      namespace :webhooks do
+        resources :repo_updates, only: [:create]
+        resources :contributors, only: [:create]
+      end
     end
   end
   get "api/(*url)", to: 'api#render_404'
@@ -187,10 +192,6 @@ Rails.application.routes.draw do
   # ############ #
   # Weird things #
   # ############ #
-  namespace :webhooks do
-    resources :repo_updates, only: [:create]
-    resources :contributors, only: [:create]
-  end
   post "markdown/parse" => "markdown#parse"
 
 

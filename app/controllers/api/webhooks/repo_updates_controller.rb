@@ -1,4 +1,4 @@
-class Webhooks::RepoUpdatesController < WebhooksController
+class API::Webhooks::RepoUpdatesController < API::WebhooksController
   before_action :verify_github_webhook
 
   MASTER_REF = "refs/heads/master"

@@ -1,6 +1,6 @@
-require_relative '../../../lib/open_source'
+require "open_source"
 
-class Webhooks::ContributorsController < WebhooksController
+class API::Webhooks::ContributorsController < API::WebhooksController
   before_action :verify_github_webhook
 
   def create
