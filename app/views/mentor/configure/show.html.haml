@@ -1,0 +1,21 @@
+#mentor-configure-page
+  .header
+    .lo-container
+      %h1 Configure your mentor settings
+      .h1-subtitle
+        Thanks for being here. Let's get you set up.
+
+  .lo-container
+    .pure-g
+      .pure-u-3-5.lhs
+        %h2 Choose the tracks you would like to mentor
+        =notice_and_alert
+        =form_tag mentor_configure_path, method: :patch do
+          -Track.all.order(:title).pluck(:title, :id).each do |track_title, track_id|
+            .field
+              =label_tag "track_id_#{track_id}" do
+                =check_box_tag "track_id[#{track_id}]"
+                .text= track_title
+
+          =button_tag "Save Settings", class: 'pure-button'
+      .pure-u-2-5.rhs
