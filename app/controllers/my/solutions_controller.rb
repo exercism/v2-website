@@ -34,7 +34,10 @@ class My::SolutionsController < MyController
       Git::WebsiteContent.head.walkthrough
     )
 
-    render_modal("solution-walkthrough", "walkthrough", close_button: true)
+    respond_to do |format|
+      format.js { render_modal("solution-walkthrough", "walkthrough", close_button: true) }
+      format.html { render }
+    end
   end
 
   def request_mentoring
