@@ -33,7 +33,8 @@ class My::SolutionsController < MyController
       current_user,
       Git::WebsiteContent.head.walkthrough
     )
-    render_modal("solution-walkthrough", "walkthrough")
+
+    render_modal("solution-walkthrough", "walkthrough", close_button: true)
   end
 
   def request_mentoring
