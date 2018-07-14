@@ -25,12 +25,12 @@
 
       -@deprecated_exercises_and_solutions.each do |exercise, solution|
         .pure-u-1-3
-          .exercise.completed
+          .widget-side-exercise.completed
             .icon
               .img{style: "background-image:url('#{image_path(exercise.white_icon_url)}')"}
             .status.deprecated Deprecated
             .title= exercise.title
             .topics
-              .topic deprecated
+              .topic Deprecated
 
 
