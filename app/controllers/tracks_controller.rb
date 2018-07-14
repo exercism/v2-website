@@ -8,7 +8,11 @@ class TracksController < ApplicationController
   end
 
   def show
-    @track = Track.find(params[:id])
+    @track = Track.where(slug: params[:id]).first
+    if @track.nil?
+      return render status: 404
+    end
+
     return redirect_to [:my, @track] if user_signed_in?
 
     @mentors = @track.mentors.reorder(SQLSnippets.random).limit(6)

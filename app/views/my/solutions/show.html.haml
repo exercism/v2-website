@@ -37,6 +37,14 @@
           .notification
             A mentor has left you a new comment
 
+        -elsif @user_track.independent_mode? && !@solution.mentoring_enabled?
+          .notification
+            %i.fa.fa-clock-o
+            In Indpendent Mode you will
+            %strong not
+            receive mentoring by default. You may request mentoring on 5 solutions.
+            #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.
+
         -else
           .notification
             %i.fa.fa-clock-o
@@ -72,6 +80,7 @@
                   Once one of your existing solutions is completed you will be able to request mentoring here.
                 -else
                   =link_to "Request mentoring on this solution.", request_mentoring_my_solution_path(@solution), method: :patch
+              =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
           -else
             %h3 Mentor Discussion
             -if @solution.exercise.auto_approve?
