@@ -43,9 +43,9 @@ class ApplicationController < ActionController::Base
     redirect_to signed_in_path if user_signed_in?
   end
 
-  def render_modal(class_name, template)
+  def render_modal(class_name, template, options = {})
     html = EscapesJavascript.escape(render_to_string(template, layout: false))
-    render js: %Q{ showModal('#{class_name}', "#{html}") }
+    render js: %Q{ showModal('#{class_name}', '#{html}', '#{options.to_json}') }
   end
 
   def js_redirect_to(*objs)

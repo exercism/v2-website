@@ -16,6 +16,7 @@ $('#modal-wrapper').click (e) ->
 
 
 window.showModal = (className, html, options = {}) ->
+  options = JSON.parse(options)
   $("#modal-wrapper").removeClass()
   $("#modal-wrapper").addClass("no-autoclose") if options['no_autoclose']
   $("#modal-wrapper #modal").removeClass().addClass(className)
