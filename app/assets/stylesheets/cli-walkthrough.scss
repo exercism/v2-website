@@ -4,6 +4,8 @@
   @include normal-font;
   @include font-size;
 
+  padding: 20px;
+
   h1 {
     @include font-size(16);
     padding-bottom: 10px;

@@ -5,7 +5,9 @@ class WalkthroughTest < ApplicationSystemTestCase
     Git::WebsiteContent.
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
-    user = create(:user)
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
     create(:auth_token, user: user)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     create(:user_track, user: user, track: track)
@@ -16,6 +18,27 @@ class WalkthroughTest < ApplicationSystemTestCase
       sign_in!(user)
       visit my_solution_path(solution)
       click_on "Begin Walk-Through"
+
+      assert_text "Welcome to the Exercism installation guide!"
+    end
+  end
+
+  test "shows walkthrough in a different page" do
+    Git::WebsiteContent.
+      stubs(:repo_url).
+      returns("file://#{Rails.root}/test/fixtures/website-copy")
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    create(:auth_token, user: user)
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    create(:user_track, user: user, track: track)
+    exercise = create(:exercise, track: track)
+    solution = create(:solution, user: user, exercise: exercise)
+
+    stub_repo_cache! do
+      sign_in!(user)
+      visit walkthrough_my_solution_path(solution)
 
       assert_text "Welcome to the Exercism installation guide!"
     end
