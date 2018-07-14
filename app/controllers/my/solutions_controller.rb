@@ -35,7 +35,7 @@ class My::SolutionsController < MyController
     )
 
     respond_to do |format|
-      format.js { render_modal("solution-walkthrough", "walkthrough", close_button: true) }
+      format.js { render_modal("solution-walkthrough", "walkthrough_modal", close_button: true) }
       format.html { render }
     end
   end
