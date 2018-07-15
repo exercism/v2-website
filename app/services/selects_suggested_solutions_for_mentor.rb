@@ -20,10 +20,10 @@ class SelectsSuggestedSolutionsForMentor
       where("user_tracks.track_id = exercises.track_id").
 
       # Not things you already mentor
-      where.not(id: user.mentored_solutions).
+      where.not(id: user.solution_mentorships.select(:solution_id)).
 
       # Not things you've ignored
-      where.not(id: user.ignored_solutions).
+      where.not(id: user.ignored_solution_mentorships.select(:solution_id)).
 
       # Not your own solutions
       where.not(user_id: user.id).
