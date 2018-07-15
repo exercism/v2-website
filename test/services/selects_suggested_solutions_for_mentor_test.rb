@@ -225,33 +225,13 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     )
   end
 
-  test "puts legacy exercises last" do
-    mentor, track = create_mentor_and_track
-    mentee = create_mentee([track])
-
-    side_solution = create(:solution,
-                           exercise: create(:exercise, track: track, core: false),
-                           last_updated_by_user_at: Exercism::V2_MIGRATED_AT + 1.week,
-                           user: mentee)
-    legacy_core_solution = create(:solution,
-                                   exercise: create(:exercise, track: track, core: true),
-                                   last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.week,
-                                   user: mentee)
-    [side_solution, legacy_core_solution].each do |solution|
-      create :iteration, solution: solution
-    end
-
-    assert_equal(
-      [side_solution, legacy_core_solution],
-      SelectsSuggestedSolutionsForMentor.select(mentor)
-    )
-  end
-
   test "orders correctly" do
     Timecop.freeze do
       mentor, track = create_mentor_and_track
       independent_user = create :user
       mentored_user = create :user
+      undecided_user = create :user
+      create :user_track, user: undecided_user, track: track, independent_mode: nil
       create :user_track, user: independent_user, track: track, independent_mode: true
       create :user_track, user: mentored_user, track: track, independent_mode: false
       core_exercise = create(:exercise, track: track, core: true)
@@ -268,6 +248,13 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                         num_mentors: 0,
                                         last_updated_by_user_at: DateTime.now,
                                         user: mentored_user)
+
+      undecided_newer_unmentored_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        last_updated_by_user_at: DateTime.now + 1.minute,
+                                        user: undecided_user)
+
 
       unmentored_side_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: false),
@@ -302,6 +289,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       [
         independent_solution,
         old_unmentored_core_solution,
+        undecided_newer_unmentored_core_solution,
         unmentored_core_solution,
         unmentored_side_solution,
         unmentored_legacy_core_solution,
@@ -314,6 +302,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       expected = [
         old_unmentored_core_solution,
         unmentored_core_solution,
+        undecided_newer_unmentored_core_solution,
         unmentored_side_solution,
         unmentored_legacy_core_solution,
         mentored_1_core_solution,
