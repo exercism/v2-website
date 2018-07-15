@@ -178,9 +178,9 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
   test "puts exercises in standard mode first" do
     mentor = create(:user)
     mentee = create(:user)
-    track = create(:track)
+    standard_track = create(:track)
     independent_track = create(:track)
-    create(:track_mentorship, user: mentor, track: track)
+    create(:track_mentorship, user: mentor, track: standard_track)
     create(:track_mentorship, user: mentor, track: independent_track)
     create(:user_track,
            user: mentee,
@@ -189,18 +189,18 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create(:user_track,
            user: mentee,
            independent_mode: false,
-           track: track)
-    exercise = create(:exercise, track: track)
+           track: standard_track)
+    standard_exercise = create(:exercise, track: standard_track)
     independent_exercise = create(:exercise, track: independent_track)
     independent_solution = create(:solution,
                                   exercise: independent_exercise,
                                   user: mentee)
-    solution = create(:solution, exercise: exercise, user: mentee)
-    [solution, independent_solution].each do |solution|
+    standard_solution = create(:solution, exercise: standard_exercise, user: mentee)
+    [standard_solution, independent_solution].each do |solution|
       create :iteration, solution: solution
     end
 
-    expected = [solution, independent_solution]
+    expected = [standard_solution, independent_solution]
     actual = SelectsSuggestedSolutionsForMentor.select(mentor)
     assert_equal expected.map(&:id), actual.map(&:id)
   end
@@ -231,12 +231,13 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
 
     side_solution = create(:solution,
                            exercise: create(:exercise, track: track, core: false),
+                           last_updated_by_user_at: Exercism::V2_MIGRATED_AT + 1.week,
                            user: mentee)
     legacy_core_solution = create(:solution,
                                    exercise: create(:exercise, track: track, core: true),
                                    last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.week,
                                    user: mentee)
-    [legacy_core_solution, side_solution].each do |solution|
+    [side_solution, legacy_core_solution].each do |solution|
       create :iteration, solution: solution
     end
 
