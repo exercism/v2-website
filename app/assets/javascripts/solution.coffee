@@ -1,24 +1,26 @@
 window.setupSolution = ->
-  $window = $(window)
-  setupLayout = =>
-    $lhs = $('.lhs')
-    $rhs = $('.rhs')
-    $lhs_content = $('.lhs-content')
-    $lhs_content.css
-      left: $lhs.position().left
-      width: $lhs.outerWidth()
-    $rhs.css
-      minHeight: $window.height()
+  ###
+    $window = $(window)
+    setupLayout = =>
+      $lhs = $('.lhs')
+      $rhs = $('.rhs')
+      $lhs_content = $('.lhs-content')
+      $lhs_content.css
+        left: $lhs.position().left
+        width: $lhs.outerWidth()
+      $rhs.css
+        minHeight: $window.height()
 
-  $lhs = $('.lhs')
-  $notificationsBar = $('.notifications-bar')
-  $window.scroll =>
-    console.log($window.scrollTop())
-    console.log($notificationsBar.position().top)
-    if $window.scrollTop() >= 300#$notificationsBar.position().top - 10
-      $lhs.addClass('fixed')
-    else
-      $lhs.removeClass('fixed')
+    $lhs = $('.lhs')
+    $notificationsBar = $('.notifications-bar')
+    $window.scroll =>
+      console.log($window.scrollTop())
+      console.log($notificationsBar.position().top)
+      if $window.scrollTop() >= 300 #$notificationsBar.position().top - 10
+        $lhs.addClass('fixed')
+      else
+        $lhs.removeClass('fixed')
+  ###
 
   setupTabs = =>
     $('.tab').click ->
