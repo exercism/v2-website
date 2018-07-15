@@ -43,7 +43,7 @@ class SelectsSuggestedSolutionsForMentor
       # Order standard mode tracks first,
       # then by number of mentors (least first),
       # then age (oldest first)
-      order(Arel.sql("last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' ASC, 
+      order(Arel.sql("last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
                       independent_mode ASC, core DESC, num_mentors ASC, last_updated_by_user_at ASC")).
 
       includes(iterations: [], exercise: {track: []}, user: [:profile, { avatar_attachment: :blob }]).
