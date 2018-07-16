@@ -17,7 +17,7 @@
         =select_tag :teams, options_for_select(current_user.teams.map{|t|[t.name, t.id]}, @team.id)
 
     =link_to root_path, class: 'logo' do
-      =image_tag "logo-white.png"
+      =image_tag "logo-white.png", alt: 'Exercism'
       %span teams edition
 
 

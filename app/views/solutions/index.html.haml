@@ -3,26 +3,26 @@
     .lo-container
       -if user_signed_in?
         /=link_to "Dashboard", root_path
-        /=image_tag "nav-divider.png"
+        /=image_tag "nav-divider.png", alt: ""
         =link_to "Language Tracks", [:my, :tracks]
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         =link_to "#{@track.title} Track", [:my, @track]
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         -if @user_solution
           =link_to "Your Solution to #{@exercise.title}", [:my, @user_solution]
-          =image_tag "nav-divider.png"
+          =image_tag "nav-divider.png", alt: ""
         %span Community Solutions
       -else
         =link_to "Home", root_path
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         =link_to "Language Tracks", :tracks
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         =link_to "#{@track.title} Track", @track
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         =link_to "Exercises", [@track, :exercises]
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         =link_to @exercise.title, [@track, @exercise]
-        =image_tag "nav-divider.png"
+        =image_tag "nav-divider.png", alt: ""
         %span Solutions
 
   .header
