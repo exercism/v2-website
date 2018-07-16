@@ -10,9 +10,14 @@
     until your mentor thinks you’re ready to move on and marks the exercise as complete.
   %p If you’re eager to move on now, we understand that too. When you mark this exercise as complete yourself, please note that:
   %ul
+    %li
+      you will
+      %strong not
+      unlock this exercise's side exercises
     %li you'll no longer get mentor feedback on this exercise
-    %li you'll not recieve a laptop sticker once you've finished the Track
     %li you will be able to reactivate the exercise in the future
+
+  %p If you want to quickly move through the track without regular feedback, we recommend moving to Indepenent Mode, where you can choose which exercises to receive feedback on. You can do on the right-hand-side of the Track page.
 
   =form_tag [:complete, :my, @solution], method: :patch, remote: true do
     =check_box_tag :agree, 1, false, required: true
