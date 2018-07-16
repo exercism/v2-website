@@ -7,7 +7,7 @@ default: &default
   #collation: utf8_unicode_ci
   username: exercism_reboot
   password: exercism_reboot
-  host: localhost
+  host: <%= ENV['MYSQL_HOST'] || 'localhost' %>
   variables:
     sql_mode: traditional
 

@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mysql:
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_DATABASE=exercism_reboot_development
+      - MYSQL_USER=exercism_reboot
+      - MYSQL_PASSWORD=exercism_reboot
+    image: "mariadb:10.3"
+    restart: always
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+  rails:
+    build: .
+    volumes:
+      - .:/opt/rails
+    environment:
+      MYSQL_HOST: 'mysql'
+    depends_on:
+      - mysql
+    ports:
+      - "3000:3000/tcp"
