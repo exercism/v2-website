@@ -171,6 +171,8 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.string "link_text"
     t.string "link_url"
     t.text "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["track_id"], name: "index_mentors_on_track_id"
   end
 
