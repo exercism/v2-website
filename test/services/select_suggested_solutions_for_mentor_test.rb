@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
+class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
   test "selects only mentored tracks" do
     mentor = create(:user)
     track1 = create :track
@@ -24,7 +24,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor, track: track1
     create :track_mentorship, user: mentor, track: track2
 
-    assert_equal [solution1, solution2].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [solution1, solution2].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "does not select solutions you already mentor" do
@@ -41,7 +41,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: bad_solution
     create :solution_mentorship, user: mentor, solution: bad_solution
 
-    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "only selects solutions that have an iteration" do
@@ -56,7 +56,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                            user: mentee)
     create :iteration, solution: good_solution
 
-    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "does not select solutions with >=3 mentors" do
@@ -74,7 +74,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "does not select approved solutions" do
@@ -92,7 +92,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "does not select completed solutions" do
@@ -110,7 +110,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "does not select ignored solutions" do
@@ -127,7 +127,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: bad_solution
     create :ignored_solution_mentorship, solution: bad_solution, user: mentor
 
-    assert_equal [good_solution].sort, SelectsSuggestedSolutionsForMentor.select(mentor).sort
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
   test "orders by number of mentors then time" do
@@ -170,7 +170,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     end
 
     expected = [m0_solution_old, m0_solution_new, m1_solution_old, m1_solution_new, m2_solution_old, m2_solution_new]
-    actual = SelectsSuggestedSolutionsForMentor.select(mentor)
+    actual = SelectSuggestedSolutionsForMentor.(mentor)
 
     assert_equal actual.map(&:id), expected.map(&:id)
   end
@@ -201,7 +201,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     end
 
     expected = [standard_solution, independent_solution]
-    actual = SelectsSuggestedSolutionsForMentor.select(mentor)
+    actual = SelectSuggestedSolutionsForMentor.(mentor)
     assert_equal expected.map(&:id), actual.map(&:id)
   end
 
@@ -221,7 +221,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
 
     assert_equal(
       [core_solution, side_solution],
-      SelectsSuggestedSolutionsForMentor.select(mentor)
+      SelectSuggestedSolutionsForMentor.(mentor)
     )
   end
 
@@ -328,7 +328,7 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         mentored_1_core_solution,
         mentored_2_core_solution,
       ]
-      actual = SelectsSuggestedSolutionsForMentor.select(mentor)
+      actual = SelectSuggestedSolutionsForMentor.(mentor)
 
       assert_equal expected.map(&:id), actual.map(&:id)
     end
