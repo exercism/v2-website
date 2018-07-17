@@ -255,7 +255,6 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                         last_updated_by_user_at: DateTime.now + 1.minute,
                                         user: undecided_user)
 
-
       unmentored_side_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: false),
                                         num_mentors: 0,
@@ -274,16 +273,32 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                         last_updated_by_user_at: DateTime.now,
                                         user: mentored_user)
 
-      unmentored_legacy_core_solution = create(:solution,
+      unmentored_older_legacy_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
-                                        last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day,
+                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
+                                        last_updated_by_user_at: Time.now - 30.seconds,
                                         user: mentored_user)
+
+      unmentored_newer_legacy_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
+                                        last_updated_by_user_at: Time.now + 30.seconds,
+                                        user: mentored_user)
+
+      unmentored_dead_legacy_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
+                                        last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.hour,
+                                        user: mentored_user)
+
 
       old_unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
-                                        last_updated_by_user_at: DateTime.now - 1.day,
+                                        last_updated_by_user_at: Time.now - 1.day,
                                         user: mentored_user)
 
       [
@@ -292,9 +307,11 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         undecided_newer_unmentored_core_solution,
         unmentored_core_solution,
         unmentored_side_solution,
-        unmentored_legacy_core_solution,
+        unmentored_older_legacy_core_solution,
+        unmentored_newer_legacy_core_solution,
         mentored_1_core_solution,
         mentored_2_core_solution,
+        unmentored_dead_legacy_core_solution
       ].each do |solution|
         create :iteration, solution: solution
       end
@@ -304,14 +321,16 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         unmentored_core_solution,
         undecided_newer_unmentored_core_solution,
         unmentored_side_solution,
-        unmentored_legacy_core_solution,
+        unmentored_older_legacy_core_solution,
+        unmentored_newer_legacy_core_solution,
+        independent_solution,
+        unmentored_dead_legacy_core_solution,
         mentored_1_core_solution,
         mentored_2_core_solution,
-        independent_solution
       ]
       actual = SelectsSuggestedSolutionsForMentor.select(mentor)
 
-      assert_equal actual.map(&:id), expected.map(&:id)
+      assert_equal expected.map(&:id), actual.map(&:id)
     end
   end
 
