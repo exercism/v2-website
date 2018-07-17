@@ -12,9 +12,9 @@ module Scripts
     # completed without approval. That should be added before
     # this is run in the future.
     def fix_track(track)
-      core_exercises = track.exercises.core.order("position ASC")
+      core_exercises = track.exercises.core.order("position ASC").active
       core_exercise_ids = core_exercises.map(&:id)
-      side_exercises = track.exercises.side
+      side_exercises = track.exercises.side.active
       unlocked_by, auto_unlock = side_exercises.partition { |e| e.unlocked_by_id.present? }
 
       UserTrack.includes(:user).where(track_id: track.id).each do |ut|
