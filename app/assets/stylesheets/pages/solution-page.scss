@@ -104,6 +104,7 @@ body.controller-solutions.action-show {
         .post, .preview-area {
             p {
                 @include font-size(14, 20);
+                margin-bottom:10px;
             }
             blockquote {
                 border-left: 4px solid #eee;
