@@ -9,7 +9,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     get track_exercise_solutions_url(exercise.track, exercise)
     assert_response :success
-    assert assigns(:solutions), [solution]
+    assert_equal assigns(:solutions), [solution]
   end
 
   test "show should succeed for unpublished solution" do
@@ -25,7 +25,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     exercise = create :exercise
     solution = create :solution, exercise: exercise, published_at: nil
 
-    get track_exercise_solution_url(exercise.track, exercise, solution)
+    get track_exercise_solution_url(exercise.track, exercise, solution.uuid)
     assert_redirected_to track_exercise_url(exercise.track, exercise)
   end
 end
