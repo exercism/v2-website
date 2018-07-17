@@ -43,9 +43,10 @@ class SelectsSuggestedSolutionsForMentor
       # Order standard mode tracks first,
       # then by number of mentors (least first),
       # then age (oldest first)
-      order(Arel.sql("(independent_mode IS NULL OR independent_mode = 0) DESC,
-                      num_mentors > 0 ASC,
+      order(Arel.sql("num_mentors > 0 ASC,
                       last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
+                      (independent_mode IS NULL OR independent_mode = 0) DESC,
+                      solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
                       core DESC,
                       num_mentors ASC,
                       last_updated_by_user_at ASC")).
