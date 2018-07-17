@@ -14,7 +14,8 @@ class CreatesSolution
       user: user,
       exercise: exercise,
       git_sha: git_sha,
-      git_slug: exercise.slug
+      git_slug: exercise.slug,
+      last_updated_by_user_at: Time.now
     )
   end
 

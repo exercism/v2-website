@@ -20,10 +20,10 @@ class SelectsSuggestedSolutionsForMentor
       where("user_tracks.track_id = exercises.track_id").
 
       # Not things you already mentor
-      where.not(id: user.mentored_solutions).
+      where.not(id: user.solution_mentorships.select(:solution_id)).
 
       # Not things you've ignored
-      where.not(id: user.ignored_solutions).
+      where.not(id: user.ignored_solution_mentorships.select(:solution_id)).
 
       # Not your own solutions
       where.not(user_id: user.id).
@@ -43,7 +43,12 @@ class SelectsSuggestedSolutionsForMentor
       # Order standard mode tracks first,
       # then by number of mentors (least first),
       # then age (oldest first)
-      order("independent_mode ASC, core DESC, num_mentors ASC, last_updated_by_user_at ASC").
+      order(Arel.sql("(independent_mode IS NULL OR independent_mode = 0) DESC,
+                      num_mentors > 0 ASC,
+                      last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
+                      core DESC,
+                      num_mentors ASC,
+                      last_updated_by_user_at ASC")).
 
       includes(iterations: [], exercise: {track: []}, user: [:profile, { avatar_attachment: :blob }]).
 

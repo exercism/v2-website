@@ -1,9 +1,6 @@
-#modal-close-button x
-.header
-.content
-  #cli-walkthrough
-    = @walkthrough.html_safe
-.buttons
+#cli-walkthrough
+  = @walkthrough.html_safe
 
-:javascript
-  $(Walkthrough.bindEvents);
+- content_for :js do
+  :javascript
+    $(function() { Walkthrough.bindEvents("html, body") });

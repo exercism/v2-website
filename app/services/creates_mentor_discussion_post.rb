@@ -32,7 +32,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
       solution.user,
       :new_discussion_post,
       "#{strong user.handle} has commented on your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",
-      routes.my_solution_url(solution),
+      routes.my_solution_iteration_url(solution, iteration),
       trigger: discussion_post,
 
       # We want this to be the solution not the post

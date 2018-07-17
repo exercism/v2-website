@@ -1,4 +1,4 @@
-class Webhooks::RepoUpdatesController < WebhooksController
+class API::Webhooks::RepoUpdatesController < API::WebhooksController
   before_action :verify_github_webhook
 
   MASTER_REF = "refs/heads/master"
@@ -13,17 +13,21 @@ class Webhooks::RepoUpdatesController < WebhooksController
 
   private
 
+  def payload_params
+    params.permit(:ref, { repository: :name })
+  end
+
   def pushed_to_master?
-    params[:ref].eql? MASTER_REF
+    payload_params[:ref].eql? MASTER_REF
   end
 
   def slug
-    params.fetch(:repository).fetch(:name)
+    payload_params[:repository][:name]
   end
 
   def verify_github_webhook
-    payload = request.raw_post
-    signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), secret, payload)
+    request_body = request.body.read
+    signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), secret, request_body)
     if !Rack::Utils.secure_compare(signature, github_signature)
       render json: {error: 'invalid signature - delivery: %s' % github_delivery}, status: 500
     end

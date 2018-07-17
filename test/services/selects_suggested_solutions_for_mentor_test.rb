@@ -178,9 +178,9 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
   test "puts exercises in standard mode first" do
     mentor = create(:user)
     mentee = create(:user)
-    track = create(:track)
+    standard_track = create(:track)
     independent_track = create(:track)
-    create(:track_mentorship, user: mentor, track: track)
+    create(:track_mentorship, user: mentor, track: standard_track)
     create(:track_mentorship, user: mentor, track: independent_track)
     create(:user_track,
            user: mentee,
@@ -189,18 +189,18 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create(:user_track,
            user: mentee,
            independent_mode: false,
-           track: track)
-    exercise = create(:exercise, track: track)
+           track: standard_track)
+    standard_exercise = create(:exercise, track: standard_track)
     independent_exercise = create(:exercise, track: independent_track)
     independent_solution = create(:solution,
                                   exercise: independent_exercise,
                                   user: mentee)
-    solution = create(:solution, exercise: exercise, user: mentee)
-    [solution, independent_solution].each do |solution|
+    standard_solution = create(:solution, exercise: standard_exercise, user: mentee)
+    [standard_solution, independent_solution].each do |solution|
       create :iteration, solution: solution
     end
 
-    expected = [solution, independent_solution]
+    expected = [standard_solution, independent_solution]
     actual = SelectsSuggestedSolutionsForMentor.select(mentor)
     assert_equal expected.map(&:id), actual.map(&:id)
   end
@@ -223,6 +223,96 @@ class SelectsSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       [core_solution, side_solution],
       SelectsSuggestedSolutionsForMentor.select(mentor)
     )
+  end
+
+  test "orders correctly" do
+    Timecop.freeze do
+      mentor, track = create_mentor_and_track
+      independent_user = create :user
+      mentored_user = create :user
+      undecided_user = create :user
+      create :user_track, user: undecided_user, track: track, independent_mode: nil
+      create :user_track, user: independent_user, track: track, independent_mode: true
+      create :user_track, user: mentored_user, track: track, independent_mode: false
+      core_exercise = create(:exercise, track: track, core: true)
+      side_exercise = create(:exercise, track: track, core: false)
+
+      independent_solution = create(:solution,
+                                    exercise: create(:exercise, track: track, core: true),
+                                    num_mentors: 0,
+                                    last_updated_by_user_at: DateTime.now,
+                                    user: independent_user)
+
+      unmentored_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        last_updated_by_user_at: DateTime.now,
+                                        user: mentored_user)
+
+      undecided_newer_unmentored_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        last_updated_by_user_at: DateTime.now + 1.minute,
+                                        user: undecided_user)
+
+
+      unmentored_side_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: false),
+                                        num_mentors: 0,
+                                        last_updated_by_user_at: DateTime.now,
+                                        user: mentored_user)
+
+      mentored_1_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 1,
+                                        last_updated_by_user_at: DateTime.now,
+                                        user: mentored_user)
+
+      mentored_2_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 2,
+                                        last_updated_by_user_at: DateTime.now,
+                                        user: mentored_user)
+
+      unmentored_legacy_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day,
+                                        user: mentored_user)
+
+      old_unmentored_core_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        last_updated_by_user_at: DateTime.now - 1.day,
+                                        user: mentored_user)
+
+      [
+        independent_solution,
+        old_unmentored_core_solution,
+        undecided_newer_unmentored_core_solution,
+        unmentored_core_solution,
+        unmentored_side_solution,
+        unmentored_legacy_core_solution,
+        mentored_1_core_solution,
+        mentored_2_core_solution,
+      ].each do |solution|
+        create :iteration, solution: solution
+      end
+
+      expected = [
+        old_unmentored_core_solution,
+        unmentored_core_solution,
+        undecided_newer_unmentored_core_solution,
+        unmentored_side_solution,
+        unmentored_legacy_core_solution,
+        mentored_1_core_solution,
+        mentored_2_core_solution,
+        independent_solution
+      ]
+      actual = SelectsSuggestedSolutionsForMentor.select(mentor)
+
+      assert_equal actual.map(&:id), expected.map(&:id)
+    end
   end
 
   def create_mentor_and_track

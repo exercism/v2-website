@@ -1,14 +1,14 @@
-require_relative '../../test_helper'
+require "test_helper"
 
-class Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTest
+class API::Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTest
   test "does not save incomplete contributions" do
-    post webhooks_contributors_path, default_options(fixture('pull_request_event.closed'))
+    post api_webhooks_contributors_path, default_options(fixture('pull_request_event.closed'))
 
     assert_equal 0, Contributor.count
   end
 
   test "saves a contribution" do
-    post webhooks_contributors_path, default_options(fixture('pull_request_event.merged.to_default_master'))
+    post api_webhooks_contributors_path, default_options(fixture('pull_request_event.merged.to_default_master'))
 
     assert_equal 1, Contributor.count
   end
@@ -16,7 +16,7 @@ class Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTest
   test "provides a useful error message if record fails to save" do
     payload = fixture('pull_request_event.merged.to_default_master')
     payload['pull_request']['user']['login'] = nil
-    post webhooks_contributors_path, default_options(payload)
+    post api_webhooks_contributors_path, default_options(payload)
 
     assert_equal 500, response.status
     assert_match "abc-123", JSON.parse(response.body)['error']
@@ -27,7 +27,7 @@ class Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTest
 
     options = default_options(payload)
     options[:headers]['X-Hub-Signature'] = 'ZOMG wrong signature'
-    post webhooks_contributors_path, options
+    post api_webhooks_contributors_path, options
 
     assert_equal 500, response.status
     assert_match "abc-123", JSON.parse(response.body)['error']
@@ -37,23 +37,19 @@ class Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTest
   private
 
   def default_options(payload)
+    body = { payload: payload }.to_json
     {
       headers: {
+        'Content-Type' => "application/json",
         'X-GitHub-Delivery' => 'abc-123',
-        # Signature is pre-calculated to match the post body 'fake'.
-        # Under normal circumstances, the request.raw_post is the actual raw
-        # post body that was received.
-        'X-Hub-Signature' => 'sha1=cfbe1b6a0950b651e6f07e951476bb818051ae16',
+        'X-Hub-Signature' => 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), Rails.application.secrets.github_webhook_secret, body)
       },
-      env: {
-        'action_dispatch.request.request_parameters' => payload,
-        'action_dispatch.request.raw_post' => 'fake',
-      }
+      params: body
     }
   end
 
   def fixture(name)
-    path = '../../../fixtures/contributions/%s.json' % name
+    path = "#{Rails.root}/test/fixtures/contributions/%s.json" % name
     JSON.parse(File.read(File.absolute_path(path, __FILE__)))
   end
 end

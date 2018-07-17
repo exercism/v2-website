@@ -1,4 +1,4 @@
 .content
   .h2 Hello #{@user.handle},
-  %p You can confirm your account email through the link below:
+  %p Welcome to Exercism. Complete setting up your account by confirming your email address - just click the link below.
   %p= link_to 'Confirm my account', confirmation_url(@user, confirmation_token: @token)
