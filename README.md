@@ -2,7 +2,9 @@
 
 ## Development Setup
 
-This is a Ruby on Rails (5.2) application backed by MySQL.
+This is a Ruby on Rails (5.2) application backed by MySQL. You can setup a
+local development environment with the steps below or use the Docker setup from
+[github.com/unused/exercism-docker](https://github.com/unused/exercism-docker).
 
 ### Database
 
