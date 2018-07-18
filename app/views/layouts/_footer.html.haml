@@ -33,12 +33,12 @@
           =link_to "Report Abuse", report_abuse_page_path
         .pure-u-1-6
           %h4 Follow
-          =link_to "https://twitter.com/exercism_io", class: 'icon' do
-            %i.fa.fa-twitter
-          =link_to "https://facebook.com/exercism.io", class: 'icon' do
-            %i.fa.fa-facebook-official
-          =link_to "https://github.com/exercism", class: 'icon' do
-            %i.fa.fa-github
+          =link_to "https://twitter.com/exercism_io", class: "icon", "aria-label": "Exercism on Twitter" do
+            %i.fa.fa-twitter{"aria-hidden": true}
+          =link_to "https://facebook.com/exercism.io", class: "icon", "aria-label": "Exercism on Facebook" do
+            %i.fa.fa-facebook-official{'aria-hidden': true}
+          =link_to "https://github.com/exercism", class: "icon", "aria-label": "Exercism on GitHub" do
+            %i.fa.fa-github{"aria-hidden": true}
 
       .legal
         .copyright © #{Time.current.year} Exercism, Inc
