@@ -29,8 +29,9 @@ module TracksHelper
   end
 
   def track_icon(type, color, track, options={})
+    options[:alt] = "Track #{track.title}"
     options[:onerror] = "this.onerror=null;this.src='https://assets.exercism.io/tracks/default-#{type}-#{color}.png'"
-    image_tag(track.send("#{type}_#{color}_icon_url"), options)
+    image_tag track.send("#{type}_#{color}_icon_url"), options
   end
 
 end
