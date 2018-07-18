@@ -25,6 +25,7 @@
     }
     &.unlocked {
         .status { color: #999 }
+        border-color:rgba($color-2, 0.6);
     }
     &.in-progress {
         border:2px solid $color-2;

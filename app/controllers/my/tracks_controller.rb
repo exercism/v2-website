@@ -49,7 +49,7 @@ class My::TracksController < MyController
       end
 
       @core_exercises_and_solutions = core_exercises.
-        inject([[], [], []]) do |collection, exercise|
+        inject([[], [], []]) { |collection, exercise|
           if exercise.completed?
             collection[0] << exercise
           elsif exercise.unlocked?
@@ -59,9 +59,11 @@ class My::TracksController < MyController
           end
 
           collection
-        end.
+        }.
         flatten
-      @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}
+      @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}.sort_by{|e,s|
+        "#{s ? (s.completed?? 0 : (s.in_progress?? 1 : 2)) : 3}#{!e.unlocked_by ? 0 : 1}"
+      }
 
       @num_side_exercises = @track.exercises.side.count
       @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
