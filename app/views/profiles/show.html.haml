@@ -3,7 +3,7 @@
     .lo-container
       -if user_signed_in? && current_user == @profile.user
         =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
-          %i.fa.fa-cogs
+          %i.fa.fa-cogs{"aria-hidden": true}
           Edit Public Profile
       %h1 #{@profile.display_name}'s Profile
       .h1-subtitle This is a showcase of some of the solutions that #{@profile.display_name} has published on Exercism.
@@ -27,12 +27,12 @@
             -@profile.user.maintained_tracks.each do |track|
               .badge.maintainer #{track.title} Maintainer
           .member-since
-            %i.fa.fa-fw.fa-calendar
+            %i.fa.fa-fw.fa-calendar{"aria-hidden": true}
             Since #{@profile.user.created_at.strftime("%b %Y")}
 
           -if @helped_count > 0
             .helped-count
-              %i.fa.fa-fw.fa-handshake-o
+              %i.fa.fa-fw.fa-handshake-o{"aria-hidden": true}
               Helped
               .count #{@helped_count}
               = "student".pluralize(@helped_count)
@@ -43,27 +43,27 @@
 
             -if @profile.website.present?
               =link_to @profile.website, target: "_blank", class: 'external-link' do
-                %i.fa.fa-fw.fa-globe
+                %i.fa.fa-fw.fa-globe{"aria-hidden": true}
                 %span My Website
 
             -if @profile.github.present?
               =link_to "https://github.com/#{@profile.github}", target: "_blank", class: 'external-link' do
-                %i.fa.fa-fw.fa-github
+                %i.fa.fa-fw.fa-github{"aria-hidden": true}
                 %span GitHub
 
             -if @profile.twitter.present?
               =link_to "https://twitter.com/#{@profile.twitter}", target: "_blank", class: 'external-link' do
-                %i.fa.fa-fw.fa-twitter
+                %i.fa.fa-fw.fa-twitter{"aria-hidden": true}
                 %span Twitter
 
             -if @profile.linkedin.present?
               =link_to @profile.linkedin, target: "_blank", class: 'external-link' do
-                %i.fa.fa-fw.fa-linkedin
+                %i.fa.fa-fw.fa-linkedin{"aria-hidden": true}
                 %span LinkedIn
 
             -if @profile.medium.present?
               =link_to "https://medium.com/#{@profile.medium}", target: "_blank", class: 'external-link' do
-                %i.fa.fa-fw.fa-medium
+                %i.fa.fa-fw.fa-medium{"aria-hidden": true}
                 %span Medium
 
       .pure-u-18-24.rhs
