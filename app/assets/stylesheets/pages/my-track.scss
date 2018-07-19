@@ -103,7 +103,7 @@ body.namespace-my.controller-tracks.action-show {
             .circle {
                 position:absolute;
                 top:23px;
-                left:-86px;
+                left:-83px;
                 border-radius:100%;
                 width:50px;
                 height:50px;
@@ -210,7 +210,7 @@ body.namespace-my.controller-tracks.action-show {
                         border:2px solid #fff;
                     }
                     top:21px;
-                    left:-88px;
+                    left:-85px;
                     width:55px;
                     height:55px;
                 }
@@ -263,12 +263,13 @@ body.namespace-my.controller-tracks.action-show {
                     position:absolute;
                     content: "";
                     top:-50px;
-                    left:-61px;
+                    left:-58px;
                     height:92px;
                     width:2px;
                     background:$color-1;
                 }
             }
+            &.completed + .exercise-wrapper.completed,
             &.completed + .exercise-wrapper.in-progress {
                 &:before {
                     margin-top: -200px;
