@@ -3,11 +3,15 @@ class MentorNotificationsMailer < ApplicationMailer
 
   def new_discussion_post(mentor, discussion_post)
     @solution = discussion_post.solution
-    mail(subject: "[Exercism Mentor Notification] New comment", to: mentor.email)
+    exercise_title = @solution.exercise.title
+    track_title = @solution.track.title
+    mail(subject: "[Exercism Mentor Notification] New comment on #{track_title}/#{exercise_title} - #{@solution.uuid[0,5]}", to: mentor.email)
   end
 
   def new_iteration(mentor, iteration)
     @solution = iteration.solution
-    mail(subject: "[Exercism Mentor Notification] New iteration", to: mentor.email)
+    exercise_title = @solution.exercise.title
+    track_title = @solution.track.title
+    mail(subject: "[Exercism Mentor Notification] New iteration on #{track_title}/#{exercise_title} - #{@solution.uuid[0,5]}", to: mentor.email)
   end
 end

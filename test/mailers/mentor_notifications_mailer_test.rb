@@ -7,6 +7,9 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     user_track = create :user_track, user: user, track: discussion_post.iteration.solution.exercise.track
     mentor = create :user
 
+    solution = discussion_post.solution
+    exercise = solution.exercise
+
     email = MentorNotificationsMailer.new_discussion_post(mentor, discussion_post)
 
     assert_emails 1 do
@@ -15,7 +18,7 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
 
     assert_equal ["hello@exercism.io"], email.from
     assert_equal [mentor.email], email.to
-    assert_equal '[Exercism Mentor Notification] New comment', email.subject
+    assert_equal "[Exercism Mentor Notification] New comment on #{exercise.track.title}/#{exercise.title} - #{solution.uuid[0,5]}", email.subject
 
     str = "A student you are mentoring (#{user.handle}) has posted"
     assert_body_includes email, str
@@ -42,6 +45,9 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     user_track = create :user_track, user: user, track: iteration.solution.exercise.track
     mentor = create :user
 
+    solution = iteration.solution
+    exercise = solution.exercise
+
     email = MentorNotificationsMailer.new_iteration(mentor, iteration)
 
     assert_emails 1 do
@@ -50,7 +56,7 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
 
     assert_equal ["hello@exercism.io"], email.from
     assert_equal [mentor.email], email.to
-    assert_equal '[Exercism Mentor Notification] New iteration', email.subject
+    assert_equal "[Exercism Mentor Notification] New iteration on #{exercise.track.title}/#{exercise.title} - #{solution.uuid[0,5]}", email.subject
 
     str = "A student you are mentoring (#{user.handle}) has posted"
     assert_body_includes email, str
