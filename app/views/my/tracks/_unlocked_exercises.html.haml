@@ -1,0 +1,9 @@
+-unlocked_exercises_and_solutions.each do |exercise, solution|
+  -if solution
+    = link_to [:my, solution], class: "unlocked-exercise" do
+      =image_tag exercise.turquoise_icon_url, class: 'normal'
+      =image_tag exercise.white_icon_url, class: 'hover'
+  -else
+    = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'unlocked-exercise' do
+      =image_tag exercise.turquoise_icon_url, class: 'normal'
+      =image_tag exercise.white_icon_url, class: 'hover'

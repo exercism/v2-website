@@ -86,23 +86,14 @@ body.namespace-my.controller-tracks.action-show {
             background:$background-grey-1;
             width:2px;
         }
-        .exercise {
-            display:block;
-            color:#333;
-            text-decoration:none;
-            border:1px solid $line-color-1;
-            border-radius:2px;
-            padding:20px 25px;
-            margin-bottom:15px;
-            margin-left:60px;
-            height:100px;
+        .exercise-wrapper {
             position:relative;
-            background:#fff;
+            margin-left:58px;
 
             &:after {
                 position:absolute;
                 content: "";
-                top:50%;
+                top:50px;
                 left:-36px;
                 width:35px;
                 height:1px;
@@ -117,56 +108,70 @@ body.namespace-my.controller-tracks.action-show {
                 width:50px;
                 height:50px;
                 background:#eee;
+                z-index:1;
             }
-            .status {
-                float:right;
-                @include font-size(12, 12);
-                letter-spacing:-0.5px;
-                text-transform:uppercase;
-                font-weight:$regular;
-                color:#ccc;
-            }
-            .position {
-                @include font-size(10, 10);
-                font-weight:$light;
-                letter-spacing:-0.0px;
-                color:#ccc;
-                margin-bottom:5px;
-                display:none;
-            }
-            .title {
-                font-weight:$bold;
-                @include font-size(20, 20);
-                color:#ccc;
-                margin-bottom:5px;
-            }
-            .blurb {
-                font-weight:$regular;
-                @include font-size(13, 16);
-                color:#ccc;
-                overflow:hidden;
-                max-height:32px;
-                max-width:400px;
-            }
-            .topics {
-                display:inline-block;
-                vertical-align:bottom;
-                max-width: 290px;
-                overflow: hidden;
-                max-height: 23px;
-                margin-bottom:0px;
 
-                .topic {
-                    display:inline-block;
-                    @include font-size(11, 11);
+            .exercise {
+                display:block;
+                color:#333;
+                text-decoration:none;
+                border:1px solid $line-color-1;
+                border-radius:2px;
+                padding:20px 25px;
+                margin-bottom:15px;
+                height:100px;
+                background:#fff;
+                .status {
+                    float:right;
+                    @include font-size(12, 12);
+                    letter-spacing:-0.5px;
+                    text-transform:uppercase;
                     font-weight:$regular;
-                    margin-left:10px;
-                    background:#eee;
-                    color:#999;
-                    padding:3px 6px 4px;
-                    border-radius:2px;
+                    color:#ccc;
+                }
+                .position {
+                    @include font-size(10, 10);
+                    font-weight:$light;
+                    letter-spacing:-0.0px;
+                    color:#ccc;
+                    margin-bottom:5px;
+                    display:none;
+                }
+                .title {
+                    font-weight:$bold;
+                    @include font-size(20, 20);
+                    color:#ccc;
+                    margin-bottom:5px;
+                }
+                .blurb {
+                    font-weight:$regular;
+                    @include font-size(13, 16);
+                    color:#ccc;
+                    overflow:hidden;
+                    max-height:32px;
+                    max-width:400px;
+                }
+                .topics {
+                    display:inline-block;
+                    vertical-align:bottom;
+                    max-width: 290px;
+                    overflow: hidden;
+                    max-height: 23px;
+                    margin-bottom:0px;
+
+                    .topic {
+                        display:inline-block;
+                        @include font-size(11, 11);
+                        font-weight:$regular;
+                        margin-left:10px;
+                        background:#eee;
+                        color:#999;
+                        padding:3px 6px 4px;
+                        border-radius:2px;
+                    }
                 }
             }
+
             &.locked {
                 .circle {
                     img {
@@ -177,9 +182,11 @@ body.namespace-my.controller-tracks.action-show {
                 }
             }
             &.in-progress {
-                border:1px solid $color-1;
-                box-shadow:0 0 0 1px $color-1;
-                background:#fff;
+                .exercise {
+                    border:1px solid $color-1;
+                    box-shadow:0 0 0 1px $color-1;
+                    background:#fff;
+                }
                 &:after {
                     left:-34px;
                     width:33px;
@@ -216,7 +223,12 @@ body.namespace-my.controller-tracks.action-show {
                 }
             }
             &.completed {
-                border-color:$color-1;
+                .exercise {
+                    border-color:$color-1;
+                    .status {
+                        color:$color-1;
+                    }
+                }
                 &:after {
                     background:$color-1;
                 }
@@ -229,36 +241,89 @@ body.namespace-my.controller-tracks.action-show {
                         margin:16px auto;
                     }
                 }
-                .status {
-                    color:$color-1;
-                }
             }
             &.in-progress, &.completed {
-                &:hover {
-                    background:rgba($color-1, 0.05);
-                }
+                .exercise {
+                    &:hover {
+                        background:rgba($color-1, 0.05);
+                    }
 
-                .title {
-                    color:#333;
-                }
-                .position {
-                    color:#999;
-                }
-                .blurb {
-                    color:#999;
+                    .title {
+                        color:#333;
+                    }
+                    .position {
+                        color:#999;
+                    }
+                    .blurb {
+                        color:#999;
+                    }
                 }
 
                 &:before {
                     position:absolute;
                     content: "";
-                    bottom:50%;
+                    top:-50px;
                     left:-61px;
                     height:92px;
                     width:2px;
                     background:$color-1;
                 }
             }
-
+            &.completed + .exercise-wrapper.in-progress {
+                &:before {
+                    margin-top: -200px;
+                    height: 300px;
+                }
+            }
+        }
+        .unlocked-exercises-section {
+            margin: 0 50px;
+            border: 1px solid rgba($color-2, 0.5);
+            border-radius:2px;
+            margin-bottom: 20px;
+            position:relative;
+            &:before {
+                width:1px;
+                left:50%;
+                top:-16px;
+                height:16px;
+                position:absolute;
+                content: "";
+                background:$color-2;
+            }
+            h3 {
+                color:rgba($color-2, 0.9);
+                text-align:center;
+                background:rgba($color-1, 0.04);
+                border-bottom:1px solid rgba($color-2, 0.1);
+                font-weight:$regular;
+                padding:7px 20px;
+                @include font-size(13,13);
+            }
+            .unlocked-exercises {
+                padding:10px 20px 5px;
+                text-align:center;
+                font-size: 0;
+            }
+            .unlocked-exercise {
+                display: inline-block;
+                margin: 0 5px 5px 0;
+                border: 1px solid rgba($color-2, 0.5);
+                background:#fff;
+                padding:6px;
+                border-radius:2px;
+                height:37px;
+                img {
+                    height:25px;
+                    display:inline;
+                }
+                .hover { display:none; }
+                &:hover {
+                    background:$color-2;
+                    .normal { display:none; }
+                    .hover { display:inline; }
+                }
+            }
         }
     }
     .progress-section {
