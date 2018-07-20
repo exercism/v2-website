@@ -3,10 +3,12 @@ class SelectSuggestedSolutionsForMentor
 
   MAX_RESULTS = 20
 
-  attr_reader :user, :page
-  def initialize(user, page = nil)
+  attr_reader :user, :filtered_track_ids, :filtered_exercise_ids, :page
+  def initialize(user, filtered_track_ids: nil, filtered_exercise_ids: nil, page: nil)
     @user = user
     @page = page
+    @filtered_track_ids = filtered_track_ids
+    @filtered_exercise_ids = filtered_exercise_ids
   end
 
   def call
@@ -63,7 +65,7 @@ class SelectSuggestedSolutionsForMentor
 
       # Only mentored tracks
       joins(:exercise).
-      where("exercises.track_id": track_ids).
+      where("solutions.exercise_id": exercise_ids).
 
       joins(user: :user_tracks).
       where("user_tracks.track_id = exercises.track_id").
@@ -87,7 +89,17 @@ class SelectSuggestedSolutionsForMentor
       where(completed_at: nil)
   end
 
+  memoize
+  def exercise_ids
+    eids = Exercise.where(track_id: track_ids).select(:id)
+    eids = eids.where(id: filtered_exercise_ids) if filtered_exercise_ids.present?
+    eids
+  end
+
+  memoize
   def track_ids
-    @track_ids ||= user.track_mentorships.pluck(:track_id)
+    tids = user.track_mentorships.select(:track_id)
+    tids = tids.where(track_id: filtered_track_ids) if filtered_track_ids.present?
+    tids
   end
 end

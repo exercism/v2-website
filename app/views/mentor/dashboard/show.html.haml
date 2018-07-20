@@ -6,16 +6,12 @@
         You can keep track of what needs responding to here.
         If you're stuck, check out the #{link_to "Mentoring Guide", mentoring_guide_page_path}, #{link_to "Mentoring FAQs", mentoring_faqs_page_path} or ask questions on Slack.
 
-
   .lo-container
     .pure-g
       .pure-u-2-3
-        /-if @your_solutions.present? || @suggested_solutions.present?
-        /- if @your_solutions.present?
-
         =render "your_solutions_section"
 
-        -if @suggested_solutions.present?
+        -if @next_solutions.present?
           =render "next_solutions_section"
         -else
           =render "no_solutions_section"

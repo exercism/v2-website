@@ -1,0 +1,10 @@
+-if @next_solutions.size > 0
+  $('.next-solutions').show().html("#{j render "next_solutions", next_solutions: @next_solutions, user_tracks: @user_tracks}")
+  $('.no-next-solutions').hide()
+-else
+  $('.next-solutions').hide()
+  $('.no-next-solutions').show().html("You have no solutions in this category.")
+
+- if @next_track_id && @next_exercise_id.blank?
+  var select = $('#next_exercise_id')[0].selectize;
+  updateOptions(select, #{@next_exercise_id_options.to_json.html_safe});

@@ -38,7 +38,10 @@ Rails.application.routes.draw do
   # ###### #
   namespace :mentor do
     resource :configure, only: [:show, :update], controller: "configure"
-    resource :dashboard, only: [:show], controller: "dashboard"
+    resource :dashboard, only: [:show], controller: "dashboard" do
+      get :your_solutions
+      get :next_solutions
+    end
     resources :solutions, only: [:show] do
       member do
         patch :approve
