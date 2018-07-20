@@ -44,6 +44,42 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
+  test "filters by track" do
+    mentor, track1 = create_mentor_and_track
+    track2 = create :track
+    create :track_mentorship, user: mentor, track: track2
+    mentee = create_mentee([track1, track2])
+
+    bad_solution = create(:solution,
+                          exercise: create(:exercise, track: track2),
+                          user: mentee)
+    good_solution = create(:solution,
+                           exercise: create(:exercise, track: track1),
+                           user: mentee)
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor, filtered_track_ids: track1.id).sort
+  end
+
+  test "filters by exercise" do
+    mentor, track = create_mentor_and_track
+    mentee = create_mentee([track])
+
+    bad_exercise = create(:exercise, track: track)
+    good_exercise = create(:exercise, track: track)
+    bad_solution = create(:solution,
+                          exercise: bad_exercise,
+                          user: mentee)
+    good_solution = create(:solution,
+                           exercise: good_exercise,
+                           user: mentee)
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor, filtered_exercise_ids: good_exercise.id).sort
+  end
+
   test "only selects solutions that have an iteration" do
     mentor, track = create_mentor_and_track
     mentee = create_mentee([track])
@@ -128,51 +164,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :ignored_solution_mentorship, solution: bad_solution, user: mentor
 
     assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
-  end
-
-  test "orders by number of mentors then time" do
-    mentor, track = create_mentor_and_track
-    mentee = create_mentee([track])
-
-    m2_solution_old = create(:solution,
-                             exercise: create(:exercise, track: track),
-                             num_mentors: 2,
-                             last_updated_by_user_at: DateTime.now - 2.week,
-                             user: mentee)
-    m2_solution_new = create(:solution,
-                             exercise: create(:exercise, track: track),
-                             num_mentors: 2,
-                             last_updated_by_user_at: DateTime.now - 1.week,
-                             user: mentee)
-    m0_solution_new = create(:solution,
-                             exercise: create(:exercise, track: track),
-                             num_mentors: 0,
-                             last_updated_by_user_at: DateTime.now - 1.week,
-                             user: mentee)
-    m0_solution_old = create(:solution,
-                             exercise: create(:exercise, track: track),
-                             num_mentors: 0,
-                             last_updated_by_user_at: DateTime.now - 2.week,
-                             user: mentee)
-    m1_solution_old = create(:solution,
-                             exercise: create(:exercise, track: track),
-                             num_mentors: 1,
-                             last_updated_by_user_at: DateTime.now - 2.week,
-                             user: mentee)
-    m1_solution_new = create(:solution,
-                             exercise: create(:exercise, track: track),
-                             num_mentors: 1,
-                             last_updated_by_user_at: DateTime.now - 1.week,
-                             user: mentee)
-
-    [m0_solution_old, m0_solution_new, m1_solution_old, m1_solution_new, m2_solution_old, m2_solution_new].each do |solution|
-      create :iteration, solution: solution
-    end
-
-    expected = [m0_solution_old, m0_solution_new, m1_solution_old, m1_solution_new, m2_solution_old, m2_solution_new]
-    actual = SelectSuggestedSolutionsForMentor.(mentor)
-
-    assert_equal actual.map(&:id), expected.map(&:id)
   end
 
   test "puts exercises in standard mode first" do
