@@ -99,13 +99,15 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     mentor, track = create_mentor_and_track
     mentee = create_mentee([track])
 
+    # Temporary change: >=3 to >=1
+    # For >=3 mentors, change the values below to 1 and 0 respective
     bad_solution = create(:solution,
                           exercise: create(:exercise, track: track),
-                          num_mentors: 3,
+                          num_mentors: 1,
                           user: mentee)
     good_solution = create(:solution,
                            exercise: create(:exercise, track: track),
-                           num_mentors: 2,
+                           num_mentors: 0,
                            user: mentee)
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
@@ -316,8 +318,12 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         unmentored_newer_legacy_core_solution,
         independent_solution,
         unmentored_dead_legacy_core_solution,
-        mentored_1_core_solution,
-        mentored_2_core_solution,
+
+        # We are currently not showing any solutions
+        # with >=1 mentor. Uncomment these again when/if 
+        # we change this back to >=3 mentors.
+        #mentored_1_core_solution, 
+        #mentored_2_core_solution,
       ]
       actual = SelectSuggestedSolutionsForMentor.(mentor)
 
