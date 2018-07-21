@@ -26,7 +26,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
   private
 
   def notify_mentors
-    solution.mentors.each do |mentor|
+    solution.active_mentors.each do |mentor|
       CreatesNotification.create!(
         mentor,
         :new_discussion_post_for_mentor,

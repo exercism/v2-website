@@ -27,6 +27,8 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     # Setup mentors
     mentor1 = create :user
     mentor2 = create :user
+    create :track_mentorship, user: mentor1
+    create :track_mentorship, user: mentor2
     create :solution_mentorship, solution: solution, user: mentor1
     create :solution_mentorship, solution: solution, user: mentor2
 
@@ -44,6 +46,19 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
       assert_equal DiscussionPost, args[2].class
     end
 
+    CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
+  end
+
+  test "does not notify non-current mentors" do
+    iteration = create :iteration
+    solution = iteration.solution
+    user = solution.user
+
+    non_current_mentor = create :user
+    create :solution_mentorship, solution: solution, user: non_current_mentor
+
+    CreatesNotification.expects(:create!).never
+    DeliversEmail.expects(:deliver!).never
     CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
   end
 

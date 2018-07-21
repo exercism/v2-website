@@ -79,6 +79,18 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert mentorship.requires_action
   end
 
+  test "does not notify non-current mentors" do
+    solution = create :solution
+    user = solution.user
+
+    non_current_mentor = create :user
+    create :solution_mentorship, solution: solution, user: non_current_mentor
+
+    CreatesNotification.expects(:create!).never
+    DeliversEmail.expects(:deliver!).never
+    CreatesIteration.create!(solution, [])
+  end
+
   test "notifies and emails mentors" do
     solution = create :solution
     user = solution.user
@@ -86,6 +98,8 @@ class CreatesIterationTest < ActiveSupport::TestCase
     # Setup mentors
     mentor1 = create :user
     mentor2 = create :user
+    create :track_mentorship, user: mentor1
+    create :track_mentorship, user: mentor2
     create :solution_mentorship, solution: solution, user: mentor1
     create :solution_mentorship, solution: solution, user: mentor2
 

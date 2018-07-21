@@ -71,7 +71,7 @@ class CreatesIteration
   end
 
   def notify_mentors
-    solution.mentors.each do |mentor|
+    solution.active_mentors.each do |mentor|
       CreatesNotification.create!(
         mentor,
         :new_iteration_for_mentor,
