@@ -6,12 +6,16 @@ class CreatesNotification
     end
   end
 
+  # When adding to this list ensure you've also added to:
+  # - app/helpers/notifications_helper.rb
+
   VALID_NOTIFICATION_TYPES = %i{
+    exercise_auto_approved
     new_discussion_post
     new_reaction
     new_discussion_post_for_mentor
     new_iteration_for_mentor
-    exercise_auto_approved
+    solution_approved
   }
 
   def self.create!(*args)
