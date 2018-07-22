@@ -3,8 +3,10 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
     new(*args).create!
   end
 
+  attr_reader :user
   def initialize(iteration, user, content)
-    super
+    @user = user
+    super(iteration, user, content)
   end
 
   # Note: This whole method is pretty racey.
