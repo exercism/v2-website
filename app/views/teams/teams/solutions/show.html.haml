@@ -5,7 +5,7 @@
     .lo-container
       =image_tag display_avatar_url @solution.user, @solution_user_track
       .inner
-        =render "solutions/iteration_nav", url_path: :teams_team_solution_path, url_parts: [@team, @solution], iteration_idx: @iteration_idx, num_iterations: @solution.num_iterations
+        =iterations_nav_widget(@team, @solution, @iteration, url_path: :teams_team_solution_path)
         %h2
           %strong #{@exercise.title}
           in

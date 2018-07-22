@@ -2,47 +2,84 @@
 @import 'mixins';
 
 .widget-iterations-nav {
-    overflow:hidden;
     .title {
         @include font-size(12, 12);
         margin-top:1px;
         text-align:right;
         border-bottom:1px solid #ddd;
         padding-bottom:2px;
-        margin-bottom:5px;
+        margin-bottom:8px;
         strong {
             font-weight:$regular;
         }
     }
     .iterations {
+        font-size:0; // Remove spacing between elements
         .current, a {
             text-decoration:none;
             display:inline-block;
             position:relative;
+            margin-left:8px;
 
             .idx {
-                width:20px;
-                height:20px;
-                border:1px solid #fff;
-                color:#fff;
+                width:35px;
+                height:28px;
+                border-radius:2px;
                 text-align:center;
-                @include font-size(12, 20);
+                @include font-size(12, 28);
+                border:1px solid;
             }
             .num-comments {
+                display: inline-block;
                 position:absolute;
-                top:-7px;
-                right:-7px;
-                background:#fff;
-                color:#999;
-                border-radius:100%;
-                width:16px;
-                height:16px;
+                top:-8px;
+                right:-6px;
                 text-align:center;
-                @include font-size(11, 16);
+                width:20px;
+                .num {
+                    z-index:2;
+                    @include font-size(10, 13);
+                    font-weight:$regular;
+                    vertical-align:top;
+                    padding-top:3px;
+                    padding-right:1px;
+                    display:inline-block;
+                    color:#333;
+                    position:relative;
+                    position:relative;
+                }
+                &:after {
+                    font: normal normal normal 14px/1 FontAwesome;
+                    font-size: inherit;
+                    text-rendering: auto;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    content: "\f075";
+                    position:absolute;
+                    left:0;
+                    top:0;
+                    @include font-size(19, 19);
+                    z-index:1;
+                }
             }
-        }
-        .current {
-            opacity:0.5;
+            .idx {
+                color:#fff;
+                border-color:#fff;
+            }
+            .num-comments {
+                &:after { 
+                    color:#fff;
+                    text-shadow: -1px -1px 0 $color-1,  1px -1px 0 $color-1, -1px 1px 0 $color-1, 1px 1px 0 $color-1;
+                }
+                .num { color:$color-1; }
+            }
+            &.current {
+                .idx {
+                    background: #fff;
+                    border-color:#fff;
+                    color:$color-1;
+                }
+            }
         }
     }
 }
