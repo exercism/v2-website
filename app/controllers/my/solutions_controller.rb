@@ -129,8 +129,6 @@ class My::SolutionsController < MyController
   def show_started
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
-    @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
-    @num_iterations = @solution.iterations.count
 
     @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }

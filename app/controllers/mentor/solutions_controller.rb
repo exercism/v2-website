@@ -8,8 +8,6 @@ class Mentor::SolutionsController < MentorController
 
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
-    @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
-    @num_iterations = @solution.iterations.count
 
     @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h

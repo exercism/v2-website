@@ -14,23 +14,20 @@
       =image_tag @exercise.white_icon_url
     .inner
       -if @iteration
-        =render "solutions/iteration_nav", url_parts: [:my, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
+        =iterations_nav_widget(:my, @solution, @iteration)
 
       %h2= @exercise.title
       .track-progress
-        -if @user_track.independent_mode?
-          %h3 In Independent Mode
-        -else
-          %h3 Track Progress:
-          -num_core_exercises = @track.exercises.core.count
-          -num_completed_exercises = @user_track.num_completed_core_exercies
-          -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
+        %h3 Track Progress:
+        -num_core_exercises = @track.exercises.core.count
+        -num_completed_exercises = @user_track.num_completed_core_exercies
+        -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
 
-          .dots
-            -num_core_exercises.times do |i|
-              -if i == exercise_idx
-                .dot.current
-              -elsif i < num_completed_exercises
-                .dot.completed
-              -else
-                .dot.locked
+        .dots
+          -num_core_exercises.times do |i|
+            -if i == exercise_idx
+              .dot.current
+            -elsif i < num_completed_exercises
+              .dot.completed
+            -else
+              .dot.locked
