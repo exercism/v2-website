@@ -1,4 +1,6 @@
 class CreatesDiscussionPost
+  include HTMLGenerationHelpers
+
   attr_reader :iteration, :author, :content, :discussion_post
   def initialize(iteration, author, content)
     @iteration = iteration
@@ -23,9 +25,5 @@ class CreatesDiscussionPost
 
   def solution
     iteration.solution
-  end
-
-  def strong(text)
-    "<strong>#{text}</strong>"
   end
 end

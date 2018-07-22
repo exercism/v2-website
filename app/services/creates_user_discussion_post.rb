@@ -52,8 +52,4 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
   def user_may_comment?
     user == solution.user
   end
-
-  def routes
-    @routes ||= Rails.application.routes.url_helpers
-  end
 end
