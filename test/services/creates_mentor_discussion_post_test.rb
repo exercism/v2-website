@@ -49,7 +49,7 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
       assert_equal "<strong>#{mentor1.handle}</strong> has commented on your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
       assert_equal "https://test.exercism.io/my/solutions/#{solution.uuid}/iterations/#{iteration.id}", args[3]
       assert_equal DiscussionPost, args[4][:trigger].class
-      assert_equal solution, args[4][:about]
+      assert_equal iteration, args[4][:about]
     end
 
     DeliversEmail.expects(:deliver!).with do |*args|
