@@ -133,6 +133,8 @@ class My::SolutionsController < MyController
     @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
+    ClearsNotifications.clear!(current_user, @iteration)
+
     render :show
   end
 end
