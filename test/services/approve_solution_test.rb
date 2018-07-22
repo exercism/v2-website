@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
+class ApprovesSolutionTest < ActiveSupport::TestCase
   test "approves solution" do
     Timecop.freeze do
       solution = create :solution, last_updated_by_user_at: nil
