@@ -209,7 +209,7 @@ Exercism::PrismFileMappings = {
   "diff": %w{},
   "docker": %w{},
   "eiffel": %w{},
-  "elisp": %w{lisp},
+  "elisp": %w{el},
   "elixir": %w{ex exs},
   "erlang": %w{erl hrl },
   "fsharp": %w{fs fsx},
