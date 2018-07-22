@@ -1,0 +1,49 @@
+@import 'variables';
+@import 'mixins';
+
+.widget-iterations-nav {
+    overflow:hidden;
+    .title {
+        @include font-size(12, 12);
+        margin-top:1px;
+        text-align:right;
+        border-bottom:1px solid #ddd;
+        padding-bottom:2px;
+        margin-bottom:5px;
+        strong {
+            font-weight:$regular;
+        }
+    }
+    .iterations {
+        .current, a {
+            text-decoration:none;
+            display:inline-block;
+            position:relative;
+
+            .idx {
+                width:20px;
+                height:20px;
+                border:1px solid #fff;
+                color:#fff;
+                text-align:center;
+                @include font-size(12, 20);
+            }
+            .num-comments {
+                position:absolute;
+                top:-7px;
+                right:-7px;
+                background:#fff;
+                color:#999;
+                border-radius:100%;
+                width:16px;
+                height:16px;
+                text-align:center;
+                @include font-size(11, 16);
+            }
+        }
+        .current {
+            opacity:0.5;
+        }
+    }
+}
+
