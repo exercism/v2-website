@@ -30,6 +30,9 @@ class DeliversEmail
     case mail_type
     when :new_discussion_post
       [:user_notifications, :new_discussion_post]
+    when :solution_approved
+      [:user_notifications, :solution_approved]
+
     when :new_discussion_post_for_mentor
       [:mentor_notifications, :new_discussion_post]
     when :new_iteration_for_mentor
