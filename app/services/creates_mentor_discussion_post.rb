@@ -60,8 +60,4 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
   def solution
     iteration.solution
   end
-
-  def routes
-    @routes ||= Rails.application.routes.url_helpers
-  end
 end

@@ -43,7 +43,8 @@ class CreatesIteration
         "<strong>#{solution.exercise.track.title}</strong> track has been "\
         "auto approved.",
         Rails.application.routes.url_helpers.my_solution_url(solution),
-        about: solution)
+        about: solution
+      )
     else
       solution.mentorships.update_all(requires_action: true)
       notify_mentors
