@@ -27,9 +27,9 @@ module NotificationsHelper
       notification.about.user.avatar_url
 
     when 'solution_approved'
-      # Your own face
-      # about = solution
-      notification.about.user.avatar_url
+      # Mentor's face
+      # trigger = mentor
+      notification.trigger.avatar_url
     end
   end
 end
