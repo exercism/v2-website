@@ -38,6 +38,33 @@ body.controller-solutions.action-show {
         .inner {
             .widget-iterations-nav {
                 float:right;
+                a, .current {
+                    .idx {
+                        color:$color-1;
+                        border-color:$color-1;
+                    }
+                    .num-comments {
+                        &:after { 
+                            color:$color-1;
+                            text-shadow:0 0 2px #fff;
+                        }
+                        .num { color:#fff; }
+                    }
+                    &.current {
+                        .idx {
+                            background: $color-1;
+                            border-color:$color-1;
+                            color:#fff;
+                        }
+                        .num-comments {
+                            &:after { 
+                                color:#fff;
+                                text-shadow: -1px -1px 0 $color-1,  1px -1px 0 $color-1, -1px 1px 0 $color-1, 1px 1px 0 $color-1;
+                            }
+                            .num { color:$color-1; }
+                        }
+                    }
+                }
             }
             h2 {
                 @include font-size(25, 25);

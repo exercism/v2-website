@@ -9,10 +9,12 @@
       -if current_idx == idx
         .current
           .idx= idx
-          .num-comments= num_comments[iteration_id]
+          .num-comments
+            .num= num_comments[iteration_id]
       -else
         =link_to iteration_path(url_path, url_parts + [iteration_idx: idx]) do
           .idx= idx
-          .num-comments= num_comments[iteration_id]
+          .num-comments
+            .num= num_comments[iteration_id]
 
       -idx += 1

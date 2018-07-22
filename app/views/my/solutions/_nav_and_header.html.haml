@@ -18,16 +18,19 @@
 
       %h2= @exercise.title
       .track-progress
-        %h3 Track Progress:
-        -num_core_exercises = @track.exercises.core.count
-        -num_completed_exercises = @user_track.num_completed_core_exercies
-        -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
+        -if @user_track.independent_mode?
+          %h3 In Independent Mode
+        -else
+          %h3 Track Progress:
+          -num_core_exercises = @track.exercises.core.count
+          -num_completed_exercises = @user_track.num_completed_core_exercies
+          -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
 
-        .dots
-          -num_core_exercises.times do |i|
-            -if i == exercise_idx
-              .dot.current
-            -elsif i < num_completed_exercises
-              .dot.completed
-            -else
-              .dot.locked
+          .dots
+            -num_core_exercises.times do |i|
+              -if i == exercise_idx
+                .dot.current
+              -elsif i < num_completed_exercises
+                .dot.completed
+              -else
+                .dot.locked
