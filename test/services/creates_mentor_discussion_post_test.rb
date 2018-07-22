@@ -55,11 +55,11 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
       assert_equal solution, args[4][:about]
     end
 
-    # DeliversEmail.expects(:deliver!).with do |*args|
-    #   assert_equal user, args[0]
-    #   assert_equal :new_discussion_post, args[1]
-    #   assert_equal DiscussionPost, args[2].class
-    # end
+    DeliversEmail.expects(:deliver!).with do |*args|
+      assert_equal user, args[0]
+      assert_equal :new_discussion_post, args[1]
+      assert_equal DiscussionPost, args[2].class
+    end
 
     CreatesMentorDiscussionPost.create!(iteration, mentor1, "foooebar")
   end
