@@ -40,11 +40,8 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
 
     # Setup mentors
     mentor1 = create :user
-    mentor2 = create :user
     create :track_mentorship, user: mentor1, track: solution.exercise.track
-    create :track_mentorship, user: mentor2, track: solution.exercise.track
     create :solution_mentorship, solution: solution, user: mentor1
-    create :solution_mentorship, solution: solution, user: mentor2
 
     CreatesNotification.expects(:create!).with do |*args|
       assert_equal user, args[0]

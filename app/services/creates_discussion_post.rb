@@ -1,8 +1,8 @@
 class CreatesDiscussionPost
-  attr_reader :iteration, :user, :content, :discussion_post
-  def initialize(iteration, user, content)
+  attr_reader :iteration, :author, :content, :discussion_post
+  def initialize(iteration, author, content)
     @iteration = iteration
-    @user = user
+    @author = author
     @content = content
   end
 
@@ -11,7 +11,7 @@ class CreatesDiscussionPost
   def create_discussion_post!
     @discussion_post ||= DiscussionPost.create!(
       iteration: iteration,
-      user: user,
+      user: author,
       content: content,
       html: html
     )
