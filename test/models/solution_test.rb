@@ -33,14 +33,15 @@ class SolutionTest < ActiveSupport::TestCase
 
   test "active_mentors" do
     solution = create :solution
-    user1 = create :user
-    user2 = create :user
+    active_mentor_on_solution = create :user
+    active_mentor_not_on_solution = create :user
+    inactive_mentor_on_solution = create :user
 
-    create :solution_mentorship, solution: solution
-    create :solution_mentorship, solution: solution, user: user1
-    create :track_mentorship, user: user1
-    create :track_mentorship, user: user2
+    create :solution_mentorship, solution: solution, user: active_mentor_on_solution
+    create :solution_mentorship, solution: solution, user: inactive_mentor_on_solution
+    create :track_mentorship, user: active_mentor_on_solution
+    create :track_mentorship, user: active_mentor_not_on_solution
 
-    assert_equal [user1], solution.active_mentors
+    assert_equal [active_mentor_on_solution], solution.active_mentors
   end
 end

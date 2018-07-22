@@ -54,8 +54,10 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     solution = iteration.solution
     user = solution.user
 
-    non_current_mentor = create :user
-    create :solution_mentorship, solution: solution, user: non_current_mentor
+    # Create a user who mentored this solution but doesn't
+    # have a current track mentorship so is inactive.
+    inactive_mentor = create :user
+    create :solution_mentorship, solution: solution, user: inactive_mentor
 
     CreatesNotification.expects(:create!).never
     DeliversEmail.expects(:deliver!).never
