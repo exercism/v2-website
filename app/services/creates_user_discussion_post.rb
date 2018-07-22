@@ -39,7 +39,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
         # We want this to be the solution not the post
         # to allow for clearing without a mentor having to
         # go into every single iteration
-        about: solution
+        about: iteration
       )
       DeliversEmail.deliver!(
         mentor,
