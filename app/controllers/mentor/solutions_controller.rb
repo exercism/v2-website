@@ -25,6 +25,7 @@ class Mentor::SolutionsController < MentorController
     end
 
     ClearsNotifications.clear!(current_user, @solution)
+    ClearsNotifications.clear!(current_user, @iteration)
   end
 
   def approve

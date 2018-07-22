@@ -62,5 +62,7 @@ class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
     @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
+
+    ClearsNotifications.clear!(current_user, @iteration)
   end
 end

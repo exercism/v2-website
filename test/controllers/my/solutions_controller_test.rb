@@ -35,6 +35,17 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       assert_correct_page page
     end
   end
+    test "clears notifications" do
+      sign_in!
+      solution = create :solution, user: @current_user
+      iteration = create :iteration, solution: solution
+      create :user_track, user: @current_user, track: solution.exercise.track
+
+      ClearsNotifications.expects(:clear!).with(@current_user, solution)
+      ClearsNotifications.expects(:clear!).with(@current_user, iteration)
+
+      get my_solution_url(solution)
+    end
 
   test "reflects properly" do
     sign_in!
