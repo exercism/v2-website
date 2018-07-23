@@ -37,4 +37,8 @@ $ go home
 MD
     assert_equal expected.chomp, actual.chomp
   end
+
+  test "doesn't blow up with nil" do
+    assert_equal "", ParsesMarkdown.parse(nil)
+  end
 end

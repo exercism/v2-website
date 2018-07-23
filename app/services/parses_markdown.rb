@@ -9,7 +9,7 @@ class ParsesMarkdown
 
   attr_reader :text
   def initialize(text)
-    @text = text
+    @text = text.to_s
   end
 
   def parse
