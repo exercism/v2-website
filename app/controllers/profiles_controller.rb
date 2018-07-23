@@ -6,11 +6,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, except: [:index]
 
   def show
-    @helped_count = if user_signed_in?
-        current_user.solution_mentorships.joins(:solution).select('solutions.user_id').distinct.count
-      else
-        0
-      end
+    @helped_count = @user.solution_mentorships.joins(:solution).select('solutions.user_id').distinct.count
 
     setup_solutions
   end
