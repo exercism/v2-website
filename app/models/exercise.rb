@@ -47,7 +47,7 @@ class Exercise < ApplicationRecord
   end
 
   def description
-    ParsesMarkdown.parse(super)
+    ParseMarkdown.(super)
   rescue
     ""
   end

@@ -53,7 +53,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
   end
 
   def html
-    @html ||= ParsesMarkdown.parse(content)
+    @html ||= ParseMarkdown.(content)
   end
 
   def solution

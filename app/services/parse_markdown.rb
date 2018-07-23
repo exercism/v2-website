@@ -2,17 +2,15 @@ require 'redcarpet'
 require 'rouge'
 require 'rouge/plugins/redcarpet'
 
-class ParsesMarkdown
-  def self.parse(*args)
-    new(*args).parse
-  end
+class ParseMarkdown
+  include Mandate
 
   attr_reader :text
   def initialize(text)
     @text = text.to_s
   end
 
-  def parse
+  def call
     sanitized_html
   end
 

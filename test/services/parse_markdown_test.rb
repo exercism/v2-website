@@ -1,9 +1,8 @@
 require 'test_helper'
 
-class ParsesMarkdownTest < ActiveSupport::TestCase
+class ParseMarkdownTest < ActiveSupport::TestCase
     test "converts markdown to html" do
-    expected = <<-HTML
-<h1>OHAI</h1>
+    expected = %q{<h1>OHAI</h1>
 
 <p>So I was split between two ways of doing this.</p>
 
@@ -16,10 +15,9 @@ class ParsesMarkdownTest < ActiveSupport::TestCase
 
 <p>Watch this:</p>
 <pre><code class="language-plain">$ go home
-</code></pre>
-    HTML
+</code></pre>}
 
-    actual = ParsesMarkdown.parse <<-MD
+    actual = ParseMarkdown.(%q{
 # OHAI
 
 So I was split between two ways of doing this.
@@ -34,11 +32,11 @@ Watch this:
 ```
 $ go home
 ```
-MD
+})
     assert_equal expected.chomp, actual.chomp
   end
 
   test "doesn't blow up with nil" do
-    assert_equal "", ParsesMarkdown.parse(nil)
+    assert_equal "", ParseMarkdown.(nil)
   end
 end
