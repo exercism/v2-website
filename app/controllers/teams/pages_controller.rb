@@ -14,7 +14,7 @@ class Teams::PagesController < Teams::BaseController
       markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
       @page = page
       @page_title = title
-      @content = ParsesMarkdown.parse(markdown.to_s)
+      @content = ParseMarkdown.(markdown.to_s)
       render action: "generic"
     end
   end

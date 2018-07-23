@@ -3,7 +3,7 @@ class MarkdownController < ApplicationController
   layout false
 
   def parse
-    html = ParsesMarkdown.parse(params[:markdown].to_s)
+    html = ParseMarkdown.(params[:markdown].to_s)
     render html: html.html_safe
   end
 end

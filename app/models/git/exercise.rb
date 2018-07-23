@@ -7,7 +7,7 @@ class Git::Exercise
   end
 
   def instructions
-    ParsesMarkdown.parse(exercise_reader.readme)
+    ParseMarkdown.(exercise_reader.readme)
   end
 
   def test_suite
