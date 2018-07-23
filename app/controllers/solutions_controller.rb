@@ -33,7 +33,7 @@ class SolutionsController < ApplicationController
       @track = @exercise.track
       return redirect_to [@track, @exercise, @solution], :status => :moved_permanently if request.path != track_exercise_solution_path(@track, @exercise, @solution)
 
-    else
+    elsif params[:track_id].present? && params[:exercise_id].present?
       @track = Track.find(params[:track_id])
       @exercise = @track.exercises.find(params[:exercise_id])
 
@@ -42,6 +42,8 @@ class SolutionsController < ApplicationController
       rescue
         return redirect_to [@track, @exercise]
       end
+    else
+      raise ActionController::RoutingError.new('Not Found')
     end
 
     @iteration = @solution.iterations.last
