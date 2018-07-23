@@ -4,4 +4,23 @@ class My::DiscussionPostsController < MyController
     @post = CreatesUserDiscussionPost.create!(@iteration, current_user, params[:discussion_post][:content])
     @user_track = UserTrack.where(user: current_user, track: @iteration.solution.exercise.track).first
   end
+
+  def update
+    @post = current_user.discussion_posts.find(params[:id])
+    @iteration = @post.iteration
+    @user_track = UserTrack.where(user: current_user, track: @iteration.solution.exercise.track).first
+
+    @post.update!(
+      previous_content: @post.content,
+      content: discussion_post_params[:content],
+      html: ParsesMarkdown.parse(discussion_post_params[:content]),
+      edited: true
+    )
+  end
+
+  private
+
+  def discussion_post_params
+    params.require(:discussion_post).permit(:content)
+  end
 end

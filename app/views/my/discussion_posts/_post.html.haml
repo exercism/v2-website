@@ -15,4 +15,8 @@
         -else
           Mentor
 
-    .post-html= raw post.html
+    = render "my/discussion_posts/content", post: post
+
+- content_for :js do
+  :javascript
+    $(function() { new DiscussionPost(#{post.id}) });
