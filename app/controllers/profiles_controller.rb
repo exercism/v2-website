@@ -28,6 +28,8 @@ class ProfilesController < ApplicationController
   def set_profile
     @user = User.find_by_handle!(params[:id])
     @profile = @user.profile
+
+    raise ActiveRecord::RecordNotFound unless @profile
   end
 
   def setup_solutions
