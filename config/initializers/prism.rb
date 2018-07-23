@@ -195,7 +195,7 @@ Exercism::PrismFileMappings = {
   "brainfuck": %w{},
   "bro": %w{},
   "c": %w{c},
-  "clojure": %w{},
+  "clojure": %w{clj cljs cljc},
   "csharp": %w{cs csx},
   "css": %w{},
   "clike": %w{},
