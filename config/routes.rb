@@ -31,6 +31,10 @@ Rails.application.routes.draw do
   # ##### #
   namespace :admin do
     resource :dashboard, only: [:show], controller: "dashboard"
+    resource :users, only: [:show]
+    resources :solutions, only: [:show] do
+      resources :iterations, only: [:show]
+    end
   end
 
   # ###### #
