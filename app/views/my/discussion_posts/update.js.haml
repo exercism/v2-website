@@ -1,0 +1,5 @@
+var newPost = '#{j render("post", post: @post, solution: @iteration.solution, user_track: @user_track)}';
+
+$('#discussion-post-#{@post.id}').replaceWith(newPost);
+
+new DiscussionPost(#{@post.id});

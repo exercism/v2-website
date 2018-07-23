@@ -131,7 +131,7 @@ Rails.application.routes.draw do
     end
     resources :reactions, only: [:index, :create]
 
-    resources :discussion_posts, only: [:create]
+    resources :discussion_posts, only: [:create, :update]
     resources :notifications, only: [:index] do
       patch :read, on: :member
       patch :read_batch, on: :collection
