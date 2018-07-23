@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
   end
 
   def index
-    @profiles = Profile.order("profiles.created_at ASC").includes(:user).page(params[:page]).per(20)
+    @profiles = Profile.order("profiles.created_at ASC").includes(:user).page(params[:page]).per(100)
   end
 
   def solutions
