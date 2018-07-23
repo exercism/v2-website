@@ -10,13 +10,15 @@ class CreatesSolution
   end
 
   def create!
-    Solution.create(
+    Solution.create!(
       user: user,
       exercise: exercise,
       git_sha: git_sha,
       git_slug: exercise.slug,
       last_updated_by_user_at: Time.now
     )
+  rescue ActiveRecord::RecordNotUnique
+    Solution.find_by(user: user, exercise: exercise)
   end
 
   private
