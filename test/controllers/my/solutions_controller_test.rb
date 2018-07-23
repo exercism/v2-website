@@ -72,24 +72,26 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "migrates to v2 properly" do
-    sign_in!
-    solution = create :solution,
-                      user: @current_user,
-                      completed_at: Time.now - 1.week,
-                      published_at: Time.now - 1.week,
-                      approved_by: create(:user),
-                      last_updated_by_user_at: Time.now - 1.week,
-                      updated_at: Time.now - 1.week
+    Timecop.freeze do
+      sign_in!
+      solution = create :solution,
+                        user: @current_user,
+                        completed_at: Time.now - 1.week,
+                        published_at: Time.now - 1.week,
+                        approved_by: create(:user),
+                        last_updated_by_user_at: Time.now - 1.week,
+                        updated_at: Time.now - 1.week
 
-    patch migrate_to_v2_my_solution_url(solution.uuid)
-    assert_redirected_to my_solution_url(solution.uuid)
+      patch migrate_to_v2_my_solution_url(solution.uuid)
+      assert_redirected_to my_solution_url(solution.uuid)
 
-    solution.reload
-    assert_nil solution.completed_at
-    assert_nil solution.published_at
-    assert_nil solution.approved_by
-    assert_equal Time.now.to_i, solution.last_updated_by_user_at.to_i
-    assert_equal Time.now.to_i, solution.updated_at.to_i
+      solution.reload
+      assert_nil solution.completed_at
+      assert_nil solution.published_at
+      assert_nil solution.approved_by
+      assert_equal Time.now.to_i, solution.last_updated_by_user_at.to_i
+      assert_equal Time.now.to_i, solution.updated_at.to_i
+    end
   end
 
   test "reflects without next core exercise" do
