@@ -101,7 +101,7 @@ body.controller-solutions.action-show {
         }
     }
     .discussion {
-        .post, .preview-area {
+        .post-html, .preview-area {
             p {
                 @include font-size(14, 20);
                 margin-bottom:10px;
