@@ -8,5 +8,6 @@
 
     %h2 Users
     =form_tag '/admin/users', method: :get do
-      =text_field_tag :id
+      =text_field_tag :id, '', placeholder: "id"
+      =text_field_tag :handle, '', placeholder: "handle"
       =button_tag "Search"

@@ -17,5 +17,6 @@
     - @discussion_posts.each do |dp|
       .discussion-post
         = link_to "#{dp.solution.user_id == dp.user_id ? "Learner" : "Mentor"} on #{dp.solution.uuid}", admin_solution_iteration_path(dp.solution, dp.iteration), class: "solution"
+        .timestamp= dp.created_at.to_s(:db)
         .content=raw dp.html
 

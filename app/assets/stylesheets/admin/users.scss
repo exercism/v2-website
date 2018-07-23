@@ -22,6 +22,9 @@
             text-decoration:underline;
             margin-bottom:5px;
         }
+        .timestamp {
+            margin-bottom:5px;
+        }
         .content {
             * {
                 @include font-size(14, 19);
