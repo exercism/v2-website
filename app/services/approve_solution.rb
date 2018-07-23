@@ -42,4 +42,3 @@ class ApproveSolution
     mentor.mentoring_track?(solution.exercise.track)
   end
 end
-
