@@ -22,4 +22,12 @@ class CreatesSolutionTest < ActiveSupport::TestCase
       assert_equal solution.git_sha, git_sha
     end
   end
+
+  test "copes with duplicates" do
+    git_sha = SecureRandom.uuid
+    Git::ExercismRepo.stubs(current_head: git_sha)
+
+    solution = create :solution
+    assert_equal solution, CreatesSolution.create!(solution.user, solution.exercise)
+  end
 end
