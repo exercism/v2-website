@@ -33,12 +33,19 @@ gem install bundler
 
 ### Application setup
 
-We've put a rake task together that should get you set up. You can run it like this.
+Firstly, you need to set a server identity, which you can do like this:
+
+```bash
+echo "host" > server_identity
+```
+
+Then we've put a rake task together that should set everything else up. You can run it like this:
 
 ```bash
 bundle install
 bundle exec rake exercism:setup
 ```
+
 
 ### Running a webserver
 
