@@ -41,4 +41,11 @@ class PagesController < ApplicationController
   def index
     @tracks = Track.active.reorder(SQLSnippets.random).to_a
   end
+
+  def cli_walkthrough
+    @walkthrough = RendersUserWalkthrough.(
+      current_user,
+      Git::WebsiteContent.head.walkthrough
+    )
+  end
 end

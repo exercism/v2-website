@@ -36,7 +36,7 @@ class My::SolutionsController < MyController
 
     respond_to do |format|
       format.js { render_modal("solution-walkthrough", "walkthrough_modal", close_button: true) }
-      format.html { render }
+      format.html { redirect_to cli_walkthrough_page_path }
     end
   end
 

@@ -189,6 +189,8 @@ Rails.application.routes.draw do
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
 
+  get "cli-walkthrough" => "pages#cli_walkthrough", as: "cli_walkthrough_page"
+
   PagesController::LICENCES.values.each do |licence|
     get "licences/#{licence.to_s.dasherize}" => "pages##{licence}", as: "#{licence}_licence"
   end
