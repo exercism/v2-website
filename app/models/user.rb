@@ -49,6 +49,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
+  validate :avatar_is_correct_file_type
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -154,5 +155,14 @@ class User < ApplicationRecord
     )
 
     Rails.application.routes.url_helpers.url_for(avatar_thumbnail)
+  end
+
+  def avatar_is_correct_file_type
+    return unless avatar.attached?
+
+    unless avatar.variable?
+      avatar.purge
+      errors[:avatar] << "Wrong format"
+    end
   end
 end

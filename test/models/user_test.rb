@@ -195,4 +195,20 @@ class UserTest < ActiveSupport::TestCase
     refute not_onboarded_2.onboarded?
     refute not_onboarded_3.onboarded?
   end
+
+  test "validates that avatar is correct format" do
+    user = create(:user)
+    user.avatar.attach(
+      io: File.open("test/fixtures/test.svg"),
+      filename: "test.svg"
+    )
+    other_user = create(:user)
+    other_user.avatar.attach(
+      io: File.open("test/fixtures/test.png"),
+      filename: "test.png"
+    )
+
+    refute user.valid?
+    assert other_user.valid?
+  end
 end
