@@ -20,11 +20,15 @@ class RendersUserWalkthrough
   def substitute_tokens!
     walkthrough.gsub!(
       CONFIGURE_COMMAND_TOKEN,
-      configure_command(user.auth_token)
+      configure_command(auth_token)
     )
   end
 
   def configure_command(token)
     "exercism configure --token=%s" % [token]
+  end
+
+  def auth_token
+    user ? user.auth_token : "[TOKEN]"
   end
 end
