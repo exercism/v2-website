@@ -41,9 +41,16 @@ class My::ProfileController < MyController
   end
 
   def update
-    @profile.update(profile_params)
-    User.find(current_user.id).update(user_params)
-    redirect_to @profile
+    @user = current_user
+
+    ActiveRecord::Base.transaction do
+      if @profile.update(profile_params) && @user.update(user_params)
+        redirect_to @profile
+      else
+        setup_solutions
+        render :edit
+      end
+    end
   end
 
   private

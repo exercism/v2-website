@@ -38,5 +38,14 @@
       @include font-size(12, 15);
       color: #aaa;
     }
+
+    .errors {
+      margin-top: 10px;
+    }
+
+    .text-error {
+      @include font-size(12, 15);
+      color: red;
+    }
   }
 }
