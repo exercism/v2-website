@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     "Privacy Policy": :privacy,
     "Code of Conduct": :code_of_conduct,
     "Frequently Asked Questions": :faqs,
+    "Command Line Interface": :cli,
     "Exercism's Values": :values,
     "About Exercism": :about,
     "Getting Started": :getting_started,
