@@ -3,30 +3,40 @@
 
 #modal.edit-profile {
   .avatar-section {
-      overflow: hidden;
-      margin-bottom:25px;
-      h3 {
-          padding-top:5px;
-          float:left;
-          width:60px;
-          color:#444;
-          @include font-size(14, 14);
-          font-weight:$regular;
-      }
-      .image-preview {
-        height:80px;
-        width:80px;
-        float:left;
-        margin-right:20px;
-        border-radius:2px;
-        background-position: center;
-        background-size: cover;
-      }
-      p {
-          @include font-size(12, 15);
-          color:#aaa;
-          float:left;
-          width:200px;
-      }
+    overflow: hidden;
+    margin-bottom: 25px;
+
+    > h3 {
+      display: inline-block;
+      vertical-align: top;
+      width: 60px;
+      padding-top: 5px;
+
+      @include font-size(14, 14);
+      color: #444;
+      font-weight: $regular;
+    }
+
+    > .image-preview {
+      display: inline-block;
+      vertical-align: top;
+      height: 80px;
+      width: 80px;
+      margin-right: 20px;
+      border-radius: 2px;
+
+      background-position: center;
+      background-size: cover;
+    }
+
+    > .file-selector-section {
+      display: inline-block;
+      width: 200px;
+    }
+
+    p {
+      @include font-size(12, 15);
+      color: #aaa;
+    }
   }
 }
