@@ -24,10 +24,10 @@ class DiscussionPostTest < ApplicationSystemTestCase
     visit my_solution_path(solution)
     click_on "Edit"
     fill_simple_mde "discussion_post_content", "Hey!"
-    click_on "Update"
+    click_on "Save Changes"
 
     assert_text "Hey!"
-    assert_text "(edited)"
+    assert_text "(edited less than a minute ago)"
     discussion_post.reload
     assert_equal "Hello!", discussion_post.previous_content
   end
@@ -76,10 +76,10 @@ class DiscussionPostTest < ApplicationSystemTestCase
     visit mentor_solution_path(solution)
     click_on "Edit"
     fill_simple_mde "discussion_post_content", "Hey!"
-    click_on "Update"
+    click_on "Save Changes"
 
     assert_text "Hey!"
-    assert_text "(edited)"
+    assert_text "(edited less than a minute ago)"
     discussion_post.reload
     assert_equal "Hello!", discussion_post.previous_content
   end

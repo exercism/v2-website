@@ -239,53 +239,6 @@ body.controller-solutions.action-show {
         .pane.preview {
             padding:0;
         }
-        .post {
-            margin-bottom:20px;
-            overflow:hidden;
-            &+.post {
-                border-top:1px solid #fafafa;
-                padding-top:20px;
-            }
-            .avatar {
-                margin-right:3%;
-                float:left;
-                min-width:35px;
-                width:8%;
-                display:block;
-                border-radius:3px;
-            }
-            .post-body {
-                min-width:100px;
-                width:89%;
-                float:left;
-            }
-
-            .post-header {
-                overflow:hidden;
-                margin-bottom:5px;
-                .user-handle {
-                    display:inline-block;
-                    color:#333;
-                    font-weight:$regular;
-                    margin-right:5px;
-                    @include font-size(13, 13);
-                }
-                .user-status {
-                    display:inline-block;
-                    background:#eee;
-                    padding:2px 5px 3px 5px;
-                    border-radius:2px;
-                    @include font-size(11, 11);
-                    color:#888;
-                    font-weight:$regular;
-                }
-                .created-at {
-                    float:right;
-                    @include font-size(11, 13);
-                    color:#999;
-                }
-            }
-        }
 
         .posts+form {
             margin-top:40px;

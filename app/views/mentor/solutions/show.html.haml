@@ -38,7 +38,7 @@
             .posts
               -@iteration.discussion_posts.each do |post|
                 -user_track = @user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
-                =render "mentor/discussion_posts/post", post: post, solution: @solution, user_track: user_track
+                =discussion_post_widget(post, @solution, user_track)
           -else
             .posts{style: "display:none"}
 

@@ -14,7 +14,7 @@ DiscussionPost.prototype.bindEvents = function() {
 DiscussionPost.prototype.startEditing = function(e) {
   e.preventDefault();
 
-  this.node.addClass('post--editing');
+  this.node.addClass('editing');
 
   if (!this.editorInitialized) {
     new SimpleMDE({
@@ -34,7 +34,7 @@ DiscussionPost.prototype.startEditing = function(e) {
 DiscussionPost.prototype.stopEditing = function(e) {
   e.preventDefault();
 
-  this.node.removeClass('post--editing');
+  this.node.removeClass('editing');
 
   this.bindEvents();
 };

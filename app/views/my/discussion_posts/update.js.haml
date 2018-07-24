@@ -1,5 +1,4 @@
-var newPost = '#{j render("post", post: @post, solution: @iteration.solution, user_track: @user_track)}';
-
+var newPost = '#{j discussion_post_widget(@post, @iteration.solution, @user_track)}';
 $('#discussion-post-#{@post.id}').replaceWith(newPost);
 
-new DiscussionPost(#{@post.id});
+#{yield(:js).gsub(/<\/?script>/, "")}

@@ -40,4 +40,10 @@ module WidgetsHelper
 
   end
 
+  def discussion_post_widget(post, solution, user_track)
+    render "widgets/discussion_post", post: post, 
+                                      solution: solution, 
+                                      user_track: user_track
+  end
+
 end
