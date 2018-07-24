@@ -18,6 +18,14 @@ class My::DiscussionPostsController < MyController
     )
   end
 
+  def destroy
+    @post = current_user.discussion_posts.find(params[:id])
+    @iteration = @post.iteration
+    @user_track = UserTrack.where(user: current_user, track: @iteration.solution.exercise.track).first
+
+    @post.update!(deleted: true)
+  end
+
   private
 
   def discussion_post_params

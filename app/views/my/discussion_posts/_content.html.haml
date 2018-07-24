@@ -1,12 +1,12 @@
 .post-viewer
-  .post-html
-    = raw post.html
-  - if post.edited?
-    %p.post-status (edited)
-  - if post.user == current_user
-    = link_to "Edit", "#", class: "link js-edit-discussion-post"
-.post-editor
-  = form_for post, url: my_discussion_post_path(post), remote: true do |f|
-    = f.text_area :content
-    = f.submit "Update", class: "pure-button button-primary", data: { "disable-with": "Saving..." }
-    = link_to "Cancel", "#", class: "pure-button js-show-discussion-post"
+  - if post.deleted?
+    .post-html
+      %p.font-italic This message has been deleted
+  - else
+    .post-html
+      = raw post.html
+    - if post.edited?
+      %p.post-status (edited)
+    - if post.user == current_user
+      = link_to "Edit", "#", class: "link js-edit-discussion-post"
+      = link_to "Delete", my_discussion_post_path(post), class: "link js-delete-discussion-post", data: { confirm: "Are you sure you want to delete this comment?", remote: true, method: :delete, "disabled-with": "Deleting..." }
