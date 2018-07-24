@@ -1,0 +1,32 @@
+@import 'variables';
+@import 'mixins';
+
+#modal.edit-profile {
+  .avatar-section {
+      overflow: hidden;
+      margin-bottom:25px;
+      h3 {
+          padding-top:5px;
+          float:left;
+          width:60px;
+          color:#444;
+          @include font-size(14, 14);
+          font-weight:$regular;
+      }
+      .image-preview {
+        height:80px;
+        width:80px;
+        float:left;
+        margin-right:20px;
+        border-radius:2px;
+        background-position: center;
+        background-size: cover;
+      }
+      p {
+          @include font-size(12, 15);
+          color:#aaa;
+          float:left;
+          width:200px;
+      }
+  }
+}

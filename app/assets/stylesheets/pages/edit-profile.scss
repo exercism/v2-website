@@ -31,29 +31,6 @@
         color:#999;
         margin-bottom:20px;
     }
-
-    .avatar-section {
-        margin-bottom:25px;
-        h3 {
-            padding-top:5px;
-        }
-        .image-preview {
-          height:80px;
-          width:80px;
-          float:left;
-          margin-right:20px;
-          border-radius:2px;
-          background-position: center;
-          background-size: cover;
-        }
-        p {
-            @include font-size(12, 15);
-            color:#aaa;
-            float:left;
-            width:200px;
-        }
-    }
-    .avatar-section,
     .name-section,
     .bio-section {
         overflow:hidden;
