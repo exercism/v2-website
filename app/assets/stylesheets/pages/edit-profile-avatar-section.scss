@@ -34,7 +34,7 @@
       width: 200px;
     }
 
-    p {
+    .text-hint {
       @include font-size(12, 15);
       color: #aaa;
     }
