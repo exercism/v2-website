@@ -82,6 +82,10 @@ class User < ApplicationRecord
     else
       User::DEFAULT_AVATAR
     end
+  rescue
+    # If ActiveStorage fails or something weird happens
+    # don't blow the whole site, just return *something*
+    User::DEFAULT_AVATAR
   end
 
   def may_view_solution?(solution)

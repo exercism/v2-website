@@ -163,6 +163,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal User::DEFAULT_AVATAR, no_image.avatar_url
   end
 
+  test "a bad avatar_url doesn't raise an exception" do
+    user = create :user
+    user.expects(:avatar).raises
+    assert_equal User::DEFAULT_AVATAR, user.avatar_url
+  end
+
   test "destroying a user preserves discussions as a mentor and deletes discussions as a learner" do
     user = create(:user)
     mentor_post = create(:discussion_post, user: user)
