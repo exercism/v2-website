@@ -1,0 +1,5 @@
+.post-editor
+  = form_for post, url: my_discussion_post_path(post), remote: true do |f|
+    = f.text_area :content
+    = f.submit "Update", class: "pure-button button-primary", data: { "disable-with": "Saving..." }
+    = link_to "Cancel", "#", class: "pure-button js-show-discussion-post"
