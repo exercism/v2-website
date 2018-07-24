@@ -1,0 +1,43 @@
+-avatar_url = post.user == solution.user ?  display_avatar_url(post.user, user_track) : post.avatar_url
+-user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.handle
+
+.widget-discussion-post{id: "discussion-post-#{post.id}", class: (post.deleted?? "delete" : "")}
+  =image_tag avatar_url, class: 'avatar'
+  .post-body
+    .post-header
+      .created-at posted #{time_ago_in_words(post.created_at)} ago
+      .user-handle= user_handle
+      .user-role
+        -if post.user == solution.user
+          Student
+          -if user_track && user_track.anonymous?
+            (Anonymous Mode)
+        -else
+          Mentor
+
+    .post-viewer
+      - if post.deleted?
+        .post-html
+          .deleted-status This message has been deleted
+      - else
+        .post-html
+          = raw post.html
+        - if post.user == current_user
+          .post-options
+            = link_to "Edit", "#", class: "js-edit-discussion-post"
+            or
+            = link_to "Delete", my_discussion_post_path(post), class: "js-delete-discussion-post", data: { confirm: "Are you sure you want to delete this comment?", remote: true, method: :delete, "disabled-with": "Deleting..." }
+        - if post.edited?
+          .edited-status (edited #{time_ago_in_words(post.updated_at)} ago)
+
+    .post-editor
+      = form_for post, url: my_discussion_post_path(post), remote: true do |f|
+        = f.text_area :content
+        .buttons
+          = f.submit "Save Changes", class: "pure-button update-button", data: { "disable-with": "Saving..." }
+          = link_to "Cancel", "#", class: "pure-button cancel-button js-show-discussion-post"
+
+- content_for :js do
+  :javascript
+    $(function() { new DiscussionPost(#{post.id}) });
+
