@@ -6,15 +6,19 @@
   .iterations
     -idx = 1 # 1-based index
     -iteration_ids.each.with_index do |iteration_id|
+      -num_iteration_comments = num_comments[iteration_id].to_i
+
       -if current_idx == idx
         .current
           .idx= idx
-          .num-comments
-            .num= num_comments[iteration_id]
+          -if num_iteration_comments > 0
+            .num-comments
+              .num= num_iteration_comments
       -else
         =link_to iteration_path(url_path, url_parts + [iteration_idx: idx]) do
           .idx= idx
-          .num-comments
-            .num= num_comments[iteration_id]
+          -if num_iteration_comments > 0
+            .num-comments
+              .num= num_iteration_comments
 
       -idx += 1
