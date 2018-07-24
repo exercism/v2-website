@@ -13,7 +13,7 @@ class My::DiscussionPostsController < MyController
     @post.update!(
       previous_content: @post.content,
       content: discussion_post_params[:content],
-      html: ParsesMarkdown.parse(discussion_post_params[:content]),
+      html: ParseMarkdown.(discussion_post_params[:content]),
       edited: true
     )
   end
