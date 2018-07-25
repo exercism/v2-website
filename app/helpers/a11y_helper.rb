@@ -9,6 +9,10 @@ module A11yHelper
   end
 
   def graphical_image(source, options = {})
-    image_tag source, { alt: '' }.merge(options)
+    image source, '', options
+  end
+
+  def image(source, alt, options = {})
+    image_tag source, { alt: alt }.merge(options)
   end
 end
