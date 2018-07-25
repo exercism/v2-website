@@ -40,9 +40,8 @@ class SelectSuggestedSolutionsForMentor
   def select_rest(ignore_ids, limit)
     base_query.
       where.not(id: ignore_ids).
-      where("num_mentors < 1").
-      order(Arel.sql("num_mentors > 0 ASC,
-                      last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
+      where("num_mentors = 0").
+      order(Arel.sql("last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
                       solutions.independent_mode = 0 DESC,
                       solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
                       core DESC,
