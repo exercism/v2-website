@@ -227,6 +227,17 @@ body.namespace-my.controller-tracks.action-show {
                     border-color:$color-1;
                     .status {
                         color:$color-1;
+                        &.completed-unmentored {
+                            color:#bbb;
+                            text-align:right;
+                            .unmentored {
+                                margin-top:4px;
+                                @include font-size(9, 10);
+                                i {
+                                }
+                            }
+                        }
+
                     }
                 }
                 &:after {
