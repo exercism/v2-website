@@ -2,7 +2,9 @@ require 'test_helper'
 
 class SetSolutionsIndependentModeTest < ActiveSupport::TestCase
   test "it populates correctly" do
-    skip
+
+    # Delete on Sept 1st 2018
+    skip "Kept for posterity"
 
     ruby = create :track
     python = create :track
