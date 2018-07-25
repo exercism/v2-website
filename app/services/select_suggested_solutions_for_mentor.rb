@@ -43,7 +43,7 @@ class SelectSuggestedSolutionsForMentor
       where("num_mentors < 1").
       order(Arel.sql("num_mentors > 0 ASC,
                       last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
-                      (user_tracks.independent_mode IS NULL OR user_tracks.independent_mode = 0) DESC,
+                      solutions.independent_mode = 0 DESC,
                       solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
                       core DESC,
                       num_mentors ASC,
@@ -55,7 +55,7 @@ class SelectSuggestedSolutionsForMentor
   def base_fast_query
     base_query.
       where(num_mentors: 0).
-      where("user_tracks.independent_mode IS NULL OR user_tracks.independent_mode = 0").
+      where("solutions.independent_mode = 0").
       where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
       order(Arel.sql("last_updated_by_user_at ASC"))
   end
@@ -66,9 +66,6 @@ class SelectSuggestedSolutionsForMentor
       # Only mentored tracks
       joins(:exercise).
       where("solutions.exercise_id": exercise_ids).
-
-      joins(user: :user_tracks).
-      where("user_tracks.track_id = exercises.track_id").
 
       # Not things you already mentor
       where.not(id: user.solution_mentorships.select(:solution_id)).
