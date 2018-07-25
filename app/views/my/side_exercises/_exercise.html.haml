@@ -9,11 +9,11 @@
   .icon
     .img{style: "background-image:url('#{image_path(img_url)}')"}
 
-  %i.fa.fa-lock.status.locked
-  %i.fa.fa-unlock.status.unlocked
-  %i.fa.fa-adjust.status.in-progress
+  =icon 'lock status locked'
+  =icon 'unlock status unlocked'
+  =icon 'adjust status in-progress'
   .status.completed
-    %i.fa.fa-check
+    =icon :check
 
   .title= exercise.title
   -length_word = exercise_length_word(exercise)
