@@ -2,7 +2,7 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =image_tag "nav-divider.png", alt: ""
+      =nav_divider
       %span The Exercism Team
   =render "header"
 
@@ -15,7 +15,7 @@
           =link_to "http://kytrinyx.com", class: 'core-person' do
             .pure-g
               .pure-u-1-4
-                =image_tag "https://avatars2.githubusercontent.com/u/276834?v=4&s=460"
+                =image "https://avatars2.githubusercontent.com/u/276834?v=4&s=460", "Photo of Katrina Owen"
               .pure-u-3-4
                 %h3 Katrina Owen
                 %p.bio Katrina is the founder of Exercism. She is a polyglot developer and Ruby Hero award winner, with a degree in molecular biology. She cares deeply about open source and contributes to several projects outside of exercism.
@@ -28,7 +28,7 @@
           =link_to "https://twitter.com/n_chalmers", class: 'core-person' do
             .pure-g
               .pure-u-1-4
-                =image_tag "https://avatars0.githubusercontent.com/u/5421823?v=4&s=460"
+                =image "https://avatars0.githubusercontent.com/u/5421823?v=4&s=460", "Photo of Nicole Chalmers"
               .pure-u-3-4
                 %h3 Nicole Chalmers
                 %p.bio Nicole is responsible for the product-side of Exercism. She is the brains behind the user experience and beautiful design of Exercism. She is passionate about education, equality and inclusiveness. Nicole is part of the team at Thalamus.
@@ -40,7 +40,7 @@
           =link_to "http://ihid.co.uk", class: 'core-person' do
             .pure-g
               .pure-u-1-4
-                =image_tag "https://avatars2.githubusercontent.com/u/286476?v=4&s=460"
+                =image "https://avatars2.githubusercontent.com/u/286476?v=4&s=460", "Photo of Jeremy Walker"
               .pure-u-3-4
                 %h3 Jeremy Walker
                 %p.bio Jeremy works on the strategic side of Exercism and is also the lead developer behind the website. Away from Exercism, Jeremy is the CEO of Thalamus, where he and his team develop artificial intelligence solutions to meaningful problems.
@@ -53,7 +53,7 @@
           =link_to "https://twitter.com/charlescare", class: 'core-person' do
             .pure-g
               .pure-u-1-4
-                =image_tag "https://avatars3.githubusercontent.com/u/441154?v=4&s=460"
+                =image "https://avatars3.githubusercontent.com/u/441154?v=4&s=460", "Photo of Charles Care"
               .pure-u-3-4
                 %h3 Charles Care
                 %p.bio Charles manages the operations side of Exercism, ensuring the platform stays online and fast. Charles is a seasoned developer and in his spare time has an interest in real world infrastucture, such as railway lines. Charles is part of the team at Thalamus.
@@ -64,7 +64,7 @@
           =link_to "https://twitter.com/kntsoriano", class: 'core-person' do
             .pure-g
               .pure-u-1-4
-                =image_tag "https://avatars3.githubusercontent.com/u/1901520?s=460&v=4"
+                =image "https://avatars3.githubusercontent.com/u/1901520?s=460&v=4", "Photo of Karlo Soriano"
               .pure-u-3-4
                 %h3 Karlo Soriano
                 %p.bio Karlo is a core part of the platform team, ensuring Exercism provides an exceptional experience to its users. Karlo is part of the team at Thalamus.

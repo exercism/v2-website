@@ -4,18 +4,18 @@
 -genius_count_largest = genius_count > love_count && genius_count > like_count
 .reactions
   .reaction{class: like_count > love_count && like_count > genius_count ? "highlight": ""}
-    %i.fa.fa-fw.fa-thumbs-up
+    =icon 'thumbs-up fa-fw', 'Thumbs up'
     .count= like_count
 
   .reaction{class: love_count > like_count && love_count > genius_count ? "highlight": ""}
-    %i.fa.fa-fw.fa-heart
+    =icon 'heart fa-fw', 'Heart'
     .count= love_count
 
   .reaction{class: genius_count_largest ? "highlight": ""}
     -if genius_count_largest
-      =image_tag "genius-turquoise.png"
+      =image "genius-turquoise.png", "Genius"
     -else
-      =image_tag "genius.png"
+      =image "genius.png", "Genius"
     .count= genius_count
 
   .reaction

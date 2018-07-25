@@ -1,15 +1,15 @@
 .widget-mentor
   .pure-g
     .pure-u-1-4
-      =image_tag mentor.avatar_url ? mentor.avatar_url : 'blank.png'
+      =image mentor.avatar_url ? mentor.avatar_url : 'blank.png', "Avatar of #{mentor.name}"
     .pure-u-3-4
       %h3
-        = mentor.name
+        =mentor.name
         -if mentor.link_text.present? && mentor.link_url.present?
           =link_to mentor.link_text, mentor.link_url, target: "_blank"
       .bio
         -if mentor.bio.present?
-          = mentor.bio
+          =mentor.bio
         -else
           .holding-text This mentor has not added their bio yet.
 

@@ -2,12 +2,12 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Admin Dashboard", [:admin, :dashboard]
-      =image_tag "nav-divider.png"
+      =nav_divider
       %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
-      =image_tag display_avatar_url @solution.user, @solution_user_track
+      =image display_avatar_url(@solution.user, @solution_user_track), display_handle(@solution.user, @solution_user_track)
       .inner
         =iterations_nav_widget(:admin, @solution, @iteration)
         %h2

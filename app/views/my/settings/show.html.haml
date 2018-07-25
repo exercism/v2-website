@@ -2,7 +2,7 @@
   #nav.lo-nav-bar
     .lo-container
       /=link_to "Dashboard", root_path
-      /=image_tag "nav-divider.png", alt: ""
+      /=nav_divider
       %span Settings
 
   = notice_and_alert(current_user)
@@ -65,10 +65,10 @@
                     %i.fa.fa-toggle-off
                 %td
                   .default{style: user_track.anonymous?? "display:none" : ""}
-                    =image_tag current_user.avatar_url
+                    =image current_user.avatar_url, "Avatar of #{current_user.handle}"
                     .handle= current_user.handle
                   .anon{style: user_track.anonymous?? "" : "display:none"}
-                    =image_tag "anonymous.png"
+                    =image "anonymous.png", "Anonymous Avatar"
                     =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, class: 'handle', placeholder: "Choose an alias for this track", required: user_track.anonymous?
                 %td
                   -if user_track.errors.present?

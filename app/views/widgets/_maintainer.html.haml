@@ -1,12 +1,12 @@
 .widget-maintainer
   - unless maintainer.active?
-    = render "widgets/banner", text: maintainer.alumnus.capitalize
+    =render "widgets/banner", text: maintainer.alumnus.capitalize
   .pure-g
     .pure-u-1-4
-      =image_tag maintainer.avatar_url
+      =image maintainer.avatar_url, "Avatar of #{maintainer.name}"
     .pure-u-3-4
       %h3
-        = maintainer.name
+        =maintainer.name
         -if maintainer.link_text.present? && maintainer.link_url.present?
           =link_to maintainer.link_text, maintainer.link_url, target: "_blank"
       .bio

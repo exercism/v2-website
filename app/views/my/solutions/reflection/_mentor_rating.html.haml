@@ -10,7 +10,7 @@
 
   -solution.mentors.each do |mentor|
     .mentor-review
-      = image_tag mentor.avatar_url, class: "avatar"
+      =image mentor.avatar_url, mentor.name, class: "avatar"
       .details
         .handle= mentor.handle
         .interactions= pluralize mentor_iterations[mentor.id], "interaction"

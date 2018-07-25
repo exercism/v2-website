@@ -1,4 +1,4 @@
 =link_to "https://github.com/#{contributor.github_username}", class: "contributor", rel: "nofollow" do
-  = image_tag contributor.avatar_url
+  =image contributor.avatar_url, "Avatar of #{contributor.github_username}"
   %h3 @#{contributor.github_username}
   .num-contributions= pluralize contributor.num_contributions, "Contribution"
