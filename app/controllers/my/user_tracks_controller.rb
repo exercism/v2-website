@@ -22,7 +22,8 @@ class My::UserTracksController < MyController
   def set_independent_mode
     user_track = current_user.user_tracks.find(params[:id])
     track = user_track.track
-    user_track.update(independent_mode: true)
+
+    SwitchTrackToIndependentMode.(current_user, track)
     redirect_to [:my, track]
   end
 
