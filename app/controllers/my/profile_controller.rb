@@ -36,7 +36,9 @@ class My::ProfileController < MyController
 
     respond_to do |format|
       format.js { render_modal("edit-profile", "_edit_modal") }
-      format.html { setup_solutions }
+      format.html do
+        @profile_view = ProfileView.new(@profile, track_id: params[:track_id])
+      end
     end
   end
 
@@ -47,29 +49,13 @@ class My::ProfileController < MyController
       if @profile.update(profile_params) && @user.update(user_params)
         redirect_to @profile
       else
-        setup_solutions
+        @profile_view = ProfileView.new(@profile, track_id: params[:track_id])
         render :edit
       end
     end
   end
 
   private
-
-  def setup_solutions
-    @helped_count = @user.solution_mentorships.joins(:solution).select('solutions.user_id').distinct.count
-
-    @solutions = @profile.solutions.includes(exercise: :track)
-
-    track_ids = Exercise.where(id: @solutions.map(&:exercise_id)).distinct.pluck(:track_id)
-    @tracks_for_select = Track.where(id: track_ids).
-      map{|l|[l.title, l.id]}.
-      unshift(["Any", 0])
-    @track = Track.find_by_id(params[:track_id]) if params[:track_id].to_i > 0
-
-    @solutions = @solutions.joins(:exercise).where("exercises.track_id": @track.id) if @track
-    @reaction_counts = Reaction.where(solution_id: @solutions).group(:solution_id, :emotion).count
-    @comment_counts = Reaction.where(solution_id: @solutions).with_comments.group(:solution_id).count
-  end
 
   def profile_params
     params.require(:profile).permit(
