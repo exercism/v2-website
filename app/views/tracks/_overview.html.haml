@@ -3,13 +3,13 @@
     .pure-g
       .pure-u-1-3
         .icon
-          =image_tag "track-page-mentors.png"
+          =image "track-page-mentors.png", "Track mentors"
         %h3 #{number_with_delimiter @track.mentors.size} Mentors
         .info Our mentors are friendly, experienced #{@track.title} developers who will help teach you new techniques and tricks.
 
       .pure-u-1-3
         .icon
-          =image_tag "track-page-students.png"
+          =image "track-page-students.png", "Track students"
         %h3 #{number_with_delimiter @track.user_tracks.size} Students
         .info
           Join
@@ -21,7 +21,7 @@
 
       .pure-u-1-3
         .icon
-          =image_tag "track-page-exercises.png"
+          =image "track-page-exercises.png", "Track exercises"
         %h3= pluralize @track.exercises.size, "Exercise"
         .info Hundreds of hours have gone into making these exercises fun, useful, and challenging to help you enjoy learning.
 

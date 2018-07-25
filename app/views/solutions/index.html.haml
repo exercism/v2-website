@@ -3,35 +3,35 @@
     .lo-container
       -if user_signed_in?
         /=link_to "Dashboard", root_path
-        /=image_tag "nav-divider.png", alt: ""
+        /=nav_divider
         =link_to "Language Tracks", [:my, :tracks]
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         =link_to "#{@track.title} Track", [:my, @track]
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         -if @user_solution
           =link_to "Your Solution to #{@exercise.title}", [:my, @user_solution]
-          =image_tag "nav-divider.png", alt: ""
+          =nav_divider
         %span Community Solutions
       -else
         =link_to "Home", root_path
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         =link_to "Language Tracks", :tracks
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         =link_to "#{@track.title} Track", @track
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         =link_to "Exercises", [@track, :exercises]
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         =link_to @exercise.title, [@track, @exercise]
-        =image_tag "nav-divider.png", alt: ""
+        =nav_divider
         %span Solutions
 
   .header
     .lo-container
       .track
-        = bordered_turquoise_track_icon(@track)
+        =bordered_turquoise_track_icon @track
         .title #{@track.title} Track
       .icon
-        =image_tag @exercise.white_icon_url
+        =graphical_image @exercise.white_icon_url
       %h1
         Solutions to
         %strong= @exercise.title
@@ -47,8 +47,8 @@
           -else
             =link_to [:my, @user_solution], class: 'user-solution' do
               .person
-                %i.fa.fa-eye-slash.not-published-icon
-                =image_tag display_avatar_url(current_user, @current_user_track)
+                =graphical_icon 'eye-slash not-published-icon'
+                  =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
                 .handle
                   Your Solution
                   .hidden-box Hidden

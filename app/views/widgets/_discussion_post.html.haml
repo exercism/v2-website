@@ -2,7 +2,7 @@
 -user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.handle
 
 .widget-discussion-post{id: "discussion-post-#{post.id}", class: (post.deleted?? "delete" : "")}
-  =image_tag avatar_url, class: 'avatar'
+  =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
   .post-body
     .post-header
       .created-at posted #{time_ago_in_words(post.created_at)} ago

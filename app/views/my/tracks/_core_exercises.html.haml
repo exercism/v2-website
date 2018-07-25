@@ -3,7 +3,7 @@
   - core_exercises.each.with_index do |exercise, idx|
     - if exercise.completed?
       .exercise-wrapper.completed
-        .circle= image_tag "tick-color-1.png"
+        .circle= image "tick-color-1.png", "Green checkmark"
         = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
           -if exercise.solution.approved_by
             .status Completed
@@ -31,7 +31,7 @@
 
     - elsif exercise.unlocked?
       .exercise-wrapper.in-progress
-        .circle= image_tag exercise.white_icon_url
+        .circle= graphical_image exercise.white_icon_url
         = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
           .status In Progress
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
@@ -44,7 +44,7 @@
 
     - elsif exercise.locked?
       .exercise-wrapper.locked
-        .circle= image_tag exercise.dark_icon_url
+        .circle= graphical_image exercise.dark_icon_url
         .exercise{id: "exercise-#{exercise.slug}"}
           .status Locked
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
