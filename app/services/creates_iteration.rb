@@ -68,7 +68,7 @@ class CreatesIteration
 
     return if user.solutions.where(exercise_id: side_exercise_to_unlock.id).exists?
 
-    CreatesSolution.create!(user, side_exercise_to_unlock)
+    CreateSolution.(user, side_exercise_to_unlock)
   end
 
   def notify_mentors

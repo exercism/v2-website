@@ -1,7 +1,5 @@
-class CreatesSolution
-  def self.create!(*args)
-    new(*args).create!
-  end
+class CreateSolution
+  include Mandate
 
   attr_reader :user, :exercise
   def initialize(user, exercise)
@@ -9,7 +7,7 @@ class CreatesSolution
     @exercise = exercise
   end
 
-  def create!
+  def call
     Solution.create!(
       user: user,
       exercise: exercise,
@@ -23,10 +21,12 @@ class CreatesSolution
 
   private
 
+  memoize
   def git_sha
     Git::ExercismRepo.current_head(repo_url)
   end
 
+  memoize
   def repo_url
     exercise.track.repo_url
   end

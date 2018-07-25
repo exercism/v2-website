@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CreatesSolutionTest < ActiveSupport::TestCase
+class CreateSolutionTest < ActiveSupport::TestCase
   test "creates with correct git sha" do
     Timecop.freeze do
 
@@ -9,7 +9,7 @@ class CreatesSolutionTest < ActiveSupport::TestCase
       git_sha = SecureRandom.uuid
       Git::ExercismRepo.stubs(current_head: git_sha)
 
-      solution = CreatesSolution.create!(user, exercise)
+      solution = CreateSolution.(user, exercise)
 
       assert solution.persisted?
       assert_equal exercise, solution.exercise
@@ -28,6 +28,6 @@ class CreatesSolutionTest < ActiveSupport::TestCase
     Git::ExercismRepo.stubs(current_head: git_sha)
 
     solution = create :solution
-    assert_equal solution, CreatesSolution.create!(solution.user, solution.exercise)
+    assert_equal solution, CreateSolution.(solution.user, solution.exercise)
   end
 end

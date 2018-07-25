@@ -33,7 +33,7 @@ module Scripts
         #
         # Do this before getting the other stuff
         #if existing_core_ids.empty?
-        #  CreatesSolution.create!(user, core_exercises.first)
+        #  CreateSolution.(user, core_exercises.first)
         #  existing_core_ids << core_exercises.first.id
         #end
 =end
@@ -50,7 +50,7 @@ module Scripts
         if existing_unlocked_core_ids.empty?
           core_exercises.each do |core_exercise|
             next if existing_core_ids.include?(core_exercise.id)
-            CreatesSolution.create!(user, core_exercise)
+            CreateSolution.(user, core_exercise)
             break
           end
         end
@@ -63,7 +63,7 @@ module Scripts
         # Unlock auto unlocks
         auto_unlock.each do |side_exercise|
           unless existing_exercise_ids.include?(side_exercise.id)
-            CreatesSolution.create!(user, side_exercise)
+            CreateSolution.(user, side_exercise)
           end
         end
 
@@ -71,7 +71,7 @@ module Scripts
         unlocked_by.each do |side_exercise|
           if !existing_exercise_ids.include?(side_exercise.id) &&
              existing_completed_exercise_ids.include?(side_exercise.unlocked_by_id)
-            CreatesSolution.create!(user, side_exercise)
+            CreateSolution.(user, side_exercise)
           end
         end
       end

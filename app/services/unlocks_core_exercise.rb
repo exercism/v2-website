@@ -9,7 +9,7 @@ class UnlocksCoreExercise
   def call
     return if exercise.unlocked_by_user?(user)
 
-    CreatesSolution.create!(user, exercise)
+    CreateSolution.(user, exercise)
   end
 
   private

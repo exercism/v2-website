@@ -14,7 +14,7 @@ class JoinsTrack
 
     user_track = UserTrack.create!(user: user, track: track)
     first_exercise = track.exercises.core.first
-    CreatesSolution.create!(user, first_exercise) if first_exercise
+    CreateSolution.(user, first_exercise) if first_exercise
 
     return user_track
   end

@@ -4,7 +4,7 @@ class UnlocksCoreExerciseTest < ActiveSupport::TestCase
   test "unlocks core exercise" do
     user = create(:user)
     exercise = create(:exercise)
-    CreatesSolution.expects(:create!).with(user, exercise)
+    CreateSolution.expects(:call).with(user, exercise)
 
     UnlocksCoreExercise.(user, exercise)
   end
@@ -13,7 +13,7 @@ class UnlocksCoreExerciseTest < ActiveSupport::TestCase
     user = create(:user)
     exercise = create(:exercise)
     create(:solution, user: user, exercise: exercise)
-    CreatesSolution.expects(:create!).with(user, exercise).never
+    CreateSolution.expects(:call).with(user, exercise).never
 
     UnlocksCoreExercise.(user, exercise)
   end
