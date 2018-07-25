@@ -44,14 +44,18 @@ class CreateSolutionTest < ActiveSupport::TestCase
 
     normal_user = create :user
     independent_user = create :user
+    neither_user = create :user
 
     create :user_track, track: ruby, user: normal_user, independent_mode: false
     create :user_track, track: ruby, user: independent_user, independent_mode: true
+    create :user_track, track: ruby, user: neither_user, independent_mode: nil
 
     normal_solution = CreateSolution.(normal_user, exercise)
+    neither_solution = CreateSolution.(neither_user, exercise)
     independent_solution = CreateSolution.(independent_user, exercise)
 
     refute normal_solution.independent_mode?
+    refute neither_solution.independent_mode?
     assert independent_solution.independent_mode?
   end
 end

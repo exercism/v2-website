@@ -14,7 +14,7 @@ class CreateSolution
       git_sha: git_sha,
       git_slug: exercise.slug,
       last_updated_by_user_at: Time.now,
-      independent_mode: user_track.independent_mode
+      independent_mode: independent_mode
     )
   rescue ActiveRecord::RecordNotUnique
     Solution.find_by(user: user, exercise: exercise)
@@ -35,5 +35,9 @@ class CreateSolution
   memoize
   def user_track
     UserTrack.find_by!(user_id: user, track_id: exercise.track_id)
+  end
+
+  def independent_mode
+    !!user_track.independent_mode
   end
 end
