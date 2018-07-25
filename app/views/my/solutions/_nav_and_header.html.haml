@@ -14,7 +14,7 @@
       =image_tag @exercise.white_icon_url
     .inner
       -if @iteration
-        =render "solutions/iteration_nav", url_parts: [:my, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
+        =iterations_nav_widget(:my, @solution, @iteration)
 
       %h2= @exercise.title
       .track-progress

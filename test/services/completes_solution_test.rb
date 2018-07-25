@@ -8,8 +8,8 @@ class CompletesSolutionTest < ActiveSupport::TestCase
     @next_core_exercise = create :exercise, track: @track, core: true, position: 2
     @another_core_exercise = create :exercise, track: @track, core: true, position: 4
 
-    @side_exercise = create :exercise, core: false, unlocked_by: @core_exercise
-    @other_side_exercise = create :exercise, core: false, unlocked_by: create(:exercise)
+    @side_exercise = create :exercise, track: @track, core: false, unlocked_by: @core_exercise
+    @other_side_exercise = create :exercise, track: @track, core: false, unlocked_by: create(:exercise)
 
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
   end
@@ -19,6 +19,8 @@ class CompletesSolutionTest < ActiveSupport::TestCase
       user = create :user
       mentor = create :user
       solution = create :solution, user: user, exercise: @core_exercise, approved_by: mentor
+      create :user_track, user: user, track: @track
+
       UnlocksNextCoreExercise.expects(:call).with(@track, user)
 
       CompletesSolution.complete!(solution)
@@ -55,6 +57,7 @@ class CompletesSolutionTest < ActiveSupport::TestCase
       mentor = create :user
       create :solution, user: user, exercise: @side_exercise
       solution = create :solution, user: user, exercise: @core_exercise, approved_by: mentor
+      create :user_track, user: user, track: @track
 
       CompletesSolution.complete!(solution)
       assert_equal 1, Solution.where(user: user, exercise: @next_core_exercise).count

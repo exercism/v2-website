@@ -1,6 +1,10 @@
+require "application_system_test_case"
+
 class JoinTrackTest < ApplicationSystemTestCase
   test "user rejoins a track" do
-    user = create(:user)
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
     track = create(:track,
                    title: "Ruby",
                    repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
@@ -24,6 +28,6 @@ class JoinTrackTest < ApplicationSystemTestCase
       click_on "Join the Ruby track"
     end
 
-    within(".exercise.completed") { assert_text "Hello World" }
+    within(".exercise-wrapper.completed") { assert_text "Hello World" }
   end
 end

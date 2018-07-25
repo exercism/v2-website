@@ -27,7 +27,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       side_exercise2 = create :exercise, core: false, unlocked_by: core_exercise
 
       solution = create :solution, exercise: core_exercise
-      CreatesSolution.expects(:create!).once.with(solution.user, side_exercise1)
+      CreateSolution.expects(:call).once.with(solution.user, side_exercise1)
       CreatesIteration.create!(solution, [])
     end
   end
@@ -38,7 +38,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       side_exercise = create :exercise, core: false, unlocked_by: core_exercise
 
       solution = create :solution, exercise: core_exercise
-      CreatesSolution.expects(:create!).never
+      CreateSolution.expects(:call).never
       CreatesIteration.create!(solution, [])
     end
   end
@@ -52,7 +52,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       user = create :user
       create :solution, user: user, exercise: side_exercise1
       solution = create :solution, user: user, exercise: core_exercise
-      CreatesSolution.expects(:create!).never
+      CreateSolution.expects(:call).never
       CreatesIteration.create!(solution, [])
     end
   end
@@ -79,6 +79,20 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert mentorship.requires_action
   end
 
+  test "does not notify non-current mentors" do
+    solution = create :solution
+    user = solution.user
+
+    # Create a user who mentored this solution but doesn't
+    # have a current track mentorship so is inactive.
+    inactive_mentor = create :user 
+    create :solution_mentorship, solution: solution, user: inactive_mentor
+
+    CreatesNotification.expects(:create!).never
+    DeliversEmail.expects(:deliver!).never
+    CreatesIteration.create!(solution, [])
+  end
+
   test "notifies and emails mentors" do
     solution = create :solution
     user = solution.user
@@ -86,6 +100,8 @@ class CreatesIterationTest < ActiveSupport::TestCase
     # Setup mentors
     mentor1 = create :user
     mentor2 = create :user
+    create :track_mentorship, user: mentor1
+    create :track_mentorship, user: mentor2
     create :solution_mentorship, solution: solution, user: mentor1
     create :solution_mentorship, solution: solution, user: mentor2
 

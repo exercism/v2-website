@@ -3,8 +3,10 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
     new(*args).create!
   end
 
+  attr_reader :user
   def initialize(iteration, user, content)
-    super
+    @user = user
+    super(iteration, user, content)
   end
 
   # Note: This whole method is pretty racey.
@@ -26,7 +28,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
   private
 
   def notify_mentors
-    solution.mentors.each do |mentor|
+    solution.active_mentors.each do |mentor|
       CreatesNotification.create!(
         mentor,
         :new_discussion_post_for_mentor,
@@ -37,7 +39,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
         # We want this to be the solution not the post
         # to allow for clearing without a mentor having to
         # go into every single iteration
-        about: solution
+        about: iteration
       )
       DeliversEmail.deliver!(
         mentor,
@@ -49,9 +51,5 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
 
   def user_may_comment?
     user == solution.user
-  end
-
-  def routes
-    @routes ||= Rails.application.routes.url_helpers
   end
 end

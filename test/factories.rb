@@ -149,6 +149,7 @@ FactoryBot.define do
   factory :user_track do
     user { create :user }
     track { create :track }
+    independent_mode false
   end
 
   factory :repo_update do

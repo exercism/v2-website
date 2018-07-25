@@ -12,7 +12,7 @@
     .pure-g
       .pure-u-6-24.lhs
         .sidebar
-          =image_tag @profile.user.avatar_url, class: 'avatar'
+          =image_tag @profile.user.avatar_url, class: 'avatar', alt: @profile.user.name
           .name= @profile.display_name
           -if @profile.user.bio.present?
             .bio= @profile.user.bio

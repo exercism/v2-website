@@ -1,9 +1,12 @@
 %h2 Next solutions to mentor
--if @suggested_solutions.present?
+= render "next_solutions_filters",
+  track_id: @next_track_id,
+  track_id_options: @next_track_id_options,
+  exercise_id: @next_exercise_id,
+  exercise_id_options: @next_exercise_id_options
+
+.next-solutions{style: @next_solutions.present?? "display:block" : "display:none"}
   .subheading These are new solutions that need feedback.
-  -@suggested_solutions.each do |solution|
-    -user_track = @user_tracks["#{solution.user_id}|#{solution.exercise.track_id}"]
-    =render "solution", solution: solution, user_track: user_track
--else
-  .no-solutions.general
-    There are currently no solutions that need claiming.
+  =render "next_solutions", next_solutions: @next_solutions, user_tracks: @user_tracks
+.no-next-solutions{style: @next_solutions.empty?? "display:block" : "display:none"}
+  %p There are currently no new solutions that need mentoring. Great work!

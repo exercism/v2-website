@@ -101,35 +101,6 @@ body.controller-solutions.action-show {
         }
     }
     .discussion {
-        .post, .preview-area {
-            p {
-                @include font-size(14, 20);
-            }
-            blockquote {
-                border-left: 4px solid #eee;
-                padding-left: 15px;
-                margin-left: 10px;
-            }
-            a {
-                color: #333;
-                font-weight: 400;
-                text-decoration: underline;
-            }
-        }
-        .post {
-            .post-html {
-                * {
-                    @include font-size(14, 19);
-                }
-                &>* {
-                    margin-bottom:10px;
-                    &:last-child {
-                        margin-bottom:0;
-                    }
-                }
-            }
-        }
-
         .solution pre,
         .post-html pre,
         .new-discussion-post-form .preview-area pre {

@@ -52,3 +52,7 @@ class ActionDispatch::IntegrationTest
     repo
   end
 end
+
+ActionDispatch::IntegrationTest.register_encoder :js,
+  param_encoder: -> params { params },
+  response_parser: -> body { body }

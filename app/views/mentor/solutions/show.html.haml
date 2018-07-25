@@ -9,7 +9,7 @@
     .lo-container
       =image_tag display_avatar_url @solution.user, @solution_user_track
       .inner
-        =render "solutions/iteration_nav", url_parts: [:mentor, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
+        =iterations_nav_widget(:mentor, @solution, @iteration)
         %h2
           %strong #{@exercise.title}
           on the
@@ -38,7 +38,7 @@
             .posts
               -@iteration.discussion_posts.each do |post|
                 -user_track = @user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
-                =render "mentor/discussion_posts/post", post: post, solution: @solution, user_track: user_track
+                =discussion_post_widget(post, @solution, user_track)
           -else
             .posts{style: "display:none"}
 
@@ -51,24 +51,24 @@
                 .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
               .panes
                 .pane.pane-1.markdown
-                  =f.text_area :content
+                  =f.text_area :content, required: true
                 .pane.pane-2.preview
                   .preview-area
 
-            =button_tag "Comment", class: 'pure-button'
+            =button_tag "Comment", class: 'pure-button button'
 
             .approved{style: @solution.approved?? "" : "display:none"}
               %i.fa.fa-check
               Solution Approved
             -if current_user.mentoring_solution?(@solution)
               -unless @solution.approved?
-                =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button'
+                =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button button'
             -else
-              =link_to "I'll pass, thanks", [:ignore, :mentor, @solution], method: :patch, class: 'pure-button pass-button'
+              =link_to "I'll pass, thanks", [:ignore, :mentor, @solution], method: :patch, class: 'pure-button pass-button button'
 
             -unless @solution.approved?
-              =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button', value: "approved"
-              =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button', value: "approved"
+              =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button button', value: "approved"
+              =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button button', value: "approved"
 
 -content_for :js do
   :javascript

@@ -31,8 +31,8 @@ class ExerciseTest < ActiveSupport::TestCase
            completed_at: Date.new(2016, 12, 25))
 
     assert_equal(
-      [other_core_exercise, side_exercise],
-      Exercise.locked_for(user)
+      [other_core_exercise, side_exercise].sort,
+      Exercise.locked_for(user).sort
     )
   end
 end

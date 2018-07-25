@@ -22,12 +22,16 @@
 
         =f.label :email_on_new_iteration_for_mentor do
           =f.check_box :email_on_new_iteration_for_mentor
-          %span Email me when a student posts a new iteratin to a solution I'm mentoring
+          %span Email me when a student posts a new iteration to a solution I'm mentoring
 
       %h2 Usage Emails
       =f.label :email_on_new_discussion_post do
         =f.check_box :email_on_new_discussion_post
         %span Email me when a mentor comments on my solution
+
+      =f.label :email_on_solution_approved do
+        =f.check_box :email_on_solution_approved
+        %span Email me when a mentor approves my solution
 
       %h2 General Communications
       =f.label :receive_product_updates do

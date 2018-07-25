@@ -40,11 +40,8 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
 
     # Setup mentors
     mentor1 = create :user
-    mentor2 = create :user
     create :track_mentorship, user: mentor1, track: solution.exercise.track
-    create :track_mentorship, user: mentor2, track: solution.exercise.track
     create :solution_mentorship, solution: solution, user: mentor1
-    create :solution_mentorship, solution: solution, user: mentor2
 
     CreatesNotification.expects(:create!).with do |*args|
       assert_equal user, args[0]
@@ -52,14 +49,14 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
       assert_equal "<strong>#{mentor1.handle}</strong> has commented on your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
       assert_equal "https://test.exercism.io/my/solutions/#{solution.uuid}/iterations/#{iteration.id}", args[3]
       assert_equal DiscussionPost, args[4][:trigger].class
-      assert_equal solution, args[4][:about]
+      assert_equal iteration, args[4][:about]
     end
 
-    # DeliversEmail.expects(:deliver!).with do |*args|
-    #   assert_equal user, args[0]
-    #   assert_equal :new_discussion_post, args[1]
-    #   assert_equal DiscussionPost, args[2].class
-    # end
+    DeliversEmail.expects(:deliver!).with do |*args|
+      assert_equal user, args[0]
+      assert_equal :new_discussion_post, args[1]
+      assert_equal DiscussionPost, args[2].class
+    end
 
     CreatesMentorDiscussionPost.create!(iteration, mentor1, "foooebar")
   end

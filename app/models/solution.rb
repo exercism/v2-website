@@ -55,6 +55,10 @@ class Solution < ApplicationRecord
     !!completed_at
   end
 
+  def active_mentors
+    mentors.where("solution_mentorships.user_id": TrackMentorship.select(:user_id))
+  end
+
   def user_track
     UserTrack.find_by(user_id: user_id, track_id: exercise.track_id)
   end

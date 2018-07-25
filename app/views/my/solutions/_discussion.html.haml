@@ -13,7 +13,8 @@
   .posts
     -@iteration.discussion_posts.each do |post|
       -user_track = @post_user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
-      =render "my/discussion_posts/post", post: post, solution: @solution, user_track: user_track
+      =discussion_post_widget(post, @solution, user_track)
+
 -elsif !@solution.approved?
   .posts{style: "display:none"}
   .next-steps
@@ -36,7 +37,7 @@
       .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
     .panes
       .pane.pane-1.markdown
-        =f.text_area :content
+        =f.text_area :content, required: true
       .pane.pane-2.preview
         .preview-area
 

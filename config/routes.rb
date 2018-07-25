@@ -31,6 +31,10 @@ Rails.application.routes.draw do
   # ##### #
   namespace :admin do
     resource :dashboard, only: [:show], controller: "dashboard"
+    resource :users, only: [:show]
+    resources :solutions, only: [:show] do
+      resources :iterations, only: [:show]
+    end
   end
 
   # ###### #
@@ -38,7 +42,10 @@ Rails.application.routes.draw do
   # ###### #
   namespace :mentor do
     resource :configure, only: [:show, :update], controller: "configure"
-    resource :dashboard, only: [:show], controller: "dashboard"
+    resource :dashboard, only: [:show], controller: "dashboard" do
+      get :your_solutions
+      get :next_solutions
+    end
     resources :solutions, only: [:show] do
       member do
         patch :approve
@@ -124,7 +131,7 @@ Rails.application.routes.draw do
     end
     resources :reactions, only: [:index, :create]
 
-    resources :discussion_posts, only: [:create]
+    resources :discussion_posts, only: [:create, :update, :destroy]
     resources :notifications, only: [:index] do
       patch :read, on: :member
       patch :read_batch, on: :collection
@@ -181,6 +188,8 @@ Rails.application.routes.draw do
   PagesController::PAGES.values.each do |page|
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
+
+  get "cli-walkthrough" => "pages#cli_walkthrough", as: "cli_walkthrough_page"
 
   PagesController::LICENCES.values.each do |licence|
     get "licences/#{licence.to_s.dasherize}" => "pages##{licence}", as: "#{licence}_licence"

@@ -1,8 +1,10 @@
 class CreateTeamDiscussionPost < CreatesDiscussionPost
   include Mandate
 
+  attr_reader :user
   def initialize(iteration, user, content)
-    super
+    @user = user
+    super(iteration, user, content)
   end
 
   def call

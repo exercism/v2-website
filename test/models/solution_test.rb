@@ -30,4 +30,18 @@ class SolutionTest < ActiveSupport::TestCase
 
     refute solution.auto_approve?
   end
+
+  test "active_mentors" do
+    solution = create :solution
+    active_mentor_on_solution = create :user
+    active_mentor_not_on_solution = create :user
+    inactive_mentor_on_solution = create :user
+
+    create :solution_mentorship, solution: solution, user: active_mentor_on_solution
+    create :solution_mentorship, solution: solution, user: inactive_mentor_on_solution
+    create :track_mentorship, user: active_mentor_on_solution
+    create :track_mentorship, user: active_mentor_not_on_solution
+
+    assert_equal [active_mentor_on_solution], solution.active_mentors
+  end
 end

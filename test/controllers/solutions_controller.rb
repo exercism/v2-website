@@ -9,10 +9,10 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     get track_exercise_solutions_url(exercise.track, exercise)
     assert_response :success
-    assert assigns(:solutions), [solution]
+    assert_equal assigns(:solutions), [solution]
   end
 
-  test "show should succeed for unpublished solution" do
+  test "show should succeed for published solution" do
     exercise = create :exercise
     solution = create :solution, exercise: exercise, published_at: DateTime.now - 1.week
     create :iteration, solution: solution
@@ -21,12 +21,21 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "show should fail for unpublished solution" do
+  test "show should fail for unpublished solution with full path" do
     exercise = create :exercise
     solution = create :solution, exercise: exercise, published_at: nil
 
-    get track_exercise_solution_url(exercise.track, exercise, solution)
+    get track_exercise_solution_url(exercise.track, exercise, solution.uuid)
     assert_redirected_to track_exercise_url(exercise.track, exercise)
+  end
+
+  test "show should explode for unpublished solution with uuid" do
+    exercise = create :exercise
+    solution = create :solution, exercise: exercise, published_at: nil
+
+    assert_raises(ActionController::RoutingError) do
+      get solution_url(solution.uuid)
+    end
   end
 end
 

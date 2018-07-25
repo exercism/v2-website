@@ -115,12 +115,17 @@ class Git::SyncsTrack
   def sync_track_metadata
     track.update!(
       introduction: track_introduction,
-      code_sample: code_sample
+      code_sample: code_sample,
+      active: active
     )
   end
 
   def track_introduction
     config[:blurb] || ""
+  end
+
+  def active
+    config[:active]
   end
 
   def code_sample

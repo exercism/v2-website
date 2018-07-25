@@ -43,7 +43,8 @@ class CreatesIteration
         "<strong>#{solution.exercise.track.title}</strong> track has been "\
         "auto approved.",
         Rails.application.routes.url_helpers.my_solution_url(solution),
-        about: solution)
+        about: solution
+      )
     else
       solution.mentorships.update_all(requires_action: true)
       notify_mentors
@@ -67,11 +68,11 @@ class CreatesIteration
 
     return if user.solutions.where(exercise_id: side_exercise_to_unlock.id).exists?
 
-    CreatesSolution.create!(user, side_exercise_to_unlock)
+    CreateSolution.(user, side_exercise_to_unlock)
   end
 
   def notify_mentors
-    solution.mentors.each do |mentor|
+    solution.active_mentors.each do |mentor|
       CreatesNotification.create!(
         mentor,
         :new_iteration_for_mentor,

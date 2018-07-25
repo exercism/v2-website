@@ -23,4 +23,27 @@ module WidgetsHelper
       block.call
     end
   end
+
+  def iterations_nav_widget(scope, solution, current_iteration, url_path: nil)
+    iteration_ids = solution.iterations.reorder('id asc').pluck(:id)
+    num_comments = DiscussionPost.where(iteration_id: iteration_ids).
+                                  group(:iteration_id).
+                                  count
+
+    current_idx = iteration_ids.index(current_iteration.id) + 1
+
+    render "widgets/iteration_nav", url_parts: [scope, solution],
+                                      iteration_ids: iteration_ids,
+                                      num_comments: num_comments,
+                                      current_idx: current_idx,
+                                      url_path: url_path
+
+  end
+
+  def discussion_post_widget(post, solution, user_track)
+    render "widgets/discussion_post", post: post, 
+                                      solution: solution, 
+                                      user_track: user_track
+  end
+
 end

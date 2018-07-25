@@ -19,7 +19,7 @@ class Git::ExerciseReader
   end
 
   def tests
-    files = exercise_files.select { |f| f[:name].match(test_regexp) }
+    files = exercise_files.select { |f| f[:full].match(test_regexp) }
     test_suites = {}
     files.each do |file|
       name = file[:name]

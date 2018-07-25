@@ -58,7 +58,7 @@ class API::SolutionsController < APIController
           solution = current_user.solutions.where(exercise_id: exercise.id).last!
         rescue
           if current_user.may_unlock_exercise?(user_track, exercise)
-            solution = CreatesSolution.create!(current_user, exercise)
+            solution = CreateSolution.(current_user, exercise)
           else
             return render_solution_not_found
           end
@@ -76,7 +76,7 @@ class API::SolutionsController < APIController
         else
           exercises = Exercise.side.where(unlocked_by: nil).where(track_id: current_user.tracks).where(slug: params[:exercise_id]).includes(:track)
           if exercises.size == 1
-            solution = CreatesSolution.create!(current_user, exercises.first)
+            solution = CreateSolution.(current_user, exercises.first)
           elsif exercises.size == 0
             return render_404(:exercise_not_found)
           elsif exercises.size > 1

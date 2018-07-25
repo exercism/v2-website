@@ -3,9 +3,11 @@ class TeamPagesController < ApplicationController
   end
 
   def maintainers
+    @page = params[:page]
     @maintainers_last_updated_at = Maintainer.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @maintainers = Maintainer.visible.reorder('LENGTH(bio) DESC').
                                       page(@page).
+                                      group(:github_username).
                                       per(40)
   end
 
@@ -14,15 +16,17 @@ class TeamPagesController < ApplicationController
     @mentors_last_updated_at = Mentor.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @mentors = Mentor.reorder('LENGTH(bio) DESC').
                       page(@page).
+                      group(:github_username).
                       per(40)
   end
 
   def contributors
+    @page = params[:page]
     @last_updated_at = Contributor.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @contributors = Contributor.where.not(is_core: true).
                                 where.not(is_maintainer: true).
                                 order("num_contributions DESC").
-                                page(params[:page]).
+                                page(@page).
                                 per(40)
   end
 
