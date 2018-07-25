@@ -2,10 +2,10 @@
   .lo-container
     .misc-menu
       .in-situ
-        =image_tag current_user.avatar_url ? current_user.avatar_url : "blank.png"
-        %i.fa.fa-caret-down
+        =image_tag current_user.avatar_url ? current_user.avatar_url : "blank.png", alt: current_user.name
+        =graphical_icon 'caret-down'
       .dropdown
-        %i.fa.fa-caret-up
+        =graphical_icon 'caret-up'
         .person
           Logged in as
           %strong #{current_user.handle}

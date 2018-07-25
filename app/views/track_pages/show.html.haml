@@ -3,9 +3,9 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Language Tracks", [:my, :tracks]
-      =image_tag "nav-divider.png", alt: ""
+      =nav_divider
       =link_to "#{@track.title} Track", [:my, @track]
-      =image_tag "nav-divider.png", alt: ""
+      =nav_divider
       %span= title
 
   .header

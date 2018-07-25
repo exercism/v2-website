@@ -4,8 +4,8 @@
   %i.fa.fa-circle
 
 .icon
-  =image_tag @exercise.white_icon_url, class: 'exercise-icon'
-  =image_tag "tick-white.png", class: 'tick'
+  =graphical_image @exercise.white_icon_url, class: 'exercise-icon'
+  =image "tick-white.png", "White checkmark", class: 'tick'
 
 %h2 Well done
 %h3 You've completed #{@solution.exercise.title}

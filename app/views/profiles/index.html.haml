@@ -9,7 +9,7 @@
         -@profiles.each do |profile|
           .pure-u-1-2
             =link_to profile, class: 'profile' do
-              =image_tag profile.user.avatar_url
+              =image profile.user.avatar_url, alt: profile.user.name
               %h2= profile.display_name
               %p= profile.user.bio
 

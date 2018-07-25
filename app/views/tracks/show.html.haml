@@ -2,9 +2,9 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =image_tag "nav-divider.png", alt: ''
+      =nav_divider
       =link_to "Language Tracks", [:tracks]
-      =image_tag "nav-divider.png", alt: ''
+      =nav_divider
       %span #{@track.title} Track
 
   .header

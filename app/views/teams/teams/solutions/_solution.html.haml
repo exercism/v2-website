@@ -1,10 +1,10 @@
 =link_to teams_team_solution_path(@team, solution), class: 'solution' do
   .icons
     .exercise
-      = image_tag solution.exercise.turquoise_icon_url
-    = image_tag solution.exercise.track.hex_turquoise_icon_url, class: 'track'
+      =graphical_image solution.exercise.turquoise_icon_url
+    =graphical_image solution.exercise.track.hex_turquoise_icon_url, class: 'track'
     .joiner
-    = image_tag solution.user.avatar_url, class: 'person'
+      =image solution.user.avatar_url, "Avatar of #{solution.user.handle}", class: 'person'
 
   -difficulty_word = exercise_difficulty_word(solution.exercise)
   .details
