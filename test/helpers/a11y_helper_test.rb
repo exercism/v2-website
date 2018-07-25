@@ -26,4 +26,9 @@ class A11yHelperTest < ActionView::TestCase
     alt = 'Brief image description'
     assert_includes graphical_image('img.png', alt: alt), alt
   end
+
+  test "image should enforce to explicitly use an alt attribute" do
+    img = '<img src="/images/img.png" alt="foobar" class="test" />'
+    assert_dom_equal img, image('img.png', 'foobar', class: 'test')
+  end
 end
