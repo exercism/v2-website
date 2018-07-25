@@ -171,24 +171,18 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
   test "puts exercises in standard mode first" do
     mentor = create(:user)
     mentee = create(:user)
-    standard_track = create(:track)
-    independent_track = create(:track)
-    create(:track_mentorship, user: mentor, track: standard_track)
-    create(:track_mentorship, user: mentor, track: independent_track)
-    create(:user_track,
-           user: mentee,
-           independent_mode: true,
-           track: independent_track)
-    create(:user_track,
-           user: mentee,
-           independent_mode: false,
-           track: standard_track)
-    standard_exercise = create(:exercise, track: standard_track)
-    independent_exercise = create(:exercise, track: independent_track)
+    track = create(:track)
+    create(:track_mentorship, user: mentor, track: track)
+
+    standard_exercise = create(:exercise, track: track)
+    standard_solution = create(:solution, exercise: standard_exercise, user: mentee, independent_mode: false)
+
+    independent_exercise = create(:exercise, track: track)
     independent_solution = create(:solution,
                                   exercise: independent_exercise,
-                                  user: mentee)
-    standard_solution = create(:solution, exercise: standard_exercise, user: mentee)
+                                  user: mentee,
+                                  independent_mode: true)
+
     [standard_solution, independent_solution].each do |solution|
       create :iteration, solution: solution
     end
@@ -223,10 +217,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       mentor, track = create_mentor_and_track
       independent_user = create :user
       mentored_user = create :user
-      undecided_user = create :user
-      create :user_track, user: undecided_user, track: track, independent_mode: nil
-      create :user_track, user: independent_user, track: track, independent_mode: true
-      create :user_track, user: mentored_user, track: track, independent_mode: false
       core_exercise = create(:exercise, track: track, core: true)
       side_exercise = create(:exercise, track: track, core: false)
 
@@ -234,19 +224,14 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                     exercise: create(:exercise, track: track, core: true),
                                     num_mentors: 0,
                                     last_updated_by_user_at: DateTime.now,
-                                    user: independent_user)
+                                    user: independent_user,
+                                    independent_mode: true)
 
       unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
                                         last_updated_by_user_at: DateTime.now,
                                         user: mentored_user)
-
-      undecided_newer_unmentored_core_solution = create(:solution,
-                                        exercise: create(:exercise, track: track, core: true),
-                                        num_mentors: 0,
-                                        last_updated_by_user_at: DateTime.now + 1.minute,
-                                        user: undecided_user)
 
       unmentored_side_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: false),
@@ -297,7 +282,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       [
         independent_solution,
         old_unmentored_core_solution,
-        undecided_newer_unmentored_core_solution,
         unmentored_core_solution,
         unmentored_side_solution,
         unmentored_older_legacy_core_solution,
@@ -312,7 +296,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       expected = [
         old_unmentored_core_solution,
         unmentored_core_solution,
-        undecided_newer_unmentored_core_solution,
         unmentored_side_solution,
         unmentored_older_legacy_core_solution,
         unmentored_newer_legacy_core_solution,
