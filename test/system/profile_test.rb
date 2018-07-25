@@ -34,4 +34,15 @@ class ProfileTest < ApplicationSystemTestCase
 
     assert_text "We only support PNG, GIF, or JPG pictures."
   end
+
+  test "shows correct contributions count" do
+    user = create(:user)
+    profile = create(:profile, user: user)
+    4.times { create :solution_mentorship, user: user } 
+
+    sign_in!(user)
+    visit profile_path(profile)
+
+    assert_text "Helped 4 students"
+  end
 end

@@ -71,3 +71,14 @@ The user record is deleted, as well as associated objects except the ff:
 
 - Discussion posts where they are a mentor.
 - Maintainer records where their user record is associated.
+
+### Unlock first exercise for each user track
+
+For when @iHiD breaks things.
+
+```
+user_track_ids.each do |id|
+  ut = UserTrack.find(id)
+  CreateSolution.(ut.user, ut.track.exercises.core.first) if ut.solutions.size == 0
+end
+```

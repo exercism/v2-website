@@ -27,7 +27,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       side_exercise2 = create :exercise, core: false, unlocked_by: core_exercise
 
       solution = create :solution, exercise: core_exercise
-      CreatesSolution.expects(:create!).once.with(solution.user, side_exercise1)
+      CreateSolution.expects(:call).once.with(solution.user, side_exercise1)
       CreatesIteration.create!(solution, [])
     end
   end
@@ -38,7 +38,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       side_exercise = create :exercise, core: false, unlocked_by: core_exercise
 
       solution = create :solution, exercise: core_exercise
-      CreatesSolution.expects(:create!).never
+      CreateSolution.expects(:call).never
       CreatesIteration.create!(solution, [])
     end
   end
@@ -52,7 +52,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       user = create :user
       create :solution, user: user, exercise: side_exercise1
       solution = create :solution, user: user, exercise: core_exercise
-      CreatesSolution.expects(:create!).never
+      CreateSolution.expects(:call).never
       CreatesIteration.create!(solution, [])
     end
   end

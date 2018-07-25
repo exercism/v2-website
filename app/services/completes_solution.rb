@@ -27,7 +27,7 @@ class CompletesSolution
     existing_exercise_ids = user.solutions.pluck(:exercise_id)
     solution.exercise.unlocks.each do |exercise|
       next if existing_exercise_ids.include?(exercise.id)
-      CreatesSolution.create!(user, exercise)
+      CreateSolution.(user, exercise)
     end
   end
 
