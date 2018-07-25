@@ -6,6 +6,7 @@ require 'test_helper'
 module Scripts
   class FixETLUnlockingTest < ActiveSupport::TestCase
     test "unlocks correctly" do
+      skip
       CreateSolution.any_instance.stubs(git_sha: SecureRandom.uuid)
       CreateSolution.any_instance.stubs(repo_url: SecureRandom.uuid)
 

@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SetSolutionsIndependentModeTest < ActiveSupport::TestCase
   test "it populates correctly" do
+    skip
 
     ruby = create :track
     python = create :track

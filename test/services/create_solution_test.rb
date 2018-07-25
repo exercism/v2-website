@@ -6,6 +6,8 @@ class CreateSolutionTest < ActiveSupport::TestCase
 
       user = create :user
       exercise = create :exercise
+      create :user_track, user: user, track: exercise.track
+
       git_sha = SecureRandom.uuid
       Git::ExercismRepo.stubs(current_head: git_sha)
 
@@ -28,6 +30,28 @@ class CreateSolutionTest < ActiveSupport::TestCase
     Git::ExercismRepo.stubs(current_head: git_sha)
 
     solution = create :solution
+    create :user_track, user: solution.user, track: solution.exercise.track
+
     assert_equal solution, CreateSolution.(solution.user, solution.exercise)
+  end
+
+  test "sets independent_mode correctly" do
+    git_sha = SecureRandom.uuid
+    Git::ExercismRepo.stubs(current_head: git_sha)
+
+    ruby = create :track
+    exercise = create :exercise, track: ruby
+
+    normal_user = create :user
+    independent_user = create :user
+
+    create :user_track, track: ruby, user: normal_user, independent_mode: false
+    create :user_track, track: ruby, user: independent_user, independent_mode: true
+
+    normal_solution = CreateSolution.(normal_user, exercise)
+    independent_solution = CreateSolution.(independent_user, exercise)
+
+    refute normal_solution.independent_mode?
+    assert independent_solution.independent_mode?
   end
 end
