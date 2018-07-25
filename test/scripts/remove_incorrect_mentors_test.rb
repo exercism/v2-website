@@ -2,6 +2,7 @@ require 'test_helper'
 
 class RemoveIncorrectMentorsTest < ActiveSupport::TestCase
   test "it removes the correct ones" do
+    skip
     Timecop.freeze do
       earlier = Time.now - 20.seconds
       earlier_plus_one_sec = earlier + 1.second
