@@ -5,7 +5,14 @@
       .exercise-wrapper.completed
         .circle= image_tag "tick-color-1.png"
         = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
-          .status Completed
+          -if exercise.solution.approved_by
+            .status Completed
+          -else exercise.solution.approved_by
+            .status.completed-unmentored
+              Completed
+              .unmentored
+                %i.fa.fa-user-times
+                Unmentored
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
           .title
             = exercise.title
