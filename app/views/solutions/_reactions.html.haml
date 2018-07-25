@@ -8,7 +8,7 @@
     .count= like_count
 
   .reaction{class: love_count > like_count && love_count > genius_count ? "highlight": ""}
-    =icon 'heart fa-fw', 'Heart'
+    =icon 'heart fa-fw', 'Hearts'
     .count= love_count
 
   .reaction{class: genius_count_largest ? "highlight": ""}
@@ -19,6 +19,6 @@
     .count= genius_count
 
   .reaction
-    %i.fa.fa-fw.fa-comment
+    =icon 'comment fa-fw', 'Comments'
     .count= @comments.size
 

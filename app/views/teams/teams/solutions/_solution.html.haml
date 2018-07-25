@@ -20,6 +20,6 @@
       .submitted-at Submitted #{time_ago_in_words(solution.iterations.last.created_at)} ago
     .status
       -if solution.needs_feedback?
-        %i.fa.fa-comments-o
+        =graphical_icon 'comments-o'
         View and Give Feedback
 

@@ -58,7 +58,7 @@
             =button_tag "Comment", class: 'pure-button button'
 
             .approved{style: @solution.approved?? "" : "display:none"}
-              %i.fa.fa-check
+              =icon :check
               Solution Approved
             -if current_user.mentoring_solution?(@solution)
               -unless @solution.approved?
