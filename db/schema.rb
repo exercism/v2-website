@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_24_000822) do
+ActiveRecord::Schema.define(version: 2018_07_25_105321) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 2018_07_24_000822) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "mentoring_enabled"
+    t.boolean "independent_mode", default: false, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
