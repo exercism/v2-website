@@ -22,7 +22,7 @@
           -else
             .notification
               Well done! Your solution is completed.
-              =link_to "Publish your solution", [:publish, :my, @solution], method: :patch
+              =link_to "Publish your solution", [:publish, :my, @solution, publish: 1], method: :patch
 
         -elsif @solution.approved?
           -if @solution.exercise.auto_approve?
