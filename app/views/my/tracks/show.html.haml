@@ -31,7 +31,7 @@
   -if @user_track.independent_mode?
     =render "show_side_exercises", exercises_and_solutions: @exercises_and_solutions
   -else
-    =render "show_normal_mode"
+    =render "show_mentored_mode"
 
   -if @user_track.independent_mode === nil
     -content_for :js do

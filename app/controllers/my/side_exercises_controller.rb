@@ -2,7 +2,7 @@ class My::SideExercisesController < MyController
   before_action :set_track
 
   def index
-    exercises = if @user_track.normal_mode?
+    exercises = if @user_track.mentored_mode?
         @track.exercises.side.active.includes(:topics)
       else
         @track.exercises.active.includes(:topics)

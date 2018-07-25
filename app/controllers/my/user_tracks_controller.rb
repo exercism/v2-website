@@ -13,18 +13,24 @@ class My::UserTracksController < MyController
     redirect_to [:my, track]
   end
 
-  def set_normal_mode
+  def set_mentored_mode
     user_track = current_user.user_tracks.find(params[:id])
-    user_track.update(independent_mode: false)
-    render js: "window.closeModal()"
+    SwitchTrackToMentoredMode.(current_user, user_track.track)
+
+    respond_to do |format|
+      format.js { render js: "window.closeModal()" } 
+      format.html { redirect_to [:my, user_track.track] }
+    end
   end
 
   def set_independent_mode
     user_track = current_user.user_tracks.find(params[:id])
-    track = user_track.track
+    SwitchTrackToIndependentMode.(current_user, user_track.track)
 
-    SwitchTrackToIndependentMode.(current_user, track)
-    redirect_to [:my, track]
+    respond_to do |format|
+      format.js { render js: "window.closeModal()" } 
+      format.html { redirect_to [:my, user_track.track] }
+    end
   end
 
   def leave

@@ -78,7 +78,7 @@ class My::SolutionsController < MyController
     @track = @solution.exercise.track
     user_track = UserTrack.where(user: current_user, track: @track).first
 
-    if user_track.normal_mode?
+    if user_track.mentored_mode?
       if @solution.exercise.core?
         @next_core_solution = current_user.solutions.not_completed.
                               includes(exercise: :topics).

@@ -30,4 +30,14 @@ class UserTracksControllerTest < ActionDispatch::IntegrationTest
     SwitchTrackToIndependentMode.expects(:call).with(@current_user, track)
     patch set_independent_mode_my_user_track_url(user_track)
   end
+
+  test "#set_mentored_mode sets the track to independent_mode" do
+    sign_in!
+    track = create :track
+    user_track = create :user_track, user: @current_user, track: track
+
+    SwitchTrackToMentoredMode.expects(:call).with(@current_user, track)
+    patch set_mentored_mode_my_user_track_url(user_track)
+  end
+
 end

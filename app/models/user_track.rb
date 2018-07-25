@@ -11,7 +11,7 @@ class UserTrack < ApplicationRecord
     created_at < Exercism::V2_MIGRATED_AT
   end
 
-  def normal_mode?
+  def mentored_mode?
     !independent_mode?
   end
 
