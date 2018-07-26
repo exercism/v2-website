@@ -118,13 +118,12 @@ Rails.application.routes.draw do
     resources :solutions, only: [:show, :create] do
       member do
         get :walkthrough
-        patch :request_mentoring
         get :confirm_unapproved_completion
         patch :complete
         get :reflection
+        patch :request_mentoring
         patch :reflect
         patch :publish
-        patch :migrate_to_v2
       end
 
       resources :iterations, only: [:show]

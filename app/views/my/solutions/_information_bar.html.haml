@@ -6,7 +6,7 @@
   .migration-bar
     This solution has been imported from an old version of the website.
     -if @user_track.mentoring_slots_remaining?
-      If you would like to receive mentorship on it, please #{link_to "click here", migrate_to_v2_my_solution_path(@solution), method: :patch}.
+      If you would like to receive mentorship on it, please #{link_to "click here", request_mentoring_my_solution_path(@solution), method: :patch}.
     -else
       Once your other solutions on this track have been mentored you may request mentoring for this.
 
