@@ -26,8 +26,8 @@ class UserTrack < ApplicationRecord
 
   def mentoring_allowance_used_up?
     solutions.where("completed_at IS NOT NULL OR approved_by_id IS NOT NULL").
-              where(mentoring_enabled: true).
-              count >= 5
+              where(independent_mode: false).
+              count >= MAX_MENTORING_SLOTS
   end
 
   def solutions
@@ -41,8 +41,7 @@ class UserTrack < ApplicationRecord
 
   def solutions_being_mentored
     solutions.where(approved_by_id: nil).
-              where("solutions.independent_mode = ?
-                     OR mentoring_enabled = ?", false, true)
+              where(independent_mode: false)
   end
 
   def num_solutions_being_mentored

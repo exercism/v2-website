@@ -21,10 +21,7 @@
       .pure-u-1-2.rhs
         .discussion
           -if @user_track.independent_mode?
-            -if @solution.mentoring_enabled?
-              %h3 Mentor Discussion
-              =render "discussion"
-            -else
+            -if @solution.independent_mode?
               %h3.disabled
                 %i.fa.fa-ban
                 Mentor Discussion (Disabled in independent mode)
@@ -35,6 +32,10 @@
                 -else
                   =link_to "Request mentoring on this solution.", request_mentoring_my_solution_path(@solution), method: :patch
               =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+
+            -else
+              %h3 Mentor Discussion
+              =render "discussion"
           -else
             %h3 Mentor Discussion
             -if @solution.exercise.auto_approve?
