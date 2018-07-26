@@ -2,7 +2,10 @@
 @import 'mixins';
 
 .lo-container {
-    padding:0 50px;
+    padding:0 15px;
+    @media #{$md-media} {
+        padding:0 50px;
+    }
     margin:0 auto;
 }
 
