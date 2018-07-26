@@ -304,9 +304,10 @@
     .pure-button {
         background:$color-1;
         display:block;
-        width:280px;
+        max-width:280px;
+        width:100%;
         padding:11px 10px;
         text-align:center;
-        margin: 30px auto 0 auto;
+        margin: 30px auto 30px auto;
     }
 }
