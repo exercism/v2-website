@@ -14,7 +14,9 @@ class LeaveTrackTest < ApplicationSystemTestCase
     sign_in!(user)
     visit track_path(track)
     click_on "Leave Track"
-    click_on "Leave Track"
+    within("#modal") do
+      click_on "Leave Track"
+    end
 
     within(".other-tracks") { assert_text "Ruby" }
     assert_no_css ".joined-tracks"

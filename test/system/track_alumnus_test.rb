@@ -5,7 +5,7 @@ class TrackAlumnusTest < ApplicationSystemTestCase
     track = create(:track)
     alumnus = create(:maintainer, track: track, alumnus: "alumnum")
 
-    visit team_page_path
+    visit maintainers_team_page_path
 
     assert page.has_content?("Alumnum")
   end

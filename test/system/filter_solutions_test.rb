@@ -3,7 +3,10 @@ require 'application_system_test_case'
 class FilterSolutionsTest < ApplicationSystemTestCase
   test "filters solutions by status" do
     track = create(:track)
-    mentor = create(:user, mentored_tracks: [track])
+    mentor = create(:user,
+                    accepted_terms_at: Date.new(2016, 12, 25),
+                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
+                    mentored_tracks: [track])
     hello_world = create(:exercise, track: track)
     solution = create(:solution,
                       exercise: hello_world,
@@ -17,14 +20,17 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Completed", id: :status
+    select_option "Completed", id: :your_status
 
     assert page.has_link?(href: mentor_solution_path(solution))
   end
 
   test "displays solutions requiring action by default" do
     track = create(:track)
-    mentor = create(:user, mentored_tracks: [track])
+    mentor = create(:user,
+                    accepted_terms_at: Date.new(2016, 12, 25),
+                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
+                    mentored_tracks: [track])
     hello_world = create(:exercise, track: track)
     action_required_solution = create(:solution,
                                       exercise: hello_world)
@@ -54,7 +60,10 @@ class FilterSolutionsTest < ApplicationSystemTestCase
   test "filters solutions by track" do
     ruby = create(:track, title: "Ruby")
     cpp = create(:track, title: "C++")
-    mentor = create(:user, mentored_tracks: [ruby, cpp])
+    mentor = create(:user,
+                    accepted_terms_at: Date.new(2016, 12, 25),
+                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
+                    mentored_tracks: [ruby, cpp])
     hello_world_ruby = create(:exercise, track: ruby)
     solution_ruby = create(:solution, exercise: hello_world_ruby)
     hello_world_cpp = create(:exercise, track: cpp)
@@ -72,7 +81,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Ruby", id: :track_id
+    select_option "Ruby", id: :your_track_id
 
     assert page.has_link?(href: mentor_solution_path(solution_ruby))
     assert page.has_no_link?(href: mentor_solution_path(solution_cpp))
@@ -80,7 +89,10 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
   test "filters solutions by exercise" do
     ruby = create(:track, title: "Ruby")
-    mentor = create(:user, mentored_tracks: [ruby])
+    mentor = create(:user,
+                    accepted_terms_at: Date.new(2016, 12, 25),
+                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
+                    mentored_tracks: [ruby])
     hello_world = create(:exercise, title: "Hello World", track: ruby)
     sorting = create(:exercise, title: "Sorting", track: ruby)
     hello_world_solution = create(:solution, exercise: hello_world)
@@ -98,8 +110,8 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Ruby", id: :track_id
-    select_option "Sorting", id: :exercise_id
+    select_option "Ruby", id: :your_track_id
+    select_option "Sorting", id: :your_exercise_id
 
     assert page.has_link?(href: mentor_solution_path(sorting_solution))
     assert page.has_no_link?(href: mentor_solution_path(hello_world_solution))
