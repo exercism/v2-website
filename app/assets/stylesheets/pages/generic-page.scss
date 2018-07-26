@@ -17,7 +17,10 @@
         }
     }
     .lhs {
-        padding-right:40px;
+        padding-right:0;
+        @media #{$lg-media} {
+            padding-right:40px;
+        }
     }
     .changes, .links {
         margin-top:50px;
@@ -76,6 +79,10 @@
         img {
             right:50px;
             width:150px;
+        }
+        display:none;
+        @media #{$lg-media} {
+            display:block;
         }
     }
 
