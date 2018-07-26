@@ -35,7 +35,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_selector ".notifications-bar .notification", text: "A mentor has left you a new comment"
+    assert_selector ".notifications-bar .notification", text: "A mentor has left you a new comment."
   end
 
   test "on mentor comment on subsequent viewing" do
@@ -45,8 +45,9 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_no_selector ".notifications-bar"
-    assert_no_selector ".migration-bar"
+    #assert_no_selector ".notifications-bar"
+    #assert_no_selector ".migration-bar"
+    assert_selector ".notifications-bar .notification", text: "A mentor has left you a comment."
   end
 
   test "on approval" do

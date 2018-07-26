@@ -151,7 +151,7 @@ body.controller-solutions.action-show {
     .notifications-bar {
         overflow:hidden;
         margin-bottom:40px;
-        .community-solutions {
+        /*.community-solutions {
             float:right;
             border:1px solid #ddd;
             border-radius:2px;
@@ -164,9 +164,9 @@ body.controller-solutions.action-show {
             i {
                 margin-right:3px;
             }
-        }
+        }*/
         .notification {
-            margin-right:190px;
+            //margin-right:190px;
             background:rgba($color-1, 0.05);
             @include font-size(13, 13);
             padding:8px 20px;

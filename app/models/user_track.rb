@@ -24,12 +24,6 @@ class UserTrack < ApplicationRecord
               count
   end
 
-  def mentoring_allowance_used_up?
-    solutions.where("completed_at IS NOT NULL OR approved_by_id IS NOT NULL").
-              where(independent_mode: false).
-              count >= MAX_MENTORING_SLOTS
-  end
-
   def solutions
     user.solutions.joins(:exercise).
                    where("exercises.track_id": track_id)
@@ -54,5 +48,9 @@ class UserTrack < ApplicationRecord
 
   def mentoring_slots_remaining?
     mentoring_slots_remaining > 0
+  end
+
+  def mentoring_allowance_used_up?
+    !mentoring_slots_remaining?
   end
 end
