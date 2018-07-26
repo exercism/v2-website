@@ -41,6 +41,9 @@ class My::SolutionsController < MyController
   end
 
   def request_mentoring
+    # TODO
+    # If track is in mentored_mode set this solution to mentored mode
+    # If track is in independent_mode then enable_mentoring!
     @solution.enable_mentoring!
     redirect_to action: :show
   end

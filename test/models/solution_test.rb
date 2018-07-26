@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SolutionTest < ActiveSupport::TestCase
-  test "instructions and testsuite come from git exercise" do
+  test "instructions and test suite come from git exercise" do
     solution = create :solution
     instructions = mock
     test_suite = mock

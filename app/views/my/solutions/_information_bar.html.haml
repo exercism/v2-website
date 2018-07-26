@@ -1,0 +1,66 @@
+/=link_to [@track, @exercise, :solutions], class: 'pure-button community-solutions' do
+/  %i.fa.fa-users
+/  Community Solutions
+
+-if @solution.updated_at <= Exercism::V2_MIGRATED_AT
+  .migration-bar
+    This solution has been imported from an old version of the website.
+    -if @user_track.mentoring_slots_remaining?
+      If you would like to receive mentorship on it, please #{link_to "click here", migrate_to_v2_my_solution_path(@solution), method: :patch}.
+    -else
+      Once your other solutions on this track have been mentored you may request mentoring for this.
+
+-elsif @user_track.mentored_mode? && @solution.independent_mode?
+  .migration-bar
+    This solution has been imported from independent mode.
+    -if @user_track.mentoring_slots_remaining?
+      You may request mentoring to unlock its extra exercises.
+      #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.
+    -else
+      Mentoring will become available when your other solutions have been mentored.
+
+-elsif @solution.completed?
+  -if @solution.published?
+    .notifications-bar
+      .notification
+        Your solution has been published.
+        =link_to "View published solution", [@solution.exercise.track, @solution.exercise, @solution], method: :get
+  -else
+    .notifications-bar
+      .notification
+        Well done! Your solution is completed.
+        =link_to "Publish your solution", [:publish, :my, @solution, publish: 1], method: :patch
+
+-elsif @solution.approved?
+  -if @solution.exercise.auto_approve?
+    .notifications-bar
+      .notification Your exercise has been submitted successfully.
+  -else
+    .notifications-bar
+      .notification.action
+        %i.fa.fa-bell
+        %span.text A mentor has approved this solution
+        =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
+
+-elsif @iteration.notifications.unread.size > 0
+  .notifications-bar
+    .notification
+      A mentor has left you a new comment
+
+-elsif @user_track.independent_mode? && !@solution.mentoring_enabled?
+  .notifications-bar
+    .notification
+      In Independent Mode you will
+      %strong not
+      receive mentoring by default. 
+      -if @user_track.mentoring_slots_remaining?
+        You may request mentoring on #{pluralize UserTrack::MAX_MENTORING_SLOTS, "solution"} at a time.
+        #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.
+      -else
+        You may request mentoring once your existing solutions have been mentored.
+
+-elsif @iteration.mentor_discussion_posts.count == 0
+  .notifications-bar
+    .notification
+      %i.fa.fa-clock-o
+      Well done on submitting. A mentor will leave you feedback shortly.

@@ -19,4 +19,3 @@ class IterationTest < ActiveSupport::TestCase
     assert_equal [mentor_dp], iteration.mentor_discussion_posts
   end
 end
-
