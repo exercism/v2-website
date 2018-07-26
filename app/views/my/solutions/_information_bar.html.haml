@@ -45,7 +45,7 @@
 -elsif @iteration.discussion_post_notifications.unread.size > 0
   .notifications-bar
     .notification
-      A mentor has left you a new comment
+      A mentor has left you a new comment.
 
 -elsif @solution.independent_mode?
   .notifications-bar
@@ -64,3 +64,8 @@
     .notification
       %i.fa.fa-clock-o
       Well done on submitting. A mentor will leave you feedback shortly.
+
+-else
+  .notifications-bar
+    .notification
+      A mentor has left you a comment.
