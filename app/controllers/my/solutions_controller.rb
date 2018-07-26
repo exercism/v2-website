@@ -41,10 +41,8 @@ class My::SolutionsController < MyController
   end
 
   def request_mentoring
-    # TODO
-    # If track is in mentored_mode set this solution to mentored mode
-    # If track is in independent_mode then enable_mentoring!
-    @solution.enable_mentoring!
+    SwitchSolutionToMentoredMode.(@solution)
+
     redirect_to action: :show
   end
 
@@ -107,18 +105,6 @@ class My::SolutionsController < MyController
   def publish
     @solution.update(published_at: Time.current) if params[:publish]
     redirect_to [@solution.exercise.track, @solution.exercise, @solution]
-  end
-
-  def migrate_to_v2
-    @solution.update(
-      completed_at: nil,
-      published_at: nil,
-      approved_by: nil,
-      last_updated_by_user_at: Time.now,
-      updated_at: Time.now,
-      independent_mode: current_user.user_track_for(@solution.track).independent_mode
-    )
-    redirect_to action: :show
   end
 
   private

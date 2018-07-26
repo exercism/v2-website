@@ -82,42 +82,16 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, SolutionMentorship.where.not(rating: nil).count
   end
 
-  test "migrates to v2 properly" do
+  test "request_mentoring calls service" do
     Timecop.freeze do
       sign_in!
-      solution = create :solution,
-                        user: @current_user,
-                        completed_at: Time.now - 1.week,
-                        published_at: Time.now - 1.week,
-                        approved_by: create(:user),
-                        last_updated_by_user_at: Time.now - 1.week,
-                        updated_at: Time.now - 1.week
+      solution = create :solution, user: @current_user
 
-      patch migrate_to_v2_my_solution_url(solution.uuid)
+      SwitchSolutionToMentoredMode.expects(:call).with(solution)
+
+      patch request_mentoring_my_solution_url(solution.uuid)
       assert_redirected_to my_solution_url(solution.uuid)
-
-      solution.reload
-      assert_nil solution.completed_at
-      assert_nil solution.published_at
-      assert_nil solution.approved_by
-      assert_equal Time.now.to_i, solution.last_updated_by_user_at.to_i
-      assert_equal Time.now.to_i, solution.updated_at.to_i
     end
-  end
-
-  test "migrates to v2 respects independent mode" do
-    sign_in!
-    im_track = create(:user_track, user: @current_user, independent_mode: true).track
-    mm_track = create(:user_track, user: @current_user, independent_mode: false).track
-    im_solution = create :solution, user: @current_user, exercise: create(:exercise, track: im_track)
-    mm_solution = create :solution, user: @current_user, exercise: create(:exercise, track: mm_track)
-
-    patch migrate_to_v2_my_solution_url(im_solution)
-    patch migrate_to_v2_my_solution_url(mm_solution)
-
-    [im_solution, mm_solution].each(&:reload)
-    assert im_solution.independent_mode
-    refute mm_solution.independent_mode
   end
 
   test "reflects without next core exercise" do
