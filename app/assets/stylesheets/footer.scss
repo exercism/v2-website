@@ -16,13 +16,16 @@ body.controller-tracks.action-show {
 }
 
 footer {
-    position:absolute;
+    position:relative;
     bottom:0;
     left:0;
     right:0;
     padding:60px 0 0 0;
     border-top:1px solid #f3f3f3;
-    margin-top:100px;
+    margin-top:25px;
+    @media #{$md-media} {
+        margin-top:100px;
+    }
     background:#fafafa;
     h4 {
         @include font-size(16, 16);
