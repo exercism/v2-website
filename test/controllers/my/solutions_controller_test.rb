@@ -105,6 +105,21 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "migrates to v2 respects independent mode" do
+    sign_in!
+    im_track = create(:user_track, user: @current_user, independent_mode: true).track
+    mm_track = create(:user_track, user: @current_user, independent_mode: false).track
+    im_solution = create :solution, user: @current_user, exercise: create(:exercise, track: im_track)
+    mm_solution = create :solution, user: @current_user, exercise: create(:exercise, track: mm_track)
+
+    patch migrate_to_v2_my_solution_url(im_solution)
+    patch migrate_to_v2_my_solution_url(mm_solution)
+
+    [im_solution, mm_solution].each(&:reload)
+    assert im_solution.independent_mode
+    refute mm_solution.independent_mode
+  end
+
   test "reflects without next core exercise" do
     skip
   end
