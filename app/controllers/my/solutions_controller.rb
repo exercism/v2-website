@@ -115,7 +115,8 @@ class My::SolutionsController < MyController
       published_at: nil,
       approved_by: nil,
       last_updated_by_user_at: Time.now,
-      updated_at: Time.now
+      updated_at: Time.now,
+      independent_mode: current_user.user_track_for(@solution.track).independent_mode
     )
     redirect_to action: :show
   end
