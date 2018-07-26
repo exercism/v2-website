@@ -1,17 +1,17 @@
 #nav.lo-nav-bar
   .lo-container
     /=link_to "Dashboard", root_path
-    /=image_tag "nav-divider.png"
+    /=nav_divider
     =link_to "Language Tracks", [:my, :tracks]
-    =image_tag "nav-divider.png"
+    =nav_divider
     =link_to "#{@track.title} Track", [:my, @track]
-    =image_tag "nav-divider.png"
+    =nav_divider
     %span= @exercise.title
 
 .lo-container
   .track-header
     .icon
-      =image_tag @exercise.white_icon_url
+      =graphical_image @exercise.white_icon_url
     .inner
       -if @iteration
         =iterations_nav_widget(:my, @solution, @iteration)

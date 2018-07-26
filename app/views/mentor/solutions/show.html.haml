@@ -2,12 +2,12 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Mentor Dashboard", [:mentor, :dashboard]
-      =image_tag "nav-divider.png"
+      =nav_divider
       %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
-      =image_tag display_avatar_url @solution.user, @solution_user_track
+      =image display_avatar_url(@solution.user, @solution_user_track), display_handle(@solution.user, @solution_user_track)
       .inner
         =iterations_nav_widget(:mentor, @solution, @iteration)
         %h2
@@ -58,7 +58,7 @@
             =button_tag "Comment", class: 'pure-button button'
 
             .approved{style: @solution.approved?? "" : "display:none"}
-              %i.fa.fa-check
+              =icon :check
               Solution Approved
             -if current_user.mentoring_solution?(@solution)
               -unless @solution.approved?

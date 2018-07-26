@@ -1,11 +1,11 @@
 .progress
-  %i.fa.fa-circle.filled
-  %i.fa.fa-circle
-  %i.fa.fa-circle
+  =graphical_icon 'circle filled'
+  =graphical_icon 'circle'
+  =icon 'circle', 'Step 1 of 3'
 
 .icon
-  =image_tag @exercise.white_icon_url, class: 'exercise-icon'
-  =image_tag "tick-white.png", class: 'tick'
+  =graphical_image @exercise.white_icon_url, class: 'exercise-icon'
+  =image "tick-white.png", "White checkmark", class: 'tick'
 
 %h2 Well done
 %h3 You've completed #{@solution.exercise.title}

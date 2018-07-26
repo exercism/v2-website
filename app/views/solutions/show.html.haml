@@ -3,34 +3,34 @@
     .lo-container
       -if user_signed_in?
         /=link_to "Dashboard", root_path
-        /=image_tag "nav-divider.png"
+        /=nav_divider
         =link_to "Language Tracks", [:my, :tracks]
-        =image_tag "nav-divider.png"
+        =nav_divider
         =link_to "#{@track.title} Track", [:my, @track]
-        =image_tag "nav-divider.png"
+        =nav_divider
         -if @user_solution
           =link_to "Your Solution to #{@exercise.title}", [:my, @user_solution]
-          =image_tag "nav-divider.png"
+          =nav_divider
         =link_to "Community Solutions", [@track, @exercise, :solutions]
-        =image_tag "nav-divider.png"
+        =nav_divider
         %span This Solution
 
       -else
         =link_to "Language Tracks", :tracks
-        =image_tag "nav-divider.png"
+        =nav_divider
         =link_to "#{@track.title} Track", @track
-        =image_tag "nav-divider.png"
+        =nav_divider
         =link_to "Exercises", [@track, :exercises]
-        =image_tag "nav-divider.png"
+        =nav_divider
         =link_to @exercise.title, [@track, @exercise]
-        =image_tag "nav-divider.png"
+        =nav_divider
         =link_to "Community Solutions", [@track, @exercise, :solutions]
-        =image_tag "nav-divider.png"
+        =nav_divider
         %span This Solution
 
   .lo-container
     .header
-      =image_tag display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), class: "avatar"
+      =image display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), "Avatar of #{display_handle(@solution.user, @solution.user.user_track_for(@track))}", class: "avatar"
 
       =render "reactions"
 
@@ -61,14 +61,14 @@
             %h3 React to this solution
             =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
               .hover Well done
-              %i.fa.fa-fw.fa-thumbs-up
+              =icon 'thumbs-up fa-fw', 'Thumbs up'
             =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
               .hover Love it!
-              %i.fa.fa-fw.fa-heart
+              =icon 'heart fa-fw', 'Heart'
             =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
               .hover Genius!
-              =image_tag "genius.png", class: 'not-selected'
-              =image_tag "genius-turquoise.png", class: 'selected'
+              =graphical_image "genius.png", class: 'not-selected'
+              =graphical_image "genius-turquoise.png", class: 'selected'
 
       .pure-u-1-2.rhs
         -if @solution.reflection.present?
@@ -95,13 +95,13 @@
               .comment.pure-g
                 .pure-u-2-24
                   -if reaction.emotion == "like"
-                    %i.fa.fa-thumbs-up
+                    icon 'thumbs-up'
                   -elsif reaction.emotion == "love"
-                    %i.fa.fa-heart
+                    icon 'heart'
                   -elsif reaction.emotion == "genius"
-                    =image_tag "genius-turquoise.png"
+                    =graphical_image "genius-turquoise.png"
                   -else reaction.emotion == "legacy"
-                    %i.fa.fa-comment
+                    icon 'comment'
 
                 .pure-u-22-24.content
                   .when #{time_ago_in_words(reaction.created_at)} ago

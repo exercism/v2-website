@@ -3,9 +3,9 @@
     .misc-menu
       .in-situ
         =image_tag current_user.avatar_url ? current_user.avatar_url : "blank.png", alt: current_user.name
-        %i.fa.fa-caret-down
+        =graphical_icon 'caret-down'
       .dropdown
-        %i.fa.fa-caret-up
+        =graphical_icon 'caret-up'
         .person
           Logged in as
           %strong #{current_user.handle}
@@ -23,9 +23,13 @@
         = link_to "Preferences", [:edit, :my, :settings, :communication_preferences]
         = link_to "Sign out", destroy_user_session_path, method: :delete
 
-    = link_to [:my, :notifications], class: "notifications #{current_user_has_notifications?? 'active' : ''}" do
-      %i.fa.fa-bell-o
+    -if current_user_has_notifications?
+      = link_to [:my, :notifications], class: "notifications active", "aria-label": "New notifications" do
+        =graphical_icon "bell-o"
+    -else
+      = link_to [:my, :notifications], class: "notifications", "aria-label": "No notifications" do
+        =graphical_icon "bell-o"
 
-    =link_to root_path, class: 'logo' do
-      =image_tag "logo-white.png"
+    =link_to root_path, class: "logo" do
+      =image "logo-white.png", "Exercism"
 

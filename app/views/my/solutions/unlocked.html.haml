@@ -1,14 +1,14 @@
 .progress
-  %i.fa.fa-circle.filled
-  %i.fa.fa-circle.filled
-  %i.fa.fa-circle.filled
+  =graphical_icon 'circle filled'
+  =graphical_icon 'circle filled'
+  =icon 'circle filled', 'Step 3 of 3'
 
 %h2 Exercises Unlocked
 %h3 You have unlocked the following core exercise:
 
 -if @next_core_solution
   =link_to [:my, @next_core_solution], class: 'core-exercise' do
-    .icon= image_tag @next_core_solution.exercise.white_icon_url
+    .icon= graphical_image @next_core_solution.exercise.white_icon_url
     .title
       = @next_core_solution.exercise.title
       .topics
@@ -25,8 +25,8 @@
       bonus exercises:
     -@unlocked_side_exercise_solutions.each do |solution|
       =link_to [:my, solution], target: "_blank", class: 'side-exercise' do
-        =image_tag solution.exercise.turquoise_icon_url, class: 'turquoise'
-        =image_tag solution.exercise.white_icon_url, class: 'white'
+        =graphical_image solution.exercise.turquoise_icon_url, class: 'turquoise'
+        =graphical_image solution.exercise.white_icon_url, class: 'white'
         .tooltip= solution.exercise.title
 
 =link_to "Go to track", [:my, @solution.exercise.track], class: 'pure-button'

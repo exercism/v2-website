@@ -33,20 +33,20 @@
           =link_to "Report Abuse", report_abuse_page_path
         .pure-u-1-6
           %h4 Follow
-          =link_to "https://twitter.com/exercism_io", class: 'icon' do
-            %i.fa.fa-twitter
-          =link_to "https://facebook.com/exercism.io", class: 'icon' do
-            %i.fa.fa-facebook-official
-          =link_to "https://github.com/exercism", class: 'icon' do
-            %i.fa.fa-github
+          =link_to "https://twitter.com/exercism_io", class: "icon", "aria-label": "Exercism on Twitter" do
+            =graphical_icon :twitter
+          =link_to "https://facebook.com/exercism.io", class: "icon", "aria-label": "Exercism on Facebook" do
+            =graphical_icon 'facebook-official'
+          =link_to "https://github.com/exercism", class: "icon", "aria-label": "Exercism on GitHub" do
+            =graphical_icon :github
 
       .legal
         .copyright © #{Time.current.year} Exercism, Inc
         .created-by
           Made with
-          %i.fa.fa-heart
+          =icon :heart
           and
-          %i.fa.fa-coffee
+          =icon :coffee
           by
           #{link_to "Katrina Owen", "http://kytrinyx.com"},
           #{link_to "Thalamus", "http://thalamus.ai"}

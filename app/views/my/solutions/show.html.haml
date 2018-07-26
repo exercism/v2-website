@@ -11,7 +11,7 @@
     -else
       .notifications-bar
         =link_to [@track, @exercise, :solutions], class: 'pure-button community-solutions' do
-          %i.fa.fa-users
+          =icon :users
           Community Solutions
 
         -if @solution.completed?
@@ -29,7 +29,7 @@
             .notification Your exercise has been submitted successfully.
           -else
             .notification.action
-              %i.fa.fa-bell
+              =icon :bell
               %span.text A mentor has approved this solution
               =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
 
@@ -39,7 +39,7 @@
 
         -elsif @user_track.independent_mode? && !@solution.mentoring_enabled?
           .notification
-            %i.fa.fa-clock-o
+            =icon 'clock-o', 'Clock'
             In Independent Mode you will
             %strong not
             receive mentoring by default. You may request mentoring on 5 solutions.
@@ -47,7 +47,7 @@
 
         -else
           .notification
-            %i.fa.fa-clock-o
+            =icon 'clock-o', 'Clock'
             Well done on submitting. A mentor will leave you feedback shortly.
 
     .pure-g.panels#solution-panels
@@ -72,7 +72,7 @@
               =render "discussion"
             -else
               %h3.disabled
-                %i.fa.fa-ban
+                =icon :ban
                 Mentor Discussion (Disabled in independent mode)
               %p.disabled
                 Mentoring is disabled by default in Independent Mode. However, you can request feedback on a maximum of 5 solutions.

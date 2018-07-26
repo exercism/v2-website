@@ -12,7 +12,7 @@
         .num-iterations= pluralize solution.iterations.count, "iterations"
       .status
         -if solution.has_unseen_feedback?
-          %i.fa.fa-comments-o
+          =graphical_icon 'comments-o'
           New Feedback
         -elsif solution.needs_feedback?
           Awaiting Feedback

@@ -2,10 +2,10 @@
   .lo-container
     .misc-menu
       .in-situ
-        =image_tag current_user.avatar_url ? current_user.avatar_url : "blank.png"
-        %i.fa.fa-caret-down
+        =image_tag current_user.avatar_url ? current_user.avatar_url : "blank.png", alt: current_user.name
+        =graphical_icon 'caret-down'
       .dropdown
-        %i.fa.fa-caret-up
+        =graphical_icon 'caret-up'
         .person
           Logged in as
           %strong #{current_user.handle}
@@ -17,7 +17,7 @@
         =select_tag :teams, options_for_select(current_user.teams.map{|t|[t.name, t.id]}, @team.id)
 
     =link_to root_path, class: 'logo' do
-      =image_tag "logo-white.png"
+      =image_tag "logo-white.png", alt: 'Exercism'
       %span teams edition
 
 
