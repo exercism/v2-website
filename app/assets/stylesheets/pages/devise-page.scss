@@ -2,13 +2,24 @@
 @import 'mixins';
 
 .lo-devise-page {
+    .lhs #widget-code-person {
+        display: none;
+        @media #{$lg-media} {
+            display: block;
+        }
+    }
     .rhs {
         padding-top:30px;
-        padding-left:20px;
+        @media #{$lg-media} {
+            padding-left:20px;
+        }
     }
     .frame {
         background:#f7f7f7;
-        padding:25px 45px;
+        padding:25px 15px;
+        @media #{$lg-media} {
+            padding:25px 45px;
+        }
     }
     h1 {
         @include header-font;
@@ -76,6 +87,7 @@
         border:none;
         @include font-size(15, 15);
         margin-bottom:20px;
+        white-space:normal;
     }
     .sign-up,
     .log-in,
