@@ -55,6 +55,9 @@ textarea {
 .pure-button {
     color:#fff;
     border-radius:2px;
+    &:focus {
+      box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset, 0 0 6px rgba(0,0,0,.2) inset;
+    }
 }
 h1, h2, h3, h4, h5, h6, p {
     margin:0;
