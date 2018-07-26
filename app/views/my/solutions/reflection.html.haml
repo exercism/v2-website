@@ -4,8 +4,7 @@
   =icon 'circle', 'Step 2 of 3'
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
-  :cn
-
+  .pure-g
     = render "my/solutions/reflection/form",
     solution: @solution,
     mentor_iterations: @mentor_iterations
