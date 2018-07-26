@@ -6,9 +6,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, except: [:index]
 
   def show
-    @helped_count = @user.solution_mentorships.joins(:solution).select('solutions.user_id').distinct.count
-
-    setup_solutions
+    @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
   end
 
   def index

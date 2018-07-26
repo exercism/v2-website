@@ -30,12 +30,12 @@
             %i.fa.fa-fw.fa-calendar
             Since #{@profile.user.created_at.strftime("%b %Y")}
 
-          -if @helped_count > 0
+          -if @profile_view.helped_count > 0
             .helped-count
               %i.fa.fa-fw.fa-handshake-o
               Helped
-              .count #{@helped_count}
-              = "student".pluralize(@helped_count)
+              .count #{@profile_view.helped_count}
+              = "student".pluralize(@profile_view.helped_count)
 
           -if @profile.has_external_links?
             .hr
@@ -67,13 +67,13 @@
                 %span Medium
 
       .pure-u-18-24.rhs
-        .num-solutions Showing #{pluralize @solutions.size, "solution"}
+        .num-solutions Showing #{pluralize @profile_view.solutions.size, "solution"}
         =form_tag [:solutions, @profile], method: :get, remote: true, class: "filters" do
           .widget-filter
             .title Language:
-            =select_tag :track_id, options_for_select(@tracks_for_select, value: @track), id: nil
+            =select_tag :track_id, options_for_select(@profile_view.tracks_for_select, value: @profile_view.track_id), id: nil
         .solutions.pure-g
-          =render "solutions", solutions: @solutions, reaction_counts: @reaction_counts, comment_counts: @comment_counts
+          =render "profiles/solutions", solutions: @profile_view.solutions, reaction_counts: @profile_view.reaction_counts, comment_counts: @profile_view.comment_counts
 
 
   -content_for :js do

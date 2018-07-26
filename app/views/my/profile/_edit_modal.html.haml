@@ -1,0 +1,40 @@
+%h2 Update your profile
+.h2-subtitle Tell the Exercism community a little about yourself.
+=form_for @profile, url: my_profile_path, method: :patch, html: { multipart: true } do |f|
+  =fields_for @user do |uf|
+    .pure-g
+      .pure-u-1-2.lhs
+        = render "avatar_edit", form: uf, user: @user
+        .name-section
+          %h3 Name
+          =f.text_field :display_name, placeholder: "Most people choose their name or handle"
+        .bio-section
+          %h3 Bio
+          =uf.text_area :bio, placeholder: "Tell the world a little about who you are (max 230 chars)", maxlength: 230
+
+      .pure-u-1-2.rhs
+        %h3 Elsewhere Online
+        .field
+          %i.fa.fa-globe
+          =f.url_field :website,
+            placeholder: "Your website",
+            pattern: "https?://.+",
+            title: "Please enter a URL starting with http:// or https://"
+        .field.twitter
+          %i.fa.fa-twitter
+          =f.text_field :twitter, placeholder: "handle"
+        .field.github
+          %i.fa.fa-github
+          =f.text_field :github, placeholder: "handle"
+        .field
+          %i.fa.fa-linkedin
+          =f.text_field :linkedin, placeholder: "Your Linkedin"
+        .field.medium
+          %i.fa.fa-medium
+          =f.text_field :medium, placeholder: "handle"
+
+    =f.button "Update profile", class: 'pure-button update-button'
+    =content_tag :span, "Cancel", class: 'pure-button cancel-button close-modal'
+
+  :javascript
+    $(ImagePreview.bindEvents);
