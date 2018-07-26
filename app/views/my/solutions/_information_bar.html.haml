@@ -42,12 +42,12 @@
         %span.text A mentor has approved this solution
         =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
 
--elsif @iteration.notifications.unread.size > 0
+-elsif @iteration.discussion_post_notifications.unread.size > 0
   .notifications-bar
     .notification
       A mentor has left you a new comment
 
--elsif @user_track.independent_mode? && !@solution.mentoring_enabled?
+-elsif @solution.independent_mode?
   .notifications-bar
     .notification
       In Independent Mode you will

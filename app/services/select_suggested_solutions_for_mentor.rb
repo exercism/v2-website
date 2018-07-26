@@ -42,7 +42,7 @@ class SelectSuggestedSolutionsForMentor
       where.not(id: ignore_ids).
       where("num_mentors = 0").
       order(Arel.sql("last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
-                      solutions.independent_mode = 0 DESC,
+                      solutions.track_in_independent_mode = 0 DESC,
                       solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
                       core DESC,
                       num_mentors ASC,
@@ -54,7 +54,7 @@ class SelectSuggestedSolutionsForMentor
   def base_fast_query
     base_query.
       where(num_mentors: 0).
-      where("solutions.independent_mode = 0").
+      where("solutions.track_in_independent_mode = 0").
       where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
       order(Arel.sql("last_updated_by_user_at ASC"))
   end
@@ -82,7 +82,10 @@ class SelectSuggestedSolutionsForMentor
       where(approved_by: nil).
 
       # Not completed
-      where(completed_at: nil)
+      where(completed_at: nil).
+
+      # Not completed
+      where(independent_mode: false)
   end
 
   memoize

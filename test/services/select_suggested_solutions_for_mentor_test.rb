@@ -44,6 +44,25 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
+  test "does not select solutions in independent mode" do
+    mentor, track = create_mentor_and_track
+    mentee = create_mentee([track])
+
+    bad_solution = create(:solution,
+                          exercise: create(:exercise, track: track),
+                          user: mentee,
+                          independent_mode: true)
+    good_solution = create(:solution,
+                           exercise: create(:exercise, track: track),
+                           user: mentee,
+                           independent_mode: false)
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+
+    assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
+  end
+
+
   test "filters by track" do
     mentor, track1 = create_mentor_and_track
     track2 = create :track
@@ -175,13 +194,13 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create(:track_mentorship, user: mentor, track: track)
 
     standard_exercise = create(:exercise, track: track)
-    standard_solution = create(:solution, exercise: standard_exercise, user: mentee, independent_mode: false)
+    standard_solution = create(:solution, exercise: standard_exercise, user: mentee, track_in_independent_mode: false)
 
     independent_exercise = create(:exercise, track: track)
     independent_solution = create(:solution,
                                   exercise: independent_exercise,
                                   user: mentee,
-                                  independent_mode: true)
+                                  track_in_independent_mode: true)
 
     [standard_solution, independent_solution].each do |solution|
       create :iteration, solution: solution
@@ -225,7 +244,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                     num_mentors: 0,
                                     last_updated_by_user_at: DateTime.now,
                                     user: independent_user,
-                                    independent_mode: true)
+                                    track_in_independent_mode: true)
 
       unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_141241) do
+ActiveRecord::Schema.define(version: 2018_07_26_143155) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 2018_07_26_141241) do
     t.index ["num_mentors", "exercise_id"], name: "fix-2"
     t.index ["num_mentors", "independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_1"
     t.index ["num_mentors", "last_updated_by_user_at"], name: "ihid-4"
+    t.index ["num_mentors", "track_in_independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_2"
     t.index ["num_mentors", "user_id", "exercise_id"], name: "fix-5"
     t.index ["num_mentors", "user_id"], name: "fix-3"
     t.index ["num_mentors"], name: "ihid-2"

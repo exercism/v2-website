@@ -18,5 +18,3 @@ class SwitchTrackToMentoredMode
     user.user_track_for(track)
   end
 end
-
-
