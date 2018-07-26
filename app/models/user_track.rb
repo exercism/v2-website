@@ -7,6 +7,8 @@ class UserTrack < ApplicationRecord
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
 
+  MAX_MENTORING_SLOTS = 1
+
   def originated_in_v1?
     created_at < Exercism::V2_MIGRATED_AT
   end
@@ -35,5 +37,23 @@ class UserTrack < ApplicationRecord
 
   def archived?
     archived_at.present?
+  end
+
+  def solutions_being_mentored
+    solutions.where(approved_by_id: nil).
+              where("solutions.independent_mode = ?
+                     OR mentoring_enabled = ?", false, true)
+  end
+
+  def num_solutions_being_mentored
+    solutions_being_mentored.count
+  end
+
+  def mentoring_slots_remaining
+    MAX_MENTORING_SLOTS - num_solutions_being_mentored
+  end
+
+  def mentoring_slots_remaining?
+    mentoring_slots_remaining > 0
   end
 end
