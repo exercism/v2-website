@@ -2,6 +2,8 @@
 @import 'mixins';
 
 .widget-iterations-nav {
+    text-align:right;
+
     .title {
         @include font-size(12, 12);
         margin-top:1px;
@@ -67,7 +69,7 @@
                 border-color:#fff;
             }
             .num-comments {
-                &:after { 
+                &:after {
                     color:#fff;
                     text-shadow: -1px -1px 0 $color-1,  1px -1px 0 $color-1, -1px 1px 0 $color-1, 1px 1px 0 $color-1;
                 }

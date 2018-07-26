@@ -3,7 +3,9 @@ require 'application_system_test_case'
 class ExerciseTest < ApplicationSystemTestCase
   test "shows exercises in order" do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
-    user = create(:user)
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
     track = create(:track)
     create(:user_track, user: user, track: track, independent_mode: false)
     unlocked_exercise = create(:exercise,
@@ -30,13 +32,13 @@ class ExerciseTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_track_path(track)
 
-    exercises = find_all(".exercise")
+    exercises = find_all(".exercise-wrapper")
 
-    assert_equal "exercise completed", exercises[0][:class]
-    assert_equal "exercise in-progress", exercises[1][:class]
-    assert_equal "exercise locked", exercises[2][:class]
-    within(".exercise.completed") { assert_text "Strings" }
-    within(".exercise.in-progress") { assert_text "Hello World" }
-    within(".exercise.locked") { assert_text "Locked" }
+    assert_equal "exercise-wrapper completed", exercises[0][:class]
+    assert_equal "exercise-wrapper in-progress", exercises[1][:class]
+    assert_equal "exercise-wrapper locked", exercises[2][:class]
+    within(".exercise-wrapper.completed") { assert_text "Strings" }
+    within(".exercise-wrapper.in-progress") { assert_text "Hello World" }
+    within(".exercise-wrapper.locked") { assert_text "Locked" }
   end
 end
