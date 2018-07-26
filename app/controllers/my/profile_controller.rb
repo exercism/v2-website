@@ -37,7 +37,7 @@ class My::ProfileController < MyController
     respond_to do |format|
       format.js { render_modal("edit-profile", "_edit_modal") }
       format.html do
-        @profile_view = ProfileView.new(@profile, track_id: params[:track_id])
+        @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
       end
     end
   end
@@ -49,7 +49,7 @@ class My::ProfileController < MyController
       if @profile.update(profile_params) && @user.update(user_params)
         redirect_to @profile
       else
-        @profile_view = ProfileView.new(@profile, track_id: params[:track_id])
+        @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
         render :edit
       end
     end

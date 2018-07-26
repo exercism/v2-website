@@ -1,4 +1,4 @@
-class ProfileView
+class ProfilePresenter
   attr_reader :profile, :track_id
 
   def initialize(profile, track_id: nil)

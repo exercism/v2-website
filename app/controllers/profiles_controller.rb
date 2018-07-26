@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, except: [:index]
 
   def show
-    @profile_view = ProfileView.new(@profile, track_id: params[:track_id])
+    @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
   end
 
   def index
