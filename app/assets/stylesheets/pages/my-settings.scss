@@ -46,6 +46,7 @@
         display:inline-block;
         input {
             width:252px;
+            max-width: 95%;
         }
     }
     .field {
@@ -59,6 +60,7 @@
         input {
             padding:8px 10px;
             width:250px;
+            max-width:100%;
             border:1px solid #ddd;
             border-radius:2px;
         }
