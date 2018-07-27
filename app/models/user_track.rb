@@ -34,7 +34,8 @@ class UserTrack < ApplicationRecord
   end
 
   def solutions_being_mentored
-    solutions.where(approved_by_id: nil).
+    solutions.started.
+              where(approved_by_id: nil).
               where(independent_mode: false)
   end
 

@@ -66,12 +66,21 @@ class UserTrackTest < ActiveSupport::TestCase
     assert_equal 1, user_track.mentoring_slots_remaining
     assert user_track.mentoring_slots_remaining
 
-        create :solution, independent_mode: true, user: user, exercise: create(:exercise, track: track)
-        create :solution, independent_mode: true, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
-    s = create :solution, independent_mode: false, user: user, exercise: create(:exercise, track: track)
-        create :solution, independent_mode: false, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+    s1 = create :solution, independent_mode: true, user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s1
 
-    assert_equal [s], user_track.solutions_being_mentored
+    s2 = create :solution, independent_mode: true, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s2
+
+    s3 = create :solution, independent_mode: false, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s3
+
+    s4 = create :solution, independent_mode: false, user: user, exercise: create(:exercise, track: track)
+
+    s5 = create :solution, independent_mode: false, user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s5
+
+    assert_equal [s5], user_track.solutions_being_mentored
     assert_equal 1, user_track.num_solutions_being_mentored
     assert_equal 0, user_track.mentoring_slots_remaining
     refute user_track.mentoring_slots_remaining?

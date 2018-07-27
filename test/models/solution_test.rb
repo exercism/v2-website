@@ -44,4 +44,14 @@ class SolutionTest < ActiveSupport::TestCase
 
     assert_equal [active_mentor_on_solution], solution.active_mentors
   end
+
+  test "started vs not_started" do
+    user_track = create :user_track
+    started_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    create :iteration, solution: started_solution
+    unstarted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+
+    assert_equal [started_solution], Solution.started
+    assert_equal [unstarted_solution], Solution.not_started
+  end
 end
