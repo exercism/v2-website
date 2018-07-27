@@ -1,10 +1,14 @@
+@import "variables";
 @import "mixins";
 
 #cli-walkthrough {
   @include normal-font;
   @include font-size;
 
-  padding: 20px;
+  padding: 10px;
+  @media #{$md-media} {
+    padding: 20px;
+  }
 
   h1 {
     @include font-size(16);
