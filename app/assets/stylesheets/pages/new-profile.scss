@@ -29,7 +29,10 @@
 }
 
 #modal.new-profile {
-    padding:20px 35px 25px;
+    padding:20px 15px 25px 15px;
+    @media #{$md-media} {
+        padding:20px 35px 25px;
+    }
     .progress {
         display:block;
         text-align:center;

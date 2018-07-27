@@ -4,6 +4,9 @@
 #modal.edit-profile {
     max-width:850px !important;
     padding:35px;
+    @media #{$md-media} {
+        padding:35px 15px;
+    }
     .lhs {
         margin-bottom:15px;
         @media #{$md-media} {

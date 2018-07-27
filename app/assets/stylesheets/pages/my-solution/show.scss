@@ -228,7 +228,10 @@
 #modal.solution-completed,
 #modal.solution-reflection,
 #modal.solution-unlocked {
-    padding:30px 50px 50px 50px;
+    padding:30px 15px 50px 15px;
+    @media #{$md-media} {
+        padding:30px 50px 50px 50px;
+    }
     .progress {
         display:block;
         text-align:center;
