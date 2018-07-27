@@ -9,7 +9,11 @@
         padding:100px 0 35px;
         margin-bottom:35px;
         .edit-button {
-            float:right;
+            margin-bottom:15px;
+            @media #{$md-media} {
+                float:right;
+                margin-bottom:0;
+            }
             border:1px solid #fff;
             border-radius:2px;
             background:#fff;
@@ -36,11 +40,17 @@
 
     }
     .lhs {
-        padding:0 0px 30px 0;
+        @media #{$md-media} {
+            padding:0 0px 30px 0;
+        }
         .sidebar {
             background: #f8f8f8;
             border-radius:2px;
             padding:50px 30px;
+            margin-bottom:15px;
+            @media #{$md-media} {
+                margin-bottom:0;
+            }
             .avatar {
                 display:block;
                 width:70px;
@@ -123,10 +133,14 @@
         }
     }
     .rhs {
-        padding-left:45px;
+        @media #{$md-media} {
+            padding-left:45px;
+        }
         .num-solutions {
             color:#fff;
-            float:right;
+            @media #{$md-media} {
+                float:right;
+            }
             color:#999;
             font-weight:$regular;
             @include font-size(14, 14);
