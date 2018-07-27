@@ -40,9 +40,16 @@
 
     .notifications-bar {
         overflow:hidden;
-        margin-bottom:40px;
+        margin-bottom:20px;
+        @media #{$md-media} {
+            margin-bottom:40px;
+        }
         .community-solutions {
-            float:right;
+            margin-bottom:15px;
+            @media #{$md-media} {
+                float:right;
+                margin-bottom:0;
+            }
             border:1px solid #ddd;
             border-radius:2px;
             background:#fff;
