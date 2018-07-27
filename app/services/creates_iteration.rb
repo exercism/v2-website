@@ -46,7 +46,7 @@ class CreatesIteration
         about: solution
       )
     else
-      solution.mentorships.update_all(requires_action: true)
+      solution.mentorships.update_all(requires_action: true) unless solution.approved?
       notify_mentors
     end
 
