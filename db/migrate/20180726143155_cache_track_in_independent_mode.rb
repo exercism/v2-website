@@ -1,6 +1,6 @@
 class CacheTrackInIndependentMode < ActiveRecord::Migration[5.2]
   def up
-    # Set old things to independent mode if they've not requested mentoring
+    # Update solutions.track_in_independent_mode
     execute(%Q{
       UPDATE solutions
       JOIN exercises ON solutions.exercise_id = exercises.id
@@ -10,7 +10,7 @@ class CacheTrackInIndependentMode < ActiveRecord::Migration[5.2]
       SET solutions.track_in_independent_mode = COALESCE(user_tracks.independent_mode, 1)
     })
 
-    # Set old things to independent mode if they've not requested mentorin
+    # Set old things to independent mode if they've not requested mentoring
     execute(%Q{
       UPDATE solutions
       SET solutions.independent_mode = 1
@@ -18,7 +18,7 @@ class CacheTrackInIndependentMode < ActiveRecord::Migration[5.2]
       AND mentoring_enabled = 0 OR mentoring_enabled IS NULL
     })
 
-    # Set old things to mentored mode if they're requested mentorin
+    # Set old things to mentored mode if they're requested mentoring
     execute(%Q{
       UPDATE solutions
       SET solutions.independent_mode = 0
