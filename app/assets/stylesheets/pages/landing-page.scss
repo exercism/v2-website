@@ -5,7 +5,7 @@
     .welcome-section {
         .lhs {
             @media #{$lg-media} {
-               padding-bottom:50px; 
+                padding-bottom:50px; 
             }
         }
         .rhs {
@@ -198,10 +198,14 @@
         .step {
             overflow:hidden;
             margin:0 auto 30px;
-            width:700px;
+            max-width:700px;
             img {
                 display:block;
-                width:100%;
+                width:80%;
+                max-width:230px;
+                @media #{$md-media} {
+                    width:100%;
+                }
             }
             h3 {
                 margin-top:30px;
