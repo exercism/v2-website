@@ -1,6 +1,8 @@
 @import 'variables';
 @import 'mixins';
 
+$blue: #4A90E2;
+
 #mentor-dashboard-page {
     .header {
         background: $color-2;
@@ -101,8 +103,22 @@
         display:block;
         text-decoration:none;
         overflow:hidden;
+
         &:hover {
             border-color:$color-2;
+        }
+        &.core {
+            border-color:$blue;
+            .core { display:block }
+        }
+        .core {
+            display:none;
+            float:right;
+            color:$blue;
+            text-transform:uppercase;
+            @include font-size(12, 12);
+            font-weight:500;
+
         }
         .icons {
             position:relative;
@@ -237,8 +253,8 @@
                 text-align:center;
             }
             &.completed {
-                .fill { background-color: #4A90E2; }
-                .count { border-color: #4A90E2;}
+                .fill { background-color: $blue; }
+                .count { border-color: $blue;}
             }
         }
         .hr {

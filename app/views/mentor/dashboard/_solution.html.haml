@@ -1,4 +1,5 @@
-=link_to [:mentor, solution], class: 'solution' do
+=link_to [:mentor, solution], class: "solution #{solution.exercise.core? && !solution.track_in_independent_mode?? "core" : ""}" do
+  .core Core
   .icons
     .exercise
       = image_tag solution.exercise.turquoise_icon_url
