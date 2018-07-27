@@ -61,21 +61,23 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     mentor = create :user
     create :track_mentorship, user: mentor, track: solution.exercise.track
 
-    CreatesSolutionMentorship.expects(:create).with(solution, mentor).returns(mock(update!: false))
+    CreatesSolutionMentorship.expects(:create).with(solution, mentor)
     ApproveSolution.(solution, mentor)
   end
 
-  test "cancels a mentor's requires_action when they post" do
+  test "cancels all mentors' requires_action" do
     solution = create :solution
-    mentor = create :user
-    create :track_mentorship, user: mentor, track: solution.exercise.track
-    mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action: true
+    mentor1 = create :user
+    mentor2 = create :user
+    create :track_mentorship, user: mentor1, track: solution.exercise.track
+    create :track_mentorship, user: mentor2, track: solution.exercise.track
+    mentorship1 = create :solution_mentorship, user: mentor1, solution: solution, requires_action: true
+    mentorship2 = create :solution_mentorship, user: mentor2, solution: solution, requires_action: true
 
-    ApproveSolution.(solution, mentor)
+    ApproveSolution.(solution, mentor1)
 
-    mentorship.reload
-    refute mentorship.requires_action
+    [mentorship1, mentorship2].each(&:reload)
+    refute mentorship1.requires_action
+    refute mentorship2.requires_action
   end
 end
-
-

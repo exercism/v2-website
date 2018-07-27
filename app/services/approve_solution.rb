@@ -13,9 +13,10 @@ class ApproveSolution
 
     solution.update(approved_by: mentor)
 
-    mentorship = CreatesSolutionMentorship.create(solution, mentor)
+    CreatesSolutionMentorship.create(solution, mentor)
     solution.update!(last_updated_by_mentor_at: Time.current)
-    mentorship.update!(requires_action: false)
+
+    SolutionMentorship.where(solution: solution).update_all(requires_action: false)
     notify_solution_user
   end
 
