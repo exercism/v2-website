@@ -4,8 +4,8 @@ class Iteration < ApplicationRecord
   has_many :discussion_posts, dependent: :destroy
   has_many :notifications, as: :about
 
-  def discussion_post_notifications
-    notifications.where(trigger_type: "DiscussionPost")
+  def discussion_post_notifications_for_user
+    notifications.where(trigger_type: "DiscussionPost", user_id: solution.user_id)
   end
 
   def mentor_discussion_posts
