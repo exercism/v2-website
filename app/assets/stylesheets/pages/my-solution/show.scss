@@ -188,14 +188,17 @@
     padding-top:25px;
     .warning-bar {
         background:#ffe3e3;
-        padding:10px;
+        padding:10px 50px;
         text-align:center;
         color:#f34a56;
         i {
         }
     }
     .content {
-        padding:20px 40px;
+        padding:20px 15px;
+        @media #{$md-media} {
+            padding:20px 40px;
+        }
         h2 {
             @include font-size(16, 16);
             font-weight:$regular;
@@ -290,6 +293,8 @@
         background:$color-1;
         display:block;
         width:280px;
+        max-width:100%;
+        word-wrap:normal;
         padding:11px 10px;
         text-align:center;
         margin: 0 auto;
