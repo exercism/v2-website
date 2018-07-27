@@ -86,12 +86,15 @@ $blue: #4A90E2;
         margin-right:0;
         &.status .selectize-control {
             width:200px;
+            max-width:100%;
         }
         &.track_id .selectize-control {
             width:130px;
+            max-width:100%;
         }
         &.exercise_id .selectize-control {
             width:155px;
+            max-width:100%;
         }
     }
 
