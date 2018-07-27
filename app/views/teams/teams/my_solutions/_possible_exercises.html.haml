@@ -1,6 +1,6 @@
 .pure-g
   -@exercises.each do |exercise|
-    .pure-u-1-4
+    .pure-u-1.pure-u-md-1-4
       =radio_button_tag :exercise_id, exercise.id, 1, class: 'exercise-radio-button'
       =label_tag "exercise_id[#{exercise.id}]", class: "widget-side-exercise unlocked" do
         .icon

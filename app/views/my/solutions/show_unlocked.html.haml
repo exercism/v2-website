@@ -2,14 +2,14 @@
   =render "nav_and_header"
   .lo-container
     .pure-g
-      .pure-u-14-24.lhs
+      .pure-u-1.pure-u-md-14-24.lhs
         .instructions
           -if @track.slug == "ruby" && @exercise.slug == "hello-world"
             <iframe width="560" height="315" src="https://www.youtube.com/embed/ixSJXImknnk?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           %h2 Introduction
           .rendered= raw @solution.instructions
 
-      .pure-u-10-24.rhs
+      .pure-u-1.pure-u-md-10-24.rhs
         .newbie
           %h3 Get started
           %p We've created a step-by-step set of instructions to help you quickly install Exercism and get started, so you can start learning.

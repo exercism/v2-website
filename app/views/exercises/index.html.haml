@@ -29,7 +29,7 @@
       .pure-g
         -@exercises.each do |exercise|
           =cache(["my/exercises/index", exercise], skip_digest: true, expires_in: 1.hour) do
-            .pure-u-1-2
+            .pure-u-1.pure-u-md-1-2
               = link_to [@track, exercise], class: "exercise" do
                 .icon
                   .img{style: "background-image:url('#{image_path(exercise.turquoise_icon_url)}')"}
