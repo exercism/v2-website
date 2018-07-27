@@ -174,7 +174,10 @@
             border:1px solid #eee;
             border-radius:2px;
             overflow:hidden;
-            float:right;
+            display:inline-block;
+            @media #{$md-media} {
+                float:right;
+            }
             .reaction {
                 float:left;
                 border-right:1px solid #eee;
@@ -216,6 +219,7 @@
         border:1px solid #ddd;
         padding:10px;
         width:315px;
+        max-width: 100%;
         float:right;
         h3 {
             float:left;
@@ -296,7 +300,10 @@
     }
     .no-reflection,
     .reflection {
-        margin:48px 0 0 50px;
+        margin: 15px 0 30px 0;
+        @media #{$md-media} {
+           margin:48px 0 0 50px; 
+        }
         padding:40px 40px;
         h3 {
             @include font-size(16, 16);
