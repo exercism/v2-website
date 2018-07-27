@@ -23,20 +23,11 @@ class SetSolutionsIndependentModeTest < ActiveSupport::TestCase
     mentored_solution = create :solution, user: user, exercise: create(:exercise, track: mentored_track)
     undecided_solution = create :solution, user: user, exercise: create(:exercise, track: undecided_track)
 
-    # Set old things to independent mode if they've not requested mentorin
+    # Set old things to independent mode if they've not requested mentoring
     ActiveRecord::Base.connection.execute(%Q{
       UPDATE solutions
-      SET solutions.independent_mode = 1
+      SET solutions.independent_mode = COALESCE(!mentoring_enabled, 1)
       WHERE solutions.created_at <= "#{Exercism::V2_MIGRATED_AT.to_s(:db)}"
-      AND mentoring_enabled = 0 OR mentoring_enabled IS NULL
-    })
-
-    # Set old things to mentored mode if they're requested mentorin
-    ActiveRecord::Base.connection.execute(%Q{
-      UPDATE solutions
-      SET solutions.independent_mode = 0
-      WHERE solutions.created_at <= "#{Exercism::V2_MIGRATED_AT.to_s(:db)}"
-      AND mentoring_enabled = 1
     })
 
     # Set new things to independent_mode if they've not chosen yet
