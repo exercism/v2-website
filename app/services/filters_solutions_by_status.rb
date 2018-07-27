@@ -46,8 +46,18 @@ class FiltersSolutionsByStatus
       where("solution_mentorships.abandoned": false).
       not_completed.
       where("solution_mentorships.requires_action": false).
-      where("last_updated_by_user_at <= ?", Time.current - 7.days)
+      where("last_updated_by_user_at <= ?", Time.current - 7.days).
+      where("last_updated_by_user_at > ?", Exercism::V2_MIGRATED_AT)
   end
+
+  def filter_legacy
+    solutions.
+      where("solution_mentorships.abandoned": false).
+      not_completed.
+      where("solution_mentorships.requires_action": false).
+      where("last_updated_by_user_at <= ?", Exercism::V2_MIGRATED_AT)
+  end
+
 
   def filter_abandoned
     solutions.where("solution_mentorships.abandoned": true)
