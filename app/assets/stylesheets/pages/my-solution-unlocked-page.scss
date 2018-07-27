@@ -8,11 +8,16 @@
     }
 
     .lhs {
-        padding-right:60px;
+        @media #{$md-media} {
+            padding-right:60px;
+        }
+        
     }
     .rhs {
-        padding-left:60px;
-        border-left:1px solid #e5e5e5;
+        @media #{$md-media} {
+            padding-left:60px;
+            border-left:1px solid #e5e5e5;
+        } 
     }
 
     .instructions {
