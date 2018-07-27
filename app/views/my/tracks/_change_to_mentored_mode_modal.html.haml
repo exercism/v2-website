@@ -3,7 +3,7 @@
   %h2 Switch to Mentored Mode
   %h3 on the #{track.title} Track
 
-  %p In Mentored Mode you will receive mentoring on each exercise, but you will follow a fixed progression. All your existing submissions will be deleted but many exercises may become locked until you complete prerequisites.
+  %p In Mentored Mode you will receive mentoring on each exercise, but you will follow a fixed progression. All your existing submissions will be kept but many exercises may become locked until you complete prerequisites.
   .buttons
     =link_to "Switch to Mentored Mode", set_mentored_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button action-button'
     =link_to "Cancel", "#", class: "pure-button close-modal cancel-button"
