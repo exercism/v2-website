@@ -43,6 +43,7 @@
         margin-bottom:15px;
         position:relative;
         transition:opacity 0.2s;
+        max-width:600px;
         &.read {
             opacity:0.4;
             .mark-as-read-button {
@@ -70,7 +71,6 @@
             display:block;
             text-decoration:none;
             color:#333;
-            width:600px;
             margin-left:60px;
             margin-right:60px;
             padding:12px 15px;
