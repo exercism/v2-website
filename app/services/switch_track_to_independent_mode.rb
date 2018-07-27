@@ -9,8 +9,9 @@ class SwitchTrackToIndependentMode
 
   def call
     user_track.update(independent_mode: true)
-    user_track.solutions.not_completed.update_all(independent_mode: true)
     user_track.solutions.update_all(track_in_independent_mode: true)
+
+    user_track.solutions.not_completed.update_all(independent_mode: true)
   end
 
   memoize
