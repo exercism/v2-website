@@ -15,7 +15,7 @@
       -user_track = @post_user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
       =discussion_post_widget(post, @solution, user_track)
 
--elsif !@solution.approved?
+-elsif !(@solution.approved? || @solution.completed?)
   .posts{style: "display:none"}
   .next-steps
     .title ↳ Next Steps

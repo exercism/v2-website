@@ -14,11 +14,14 @@ class SwitchTrackToMentoredMode
     # Delete all unsubmitted exercises
     user_track.solutions.not_started.destroy_all
 
-    # Get the core exercises
+    # Get the core exercises and unlock their dependants
     exercise_ids = Exercise.core.where(id: user_track.solutions.completed.map(&:exercise_id)).pluck(:id)
     Exercise.where(unlocked_by: exercise_ids).each { |e|CreateSolution.(user, e) }
+
+    # Make sure there is one unlocked core
     UnlocksNextCoreExercise.(track, user)
 
+    # Set everything that's not completed to mentored mode
     user_track.solutions.not_completed.update_all(independent_mode: false)
   end
 

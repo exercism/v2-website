@@ -42,7 +42,7 @@
         %span.text A mentor has approved this solution
         =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
 
--elsif @iteration.discussion_post_notifications.unread.size > 0
+-elsif @iteration.discussion_post_notifications_for_user.unread.size > 0
   .notifications-bar
     .notification
       A mentor has left you a new comment.

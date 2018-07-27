@@ -4,10 +4,11 @@ class IterationTest < ActiveSupport::TestCase
   test "notifications" do
     iteration = create :iteration
     random_notification = create :notification, about: iteration, trigger: create(:user)
-    dp_notification = create :notification, about: iteration, trigger: create(:discussion_post)
+    mentor_dp_notification = create :notification, about: iteration, trigger: create(:discussion_post), user: create(:user)
+    dp_notification = create :notification, about: iteration, trigger: create(:discussion_post), user: iteration.solution.user
 
-    assert_equal [random_notification, dp_notification].sort, iteration.notifications.sort
-    assert_equal [dp_notification], iteration.discussion_post_notifications
+    assert_equal [random_notification, mentor_dp_notification, dp_notification].sort, iteration.notifications.sort
+    assert_equal [dp_notification], iteration.discussion_post_notifications_for_user
   end
 
   test "mentor_discussion_posts" do
