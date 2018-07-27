@@ -38,7 +38,7 @@
   -else
     .notifications-bar
       .notification.action
-        %i.fa.fa-bell
+        =icon :bell
         %span.text A mentor has approved this solution
         =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
 
@@ -62,7 +62,7 @@
 -elsif @iteration.mentor_discussion_posts.count == 0
   .notifications-bar
     .notification
-      %i.fa.fa-clock-o
+      =icon 'clock-o', 'Clock'
       Well done on submitting. A mentor will leave you feedback shortly.
 
 -else
