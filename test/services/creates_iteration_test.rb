@@ -79,6 +79,18 @@ class CreatesIterationTest < ActiveSupport::TestCase
     assert mentorship.requires_action
   end
 
+  test "does not set mentor status if approved" do
+    solution = create :solution, approved_by: create(:user)
+    mentor = create :user
+    mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action: false
+
+    CreatesIteration.create!(solution, [])
+
+    mentorship.reload
+    refute mentorship.requires_action
+  end
+
+
   test "does not notify non-current mentors" do
     solution = create :solution
     user = solution.user
