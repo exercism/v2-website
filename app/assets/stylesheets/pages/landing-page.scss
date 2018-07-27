@@ -4,10 +4,14 @@
 #landing-page {
     .welcome-section {
         .lhs {
-            padding-bottom:50px;
+            @media #{$lg-media} {
+               padding-bottom:50px; 
+            }
         }
         .rhs {
-            padding-top:100px;
+            @media #{$lg-media} {
+                padding-top:100px;
+            }
             h1 {
                 @include header-font;
                 @include font-size(32,24);
