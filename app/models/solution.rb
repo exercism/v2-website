@@ -25,6 +25,10 @@ class Solution < ApplicationRecord
     where.not(published_at: nil)
   end
 
+  def self.started
+    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
+  end
+
   def self.not_started
     where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
   end
