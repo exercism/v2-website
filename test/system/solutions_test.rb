@@ -23,4 +23,14 @@ class SolutionsTest < ApplicationSystemTestCase
 
     assert_text "This is the test suite"
   end
+
+  test "index test suite" do
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    solution = create(:solution, published_at: Time.now)
+
+    sign_in!(user)
+    visit track_exercise_solutions_path(solution.track, solution.exercise)
+  end
 end

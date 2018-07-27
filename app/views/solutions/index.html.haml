@@ -48,7 +48,7 @@
             =link_to [:my, @user_solution], class: 'user-solution' do
               .person
                 =graphical_icon 'eye-slash not-published-icon'
-                  =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
+                =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
                 .handle
                   Your Solution
                   .hidden-box Hidden
