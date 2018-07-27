@@ -283,10 +283,19 @@ $blue: #4A90E2;
     .weekly-section,
     .contributions-section,
     .celebration-section {
-        padding:30px 30px;
+        padding:15px;
+        @media #{$md-media} {
+            padding:30px 30px;
+        }
         background:#f9f9f9;
         border-radius:2px;
-        margin-left:50px;
+        margin-top:15px;
+        margin-bottom:15px;
+        @media #{$md-media} {
+            margin-top:0;
+            margin-bottom:0;
+            margin-left:50px;
+        }
         h2 {
             color:$color-2;
             font-weight:$bold;
