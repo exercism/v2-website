@@ -21,8 +21,9 @@ class SwitchTrackToMentoredMode
     # Make sure there is one unlocked core
     UnlocksNextCoreExercise.(track, user)
 
-    # Set everything that's not completed to mentored mode
-    user_track.solutions.not_completed.update_all(independent_mode: false)
+    # Set everything that's not started to mentored mode
+    user_track.solutions.update_all(independent_mode: true)
+    user_track.solutions.not_started.update_all(independent_mode: false)
   end
 
   memoize
