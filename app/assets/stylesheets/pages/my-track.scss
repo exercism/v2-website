@@ -447,24 +447,6 @@ body.namespace-my.controller-tracks.action-show {
                 }
             }
         }
-        .danger-zone {
-            .leave-track-btn,
-            .change-to-independent-btn {
-                display:block;
-                background:#fff;
-                color:$color-1;
-                border:1px solid rgba($color-1, 0.5);
-                @include font-size(12, 12);
-                padding:9px;
-                width:100%;
-                margin:10px 0;
-                &:hover {
-                    background:$color-1;
-                    border-color:$color-1;
-                    color:#fff;
-                }
-            }
-        }
         .side {
             .completed {
                 float:right;
@@ -550,12 +532,54 @@ body.namespace-my.controller-tracks.action-show {
             margin: 0 20px 20px 0;
         }
     }
+    .danger-zone {
+        .leave-track-btn,
+        .change-to-independent-btn,
+        .change-to-mentored-btn {
+            display:block;
+            background:#fff;
+            color:$color-1;
+            border:1px solid rgba($color-1, 0.5);
+            @include font-size(12, 12);
+            padding:9px;
+            width:100%;
+            margin:10px 0;
+            &:hover {
+                background:$color-1;
+                border-color:$color-1;
+                color:#fff;
+            }
+        }
+    }
+
+    .independent-mode {
+        .danger-zone {
+            background:#fff;
+            padding:20px 0;
+            margin-bottom:15px;
+            border-top:1px solid #ddd;
+            h3 {
+                @include font-size(16, 16);
+                font-weight:$regular;
+                border-bottom:1px solid #f1f1f1;
+                margin-bottom:15px;
+                padding-bottom:5px;
+            }
+            .leave-track-btn,
+            .change-to-independent-btn,
+            .change-to-mentored-btn {
+                width:200px;
+            }
+
+        }
+    }
 }
 
 #modal.my-track-started,
 #modal.my-track-finished,
 #modal.my-track-v1-migration,
 #modal.change-to-independent-mode,
+#modal.change-to-mentored-mode,
 #modal.leave-track {
     max-width:540px;
     padding:50px 50px 50px 50px;
@@ -667,6 +691,7 @@ body.namespace-my.controller-tracks.action-show {
 }
 
 #modal.change-to-independent-mode,
+#modal.change-to-mentored-mode,
 #modal.leave-track {
     .pure-button {
         margin: 0 auto;

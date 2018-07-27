@@ -29,7 +29,7 @@
         .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
 
   -if @user_track.independent_mode?
-    =render "show_side_exercises", exercises_and_solutions: @exercises_and_solutions
+    =render "show_independent_mode"
   -else
     =render "show_mentored_mode"
 
@@ -55,3 +55,22 @@
         $('.topics .extra').show()
       });
       submitOnChange($('.side_exercises_form select'))
+
+-content_for :js do
+  :javascript
+    $('.leave-track-btn').click(function() {
+      showModal("leave-track", "#{j(render "leave_track_modal", track: @track)}")
+    })
+
+-if @user_track.independent_mode?
+  -content_for :js do
+    :javascript
+      $('.change-to-mentored-btn').click(function() {
+        showModal("change-to-mentored-mode", "#{j(render "change_to_mentored_mode_modal", track: @track)}")
+      })
+-else
+  -content_for :js do
+    :javascript
+      $('.change-to-independent-btn').click(function() {
+        showModal("change-to-independent-mode", "#{j(render "change_to_independent_mode_modal", track: @track)}")
+      })
