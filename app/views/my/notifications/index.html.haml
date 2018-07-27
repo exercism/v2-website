@@ -13,7 +13,7 @@
   .lo-container
     -if @notifications.present?
       .pure-g
-        .pure-u-2-3
+        .pure-u-1.pure-u-md-2-3
           .header-bar
             =link_to "Mark all as read", read_batch_my_notifications_path(ids: @notifications.map(&:id)), method: :patch, remote: true, class: "pure-button mark-all-button"
           - @notifications.each do |notification|
