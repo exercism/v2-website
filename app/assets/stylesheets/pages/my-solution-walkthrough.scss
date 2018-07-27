@@ -3,7 +3,10 @@
 
 #modal-wrapper #modal.solution-walkthrough {
   max-width: 100%;
-  padding: 40px;
+  padding: 15px;
+  @media #{$md-media} {
+    padding: 40px;
+  }
 }
 
 #modal-wrapper #modal-close-button {
