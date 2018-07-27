@@ -8,6 +8,6 @@
         You can see #{link_to "all the exercises here", track_exercises_path(@track)}.
     .pure-g.exercises
       -@exercises.each do |exercise|
-        .pure-u-1-3
+        .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
           .widget-side-exercise.completed
             =render "my/side_exercises/exercise", exercise: exercise, solution: Solution.new(completed_at: Time.current - 1.second)

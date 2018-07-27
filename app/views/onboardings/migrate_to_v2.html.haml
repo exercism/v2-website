@@ -2,7 +2,7 @@
   .lo-container
   .lo-container
     .pure-g
-      .pure-u-3-5.lhs
+      .pure-u-1.pure-u-md-3-5.lhs
         =form_for @current_user, url: onboarding_path, method: :patch do |f|
 
           %h1 Welcome to the new version of Exercism
@@ -10,4 +10,4 @@
 
           =render "general", f: f
 
-      .pure-u-2-5.rhs= code_person_widget
+      .pure-u-1.pure-u-md-2-5.rhs= code_person_widget

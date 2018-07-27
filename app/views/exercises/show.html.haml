@@ -39,6 +39,6 @@
   .lo-container
     .pure-g
       -@solutions.each do |solution|
-        .pure-u-1-3
+        .pure-u-1.pure-u-md-1-3
           =render "solutions/solution", solution: solution, user_track: @user_tracks[solution.user_id]
     =link_to "View all solutions", [@track, @exercise, :solutions], class: 'pure-button more-button'
