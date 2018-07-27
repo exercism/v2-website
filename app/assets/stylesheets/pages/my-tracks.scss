@@ -41,6 +41,7 @@
             padding:7px 10px 7px 30px;
             border-radius:2px;
             width:350px;
+            max-width:100%;
             vertical-align:middle;
             margin-right:5px;
         }
@@ -105,7 +106,10 @@
         border:1px solid #c2c3c3;
         border-radius:2px;
         padding:10px 20px;
-        margin: 0 20px 20px 0;
+        margin: 0 0 20px 0;
+        @media #{$md-media} {
+            margin: 0 20px 20px 0;
+        }
         position:relative;
         overflow:hidden;
 

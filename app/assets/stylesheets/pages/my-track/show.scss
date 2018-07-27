@@ -353,14 +353,21 @@ body.namespace-my.controller-tracks.action-show {
         .filters {
             margin-bottom:20px;
             .widget-filter {
+                &.difficulty {
+                    .selectize-control {
+                        max-width:100%;
+                    }
+                }
                 &.topic {
                     .selectize-control {
                         width:250px;
+                        max-width:100%;
                     }
                 }
                 &.status {
                     .selectize-control {
                         width:120px;
+                        max-width:100%;
                     }
                 }
             }
@@ -385,7 +392,10 @@ body.namespace-my.controller-tracks.action-show {
             margin-bottom:35px;
         }
         .widget-side-exercise {
-            margin: 0 20px 20px 0;
+            margin: 0 0 20px 0;
+            @media #{$md-media} {
+                margin: 0 20px 20px 0;
+            }
         }
     }
 }
