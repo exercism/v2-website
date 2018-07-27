@@ -17,10 +17,12 @@ These are our style guidelines which are constantly evolving.
 
 ### Ruby Tests
 - The Ruby Code guidelines apply, other than for calling factories, where we prefer the style `create :user, name: "Jeremy Walker", handle: "iHiD"`
+- Use double quotes everywhere.
 
 ### Haml
 
 - When executing Ruby, do not use spaces between the `=` and the method. e.g. use `=image_tag` not `= image_tag`.
+- Use double quotes everywhere.
 
 ### SCSS
 
