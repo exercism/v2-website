@@ -305,11 +305,15 @@
     max-width:850px !important;
 
     .modal-lhs {
-        padding-right:20px;
-        border-right:1px solid #e9e9e9;
+        @media #{$md-media} {
+            padding-right:20px;
+            border-right:1px solid #e9e9e9;
+        }
     }
     .modal-rhs {
-        padding-left:20px;
+        @media #{$md-media} {
+            padding-left:20px;
+        }
     }
     h2 {
         @include font-size(18, 18);
@@ -346,6 +350,7 @@
         .details {
             display:inline-block;
             width:130px;
+            max-width:100%;
             margin-right:5px;
             vertical-align:middle;
             .handle {
