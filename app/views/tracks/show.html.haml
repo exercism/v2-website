@@ -22,7 +22,7 @@
   =render "tracks/testimonial", testimonial: @testimonial
   =render "tracks/mentors", mentors: @mentors, track: @track
   =render "tracks/exercises"
-  =render "tracks/maintainers", maintainers: @maintainers, track: @track
+  =render "tracks/maintainers", maintainers: @active_maintainers, track: @track
 
   .cta-section
     .lo-container
