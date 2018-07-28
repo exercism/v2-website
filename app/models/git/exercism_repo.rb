@@ -6,6 +6,10 @@ class Git::ExercismRepo < Git::RepoBase
     new(repo_url).head
   end
 
+  def self.pages
+    PAGES
+  end
+
   def initialize(repo_url, auto_fetch=false)
     super
     @retrieved_pages = {}

@@ -26,8 +26,7 @@ class CreateSolutionTest < ActiveSupport::TestCase
   end
 
   test "copes with duplicates" do
-    git_sha = SecureRandom.uuid
-    Git::ExercismRepo.stubs(current_head: git_sha)
+    Git::ExercismRepo.stubs(current_head: SecureRandom.uuid)
 
     solution = create :solution
     create :user_track, user: solution.user, track: solution.exercise.track
@@ -36,8 +35,7 @@ class CreateSolutionTest < ActiveSupport::TestCase
   end
 
   test "sets independent_mode correctly" do
-    git_sha = SecureRandom.uuid
-    Git::ExercismRepo.stubs(current_head: git_sha)
+    Git::ExercismRepo.stubs(current_head: SecureRandom.uuid)
 
     ruby = create :track
     exercise = create :exercise, track: ruby

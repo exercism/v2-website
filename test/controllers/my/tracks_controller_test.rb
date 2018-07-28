@@ -25,6 +25,8 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show unlocked renders" do
+    Git::ExercismRepo.stubs(pages: [])
+
     sign_in!
 
     track = create :track
