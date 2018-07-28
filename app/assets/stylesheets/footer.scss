@@ -6,9 +6,15 @@ html {
 }
 body {
     position:relative;
-    padding-bottom:300px;
+    padding-bottom:340px;
     min-height: 100%;
 }
+
+body.controller-pages.action-index,
+body.controller-tracks.action-show {
+    padding-bottom:300px;
+}
+
 footer {
     position:absolute;
     bottom:0;

@@ -134,4 +134,26 @@
             &.pass-button { padding:8px 15px; }
         }
     }
+    .download-section {
+        clear:both;
+        padding-top:15px;
+        h3 {
+            font-weight:400;
+            color:#333;
+            padding:7px 0;
+            border-bottom:1px solid #ddd;
+            margin-bottom:10px;
+
+        } 
+        p {
+            margin-bottom:10px;
+            @include font-size(14, 19);
+        }
+        .widget-code-snippet {
+            input {
+                width:100%;
+            }
+        }
+
+    }
 }

@@ -1,12 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-body.controller-solutions.action-show {
-    footer {
-        display:none;
-    }
-}
-
 #my-solution-unlocked-page,
 #my-solution-page {
     .track-header {

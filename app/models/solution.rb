@@ -33,6 +33,10 @@ class Solution < ApplicationRecord
     where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
   end
 
+  def mentor_download_command
+    "exercism download --uuid=#{uuid}"
+  end
+
   def team_solution?
     false
   end
