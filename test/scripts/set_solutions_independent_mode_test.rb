@@ -1,7 +1,31 @@
 require 'test_helper'
 
 class SetSolutionsIndependentModeTest < ActiveSupport::TestCase
+  test "fix it" do
+    incorrectly_independent_solution_1 = create :solution, independent_mode: true, track_in_independent_mode: false
+    incorrectly_independent_solution_2 = create :solution, independent_mode: true, track_in_independent_mode: false
+    create :iteration, solution: incorrectly_independent_solution_2
+
+    correctly_independent_solution = create :solution, independent_mode: true, track_in_independent_mode: false, completed_at: Time.now - 1.day
+    create :iteration, solution: correctly_independent_solution
+
+    Solution.where('independent_mode = 1 and track_in_independent_mode = 0').
+             not_completed.
+             update_all('independent_mode = 0')
+
+    [
+      incorrectly_independent_solution_1,
+      incorrectly_independent_solution_2,
+      correctly_independent_solution
+    ].each(&:reload)
+
+    refute incorrectly_independent_solution_1.independent_mode?
+    refute incorrectly_independent_solution_2.independent_mode?
+    assert correctly_independent_solution.independent_mode?
+  end
+
   test "it populates correctly" do
+    skip
 
     # Delete on Sept 1st 2018
     #skip "Kept for posterity"
