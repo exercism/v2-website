@@ -2,6 +2,9 @@ require 'application_system_test_case'
 
 class CompleteSolutionTest < ApplicationSystemTestCase
   test "completes a solution" do
+    Git::ExercismRepo.stubs(current_head: SecureRandom.uuid)
+    Git::ExercismRepo.stubs(pages: [])
+
     track = create(:track)
     user = create(:user)
     user = create(:user,

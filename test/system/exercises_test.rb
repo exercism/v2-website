@@ -3,6 +3,8 @@ require 'application_system_test_case'
 class ExerciseTest < ApplicationSystemTestCase
   test "shows exercises in order" do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
+    Git::ExercismRepo.stubs(pages: [])
+
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
