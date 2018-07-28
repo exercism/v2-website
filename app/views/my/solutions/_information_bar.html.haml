@@ -2,7 +2,7 @@
 /  %i.fa.fa-users
 /  Community Solutions
 
--if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT
+-if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT && @solution.independent_mode?
   .migration-bar
     This solution has been imported from an old version of the website.
     -if @user_track.mentoring_slots_remaining?
