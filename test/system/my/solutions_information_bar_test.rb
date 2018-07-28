@@ -138,8 +138,17 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     assert_selector ".migration-bar", text: "This solution has been imported from independent mode. Mentoring will become available when your other solutions have been mentored."
   end
 
+  test "Legacy in mentored mode" do
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, independent_mode: false)
+
+    sign_in!(@user)
+    visit my_solution_path(@solution)
+
+    assert_selector ".notifications-bar", text: "Well done on submitting. A mentor will leave you feedback shortly."
+  end
+
   test "Legacy with slots" do
-    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day)
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, independent_mode: true)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
     sign_in!(@user)
@@ -149,7 +158,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   end
 
   test "Legacy without slots" do
-    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day)
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, independent_mode: true)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
 
     sign_in!(@user)
@@ -157,5 +166,4 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
 
     assert_selector ".migration-bar", text: "This solution has been imported from an old version of the website. Once your other solutions on this track have been mentored you may request mentoring for this."
   end
-
 end
