@@ -6,8 +6,6 @@ class Mentor::SolutionsController < MentorController
     @exercise = @solution.exercise
     @track = @exercise.track
 
-    return redirect_to [:mentor, :dashboard] unless current_user.mentoring_track?(@track)
-
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
 
@@ -48,7 +46,11 @@ class Mentor::SolutionsController < MentorController
   end
 
   def check_mentor_may_mentor_solution!
-    return head 403 unless current_user.mentoring_track?(@solution.exercise.track)
     return head 403 if current_user == @solution.user
+
+    return true if current_user.mentoring_solution?(@solution)
+    return true if current_user.mentoring_track?(@solution.exercise.track)
+
+    head 403
   end
 end
