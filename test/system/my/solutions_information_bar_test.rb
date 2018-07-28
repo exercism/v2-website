@@ -139,7 +139,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   end
 
   test "Legacy with slots" do
-    @solution.update(updated_at: Exercism::V2_MIGRATED_AT - 1.day)
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
     sign_in!(@user)
@@ -149,7 +149,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   end
 
   test "Legacy without slots" do
-    @solution.update(updated_at: Exercism::V2_MIGRATED_AT - 1.day)
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
 
     sign_in!(@user)
