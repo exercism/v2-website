@@ -12,8 +12,11 @@ class SelectSuggestedSolutionsForMentor
   end
 
   def call
-    solution_ids = select_priority_core
-    solution_ids += select_priority_side(MAX_RESULTS - solution_ids.length)
+    solution_ids = select_new_core
+    solution_ids += select_legacy_core(MAX_RESULTS - solution_ids.length)
+    solution_ids += select_new_side(MAX_RESULTS - solution_ids.length)
+    solution_ids += select_legacy_side(MAX_RESULTS - solution_ids.length)
+    solution_ids += select_independent(MAX_RESULTS - solution_ids.length)
     solution_ids += select_rest(solution_ids, MAX_RESULTS - solution_ids.length)
 
     Solution.
@@ -23,39 +26,59 @@ class SelectSuggestedSolutionsForMentor
   end
 
   private
-  def select_priority_core
-    base_fast_query.
+  def select_new_core
+    base_mentored_mode_new_query.
       where('exercises.core': true).
-      limit(MAX_RESULTS).
-      pluck(:id)
+      limit(MAX_RESULTS).pluck(:id)
   end
 
-  def select_priority_side(limit)
-    base_fast_query.
+  def select_new_side(limit)
+    base_mentored_mode_new_query.
       where('exercises.core': false).
-      limit(limit).
-      pluck(:id)
+      where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
+      limit(limit).pluck(:id)
+  end
+
+  def select_legacy_core(limit)
+    base_mentored_mode_legacy_query.
+      where('exercises.core': true).
+      limit(limit).pluck(:id)
+  end
+
+  def select_legacy_side(limit)
+    base_mentored_mode_legacy_query.
+      where('exercises.core': false).
+      limit(limit).pluck(:id)
+  end
+
+  def select_independent(limit)
+    base_query.
+      where("solutions.track_in_independent_mode = 1").
+      order(Arel.sql("last_updated_by_user_at ASC")).
+      limit(limit).pluck(:id)
   end
 
   def select_rest(ignore_ids, limit)
     base_query.
       where.not(id: ignore_ids).
-      where("num_mentors = 0").
-      order(Arel.sql("last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
-                      solutions.track_in_independent_mode = 0 DESC,
-                      solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}' DESC,
-                      core DESC,
-                      num_mentors ASC,
-                      last_updated_by_user_at ASC")).
-      limit(limit).
-      pluck(:id)
+      order(Arel.sql("last_updated_by_user_at ASC")).
+      limit(limit).pluck(:id)
   end
 
-  def base_fast_query
+  def base_mentored_mode_new_query
+    base_mentored_mode_query.
+      where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'")
+  end
+
+  def base_mentored_mode_legacy_query
+    base_mentored_mode_query.
+      where("solutions.created_at <= '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
+      where("solutions.last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'")
+  end
+
+  def base_mentored_mode_query
     base_query.
-      where(num_mentors: 0).
       where("solutions.track_in_independent_mode = 0").
-      where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
       order(Arel.sql("last_updated_by_user_at ASC"))
   end
 
@@ -85,7 +108,10 @@ class SelectSuggestedSolutionsForMentor
       where(completed_at: nil).
 
       # Not completed
-      where(independent_mode: false)
+      where(independent_mode: false).
+
+      # Where there are no mentors
+      where(num_mentors: 0)
   end
 
   memoize

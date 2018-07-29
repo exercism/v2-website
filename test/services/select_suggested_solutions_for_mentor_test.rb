@@ -284,13 +284,19 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                         last_updated_by_user_at: Time.now + 30.seconds,
                                         user: mentored_user)
 
+      unmentored_legacy_side_solution = create(:solution,
+                                        exercise: create(:exercise, track: track, core: false),
+                                        num_mentors: 0,
+                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
+                                        last_updated_by_user_at: Time.now + 30.seconds,
+                                        user: mentored_user)
+
       unmentored_dead_legacy_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
                                         created_at: Exercism::V2_MIGRATED_AT - 1.hour,
                                         last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.hour,
                                         user: mentored_user)
-
 
       old_unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
@@ -307,6 +313,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         unmentored_newer_legacy_core_solution,
         mentored_1_core_solution,
         mentored_2_core_solution,
+        unmentored_legacy_side_solution,
         unmentored_dead_legacy_core_solution
       ].each do |solution|
         create :iteration, solution: solution
@@ -315,9 +322,10 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       expected = [
         old_unmentored_core_solution,
         unmentored_core_solution,
-        unmentored_side_solution,
         unmentored_older_legacy_core_solution,
         unmentored_newer_legacy_core_solution,
+        unmentored_side_solution,
+        unmentored_legacy_side_solution,
         independent_solution,
         unmentored_dead_legacy_core_solution,
 
