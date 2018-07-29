@@ -19,5 +19,5 @@
       .divider &nbsp;
       .iteration Iteration ##{solution.iterations.size}
       .divider &nbsp;
-      .submitted-at Submitted #{time_ago_in_words(solution.iterations.last.created_at)} ago
+      .submitted-at Last updated #{time_ago_in_words(solution.last_updated_by_user_at || solution.created_at)} ago
 
