@@ -10,11 +10,13 @@ class UnlocksCoreExerciseTest < ActiveSupport::TestCase
   end
 
   test "does not double-unlock" do
+    Git::ExercismRepo.stubs(current_head: SecureRandom.uuid)
+
     user = create(:user)
     exercise = create(:exercise)
-    create(:solution, user: user, exercise: exercise)
-    CreateSolution.expects(:call).with(user, exercise).never
+    user_track = create :user_track, user: user, track: exercise.track
+    solution = create(:solution, user: user, exercise: exercise)
 
-    UnlocksCoreExercise.(user, exercise)
+    assert_equal solution, UnlocksCoreExercise.(user, exercise)
   end
 end

@@ -7,7 +7,7 @@ class UnlocksNextCoreExercise
   end
 
   def call
-    return if core_exercises_in_progress?
+    return core_exercises_in_progress if core_exercises_in_progress
 
     next_exercise = track.exercises.core.
                                     locked_for(user).
@@ -25,12 +25,13 @@ class UnlocksNextCoreExercise
   private
   attr_reader :track, :user
 
-  def core_exercises_in_progress?
+  memoize
+  def core_exercises_in_progress
     user.
       solutions.
       joins(:exercise).
       where(exercises: { track: track, core: true }).
       where(completed_at: nil).
-      exists?
+      first
   end
 end
