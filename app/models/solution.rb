@@ -36,6 +36,10 @@ class Solution < ApplicationRecord
     where(downloaded_at: nil)
   end
 
+  def mentored_mode?
+    !independent_mode?
+  end
+
   def mentor_download_command
     "exercism download --uuid=#{uuid}"
   end
