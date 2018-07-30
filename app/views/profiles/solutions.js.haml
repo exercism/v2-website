@@ -1,1 +1,3 @@
 $('.solutions').html('#{j render "solutions", solutions: @solutions, reaction_counts: @reaction_counts, comment_counts: @comment_counts}')
+
+$('.num-solutions').html('Showing #{pluralize @solutions.size, "solution"}')
