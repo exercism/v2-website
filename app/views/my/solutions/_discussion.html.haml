@@ -1,14 +1,3 @@
--if @solution.completed?
-  .completed-info
-    .title ↳ Solution Completed
-    %p Your solution has been completed. You can continue working adding further iterations or move on to new challenges. Well done!
-
--elsif @solution.approved?
-  .completed-info
-    .title ↳ Solution Approved!
-    %p Your solution has been approved by a mentor. Congratulations! You can now complete the exercise and move forward on the track.
-    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
-
 -if @iteration.discussion_posts.size > 0
   .posts
     -@iteration.discussion_posts.each do |post|
