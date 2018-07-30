@@ -17,10 +17,21 @@ class UserTrack < ApplicationRecord
     !independent_mode?
   end
 
-  def num_completed_core_exercies
+  def num_completed_core_exercises
     solutions.completed.
-              where("exercises.core": true,
-                    "exercises.track_id": track_id).
+              where("exercises.core": true).
+              count
+  end
+
+  def num_avaliable_core_exercises
+    solutions.not_completed.
+              where("exercises.core": true).
+              count
+  end
+
+  def num_avaliable_side_exercises
+    solutions.not_completed.
+              where("exercises.core": false).
               count
   end
 

@@ -2,7 +2,7 @@
 @import 'mixins';
 
 #my-solution-page .rhs {
-    h3 {
+    h3.rhs-heading {
         padding:7px 0;
         border-bottom:1px solid #ddd;
         margin-bottom:20px;
@@ -19,8 +19,8 @@
             color:#333;
         }
     }
-    .next-steps,
-    .completed-info {
+    .approved-section,
+    .next-steps {
         background:rgba($color-1, 0.05);
         border-radius:2px;
         padding:20px 40px 20px 20px;

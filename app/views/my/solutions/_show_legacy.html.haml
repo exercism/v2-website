@@ -1,0 +1,12 @@
+.discussion
+  %h3.disabled
+    =icon :ban
+    Mentor Discussion
+  %p.disabled
+    This solution has been imported from an old version of the website.
+    -if @user_track.mentoring_slots_remaining?
+      You may request mentoring to unlock its extra exercises.
+      =button_to "Request mentoring on this solution.", request_mentoring_my_solution_path(@solution), method: :patch, class: 'pure-button request-mentoring'
+    -else
+      You may request mentoring to unlock its extra exercises. 
+      This will become available when your other solutions have been mentored.
