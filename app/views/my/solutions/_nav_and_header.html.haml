@@ -23,7 +23,7 @@
         -else
           %h3 Track Progress:
           -num_core_exercises = @track.exercises.core.count
-          -num_completed_exercises = @user_track.num_completed_core_exercies
+          -num_completed_exercises = @user_track.num_completed_core_exercises
           -exercise_idx = @track.exercises.core.where("position < ?", @exercise.position).count
 
           .dots

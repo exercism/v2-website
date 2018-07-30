@@ -164,6 +164,6 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_selector ".migration-bar", text: "This solution has been imported from an old version of the website. Once your other solutions on this track have been mentored you may request mentoring for this."
+    assert_selector ".migration-bar", text: "This solution has been imported from an old version of the website.\nOnce your other solutions on this track have been mentored you may request mentoring for this."
   end
 end
