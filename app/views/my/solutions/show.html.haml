@@ -19,42 +19,4 @@
             =render "solutions/panes", iteration: @iteration
 
       .pure-u-1-2.rhs
-        .discussion
-          -if @solution.track_in_independent_mode?
-            -if @solution.independent_mode?
-              %h3.disabled
-                =icon :ban
-                Mentor Discussion (Disabled in independent mode)
-              %p.disabled
-                Mentoring is disabled by default in Independent Mode. However, you can request feedback on a maximum of 1 solution at a time.
-                -if @user_track.mentoring_slots_remaining?
-                  =button_to "Request mentoring on this solution.", request_mentoring_my_solution_path(@solution), method: :patch
-                -else
-                  Once one of your existing solutions is completed you will be able to request mentoring here.
-              =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
-
-            -else
-              %h3 Mentor Discussion
-              =render "discussion"
-          -else
-            -if @solution.independent_mode?
-              %h3.disabled
-                =icon :ban
-                Mentor Discussion
-              %p.disabled
-                This solution has been imported from independent mode.
-                -if @user_track.mentoring_slots_remaining?
-                  You may request mentoring to unlock its extra exercises.
-                  =button_to "Request mentoring on this solution.", request_mentoring_my_solution_path(@solution), method: :patch, class: 'pure-button request-mentoring'
-                -else
-                  Mentoring will become available when your other solutions have been mentored.
-            -else
-              %h3 Mentor Discussion
-              -if @solution.exercise.auto_approve?
-                =render "auto_approved"
-              -else
-                =render "discussion"
-
--content_for :js do
-  :javascript
-    setupSolution()
+        =render "show_rhs"

@@ -1,0 +1,25 @@
+-if @solution.mentored_mode?
+  -if @solution.completed?
+    =render "show_completed"
+
+  -elsif @solution.approved?
+    =render "show_approved"
+
+  .discussion
+    %h3 Mentor Discussion
+    -if @solution.exercise.auto_approve?
+      =render "auto_approved"
+    -else
+      =render "discussion"
+
+-elsif @solution.track_in_independent_mode?
+  =render "show_independent_mode"
+
+-else # Track in mentored mode, solution in independent mode
+  =render "show_hybrid_mode"
+
+
+-content_for :js do
+  :javascript
+    setupSolution()
+
