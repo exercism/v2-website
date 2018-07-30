@@ -8,6 +8,7 @@
     -if @user_track.mentoring_slots_remaining?
       If you would like to receive mentorship on it, please #{link_to "click here", request_mentoring_my_solution_path(@solution), method: :patch}.
     -else
+      %br
       Once your other solutions on this track have been mentored you may request mentoring for this.
 
 -elsif @user_track.mentored_mode? && @solution.independent_mode?

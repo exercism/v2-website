@@ -1,4 +1,24 @@
-.completed-info
-  .title ↳ Solution Completed
-  %p Your solution has been completed. You can continue working adding further iterations or move on to new challenges. Well done!
+- num_avaliable_core_exercises = @user_track.num_avaliable_core_exercises
+- num_avaliable_side_exercises = @user_track.num_avaliable_side_exercises
+.completed-section
+  .title
+    =icon("check-circle", "checkmark")
+    Congratulations - you've completed this exercise!
+  .next
+    %h3
+      =graphical_icon("question-circle")
+      What's next?
+
+  -if num_avaliable_core_exercises.size > 0 || num_avaliable_side_exercises.size > 0
+    %p
+      %strong Carry on coding.
+      You have
+      -if num_avaliable_core_exercises > 0
+        #{pluralize num_avaliable_core_exercises, "core exercise"}
+        -if num_avaliable_side_exercises > 0
+          and
+      -if num_avaliable_side_exercises > 0
+        #{pluralize num_avaliable_side_exercises, "side exercise"}
+      avaliable.
+
 
