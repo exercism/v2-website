@@ -40,7 +40,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
       assert_equal iteration, args[4][:about]
     end
 
-    DeliversEmail.expects(:deliver!).twice.with do |*args|
+    DeliverEmail.expects(:call).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_discussion_post_for_mentor, args[1]
       assert_equal DiscussionPost, args[2].class
@@ -60,7 +60,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     create :solution_mentorship, solution: solution, user: inactive_mentor
 
     CreatesNotification.expects(:create!).never
-    DeliversEmail.expects(:deliver!).never
+    DeliverEmail.expects(:call).never
     CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
   end
 

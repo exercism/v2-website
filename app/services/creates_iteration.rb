@@ -85,7 +85,7 @@ class CreatesIteration
         # go into every single iteration
         about: solution
       )
-      DeliversEmail.deliver!(
+      DeliverEmail.(
         mentor,
         :new_iteration_for_mentor,
         iteration
