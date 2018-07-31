@@ -110,11 +110,11 @@
         }
         &.medium {
             &:before { content: "https://medium.com/"; }
-            input { padding-left:173px; }
+            input { padding-left:184px; }
         }
         &.github {
             &:before { content: "https://github.com/"; }
-            input { padding-left:183px; }
+            input { padding-left:173px; }
         }
     }
     .pure-button {
@@ -133,4 +133,3 @@
         }
     }
 }
-
