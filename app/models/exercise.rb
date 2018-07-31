@@ -26,6 +26,10 @@ class Exercise < ApplicationRecord
     where.not(id: user.solutions.select(:exercise_id))
   }
 
+  scope :not_completed_for, -> (user) {
+    where.not(id: user.solutions.completed.select(:exercise_id))
+  }
+
   def download_command
     "exercism download --exercise=#{slug} --track=#{track.slug}"
   end
