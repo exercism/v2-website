@@ -16,7 +16,7 @@ class My::SolutionsController < MyController
 
   def show
     @exercise = @solution.exercise
-    ClearsNotifications.clear!(current_user, @solution)
+    ClearNotifications.(current_user, @solution)
 
     @track = @solution.exercise.track
     @user_track = UserTrack.where(user: current_user, track: @track).first
@@ -123,7 +123,7 @@ class My::SolutionsController < MyController
     @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
-    ClearsNotifications.clear!(current_user, @iteration)
+    ClearNotifications.(current_user, @iteration)
 
     render :show
   end

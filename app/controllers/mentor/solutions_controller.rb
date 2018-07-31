@@ -20,8 +20,8 @@ class Mentor::SolutionsController < MentorController
       return redirect_to [:my, @solution]
     end
 
-    ClearsNotifications.clear!(current_user, @solution)
-    ClearsNotifications.clear!(current_user, @iteration)
+    ClearNotifications.(current_user, @solution)
+    ClearNotifications.(current_user, @iteration)
   end
 
   def approve
