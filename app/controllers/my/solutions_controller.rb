@@ -98,13 +98,13 @@ class My::SolutionsController < MyController
     if @next_core_solution || @unlocked_side_exercise_solutions.present?
       render_modal("solution-unlocked", "unlocked")
     else
-      js_redirect_to(@track)
+      js_redirect_to([:my, @solution])
     end
   end
 
   def publish
     @solution.update(published_at: Time.current) if params[:publish]
-    redirect_to [@solution.exercise.track, @solution.exercise, @solution]
+    redirect_to [:my, @solution]
   end
 
   private
