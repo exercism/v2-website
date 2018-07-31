@@ -36,6 +36,10 @@ class Solution < ApplicationRecord
     where(downloaded_at: nil)
   end
 
+  def track_in_mentored_mode?
+    !track_in_independent_mode?
+  end
+
   def mentored_mode?
     !independent_mode?
   end
