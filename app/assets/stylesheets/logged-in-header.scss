@@ -5,12 +5,19 @@ header.logged-in {
     background:#22333b;
     height:50px;
     border-bottom:1px solid #22333b;
+    .lo-container {
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:space-between;
+    }
 
+    div.spacer {
+        flex:1;
+    }
     a.logo {
         display:inline-block;
         padding:14px 0;
         vertical-align:middle;
-        float:left;
         img {
             display:block;
             height:22px;
@@ -21,13 +28,18 @@ header.logged-in {
         position:relative;
         cursor:pointer;
 
-        &:hover {
+        &:hover, &:focus {
+            .dropdown {
+                display:block;
+            }
+        }
+        // explicit rule to avoid browser issues for no-support
+        &:focus-within {
             .dropdown {
                 display:block;
             }
         }
         .in-situ {
-            float:right;
             width:55px;
             margin-left:5px;
             padding:10px 0 15px 0;
@@ -103,7 +115,6 @@ header.logged-in {
         }
     }
     .notifications {
-        float:right;
         color:rgba(#fff, 0.9);
         padding:7px 10px;
         position:relative;
