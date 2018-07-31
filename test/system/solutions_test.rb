@@ -19,9 +19,9 @@ class SolutionsTest < ApplicationSystemTestCase
       sign_in!(user)
       visit my_solution_path(solution)
       find(:css, ".tab", text: "Test Suite").click
+      assert_text "This is the test suite"
     end
 
-    assert_text "This is the test suite"
   end
 
   test "index test suite" do
