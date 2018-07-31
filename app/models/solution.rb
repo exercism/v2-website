@@ -26,11 +26,14 @@ class Solution < ApplicationRecord
   end
 
   def self.started
-    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
+    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)
+           OR
+           downloaded_at IS NOT NULL")
   end
 
   def self.not_started
-    where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
+    where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)").
+    where(downloaded_at: nil)
   end
 
   def mentor_download_command
