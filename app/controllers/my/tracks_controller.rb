@@ -61,7 +61,7 @@ class My::TracksController < MyController
 
           collection
         }.
-        flatten
+        inject(&:+)
       @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}.sort_by{|e,s|
         "#{s ? (s.completed?? 0 : (s.in_progress?? 1 : 2)) : 3}#{!e.unlocked_by ? 0 : 1}"
       }
