@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   end
 
   def js_redirect_to(*objs)
-    render js: %Q{ window.location = "#{url_for(objs)}"}
+    render js: %Q{ window.location = "#{url_for(*objs)}"}
   end
 
   def current_user_has_notifications?
