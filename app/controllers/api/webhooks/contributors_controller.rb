@@ -23,7 +23,7 @@ class API::Webhooks::ContributorsController < API::WebhooksController
   private
 
   def payload_params
-    params.require(:payload).permit(:action, { pull_request: [:merged, { base: :ref }, user: [:login, :id, :avatar_url]], repository: [:default_branch] })
+    params.require(:payload).permit(:ref, sender: [:login, :id, :avatar_url], repository: [:default_branch])
   end
 
   def verify_github_webhook
