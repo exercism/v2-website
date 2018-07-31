@@ -10,7 +10,7 @@
     %strong Independent Mode,
     which allows you to follow your own path at your own pace, but with limited feedback options. If you're unsure, we recommend starting with Mentored Mode. Which mode would you like to use? 
   .buttons
-    =link_to "Mentored Mode (Recommended)", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button mentored-mode-button'
+    =link_to "Mentored Mode (Recommended)", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button mentored-mode-button'
     =link_to "Independent Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode-button'
 
   .learn-more
@@ -25,7 +25,7 @@
     %strong Mentored Mode.
   %p Get started by clicking on #{@track.exercises.core.first.title} and then follow the instructions. You'll install the Command Line Interface (CLI) and then submit your first solution. We'll talk you through every step of the way :)
   .buttons
-    =button_tag "Get Started", class: 'pure-button get-started-button'
+    =button_tag "Continue", class: 'pure-button get-started-button'
 
 :javascript
   $('#modal.my-track-started .get-started-button').click(function() { window.closeModal() });
