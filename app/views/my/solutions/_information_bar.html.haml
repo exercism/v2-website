@@ -11,7 +11,7 @@
       %br
       Once your other solutions on this track have been mentored you may request mentoring for this.
 
--elsif @user_track.mentored_mode? && @solution.independent_mode?
+-elsif @solution.track_in_mentored_mode? && @solution.independent_mode?
   .migration-bar
     This solution has been imported from independent mode.
     -if @user_track.mentoring_slots_remaining?
