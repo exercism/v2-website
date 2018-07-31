@@ -1,5 +1,8 @@
 %header.logged-in
   .lo-container
+    =link_to root_path, class: "logo" do
+      =image "logo-white.png", "Exercism"
+
     .misc-menu
       .in-situ
         =image_tag current_user.avatar_url || "blank.png", alt: "Avatar for #{current_user.handle}"
@@ -29,6 +32,3 @@
     -else
       = link_to [:my, :notifications], class: "notifications", "aria-label": "No notifications" do
         =graphical_icon "bell-o"
-
-    =link_to root_path, class: "logo" do
-      =image "logo-white.png", "Exercism"
