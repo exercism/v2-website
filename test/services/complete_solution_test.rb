@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CompletesSolutionTest < ActiveSupport::TestCase
+class CompleteSolutionTest < ActiveSupport::TestCase
   setup do
     @track = create :track
     @core_exercise = create :exercise, track: @track, core: true, position: 1
@@ -23,7 +23,7 @@ class CompletesSolutionTest < ActiveSupport::TestCase
 
       UnlocksNextCoreExercise.expects(:call).with(@track, user)
 
-      CompletesSolution.complete!(solution)
+      CompleteSolution.(solution)
 
       assert_equal DateTime.now.to_i, solution.completed_at.to_i
 
@@ -38,7 +38,7 @@ class CompletesSolutionTest < ActiveSupport::TestCase
       user = create :user
       solution = create :solution, user: user, exercise: @core_exercise
 
-      CompletesSolution.complete!(solution)
+      CompleteSolution.(solution)
 
       assert_equal DateTime.now.to_i, solution.completed_at.to_i
 
@@ -59,7 +59,7 @@ class CompletesSolutionTest < ActiveSupport::TestCase
       solution = create :solution, user: user, exercise: @core_exercise, approved_by: mentor
       create :user_track, user: user, track: @track
 
-      CompletesSolution.complete!(solution)
+      CompleteSolution.(solution)
       assert_equal 1, Solution.where(user: user, exercise: @next_core_exercise).count
     end
   end

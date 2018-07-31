@@ -51,7 +51,7 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    CompletesSolution.complete!(@solution)
+    CompleteSolution.(@solution)
     @exercise = @solution.exercise
     @track = @exercise.track
     @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
