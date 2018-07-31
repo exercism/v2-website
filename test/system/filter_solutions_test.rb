@@ -20,7 +20,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Completed", id: :your_status
+    select_option "Completed", selector: "#your_status"
 
     assert page.has_link?(href: mentor_solution_path(solution))
   end
@@ -81,7 +81,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Ruby", id: :your_track_id
+    select_option "Ruby", selector: "#your_track_id"
 
     assert page.has_link?(href: mentor_solution_path(solution_ruby))
     assert page.has_no_link?(href: mentor_solution_path(solution_cpp))
@@ -110,8 +110,8 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     sign_in!(mentor)
     visit mentor_dashboard_path
-    select_option "Ruby", id: :your_track_id
-    select_option "Sorting", id: :your_exercise_id
+    select_option "Ruby", selector: "#your_track_id"
+    select_option "Sorting", selector: "#your_exercise_id"
 
     assert page.has_link?(href: mentor_solution_path(sorting_solution))
     assert page.has_no_link?(href: mentor_solution_path(hello_world_solution))
