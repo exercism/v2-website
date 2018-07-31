@@ -1,14 +1,12 @@
-class CompletesSolution
-  def self.complete!(*args)
-    new(*args).complete!
-  end
+class CompleteSolution
+  include Mandate
 
   attr_reader :solution
   def initialize(solution)
     @solution = solution
   end
 
-  def complete!
+  def call
     if solution.approved?
       completed_approved
     else
