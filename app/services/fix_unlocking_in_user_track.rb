@@ -23,10 +23,15 @@ class FixUnlockingInUserTrack
     keep_solution_ids += Exercise.where(unlocked_by: exercise_ids).map { |e|CreateSolution.(user, e).id }
 
     # Check all the bonus exercises are avalaible but don't unlock them.
-    keep_solution_ids += user_track.solutions.where(exercise_id: track.exercises.side.where(unlocked_by: nil)).select(:id)
+    keep_solution_ids += user_track.solutions.where(exercise_id: track.exercises.side.where(unlocked_by: nil)).pluck(:id)
+
 
     # Make sure there is one unlocked core
-    keep_solution_ids << UnlocksNextCoreExercise.(track, user).try(:id)
+    next_exercise = track.exercises.core.
+                                    not_completed_for(user).
+                                    order(:position).
+                                    first
+    keep_solution_ids << UnlocksCoreExercise.(user, next_exercise).try(:id)
 
     # Delete all unsubmitted exercises that we haven't just
     # agreed to unlocked
