@@ -41,5 +41,6 @@ script:
   - "bundle exec rake test"
   - "bundle exec rake test:system"
 cache:
-  - bundler
-  - node_modules
+  node_modules: true
+  directories:
+    - vendor/bundle
