@@ -1,25 +1,32 @@
 .main-section
   =hex_green_track_icon(track)
-  %h2 Getting Started
-  %h3 on the #{track.title} Track
+  %h2 Welcome
+  %h3 to the #{track.title} Track
 
-  %p Welcome to the #{track.title} Track. To get started, click on the first exercise (#{@track.exercises.core.first.title}) and follow the instructions.
-  =link_to "Continue", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: "pure-button"
-  .independent-mode-option
-    If you don't want regular Mentor Feedback and would like to work through the exercises by yourself, you can continue in Independent Mode.
-    =link_to "Learn More", "#", class: 'learn-about-independent-mode-button'
-
-.independent-mode-section
-  %h2 What is Independent Mode?
-  %h3 on the #{track.title} Track
-  %p In Independent Mode all of the exercises within a Track are unlocked and you can work through them freely. You will only receive feedback if you request it for a specific exercise. This mode is for people who want to do fast deep-dives into a track and is not recommended for those that want the full Exercism experience.
-  %p.question Which mode do you want to complete this track in?
+  %p
+    You can join this track in either
+    %strong Mentored Mode,
+    a structured approach centered around feedback, or
+    %strong Independent Mode,
+    which allows you to follow your own path at your own pace, but with limited feedback options. If you're unsure, we recommend starting with Mentored Mode. Which mode would you like to use? 
   .buttons
+    =link_to "Mentored Mode (Recommended)", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button mentored-mode-button'
     =link_to "Independent Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode-button'
-    =link_to "Normal Mode (Recommended)", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button normal-mode-button'
+
+  .learn-more
+    You can learn more about Mentored and Independent Modes #{link_to "here", mentored_mode_vs_indepedent_mode_page_path}.
+
+.start-section
+  =hex_green_track_icon(track)
+  %h2 Getting started
+  %h3 on the #{track.title} Track
+  %p
+    You've successfully joined the track in
+    %strong Mentored Mode.
+  %p Get started by clicking on #{@track.exercises.core.first.title} and then follow the instructions. You'll install the Command Line Interface (CLI) and then submit your first solution. We'll talk you through every step of the way :)
+  .buttons
+    =button_tag "Get Started", class: 'pure-button get-started-button'
 
 :javascript
-  $('.learn-about-independent-mode-button').click(function() {
-    $('#modal.my-track-started .main-section').hide()
-    $('#modal.my-track-started .independent-mode-section').show()
-  })
+  $('#modal.my-track-started .get-started-button').click(function() { window.closeModal() });
+

@@ -18,7 +18,7 @@ class My::UserTracksController < MyController
     SwitchTrackToMentoredMode.(current_user, user_track.track)
 
     respond_to do |format|
-      format.js { render js: "window.closeModal()" } 
+      format.js { render js: "$('#modal .main-section').hide();$('#modal .start-section').show()" } 
       format.html { redirect_to [:my, user_track.track] }
     end
   end
