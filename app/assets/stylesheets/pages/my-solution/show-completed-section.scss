@@ -53,10 +53,13 @@
             margin-left:16px;
             background:$color-1;
             color:#fff;
+            &.disabled {
+                pointer-events:all;
+                cursor: not-allowed;
+            }
         }
     }
     .next-option+.next-option {
         margin-top:25px;
     }
 }
-

@@ -16,10 +16,10 @@
       =render "discussion"
 
 -elsif @solution.track_in_independent_mode?
-  =render "show_independent_mode"
+  =render "show_completed_independent"
 
 -else # Track in mentored mode, solution in independent mode
-  =render "show_hybrid_mode"
+  =render "show_completed_hybrid"
 
 -content_for :js do
   :javascript

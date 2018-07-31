@@ -46,8 +46,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_solution_path(solution)
 
-    assert_selector ".discussion h3.disabled", text: "Mentor Discussion"
-    assert_selector ".discussion p.disabled", text: "This solution has been imported from independent mode. You may request mentoring to unlock its extra exercises."
+    assert_selector ".completed-section .next-option strong", text: "Request mentor feedback."
+    refute_selector ".discussion"
   end
 
   test "independent mode / independent solution" do
@@ -63,9 +63,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_solution_path(solution)
 
-    assert_selector ".discussion h3.disabled", text: "Mentor Discussion (Disabled in independent mode)"
-    assert_selector ".discussion p.disabled", text: "Mentoring is disabled by default in Independent Mode. However, you can request feedback on a maximum of 1 solution at a time."
-
+    assert_selector ".completed-section .next-option strong", text: "Request mentor feedback."
+    refute_selector ".discussion"
   end
 end
 
