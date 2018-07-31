@@ -1,8 +1,5 @@
-class AuthenticatesUserFromOmniauth
-
-  def self.authenticate(*args)
-    new(*args).authenticate
-  end
+class AuthenticateUserFromOmniauth
+  include Mandate
 
   attr_reader :auth, :initial_track_id
   def initialize(auth, initial_track_id = nil)
@@ -10,7 +7,7 @@ class AuthenticatesUserFromOmniauth
     @initial_track_id = initial_track_id
   end
 
-  def authenticate
+  def call
     user = User.where(provider: auth.provider, uid: auth.uid).first
     if user
       if user.email.ends_with?("@users.noreply.github.com")
