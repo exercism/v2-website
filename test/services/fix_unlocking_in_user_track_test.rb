@@ -41,6 +41,10 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
     # unlocked on demand within the UI.
     bonus1_sol = create :solution, exercise: bonus1, user: user
 
+    # This should get ignored and deleted
+    # and replaced with c2
+    c3_sol = create :solution, exercise: c3, independent_mode: true, user: user
+
     user_track = create :user_track, user: user, track: track
     FixUnlockingInUserTrack.(user_track)
 
