@@ -57,7 +57,7 @@ class AuthenticatesUserFromOmniauth
     user.skip_confirmation!
     user.save!
 
-    BootstrapsUser.bootstrap(user, initial_track_id)
+    BootstrapUser.(user, initial_track_id)
     user
   end
 
