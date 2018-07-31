@@ -101,7 +101,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     create :solution_mentorship, solution: solution, user: inactive_mentor
 
     CreatesNotification.expects(:create!).never
-    DeliversEmail.expects(:deliver!).never
+    DeliverEmail.expects(:call).never
     CreatesIteration.create!(solution, [])
   end
 
@@ -125,7 +125,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
       assert_equal solution, args[4][:about]
     end
 
-    DeliversEmail.expects(:deliver!).twice.with do |*args|
+    DeliverEmail.expects(:call).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_iteration_for_mentor, args[1]
       assert_equal Iteration, args[2].class

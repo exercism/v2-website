@@ -47,7 +47,7 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
       assert_equal solution, args[4][:about]
     end
 
-    DeliversEmail.expects(:deliver!).with do |*args|
+    DeliverEmail.expects(:call).with do |*args|
       assert_equal user, args[0]
       assert_equal :solution_approved, args[1]
       assert_equal solution, args[2]

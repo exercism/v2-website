@@ -41,7 +41,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
         # go into every single iteration
         about: iteration
       )
-      DeliversEmail.deliver!(
+      DeliverEmail.(
         mentor,
         :new_discussion_post_for_mentor,
         discussion_post
