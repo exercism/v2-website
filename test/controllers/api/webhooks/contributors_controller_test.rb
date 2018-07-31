@@ -2,20 +2,21 @@ require "test_helper"
 
 class API::Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTest
   test "does not save incomplete contributions" do
-    post api_webhooks_contributors_path, default_options(fixture('pull_request_event.closed'))
+    post api_webhooks_contributors_path, default_options(fixture('push_event.to_non_default_branch'))
 
     assert_equal 0, Contributor.count
   end
 
   test "saves a contribution" do
-    post api_webhooks_contributors_path, default_options(fixture('pull_request_event.merged.to_default_master'))
+    post api_webhooks_contributors_path, default_options(fixture('push_event.to_default_master'))
 
     assert_equal 1, Contributor.count
   end
 
   test "provides a useful error message if record fails to save" do
-    payload = fixture('pull_request_event.merged.to_default_master')
-    payload['pull_request']['user']['login'] = nil
+    payload = fixture('push_event.to_default_master')
+    payload["sender"]["login"] = nil
+
     post api_webhooks_contributors_path, default_options(payload)
 
     assert_equal 500, response.status
@@ -23,10 +24,10 @@ class API::Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTes
   end
 
   test "it doesn't process a request with an invalid signature" do
-    payload = fixture('pull_request_event.merged.to_non_default_branch')
-
+    payload = fixture('push_event.to_non_default_branch')
     options = default_options(payload)
     options[:headers]['X-Hub-Signature'] = 'ZOMG wrong signature'
+
     post api_webhooks_contributors_path, options
 
     assert_equal 500, response.status
