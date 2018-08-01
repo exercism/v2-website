@@ -8,7 +8,7 @@
       %span Our Contributors
   =render "header"
 
-  %h2 Our Track Maintainers
+  %h2 Our track maintainers
   %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
   =cache ["pages/team/maintainers", @last_updated_at, @page] do
     .maintainers
@@ -17,5 +17,3 @@
           -@maintainers.each do |maintainer|
             .pure-u-1-2.maintainer-wrapper= maintainer_widget(maintainer)
         =paginate(@maintainers)
-
-
