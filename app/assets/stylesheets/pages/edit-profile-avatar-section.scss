@@ -6,7 +6,7 @@
         overflow: hidden;
         margin-bottom: 25px;
 
-        > h3 {
+        h3 {
             display: inline-block;
             vertical-align: top;
             width: 60px;
@@ -17,21 +17,28 @@
             font-weight: $regular;
         }
 
-        > .image-preview {
-            display: inline-block;
+        .image-preview {
             vertical-align: top;
             height: 80px;
             width: 80px;
-            margin-right: 20px;
+            margin:5px 20px 5px 0;
             border-radius: 2px;
 
             background-position: center;
             background-size: cover;
+
+            @media #{$sm-media} {
+                display:inline-block;
+                margin-top:0;
+            }
         }
 
-        > .file-selector-section {
+        .file-selector-section {
             display: inline-block;
-            width: 200px;
+            .file-selector {
+                text-align: center;
+            }
+            // width: 200px;
         }
 
         .text-hint {
