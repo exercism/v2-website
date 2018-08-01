@@ -16,7 +16,7 @@ class My::SolutionsController < MyController
 
   def show
     @exercise = @solution.exercise
-    ClearsNotifications.clear!(current_user, @solution)
+    ClearNotifications.(current_user, @solution)
 
     @track = @solution.exercise.track
     @user_track = UserTrack.where(user: current_user, track: @track).first
@@ -51,7 +51,7 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    CompletesSolution.complete!(@solution)
+    CompleteSolution.(@solution)
     @exercise = @solution.exercise
     @track = @exercise.track
     @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
@@ -98,13 +98,13 @@ class My::SolutionsController < MyController
     if @next_core_solution || @unlocked_side_exercise_solutions.present?
       render_modal("solution-unlocked", "unlocked")
     else
-      js_redirect_to(@track)
+      js_redirect_to([:my, @solution])
     end
   end
 
   def publish
     @solution.update(published_at: Time.current) if params[:publish]
-    redirect_to [@solution.exercise.track, @solution.exercise, @solution]
+    redirect_to [:my, @solution]
   end
 
   private
@@ -123,7 +123,7 @@ class My::SolutionsController < MyController
     @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
-    ClearsNotifications.clear!(current_user, @iteration)
+    ClearNotifications.(current_user, @iteration)
 
     render :show
   end

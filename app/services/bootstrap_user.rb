@@ -1,7 +1,5 @@
-class BootstrapsUser
-  def self.bootstrap(*args)
-    new(*args).bootstrap
-  end
+class BootstrapUser
+  include Mandate
 
   attr_reader :user, :initial_track_id
   def initialize(user, initial_track_id = nil)
@@ -9,7 +7,7 @@ class BootstrapsUser
     @initial_track_id = initial_track_id
   end
 
-  def bootstrap
+  def call
     user.auth_tokens.create!(token: SecureRandom.uuid)
 
     if initial_track_id

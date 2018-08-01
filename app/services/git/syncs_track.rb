@@ -79,7 +79,7 @@ class Git::SyncsTrack
 
   def sync_exercise(exercise_slug, exercise_uuid, exercise, position)
     unlocked_by = exercise[:unlocked_by]
-    @unlocked_by_relationships[exercise_uuid] = unlocked_by unless unlocked_by.nil?
+    @unlocked_by_relationships[exercise_uuid] = unlocked_by
 
     # Some tracks have old config without keys and others
     # have new config with keys. Even when the keys are present,

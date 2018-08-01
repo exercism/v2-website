@@ -50,8 +50,20 @@ class SolutionTest < ActiveSupport::TestCase
     started_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
     create :iteration, solution: started_solution
     unstarted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    downloaded_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track), downloaded_at: Time.now
 
-    assert_equal [started_solution], Solution.started
+    assert_equal [started_solution, downloaded_solution], Solution.started
     assert_equal [unstarted_solution], Solution.not_started
   end
+
+  test "mentored_mode" do
+    refute create(:solution, independent_mode: true).mentored_mode?
+    assert create(:solution, independent_mode: false).mentored_mode?
+  end
+
+  test "track_in_mentored_mode" do
+    refute create(:solution, track_in_independent_mode: true).track_in_mentored_mode?
+    assert create(:solution, track_in_independent_mode: false).track_in_mentored_mode?
+  end
+
 end

@@ -8,9 +8,10 @@
     -if @user_track.mentoring_slots_remaining?
       If you would like to receive mentorship on it, please #{link_to "click here", request_mentoring_my_solution_path(@solution), method: :patch}.
     -else
+      %br
       Once your other solutions on this track have been mentored you may request mentoring for this.
 
--elsif @user_track.mentored_mode? && @solution.independent_mode?
+-elsif @solution.track_in_mentored_mode? && @solution.independent_mode?
   .migration-bar
     This solution has been imported from independent mode.
     -if @user_track.mentoring_slots_remaining?
@@ -52,7 +53,7 @@
     .notification
       In Independent Mode you will
       %strong not
-      receive mentoring by default. 
+      receive mentoring by default.
       -if @user_track.mentoring_slots_remaining?
         You may request mentoring on #{pluralize UserTrack::MAX_MENTORING_SLOTS, "solution"} at a time.
         #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.

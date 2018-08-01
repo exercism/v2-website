@@ -18,9 +18,9 @@ class SolutionsTest < ApplicationSystemTestCase
     stub_repo_cache! do
       sign_in!(user)
       visit my_solution_path(solution)
-      find(:css, ".tab", text: "Test Suite").click
     end
 
+    find(:css, ".tab", text: "Test Suite").click
     assert_text "This is the test suite"
   end
 

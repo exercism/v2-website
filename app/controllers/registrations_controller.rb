@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
      super do |user|
        if user.persisted?
-         BootstrapsUser.bootstrap(user, session[:user_join_track_id])
+         BootstrapUser.(user, session[:user_join_track_id])
        end
      end
   end

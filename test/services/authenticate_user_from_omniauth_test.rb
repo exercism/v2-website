@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
+class AuthenticateUserFromOmniauthTest < ActiveSupport::TestCase
   test "logs in with existing details" do
     provider = "foobar"
     uid = "bizzzz"
     user = create :user, provider: provider, uid: uid
 
     auth = mock(provider: provider, uid: uid)
-    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    actual = AuthenticateUserFromOmniauth.(auth)
     assert_equal user, actual
   end
 
@@ -25,7 +25,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     auth.stubs(provider: provider, uid: uid, info: info)
 
     DeviseMailer.expects(:confirmation_instructions).never
-    user = AuthenticatesUserFromOmniauth.authenticate(auth)
+    user = AuthenticateUserFromOmniauth.(auth)
     assert user.persisted?
     assert_equal provider, user.provider
     assert_equal uid, user.uid
@@ -42,7 +42,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     info.stubs(email: user.email)
     auth = mock
     auth.stubs(provider: 'asda', uid: '12312', info: info)
-    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    actual = AuthenticateUserFromOmniauth.(auth)
     assert_equal user, actual
   end
 
@@ -60,7 +60,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     create :user, handle: "#{handle}-#{num1}"
 
     SecureRandom.stubs(:random_number).with(10000).returns(num1, num2)
-    user = AuthenticatesUserFromOmniauth.authenticate(auth)
+    user = AuthenticateUserFromOmniauth.(auth)
     assert user.persisted?
     assert_equal "#{handle}-#{num2}", user.handle
   end
@@ -72,7 +72,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     user = create :user, provider: provider, uid: uid, email: old_email
 
     auth = mock(provider: provider, uid: uid)
-    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    actual = AuthenticateUserFromOmniauth.(auth)
     assert_equal user, actual
 
     user.reload
@@ -86,7 +86,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     user = create :user, provider: provider, uid: uid, email: "foo@users.noreply.github.com"
 
     auth = mock(provider: provider, uid: uid, info: mock(email: new_email))
-    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    actual = AuthenticateUserFromOmniauth.(auth)
     assert_equal user, actual
 
     user.reload
@@ -102,7 +102,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
     info.stubs(email: user.email)
     auth = mock
     auth.stubs(provider: provider, uid: uid, info: info)
-    actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+    actual = AuthenticateUserFromOmniauth.(auth)
     assert_equal user, actual
 
     user.reload
@@ -122,7 +122,7 @@ class AuthenticatesUserFromOmniauthTest < ActiveSupport::TestCase
       auth.stubs(provider: 'asd', uid: 'qwe', info: info)
 
       SecureRandom.stubs(uuid: new_password)
-      actual = AuthenticatesUserFromOmniauth.authenticate(auth)
+      actual = AuthenticateUserFromOmniauth.(auth)
       assert_equal user, actual
 
       user.reload

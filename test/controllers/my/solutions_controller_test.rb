@@ -41,8 +41,8 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       iteration = create :iteration, solution: solution
       create :user_track, user: @current_user, track: solution.exercise.track
 
-      ClearsNotifications.expects(:clear!).with(@current_user, solution)
-      ClearsNotifications.expects(:clear!).with(@current_user, iteration)
+      ClearNotifications.expects(:call).with(@current_user, solution)
+      ClearNotifications.expects(:call).with(@current_user, iteration)
 
       get my_solution_url(solution)
     end

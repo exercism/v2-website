@@ -1,7 +1,5 @@
-class ClearsNotifications
-  def self.clear!(*args)
-    new(*args).clear!
-  end
+class ClearNotifications
+  include Mandate
 
   attr_reader :user, :about
   def initialize(user, about)
@@ -9,7 +7,7 @@ class ClearsNotifications
     @about = about
   end
 
-  def clear!
+  def call
     Notification.where(user: user, about: about).update_all(read: true)
   end
 end

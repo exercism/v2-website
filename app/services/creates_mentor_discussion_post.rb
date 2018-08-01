@@ -42,7 +42,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
       about: iteration
     )
 
-    DeliversEmail.deliver!(
+    DeliverEmail.(
       solution.user,
       :new_discussion_post,
       discussion_post

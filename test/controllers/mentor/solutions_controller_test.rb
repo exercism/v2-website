@@ -26,8 +26,8 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in!(mentor)
 
-    ClearsNotifications.expects(:clear!).with(mentor, solution)
-    ClearsNotifications.expects(:clear!).with(mentor, iteration)
+    ClearNotifications.expects(:call).with(mentor, solution)
+    ClearNotifications.expects(:call).with(mentor, iteration)
 
     get mentor_solution_url(solution)
     assert_response :success

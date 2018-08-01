@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ClearsNotificationsTest < ActiveSupport::TestCase
+class ClearNotificationsTest < ActiveSupport::TestCase
 
   test "clears all notifications about a thing for a user" do
     user = create :user
@@ -9,7 +9,7 @@ class ClearsNotificationsTest < ActiveSupport::TestCase
     clear_notification2 = create :notification, user: user, about: about
     persist_notification = create :notification, about: about
 
-    ClearsNotifications.clear!(user, about)
+    ClearNotifications.(user, about)
     clear_notification1.reload
     clear_notification2.reload
     persist_notification.reload

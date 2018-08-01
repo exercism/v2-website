@@ -1,13 +1,11 @@
-class DeliversEmail
+class DeliverEmail
+  include Mandate
+
   class UnknownMailTypeError < RuntimeError
     attr_reader :mail_type
     def initialize(mail_type)
       @mail_type = mail_type
     end
-  end
-
-  def self.deliver!(*args)
-    new(*args).deliver!
   end
 
   attr_reader :user, :mail_type, :objects, :mailer, :action
@@ -18,7 +16,7 @@ class DeliversEmail
     @mailer, @action = parse_mail_type
   end
 
-  def deliver!
+  def call
     return false unless should_deliver?
     mail = "#{mailer}_mailer".classify.constantize.send(action, user, *objects)
     mail.deliver_later

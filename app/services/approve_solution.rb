@@ -32,7 +32,7 @@ class ApproveSolution
       about: solution
     )
 
-    DeliversEmail.deliver!(
+    DeliverEmail.(
       solution.user,
       :solution_approved,
       solution

@@ -25,6 +25,8 @@ class CompleteSolutionTest < ApplicationSystemTestCase
                                  solution: solution,
                                  user: mentor)
 
+    create(:exercise, unlocked_by: exercise, track: exercise.track)
+
     sign_in!(user)
     visit my_solution_path(solution.uuid)
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DeliversEmailTest < ActiveSupport::TestCase
+class DeliverEmailTest < ActiveSupport::TestCase
   {
     new_discussion_post: [UserNotificationsMailer, :new_discussion_post],
     new_discussion_post_for_mentor: [MentorNotificationsMailer, :new_discussion_post],
@@ -10,7 +10,7 @@ class DeliversEmailTest < ActiveSupport::TestCase
 
       mailer_action = mock(:deliver_later)
       mailer.expects(action).with(user).returns(mailer_action)
-      notification = DeliversEmail.deliver!(user, mail_type)
+      notification = DeliverEmail.(user, mail_type)
     end
   end
 
@@ -21,7 +21,7 @@ class DeliversEmailTest < ActiveSupport::TestCase
 
     mailer_action = mock(:deliver_later)
     UserNotificationsMailer.expects(:new_discussion_post).with(user, discussion_post).returns(mailer_action)
-    notification = DeliversEmail.deliver!(user, mail_type, discussion_post)
+    notification = DeliverEmail.(user, mail_type, discussion_post)
   end
 
   test "doesn't send if shouldn't deliver" do
@@ -31,12 +31,12 @@ class DeliversEmailTest < ActiveSupport::TestCase
     mail_type = :new_discussion_post
 
     UserNotificationsMailer.expects(:new_discussion_post).never
-    notification = DeliversEmail.deliver!(user, mail_type, discussion_post)
+    notification = DeliverEmail.(user, mail_type, discussion_post)
   end
 
   test "raises with invalid mail type" do
-    assert_raises DeliversEmail::UnknownMailTypeError do
-      DeliversEmail.deliver!(create(:user), :foobar)
+    assert_raises DeliverEmail::UnknownMailTypeError do
+      DeliverEmail.(create(:user), :foobar)
     end
   end
 end
