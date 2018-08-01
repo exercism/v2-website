@@ -12,8 +12,10 @@
 
   .lo-container
     =form_tag [:my, :tracks], method: :get, remote: true do
-      =text_field_tag :title, @title, placeholder: "Search for a language", autocomplete: "off"
-      =button_tag "Search", class: "pure-button"
+      .search-bar
+        =text_field_tag :title, @title, placeholder: "Search for a language", autocomplete: "off"
+      .search-button
+        =button_tag "Search", class: "pure-button"
 
     .no-results
       %h4 No results found.
