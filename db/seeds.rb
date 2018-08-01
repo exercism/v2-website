@@ -1,4 +1,5 @@
 ihid = User.create!(name: "Jeremy Walker", handle: 'iHiD', email: "jeremy@thalamus.ai", password: 'password', admin: true)
+BootstrapUser.(ihid)
 
 # Seed tracks
 Git::SeedsTracks.seed!
