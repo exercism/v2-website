@@ -6,20 +6,24 @@
         background: $color-1;
         background-image:image-url('background-overlay-1.png');
         background-size:cover;
-        padding:100px 0 35px;
+        padding:15px 0 15px;
         margin-bottom:35px;
+        @media #{$sm-media} {
+            padding:100px 0 35px;
+        }
         .edit-button {
             margin-bottom:15px;
-            @media #{$md-media} {
-                float:right;
-                margin-bottom:0;
-            }
             border:1px solid #fff;
             border-radius:2px;
             background:#fff;
             background:#4accaa;
             font-weight:$regular;
             margin-top:25px;
+            @media #{$sm-media} {
+                float:right;
+                margin-bottom:0;
+                margin-top: -50px;
+            }
             i {
                 margin-right:3px;
             }
@@ -46,10 +50,13 @@
         .sidebar {
             background: #f8f8f8;
             border-radius:2px;
-            padding:50px 30px;
+            padding:50px 15px;
             margin-bottom:15px;
             @media #{$md-media} {
                 margin-bottom:0;
+            }
+            @media #{$sm-media} {
+                padding:50px 30px;
             }
             .avatar {
                 display:block;
