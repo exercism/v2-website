@@ -66,6 +66,10 @@
                 margin-bottom:5px;
             }
             .track-progress {
+                display:none;
+                @media #{$sm-media} {
+                    display:block;
+                }
                 h3 {
                     display:inline-block;
                     @include font-size(14, 14);
