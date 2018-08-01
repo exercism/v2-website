@@ -16,4 +16,13 @@ module ApplicationHelper
     return false if current_user.admin? || current_user.test_user?
     true
   end
+
+  def url_with_protocol(url)
+    return url if url.starts_with? "https://"
+    if url.starts_with? "http://"
+      url.sub("http://", "https://")
+    else
+      "https://#{url}"
+    end
+  end
 end

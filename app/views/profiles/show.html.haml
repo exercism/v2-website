@@ -57,7 +57,7 @@
                 %span Twitter
 
             -if @profile.linkedin.present?
-              =link_to "https://" + @profile.linkedin, target: "_blank", class: 'external-link' do
+              =link_to url_with_protocol(@profile.linkedin), target: "_blank", class: 'external-link' do
                 =graphical_icon 'linkedin fa-fw'
                 %span LinkedIn
 
