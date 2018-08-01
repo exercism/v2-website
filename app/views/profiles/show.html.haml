@@ -57,12 +57,12 @@
                 %span Twitter
 
             -if @profile.linkedin.present?
-              =link_to url_with_protocol(@profile.linkedin), target: "_blank", class: 'external-link' do
+              =link_to @profile.linkedin, target: "_blank", class: 'external-link' do
                 =graphical_icon 'linkedin fa-fw'
                 %span LinkedIn
 
             -if @profile.medium.present?
-              =link_to "https://medium.com/@#{@profile.medium}", target: "_blank", class: 'external-link' do
+              =link_to "https://medium.com/#{@profile.medium}", target: "_blank", class: 'external-link' do
                 =graphical_icon 'medium fa-fw'
                 %span Medium
 
