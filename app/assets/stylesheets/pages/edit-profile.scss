@@ -3,9 +3,9 @@
 
 #modal.edit-profile {
     max-width:850px !important;
-    padding:35px;
+    padding:35px 15px;
     @media #{$md-media} {
-        padding:35px 15px;
+        padding:35px;
     }
     .lhs {
         margin-bottom:15px;
@@ -63,8 +63,7 @@
             border:1px solid #ddd;
             padding:8px;
             border-radius:2px;
-            width:310px;
-            max-width: 100%;
+            width:100%;
         }
     }
 
