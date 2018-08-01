@@ -1,12 +1,12 @@
 #profile-page
   .header
     .lo-container
+      %h1 #{@profile.display_name}'s Profile
+      .h1-subtitle This is a showcase of some of the solutions that #{@profile.display_name} has published on Exercism.
       -if user_signed_in? && current_user == @profile.user
         =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
           =graphical_icon :cogs
           Edit public profile
-      %h1 #{@profile.display_name}'s profile
-      .h1-subtitle This is a showcase of some of the solutions that #{@profile.display_name} has published on Exercism.
 
   .lo-container
     .pure-g
