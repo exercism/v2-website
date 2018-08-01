@@ -6,7 +6,7 @@
   -if @solution.completed?
     =render "show_completed"
 
-  -elsif @solution.approved?
+  -elsif @solution.approved? && !@exercise.auto_approve?
     =render "show_approved"
 
   .discussion
