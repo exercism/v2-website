@@ -6,6 +6,10 @@
     //margin-bottom:20px;
     height:35px;
     border-bottom: 1px solid rgba(#22333b, 0.5);
+    display:none;
+    @media #{$sm-media} {
+        display:block;
+    }
     a, span {
         display:inline-block;
         @include font-size(12, 12);
