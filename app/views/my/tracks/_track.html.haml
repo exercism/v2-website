@@ -11,11 +11,11 @@
 
     .title
       %h2= track.title
-      -if joined
-        .progress
-          - percentage = num_completed_exercises / num_exercises * 100
-          .filled{style: "width:#{percentage}%"}
-          .num #{num_completed_exercises.to_i} / #{num_exercises.to_i} exercises
-      -else
-        .num-exercises= pluralize num_exercises.to_i, "exercise"
-    .enrolled Joined by #{number_with_delimiter(num_users.to_i)} students
+    -if joined
+      .progress
+        - percentage = num_completed_exercises / num_exercises * 100
+        .filled{style: "width:#{percentage}%"}
+        .num #{num_completed_exercises.to_i} / #{num_exercises.to_i} exercises
+    -else
+      .num-exercises= pluralize num_exercises.to_i, "exercise"
+    -# .enrolled Joined by #{number_with_delimiter(num_users.to_i)} students
