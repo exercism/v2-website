@@ -2,44 +2,7 @@
 #my-solution-page,
 #mentor-solution-page {
     .panels {
-        overflow-y:hidden;
-
-        .lhs {
-            &.fixed {
-                .lhs-content {
-                    overflow-y:hidden;
-                    //position:relative;
-                    position:fixed;
-                    top:20px;
-                    //height:98%;
-                    height: 97vh;
-                    width:550px;
-                    .panes {
-                        position:absolute;
-                        top:29px;
-                        left:0;
-                        right:0;
-                        bottom:20px;
-                        .pane {
-                            overflow-y:auto;
-                            max-height:100%;
-                            .solution.single-file {
-                                .solution-code {
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    right: 0;
-                                    bottom: 0;
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
         .rhs {
-            overflow:hidden;
             padding-left:50px;
         }
     }

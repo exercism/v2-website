@@ -1,33 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-.widget-discussion-post .post-html, 
-.discussion .preview-area {
-    * {
-        @include font-size(14, 19);
-    }
-    &>* {
-        margin-bottom:10px;
-        &:last-child {
-            margin-bottom:0;
-        }
-    }
-    p {
-        @include font-size(14, 20);
-        margin-bottom:10px;
-    }
-    blockquote {
-        border-left: 4px solid #eee;
-        padding-left: 15px;
-        margin-left: 10px;
-    }
-    a {
-        color: #333;
-        font-weight: 400;
-        text-decoration: underline;
-    }
-}
-
 .widget-discussion-post {
     margin-bottom:20px;
     overflow:hidden;
@@ -127,6 +100,7 @@
 
         .buttons {
             text-align:right;
+            margin-top:10px;
             .update-button {
                 border: 1px solid $color-1;
                 background: $color-1;
@@ -142,10 +116,6 @@
 
         .pure-button {
             text-decoration: none !important;
-        }
-
-        .CodeMirror {
-            margin-bottom: 10px;
         }
     }
 }
