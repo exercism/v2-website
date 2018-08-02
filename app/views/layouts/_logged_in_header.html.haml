@@ -15,7 +15,7 @@
         -if current_user.admin? || current_user.mentor?
           .hr
         -if current_user.admin?
-          = link_to "Admin Dashboard", [:admin, :dashboard]
+          = link_to "Admin dashboard", [:admin, :dashboard]
         -if current_user.mentor?
           = link_to "Mentor Dashboard", [:mentor, :dashboard]
         .hr
@@ -32,4 +32,3 @@
 
     =link_to root_path, class: "logo" do
       =image "logo-white.png", "Exercism"
-
