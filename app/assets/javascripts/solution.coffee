@@ -37,21 +37,16 @@ window.setupSolution = ->
   setupNewDiscussionPost = =>
     $textarea = $(".new-discussion-post-form textarea")
     return if $textarea.length == 0
-    smde = new SimpleMDE
-      element: $textarea[0]
-      spellChecker: false
-      forceSync: true
-      status: false
-      toolbar: ["bold", "italic", "strikethrough", "|", "quote", "code", "link", "|", "unordered-list", "ordered-list"]
+
+    $textarea.markdown
+      iconlibrary: 'fa'
+      hiddenButtons: 'cmdHeading cmdImage cmdPreview'
 
     $('.preview-tab').click ->
       markdown = $textarea.val()
       $.post "/markdown/parse", {markdown: markdown}, (x,y,z) =>
         $('.new-discussion-post-form .preview-area').html(x)
         Prism.highlightAll()
-
-    $('.CodeMirror').bind 'heightChange', =>
-      $('.preview-area').css(height: $('.CodeMirror').outerHeight())
 
   #$window.resize(setupLayout)
   #setupLayout()
