@@ -38,7 +38,7 @@ class API::Webhooks::ContributorsControllerTest < ActionDispatch::IntegrationTes
   private
 
   def default_options(payload)
-    body = { payload: payload }.to_json
+    body = payload.to_json
     {
       headers: {
         'Content-Type' => "application/json",
