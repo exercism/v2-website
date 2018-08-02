@@ -2,7 +2,7 @@
   .person
     =image display_avatar_url(solution.user, user_track), "Avatar of #{display_handle(solution.user, user_track)}"
     .handle= display_handle(solution.user, user_track)
-    .published-at Published #{time_ago_in_words(solution.published_at)} ago
+    .published-at Published #{time_ago_in_words(solution.published_at || solution.created_at)} ago
   .reactions
     .reaction
       =icon 'thumbs-up fa-fw', 'Thumbs up'
