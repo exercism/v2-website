@@ -24,7 +24,8 @@ body .md-editor {
         border:none !important;
         border-top:1px solid #ddd !important;
         padding:15px;
-        @include font-size(14, 18);
+        @include code-font;
+        @include font-size(13, 18);
     }
 }
 
@@ -89,5 +90,8 @@ body .md-editor {
             background:#fafafa;
 
         }
+    }
+    strong {
+        font-weight:500;
     }
 }
