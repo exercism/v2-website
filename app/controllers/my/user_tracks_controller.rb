@@ -36,7 +36,10 @@ class My::UserTracksController < MyController
   def leave
     user_track = current_user.user_tracks.find(params[:id])
 
-    user_track.update!(archived_at: Time.current)
+    ActiveRecord::Base.transaction do
+      user_track.solutions.destroy_all
+      user_track.destroy!
+    end
 
     redirect_to my_tracks_path
   end
