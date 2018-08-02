@@ -76,4 +76,18 @@ body .md-editor {
         font-size:12px;
         padding:2px;
     }
+
+    table {
+        th, td {
+            border:1px solid #ddd;
+            padding:5px 10px;
+        }
+        th {
+            font-weight:500;
+        }
+        tr:nth-child(even) {
+            background:#fafafa;
+
+        }
+    }
 }
