@@ -1,4 +1,4 @@
-# Exercism Website
+# Exercism website
 
 ## Development setup
 
