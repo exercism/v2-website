@@ -62,6 +62,16 @@ header.logged-in {
                 right:24px;
                 @include font-size(20, 20);
                 color:#ccc;
+                &:after {
+                    font-family:"Font Awesome 5 Free";
+                    font-weight:900;
+                    content: "\f0d8";
+                    position:absolute;
+                    top:3px;
+                    right:1px;
+                    color:#fff;
+                    @include font-size(17, 17);
+                }
             }
 
             .person {
