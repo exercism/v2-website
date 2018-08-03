@@ -1,10 +1,10 @@
 #teams-memberships-page.team-page
   =teams_header
   .lo-container
-    %h1 Your Team
+    %h1 Your team
     -if @invitations.present?
       .section
-        %h2 Pending Invitations
+        %h2 Pending invitations
         %p These are people who have been invited to this team.
         %table.teams-table
           -@invitations.each do |invitation|

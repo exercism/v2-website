@@ -63,7 +63,8 @@ header.logged-in {
                 @include font-size(20, 20);
                 color:#ccc;
                 &:after {
-                    font-family:FontAwesome;
+                    font-family:"Font Awesome 5 Free";
+                    font-weight:900;
                     content: "\f0d8";
                     position:absolute;
                     top:3px;
