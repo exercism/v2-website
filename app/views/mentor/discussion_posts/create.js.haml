@@ -1,8 +1,7 @@
 var newPost = '#{j discussion_post_widget(@post, @solution, @user_track)}';
 $('.discussion .posts').show().append(newPost)
 $('.new-discussion-post-form textarea').val("")
-$('.CodeMirror')[0].CodeMirror.setValue("")
-$('.CodeMirror')[0].CodeMirror.clearHistory()
+$('.discussion .write-tab').click()
 Prism.highlightAll()
 #{yield(:js).gsub(/<\/?script>/, "")}
 

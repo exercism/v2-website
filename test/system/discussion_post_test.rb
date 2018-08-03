@@ -23,7 +23,7 @@ class DiscussionPostTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_solution_path(solution)
     click_on "Edit"
-    fill_simple_mde "discussion_post_content", "Hey!"
+    within(".widget-discussion-post.editing") { fill_in("discussion_post_content", with: "Hey!") }
     click_on "Save Changes"
 
     assert_text "Hey!"
@@ -75,7 +75,7 @@ class DiscussionPostTest < ApplicationSystemTestCase
     sign_in!(mentor)
     visit mentor_solution_path(solution)
     click_on "Edit"
-    fill_simple_mde "discussion_post_content", "Hey!"
+    within(".widget-discussion-post.editing") { fill_in("discussion_post_content", with: "Hey!") }
     click_on "Save Changes"
 
     assert_text "Hey!"
@@ -107,15 +107,5 @@ class DiscussionPostTest < ApplicationSystemTestCase
     end
 
     assert_text "This message has been deleted"
-  end
-
-  private
-
-  def fill_simple_mde(id, value)
-    script = <<~SCRIPT
-      var textarea = $('textarea[id=#{id}]').nextAll('.CodeMirror')[0].CodeMirror;
-      textarea.getDoc().setValue('#{value}');
-    SCRIPT
-    page.execute_script(script);
   end
 end

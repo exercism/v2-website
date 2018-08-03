@@ -67,7 +67,7 @@ class My::TracksController < MyController
       }
       @side_exercises_and_solutions_by_unlocked_by = @side_exercises_and_solutions.each_with_object(Hash.new{|h,k|h[k] = []}){|(e,s), h| h[e.unlocked_by_id] << [e,s]}
 
-      @num_side_exercises = @track.exercises.side.count
+      @num_side_exercises = @track.exercises.side.active.count
       @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
       @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.completed?}.size
 
