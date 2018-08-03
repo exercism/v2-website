@@ -24,6 +24,9 @@ mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'l
 
 You need Ruby installed. We use version 2.4. 
 
+### Node
+You need node installed. 
+
 ### Bundler
 
 Bundle is used to handle the project's Ruby dependancies. You can install it via
@@ -43,6 +46,7 @@ Then we've put a rake task together that should set everything else up. You can 
 
 ```bash
 bundle install
+npm install
 bundle exec rake exercism:setup
 ```
 
