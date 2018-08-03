@@ -9,15 +9,11 @@ class OpenSource::Contribution
   end
 
   def complete?
-    merged? && to_default_branch?
-  end
-
-  def merged?
-    payload.action == 'closed' && payload.pull_request.merged
+    to_default_branch?
   end
 
   def to_default_branch?
-    payload.pull_request.base.ref == payload.repository.default_branch
+    branch_name == payload.repository.default_branch
   end
 
   def username
@@ -35,6 +31,10 @@ class OpenSource::Contribution
   private
 
   def user
-    payload.pull_request.user
+    payload.sender
+  end
+
+  def branch_name
+    payload.ref.sub("refs/heads/", "")
   end
 end

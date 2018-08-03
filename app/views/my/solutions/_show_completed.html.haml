@@ -31,11 +31,11 @@
           %strong Carry on coding.
           You have
           -if num_avaliable_core_exercises > 0
-            #{pluralize num_avaliable_core_exercises, "core exercise"}
+            #{pluralize num_avaliable_core_exercises, "unlocked core exercise"}
             -if num_avaliable_side_exercises > 0
               and
           -if num_avaliable_side_exercises > 0
-            #{pluralize num_avaliable_side_exercises, "side exercise"}
+            #{pluralize num_avaliable_side_exercises, "unlocked side exercise"}
           that you have not yet completed on this track. Why not try a new challenge?
 
         =link_to "Choose next exercise", my_track_path(@track), class: 'pure-button'

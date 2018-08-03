@@ -1,6 +1,6 @@
 class My::ReactionsController < MyController
   def index
-    @solutions = Solution.joins(:reactions).where("reactions.user_id": current_user).includes({exercise: :track}).distinct.page(params[:page]).per(18)
+    @solutions = Solution.published.joins(:reactions).where("reactions.user_id": current_user).includes({exercise: :track}).distinct.page(params[:page]).per(18)
     @reaction_counts = Reaction.where(solution_id: @solutions.map(&:id)).group(:solution_id, :emotion).count
     @comment_counts = Reaction.where(solution_id: @solutions.map(&:id)).with_comments.group(:solution_id).count
     @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
