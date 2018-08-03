@@ -49,7 +49,9 @@
 
 #modal.my-track-started {
     max-width:530px !important;
-    max-height:85% !important;
+    @media #{$sm-media} {
+        max-height:85% !important;
+    }
     .learn-more {
         margin-top: 20px;
         border-top: 1px solid #ddd;
