@@ -3,12 +3,12 @@
     .lo-container
       =link_to "Home", root_path
       =nav_divider
-      =link_to "The Exercism Team", team_page_path
+      =link_to "The Exercism team", team_page_path
       =nav_divider
-      %span Our Contributors
+      %span Our contributors
   =render "header"
 
-  %h2 Our Track Maintainers
+  %h2 Our track maintainers
   %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
   =cache ["pages/team/maintainers", @last_updated_at, @page] do
     .maintainers
@@ -17,5 +17,3 @@
           -@maintainers.each do |maintainer|
             .pure-u-1-2.maintainer-wrapper= maintainer_widget(maintainer)
         =paginate(@maintainers)
-
-

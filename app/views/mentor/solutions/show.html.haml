@@ -1,7 +1,7 @@
 #mentor-solution-page
   #nav.lo-nav-bar
     .lo-container
-      =link_to "Mentor Dashboard", [:mentor, :dashboard]
+      =link_to "Mentor dashboard", [:mentor, :dashboard]
       =nav_divider
       %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
@@ -24,14 +24,14 @@
             .tab.tab-1
               Instructions
             .tab.tab-2
-              Test Suite
+              Test suite
             .tab.tab-3
               Solution
 
           =render "solutions/panes", iteration: @iteration
       .pure-u-1-2.rhs
         .discussion
-          %h3 Mentor Discussion
+          %h3 Mentor discussion
           -if @iteration.discussion_posts.size > 0
             .posts
               -@iteration.discussion_posts.each do |post|
