@@ -1,5 +1,9 @@
 # Exercism website
 
+[![Build Status](https://travis-ci.com/exercism/website.svg?branch=master)](https://travis-ci.com/exercism/website)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a287df685c8499df632e/maintainability)](https://codeclimate.com/github/exercism/website/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a287df685c8499df632e/test_coverage)](https://codeclimate.com/github/exercism/website/test_coverage)
+
 ## Development setup
 
 This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to run it locally:
