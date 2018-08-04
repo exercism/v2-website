@@ -3,9 +3,9 @@
     .lo-container
       =link_to "Home", root_path
       =nav_divider
-      =link_to "Language Tracks", [:tracks]
+      =link_to "Language tracks", [:tracks]
       =nav_divider
-      =link_to "#{@track.title} Track", @track
+      =link_to "#{@track.title} track", @track
       =nav_divider
       %span Exercises
 
@@ -16,7 +16,7 @@
         =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
       = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
-      %h1 Exercises on the #{@track.title} Track
+      %h1 Exercises on the #{@track.title} track
       /.stats
       /  .stat= pluralize @track.exercises.count, "Exercise"
       /  .stat= pluralize @track.user_tracks.count, "Students"
@@ -37,7 +37,8 @@
                 -length_word = exercise_length_word(exercise)
                 -difficulty_word = exercise_difficulty_word(exercise)
                 .stats
-                  .length{class: length_word}= length_word
+                  -# TODO: Uncomment this when exercise_length_word has been fix to no longer return medium by default
+                  -# .length{class: length_word}= length_word
                   .difficulty{class: difficulty_word}= difficulty_word
                 %h3= exercise.title
                 .details

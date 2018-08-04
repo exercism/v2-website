@@ -16,7 +16,7 @@
             .completed completed successfully
 
           .side
-            .completed= @num_solved_side_exercises
+            .completed #{@num_solved_side_exercises} / #{@num_side_exercises}
             %h3 Extra exercises completed
             .squares
               -@num_side_exercises.times do |i|

@@ -54,4 +54,14 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "love", reaction.emotion
   end
 
+  test "index only shows published solutions" do
+    sign_in!
+    published_solution = create :solution, published_at: DateTime.now
+    unpublished_solution = create :solution
+    create :reaction, solution: published_solution, user: @current_user
+    create :reaction, solution: unpublished_solution, user: @current_user
+
+    get my_reactions_path
+    assert_equal [published_solution], assigns(:solutions)
+  end
 end
