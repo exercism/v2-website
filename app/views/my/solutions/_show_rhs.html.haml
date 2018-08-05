@@ -13,7 +13,7 @@
     %h3.rhs-heading Mentor Discussion
     -if @solution.exercise.auto_approve?
       =render "auto_approved"
-      =render "discussion", readonly: true
+      =render "discussion", readonly: @iteration.discussion_posts.size == 0
     -else
       =render "discussion"
 
