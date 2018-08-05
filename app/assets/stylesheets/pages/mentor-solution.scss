@@ -134,6 +134,46 @@
             &.pass-button { padding:8px 15px; }
         }
     }
+    .claim-section {
+        clear:both;
+        padding-top:15px;
+        h3 {
+            font-weight:400;
+            color:#333;
+            padding:7px 0;
+            border-bottom:1px solid #ddd;
+            margin-bottom:10px;
+        } 
+        p {
+            margin-bottom:10px;
+            @include font-size(14, 19);
+        }
+        .pure-button {
+            background:$color-1;
+            margin-bottom:15px;
+        }
+        .force {
+            display:none;
+            p {
+                strong {
+                    color:red;
+                    font-weight:400;
+                }
+            }
+
+            .pure-button {
+                display:inline-block;
+                border:1px solid $color-1;
+                &.mentor-button {
+                    background:#fff;
+                    color:$color-1;
+                }
+            }
+        }
+    }
+    .claimed-section {
+        display:none;
+    }
     .download-section {
         clear:both;
         padding-top:15px;
@@ -143,7 +183,6 @@
             padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:10px;
-
         } 
         p {
             margin-bottom:10px;
@@ -154,6 +193,5 @@
                 width:100%;
             }
         }
-
     }
 }
