@@ -1,3 +1,12 @@
+-if @iteration.discussion_posts.size > 0
+  =render "discussion"
+
+.claimed-section
+  -unless @iteration.discussion_posts.size > 0
+    =render "discussion"
+  =render "new_discussion_post"
+  =render "download-section"
+
 .claim-section
   .request
     %h3 Give feedback on this solution
@@ -10,13 +19,10 @@
 
   .force
     %h3 Give feedback on this solution
-    %p 
+    %p
       %strong Warning:
-      Another mentor has started giving feedback on this solution. 
+      Another mentor has started giving feedback on this solution.
       You can still give feedback if you want to, but we recommend you apply your time to a different solution instead.
     =link_to "Go back to mentor dashboard", [:mentor, :dashboard], class: 'pure-button'
     =link_to "Mentor this solution anyway", lock_mentor_solution_path(@solution, force: true), remote: true, method: :patch, class: 'pure-button mentor-button js-disable-on-click'
 
-.claimed-section
-  =render "discussion"
-  =render "download-section"
