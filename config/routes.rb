@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     end
     resources :solutions, only: [:show] do
       member do
+        patch :lock
         patch :approve
         patch :abandon
         patch :ignore
