@@ -54,9 +54,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     assert_selector ".discussion h3", text: "Mentor Discussion"
     assert_selector ".discussion .posts"
-    refute_selector ".discussion form"
+    assert_selector ".discussion form"
   end
-
 
   test "independent mode / mentored solution" do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
