@@ -32,6 +32,7 @@
       .pure-u-1-2.rhs
         -if current_user.mentoring_solution?(@solution) || current_user.has_active_lock_for_solution?(@solution)
           =render "discussion"
+          =render "new_discussion_post"
           =render "download-section"
         -else
           =render "claim-section"

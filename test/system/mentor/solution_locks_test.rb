@@ -7,7 +7,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     create :track_mentorship, user: @mentor, track: @track
 
     @solution = create :solution, exercise: create(:exercise, track: @track)
-    create :iteration, solution: @solution
+    @iteration = create :iteration, solution: @solution
 
     sign_in!(@mentor)
   end
@@ -18,6 +18,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
   end
 
@@ -27,19 +28,37 @@ class SolutionLocksTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
   end
 
-  test "shows claim-section otherwise" do
+  test "shows claim-section if no lock" do
     visit mentor_solution_path(@solution)
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
+    refute_selector ".new-discussion-post"
 
     click_on "Mentor this solution"
     assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
   end
+
+  test "shows claim-section and discussions but no form if no lock but posts" do
+    create :discussion_post, iteration: @iteration
+    visit mentor_solution_path(@solution)
+
+    assert_selector ".claim-section"
+    assert_selector ".discussion"
+    refute_selector ".new-discussion-post"
+
+    click_on "Mentor this solution"
+    assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
+    refute_selector ".claim-section"
+  end
+
 
   test "check force works" do
     create :solution_lock, solution: @solution, user: create(:user), locked_until: Time.current + 1.minute
@@ -48,13 +67,16 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
+    refute_selector ".new-discussion-post"
 
     click_on "Mentor this solution"
     assert_selector ".claim-section"
     refute_selector ".discussion"
+    refute_selector ".new-discussion-post"
 
     click_on "Mentor this solution anyway"
     assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
   end
 end

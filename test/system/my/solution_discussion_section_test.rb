@@ -67,4 +67,3 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".discussion"
   end
 end
-
