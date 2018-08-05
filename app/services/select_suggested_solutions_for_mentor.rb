@@ -111,7 +111,13 @@ class SelectSuggestedSolutionsForMentor
       where(independent_mode: false).
 
       # Where there are no mentors
-      where(num_mentors: 0)
+      where(num_mentors: 0).
+
+      # Where not locked by a different mentor
+      where("NOT EXISTS(SELECT NULL FROM solution_locks
+                        WHERE solution_locks.solution_id = solutions.id
+                        AND locked_until > ?
+                        AND user_id != ?)", Time.current, user.id)
   end
 
   memoize
