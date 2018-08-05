@@ -137,6 +137,12 @@ class User < ApplicationRecord
     solution_mentorships.where(solution_id: solution.id).exists?
   end
 
+  def has_active_lock_for_solution?(solution)
+    SolutionLock.where(solution: solution, user_id: id).
+                 where('locked_until > ?', Time.current).
+                 exists?
+  end
+
   def test_user?
     return false if email.blank?
     return true  if email.downcase.include?('+testexercismuser')
