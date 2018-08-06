@@ -14,7 +14,8 @@ class CreateSolution
       git_sha: git_sha,
       git_slug: exercise.slug,
       last_updated_by_user_at: Time.now,
-      independent_mode: independent_mode
+      independent_mode: independent_mode,
+      track_in_independent_mode: independent_mode
     )
   rescue ActiveRecord::RecordNotUnique
     Solution.find_by(user: user, exercise: exercise)
