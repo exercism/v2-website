@@ -55,5 +55,9 @@ class CreateSolutionTest < ActiveSupport::TestCase
     refute normal_solution.independent_mode?
     refute neither_solution.independent_mode?
     assert independent_solution.independent_mode?
+
+    refute normal_solution.track_in_independent_mode?
+    refute neither_solution.track_in_independent_mode?
+    assert independent_solution.track_in_independent_mode?
   end
 end
