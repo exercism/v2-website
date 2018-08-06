@@ -122,9 +122,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "independent mode / independent solution" do
-    solution = create(:solution, user: @user, track_in_independent_mode: true, independent_mode: true)
+    solution = create(:solution, user: @user, independent_mode: true)
     create :iteration, solution: solution
-    create(:user_track, track: solution.track, user: @user)
+    create(:user_track, track: solution.track, user: @user, independent_mode: true)
 
     visit my_solution_path(solution)
 
@@ -135,9 +135,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "independent mode / independent solution - completed" do
-    solution = create(:solution, user: @user, track_in_independent_mode: true, independent_mode: true, completed_at: Time.current)
+    solution = create(:solution, user: @user, independent_mode: true, completed_at: Time.current)
     create :iteration, solution: solution
-    create(:user_track, track: solution.track, user: @user)
+    create(:user_track, track: solution.track, user: @user, independent_mode: true)
 
     visit my_solution_path(solution)
 

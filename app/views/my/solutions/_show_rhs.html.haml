@@ -17,7 +17,7 @@
     -else
       =render "discussion"
 
--elsif @solution.track_in_independent_mode?
+-elsif @user_track.independent_mode?
   =render "show_completed_independent"
   =render "show_legacy_discussion"
 
