@@ -35,7 +35,6 @@ class SelectSuggestedSolutionsForMentor
   def select_new_side(limit)
     base_mentored_mode_new_query.
       where('exercises.core': false).
-      where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
       limit(limit).pluck(:id)
   end
 
@@ -67,13 +66,13 @@ class SelectSuggestedSolutionsForMentor
 
   def base_mentored_mode_new_query
     base_mentored_mode_query.
-      where("solutions.created_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'")
+      not_legacy
   end
 
   def base_mentored_mode_legacy_query
     base_mentored_mode_query.
-      where("solutions.created_at <= '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'").
-      where("solutions.last_updated_by_user_at > '#{Exercism::V2_MIGRATED_AT.to_s(:db)}'")
+      legacy.
+      where("solutions.last_updated_by_user_at > ?", Exercism::V2_MIGRATED_AT.to_s(:db))
   end
 
   def base_mentored_mode_query

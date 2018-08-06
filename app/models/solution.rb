@@ -36,6 +36,14 @@ class Solution < ApplicationRecord
     where(downloaded_at: nil)
   end
 
+  def self.legacy
+    where("solutions.created_at < ?", Exercism::V2_MIGRATED_AT)
+  end
+
+  def self.not_legacy
+    where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT)
+  end
+
   def track_in_mentored_mode?
     !track_in_independent_mode?
   end
@@ -50,6 +58,10 @@ class Solution < ApplicationRecord
 
   def team_solution?
     false
+  end
+
+  def legacy?
+    created_at < Exercism::V2_MIGRATED_AT
   end
 
   def approved?

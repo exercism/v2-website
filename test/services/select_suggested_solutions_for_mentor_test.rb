@@ -280,6 +280,13 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                                         last_updated_by_user_at: DateTime.now,
                                         user: mentored_user)
 
+      unmentored_core_solution_2 = create(:solution,
+                                        exercise: create(:exercise, track: track, core: true),
+                                        num_mentors: 0,
+                                        created_at: Exercism::V2_MIGRATED_AT,
+                                        last_updated_by_user_at: DateTime.now,
+                                        user: mentored_user)
+
       unmentored_side_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: false),
                                         num_mentors: 0,
@@ -289,7 +296,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       mentored_1_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 1,
-                                        last_updated_by_user_at: DateTime.now,
+                                        last_updated_by_user_at: DateTime.now - 10.minutes,
                                         user: mentored_user)
 
       mentored_2_core_solution = create(:solution,
@@ -342,7 +349,8 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         mentored_1_core_solution,
         mentored_2_core_solution,
         unmentored_legacy_side_solution,
-        unmentored_dead_legacy_core_solution
+        unmentored_dead_legacy_core_solution,
+        unmentored_core_solution_2
       ].each do |solution|
         create :iteration, solution: solution
       end
@@ -350,6 +358,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       expected = [
         old_unmentored_core_solution,
         unmentored_core_solution,
+        unmentored_core_solution_2,
         unmentored_older_legacy_core_solution,
         unmentored_newer_legacy_core_solution,
         unmentored_side_solution,
