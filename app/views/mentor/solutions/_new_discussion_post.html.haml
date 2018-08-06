@@ -12,15 +12,16 @@
         .pane.pane-2.preview
           .preview-area
 
-    =button_tag "Comment", class: 'pure-button button'
+    =button_tag "Comment", class: 'pure-button button comment-button'
 
     .approved{style: @solution.approved?? "" : "display:none"}
       =icon :check
       Solution Approved
 
-    =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button button'
-    =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button button', value: "approved"
-    =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button button', value: "approved"
+    -unless @solution.approved?
+      =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button button'
+      =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button button', value: "approved"
+      =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button button', value: "approved"
 
 -content_for :js do
   :javascript
