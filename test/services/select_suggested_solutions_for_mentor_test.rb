@@ -44,6 +44,34 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
 
+  test "does not select solutions claimed by a mentor" do
+    mentor, track = create_mentor_and_track
+    mentee = create_mentee([track])
+
+    bad_solution = create(:solution,
+                          exercise: create(:exercise, track: track),
+                          user: mentee)
+    good_solution1 = create(:solution,
+                          exercise: create(:exercise, track: track),
+                          user: mentee)
+    good_solution2 = create(:solution,
+                           exercise: create(:exercise, track: track),
+                           user: mentee)
+
+    create :iteration, solution: bad_solution
+    create :iteration, solution: good_solution1
+    create :iteration, solution: good_solution2
+
+    # Lock with a differnet mentor
+    create :solution_lock, solution: bad_solution, user: create(:user), locked_until: Time.now + 1.day
+
+    # Lock with the same mentor
+    create :solution_lock, solution: good_solution1, user: mentor, locked_until: Time.now + 1.day
+
+    assert_equal [good_solution1, good_solution2], SelectSuggestedSolutionsForMentor.(mentor)
+  end
+
+
   test "does not select solutions in independent mode" do
     mentor, track = create_mentor_and_track
     mentee = create_mentee([track])
@@ -330,9 +358,9 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         unmentored_dead_legacy_core_solution,
 
         # We are currently not showing any solutions
-        # with >=1 mentor. Uncomment these again when/if 
+        # with >=1 mentor. Uncomment these again when/if
         # we change this back to >=3 mentors.
-        #mentored_1_core_solution, 
+        #mentored_1_core_solution,
         #mentored_2_core_solution,
       ]
       actual = SelectSuggestedSolutionsForMentor.(mentor)

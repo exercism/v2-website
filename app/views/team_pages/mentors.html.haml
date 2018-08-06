@@ -3,12 +3,12 @@
     .lo-container
       =link_to "Home", root_path
       =nav_divider
-      =link_to "The Exercism Team", team_page_path
+      =link_to "The Exercism team", team_page_path
       =nav_divider
-      %span Our Contributors
+      %span Our contributors
   =render "header"
 
-  %h2 Our Track Mentors
+  %h2 Our track mentors
   %p.subheading Our mentors are the human element behind Exercism, providing empathetic feedback on learners' solutions
   =cache ["pages/team/mentors", @last_updated_at, @page] do
     .mentors

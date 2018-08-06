@@ -51,7 +51,8 @@
                     position:relative;
                 }
                 &:after {
-                    font: normal normal normal 14px/1 FontAwesome;
+                    font-family: "Font Awesome 5 Pro"; 
+                    font-weight: 900;
                     font-size: inherit;
                     text-rendering: auto;
                     -webkit-font-smoothing: antialiased;

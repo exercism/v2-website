@@ -3,6 +3,10 @@ class Mentor::SolutionsController < MentorController
   before_action :check_mentor_may_mentor_solution!
 
   def show
+    if current_user == @solution.user
+      return redirect_to [:my, @solution]
+    end
+
     @exercise = @solution.exercise
     @track = @exercise.track
 
@@ -16,9 +20,7 @@ class Mentor::SolutionsController < MentorController
     @user_tracks = UserTrack.where(track: @track, user_id: @iteration.discussion_posts.map(&:user_id)).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
-    if current_user == @iteration.solution.user
-      return redirect_to [:my, @solution]
-    end
+    @current_user_lock = SolutionLock.find_by(solution: @solution, user: current_user)
 
     ClearNotifications.(current_user, @solution)
     ClearNotifications.(current_user, @iteration)
@@ -37,6 +39,15 @@ class Mentor::SolutionsController < MentorController
     @mentor_solution = SolutionMentorship.where(user: current_user, solution: @solution).first
     @mentor_solution.update(abandoned: true)
     redirect_to [:mentor, :dashboard]
+  end
+
+  def lock
+    @solution_locked = LockSolution.(current_user, @solution, force: !!params[:force])
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to action: :show }
+    end
   end
 
   private

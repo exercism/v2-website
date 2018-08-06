@@ -1,7 +1,7 @@
 #mentor-solution-page
   #nav.lo-nav-bar
     .lo-container
-      =link_to "Mentor Dashboard", [:mentor, :dashboard]
+      =link_to "Mentor dashboard", [:mentor, :dashboard]
       =nav_divider
       %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
@@ -24,67 +24,19 @@
             .tab.tab-1
               Instructions
             .tab.tab-2
-              Test Suite
+              Test suite
             .tab.tab-3
               Solution
 
           =render "solutions/panes", iteration: @iteration
       .pure-u-1-2.rhs
-        .discussion
-          %h3 Mentor Discussion
-          -if @iteration.discussion_posts.size > 0
-            .posts
-              -@iteration.discussion_posts.each do |post|
-                -user_track = @user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
-                =discussion_post_widget(post, @solution, user_track)
-          -else
-            .posts{style: "display:none"}
-
-          =form_for [:mentor, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
-            =hidden_field_tag :iteration_id, @iteration.id
-
-            .tabs-and-panes.selected-1
-              .tabs
-                .tab.tab-1{data: {tab: "markdown"}} Write
-                .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
-              .panes
-                .pane.pane-1.markdown
-                  =f.text_area :content, required: true
-                .pane.pane-2.preview
-                  .preview-area
-
-            =button_tag "Comment", class: 'pure-button button'
-
-            .approved{style: @solution.approved?? "" : "display:none"}
-              =icon :check
-              Solution Approved
-            -if current_user.mentoring_solution?(@solution)
-              -unless @solution.approved?
-                =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button button'
-            -else
-              =link_to "I'll pass, thanks", [:ignore, :mentor, @solution], method: :patch, class: 'pure-button pass-button button'
-
-            -unless @solution.approved?
-              =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button button', value: "approved"
-              =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button button', value: "approved"
-
-        .download-section
-          %h3 Download this solution
-          %p You can download this solution in mentor mode. Remember that this is user-submitted code that could potentially cause damage to your system. Please check it in the window above before executing it.
-          =render "widgets/code_snippet", code: @solution.mentor_download_command
-
+        -if current_user.mentoring_solution?(@solution) || current_user.has_active_lock_for_solution?(@solution)
+          =render "discussion"
+          =render "new_discussion_post"
+          =render "download-section"
+        -else
+          =render "claim-section"
 
 -content_for :js do
   :javascript
     setupSolution()
-    $textarea = $(".new-discussion-post-form textarea")
-    $textarea.keyup(function(){
-      if($textarea.val() == "") {
-        $('.approve-button').show()
-        $('.approve-and-comment-button').hide()
-      }
-      else {
-        $('.approve-button').hide()
-        $('.approve-and-comment-button').show()
-      }
-    })

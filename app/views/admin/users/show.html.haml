@@ -1,7 +1,7 @@
 #admin-users-page
   #nav.lo-nav-bar
     .lo-container
-      =link_to "Admin Dashboard", [:admin, :dashboard]
+      =link_to "Admin dashboard", [:admin, :dashboard]
       =nav_divider
       %span User ##{@user.id}
 
@@ -22,4 +22,3 @@
         = link_to "#{dp.solution.user_id == dp.user_id ? "Learner" : "Mentor"} on #{dp.solution.uuid}", admin_solution_iteration_path(dp.solution, dp.iteration), class: "solution"
         .timestamp= dp.created_at.to_s(:db)
         .content=raw dp.html
-

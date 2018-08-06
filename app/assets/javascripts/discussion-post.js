@@ -17,13 +17,10 @@ DiscussionPost.prototype.startEditing = function(e) {
   this.node.addClass('editing');
 
   if (!this.editorInitialized) {
-    new SimpleMDE({
-      element: this.node.find('textarea')[0],
-      spellChecker: false,
-      forceSync: true,
-      status: false,
-      toolbar: ["bold", "italic", "strikethrough", "|", "quote", "code", "link", "|", "unordered-list", "ordered-list"]
-    });
+    this.node.find('textarea').markdown({
+      iconlibrary: 'fa',
+      hiddenButtons: 'cmdHeading cmdImage cmdPreview'
+    })
 
     this.editorInitialized = true;
   }

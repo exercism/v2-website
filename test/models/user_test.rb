@@ -211,4 +211,16 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
     assert other_user.valid?
   end
+
+  test "has_active_lock_for_solution?" do
+    user = create :user
+    solution = create :solution
+    refute user.has_active_lock_for_solution?(solution)
+
+    lock = create :solution_lock, user: user, solution: solution, locked_until: Time.current - 1.second
+    refute user.has_active_lock_for_solution?(solution)
+
+    lock.update(locked_until: Time.current + 1.minute)
+    assert user.has_active_lock_for_solution?(solution)
+  end
 end
