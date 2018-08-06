@@ -1,5 +1,5 @@
 =link_to [:mentor, solution], class: "solution #{solution.exercise.core? && !solution.track_in_independent_mode?? "core" : ""}" do
-  .core= solution.created_at > Exercism::V2_MIGRATED_AT ? "Core" : "Core (Legacy)"
+  .core= solution.legacy?? "Core (Legacy)" : "Core"
   .icons
     .exercise
       =image solution.exercise.turquoise_icon_url, solution.exercise.track.title
