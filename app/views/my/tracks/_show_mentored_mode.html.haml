@@ -6,7 +6,7 @@
 
       .pure-u-5-12
         .progress-section
-          %h2 Your Progress in #{@track.title}
+          %h2 Your progress in #{@track.title}
           .h2-subtitle see how you're doing
 
           .core
@@ -30,7 +30,7 @@
             %h3 Concepts
             =render "topic_percentages", topic_percentages: @topic_percentages[0..10]
             -if @topic_percentages.size > 10
-              =link_to "Show More", "#", class: 'pure-button extra-button'
+              =link_to "Show more", "#", class: 'pure-button extra-button'
               .extra
                 =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
 
@@ -39,8 +39,8 @@
             =render "track_pages/links", track: @track, target: "_blank"
 
           .danger-zone
-            %h3 Danger Zone
-            =link_to "Leave Track", "#", class: 'pure-button leave-track-btn'
+            %h3 Danger zone
+            =link_to "Leave track", "#", class: 'pure-button leave-track-btn'
             -if !@user_track.independent_mode?
               =link_to "Switch to Independent Mode", "#", class: 'pure-button change-to-independent-btn'
 
@@ -49,4 +49,3 @@
 =content_for :js do
   :javascript
     setupMyTrackMentored()
-
