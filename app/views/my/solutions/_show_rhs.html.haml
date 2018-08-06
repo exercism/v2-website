@@ -10,7 +10,7 @@
     =render "show_approved"
 
   .discussion
-    %h3.rhs-heading Mentor Discussion
+    %h3.rhs-heading Mentor discussion
     -if @solution.exercise.auto_approve?
       =render "auto_approved"
       =render "discussion", readonly: @iteration.discussion_posts.size == 0
@@ -28,4 +28,3 @@
 -content_for :js do
   :javascript
     setupSolution()
-

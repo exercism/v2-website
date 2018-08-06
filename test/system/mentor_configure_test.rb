@@ -12,14 +12,14 @@ class MentorConfigureTest < ApplicationSystemTestCase
     visit mentor_configure_path
     assert_track_selections(not_selected: ["Ruby", "Elm", "Piet"])
     check "Ruby"
-    click_on "Save Settings"
+    click_on "Save settings"
     assert_equal user.mentored_tracks, [track_one]
 
     visit mentor_configure_path
     assert_track_selections(selected: ["Ruby"], not_selected: ["Elm", "Piet"])
     uncheck "Ruby"
     check "Elm"
-    click_on "Save Settings"
+    click_on "Save settings"
     user.reload
     assert_equal user.mentored_tracks, [track_two]
 

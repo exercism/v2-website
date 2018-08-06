@@ -3,7 +3,7 @@
     .lo-container
       =link_to "Settings", my_settings_path
       =nav_divider
-      %span Communication Preferences
+      %span Communication preferences
 
   .lo-container
     =notice_and_alert
@@ -12,7 +12,7 @@
 
     =form_for current_user.communication_preferences, url: [:my, :settings, :communication_preferences] do |f|
       /-if current_user.admin?
-      /  %h2 Admin Communications
+      /  %h2 Admin communications
 
       -if current_user.mentor?
         %h2 Mentor emails

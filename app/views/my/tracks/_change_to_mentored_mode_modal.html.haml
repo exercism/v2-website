@@ -1,10 +1,9 @@
 =hex_green_track_icon(track)
 .main-section
   %h2 Switch to Mentored Mode
-  %h3 on the #{track.title} Track
+  %h3 on the #{track.title} track
 
-  %p In Mentored Mode you will receive mentor feedback on each solution. The Track will also follow a structured route of progression. All your existing submissions on this Track will be saved but some exercises may become locked until you complete their prerequisite exercise.
+  %p In Mentored Mode you will receive mentor feedback on each solution. The track will also follow a structured route of progression. All your existing submissions on this Track will be saved but some exercises may become locked until you complete their prerequisite exercise.
   .buttons
     =link_to "Switch to Mentored Mode", set_mentored_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button action-button'
     =link_to "Cancel", "#", class: "pure-button close-modal cancel-button"
-

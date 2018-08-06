@@ -3,7 +3,7 @@
     .lo-container
       /=link_to "Dashboard", root_path
       /=nav_divider
-      =link_to "Language Tracks", [:my, :tracks]
+      =link_to "Language tracks", [:my, :tracks]
       =nav_divider
       %span #{@track.title} Track
 
@@ -16,7 +16,7 @@
           -if @user_track.independent_mode?
             Independent Mode
           -else
-            Track in Progress
+            Track in progress
     .lo-container
       .stats
         .stat= pluralize @track.exercises.active.count, "Exercise"

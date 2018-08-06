@@ -22,7 +22,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     visit my_solution_path(solution)
 
     refute_selector ".completed-section"
-    assert_selector ".discussion h3", text: "Mentor Discussion"
+    assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
   end
 
@@ -36,7 +36,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     assert_selector ".next-steps"
     refute_selector ".completed-section"
-    assert_selector ".discussion h3", text: "Mentor Discussion"
+    assert_selector ".discussion h3", text: "Mentor discussion"
     refute_selector ".discussion .posts"
     refute_selector ".discussion form"
   end
@@ -57,7 +57,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     assert_selector ".next-steps"
     refute_selector ".completed-section"
-    assert_selector ".discussion h3", text: "Mentor Discussion"
+    assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion .posts"
     assert_selector ".discussion form"
   end
@@ -76,7 +76,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".completed-section .next-option strong", text: COMPLETE_TEXT
 
     refute_selector ".next-steps"
-    assert_selector ".discussion h3", text: "Mentor Discussion"
+    assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion .posts"
     assert_selector ".discussion form"
   end
@@ -94,7 +94,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".completed-section .next-option strong", text: COMPLETE_TEXT
 
     refute_selector ".next-steps"
-    assert_selector ".discussion h3", text: "Mentor Discussion"
+    assert_selector ".discussion h3", text: "Mentor discussion"
     refute_selector ".discussion .posts"
     refute_selector ".discussion form"
   end
@@ -106,7 +106,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".discussion h3", text: "Mentor Discussion"
+    assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
   end
 
