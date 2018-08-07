@@ -103,6 +103,7 @@ header.logged-in {
                 text-decoration:none;
                 color:#666;
                 @include font-size(13, 13);
+                white-space:nowrap;
                 &:hover {
                     background:#eee;
                 }
