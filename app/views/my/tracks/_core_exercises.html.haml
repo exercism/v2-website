@@ -7,7 +7,7 @@
         = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
           -if exercise.solution.approved_by
             .status Completed
-          -else exercise.solution.approved_by
+          -else
             .status.completed-unmentored
               Completed
               .unmentored
@@ -33,7 +33,7 @@
       .exercise-wrapper.in-progress
         .circle= graphical_image exercise.white_icon_url
         = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
-          .status In Progress
+          .status= exercise.solution.approved?? "Approved" : "In Progress"
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
           .title
             = exercise.title

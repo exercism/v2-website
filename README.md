@@ -14,7 +14,7 @@ This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to
 
 - **Ruby**: We recommend Ruby >=2.4 (and this will soon become a requirement). We recommend using [RVM](http://rvm.io/)
 - **MySQL**: Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
-- **Yarn**: Yarn handles front-end dependencies. See Yarn's [installation instructions](https://yarnpkg.com/lang/en/docs/install/#mac-stable).
+- **Yarn**: Yarn handles front-end dependencies. See Yarn's [installation instructions](https://yarnpkg.com/lang/en/docs/install).
 
 ### Configure the database
 

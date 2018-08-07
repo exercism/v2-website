@@ -6,10 +6,10 @@ class Solution < ApplicationRecord
   has_many :iterations, dependent: :destroy
   has_many :discussion_posts, through: :iterations
 
-  has_many :mentorships, class_name: "SolutionMentorship"
+  has_many :mentorships, class_name: "SolutionMentorship", dependent: :destroy
   has_many :mentors, through: :mentorships, source: :user
 
-  has_many :reactions
+  has_many :reactions, dependent: :destroy
 
   delegate :auto_approve?, :track, to: :exercise
 
@@ -36,6 +36,14 @@ class Solution < ApplicationRecord
     where(downloaded_at: nil)
   end
 
+  def self.legacy
+    where("solutions.created_at < ?", Exercism::V2_MIGRATED_AT)
+  end
+
+  def self.not_legacy
+    where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT)
+  end
+
   def track_in_mentored_mode?
     !track_in_independent_mode?
   end
@@ -50,6 +58,10 @@ class Solution < ApplicationRecord
 
   def team_solution?
     false
+  end
+
+  def legacy?
+    created_at < Exercism::V2_MIGRATED_AT
   end
 
   def approved?

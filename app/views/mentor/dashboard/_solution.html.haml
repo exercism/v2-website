@@ -1,9 +1,9 @@
 =link_to [:mentor, solution], class: "solution #{solution.exercise.core? && !solution.track_in_independent_mode?? "core" : ""}" do
-  .core= solution.created_at > Exercism::V2_MIGRATED_AT ? "Core" : "Core (Legacy)"
+  .core= solution.legacy?? "Core (Legacy)" : "Core"
   .icons
     .exercise
       =image solution.exercise.turquoise_icon_url, solution.exercise.track.title
-    =image solution.exercise.track.hex_turquoise_icon_url, solution.exercise.track.title, class: 'track'
+    =image solution.exercise.track.hex_turquoise_icon_url, solution.exercise.track.title, class: 'track', onerror: 'if (this.src != "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") { this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; };'
     .joiner
     =image display_avatar_url(solution.user, user_track), display_handle(solution.user, user_track), class: 'person'
 
