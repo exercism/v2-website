@@ -3,7 +3,7 @@
   .icons
     .exercise
       =image solution.exercise.turquoise_icon_url, solution.exercise.track.title
-    =image solution.exercise.track.hex_turquoise_icon_url, solution.exercise.track.title, class: 'track'
+    =image solution.exercise.track.hex_turquoise_icon_url, solution.exercise.track.title, class: 'track', onerror: 'if (this.src != "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") { this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; };'
     .joiner
     =image display_avatar_url(solution.user, user_track), display_handle(solution.user, user_track), class: 'person'
 
