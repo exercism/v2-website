@@ -18,7 +18,13 @@ class Git::FetchesUpdatedRepos
   end
 
   def fetch
-    repo_updates.each { |update| FetchRepoUpdateJob.perform_now(update.id) }
+    repo_updates.each do |update|
+      begin
+        FetchRepoUpdateJob.perform_now(update.id)
+      rescue => exception
+        Bugsnag.notify(exception)
+      end
+    end
   end
 
   private
