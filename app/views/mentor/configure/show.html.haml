@@ -14,7 +14,7 @@
           -Track.all.order(:title).pluck(:title, :id).each do |track_title, track_id|
             .field
               =label_tag "track_id_#{track_id}" do
-                - is_mentored = @mentored_track_ids.member?(track_id)
+                - is_mentored = @mentored_track_ids.include?(track_id)
                 =check_box_tag "track_id[#{track_id}]", 1, is_mentored
                 .text= track_title
 
