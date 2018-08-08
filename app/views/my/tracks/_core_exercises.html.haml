@@ -29,6 +29,22 @@
                 =render "unlocked_exercises", unlocked_exercises_and_solutions: @side_exercises_and_solutions_by_unlocked_by[nil][0,10]
               =render "unlocked_exercises", unlocked_exercises_and_solutions: @side_exercises_and_solutions_by_unlocked_by[exercise.id]
 
+          =content_for :js do
+            :javascript
+              $("a.unlocked-exercise").each(function(idx, el){
+                const title = $(el).data("title")
+                const status = $(el).data("status")
+                const section = $(el).parents(".unlocked-exercises").siblings("h3")
+                $(el).hover(
+                  function(){
+                    section.text(title + ": " + status)
+                  },
+                  function(){
+                    section.text("You've unlocked extra exercises!")
+                  })
+              });
+
+
     - elsif exercise.unlocked?
       .exercise-wrapper.in-progress
         .circle= graphical_image exercise.white_icon_url

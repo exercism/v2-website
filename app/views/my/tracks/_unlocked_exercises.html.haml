@@ -1,9 +1,10 @@
 -unlocked_exercises_and_solutions.each do |exercise, solution|
   -if solution
-    = link_to [:my, solution], class: "unlocked-exercise" do
+    - status = solution.completed? ? "Completed" : "In progress"
+    = link_to [:my, solution], class: "unlocked-exercise", data: { status: status, title: exercise.title } do
       =graphical_image exercise.turquoise_icon_url, class: 'normal'
       =graphical_image exercise.white_icon_url, class: 'hover'
   -else
-    = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'unlocked-exercise' do
+    = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'unlocked-exercise', data: { status: "Unstarted", title: exercise.title } do
       =graphical_image exercise.turquoise_icon_url, class: 'normal'
       =graphical_image exercise.white_icon_url, class: 'hover'
