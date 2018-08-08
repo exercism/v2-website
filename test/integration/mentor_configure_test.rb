@@ -7,6 +7,7 @@ class MentorConfigureTest < ActionDispatch::IntegrationTest
 
     track_one = create :track
     track_two = create :track
+    track_three = create :track
     user.mentored_tracks = [track_one]
 
     sign_in! user
@@ -16,6 +17,7 @@ class MentorConfigureTest < ActionDispatch::IntegrationTest
     assert_select "form" do
       assert_track_selected(track_one.id)
       assert_track_not_selected(track_two.id)
+      assert_track_not_selected(track_three.id)
     end
 
     # User unclicks their track and cliks the other path
@@ -26,6 +28,7 @@ class MentorConfigureTest < ActionDispatch::IntegrationTest
     assert_select "form" do
       assert_track_not_selected(track_one.id)
       assert_track_selected(track_two.id)
+      assert_track_not_selected(track_three.id)
     end
   end
 
