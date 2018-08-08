@@ -14,7 +14,9 @@
           -Track.all.order(:title).pluck(:title, :id).each do |track_title, track_id|
             .field
               =label_tag "track_id_#{track_id}" do
-                =check_box_tag "track_id[#{track_id}]"
+                - is_mentored = @mentored_track_ids.member?(track_id)
+                - check_box_value = "track_id[#{track_id}]"
+                =check_box_tag check_box_value, check_box_value, is_mentored
                 .text= track_title
 
           =button_tag "Save Settings", class: 'pure-button'

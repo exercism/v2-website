@@ -2,6 +2,7 @@ class Mentor::ConfigureController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @mentored_track_ids = Set.new(current_user.mentored_tracks.pluck(:id))
   end
 
   def update
