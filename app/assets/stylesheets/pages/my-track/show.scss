@@ -311,6 +311,9 @@ body.namespace-my.controller-tracks.action-show {
                 font-weight:$regular;
                 padding:7px 20px;
                 @include font-size(13,13);
+                strong {
+                    font-weight:$bold;
+                }
             }
             .unlocked-exercises {
                 padding:10px 20px 5px;
