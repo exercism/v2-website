@@ -8,7 +8,10 @@
 #modal.change-to-mentored-mode,
 #modal.leave-track {
     max-width:540px;
-    padding:50px 50px 50px 50px;
+    padding:50px 15px 50px 15px;
+    @media #{$sm-media} {
+        padding:50px 50px 50px 50px;
+    }
     img {
         display:block;
         width:100px;
@@ -67,11 +70,15 @@
     .buttons {
         .pure-button {
             display:inline-block;
-            width:auto;
+            width:100%;
+            margin-bottom:20px;
+            @media #{$md-media} {
+                width:auto;
+                margin-bottom:0;
+            }
             border:1px solid $color-1;
             padding: 10px 13px;
             font-weight:400;
-            margin-bottom:0;
             &.independent-mode-button {
                 border:1px solid $color-1;
                 background:#fff;
