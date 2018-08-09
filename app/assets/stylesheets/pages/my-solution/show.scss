@@ -65,6 +65,12 @@
                 font-weight:$bold;
                 margin-bottom:5px;
             }
+            .track-progress-mobile {
+                display:block;
+                @media #{$sm-media} {
+                    display:none;
+                }
+            }
             .track-progress {
                 display:none;
                 @media #{$sm-media} {

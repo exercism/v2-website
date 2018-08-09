@@ -17,6 +17,9 @@
         =iterations_nav_widget(:my, @solution, @iteration)
 
       %h2= @exercise.title
+      .track-progress-mobile
+        = "#{@user_track.num_completed_core_exercises}/#{@track.exercises.core.count} Exercises on the "
+        = link_to "#{@track.title} Track", [:my, @track]
       .track-progress
         -if @user_track.independent_mode?
           %h3 In Independent Mode
