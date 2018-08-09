@@ -405,6 +405,10 @@ body.namespace-my.controller-tracks.action-show {
     }
     .side-exercises {
         .num-extra-exercises {
+            display:none;
+            @media #{$md-media} {
+                display:block;
+            }
             float:right;
             padding-top:5px;
             padding-right:25px;
