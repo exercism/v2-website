@@ -14,15 +14,19 @@
             width:70px;
             height:70px;
             padding:8px;
-            float:left;
-            margin-right:20px;
-            margin-left: -54px;
-            margin-top: -11px;
+            float:right;
+            margin-top: -25px;
             border-radius: 100%;
             overflow:hidden;
             background:$color-1;
             border:5px solid #fff;
             box-shadow:0 0 1px 1px $color-1;
+            @media #{$sm-media} {
+                float:left;
+                margin-left: -54px;
+                margin-right:20px;
+                margin-top: -11px;
+            }
             img {
                 height:42px;
                 margin: 1px auto;
