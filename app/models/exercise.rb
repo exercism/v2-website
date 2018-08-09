@@ -15,7 +15,6 @@ class Exercise < ApplicationRecord
   has_many :solutions
   has_many :iterations, through: :solutions
 
-  default_scope -> { order('position ASC, title ASC') }
   scope :active, -> { where(active: true) }
   scope :core, -> { where(core: true) }
   scope :side, -> { where(core: false) }
