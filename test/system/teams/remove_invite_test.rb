@@ -3,7 +3,7 @@ require 'application_system_test_case'
 class Teams::RemoveInviteTest < ApplicationSystemTestCase
   test "team admin removes team invitation" do
     original_host = Capybara.app_host
-    Capybara.app_host = "http://teams.lvh.me"
+    Capybara.app_host = SeleniumHelpers.teams_host
 
     team_admin = create(:user)
     team = create(:team)
