@@ -2,6 +2,7 @@
 @import 'mixins';
 
 .lo-container {
+    max-width:1200px;
     padding:0 15px;
     @media #{$md-media} {
         padding:0 50px;
