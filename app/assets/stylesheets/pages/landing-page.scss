@@ -4,13 +4,21 @@
 #landing-page {
     .welcome-section {
         .lhs {
+            display:none;
+            @media #{$lg-media} {
+                display: block;
+            }
             @media #{$lg-media} {
                 padding-bottom:50px; 
             }
+            z-index: -1;
         }
         .rhs {
+            padding-top:100px;
+            margin-bottom:50px;
             @media #{$lg-media} {
                 padding-top:100px;
+                margin-bottom:0;
             }
             h1 {
                 @include header-font;
@@ -43,6 +51,12 @@
                 @include font-size(16, 16);
                 font-weight:$regular;
                 border-radius:2px;
+                width:100%;
+                margin-bottom:15px;
+                @media #{$sm-media} {
+                    width:auto;
+                    margin-bottom:0;
+                }
                 &.sign-up-button {
                     background:$color-3;
                     color:#fff;
