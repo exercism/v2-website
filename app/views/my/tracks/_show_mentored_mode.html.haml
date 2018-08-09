@@ -46,3 +46,7 @@
 
 =render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions
 
+=content_for :js do
+  :javascript
+    setupMyTrackMentored()
+
