@@ -18,5 +18,5 @@
   - if @solution.auto_approve?
     =button_tag "Save and continue", class: 'pure-button reflection-submit-button'
   - else
-    .pure-button.reflection-continue-button Continue
+    =button_tag "Continue", class: 'pure-button reflection-continue-button'
     =button_tag "Save and continue", class: 'pure-button reflection-submit-button', style: 'display:none;'

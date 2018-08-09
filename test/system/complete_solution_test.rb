@@ -36,6 +36,7 @@ class CompleteSolutionTest < ApplicationSystemTestCase
     click_link "Continue"
     check "Publish my solution"
     fill_in "reflection", with: "Printing to the console was easy!"
+    click_button "Continue"
     find("label[for=mentor_reviews_#{mentor.id}_rating_5]").click
     click_button "Save and continue"
     click_link "Continue"
