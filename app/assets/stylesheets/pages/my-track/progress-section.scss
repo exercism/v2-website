@@ -2,11 +2,14 @@
 @import 'mixins';
 
 #my-track-page .progress-section {
-    padding: 30px 30px 15px 30px;
+    padding: 30px 15px 15px 15px;
     background:#f9f9f9;
     border-radius:2px;
     margin-top:42px;
-    margin-left:100px;
+    @media #{$md-media} {
+        padding: 30px 30px 15px 30px;
+        margin-left:100px;
+    }
     h2 {
         color:$color-1;
         font-weight:$bold;
