@@ -2,6 +2,9 @@
   =render "nav_and_header"
 
   .lo-container
+    .small-iterations-nav
+      -if @iteration
+        =iterations_nav_widget(:my, @solution, @iteration)
     =render "information_bar"
 
     .pure-g.panels#solution-panels

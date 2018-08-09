@@ -30,36 +30,6 @@
             }
         }
         .inner {
-            .widget-iterations-nav {
-                float:right;
-                a, .current {
-                    .idx {
-                        color:$color-1;
-                        border-color:$color-1;
-                    }
-                    .num-comments {
-                        &:after { 
-                            color:$color-1;
-                            text-shadow:0 0 2px #fff;
-                        }
-                        .num { color:#fff; }
-                    }
-                    &.current {
-                        .idx {
-                            background: $color-1;
-                            border-color:$color-1;
-                            color:#fff;
-                        }
-                        .num-comments {
-                            &:after { 
-                                color:#fff;
-                                text-shadow: -1px -1px 0 $color-1,  1px -1px 0 $color-1, -1px 1px 0 $color-1, 1px 1px 0 $color-1;
-                            }
-                            .num { color:$color-1; }
-                        }
-                    }
-                }
-            }
             h2 {
                 @include font-size(25, 25);
                 font-weight:$bold;
@@ -130,6 +100,53 @@
         }
     }
 }
+#my-solution-page .inner .widget-iterations-nav {
+    float:right;
+    display:none;
+    @media #{$sm-media} {
+        display:block;
+    }
+}
+#my-solution-page .small-iterations-nav .widget-iterations-nav {
+    @media #{$sm-media} {
+        display:none;
+    }
+    margin:20px 15px;
+    .title, .iterations {
+        text-align:left;
+    }
+}
+#my-solution-page .inner .widget-iterations-nav,
+#my-solution-page .small-iterations-nav .widget-iterations-nav {
+    a, .current {
+        .idx {
+            color:$color-1;
+            border-color:$color-1;
+        }
+        .num-comments {
+            &:after { 
+                color:$color-1;
+                text-shadow:0 0 2px #fff;
+            }
+            .num { color:#fff; }
+        }
+        &.current {
+            .idx {
+                background: $color-1;
+                border-color:$color-1;
+                color:#fff;
+            }
+            .num-comments {
+                &:after { 
+                    color:#fff;
+                    text-shadow: -1px -1px 0 $color-1,  1px -1px 0 $color-1, -1px 1px 0 $color-1, 1px 1px 0 $color-1;
+                }
+                .num { color:$color-1; }
+            }
+        }
+    }
+}
+
 #my-solution-page,
 #teams-my-solution-page,
 #teams-solution-page {
