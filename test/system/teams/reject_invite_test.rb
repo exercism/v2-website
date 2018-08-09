@@ -3,7 +3,7 @@ require 'application_system_test_case'
 class Teams::RejectInviteTest < ApplicationSystemTestCase
   test "user rejects invite" do
     original_host = Capybara.app_host
-    Capybara.app_host = "http://teams.lvh.me"
+    Capybara.app_host = SeleniumHelpers.teams_host
 
     user = create(:user, email: "test@example.com")
     team = create(:team, name: "Team A")
