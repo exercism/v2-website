@@ -275,7 +275,9 @@
         padding:60px 0;
         h2 {
             color:#fff;
-            text-align:center;
+            @media #{$sm-media} {
+                text-align:center;
+            }
             @include font-size(17, 17);
             font-weight:$light;
             margin-bottom:20px;
@@ -289,7 +291,10 @@
             @include font-size(16, 16);
             margin:0 auto;
             display:block;
-            width:280px;
+            width:100%;
+            @media #{$sm-media} {
+                width:280px;
+            }
             color:#fff;
         }
     }
