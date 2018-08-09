@@ -137,7 +137,9 @@ body.controller-my-tracks.action-show {
     .about-section {
         padding:60px 0;
         .about {
-            padding-right:100px;
+            @media #{$lg-media} {
+                padding-right:100px;
+            } 
         }
         .code-sample {
             margin-top:35px;
