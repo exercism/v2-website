@@ -1,7 +1,13 @@
 .progress
-  =graphical_icon 'circle filled'
-  =graphical_icon 'circle'
-  =icon 'circle', 'Step 1 of 3'
+  - if @solution.auto_approve?
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle'
+    =icon 'circle', 'Step 1 of 3'
+  - else
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle'
+    =graphical_icon 'circle'
+    =icon 'circle', 'Step 1 of 4'
 
 .icon
   =graphical_image @exercise.white_icon_url, class: 'exercise-icon'

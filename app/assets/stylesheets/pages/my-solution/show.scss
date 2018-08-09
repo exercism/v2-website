@@ -310,18 +310,7 @@
 
 #modal.solution-reflection {
     max-width:850px !important;
-
-    .modal-lhs {
-        @media #{$md-media} {
-            padding-right:20px;
-            border-right:1px solid #e9e9e9;
-        }
-    }
-    .modal-rhs {
-        @media #{$md-media} {
-            padding-left:20px;
-        }
-    }
+    
     h2 {
         @include font-size(18, 18);
         font-weight:$regular;
