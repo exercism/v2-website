@@ -226,10 +226,8 @@
                     border-radius:5px;
                     border: 2px solid $color-2;
                     margin:10px 5px;
-                    min-width:50px;
                     @media #{$sm-media} {
                         margin:10px;
-                        min-width:150px;
                     }
                     .logo, .title {
                         height:36px;
