@@ -99,10 +99,30 @@ body.namespace-my.controller-tracks.action-show {
             left:0;
             background:$background-grey-1;
             width:2px;
+            z-index:-2;
         }
         .exercise-wrapper {
             position:relative;
-            margin-left:58px;
+            margin-left:38px;
+            @media #{$md-media} {
+                margin-left:58px;
+            }
+
+            &:last-child{
+                &:before {
+                    position:absolute;
+                    content: "";
+                    top:40px;
+                    left:-38px;
+                    @media #{$md-media} {
+                        left:-58px;
+                    }
+                    height:350px;
+                    width:2px;
+                    background:#fff;
+                    z-index:-1;
+                }
+            }
 
             &:after {
                 position:absolute;
@@ -117,7 +137,10 @@ body.namespace-my.controller-tracks.action-show {
             .circle {
                 position:absolute;
                 top:23px;
-                left:-83px;
+                left:-63px;
+                @media #{$md-media} {
+                    left:-83px;
+                }
                 border-radius:100%;
                 width:50px;
                 height:50px;
@@ -133,10 +156,14 @@ body.namespace-my.controller-tracks.action-show {
                 border-radius:2px;
                 padding:20px 25px;
                 margin-bottom:15px;
-                height:100px;
+                min-height:100px;
                 background:#fff;
                 .status {
-                    float:right;
+                    margin-bottom:10px;
+                    @media #{$md-media} {
+                        float:right;
+                        margin-bottom:0;
+                    }
                     @include font-size(12, 12);
                     letter-spacing:-0.5px;
                     text-transform:uppercase;
@@ -162,22 +189,33 @@ body.namespace-my.controller-tracks.action-show {
                     @include font-size(13, 16);
                     color:#ccc;
                     overflow:hidden;
-                    max-height:32px;
                     max-width:400px;
                 }
                 .topics {
-                    display:inline-block;
+                    display:block;
                     vertical-align:bottom;
                     max-width: 290px;
                     overflow: hidden;
                     max-height: 23px;
                     margin-bottom:0px;
 
+                    @media #{$md-media} {
+                        display:inline-block;
+                    }
+
                     .topic {
                         display:inline-block;
                         @include font-size(11, 11);
                         font-weight:$regular;
                         margin-left:10px;
+                        &:first-child {
+                            margin-left:0;
+                        }
+                        @media #{$md-media} {
+                            &:first-child {
+                                margin-left:10px;
+                            }
+                        }
                         background:#eee;
                         color:#999;
                         padding:3px 6px 4px;
@@ -224,7 +262,10 @@ body.namespace-my.controller-tracks.action-show {
                         border:2px solid #fff;
                     }
                     top:21px;
-                    left:-85px;
+                    left:-65px;
+                    @media #{$md-media} {
+                        left:-85px;
+                    }
                     width:55px;
                     height:55px;
                 }
@@ -288,22 +329,29 @@ body.namespace-my.controller-tracks.action-show {
                     position:absolute;
                     content: "";
                     top:-50px;
-                    left:-58px;
+                    left:-38px;
+                    @media #{$md-media} {
+                        left:-58px;
+                    }
                     height:92px;
                     width:2px;
                     background:$color-1;
+                    z-index:-1;
                 }
             }
             &.completed + .exercise-wrapper.completed,
             &.completed + .exercise-wrapper.in-progress {
                 &:before {
-                    margin-top: -200px;
-                    height: 300px;
+                    margin-top: -250px;
+                    height: 350px;
                 }
             }
         }
         .unlocked-exercises-section {
-            margin: 0 50px;
+            @media #{$md-media} {
+                margin-left:50px;
+                margin-right:50px;
+            }
             border: 1px solid rgba($color-2, 0.5);
             border-radius:2px;
             margin-bottom: 20px;
