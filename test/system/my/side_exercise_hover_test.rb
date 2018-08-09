@@ -58,5 +58,19 @@ class My::SideExercisesHoverTest < ApplicationSystemTestCase
     assert_selector ".core-exercises .unlocked-exercises-section h3", text: "side-1: Completed"
   end
 
+  test "hover only affects the relevant selector" do
+    # Add another approved solution
+    other_core_exercise = create :exercise, track: @track, core: true
+    create :solution, exercise: other_core_exercise, user: @user, completed_at: Time.current
+    create :exercise, track: @track, unlocked_by: other_core_exercise, title: "side-2"
+
+    visit my_track_path(@track)
+    find(".core-exercises #exercise-#{@core_exercise.slug}+.unlocked-exercises-section a.unlocked-exercise").hover
+    assert_selector ".core-exercises #exercise-#{@core_exercise.slug}+.unlocked-exercises-section h3", text: "side-1: Unlocked"
+
+    assert_selector ".core-exercises #exercise-#{other_core_exercise.slug}+.unlocked-exercises-section h3", text: "You've unlocked extra exercises!"
+  end
+
+
 
 end
