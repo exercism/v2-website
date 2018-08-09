@@ -37,6 +37,14 @@
         %p There are #{num_tracks} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
       .tracks
         =render 'tracks_display', tracks: @tracks
+      .tracks-mini
+        -@tracks.each do |track|
+          =link_to track do
+            .track-mini
+              .logo
+                =image(track.hex_turquoise_icon_url, track.title)
+              .title
+                =track.title
 
   .how-section
     .lo-container

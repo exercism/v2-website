@@ -124,7 +124,12 @@
             }
         }
         .tracks {
-            margin:0 20px;
+            display:none;
+            width: 1100px;
+            @media screen and (min-width: 1200px) {
+                display:block;
+            }
+            margin:0 auto;
             padding:20px 20px 0 20px;
             border-radius:10px;
             //background:rgba(#fff, 0.5);
@@ -201,6 +206,55 @@
                         width: 11px;
                         height: 11px;
                     }
+                }
+            }
+        }
+        .tracks-mini {
+            display:flex;
+            @media screen and (min-width: 1200px) {
+                display:none;
+            }
+            flex-wrap:wrap;
+            align-items: center;
+            justify-content: center;
+            a {
+                color: #333;
+                text-decoration:none;
+                .track-mini {   
+                    display:flex;
+                    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+                    border-radius:5px;
+                    border: 2px solid $color-2;
+                    margin:10px 5px;
+                    min-width:50px;
+                    @media #{$sm-media} {
+                        margin:10px;
+                        min-width:150px;
+                    }
+                    .logo, .title {
+                        height:36px;
+                        display:inline-block;
+                    }
+                    .logo {
+                        background-color: $color-2;
+                        color: $color-2;
+                        overflow:hidden;
+                        &, img {
+                            height:36px;
+                            width:36px;
+                        }
+                    }
+                    .title {
+                        background-color:#fff;
+                        padding:0 10px;
+                        border-radius:0 5px 5px 0;
+                        vertical-align: middle;
+                        line-height:36px;
+                    }
+                }
+                &:hover .track-mini, &:hover .track-mini .title {
+                    background-color: $color-2 !important;
+                    color: #fff;
                 }
             }
         }
