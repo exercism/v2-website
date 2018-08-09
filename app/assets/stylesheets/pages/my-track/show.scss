@@ -353,20 +353,42 @@ body.namespace-my.controller-tracks.action-show {
         .filters {
             margin-bottom:20px;
             .widget-filter {
+                display:flex;
+                align-items:stretch;
+
+                margin-bottom:10px;
+
+                @media #{$md-media} {
+                    width:100%;
+                }
+
+                .title, .selectize-control {
+                    display:flex;
+                }
+                .title {
+                    width:120px;
+                }
                 &.difficulty {
                     .selectize-control {
+                        width:100%;
                         max-width:100%;
                     }
                 }
                 &.topic {
                     .selectize-control {
-                        width:250px;
+                        width:100%;
+                        @media #{$md-media} {
+                            width:250px;
+                        }
                         max-width:100%;
                     }
                 }
                 &.status {
                     .selectize-control {
-                        width:120px;
+                        width:100%;
+                        @media #{$md-media} {
+                            width:120px;
+                        }
                         max-width:100%;
                     }
                 }
