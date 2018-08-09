@@ -84,17 +84,37 @@ $blue: #4A90E2;
     }
     .widget-filter {
         margin-right:0;
+        margin-bottom:5px;
+        display:flex;
+        align-items:stretch;
+        
+        .title {
+            width:120px;
+        }
+        .title, .selectize-control {
+            display:flex;
+        }
+
         &.status .selectize-control {
-            width:200px;
+            width:100%;
             max-width:100%;
+            @media #{$md-media} {
+                width:200px;
+            }
         }
         &.track_id .selectize-control {
-            width:130px;
+            width:100%;
             max-width:100%;
+            @media #{$md-media} {
+                width:130px;
+            }
         }
         &.exercise_id .selectize-control {
-            width:155px;
+            width:100%;
             max-width:100%;
+            @media #{$md-media} {
+                width:155px;
+            }
         }
     }
 
