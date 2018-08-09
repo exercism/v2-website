@@ -28,6 +28,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     check "I understand and agree to continue."
     click_on "Mark as completed"
     click_on "Continue"
+    click_on "Continue"
     click_on "Save and continue"
 
     assert_text "You have unlocked the following core exercise:\nCore Exercise"
@@ -61,6 +62,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_solution_path(solution)
     click_on "Complete Exercise"
+    click_on "Continue"
     click_on "Continue"
     click_on "Save and continue"
 
