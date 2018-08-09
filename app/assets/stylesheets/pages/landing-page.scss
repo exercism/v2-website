@@ -377,9 +377,9 @@
     padding:50px;
     @media #{$md-media} {
         padding:50px 15px;
+        margin:40px auto !important;
+        max-height:85% !important;
     }
-    margin:40px auto !important;
-    max-height:85% !important;
     img {
         width:50px;
         display:block;
