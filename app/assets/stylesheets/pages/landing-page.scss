@@ -194,7 +194,20 @@
             margin:0 400px 30px;
             border-bottom:1px solid #eee;
         }
-
+        .step-small {
+            img {
+                margin:0 auto;
+            }
+            @media #{$md-media} {
+                display:none;
+            }
+        }
+        .step .step-image {
+            display:none;
+            @media #{$md-media} {
+                display:block;
+            }
+        }
         .step {
             overflow:hidden;
             margin:0 auto 30px;
