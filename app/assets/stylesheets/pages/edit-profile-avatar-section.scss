@@ -6,11 +6,20 @@
         overflow: hidden;
         margin-bottom: 25px;
 
+        > *:last-child {
+            display:flex;
+            align-items:stretch;
+        }
+
         h3 {
             display: inline-block;
             vertical-align: top;
             width: 60px;
             padding-top: 5px;
+            margin-bottom:10px;
+            @media #{$md-media} {
+                margin-bottom:0;
+            }
 
             @include font-size(14, 14);
             color: #444;
@@ -21,6 +30,7 @@
             vertical-align: top;
             height: 80px;
             width: 80px;
+            flex: 0 0 80px;
             margin:5px 20px 5px 0;
             border-radius: 2px;
 
@@ -44,6 +54,7 @@
         .text-hint {
             @include font-size(12, 15);
             color: #aaa;
+            max-width:200px;
         }
 
         .errors {
