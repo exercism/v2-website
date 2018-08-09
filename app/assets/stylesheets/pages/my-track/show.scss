@@ -44,19 +44,33 @@ body.namespace-my.controller-tracks.action-show {
             color:#555;
             font-weight:500;
             padding:9px 15px;
+            @media screen and (max-width: 300px) {
+                @include font-size(8, 8);
+                padding:4px 5px;
+                margin-top:43px
+            }
         }
         .stats {
-            float:right;
-            margin-top:58px;
+            margin-top:15px;
+            @media #{$md-media} {
+                float:right;
+                margin-top:58px;
+            }
             .stat {
                 display:inline-block;
                 color:#fff;
                 @include font-size(11, 14);
                 text-transform:uppercase;
-                padding-left:20px;
-                margin-left:20px;
+                margin-right:20px;
+                @media #{$md-media} {
+                    padding-left:20px;
+                    margin-left:20px;
+                    margin-right:0;
+                }
                 &+.stat {
-                    border-left:1px solid rgba(#fff, 0.5);
+                    @media #{$md-media} {
+                        border-left:1px solid rgba(#fff, 0.5);
+                    }
                 }
                 a {
                     color:#fff;
