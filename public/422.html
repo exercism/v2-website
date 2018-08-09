@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <link rel="//fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Montserrat+Alternates:400,700|Dosis:800"/>
   <style>
     * { box-sizing: border-box }
@@ -19,11 +19,13 @@
         @include normal-font;
         @include font-size(14);
         color:#333;
+        padding: 0 0 env(safe-area-inset-bottom) 0;
     }
     .heading-bar {
       background:#22333b;
       height:40px;
       margin-bottom:150px;
+      padding: env(safe-area-inset-top) 0 0 0;
     }
     img {
       display:block;
