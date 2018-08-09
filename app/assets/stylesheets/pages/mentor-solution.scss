@@ -17,8 +17,23 @@
         }
         .inner {
             color:#fff;
-            .widget-iterations-nav {
+            > .widget-iterations-nav {
                 float:right;
+                display:none;
+                @media #{$sm-media} {
+                    display:block;
+                }
+            }
+            .small-iterations-nav {
+                @media #{$sm-media} {
+                    display:none;
+                }
+                margin-top: 20px;
+                .widget-iterations-nav {
+                    .title, .iterations {
+                        text-align:left;
+                    }
+                }
             }
             h2 {
                 @include font-size(22, 22);
