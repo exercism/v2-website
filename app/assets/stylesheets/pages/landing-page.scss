@@ -79,15 +79,19 @@
             h2 {
                 @include header-font;
                 font-weight:600;
-                text-align:center;
+                @media #{$sm-media} {
+                    text-align:center;
+                }
                 @include font-size(30, 30);
                 margin-bottom:15px;
             }
             p {
-                text-align:center;
+                @media #{$sm-media} {
+                    text-align:center;
+                    margin: 0px auto 40px auto;
+                }
                 @include font-size(17, 22);
                 max-width: 600px;
-                margin: 0px auto 40px auto;
                 a {
                     text-decoration:none;
                     color:#333;
