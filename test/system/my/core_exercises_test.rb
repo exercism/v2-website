@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class My::SideExercisesTest < ApplicationSystemTestCase
+class My::CoreExercisesTest < ApplicationSystemTestCase
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
@@ -36,5 +36,4 @@ class My::SideExercisesTest < ApplicationSystemTestCase
     visit my_track_path(@track)
     assert_selector ".core-exercises .exercise-wrapper.in-progress .status", text: "APPROVED"
   end
-
 end
