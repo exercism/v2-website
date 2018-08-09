@@ -48,6 +48,9 @@ window.setupSolution = ->
         $('.new-discussion-post-form .preview-area').html(x)
         Prism.highlightAll()
 
+    $(".new-discussion-post-form").on "ajax:success", ->
+      $('.new-discussion-post-form .preview-area').html('')
+
   #$window.resize(setupLayout)
   #setupLayout()
   setupSolutionTabs()
