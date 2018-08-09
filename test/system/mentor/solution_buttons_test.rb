@@ -32,4 +32,19 @@ class SolutionButtonsTest < ApplicationSystemTestCase
     refute_selector ".approve-button"
     assert_selector ".comment-button"
   end
+
+  test "comment button clears preview tab" do
+    create :solution_mentorship, solution: @solution, user: @mentor
+
+    visit mentor_solution_path(@solution)
+
+    assert_selector ".comment-button"
+    assert_selector ".markdown"
+    refute_selector ".preview"
+    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    find(".preview-tab").click
+    within(".preview-area") { assert_text "An example mentor comment to test the comment button!" }
+    click_on "Comment"
+    within(".preview-area") { assert_text "", { exact: true } }
+  end
 end
