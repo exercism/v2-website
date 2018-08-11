@@ -19,7 +19,7 @@ class FixUnlockingInUserTrack
     keep_solution_ids = []
 
     # Get the core exercises and unlock their dependants
-    exercise_ids = Exercise.core.where(id: user_track.solutions.completed.map(&:exercise_id)).pluck(:id)
+    exercise_ids = Exercise.core.where(id: user_track.solutions.completed.pluck(:exercise_id)).pluck(:id)
     keep_solution_ids += Exercise.where(unlocked_by: exercise_ids).map { |e|CreateSolution.(user, e).id }
 
     # Check all the bonus exercises are avalaible but don't unlock them.

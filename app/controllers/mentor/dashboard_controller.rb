@@ -3,7 +3,7 @@ class Mentor::DashboardController < MentorController
     load_your_solutions
     load_next_solutions
 
-    user_ids = @your_solutions.map(&:user_id) + @next_solutions.map(&:user_id)
+    user_ids = @your_solutions.pluck(:user_id) + @next_solutions.pluck(:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
@@ -41,7 +41,7 @@ class Mentor::DashboardController < MentorController
     ).to_a
 
 
-    user_ids = @your_solutions.map(&:user_id)
+    user_ids = @your_solutions.pluck(:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
   end
@@ -60,7 +60,7 @@ class Mentor::DashboardController < MentorController
       page: params[:page]
     ).to_a
 
-    user_ids = @next_solutions.map(&:user_id)
+    user_ids = @next_solutions.pluck(:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 

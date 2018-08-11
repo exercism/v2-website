@@ -120,7 +120,7 @@ class My::SolutionsController < MyController
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
 
-    @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
+    @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.pluck(:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
     ClearNotifications.(current_user, @iteration)

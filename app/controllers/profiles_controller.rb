@@ -30,7 +30,7 @@ class ProfilesController < ApplicationController
 
     @solutions = @profile.solutions.includes(exercise: :track)
 
-    track_ids = Exercise.where(id: @solutions.map(&:exercise_id)).distinct.pluck(:track_id)
+    track_ids = Exercise.where(id: @solutions.pluck(:exercise_id)).distinct.pluck(:track_id)
     @tracks_for_select = Track.where(id: track_ids).
       map{|l|[l.title, l.id]}.
       unshift(["Any", 0])
