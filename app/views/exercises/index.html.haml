@@ -44,7 +44,7 @@
                 .details
                   %summary= exercise.blurb
                   .topics
-                    -if exercise.topic_names.size > 0
+                    -if exercise.topic_names.present?
                       - exercise.topic_names.each do |topic_name|
                         .topic= topic_name
                     -else

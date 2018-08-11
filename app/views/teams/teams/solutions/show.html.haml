@@ -31,7 +31,7 @@
         .discussion
           %h3 Team feedback
 
-          -if @iteration.discussion_posts.size > 0
+          -if @iteration.discussion_posts.present?
             .posts
               -@iteration.discussion_posts.each do |post|
                 =render "teams/discussion_posts/post", post: post, solution: @solution
