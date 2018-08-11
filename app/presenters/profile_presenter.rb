@@ -31,7 +31,7 @@ class ProfilePresenter
 
   def tracks_for_select
     track_ids = Exercise.
-      where(id: solutions.map(&:exercise_id)).
+      where(id: solutions.pluck(:exercise_id)).
       distinct.
       pluck(:track_id)
 

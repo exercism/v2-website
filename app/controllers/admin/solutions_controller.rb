@@ -11,7 +11,7 @@ class Admin::SolutionsController < AdminController
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
     @solution_user_track = UserTrack.where(user: @solution.user, track: @track).first
 
-    @user_tracks = UserTrack.where(track: @track, user_id: @iteration.discussion_posts.map(&:user_id)).
+    @user_tracks = UserTrack.where(track: @track, user_id: @iteration.discussion_posts.pluck(:user_id)).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
   end
