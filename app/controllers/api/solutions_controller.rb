@@ -77,7 +77,7 @@ class API::SolutionsController < APIController
           exercises = Exercise.side.where(unlocked_by: nil).where(track_id: current_user.tracks).where(slug: params[:exercise_id]).includes(:track)
           if exercises.size == 1
             solution = CreateSolution.(current_user, exercises.first)
-          elsif exercises.size == 0
+          elsif exercises.empty?
             return render_404(:exercise_not_found)
           elsif exercises.size > 1
             return render_error(400, :track_ambiguous, "Please specify a track id", possible_track_ids: solutions.flat_map {|s|s.exercise.track.slug}.uniq)

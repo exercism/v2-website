@@ -1,8 +1,8 @@
--if @iteration.discussion_posts.size > 0
+-if @iteration.discussion_posts.present?
   =render "discussion"
 
 .claimed-section
-  -unless @iteration.discussion_posts.size > 0
+  -if @iteration.discussion_posts.empty?
     =render "discussion"
   =render "new_discussion_post"
   =render "download-section"
