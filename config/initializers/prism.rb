@@ -213,6 +213,7 @@ Exercism::PrismFileMappings = {
   "eiffel": %w{e},
   "elisp": %w{el},
   "elixir": %w{ex exs},
+  "elm": %w{elm},
   "erlang": %w{erl app.src escript hrl xrl yrl},
   "fsharp": %w{fs fsx},
   "fortran": %w{f90 f f03 f08 f77 f95 for fpp},

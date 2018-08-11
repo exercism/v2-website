@@ -2,18 +2,25 @@ class Mentor::ConfigureController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @mentored_track_ids = current_user.mentored_tracks.pluck(:id)
   end
 
   def update
     if params["track_id"].present?
-      track_ids = params["track_id"].keys
+      mentored_track_ids = Set.new(current_user.mentored_tracks.pluck(:id).map(&:to_s))
+      selected_tracks = Set.new(params["track_id"].keys)
+
+      tracks_to_create = selected_tracks - mentored_track_ids
+      tracks_to_remove = mentored_track_ids - selected_tracks
+
       TrackMentorship.transaction do
-        track_ids.each do |track_id|
+        tracks_to_create.each do |track_id|
           begin
             TrackMentorship.create!(user: current_user, track_id: track_id)
           rescue ActiveRecord::RecordNotUnique
           end
         end
+        TrackMentorship.where(user: current_user, track_id: tracks_to_remove).destroy_all
       end
     end
 

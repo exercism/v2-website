@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class My::CoreExercisesTest < ApplicationSystemTestCase
+class My::SideExercisesTest < ApplicationSystemTestCase
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])

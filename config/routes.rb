@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   # Mentor #
   # ###### #
   namespace :mentor do
+    get "/", to: redirect("mentor/dashboard")
     resource :configure, only: [:show, :update], controller: "configure"
     resource :dashboard, only: [:show], controller: "dashboard" do
       get :your_solutions
