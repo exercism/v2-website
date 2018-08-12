@@ -126,7 +126,6 @@ FactoryBot.define do
       puts "Hello World"
     EOS
     repo_url { "http://example.com/ruby-#{SecureRandom.uuid}.git" }
-
   end
 
   factory :exercise do

@@ -50,4 +50,3 @@ class CreatesNotificationTest < ActiveSupport::TestCase
     end
   end
 end
-

@@ -1,5 +1,4 @@
 class Git::SeedsTrack
-
   def self.seed!(repo_url)
     new(repo_url).seed!
   end
@@ -35,5 +34,4 @@ class Git::SeedsTrack
     repo = Git::ExercismRepo.new(repo_url, auto_fetch: true)
     repo.config
   end
-
 end

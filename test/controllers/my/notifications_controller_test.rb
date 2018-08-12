@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class NotificationsControllerTest < ActionDispatch::IntegrationTest
-
   test "302 if not signed in" do
     get my_notifications_url
     assert_response 302
@@ -23,4 +22,3 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
     assert_correct_page "notifications-page"
   end
 end
-

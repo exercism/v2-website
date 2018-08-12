@@ -141,5 +141,4 @@ class UserTrackTest < ActiveSupport::TestCase
     assert_equal 2, user_track.num_avaliable_core_exercises
     assert_equal 4, user_track.num_avaliable_side_exercises
   end
-
 end

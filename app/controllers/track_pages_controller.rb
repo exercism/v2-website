@@ -10,6 +10,7 @@ class TrackPagesController < ApplicationController
   end
 
   private
+
   def get_track
     @track = Track.find(params[:track_id])
   end

@@ -17,5 +17,6 @@ class Git::FetchesRepos
   end
 
   private
+
   attr_reader :repos
 end

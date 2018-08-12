@@ -19,4 +19,3 @@ class JoinsTrackTest < ActiveSupport::TestCase
     assert_equal 1, UserTrack.where(track: track, user: user).size
   end
 end
-

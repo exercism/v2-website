@@ -52,6 +52,4 @@ class CreateTeamDiscussionPostTest < ActiveSupport::TestCase
     refute solution.needs_feedback
     assert solution.has_unseen_feedback
   end
-
 end
-

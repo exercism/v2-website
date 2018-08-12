@@ -12,4 +12,3 @@ class API::CLISettingsControllerTest < API::TestBase
     assert_response 200
   end
 end
-

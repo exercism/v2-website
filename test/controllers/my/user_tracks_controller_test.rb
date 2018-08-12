@@ -39,5 +39,4 @@ class UserTracksControllerTest < ActionDispatch::IntegrationTest
     SwitchTrackToMentoredMode.expects(:call).with(@current_user, track)
     patch set_mentored_mode_my_user_track_url(user_track)
   end
-
 end

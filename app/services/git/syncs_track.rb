@@ -1,5 +1,4 @@
 class Git::SyncsTrack
-
   def self.sync!(track)
     new(Git::StateDb.instance, track).sync!
   end

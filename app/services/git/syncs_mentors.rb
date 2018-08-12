@@ -10,6 +10,7 @@ class Git::SyncsMentors
   end
 
   private
+
   attr_reader :mentor_ids, :repo
 
   def sync_mentors!

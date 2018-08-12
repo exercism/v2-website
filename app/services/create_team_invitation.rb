@@ -17,6 +17,7 @@ class CreateTeamInvitation
   end
 
   private
+
   attr_reader :invite
 
   def create_invite!
@@ -38,4 +39,3 @@ class CreateTeamInvitation
     User.find_by(email: invite.email).present?
   end
 end
-

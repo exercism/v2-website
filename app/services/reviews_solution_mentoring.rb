@@ -24,4 +24,3 @@ class ReviewsSolutionMentoring
       solution.mentorships.where(user_id: mentor_id).first!
   end
 end
-

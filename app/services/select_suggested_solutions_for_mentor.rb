@@ -26,6 +26,7 @@ class SelectSuggestedSolutionsForMentor
   end
 
   private
+
   def select_new_core
     base_mentored_mode_new_query.
       where('exercises.core': true).

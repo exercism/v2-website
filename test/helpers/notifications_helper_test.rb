@@ -14,4 +14,3 @@ class NotificationsHelperTest < ActionView::TestCase
     assert_dom_equal user.avatar_url, notification_image(notification3)
   end
 end
-

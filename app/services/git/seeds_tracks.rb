@@ -1,5 +1,4 @@
 class Git::SeedsTracks
-
   # NB generate this with Trackler.tracks.map(&:repository).sort
 
   def self.tracks
@@ -104,5 +103,6 @@ class Git::SeedsTracks
   end
 
   private
+
   attr_reader :stdout, :stderr
 end

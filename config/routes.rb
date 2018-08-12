@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # ### #
   # API #
   # ### #
@@ -206,7 +205,6 @@ Rails.application.routes.draw do
   # Weird things #
   # ############ #
   post "markdown/parse" => "markdown#parse"
-
 
   # ################ #
   # Legacy redirects #

@@ -22,4 +22,3 @@ class ProfileTest < ActiveSupport::TestCase
     assert_equal [s3,s1,s2], profile.solutions
   end
 end
-

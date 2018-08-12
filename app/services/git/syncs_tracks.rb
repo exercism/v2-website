@@ -19,6 +19,7 @@ class Git::SyncsTracks
   end
 
   private
+
   attr_reader :tracks, :stdout, :stderr
 
   def fetch_problem_specs

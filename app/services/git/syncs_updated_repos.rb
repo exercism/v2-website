@@ -32,6 +32,7 @@ class Git::SyncsUpdatedRepos
   end
 
   private
+
   attr_reader :repo_updates, :stdout
 
   def repo_updates

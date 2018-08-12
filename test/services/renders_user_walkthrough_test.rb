@@ -25,5 +25,4 @@ class RendersUserWalkthroughTest < ActiveSupport::TestCase
       RendersUserWalkthrough.(nil, "[CONFIGURE_COMMAND]")
     )
   end
-
 end

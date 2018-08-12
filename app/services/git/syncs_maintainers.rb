@@ -75,5 +75,4 @@ class Git::SyncsMaintainers
       alumnus
     end
   end
-
 end

@@ -1,7 +1,6 @@
 require 'lmdb'
 
 class Git::StateDb
-
   DB_LOCATION="#{Rails.root}/tmp/git_state_db"
   MIN_FETCH_PERIOD = 5.minutes
   MIN_FAIL_WAIT_PERIOD = 2.minutes
@@ -104,5 +103,4 @@ class Git::StateDb
   def key_for_id(track_id)
     "track-#{track_id}"
   end
-
 end

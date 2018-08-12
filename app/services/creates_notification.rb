@@ -46,6 +46,7 @@ class CreatesNotification
   end
 
   private
+
   def check_notification_type!
     return if VALID_NOTIFICATION_TYPES.include?(type)
 

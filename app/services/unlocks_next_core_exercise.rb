@@ -23,6 +23,7 @@ class UnlocksNextCoreExercise
   end
 
   private
+
   attr_reader :track, :user
 
   memoize

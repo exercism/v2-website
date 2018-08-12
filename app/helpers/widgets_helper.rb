@@ -37,13 +37,11 @@ module WidgetsHelper
                                       num_comments: num_comments,
                                       current_idx: current_idx,
                                       url_path: url_path
-
   end
 
   def discussion_post_widget(post, solution, user_track)
-    render "widgets/discussion_post", post: post, 
-                                      solution: solution, 
+    render "widgets/discussion_post", post: post,
+                                      solution: solution,
                                       user_track: user_track
   end
-
 end

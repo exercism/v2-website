@@ -27,7 +27,6 @@ class ProfilesController < ApplicationController
   end
 
   def setup_solutions
-
     @solutions = @profile.solutions.includes(exercise: :track)
 
     track_ids = Exercise.where(id: @solutions.map(&:exercise_id)).distinct.pluck(:track_id)

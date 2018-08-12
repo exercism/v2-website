@@ -70,7 +70,4 @@ class My::SideExercisesHoverTest < ApplicationSystemTestCase
 
     assert_selector ".core-exercises #exercise-#{other_core_exercise.slug}+.unlocked-exercises-section h3", text: "You've unlocked extra exercises!"
   end
-
-
-
 end

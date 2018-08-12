@@ -36,4 +36,3 @@ class OnboardingFlowsTest < ActionDispatch::IntegrationTest
     assert_redirected_to my_track_path(track)
   end
 end
-

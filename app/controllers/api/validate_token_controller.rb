@@ -7,4 +7,3 @@ class API::ValidateTokenController < APIController
     }, status: 200
   end
 end
-

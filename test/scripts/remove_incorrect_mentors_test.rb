@@ -45,4 +45,3 @@ class RemoveIncorrectMentorsTest < ActiveSupport::TestCase
     end
   end
 end
-

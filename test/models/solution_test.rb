@@ -65,5 +65,4 @@ class SolutionTest < ActiveSupport::TestCase
     refute create(:solution, track_in_independent_mode: true).track_in_mentored_mode?
     assert create(:solution, track_in_independent_mode: false).track_in_mentored_mode?
   end
-
 end

@@ -1,5 +1,4 @@
 class Git::FetchesUpdatedRepos
-
   QUIET_PERIOD = 30.seconds
 
   def self.run

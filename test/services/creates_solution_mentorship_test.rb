@@ -23,4 +23,3 @@ class CreatesSolutionMentorshipTest < ActiveSupport::TestCase
     assert_equal existing_mentorship, new_mentorship
   end
 end
-

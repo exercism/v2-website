@@ -71,7 +71,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     assert_equal [good_solution1, good_solution2], SelectSuggestedSolutionsForMentor.(mentor)
   end
 
-
   test "does not select solutions in independent mode" do
     mentor, track = create_mentor_and_track
     mentee = create_mentee([track])
@@ -89,7 +88,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
 
     assert_equal [good_solution].sort, SelectSuggestedSolutionsForMentor.(mentor).sort
   end
-
 
   test "filters by track" do
     mentor, track1 = create_mentor_and_track

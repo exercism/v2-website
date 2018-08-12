@@ -89,6 +89,7 @@ class UserTrack < ApplicationRecord
   end
 
   private
+
   def completed_core_exercise_ids
     solutions.completed.
               where("exercises.core": true).
@@ -100,5 +101,4 @@ class UserTrack < ApplicationRecord
               where("exercises.core": false).
               select(:exercise_id)
   end
-
 end

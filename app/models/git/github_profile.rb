@@ -1,5 +1,4 @@
 class Git::GithubProfile
-
   class NotFoundError < StandardError
   end
 
@@ -27,5 +26,4 @@ class Git::GithubProfile
     @avatar_url = user.avatar_url
     @link_url = user.html_url
   end
-
 end

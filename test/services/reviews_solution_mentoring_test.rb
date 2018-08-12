@@ -19,4 +19,3 @@ class ReviewsSolutionMentoringTest < ActiveSupport::TestCase
     refute solution_mentorship.show_feedback_to_mentor
   end
 end
-

@@ -11,5 +11,6 @@ class UnlocksCoreExercise
   end
 
   private
+
   attr_reader :exercise, :user
 end

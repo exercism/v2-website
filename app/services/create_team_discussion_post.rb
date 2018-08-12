@@ -35,4 +35,3 @@ class CreateTeamDiscussionPost < CreatesDiscussionPost
     )
   end
 end
-

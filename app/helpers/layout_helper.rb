@@ -66,5 +66,4 @@ module LayoutHelper
       render "layouts/logged_out_teams_header"
     end
   end
-
 end
