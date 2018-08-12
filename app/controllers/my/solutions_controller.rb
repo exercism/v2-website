@@ -108,6 +108,7 @@ class My::SolutionsController < MyController
   end
 
   private
+
   def set_solution
     @solution = current_user.solutions.find_by_uuid!(params[:id])
   end

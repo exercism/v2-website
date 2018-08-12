@@ -12,6 +12,7 @@ class CreateTeamMembership
   end
 
   private
+
   attr_reader :user, :team
 
   def create_team_membership!

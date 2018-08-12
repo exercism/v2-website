@@ -91,7 +91,7 @@ class SetSolutionsIndependentModeTest < ActiveSupport::TestCase
     })
 
     [legacy_solution, legacy_undecided_solution, legacy_but_requested_solution,
-     independent_solution, independent_but_requested_solution, mentored_solution, 
+     independent_solution, independent_but_requested_solution, mentored_solution,
      undecided_solution].each(&:reload)
 
     assert legacy_solution.independent_mode?

@@ -77,4 +77,3 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     assert_text_includes email, str
   end
 end
-

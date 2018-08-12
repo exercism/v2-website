@@ -25,6 +25,7 @@ class OnboardingsController < ApplicationController
   end
 
   private
+
   def redirect_if_onboarded!
     if current_user.onboarded?
       redirect_to after_sign_in_path_for(:user)

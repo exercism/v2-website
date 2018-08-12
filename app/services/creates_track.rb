@@ -1,5 +1,4 @@
 class CreatesTrack
-
   def self.create!(language, track_slug, repo_url, active:)
     new(language, track_slug, repo_url, active: active).create!
   end
@@ -47,5 +46,4 @@ class CreatesTrack
   def track_image_url(file_name)
     "https://assets.exercism.io/tracks/#{file_name}"
   end
-
 end

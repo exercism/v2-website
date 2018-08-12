@@ -58,7 +58,6 @@ class FiltersSolutionsByStatus
       where("last_updated_by_user_at <= ?", Exercism::V2_MIGRATED_AT)
   end
 
-
   def filter_abandoned
     solutions.where("solution_mentorships.abandoned": true)
   end

@@ -25,4 +25,3 @@ class SwitchSolutionToMentoredMode
     solution.user.user_track_for(solution.track)
   end
 end
-

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
-
   test "302 if not signed in" do
     get mentor_dashboard_url
     assert_response 302
@@ -31,5 +30,4 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
     get mentor_url
     assert_redirected_to mentor_dashboard_url
   end
-
 end

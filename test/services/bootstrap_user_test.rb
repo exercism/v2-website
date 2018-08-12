@@ -16,5 +16,3 @@ class BootstrapUserTest < ActiveSupport::TestCase
     BootstrapUser.(user, track.id)
   end
 end
-
-

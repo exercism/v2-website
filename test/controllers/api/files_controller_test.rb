@@ -1,7 +1,6 @@
 require_relative './test_base'
 
 class API::FilesControllerTest < API::TestBase
-
   def setup
     @mock_exercise = stub(read_file: "some_content")
     @mock_repo = stub(exercise: @mock_exercise)

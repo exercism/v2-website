@@ -1,5 +1,4 @@
 class TeamMembership < ApplicationRecord
-
   class InvalidMembership < RuntimeError
   end
 

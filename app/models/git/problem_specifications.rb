@@ -1,5 +1,4 @@
 class Git::ProblemSpecifications < Git::RepoBase
-
   REPO_URL="https://github.com/exercism/problem-specifications"
 
   def self.head
@@ -45,7 +44,6 @@ class Git::ProblemSpecifications < Git::RepoBase
       return nil if m.nil?
       metadata[:blurb]
     end
-
   end
 
   class Exercises

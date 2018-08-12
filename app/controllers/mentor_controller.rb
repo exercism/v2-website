@@ -9,4 +9,3 @@ class MentorController < ApplicationController
     redirect_to root_path, status: 401
   end
 end
-

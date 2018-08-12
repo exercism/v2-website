@@ -13,7 +13,5 @@ class Admin::SolutionsController < AdminController
 
     @user_tracks = UserTrack.where(track: @track, user_id: @iteration.discussion_posts.map(&:user_id)).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
-
   end
 end
-

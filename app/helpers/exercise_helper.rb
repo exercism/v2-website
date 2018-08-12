@@ -1,5 +1,4 @@
 module ExerciseHelper
-
   # TODO Length
   def exercise_length_word(exercise)
     return "medium"
@@ -24,6 +23,4 @@ module ExerciseHelper
       "hard"
     end
   end
-
 end
-

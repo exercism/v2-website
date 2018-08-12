@@ -15,4 +15,3 @@ class My::ReactionsController < MyController
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
   end
 end
-

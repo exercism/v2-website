@@ -2,7 +2,7 @@ require_relative './test_base'
 
 class API::UnknownRouteTest < API::TestBase
   [
-    "/api/foobar", 
+    "/api/foobar",
     "/api/v1/foobar"
   ].each do |route|
     test "routing to a missing page 401s with json for #{route}" do
@@ -12,7 +12,7 @@ class API::UnknownRouteTest < API::TestBase
   end
 
   [
-    "/api/foobar", 
+    "/api/foobar",
     "/api/v1/foobar"
   ].each do |route|
     test "routing 404s with json for #{route}" do

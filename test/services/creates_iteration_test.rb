@@ -57,7 +57,6 @@ class CreatesIterationTest < ActiveSupport::TestCase
     end
   end
 
-
   test "updates last updated by" do
     Timecop.freeze do
       solution = create :solution, last_updated_by_user_at: nil
@@ -90,14 +89,13 @@ class CreatesIterationTest < ActiveSupport::TestCase
     refute mentorship.requires_action
   end
 
-
   test "does not notify non-current mentors" do
     solution = create :solution
     user = solution.user
 
     # Create a user who mentored this solution but doesn't
     # have a current track mentorship so is inactive.
-    inactive_mentor = create :user 
+    inactive_mentor = create :user
     create :solution_mentorship, solution: solution, user: inactive_mentor
 
     CreatesNotification.expects(:create!).never

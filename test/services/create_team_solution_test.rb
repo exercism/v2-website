@@ -38,5 +38,4 @@ class CreatesTeamSolutionTest < ActiveSupport::TestCase
       CreateTeamSolution.(user, team, create(:exercise))
     end
   end
-
 end

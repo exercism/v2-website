@@ -15,6 +15,7 @@ class RendersUserWalkthrough
   end
 
   private
+
   attr_reader :user, :walkthrough
 
   def substitute_tokens!

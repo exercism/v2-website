@@ -62,6 +62,7 @@ class CreatesIteration
   end
 
   private
+
   def unlock_side_exercise!
     return if solution.exercise.unlocks.count < 2
     side_exercise_to_unlock = solution.exercise.unlocks.first

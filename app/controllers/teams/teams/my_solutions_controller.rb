@@ -54,6 +54,7 @@ class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
   end
 
   private
+
   def show_unlocked
     render :show_unlocked
   end

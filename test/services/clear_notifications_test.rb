@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ClearNotificationsTest < ActiveSupport::TestCase
-
   test "clears all notifications about a thing for a user" do
     user = create :user
     about = create :solution

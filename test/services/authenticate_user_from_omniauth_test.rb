@@ -130,5 +130,4 @@ class AuthenticateUserFromOmniauthTest < ActiveSupport::TestCase
       assert user.valid_password?(new_password)
     end
   end
-
 end

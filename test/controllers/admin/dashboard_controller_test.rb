@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Admin::DashboardControllerTest < ActionDispatch::IntegrationTest
-
   test "302 if not signed in" do
     get admin_dashboard_url
     assert_response 302

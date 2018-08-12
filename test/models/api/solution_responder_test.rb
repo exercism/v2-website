@@ -155,5 +155,4 @@ class API::SolutionResponderTest < ActiveSupport::TestCase
     }
     assert_equal team_json, responder.to_hash[:solution][:team]
   end
-
 end

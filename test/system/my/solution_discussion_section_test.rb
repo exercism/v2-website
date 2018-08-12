@@ -14,7 +14,6 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "mentored mode / mentored solution" do
-
     solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
@@ -117,7 +116,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".completed-section .next-option strong", text: REQUEST_MENTORING_TEXT 
+    assert_selector ".completed-section .next-option strong", text: REQUEST_MENTORING_TEXT
     refute_selector ".discussion"
   end
 

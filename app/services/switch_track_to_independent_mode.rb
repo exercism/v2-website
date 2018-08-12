@@ -19,4 +19,3 @@ class SwitchTrackToIndependentMode
     user.user_track_for(track)
   end
 end
-

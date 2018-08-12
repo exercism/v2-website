@@ -45,4 +45,3 @@ class CompleteSolution
     solution.user
   end
 end
-

@@ -35,7 +35,6 @@ class API::FilesController < APIController
     render_404(:file_not_found)
   end
 
-
   def exercise_reader
     @exercise_reader ||= Git::ExercismRepo.new(track_url).exercise(exercise_slug)
   end

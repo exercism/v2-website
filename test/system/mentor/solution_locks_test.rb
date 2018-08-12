@@ -59,7 +59,6 @@ class SolutionLocksTest < ApplicationSystemTestCase
     refute_selector ".claim-section"
   end
 
-
   test "check force works" do
     create :solution_lock, solution: @solution, user: create(:user), locked_until: Time.current + 1.minute
 

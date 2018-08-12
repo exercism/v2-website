@@ -24,6 +24,7 @@ class LockSolution
   end
 
   private
+
   def existing_user_lock
     SolutionLock.where(user: user).
                  where(solution: solution).

@@ -82,4 +82,3 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     refute mentorship.requires_action
   end
 end
-

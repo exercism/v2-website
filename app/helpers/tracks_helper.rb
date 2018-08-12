@@ -1,5 +1,4 @@
 module TracksHelper
-
   def hex_turquoise_track_icon(track, options={})
     hex_track_icon("turquoise", track, options)
   end
@@ -33,5 +32,4 @@ module TracksHelper
     options[:onerror] = "this.onerror=null;this.src='https://assets.exercism.io/tracks/default-#{type}-#{color}.png'"
     image_tag track.send("#{type}_#{color}_icon_url"), options
   end
-
 end

@@ -3,7 +3,6 @@ require 'test_helper'
 class CreateSolutionTest < ActiveSupport::TestCase
   test "creates with correct git sha" do
     Timecop.freeze do
-
       user = create :user
       exercise = create :exercise
       create :user_track, user: user, track: exercise.track

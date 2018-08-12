@@ -19,6 +19,7 @@ class RetrievesSolutionsForMentor
   end
 
   private
+
   attr_reader :solutions, :status, :track_id, :exercise_id
 
   def filter_by_status!
