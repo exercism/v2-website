@@ -5,10 +5,10 @@
     .welcome-section {
         .lhs {
             display:none;
-            @media #{$lg-media} {
+            @media #{$md-media} {
                 display: block;
             }
-            @media #{$lg-media} {
+            @media #{$md-media} {
                 padding-bottom:50px; 
             }
             z-index: -1;
@@ -16,7 +16,7 @@
         .rhs {
             padding-top:50px;
             margin-bottom:50px;
-            @media #{$lg-media} {
+            @media #{$md-media} {
                 padding-top:150px;
                 margin-bottom:150px;
             }
