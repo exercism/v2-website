@@ -3,9 +3,9 @@
     .lo-container
       =link_to "Home", root_path
       =nav_divider
-      =link_to "Language Tracks", [:tracks]
+      =link_to "Language tracks", [:tracks]
       =nav_divider
-      =link_to "#{@track.title} Track", @track
+      =link_to "#{@track.title} track", @track
       =nav_divider
       %span Mentors
 
@@ -22,4 +22,3 @@
     .pure-g.people
       -@mentors.each do |mentor|
         .pure-u-1-2= mentor_widget(mentor)
-
