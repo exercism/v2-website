@@ -98,14 +98,17 @@ body.namespace-my.controller-tracks.action-show {
             position:absolute;
             top:0px;
             bottom:50px;
-            left:0;
+            left:20px;
+            @media #{$md-media} {
+                left:0;
+            }
             background:$background-grey-1;
             width:2px;
             z-index:-2;
         }
         .exercise-wrapper {
             position:relative;
-            margin-left:38px;
+            margin-left:58px;
             @media #{$md-media} {
                 margin-left:58px;
             }
