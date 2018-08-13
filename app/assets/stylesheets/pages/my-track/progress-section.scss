@@ -3,10 +3,13 @@
 
 #my-track-page .progress-section {
     padding: 30px 15px 15px 15px;
-    background:#f9f9f9;
     border-radius:2px;
     margin-top:42px;
     @media #{$md-media} {
+        margin-left:50px;
+    }
+    @media #{$lg-media} {
+        background:#f9f9f9;
         padding: 30px 30px 15px 30px;
         margin-left:100px;
     }
@@ -28,7 +31,10 @@
         text-align:right;
     }
     .core, .topics, .side, .guides, .danger-zone {
-        background:#fff;
+        background:#f9f9f9;
+        @media #{$lg-media} {
+            background:#fff;
+        }
         padding:20px 30px;
         margin-bottom:15px;
         h3 {
