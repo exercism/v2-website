@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'mixins';
+
+#admin-users-page {
+    h1 {
+        margin-bottom:20px;
+        @include font-size(20, 20);
+        font-weight:400
+    }
+    h2 {
+        margin-bottom:10px;
+        @include font-size(16, 16);
+        font-weight:400
+    }
+    .discussion-post {
+        border-bottom:1px solid #ccc;
+        padding-bottom:20px;
+        margin-bottom:20px;
+        .solution {
+            display:block;
+            color:#666;
+            text-decoration:underline;
+            margin-bottom:5px;
+        }
+        .timestamp {
+            margin-bottom:5px;
+        }
+        .content {
+            * {
+                @include font-size(14, 19);
+            }
+            &>* {
+                margin-bottom:10px;
+                &:last-child {
+                    margin-bottom:0;
+                }
+            }
+        }
+    }
+}

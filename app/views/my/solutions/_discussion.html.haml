@@ -1,23 +1,15 @@
--if @solution.completed?
-  .completed-info
-    .title ↳ Solution Completed
-    %p Your solution has been completed. You can continue working adding further iterations or move on to new challenges. Well done!
-
--elsif @solution.approved?
-  .completed-info
-    .title ↳ Solution Approved!
-    %p Your solution has been approved by a mentor. Congratulations! You can now complete the exercise and move forward on the track.
-    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+-readonly ||= false
 
 -if @iteration.discussion_posts.size > 0
   .posts
     -@iteration.discussion_posts.each do |post|
       -user_track = @post_user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
-      =render "my/discussion_posts/post", post: post, solution: @solution, user_track: user_track
--elsif !@solution.approved?
+      =discussion_post_widget(post, @solution, user_track)
+
+-elsif !(@solution.approved? || @solution.completed?)
   .posts{style: "display:none"}
   .next-steps
-    .title ↳ Next Steps
+    .title ↳ Next steps
 
     %p Well done on submitting your iteration. A mentor will check out your work and leave a comment here on your solution soon.
     %p
@@ -27,20 +19,22 @@
 -else
   .posts{style: "display:none"}
 
-=form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
-  =hidden_field_tag :iteration_id, @iteration.id
+-unless readonly
+  .new-discussion-post
+    =form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+      =hidden_field_tag :iteration_id, @iteration.id
 
-  .tabs-and-panes.selected-1
-    .tabs
-      .tab.tab-1{data: {tab: "markdown"}} Write
-      .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
-    .panes
-      .pane.pane-1.markdown
-        =f.text_area :content
-      .pane.pane-2.preview
-        .preview-area
+      .tabs-and-panes.selected-1
+        .tabs
+          .tab.tab-1.write-tab{data: {tab: "markdown"}} Write
+          .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+        .panes
+          .pane.pane-1.markdown
+            =f.text_area :content, required: true
+          .pane.pane-2.preview
+            .preview-area
 
-  -if !@solution.approved?
-    =link_to "Complete Exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
+      -if !@solution.approved?
+        =link_to "Complete Exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
 
-  =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"
+      =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"

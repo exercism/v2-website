@@ -1,6 +1,12 @@
 require_relative '../../test_helper'
 
 class Git::SyncsUpdatedReposTest < ActiveJob::TestCase
+  setup do
+    fake_stdout = mock
+    fake_stdout.stubs(:puts)
+    Git::SyncsUpdatedRepos.any_instance.stubs(stdout: fake_stdout)
+  end
+
   test "syncs a fully fetched track update" do
     ClusterConfig.stubs(:num_webservers).returns(2)
     repo_update = create(:repo_update)

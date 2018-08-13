@@ -1,6 +1,6 @@
 #modal-close-button x
 .warning-bar
-  %i.fa.fa-warning
+  =icon :warning
   Mentor hasn’t marked this solution as complete
 .content
   %h2 Mark #{@solution.exercise.title} as Complete
@@ -17,7 +17,7 @@
     %li you'll no longer get mentor feedback on this exercise
     %li you will be able to reactivate the exercise in the future
 
-  %p If you want to quickly move through the track without regular feedback, we recommend moving to Indepenent Mode, where you can choose which exercises to receive feedback on. You can do on the right-hand-side of the Track page.
+  %p If you want to quickly move through the track without regular feedback, we recommend moving to Independent Mode, where you can choose which exercises to receive feedback on. You can do on the right-hand-side of the Track page.
 
   =form_tag [:complete, :my, @solution], method: :patch, remote: true do
     =check_box_tag :agree, 1, false, required: true

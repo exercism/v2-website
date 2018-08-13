@@ -10,7 +10,8 @@
         -length_word = exercise_length_word(exercise)
         -difficulty_word = exercise_difficulty_word(exercise)
         .stats
-          .length{class: length_word}= length_word
+          -# TODO: Uncomment this when exercise_length_word has been fix to no longer return medium by default
+          -# .length{class: length_word}= length_word
           .difficulty{class: difficulty_word}= difficulty_word
 
 =button_tag "Start exercise", class: 'pure-button'

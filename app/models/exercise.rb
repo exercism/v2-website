@@ -15,7 +15,6 @@ class Exercise < ApplicationRecord
   has_many :solutions
   has_many :iterations, through: :solutions
 
-  default_scope -> { order('position ASC, title ASC') }
   scope :active, -> { where(active: true) }
   scope :core, -> { where(core: true) }
   scope :side, -> { where(core: false) }
@@ -24,6 +23,10 @@ class Exercise < ApplicationRecord
 
   scope :locked_for, -> (user) {
     where.not(id: user.solutions.select(:exercise_id))
+  }
+
+  scope :not_completed_for, -> (user) {
+    where.not(id: user.solutions.completed.select(:exercise_id))
   }
 
   def download_command
@@ -47,7 +50,7 @@ class Exercise < ApplicationRecord
   end
 
   def description
-    ParsesMarkdown.parse(super)
+    ParseMarkdown.(super)
   rescue
     ""
   end

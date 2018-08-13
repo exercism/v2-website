@@ -2,33 +2,34 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =image_tag "nav-divider.png"
-      =link_to "Language Tracks", :tracks
-      =image_tag "nav-divider.png"
-      =link_to "#{@track.title} Track", @track
-      =image_tag "nav-divider.png"
+      =nav_divider
+      =link_to "Language tracks", :tracks
+      =nav_divider
+      =link_to "#{@track.title} track", @track
+      =nav_divider
       =link_to "Exercises", [@track, :exercises]
-      =image_tag "nav-divider.png"
+      =nav_divider
       %span= @exercise.title
 
   .header
     .lo-container
       .track
-        = bordered_turquoise_track_icon(@track)
-        .title #{@track.title} Track
+        =bordered_turquoise_track_icon @track
+        .title #{@track.title} track
       .icon
-        =image_tag @exercise.white_icon_url
+        =graphical_image @exercise.white_icon_url
       %h1= @exercise.title
       .h1-subtitle
-        An exercise from the #{link_to "#{@exercise.track.title} Track", @exercise.track}
+        An exercise from the #{link_to "#{@exercise.track.title} track", @exercise.track}
 
   .info-section
     .lo-container
-      %h2 About this Exercise
+      %h2 About this exercise
       -length_word = exercise_length_word(@exercise)
       -difficulty_word = exercise_difficulty_word(@exercise)
       .difficulty{class: difficulty_word}= difficulty_word
-      .length{class: length_word}= length_word
+      -# TODO: Uncomment this when exercise_length_word has been fix to no longer return medium by default
+      -# .length{class: length_word}= length_word
 
       %p.blurb= @exercise.blurb
       .topics

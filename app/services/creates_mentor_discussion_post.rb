@@ -3,9 +3,10 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     new(*args).create!
   end
 
-  attr_reader :iteration, :user, :content, :discussion_post
-  def initialize(iteration, user, content)
-    super
+  attr_reader :mentor
+  def initialize(iteration, mentor, content)
+    @mentor = mentor
+    super(iteration, mentor, content)
   end
 
   # Note: This whole method is pretty racey.
@@ -13,11 +14,11 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
   # pain of deadlocks and slowdowns for the occasional missed
   # notification etc.
   def create!
-    return false unless user_may_comment?
+    return false unless mentor_may_comment?
 
     create_discussion_post!
 
-    mentorship = CreatesSolutionMentorship.create(solution, user)
+    mentorship = CreatesSolutionMentorship.create(solution, mentor)
     solution.update!(last_updated_by_mentor_at: Time.current)
     mentorship.update!(requires_action: false)
     notify_solution_user
@@ -31,36 +32,32 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
     CreatesNotification.create!(
       solution.user,
       :new_discussion_post,
-      "#{strong user.handle} has commented on your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",
+      "#{strong mentor.handle} has commented on your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",
       routes.my_solution_iteration_url(solution, iteration),
       trigger: discussion_post,
 
       # We want this to be the solution not the post
       # to allow for clearing without a mentor having to
       # go into every single iteration
-      about: solution
+      about: iteration
     )
 
-    DeliversEmail.deliver!(
+    DeliverEmail.(
       solution.user,
       :new_discussion_post,
       discussion_post
     )
   end
 
-  def user_may_comment?
-    user.mentoring_track?(solution.exercise.track)
+  def mentor_may_comment?
+    mentor.mentoring_track?(solution.exercise.track)
   end
 
   def html
-    @html ||= ParsesMarkdown.parse(content)
+    @html ||= ParseMarkdown.(content)
   end
 
   def solution
     iteration.solution
-  end
-
-  def routes
-    @routes ||= Rails.application.routes.url_helpers
   end
 end

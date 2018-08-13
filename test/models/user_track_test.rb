@@ -56,4 +56,90 @@ class UserTrackTest < ActiveSupport::TestCase
 
     assert_equal [archived], UserTrack.archived
   end
+
+  test "solutions_being_mentored" do
+    user = create :user
+    track = create :track
+    user_track = create :user_track, user: user, track: track
+
+    assert_equal 0, user_track.num_solutions_being_mentored
+    assert_equal 1, user_track.mentoring_slots_remaining
+    assert user_track.mentoring_slots_remaining
+
+    s1 = create :solution, independent_mode: true, user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s1
+
+    s2 = create :solution, independent_mode: true, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s2
+
+    s3 = create :solution, independent_mode: false, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s3
+
+    s4 = create :solution, independent_mode: false, user: user, exercise: create(:exercise, track: track)
+
+    s5 = create :solution, independent_mode: false, user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s5
+
+    assert_equal [s5], user_track.solutions_being_mentored
+    assert_equal 1, user_track.num_solutions_being_mentored
+    assert_equal 0, user_track.mentoring_slots_remaining
+    refute user_track.mentoring_slots_remaining?
+  end
+
+  test "counters in mentored mode" do
+    track = create :track
+    core1 = create :exercise, track: track, core: true
+    core2 = create :exercise, track: track, core: true
+    core3 = create :exercise, track: track, core: true
+    side1 = create :exercise, track: track, core: false, unlocked_by: core1
+    side2 = create :exercise, track: track, core: false, unlocked_by: core2
+    side3 = create :exercise, track: track, core: false
+    side4 = create :exercise, track: track, core: false
+    side5 = create :exercise, track: track, core: false, unlocked_by: core2
+    side6 = create :exercise, track: track, core: false, unlocked_by: core3
+
+    create :exercise, track: track, core: true, active: false
+    create :exercise, track: track, core: false, active: false
+
+    user = create :user
+    c1s = create :solution, exercise: core1, user: user, completed_at: Time.now
+    s2s = create :solution, exercise: side2, user: user, completed_at: Time.now
+    s4s = create :solution, exercise: side4, user: user, completed_at: Time.now
+    c2s = create :solution, exercise: core2, user: user
+
+    user_track = create :user_track, user: user, track: track, independent_mode: false
+    assert_equal 1, user_track.num_completed_core_exercises
+    assert_equal 2, user_track.num_completed_side_exercises
+    assert_equal 1, user_track.num_avaliable_core_exercises
+    assert_equal 2, user_track.num_avaliable_side_exercises
+  end
+
+  test "counters in independent mode" do
+    track = create :track
+    core1 = create :exercise, track: track, core: true
+    core2 = create :exercise, track: track, core: true
+    core3 = create :exercise, track: track, core: true
+    side1 = create :exercise, track: track, core: false, unlocked_by: core1
+    side2 = create :exercise, track: track, core: false, unlocked_by: core2
+    side3 = create :exercise, track: track, core: false
+    side4 = create :exercise, track: track, core: false
+    side5 = create :exercise, track: track, core: false, unlocked_by: core2
+    side6 = create :exercise, track: track, core: false, unlocked_by: core3
+
+    create :exercise, track: track, core: true, active: false
+    create :exercise, track: track, core: false, active: false
+
+    user = create :user
+    c1s = create :solution, exercise: core1, user: user, completed_at: Time.now
+    s2s = create :solution, exercise: side2, user: user, completed_at: Time.now
+    s4s = create :solution, exercise: side4, user: user, completed_at: Time.now
+    c2s = create :solution, exercise: core2, user: user
+
+    user_track = create :user_track, user: user, track: track, independent_mode: true
+    assert_equal 1, user_track.num_completed_core_exercises
+    assert_equal 2, user_track.num_completed_side_exercises
+    assert_equal 2, user_track.num_avaliable_core_exercises
+    assert_equal 4, user_track.num_avaliable_side_exercises
+  end
+
 end

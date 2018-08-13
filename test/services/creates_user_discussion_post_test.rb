@@ -27,6 +27,8 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     # Setup mentors
     mentor1 = create :user
     mentor2 = create :user
+    create :track_mentorship, user: mentor1
+    create :track_mentorship, user: mentor2
     create :solution_mentorship, solution: solution, user: mentor1
     create :solution_mentorship, solution: solution, user: mentor2
 
@@ -35,15 +37,30 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
       assert_equal :new_discussion_post_for_mentor, args[1]
       assert_equal "<strong>#{user.handle}</strong> has posted a comment on a solution you are mentoring", args[2]
       assert_equal "https://test.exercism.io/mentor/solutions/#{solution.uuid}", args[3]
-      assert_equal solution, args[4][:about]
+      assert_equal iteration, args[4][:about]
     end
 
-    DeliversEmail.expects(:deliver!).twice.with do |*args|
+    DeliverEmail.expects(:call).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_discussion_post_for_mentor, args[1]
       assert_equal DiscussionPost, args[2].class
     end
 
+    CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
+  end
+
+  test "does not notify non-current mentors" do
+    iteration = create :iteration
+    solution = iteration.solution
+    user = solution.user
+
+    # Create a user who mentored this solution but doesn't
+    # have a current track mentorship so is inactive.
+    inactive_mentor = create :user
+    create :solution_mentorship, solution: solution, user: inactive_mentor
+
+    CreatesNotification.expects(:create!).never
+    DeliverEmail.expects(:call).never
     CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
   end
 

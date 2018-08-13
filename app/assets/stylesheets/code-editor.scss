@@ -1,0 +1,97 @@
+@import 'variables';
+@import 'mixins';
+
+body .md-editor {
+    border-radius:2px;
+    .md-controls {
+        display:none;
+    }
+    .btn-toolbar {
+        background:#fff;
+    }
+   .btn-group {
+        display:inline;
+        button {
+            background:#fff;
+            border:none;
+            padding:10px;
+            outline:none;
+        }
+    }
+    textarea {
+        background:#fff;
+        height:200px;
+        border:none !important;
+        border-top:1px solid #ddd !important;
+        padding:15px;
+        @include code-font;
+        @include font-size(13, 18);
+    }
+}
+
+
+.widget-discussion-post .post-html, 
+.new-discussion-post .preview-area {
+    * {
+        @include font-size(14, 19);
+    }
+    &>* {
+        margin-bottom:10px;
+        &:last-child {
+            margin-bottom:0;
+        }
+    }
+    p {
+        @include font-size(14, 20);
+        margin-bottom:10px;
+    }
+    blockquote {
+        border-left: 4px solid #eee;
+        padding-left: 15px;
+        margin-left: 10px;
+    }
+    a {
+        color: #333;
+        font-weight: 400;
+        text-decoration: underline;
+    }
+
+    pre {
+        border:1px solid #f3f3f3;
+        background:#fafafa;
+        padding: 10px;
+        margin: 0 0 10px 0;
+        overflow: auto;
+
+        code {
+            &, * {
+                font-size:12px;
+            }
+        }
+    }
+
+    p code {
+        border:1px solid #fafafa;
+        background:#f5f5f5;
+        @include code-font;
+        font-size:12px;
+        padding:2px;
+    }
+
+    table {
+        th, td {
+            border:1px solid #ddd;
+            padding:5px 10px;
+        }
+        th {
+            font-weight:500;
+        }
+        tr:nth-child(even) {
+            background:#fafafa;
+
+        }
+    }
+    strong {
+        font-weight:500;
+    }
+}

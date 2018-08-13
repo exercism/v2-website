@@ -1,0 +1,7 @@
+#cli-walkthrough
+  .lo-container
+    = @walkthrough.html_safe
+
+- content_for :js do
+  :javascript
+    $(function() { Walkthrough.bindEvents("html, body") });

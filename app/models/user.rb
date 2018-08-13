@@ -49,6 +49,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
+  validate :avatar_is_correct_file_type
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -82,6 +83,10 @@ class User < ApplicationRecord
     else
       User::DEFAULT_AVATAR
     end
+  rescue
+    # If ActiveStorage fails or something weird happens
+    # don't blow the whole site, just return *something*
+    User::DEFAULT_AVATAR
   end
 
   def may_view_solution?(solution)
@@ -132,6 +137,12 @@ class User < ApplicationRecord
     solution_mentorships.where(solution_id: solution.id).exists?
   end
 
+  def has_active_lock_for_solution?(solution)
+    SolutionLock.where(solution: solution, user_id: id).
+                 where('locked_until > ?', Time.current).
+                 exists?
+  end
+
   def test_user?
     return false if email.blank?
     return true  if email.downcase.include?('+testexercismuser')
@@ -150,5 +161,14 @@ class User < ApplicationRecord
     )
 
     Rails.application.routes.url_helpers.url_for(avatar_thumbnail)
+  end
+
+  def avatar_is_correct_file_type
+    return unless avatar.attached?
+
+    unless avatar.variable?
+      avatar.purge
+      errors[:avatar] << "Wrong format"
+    end
   end
 end

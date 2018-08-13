@@ -6,7 +6,7 @@
         .frame
           %h1 Log in
           =link_to user_github_omniauth_authorize_path, class: 'github-button pure-button' do
-            %i.fa.fa-github
+            =graphical_icon :github
             with
             %strong GitHub
 
@@ -15,7 +15,7 @@
 
           .instruction Enter your log in details to access your account.
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-            = f.email_field :email, autofocus: true, placeholder: "Email Address"
+            = f.email_field :email, autofocus: true, placeholder: "Email address"
             = f.password_field :password, autocomplete: "off", placeholder: "Password"
             = f.button "Log in", class: 'pure-button'
           = render "devise/shared/links"

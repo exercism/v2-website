@@ -27,7 +27,8 @@
         margin-bottom:20px;
         position: relative;
         &:before {
-            font-family:FontAwesome;
+            font-family: "Font Awesome 5 Pro"; 
+            font-weight: 900;
             content: "\f002";
             position: absolute;
             left: 10px;

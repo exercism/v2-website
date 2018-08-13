@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'mixins';
+
+#profiles-page {
+    .header {
+        background-color:$color-2;
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        padding:100px 0 35px;
+        margin-bottom:35px;
+
+        h1 {
+            padding-top:20px;
+            @include font-size(40, 40);
+            //letter-spacing:-1.56px;
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            max-width:70%;
+            @include font-size(16, 21);
+            color:#fff;
+            font-weight:$light;
+        }
+    }
+    .profile {
+        margin-bottom:30px;
+        margin-right:20px;
+        display:block;
+        overflow:hidden;
+        text-decoration:none;
+        color:#333;
+        border:1px solid rgba($color-2, 0.5);
+        padding:15px;
+        border-radius:2px;
+        &:hover {
+            border:1px solid $color-2;
+            background:rgba($color-2, 0.05);
+        }
+        img {
+            border-radius:100%;
+            margin-right:10px;
+            height:50px;
+            width:50px;
+            float:left;
+        }
+        h2 {
+            padding-top:5px;
+            max-width:500px;
+            @include font-size(18, 18);
+            font-weight:$regular;
+            margin-bottom:5px;
+        }
+        p {
+            @include font-size(15, 21);
+            margin-left:60px;
+        }
+    }
+}

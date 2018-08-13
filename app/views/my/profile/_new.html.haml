@@ -1,7 +1,7 @@
 .page-1
   .progress
-    %i.fa.fa-circle.filled
-    %i.fa.fa-circle
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle'
 
   %h2 Showcase your solutions
   %p Create a public profile to showcase the solutions you’re proud of and help others learn from your work.
@@ -11,12 +11,12 @@
     %li Add links to where you exist elsewhere on the internet (e.g. Twitter and GitHub)
 
   =button_tag "Continue", class: 'pure-button start'
-  =link_to "No Thanks", [:my, :tracks], class: 'pure-button cancel'
+  =link_to "No thanks", [:my, :tracks], class: 'pure-button cancel'
 
 .page-2
   .progress
-    %i.fa.fa-circle.filled
-    %i.fa.fa-circle.filled
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle filled'
 
   =form_for @profile, url: my_profile_path do |f|
     %h2 Choose your display name

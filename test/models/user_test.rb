@@ -163,6 +163,12 @@ class UserTest < ActiveSupport::TestCase
     assert_equal User::DEFAULT_AVATAR, no_image.avatar_url
   end
 
+  test "a bad avatar_url doesn't raise an exception" do
+    user = create :user
+    user.expects(:avatar).raises
+    assert_equal User::DEFAULT_AVATAR, user.avatar_url
+  end
+
   test "destroying a user preserves discussions as a mentor and deletes discussions as a learner" do
     user = create(:user)
     mentor_post = create(:discussion_post, user: user)
@@ -188,5 +194,33 @@ class UserTest < ActiveSupport::TestCase
     refute not_onboarded_1.onboarded?
     refute not_onboarded_2.onboarded?
     refute not_onboarded_3.onboarded?
+  end
+
+  test "validates that avatar is correct format" do
+    user = create(:user)
+    user.avatar.attach(
+      io: File.open("test/fixtures/test.svg"),
+      filename: "test.svg"
+    )
+    other_user = create(:user)
+    other_user.avatar.attach(
+      io: File.open("test/fixtures/test.png"),
+      filename: "test.png"
+    )
+
+    refute user.valid?
+    assert other_user.valid?
+  end
+
+  test "has_active_lock_for_solution?" do
+    user = create :user
+    solution = create :solution
+    refute user.has_active_lock_for_solution?(solution)
+
+    lock = create :solution_lock, user: user, solution: solution, locked_until: Time.current - 1.second
+    refute user.has_active_lock_for_solution?(solution)
+
+    lock.update(locked_until: Time.current + 1.minute)
+    assert user.has_active_lock_for_solution?(solution)
   end
 end

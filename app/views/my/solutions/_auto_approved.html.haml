@@ -1,9 +1,6 @@
-.next-steps
-  .title ↳ Next Steps
-  -if @solution.completed?
-    %p Well done. This solution has been completed. You can now move on to real exercises with mentor discussions.
-    =link_to "Start another exercise", [:my, @track], class: "pure-button complete-button approved"
-  -else
+-unless @solution.completed?
+  .next-steps
+    .title ↳ Next Steps
     %p Well done on submitting your solution!
     %p At this stage normally you would have a discussion with your mentor about your solution. However, as this is a simple exercise to get you started, we skip this step, and you can complete the exercise straight away.
     =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"

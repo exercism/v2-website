@@ -11,10 +11,12 @@
         .pure-u-1-6
           %h4 Help
           =link_to "FAQs", faqs_page_path
-          =link_to "Getting Started", getting_started_page_path
+          =link_to "Getting started", getting_started_page_path
           =link_to "Exercism in bootcamps", "https://teams.exercism.io"
+          =link_to "Installing the CLI", cli_page_path
+          =link_to "Interactive CLI walkthrough", cli_walkthrough_page_path
         .pure-u-1-6
-          %h4 Get Involved
+          %h4 Get involved
           =link_to "Contribute", contribute_page_path
           =link_to "Become a mentor", "http://mentoring.exercism.io/", target: "_blank"
           =link_to "Become a maintainer", become_a_maintainer_page_path
@@ -22,29 +24,29 @@
           %h4 Legal &amp; Privacy
           =link_to "Terms", terms_of_service_page_path
           =link_to "Privacy", privacy_page_path
-          =link_to "Code of Conduct", code_of_conduct_page_path
+          =link_to "Code of conduct", code_of_conduct_page_path
         .pure-u-1-6
           %h4 Keep in touch
           =link_to "Newsletter", "https://tinyletter.com/exercism", target: "_blank"
           =link_to "Discuss on GitHub", "https://github.com/exercism/discussions", target: "_blank"
           =link_to "Contact us", contact_page_path
-          =link_to "Report Abuse", report_abuse_page_path
+          =link_to "Report abuse", report_abuse_page_path
         .pure-u-1-6
           %h4 Follow
-          =link_to "https://twitter.com/exercism_io", class: 'icon' do
-            %i.fa.fa-twitter
-          =link_to "https://facebook.com/exercism.io", class: 'icon' do
-            %i.fa.fa-facebook-official
-          =link_to "https://github.com/exercism", class: 'icon' do
-            %i.fa.fa-github
+          =link_to "https://twitter.com/exercism_io", class: "icon", "aria-label": "Exercism on Twitter" do
+            =graphical_icon :twitter
+          =link_to "https://facebook.com/exercism.io", class: "icon", "aria-label": "Exercism on Facebook" do
+            =graphical_icon 'facebook-official'
+          =link_to "https://github.com/exercism", class: "icon", "aria-label": "Exercism on GitHub" do
+            =graphical_icon :github
 
       .legal
         .copyright © #{Time.current.year} Exercism, Inc
         .created-by
           Made with
-          %i.fa.fa-heart
+          =icon :heart
           and
-          %i.fa.fa-coffee
+          =icon :coffee
           by
           #{link_to "Katrina Owen", "http://kytrinyx.com"},
           #{link_to "Thalamus", "http://thalamus.ai"}

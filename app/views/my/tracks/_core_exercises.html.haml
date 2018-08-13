@@ -2,35 +2,55 @@
   - num_core_exercises = core_exercises.size
   - core_exercises.each.with_index do |exercise, idx|
     - if exercise.completed?
-      = link_to [:my, exercise.solution], class: "exercise completed", id: "exercise-#{exercise.slug}" do
-        .circle= image_tag "tick-color-1.png"
-        .status Completed
-        .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-        .title
-          = exercise.title
-          .topics
-            - exercise.topic_names.each do |topic_name|
-              .topic= topic_name
-        .blurb= exercise.blurb
+      .exercise-wrapper.completed
+        .circle= image "tick-color-1.png", "Green checkmark"
+        = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
+          -if exercise.solution.approved_by
+            .status Completed
+          -else
+            .status.completed-unmentored
+              Completed
+              .unmentored
+                %i.fa.fa-user-times
+                Unmentored
+          .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
+          .title
+            = exercise.title
+            .topics
+              - exercise.topic_names.each do |topic_name|
+                .topic= topic_name
+          .blurb= exercise.blurb
+
+        -if @side_exercises_and_solutions_by_unlocked_by[exercise.id].present? || (exercise.auto_approve? && @side_exercises_and_solutions_by_unlocked_by[nil].present?)
+          .unlocked-exercises-section
+            %h3 You've unlocked extra exercises!
+            .unlocked-exercises
+              -if exercise.auto_approve?
+                =render "unlocked_exercises", unlocked_exercises_and_solutions: @side_exercises_and_solutions_by_unlocked_by[nil][0,10]
+              =render "unlocked_exercises", unlocked_exercises_and_solutions: @side_exercises_and_solutions_by_unlocked_by[exercise.id]
+
     - elsif exercise.unlocked?
-      = link_to [:my, exercise.solution], class: "exercise in-progress", id: "exercise-#{exercise.slug}" do
-        .circle= image_tag exercise.white_icon_url
-        .status In Progress
-        .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-        .title
-          = exercise.title
-          .topics
-            - exercise.topic_names.each do |topic_name|
-              .topic= topic_name
-        .blurb= exercise.blurb
+      .exercise-wrapper.in-progress
+        .circle= graphical_image exercise.white_icon_url
+        = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
+          .status= exercise.solution.approved?? "Approved" : "In Progress"
+          .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
+          .title
+            = exercise.title
+            .topics
+              - exercise.topic_names.each do |topic_name|
+                .topic= topic_name
+          .blurb= exercise.blurb
+
     - elsif exercise.locked?
-      .exercise.locked{id: "exercise-#{exercise.slug}"}
-        .circle= image_tag exercise.dark_icon_url
-        .status Locked
-        .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-        .title
-          = exercise.title
-          .topics
-            - exercise.topic_names.each do |topic_name|
-              .topic= topic_name
-        .blurb= exercise.blurb
+      .exercise-wrapper.locked
+        .circle= graphical_image exercise.dark_icon_url
+        .exercise{id: "exercise-#{exercise.slug}"}
+          .status Locked
+          .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
+          .title
+            = exercise.title
+            .topics
+              - exercise.topic_names.each do |topic_name|
+                .topic= topic_name
+          .blurb= exercise.blurb

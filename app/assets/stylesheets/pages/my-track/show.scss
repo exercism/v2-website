@@ -1,0 +1,391 @@
+@import 'variables';
+@import 'mixins';
+
+body.namespace-my.controller-tracks.action-show {
+    footer {
+        background:#fff;
+    }
+}
+#my-track-page {
+    .lo-internal-nav-bar {
+        margin-bottom:0;
+    }
+    .header {
+        background-color: $header-color-1;
+        overflow:hidden;
+        .title {
+            float:left
+        }
+
+        .h1-subtitle {
+            @include font-size(12, 12);
+            color:#fff;
+            opacity:0.75;
+            font-weight:$light;
+        }
+        .num-solutions {
+            float:right;
+            color:#ededed;
+            font-weight:$bold;
+            @include font-size(11, 14);
+            text-transform:uppercase;
+        }
+        .status {
+            position:relative;
+            float:right;
+            margin-top:40px;
+            background:#fff;
+            color:333;
+            @include font-size(10, 10);
+            font-weight:$regular;
+            border-radius:5px;
+            border:1px solid $color-1;
+            text-transform:uppercase;
+            color:#555;
+            font-weight:500;
+            padding:9px 15px;
+        }
+        .stats {
+            float:right;
+            margin-top:58px;
+            .stat {
+                display:inline-block;
+                color:#fff;
+                @include font-size(11, 14);
+                text-transform:uppercase;
+                padding-left:20px;
+                margin-left:20px;
+                &+.stat {
+                    border-left:1px solid rgba(#fff, 0.5);
+                }
+                a {
+                    color:#fff;
+                    text-decoration:none;
+                    display:block;
+                    border-bottom:1px solid rgba(#fff, 0.5);
+                    &:hover {
+                        border-bottom-color:#fff
+                    }
+                }
+            }
+        }
+    }
+    .top-section {
+        border-bottom:5px solid #fff;
+    }
+    .core-exercises {
+        padding-top:42px;
+        margin-bottom:45px;
+        position:relative;
+        &:before {
+            content: "";
+            position:absolute;
+            top:0px;
+            bottom:50px;
+            left:0;
+            background:$background-grey-1;
+            width:2px;
+        }
+        .exercise-wrapper {
+            position:relative;
+            margin-left:58px;
+
+            &:after {
+                position:absolute;
+                content: "";
+                top:50px;
+                left:-36px;
+                width:35px;
+                height:1px;
+                background:$background-grey-1;
+            }
+
+            .circle {
+                position:absolute;
+                top:23px;
+                left:-83px;
+                border-radius:100%;
+                width:50px;
+                height:50px;
+                background:#eee;
+                z-index:1;
+            }
+
+            .exercise {
+                display:block;
+                color:#333;
+                text-decoration:none;
+                border:1px solid $line-color-1;
+                border-radius:2px;
+                padding:20px 25px;
+                margin-bottom:15px;
+                height:100px;
+                background:#fff;
+                .status {
+                    float:right;
+                    @include font-size(12, 12);
+                    letter-spacing:-0.5px;
+                    text-transform:uppercase;
+                    font-weight:$regular;
+                    color:#ccc;
+                }
+                .position {
+                    @include font-size(10, 10);
+                    font-weight:$light;
+                    letter-spacing:-0.0px;
+                    color:#ccc;
+                    margin-bottom:5px;
+                    display:none;
+                }
+                .title {
+                    font-weight:$bold;
+                    @include font-size(20, 20);
+                    color:#ccc;
+                    margin-bottom:5px;
+                }
+                .blurb {
+                    font-weight:$regular;
+                    @include font-size(13, 16);
+                    color:#ccc;
+                    overflow:hidden;
+                    max-height:32px;
+                    max-width:400px;
+                }
+                .topics {
+                    display:inline-block;
+                    vertical-align:bottom;
+                    max-width: 290px;
+                    overflow: hidden;
+                    max-height: 23px;
+                    margin-bottom:0px;
+
+                    .topic {
+                        display:inline-block;
+                        @include font-size(11, 11);
+                        font-weight:$regular;
+                        margin-left:10px;
+                        background:#eee;
+                        color:#999;
+                        padding:3px 6px 4px;
+                        border-radius:2px;
+                    }
+                }
+            }
+
+            &.locked {
+                .circle {
+                    img {
+                        height:31px;
+                        display:block;
+                        margin:10px auto;
+                    }
+                }
+            }
+            &.in-progress {
+                .exercise {
+                    border:1px solid $color-1;
+                    box-shadow:0 0 0 1px $color-1;
+                    background:#fff;
+                }
+                &:after {
+                    left:-34px;
+                    width:33px;
+                }
+                .circle {
+                    border:2px solid $color-1;
+                    background:$color-1;
+                    img {
+                        height:31px;
+                        display:block;
+                        margin:10px auto;
+                    }
+                    &:before {
+                        position:absolute;
+                        content: "";
+                        top:0;
+                        left:0;
+                        right:0;
+                        bottom:0;
+                        border-radius:100%;
+                        border:2px solid #fff;
+                    }
+                    top:21px;
+                    left:-85px;
+                    width:55px;
+                    height:55px;
+                }
+                &:after {
+                    height:2px;
+                    background:$color-1;
+                }
+                .status {
+                    color:#999;
+                }
+            }
+            &.completed {
+                .exercise {
+                    border-color:$color-1;
+                    .status {
+                        color:$color-1;
+                        &.completed-unmentored {
+                            color:#bbb;
+                            text-align:right;
+                            .unmentored {
+                                margin-top:4px;
+                                @include font-size(9, 10);
+                                i {
+                                }
+                            }
+                        }
+
+                    }
+                }
+                &:after {
+                    background:$color-1;
+                }
+                .circle {
+                    border:2px solid $color-1;
+                    background:#fff;
+                    img {
+                        width:20px;
+                        display:block;
+                        margin:16px auto;
+                    }
+                }
+            }
+            &.in-progress, &.completed {
+                .exercise {
+                    &:hover {
+                        background:rgba($color-1, 0.05);
+                    }
+
+                    .title {
+                        color:#333;
+                    }
+                    .position {
+                        color:#999;
+                    }
+                    .blurb {
+                        color:#999;
+                    }
+                }
+
+                &:before {
+                    position:absolute;
+                    content: "";
+                    top:-50px;
+                    left:-58px;
+                    height:92px;
+                    width:2px;
+                    background:$color-1;
+                }
+            }
+            &.completed + .exercise-wrapper.completed,
+            &.completed + .exercise-wrapper.in-progress {
+                &:before {
+                    margin-top: -200px;
+                    height: 300px;
+                }
+            }
+        }
+        .unlocked-exercises-section {
+            margin: 0 50px;
+            border: 1px solid rgba($color-2, 0.5);
+            border-radius:2px;
+            margin-bottom: 20px;
+            position:relative;
+            &:before {
+                width:1px;
+                left:50%;
+                top:-16px;
+                height:16px;
+                position:absolute;
+                content: "";
+                background:$color-2;
+            }
+            h3 {
+                color:rgba($color-2, 0.9);
+                text-align:center;
+                background:rgba($color-1, 0.04);
+                border-bottom:1px solid rgba($color-2, 0.1);
+                font-weight:$regular;
+                padding:7px 20px;
+                @include font-size(13,13);
+                strong {
+                    font-weight:$bold;
+                }
+            }
+            .unlocked-exercises {
+                padding:10px 20px 5px;
+                text-align:center;
+                font-size: 0;
+            }
+            .unlocked-exercise {
+                display: inline-block;
+                margin: 0 5px 5px 0;
+                border: 1px solid rgba($color-2, 0.5);
+                background:#fff;
+                padding:6px;
+                border-radius:2px;
+                height:37px;
+                img {
+                    height:25px;
+                    display:inline;
+                }
+                .hover { display:none; }
+                &:hover {
+                    background:$color-2;
+                    .normal { display:none; }
+                    .hover { display:inline; }
+                }
+            }
+        }
+    }
+    .side-exercises {
+        .num-extra-exercises {
+            float:right;
+            padding-top:5px;
+            padding-right:25px;
+            font-weight:$regular;
+            color:#999;
+        }
+
+        .filters {
+            margin-bottom:20px;
+            .widget-filter {
+                &.topic {
+                    .selectize-control {
+                        width:250px;
+                    }
+                }
+                &.status {
+                    .selectize-control {
+                        width:120px;
+                    }
+                }
+            }
+        }
+        .no-results {
+            color:#999;
+        }
+    }
+    .deprecated-exercises,
+    .side-exercises {
+        background:#f9f9f9;
+        padding:45px 0;
+        h2 {
+            @include font-size(20, 20);
+            font-weight:$bold;
+            margin-bottom:7px;
+        }
+        .h2-subtitle {
+            @include font-size(14, 14);
+            font-weight:$light;
+            color:#666;
+            margin-bottom:35px;
+        }
+        .widget-side-exercise {
+            margin: 0 20px 20px 0;
+        }
+    }
+}

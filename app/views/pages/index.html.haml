@@ -9,7 +9,7 @@
           %h1
             =image_tag "logo-green.png", title: "Exercism", alt: "Exercism"
             exercism
-          %h2 Code Practice and Mentorship for Everyone
+          %h2 Code practice and mentorship for everyone
           %p
             Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{num_tracks} languages, and insightful discussion with our dedicated team of welcoming mentors.
             Exercism is
@@ -22,13 +22,13 @@
     .lo-container
       %h2 Exercism has been featured in...
       .logos
-        =link_to image_tag("pr-logos/changelog.png"), "https://changelog.com/108/", target: "blank"
-        =link_to image_tag("pr-logos/codeship.png"), "http://blog.codeship.com/an-inside-look-with-codeship-katrina-owen-of-exercism-io/", target: "blank"
-        =link_to image_tag("pr-logos/code-newbie.png"), "http://www.codenewbie.org/podcast/nitpicks-and-devils", target: "blank"
-        =link_to image_tag("pr-logos/wired.png"), "https://www.wired.com/2014/09/exercism/", target: "blank"
-        =link_to image_tag("pr-logos/opensource.png"), "https://opensource.com/article/17/1/exercism-learning-programming", target: "blank"
-        =link_to image_tag("pr-logos/sd-times.png"), "http://sdtimes.com/sd-times-github-project-week-exercism/", target: "blank"
-        =link_to image_tag("pr-logos/linux.png"), "", target: "blank"
+        =link_to image("pr-logos/changelog.png", "Changelog"), "https://changelog.com/108/", target: "blank"
+        =link_to image("pr-logos/codeship.png", "Codeship"), "http://blog.codeship.com/an-inside-look-with-codeship-katrina-owen-of-exercism-io/", target: "blank"
+        =link_to image("pr-logos/code-newbie.png", "Code Newbie"), "http://www.codenewbie.org/podcast/nitpicks-and-devils", target: "blank"
+        =link_to image("pr-logos/wired.png", "Wired"), "https://www.wired.com/2014/09/exercism/", target: "blank"
+        =link_to image("pr-logos/opensource.png", "Open Source"), "https://opensource.com/article/17/1/exercism-learning-programming", target: "blank"
+        =link_to image("pr-logos/sd-times.png", "SD Times"), "http://sdtimes.com/sd-times-github-project-week-exercism/", target: "blank"
+        =link_to image("pr-logos/linux.png", "Linux"), "", target: "blank"
 
   .tracks-section#explore-languages
     .lo-container
@@ -46,7 +46,7 @@
 
       .step.pure-g.lalign
         .pure-u-1-3
-          =image_tag "how-step-1.png"
+          =graphical_image "how-step-1.png"
         .pure-u-1-12
         .pure-u-7-12
           %h3 1. Choose a language to master
@@ -55,7 +55,7 @@
 
       .step.pure-g
         .pure-u-1-3
-          =image_tag "how-step-2.png"
+          =graphical_image "how-step-2.png"
         .pure-u-1-12
         .pure-u-7-12
           %h3 2. Complete a coding challenge on your computer
@@ -64,7 +64,7 @@
 
       .step.pure-g
         .pure-u-1-3
-          =image_tag "how-step-3.png"
+          =graphical_image "how-step-3.png"
         .pure-u-1-12
         .pure-u-7-12
           %h3 3. Upload your solution and review it with a mentor
@@ -74,7 +74,7 @@
       .step.step-4.pure-g
         .pure-u-1-3
           .waterfall
-          =image_tag "how-step-4.png"
+          =graphical_image "how-step-4.png"
 
         .pure-u-1-12
         .pure-u-7-12
@@ -84,7 +84,7 @@
 
       .step.pure-g
         .pure-u-1-3
-          =image_tag "how-step-5.png"
+          =graphical_image "how-step-5.png"
         .pure-u-1-12
         .pure-u-7-12
           %h3 5. Complete the language track and achieve fluency

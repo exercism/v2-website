@@ -1,0 +1,24 @@
+#admin-users-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Admin dashboard", [:admin, :dashboard]
+      =nav_divider
+      %span User ##{@user.id}
+
+  .lo-container
+    %h1 User ##{@user.id}: #{@user.handle}
+
+    %h2 Info
+    %ul
+      %li Email: #{@user.email}
+      %li Signed up on #{@user.created_at}
+      %li Current session started at #{@user.current_sign_in_at}
+      %li Mentor: #{@user.mentor?? "Yes" : "No"}
+      %li Tracks: #{@user.tracks.pluck(:title).sort.join(", ")}
+
+    %h2 Comments
+    - @discussion_posts.each do |dp|
+      .discussion-post
+        = link_to "#{dp.solution.user_id == dp.user_id ? "Learner" : "Mentor"} on #{dp.solution.uuid}", admin_solution_iteration_path(dp.solution, dp.iteration), class: "solution"
+        .timestamp= dp.created_at.to_s(:db)
+        .content=raw dp.html

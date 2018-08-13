@@ -32,13 +32,27 @@ class My::ProfileController < MyController
   end
 
   def edit
-    render_modal("edit-profile", "edit")
+    @user = current_user
+
+    respond_to do |format|
+      format.js { render_modal("edit-profile", "_edit_modal") }
+      format.html do
+        @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
+      end
+    end
   end
 
   def update
-    @profile.update(profile_params)
-    User.find(current_user.id).update(user_params)
-    redirect_to @profile
+    @user = current_user
+
+    ActiveRecord::Base.transaction do
+      if @profile.update(profile_params) && @user.update(user_params)
+        redirect_to @profile
+      else
+        @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
+        render :edit
+      end
+    end
   end
 
   private

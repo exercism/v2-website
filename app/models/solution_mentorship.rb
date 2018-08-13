@@ -5,6 +5,7 @@ class SolutionMentorship < ApplicationRecord
     { text: "Completed", value: :completed },
     { text: "Stale", value: :stale },
     { text: "Unsubscribed", value: :unsubscribed },
+    { text: "Legacy", value: :legacy },
   ]
 
   belongs_to :user

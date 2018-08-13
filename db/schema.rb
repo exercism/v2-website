@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_13_164812) do
+ActiveRecord::Schema.define(version: 2018_08_05_111033) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "receive_product_updates", default: true, null: false
+    t.boolean "email_on_solution_approved", default: true, null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
@@ -71,6 +72,9 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.text "html", limit: 4294967295, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "edited", default: false, null: false
+    t.text "previous_content"
+    t.boolean "deleted", default: false, null: false
     t.index ["iteration_id"], name: "fk_rails_f58a02b68e"
   end
 
@@ -171,6 +175,8 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.string "link_text"
     t.string "link_url"
     t.text "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["track_id"], name: "index_mentors_on_track_id"
   end
 
@@ -230,6 +236,16 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "solution_locks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "locked_until", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id"], name: "fk_rails_d2575804da"
+    t.index ["user_id"], name: "fk_rails_7c200d25d8"
+  end
+
   create_table "solution_mentorships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "solution_id", null: false
@@ -263,8 +279,23 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "mentoring_enabled"
+    t.boolean "independent_mode", default: false, null: false
+    t.boolean "track_in_independent_mode", default: false, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
+    t.index ["approved_by_id"], name: "ihid-5"
+    t.index ["completed_at"], name: "ihid-6"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
+    t.index ["last_updated_by_user_at"], name: "ihid-3"
+    t.index ["num_mentors", "exercise_id", "user_id"], name: "fix-4"
+    t.index ["num_mentors", "exercise_id"], name: "fix-2"
+    t.index ["num_mentors", "independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_1"
+    t.index ["num_mentors", "last_updated_by_user_at"], name: "ihid-4"
+    t.index ["num_mentors", "track_in_independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_2"
+    t.index ["num_mentors", "user_id", "exercise_id"], name: "fix-5"
+    t.index ["num_mentors", "user_id"], name: "fix-3"
+    t.index ["num_mentors"], name: "ihid-2"
+    t.index ["user_id", "exercise_id", "num_mentors"], name: "fix-6"
+    t.index ["user_id", "exercise_id"], name: "fix-1"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
     t.index ["uuid"], name: "index_solutions_on_uuid"
   end
@@ -378,6 +409,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
     t.datetime "updated_at", null: false
     t.boolean "independent_mode"
     t.datetime "archived_at"
+    t.index ["independent_mode"], name: "ihid-1"
     t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_99e944edbc"
   end
@@ -432,6 +464,8 @@ ActiveRecord::Schema.define(version: 2018_07_13_164812) do
   add_foreign_key "reactions", "solutions"
   add_foreign_key "reactions", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
+  add_foreign_key "solution_locks", "solutions"
+  add_foreign_key "solution_locks", "users"
   add_foreign_key "solution_mentorships", "solutions"
   add_foreign_key "solution_mentorships", "users"
   add_foreign_key "solutions", "exercises"

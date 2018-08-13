@@ -17,6 +17,7 @@ class My::TracksController < MyController
     @track = Track.find(params[:id])
     return redirect_to @track unless user_signed_in?
     return show_not_joined unless current_user.joined_track?(@track)
+    return show_not_joined if current_user.previously_joined_track?(@track)
     solutions = current_user.solutions.includes(:exercise).where('exercises.track_id': @track.id)
     mapped_solutions = solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
 
@@ -49,7 +50,7 @@ class My::TracksController < MyController
       end
 
       @core_exercises_and_solutions = core_exercises.
-        inject([[], [], []]) do |collection, exercise|
+        inject([[], [], []]) { |collection, exercise|
           if exercise.completed?
             collection[0] << exercise
           elsif exercise.unlocked?
@@ -59,11 +60,14 @@ class My::TracksController < MyController
           end
 
           collection
-        end.
-        flatten
-      @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}
+        }.
+        inject(&:+)
+      @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}.sort_by{|e,s|
+        "#{s ? (s.completed?? 0 : (s.in_progress?? 1 : 2)) : 3}#{!e.unlocked_by ? 0 : 1}"
+      }
+      @side_exercises_and_solutions_by_unlocked_by = @side_exercises_and_solutions.each_with_object(Hash.new{|h,k|h[k] = []}){|(e,s), h| h[e.unlocked_by_id] << [e,s]}
 
-      @num_side_exercises = @track.exercises.side.count
+      @num_side_exercises = @track.exercises.side.active.count
       @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
       @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.completed?}.size
 

@@ -1,9 +1,10 @@
 !!!
-%html
+%html{lang: I18n.locale}
   %head
     =stylesheet_link_tag 'application', media: 'all'
     =stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:600,700,800'
-    =stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+    =stylesheet_link_tag '//pro.fontawesome.com/releases/v5.2.0/css/all.css', integrity: 'sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno', crossorigin: 'anonymous'
+    =stylesheet_link_tag '//pro.fontawesome.com/releases/v5.2.0/css/v4-shims.css'
 
     =render "layouts/meta_tags"
     =csrf_meta_tags

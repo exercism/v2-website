@@ -6,17 +6,11 @@ class ProfilesController < ApplicationController
   before_action :set_profile, except: [:index]
 
   def show
-    @helped_count = if user_signed_in?
-        current_user.solution_mentorships.joins(:solution).select('solutions.user_id').distinct.count
-      else
-        0
-      end
-
-    setup_solutions
+    @profile_view = ProfilePresenter.new(@profile, track_id: params[:track_id])
   end
 
   def index
-    @profiles = Profile.page(params[:page]).per(20)
+    @profiles = Profile.order("profiles.created_at ASC").includes(:user).page(params[:page]).per(100)
   end
 
   def solutions
@@ -28,6 +22,8 @@ class ProfilesController < ApplicationController
   def set_profile
     @user = User.find_by_handle!(params[:id])
     @profile = @user.profile
+
+    raise ActiveRecord::RecordNotFound unless @profile
   end
 
   def setup_solutions

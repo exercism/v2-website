@@ -1,7 +1,8 @@
-$('.discussion .posts').show().append("#{j render("post", post: @post, solution: @iteration.solution, user_track: @user_track)}")
+var newPost = '#{j discussion_post_widget(@post, @iteration.solution, @user_track)}';
+$('.discussion .posts').show().append(newPost)
 $('.discussion .next-steps').hide()
 $('.new-discussion-post-form textarea').val("")
-$('.CodeMirror')[0].CodeMirror.setValue("")
-$('.CodeMirror')[0].CodeMirror.clearHistory()
 window.location.href = "#discussion-post-#{@post.id}"
+$('.discussion .write-tab').click()
 Prism.highlightAll()
+#{yield(:js).gsub(/<\/?script>/, "")}

@@ -1,7 +1,7 @@
 #side-exercises.side-exercises
   .lo-container
-    -if @user_track.normal_mode?
-      %h2 Extra Exercises
+    -if @user_track.mentored_mode?
+      %h2 Extra exercises
       .h2-subtitle These exercises are unlocked by completing the core track. They're great for practicing and full of fun.
 
     .num-extra-exercises= pluralize exercises_and_solutions.size, "Exercise"
@@ -19,7 +19,7 @@
           =select_tag :topic_id, options_for_select(@topics_for_select), id: nil
         .widget-filter.status
           .title Status:
-          =select_tag :status, options_for_select({"All": 0, "In Progress": :in_progress, "Unlocked": :unlocked, "Completed": :completed, "Locked": :locked}, value: @status), id: nil
+          =select_tag :status, options_for_select({"All": 0, "In progress": :in_progress, "Unlocked": :unlocked, "Completed": :completed, "Locked": :locked}, value: @status), id: nil
     .pure-g.exercises
       =render "my/side_exercises/exercises", exercises_and_solutions: exercises_and_solutions
 
@@ -32,5 +32,3 @@
             .title= exercise.title
             .topics
               .topic Deprecated
-
-

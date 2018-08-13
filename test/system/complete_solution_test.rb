@@ -2,8 +2,14 @@ require 'application_system_test_case'
 
 class CompleteSolutionTest < ApplicationSystemTestCase
   test "completes a solution" do
+    Git::ExercismRepo.stubs(current_head: SecureRandom.uuid)
+    Git::ExercismRepo.stubs(pages: [])
+
     track = create(:track)
     user = create(:user)
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
     mentor = create(:user, mentored_tracks: [track])
     user_track = create(:user_track,
                         user: user,
@@ -19,10 +25,12 @@ class CompleteSolutionTest < ApplicationSystemTestCase
                                  solution: solution,
                                  user: mentor)
 
+    create(:exercise, unlocked_by: exercise, track: exercise.track)
+
     sign_in!(user)
     visit my_solution_path(solution.uuid)
 
-    click_link "Complete Exercise"
+    click_link "Complete exercise"
     assert page.has_content?("You've completed Hello World")
 
     click_link "Continue"

@@ -35,6 +35,17 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       assert_correct_page page
     end
   end
+    test "clears notifications" do
+      sign_in!
+      solution = create :solution, user: @current_user
+      iteration = create :iteration, solution: solution
+      create :user_track, user: @current_user, track: solution.exercise.track
+
+      ClearNotifications.expects(:call).with(@current_user, solution)
+      ClearNotifications.expects(:call).with(@current_user, iteration)
+
+      get my_solution_url(solution)
+    end
 
   test "reflects properly" do
     sign_in!
@@ -71,25 +82,16 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, SolutionMentorship.where.not(rating: nil).count
   end
 
-  test "migrates to v2 properly" do
-    sign_in!
-    solution = create :solution,
-                      user: @current_user,
-                      completed_at: Time.now - 1.week,
-                      published_at: Time.now - 1.week,
-                      approved_by: create(:user),
-                      last_updated_by_user_at: Time.now - 1.week,
-                      updated_at: Time.now - 1.week
+  test "request_mentoring calls service" do
+    Timecop.freeze do
+      sign_in!
+      solution = create :solution, user: @current_user
 
-    patch migrate_to_v2_my_solution_url(solution.uuid)
-    assert_redirected_to my_solution_url(solution.uuid)
+      SwitchSolutionToMentoredMode.expects(:call).with(solution)
 
-    solution.reload
-    assert_nil solution.completed_at
-    assert_nil solution.published_at
-    assert_nil solution.approved_by
-    assert_equal Time.now.to_i, solution.last_updated_by_user_at.to_i
-    assert_equal Time.now.to_i, solution.updated_at.to_i
+      patch request_mentoring_my_solution_url(solution.uuid)
+      assert_redirected_to my_solution_url(solution.uuid)
+    end
   end
 
   test "reflects without next core exercise" do

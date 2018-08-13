@@ -1,12 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-body.controller-solutions.action-show {
-    footer {
-        display:none;
-    }
-}
-
 #solution-page,
 #mentor-solution-page,
 #my-solution-page,
@@ -89,9 +83,6 @@ body.controller-solutions.action-show {
         pre {
             padding-top:0;
             padding-bottom:0;
-            code[class*="language-"] {
-                //font-size:12px;
-            }
         }
     }
     .lhs-content {
@@ -100,118 +91,18 @@ body.controller-solutions.action-show {
             border-radius:2px;
         }
     }
-    .discussion {
-        .post, .preview-area {
-            p {
-                @include font-size(14, 20);
-            }
-            blockquote {
-                border-left: 4px solid #eee;
-                padding-left: 15px;
-                margin-left: 10px;
-            }
-            a {
-                color: #333;
-                font-weight: 400;
-                text-decoration: underline;
-            }
-        }
-        .post {
-            .post-html {
-                * {
-                    @include font-size(14, 19);
-                }
-                &>* {
-                    margin-bottom:10px;
-                    &:last-child {
-                        margin-bottom:0;
-                    }
-                }
-            }
-        }
-
-        .solution pre,
-        .post-html pre,
-        .new-discussion-post-form .preview-area pre {
-            border:1px solid #f3f3f3;
-            background:#fafafa;
-            code[class*="language-"] {
-                &, * {
-                    font-size:12px;
-                }
-            }
-        }
+    .new-discussion-post {
         form {
             margin:0px 0 20px 0;
-            textarea, .preview-area {
+            .md-editor, .preview-area {
                 width:100%;
                 resize:none;
-                padding:15px;
                 border:1px solid #ddd;
             }
             .preview-area {
-                height:231px;
+                height:248px;
                 overflow:auto;
-            }
-
-            .editor-toolbar {
-                border-radius:2px 0 0 2px;
-                &:before, &:after {
-                    display:none;
-                }
-                a {
-                    color:#888 !important;
-                    &:hover, &.active {
-                        border-color:transparent !important;
-                        color:#333 !important;
-                    }
-
-                }
-            }
-
-            .CodeMirror {
-                //&, .CodeMirror-scroll {
-                min-height:220px !important;
-                max-height:220px !important;
-                //}
-
-                .CodeMirror-scroll {
-                    min-height:200px !important;
-                    max-height:200px !important;
-                }
-                .cm-header{color:#00f}
-                .cm-s-default .cm-quote{color:#090}
-                .cm-negative{color:#d44}
-                .cm-positive{color:#292}
-                .cm-header, .cm-strong{font-weight:300}
-                .cm-em{font-style:normal}
-                .cm-link{text-decoration:underline}
-                .cm-strikethrough{text-decoration:line-through}
-                .cm-s-default .cm-keyword{color:#333}
-                .cm-s-default .cm-atom{color:#333}
-                .cm-s-default .cm-number{color:#333}
-                .cm-s-default .cm-def{color:#333}
-                .cm-s-default .cm-variable-2{color:#333}
-                .cm-s-default .cm-variable-3{color:#333}
-                .cm-s-default .cm-comment{color:#333}
-                .cm-s-default .cm-string{color:#333}
-                .cm-s-default .cm-string-2{color:#333}
-                .cm-s-default .cm-meta,.cm-s-default .cm-qualifier{color:#333}
-                .cm-s-default .cm-builtin{color:#333}
-                .cm-s-default .cm-bracket{color:#333}
-                .cm-s-default .cm-tag{color:#333}
-                .cm-s-default .cm-attribute{color:#333}
-                .cm-s-default .cm-hr{color:#333}
-                .cm-s-default .cm-link{color:#333}
-                .cm-invalidchar,.cm-s-default .cm-error{color:#333}
-                .cm-header-1,
-                .cm-header-2,
-                .cm-header-3,
-                .cm-header-4 { @include font-size(14, 18); color:#333 }
-                .cm-comment {
-                    @include code-font;
-                    font-size:12px;
-                }
+                padding:15px;
             }
         }
     }
@@ -357,7 +248,8 @@ body.controller-solutions.action-show {
                 &:before,
                 &:after {
                     content: "\f0d7";
-                    font-family:FontAwesome;
+                    font-family: "Font Awesome 5 Pro";
+                    font-weight: 900;
                     position:absolute;
                     left:50%;
                 }

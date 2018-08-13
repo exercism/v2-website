@@ -2,53 +2,7 @@
   =render "nav_and_header"
 
   .lo-container
-    -if @solution.updated_at <= Exercism::V2_MIGRATED_AT
-      .migration-bar
-        -if @solution.completed_at.present?
-          This solution has been imported from an old version of the website. If you would like to receive mentorship on it, please #{link_to "click here", migrate_to_v2_my_solution_path(@solution), method: :patch}.
-        -else
-          This solution has been imported from an old version of the website. In order to receive mentorship on it and to progress with this track, please #{link_to "click here", migrate_to_v2_my_solution_path(@solution), method: :patch}.
-    -else
-      .notifications-bar
-        =link_to [@track, @exercise, :solutions], class: 'pure-button community-solutions' do
-          %i.fa.fa-users
-          Community Solutions
-
-        -if @solution.completed?
-          -if @solution.published?
-            .notification
-              Your solution has been published.
-              =link_to "View published solution", [@solution.exercise.track, @solution.exercise, @solution], method: :get
-          -else
-            .notification
-              Well done! Your solution is completed.
-              =link_to "Publish your solution", [:publish, :my, @solution], method: :patch
-
-        -elsif @solution.approved?
-          -if @solution.exercise.auto_approve?
-            .notification Your exercise has been submitted successfully.
-          -else
-            .notification.action
-              %i.fa.fa-bell
-              %span.text A mentor has approved this solution
-              =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
-
-        -elsif @iteration.notifications.unread.size > 0
-          .notification
-            A mentor has left you a new comment
-
-        -elsif @user_track.independent_mode? && !@solution.mentoring_enabled?
-          .notification
-            %i.fa.fa-clock-o
-            In Independent Mode you will
-            %strong not
-            receive mentoring by default. You may request mentoring on 5 solutions.
-            #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.
-
-        -else
-          .notification
-            %i.fa.fa-clock-o
-            Well done on submitting. A mentor will leave you feedback shortly.
+    =render "information_bar"
 
     .pure-g.panels#solution-panels
       .pure-u-1-2.lhs
@@ -58,36 +12,11 @@
               .tab.tab-1
                 Instructions
               .tab.tab-2
-                Test Suite
+                Test suite
               .tab.tab-3
                 Solution
 
             =render "solutions/panes", iteration: @iteration
 
       .pure-u-1-2.rhs
-        .discussion
-          -if @user_track.independent_mode?
-            -if @solution.mentoring_enabled?
-              %h3 Mentor Discussion
-              =render "discussion"
-            -else
-              %h3.disabled
-                %i.fa.fa-ban
-                Mentor Discussion (Disabled in independent mode)
-              %p.disabled
-                Mentoring is disabled by default in Independent Mode. However, you can request feedback on a maximum of 5 solutions.
-                -if @user_track.mentoring_allowance_used_up?
-                  Once one of your existing solutions is completed you will be able to request mentoring here.
-                -else
-                  =link_to "Request mentoring on this solution.", request_mentoring_my_solution_path(@solution), method: :patch
-              =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
-          -else
-            %h3 Mentor Discussion
-            -if @solution.exercise.auto_approve?
-              =render "auto_approved"
-            -else
-              =render "discussion"
-
--content_for :js do
-  :javascript
-    setupSolution()
+        =render "show_rhs"

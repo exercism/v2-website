@@ -3,9 +3,9 @@
 
   .solution-header
     .lo-container
-      =image_tag display_avatar_url @solution.user, @solution_user_track
+      =image display_avatar_url(@solution.user, @solution_user_track), "Avatar of #{display_handle(@solution.user, @solution_user_track)}"
       .inner
-        =render "solutions/iteration_nav", url_path: :teams_team_solution_path, url_parts: [@team, @solution], iteration_idx: @iteration_idx, num_iterations: @solution.num_iterations
+        =iterations_nav_widget(@team, @solution, @iteration, url_path: :teams_team_solution_path)
         %h2
           %strong #{@exercise.title}
           in
@@ -21,7 +21,7 @@
               .tab.tab-1
                 Instructions
               .tab.tab-2
-                Test Suite
+                Test suite
               .tab.tab-3
                 Solution
 
@@ -29,7 +29,7 @@
 
       .pure-u-1-2.rhs
         .discussion
-          %h3 Team Feedback
+          %h3 Team feedback
 
           -if @iteration.discussion_posts.size > 0
             .posts
@@ -59,5 +59,3 @@
 -content_for :js do
   :javascript
     setupSolution()
-
-

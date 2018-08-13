@@ -2,11 +2,11 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =image_tag "nav-divider.png"
-      =link_to "Language Tracks", [:tracks]
-      =image_tag "nav-divider.png"
-      =link_to "#{@track.title} Track", @track
-      =image_tag "nav-divider.png"
+      =nav_divider
+      =link_to "Language tracks", [:tracks]
+      =nav_divider
+      =link_to "#{@track.title} track", @track
+      =nav_divider
       %span Mentors
 
   .header
@@ -16,10 +16,9 @@
         =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
       %h1 #{@track.title} Mentors
-      .h1-subtitle Our mentors are the lynchpins of the language tracks and exercises on Exercism. This group of wonderful people maintain the #{@track.title} Track, creating and updating the exercises and tooling for #{@track.title}.
+      .h1-subtitle Our mentors are the human element behind Exercism, providing empathetic feedback on learners' solutions.
 
   .lo-container
     .pure-g.people
       -@mentors.each do |mentor|
         .pure-u-1-2= mentor_widget(mentor)
-

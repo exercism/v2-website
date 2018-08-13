@@ -1,15 +1,15 @@
 #mentor-solution-page
   #nav.lo-nav-bar
     .lo-container
-      =link_to "Mentor Dashboard", [:mentor, :dashboard]
-      =image_tag "nav-divider.png"
+      =link_to "Mentor dashboard", [:mentor, :dashboard]
+      =nav_divider
       %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
-      =image_tag display_avatar_url @solution.user, @solution_user_track
+      =image display_avatar_url(@solution.user, @solution_user_track), display_handle(@solution.user, @solution_user_track)
       .inner
-        =render "solutions/iteration_nav", url_parts: [:mentor, @solution], iteration_idx: @iteration_idx, num_iterations: @num_iterations
+        =iterations_nav_widget(:mentor, @solution, @iteration)
         %h2
           %strong #{@exercise.title}
           on the
@@ -19,68 +19,24 @@
   .lo-container
     .pure-g.panels
       .pure-u-1-2.lhs
-        .lhs-content
-          .tabs-and-panes.selected-3
-            .tabs
-              .tab.tab-1
-                Instructions
-              .tab.tab-2
-                Test Suite
-              .tab.tab-3
-                Solution
+        .tabs-and-panes.selected-3
+          .tabs
+            .tab.tab-1
+              Instructions
+            .tab.tab-2
+              Test suite
+            .tab.tab-3
+              Solution
 
-            =render "solutions/panes", iteration: @iteration
-
+          =render "solutions/panes", iteration: @iteration
       .pure-u-1-2.rhs
-        .discussion
-          %h3 Mentor Discussion
-          -if @iteration.discussion_posts.size > 0
-            .posts
-              -@iteration.discussion_posts.each do |post|
-                -user_track = @user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
-                =render "mentor/discussion_posts/post", post: post, solution: @solution, user_track: user_track
-          -else
-            .posts{style: "display:none"}
-
-          =form_for [:mentor, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
-            =hidden_field_tag :iteration_id, @iteration.id
-
-            .tabs-and-panes.selected-1
-              .tabs
-                .tab.tab-1{data: {tab: "markdown"}} Write
-                .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
-              .panes
-                .pane.pane-1.markdown
-                  =f.text_area :content
-                .pane.pane-2.preview
-                  .preview-area
-
-            =button_tag "Comment", class: 'pure-button'
-
-            .approved{style: @solution.approved?? "" : "display:none"}
-              %i.fa.fa-check
-              Solution Approved
-            -if current_user.mentoring_solution?(@solution)
-              -unless @solution.approved?
-                =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button'
-            -else
-              =link_to "I'll pass, thanks", [:ignore, :mentor, @solution], method: :patch, class: 'pure-button pass-button'
-
-            -unless @solution.approved?
-              =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button', value: "approved"
-              =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button', value: "approved"
+        -if current_user.mentoring_solution?(@solution) || current_user.has_active_lock_for_solution?(@solution)
+          =render "discussion"
+          =render "new_discussion_post"
+          =render "download-section"
+        -else
+          =render "claim-section"
 
 -content_for :js do
   :javascript
     setupSolution()
-    $textarea = $(".new-discussion-post-form textarea")
-    $textarea.keyup(function(){
-      if($textarea.val() == "") {
-        $('.approve-button').show()
-        $('.approve-and-comment-button').hide()
-      }
-      else {
-        $('.approve-button').hide()
-        $('.approve-and-comment-button').show()
-      }
-    })

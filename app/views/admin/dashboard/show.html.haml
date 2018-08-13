@@ -1,3 +1,13 @@
 #admin-dashboard-page
+  #nav.lo-nav-bar
+    .lo-container
+      %span Admin dashboard
+
   .lo-container
-    Admin Dashboard
+    %h1 Admin dashboard
+
+    %h2 Users
+    =form_tag '/admin/users', method: :get do
+      =text_field_tag :id, '', placeholder: "id"
+      =text_field_tag :handle, '', placeholder: "handle"
+      =button_tag "Search"

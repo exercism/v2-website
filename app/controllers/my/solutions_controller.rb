@@ -7,7 +7,7 @@ class My::SolutionsController < MyController
     exercise = track.exercises.find(params[:exercise_id])
 
     if current_user.may_unlock_exercise?(user_track, exercise)
-      solution = CreatesSolution.create!(current_user, exercise)
+      solution = CreateSolution.(current_user, exercise)
       redirect_to [:my, solution]
     else
       redirect_to [:my, track]
@@ -16,7 +16,7 @@ class My::SolutionsController < MyController
 
   def show
     @exercise = @solution.exercise
-    ClearsNotifications.clear!(current_user, @solution)
+    ClearNotifications.(current_user, @solution)
 
     @track = @solution.exercise.track
     @user_track = UserTrack.where(user: current_user, track: @track).first
@@ -36,12 +36,13 @@ class My::SolutionsController < MyController
 
     respond_to do |format|
       format.js { render_modal("solution-walkthrough", "walkthrough_modal", close_button: true) }
-      format.html { render }
+      format.html { redirect_to cli_walkthrough_page_path }
     end
   end
 
   def request_mentoring
-    @solution.enable_mentoring!
+    SwitchSolutionToMentoredMode.(@solution)
+
     redirect_to action: :show
   end
 
@@ -50,7 +51,7 @@ class My::SolutionsController < MyController
   end
 
   def complete
-    CompletesSolution.complete!(@solution)
+    CompleteSolution.(@solution)
     @exercise = @solution.exercise
     @track = @exercise.track
     @num_completed_exercises = current_user.solutions.where(exercise_id: @track.exercises).completed.count
@@ -78,7 +79,7 @@ class My::SolutionsController < MyController
     @track = @solution.exercise.track
     user_track = UserTrack.where(user: current_user, track: @track).first
 
-    if user_track.normal_mode?
+    if user_track.mentored_mode?
       if @solution.exercise.core?
         @next_core_solution = current_user.solutions.not_completed.
                               includes(exercise: :topics).
@@ -97,24 +98,13 @@ class My::SolutionsController < MyController
     if @next_core_solution || @unlocked_side_exercise_solutions.present?
       render_modal("solution-unlocked", "unlocked")
     else
-      js_redirect_to(@track)
+      js_redirect_to([:my, @solution])
     end
   end
 
   def publish
     @solution.update(published_at: Time.current) if params[:publish]
-    redirect_to [@solution.exercise.track, @solution.exercise, @solution]
-  end
-
-  def migrate_to_v2
-    @solution.update(
-      completed_at: nil,
-      published_at: nil,
-      approved_by: nil,
-      last_updated_by_user_at: Time.now,
-      updated_at: Time.now
-    )
-    redirect_to action: :show
+    redirect_to [:my, @solution]
   end
 
   private
@@ -129,11 +119,11 @@ class My::SolutionsController < MyController
   def show_started
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
-    @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
-    @num_iterations = @solution.iterations.count
 
     @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
+
+    ClearNotifications.(current_user, @iteration)
 
     render :show
   end

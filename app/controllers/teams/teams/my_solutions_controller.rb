@@ -30,7 +30,7 @@ class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
     @solution = TeamSolution.find_by_uuid_for_team_and_user(params[:id], @team, current_user)
     @exercise = @solution.exercise
 
-    ClearsNotifications.clear!(current_user, @solution)
+    ClearNotifications.(current_user, @solution)
     @solution.update(has_unseen_feedback: false)
 
     if @solution.iterations.size > 0
@@ -62,5 +62,7 @@ class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
     @iteration_idx = @solution.iterations.where("id < ?", @iteration.id).count + 1
+
+    ClearNotifications.(current_user, @iteration)
   end
 end

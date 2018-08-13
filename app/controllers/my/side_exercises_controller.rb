@@ -2,7 +2,7 @@ class My::SideExercisesController < MyController
   before_action :set_track
 
   def index
-    exercises = if @user_track.normal_mode?
+    exercises = if @user_track.mentored_mode?
         @track.exercises.side.active.includes(:topics)
       else
         @track.exercises.active.includes(:topics)
@@ -21,7 +21,7 @@ class My::SideExercisesController < MyController
 
     exercises = exercises.joins(:exercise_topics).where("exercise_topics.topic_id": params[:topic_id]) if params[:topic_id].to_i > 0
     exercises = exercises.where(length: params[:length]) if params[:length].to_i > 0
-    solutions = current_user.solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
+    solutions = current_user.solutions.includes(:exercise).where('exercises.track_id': @track.id).each_with_object({}) {|s,h| h[s.exercise_id] = s }
 
     @exercises_and_solutions = exercises.map{|ce|[ce, solutions[ce.id]]}
     if params[:status] == "unlocked"

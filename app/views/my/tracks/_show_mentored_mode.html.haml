@@ -1,0 +1,51 @@
+.top-section
+  .lo-container
+    .pure-g
+      .pure-u-7-12
+        = render "core_exercises", core_exercises: @core_exercises_and_solutions
+
+      .pure-u-5-12
+        .progress-section
+          %h2 Your progress in #{@track.title}
+          .h2-subtitle see how you're doing
+
+          .core
+            %h3 Track progression
+            .percentage #{@core_track_completion_percentage}%
+            .number #{@num_solved_core_exercises} of #{@core_exercises_and_solutions.size} core exercises
+            .completed completed successfully
+
+          .side
+            .completed #{@num_solved_side_exercises} / #{@num_side_exercises}
+            %h3 Extra exercises completed
+            .squares
+              -@num_side_exercises.times do |i|
+                -if i < @num_solved_side_exercises
+                  .square.completed
+                -else
+                  .square
+            =link_to "See all extra exercises", "#side-exercises", class: 'pure-button'
+
+          .topics
+            %h3 Concepts
+            =render "topic_percentages", topic_percentages: @topic_percentages[0..10]
+            -if @topic_percentages.size > 10
+              =link_to "Show more", "#", class: 'pure-button extra-button'
+              .extra
+                =render "topic_percentages", topic_percentages: @topic_percentages[11..-1]
+
+          .guides
+            %h3 Guides
+            =render "track_pages/links", track: @track, target: "_blank"
+
+          .danger-zone
+            %h3 Danger zone
+            =link_to "Leave track", "#", class: 'pure-button leave-track-btn'
+            -if !@user_track.independent_mode?
+              =link_to "Switch to Independent Mode", "#", class: 'pure-button change-to-independent-btn'
+
+=render "show_side_exercises", exercises_and_solutions: @side_exercises_and_solutions
+
+=content_for :js do
+  :javascript
+    setupMyTrackMentored()

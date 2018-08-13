@@ -13,7 +13,6 @@
 //= require rails-ujs
 //= require jquery
 //= require jquery_ujs
-//= require simplemde/dist/simplemde.min.js
 //= require selectize/dist/js/standalone/selectize.js
 //= require_tree .
 

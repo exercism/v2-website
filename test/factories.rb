@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :solution_lock do
+    solution { create :solution }
+    user { create :user }
+    locked_until { Time.current }
+  end
+
   factory :team_invitation do
     team { create :team }
     invited_by { create :user }
@@ -149,6 +155,7 @@ FactoryBot.define do
   factory :user_track do
     user { create :user }
     track { create :track }
+    independent_mode false
   end
 
   factory :repo_update do

@@ -1,0 +1,8 @@
+.independent-mode
+  =render "show_side_exercises", exercises_and_solutions: @exercises_and_solutions
+
+  .danger-zone
+    .lo-container
+      %h3 Danger zone
+      =link_to "Leave track", "#", class: 'pure-button leave-track-btn'
+      =link_to "Switch to Mentored Mode", "#", class: 'pure-button change-to-mentored-btn'

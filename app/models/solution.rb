@@ -6,10 +6,10 @@ class Solution < ApplicationRecord
   has_many :iterations, dependent: :destroy
   has_many :discussion_posts, through: :iterations
 
-  has_many :mentorships, class_name: "SolutionMentorship"
+  has_many :mentorships, class_name: "SolutionMentorship", dependent: :destroy
   has_many :mentors, through: :mentorships, source: :user
 
-  has_many :reactions
+  has_many :reactions, dependent: :destroy
 
   delegate :auto_approve?, :track, to: :exercise
 
@@ -25,14 +25,43 @@ class Solution < ApplicationRecord
     where.not(published_at: nil)
   end
 
+  def self.started
+    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)
+           OR
+           downloaded_at IS NOT NULL")
+  end
+
+  def self.not_started
+    where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)").
+    where(downloaded_at: nil)
+  end
+
+  def self.legacy
+    where("solutions.created_at < ?", Exercism::V2_MIGRATED_AT)
+  end
+
+  def self.not_legacy
+    where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT)
+  end
+
+  def track_in_mentored_mode?
+    !track_in_independent_mode?
+  end
+
+  def mentored_mode?
+    !independent_mode?
+  end
+
+  def mentor_download_command
+    "exercism download --uuid=#{uuid}"
+  end
+
   def team_solution?
     false
   end
 
-  def enable_mentoring!
-    user_track = user.user_track_for(exercise.track)
-    return if user_track.mentoring_allowance_used_up?
-    update(mentoring_enabled: true)
+  def legacy?
+    created_at < Exercism::V2_MIGRATED_AT
   end
 
   def approved?
@@ -53,6 +82,10 @@ class Solution < ApplicationRecord
 
   def completed?
     !!completed_at
+  end
+
+  def active_mentors
+    mentors.where("solution_mentorships.user_id": TrackMentorship.select(:user_id))
   end
 
   def user_track

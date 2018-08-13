@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SolutionTest < ActiveSupport::TestCase
-  test "instructions and testsuite come from git exercise" do
+  test "instructions and test suite come from git exercise" do
     solution = create :solution
     instructions = mock
     test_suite = mock
@@ -30,4 +30,40 @@ class SolutionTest < ActiveSupport::TestCase
 
     refute solution.auto_approve?
   end
+
+  test "active_mentors" do
+    solution = create :solution
+    active_mentor_on_solution = create :user
+    active_mentor_not_on_solution = create :user
+    inactive_mentor_on_solution = create :user
+
+    create :solution_mentorship, solution: solution, user: active_mentor_on_solution
+    create :solution_mentorship, solution: solution, user: inactive_mentor_on_solution
+    create :track_mentorship, user: active_mentor_on_solution
+    create :track_mentorship, user: active_mentor_not_on_solution
+
+    assert_equal [active_mentor_on_solution], solution.active_mentors
+  end
+
+  test "started vs not_started" do
+    user_track = create :user_track
+    started_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    create :iteration, solution: started_solution
+    unstarted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    downloaded_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track), downloaded_at: Time.now
+
+    assert_equal [started_solution, downloaded_solution], Solution.started
+    assert_equal [unstarted_solution], Solution.not_started
+  end
+
+  test "mentored_mode" do
+    refute create(:solution, independent_mode: true).mentored_mode?
+    assert create(:solution, independent_mode: false).mentored_mode?
+  end
+
+  test "track_in_mentored_mode" do
+    refute create(:solution, track_in_independent_mode: true).track_in_mentored_mode?
+    assert create(:solution, track_in_independent_mode: false).track_in_mentored_mode?
+  end
+
 end

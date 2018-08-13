@@ -1,0 +1,30 @@
+-if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT && @solution.independent_mode?
+  =render "show_legacy"
+  =render "show_legacy_discussion"
+
+-elsif @solution.mentored_mode?
+  -if @solution.completed?
+    =render "show_completed"
+
+  -elsif @solution.approved? && !@exercise.auto_approve?
+    =render "show_approved"
+
+  .discussion
+    %h3.rhs-heading Mentor discussion
+    -if @solution.exercise.auto_approve?
+      =render "auto_approved"
+      =render "discussion", readonly: @iteration.discussion_posts.size == 0
+    -else
+      =render "discussion"
+
+-elsif @user_track.independent_mode?
+  =render "show_completed_independent"
+  =render "show_legacy_discussion"
+
+-else # Track in mentored mode, solution in independent mode
+  =render "show_completed_hybrid"
+  =render "show_legacy_discussion"
+
+-content_for :js do
+  :javascript
+    setupSolution()

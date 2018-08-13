@@ -1,8 +1,10 @@
 class CreatesDiscussionPost
-  attr_reader :iteration, :user, :content, :discussion_post
-  def initialize(iteration, user, content)
+  include HTMLGenerationHelpers
+
+  attr_reader :iteration, :author, :content, :discussion_post
+  def initialize(iteration, author, content)
     @iteration = iteration
-    @user = user
+    @author = author
     @content = content
   end
 
@@ -11,21 +13,17 @@ class CreatesDiscussionPost
   def create_discussion_post!
     @discussion_post ||= DiscussionPost.create!(
       iteration: iteration,
-      user: user,
+      user: author,
       content: content,
       html: html
     )
   end
 
   def html
-    @html ||= ParsesMarkdown.parse(content)
+    @html ||= ParseMarkdown.(content)
   end
 
   def solution
     iteration.solution
-  end
-
-  def strong(text)
-    "<strong>#{text}</strong>"
   end
 end
