@@ -272,13 +272,13 @@
             img {
                 margin:0 auto;
             }
-            @media #{$md-media} {
+            @media #{$sm-media} {
                 display:none;
             }
         }
         .step .step-image {
             display:none;
-            @media #{$md-media} {
+            @media #{$sm-media} {
                 display:block;
             }
         }
@@ -293,7 +293,7 @@
                 display:block;
                 width:80%;
                 max-width:230px;
-                @media #{$md-media} {
+                @media #{$sm-media} {
                     width:100%;
                 }
             }
@@ -322,6 +322,7 @@
                   left:0px;
                   background-image:image-url("how-step-4-exercises.png");
                   background-size:100%;
+                  z-index:-1;
               }
             }
         }
