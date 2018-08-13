@@ -34,10 +34,9 @@
       = form_for post, url: my_discussion_post_path(post), remote: true do |f|
         = f.text_area :content
         .buttons
-          = f.submit "Save Changes", class: "pure-button update-button", data: { "disable-with": "Saving..." }
+          = f.submit "Save changes", class: "pure-button update-button", data: { "disable-with": "Saving..." }
           = link_to "Cancel", "#", class: "pure-button cancel-button js-show-discussion-post"
 
 - content_for :js do
   :javascript
     $(function() { new DiscussionPost(#{post.id}) });
-
