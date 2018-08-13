@@ -1,8 +1,8 @@
 .section
-  %h2 Our Terms of Service
+  %h2 Our terms of service
   %p
-    Our Terms of Service say that you must act in a way that is in line with Exercism's values of respect and empathy per our
-    #{link_to "Code of Conduct", code_of_conduct_page_path, target: "_blank"}.
+    Our terms of service say that you must act in a way that is in line with Exercism's values of respect and empathy per our
+    #{link_to "Code of conduct", code_of_conduct_page_path, target: "_blank"}.
     If you do not, we have the right to ban you. Any code you submit remains your property, but you grant us a licence to use it as we wish in perpetuity. You may use exercises (provided by Exercism) and solutions (created by users) in accordance with the
     #{link_to "MIT", mit_licence_path, target: "_blank"}
     and
@@ -12,21 +12,21 @@
   .field
     =f.label :accepted_terms_at do
       =f.check_box :accepted_terms_at, required: true
-      .text Accept Terms of Service
+      .text Accept terms of service
 
 .section
-  %h2 Our Privacy Policy
+  %h2 Our privacy policy
   %p
-    In brief our Privacy Policy says that we
+    In brief our privacy policy says that we
     %strong will never share your details with anyone.
     You can #{link_to "read it in full here", privacy_page_path, target: "_blank"}.
   .field
     =f.label :accepted_privacy_policy_at do
       =f.check_box :accepted_privacy_policy_at, required: true
-      .text Accept Privacy Policy
+      .text Accept privacy policy
 
 .section
-  %h2 Communication Preferences
+  %h2 Communication preferences
   %p
     By default, we will email you when a mentor comments on one of your solutions, and we will send you occasional updates to tell you about new features, languages and exercises. You can edit your communication preferences at any time from the main menu.
     We don't send marketing emails.
@@ -45,5 +45,3 @@
       Send me updates about new features, languages and exercises
 
 =f.button "Save and continue to Exercism", class: 'pure-button'
-
-
