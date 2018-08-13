@@ -14,7 +14,9 @@ body.namespace-my.controller-tracks.action-show {
         background-color: $header-color-1;
         overflow:hidden;
         .title {
-            float:left
+            @media #{$md-media} {
+                float:left;
+            }     
         }
 
         .h1-subtitle {
