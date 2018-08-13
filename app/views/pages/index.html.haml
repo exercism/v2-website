@@ -33,7 +33,7 @@
   .tracks-section#explore-languages
     .lo-container
       .title-block
-        %h2 Available Language Tracks
+        %h2 Available language tracks
         %p There are #{num_tracks} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
       .tracks
         =render 'tracks_display', tracks: @tracks
