@@ -260,11 +260,15 @@
     .how-section {
         .divider {
             text-align:center;
-            margin-bottom:30px;
-            margin:0 400px 30px;
+            margin-bottom:15px;
+            margin:0 400px 15px;
+            @media #{$md-media} {
+                margin:0 400px 30px;
+            }
             border-bottom:1px solid #eee;
         }
-        .step-small {
+        .step.step-small {
+            margin-top:15px;
             img {
                 margin:0 auto;
             }
@@ -280,7 +284,10 @@
         }
         .step {
             overflow:hidden;
-            margin:0 auto 30px;
+            margin:0 auto 15px;
+            @media #{$md-media} {
+               margin:0 auto 30px; 
+            }
             max-width:700px;
             img {
                 display:block;
@@ -291,10 +298,13 @@
                 }
             }
             h3 {
-                margin-top:30px;
+                margin-top:15px;
                 font-weight:$regular;
                 @include font-size(18, 18);
                 margin-bottom:10px;
+                @media #{$md-media} {
+                    margin-top:30px;
+                }
             }
             p {
                 @include font-size(16, 22);
