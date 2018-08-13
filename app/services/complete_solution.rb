@@ -1,10 +1,7 @@
 class CompleteSolution
   include Mandate
 
-  attr_reader :solution
-  def initialize(solution)
-    @solution = solution
-  end
+  initialize_with :solution
 
   def call
     if solution.approved?

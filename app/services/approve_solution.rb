@@ -2,11 +2,7 @@ class ApproveSolution
   include Mandate
   include HTMLGenerationHelpers
 
-  attr_reader :solution, :mentor
-  def initialize(solution, mentor)
-    @solution = solution
-    @mentor = mentor
-  end
+  initialize_with :solution, :mentor
 
   def call
     return false unless mentor_may_approve?

@@ -1,12 +1,7 @@
 class CreateTeamSolution
   include Mandate
 
-  attr_reader :user, :team, :exercise
-  def initialize(user, team, exercise)
-    @user = user
-    @team = team
-    @exercise = exercise
-  end
+  initialize_with :user, :team, :exercise
 
   def call
     unless TeamMembership.where(user: user, team: team).exists?
