@@ -285,13 +285,15 @@ body.controller-my-tracks.action-show {
         }
         .pure-g.mentors,
         .pure-g.maintainers {
-            &>.pure-u-1-2 {
+            &>.pure-u-1 {
                 margin-bottom:20px;
-                &:nth-child(odd) {
-                    padding-right:10px;
-                }
-                &:nth-child(even) {
-                    padding-left:10px;
+                @media #{$md-media} {
+                    &:nth-child(odd) {
+                        padding-right:10px;
+                    }
+                    &:nth-child(even) {
+                        padding-left:10px;
+                    }
                 }
             }
             .widget-maintainer, .widget-mentor {
@@ -350,7 +352,7 @@ body.controller-my-tracks.action-show {
         margin-bottom:30px;
     }
     .pure-g.people {
-        &>.pure-u-1-2 {
+        &>.pure-u-1 {
             margin-bottom:20px;
             &:nth-child(odd) {
                 padding-right:10px;
