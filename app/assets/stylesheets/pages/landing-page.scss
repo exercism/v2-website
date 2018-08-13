@@ -14,11 +14,11 @@
             z-index: -1;
         }
         .rhs {
-            padding-top:100px;
+            padding-top:50px;
             margin-bottom:50px;
             @media #{$lg-media} {
-                padding-top:100px;
-                margin-bottom:0;
+                padding-top:150px;
+                margin-bottom:150px;
             }
             h1 {
                 @include header-font;
