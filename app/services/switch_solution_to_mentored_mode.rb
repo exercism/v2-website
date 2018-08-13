@@ -1,10 +1,7 @@
 class SwitchSolutionToMentoredMode
   include Mandate
 
-  attr_reader :solution
-  def initialize(solution)
-    @solution = solution
-  end
+  initialize_with :solution
 
   def call
     return if user_track.mentoring_allowance_used_up?

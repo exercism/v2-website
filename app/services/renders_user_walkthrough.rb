@@ -3,10 +3,7 @@ class RendersUserWalkthrough
 
   CONFIGURE_COMMAND_TOKEN = "[CONFIGURE_COMMAND]"
 
-  def initialize(user, walkthrough)
-    @user = user
-    @walkthrough = walkthrough
-  end
+  initialize_with :user, :walkthrough
 
   def call
     substitute_tokens!
@@ -15,8 +12,6 @@ class RendersUserWalkthrough
   end
 
   private
-
-  attr_reader :user, :walkthrough
 
   def substitute_tokens!
     walkthrough.gsub!(

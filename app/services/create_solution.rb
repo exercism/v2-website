@@ -1,11 +1,7 @@
 class CreateSolution
   include Mandate
 
-  attr_reader :user, :exercise
-  def initialize(user, exercise)
-    @user = user
-    @exercise = exercise
-  end
+  initialize_with :user, :exercise
 
   def call
     Solution.create!(
