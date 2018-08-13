@@ -4,8 +4,8 @@
       -if user_signed_in? && current_user == @profile.user
         =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
           =graphical_icon :cogs
-          Edit Public Profile
-      %h1 #{@profile.display_name}'s Profile
+          Edit public profile
+      %h1 #{@profile.display_name}'s profile
       .h1-subtitle This is a showcase of some of the solutions that #{@profile.display_name} has published on Exercism.
 
   .lo-container
@@ -21,11 +21,11 @@
           %h3 On Exercism
           .badges
             -if @profile.user.admin?
-              .badge.admin Exercism Admin
+              .badge.admin Exercism admin
             -@profile.user.mentored_tracks.each do |track|
-              .badge.mentor #{track.title} Mentor
+              .badge.mentor #{track.title} mentor
             -@profile.user.maintained_tracks.each do |track|
-              .badge.maintainer #{track.title} Maintainer
+              .badge.maintainer #{track.title} maintainer
           .member-since
             =graphical_icon 'calendar fa-fw'
             Since #{@profile.user.created_at.strftime("%b %Y")}
@@ -44,7 +44,7 @@
             -if @profile.website.present?
               =link_to @profile.website, target: "_blank", class: 'external-link' do
                 =graphical_icon 'globe fa-fw'
-                %span My Website
+                %span My website
 
             -if @profile.github.present?
               =link_to "https://github.com/#{@profile.github}", target: "_blank", class: 'external-link' do

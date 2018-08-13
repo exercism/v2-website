@@ -9,7 +9,7 @@ class ProfileTest < ApplicationSystemTestCase
 
     sign_in!(user)
     visit profile_path(profile)
-    click_on "Edit Public Profile"
+    click_on "Edit public profile"
     attach_file "user_avatar",
       "#{Rails.root}/test/fixtures/test.png",
       make_visible: true
@@ -26,7 +26,7 @@ class ProfileTest < ApplicationSystemTestCase
 
     sign_in!(user)
     visit profile_path(profile)
-    click_on "Edit Public Profile"
+    click_on "Edit public profile"
     attach_file "user_avatar",
       "#{Rails.root}/test/fixtures/test.svg",
       make_visible: true
