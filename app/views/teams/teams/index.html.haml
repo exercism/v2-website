@@ -1,9 +1,9 @@
 #teams-teams-page.teams-page
   .lo-container
-    %h1 Your Teams
+    %h1 Your teams
 
     -if @invitations.present?
-      %h2 Pending Invitiations
+      %h2 Pending invitiations
       %table.teams-table
         - @invitations.each do |invite|
           %tr
