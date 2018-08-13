@@ -430,11 +430,15 @@ body.namespace-my.controller-tracks.action-show {
                 margin-bottom:10px;
 
                 @media #{$md-media} {
-                    width:100%;
+                    display:inline-block;
                 }
 
                 .title, .selectize-control {
                     display:flex;
+                    @media #{$md-media} {
+                        display:inline-block;
+                    }
+                    
                 }
                 .title {
                     width:120px;
@@ -442,6 +446,9 @@ body.namespace-my.controller-tracks.action-show {
                 &.difficulty {
                     .selectize-control {
                         width:100%;
+                        @media #{$md-media} {
+                            width:120px;
+                        }
                         max-width:100%;
                     }
                 }
@@ -449,7 +456,7 @@ body.namespace-my.controller-tracks.action-show {
                     .selectize-control {
                         width:100%;
                         @media #{$md-media} {
-                            width:250px;
+                            width:200px;
                         }
                         max-width:100%;
                     }
