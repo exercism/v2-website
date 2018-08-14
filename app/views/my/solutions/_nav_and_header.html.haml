@@ -21,16 +21,19 @@
         -if @user_track.independent_mode?
           %h3 In Independent Mode
         -else
-          %h3 Track progress:
-          -num_core_exercises = @track.exercises.core.count
-          -num_completed_exercises = @user_track.num_completed_core_exercises
-          -num_available_exercises = @user_track.num_avaliable_core_exercises + num_completed_exercises
+          -if @exercise.side?
+            %h3 Side exercise
+          -else
+            %h3 Track progress:
+            -num_core_exercises = @track.exercises.core.count
+            -num_completed_exercises = @user_track.num_completed_core_exercises
+            -num_available_exercises = @user_track.num_avaliable_core_exercises + num_completed_exercises
 
-          .dots
-            -num_core_exercises.times do |i|
-              -if i < num_completed_exercises
-                .dot.completed
-              -elsif i < num_available_exercises
-                .dot.current
-              -else
-                .dot.locked
+            .dots
+              -num_core_exercises.times do |i|
+                -if i < num_completed_exercises
+                  .dot.completed
+                -elsif i < num_available_exercises
+                  .dot.current
+                -else
+                  .dot.locked
