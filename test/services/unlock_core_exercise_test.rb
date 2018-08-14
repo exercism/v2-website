@@ -1,12 +1,12 @@
 require "test_helper"
 
-class UnlocksCoreExerciseTest < ActiveSupport::TestCase
+class UnlockCoreExerciseTest < ActiveSupport::TestCase
   test "unlocks core exercise" do
     user = create(:user)
     exercise = create(:exercise)
     CreateSolution.expects(:call).with(user, exercise)
 
-    UnlocksCoreExercise.(user, exercise)
+    UnlockCoreExercise.(user, exercise)
   end
 
   test "does not double-unlock" do
@@ -17,6 +17,6 @@ class UnlocksCoreExerciseTest < ActiveSupport::TestCase
     user_track = create :user_track, user: user, track: exercise.track
     solution = create(:solution, user: user, exercise: exercise)
 
-    assert_equal solution, UnlocksCoreExercise.(user, exercise)
+    assert_equal solution, UnlockCoreExercise.(user, exercise)
   end
 end

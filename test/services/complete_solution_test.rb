@@ -21,7 +21,7 @@ class CompleteSolutionTest < ActiveSupport::TestCase
       solution = create :solution, user: user, exercise: @core_exercise, approved_by: mentor
       create :user_track, user: user, track: @track
 
-      UnlocksNextCoreExercise.expects(:call).with(@track, user)
+      UnlockNextCoreExercise.expects(:call).with(@track, user)
 
       CompleteSolution.(solution)
 

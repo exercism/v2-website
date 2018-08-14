@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class CreatesNotificationTest < ActiveSupport::TestCase
+class CreateNotificationTest < ActiveSupport::TestCase
   %i{
     new_discussion_post
     new_discussion_post_for_mentor
   }.each do |type|
     test "type: #{type}" do
-      notification = CreatesNotification.create!(create(:user), type, "a", "b")
+      notification = CreateNotification.(create(:user), type, "a", "b")
       assert notification.persisted?
     end
   end
@@ -18,7 +18,7 @@ class CreatesNotificationTest < ActiveSupport::TestCase
     link = "http://barfoo.com"
     about = create :solution
 
-    notification = CreatesNotification.create!(user, type, content, link, about: about)
+    notification = CreateNotification.(user, type, content, link, about: about)
 
     assert notification.persisted?
     assert_equal notification.user, user
@@ -34,7 +34,7 @@ class CreatesNotificationTest < ActiveSupport::TestCase
     content = "foobar"
     link = "http://barfoo.com"
 
-    notification = CreatesNotification.create!(user, type, content, link)
+    notification = CreateNotification.(user, type, content, link)
 
     assert notification.persisted?
     assert_equal notification.user, user
@@ -45,8 +45,8 @@ class CreatesNotificationTest < ActiveSupport::TestCase
   end
 
   test "raises with invalid type" do
-    assert_raises CreatesNotification::UnknownNotificationTypeError do
-      CreatesNotification.create!(nil, :foobar, nil, nil)
+    assert_raises CreateNotification::UnknownNotificationTypeError do
+      CreateNotification.(nil, :foobar, nil, nil)
     end
   end
 end

@@ -1,15 +1,9 @@
-class CreatesSolutionMentorship
-  def self.create(*args)
-    new(*args).create
-  end
+class CreateSolutionMentorship
+  include Mandate
 
-  attr_reader :solution, :user
-  def initialize(solution, user)
-    @solution = solution
-    @user = user
-  end
+  initialize_with :solution, :user
 
-  def create
+  def call
     return existing_record if existing_record
 
     mentorship = SolutionMentorship.create(

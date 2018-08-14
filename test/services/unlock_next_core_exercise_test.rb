@@ -1,6 +1,6 @@
 require "test_helper"
 
-class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
+class UnlockNextCoreExerciseTest < ActiveSupport::TestCase
   test "unlocks a new core exercise only when all in progress core exercises are completed" do
     track = create(:track)
     user = create(:user)
@@ -15,9 +15,9 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
            user: user,
            exercise: core_exercise,
            completed_at: Date.new(2016, 12, 25))
-    UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
+    UnlockCoreExercise.expects(:call).with(user, next_core_exercise).never
 
-    UnlocksNextCoreExercise.(track, user)
+    UnlockNextCoreExercise.(track, user)
   end
 
   test "unlocks next core exercise" do
@@ -39,10 +39,10 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
            user: user,
            exercise: core_exercise,
            completed_at: Date.new(2016, 12, 25))
-    UnlocksCoreExercise.expects(:call).with(user, next_core_exercise)
-    UnlocksCoreExercise.expects(:call).with(user, other_core_exercise).never
+    UnlockCoreExercise.expects(:call).with(user, next_core_exercise)
+    UnlockCoreExercise.expects(:call).with(user, other_core_exercise).never
 
-    UnlocksNextCoreExercise.(track, user)
+    UnlockNextCoreExercise.(track, user)
   end
 
   test "unlocks oldest core exercise not completed" do
@@ -64,10 +64,10 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
            user: user,
            exercise: core_exercise,
            completed_at: Date.new(2016, 12, 25))
-    UnlocksCoreExercise.expects(:call).with(user, old_core_exercise)
-    UnlocksCoreExercise.expects(:call).with(user, next_core_exercise).never
+    UnlockCoreExercise.expects(:call).with(user, old_core_exercise)
+    UnlockCoreExercise.expects(:call).with(user, next_core_exercise).never
 
-    UnlocksNextCoreExercise.(track, user)
+    UnlockNextCoreExercise.(track, user)
   end
 
   test "does not unlock side exercise" do
@@ -79,7 +79,7 @@ class UnlocksNextCoreExerciseTest < ActiveSupport::TestCase
                            core: false,
                            position: 2)
 
-    UnlocksCoreExercise.expects(:call).with(user, side_exercise).never
-    UnlocksNextCoreExercise.(track, user)
+    UnlockCoreExercise.expects(:call).with(user, side_exercise).never
+    UnlockNextCoreExercise.(track, user)
   end
 end

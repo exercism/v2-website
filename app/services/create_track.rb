@@ -1,10 +1,7 @@
-class CreatesTrack
-  def self.create!(language, track_slug, repo_url, active:)
-    new(language, track_slug, repo_url, active: active).create!
-  end
+class CreateTrack
+  include Mandate
 
   attr_reader :language, :track_slug, :repo_url, :active
-
   def initialize(language, track_slug, repo_url, active:)
     @language = language
     @repo_url = repo_url
@@ -12,7 +9,7 @@ class CreatesTrack
     @active = active
   end
 
-  def create!
+  def call
     prism_language = track_slug
     unless Exercism::PrismLanguages.include?(prism_language)
       if mapping = Exercism::PrismLanguageMappings[prism_language]

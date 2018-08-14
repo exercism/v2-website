@@ -1,16 +1,9 @@
-class CreatesReaction
-  def self.create!(*args)
-    new(*args).create!
-  end
+class CreateReaction
+  include Mandate
 
-  attr_reader :user, :solution, :emotion, :reaction
-  def initialize(user, solution, emotion)
-    @user = user
-    @solution = solution
-    @emotion = emotion
-  end
+  initialize_with :user, :solution, :emotion
 
-  def create!
+  def call
     @reaction = Reaction.where(user: user, solution: solution).first
     if reaction
       if emotion == reaction.emotion
@@ -26,11 +19,12 @@ class CreatesReaction
   end
 
   private
+  attr_reader :reaction
 
   def create_reaction
     @reaction = Reaction.create!(user: user, solution: solution, emotion: emotion)
 
-    CreatesNotification.create!(
+    CreateNotification.(
       solution.user,
       :new_reaction,
       "#{strong user.handle} has reacted to your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",

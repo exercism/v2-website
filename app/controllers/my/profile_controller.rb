@@ -19,7 +19,7 @@ class My::ProfileController < MyController
     @profile = if current_user.profile
         current_user.profile
       else
-        CreatesProfile.create(current_user, params[:profile][:display_name])
+        CreateProfile.(current_user, params[:profile][:display_name])
       end
 
     User.find(current_user.id).update(user_params)

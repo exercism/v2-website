@@ -32,7 +32,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     create :solution_mentorship, solution: solution, user: mentor1
     create :solution_mentorship, solution: solution, user: mentor2
 
-    CreatesNotification.expects(:create!).twice.with do |*args|
+    CreateNotification.expects(:call).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_discussion_post_for_mentor, args[1]
       assert_equal "<strong>#{user.handle}</strong> has posted a comment on a solution you are mentoring", args[2]
@@ -59,7 +59,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     inactive_mentor = create :user
     create :solution_mentorship, solution: solution, user: inactive_mentor
 
-    CreatesNotification.expects(:create!).never
+    CreateNotification.expects(:call).never
     DeliverEmail.expects(:call).never
     CreatesUserDiscussionPost.create!(iteration, user, "foooebar")
   end

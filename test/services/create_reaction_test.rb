@@ -6,7 +6,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     solution = create :solution
     emotion = 'love'
 
-    CreatesNotification.expects(:create!).with do |*args|
+    CreateNotification.expects(:call).with do |*args|
       assert_equal solution.user, args[0]
       assert_equal :new_reaction, args[1]
       assert_equal "<strong>#{user.handle}</strong> has reacted to your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
@@ -15,7 +15,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
       assert_equal solution, args[4][:about]
     end
 
-    reaction = CreatesReaction.create!(user, solution, emotion)
+    reaction = CreateReaction.(user, solution, emotion)
     solution.reload
 
     assert_equal 1, solution.reactions.count
@@ -31,7 +31,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     solution = create :solution, num_reactions: 1
     original_reaction = create :reaction, user: user, solution: solution, emotion: 'like'
     emotion = 'genius'
-    reaction = CreatesReaction.create!(user, solution, emotion)
+    reaction = CreateReaction.(user, solution, emotion)
     solution.reload
 
     assert_equal original_reaction, reaction
@@ -48,7 +48,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     solution = create :solution
     emotion = 'genius'
     original_reaction = create :reaction, user: user, solution: solution, emotion: emotion, comment: ""
-    CreatesReaction.create!(user, solution, emotion)
+    CreateReaction.(user, solution, emotion)
     solution.reload
 
     assert_equal 0, solution.reactions.count
@@ -63,7 +63,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     other_notification = create :notification, user: solution.user
     notification = create :notification, user: solution.user, type: :new_reaction, trigger: reaction
 
-    CreatesReaction.create!(user, solution, emotion)
+    CreateReaction.(user, solution, emotion)
 
     solution.user.reload
     assert_equal [other_notification], solution.user.notifications
@@ -74,7 +74,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     solution = create :solution, num_reactions: 1
     emotion = 'genius'
     original_reaction = create :reaction, user: user, solution: solution, emotion: emotion, comment: "Foobar"
-    reaction = CreatesReaction.create!(user, solution, emotion)
+    reaction = CreateReaction.(user, solution, emotion)
     solution.reload
 
     assert_equal original_reaction, reaction

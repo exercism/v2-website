@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class RendersUserWalkthroughTest < ActiveSupport::TestCase
+class RenderUserWalkthroughTest < ActiveSupport::TestCase
   test "renders the walkthrough" do
     user = create :user
     auth_token = create :auth_token, user: user, token: "TOKEN"
 
-    assert_equal "Hello!", RendersUserWalkthrough.(user, "Hello!")
+    assert_equal "Hello!", RenderUserWalkthrough.(user, "Hello!")
   end
 
   test "substitutes the configure command" do
@@ -15,14 +15,14 @@ class RendersUserWalkthroughTest < ActiveSupport::TestCase
 
     assert_equal(
       "exercism configure --token=#{token}",
-      RendersUserWalkthrough.(user, "[CONFIGURE_COMMAND]")
+      RenderUserWalkthrough.(user, "[CONFIGURE_COMMAND]")
     )
   end
 
   test "substitutes the configure command without user" do
     assert_equal(
       "exercism configure --token=[TOKEN]",
-      RendersUserWalkthrough.(nil, "[CONFIGURE_COMMAND]")
+      RenderUserWalkthrough.(nil, "[CONFIGURE_COMMAND]")
     )
   end
 end
