@@ -1,4 +1,4 @@
-class RendersUserWalkthrough
+class RenderUserWalkthrough
   include Mandate
 
   CONFIGURE_COMMAND_TOKEN = "[CONFIGURE_COMMAND]"

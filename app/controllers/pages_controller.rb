@@ -45,7 +45,7 @@ class PagesController < ApplicationController
   end
 
   def cli_walkthrough
-    @walkthrough = RendersUserWalkthrough.(
+    @walkthrough = RenderUserWalkthrough.(
       current_user,
       Git::WebsiteContent.head.walkthrough
     )

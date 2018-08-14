@@ -7,7 +7,7 @@ class My::UserTracksController < MyController
 
       user_track.update!(archived_at: nil)
     else
-      JoinsTrack.join!(current_user, track)
+      JoinTrack.(current_user, track)
     end
 
     redirect_to [:my, track]

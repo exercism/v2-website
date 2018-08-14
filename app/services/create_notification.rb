@@ -1,9 +1,9 @@
-class CreatesNotification
+class CreateNotification
+  include Mandate
+
   class UnknownNotificationTypeError < RuntimeError
-    attr_reader :type
-    def initialize(type)
-      @type = type
-    end
+    include Mandate
+    initialize_with :type
   end
 
   # When adding to this list ensure you've also added to:
@@ -18,10 +18,6 @@ class CreatesNotification
     solution_approved
   }
 
-  def self.create!(*args)
-    new(*args).create!
-  end
-
   attr_reader :user, :type, :content, :link, :trigger, :about
   def initialize(user, type, content, link, trigger: nil, about: nil)
     @user = user
@@ -32,7 +28,7 @@ class CreatesNotification
     @about = about
   end
 
-  def create!
+  def call
     check_notification_type!
 
     Notification.create!(

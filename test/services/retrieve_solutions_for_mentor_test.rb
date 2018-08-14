@@ -1,6 +1,6 @@
 require "test_helper"
 
-class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
+class RetrieveSolutionsForMentorTest < ActiveSupport::TestCase
   test "filters by status by default" do
     user = create(:user)
     solution = create(:solution)
@@ -9,7 +9,7 @@ class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
            solution: solution)
     FiltersSolutionsByStatus.expects(:filter).with([solution], nil)
 
-    RetrievesSolutionsForMentor.retrieve(user)
+    RetrieveSolutionsForMentor.(user)
   end
 
   test "filters mentored solutions by status" do
@@ -22,11 +22,11 @@ class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
            abandoned: false
           )
 
-    completed_solutions = RetrievesSolutionsForMentor.retrieve(
+    completed_solutions = RetrieveSolutionsForMentor.(
       user,
       status: :completed
     )
-    abandoned_solutions = RetrievesSolutionsForMentor.retrieve(
+    abandoned_solutions = RetrieveSolutionsForMentor.(
       user,
       status: :abandoned
     )
@@ -52,11 +52,11 @@ class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
            solution: solution_cpp,
            requires_action: true)
 
-    cpp_solutions = RetrievesSolutionsForMentor.retrieve(
+    cpp_solutions = RetrieveSolutionsForMentor.(
       user,
       track_id: cpp.id
     )
-    ruby_solutions = RetrievesSolutionsForMentor.retrieve(
+    ruby_solutions = RetrieveSolutionsForMentor.(
       user,
       track_id: ruby.id
     )
@@ -81,12 +81,12 @@ class RetrievesSolutionsForMentorTest < ActiveSupport::TestCase
            solution: sorting_solution,
            requires_action: true)
 
-    hello_world_solutions = RetrievesSolutionsForMentor.retrieve(
+    hello_world_solutions = RetrieveSolutionsForMentor.(
       user,
       track_id: ruby.id,
       exercise_id: hello_world.id
     )
-    sorting_solutions = RetrievesSolutionsForMentor.retrieve(
+    sorting_solutions = RetrieveSolutionsForMentor.(
       user,
       track_id: ruby.id,
       exercise_id: sorting.id

@@ -1,15 +1,9 @@
-class JoinsTrack
-  def self.join!(*args)
-    new(*args).join!
-  end
+class JoinTrack
+  include Mandate
 
-  attr_reader :user, :track
-  def initialize(user, track)
-    @user = user
-    @track = track
-  end
+  initialize_with :user, :track
 
-  def join!
+  def call
     return false if UserTrack.where(user: user, track: track).exists?
 
     user_track = UserTrack.create!(user: user, track: track)

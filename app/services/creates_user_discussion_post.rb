@@ -29,7 +29,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
 
   def notify_mentors
     solution.active_mentors.each do |mentor|
-      CreatesNotification.create!(
+      CreateNotification.(
         mentor,
         :new_discussion_post_for_mentor,
         "#{strong solution.user.handle} has posted a comment on a solution you are mentoring",

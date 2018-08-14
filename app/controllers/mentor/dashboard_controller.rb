@@ -33,7 +33,7 @@ class Mentor::DashboardController < MentorController
     @your_exercise_id = params[:your_exercise_id]
     @your_exercise_id_options = exercise_id_options_for(@your_track_id)
 
-    @your_solutions = RetrievesSolutionsForMentor.retrieve(
+    @your_solutions = RetrieveSolutionsForMentor.(
       current_user,
       status: @your_status,
       track_id: @your_track_id,

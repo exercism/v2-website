@@ -30,7 +30,7 @@ class FixUnlockingInUserTrack
                                     not_completed_for(user).
                                     order(:position).
                                     first
-    keep_solution_ids << UnlocksCoreExercise.(user, next_exercise).try(:id) if next_exercise
+    keep_solution_ids << UnlockCoreExercise.(user, next_exercise).try(:id) if next_exercise
 
     # Delete all unsubmitted exercises that we haven't just
     # agreed to unlocked

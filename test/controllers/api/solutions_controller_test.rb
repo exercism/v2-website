@@ -361,7 +361,7 @@ class API::SolutionsControllerTest < API::TestBase
     solution = create :solution, user: @current_user, exercise: exercise
 
     file = File.open(__FILE__)
-    CreatesIteration.expects(:create!).with do |passed_solution, files|
+    CreateIteration.expects(:call).with do |passed_solution, files|
       assert_equal solution, passed_solution
     end
 
@@ -382,7 +382,7 @@ class API::SolutionsControllerTest < API::TestBase
     solution = create :team_solution, user: @current_user, exercise: exercise
 
     file = File.open(__FILE__)
-    CreatesIteration.expects(:create!).with do |passed_solution, files|
+    CreateIteration.expects(:call).with do |passed_solution, files|
       assert_equal solution, passed_solution
     end
 
@@ -401,7 +401,7 @@ class API::SolutionsControllerTest < API::TestBase
     track = exercise.track
     solution = create :solution, user: @current_user, exercise: exercise
 
-    CreatesIteration.expects(:create!).raises(DuplicateIterationError)
+    CreateIteration.expects(:call).raises(DuplicateIterationError)
 
     file = File.open(__FILE__)
     patch api_solution_path(solution),

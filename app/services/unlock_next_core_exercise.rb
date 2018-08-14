@@ -1,13 +1,10 @@
-class UnlocksNextCoreExercise
+class UnlockNextCoreExercise
   include Mandate
 
-  def initialize(track, user)
-    @track = track
-    @user = user
-  end
+  initialize_with :track, :user
 
   def call
-    return core_exercises_in_progress if core_exercises_in_progress
+    return core_exercise_in_progress if core_exercise_in_progress
 
     next_exercise = track.exercises.core.
                                     locked_for(user).
@@ -15,7 +12,7 @@ class UnlocksNextCoreExercise
                                     first
 
     if next_exercise
-      UnlocksCoreExercise.(user, next_exercise)
+      UnlockCoreExercise.(user, next_exercise)
     else
       # TODO Complete
       # raise "Not Implemented"
@@ -24,10 +21,8 @@ class UnlocksNextCoreExercise
 
   private
 
-  attr_reader :track, :user
-
   memoize
-  def core_exercises_in_progress
+  def core_exercise_in_progress
     user.
       solutions.
       joins(:exercise).

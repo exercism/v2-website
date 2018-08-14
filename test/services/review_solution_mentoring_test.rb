@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReviewsSolutionMentoringTest < ActiveSupport::TestCase
+class ReviewSolutionMentoringTest < ActiveSupport::TestCase
   test "reviews in valid case" do
     solution_mentorship = create :solution_mentorship
     solution = solution_mentorship.solution
@@ -9,7 +9,7 @@ class ReviewsSolutionMentoringTest < ActiveSupport::TestCase
     rating = 2
     feedback = "The foo was not enough bar"
 
-    ReviewsSolutionMentoring.review!(
+    ReviewSolutionMentoring.(
       solution, mentor.id, rating, feedback
     )
 

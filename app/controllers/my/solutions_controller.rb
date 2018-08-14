@@ -29,7 +29,7 @@ class My::SolutionsController < MyController
   end
 
   def walkthrough
-    @walkthrough = RendersUserWalkthrough.(
+    @walkthrough = RenderUserWalkthrough.(
       current_user,
       Git::WebsiteContent.head.walkthrough
     )
@@ -68,7 +68,7 @@ class My::SolutionsController < MyController
     @solution.update(published_at: Time.current) if params[:publish]
 
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
-      ReviewsSolutionMentoring.review!(
+      ReviewSolutionMentoring.(
         @solution,
         User.find(mentor_id),
         data[:rating],

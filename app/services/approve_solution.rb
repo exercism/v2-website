@@ -9,7 +9,7 @@ class ApproveSolution
 
     solution.update(approved_by: mentor)
 
-    CreatesSolutionMentorship.create(solution, mentor)
+    CreateSolutionMentorship.(solution, mentor)
     solution.update!(last_updated_by_mentor_at: Time.current)
 
     SolutionMentorship.where(solution: solution).update_all(requires_action: false)
@@ -19,7 +19,7 @@ class ApproveSolution
   private
 
   def notify_solution_user
-    CreatesNotification.create!(
+    CreateNotification.(
       solution.user,
       :solution_approved,
       "#{strong mentor.handle} has approved your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",

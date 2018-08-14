@@ -38,7 +38,7 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor, track: solution.exercise.track
     create :solution_mentorship, solution: solution, user: mentor
 
-    CreatesNotification.expects(:create!).with do |*args|
+    CreateNotification.expects(:call).with do |*args|
       assert_equal user, args[0]
       assert_equal :solution_approved, args[1]
       assert_equal "<strong>#{mentor.handle}</strong> has approved your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
@@ -61,7 +61,7 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     mentor = create :user
     create :track_mentorship, user: mentor, track: solution.exercise.track
 
-    CreatesSolutionMentorship.expects(:create).with(solution, mentor)
+    CreateSolutionMentorship.expects(:call).with(solution, mentor)
     ApproveSolution.(solution, mentor)
   end
 

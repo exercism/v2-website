@@ -1,14 +1,9 @@
-class SyncsContributors
-  def self.sync!(*args)
-    new(*args).sync!
-  end
+class SyncContributors
+  include Mandate
 
-  attr_reader :filepath
-  def initialize(filepath)
-    @filepath = filepath
-  end
+  initialize_with :filepath
 
-  def sync!
+  def call
     contributors = JSON.parse(File.read(filepath), symbolize_names: true)
     contributors.each do |_, contributor_data|
       begin

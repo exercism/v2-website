@@ -1,18 +1,12 @@
 class DuplicateIterationError < RuntimeError
 end
 
-class CreatesIteration
-  def self.create!(*args)
-    new(*args).create!
-  end
+class CreateIteration
+  include Mandate
 
-  attr_reader :solution, :files, :iteration
-  def initialize(solution, files)
-    @solution = solution
-    @files = files
-  end
+  initialize_with :solution, :files
 
-  def create!
+  def call
     check_not_duplicate!
 
     @iteration = Iteration.create!( solution: solution )
@@ -31,12 +25,15 @@ class CreatesIteration
     iteration
   end
 
+  private
+  attr_reader :iteration
+
   def update_solution
     solution.update(last_updated_by_user_at: Time.current)
 
     if solution.exercise.auto_approve?
       solution.update(approved_by: user)
-      CreatesNotification.create!(
+      CreateNotification.(
         solution.user,
         :exercise_auto_approved,
         "Your solution to <strong>#{solution.exercise.title}</strong> on the "\
@@ -74,7 +71,7 @@ class CreatesIteration
 
   def notify_mentors
     solution.active_mentors.each do |mentor|
-      CreatesNotification.create!(
+      CreateNotification.(
         mentor,
         :new_iteration_for_mentor,
         "<strong>#{user.handle}</strong> has posted a new iteration on a solution you are mentoring",
