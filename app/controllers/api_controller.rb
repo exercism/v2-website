@@ -23,19 +23,25 @@ class APIController < ApplicationController
     render json: {}, status: 401
   end
 
-  def render_403(type, message)
-    render_error(403, type, message)
+  def render_403(type)
+    render_error(403, type)
   end
 
   def render_404(type = :resource_not_found, data = {})
-    render_error(404, type, type.to_s.humanize, data)
+    render_error(404, type, data)
   end
 
   def render_solution_not_found
     render_404(:solution_not_found)
   end
 
-  def render_error(status, type, message, data = {})
+  def render_solution_not_accessible
+    render_403(:solution_not_accessible)
+  end
+
+  def render_error(status, type, data = {})
+    message = I18n.t("api.errors.#{type}")
+
     render json: {
       error: {
         type: type,
