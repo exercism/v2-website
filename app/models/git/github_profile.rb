@@ -26,4 +26,8 @@ class Git::GithubProfile
     @avatar_url = user.avatar_url
     @link_url = user.html_url
   end
+
+  def user_present?
+    user && user.id
+  end
 end
