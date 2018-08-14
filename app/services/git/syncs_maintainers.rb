@@ -41,7 +41,8 @@ class Git::SyncsMaintainers
     alumnus = alumnus_string(m[:alumnus])
 
     gh_profile = Git::GithubProfile.for_user(gh_user)
-
+    user_id = User.find_by(provider: "github", uid: gh_profile.user.id).try(:id) if gh_profile.try(:user_present?)
+    
     link_url = m.fetch(:link_url, gh_profile.link_url)
     link_text = m.fetch(:link_text, link_url)
 
@@ -51,7 +52,8 @@ class Git::SyncsMaintainers
       bio: (m[:bio] || gh_profile.bio),
       avatar_url: (m[:avatar_url] || gh_profile.avatar_url),
       link_url: link_url,
-      link_text: link_text
+      link_text: link_text,
+      user_id: user_id
     }
     maintainer = Maintainer.find_or_create_by!(track: track, github_username: gh_user) do |mm|
       mm.assign_attributes(maintainer_data)
