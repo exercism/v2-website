@@ -19,7 +19,7 @@ class API::UnknownRouteTest < API::TestBase
       setup_user
       get route, headers: @headers, as: :json
       assert_response 404
-      expected = {"error"=>{"type"=>"resource_not_found", "message"=>"Resource not found"}}
+      expected = {"error"=>{"type"=>"resource_not_found", "message"=>"This URL was not recognised"}}
       assert_equal expected, JSON.parse(response.body)
     end
   end

@@ -6,7 +6,7 @@ class My::SolutionsController < MyController
     user_track = UserTrack.where(user: current_user, track: track).first
     exercise = track.exercises.find(params[:exercise_id])
 
-    if current_user.may_unlock_exercise?(user_track, exercise)
+    if current_user.may_unlock_exercise?(exercise, user_track: user_track)
       solution = CreateSolution.(current_user, exercise)
       redirect_to [:my, solution]
     else
