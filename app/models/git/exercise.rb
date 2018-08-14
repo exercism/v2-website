@@ -8,7 +8,7 @@ class Git::Exercise
   end
 
   def instructions
-    lines = exercise_reader.readme.lines
+    lines = exercise_reader.readme.split("\n")
     lines.shift if /^#\s*#{@title}\s*$/.match? lines.first
     ParseMarkdown.(lines.join("\n"))
   end

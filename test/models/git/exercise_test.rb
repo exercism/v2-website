@@ -6,7 +6,7 @@ class GitExerciseTest < ActiveSupport::TestCase
 
     readme_lines = ["# barfoo", "### Something else", "Here"]
 
-    readme = mock(lines: readme_lines)
+    readme = mock(split: readme_lines)
     exercise_reader = mock(readme: readme)
 
     git_exercise = Git::Exercise.new(exercise, nil, nil)
@@ -22,7 +22,7 @@ class GitExerciseTest < ActiveSupport::TestCase
     original_readme_lines = ["# foobar", "### Something else", "Here"]
     modified_readme_lines = ["### Something else", "Here"]
 
-    readme = mock(lines: original_readme_lines)
+    readme = mock(split: original_readme_lines)
     exercise_reader = mock(readme: readme)
 
     git_exercise = Git::Exercise.new(exercise, nil, nil)
