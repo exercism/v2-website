@@ -24,7 +24,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
 
     sign_in!(user)
     visit my_solution_path(solution)
-    click_on "Complete Exercise (Unapproved)"
+    click_on "Complete exercise (Unapproved)"
     check "I understand and agree to continue."
     click_on "Mark as completed"
     click_on "Continue"
