@@ -16,7 +16,7 @@
 
     .approved{style: @solution.approved?? "" : "display:none"}
       =icon :check
-      Solution Approved
+      Solution approved
 
     -unless @solution.approved?
       =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button button'
