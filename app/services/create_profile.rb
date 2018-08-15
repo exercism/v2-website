@@ -1,4 +1,5 @@
 class CreateProfile
+  include Mandate
   initialize_with :user, :display_name
 
   def call
