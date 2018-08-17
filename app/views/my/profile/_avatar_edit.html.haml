@@ -3,7 +3,7 @@
   .image-preview.js-image-preview-container{ style: "background-image: url('#{image_url(user.avatar_url)}')" }
   .file-selector-section
     .file-selector
-      Change Image
+      Change image
       = form.file_field :avatar, class: "js-image-preview-file"
     %p.text-hint Try and choose a square photo that works when rounded.
   - if user.errors.any?
