@@ -12,6 +12,7 @@ require 'capistrano/yarn'
 require 'capistrano/rails'
 require 'capistrano/rvm'
 require 'capistrano/bundler'
+require "capistrano/checks"
 require 'capistrano/rails/migrations'
 require 'capistrano/rails/assets'
 

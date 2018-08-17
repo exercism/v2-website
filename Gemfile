@@ -69,3 +69,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'webmock'
 end
+
+group :development, :production do
+  gem 'capistrano-checks'
+end
