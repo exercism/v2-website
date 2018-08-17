@@ -110,6 +110,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    commonmarker (0.17.11)
+      ruby-enum (~> 0.5)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -282,12 +284,12 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redcarpet (3.4.0)
     redis (4.0.1)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rouge (3.1.1)
+    ruby-enum (0.7.2)
+      i18n
     ruby-vips (2.0.12)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
@@ -381,6 +383,7 @@ DEPENDENCIES
   capybara (~> 3.0)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  commonmarker
   dalli
   devise (~> 4.3)
   factory_bot_rails
@@ -404,8 +407,6 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.2)
   rails-controller-testing
-  redcarpet
-  rouge
   rugged
   sass-rails (~> 5.0)
   selenium-webdriver
@@ -419,4 +420,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.2
+   1.16.3
