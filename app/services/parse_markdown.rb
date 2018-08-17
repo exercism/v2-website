@@ -1,6 +1,4 @@
-require 'redcarpet'
-require 'rouge'
-require 'rouge/plugins/redcarpet'
+require 'commonmarker'
 
 class ParseMarkdown
   include Mandate
@@ -21,11 +19,7 @@ class ParseMarkdown
   end
 
   def raw_html
-    @raw_html ||= markdown.render(preprocessed_text)
-  end
-
-  def markdown
-    @markdown ||= Redcarpet::Markdown.new(Renderer.new(options), extensions)
+    @raw_html ||= Renderer.new.render(CommonMarker.render_doc(preprocessed_text))
   end
 
   def preprocessed_text
@@ -33,97 +27,26 @@ class ParseMarkdown
       text.gsub(/^`{3,}(.*?)`{3,}\s*$/m) { "\n#{$&}\n" }
   end
 
-  def options
-    @options ||= {
-      with_toc_data: false,
-      hard_wrap: false,
-      xhtml: true
-    }
-  end
-
-  def extensions
-    @extensions ||= {
-      fenced_code_blocks: true,
-      no_intra_emphasis: true,
-      autolink: true,
-      strikethrough: true,
-      lax_html_blocks: true,
-      superscript: true,
-      tables: true,
-      space_after_headers: true,
-      lax_spacing: true,
-    }
-  end
-
-  class Renderer < Redcarpet::Render::XHTML
-    #def lexer
-    #  Rouge::Lexers::PlainText
-    #end
-
-    #def formatter
-    #  @formatter ||= Rouge::Formatters::HTML.new(
-    #    css_class: "highlight #{lexer.tag}",
-    #    line_numbers: true
-    #  )
-    #end
-
-    def link(link, title, content)
-      elem = %Q{<a href="#{link}" target="_blank"}
-      elem += %Q{ target="_blank"}
-      elem += %Q{>#{content}</a>}
-      elem
+  class Renderer < CommonMarker::HtmlRenderer
+    def link(node)
+      out('<a href="', node.url.nil? ? '' : escape_href(node.url), '" target="_blank"')
+      if node.title && !node.title.empty?
+        out(' title="', escape_html(node.title), '"')
+      end
+      out('>', :children, '</a>')
     end
 
-    def block_code(code, language)
-      language ||= "plain"
-      %Q{<pre><code class="language-#{language}">#{code}</code></pre>}
-      #Rouge::Formatters::HTML.new(
-      #  css_class: "highlight #{lexer.tag}",
-      #  line_numbers: true
-      #)
-
-      #formatter.format(lexer.lex(code))
-      #SyntaxHighlighter.new(code, language).render
+    def code_block(node)
+      block do
+        out("<pre#{sourcepos(node)}><code")
+        if node.fence_info && !node.fence_info.empty?
+          out(' class="language-', node.fence_info.split(/\s+/)[0], '">')
+        else
+          out(' class="language-plain">')
+        end
+        out(escape_html(node.string_content))
+        out('</code></pre>')
+      end
     end
   end
-
-=begin
-  class SyntaxHighlighter
-    ROUGE_LANG = {
-      'objective-c' => 'objective_c',
-      'elisp'       => 'common_lisp',
-      'lisp'        => 'common_lisp',
-      'lfe'         => 'common_lisp',
-      'plsql'       => 'sql',
-      'ecmascript'  => 'javascript',
-      'perl5'       => 'perl',
-      'crystal'     => 'ruby',
-      'delphi'      => 'pascal',
-    }.freeze
-
-    attr_reader :lexer, :code
-    def initialize(raw_code, raw_language)
-      language = ROUGE_LANG.fetch(raw_language) { raw_language }
-      @code = raw_code.gsub(/\r\n?/, "\n")
-      @lexer = Rouge::Lexer.find_fancy(language, code) || Rouge::Lexers::PlainText
-
-      # XXX HACK: Redcarpet strips hard tabs out of code blocks,
-      # so we assume you're not using leading spaces that aren't tabs,
-      # and just replace them here.
-      @code = code
-      @code.gsub!(/^    /, "\t") if lexer.tag == 'make'
-    end
-
-    def render
-      formatter.format(lexer.lex(code))
-    end
-
-    def formatter
-      @formatter ||= Rouge::Formatters::HTML.new(
-        css_class: "highlight #{lexer.tag}",
-        line_numbers: true
-      )
-    end
-  end
-=end
 end
