@@ -48,6 +48,10 @@ class Git::ProblemSpecifications < Git::RepoBase
       return nil if m.nil?
       metadata[:blurb]
     end
+
+    def title
+      metadata[:title]
+    end
   end
 
   class Exercises
