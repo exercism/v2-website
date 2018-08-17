@@ -44,6 +44,10 @@ class Solution < ApplicationRecord
     where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT)
   end
 
+  def display_published_at
+    published_at == Exercism::V2_MIGRATED_AT ? created_at : published_at
+  end
+
   def track_in_mentored_mode?
     !track_in_independent_mode?
   end
