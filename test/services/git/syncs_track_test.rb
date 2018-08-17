@@ -26,4 +26,16 @@ class Git::SyncsTracksTest < ActiveSupport::TestCase
     hello_world.reload
     assert_nil hello_world.unlocked_by
   end
+
+  test "pulls exercise title from problem specifications" do
+    Git::ProblemSpecifications.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/problem-specifications")
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+
+    stub_repo_cache! do
+      Git::SyncsTrack.sync!(track)
+    end
+
+    exercise = Exercise.last
+    assert_equal "Hello World", exercise.title
+  end
 end
