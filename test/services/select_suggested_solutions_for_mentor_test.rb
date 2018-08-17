@@ -275,7 +275,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
-                                        last_updated_by_user_at: DateTime.now,
+                                        last_updated_by_user_at: DateTime.now - 1.minute,
                                         user: mentored_user)
 
       unmentored_core_solution_2 = create(:solution,
