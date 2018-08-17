@@ -69,7 +69,7 @@ class My::TracksController < MyController
 
       @num_side_exercises = @track.exercises.side.active.count
       @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
-      @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.completed?}.size
+      @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.exercise.active && s.completed?}.size
 
       user_topic_counts = solutions.completed.each_with_object({}) do |s, topics|
         s.exercise.topics.each do |topic|
