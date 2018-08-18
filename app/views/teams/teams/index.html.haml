@@ -1,7 +1,10 @@
 #teams-teams-page.teams-page
-  .lo-container
-    %h1 Your teams
+  .lo-general-header
+    .lo-container
+      %h1 Your teams
+      .h1-subtitle All the teams you have are a member of
 
+  .lo-container
     -if @invitations.present?
       %h2 Pending invitiations
       %table.teams-table

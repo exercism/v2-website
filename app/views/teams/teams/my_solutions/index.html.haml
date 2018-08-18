@@ -1,24 +1,25 @@
 #teams-my-solutions-page.team-page
   =teams_header
   .lo-container
-    %h1 Your solutions
+    %h2 Your solutions
+    .h2-subheading Solutions you have started with the #{@team.name} team.
     .num-solutions= pluralize @solutions.size, "Solutions"
     .filters
       =form_tag [:teams, @team, :my_solutions], remote: true, method: :get, class: "my-solutions-form" do
-        .widget-filter.difficulty
-          .title Difficulty:
-          =select_tag :difficulty, options_for_select({"All": ' ', "Easy": 'easy', "Medium": 'medium', "Hard": 'hard'}, value: @difficulty), id: nil
-        / TODO Length
-        /.widget-filter.length
-        /  .title Length:
-        /  =select_tag :length, options_for_select({"All": 0, "Short": 1, "Medium": 2, "Long": 3}, value: @length), id: nil
-        .widget-filter.topic
-          .title Topic:
-          =select_tag :topic_id, options_for_select(@topics_for_select), id: nil
+        .widget-filter.track_id
+          .title Track:
+          = select_tag :track_id,
+            options_for_select(OptionsHelper.format_options(@track_id_options), @track_id),
+            include_blank: true
+        .widget-filter.exercise_id
+          .title Exercise:
+          = select_tag :exercise_id,
+            options_for_select(OptionsHelper.format_options(@exercise_id_options), @exercise_id),
+            include_blank: true
     .pure-g.solutions
       =render "teams/teams/my_solutions/solutions", solutions: @solutions
 
-    =link_to "Start new solution", new_teams_team_my_solution_path, class: "pure-button"
+    =link_to "Start a new solution", new_teams_team_my_solution_path, class: "pure-button"
 
   -content_for :js do
     :javascript
