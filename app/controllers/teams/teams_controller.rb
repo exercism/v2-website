@@ -8,6 +8,7 @@ class Teams::TeamsController < Teams::BaseController
 
   def show
     @team = current_user.teams.find(params[:id])
+    @activities = GenerateTeamActivityFeed.(@team)
   end
 
   def new

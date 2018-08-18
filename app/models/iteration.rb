@@ -1,5 +1,10 @@
 class Iteration < ApplicationRecord
   belongs_to :solution, polymorphic: true
+
+  # Helper methods for eager-loading
+  belongs_to :team_solution, class_name: "TeamSolution"
+  belongs_to :person_solution, class_name: "Solution"
+
   has_many :files, class_name: "IterationFile", dependent: :destroy
   has_many :discussion_posts, dependent: :destroy
   has_many :notifications, as: :about
