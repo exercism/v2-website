@@ -2,7 +2,8 @@
   =teams_header
 
   .lo-container
-    %ul
-      %li= link_to "Members", [:teams, @team, :memberships]
-      %li= link_to "Your solutions", [:teams, @team, :my_solutions]
-      %li= link_to "Everyone's solutions", [:teams, @team, :solutions]
+    %h2 Activity Feed
+    .h2-subheading What's been happening in your team.
+
+    -@activities.each do |activity|
+      =render "activity_#{activity.class.name.underscore}", activity: activity
