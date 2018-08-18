@@ -2,6 +2,14 @@
 @import 'variables';
 
 #teams-memberships-page {
+    h3 {
+        @include font-size(16, 16);
+        border-bottom: 1px solid #ddd;
+        padding-bottom:5px;
+        margin-bottom: 10px;
+        font-weight: 400;
+        color: #333;
+    }
     p {
         margin-bottom:10px;
     }
@@ -11,5 +19,26 @@
 
     .team-join-url {
       width: 50%;
+    }
+    table.memberships-table {
+        margin-bottom:10px;
+        th, td {
+            padding:5px 20px 5px 0;
+        }
+        th {
+            text-align:left;
+            font-weight:400;
+            border-bottom:1px solid #eee;
+        }
+        td {
+            a {
+                color:$color-2;
+                text-decoration:none;
+                border-bottom:1px solid rgba($color-2, 0.3);
+            }
+        }
+    }
+    .section {
+        margin-bottom:25px;
     }
 }
