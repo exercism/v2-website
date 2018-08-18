@@ -1,0 +1,9 @@
+=link_to teams_team_solution_path(@team, activity.solution), class: 'activity iteration' do
+  =image_tag activity.solution.user.avatar_url
+  .title
+    %strong #{activity.solution.user.handle} 
+    posted a new iteration
+    %strong #{activity.solution.exercise.title} 
+    on the
+    %strong #{activity.solution.exercise.track.title}
+    Track.
