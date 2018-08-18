@@ -7,6 +7,8 @@ module TeamsHelper
         :my_solutions
       when "solutions"
         :solutions
+      else
+        :home
       end
     render "teams/header", team: @team, selected: selected
   end

@@ -15,16 +15,16 @@
               .tab.tab-3
                 Solution
 
-            =render "teams/teams/solutions/panes", iteration: @iteration
+            =render "solutions/panes", iteration: @iteration
 
       .pure-u-1-2.rhs
         .discussion
-          %h3 Team feedback
+          %h3.rhs-heading Team feedback
 
           -if @iteration.discussion_posts.present?
             .posts
               -@iteration.discussion_posts.each do |post|
-                =render "teams/teams/discussion_posts/post", post: post, solution: @solution
+                =discussion_post_widget(post, @solution, nil)
           -else
             .posts{style: "display:none"}
             .next-steps

@@ -1,8 +1,7 @@
 .pure-g
   -@exercises.each do |exercise|
     .pure-u-1-4
-      =radio_button_tag :exercise_id, exercise.id, 1, class: 'exercise-radio-button'
-      =label_tag "exercise_id[#{exercise.id}]", class: "widget-side-exercise unlocked" do
+      =button_tag name: 'exercise_id', value: exercise.id, class: "widget-side-exercise unlocked" do
         .icon
           .img{style: "background-image:url('#{image_path(exercise.dark_icon_url)}')"}
 
@@ -13,5 +12,3 @@
           -# TODO: Uncomment this when exercise_length_word has been fix to no longer return medium by default
           -# .length{class: length_word}= length_word
           .difficulty{class: difficulty_word}= difficulty_word
-
-=button_tag "Start exercise", class: 'pure-button'

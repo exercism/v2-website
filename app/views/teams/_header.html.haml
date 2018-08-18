@@ -1,6 +1,9 @@
 #team-header
+  %h1
+    .lo-container
+      #{@team.name}
   .lo-container
-    .name= team.name
+    =link_to "Home", teams_team_path(@team), class: (selected == :home ? "selected" : "")
     =link_to "Your solutions", teams_team_my_solutions_path(@team), class: (selected == :my_solutions ? "selected" : "")
     =link_to "Others' solutions", teams_team_solutions_path(@team), class: (selected == :solutions ? "selected" : "")
     =link_to "Members", teams_team_memberships_path(@team), class: (selected == :memberships ? "selected" : "")
