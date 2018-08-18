@@ -3,14 +3,15 @@
 
   .solution-header
     .lo-container
-      =image display_avatar_url(@solution.user, @solution_user_track), "Avatar of #{display_handle(@solution.user, @solution_user_track)}"
-      .inner
-        =iterations_nav_widget(@team, @solution, @iteration, url_path: :teams_team_solution_path)
-        %h2
-          %strong #{@exercise.title}
-          in
-          %strong #{@exercise.track.title}
-        .byline by #{@solution.user.handle}
+      .content
+        =image display_avatar_url(@solution.user, @solution_user_track), "Avatar of #{display_handle(@solution.user, @solution_user_track)}"
+        .inner
+          =iterations_nav_widget(@team, @solution, @iteration, url_path: :teams_team_solution_path)
+          %h2
+            %strong #{@exercise.title}
+            in
+            %strong #{@exercise.track.title}
+          .byline by #{@solution.user.handle}
 
   .lo-container
     .pure-g.panels
@@ -29,12 +30,12 @@
 
       .pure-u-1.pure-u-md-1-2.rhs
         .discussion
-          %h3 Team feedback
+          %h3.rhs-heading Team feedback
 
           -if @iteration.discussion_posts.present?
             .posts
               -@iteration.discussion_posts.each do |post|
-                =render "teams/discussion_posts/post", post: post, solution: @solution
+                =discussion_post_widget(post, @solution, nil)
           -else
             .posts{style: "display:none"}
             .next-steps

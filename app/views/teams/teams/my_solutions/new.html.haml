@@ -1,8 +1,10 @@
 #teams-new-solution-page.team-page
   =teams_header
   .lo-container
-    %h1 Start new exercise
-    %h2 1) Choose a language
+    %h2 Start new exercise
+    .h2-subheading Choose an exercise to complete with the #{@team.name} team
+
+    %h3 1) Choose a language
     =form_tag teams_team_my_solutions_path(@team), method: :post do
       .widget-filter
         .title Track:
@@ -10,10 +12,9 @@
           options_for_select(OptionsHelper.format_options(@track_id_options)),
           include_blank: true
 
-      %h2 2) Choose an exercise
+      %h3 2) Choose an exercise
       .exercises
         .placeholder Choose a track first to see exercises.
-
 
 -content_for :js do
   :javascript

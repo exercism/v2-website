@@ -1,3 +1,6 @@
-$('#teams-my-solutions-page .solutions').html("#{j render("teams/my_solutions/solutions", solutions: @solutions)}")
+$('#teams-my-solutions-page .solutions').html("#{j render("teams/teams/my_solutions/solutions", solutions: @solutions)}")
 $('#teams-my-solutions-page .num-solutions').html("#{j pluralize @solutions.size, "Solutions"}")
 
+- if @track_id && @exercise_id.blank?
+  var select = $('#exercise_id')[0].selectize;
+  updateOptions(select, #{@exercise_id_options.to_json.html_safe});

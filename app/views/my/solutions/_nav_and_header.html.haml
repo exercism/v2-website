@@ -1,7 +1,5 @@
 #nav.lo-nav-bar
   .lo-container
-    /=link_to "Dashboard", root_path
-    /=nav_divider
     =link_to "Language tracks", [:my, :tracks]
     =nav_divider
     =link_to "#{@track.title} track", [:my, @track]
