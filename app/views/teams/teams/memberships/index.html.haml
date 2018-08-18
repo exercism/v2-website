@@ -1,39 +1,52 @@
+-current_user_is_admin = @team.admin?(current_user)
+
 #teams-memberships-page.team-page
   =teams_header
   .lo-container
-    %h1 Your team
+    %h2 Your team
+    .h2-subheading Manage your team and invite new members
     -if @invitations.present?
       .section
-        %h2 Pending invitations
+        %h3 Pending invitations
         %p These are people who have been invited to this team.
-        %table.teams-table
+        %table.memberships-table
+          %tr
+            %th Email
+            -if current_team_membership.admin?
+              %th{colspan: 2} Actions
           -@invitations.each do |invitation|
             %tr
               %td
                 = invitation.email
               -if current_team_membership.admin?
+                /%td= link_to "Resend invite", "#"
                 %td
-                  %ul.inline-list
-                    %li= link_to "Resend invite", "#"
-                    %li= link_to "Remove",
-                      teams_team_invitation_path(invitation.team, invitation),
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to reject your invitation to #{invitation.email}?" }
+                  = link_to "Remove",
+                    teams_team_invitation_path(invitation.team, invitation),
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to reject your invitation to #{invitation.email}?" }
 
-    -if @memberships.present?
-      .section
-        %h2 Members
-        %p These are full members of this team who can attempt solutions or give feedback.
-        %table
+    .section
+      %h3 Team Members
+      -if @memberships.present?
+        %table.memberships-table
+          %tr
+            %th Name
+            %th Status
+            - if current_user_is_admin
+              %th Actions
           -@memberships.each do |membership|
             %tr
               %td= membership.name
-              - if current_team_membership.admin? && membership != current_team_membership
+              %td
+                = membership.admin?? "Admin" : "Member"
+              - if current_user_is_admin && membership != current_team_membership
                 %td= link_to "Remove",
                   teams_team_membership_path(membership.team, membership),
                   method: :delete,
                   data: { confirm: "Are you sure you want to remove #{membership.name} from your team?" }
-        = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
+        - if current_user_is_admin
+          = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
-    - if @team.admin?(current_user)
-      = render "teams/teams/memberships/sections/settings", team: @team
+    - if current_user_is_admin
+      = render "teams/teams/memberships/settings", team: @team

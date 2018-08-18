@@ -15,14 +15,14 @@ class Team < ApplicationRecord
   has_many :invitations, class_name: "TeamInvitation"
   has_many :memberships, class_name: "TeamMembership"
   has_many :members, through: :memberships, source: :user
-  has_many :admins,
-    -> { where(team_memberships: { admin: true }) },
-    through: :memberships,
-    source: :user
+  #has_many :admins,
+  #  -> { where(team_memberships: { admin: true }) },
+  #  through: :memberships,
+  #  source: :user
 
   has_secure_token :token
 
   def admin?(user)
-    admins.include?(user)
+    memberships.where(admin: true).where(user_id: user.id).exists?
   end
 end

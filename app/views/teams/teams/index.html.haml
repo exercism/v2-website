@@ -2,11 +2,12 @@
   .lo-general-header
     .lo-container
       %h1 Your teams
-      .h1-subtitle All the teams you have are a member of
+      .h1-subtitle Get started by choosing the team you want to work within
 
   .lo-container
     -if @invitations.present?
       %h2 Pending invitiations
+      .h2-subheading You have been invited to these teams
       %table.teams-table
         - @invitations.each do |invite|
           %tr
@@ -20,6 +21,9 @@
                 reject_teams_invitation_path(invite.id),
                 method: :post,
                 data: { confirm: "Are you sure you want to reject your invitation to #{invite.team_name}?" }
+
+      %h2 Your Teams
+      .h2-subheading The teams you have created or joined
 
     .pure-g
       -if @teams.present?
