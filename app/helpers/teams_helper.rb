@@ -1,7 +1,8 @@
 module TeamsHelper
   def teams_header
     selected = case controller_name
-      when "memberships"
+      when "memberships",
+           "invitations"
         :memberships
       when "my_solutions"
         :my_solutions

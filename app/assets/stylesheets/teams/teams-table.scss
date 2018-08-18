@@ -3,6 +3,8 @@
 
 .teams-table {
 	margin-bottom:20px;
+    border:1px solid #eee;
+    border-radius:2px;
 	tr {
 		&:nth-child(odd) {
 			background:#fafafa;
