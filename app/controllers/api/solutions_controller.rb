@@ -12,6 +12,8 @@ class API::SolutionsController < APIController
       return render_403(:user_may_not_download_solution, "You may not download this solution")
     end
 
+    return if guard_js_ecma_migration!(solution.exercise.track)
+
     responder = API::SolutionResponder.new(solution, current_user)
     solution.update(downloaded_at: Time.current) if current_user == solution.user
     render json: responder.to_hash
@@ -85,6 +87,8 @@ class API::SolutionsController < APIController
         end
       end
     end
+
+    return if guard_js_ecma_migration!(solution.exercise.track)
 
     responder = API::SolutionResponder.new(solution, current_user)
     solution.update(downloaded_at: Time.current)
