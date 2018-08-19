@@ -13,9 +13,13 @@
 
     %p Well done on submitting your iteration. A mentor will check out your work and leave a comment here on your solution soon.
     %p
-      In the meantime why not try a different exercise on the
-      =link_to "#{@track.title} track", [:my, @track]
-      or explore the #{link_to "other Exercism tracks", [:my, :tracks]}.
+      -if @solution.exercise.core?
+        In the meantime why not try a different exercise on the
+        =link_to "#{@track.title} track", [:my, @track]
+        or explore the #{link_to "other Exercism tracks", [:my, :tracks]}.
+      -else
+        In the meantime why not explore how 
+        #{link_to "other people have solved this", track_exercise_solutions_path(@track, @exercise)}.
 -else
   .posts{style: "display:none"}
 
