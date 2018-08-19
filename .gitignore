@@ -28,3 +28,6 @@
 /server_identity
 
 storage/
+
+/test/tmp/*
+!/test/tmp/.gitkeep
