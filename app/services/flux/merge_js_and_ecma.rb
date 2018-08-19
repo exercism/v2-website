@@ -48,7 +48,8 @@ module Flux
         exercise.update(
           slug: "legacy-#{exercise.slug}",
           title: "#{exercise.title} (Legacy)",
-          track: ecma
+          track: ecma,
+          active: false
         )
       end
     end

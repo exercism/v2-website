@@ -141,14 +141,17 @@ module Flux
       assert_equal 'legacy-hamming', @js_hamming.slug
       assert_equal 'Hamming (Legacy)', @js_hamming.title
       assert_equal @ecma, @js_hamming.track
+      refute @js_hamming.active?
 
       assert_equal 'hamming', @ecma_hamming.slug
       assert_equal 'Hamming', @ecma_hamming.title
       assert_equal @ecma, @ecma_hamming.track
+      assert @ecma_hamming.active?
 
       assert_equal 'hamming', @ruby_hamming.slug
       assert_equal 'Hamming', @ruby_hamming.title
       assert_equal @ruby, @ruby_hamming.track
+      assert @ruby_hamming.active?
     end
 
     test "ruby and ecma exercises don't get touched" do
