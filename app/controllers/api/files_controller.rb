@@ -36,7 +36,7 @@ class API::FilesController < APIController
   end
 
   def exercise_reader
-    @exercise_reader ||= Git::ExercismRepo.new(track_url).exercise(exercise_slug)
+    @exercise_reader ||= Git::ExercismRepo.new(track_url).exercise(exercise_slug, @solution.git_sha)
   end
 
   def exercise
