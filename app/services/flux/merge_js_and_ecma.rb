@@ -21,10 +21,10 @@ module Flux
 
     def repoint_solutions
       # Delete any unstarted ecma exercises
-      Solution.where(exercise_id: ecma.exercises).not_started.destroy_all
+      Solution.where(exercise_id: ecma.exercises).not_started.delete_all
 
       # Delete any unstarted js exercises
-      Solution.where(exercise_id: js.exercises).not_started.destroy_all
+      Solution.where(exercise_id: js.exercises).not_started.delete_all
 
       ecma_user_id_slugs = Solution.where(exercise_id: ecma.exercises).includes(:exercise).map{|s|"#{s.user_id}_#{s.exercise.slug}"}
       js_solutions = Solution.where(exercise_id: js.exercises).started.includes(:exercise)
