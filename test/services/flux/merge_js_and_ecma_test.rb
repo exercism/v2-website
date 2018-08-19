@@ -25,6 +25,15 @@ module Flux
       assert_equal "6a8a5a41b89a45008b46ca18ff7ea800baca1c4c", MergeJSAndECMA::JS_SHA
     end
 
+    test "tracks are renamed" do
+      MergeJSAndECMA.()
+      assert_equal "JavaScript (Legacy)", @js.title
+      assert_equal "javascript-legacy", @js.slug
+
+      assert_equal "JavaScript", @ecma.title
+      assert_equal "javascript", @ecma.slug
+    end
+
     test "FixUnlockingInUserTrack is called for affected users" do
       ecma_user = create :user
       js_user = create :user
@@ -167,7 +176,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_not_completed_and_on_ecma js_bob_solution
+      assert_migrated_to_active js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and ecma is approved" do
@@ -178,7 +187,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and ecma is completed" do
@@ -189,7 +198,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and js is completed but ecma is started" do
@@ -200,7 +209,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and js is approved but ecma is started" do
@@ -211,7 +220,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and js is approved and ecma is completed" do
@@ -222,7 +231,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and js is completed and ecma is approved" do
@@ -233,7 +242,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and both are approved" do
@@ -244,7 +253,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and both are completed" do
@@ -255,7 +264,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to legacy exercise if there is a clash and both are started" do
@@ -266,7 +275,7 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_completed_and_legacy js_bob_solution
+      assert_migrated_to_legacy js_bob_solution
     end
 
     test "exercises are migrated to ecma exercise if there is a clash and ecma is not started" do
@@ -277,15 +286,15 @@ module Flux
       MergeJSAndECMA.()
       js_bob_solution.reload
 
-      assert_not_completed_and_on_ecma js_bob_solution
+      assert_migrated_to_active js_bob_solution
     end
 
-    def assert_completed_and_legacy(solution)
+    def assert_migrated_to_legacy(solution)
       assert_equal @js_bob, solution.exercise
       assert Time.now, solution.completed_at
     end
 
-    def assert_not_completed_and_on_ecma(solution)
+    def assert_migrated_to_active(solution)
       assert_equal @ecma_bob, solution.exercise
       refute solution.completed_at
     end

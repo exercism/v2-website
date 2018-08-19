@@ -8,6 +8,7 @@ module Flux
       return
       repoint_solutions
       rename_js_exercises
+      rename_tracks
       fix_unlocking
     end
 
