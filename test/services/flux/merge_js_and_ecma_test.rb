@@ -3,11 +3,9 @@ require 'test_helper'
 module Flux
   class MergeJSandECMATest < ActiveSupport::TestCase
     setup do
-      Timecop.freeze
-
-      @js = create :track, slug: "javascript"
-      @ecma = create :track, slug: "ecmascript"
-      @ruby = create :track, slug: "ruby"
+      @js = create :track, slug: "javascript", title: "JavaScript"
+      @ecma = create :track, slug: "ecmascript", title: "ECMAScript"
+      @ruby = create :track, slug: "ruby", title: "Ruby"
 
       @js_hamming = create :exercise, slug: 'hamming', title: "Hamming", track: @js
       @ecma_hamming = create :exercise, slug: 'hamming', title: "Hamming", track: @ecma
@@ -15,10 +13,6 @@ module Flux
       @js_bob = create :exercise, slug: 'bob', track: @js
       @ecma_bob = create :exercise, slug: 'bob', track: @ecma
       @ruby_bob = create :exercise, slug: 'bob', track: @ruby
-    end
-
-    teardown do
-      Timecop.return
     end
 
     test "JS Sha is correct" do
@@ -291,7 +285,7 @@ module Flux
 
     def assert_migrated_to_legacy(solution)
       assert_equal @js_bob, solution.exercise
-      assert Time.now, solution.completed_at
+      assert Exercism::JS_AND_ECMA_MERGED_AT, solution.completed_at
     end
 
     def assert_migrated_to_active(solution)
