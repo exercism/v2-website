@@ -28,9 +28,11 @@ module Flux
 
       assert_equal "JavaScript (Legacy)", @js.title
       assert_equal "javascript-legacy", @js.slug
+      refute @js.active?
 
       assert_equal "JavaScript", @ecma.title
       assert_equal "javascript", @ecma.slug
+      assert @ecma.active?
     end
 
     test "FixUnlockingInUserTrack is called for affected users" do

@@ -8,7 +8,7 @@ module Flux
       lock_js_shas
       repoint_solutions
       rename_js_exercises
-      rename_tracks
+      update_tracks
       creates_track_mentorships
       fix_unlocking
     end
@@ -67,8 +67,12 @@ module Flux
       end
     end
 
-    def rename_tracks
-      js.update(title: "JavaScript (Legacy)", slug: "javascript-legacy")
+    def update_tracks
+      js.update(
+        title: "JavaScript (Legacy)", 
+        slug: "javascript-legacy",
+        active: false
+      )
       ecma.update(title: "JavaScript", slug: "javascript")
     end
 
