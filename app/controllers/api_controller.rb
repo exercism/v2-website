@@ -21,7 +21,7 @@ class APIController < ApplicationController
 
   def guard_js_ecma_migration!(track)
     if track.slug == "javascript" || track.slug == "ecmascript"
-      render_400(:js_ecma_migration, "We are currently merging the JavaScript and ECMAScript tracks. They will be offline for the next couple of hours. Sorry.")
+      render_error(400, :js_ecma_migration, "We are currently merging the JavaScript and ECMAScript tracks. They will be offline for the next couple of hours. Sorry.")
       true
     else
       false
