@@ -13,6 +13,9 @@ module Flux
       @js_bob = create :exercise, slug: 'bob', track: @js
       @ecma_bob = create :exercise, slug: 'bob', track: @ecma
       @ruby_bob = create :exercise, slug: 'bob', track: @ruby
+
+      # Create a migration bot user for foreign key constraints
+      create :user, id: 1
     end
 
     test "JS Sha is correct" do
@@ -21,6 +24,8 @@ module Flux
 
     test "tracks are renamed" do
       MergeJSAndECMA.()
+      [@js, @ecma].each(&:reload)
+
       assert_equal "JavaScript (Legacy)", @js.title
       assert_equal "javascript-legacy", @js.slug
 
@@ -41,19 +46,21 @@ module Flux
       ut5 = create :user_track, user: ruby_user, track: @ruby
 
       FixUnlockingInUserTrack.expects(:call).with(ut1)
+      FixUnlockingInUserTrack.expects(:call).with(ut2) # Run it on all ecma to be safe
       FixUnlockingInUserTrack.expects(:call).with(ut3)
 
       # This shouldn't be called for the ecma or ruby tracks, or for the legacy js on both
-      FixUnlockingInUserTrack.expects(:call).with(ut2).never
       FixUnlockingInUserTrack.expects(:call).with(ut4).never
       FixUnlockingInUserTrack.expects(:call).with(ut5).never
+
+      MergeJSAndECMA.()
     end
 
     test "locks the JS solution shas" do
       ecma_sha = SecureRandom.uuid
 
-      js_bob_solution = create :solution, exercise: @js_bob, git_sha: SecureRandom.uuid
-      ecma_bob_solution = create :solution, exercise: @ecma_bob, git_sha: ecma_sha
+      js_bob_solution = create :solution, exercise: @js_bob, git_sha: SecureRandom.uuid, downloaded_at: Time.now
+      ecma_bob_solution = create :solution, exercise: @ecma_bob, git_sha: ecma_sha, downloaded_at: Time.now
 
       MergeJSAndECMA.()
 
@@ -114,7 +121,7 @@ module Flux
       MergeJSAndECMA.()
 
       # Check there is an ecma track mentorship for everyone and a js track mentorship for no-one
-      assert_equal [js_mentor, ecma_mentor, both_mentor].map(&:id).sort, TrackMentorship.where(track: @ecma).pluck(:user_id).sort
+      assert_equal [js_mentor, ecma_mentor, both_mentor].map(&:id).sort, TrackMentorship.where(track_id: @ecma.id).pluck(:user_id).sort
       assert_equal [].map(&:id), TrackMentorship.where(track: @js).pluck(:user_id)
 
       # Check the actual ecma track mentorship is still the same object
@@ -143,7 +150,6 @@ module Flux
     end
 
     test "ruby and ecma exercises don't get touched" do
-
       ecma_bob_solution = create_solution(@ecma_bob, :started)
       ruby_bob_solution = create_solution(@ruby_bob, :started)
       ecma_hamming_solution = create_solution(@ecma_hamming, :started)
@@ -272,26 +278,23 @@ module Flux
       assert_migrated_to_legacy js_bob_solution
     end
 
-    test "exercises are migrated to legacy exercise if there is a clash and both are unlocked" do
+    test "solutions are destroyed if unlocked" do
       user = create :user
       js_bob_solution = create_solution(@js_bob, :unlocked, user)
       ecma_bob_solution = create_solution(@ecma_bob, :unlocked, user)
 
       MergeJSAndECMA.()
-      js_bob_solution.reload
-
-      assert_migrated_to_legacy js_bob_solution
+      refute Solution.where(id: js_bob_solution.id).exists?
+      refute Solution.where(id: ecma_bob_solution.id).exists?
     end
 
-    test "exercises are migrated to legacy exercise if there is a clash and js is unlocked and ecma is started" do
+    test "solutions are destroyed if js is unlocked" do
       user = create :user
       js_bob_solution = create_solution(@js_bob, :unlocked, user)
       ecma_bob_solution = create_solution(@ecma_bob, :started, user)
 
       MergeJSAndECMA.()
-      js_bob_solution.reload
-
-      assert_migrated_to_legacy js_bob_solution
+      refute Solution.where(id: js_bob_solution.id).exists?
     end
 
     test "exercises are migrated to ecma exercise if there is a clash and ecma is not started but js is started" do
@@ -333,12 +336,14 @@ module Flux
       # The ecma solution should be deleted in this case
       refute Solution.where(id: ecma_bob_solution.id).exists?
 
-      assert_migrated_to_active js_bob_solution
+      assert_equal @ecma_bob, js_bob_solution.exercise
+      assert js_bob_solution.completed?
     end
 
     def assert_migrated_to_legacy(solution)
       assert_equal @js_bob, solution.exercise
-      assert Exercism::JS_AND_ECMA_MERGED_AT, solution.completed_at
+      assert_equal 1, solution.approved_by_id
+      assert_equal Exercism::JS_AND_ECMA_MERGED_AT, solution.completed_at
     end
 
     def assert_migrated_to_active(solution)
@@ -353,9 +358,9 @@ module Flux
       when :started
         create :solution, exercise: exercise, downloaded_at: Time.now, user: user
       when :approved
-        create :solution, exercise: exercise, approved_by: create(:user), user: user
+        create :solution, exercise: exercise, downloaded_at: Time.now, approved_by: create(:user), user: user
       when :completed
-        create :solution, exercise: exercise, completed_at: Time.now, user: user
+        create :solution, exercise: exercise, downloaded_at: Time.now, completed_at: Time.now, user: user
       end
     end
   end
