@@ -5,6 +5,7 @@ module Flux
     JS_SHA = "6a8a5a41b89a45008b46ca18ff7ea800baca1c4c"
 
     def call
+      return
       repoint_solutions
       rename_js_exercises
       fix_unlocking
