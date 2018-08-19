@@ -272,13 +272,66 @@ module Flux
       assert_migrated_to_legacy js_bob_solution
     end
 
-    test "exercises are migrated to ecma exercise if there is a clash and ecma is not started" do
+    test "exercises are migrated to legacy exercise if there is a clash and both are unlocked" do
+      user = create :user
+      js_bob_solution = create_solution(@js_bob, :unlocked, user)
+      ecma_bob_solution = create_solution(@ecma_bob, :unlocked, user)
+
+      MergeJSAndECMA.()
+      js_bob_solution.reload
+
+      assert_migrated_to_legacy js_bob_solution
+    end
+
+    test "exercises are migrated to legacy exercise if there is a clash and js is unlocked and ecma is started" do
+      user = create :user
+      js_bob_solution = create_solution(@js_bob, :unlocked, user)
+      ecma_bob_solution = create_solution(@ecma_bob, :started, user)
+
+      MergeJSAndECMA.()
+      js_bob_solution.reload
+
+      assert_migrated_to_legacy js_bob_solution
+    end
+
+    test "exercises are migrated to ecma exercise if there is a clash and ecma is not started but js is started" do
       user = create :user
       js_bob_solution = create_solution(@js_bob, :started, user)
       ecma_bob_solution = create_solution(@ecma_bob, :unlocked, user)
 
       MergeJSAndECMA.()
       js_bob_solution.reload
+
+      # The ecma solution should be deleted in this case
+      refute Solution.where(id: ecma_bob_solution.id).exists?
+
+      assert_migrated_to_active js_bob_solution
+    end
+
+    test "exercises are migrated to ecma exercise if there is a clash and ecma is not started but js is approved" do
+      user = create :user
+      js_bob_solution = create_solution(@js_bob, :approved, user)
+      ecma_bob_solution = create_solution(@ecma_bob, :unlocked, user)
+
+      MergeJSAndECMA.()
+      js_bob_solution.reload
+
+      # The ecma solution should be deleted in this case
+      refute Solution.where(id: ecma_bob_solution.id).exists?
+
+      assert_migrated_to_active js_bob_solution
+    end
+
+    test "exercises are migrated to ecma exercise if there is a clash and ecma is not started but js is completed" do
+      user = create :user
+      js_bob_solution = create_solution(@js_bob, :completed, user)
+      ecma_bob_solution = create_solution(@ecma_bob, :unlocked, user)
+
+      MergeJSAndECMA.()
+      js_bob_solution.reload
+
+      # The ecma solution should be deleted in this case
+      refute Solution.where(id: ecma_bob_solution.id).exists?
 
       assert_migrated_to_active js_bob_solution
     end
