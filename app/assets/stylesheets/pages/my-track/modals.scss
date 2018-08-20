@@ -135,14 +135,22 @@
         font-weight:400;
 
         &.action-button {
-            width:69%;
+            width:100%;
+            margin-bottom:15px;
+            @media #{$md-media} {
+                width:69%;
+                margin-bottom:0;
+            }
         }
         &.cancel-button {
             border:1px solid $color-1;
             background:#fff;
             color:$color-1;
             font-weight:300;
-            width:30%;
+            width:100%;
+            @media #{$md-media} {
+                width:30%;
+            }
         }
     }
 }
