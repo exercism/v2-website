@@ -145,8 +145,10 @@
         }
         .num-solutions {
             color:#fff;
+            margin-bottom:5px;
             @media #{$md-media} {
                 float:right;
+                margin-bottom:0;
             }
             color:#999;
             font-weight:$regular;
