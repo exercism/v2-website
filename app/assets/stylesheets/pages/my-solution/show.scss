@@ -3,9 +3,25 @@
 
 #my-solution-unlocked-page,
 #my-solution-page {
+    .track-header-container {
+        background:#3ab292;
+        color:#fff;
+        a {
+            color:#fff;
+        }
+        @media #{$sm-media} {
+            background:none;
+            color:#333;
+            a {
+                color:#333;
+            }
+        }
+    }
     .track-header {
         margin-top:20px;
-        border:1px solid #e5e5e5;
+        @media #{$sm-media} {
+            border:1px solid #e5e5e5;
+        }
         border-radius:2px;
         padding:22px 20px;
         margin-bottom:10px;
