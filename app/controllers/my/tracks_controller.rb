@@ -18,6 +18,7 @@ class My::TracksController < MyController
     return redirect_to @track unless user_signed_in?
     return show_not_joined unless current_user.joined_track?(@track)
     return show_not_joined if current_user.previously_joined_track?(@track)
+    return redirect_to [:my, @track], :status => :moved_permanently if request.path != my_track_path(@track)
 
     solutions = current_user.solutions.includes(:exercise).where('exercises.track_id': @track.id)
     mapped_solutions = solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
