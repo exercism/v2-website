@@ -47,7 +47,9 @@
             }
         }
         .pure-button {
-            margin-left:20px;
+            @media #{$sm-media} {
+                margin-left:20px;
+            }
         }
     }
     .pane.markdown,
