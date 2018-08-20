@@ -2,6 +2,7 @@ require_relative '../../test_helper'
 
 class Git::SyncsTracksTest < ActiveSupport::TestCase
   test "updates track metadata" do
+    Git::ProblemSpecifications.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/problem-specifications")
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track", active: false)
 
     stub_repo_cache! do
@@ -12,6 +13,7 @@ class Git::SyncsTracksTest < ActiveSupport::TestCase
   end
 
   test "updates exercise unlocked_by" do
+    Git::ProblemSpecifications.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/problem-specifications")
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track", active: false)
     slugs = create(:exercise, track: track)
     hello_world = create(:exercise,
