@@ -34,7 +34,9 @@
         }
         p {
             @include font-size(13, 19);
-            padding-left:19px;
+            @media #{$sm-media} {
+                padding-left:19px;
+            }
             margin-bottom:10px;
             &:last-child {
                 margin-bottom:0;
