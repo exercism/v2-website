@@ -106,11 +106,21 @@
                 background: $color-1;
                 color: #fff;
                 padding:7px 25px;
+                width:100%;
+                margin-bottom:10px;
+                @media #{$sm-media} {
+                    width:auto;
+                    margin-bottom:0;
+                }
             }
             .cancel-button {
                 background:#fff;
                 border:1px solid #ccc;
                 color:#999;
+                width:100%;
+                @media #{$sm-media} {
+                    width:auto;
+                }
             }
         }
 
