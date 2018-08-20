@@ -36,20 +36,21 @@
             @media #{$sm-media} {
                 width:auto;
             }
+            position: relative;
+            &:before {
+                font-family: "Font Awesome 5 Pro"; 
+                font-weight: 900;
+                content: "\f002";
+                position: absolute;
+                left: 10px;
+                top: 8px;
+                color:#bbb;
+            }
         }
         .search-button {
             display:table-cell;
             width:0;
             white-space:nowrap;
-        }
-        &:before {
-            font-family: "Font Awesome 5 Pro"; 
-            font-weight: 900;
-            content: "\f002";
-            position: absolute;
-            left: 10px;
-            top: 8px;
-            color:#bbb;
         }
         input {
             @include font-size(14, 14);
