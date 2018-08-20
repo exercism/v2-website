@@ -75,4 +75,14 @@ class SolutionTest < ActiveSupport::TestCase
     solution = create :solution, published_at: Time.now
     assert_equal solution.display_published_at, solution.published_at
   end
+
+  test "deletes cleanly with associated models" do
+    solution = create(:solution)
+    create(:solution_lock, solution: solution)
+    create(:solution_mentorship, solution: solution)
+    create(:ignored_solution_mentorship, solution: solution)
+    create(:reaction, solution: solution)
+
+    solution.destroy!
+  end
 end
