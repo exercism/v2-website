@@ -74,6 +74,10 @@
         margin-top:10px;
         border-radius:2px;
         padding:8px 25px;
+        width:100%;
+        @media #{$sm-media} {
+            width:auto;
+        }
     }
     .complete-button {
         &.unapproved {
