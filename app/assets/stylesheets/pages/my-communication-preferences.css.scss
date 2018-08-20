@@ -2,6 +2,13 @@
 @import 'mixins';
 
 #my-communication-preferences-page {
+    padding-top:30px;
+    @media #{$sm-media} {
+        padding-top:0;
+    }
+    #nav {
+        margin-bottom:30px;
+    }
     .lhs {
         @media #{$md-media} {
             border-right:1px solid #eee;
