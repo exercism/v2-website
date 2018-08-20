@@ -27,6 +27,7 @@ header.logged-in {
     .misc-menu {
         position:relative;
         cursor:pointer;
+        outline-style: none;
 
         &:hover, &:focus {
             .dropdown {
