@@ -19,8 +19,6 @@ class My::TracksController < MyController
     return show_not_joined unless current_user.joined_track?(@track)
     return show_not_joined if current_user.previously_joined_track?(@track)
 
-    return render("js_ecma_migration") if @track.slug == "javascript" || @track.slug == "ecmascript"
-
     solutions = current_user.solutions.includes(:exercise).where('exercises.track_id': @track.id)
     mapped_solutions = solutions.each_with_object({}) {|s,h| h[s.exercise_id] = s }
 
@@ -96,9 +94,6 @@ class My::TracksController < MyController
 
   def show_not_joined
     @track = Track.find(params[:id])
-
-    return render("js_ecma_migration") if @track.slug == "javascript" || @track.slug == "ecmascript"
-
     @mentors = @track.mentors.reorder(SQLSnippets.random).limit(6)
     @maintainers = @track.maintainers.visible.reorder('alumnus DESC', SQLSnippets.random).limit(6)
     @exercises = @track.exercises.active.reorder(SQLSnippets.random).limit(6)
