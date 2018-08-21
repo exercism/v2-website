@@ -176,6 +176,9 @@
         .pure-button {
             background:$color-1;
             margin-bottom:15px;
+            &.mentor-button {
+                margin-bottom:30px;
+            }
         }
         .force {
             display:none;
