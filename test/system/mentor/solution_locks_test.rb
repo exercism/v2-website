@@ -78,4 +78,47 @@ class SolutionLocksTest < ApplicationSystemTestCase
     assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
   end
+
+  test "mentor can leave solution without adding a comment" do
+    visit mentor_dashboard_path
+    assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
+
+    visit mentor_solution_path(@solution)
+
+    assert_selector ".claim-section"
+    refute_selector ".discussion"
+    refute_selector ".new-discussion-post"
+
+    click_on "Mentor this solution"
+    assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
+    refute_selector ".claim-section"
+
+    click_on "Leave conversation"
+    assert page.has_content?("Mentor dashboard")
+    assert page.has_no_link?(nil, {href: mentor_solution_path(@solution)})
+  end
+
+  test "mentor can leave solution after adding a comment" do
+    visit mentor_dashboard_path
+    assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
+
+    visit mentor_solution_path(@solution)
+
+    assert_selector ".claim-section"
+    refute_selector ".discussion"
+    refute_selector ".new-discussion-post"
+
+    click_on "Mentor this solution"
+    assert_selector ".discussion"
+    assert_selector ".new-discussion-post"
+    refute_selector ".claim-section"
+
+    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    click_on "Comment"
+
+    click_on "Leave conversation"
+    assert page.has_content?("Mentor dashboard")
+    assert page.has_no_link?(nil, {href: mentor_solution_path(@solution)})
+  end
 end

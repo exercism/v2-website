@@ -98,8 +98,8 @@
   :javascript
     setupLandingPage()
 
--unless session[:announcement_modal_shown]
-  - session[:announcement_modal_shown] = true
+-unless cookies[:v2_welcome_modal_shown]
+  - cookies[:v2_welcome_modal_shown] = { value: true, expires: Time.utc(2020) }
   -content_for :js do
     :javascript
       showModal('announcement', '#{j render "announcement"}')

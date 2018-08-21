@@ -7,6 +7,8 @@ class Solution < ApplicationRecord
   has_many :discussion_posts, through: :iterations
 
   has_many :mentorships, class_name: "SolutionMentorship", dependent: :destroy
+  has_many :ignored_mentorships, class_name: "IgnoredSolutionMentorship", dependent: :destroy
+  has_many :solution_locks, dependent: :destroy
   has_many :mentors, through: :mentorships, source: :user
 
   has_many :reactions, dependent: :destroy
@@ -42,6 +44,10 @@ class Solution < ApplicationRecord
 
   def self.not_legacy
     where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT)
+  end
+
+  def display_published_at
+    published_at == Exercism::V2_MIGRATED_AT ? created_at : published_at
   end
 
   def track_in_mentored_mode?
