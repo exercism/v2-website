@@ -44,7 +44,7 @@ class ExerciseTest < ApplicationSystemTestCase
     within(".exercise-wrapper.locked") { assert_text "Locked" }
   end
 
-  test "hides side exercises for an unapproved solution" do
+  test "shows unlocked exercises for an exercise" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
@@ -57,13 +57,17 @@ class ExerciseTest < ApplicationSystemTestCase
                            core: false)
     create(:solution,
            user: user,
-           approved_by: nil,
            completed_at: Date.new(2016, 12, 25),
            exercise: exercise)
+    unlocked_exercise_solution = create(:solution,
+                                        user: user,
+                                        completed_at: nil,
+                                        exercise: side_exercise)
 
     sign_in!(user)
     visit my_track_path(track)
 
-    assert_no_text "You've unlocked extra exercises"
+    assert_text "You've unlocked extra exercises"
+    assert_link nil, href: my_solution_path(unlocked_exercise_solution)
   end
 end
