@@ -23,8 +23,10 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
 
-gem 'redcarpet', require: false
-gem 'rouge', require: false
+gem 'commonmarker'
+gem 'html-pipeline'
+gem 'sanitize'
+gem 'rouge'
 gem 'rugged'
 gem 'sidekiq'
 gem 'loofah'
