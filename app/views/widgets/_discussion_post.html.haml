@@ -5,7 +5,6 @@
   =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
   .post-body
     .post-header
-      .created-at posted #{time_ago_in_words(post.created_at)} ago
       .user-handle= user_handle
       .user-role
         -if post.user == solution.user
@@ -14,6 +13,7 @@
             (Anonymous Mode)
         -else
           Mentor
+      .created-at posted #{time_ago_in_words(post.created_at)} ago
 
     .post-viewer
       - if post.deleted?
