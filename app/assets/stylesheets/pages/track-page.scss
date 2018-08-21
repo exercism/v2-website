@@ -62,19 +62,24 @@ body.controller-my-tracks.action-show {
         h1 {
             margin-bottom:10px;
             color:#fff;
+            @media #{$lg-media} {
+                float:left;
+            }
         }
         .h1-subtitle {
             max-width:70%;
             @include font-size(16, 21);
             color:#fff;
             font-weight:$light;
+            clear:both;
         }
         .pure-button {
+            float:left;
             margin-top:15px;
             margin-bottom:15px;
-            @media #{$md-media} {
+            @media #{$lg-media} {
                 float:right; 
-                margin-top:0;
+                margin-top:35px;
                 margin-bottom:0;
             }
             border:1px solid #fff;
