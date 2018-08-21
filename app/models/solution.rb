@@ -71,7 +71,7 @@ class Solution < ApplicationRecord
   end
 
   def approved?
-    !!approved_by
+    auto_approve? || !!approved_by
   end
 
   def downloaded?
