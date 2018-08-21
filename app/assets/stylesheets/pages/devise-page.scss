@@ -1,6 +1,12 @@
 @import 'variables';
 @import 'mixins';
 
+body.devise {
+    background:#f7f7f7;
+    @media #{$lg-media} {
+        background:none;
+    }
+}
 .lo-devise-page {
     .lhs #widget-code-person {
         display: none;
