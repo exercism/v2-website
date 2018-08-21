@@ -16,7 +16,6 @@
     .avatar {
         margin-right:3%;
         float:left;
-        min-width:35px;
         width:8%;
         display:block;
         border-radius:3px;
@@ -47,7 +46,9 @@
             font-weight:$regular;
         }
         .created-at {
-            float:right;
+            @media #{$md-media} {
+                float:right;
+            }
             @include font-size(11, 13);
             color:#999;
         }
