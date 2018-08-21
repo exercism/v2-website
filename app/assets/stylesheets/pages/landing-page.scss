@@ -262,11 +262,16 @@
         .divider {
             text-align:center;
             margin-bottom:15px;
-            margin:0 400px 15px;
+            margin:10px 0 20px;
+            width:80px;
+            border-bottom:1px solid #ddd;
+            @media #{$sm-media} {
+                width:0;
+                border-bottom:1px solid #eee;
+            }
             @media #{$md-media} {
                 margin:0 400px 30px;
             }
-            border-bottom:1px solid #eee;
         }
         .step.step-small {
             margin-top:15px;
