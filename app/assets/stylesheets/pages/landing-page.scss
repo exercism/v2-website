@@ -235,7 +235,6 @@
                     .logo {
                         background-color: $color-2;
                         color: $color-2;
-                        overflow:hidden;
                         &, img {
                             height:36px;
                             width:36px;
@@ -247,6 +246,9 @@
                         border-radius:0 5px 5px 0;
                         vertical-align: middle;
                         line-height:36px;
+                        font-size:12px;
+                        overflow:hidden;
+                        text-overflow:ellipsis;
                     }
                 }
                 &:hover .track-mini, &:hover .track-mini .title {
