@@ -43,4 +43,27 @@ class ExerciseTest < ApplicationSystemTestCase
     within(".exercise-wrapper.in-progress") { assert_text "Hello World" }
     within(".exercise-wrapper.locked") { assert_text "Locked" }
   end
+
+  test "hides side exercises for an unapproved solution" do
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    create(:user_track, user: user, track: track, independent_mode: false)
+    exercise = create(:exercise, track: track, core: true)
+    side_exercise = create(:exercise,
+                           track: track,
+                           unlocked_by: exercise,
+                           core: false)
+    create(:solution,
+           user: user,
+           approved_by: nil,
+           completed_at: Date.new(2016, 12, 25),
+           exercise: exercise)
+
+    sign_in!(user)
+    visit my_track_path(track)
+
+    assert_no_text "You've unlocked extra exercises"
+  end
 end

@@ -73,7 +73,12 @@ class My::TracksController < MyController
       @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}.sort_by{|e,s|
         "#{s ? (s.completed?? 0 : (s.in_progress?? 1 : 2)) : 3}#{!e.unlocked_by ? 0 : 1}"
       }
-      @side_exercises_and_solutions_by_unlocked_by = @side_exercises_and_solutions.each_with_object(Hash.new{|h,k|h[k] = []}){|(e,s), h| h[e.unlocked_by_id] << [e,s]}
+      @side_exercises_and_solutions_by_unlocked_by = @side_exercises_and_solutions.
+        each_with_object(Hash.new { |h,k| h[k] = [] }) do |(e,s), h|
+          unlocking_solution = mapped_solutions[e.unlocked_by_id]
+
+          h[e.unlocked_by_id] << [e,s] if unlocking_solution.approved?
+        end
 
       @num_side_exercises = @track.exercises.side.active.count
       @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
