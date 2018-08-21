@@ -171,21 +171,6 @@ $blue: #4A90E2;
                     display:block;
                 }
             }
-            .track {
-                float:right;
-                width:20px;
-                padding-top:20px;
-                position:relative;
-                right:-30px;
-                @media #{$md-media} {
-                    width: 30px;
-                    position: absolute;
-                    top: -15px;
-                    left: 35px;
-                    float:none;
-                    padding-top:0;
-                }
-            }
             .joiner {
                 float:left;
                 height:25px;
@@ -209,8 +194,11 @@ $blue: #4A90E2;
             }
         }
         .details {
-            overflow:hidden;
             margin-bottom:6px;
+            clear:both;
+            @media #{$sm-media} {
+                clear:none;
+            }
             @media #{$md-media} {
                 padding-left:10px;
                 border-left:2px solid #ddd;
@@ -233,9 +221,6 @@ $blue: #4A90E2;
                 margin-bottom:5px;
                 font-weight:$regular;
                 max-width: 480px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
 
                 .handle {
                     display:inline-block;
@@ -262,13 +247,36 @@ $blue: #4A90E2;
                     margin:0 5px;
                     display:inline-block;
                     border-right:1px solid #bbb;
+                    &:nth-child(4) {
+                        display:none;
+                        @media #{$sm-media} {
+                            display:inline-block;
+                        }
+                    }
                 }
                 .submitted-at {
-                    display:inline-block;
+                    display:block;
+                    @media #{$sm-media} {
+                        display:inline-block;
+                    }
                 }
             }
         }
-
+        .track-icon {
+            float:right;
+            width:20px;
+            margin-top:-30px;
+            position:relative;
+            @media #{$md-media} {
+                width: 30px;
+                position: absolute;
+                top: -15px;
+                left: 35px;
+                margin-top:0;
+                float:none;
+                padding-top:0;
+            }
+        }
     }
     .help-section {
         p {
