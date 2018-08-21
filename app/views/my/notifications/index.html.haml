@@ -16,19 +16,14 @@
         .pure-u-2-3
           .header-bar
             =link_to "Mark all as read", read_batch_my_notifications_path(ids: @notifications.map(&:id)), method: :patch, remote: true, class: "pure-button mark-all-button"
-          - @notifications.each do |notification|
-            .notification
-              =link_to "", notification.link, class: 'image', style: "background-image:url(#{notification_image(notification)})"
-              =link_to notification.link, class: 'info' do
-                .content
-                  = raw notification.content
-                .when #{time_ago_in_words(notification.created_at)} ago
-              =link_to "", read_my_notification_path(notification), remote: true, method: :patch, class: 'mark-as-read-button'
+          =render @notifications
 
           =paginate @notifications
     -else
       .no-notifications
-        You have no notifications at the moment.
+        You have no unread notifications at the moment.
+    .link-container
+      = link_to "View all", all_my_notifications_path, class: "pure-button"
 
 -content_for :js do
   :javascript

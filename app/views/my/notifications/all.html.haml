@@ -1,0 +1,23 @@
+#notifications-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to 'Notifications', [:my, :notifications]
+      =nav_divider
+      %span All Notifications
+
+  .header
+    .lo-container
+      %h1 All notifications
+
+  .lo-container
+    -if @notifications.present?
+      .pure-g
+        .pure-u-2-3
+          .header-bar.all-notifications
+            =render @notifications
+          =paginate @notifications
+    -else
+      .no-notifications
+        You have no notifications at the moment.
+    .link-container
+      = link_to "View unread", my_notifications_path, class: "pure-button"

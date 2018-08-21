@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_one :communication_preferences, dependent: :destroy
 
   has_one :profile, dependent: :destroy
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, -> { order id: :desc }, dependent: :destroy
 
   has_many :team_memberships, dependent: :destroy
   has_many :teams, through: :team_memberships

@@ -1,0 +1,7 @@
+.notification{class: ("read" if notification.read?)}
+  =link_to "", notification.link, class: 'image', style: "background-image:url(#{notification_image(notification)})"
+  =link_to notification.link, class: 'info' do
+    .content
+      = raw notification.content
+    .when #{time_ago_in_words(notification.created_at)} ago
+  =link_to "", read_my_notification_path(notification), remote: true, method: :patch, class: 'mark-as-read-button' unless notification.read?

@@ -135,6 +135,7 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index] do
       patch :read, on: :member
       patch :read_batch, on: :collection
+      get :all, on: :collection
     end
     resource :profile, controller: "profile"
 
