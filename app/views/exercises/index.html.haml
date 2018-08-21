@@ -15,8 +15,8 @@
       .lo-container
         =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
-      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
       %h1 Exercises on the #{@track.title} track
+      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
       /.stats
       /  .stat= pluralize @track.exercises.count, "Exercise"
       /  .stat= pluralize @track.user_tracks.count, "Students"

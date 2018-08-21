@@ -4,11 +4,17 @@
 #exercises-page {
     .header {
         background-color: $color-2;
+        h1 {
+            @media #{$lg-media} {
+                float:left;
+            }
+        }
         .h1-subtitle {
             @include font-size(12, 12);
             color:#fff;
             opacity:0.75;
             font-weight:$light;
+            clear:both;
         }
         .num-solutions {
             float:right;
@@ -33,7 +39,14 @@
             padding:9px 15px;
         }
         .pure-button {
-            float:right;
+            float:left;
+            margin-top:15px;
+            margin-bottom:15px;
+            @media #{$lg-media} {
+                float:right;
+                margin-top:35px;
+                margin-bottom:0;
+            }
             border:1px solid #fff;
             @include font-size(15, 15);
             font-weight:$regular;
@@ -41,7 +54,6 @@
             background:#00bac9;
             padding:12px 35px;
             color:#fff;
-            margin-top:35px;
 
             background:$color-3;
             color:#fff;
