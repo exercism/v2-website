@@ -139,14 +139,14 @@ class UserTest < ActiveSupport::TestCase
     side_exercise_with_unlock = create :exercise, track: track, core: false, unlocked_by: core_exercise
     side_exercise_without_unlock = create :exercise, track: track, core: false
 
-    refute user.may_unlock_exercise?(user_track, core_exercise)
-    refute user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
-    assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
+    refute user.may_unlock_exercise?(core_exercise)
+    refute user.may_unlock_exercise?(side_exercise_with_unlock)
+    assert user.may_unlock_exercise?(side_exercise_without_unlock)
 
     user_track.update(independent_mode: true)
-    assert user.may_unlock_exercise?(user_track, core_exercise)
-    assert user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
-    assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
+    assert user.may_unlock_exercise?(core_exercise)
+    assert user.may_unlock_exercise?(side_exercise_with_unlock)
+    assert user.may_unlock_exercise?(side_exercise_without_unlock)
   end
 
   test "avatar_url" do
