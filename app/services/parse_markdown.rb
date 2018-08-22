@@ -9,14 +9,24 @@ class ParseMarkdown
   def call
     pipeline = HTML::Pipeline.new(
       [
-        HTML::Pipeline::MarkdownFilter,
         HTML::Pipeline::SanitizationFilter,
         HTML::Pipeline::SyntaxHighlightFilter
       ],
       { gfm: true, scope: "highlight" }
     )
 
-    result = pipeline.call(text)
+    html = Renderer.new.render(CommonMarker.render_doc(text))
+    result = pipeline.call(html)
     result[:output].to_s
+  end
+
+  class Renderer < CommonMarker::HtmlRenderer
+    def link(node)
+      out('<a href="', node.url.nil? ? '' : escape_href(node.url), '" target="_blank"')
+      if node.title && !node.title.empty?
+        out(' title="', escape_html(node.title), '"')
+      end
+      out('>', :children, '</a>')
+    end
   end
 end
