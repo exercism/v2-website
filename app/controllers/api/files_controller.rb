@@ -7,7 +7,7 @@ class API::FilesController < APIController
     end
 
     unless current_user.may_view_solution?(@solution)
-      return render_403(:user_may_not_download_solution, "You may not download this solution")
+      return render_403(:solution_not_accessible)
     end
 
     if @solution.iterations.last
