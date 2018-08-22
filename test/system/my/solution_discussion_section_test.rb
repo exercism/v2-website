@@ -13,8 +13,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     sign_in!(@user)
   end
 
-  test "mentored mode / mentored solution" do
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false)
+  test "mentored mode / mentored core solution" do
+    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: create(:exercise, core: true))
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -23,7 +23,24 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".completed-section"
     assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
+    assert_selector ".next-steps"
+    assert_selector ".next-steps a", text: "other Exercism tracks"
   end
+
+  test "mentored mode / mentored side solution" do
+    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: create(:exercise, core: false))
+    create :iteration, solution: solution
+    create(:user_track, track: solution.track, user: @user)
+
+    visit my_solution_path(solution)
+
+    refute_selector ".completed-section"
+    assert_selector ".discussion h3", text: "Mentor discussion"
+    assert_selector ".discussion form"
+    assert_selector ".next-steps"
+    assert_selector ".next-steps a", text: "other people have solved this"
+  end
+
 
   test "m/m section with auto approve" do
     exercise = create :exercise, auto_approve: true
@@ -34,6 +51,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     visit my_solution_path(solution)
 
     assert_selector ".next-steps"
+    assert_selector ".next-steps a", text: "Complete exercise"
     refute_selector ".completed-section"
     assert_selector ".discussion h3", text: "Mentor discussion"
     refute_selector ".discussion .posts"

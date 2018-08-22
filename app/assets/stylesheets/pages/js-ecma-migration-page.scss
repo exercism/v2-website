@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'mixins';
+
+#js-ecma-migration-page {
+    text-align:center;
+    margin-bottom:20px;
+    img {
+        display:block;
+        border:1px solid $color-2;
+        width: 300px;
+        border-radius: 2px;
+        margin: 20px auto;
+    }
+    h1 {
+        @include font-size(22, 24);
+        margin-bottom:10px;
+    }
+    p {
+        @include font-size(16, 20);
+        max-width:520px;
+        margin: 0 auto 10px auto;
+        a {
+            color: $color-2;
+            font-weight:400;
+        }
+    }
+}

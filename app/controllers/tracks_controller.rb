@@ -3,7 +3,7 @@ class TracksController < ApplicationController
     return redirect_to [:my, :tracks] if user_signed_in?
 
     @tracks = Track.active.order('title ASC')
-    @all_exercise_counts = Exercise.where(track_id: @tracks).group(:track_id).count
+    @all_exercise_counts = Exercise.where(track_id: @tracks, active: true).group(:track_id).count
     @all_user_tracks_counts = UserTrack.where(track_id: @tracks).group(:track_id).count
   end
 
