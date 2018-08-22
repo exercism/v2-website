@@ -31,13 +31,6 @@ class SolutionTest < ActiveSupport::TestCase
     refute solution.auto_approve?
   end
 
-  test "solution is approved when exercise is auto approved" do
-    exercise = build(:exercise, auto_approve: true)
-    solution = build(:solution, exercise: exercise)
-
-    assert solution.approved?
-  end
-
   test "solution is approved when solution is approved" do
     exercise = build(:exercise, auto_approve: false)
     solution = build(:solution, exercise: exercise, approved_by: build(:user))
