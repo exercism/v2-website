@@ -15,6 +15,8 @@ class Track < ApplicationRecord
 
   scope :active, ->{ where(active: true) }
 
+  delegate :head, to: :repo
+
   [:bordered_green_icon_url,
    :bordered_turquoise_icon_url,
    :hex_green_icon_url,
