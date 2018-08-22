@@ -192,6 +192,10 @@
     .notifications-bar {
         overflow:hidden;
         margin-bottom:40px;
+        background:rgba($color-1, 0.05);
+        @media #{$sm-media} {
+            background:none;
+        }
         /*.community-solutions {
             float:right;
             border:1px solid #ddd;
@@ -208,10 +212,13 @@
         }*/
         .notification {
             //margin-right:190px;
-            background:rgba($color-1, 0.05);
             @include font-size(13, 13);
-            padding:8px 20px;
-            border:1px solid rgba($color-1, 0.2);
+            padding:8px 15px;
+            @media #{$sm-media} {
+                border:1px solid rgba($color-1, 0.2);
+                background:rgba($color-1, 0.05);
+                padding:8px 20px;
+            }
             border-radius:2px;
             font-weight:$regular;
             color:$color-1;
