@@ -12,6 +12,7 @@ body.devise {
         display: none;
         @media #{$lg-media} {
             display: block;
+            min-height:500px;
         }
     }
     .rhs {
