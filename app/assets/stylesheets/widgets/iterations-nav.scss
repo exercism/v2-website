@@ -8,7 +8,6 @@
         @include font-size(12, 12);
         margin-top:1px;
         text-align:right;
-        border-bottom:1px solid #ddd;
         padding-bottom:2px;
         margin-bottom:8px;
         strong {
@@ -22,6 +21,9 @@
             display:inline-block;
             position:relative;
             margin-left:8px;
+            &:first-child {
+                margin-left:0;
+            }
 
             .idx {
                 width:35px;
