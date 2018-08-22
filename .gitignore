@@ -28,6 +28,6 @@
 /server_identity
 
 storage/
-
+coverage/
 /test/tmp/*
 !/test/tmp/.gitkeep
