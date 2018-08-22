@@ -47,9 +47,7 @@ class My::TracksController < MyController
     else
       core_exercises, side_exercises = normal_exercises.partition {|e|e.core?}
 
-      core_exercises = core_exercises.
-        map { |e| ExerciseWithSolution.new(e, mapped_solutions[e.id]) }.
-        map { |e| ExerciseWithUnlockedExercises.new(e, current_user) }
+      core_exercises = ExerciseMap.new(current_user, @track).core_exercises
 
       @core_exercises_and_solutions = core_exercises.
         inject([[], [], []]) { |collection, exercise|
