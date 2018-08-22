@@ -71,7 +71,7 @@ class Solution < ApplicationRecord
   end
 
   def approved?
-    auto_approve? || !!approved_by
+    !!approved_by
   end
 
   def in_progress?
