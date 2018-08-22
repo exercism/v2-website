@@ -13,7 +13,7 @@ class Solution < ApplicationRecord
 
   has_many :reactions, dependent: :destroy
 
-  delegate :auto_approve?, :track, to: :exercise
+  delegate :auto_approve?, to: :exercise
 
   def self.completed
     where.not(completed_at: nil)
@@ -72,10 +72,6 @@ class Solution < ApplicationRecord
 
   def approved?
     !!approved_by
-  end
-
-  def downloaded?
-    !!downloaded_at
   end
 
   def in_progress?

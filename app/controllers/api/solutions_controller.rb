@@ -13,7 +13,12 @@ class API::SolutionsController < APIController
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
-    solution.update(downloaded_at: Time.current) if current_user == solution.user
+
+    if current_user == solution.user
+      solution.update(git_sha: solution.track_head) unless solution.downloaded?
+      solution.update(downloaded_at: Time.current)
+    end
+
     render json: responder.to_hash
   end
 
