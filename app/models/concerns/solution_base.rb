@@ -13,6 +13,9 @@ module SolutionBase
     belongs_to :user
     belongs_to :exercise
 
+    delegate :track, to: :exercise
+    delegate :head, to: :track, prefix: true
+
     before_create do
       # Search engines derive meaning by using hyphens
       # as word-boundaries in URLs. Since we use the
@@ -42,6 +45,11 @@ module SolutionBase
   def git_exercise
     @git_exercise ||= Git::Exercise.new(exercise, git_slug, git_sha)
   end
+
+  def downloaded?
+    !!downloaded_at
+  end
+
 
   #class_methods do
   #  ...

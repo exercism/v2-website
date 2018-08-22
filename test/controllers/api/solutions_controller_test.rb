@@ -3,7 +3,9 @@ require_relative './test_base'
 class API::SolutionsControllerTest < API::TestBase
   def setup
     @mock_exercise = stub(files: [])
-    @mock_repo = stub(exercise: @mock_exercise, ignore_regexp: /somethingtoignore/)
+    @mock_repo = stub(exercise: @mock_exercise,
+                      ignore_regexp: /somethingtoignore/,
+                      head: "4567")
     Git::ExercismRepo.stubs(new: @mock_repo)
   end
 
@@ -315,7 +317,9 @@ class API::SolutionsControllerTest < API::TestBase
       setup_user
       exercise = create :exercise
       track = exercise.track
-      solution = create :solution, user: @current_user, exercise: exercise
+      solution = create :solution,
+        user: @current_user,
+        exercise: exercise
       create :user_track, user: solution.user, track: track
 
       get api_solution_path(solution), headers: @headers, as: :json
@@ -323,6 +327,44 @@ class API::SolutionsControllerTest < API::TestBase
 
       solution.reload
       assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
+    end
+  end
+
+  test "updates git sha if exercise is downloaded for the first time" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: nil,
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get api_solution_path(solution), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "4567", solution.git_sha
+    end
+  end
+
+  test "does not update git sha if exercise was downloaded" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: Time.utc(2016, 12, 25),
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get api_solution_path(solution), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "1234", solution.git_sha
     end
   end
 
@@ -338,6 +380,44 @@ class API::SolutionsControllerTest < API::TestBase
 
       solution.reload
       assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
+    end
+  end
+
+  test "updates team solution git sha if exercise is downloaded for the first time" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :team_solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: nil,
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get api_solution_path(solution), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "4567", solution.git_sha
+    end
+  end
+
+  test "does not update team solution git sha if exercise was downloaded" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :team_solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: Time.utc(2016, 12, 25),
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get api_solution_path(solution), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "1234", solution.git_sha
     end
   end
 
