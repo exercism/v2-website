@@ -24,7 +24,7 @@ class DiscussionPostTest < ApplicationSystemTestCase
     visit my_solution_path(solution)
     click_on "Edit"
     within(".widget-discussion-post.editing") { fill_in("discussion_post_content", with: "Hey!") }
-    click_on "Save Changes"
+    click_on "Save changes"
 
     assert_text "Hey!"
     assert_text "(edited less than a minute ago)"
@@ -76,7 +76,7 @@ class DiscussionPostTest < ApplicationSystemTestCase
     visit mentor_solution_path(solution)
     click_on "Edit"
     within(".widget-discussion-post.editing") { fill_in("discussion_post_content", with: "Hey!") }
-    click_on "Save Changes"
+    click_on "Save changes"
 
     assert_text "Hey!"
     assert_text "(edited less than a minute ago)"

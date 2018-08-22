@@ -91,8 +91,7 @@
             border-radius:2px;
         }
     }
-    .discussion {
-
+    .new-discussion-post {
         form {
             margin:0px 0 20px 0;
             .md-editor, .preview-area {
@@ -249,7 +248,8 @@
                 &:before,
                 &:after {
                     content: "\f0d7";
-                    font-family:FontAwesome;
+                    font-family: "Font Awesome 5 Pro";
+                    font-weight: 900;
                     position:absolute;
                     left:50%;
                 }

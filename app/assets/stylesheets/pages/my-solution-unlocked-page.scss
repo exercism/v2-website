@@ -16,6 +16,9 @@
     }
 
     .instructions {
+        iframe {
+            margin-bottom:20px
+        }
         h2 {
             @include font-size(18, 18);
             font-weight:$regular;

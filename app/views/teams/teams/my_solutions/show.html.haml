@@ -11,7 +11,7 @@
               .tab.tab-1
                 Instructions
               .tab.tab-2
-                Test Suite
+                Test suite
               .tab.tab-3
                 Solution
 
@@ -19,16 +19,16 @@
 
       .pure-u-1-2.rhs
         .discussion
-          %h3 Team Feedback
+          %h3 Team feedback
 
-          -if @iteration.discussion_posts.size > 0
+          -if @iteration.discussion_posts.present?
             .posts
               -@iteration.discussion_posts.each do |post|
                 =render "teams/teams/discussion_posts/post", post: post, solution: @solution
           -else
             .posts{style: "display:none"}
             .next-steps
-              .title ↳ Next Steps
+              .title ↳ Next steps
 
               %p Well done on submitting your iteration. Your team can now post comments giving feedback, suggestions and ideas.
 
@@ -49,4 +49,3 @@
 -content_for :js do
   :javascript
     setupSolution()
-

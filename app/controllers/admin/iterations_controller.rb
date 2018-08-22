@@ -15,4 +15,3 @@ class Admin::IterationsController < AdminController
     solution.iterations.index(iteration) + 1
   end
 end
-

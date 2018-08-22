@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CreatesIterationTest < ActiveSupport::TestCase
+class CreateIterationTest < ActiveSupport::TestCase
   test "creates for iteration user" do
     solution = create :solution
     code = "foobar"
@@ -9,7 +9,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
     file = mock(read: file_contents, headers: headers)
 
-    iteration = CreatesIteration.create!(solution, [file])
+    iteration = CreateIteration.(solution, [file])
 
     assert iteration.persisted?
     assert_equal iteration.solution, solution
@@ -28,7 +28,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
 
       solution = create :solution, exercise: core_exercise
       CreateSolution.expects(:call).once.with(solution.user, side_exercise1)
-      CreatesIteration.create!(solution, [])
+      CreateIteration.(solution, [])
     end
   end
 
@@ -39,7 +39,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
 
       solution = create :solution, exercise: core_exercise
       CreateSolution.expects(:call).never
-      CreatesIteration.create!(solution, [])
+      CreateIteration.(solution, [])
     end
   end
 
@@ -53,17 +53,16 @@ class CreatesIterationTest < ActiveSupport::TestCase
       create :solution, user: user, exercise: side_exercise1
       solution = create :solution, user: user, exercise: core_exercise
       CreateSolution.expects(:call).never
-      CreatesIteration.create!(solution, [])
+      CreateIteration.(solution, [])
     end
   end
-
 
   test "updates last updated by" do
     Timecop.freeze do
       solution = create :solution, last_updated_by_user_at: nil
       assert_nil solution.last_updated_by_user_at
 
-      CreatesIteration.create!(solution, [])
+      CreateIteration.(solution, [])
       assert_equal DateTime.now.to_i, solution.last_updated_by_user_at.to_i
     end
   end
@@ -73,7 +72,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action: false
 
-    CreatesIteration.create!(solution, [])
+    CreateIteration.(solution, [])
 
     mentorship.reload
     assert mentorship.requires_action
@@ -84,12 +83,11 @@ class CreatesIterationTest < ActiveSupport::TestCase
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action: false
 
-    CreatesIteration.create!(solution, [])
+    CreateIteration.(solution, [])
 
     mentorship.reload
     refute mentorship.requires_action
   end
-
 
   test "does not notify non-current mentors" do
     solution = create :solution
@@ -97,12 +95,12 @@ class CreatesIterationTest < ActiveSupport::TestCase
 
     # Create a user who mentored this solution but doesn't
     # have a current track mentorship so is inactive.
-    inactive_mentor = create :user 
+    inactive_mentor = create :user
     create :solution_mentorship, solution: solution, user: inactive_mentor
 
-    CreatesNotification.expects(:create!).never
+    CreateNotification.expects(:call).never
     DeliverEmail.expects(:call).never
-    CreatesIteration.create!(solution, [])
+    CreateIteration.(solution, [])
   end
 
   test "notifies and emails mentors" do
@@ -117,7 +115,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     create :solution_mentorship, solution: solution, user: mentor1
     create :solution_mentorship, solution: solution, user: mentor2
 
-    CreatesNotification.expects(:create!).twice.with do |*args|
+    CreateNotification.expects(:call).twice.with do |*args|
       assert [mentor1, mentor2].include?(args[0])
       assert_equal :new_iteration_for_mentor, args[1]
       assert_equal "<strong>#{user.handle}</strong> has posted a new iteration on a solution you are mentoring", args[2]
@@ -131,14 +129,14 @@ class CreatesIterationTest < ActiveSupport::TestCase
       assert_equal Iteration, args[2].class
     end
 
-    CreatesIteration.create!(solution, [])
+    CreateIteration.(solution, [])
   end
 
   test "auto approve when auto_approve is set" do
     exercise = create :exercise, auto_approve: true
     solution = create :solution, exercise: exercise
 
-    CreatesIteration.create!(solution, [])
+    CreateIteration.(solution, [])
 
     solution.reload
     assert solution.user, solution.approved_by
@@ -148,8 +146,8 @@ class CreatesIterationTest < ActiveSupport::TestCase
     exercise = create :exercise, auto_approve: true
     solution = create :solution, exercise: exercise
 
-    CreatesNotification.
-      expects(:create!).
+    CreateNotification.
+      expects(:call).
       with(solution.user,
            :exercise_auto_approved,
            "Your solution to <strong>#{solution.exercise.title}</strong> on the "\
@@ -158,7 +156,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
             Rails.application.routes.url_helpers.my_solution_url(solution),
             about: solution)
 
-    CreatesIteration.create!(solution, [])
+    CreateIteration.(solution, [])
   end
 
   test "works for not-duplicate files" do
@@ -176,7 +174,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename2}\"\r\nContent-Type: application/octet-stream\r\n"
     file2 = mock(read: (file_contents2 + "456"), headers: headers)
 
-    iteration = CreatesIteration.create!(solution, [file1, file2])
+    iteration = CreateIteration.(solution, [file1, file2])
     assert iteration.persisted?
     assert_equal 2, iteration.files.count
   end
@@ -197,7 +195,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     file2 = mock(read: file_contents2, headers: headers)
 
     assert_raises do
-      CreatesIteration.create!(solution, [file1, file2])
+      CreateIteration.(solution, [file1, file2])
     end
   end
 
@@ -209,7 +207,7 @@ class CreatesIterationTest < ActiveSupport::TestCase
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
     file = mock(read: file_contents, headers: headers)
 
-    iteration = CreatesIteration.create!(solution, [file])
+    iteration = CreateIteration.(solution, [file])
 
     assert iteration.persisted?
     assert_equal iteration.solution, solution

@@ -17,7 +17,7 @@ class WalkthroughTest < ApplicationSystemTestCase
     stub_repo_cache! do
       sign_in!(user)
       visit my_solution_path(solution)
-      click_on "Begin Walk-Through"
+      click_on "Begin walk-through"
 
       assert_text "Welcome to the Exercism installation guide!"
     end

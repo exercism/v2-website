@@ -1,10 +1,7 @@
 class CompleteSolution
   include Mandate
 
-  attr_reader :solution
-  def initialize(solution)
-    @solution = solution
-  end
+  initialize_with :solution
 
   def call
     if solution.approved?
@@ -38,11 +35,10 @@ class CompleteSolution
   end
 
   def unlock_next_core_exercise
-    UnlocksNextCoreExercise.(solution.track, solution.user)
+    UnlockNextCoreExercise.(solution.track, solution.user)
   end
 
   def user
     solution.user
   end
 end
-

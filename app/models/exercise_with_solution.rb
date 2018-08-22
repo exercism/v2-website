@@ -21,5 +21,6 @@ class ExerciseWithSolution < SimpleDelegator
   end
 
   private
+
   attr_reader :exercise
 end

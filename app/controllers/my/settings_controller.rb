@@ -20,7 +20,7 @@ class My::SettingsController < MyController
 
     errors.uniq!
 
-    if errors.size == 0
+    if errors.empty?
       flash.notice = "Your track settings have been updated"
     elsif errors.size == 1
       flash.alert = "The handle #{errors[0]} is already taken"

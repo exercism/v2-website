@@ -3,11 +3,11 @@
     .lo-container
       /=link_to "Dashboard", root_path
       /=nav_divider
-      %span Language Tracks
+      %span Language tracks
 
   .header
     .lo-container
-      %h1 Language Tracks
+      %h1 Language tracks
       .h1-subtitle All the tracks you can join.
 
   .lo-container
@@ -29,7 +29,7 @@
           %strong.num #{@joined_tracks.size}
           tracks
 
-        %h2 Tracks You've Joined
+        %h2 Tracks you've joined
         .tracks.pure-g
           =render 'tracks', joined: true, tracks: @joined_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts
 
@@ -38,6 +38,6 @@
         Showing
         %strong.num #{@other_tracks.size}
         tracks
-      %h2 Available Tracks
+      %h2 Available tracks
       .tracks.pure-g
         =render 'tracks', joined: false, tracks: @other_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts

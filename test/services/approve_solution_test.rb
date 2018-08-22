@@ -18,6 +18,27 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     end
   end
 
+  test "unlocks side exercises for a completed solution" do
+    user = create(:user)
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    exercise = create(:exercise, track: track)
+    unlocked_exercise = create(:exercise, unlocked_by: exercise, track: track)
+    create(:user_track, track: track, user: user)
+    solution = create(:solution,
+                      user: user,
+                      exercise: exercise,
+                      completed_at: Time.utc(2018, 6, 25))
+    mentor = create(:user)
+    create(:track_mentorship, user: mentor, track: track)
+    create(:solution_mentorship, solution: solution, user: mentor)
+
+    stub_repo_cache! do
+      ApproveSolution.(solution, mentor)
+    end
+
+    assert unlocked_exercise.unlocked_by_user?(user)
+  end
+
   test "fails for non-mentor" do
     refute ApproveSolution.(create(:solution), create(:user))
   end
@@ -38,7 +59,7 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor, track: solution.exercise.track
     create :solution_mentorship, solution: solution, user: mentor
 
-    CreatesNotification.expects(:create!).with do |*args|
+    CreateNotification.expects(:call).with do |*args|
       assert_equal user, args[0]
       assert_equal :solution_approved, args[1]
       assert_equal "<strong>#{mentor.handle}</strong> has approved your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
@@ -61,7 +82,7 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     mentor = create :user
     create :track_mentorship, user: mentor, track: solution.exercise.track
 
-    CreatesSolutionMentorship.expects(:create).with(solution, mentor)
+    CreateSolutionMentorship.expects(:call).with(solution, mentor)
     ApproveSolution.(solution, mentor)
   end
 

@@ -5,7 +5,7 @@ class CreatesSolutionMentorshipTest < ActiveSupport::TestCase
     solution = create :solution
     user = create :user
 
-    mentorship = CreatesSolutionMentorship.create(solution, user)
+    mentorship = CreateSolutionMentorship.(solution, user)
     assert mentorship.persisted?
     assert_equal solution, mentorship.solution
     assert_equal user, mentorship.user
@@ -19,8 +19,7 @@ class CreatesSolutionMentorshipTest < ActiveSupport::TestCase
     user = create :user
     existing_mentorship = create :solution_mentorship, solution: solution, user: user
 
-    new_mentorship = CreatesSolutionMentorship.create(solution, user)
+    new_mentorship = CreateSolutionMentorship.(solution, user)
     assert_equal existing_mentorship, new_mentorship
   end
 end
-

@@ -33,7 +33,7 @@
   .tracks-section#explore-languages
     .lo-container
       .title-block
-        %h2 Available Language Tracks
+        %h2 Available language tracks
         %p There are #{num_tracks} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
       .tracks
         =render 'tracks_display', tracks: @tracks
@@ -98,8 +98,8 @@
   :javascript
     setupLandingPage()
 
--unless session[:announcement_modal_shown]
-  - session[:announcement_modal_shown] = true
+-unless cookies[:v2_welcome_modal_shown]
+  - cookies[:v2_welcome_modal_shown] = { value: true, expires: Time.utc(2020) }
   -content_for :js do
     :javascript
       showModal('announcement', '#{j render "announcement"}')

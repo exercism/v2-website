@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Git::StateDbTest < ActiveSupport::TestCase
-
   def setup
     @track = create :track
     @track_2 = create :track
@@ -117,5 +116,4 @@ class Git::StateDbTest < ActiveSupport::TestCase
     assert_equal @track_2.id, stale_tracks.first[:track_id]
     assert_equal @track_3.id, stale_tracks.second[:track_id]
   end
-
 end

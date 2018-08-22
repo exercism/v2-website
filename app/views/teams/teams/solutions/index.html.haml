@@ -1,17 +1,17 @@
 #teams-solutions-page.team-page
   =teams_header
   .lo-container
-    %h1 Your Team's Solutions
+    %h1 Your team's solutions
     .num-solutions= pluralize @solutions.size, "Solutions"
     .filters
       =form_tag [:teams, @team, :solutions], remote: true, method: :get, class: "solutions-form" do
         .widget-filter.topic_id
-          .title Track:
+          .title track:
           = select_tag :track_id,
             options_for_select(OptionsHelper.format_options(@track_id_options), @track_id),
             include_blank: true
         .widget-filter.exercise_id
-          .title Exercise:
+          .title exercise:
           = select_tag :exercise_id,
             options_for_select(OptionsHelper.format_options(@exercise_id_options), @exercise_id),
             include_blank: true

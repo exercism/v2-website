@@ -1,13 +1,16 @@
 class Git::Exercise
-  attr_reader :track, :git_slug, :git_sha
+  attr_reader :track, :title, :git_slug, :git_sha
   def initialize(exercise, git_slug, git_sha)
     @track = exercise.track
+    @title = exercise.title
     @git_slug = git_slug
     @git_sha = git_sha
   end
 
   def instructions
-    ParseMarkdown.(exercise_reader.readme)
+    lines = exercise_reader.readme.split("\n")
+    lines.shift if /^#\s*#{@title}\s*$/.match? lines.first
+    ParseMarkdown.(lines.join("\n"))
   end
 
   def test_suite

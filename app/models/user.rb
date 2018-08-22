@@ -117,7 +117,7 @@ class User < ApplicationRecord
     user_tracks.where(track_id: track.id).first
   end
 
-  def may_unlock_exercise?(user_track, exercise)
+  def may_unlock_exercise?(exercise, user_track: user_track_for(exercise.track))
     # If one of:
     # - we're in indepdenent mode
     # - this is a side exercise that has no unlocked_by
@@ -135,6 +135,12 @@ class User < ApplicationRecord
 
   def mentoring_solution?(solution)
     solution_mentorships.where(solution_id: solution.id).exists?
+  end
+
+  def has_active_lock_for_solution?(solution)
+    SolutionLock.where(solution: solution, user_id: id).
+                 where('locked_until > ?', Time.current).
+                 exists?
   end
 
   def test_user?

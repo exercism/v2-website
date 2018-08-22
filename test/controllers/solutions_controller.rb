@@ -38,4 +38,3 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 end
-

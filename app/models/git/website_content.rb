@@ -1,5 +1,4 @@
 class Git::WebsiteContent < Git::RepoBase
-
   if Rails.env.development?
     REPO_URL="file://#{Rails.root}/../website-copy"
   else

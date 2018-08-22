@@ -12,9 +12,7 @@ class BootstrapUserTest < ActiveSupport::TestCase
     user = create :user
     track = create :track
 
-    JoinsTrack.expects(:join!).with(user, track)
+    JoinTrack.expects(:call).with(user, track)
     BootstrapUser.(user, track.id)
   end
 end
-
-

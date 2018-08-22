@@ -43,7 +43,7 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor1, track: solution.exercise.track
     create :solution_mentorship, solution: solution, user: mentor1
 
-    CreatesNotification.expects(:create!).with do |*args|
+    CreateNotification.expects(:call).with do |*args|
       assert_equal user, args[0]
       assert_equal :new_discussion_post, args[1]
       assert_equal "<strong>#{mentor1.handle}</strong> has commented on your solution to <strong>#{solution.exercise.title}</strong> on the <strong>#{solution.exercise.track.title}</strong> track.", args[2]
@@ -66,7 +66,7 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     mentor = create :user
     create :track_mentorship, user: mentor, track: iteration.solution.exercise.track
 
-    CreatesSolutionMentorship.expects(:create).with(iteration.solution, mentor).returns(mock(update!: false))
+    CreateSolutionMentorship.expects(:call).with(iteration.solution, mentor).returns(mock(update!: false))
     CreatesMentorDiscussionPost.create!(iteration, mentor, "Foobar")
   end
 
@@ -82,4 +82,3 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     refute mentorship.requires_action
   end
 end
-

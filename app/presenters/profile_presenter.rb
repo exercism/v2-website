@@ -53,5 +53,6 @@ class ProfilePresenter
   end
 
   private
+
   delegate :user, to: :profile
 end

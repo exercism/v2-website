@@ -3,7 +3,6 @@ require 'test_helper'
 class CreateSolutionTest < ActiveSupport::TestCase
   test "creates with correct git sha" do
     Timecop.freeze do
-
       user = create :user
       exercise = create :exercise
       create :user_track, user: user, track: exercise.track
@@ -55,5 +54,9 @@ class CreateSolutionTest < ActiveSupport::TestCase
     refute normal_solution.independent_mode?
     refute neither_solution.independent_mode?
     assert independent_solution.independent_mode?
+
+    refute normal_solution.track_in_independent_mode?
+    refute neither_solution.track_in_independent_mode?
+    assert independent_solution.track_in_independent_mode?
   end
 end

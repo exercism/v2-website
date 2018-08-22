@@ -3,16 +3,12 @@ require 'test_helper'
 class ParseMarkdownTest < ActiveSupport::TestCase
     test "converts markdown to html" do
     expected = %q{<h1>OHAI</h1>
-
 <p>So I was split between two ways of doing this.</p>
-
 <ol>
 <li>Either method pairs with adjectives (which I did),</li>
 <li>Some sort of data structure (e.g. a hash might look like)</li>
 </ol>
-
 <p><a href="http://example.com" target="_blank">Some link</a></p>
-
 <p>Watch this:</p>
 <pre><code class="language-plain">$ go home
 </code></pre>}

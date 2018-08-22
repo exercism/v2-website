@@ -139,14 +139,14 @@ class UserTest < ActiveSupport::TestCase
     side_exercise_with_unlock = create :exercise, track: track, core: false, unlocked_by: core_exercise
     side_exercise_without_unlock = create :exercise, track: track, core: false
 
-    refute user.may_unlock_exercise?(user_track, core_exercise)
-    refute user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
-    assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
+    refute user.may_unlock_exercise?(core_exercise)
+    refute user.may_unlock_exercise?(side_exercise_with_unlock)
+    assert user.may_unlock_exercise?(side_exercise_without_unlock)
 
     user_track.update(independent_mode: true)
-    assert user.may_unlock_exercise?(user_track, core_exercise)
-    assert user.may_unlock_exercise?(user_track, side_exercise_with_unlock)
-    assert user.may_unlock_exercise?(user_track, side_exercise_without_unlock)
+    assert user.may_unlock_exercise?(core_exercise)
+    assert user.may_unlock_exercise?(side_exercise_with_unlock)
+    assert user.may_unlock_exercise?(side_exercise_without_unlock)
   end
 
   test "avatar_url" do
@@ -210,5 +210,17 @@ class UserTest < ActiveSupport::TestCase
 
     refute user.valid?
     assert other_user.valid?
+  end
+
+  test "has_active_lock_for_solution?" do
+    user = create :user
+    solution = create :solution
+    refute user.has_active_lock_for_solution?(solution)
+
+    lock = create :solution_lock, user: user, solution: solution, locked_until: Time.current - 1.second
+    refute user.has_active_lock_for_solution?(solution)
+
+    lock.update(locked_until: Time.current + 1.minute)
+    assert user.has_active_lock_for_solution?(solution)
   end
 end

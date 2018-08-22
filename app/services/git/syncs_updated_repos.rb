@@ -22,10 +22,17 @@ class Git::SyncsUpdatedRepos
 
   def sync
     stdout.puts "Syncing outstanding repos"
-    repo_updates.each { |update| SyncRepoUpdateJob.perform_now(update.id) }
+    repo_updates.each do |update|
+      begin
+        SyncRepoUpdateJob.perform_now(update.id)
+      rescue => exception
+        Bugsnag.notify(exception)
+      end
+    end
   end
 
   private
+
   attr_reader :repo_updates, :stdout
 
   def repo_updates

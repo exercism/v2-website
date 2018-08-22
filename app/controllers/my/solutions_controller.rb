@@ -6,7 +6,7 @@ class My::SolutionsController < MyController
     user_track = UserTrack.where(user: current_user, track: track).first
     exercise = track.exercises.find(params[:exercise_id])
 
-    if current_user.may_unlock_exercise?(user_track, exercise)
+    if current_user.may_unlock_exercise?(exercise, user_track: user_track)
       solution = CreateSolution.(current_user, exercise)
       redirect_to [:my, solution]
     else
@@ -29,7 +29,7 @@ class My::SolutionsController < MyController
   end
 
   def walkthrough
-    @walkthrough = RendersUserWalkthrough.(
+    @walkthrough = RenderUserWalkthrough.(
       current_user,
       Git::WebsiteContent.head.walkthrough
     )
@@ -68,7 +68,7 @@ class My::SolutionsController < MyController
     @solution.update(published_at: Time.current) if params[:publish]
 
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
-      ReviewsSolutionMentoring.review!(
+      ReviewSolutionMentoring.(
         @solution,
         User.find(mentor_id),
         data[:rating],
@@ -108,6 +108,7 @@ class My::SolutionsController < MyController
   end
 
   private
+
   def set_solution
     @solution = current_user.solutions.find_by_uuid!(params[:id])
   end

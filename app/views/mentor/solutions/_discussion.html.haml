@@ -1,0 +1,9 @@
+.discussion
+  %h3 Mentor discussion
+  -if @iteration.discussion_posts.present?
+    .posts
+      -@iteration.discussion_posts.each do |post|
+        -user_track = @user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]
+        =discussion_post_widget(post, @solution, user_track)
+  -else
+    .posts{style: "display:none"}

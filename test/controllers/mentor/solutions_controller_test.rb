@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
-
   test "approve calls service" do
     mentor = create :user
     track = create :track
@@ -32,5 +31,4 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
     get mentor_solution_url(solution)
     assert_response :success
   end
-
 end

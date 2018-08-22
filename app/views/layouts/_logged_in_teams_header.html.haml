@@ -1,6 +1,15 @@
 %header.logged-in.teams
   .lo-container
-    .misc-menu
+    %div.spacer
+      =link_to root_path, class: 'logo' do
+        =image_tag "logo-white.png", alt: 'Exercism'
+        %span teams edition
+
+    -if @team
+      #team-selector
+        =select_tag :teams, options_for_select(current_user.teams.map{|t|[t.name, t.id]}, @team.id)
+
+    .misc-menu{tabindex: "0"}
       .in-situ
         =image_tag current_user.avatar_url ? current_user.avatar_url : "blank.png", alt: current_user.name
         =graphical_icon 'caret-down'
@@ -11,14 +20,6 @@
           %strong #{current_user.handle}
         .hr
         = link_to "Sign out", destroy_user_session_path, method: :delete
-
-    -if @team
-      #team-selector
-        =select_tag :teams, options_for_select(current_user.teams.map{|t|[t.name, t.id]}, @team.id)
-
-    =link_to root_path, class: 'logo' do
-      =image_tag "logo-white.png", alt: 'Exercism'
-      %span teams edition
 
 
 -content_for :js do

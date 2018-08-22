@@ -1,5 +1,4 @@
 class Git::GithubProfile
-
   class NotFoundError < StandardError
   end
 
@@ -28,4 +27,7 @@ class Git::GithubProfile
     @link_url = user.html_url
   end
 
+  def user_present?
+    user && user.id
+  end
 end

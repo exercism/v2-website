@@ -6,7 +6,7 @@
         .img{style: "background-image:url('#{image_path(exercise.white_icon_url)}')"}
       .title-bar
         .title= exercise.title
-        .track #{exercise.track.title} Track
+        .track #{exercise.track.title} track
       .reactions
         .reaction
           =icon 'thumbs-up fa-fw', 'thumbs-up'
@@ -20,4 +20,3 @@
         .reaction
           =icon 'comment fa-fw', 'comment'
           .count= comment_counts[solution.id].to_i
-

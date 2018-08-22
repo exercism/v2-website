@@ -1,9 +1,12 @@
 class Git::ProblemSpecifications < Git::RepoBase
-
   REPO_URL="https://github.com/exercism/problem-specifications"
 
+  def self.repo_url
+    REPO_URL
+  end
+
   def self.head
-    new(REPO_URL)
+    new(repo_url)
   end
 
   def initialize(repo_url, auto_fetch=false)
@@ -46,6 +49,9 @@ class Git::ProblemSpecifications < Git::RepoBase
       metadata[:blurb]
     end
 
+    def title
+      metadata[:title]
+    end
   end
 
   class Exercises

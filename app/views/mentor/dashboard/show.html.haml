@@ -1,10 +1,10 @@
 #mentor-dashboard-page
   .header
     .lo-container
-      %h1 Mentor Dashboard
+      %h1 Mentor dashboard
       .h1-subtitle
         You can keep track of what needs responding to here.
-        If you're stuck, check out the #{link_to "Mentoring Guide", mentoring_guide_page_path}, #{link_to "Mentoring FAQs", mentoring_faqs_page_path} or ask questions on Slack.
+        If you're stuck, check out the #{link_to "Mentoring guide", mentoring_guide_page_path}, #{link_to "Mentoring FAQs", mentoring_faqs_page_path} or ask questions on Slack.
 
   .lo-container
     .pure-g
@@ -19,8 +19,8 @@
       .pure-u-1-3
         .weekly-section
           -weekly_progress_percentage = @weekly_solutions_count / 20.0 * 100
-          %h2 Your Weekly Progress
-          .h2-subtitle see how you're helping
+          %h2 Your weekly progress
+          .h2-subtitle See how you're helping
           .box
             %p
               For all learners to receive mentoring, we need each mentor to give feedback on
@@ -33,28 +33,28 @@
 
             -if @weekly_solutions_count == 0
               If you're unsure where to start, take a look at the
-              =link_to "Mentoring Guide", mentoring_guide_page_path
+              =link_to "Mentoring guide", mentoring_guide_page_path
               or reach out to the community on
               #{link_to "Slack", "https://exercism-mentors.slack.com/archives/CBDA9LMDF/p1529968977000336"}.
 
             -elsif @weekly_solutions_count >= 20
-              %p 
-                So far this week you've given feedback on 
+              %p
+                So far this week you've given feedback on
                 %strong #{@weekly_solutions_count} solutions.
                 Thank you for putting in the time and helping so many others learn. You're making the world better.
 
               .hr
 
-              Know someone who would be a good mentor? Ask them to visit 
+              Know someone who would be a good mentor? Ask them to visit
               =link_to "http://mentoring.exercism.io/", "http://mentoring.exercism.io/"
 
             -else
-              So far this week you've given feedback on 
+              So far this week you've given feedback on
               %strong #{@weekly_solutions_count} solutions.
               Thank you!
 
         .contributions-section
-          %h2 Your Contribution
+          %h2 Your contribution
           .h2-subtitle see how you're helping
           .box
             You have mentored
@@ -65,7 +65,7 @@
 
         -if @feedbacks.size > 0
           .celebration-section
-            %h2 Celebration Stream
+            %h2 Celebration stream
             .h2-subtitle see your latest feedback
             -@feedbacks.each do |feedback|
               .box

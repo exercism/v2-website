@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Git::SyncsMaintainersTest < ActiveSupport::TestCase
-
   setup do
     @track = create :track
     stub_gh_user = stub(
@@ -356,5 +355,4 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
     assert_equal "http://example.com/humpty-dumpty", @maintainers.second.link_url
     assert_equal "humpty-dumpty", @maintainers.second.link_text
   end
-
 end

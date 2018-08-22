@@ -29,5 +29,4 @@ class TeamPagesController < ApplicationController
                                 page(@page).
                                 per(40)
   end
-
 end

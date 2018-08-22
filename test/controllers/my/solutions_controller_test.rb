@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SolutionsControllerTest < ActionDispatch::IntegrationTest
-
   def setup
     @mock_exercise = stub(
       instructions: "instructions",

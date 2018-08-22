@@ -12,7 +12,7 @@ class BootstrapUser
 
     if initial_track_id
       track = Track.find_by_id(initial_track_id)
-      JoinsTrack.join!(user, track) if track
+      JoinTrack.(user, track) if track
     end
   end
 end

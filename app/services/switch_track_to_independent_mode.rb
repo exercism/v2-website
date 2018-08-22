@@ -1,11 +1,7 @@
 class SwitchTrackToIndependentMode
   include Mandate
 
-  attr_reader :user, :track
-  def initialize(user, track)
-    @user = user
-    @track = track
-  end
+  initialize_with :user, :track
 
   def call
     user_track.update(independent_mode: true)
@@ -19,4 +15,3 @@ class SwitchTrackToIndependentMode
     user.user_track_for(track)
   end
 end
-

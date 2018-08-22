@@ -18,7 +18,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
 
     create_discussion_post!
 
-    mentorship = CreatesSolutionMentorship.create(solution, mentor)
+    mentorship = CreateSolutionMentorship.(solution, mentor)
     solution.update!(last_updated_by_mentor_at: Time.current)
     mentorship.update!(requires_action: false)
     notify_solution_user
@@ -29,7 +29,7 @@ class CreatesMentorDiscussionPost < CreatesDiscussionPost
   private
 
   def notify_solution_user
-    CreatesNotification.create!(
+    CreateNotification.call(
       solution.user,
       :new_discussion_post,
       "#{strong mentor.handle} has commented on your solution to #{strong solution.exercise.title} on the #{strong solution.exercise.track.title} track.",

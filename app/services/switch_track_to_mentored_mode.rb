@@ -1,11 +1,7 @@
 class SwitchTrackToMentoredMode
   include Mandate
 
-  attr_reader :user, :track
-  def initialize(user, track)
-    @user = user
-    @track = track
-  end
+  initialize_with :user, :track
 
   def call
     user_track.update(independent_mode: false)

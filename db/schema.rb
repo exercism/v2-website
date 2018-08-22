@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_143155) do
+ActiveRecord::Schema.define(version: 2018_08_05_111033) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -236,6 +236,16 @@ ActiveRecord::Schema.define(version: 2018_07_26_143155) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "solution_locks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "locked_until", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id"], name: "fk_rails_d2575804da"
+    t.index ["user_id"], name: "fk_rails_7c200d25d8"
+  end
+
   create_table "solution_mentorships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "solution_id", null: false
@@ -454,6 +464,8 @@ ActiveRecord::Schema.define(version: 2018_07_26_143155) do
   add_foreign_key "reactions", "solutions"
   add_foreign_key "reactions", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
+  add_foreign_key "solution_locks", "solutions"
+  add_foreign_key "solution_locks", "users"
   add_foreign_key "solution_mentorships", "solutions"
   add_foreign_key "solution_mentorships", "users"
   add_foreign_key "solutions", "exercises"

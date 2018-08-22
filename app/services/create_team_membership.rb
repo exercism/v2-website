@@ -1,10 +1,7 @@
 class CreateTeamMembership
   include Mandate
 
-  def initialize(user, team)
-    @user = user
-    @team = team
-  end
+  initialize_with :user, :team
 
   def call
     create_team_membership!
@@ -12,7 +9,6 @@ class CreateTeamMembership
   end
 
   private
-  attr_reader :user, :team
 
   def create_team_membership!
     TeamMembership.create!(team: team, user: user)

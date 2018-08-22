@@ -1,6 +1,5 @@
 class Teams::Teams::SolutionsController < Teams::Teams::BaseController
   def index
-
     @possible_tracks = Track.where(id: @team.solutions.where.not(user_id: current_user.id).
                                                        where("num_iterations > 0").
                                                        joins(:exercise).
@@ -21,7 +20,6 @@ class Teams::Teams::SolutionsController < Teams::Teams::BaseController
     @solutions = @solutions.where("exercise_id": @exercise_id) if @exercise_id.present?
     @solutions = @solutions.includes(:user).
                             page(params[:page]).per(21)
-
   end
 
   def show
@@ -34,11 +32,11 @@ class Teams::Teams::SolutionsController < Teams::Teams::BaseController
   end
 
   private
+
   def exercise_id_options
     track = Track.find_by(id: @track_id)
     return [] unless track
 
     OptionsHelper.as_options(track.exercises, :title, :id)
   end
-
 end

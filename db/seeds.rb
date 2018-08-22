@@ -83,13 +83,11 @@ Testimonial.create!(
 )
 #https://avatars0.githubusercontent.com/u/12205520?v=4&s=460
 
-
 Testimonial.create!(
   headline: "A tremendous learning opportunity to explore the depth of your own knowledge",
   content: "Exercism is fantastic in learning new languages but that is not the extent of it. If you are a \"more experienced\" programmer you may have encountered impostor syndrome: the idea you don't really know what you think you know. Exercism lets you solve problems and put them in the space of open feedback which is a tremendous learning opportunity to explore the depth of your own knowledge. Even if you have been programming in a language for awhile it is worth checking into Exercism to see where you stand with current implementation practices.",
   byline: "Tom Leen, Portland"
 )
-
 
 Testimonial.create!(
   track: Track.find_by_slug!('python'),

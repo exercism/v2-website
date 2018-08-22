@@ -30,7 +30,7 @@ class CompleteSolutionTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_solution_path(solution.uuid)
 
-    click_link "Complete Exercise"
+    click_link "Complete exercise"
     assert page.has_content?("You've completed Hello World")
 
     click_link "Continue"

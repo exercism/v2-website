@@ -1,19 +1,19 @@
 #teams-new-team-page.teams-page
   .lo-container
-    %h1 Create New Team
+    %h1 Create new team
     =form_for [:teams, @team] do |f|
       .field
-        %h3 Team Name:
+        %h3 Team name:
         =f.text_field :name, required: true
 
       .logo-section
         .field
-          %h3 Change Logo:
+          %h3 Change logo:
           =f.file_field :logo
 
       .field
-        %h3 Invite Team Members:
+        %h3 Invite team members:
         %p Enter your teammates' email addresses, one on each line.
         =text_area_tag :emails, '', placeholder: "Email addresses - 1 per line"
 
-      =f.button "Create Team", class: 'pure-button'
+      =f.button "Create team", class: 'pure-button'

@@ -1,7 +1,6 @@
 require "test_helper"
 
 class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
-
   test "correct exercises get deleted and unlocked" do
     git_sha = SecureRandom.uuid
     Git::ExercismRepo.stubs(current_head: git_sha)

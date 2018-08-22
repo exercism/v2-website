@@ -1,11 +1,7 @@
 class CreateTeam
   include Mandate
 
-  attr_reader :user, :name
-  def initialize(user, name)
-    @user = user
-    @name = name
-  end
+  initialize_with :user, :name
 
   def call
     team = Team.create!(name: name)

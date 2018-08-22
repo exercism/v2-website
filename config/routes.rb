@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # ### #
   # API #
   # ### #
@@ -41,6 +40,7 @@ Rails.application.routes.draw do
   # Mentor #
   # ###### #
   namespace :mentor do
+    get "/", to: redirect("mentor/dashboard")
     resource :configure, only: [:show, :update], controller: "configure"
     resource :dashboard, only: [:show], controller: "dashboard" do
       get :your_solutions
@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     end
     resources :solutions, only: [:show] do
       member do
+        patch :lock
         patch :approve
         patch :abandon
         patch :ignore
@@ -204,7 +205,6 @@ Rails.application.routes.draw do
   # Weird things #
   # ############ #
   post "markdown/parse" => "markdown#parse"
-
 
   # ################ #
   # Legacy redirects #

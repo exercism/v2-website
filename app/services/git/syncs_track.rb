@@ -1,5 +1,4 @@
 class Git::SyncsTrack
-
   def self.sync!(track)
     new(Git::StateDb.instance, track).sync!
   end
@@ -92,10 +91,11 @@ class Git::SyncsTrack
     ex = repo.exercise(exercise_slug, repo.head)
     blurb = ex.blurb || standard_blurb_for(exercise_slug)
     description = ex.description || standard_description_for(exercise_slug)
+    title = standard_title_for(exercise_slug) || exercise_slug.titleize
 
     exercise_data = {
       slug: exercise_slug,
-      title: exercise_slug.titleize,
+      title: title,
       core: respect_core?? exercise.fetch(:core, false) : (position <= 10),
       active: exercise.fetch(:active, true),
       position: position,
@@ -176,6 +176,12 @@ class Git::SyncsTrack
 
   def standard_spec_for(exercise_slug)
     problem_specifications.exercises[exercise_slug]
+  end
+
+  def standard_title_for(exercise_slug)
+    ex = standard_spec_for(exercise_slug)
+    return nil if ex.nil?
+    ex.title
   end
 
   def problem_specifications

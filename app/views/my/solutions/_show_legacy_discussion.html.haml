@@ -1,6 +1,6 @@
 -return unless  @iteration.discussion_posts.size > 0
 .discussion
-  %h3.rhs-heading Legacy Comments
+  %h3.rhs-heading Legacy comments
   .posts
     -@iteration.discussion_posts.each do |post|
       -user_track = @post_user_tracks["#{post.user_id}|#{@solution.exercise.track_id}"]

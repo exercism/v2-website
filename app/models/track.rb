@@ -5,7 +5,7 @@ class Track < ApplicationRecord
 
   has_many :testimonials
   has_many :user_tracks
-  has_many :exercises
+  has_many :exercises, -> { order position: :asc, title: :asc }
   has_many :solutions, through: :exercises
   has_many :iterations, through: :solutions
   has_many :mentorships, class_name: "TrackMentorship"

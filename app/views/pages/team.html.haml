@@ -3,13 +3,13 @@
     .lo-container
       =link_to "Home", root_path
       =nav_divider
-      %span The Exercism Team
+      %span The Exercism team
   .header
     .lo-container
-      %h1 The Exercism Team
+      %h1 The Exercism team
   .core
     .lo-container
-      %h2 Our Leadership Team
+      %h2 Our Leadership team
       %p.subheading Our leadership team manage the strategic and organisational sides of Exercism, including the Exercism website and CLI. They are responsible for fulfilling our mission statement and maintaining our values.
       .pure-g
         .pure-u-1-2
@@ -50,7 +50,7 @@
 
   .maintainers
     .lo-container
-      %h2 Our Maintainers
+      %h2 Our maintainers
       %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
       .pure-g
         =cache ["pages/team/maintainers", @maintainers_last_updated_at] do
@@ -59,7 +59,7 @@
 
   .contributors
     .lo-container
-      %h2 Our Contributors
+      %h2 Our contributors
       %p.subheading Exercism could not be the success it is without the contributors of over 1,000 volunteers, who contribute in every way imaginable.
       =cache ["pages/team/contributors_top/1", @contributors_last_updated_at] do
         .pure-g

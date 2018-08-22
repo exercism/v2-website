@@ -16,4 +16,3 @@ class SetPrismLanguagesForTracks
     end
   end
 end
-

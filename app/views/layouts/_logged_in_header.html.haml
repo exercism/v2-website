@@ -1,6 +1,17 @@
 %header.logged-in
   .lo-container
-    .misc-menu
+    %div.spacer
+      =link_to root_path, class: "logo" do
+        =image "logo-white.png", "Exercism"
+
+    -if current_user_has_notifications?
+      = link_to [:my, :notifications], class: "notifications active", "aria-label": "New notifications" do
+        =graphical_icon "bell-o"
+    -else
+      = link_to [:my, :notifications], class: "notifications", "aria-label": "No notifications" do
+        =graphical_icon "bell-o"
+
+    .misc-menu{tabindex: "0"}
       .in-situ
         =image_tag current_user.avatar_url || "blank.png", alt: "Avatar for #{current_user.handle}"
         =graphical_icon 'caret-down'
@@ -15,21 +26,10 @@
         -if current_user.admin? || current_user.mentor?
           .hr
         -if current_user.admin?
-          = link_to "Admin Dashboard", [:admin, :dashboard]
+          = link_to "Admin dashboard", [:admin, :dashboard]
         -if current_user.mentor?
-          = link_to "Mentor Dashboard", [:mentor, :dashboard]
+          = link_to "Mentor dashboard", [:mentor, :dashboard]
         .hr
         = link_to "Settings", [:my, :settings]
         = link_to "Preferences", [:edit, :my, :settings, :communication_preferences]
         = link_to "Sign out", destroy_user_session_path, method: :delete
-
-    -if current_user_has_notifications?
-      = link_to [:my, :notifications], class: "notifications active", "aria-label": "New notifications" do
-        =graphical_icon "bell-o"
-    -else
-      = link_to [:my, :notifications], class: "notifications", "aria-label": "No notifications" do
-        =graphical_icon "bell-o"
-
-    =link_to root_path, class: "logo" do
-      =image "logo-white.png", "Exercism"
-

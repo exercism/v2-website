@@ -36,9 +36,9 @@ class My::SideExercisesController < MyController
   end
 
   private
+
   def set_track
     @track = Track.find(params[:track_id])
     @user_track = UserTrack.find_by_user_id_and_track_id!(current_user.id, @track.id)
   end
 end
-

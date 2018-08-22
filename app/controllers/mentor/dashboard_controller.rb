@@ -33,13 +33,12 @@ class Mentor::DashboardController < MentorController
     @your_exercise_id = params[:your_exercise_id]
     @your_exercise_id_options = exercise_id_options_for(@your_track_id)
 
-    @your_solutions = RetrievesSolutionsForMentor.retrieve(
+    @your_solutions = RetrieveSolutionsForMentor.(
       current_user,
       status: @your_status,
       track_id: @your_track_id,
       exercise_id: @your_exercise_id
     ).to_a
-
 
     user_ids = @your_solutions.map(&:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).
@@ -63,11 +62,10 @@ class Mentor::DashboardController < MentorController
     user_ids = @next_solutions.map(&:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
-
   end
 
   def track_id_options
-    @track_id_options ||= 
+    @track_id_options ||=
       OptionsHelper.as_options(current_user.mentored_tracks,
                                                        :title,
                                                        :id)
@@ -80,4 +78,3 @@ class Mentor::DashboardController < MentorController
     OptionsHelper.as_options(track.exercises.reorder(:title), :title, :id, include_blank: true)
   end
 end
-

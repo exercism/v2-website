@@ -1,5 +1,4 @@
 class Git::ExerciseReader
-
   attr_reader :repo, :exercise_slug, :commit, :config
   def initialize(repo, exercise_slug, commit, config)
     @repo = repo
@@ -142,5 +141,4 @@ class Git::ExerciseReader
     oid = entry[:oid]
     lookup(oid)
   end
-
 end

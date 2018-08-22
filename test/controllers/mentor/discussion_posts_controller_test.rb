@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Mentor::DiscussionPostsControllerTest < ActionDispatch::IntegrationTest
-
   test "approve calls service" do
     mentor = create :user
     track = create :track

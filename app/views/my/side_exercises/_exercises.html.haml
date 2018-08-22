@@ -5,6 +5,9 @@
         -if solution.completed?
           = link_to [:my, solution], class: "widget-side-exercise completed" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
+        -elsif solution.approved?
+          = link_to [:my, solution], class: "widget-side-exercise approved" do
+            =render "my/side_exercises/exercise", exercise: exercise, solution: solution
         -elsif solution.in_progress?
           = link_to [:my, solution], class: "widget-side-exercise in-progress" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution

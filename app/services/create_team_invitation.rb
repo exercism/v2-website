@@ -1,13 +1,7 @@
 class CreateTeamInvitation
   include Mandate
 
-  attr_reader :team, :invited_by, :email
-
-  def initialize(team, invited_by, email)
-    @team = team
-    @invited_by = invited_by
-    @email = email
-  end
+  initialize_with :team, :invited_by, :email
 
   def call
     create_invite!
@@ -17,6 +11,7 @@ class CreateTeamInvitation
   end
 
   private
+
   attr_reader :invite
 
   def create_invite!
@@ -38,4 +33,3 @@ class CreateTeamInvitation
     User.find_by(email: invite.email).present?
   end
 end
-

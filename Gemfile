@@ -23,8 +23,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
 
-gem 'redcarpet', require: false
-gem 'rouge', require: false
+gem 'commonmarker', require: false
 gem 'rugged'
 gem 'sidekiq'
 gem 'loofah'
@@ -69,4 +68,8 @@ group :test do
   gem 'timecop'
   gem 'chromedriver-helper'
   gem 'webmock'
+end
+
+group :development, :production do
+  gem 'capistrano-checks'
 end

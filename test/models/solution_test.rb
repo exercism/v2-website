@@ -66,4 +66,23 @@ class SolutionTest < ActiveSupport::TestCase
     assert create(:solution, track_in_independent_mode: false).track_in_mentored_mode?
   end
 
+  test "display created_at if published_at equals V2 launch date" do
+    solution = create :solution, published_at: Exercism::V2_MIGRATED_AT
+    assert_equal solution.display_published_at, solution.created_at
+  end
+
+  test "display published_at if published_at does not equal V2 launch date" do
+    solution = create :solution, published_at: Time.now
+    assert_equal solution.display_published_at, solution.published_at
+  end
+
+  test "deletes cleanly with associated models" do
+    solution = create(:solution)
+    create(:solution_lock, solution: solution)
+    create(:solution_mentorship, solution: solution)
+    create(:ignored_solution_mentorship, solution: solution)
+    create(:reaction, solution: solution)
+
+    solution.destroy!
+  end
 end

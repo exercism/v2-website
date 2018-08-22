@@ -3,4 +3,3 @@ class API::CLISettingsController < APIController
     render json: {}, status: 200
   end
 end
-
