@@ -1,5 +1,5 @@
 class My::SolutionsController < MyController
-  before_action :set_solution, except: [:create]
+  before_action :set_solution, except: [:create, :walkthrough]
 
   def create
     track = Track.find(params[:track_id])
