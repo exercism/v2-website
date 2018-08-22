@@ -18,6 +18,27 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     end
   end
 
+  test "unlocks side exercises for a completed solution" do
+    user = create(:user)
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    exercise = create(:exercise, track: track)
+    unlocked_exercise = create(:exercise, unlocked_by: exercise, track: track)
+    create(:user_track, track: track, user: user)
+    solution = create(:solution,
+                      user: user,
+                      exercise: exercise,
+                      completed_at: Time.utc(2018, 6, 25))
+    mentor = create(:user)
+    create(:track_mentorship, user: mentor, track: track)
+    create(:solution_mentorship, solution: solution, user: mentor)
+
+    stub_repo_cache! do
+      ApproveSolution.(solution, mentor)
+    end
+
+    assert unlocked_exercise.unlocked_by_user?(user)
+  end
+
   test "fails for non-mentor" do
     refute ApproveSolution.(create(:solution), create(:user))
   end
