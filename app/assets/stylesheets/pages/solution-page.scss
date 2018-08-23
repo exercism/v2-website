@@ -394,3 +394,23 @@
         }
     }
 }
+
+body.prism-dark {
+    #solution-page,
+    #mentor-solution-page,
+    #my-solution-page,
+    #teams-solution-page,
+    #teams-my-solution-page {
+        .test-suite,
+        .solution.multi-file {
+            background:#272822;
+        }
+        .test-suite pre {
+            background:#272822;
+        }
+        .solution pre {
+            background:#272822;
+        }
+    }
+}
+

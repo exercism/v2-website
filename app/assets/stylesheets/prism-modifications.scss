@@ -2,6 +2,8 @@
 @import 'mixins';
 
 pre.line-numbers {
+    margin: 0 !important;
+    padding-bottom: 1em !important;
     .line-numbers-rows {
         span {
             line-height:16px;
