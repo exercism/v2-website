@@ -129,7 +129,11 @@ Rails.application.routes.draw do
 
       resources :iterations, only: [:show]
     end
-    resources :reactions, only: [:index, :create]
+    resources :reactions, only: [:index, :create] do
+      member do
+        post :comment
+      end
+    end
 
     resources :discussion_posts, only: [:create, :update, :destroy]
     resources :notifications, only: [:index] do

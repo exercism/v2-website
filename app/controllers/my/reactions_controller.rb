@@ -14,4 +14,15 @@ class My::ReactionsController < MyController
     @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
   end
+
+  def comment
+    @solution = Solution.published.find_by_uuid!(params[:solution_id])
+
+    @emotion = Reaction.where(user: current_user, solution: @solution).first.try(:emotion) if user_signed_in?
+    @emotion ||= params[:emotion] if Reaction.emotions.keys.include? params[:emotion]
+    @emotion ||= "legacy"
+
+    @reaction = Reaction.create!(user: current_user, solution: @solution, emotion: @emotion, comment: params[:comment])
+    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
+  end
 end

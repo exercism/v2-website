@@ -1,0 +1,6 @@
+-if @reaction.persisted?
+  $('.new-discussion-post-form textarea').val("")
+  $('.new-discussion-post-form .preview-area').html('')
+  Prism.highlightAll()
+
+$("#solution-page .community-comments").replaceWith("#{j render "solutions/community_comments"}")

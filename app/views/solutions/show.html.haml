@@ -84,32 +84,59 @@
               %li What compromises have been made?
               %li Are there new concepts here that I could read more about to develop my understanding?
 
-  -if @comments.size > 0
-    .comments-section
-      .lo-container
-        .pure-g
-          .pure-u-1-2
-            %h2 Community comments
-            .h2-subtitle See what others have said about this solution
-            -@comments.each do |reaction|
-              .comment.pure-g
-                .pure-u-2-24
-                  -if reaction.emotion == "like"
-                    =icon 'thumbs-up'
-                  -elsif reaction.emotion == "love"
-                    =icon 'heart'
-                  -elsif reaction.emotion == "genius"
-                    =graphical_image "genius-turquoise.png"
-                  -else reaction.emotion == "legacy"
-                    =icon 'comment'
+  .comments-section
+    .lo-container
+      .pure-g
+        .pure-u-1-2
+          %h2 Community comments
+          .h2-subtitle See what others have said about this solution
+          =render 'community_comments'
+          -if user_signed_in?
+            %h2 Add a community comment
+            .h2-subtitle Share feedback on this solution
+            .new-discussion-post
+              =form_for [:comment, :my, Reaction.new], url: comment_my_reaction_url, remote: true, html: {class: "new-discussion-post-form"} do |f|
+                =hidden_field_tag :solution_id, @solution.uuid
 
-                .pure-u-22-24.content
-                  .when #{time_ago_in_words(reaction.created_at)} ago
-                  .who
-                    %strong #{reaction.user.handle}
-                    says
-                  .text= simple_format reaction.comment
+                .tabs-and-panes.selected-1
+                  .tabs
+                    .tab.tab-1.write-tab{data: {tab: "markdown"}} Write
+                    .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+                  .panes
+                    .pane.pane-1.markdown
+                      =text_area_tag :comment
+                    .pane.pane-2.preview
+                      .preview-area
+                .react.react-comments
+                  .general.react-icon.selected
+                    =radio_button_tag :emotion, 'legacy', true
+                    .hover Comment
+                    =icon 'comment fa-fw', 'Comment'
+                  .like.react-icon
+                    =radio_button_tag :emotion, 'like', false
+                    .hover Well done
+                    =icon 'thumbs-up fa-fw', 'Thumbs up'
+                  .love.react-icon
+                    =radio_button_tag :emotion, 'love', false
+                    .hover Love it!
+                    =icon 'heart fa-fw', 'Heart'
+                  .genius.react-icon
+                    =radio_button_tag :emotion, 'genius', false
+                    .hover Genius!
+                    =graphical_image "genius.png", class: 'not-selected'
+                    =graphical_image "genius-turquoise.png", class: 'selected'    
+
+                  =button_tag "Comment", class: 'pure-button button comment-button'
 
 -content_for :js do
   :javascript
-    window.setupSolutionTabs()
+    setupSolution()
+
+    $('.react-comments .react-icon').on('click', function(){
+      $react = $(this)
+      $('.react-comments .react-icon').removeClass('selected')
+      $react.addClass('selected')
+      $react.find('input[type=radio]').prop('checked', 'checked')
+      $('.react-comments input[type=radio]').change()
+    })
+

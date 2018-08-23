@@ -1,0 +1,29 @@
+-if @comments.size > 0
+  .community-comments
+    -@comments.each do |reaction|
+      .comment.pure-g
+        .pure-u-2-24
+          -if reaction.emotion == "like"
+            =icon 'thumbs-up'
+          -elsif reaction.emotion == "love"
+            =icon 'heart'
+          -elsif reaction.emotion == "genius"
+            =graphical_image "genius-turquoise.png"
+          -else reaction.emotion == "legacy"
+            =icon 'comment'
+
+        .pure-u-22-24.content
+          .when #{time_ago_in_words(reaction.created_at)} ago
+          .who
+            %strong #{reaction.user.handle}
+            says
+          .text= simple_format reaction.comment
+-else
+  .community-comments
+    .comment.pure-g
+      .pure-u-2-24
+        =icon 'comment'
+
+      .pure-u-22-24.content
+        .text 
+          %strong No comments have been added for this solution

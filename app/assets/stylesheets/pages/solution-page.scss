@@ -224,7 +224,7 @@
             padding:8px 10px;
             font-weight:$regular;
         }
-        a {
+        a, div {
             float:left;
             padding:10px 9px;
             color:#666;
@@ -389,6 +389,31 @@
                         margin-bottom:0;
                     }
                 }
+            }
+        }
+        .react, .react * {
+            float:none;
+        }
+        .react {
+            width:100%;
+            input[type=radio] {
+                display:none;
+            }
+        }
+        .react .react-icon {
+            display:inline-block;
+        }
+        .comment-button {
+            margin-top:5px;
+            border-radius:2px;
+            padding:8px 25px;
+            background:$color-1;
+            color:#fff;
+            float:right;
+            &.faded {
+                background:#fff;
+                border:1px solid #aaa;
+                color:#666;
             }
         }
     }
