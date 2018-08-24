@@ -21,10 +21,10 @@ module UserHelper
 
   def display_avatar_url(user, user_track = nil)
     avatar_url = if user_track && user_track.anonymous?
-        user_track.avatar_url
+        user_track.avatar_url.present?? user_track.avatar_url : asset_path("anonymous.png")
       else
         user.avatar_url
       end
-    avatar_url.present?? avatar_url : "anonymous.png"
+    avatar_url.present?? avatar_url : asset_path("anonymous.png")
   end
 end
