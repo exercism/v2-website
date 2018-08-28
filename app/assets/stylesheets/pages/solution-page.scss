@@ -48,7 +48,10 @@
         .solution-code {
             min-height:200px;
             margin:0;
-            padding:10px 15px 10px 55px;
+            padding:10px 15px 10px 45px;
+            @include width-small() {
+                padding: 10px 15px 10px 55px;
+            }
         }
     }
 
