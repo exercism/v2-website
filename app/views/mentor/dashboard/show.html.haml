@@ -17,51 +17,53 @@
           =render "no_solutions_section"
 
       .pure-u-1-3
-        .weekly-section
-          -weekly_progress_percentage = @weekly_solutions_count / 20.0 * 100
-          %h2 Your weekly progress
-          .h2-subtitle See how you're helping
-          .box
-            %p
-              For all learners to receive mentoring, we need each mentor to give feedback on
-              %strong 20 solutions per week.
-
-            .bar-widget{class: (@weekly_solutions_count >= 20 ? "completed" : "")}
-              .count= @weekly_solutions_count
-              .bar
-                .fill{style: "width:#{weekly_progress_percentage}%"}
-
-            -if @weekly_solutions_count == 0
-              If you're unsure where to start, take a look at the
-              =link_to "Mentoring guide", mentoring_guide_page_path
-              or reach out to the community on
-              #{link_to "Slack", "https://exercism-mentors.slack.com/archives/CBDA9LMDF/p1529968977000336"}.
-
-            -elsif @weekly_solutions_count >= 20
+        -if @weekly_solutions_count > 0
+          .weekly-section
+            -weekly_progress_percentage = @weekly_solutions_count / 20.0 * 100
+            %h2 Your weekly progress
+            .h2-subtitle See how you're helping
+            .box
               %p
+                For all learners to receive mentoring, we need each mentor to give feedback on
+                %strong 20 solutions per week.
+
+              .bar-widget{class: (@weekly_solutions_count >= 20 ? "completed" : "")}
+                .count= @weekly_solutions_count
+                .bar
+                  .fill{style: "width:#{weekly_progress_percentage}%"}
+
+              -if @weekly_solutions_count == 0
+                If you're unsure where to start, take a look at the
+                =link_to "Mentoring guide", mentoring_guide_page_path
+                or reach out to the community on
+                #{link_to "Slack", "https://exercism-mentors.slack.com/archives/CBDA9LMDF/p1529968977000336"}.
+
+              -elsif @weekly_solutions_count >= 20
+                %p
+                  So far this week you've given feedback on
+                  %strong #{@weekly_solutions_count} solutions.
+                  Thank you for putting in the time and helping so many others learn. You're making the world better.
+
+                .hr
+
+                Know someone who would be a good mentor? Ask them to visit
+                =link_to "http://mentoring.exercism.io/", "http://mentoring.exercism.io/"
+
+              -else
                 So far this week you've given feedback on
                 %strong #{@weekly_solutions_count} solutions.
-                Thank you for putting in the time and helping so many others learn. You're making the world better.
+                Thank you!
 
-              .hr
-
-              Know someone who would be a good mentor? Ask them to visit
-              =link_to "http://mentoring.exercism.io/", "http://mentoring.exercism.io/"
-
-            -else
-              So far this week you've given feedback on
-              %strong #{@weekly_solutions_count} solutions.
-              Thank you!
-
-        .contributions-section
-          %h2 Your contribution
-          .h2-subtitle see how you're helping
-          .box
-            You have mentored
-            %strong #{pluralize @total_solutions_count, "solution"}
-            and helped
-            %strong #{pluralize @total_students_count, "student"}
-            since you became a mentor.
+        -if @total_solutions_count > 0
+          .contributions-section
+            %h2 Your contribution
+            .h2-subtitle see how you're helping
+            .box
+              You have mentored
+              %strong #{pluralize @total_solutions_count, "solution"}
+              and helped
+              %strong #{pluralize @total_students_count, "student"}
+              since you became a mentor.
 
         -if @feedbacks.size > 0
           .celebration-section
@@ -70,6 +72,18 @@
             -@feedbacks.each do |feedback|
               .box
                 =feedback
+
+        .help-section
+          %h2 Mentoring help and information
+          .h2-subtitle Get help with mentoring
+          .box
+            %p
+              We've put together some guides and information to help with mentoring. We also have a Slack room where you can chat about exercises and socialise with the community.
+            %ul
+              %li= link_to "Mentoring Guide", mentoring_guide_page_path
+              %li= link_to "Mentoring FAQs", mentoring_faqs_page_path
+              %li= link_to "Our Slack Room", "https://exercism-team.slack.com/messages/CARRG4MNC"
+
 
 -content_for :js do
   :javascript
