@@ -4,7 +4,10 @@
 .tabs-and-panes {
     &>.tabs {
         border-bottom:1px solid #ddd;
-        padding-left:10px;
+        padding-left:5px;
+        @include width-small() {
+            padding-left:10px;
+        }
         .tab {
             padding:6px 5px;
             text-align:center;
