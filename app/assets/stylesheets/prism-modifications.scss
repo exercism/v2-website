@@ -4,10 +4,18 @@
 pre.line-numbers {
     margin: 0 !important;
     padding-bottom: 1em !important;
+    font-size:70%;
+    @include width-small() {
+        font-size:100%;
+    }
     .line-numbers-rows {
         span {
-            line-height:16px;
-            padding-bottom:5px;
+            line-height:13px;
+            padding-bottom:1px;
+            @include width-small() {
+                line-height:16px;
+                padding-bottom:5px;
+            }
             &:before {
             }
         }
