@@ -175,7 +175,7 @@
             border-radius:2px;
             overflow:hidden;
             display:inline-block;
-            @media #{$md-media} {
+            @include width-medium() {
                 float:right;
             }
             .reaction {
@@ -301,7 +301,7 @@
     .no-reflection,
     .reflection {
         margin: 15px 0 30px 0;
-        @media #{$md-media} {
+        @include width-medium() {
            margin:48px 0 0 50px; 
         }
         padding:40px 40px;

@@ -9,7 +9,7 @@
 #modal.leave-track {
     max-width:540px;
     padding:50px 15px 50px 15px;
-    @media #{$sm-media} {
+    @include width-small() {
         padding:50px 50px 50px 50px;
     }
     img {
@@ -52,7 +52,7 @@
 
 #modal.my-track-started {
     max-width:530px !important;
-    @media #{$sm-media} {
+    @include width-small() {
         max-height:85% !important;
     }
     .learn-more {
@@ -72,7 +72,7 @@
             display:inline-block;
             width:100%;
             margin-bottom:20px;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:auto;
                 margin-bottom:0;
             }
@@ -137,7 +137,7 @@
         &.action-button {
             width:100%;
             margin-bottom:15px;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:69%;
                 margin-bottom:0;
             }
@@ -148,7 +148,7 @@
             color:$color-1;
             font-weight:300;
             width:100%;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:30%;
             }
         }

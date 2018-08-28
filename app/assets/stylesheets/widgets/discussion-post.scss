@@ -46,7 +46,7 @@
             font-weight:$regular;
         }
         .created-at {
-            @media #{$md-media} {
+            @include width-medium() {
                 float:right;
             }
             @include font-size(11, 13);
@@ -109,7 +109,7 @@
                 padding:7px 25px;
                 width:100%;
                 margin-bottom:10px;
-                @media #{$sm-media} {
+                @include width-small() {
                     width:auto;
                     margin-bottom:0;
                 }
@@ -119,7 +119,7 @@
                 border:1px solid #ccc;
                 color:#999;
                 width:100%;
-                @media #{$sm-media} {
+                @include width-small() {
                     width:auto;
                 }
             }

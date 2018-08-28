@@ -6,7 +6,7 @@
   @include font-size;
 
   padding: 10px;
-  @media #{$md-media} {
+  @include width-medium() {
     padding: 20px;
   }
 

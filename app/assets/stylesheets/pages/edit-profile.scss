@@ -4,18 +4,18 @@
 #modal.edit-profile {
     max-width:850px !important;
     padding:35px 15px;
-    @media #{$md-media} {
+    @include width-medium() {
         padding:35px;
     }
     .lhs {
         margin-bottom:15px;
-        @media #{$md-media} {
+        @include width-medium() {
             padding-right:20px;
             margin-bottom:0;
         }
     }
     .rhs {
-        @media #{$md-media} {
+        @include width-medium() {
             padding-left:20px;
             border-left:1px solid #eee;
         }
@@ -56,7 +56,7 @@
         h3 {
             padding-top:10px;
             margin-bottom:10px;
-            @media #{$md-media} {
+            @include width-medium() {
                 margin-bottom:0;
             }
         }
@@ -137,7 +137,7 @@
         &.update-button {
             width:100%;
             margin-bottom:15px;
-            @media #{$sm-media} {
+            @include width-small() {
                 width:70%;
                 margin-right:3%;
                 margin-bottom:15px;
@@ -149,7 +149,7 @@
             border:1px solid $color-1;
             color:$color-1;
             background:#fff;
-            @media #{$sm-media} {
+            @include width-small() {
                 width:25%;
                 margin-bottom:15px;
             }

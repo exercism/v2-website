@@ -4,7 +4,7 @@
 .lo-container {
     max-width:1200px;
     padding:0 15px;
-    @media #{$md-media} {
+    @include width-medium() {
         padding:0 50px;
     }
     margin:0 auto;

@@ -4,20 +4,20 @@
 #onboarding-page {
     .lhs {
         padding-top:30px;
-        @media #{$md-media} {
+        @include width-medium() {
             padding-right:30px;
         }
     }
     .rhs {
         padding-top:30px;
-        @media #{$md-media} {
+        @include width-medium() {
             padding-top:0;
             padding-left:50px;
         }
         #widget-code-person {
             display:none;
             width:460px;
-            @media #{$md-media} {
+            @include width-medium() {
                 display:block;
             }
         }
