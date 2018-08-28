@@ -242,6 +242,9 @@
 
 #modal.solution-confirm-unapproved-completion {
     padding-top:50px;
+    #modal-close-button {
+        border-top-right-radius: 6px;
+    }
     .warning-bar {
         background:#ffe3e3;
         padding:10px 50px;
