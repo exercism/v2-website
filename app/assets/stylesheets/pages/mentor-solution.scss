@@ -20,12 +20,12 @@
             > .widget-iterations-nav {
                 float:right;
                 display:none;
-                @media #{$sm-media} {
+                @include width-small() {
                     display:block;
                 }
             }
             .small-iterations-nav {
-                @media #{$sm-media} {
+                @include width-small() {
                     display:none;
                 }
                 margin-top: 20px;
@@ -56,12 +56,12 @@
     .notifications-bar {
         overflow:hidden;
         margin-bottom:20px;
-        @media #{$md-media} {
+        @include width-medium() {
             margin-bottom:40px;
         }
         .community-solutions {
             margin-bottom:15px;
-            @media #{$md-media} {
+            @include width-medium() {
                 float:right;
                 margin-bottom:0;
             }

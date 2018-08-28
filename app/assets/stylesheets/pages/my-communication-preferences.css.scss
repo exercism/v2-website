@@ -3,20 +3,20 @@
 
 #my-communication-preferences-page {
     padding-top:30px;
-    @media #{$sm-media} {
+    @include width-small() {
         padding-top:0;
     }
     #nav {
         margin-bottom:30px;
     }
     .lhs {
-        @media #{$md-media} {
+        @include width-medium() {
             border-right:1px solid #eee;
             padding-right:30px;
         }   
     }
     .rhs {
-        @media #{$md-media} {
+        @include width-medium() {
             padding-left:30px;
         }
     }

@@ -17,7 +17,7 @@
             width: 60px;
             padding-top: 5px;
             margin-bottom:10px;
-            @media #{$md-media} {
+            @include width-medium() {
                 margin-bottom:0;
             }
 
@@ -37,7 +37,7 @@
             background-position: center;
             background-size: cover;
 
-            @media #{$sm-media} {
+            @include width-small() {
                 display:inline-block;
                 margin-top:0;
             }

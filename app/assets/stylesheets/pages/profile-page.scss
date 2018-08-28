@@ -8,7 +8,7 @@
         background-size:cover;
         padding:15px 0 15px;
         margin-bottom:35px;
-        @media #{$sm-media} {
+        @include width-small() {
             padding:100px 0 35px;
         }
         .edit-button {
@@ -19,7 +19,7 @@
             background:#4accaa;
             font-weight:$regular;
             margin-top:25px;
-            @media #{$sm-media} {
+            @include width-small() {
                 float:right;
                 margin-bottom:0;
                 margin-top: -50px;
@@ -44,7 +44,7 @@
 
     }
     .lhs {
-        @media #{$md-media} {
+        @include width-medium() {
             padding:0 0px 30px 0;
         }
         .sidebar {
@@ -52,10 +52,10 @@
             border-radius:2px;
             padding:50px 15px;
             margin-bottom:15px;
-            @media #{$md-media} {
+            @include width-medium() {
                 margin-bottom:0;
             }
-            @media #{$sm-media} {
+            @include width-small() {
                 padding:50px 30px;
             }
             .avatar {
@@ -140,13 +140,13 @@
         }
     }
     .rhs {
-        @media #{$md-media} {
+        @include width-medium() {
             padding-left:45px;
         }
         .num-solutions {
             color:#fff;
             margin-bottom:5px;
-            @media #{$md-media} {
+            @include width-medium() {
                 float:right;
                 margin-bottom:0;
             }

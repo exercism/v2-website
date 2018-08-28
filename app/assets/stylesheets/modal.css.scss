@@ -24,7 +24,7 @@
         overflow-x: visible;
 
         background:#fff;
-        @media #{$sm-media} {
+        @include width-small() {
             height:auto;
             max-height:80%;
             margin: 60px auto;

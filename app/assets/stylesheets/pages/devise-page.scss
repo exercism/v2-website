@@ -3,28 +3,28 @@
 
 body.devise {
     background:#f7f7f7;
-    @media #{$lg-media} {
+    @include width-large() {
         background:none;
     }
 }
 .lo-devise-page {
     .lhs #widget-code-person {
         display: none;
-        @media #{$lg-media} {
+        @include width-large() {
             display: block;
             min-height:500px;
         }
     }
     .rhs {
         padding-top:30px;
-        @media #{$lg-media} {
+        @include width-large() {
             padding-left:20px;
         }
     }
     .frame {
         background:#f7f7f7;
         padding:25px 15px;
-        @media #{$lg-media} {
+        @include width-large() {
             padding:25px 45px;
         }
     }

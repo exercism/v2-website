@@ -9,7 +9,7 @@
         a {
             color:#fff;
         }
-        @media #{$sm-media} {
+        @include width-small() {
             background:none;
             color:#333;
             a {
@@ -19,7 +19,7 @@
     }
     .track-header {
         margin-top:20px;
-        @media #{$sm-media} {
+        @include width-small() {
             border:1px solid #e5e5e5;
         }
         border-radius:2px;
@@ -37,7 +37,7 @@
             background:$color-1;
             border:5px solid #fff;
             box-shadow:0 0 1px 1px $color-1;
-            @media #{$sm-media} {
+            @include width-small() {
                 float:left;
                 margin-left: -54px;
                 margin-right:20px;
@@ -57,13 +57,13 @@
             }
             .track-progress-mobile {
                 display:block;
-                @media #{$sm-media} {
+                @include width-small() {
                     display:none;
                 }
             }
             .track-progress {
                 display:none;
-                @media #{$sm-media} {
+                @include width-small() {
                     display:block;
                 }
                 h3 {
@@ -123,12 +123,12 @@
 #my-solution-page .inner .widget-iterations-nav {
     float:right;
     display:none;
-    @media #{$sm-media} {
+    @include width-small() {
         display:block;
     }
 }
 #my-solution-page .small-iterations-nav .widget-iterations-nav {
-    @media #{$sm-media} {
+    @include width-small() {
         display:none;
     }
     margin:20px 15px;
@@ -193,7 +193,7 @@
         overflow:hidden;
         margin-bottom:40px;
         background:rgba($color-1, 0.05);
-        @media #{$sm-media} {
+        @include width-small() {
             background:none;
         }
         /*.community-solutions {
@@ -214,7 +214,7 @@
             //margin-right:190px;
             @include font-size(13, 13);
             padding:8px 15px;
-            @media #{$sm-media} {
+            @include width-small() {
                 border:1px solid rgba($color-1, 0.2);
                 background:rgba($color-1, 0.05);
                 padding:8px 20px;
@@ -250,7 +250,7 @@
     }
     .content {
         padding:20px 15px;
-        @media #{$md-media} {
+        @include width-medium() {
             padding:20px 40px;
         }
         h2 {
@@ -283,7 +283,7 @@
 #modal.solution-reflection,
 #modal.solution-unlocked {
     padding:30px 15px 50px 15px;
-    @media #{$md-media} {
+    @include width-medium() {
         padding:30px 50px 50px 50px;
     }
     .progress {

@@ -18,7 +18,7 @@
     }
     .lhs {
         padding-right:0;
-        @media #{$lg-media} {
+        @include width-large() {
             padding-right:40px;
         }
     }
@@ -81,7 +81,7 @@
             width:150px;
         }
         display:none;
-        @media #{$lg-media} {
+        @include width-large() {
             display:block;
         }
     }

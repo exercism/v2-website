@@ -8,13 +8,13 @@
     }
 
     .lhs {
-        @media #{$md-media} {
+        @include width-medium() {
             padding-right:60px;
         }
         
     }
     .rhs {
-        @media #{$md-media} {
+        @include width-medium() {
             padding-left:60px;
             border-left:1px solid #e5e5e5;
         } 
