@@ -19,11 +19,12 @@
     }
     .track-header {
         margin-top:20px;
+        padding:22px 10px;
         @include width-small() {
             border:1px solid #e5e5e5;
+            padding:22px 20px;
         }
         border-radius:2px;
-        padding:22px 20px;
         margin-bottom:10px;
         .icon {
             display:block;
@@ -128,10 +129,11 @@
     }
 }
 #my-solution-page .small-iterations-nav .widget-iterations-nav {
+    margin:20px 10px;
     @include width-small() {
         display:none;
+        margin:20px 15px;
     }
-    margin:20px 15px;
     .title, .iterations {
         text-align:left;
     }
@@ -213,7 +215,7 @@
         .notification {
             //margin-right:190px;
             @include font-size(13, 13);
-            padding:8px 15px;
+            padding:8px 10px;
             @include width-small() {
                 border:1px solid rgba($color-1, 0.2);
                 background:rgba($color-1, 0.05);
