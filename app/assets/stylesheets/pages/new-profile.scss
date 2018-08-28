@@ -30,7 +30,7 @@
 
 #modal.new-profile {
     padding:20px 15px 25px 15px;
-    @media #{$md-media} {
+    @include width-medium() {
         padding:20px 35px 25px;
     }
     .progress {
@@ -68,7 +68,7 @@
         &.start {
             width:100%;
             margin-right:3%;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:70%;
             }
         }
@@ -78,7 +78,7 @@
             border:1px solid $color-1;
             color:$color-1;
             background:#fff;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:25%;
                 margin-bottom:0;
             }

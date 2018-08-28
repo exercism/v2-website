@@ -5,7 +5,7 @@
     .header {
         background-color: $color-2;
         h1 {
-            @media #{$lg-media} {
+            @include width-large() {
                 float:left;
             }
         }
@@ -42,7 +42,7 @@
             float:left;
             margin-top:15px;
             margin-bottom:15px;
-            @media #{$lg-media} {
+            @include width-large() {
                 float:right;
                 margin-top:35px;
                 margin-bottom:0;

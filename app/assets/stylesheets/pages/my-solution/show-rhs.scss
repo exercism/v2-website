@@ -34,7 +34,7 @@
         }
         p {
             @include font-size(13, 19);
-            @media #{$sm-media} {
+            @include width-small() {
                 padding-left:19px;
             }
             margin-bottom:10px;
@@ -47,7 +47,7 @@
             }
         }
         .pure-button {
-            @media #{$sm-media} {
+            @include width-small() {
                 margin-left:20px;
             }
         }
@@ -75,7 +75,7 @@
         border-radius:2px;
         padding:8px 25px;
         width:100%;
-        @media #{$sm-media} {
+        @include width-small() {
             width:auto;
         }
     }

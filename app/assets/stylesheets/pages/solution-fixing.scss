@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'mixins';
 
 #my-solution-unlocked-page,
 #my-solution-page,
@@ -8,7 +8,7 @@
             overflow:hidden;
             margin-top:30px;
             margin-bottom:30px;
-            @media #{$md-media} {
+            @include width-medium() {
                 margin-top:0;
                 margin-bottom:0;
                 padding-left:50px;

@@ -8,10 +8,10 @@ body.controller-pages.action-index footer {
     .welcome-section {
         .lhs {
             display:none;
-            @media #{$md-media} {
+            @include width-medium() {
                 display: block;
             }
-            @media #{$md-media} {
+            @include width-medium() {
                 padding-bottom:50px; 
             }
             z-index: -1;
@@ -19,7 +19,7 @@ body.controller-pages.action-index footer {
         .rhs {
             padding-top:50px;
             margin-bottom:50px;
-            @media #{$md-media} {
+            @include width-medium() {
                 padding-top:150px;
                 margin-bottom:150px;
             }
@@ -56,7 +56,7 @@ body.controller-pages.action-index footer {
                 border-radius:2px;
                 width:100%;
                 margin-bottom:15px;
-                @media #{$sm-media} {
+                @include width-small() {
                     width:auto;
                     margin-bottom:0;
                 }
@@ -82,14 +82,14 @@ body.controller-pages.action-index footer {
             h2 {
                 @include header-font;
                 font-weight:600;
-                @media #{$sm-media} {
+                @include width-small() {
                     text-align:center;
                 }
                 @include font-size(30, 30);
                 margin-bottom:15px;
             }
             p {
-                @media #{$sm-media} {
+                @include width-small() {
                     text-align:center;
                     margin: 0px auto 40px auto;
                 }
@@ -228,7 +228,7 @@ body.controller-pages.action-index footer {
                     border-radius:5px;
                     border: 2px solid $color-2;
                     margin:10px 5px;
-                    @media #{$sm-media} {
+                    @include width-small() {
                         margin:10px;
                     }
                     .logo, .title {
@@ -268,11 +268,11 @@ body.controller-pages.action-index footer {
             margin:10px 0 20px;
             width:80px;
             border-bottom:1px solid #ddd;
-            @media #{$sm-media} {
+            @include width-small() {
                 width:0;
                 border-bottom:1px solid #eee;
             }
-            @media #{$md-media} {
+            @include width-medium() {
                 margin:0 400px 30px;
             }
         }
@@ -281,20 +281,20 @@ body.controller-pages.action-index footer {
             img {
                 margin:0 auto;
             }
-            @media #{$sm-media} {
+            @include width-small() {
                 display:none;
             }
         }
         .step .step-image {
             display:none;
-            @media #{$sm-media} {
+            @include width-small() {
                 display:block;
             }
         }
         .step {
             overflow:hidden;
             margin:0 auto 15px;
-            @media #{$md-media} {
+            @include width-medium() {
                margin:0 auto 30px; 
             }
             max-width:700px;
@@ -302,7 +302,7 @@ body.controller-pages.action-index footer {
                 display:block;
                 width:80%;
                 max-width:230px;
-                @media #{$sm-media} {
+                @include width-small() {
                     width:100%;
                 }
             }
@@ -311,7 +311,7 @@ body.controller-pages.action-index footer {
                 font-weight:$regular;
                 @include font-size(18, 18);
                 margin-bottom:10px;
-                @media #{$md-media} {
+                @include width-medium() {
                     margin-top:30px;
                 }
             }
@@ -365,7 +365,7 @@ body.controller-pages.action-index footer {
         padding:60px 0;
         h2 {
             color:#fff;
-            @media #{$sm-media} {
+            @include width-small() {
                 text-align:center;
             }
             @include font-size(17, 17);
@@ -382,7 +382,7 @@ body.controller-pages.action-index footer {
             margin:0 auto;
             display:block;
             width:100%;
-            @media #{$sm-media} {
+            @include width-small() {
                 width:280px;
             }
             color:#fff;
@@ -393,10 +393,10 @@ body.controller-pages.action-index footer {
 
 #modal.announcement {
     padding:50px 15px;
-    @media #{$sm-media} {
+    @include width-small() {
         padding:50px;
     }
-    @media #{$md-media} {
+    @include width-medium() {
         margin:40px auto !important;
         max-height:85% !important;
     }

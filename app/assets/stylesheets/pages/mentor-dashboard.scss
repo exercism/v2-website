@@ -98,21 +98,21 @@ $blue: #4A90E2;
         &.status .selectize-control {
             width:100%;
             max-width:100%;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:200px;
             }
         }
         &.track_id .selectize-control {
             width:100%;
             max-width:100%;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:130px;
             }
         }
         &.exercise_id .selectize-control {
             width:100%;
             max-width:100%;
-            @media #{$md-media} {
+            @include width-medium() {
                 width:155px;
             }
         }
@@ -145,7 +145,7 @@ $blue: #4A90E2;
         }
         .icons {
             position:relative;
-            @media #{$md-media} {
+            @include width-medium() {
                 float:left;
             }
             margin-right:20px;
@@ -167,7 +167,7 @@ $blue: #4A90E2;
                 }
 
                 display:none;
-                @media #{$md-media} {
+                @include width-medium() {
                     display:block;
                 }
             }
@@ -177,7 +177,7 @@ $blue: #4A90E2;
                 width:20px;
                 border-bottom:2px solid $color-2;
                 display:none;
-                @media #{$md-media} {
+                @include width-medium() {
                     display:block;
                 }
             }
@@ -188,7 +188,7 @@ $blue: #4A90E2;
                 height:50px;
                 float:left;
                 display:none;
-                @media #{$md-media} {
+                @include width-medium() {
                     display:block;
                 }
             }
@@ -196,10 +196,10 @@ $blue: #4A90E2;
         .details {
             margin-bottom:6px;
             clear:both;
-            @media #{$sm-media} {
+            @include width-small() {
                 clear:none;
             }
-            @media #{$md-media} {
+            @include width-medium() {
                 padding-left:10px;
                 border-left:2px solid #ddd;
             }
@@ -249,14 +249,14 @@ $blue: #4A90E2;
                     border-right:1px solid #bbb;
                     &:nth-child(4) {
                         display:none;
-                        @media #{$sm-media} {
+                        @include width-small() {
                             display:inline-block;
                         }
                     }
                 }
                 .submitted-at {
                     display:block;
-                    @media #{$sm-media} {
+                    @include width-small() {
                         display:inline-block;
                     }
                 }
@@ -267,7 +267,7 @@ $blue: #4A90E2;
             width:20px;
             margin-top:-30px;
             position:relative;
-            @media #{$md-media} {
+            @include width-medium() {
                 width: 30px;
                 position: absolute;
                 top: -15px;
@@ -340,14 +340,14 @@ $blue: #4A90E2;
     .contributions-section,
     .celebration-section {
         padding:15px;
-        @media #{$md-media} {
+        @include width-medium() {
             padding:30px 30px;
         }
         background:#f9f9f9;
         border-radius:2px;
         margin-top:15px;
         margin-bottom:15px;
-        @media #{$md-media} {
+        @include width-medium() {
             margin-top:0;
             margin-bottom:0;
             margin-left:50px;

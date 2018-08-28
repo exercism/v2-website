@@ -33,7 +33,7 @@
         }
         .search-bar {
             width:100%;
-            @media #{$sm-media} {
+            @include width-small() {
                 width:auto;
             }
             position: relative;
@@ -124,7 +124,7 @@
         border-radius:2px;
         padding:10px 20px;
         margin: 0 0 20px 0;
-        @media #{$md-media} {
+        @include width-medium() {
             margin: 0 20px 20px 0;
         }
         position:relative;

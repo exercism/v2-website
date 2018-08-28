@@ -5,10 +5,10 @@
     padding: 30px 15px 15px 15px;
     border-radius:2px;
     margin-top:42px;
-    @media #{$md-media} {
+    @include width-medium() {
         margin-left:50px;
     }
-    @media #{$lg-media} {
+    @include width-large() {
         background:#f9f9f9;
         padding: 30px 30px 15px 30px;
         margin-left:100px;
@@ -32,7 +32,7 @@
     }
     .core, .topics, .side, .guides, .danger-zone {
         background:#f9f9f9;
-        @media #{$lg-media} {
+        @include width-large() {
             background:#fff;
         }
         padding:20px 30px;

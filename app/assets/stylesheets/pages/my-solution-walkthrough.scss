@@ -4,7 +4,7 @@
 #modal-wrapper #modal.solution-walkthrough {
   max-width: 100%;
   padding: 15px;
-  @media #{$md-media} {
+  @include width-medium() {
     padding: 40px;
   }
 }

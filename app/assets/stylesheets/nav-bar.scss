@@ -7,7 +7,7 @@
     height:35px;
     border-bottom: 1px solid rgba(#22333b, 0.5);
     display:none;
-    @media #{$sm-media} {
+    @include width-small() {
         display:block;
     }
     a, span {
