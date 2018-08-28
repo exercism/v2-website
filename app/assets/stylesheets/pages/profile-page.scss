@@ -163,9 +163,11 @@
             }
         }
         .solutions {
-            .pure-u-1 {
-                &:nth-child(odd) { padding-right:10px }
-                &:nth-child(even) { padding-left:10px }
+            @include width-medium() {
+                .pure-u-1 {
+                    &:nth-child(odd) { padding-right:10px }
+                    &:nth-child(even) { padding-left:10px }
+                }
             }
             .solution {
                 display:block;
