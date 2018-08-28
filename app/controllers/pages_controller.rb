@@ -21,6 +21,8 @@ class PagesController < ApplicationController
     "Changelog": :changelog,
 
     "Mentoring Guide": :mentoring_guide,
+    "Getting started with mentoring": :mentoring_getting_started,
+    "Mentoring workflow": :mentoring_workflow,
     "Mentoring FAQs": :mentoring_faqs,
 
     "About the new site": :about_v1_to_v2,
@@ -34,6 +36,7 @@ class PagesController < ApplicationController
 
   PAGES.merge(LICENCES).each do |title, page|
     define_method page do
+      p Git::WebsiteContent.head.pages
       markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
       @page = page
       @page_title = title
