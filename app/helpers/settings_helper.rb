@@ -3,6 +3,8 @@ module SettingsHelper
     selected = case controller_name
       when "communication_preferences"
         :preferences
+      when "track_settings"
+        :track_settings
       else
         :settings
       end
