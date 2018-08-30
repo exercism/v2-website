@@ -33,6 +33,13 @@ window.setupSolution = ->
       else
         $lhs.removeClass('fixed')
   ###
+  getLocalStoragePost = =>
+    content = localStorage.getItem('discussionPost-' + window.location.pathname)
+    return content
+
+  setLocalStoragePost = (content) =>
+    localStorage.setItem('discussionPost-' + window.location.pathname, content)
+    return content
 
   setupNewDiscussionPost = =>
     $textarea = $(".new-discussion-post-form textarea")
@@ -41,6 +48,11 @@ window.setupSolution = ->
     $textarea.markdown
       iconlibrary: 'fa'
       hiddenButtons: 'cmdHeading cmdImage cmdPreview'
+
+    $textarea.val(getLocalStoragePost())
+
+    $textarea.bind "keyup change input", ->
+      setLocalStoragePost($textarea.val())
 
     $('.preview-tab').click ->
       markdown = $textarea.val()
@@ -52,6 +64,7 @@ window.setupSolution = ->
       $('.new-discussion-post-form textarea').val("")
       $('.new-discussion-post-form .preview-area').html('')
       Prism.highlightAll()
+      setLocalStoragePost("")
 
   #$window.resize(setupLayout)
   #setupLayout()
