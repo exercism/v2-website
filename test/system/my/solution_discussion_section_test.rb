@@ -194,4 +194,28 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     click_on "Comment"
     within(".preview-area") { assert_text "", { exact: true } }
   end
+
+  test "localstorage saves comment draft" do
+    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false)
+    create :iteration, solution: solution
+    create(:user_track, track: solution.track, user: @user)
+
+    visit my_solution_path(solution)
+
+    assert_selector ".comment-button"
+    assert_selector ".markdown"
+    refute_selector ".preview"
+
+    assert_equal "", find(".new-discussion-post-form textarea").value
+    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+
+    visit my_solution_path(solution)
+
+    assert_equal "An example mentor comment to test the comment button!", find(".new-discussion-post-form textarea").value
+    find(".new-discussion-post-form textarea").set("")
+
+    visit my_solution_path(solution)
+
+    assert_equal "", find(".new-discussion-post-form textarea").value
+  end
 end
