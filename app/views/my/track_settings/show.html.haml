@@ -15,7 +15,7 @@
               %th Use alias?
               %th How you will appear
             -@user_tracks.each do |user_track|
-              %tr.track
+              %tr.track{:data => {:track => user_track.track.title}}
                 %td.title #{user_track.track.title} Track
                 %td.anonymous
                   =check_box_tag "user_tracks[#{user_track.id}][anonymous]", 1, user_track.anonymous?, class: 'anonymous-toggle'
