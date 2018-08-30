@@ -4,10 +4,16 @@
 #teams-my-solution-unlocked-page {
     padding-bottom:30px;
     .lhs {
-        padding-right:60px;
+        margin-bottom:30px;
+        @include width-large() {
+            padding-right:60px;
+            margin-bottom:0;
+        }
     }
     .rhs {
-        padding-left:60px;
+        @include width-large() {
+            padding-left:60px;
+        }
     }
 
     .instructions {
