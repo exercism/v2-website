@@ -33,12 +33,20 @@ window.setupSolution = ->
       else
         $lhs.removeClass('fixed')
   ###
+  updateStatusDiscussionPost = (content) =>
+    if content.length > 0 && $(".new-discussion-post-form .btn-toolbar .saved").length < 1
+      $(".new-discussion-post-form .btn-toolbar").append("<span class='saved'>Draft saved</span>")
+    if content.length < 1
+      $(".new-discussion-post-form .btn-toolbar .saved").remove()
+
   getLocalStoragePost = =>
     content = localStorage.getItem('discussionPost-' + window.location.pathname)
+    updateStatusDiscussionPost(content)
     return content
 
   setLocalStoragePost = (content) =>
     localStorage.setItem('discussionPost-' + window.location.pathname, content)
+    updateStatusDiscussionPost(content)
     return content
 
   setupNewDiscussionPost = =>
