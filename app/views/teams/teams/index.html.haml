@@ -28,7 +28,7 @@
     .pure-g
       -if @teams.present?
         -@teams.each do |team|
-          .pure-u-1-5
+          .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-5
             = link_to [:teams, team], class: "team" do
               .img
               %h3= team.name
@@ -38,7 +38,7 @@
                   = team.members.count
                   Members
 
-      .pure-u-1-5
+      .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-5
         = link_to [:new, :teams, :team], class: 'new-team' do
           .img
           %h3 Create a new team
