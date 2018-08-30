@@ -40,7 +40,7 @@ window.setupSolution = ->
       $(".new-discussion-post-form .btn-toolbar .saved").remove()
 
   getLocalStoragePost = =>
-    content = localStorage.getItem('discussionPost-' + window.location.pathname)
+    content = localStorage.getItem('discussionPost-' + window.location.pathname) || ""
     updateStatusDiscussionPost(content)
     return content
 
