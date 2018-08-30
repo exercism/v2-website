@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require purecss/build/pure-min.css
+ *= require purecss/build/grids-responsive-min.css
  *= require selectize/dist/css/selectize.default.css
  *= require_tree .
  *= stub mailer
