@@ -91,7 +91,10 @@
             .reaction {
                 float:left;
                 border-right:1px solid #eee;
-                padding:10px 16px;
+                padding:5px 8px;
+                @include width-small() {
+                    padding:10px 16px;
+                }
                 &:last-child {
                     border:none;
                 }
@@ -113,8 +116,11 @@
                 }
 
                 i {
-                    @include font-size(16, 16);
+                    @include font-size(12, 12);
                     color:#aaa;
+                    @include width-small() {
+                        @include font-size(16, 16);
+                    }
                 }
                 img {
                     vertical-align:bottom;
