@@ -47,7 +47,6 @@ window.setupSolution = ->
   setLocalStoragePost = (content) =>
     localStorage.setItem('discussionPost-' + window.location.pathname, content)
     updateStatusDiscussionPost(content)
-    return content
 
   setupNewDiscussionPost = =>
     $textarea = $(".new-discussion-post-form textarea")
