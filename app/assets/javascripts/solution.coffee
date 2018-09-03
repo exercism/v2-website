@@ -46,12 +46,10 @@ window.setupSolution = ->
       markdown = $textarea.val()
       $.post "/markdown/parse", {markdown: markdown}, (x,y,z) =>
         $('.new-discussion-post-form .preview-area').html(x)
-        Prism.highlightAll()
 
     $(".new-discussion-post-form").on "ajax:success", ->
       $('.new-discussion-post-form textarea').val("")
       $('.new-discussion-post-form .preview-area').html('')
-      Prism.highlightAll()
 
   #$window.resize(setupLayout)
   #setupLayout()

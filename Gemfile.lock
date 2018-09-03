@@ -155,6 +155,9 @@ GEM
       railties (>= 4.0.1)
     hashdiff (0.3.7)
     hashie (3.5.7)
+    html-pipeline (2.8.4)
+      activesupport (>= 2)
+      nokogiri (>= 1.4)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -224,6 +227,8 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
+    nokogumbo (1.5.0)
+      nokogiri
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -292,6 +297,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rouge (3.1.1)
     ruby-enum (0.7.2)
       i18n
     ruby-vips (2.0.12)
@@ -302,6 +308,10 @@ GEM
     rubyzip (1.2.1)
     rugged (0.27.2)
     safe_yaml (1.0.4)
+    sanitize (4.6.6)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (~> 1.4)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -399,6 +409,7 @@ DEPENDENCIES
   factory_bot_rails
   friendly_id (~> 5.2)
   haml-rails
+  html-pipeline
   image_processing (~> 1.2)
   jquery-rails
   kaminari
@@ -417,7 +428,9 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.2)
   rails-controller-testing
+  rouge
   rugged
+  sanitize
   sass-rails (~> 5.0)
   selenium-webdriver
   sidekiq
