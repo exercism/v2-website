@@ -10,7 +10,7 @@ window.setupSolutionTabs = ->
         tabId = c.replace("tab-", "") if c.startsWith("tab-")
 
       $container.addClass("selected-#{tabId}") if tabId
-window.setupSolution = ->
+window.setupSolution = (solutionID, iterationID) ->
   ###
     $window = $(window)
     setupLayout = =>
@@ -40,12 +40,12 @@ window.setupSolution = ->
       $(".new-discussion-post-form .btn-toolbar .saved").remove()
 
   getLocalStoragePost = =>
-    content = localStorage.getItem('discussionPost-' + window.location.pathname) || ""
+    content = localStorage.getItem('discussionPost-' + solutionID + '-' + iterationID) || ""
     updateStatusDiscussionPost(content)
     return content
 
   setLocalStoragePost = (content) =>
-    localStorage.setItem('discussionPost-' + window.location.pathname, content)
+    localStorage.setItem('discussionPost-' + solutionID + '-' + iterationID, content)
     updateStatusDiscussionPost(content)
 
   setupNewDiscussionPost = =>
