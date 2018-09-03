@@ -163,7 +163,7 @@
             }
         }
         .solutions {
-            @include width-medium() {
+            @include width-large() {
                 .pure-u-1 {
                     &:nth-child(odd) { padding-right:10px }
                     &:nth-child(even) { padding-left:10px }
