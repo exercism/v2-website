@@ -45,7 +45,10 @@ window.setupSolution = (solutionID, iterationID) ->
     return content
 
   setLocalStoragePost = (content) =>
-    localStorage.setItem('discussionPost-' + solutionID + '-' + iterationID, content)
+    if content.length > 0
+      localStorage.setItem('discussionPost-' + solutionID + '-' + iterationID, content)
+    else 
+      localStorage.removeItem('discussionPost-' + solutionID + '-' + iterationID)
     updateStatusDiscussionPost(content)
 
   setupNewDiscussionPost = =>
