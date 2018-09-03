@@ -10,7 +10,7 @@ window.setupSolutionTabs = ->
         tabId = c.replace("tab-", "") if c.startsWith("tab-")
 
       $container.addClass("selected-#{tabId}") if tabId
-window.setupSolution = ->
+window.setupSolution = (solutionID, iterationID) ->
   ###
     $window = $(window)
     setupLayout = =>
@@ -33,6 +33,23 @@ window.setupSolution = ->
       else
         $lhs.removeClass('fixed')
   ###
+  updateStatusDiscussionPost = (content) =>
+    if content.length > 0 && $(".new-discussion-post-form .btn-toolbar .saved").length < 1
+      $(".new-discussion-post-form .btn-toolbar").append("<span class='saved'>Draft saved</span>")
+    if content.length < 1
+      $(".new-discussion-post-form .btn-toolbar .saved").remove()
+
+  getLocalStoragePost = =>
+    content = localStorage.getItem('discussionPost-' + solutionID + '-' + iterationID) || ""
+    updateStatusDiscussionPost(content)
+    return content
+
+  setLocalStoragePost = (content) =>
+    if content.length > 0
+      localStorage.setItem('discussionPost-' + solutionID + '-' + iterationID, content)
+    else 
+      localStorage.removeItem('discussionPost-' + solutionID + '-' + iterationID)
+    updateStatusDiscussionPost(content)
 
   setupNewDiscussionPost = =>
     $textarea = $(".new-discussion-post-form textarea")
@@ -41,6 +58,11 @@ window.setupSolution = ->
     $textarea.markdown
       iconlibrary: 'fa'
       hiddenButtons: 'cmdHeading cmdImage cmdPreview'
+
+    $textarea.val(getLocalStoragePost())
+
+    $textarea.bind "keyup change input", ->
+      setLocalStoragePost($textarea.val())
 
     $('.preview-tab').click ->
       markdown = $textarea.val()
@@ -52,6 +74,7 @@ window.setupSolution = ->
       $('.new-discussion-post-form textarea').val("")
       $('.new-discussion-post-form .preview-area').html('')
       Prism.highlightAll()
+      setLocalStoragePost("")
 
   #$window.resize(setupLayout)
   #setupLayout()
