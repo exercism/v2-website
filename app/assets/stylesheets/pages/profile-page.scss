@@ -198,7 +198,6 @@
                     }
                 }
                 .title-bar {
-                    margin-bottom:10px;
                     text-overflow:ellipsis;
                     white-space:nowrap;
                     overflow:hidden;
@@ -233,6 +232,7 @@
                     border-radius:2px;
                     overflow:hidden;
                     display:inline-block;
+                    margin-top:10px;
                     .reaction {
                         float:left;
                         border-right:1px solid #eee;
