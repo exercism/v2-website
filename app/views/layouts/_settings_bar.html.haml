@@ -1,0 +1,5 @@
+#settings-bar.lo-settings-bar
+  .lo-container
+    =link_to "Account Settings", my_settings_path, class: (selected == :settings ? "selected" : "")
+    =link_to "Track Settings", edit_my_settings_track_settings_path, class: (selected == :track_settings ? "selected" : "")
+    =link_to "Preferences", edit_my_settings_communication_preferences_path, class: (selected == :preferences ? "selected" : "")
