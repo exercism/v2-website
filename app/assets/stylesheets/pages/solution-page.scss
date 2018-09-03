@@ -172,6 +172,18 @@
                 }
             }
         }
+        .reactions-desktop {
+            display:none;
+            @include width-medium() {
+                display:block;
+            }
+        }
+        .reactions-mobile {
+            margin-top:10px;
+            @include width-medium() {
+                display:none;
+            }
+        }
         .reactions {
             background:#fafafa;
             border:1px solid #eee;
