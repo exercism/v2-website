@@ -3,7 +3,7 @@ class My::TrackSettingsController < MyController
     setup_show
   end
 
-  def update_user_tracks
+  def update
     @user_tracks = current_user.user_tracks.includes(:track)
     mapped_user_tracks = @user_tracks.each_with_object({}) {|ut, h|h[ut.id] = ut }
 
@@ -29,10 +29,6 @@ class My::TrackSettingsController < MyController
     end
 
     render action: :show
-  end
-
-  def update
-    redirect_to action: :show
   end
 
   private

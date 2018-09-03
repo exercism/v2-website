@@ -8,7 +8,7 @@
       .pure-u-1
         %h2 Privacy
         %p You can use different aliases on tracks where you wish to be anonymous. By default your handle and photo will appear next to solutions.
-        =form_tag [:update_user_tracks, :my, :settings, :track_settings], method: :patch do |f|
+        =form_tag [:update, :my, :settings, :track_settings], method: :patch do |f|
           %table.tracks
             %tr
               %th Track

@@ -140,9 +140,7 @@ Rails.application.routes.draw do
 
     resource :settings do
       resource :communication_preferences, only: [:edit, :update]
-      resource :track_settings, only: [:show, :update] do
-        patch :update_user_tracks
-      end
+      resource :track_settings, only: [:show, :update]
     end
   end
 
