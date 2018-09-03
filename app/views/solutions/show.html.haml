@@ -32,13 +32,17 @@
     .header
       =image display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), "Avatar of #{display_handle(@solution.user, @solution.user.user_track_for(@track))}", class: "avatar"
 
-      =render "reactions"
+      .reactions-desktop
+        =render "reactions"
 
       %h1 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s solution
 
       %h2
         to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
         in the #{link_to "#{@track.title} Track", @track, class: "track"}
+
+      .reactions-mobile
+        =render "reactions"
 
   .lo-container
     .pure-g.panels
