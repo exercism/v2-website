@@ -1,6 +1,6 @@
 class My::TrackSettingsController < MyController
-  def show
-    setup_show
+  def edit
+    setup_edit
   end
 
   def update
@@ -28,12 +28,12 @@ class My::TrackSettingsController < MyController
       flash.alert = "The handles #{errors.to_sentence} are already taken"
     end
 
-    render action: :show
+    render action: :edit
   end
 
   private
 
-  def setup_show
+  def setup_edit
     @user_tracks = current_user.user_tracks.includes(:track)
   end
 end

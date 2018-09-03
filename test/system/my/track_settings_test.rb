@@ -12,16 +12,16 @@ class My::TrackSettingsTest < ApplicationSystemTestCase
 
   test "can navigate to track settings" do
     visit my_settings_path
-    assert page.has_link?(href: my_settings_track_settings_path)
+    assert page.has_link?(href: edit_my_settings_track_settings_path)
     click_on "Track Settings"
-    assert_current_path my_settings_track_settings_path
+    assert_current_path edit_my_settings_track_settings_path
   end
 
   test "can set track to use anonymous handle" do
     @user_track = create(:user_track, user: @user)
     anon_handle = SecureRandom.uuid
 
-    visit my_settings_track_settings_path
+    visit edit_my_settings_track_settings_path
 
     assert_not_equal true, @user_track.anonymous
     find("tr[data-track=#{@user_track.track.title}] input[type=checkbox]", visible: false).click
@@ -41,7 +41,7 @@ class My::TrackSettingsTest < ApplicationSystemTestCase
     anon_handle = SecureRandom.uuid
     @user_track.update_attributes(anonymous: true, handle: anon_handle)
 
-    visit my_settings_track_settings_path
+    visit edit_my_settings_track_settings_path
 
     assert_equal true, @user_track.anonymous
     find("tr[data-track=#{@user_track.track.title}] input[type=checkbox]", visible: false).click
