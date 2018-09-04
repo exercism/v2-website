@@ -7,9 +7,21 @@
         margin-bottom:8px;
     }
     .widget-filter {
+        display:flex;
+        align-items:stretch;
+            
         margin-bottom:20px;
+        @include width-small() {
+            display:inline-block;
+        }
         .selectize-control {
-            width:250px;
+            display:flex;
+            width:100%;
+            max-width:100%;
+            @include width-small() {
+                display:inline-block;
+                width:250px;
+            } 
         }
     }
     .exercise-radio-button {
