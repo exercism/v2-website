@@ -60,6 +60,7 @@ window.setupSolution = (solutionID, iterationID) ->
       hiddenButtons: 'cmdHeading cmdImage cmdPreview'
 
     $textarea.val(getLocalStoragePost())
+    $textarea.keyup()
 
     $textarea.bind "keyup change input", ->
       setLocalStoragePost($textarea.val())
