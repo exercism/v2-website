@@ -27,6 +27,12 @@ class ExerciseMap
   end
 
   def exercises_to_unlock_for(exercise)
+    if exercise.auto_approve?
+      return exercises.
+        select(&:side?).
+        select { |e| e.unlocked_by.blank? }[0, 10]
+    end
+
     exercise.unlocks.map do |exercise_to_unlock|
       exercises.find { |e| e.id == exercise_to_unlock.id }
     end
