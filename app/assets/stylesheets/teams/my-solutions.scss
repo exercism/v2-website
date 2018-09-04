@@ -3,6 +3,10 @@
 
 #teams-my-solutions-page {
     .num-solutions {
+        display:none;
+        @include width-medium() {
+            display:block;
+        }
         float:right;
         padding-top:5px;
         padding-right:25px;
