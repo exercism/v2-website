@@ -11,16 +11,35 @@
     }
 
     .filters {
-        margin-bottom:10px;
+        margin-bottom:20px;
         .widget-filter {
+            display:flex;
+            align-items:stretch;
+            
+            margin-bottom:10px;
+            @include width-medium() {
+                display:inline-block;
+            }
+            .selectize-control {
+                display:flex;
+                width:100%;
+                max-width:100%;
+                @include width-medium() {
+                    display:inline-block;
+                }       
+            }
             &.track_id {
                 .selectize-control {
-                    width:200px;
+                    @include width-medium() {
+                        width:200px;
+                    }
                 }
             }
             &.exercise_id {
                 .selectize-control {
-                    width:350px;
+                    @include width-medium() {
+                        width:350px;
+                    }
                 }
             }
         }

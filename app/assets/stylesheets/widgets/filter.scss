@@ -3,7 +3,9 @@
 
 .widget-filter {
     display:inline-block;
-    margin-right:10px;
+    @include width-medium() {
+        margin-right:10px;
+    }
     select {
         display:none;
     }
