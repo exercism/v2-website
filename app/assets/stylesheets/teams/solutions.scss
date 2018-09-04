@@ -54,12 +54,14 @@
         }
     }
 
-    .pure-u-1-2 {
-        &:nth-child(odd) .solution {
-            margin-right:10px;
-        }
-        &:nth-child(even) .solution {
-            margin-left:10px;
+    .pure-u-lg-1-2 {
+        @include width-large() {
+            &:nth-child(odd) .solution {
+                margin-right:10px;
+            }
+            &:nth-child(even) .solution {
+                margin-left:10px;
+            }
         }
     }
     .solution {
@@ -75,7 +77,9 @@
         }
         .icons {
             position:relative;
-            float:left;
+            @include width-medium() {
+                float:left;
+            }
             margin-right:20px;
             .exercise {
                 overflow:hidden;
@@ -93,18 +97,38 @@
                     margin:0 auto;
                     display:block;
                 }
+
+                display:none;
+                @include width-medium() {
+                    display:block;
+                }
             }
             .track {
-                width: 30px;
-                position: absolute;
-                top: -15px;
-                left: 45px;
+                float:right;
+                width:20px;
+                margin-top:-10px;
+                margin-right:-25px;
+                position:relative;
+                @include width-medium() {
+                    width: 30px;
+                    position: absolute;
+                    top: -15px;
+                    left: 35px;
+                    margin-top:0;
+                    margin-right:0;
+                    float:none;
+                    padding-top:0;
+                }
             }
             .joiner {
                 float:left;
                 height:25px;
                 width:20px;
                 border-bottom:2px solid $color-2;
+                display:none;
+                @include width-medium() {
+                    display:block;
+                }
             }
             .person {
                 border-radius:2px;
@@ -112,13 +136,22 @@
                 width:60px;
                 height:60px;
                 float:left;
-                display:block;
+                display:none;
+                @include width-medium() {
+                    display:block;
+                }
             }
         }
         .details {
             overflow:hidden;
-            padding-left:10px;
-            border-left:2px solid #ddd;
+            clear:both;
+            @include width-medium() {
+                clear:none;
+            }
+            @include width-medium() {
+                padding-left:10px;
+                border-left:2px solid #ddd;
+            }
             .difficulty {
                 display:inline-block;
                 float:right;
@@ -166,9 +199,18 @@
                     margin:0 5px;
                     display:inline-block;
                     border-right:1px solid #bbb;
+                    &:nth-child(4) {
+                        display:none;
+                        @include width-small() {
+                            display:inline-block;
+                        }
+                    }
                 }
                 .submitted-at {
-                    display:inline-block;
+                    display:block;
+                    @include width-small() {
+                        display:inline-block;
+                    }
                 }
             }
             .status {
