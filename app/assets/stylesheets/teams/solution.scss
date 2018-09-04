@@ -76,6 +76,12 @@
 #teams-solution-page,
 #teams-my-solution-page {
     .rhs {
-        padding-left:50px;
+        margin-top:30px;
+        margin-bottom:30px;
+        @include width-medium() {
+            margin-top:0;
+            margin-bottom:0;
+            padding-left:50px;
+        }
     }
 }
