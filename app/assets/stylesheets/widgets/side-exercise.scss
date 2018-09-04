@@ -8,10 +8,13 @@
     text-decoration:none;
     border:1px solid $line-color-1;
     padding:20px;
-    margin: 0 20px 20px 0;
+    margin: 0 0 20px 0;
     height:112px;
     position:relative;
     border-radius:2px;
+    @include width-medium() {
+        margin: 0 20px 20px 0;
+    }
     &:hover {
         background:$color-2-opaque;
         border-color:$color-2;
