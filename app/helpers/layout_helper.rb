@@ -5,6 +5,7 @@ module LayoutHelper
     classes << "namespace-#{namespace_name}"
     classes << "controller-#{controller_name}"
     classes << "action-#{action_name}"
+    classes << "prism-dark" if user_signed_in? && current_user.dark_code_theme
     classes.join(" ")
   end
 

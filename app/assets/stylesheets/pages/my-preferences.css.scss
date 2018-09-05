@@ -21,6 +21,12 @@
         margin-bottom:10px;
         color:#555;
     }
+    h3 {
+        @include font-size(16, 16);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+    }
     p {
         @include font-size(14, 14);
         font-weight:$light;
@@ -28,8 +34,49 @@
         padding-bottom:15px;
         display:inline-block;
         color:#999;
-        border-bottom:1px solid #eee;
+    }
 
+    .settings-section {
+        border-bottom:1px solid #ddd;
+        padding-bottom:20px;
+        margin-bottom:20px;
+        &:last-child {
+            border-bottom:none;
+        }
+        &.dark-toggle {
+            input[type='checkbox'] {
+                display:inline-block;
+                position:absolute;
+                width:25px;
+                height:40px;
+                cursor:pointer;
+                opacity:0;
+                &:checked {
+                    &+.toggles {
+                        i.fa.fa-toggle-on { display:block; }
+                        i.fa.fa-toggle-off { display:none; }
+                    }
+                }
+            }
+            .toggles {
+                display:inline-block;
+                @include font-size(20, 20);
+                margin-right:15px;
+                i.fa.fa-toggle-on {
+                    display:none;
+                    color: $color-2;
+                }
+                i.fa.fa-toggle-off { 
+                    display:block;
+                    color: #aaa;
+                }
+            }
+            label {
+                display:inline-block;
+                position:relative;
+                top:-2px;
+            }
+        }
     }
 
     label {
