@@ -1,4 +1,4 @@
-#my-communication-preferences-page
+#my-preferences-page
   =settings_bar
 
   .lo-container
@@ -6,7 +6,7 @@
 
     %h1 Update your communication preferences
 
-    =form_for current_user.communication_preferences, url: [:my, :settings, :communication_preferences] do |f|
+    =form_for current_user.communication_preferences, url: [:my, :settings, :preferences] do |f|
       /-if current_user.admin?
       /  %h2 Admin communications
 
