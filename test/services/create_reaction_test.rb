@@ -82,7 +82,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     assert reaction.persisted?
     assert_equal solution, reaction.solution
     assert_equal user, reaction.user
-    assert_equal emotion, reaction.emotion
+    assert_equal 'legacy', reaction.emotion
     assert_equal 1, solution.num_reactions
   end
 end
