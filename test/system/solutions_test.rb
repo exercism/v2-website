@@ -58,7 +58,7 @@ class SolutionsTest < ApplicationSystemTestCase
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
     solution = create(:solution, published_at: Time.now)
-    reaction = create(:reaction, user: user, solution: solution, emotion: :like)
+    reaction = create(:reaction, user: user, solution: solution, emotion: :like, comment: nil)
 
     sign_in!(user)
     visit solution_path(solution)
@@ -71,5 +71,27 @@ class SolutionsTest < ApplicationSystemTestCase
 
     solution.reload
     assert_equal 0, solution.reactions.count
+  end
+
+  test "can unreact to a solution with a comment" do
+    user = create(:user,
+                  accepted_terms_at: Date.new(2016, 12, 25),
+                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    solution = create(:solution, published_at: Time.now)
+    reaction = create(:reaction, user: user, solution: solution, emotion: :like)
+
+    sign_in!(user)
+    visit solution_path(solution)
+
+    assert_equal 1, solution.reactions.count
+    assert_equal "like", solution.reactions.first.emotion
+
+    assert_selector ".react", text: "React to this solution"
+    find(".react .like.selected").click
+    assert_no_selector ".react .like.selected", wait: 10
+
+    solution.reload
+    assert_equal 1, solution.reactions.count
+    assert_equal "legacy", solution.reactions.first.emotion
   end
 end

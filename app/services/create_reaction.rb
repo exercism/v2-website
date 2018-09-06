@@ -7,7 +7,11 @@ class CreateReaction
     @reaction = Reaction.where(user: user, solution: solution).first
     if reaction
       if emotion == reaction.emotion
-        destroy_reaction unless reaction.comment.present?
+        if reaction.comment.present?
+          update_reaction('legacy')
+        else
+          destroy_reaction
+        end
       else
         update_reaction
       end
@@ -39,8 +43,8 @@ class CreateReaction
     update_solution_reaction_counter
   end
 
-  def update_reaction
-    reaction.update!(emotion: emotion)
+  def update_reaction(emotion_new = emotion)
+    reaction.update!(emotion: emotion_new)
   end
 
   def destroy_reaction
