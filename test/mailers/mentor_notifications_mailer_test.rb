@@ -63,6 +63,9 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     str = "A student you are mentoring (#{user.handle}) has posted"
     assert_body_includes email, str
     assert_text_includes email, str
+
+    link_to_iteration = Rails.application.routes.url_helpers.my_solution_iteration_url(iteration.solution, iteration)
+    assert_body_includes email, link_to_iteration
   end
 
   test "new_iteration with anon handle" do
