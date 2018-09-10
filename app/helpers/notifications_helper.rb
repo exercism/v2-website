@@ -1,4 +1,6 @@
 module NotificationsHelper
+  include UserHelper
+
   def notification_image(notification)
     case notification.type
     when 'new_discussion_post'
@@ -9,12 +11,12 @@ module NotificationsHelper
     when 'new_discussion_post_for_mentor'
       # Face of the discussion post user
       # trigger = discussion post
-      notification.trigger.user.avatar_url
+      display_avatar_url(notification.trigger.user, notification.trigger.solution.user_track)
 
     when 'new_iteration_for_mentor'
       # Face of the iteration user
       # about = solution
-      notification.about.user.avatar_url
+      display_avatar_url(notification.about.user, notification.about.user_track)
 
     when 'new_reaction'
       # Face of the reacting user

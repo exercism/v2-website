@@ -3,6 +3,7 @@ end
 
 class CreateIteration
   include Mandate
+  include UserHelper
 
   initialize_with :solution, :files
 
@@ -74,7 +75,7 @@ class CreateIteration
       CreateNotification.(
         mentor,
         :new_iteration_for_mentor,
-        "<strong>#{user.handle}</strong> has posted a new iteration on a solution you are mentoring",
+        "<strong>#{display_handle(solution.user, solution.user_track)}</strong> has posted a new iteration on a solution you are mentoring",
         routes.mentor_solution_url(solution),
         trigger: iteration,
 

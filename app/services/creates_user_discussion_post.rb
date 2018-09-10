@@ -1,4 +1,6 @@
 class CreatesUserDiscussionPost < CreatesDiscussionPost
+  include UserHelper
+
   def self.create!(*args)
     new(*args).create!
   end
@@ -32,7 +34,7 @@ class CreatesUserDiscussionPost < CreatesDiscussionPost
       CreateNotification.(
         mentor,
         :new_discussion_post_for_mentor,
-        "#{strong solution.user.handle} has posted a comment on a solution you are mentoring",
+        "#{strong display_handle(solution.user, solution.user_track)} has posted a comment on a solution you are mentoring",
         routes.mentor_solution_url(solution),
         trigger: discussion_post,
 

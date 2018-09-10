@@ -1,20 +1,10 @@
 @import 'variables';
 @import 'mixins';
 
-#my-settings-page {
-    #nav {
-        margin-bottom:30px;
-    }
+#my-settings-page, #my-track-settings-page {
     #notice, #alert, #errors {
         margin-top: -20px;
         margin-bottom: 20px;
-    }
-    .lhs {
-        border-right:1px solid #eee;
-        padding-right:30px;
-    }
-    .rhs {
-        padding-left:30px;
     }
     h1 {
         @include font-size(25, 25);
@@ -32,6 +22,9 @@
         border-bottom:1px solid #ddd;
         padding-bottom:20px;
         margin-bottom:20px;
+        &:last-child {
+            border-bottom:none;
+        }
     }
     p,
     .token-explanation {
@@ -50,6 +43,7 @@
 
     }
     .widget-code-snippet {
+        display:inline-block;
         input {
             width:252px;
         }

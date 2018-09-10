@@ -21,6 +21,7 @@
           Logged in as
           %strong #{current_user.handle}
         .hr
+        = link_to "Tracks", [:my, :tracks]
         = link_to "Your profile", [:my, :profile]
         = link_to "Solutions you've liked", [:my, :reactions]
         -if current_user.admin? || current_user.mentor?
@@ -31,5 +32,4 @@
           = link_to "Mentor dashboard", [:mentor, :dashboard]
         .hr
         = link_to "Settings", [:my, :settings]
-        = link_to "Preferences", [:edit, :my, :settings, :communication_preferences]
         = link_to "Sign out", destroy_user_session_path, method: :delete

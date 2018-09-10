@@ -222,6 +222,19 @@ $blue: #4A90E2;
         }
 
     }
+    .help-section {
+        p {
+            @include font-size(14, 17);
+            margin-bottom:15px;
+        }
+        ul {
+            margin:0 0 0 0;
+            @include font-size(14, 17);
+            li {
+                margin-bottom:2px;
+            }
+        }
+    }
     .weekly-section {
         margin-top:0;
         margin-bottom:20px;
@@ -266,6 +279,7 @@ $blue: #4A90E2;
         margin-top:0;
         margin-bottom:20px;
     }
+    .help-section,
     .weekly-section,
     .contributions-section,
     .celebration-section {

@@ -1,0 +1,4 @@
+test:
+  - hub_url: <%= ENV['TESTS_SELENIUM_HUB_URL'] %>
+  - default_host: <%= ENV['TESTS_DEFAULT_HOST'] %>
+  - teams_host: <%= ENV['TESTS_TEAMS_HOST'] ? "http://#{ENV["TESTS_TEAMS_HOST"]}" : "http://teams.lvh.me" %>

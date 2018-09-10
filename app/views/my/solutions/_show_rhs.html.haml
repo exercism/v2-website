@@ -27,4 +27,4 @@
 
 -content_for :js do
   :javascript
-    setupSolution()
+    setupSolution("#{@solution.uuid}", #{@iteration.id})
