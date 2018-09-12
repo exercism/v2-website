@@ -22,12 +22,12 @@
     -else
       .no-notifications
         You have no unread notifications at the moment.
-    .link-container
-      = link_to "View all", all_my_notifications_path, class: "pure-button"
+
+    = link_to "View all notifications", all_my_notifications_path, class: "pure-button"
 
 -content_for :js do
   :javascript
-    $('.mark-as-read-button').click(function() {
+    $('.mark-as-read-button').on("ajax:success", function() {
       $(this).parents('.notification').addClass('read')
     });
 
