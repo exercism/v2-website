@@ -57,4 +57,19 @@ class My::TrackTest < ApplicationSystemTestCase
     within(".progress-section") { assert_text /2 [Cc]ore [Ee]xercises/ }
     within(".progress-section") { refute_text /1\n[Ee]tra [Ee]xercises/ }
   end
+
+  test "shows migration modal for user tracks created before migration" do
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    exercise = create(:exercise, track: track, core: true)
+
+    user_track = create(:user_track, {
+      track: track,
+      user: @user,
+      created_at: Exercism::V2_MIGRATED_AT - 1.day,
+      independent_mode: nil
+    })
+
+    visit track_path(track)
+    within(".main-section") { assert_text "Mentored Mode (Recommended)" }
+  end
 end
