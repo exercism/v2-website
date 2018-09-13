@@ -4,4 +4,4 @@
     A student you are mentoring
     (#{display_handle(@solution.user, @solution.user_track)})
     has posted a new iteration of their solution to #{@solution.exercise.title} on the #{@solution.exercise.track.title} track.
-    You can #{link_to "view it here", my_solution_iteration_url(@solution, @solution.iterations.last)}
+    You can #{link_to "view it here", mentor_solution_iteration_url(@solution, @solution.iterations.last)}

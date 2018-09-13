@@ -53,9 +53,11 @@ Rails.application.routes.draw do
         patch :abandon
         patch :ignore
       end
+      resources :iterations, only: [:show]
     end
     resources :discussion_posts, only: [:create]
   end
+
 
   # #### #
   # Auth #

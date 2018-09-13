@@ -64,7 +64,7 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     assert_body_includes email, str
     assert_text_includes email, str
 
-    link_to_iteration = Rails.application.routes.url_helpers.my_solution_iteration_url(iteration.solution, iteration)
+    link_to_iteration = Rails.application.routes.url_helpers.mentor_solution_iteration_url(iteration.solution, iteration)
     assert_body_includes email, link_to_iteration
   end
 
