@@ -49,4 +49,10 @@ class My::SettingsTest < ApplicationSystemTestCase
     @user.reload
     assert_equal @user.handle, new_handle
   end
+
+  test "CLI token field should be readonly" do
+    visit my_settings_path
+
+    assert find("input.download-code")["readonly"]
+  end
 end

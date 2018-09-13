@@ -4,34 +4,35 @@
   = notice_and_alert(current_user)
   .lo-container
     %h1 Track settings
-    %h2 Privacy
-    %p You can use different aliases on tracks where you wish to be anonymous. By default your handle and photo will appear next to solutions.
-    =form_tag [:my, :settings, :track_settings], method: :patch do |f|
-      %table.tracks
-        %tr
-          %th Track
-          %th Use alias?
-          %th How you will appear
-        -@user_tracks.each do |user_track|
-          %tr.track{:data => {:track => user_track.track.title}}
-            %td.title #{user_track.track.title} Track
-            %td.anonymous
-              =check_box_tag "user_tracks[#{user_track.id}][anonymous]", 1, user_track.anonymous?, class: 'anonymous-toggle'
-              .toggles
-                =icon 'toggle-on'
-                =icon 'toggle-off'
-            %td
-              .default{style: user_track.anonymous?? "display:none" : ""}
-                =image current_user.avatar_url, "Avatar of #{current_user.handle}"
-                .handle= current_user.handle
-              .anon{style: user_track.anonymous?? "" : "display:none"}
-                =image "anonymous.png", "Anonymous avatar"
-                =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, class: 'handle', placeholder: "Choose an alias for this track", required: user_track.anonymous?
-            %td
-              -if user_track.errors.present?
-                .error Not saved
+    .settings-section
+      %h2 Privacy
+      %p You can use different aliases on tracks where you wish to be anonymous. By default your handle and photo will appear next to solutions.
+      =form_tag [:my, :settings, :track_settings], method: :patch do |f|
+        %table.tracks
+          %tr
+            %th Track
+            %th Use alias?
+            %th How you will appear
+          -@user_tracks.each do |user_track|
+            %tr.track{:data => {:track => user_track.track.title}}
+              %td.title #{user_track.track.title} Track
+              %td.anonymous
+                =check_box_tag "user_tracks[#{user_track.id}][anonymous]", 1, user_track.anonymous?, class: 'anonymous-toggle'
+                .toggles
+                  =icon 'toggle-on'
+                  =icon 'toggle-off'
+              %td
+                .default{style: user_track.anonymous?? "display:none" : ""}
+                  =image current_user.avatar_url, "Avatar of #{current_user.handle}"
+                  .handle= current_user.handle
+                .anon{style: user_track.anonymous?? "" : "display:none"}
+                  =image "anonymous.png", "Anonymous avatar"
+                  =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, class: 'handle', placeholder: "Choose an alias for this track", required: user_track.anonymous?
+              %td
+                -if user_track.errors.present?
+                  .error Not saved
 
-      =button_tag "Update privacy settings", class: 'pure-button'
+        =button_tag "Update privacy settings", class: 'pure-button'
 
 -content_for :js do
   :javascript

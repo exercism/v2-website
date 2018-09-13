@@ -5,8 +5,8 @@
  * @author Lea Verou
  */
 
-code[class*="language-"],
-pre[class*="language-"] {
+body:not(.prism-dark) code[class*="language-"],
+body:not(.prism-dark) pre[class*="language-"] {
 	color: black;
 	background: none;
 	text-shadow: 0 1px white;
@@ -28,121 +28,121 @@ pre[class*="language-"] {
 	hyphens: none;
 }
 
-pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+body:not(.prism-dark) pre[class*="language-"]::-moz-selection, body:not(.prism-dark) pre[class*="language-"] ::-moz-selection,
+body:not(.prism-dark) code[class*="language-"]::-moz-selection, body:not(.prism-dark) code[class*="language-"] ::-moz-selection {
 	text-shadow: none;
 	background: #b3d4fc;
 }
 
-pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
-code[class*="language-"]::selection, code[class*="language-"] ::selection {
+body:not(.prism-dark) pre[class*="language-"]::selection, body:not(.prism-dark) pre[class*="language-"] ::selection,
+body:not(.prism-dark) code[class*="language-"]::selection, body:not(.prism-dark) code[class*="language-"] ::selection {
 	text-shadow: none;
 	background: #b3d4fc;
 }
 
 @media print {
-	code[class*="language-"],
-	pre[class*="language-"] {
+	body:not(.prism-dark) code[class*="language-"],
+	body:not(.prism-dark) pre[class*="language-"] {
 		text-shadow: none;
 	}
 }
 
 /* Code blocks */
-pre[class*="language-"] {
+body:not(.prism-dark) pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
 	overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+body:not(.prism-dark) :not(pre) > code[class*="language-"],
+body:not(.prism-dark) pre[class*="language-"] {
 	background: #f5f2f0;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+body:not(.prism-dark) :not(pre) > code[class*="language-"] {
 	padding: .1em;
 	border-radius: .3em;
 	white-space: normal;
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
+body:not(.prism-dark) .token.comment,
+body:not(.prism-dark) .token.prolog,
+body:not(.prism-dark) .token.doctype,
+body:not(.prism-dark) .token.cdata {
 	color: slategray;
 }
 
-.token.punctuation {
+body:not(.prism-dark) .token.punctuation {
 	color: #999;
 }
 
-.namespace {
+body:not(.prism-dark) .namespace {
 	opacity: .7;
 }
 
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
+body:not(.prism-dark) .token.property,
+body:not(.prism-dark) .token.tag,
+body:not(.prism-dark) .token.boolean,
+body:not(.prism-dark) .token.number,
+body:not(.prism-dark) .token.constant,
+body:not(.prism-dark) .token.symbol,
+body:not(.prism-dark) .token.deleted {
 	color: #905;
 }
 
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
+body:not(.prism-dark) .token.selector,
+body:not(.prism-dark) .token.attr-name,
+body:not(.prism-dark) .token.string,
+body:not(.prism-dark) .token.char,
+body:not(.prism-dark) .token.builtin,
+body:not(.prism-dark) .token.inserted {
 	color: #690;
 }
 
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
+body:not(.prism-dark) .token.operator,
+body:not(.prism-dark) .token.entity,
+body:not(.prism-dark) .token.url,
+body:not(.prism-dark) .language-css .token.string,
+body:not(.prism-dark) .style .token.string {
 	color: #a67f59;
 	background: hsla(0, 0%, 100%, .5);
 }
 
-.token.atrule,
-.token.attr-value,
-.token.keyword {
+body:not(.prism-dark) .token.atrule,
+body:not(.prism-dark) .token.attr-value,
+body:not(.prism-dark) .token.keyword {
 	color: #07a;
 }
 
-.token.function {
+body:not(.prism-dark) .token.function {
 	color: #DD4A68;
 }
 
-.token.regex,
-.token.important,
-.token.variable {
+body:not(.prism-dark) .token.regex,
+body:not(.prism-dark) .token.important,
+body:not(.prism-dark) .token.variable {
 	color: #e90;
 }
 
-.token.important,
-.token.bold {
+body:not(.prism-dark) .token.important,
+body:not(.prism-dark) .token.bold {
 	font-weight: bold;
 }
-.token.italic {
+body:not(.prism-dark) .token.italic {
 	font-style: italic;
 }
 
-.token.entity {
+body:not(.prism-dark) .token.entity {
 	cursor: help;
 }
 
-pre[data-line] {
+body:not(.prism-dark) pre[data-line] {
 	position: relative;
 	padding: 1em 0 1em 3em;
 }
 
-.line-highlight {
+body:not(.prism-dark) .line-highlight {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -158,8 +158,8 @@ pre[data-line] {
 	white-space: pre;
 }
 
-	.line-highlight:before,
-	.line-highlight[data-end]:after {
+	body:not(.prism-dark) .line-highlight:before,
+	body:not(.prism-dark) .line-highlight[data-end]:after {
 		content: attr(data-start);
 		position: absolute;
 		top: .4em;
@@ -176,23 +176,23 @@ pre[data-line] {
 		box-shadow: 0 1px white;
 	}
 
-	.line-highlight[data-end]:after {
+	body:not(.prism-dark) .line-highlight[data-end]:after {
 		content: attr(data-end);
 		top: auto;
 		bottom: .4em;
 	}
 
-pre.line-numbers {
+body:not(.prism-dark) pre.line-numbers {
 	position: relative;
 	padding-left: 3.8em;
 	counter-reset: linenumber;
 }
 
-pre.line-numbers > code {
+body:not(.prism-dark) pre.line-numbers > code {
 	position: relative;
 }
 
-.line-numbers .line-numbers-rows {
+body:not(.prism-dark) .line-numbers .line-numbers-rows {
 	position: absolute;
 	pointer-events: none;
 	top: 0;
@@ -209,13 +209,13 @@ pre.line-numbers > code {
 
 }
 
-	.line-numbers-rows > span {
+	body:not(.prism-dark) .line-numbers-rows > span {
 		pointer-events: none;
 		display: block;
 		counter-increment: linenumber;
 	}
 
-		.line-numbers-rows > span:before {
+		body:not(.prism-dark) .line-numbers-rows > span:before {
 			content: counter(linenumber);
 			color: #999;
 			display: block;

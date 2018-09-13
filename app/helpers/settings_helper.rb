@@ -1,7 +1,7 @@
 module SettingsHelper
   def settings_bar
     selected = case controller_name
-      when "communication_preferences"
+      when "preferences"
         :preferences
       when "track_settings"
         :track_settings
