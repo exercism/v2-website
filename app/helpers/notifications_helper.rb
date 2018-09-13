@@ -33,5 +33,7 @@ module NotificationsHelper
       # trigger = mentor
       notification.trigger.avatar_url
     end
+  rescue
+    'blank.gif'
   end
 end

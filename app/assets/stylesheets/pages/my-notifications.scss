@@ -106,6 +106,12 @@
     .no-notifications {
         color:#999;
         @include font-size(16, 16);
+        margin-bottom:20px;
     }
 
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+        padding:10px 20px;
+    }
 }
