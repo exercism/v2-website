@@ -13,7 +13,7 @@ This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to
 ### Things to install
 
 - **Ruby**: We recommend Ruby >=2.4 (and this will soon become a requirement). We recommend using [RVM](http://rvm.io/)
-- **MySQL**: Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
+- **MySQL**: MySQL >=5.7 required. Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
 - **Yarn**: Yarn handles front-end dependencies. See Yarn's [installation instructions](https://yarnpkg.com/lang/en/docs/install).
 
 ### Configure the database
@@ -87,3 +87,16 @@ user_track_ids.each do |id|
   CreateSolution.(ut.user, ut.track.exercises.core.first) if ut.solutions.size == 0
 end
 ```
+
+## Troubleshooting
+### MySQL < 5.7
+The following error is seen using MySQL prior to version 5.7 a discussed at gogs/gogs#4894.
+```
+$ bundle exec rake exercism:setup
+Mysql2::Error: Specified key was too long; max key length is 767 bytes:
+```
+If your system doesn't have a pre-built 5.7 package, [this install log]() may be helpful.
+
+### Windows Subsystem For Linux
+Installation on Windows Subsystem For Linux requires Windows Version 1809 (release due October 2018). 
+Tracked at #4346.
