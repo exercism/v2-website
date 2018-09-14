@@ -90,7 +90,7 @@ end
 
 ## Troubleshooting
 ### MySQL < 5.7
-The following error is seen using MySQL prior to version 5.7 a discussed at gogs/gogs#4894.
+The following error is seen using MySQL prior to version 5.7 as discussed at [gogs/gogs#4894](https://github.com/gogs/gogs/issues/4894).
 ```
 $ bundle exec rake exercism:setup
 Mysql2::Error: Specified key was too long; max key length is 767 bytes:
@@ -99,4 +99,4 @@ If your system doesn't have a pre-built 5.7 package, [this install log](https://
 
 ### Windows Subsystem For Linux
 Installation on Windows Subsystem For Linux requires Windows Version 1809 (release due October 2018). 
-Tracked at exercism/exercism#4346.
+Tracked at [exercism/exercism#4346](https://github.com/exercism/exercism/issues/4346).
