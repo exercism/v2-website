@@ -12,5 +12,5 @@ if Rails.env.production?
 elsif Rails.env.test?
   Exercism::API_HOST = "https://test-api.exercism.io"
 else
-  Exercism::API_HOST = "http://localhost:3000/api"
+  Exercism::API_HOST = "http://lvh.me:3000/api"
 end
