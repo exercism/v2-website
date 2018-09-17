@@ -20,7 +20,7 @@ class My::SettingsController < MyController
         password: params[:user][:password],
         password_confirmation: params[:user][:password_confirmation]
       )
-      sign_in(current_user, bypass: true)
+      bypass_sign_in current_user
       flash.notice = "Password updated successfully"
       return true
     else

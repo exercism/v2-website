@@ -3,6 +3,10 @@ class My::NotificationsController < MyController
     @notifications = current_user.notifications.unread.page(params[:page]).per(20)
   end
 
+  def all
+    @notifications = current_user.notifications.page(params[:page]).per(20)
+  end
+
   def read
     current_user.notifications.find(params[:id]).update(read: true)
     head 200
