@@ -27,7 +27,7 @@ class Mentor::DashboardController < MentorController
     @your_status = params[:your_status]
     @your_status_options = SolutionMentorship::STATUSES
 
-    @your_track_id = params[:your_track_id]
+    @your_track_id = params[:your_track_id].presence || single_track_id
     @your_track_id_options = track_id_options
 
     @your_exercise_id = params[:your_exercise_id]
@@ -46,7 +46,7 @@ class Mentor::DashboardController < MentorController
   end
 
   def load_next_solutions
-    @next_track_id = params[:next_track_id]
+    @next_track_id = params[:next_track_id].presence || single_track_id
     @next_track_id_options = track_id_options
 
     @next_exercise_id = params[:next_exercise_id]
@@ -69,6 +69,10 @@ class Mentor::DashboardController < MentorController
       OptionsHelper.as_options(current_user.mentored_tracks,
                                                        :title,
                                                        :id)
+  end
+
+  def single_track_id
+    track_id_options.first[:value] if track_id_options.one?
   end
 
   def exercise_id_options_for(track_id)

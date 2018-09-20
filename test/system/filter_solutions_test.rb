@@ -89,10 +89,11 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
   test "filters solutions by exercise" do
     ruby = create(:track, title: "Ruby")
+    go = create(:track, title: "Go")
     mentor = create(:user,
                     accepted_terms_at: Date.new(2016, 12, 25),
                     accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [ruby])
+                    mentored_tracks: [ruby, go])
     hello_world = create(:exercise, title: "Hello World", track: ruby)
     sorting = create(:exercise, title: "Sorting", track: ruby)
     hello_world_solution = create(:solution, exercise: hello_world)
@@ -115,5 +116,35 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
     assert page.has_link?(href: mentor_solution_path(sorting_solution))
     assert page.has_no_link?(href: mentor_solution_path(hello_world_solution))
+  end
+
+  test "autoselects your/next solutions when mentor has one track" do
+    track = create(:track)
+    mentor = create(:user,
+                    accepted_terms_at: Date.new(2016, 12, 25),
+                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
+                    mentored_tracks: [track])
+    exercise1 = create(:exercise, title: "Exercise 1", track: track)
+    exercise2 = create(:exercise, title: "Exercise 2", track: track)
+    solution1 = create(:solution, exercise: exercise1)
+    solution2 = create(:solution, exercise: exercise2)
+    create(:iteration, solution: solution1)
+    create(:solution_mentorship,
+           user: mentor,
+           solution: solution1,
+           requires_action: true)
+
+    create(:iteration, solution: solution2)
+    create(:iteration, solution: solution2)
+
+    sign_in!(mentor)
+    visit mentor_dashboard_path
+
+    your_track_id = find("#your_track_id + .selectize-control .item")["data-value"]
+    next_track_id = find("#next_track_id + .selectize-control .item")["data-value"]
+    assert_equal your_track_id, track.id.to_s
+    assert_equal next_track_id, track.id.to_s
+    assert has_selector? '.your-solutions'
+    assert has_selector? '.next-solutions'
   end
 end
