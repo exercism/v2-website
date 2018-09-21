@@ -1,2 +1,17 @@
-%h1 Admin::Mentors#index
-%p Find me in app/views/admin/mentors/index.html.haml
+-# @users must contain the User rows whose id is in TrackMentorship table! 
+
+%table
+  %tbody
+    %tr
+      %td Name:
+      %td Handle:
+      %td Languages:
+    - @user.each do |user|
+      %tr
+        %td= user.name
+        %td= user.handle
+        %td= user.email
+
+.danger-zone
+  .lo-container
+    =link_to "View", "#", class: 'pure-button leave-track-btn'
