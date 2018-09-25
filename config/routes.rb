@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :solutions, only: [:show] do
       resources :iterations, only: [:show]
     end
+    resources :mentors, only: [:index]
   end
 
   # ###### #
