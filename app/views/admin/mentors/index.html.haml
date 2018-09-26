@@ -1,17 +1,29 @@
--# @users must contain the User rows whose id is in TrackMentorship table! 
+-# @users must contain the User rows whose id is in TrackMentorship table!
+-#
+-# %table
+-#   %tbody
+-#     %tr
+-#       %td Name:
+-#       %td Handle:
+-#     - @users.each do |user|
+-#       %tr
+-#         %td= user.name
+-#         %td= user.handle
 
 %table
   %tbody
     %tr
-      %td Name:
-      %td Handle:
-      %td Languages:
-    - @user.each do |user|
+      %th Name
+      %th Handle
+      %th Languages
+    - @users.each do |user|
       %tr
         %td= user.name
         %td= user.handle
-        %td= user.email
+        %td= @tracks[user.id].join(',')
 
 .danger-zone
   .lo-container
     =link_to "View", "#", class: 'pure-button leave-track-btn'
+
+=paginate @users
