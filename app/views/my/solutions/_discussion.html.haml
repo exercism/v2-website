@@ -39,6 +39,6 @@
             .preview-area
 
       -if !@solution.approved?
-        =link_to "Complete exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
+        =link_to "Complete exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved js-disable-on-click"
 
       =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"

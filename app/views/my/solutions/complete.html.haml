@@ -11,7 +11,7 @@
 %h3 You've completed #{@solution.exercise.title}
 
 %p You've now completed #{pluralize @num_completed_exercises, "exercise"} on the #{@track.title} track! Take a few moments to reflect on this exercise and then you can get started on the next challenge.
-=link_to "Continue", [:reflection, :my, @solution], method: :get, remote: true, class: 'pure-button'
+=link_to "Continue", [:reflection, :my, @solution], method: :get, remote: true, class: 'pure-button js-disable-on-click'
 
 :javascript
   setTimeout(function() {
