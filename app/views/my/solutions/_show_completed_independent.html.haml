@@ -26,7 +26,7 @@
         %p
           %strong Complete this solution.
           If you're happy with this solution, you can mark it as completed.
-        =link_to "Complete this solution", complete_my_solution_path(@solution), method: :patch, class: 'pure-button', remote: true
+        =link_to "Complete this solution", complete_my_solution_path(@solution), method: :patch, class: 'pure-button js-disable-on-click', remote: true
 
     .next-option
       -if @user_track.mentoring_slots_remaining?
