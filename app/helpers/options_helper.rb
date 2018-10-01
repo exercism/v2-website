@@ -3,7 +3,7 @@ module OptionsHelper
     options = collection.map do |record|
       { text: record.send(title_field), value: record.send(value_field) }
     end
-    options.unshift({text: "[All]", value: ""}) if include_blank
+    options.unshift({ text: "[All]", value: "" }) if include_blank
     options
   end
 
@@ -14,6 +14,10 @@ module OptionsHelper
 
       hash[text] = value
     end
+  end
+
+  def include_blank?(options)
+    options.count > 1
   end
 
   extend self
