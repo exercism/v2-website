@@ -66,6 +66,20 @@ Note: Teams will be avaliable on http://teams.lvh.me:3000
 
 We recommend using `lvh.me` which is a DNS redirect to localhost, but which we honour cookies on.
 
+### OAuth setup
+
+In order to login via OAuth on development, [create a new OAuth application on GitHub](https://github.com/settings/applications/new).
+
+Fill in the form with the following details:
+
+- Application Name: Exercism (Dev)
+- Homepage URL: https://lvh.me:3000
+- Authorization Callback URL: http://lvh.me:3000/users/auth/github/callback
+
+The hostname and port would depend on your development setup.
+
+Once created, paste in the GitHub key and secret into `config/secrets.yml`.
+
 ## Extra scripts and useful notes
 
 ### Deleting an account
