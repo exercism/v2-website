@@ -1,4 +1,6 @@
-class Git::SeedsTracks
+class Git::SeedTracks
+  include Mandate
+
   # NB generate this with Trackler.tracks.map(&:repository).sort
 
   def self.tracks
@@ -68,33 +70,29 @@ class Git::SeedsTracks
     https://github.com/exercism/vimscript
   }
 
-  def self.seed!(stdout: STDOUT, stderr: STDERR)
-    new(tracks, stdout: stdout, stderr: stderr).seed!
-  end
-
   attr_reader :repository_urls
 
-  def initialize(repository_urls, stdout:, stderr:)
-    @repository_urls = repository_urls
+  def initialize(stdout: STDOUT, stderr: STDERR)
+    @repository_urls = self.class.tracks
     @stdout = stdout
     @stderr = stderr
   end
 
-  def seed!
+  def call
     repository_urls.each do |repo_url|
-      Git::SeedsTrack.seed!(repo_url)
+      Git::SeedTrack.(repo_url)
     end
     Track.find_each do |track|
       stdout.puts "===== Fetching #{track.slug} ====="
       begin
-        Git::FetchesRepo.fetch(track.repo)
+        Git::FetchRepo.(track.repo)
       rescue => e
         stderr.puts e.message
       end
 
       stdout.puts "===== Syncing #{track.slug} ====="
       begin
-        Git::SyncsTrack.sync!(track)
+        Git::SyncTrack.(track)
       rescue => e
         stderr.puts e.message
       end

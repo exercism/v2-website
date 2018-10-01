@@ -1,15 +1,11 @@
-class Git::FetchesRepo
+class Git::FetchRepo
+  include Mandate
+
   ERROR_BACKOFF_PERIOD = 10.seconds
 
-  def self.fetch(repo)
-    new(repo).fetch
-  end
+  initialize_with :repo
 
-  def initialize(repo)
-    @repo = repo
-  end
-
-  def fetch
+  def call
     Rails.logger.info "Fetching #{repo.repo_url}"
     repo.fetch!
     Rails.logger.info "Done #{repo.repo_url}. Current HEAD commit is #{repo.head}"
@@ -19,8 +15,4 @@ class Git::FetchesRepo
     Rails.logger.error e.backtrace
     sleep ERROR_BACKOFF_PERIOD
   end
-
-  private
-
-  attr_reader :repo
 end

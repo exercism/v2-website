@@ -4,9 +4,9 @@ class SyncRepoUpdateJobTest < ActiveJob::TestCase
   test "fetches tracks" do
     track = create(:track, slug: "ruby")
     repo_update = create(:repo_update, slug: "ruby")
-    Git::SyncsTracks.stubs(:sync)
+    Git::SyncTracks.stubs(:call)
 
-    Git::FetchesRepo.expects(:fetch).with(repo_update.repo)
+    Git::FetchRepo.expects(:call).with(repo_update.repo)
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
   end
@@ -14,35 +14,35 @@ class SyncRepoUpdateJobTest < ActiveJob::TestCase
   test "syncs tracks" do
     track = create(:track, slug: "ruby")
     repo_update = create(:repo_update, slug: "ruby")
-    Git::FetchesRepo.stubs(:fetch)
+    Git::FetchRepo.stubs(:call)
 
-    Git::SyncsTracks.expects(:sync).with([track])
+    Git::SyncTracks.expects(:call).with([track])
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
   end
 
   test "syncs website-copy repo" do
     repo_update = create(:repo_update, slug: "website-copy")
-    Git::FetchesRepo.stubs(:fetch)
+    Git::FetchRepo.stubs(:call)
 
-    Git::SyncsWebsiteCopy.expects(:call)
+    Git::SyncWebsiteCopy.expects(:call)
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
   end
 
   test "does not sync unregistered repos" do
     repo_update = create(:repo_update, slug: "problem-specifications")
-    Git::FetchesRepo.stubs(:fetch)
+    Git::FetchRepo.stubs(:call)
 
-    Git::SyncsTracks.expects(:sync).never
+    Git::SyncTracks.expects(:call).never
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
   end
 
   test "records sync time after performing" do
     repo_update = create(:repo_update, slug: "website-copy")
-    Git::SyncsWebsiteCopy.stubs(:call)
-    Git::FetchesRepo.stubs(:fetch)
+    Git::SyncWebsiteCopy.stubs(:call)
+    Git::FetchRepo.stubs(:call)
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
 

@@ -1,12 +1,12 @@
 require_relative '../../test_helper'
 
-class Git::SyncsTracksTest < ActiveSupport::TestCase
+class Git::SyncTracksTest < ActiveSupport::TestCase
   test "updates track metadata" do
     Git::ProblemSpecifications.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/problem-specifications")
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track", active: false)
 
     stub_repo_cache! do
-      Git::SyncsTrack.sync!(track)
+      Git::SyncTrack.(track)
     end
 
     assert track.active?
@@ -22,7 +22,7 @@ class Git::SyncsTracksTest < ActiveSupport::TestCase
                          uuid: "4e2533dd-3af5-400b-869d-78140764d533")
 
     stub_repo_cache! do
-      Git::SyncsTrack.sync!(track)
+      Git::SyncTrack.(track)
     end
 
     hello_world.reload
@@ -34,7 +34,7 @@ class Git::SyncsTracksTest < ActiveSupport::TestCase
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
 
     stub_repo_cache! do
-      Git::SyncsTrack.sync!(track)
+      Git::SyncTrack.(track)
     end
 
     exercise = Exercise.last

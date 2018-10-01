@@ -1,4 +1,4 @@
-class Git::SyncsUpdatedRepos
+class Git::SyncUpdatedRepos
   QUIET_PERIOD = 10.seconds
 
   def self.run(stdout: STDOUT)

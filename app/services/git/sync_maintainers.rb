@@ -1,18 +1,11 @@
-class Git::SyncsMaintainers
+class Git::SyncMaintainers
+  include Mandate
+
   DEFAULT_ALUMNUS_STRING = "alumnus"
 
-  def self.sync!(track, maintainer_config)
-    new(track, maintainer_config).sync!
-  end
+  initialize_with :track, :maintainer_config
 
-  attr_reader :track, :maintainer_config
-
-  def initialize(track, maintainer_config)
-    @track = track
-    @maintainer_config = maintainer_config
-  end
-
-  def sync!
+  def call
     if maintainer_config.nil?
       Rails.logger.warn "Skipping due to nil maintainer config"
       return
@@ -42,7 +35,7 @@ class Git::SyncsMaintainers
 
     gh_profile = Git::GithubProfile.for_user(gh_user)
     user_id = User.find_by(provider: "github", uid: gh_profile.user.id).try(:id) if gh_profile.try(:user_present?)
-    
+
     link_url = m.fetch(:link_url, gh_profile.link_url)
     link_text = m.fetch(:link_text, link_url)
 

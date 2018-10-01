@@ -1,15 +1,9 @@
-class Git::SeedsTrack
-  def self.seed!(repo_url)
-    new(repo_url).seed!
-  end
+class Git::SeedTrack
+  include Mandate
 
-  attr_reader :repo_url
+  initialize_with :repo_url
 
-  def initialize(repo_url)
-    @repo_url = repo_url
-  end
-
-  def seed!
+  def call
     puts "Seeding #{repo_url}"
     unless Track.exists?(repo_url: repo_url)
       CreateTrack.(language, track_slug, repo_url, active: config[:active])

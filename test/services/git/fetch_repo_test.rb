@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Git::FetchesRepoTest < ActiveSupport::TestCase
+class Git::FetchRepoTest < ActiveSupport::TestCase
   test "fetches repo" do
     repo = mock()
     repo.stubs(:repo_url)
@@ -8,6 +8,6 @@ class Git::FetchesRepoTest < ActiveSupport::TestCase
 
     repo.expects(:fetch!)
 
-    Git::FetchesRepo.fetch(repo)
+    Git::FetchRepo.(repo)
   end
 end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
+class Git::FetchUpdatedReposTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   test "does not fetch an already fetched repo update" do
@@ -16,7 +16,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
 
     FetchRepoUpdateJob.expects(:perform_now).never
 
-    Git::FetchesUpdatedRepos.fetch
+    Git::FetchUpdatedRepos.fetch
   end
 
   test "does not fetch an already synced repo update" do
@@ -24,7 +24,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
 
     FetchRepoUpdateJob.expects(:perform_now).never
 
-    Git::FetchesUpdatedRepos.fetch
+    Git::FetchUpdatedRepos.fetch
   end
 
   test "does not fetch an already synced repo update with previous fetches" do
@@ -36,7 +36,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
 
     FetchRepoUpdateJob.expects(:perform_now).never
 
-    Git::FetchesUpdatedRepos.fetch
+    Git::FetchUpdatedRepos.fetch
   end
 
   test "fetches a repo update if no fetches by any host yet" do
@@ -44,7 +44,7 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
 
     FetchRepoUpdateJob.expects(:perform_now).with(repo_update.id)
 
-    Git::FetchesUpdatedRepos.fetch
+    Git::FetchUpdatedRepos.fetch
   end
 
   test "fetches a repo update if not yet fetched by host" do
@@ -56,6 +56,6 @@ class Git::FetchesUpdatedReposTest < ActiveSupport::TestCase
 
     FetchRepoUpdateJob.expects(:perform_now).with(repo_update.id)
 
-    Git::FetchesUpdatedRepos.fetch
+    Git::FetchUpdatedRepos.fetch
   end
 end

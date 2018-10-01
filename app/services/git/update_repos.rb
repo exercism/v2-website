@@ -1,9 +1,7 @@
-class Git::UpdatesRepos
-  def self.update
-    new.update
-  end
+class Git::UpdateRepos
+  include Mandate
 
-  def update
+  def call
     update_tracks
     update_problem_specs
     update_website_copy
