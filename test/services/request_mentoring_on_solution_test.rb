@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class SwitchSolutionToMentoredModeTest < ActiveSupport::TestCase
-  test "sets uncompleted solutions to independent mode" do
+class RequestMentoringOnSolutionTest < ActiveSupport::TestCase
+  test "sets values correctly" do
     Timecop.freeze do
       solution = create :solution,
-                        independent_mode: true,
+                        mentoring_requested_at: nil,
                         completed_at: Time.now - 1.week,
                         published_at: Time.now - 1.week,
                         approved_by: create(:user),
@@ -14,10 +14,10 @@ class SwitchSolutionToMentoredModeTest < ActiveSupport::TestCase
       ut = create :user_track, user: solution.user, track: solution.track
       UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
 
-      SwitchSolutionToMentoredMode.(solution)
+      RequestMentoringOnSolution.(solution)
 
       solution.reload
-      refute solution.independent_mode?
+      assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
       assert_nil solution.completed_at
       assert_nil solution.published_at
       assert_nil solution.approved_by
@@ -27,15 +27,17 @@ class SwitchSolutionToMentoredModeTest < ActiveSupport::TestCase
   end
 
   test "doesn't change if mentoring allowance used up" do
-    solution = create :solution, independent_mode: true
-    ut = create :user_track, user: solution.user, track: solution.track
-    UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
+    Timecop.freeze do
+      solution = create :solution, mentoring_requested_at: nil
+      ut = create :user_track, user: solution.user, track: solution.track
+      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
 
-    SwitchSolutionToMentoredMode.(solution)
-    assert solution.independent_mode?
+      RequestMentoringOnSolution.(solution)
+      assert_nil solution.mentoring_requested_at
 
-    UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
-    SwitchSolutionToMentoredMode.(solution)
-    refute solution.independent_mode?
+      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
+      RequestMentoringOnSolution.(solution)
+      assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
+    end
   end
 end

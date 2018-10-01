@@ -1,4 +1,4 @@
-class SwitchSolutionToMentoredMode
+class RequestMentoringOnSolution
   include Mandate
 
   initialize_with :solution
@@ -7,12 +7,12 @@ class SwitchSolutionToMentoredMode
     return if user_track.mentoring_allowance_used_up?
 
     solution.update(
-      independent_mode: false,
       completed_at: nil,
       published_at: nil,
       approved_by: nil,
-      last_updated_by_user_at: Time.now,
-      updated_at: Time.now
+      last_updated_by_user_at: Time.current,
+      mentoring_requested_at: Time.current,
+      updated_at: Time.current
     )
   end
 

@@ -1,8 +1,8 @@
--if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT && @solution.independent_mode?
+-if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT && !@solution.mentoring_requested?
   =render "show_legacy"
   =render "show_legacy_discussion"
 
--elsif @solution.mentored_mode?
+-elsif @solution.mentoring_requested?
   -if @solution.completed?
     =render "show_completed"
 

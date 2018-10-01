@@ -41,7 +41,7 @@ class My::SolutionsController < MyController
   end
 
   def request_mentoring
-    SwitchSolutionToMentoredMode.(@solution)
+    RequestMentoringOnSolution.(@solution)
 
     redirect_to action: :show
   end

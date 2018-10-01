@@ -63,11 +63,6 @@ class SolutionTest < ActiveSupport::TestCase
     assert_equal [unstarted_solution], Solution.not_started
   end
 
-  test "mentored_mode" do
-    refute create(:solution, independent_mode: true).mentored_mode?
-    assert create(:solution, independent_mode: false).mentored_mode?
-  end
-
   test "track_in_mentored_mode" do
     refute create(:solution, track_in_independent_mode: true).track_in_mentored_mode?
     assert create(:solution, track_in_independent_mode: false).track_in_mentored_mode?
@@ -91,5 +86,13 @@ class SolutionTest < ActiveSupport::TestCase
     create(:reaction, solution: solution)
 
     solution.destroy!
+  end
+
+  test "mentoring_requested?" do
+    solution = create :solution, mentoring_requested_at: nil
+    refute solution.mentoring_requested?
+
+    solution.update(mentoring_requested_at: Time.current)
+    assert solution.mentoring_requested?
   end
 end

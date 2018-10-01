@@ -6,7 +6,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     @track = create(:track, title: "Ruby")
     create :track_mentorship, user: @mentor, track: @track
 
-    @solution = create :solution, exercise: create(:exercise, track: @track)
+    @solution = create :solution, exercise: create(:exercise, track: @track), mentoring_requested_at: Time.current
     @iteration = create :iteration, solution: @solution
 
     sign_in!(@mentor)

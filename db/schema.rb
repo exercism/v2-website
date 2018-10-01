@@ -285,9 +285,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
-    t.index ["last_updated_by_user_at"], name: "ihid-3"
-    t.index ["num_mentors", "exercise_id", "user_id"], name: "fix-4"
-    t.index ["num_mentors", "exercise_id"], name: "fix-2"
+    t.index ["num_mentors", "created_at", "exercise_id"], name: "mentor_selection_idx_1"
     t.index ["num_mentors", "last_updated_by_user_at"], name: "ihid-4"
     t.index ["num_mentors", "track_in_independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_2"
     t.index ["num_mentors", "user_id", "exercise_id"], name: "fix-5"

@@ -222,4 +222,35 @@ class CreateIterationTest < ActiveSupport::TestCase
     refute solution.has_unseen_feedback
     assert_equal 1, solution.num_iterations
   end
+
+  test "sets mentoring_requested_at correctly" do
+    code = "foobar"
+    filename = "dog/foobar.rb"
+    file_contents = "something = :else"
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
+    file = mock
+    file.stubs(read: file_contents, headers: headers)
+
+
+    ruby = create :track
+    core_exercise = create :exercise, track: ruby, core: true
+    side_exercise = create :exercise, track: ruby, core: false
+
+    normal_user = create :user
+    independent_user = create :user
+
+    core_solution = create :solution, user: normal_user, exercise: core_exercise, track_in_independent_mode: false
+    side_solution = create :solution, user: normal_user, exercise: side_exercise, track_in_independent_mode: false
+    independent_solution = create :solution, user: independent_user, exercise: core_exercise, track_in_independent_mode: true
+
+    CreateIteration.(core_solution, [file])
+    CreateIteration.(side_solution, [file])
+    CreateIteration.(independent_solution, [file])
+
+    [core_solution, side_solution,independent_solution].each(&:reload)
+
+    assert core_solution.mentoring_requested?
+    refute side_solution.mentoring_requested?
+    refute independent_solution.mentoring_requested?
+  end
 end

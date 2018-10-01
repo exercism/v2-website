@@ -14,7 +14,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "mentored mode / mentored core solution" do
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: create(:exercise, core: true))
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current, exercise: create(:exercise, core: true))
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -28,7 +28,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "mentored mode / mentored side solution" do
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: create(:exercise, core: false))
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current, exercise: create(:exercise, core: false))
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -44,7 +44,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
   test "m/m section with auto approve" do
     exercise = create :exercise, auto_approve: true
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: exercise, approved_by: create(:user))
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current, exercise: exercise, approved_by: create(:user))
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -65,7 +65,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
     exercise = create :exercise, auto_approve: true
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: exercise, approved_by: create(:user))
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current, exercise: exercise, approved_by: create(:user))
     iteration = create :iteration, solution: solution
     create :discussion_post, iteration: iteration
     create(:user_track, track: solution.track, user: @user)
@@ -81,7 +81,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
   test "m/m section completed with auto approve and comment" do
     exercise = create :exercise, auto_approve: true
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: exercise, approved_by: create(:user), completed_at: Time.current)
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current, exercise: exercise, approved_by: create(:user), completed_at: Time.current)
     iteration = create :iteration, solution: solution
     create :discussion_post, iteration: iteration
     create(:user_track, track: solution.track, user: @user)
@@ -100,7 +100,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
   test "m/m completed section with auto approve" do
     exercise = create :exercise, auto_approve: true
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false, exercise: exercise, approved_by: create(:user), completed_at: Time.now)
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current, exercise: exercise, approved_by: create(:user), completed_at: Time.now)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -117,7 +117,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "independent mode / mentored solution" do
-    solution = create(:solution, user: @user, track_in_independent_mode: true, independent_mode: false)
+    solution = create(:solution, user: @user, track_in_independent_mode: true, mentoring_requested_at: Time.current)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -128,7 +128,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "mentored mode / independent solution" do
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: true)
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: nil)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -139,7 +139,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "independent mode / independent solution" do
-    solution = create(:solution, user: @user, independent_mode: true)
+    solution = create(:solution, user: @user, mentoring_requested_at: nil)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user, independent_mode: true)
 
@@ -152,7 +152,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "independent mode / independent solution - completed" do
-    solution = create(:solution, user: @user, independent_mode: true, completed_at: Time.current)
+    solution = create(:solution, user: @user, mentoring_requested_at: nil, completed_at: Time.current)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user, independent_mode: true)
 
@@ -165,7 +165,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "independent mode / independent solution - published" do
-    solution = create(:solution, user: @user, track_in_independent_mode: true, independent_mode: true, published_at: Time.current)
+    solution = create(:solution, user: @user, track_in_independent_mode: true, mentoring_requested_at: nil, published_at: Time.current)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -178,7 +178,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "comment button clears preview tab" do
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false)
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 
@@ -196,7 +196,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   end
 
   test "localstorage saves comment draft" do
-    solution = create(:solution, user: @user, track_in_independent_mode: false, independent_mode: false)
+    solution = create(:solution, user: @user, track_in_independent_mode: false, mentoring_requested_at: Time.current)
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user)
 

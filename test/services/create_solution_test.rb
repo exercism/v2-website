@@ -33,7 +33,7 @@ class CreateSolutionTest < ActiveSupport::TestCase
     assert_equal solution, CreateSolution.(solution.user, solution.exercise)
   end
 
-  test "sets independent_mode correctly" do
+  test "sets track_in_independent_mode correctly" do
     Git::ExercismRepo.stubs(current_head: SecureRandom.uuid)
 
     ruby = create :track
@@ -50,10 +50,6 @@ class CreateSolutionTest < ActiveSupport::TestCase
     normal_solution = CreateSolution.(normal_user, exercise)
     neither_solution = CreateSolution.(neither_user, exercise)
     independent_solution = CreateSolution.(independent_user, exercise)
-
-    refute normal_solution.independent_mode?
-    refute neither_solution.independent_mode?
-    assert independent_solution.independent_mode?
 
     refute normal_solution.track_in_independent_mode?
     refute neither_solution.track_in_independent_mode?
