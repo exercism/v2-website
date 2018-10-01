@@ -15,9 +15,8 @@ class Solution < ApplicationRecord
 
   delegate :auto_approve?, to: :exercise
 
-  scope :core, -> {
-    joins(:exercise).merge(Exercise.core)
-  }
+  scope :core, -> { joins(:exercise).merge(Exercise.core) }
+  scope :side, -> { joins(:exercise).merge(Exercise.side) }
 
   def self.completed
     where.not(completed_at: nil)

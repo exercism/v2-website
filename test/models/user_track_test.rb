@@ -57,14 +57,14 @@ class UserTrackTest < ActiveSupport::TestCase
     assert_equal [archived], UserTrack.archived
   end
 
-  test "solutions_being_mentored" do
+  test "solutions being mentored for independent_mode" do
     user = create :user
     track = create :track
-    user_track = create :user_track, user: user, track: track
+    user_track = create :user_track, user: user, track: track, independent_mode: true
 
-    assert_equal 0, user_track.num_solutions_being_mentored
     assert_equal 1, user_track.mentoring_slots_remaining
     assert user_track.mentoring_slots_remaining
+    refute user_track.mentoring_allowance_used_up?
 
     s1 = create :solution, mentoring_requested_at: nil, user: user, exercise: create(:exercise, track: track)
          create :iteration, solution: s1
@@ -80,10 +80,48 @@ class UserTrackTest < ActiveSupport::TestCase
     s5 = create :solution, mentoring_requested_at: Time.current, user: user, exercise: create(:exercise, track: track)
          create :iteration, solution: s5
 
-    assert_equal [s5], user_track.solutions_being_mentored
-    assert_equal 1, user_track.num_solutions_being_mentored
+    assert_equal [s5], user_track.solutions_using_mentoring_allowance
     assert_equal 0, user_track.mentoring_slots_remaining
     refute user_track.mentoring_slots_remaining?
+    assert user_track.mentoring_allowance_used_up?
+  end
+
+  test "solutions being mentored for mentored_mode" do
+    user = create :user
+    track = create :track
+    user_track = create :user_track, user: user, track: track, independent_mode: false
+
+    assert_equal 3, user_track.mentoring_slots_remaining
+    assert user_track.mentoring_slots_remaining
+    refute user_track.mentoring_allowance_used_up?
+
+    s1 = create :solution, mentoring_requested_at: nil, user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s1
+
+    s2 = create :solution, mentoring_requested_at: nil, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s2
+
+    s3 = create :solution, mentoring_requested_at: Time.current, approved_by: create(:user), user: user, exercise: create(:exercise, track: track)
+         create :iteration, solution: s3
+
+    s4 = create :solution, mentoring_requested_at: Time.current, user: user, exercise: create(:exercise, track: track)
+
+    s5 = create :solution, mentoring_requested_at: Time.current, user: user, exercise: create(:exercise, track: track, core: true)
+         create :iteration, solution: s5
+
+    s6 = create :solution, mentoring_requested_at: Time.current, user: user, exercise: create(:exercise, track: track, core: false)
+         create :iteration, solution: s6
+
+    assert_equal [s6], user_track.solutions_using_mentoring_allowance
+    assert_equal 2, user_track.mentoring_slots_remaining
+
+    2.times do
+      create :iteration, solution: create(:solution, mentoring_requested_at: Time.current, user: user, exercise: create(:exercise, track: track, core: false))
+    end
+
+    assert_equal 0, user_track.mentoring_slots_remaining
+    refute user_track.mentoring_slots_remaining?
+    assert user_track.mentoring_allowance_used_up?
   end
 
   test "counters in mentored mode" do
