@@ -86,7 +86,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       sign_in!
       solution = create :solution, user: @current_user
 
-      SwitchSolutionToMentoredMode.expects(:call).with(solution)
+      RequestMentoringOnSolution.expects(:call).with(solution)
 
       patch request_mentoring_my_solution_url(solution.uuid)
       assert_redirected_to my_solution_url(solution.uuid)

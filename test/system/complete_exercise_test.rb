@@ -19,7 +19,8 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     create(:user_track, track: track, user: user, independent_mode: false)
     solution = create(:solution,
                       user: user,
-                      exercise: exercise)
+                      exercise: exercise,
+                      mentoring_requested_at: Time.current)
     iteration = create(:iteration, solution: solution)
 
     sign_in!(user)
@@ -56,7 +57,8 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     solution = create(:solution,
                       user: user,
                       exercise: exercise,
-                      approved_by: mentor)
+                      approved_by: mentor,
+                      mentoring_requested_at: Time.current)
     iteration = create(:iteration, solution: solution)
 
     sign_in!(user)

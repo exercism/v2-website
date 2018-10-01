@@ -32,21 +32,21 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
 
     # A solution that's got a iteration
     # This should be persisted
-    c3s1_sol = create :solution, exercise: c3s1, independent_mode: true, user: user
+    c3s1_sol = create :solution, exercise: c3s1, user: user
     create :iteration, solution: c3s1_sol
 
     # A completed core
     # This should be persisted
-    c1_sol = create :solution, exercise: c1, approved_by: create(:user), completed_at: Time.now - 1.day, independent_mode: true, user: user
+    c1_sol = create :solution, exercise: c1, approved_by: create(:user), completed_at: Time.now - 1.day, user: user
     create :iteration, solution: c1_sol
 
     # An unlocked side
     # This should be persisted
-    c1s2_sol = create :solution, exercise: c1s2, independent_mode: true, user: user
+    c1s2_sol = create :solution, exercise: c1s2, user: user
 
     # A different unlocked side that shouldn't be unlocked
     # This should not be persisted as it's not been started and it shouldn't be unlocked
-    c2s1_sol = create :solution, exercise: c2s1, independent_mode: true, user: user
+    c2s1_sol = create :solution, exercise: c2s1, user: user
 
     # A bonus exercise. This one should be maintained
     # but one shouldn't be created for bonus2, as that can be
@@ -55,7 +55,7 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
 
     # This should get ignored and deleted
     # and replaced with c2
-    c3_sol = create :solution, exercise: c3, independent_mode: true, user: user
+    c3_sol = create :solution, exercise: c3, user: user
 
     user_track = create :user_track, user: user, track: track
     FixUnlockingInUserTrack.(user_track)

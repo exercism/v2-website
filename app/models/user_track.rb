@@ -69,7 +69,7 @@ class UserTrack < ApplicationRecord
   def solutions_being_mentored
     solutions.started.
               where(approved_by_id: nil).
-              where(independent_mode: false)
+              where.not(mentoring_requested_at: nil)
   end
 
   def num_solutions_being_mentored

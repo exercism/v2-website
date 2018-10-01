@@ -53,7 +53,7 @@ class SelectSuggestedSolutionsForMentor
 
   def select_independent(limit)
     base_query.
-      where("solutions.track_in_independent_mode = 1").
+      where("solutions.track_in_independent_mode": true).
       order(Arel.sql("last_updated_by_user_at ASC")).
       limit(limit).pluck(:id)
   end
@@ -78,7 +78,7 @@ class SelectSuggestedSolutionsForMentor
 
   def base_mentored_mode_query
     base_query.
-      where("solutions.track_in_independent_mode = 0").
+      where("solutions.track_in_independent_mode": false).
       order(Arel.sql("last_updated_by_user_at ASC"))
   end
 
@@ -107,8 +107,8 @@ class SelectSuggestedSolutionsForMentor
       # Not completed
       where(completed_at: nil).
 
-      # Not completed
-      where(independent_mode: false).
+      # Where mentoring has been requested
+      where.not(mentoring_requested_at: nil).
 
       # Where there are no mentors
       where(num_mentors: 0).

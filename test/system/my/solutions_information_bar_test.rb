@@ -6,9 +6,9 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
                     accepted_terms_at: Date.new(2016, 12, 25),
                     accepted_privacy_policy_at: Date.new(2016, 12, 25))
     @track = create(:track)
-    @user_track = create :user_track, user: @user, track: @track
+    @user_track = create :user_track, user: @user, track: @track, independent_mode: false
     @exercise = create(:exercise, track: @track)
-    @solution = create :solution, user: @user, exercise: @exercise
+    @solution = create :solution, user: @user, exercise: @exercise, track_in_independent_mode: false, mentoring_requested_at: Time.current
     @iteration = create(:iteration, solution: @solution)
   end
 
@@ -16,7 +16,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_selector ".notifications-bar .notification", text: "Well done on submitting. A mentor will leave you feedback shortly."
+    assert_selector ".notifications-bar .notification", text: "Well done on submitting. A mentor will leave you feedback as soon as possible."
   end
 
   test "After own discussion post" do
@@ -25,7 +25,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
 
     create :discussion_post, iteration: @iteration, user: @user
 
-    assert_selector ".notifications-bar .notification", text: "Well done on submitting. A mentor will leave you feedback shortly."
+    assert_selector ".notifications-bar .notification", text: "Well done on submitting. A mentor will leave you feedback as soon as possible."
   end
 
   test "on mentor comment on first viewing" do
@@ -48,8 +48,6 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    #assert_no_selector ".notifications-bar"
-    #assert_no_selector ".migration-bar"
     assert_selector ".notifications-bar .notification", text: "A mentor has left you a comment."
   end
 
@@ -94,8 +92,17 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     assert_selector ".notifications-bar .notification", text: "Your solution has been published."
   end
 
+  test "Where mentoring hasn't been requested (a side exercise)" do
+    @solution.update(mentoring_requested_at: nil) # The behaviour for a side exercise
+
+    sign_in!(@user)
+    visit my_solution_path(@solution)
+
+    assert_selector ".notifications-bar", text: "Your exercise has been submitted successfully."
+  end
+
   test "In independent mode with slots" do
-    @solution.update(track_in_independent_mode: true, independent_mode: true)
+    @solution.update(track_in_independent_mode: true, mentoring_requested_at: nil)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
     sign_in!(@user)
@@ -105,7 +112,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   end
 
   test "In independent mode without slots" do
-    @solution.update(track_in_independent_mode: true, independent_mode: true)
+    @solution.update(track_in_independent_mode: true, mentoring_requested_at: nil)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
 
     sign_in!(@user)
@@ -114,38 +121,17 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     assert_selector ".notifications-bar .notification", text: "In Independent Mode you will not receive mentoring by default. You may request mentoring once your existing solutions have been mentored."
   end
 
-  test "Independent solution in mentored mode with slots" do
-    @solution.update(track_in_independent_mode: false, independent_mode: true)
-    UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
+  test "Legacy with mentoring requested" do
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day)
 
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_selector ".migration-bar", text: "This solution has been imported from independent mode. You may request mentoring to unlock its extra exercises."
-  end
-
-  test "Independent solution in mentored mode without slots" do
-    @user_track.update(independent_mode: false)
-    @solution.update(independent_mode: true)
-    UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
-
-    sign_in!(@user)
-    visit my_solution_path(@solution)
-
-    assert_selector ".migration-bar", text: "This solution has been imported from independent mode. Mentoring will become available when your other solutions have been mentored."
-  end
-
-  test "Legacy in mentored mode" do
-    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, independent_mode: false)
-
-    sign_in!(@user)
-    visit my_solution_path(@solution)
-
-    assert_selector ".notifications-bar", text: "Well done on submitting. A mentor will leave you feedback shortly."
+    assert_selector ".notifications-bar", text: "Well done on submitting. A mentor will leave you feedback as soon as possible."
   end
 
   test "Legacy with slots" do
-    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, independent_mode: true)
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, mentoring_requested_at: nil)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
     sign_in!(@user)
@@ -155,7 +141,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   end
 
   test "Legacy without slots" do
-    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, independent_mode: true)
+    @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day, mentoring_requested_at: nil)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
 
     sign_in!(@user)

@@ -19,7 +19,8 @@ class CompleteSolutionTest < ApplicationSystemTestCase
     solution = create(:solution,
                       user: user,
                       exercise: exercise,
-                      approved_by: mentor)
+                      approved_by: mentor,
+                      mentoring_requested_at: Time.current)
     create(:iteration, solution: solution)
     solution_mentorship = create(:solution_mentorship,
                                  solution: solution,

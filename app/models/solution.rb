@@ -15,6 +15,10 @@ class Solution < ApplicationRecord
 
   delegate :auto_approve?, to: :exercise
 
+  scope :core, -> {
+    joins(:exercise).merge(Exercise.core)
+  }
+
   def self.completed
     where.not(completed_at: nil)
   end
@@ -51,11 +55,7 @@ class Solution < ApplicationRecord
   end
 
   def track_in_mentored_mode?
-    !track_in_independent_mode?
-  end
-
-  def mentored_mode?
-    !independent_mode?
+    track_in_independent_mode === false
   end
 
   def mentor_download_command
@@ -84,6 +84,10 @@ class Solution < ApplicationRecord
 
   def completed?
     !!completed_at
+  end
+
+  def mentoring_requested?
+    !!mentoring_requested_at
   end
 
   def active_mentors
