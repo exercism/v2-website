@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-class Git::SyncsMentorsTest < ActiveSupport::TestCase
+class Git::SyncMentorsTest < ActiveSupport::TestCase
   test "creates mentors" do
     Git::GithubProfile.stubs(:for_user)
     track = create(:track, slug: "go")
@@ -20,7 +20,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
       ])
 
     stub_repo_cache! do
-      Git::SyncsMentors.(repo)
+      Git::SyncMentors.(repo)
     end
 
     mentor = Mentor.last
@@ -58,7 +58,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
       ])
 
     stub_repo_cache! do
-      Git::SyncsMentors.(repo)
+      Git::SyncMentors.(repo)
     end
 
     mentor.reload
@@ -87,7 +87,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
       ])
 
     stub_repo_cache! do
-      Git::SyncsMentors.(repo)
+      Git::SyncMentors.(repo)
     end
 
     assert_equal 1, Mentor.count
@@ -119,7 +119,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
       ])
 
     stub_repo_cache! do
-      Git::SyncsMentors.(repo)
+      Git::SyncMentors.(repo)
     end
 
     mentor = Mentor.last
@@ -151,7 +151,7 @@ class Git::SyncsMentorsTest < ActiveSupport::TestCase
       ])
 
     stub_repo_cache! do
-      Git::SyncsMentors.(repo)
+      Git::SyncMentors.(repo)
     end
 
     mentor = Mentor.last

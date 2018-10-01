@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
 require "webmock/minitest"
 
-class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
+class Git::SyncWebsiteCopyTest < ActiveJob::TestCase
   test "syncs mentors" do
     Git::WebsiteContent.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/website-copy")
     stub_request(:get, "https://api.github.com/users/kytrinyx").
@@ -21,7 +21,7 @@ class Git::SyncsWebsiteCopyTest < ActiveJob::TestCase
     track = create(:track, slug: "go")
 
     stub_repo_cache! do
-      Git::SyncsWebsiteCopy.()
+      Git::SyncWebsiteCopy.()
     end
 
     mentor = Mentor.last

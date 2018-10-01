@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Git::SyncsMaintainersTest < ActiveSupport::TestCase
+class Git::SyncMaintainersTest < ActiveSupport::TestCase
   setup do
     @track = create :track
     stub_gh_user = stub(
@@ -35,22 +35,22 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
   end
 
   test "supports undefined maintainers" do
-    Git::SyncsMaintainers.sync!(@track, {})
+    Git::SyncMaintainers.(@track, {})
     assert_empty @track.maintainers
   end
 
   test "ignores nil config" do
-    Git::SyncsMaintainers.sync!(@track, nil)
+    Git::SyncMaintainers.(@track, nil)
     assert_empty @track.maintainers
   end
 
   test "supports nil maintainers" do
-    Git::SyncsMaintainers.sync!(@track, { maintainers: nil })
+    Git::SyncMaintainers.(@track, { maintainers: nil })
     assert_empty @track.maintainers
   end
 
   test "supports empty maintainers" do
-    Git::SyncsMaintainers.sync!(@track, { maintainers: [] })
+    Git::SyncMaintainers.(@track, { maintainers: [] })
     assert_empty @track.maintainers
   end
 
@@ -65,7 +65,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     assert_equal 1, @track.maintainers.size
     assert_equal false, @track.maintainers.first.active?
@@ -83,7 +83,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     assert_nil @track.maintainers.first.alumnus
   end
@@ -109,7 +109,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
     assert_empty @track.maintainers
   end
 
@@ -128,7 +128,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
     assert_equal 1, @track.maintainers.size
   end
 
@@ -146,7 +146,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     assert_equal 1, @track.maintainers.size
 
@@ -179,7 +179,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     assert_equal 2, @track.maintainers.size
 
@@ -201,7 +201,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     assert_equal 1, @track.maintainers.size
     assert_equal "Joanne MIDDLENAME Bloggs", @track.maintainers.first.name
@@ -220,7 +220,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     assert_empty @track.maintainers
   end
@@ -243,7 +243,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     @maintainers = @track.maintainers
     assert_equal 2, @maintainers.size
@@ -267,7 +267,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
         }
       ]
     }
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     @maintainers = @track.maintainers
     assert_equal 2, @maintainers.size
@@ -292,7 +292,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
       ]
     }
 
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     @maintainers = @track.maintainers
     assert_equal 2, @maintainers.size
@@ -317,7 +317,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
       ]
     }
 
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     @maintainers = @track.maintainers
     assert_equal 2, @maintainers.size
@@ -344,7 +344,7 @@ class Git::SyncsMaintainersTest < ActiveSupport::TestCase
       ]
     }
 
-    Git::SyncsMaintainers.sync!(@track, maintainers_config)
+    Git::SyncMaintainers.(@track, maintainers_config)
 
     @maintainers = @track.maintainers
     assert_equal 2, @maintainers.size

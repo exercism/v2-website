@@ -1,4 +1,4 @@
-class Git::SyncsMentors
+class Git::SyncMentors
   include Mandate
 
   def initialize(repo = Git::WebsiteContent.head)
