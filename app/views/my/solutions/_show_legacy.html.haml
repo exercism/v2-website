@@ -1,6 +1,6 @@
 - num_avaliable_core_exercises = @user_track.num_avaliable_core_exercises
 - num_avaliable_side_exercises = @user_track.num_avaliable_side_exercises
-.completed-section
+.finsished-section
   .title-block
     %h3
       =icon("check-circle", "checkmark")
@@ -16,13 +16,13 @@
           %strong Request mentor feedback.
           This solution has been imported from an old version of the website.
           You may request mentoring to unlock its extra exercises.
-        =link_to "Request mentor feedback on this solution", request_mentoring_my_solution_path(@solution), method: :patch, class: 'pure-button'
+        =link_to "Request mentor feedback", request_mentoring_my_solution_path(@solution), method: :patch, class: 'pure-button'
       -else
         %p
           %strong Request mentor feedback (disabled).
           This solution has been imported from independent mode.
           Once your existing solutions have been mentored you will be able to request mentoring for this solution.
-        =link_to "Request mentor feedback on this solution", "#", class: 'pure-button disabled', disabled: true
+        =link_to "Request mentor feedback", "#", class: 'pure-button disabled', disabled: true
 
     .next-option
       %p

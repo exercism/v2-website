@@ -1,10 +1,12 @@
 -if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT && !@solution.mentoring_requested?
+  / Legacy Mode
   =render "show_legacy"
   =render "show_legacy_discussion"
 
 -elsif @solution.mentoring_requested?
+  / Mentoring has been requested so this superceeds other features
   -if @solution.completed?
-    =render "show_completed"
+    =render "show_finished_mentored"
 
   -elsif @solution.approved? && !@exercise.auto_approve?
     =render "show_approved"
@@ -17,12 +19,12 @@
     -else
       =render "discussion"
 
--elsif @user_track.independent_mode?
-  =render "show_completed_independent"
+-elsif @solution.user_track.independent_mode?
+  =render "show_finished_independent"
   =render "show_legacy_discussion"
 
--else # Track in mentored mode, solution in independent mode
-  =render "show_completed_hybrid"
+-else # Side exercise
+  =render "show_finished_side"
   =render "show_legacy_discussion"
 
 -content_for :js do

@@ -231,7 +231,6 @@ class CreateIterationTest < ActiveSupport::TestCase
     file = mock
     file.stubs(read: file_contents, headers: headers)
 
-
     ruby = create :track
     core_exercise = create :exercise, track: ruby, core: true
     side_exercise = create :exercise, track: ruby, core: false
