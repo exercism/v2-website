@@ -1,6 +1,6 @@
 - num_avaliable_core_exercises = @user_track.num_avaliable_core_exercises
 - num_avaliable_side_exercises = @user_track.num_avaliable_side_exercises
-.completed-section
+.finished-section
   .title-block
     %h3
       =icon("check-circle", "checkmark")
@@ -10,20 +10,12 @@
       =graphical_icon("question-circle")
       What's next?
 
-    -unless @solution.published?
-      .next-option
-        %p
-          %strong Publish this solution.
-          Learning from each other’s attempts is a crucial part of Exercism. By making your solution public, other Exercism users will be able to find it and learn from your ideas. All discussion between you and your mentor will remain private.
+    -if @solution.published?
+      =render "my/solutions/widgets/published"
+    -else
+      =render "my/solutions/widgets/publish_prompt"
 
-        =link_to "Publish your solution", [:publish, :my, @solution, publish: 1], method: :patch, class: 'pure-button'
-
-    .next-option
-      %p
-        %strong Explore more solutions to #{@exercise.title}.
-        There are lots of different ways to approach every exercise on Exercism. Why not see how others have solved it?
-
-      =link_to "View community solutions", track_exercise_solutions_path(@track, @exercise), class: 'pure-button'
+    =render "my/solutions/widgets/community_solutions"
 
     -if num_avaliable_core_exercises.size > 0 || num_avaliable_side_exercises.size > 0
       .next-option

@@ -25,6 +25,14 @@ class UserTrack < ApplicationRecord
     completed_side_exercise_ids.count
   end
 
+  def num_avaliable_exercises
+    if mentored_mode?
+      num_avaliable_core_exercises + num_avaliable_side_exercises
+    else
+      solutions.not_completed.count
+    end
+  end
+
   def num_avaliable_core_exercises
     if mentored_mode?
       solutions.not_completed.
