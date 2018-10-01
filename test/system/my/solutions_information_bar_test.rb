@@ -103,6 +103,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
 
   test "In independent mode with slots" do
     @solution.update(track_in_independent_mode: true, mentoring_requested_at: nil)
+    @user_track.update(independent_mode: true)
     UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
     sign_in!(@user)

@@ -68,7 +68,7 @@
         %strong not
         receive mentoring by default.
         -if @user_track.mentoring_slots_remaining?
-          You may request mentoring on #{pluralize UserTrack::MAX_MENTORING_SLOTS, "solution"} at a time.
+          You may request mentoring on #{pluralize @user_track.max_mentoring_slots, "solution"} at a time.
           #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.
         -else
           You may request mentoring once your existing solutions have been mentored.
