@@ -1,2 +1,17 @@
-%h1 Admin::Mentors#index
-%p Find me in app/views/admin/mentors/index.html.haml
+%table
+  %tbody
+    %tr
+      %th Name
+      %th Handle
+      %th Languages
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.handle
+        %td= @tracks[user.id].join(',')
+
+
+.lo-container
+  =link_to "View", "#", class: 'pure-button'
+
+=paginate @users
