@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixins';
+
+#settings-bar.lo-settings-bar {
+    margin-bottom:20px;
+    background:#eee;
+    a {
+        text-decoration:none;
+        padding:7px 0;
+        display:inline-block;
+        color:#666;
+        margin-right:20px;
+        &.selected {
+            color:$color-2;
+            font-weight:$bold;
+            border-bottom:3px solid $color-2;
+        }
+    }
+}

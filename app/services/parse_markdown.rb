@@ -19,7 +19,7 @@ class ParseMarkdown
   end
 
   def raw_html
-    @raw_html ||= Renderer.new.render(CommonMarker.render_doc(preprocessed_text))
+    @raw_html ||= Renderer.new.render(CommonMarker.render_doc(preprocessed_text, :DEFAULT, [:table]))
   end
 
   def preprocessed_text

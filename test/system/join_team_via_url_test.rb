@@ -3,7 +3,7 @@ require "application_system_test_case"
 class JoinTeamViaUrlTest < ApplicationSystemTestCase
   test "join team via url" do
     original_host = Capybara.app_host
-    Capybara.app_host = "http://teams.lvh.me"
+    Capybara.app_host = SeleniumHelpers.teams_host
     user = create(:user)
     team = create(:team,
                   token: "TOKEN",

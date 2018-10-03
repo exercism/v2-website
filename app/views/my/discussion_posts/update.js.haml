@@ -1,4 +1,5 @@
 var newPost = '#{j discussion_post_widget(@post, @iteration.solution, @user_track)}';
 $('#discussion-post-#{@post.id}').replaceWith(newPost);
+Prism.highlightAll()
 
 #{yield(:js).gsub(/<\/?script>/, "")}

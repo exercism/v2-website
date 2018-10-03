@@ -1,97 +1,41 @@
 #my-settings-page
-  #nav.lo-nav-bar
-    .lo-container
-      /=link_to "Dashboard", root_path
-      /=nav_divider
-      %span Settings
+  =settings_bar
 
   = notice_and_alert(current_user)
   .lo-container
     %h1 Account settings
-    .pure-g
-      .pure-u-1-3.lhs
-        .settings-section
-          %h2 CLI token
-          .token-explanation Your authentication token for the CLI is:
-          =render "widgets/code_snippet", code: current_user.auth_token
+    .settings-section
+      %h2 CLI token
+      .token-explanation Your authentication token for the CLI is:
+      =render "widgets/code_snippet", code: current_user.auth_token
 
-        .settings-section
-          %h2 Change your password
-          %p You can change your password at any point.
+    .settings-section
+      %h2 Change your password
+      %p You can change your password at any point.
 
-          =form_for current_user, url: [:my, :settings] do |f|
-            -unless current_user.provider?
-              .field
-                =label_tag :old_password, "Enter your current password"
-                =password_field_tag :old_password
+      =form_for current_user, url: [:my, :settings] do |f|
+        -unless current_user.provider?
+          .field
+            =label_tag :old_password, "Enter your current password"
+            =password_field_tag :old_password
 
-            .field
-              =f.label :password, "Enter your new password"
-              =f.password_field :password, placeholder: "Enter your new password"
+        .field
+          =f.label :password, "Enter your new password"
+          =f.password_field :password, placeholder: "Enter your new password"
 
-            .field
-              =f.password_field :password_confirmation, placeholder: "Confirm your current password"
+        .field
+          =f.password_field :password_confirmation, placeholder: "Confirm your current password"
 
-            =button_tag "Update password", class: 'pure-button'
+        =button_tag "Update password", class: 'pure-button'
 
-        .settings-section
-          %h2 Change your handle
-          %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes reguarly.
-          %p Note that you can change the name that appears on your profile seperately by using the "Edit profile" button in your profile.
+    .settings-section
+      %h2 Change your handle
+      %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes reguarly.
+      %p Note that you can change the name that appears on your profile seperately by using the "Edit profile" button in your profile.
 
-          =form_for current_user, url: [:my, :settings] do |f|
-            .field
-              =f.label :handle, "Enter your new handle"
-              =f.text_field :handle
+      =form_for current_user, url: [:my, :settings] do |f|
+        .field
+          =f.label :handle, "Enter your new handle"
+          =f.text_field :handle
 
-            =button_tag "Update handle", class: 'pure-button'
-
-      .pure-u-2-3.rhs
-        %h2 Privacy
-        %p You can use different aliases on tracks where you wish to be anonymous. By default your handle and photo will appear next to solutions.
-        =form_tag [:update_user_tracks, :my, :settings], method: :patch do |f|
-          %table.tracks
-            %tr
-              %th Track
-              %th Use alias?
-              %th How you will appear
-            -@user_tracks.each do |user_track|
-              %tr.track
-                %td.title #{user_track.track.title} Track
-                %td.anonymous
-                  =check_box_tag "user_tracks[#{user_track.id}][anonymous]", 1, user_track.anonymous?, class: 'anonymous-toggle'
-                  .toggles
-                    =icon 'toggle-on'
-                    =icon 'toggle-off'
-                %td
-                  .default{style: user_track.anonymous?? "display:none" : ""}
-                    =image current_user.avatar_url, "Avatar of #{current_user.handle}"
-                    .handle= current_user.handle
-                  .anon{style: user_track.anonymous?? "" : "display:none"}
-                    =image "anonymous.png", "Anonymous avatar"
-                    =text_field_tag "user_tracks[#{user_track.id}][handle]", user_track.handle, class: 'handle', placeholder: "Choose an alias for this track", required: user_track.anonymous?
-                %td
-                  -if user_track.errors.present?
-                    .error Not saved
-
-          =button_tag "Update privacy settings", class: 'pure-button'
-
--content_for :js do
-  :javascript
-    $('.anonymous-toggle').change(function(){
-      var $checkbox = $(this)
-      var $handle = $checkbox.parent().next().find('input.handle')
-      var $default = $checkbox.parent().next().find('.default')
-      var $anon = $checkbox.parent().next().find('.anon')
-      var anon = $checkbox.prop('checked')
-
-      if(anon) {
-        $default.hide()
-        $anon.show()
-      } else {
-        $default.show()
-        $anon.hide()
-        $anon.find("input").val("")
-      }
-      $handle.attr('required', anon)
-    })
+        =button_tag "Update handle", class: 'pure-button'
