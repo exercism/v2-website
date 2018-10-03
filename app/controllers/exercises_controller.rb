@@ -1,9 +1,11 @@
 class ExercisesController < ApplicationController
   def index
     @track = Track.find(params[:track_id])
-    @exercises = @track.exercises
-
     return redirect_to [:my, @track] if user_signed_in?
+
+    @exercises = @track.exercises.active
+
+    # TODO: Is this still needed? @exercise is not set anywhere in or before this action
     return redirect_to [@track, @exercise], :status => :moved_permanently if request.path != track_exercises_path(@track)
   end
 
