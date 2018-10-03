@@ -5,8 +5,7 @@ class ExercisesController < ApplicationController
 
     @exercises = @track.exercises.active
 
-    # TODO: Is this still needed? @exercise is not set anywhere in or before this action
-    return redirect_to [@track, @exercise], :status => :moved_permanently if request.path != track_exercises_path(@track)
+    return redirect_to [@track, :exercises], :status => :moved_permanently if request.path != track_exercises_path(@track)
   end
 
   def show
