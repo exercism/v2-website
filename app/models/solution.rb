@@ -18,36 +18,28 @@ class Solution < ApplicationRecord
   scope :core, -> { joins(:exercise).merge(Exercise.core) }
   scope :side, -> { joins(:exercise).merge(Exercise.side) }
 
-  def self.completed
-    where.not(completed_at: nil)
-  end
+  scope :completed, -> { where.not(completed_at: nil) }
+  scope :not_completed, -> { where(completed_at: nil) }
 
-  def self.not_completed
-    where(completed_at: nil)
-  end
+  scope :published, -> { where.not(published_at: nil) }
 
-  def self.published
-    where.not(published_at: nil)
-  end
+  scope :legacy, -> { where("solutions.created_at < ?", Exercism::V2_MIGRATED_AT) }
+  scope :not_legacy, -> { where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT) }
 
-  def self.started
+  scope :started, -> {
     where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)
            OR
            downloaded_at IS NOT NULL")
-  end
+  }
 
-  def self.not_started
+  scope :not_started, -> {
     where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)").
     where(downloaded_at: nil)
-  end
+  }
 
-  def self.legacy
-    where("solutions.created_at < ?", Exercism::V2_MIGRATED_AT)
-  end
-
-  def self.not_legacy
-    where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT)
-  end
+  scope :submitted, -> {
+    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
+  }
 
   def display_published_at
     published_at == Exercism::V2_MIGRATED_AT ? created_at : published_at

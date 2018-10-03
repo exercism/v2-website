@@ -1,8 +1,17 @@
 class RenameSolutionMentoringColumn < ActiveRecord::Migration[5.2]
   def up
     add_column :solutions, :mentoring_requested_at, :datetime, null: true
-    Solution.where(independent_mode: false).
+
+    # Set all core exercises that have been started to have mentoring requested at
+    # All non-core, not-started, or independent-mode exercises will be reset.
+    Solution.where(track_in_independent_mode: false).
+             joins(:exercise).merge(Exercise.core).
+             submitted.
              update_all("mentoring_requested_at = last_updated_by_user_at")
+
+    # This is deliberately commented out in the migration as I want to verify
+    # everything has worked in live before deleting this column.
+    #remove_column :solutions, :independent_mode
   end
 
   def down
