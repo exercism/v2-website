@@ -51,7 +51,7 @@ class TracksControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal @current_user, reaction.user
     assert_equal comment, reaction.comment
-    assert_equal "love", reaction.emotion
+    assert_equal "legacy", reaction.emotion
   end
 
   test "index only shows published solutions" do

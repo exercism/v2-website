@@ -1,6 +1,19 @@
 require "test_helper"
 
 class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
+  test "works for an empty user_track" do
+    git_sha = SecureRandom.uuid
+    Git::ExercismRepo.stubs(current_head: git_sha)
+
+    user = create :user
+    track = create :track
+    user_track = create :user_track, user: user, track: track
+
+    assert_nothing_raised do
+      FixUnlockingInUserTrack.(user_track)
+    end
+  end
+
   test "correct exercises get deleted and unlocked" do
     git_sha = SecureRandom.uuid
     Git::ExercismRepo.stubs(current_head: git_sha)
@@ -55,5 +68,6 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
 
     expected_exercises = [ c1, c2, c1s1, c1s2, c3s1, bonus1 ].map(&:id).sort
     assert_equal expected_exercises, user_track.solutions.map(&:exercise_id).sort
+    #p Benchmark.measure { 1000.times { FixUnlockingInUserTrack.(user_track) } }.real
   end
 end

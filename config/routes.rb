@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :solutions, only: [:show] do
       resources :iterations, only: [:show]
     end
+    resources :mentors, only: [:index]
   end
 
   # ###### #
@@ -135,12 +136,13 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index] do
       patch :read, on: :member
       patch :read_batch, on: :collection
+      get :all, on: :collection
     end
     resource :profile, controller: "profile"
 
     resource :settings do
-      patch :update_user_tracks
-      resource :communication_preferences, only: [:edit, :update]
+      resource :preferences, only: [:edit, :update]
+      resource :track_settings, only: [:edit, :update]
     end
   end
 

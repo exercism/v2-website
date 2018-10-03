@@ -35,4 +35,31 @@ $ go home
   test "doesn't blow up with nil" do
     assert_equal "", ParseMarkdown.(nil)
   end
+
+  test "parses tables" do
+    table = <<~TABLE
+      1   | 2
+      --- | ---
+      3   | 4
+    TABLE
+
+
+    expected = <<~HTML
+      <table>
+      <thead>
+      <tr>
+      <th>1</th>
+      <th>2</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>3</td>
+      <td>4</td>
+      </tr>
+      </tbody>
+      </table>
+    HTML
+    assert_equal expected, ParseMarkdown.(table)
+  end
 end
