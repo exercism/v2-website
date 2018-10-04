@@ -12,10 +12,8 @@
 
     -if @solution.published?
       =render "my/solutions/widgets/published"
-
     -elsif @solution.completed?
       =render "my/solutions/widgets/publish_prompt"
-
     -else
       =render "my/solutions/widgets/complete_prompt"
 

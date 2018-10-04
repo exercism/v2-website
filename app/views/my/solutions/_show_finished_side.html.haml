@@ -10,22 +10,15 @@
       =graphical_icon("question-circle")
       What's next?
 
+
+    -if @solution.published?
+      =render "my/solutions/widgets/published"
+    -elsif @solution.completed?
+      =render "my/solutions/widgets/publish_prompt"
+    -else
+      =render "my/solutions/widgets/complete_prompt"
+
     =render "my/solutions/widgets/community_solutions"
-
-    -if num_avaliable_core_exercises.size > 0 || num_avaliable_side_exercises.size > 0
-      .next-option
-        %p
-          %strong Carry on coding.
-          You have
-          -if num_avaliable_core_exercises > 0
-            #{pluralize num_avaliable_core_exercises, "core exercise"}
-            -if num_avaliable_side_exercises > 0
-              and
-          -if num_avaliable_side_exercises > 0
-            #{pluralize num_avaliable_side_exercises, "side exercise"}
-          that you have not yet completed on this track. Why not try a new challenge?
-
-        =link_to "Choose next exercise", my_track_path(@track), class: 'pure-button'
 
     .next-option
       -if @user_track.mentoring_slots_remaining?
