@@ -27,18 +27,22 @@ class Solution < ApplicationRecord
   scope :not_legacy, -> { where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT) }
 
   scope :started, -> {
-    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)
+    where("EXISTS(SELECT TRUE FROM iterations WHERE iterations.solution_id = solutions.id)
            OR
            downloaded_at IS NOT NULL")
   }
 
   scope :not_started, -> {
-    where("NOT EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)").
+    where("NOT EXISTS(SELECT TRUE FROM iterations WHERE iterations.solution_id = solutions.id)").
     where(downloaded_at: nil)
   }
 
   scope :submitted, -> {
-    where("EXISTS(SELECT NULL FROM iterations WHERE iterations.solution_id = solutions.id)")
+    where("EXISTS(SELECT TRUE FROM iterations WHERE iterations.solution_id = solutions.id)")
+  }
+
+  scope :has_a_mentor, -> {
+     where("EXISTS(SELECT TRUE FROM solution_mentorships WHERE solution_mentorships.solution_id = solutions.id)")
   }
 
   def display_published_at
