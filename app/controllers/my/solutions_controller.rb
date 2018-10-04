@@ -46,6 +46,12 @@ class My::SolutionsController < MyController
     redirect_to action: :show
   end
 
+  def cancel_mentoring_request
+    CancelMentoringRequestForSolution.(@solution)
+
+    redirect_to action: :show
+  end
+
   def confirm_unapproved_completion
     render_modal('solution-confirm-unapproved-completion', "confirm_unapproved_completion")
   end

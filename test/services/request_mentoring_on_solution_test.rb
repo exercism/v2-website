@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RequestMentoringOnSolutionTest < ActiveSupport::TestCase
+class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
   test "sets values correctly" do
     Timecop.freeze do
       solution = create :solution,

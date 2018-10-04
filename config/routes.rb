@@ -127,6 +127,7 @@ Rails.application.routes.draw do
         patch :complete
         get :reflection
         patch :request_mentoring
+        patch :cancel_mentoring_request
         patch :reflect
         patch :publish
       end

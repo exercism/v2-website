@@ -38,8 +38,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     visit my_solution_path(solution)
 
     assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
+    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
 
     refute_selector ".discussion"
   end
@@ -108,7 +108,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert ".finished-section .next-option strong", text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
     refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
 
