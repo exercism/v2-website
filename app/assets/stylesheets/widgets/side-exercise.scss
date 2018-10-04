@@ -27,7 +27,7 @@
         .status { color: #999 }
         border-color:rgba($color-2, 0.6);
     }
-    &.in-progress, &.approved {
+    &.in-progress, &.mentoring-requested, &.approved {
         border:2px solid $color-2;
         .icon {
             background:#fff;
@@ -68,6 +68,7 @@
     &.locked .status.locked,
     &.unlocked .status.unlocked,
     &.in-progress .status.in-progress,
+    &.mentoring-requested .status.mentoring-requested,
     &.approved .status.approved,
     &.completed .status.completed {
         display: block;

@@ -8,6 +8,9 @@
         -elsif solution.approved?
           = link_to [:my, solution], class: "widget-side-exercise approved" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
+        -elsif solution.mentoring_requested?
+          = link_to [:my, solution], class: "widget-side-exercise mentoring-requested" do
+            =render "my/side_exercises/exercise", exercise: exercise, solution: solution
         -elsif solution.in_progress?
           = link_to [:my, solution], class: "widget-side-exercise in-progress" do
             =render "my/side_exercises/exercise", exercise: exercise, solution: solution
