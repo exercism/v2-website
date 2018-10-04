@@ -12,22 +12,6 @@
         %br
         Once your other solutions on this track have been mentored you may request mentoring for this.
 
-<<<<<<< bbad32b4bb7d2b1927779b961c8e34781bc6269a
--elsif @solution.track_in_mentored_mode? && @solution.independent_mode?
-  .migration-bar
-    .lo-container
-      This solution has been imported from independent mode.
-      -if @user_track.mentoring_slots_remaining?
-        You may request mentoring to unlock its extra exercises.
-        #{link_to "Request mentoring", request_mentoring_my_solution_path(@solution), method: :patch}.
-      -else
-        Mentoring will become available when your other solutions have been mentored.
-=======
--elsif @solution.track_in_mentored_mode? && !@solution.mentoring_requested?
-  .notifications-bar
-    .notification Your exercise has been submitted successfully.
->>>>>>> Replace solutions.independent_mode with mentoring_requested_at
-
 -elsif @solution.completed?
   -if @solution.published?
     .notifications-bar
@@ -53,6 +37,11 @@
         .notification.action
           %span.text A mentor has approved this solution
           =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
+
+-elsif @solution.track_in_mentored_mode? && !@solution.mentoring_requested?
+  .notifications-bar
+    .notification
+      Your exercise has been submitted successfully. You may mark it as completed, browse other solutions, or request mentoring.
 
 -elsif @iteration.discussion_post_notifications_for_user.unread.size > 0
   .notifications-bar
