@@ -45,6 +45,14 @@ class My::SideExercisesTest < ApplicationSystemTestCase
     assert_selector ".pure-u-1 .widget-side-exercise.in-progress"
   end
 
+  test "mentoring requested" do
+    @solution.iterations.create
+    @solution.update(mentoring_requested_at_at: Time.current)
+
+    visit my_track_path(@track)
+    assert_selector ".pure-u-1-3 .widget-side-exercise.mentoring-requested"
+  end
+
   test "unlocked" do
     visit my_track_path(@track)
     assert_selector ".pure-u-1 .widget-side-exercise.unlocked"
