@@ -47,7 +47,7 @@ class My::SideExercisesTest < ApplicationSystemTestCase
 
   test "mentoring requested" do
     @solution.iterations.create
-    @solution.update(mentoring_requested_at_at: Time.current)
+    @solution.update(mentoring_requested_at: Time.current)
 
     visit my_track_path(@track)
     assert_selector ".pure-u-1-3 .widget-side-exercise.mentoring-requested"
