@@ -5,7 +5,7 @@ disableRemoteButton = (button) ->
     button.prop(disabled: false).removeClass('disabled')
 
 $('.pure-button.js-disable-on-click').click ->
-  disableRemoteButton(this)
+  disableRemoteButton($(this))
 
 $('form').submit ->
   form = $(this)
