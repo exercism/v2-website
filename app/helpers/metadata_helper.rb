@@ -19,15 +19,39 @@ module MetadataHelper
 
   def format_title(title)
     return "Exercism" unless title
-
     "#{title} | Exercism"
   end
 
   def metadata
     @metadata ||=
       case namespace_name
+      when "admin"
+        { title: "Admin" }
       when "my"
-        nil
+        case controller_name
+        when "notifications"
+          { title: "Notifications" }
+        when "settings", "track_settings", "preferences"
+          { title: "Settings" }
+        when "reactions"
+          { title: "My Reactions" }
+        when "solutions"
+          { title: "My #{@track.title}/#{@exercise.title}" }
+        when "tracks"
+          case action_name
+          when "index"
+            { title: "My Tracks" }
+          when "show"
+            { title: @mentors ? "#{@track.title} Track Preview" : "My #{@track.title} Track" }
+          end
+        end
+      when "mentor"
+        case controller_name
+        when "solutions"
+          { title: "#{display_handle(@solution.user, @solution_user_track)} | #{@track.title}/#{@exercise.title}" }
+        else
+          { title: "Mentor" }
+        end
       else
         case controller_name
         when "pages"
@@ -62,6 +86,13 @@ module MetadataHelper
           { title: "Reset your password" }
         when "confirmations"
           { title: "Resend confirmation email" }
+        when "profiles"
+          case action_name
+          when "show"
+            { title: user_signed_in? && current_user == @user ? "My Profile" : "#{@profile.display_name}'s Profile" }
+          when "index"
+            { title: "Profiles" }
+          end
         end
       end
   end
