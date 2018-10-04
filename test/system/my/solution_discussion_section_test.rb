@@ -38,8 +38,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     visit my_solution_path(solution)
 
     assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
 
     refute_selector ".discussion"
   end
@@ -57,7 +57,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".next-steps"
     assert_selector ".next-steps a", text: "other people have solved this"
 
-    refute_selector ".finished-section"
+    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
   end
 
   test "mentored section with auto approve" do
