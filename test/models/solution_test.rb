@@ -63,6 +63,25 @@ class SolutionTest < ActiveSupport::TestCase
     assert_equal [unstarted_solution], Solution.not_started
   end
 
+  test "submitted" do
+    user_track = create :user_track
+    submitted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    create :iteration, solution: submitted_solution
+    unsubmitted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    downloaded_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track), downloaded_at: Time.now
+
+    assert_equal [submitted_solution], Solution.submitted
+  end
+
+  test "has_a_mentor" do
+    user_track = create :user_track
+    mentored_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    create :solution_mentorship, solution: mentored_solution
+    unmentored_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+
+    assert_equal [mentored_solution], Solution.has_a_mentor
+  end
+
   test "track_in_mentored_mode" do
     refute create(:solution, track_in_independent_mode: true).track_in_mentored_mode?
     assert create(:solution, track_in_independent_mode: false).track_in_mentored_mode?
