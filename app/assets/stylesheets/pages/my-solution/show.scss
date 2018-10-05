@@ -214,16 +214,17 @@
         }*/
         .notification {
             //margin-right:190px;
-            @include font-size(13, 13);
+            @include font-size(13, 16);
             padding:8px 10px;
+            border-radius:2px;
+            font-weight:$regular;
+            color:$color-1;
+
             @include width-small() {
                 border:1px solid rgba($color-1, 0.2);
                 background:rgba($color-1, 0.05);
                 padding:8px 20px;
             }
-            border-radius:2px;
-            font-weight:$regular;
-            color:$color-1;
             a {
                 margin-left:3px;
                 color:#333;

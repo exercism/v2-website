@@ -45,7 +45,6 @@
     .notifications-bar
       .lo-container
         .notification.action
-          =icon :bell
           %span.text A mentor has approved this solution
           =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
 
@@ -72,7 +71,6 @@
   .notifications-bar
     .lo-container
       .notification
-        =icon 'clock-o', 'Clock'
         Well done on submitting. A mentor will leave you feedback shortly.
 
 -else
