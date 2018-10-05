@@ -11,13 +11,14 @@
         @include width-medium() {
             padding-right:60px;
         }
-        
     }
     .rhs {
+        margin-top:15px;
         @include width-medium() {
+            margin-top:0;
             padding-left:60px;
             border-left:1px solid #e5e5e5;
-        } 
+        }
     }
 
     .instructions {
