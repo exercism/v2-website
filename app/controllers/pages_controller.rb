@@ -34,16 +34,21 @@ class PagesController < ApplicationController
     "CC-BY-SA-4.0": :cc_sa_4
   }
 
-  PAGES.merge(LICENCES).each do |title, page|
-    define_method page do
-      p Git::WebsiteContent.head.pages
-      markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
-      @page = page
-      @page_title = title
-      @content = ParseMarkdown.(markdown.to_s)
-      render action: "generic"
+  PAGE_GENERATOR = -> (pages, repo_location) do
+    pages.each do |title, page|
+      define_method page do
+        p Git::WebsiteContent.head.send(repo_location)
+        markdown = Git::WebsiteContent.head.send(repo_location)["#{page}.md"] || ""
+        @page = page
+        @page_title = title
+        @content = ParseMarkdown.(markdown.to_s)
+        render action: "generic"
+      end
     end
   end
+  
+  PAGE_GENERATOR.(PAGES, :pages)
+  PAGE_GENERATOR.(LICENCES, :licences)
 
   # Landing page
   def index
