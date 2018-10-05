@@ -7,7 +7,7 @@ $('.widget-code-snippet button.copy-button').click(function() {
     }, 2000);
   }
 
-  const resetButton = function (btn, newMessage) {
+  var resetButton = function (btn, newMessage) {
     $(btn).text(newMessage).removeClass('copied')
   }
 
