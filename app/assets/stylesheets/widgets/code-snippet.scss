@@ -12,10 +12,17 @@
         top:-1px;
         bottom:-1px;
         background:$color-1;
+        border: 1px solid $color-1;
         border-radius:2px 2px 0 0;
         @include font-size(12, 12);
         font-weight:$regular;
-        padding:0 10px;
+        width:63px;
+        text-align:center;
+        transition:all 0.3s;
+        &.copied {
+            background: #fff;
+            color: $color-1;
+        }
     }
     input {
         background:transparent;

@@ -31,6 +31,13 @@ class SolutionTest < ActiveSupport::TestCase
     refute solution.auto_approve?
   end
 
+  test "solution is approved when solution is approved" do
+    exercise = build(:exercise, auto_approve: false)
+    solution = build(:solution, exercise: exercise, approved_by: build(:user))
+
+    assert solution.approved?
+  end
+
   test "active_mentors" do
     solution = create :solution
     active_mentor_on_solution = create :user

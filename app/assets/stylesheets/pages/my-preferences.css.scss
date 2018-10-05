@@ -1,0 +1,99 @@
+@import 'variables';
+@import 'mixins';
+
+#my-preferences-page {
+    .lhs {
+        border-right:1px solid #eee;
+        padding-right:30px;
+    }
+    .rhs {
+        padding-left:30px;
+    }
+    h1 {
+        @include font-size(25, 25);
+        font-weight:$bold;
+        margin-bottom:30px;
+        color:#555;
+    }
+    h2 {
+        @include font-size(18, 18);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+    }
+    h3 {
+        @include font-size(16, 16);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+    }
+    p {
+        @include font-size(14, 14);
+        font-weight:$light;
+        margin-bottom:15px;
+        padding-bottom:15px;
+        display:inline-block;
+        color:#999;
+    }
+
+    .settings-section {
+        border-bottom:1px solid #ddd;
+        padding-bottom:20px;
+        margin-bottom:20px;
+        &:last-child {
+            border-bottom:none;
+        }
+        &.dark-toggle {
+            input[type='checkbox'] {
+                display:inline-block;
+                position:absolute;
+                width:25px;
+                height:40px;
+                cursor:pointer;
+                opacity:0;
+                &:checked {
+                    &+.toggles {
+                        i.fa.fa-toggle-on { display:block; }
+                        i.fa.fa-toggle-off { display:none; }
+                    }
+                }
+            }
+            .toggles {
+                display:inline-block;
+                @include font-size(20, 20);
+                margin-right:15px;
+                i.fa.fa-toggle-on {
+                    display:none;
+                    color: $color-2;
+                }
+                i.fa.fa-toggle-off { 
+                    display:block;
+                    color: #aaa;
+                }
+            }
+            label {
+                display:inline-block;
+                position:relative;
+                top:-2px;
+            }
+        }
+    }
+
+    label {
+        display:block;
+        color:#999;
+        @include font-size(14, 14);
+        margin-bottom:10px;
+        input {
+            margin-right:5px;
+        }
+    }
+
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+        margin-top:20px;
+        padding:8px 20px;
+        display:block;
+    }
+}

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FetchRepoUpdateJobTest < ActiveJob::TestCase
   test "records fetch before performing" do
-    Git::FetchesRepos.stubs(:fetch)
+    Git::FetchRepos.stubs(:call)
     repo_update = create(:repo_update)
     host_name = "host"
     ClusterConfig.stubs(:server_identity).returns(host_name)
@@ -17,13 +17,13 @@ class FetchRepoUpdateJobTest < ActiveJob::TestCase
   test "fetches a repo update" do
     repo_update = create(:repo_update)
 
-    Git::FetchesRepos.expects(:fetch).with([repo_update.repo])
+    Git::FetchRepos.expects(:call).with([repo_update.repo])
 
     FetchRepoUpdateJob.perform_now(repo_update.id)
   end
 
   test "records fetch completion time after performing" do
-    Git::FetchesRepos.stubs(:fetch)
+    Git::FetchRepos.stubs(:call)
     repo_update = create(:repo_update)
     host_name = "host"
     ClusterConfig.stubs(:server_identity).returns(host_name)
