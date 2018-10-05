@@ -15,8 +15,8 @@
       .lo-container
         =bordered_turquoise_track_icon(@track, class: 'logo')
     .lo-container
-      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
       %h1 Exercises on the #{@track.title} track
+      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
       /.stats
       /  .stat= pluralize @track.exercises.count, "Exercise"
       /  .stat= pluralize @track.user_tracks.count, "Students"
@@ -29,7 +29,7 @@
       .pure-g
         -@exercises.each do |exercise|
           =cache(["my/exercises/index", exercise], skip_digest: true, expires_in: 1.hour) do
-            .pure-u-1-2
+            .pure-u-1.pure-u-md-1-2
               = link_to [@track, exercise], class: "exercise" do
                 .icon
                   .img{style: "background-image:url('#{image_path(exercise.turquoise_icon_url)}')"}

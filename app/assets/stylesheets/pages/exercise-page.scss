@@ -93,6 +93,7 @@
         }
         p.blurb {
             margin-bottom:8px;
+            line-height:1.3;
         }
         .topics {
             overflow:hidden;
@@ -148,6 +149,7 @@
             border:1px solid #eee;
             border-radius:2px;
             overflow:hidden;
+            display:inline-block;
             .reaction {
                 float:left;
                 border-right:1px solid #eee;

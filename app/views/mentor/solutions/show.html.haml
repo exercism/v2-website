@@ -15,10 +15,12 @@
           on the
           %strong #{@exercise.track.title} Track
         .byline by #{display_handle_link(@solution.user, @solution_user_track)}
+        .small-iterations-nav
+          =iterations_nav_widget(:mentor, @solution, @iteration)
 
   .lo-container
     .pure-g.panels
-      .pure-u-1-2.lhs
+      .pure-u-1.pure-u-md-1-2.lhs
         .tabs-and-panes.selected-3
           .tabs
             .tab.tab-1
@@ -29,7 +31,7 @@
               Solution
 
           =render "solutions/panes", iteration: @iteration
-      .pure-u-1-2.rhs
+      .pure-u-1.pure-u-md-1-2.rhs
         -if current_user.mentoring_solution?(@solution) || current_user.has_active_lock_for_solution?(@solution)
           =render "discussion"
           =render "new_discussion_post"

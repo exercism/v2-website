@@ -41,7 +41,7 @@
   .lo-container
     .pure-g
       -if @user_solution
-        .pure-u-1-3
+        .pure-u-1.pure-u-md-1-3
           -if @user_solution.published?
             =render "solution", solution: @user_solution, track: @track, exercise: @exercise, user_track: @current_user_track
           -else
@@ -59,7 +59,7 @@
                 Publish your solution to see others' reactions
 
       -@solutions.each do |solution|
-        .pure-u-1-3
+        .pure-u-1.pure-u-md-1-3
           =render "solution", solution: solution, track: @track, exercise: @exercise, user_track: @user_tracks[solution.user_id]
 
     =paginate @solutions

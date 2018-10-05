@@ -3,13 +3,23 @@
 
 #onboarding-page {
     .lhs {
-        padding-right:30px;
         padding-top:30px;
+        @include width-medium() {
+            padding-right:30px;
+        }
     }
     .rhs {
-        padding-left:50px;
+        padding-top:30px;
+        @include width-medium() {
+            padding-top:0;
+            padding-left:50px;
+        }
         #widget-code-person {
+            display:none;
             width:460px;
+            @include width-medium() {
+                display:block;
+            }
         }
     }
     h1 {

@@ -7,7 +7,10 @@
     .solution {
         border:1px solid #eee;
         border-radius:2px;
-        margin:0 20px 20px 0;
+        margin:0 0 20px 0;
+        @include width-medium() {
+            margin:0 20px 20px 0;
+        }
         padding:20px;
         display:block;
         text-decoration:none;
@@ -84,10 +87,14 @@
             border:1px solid #eee;
             border-radius:2px;
             overflow:hidden;
+            display:inline-block;
             .reaction {
                 float:left;
                 border-right:1px solid #eee;
-                padding:10px 16px;
+                padding:5px 8px;
+                @include width-small() {
+                    padding:10px 16px;
+                }
                 &:last-child {
                     border:none;
                 }
@@ -109,8 +116,11 @@
                 }
 
                 i {
-                    @include font-size(16, 16);
+                    @include font-size(12, 12);
                     color:#aaa;
+                    @include width-small() {
+                        @include font-size(16, 16);
+                    }
                 }
                 img {
                     vertical-align:bottom;

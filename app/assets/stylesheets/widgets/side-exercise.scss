@@ -131,6 +131,8 @@
     }
     .topics {
         overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
         height:21px;
         .topic {
             @include font-size(11, 11);

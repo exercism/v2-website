@@ -16,7 +16,6 @@
     .avatar {
         margin-right:3%;
         float:left;
-        min-width:35px;
         width:8%;
         display:block;
         border-radius:3px;
@@ -47,7 +46,9 @@
             font-weight:$regular;
         }
         .created-at {
-            float:right;
+            @include width-medium() {
+                float:right;
+            }
             @include font-size(11, 13);
             color:#999;
         }
@@ -106,11 +107,21 @@
                 background: $color-1;
                 color: #fff;
                 padding:7px 25px;
+                width:100%;
+                margin-bottom:10px;
+                @include width-small() {
+                    width:auto;
+                    margin-bottom:0;
+                }
             }
             .cancel-button {
                 background:#fff;
                 border:1px solid #ccc;
                 color:#999;
+                width:100%;
+                @include width-small() {
+                    width:auto;
+                }
             }
         }
 

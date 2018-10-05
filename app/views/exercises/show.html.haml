@@ -24,10 +24,10 @@
 
   .info-section
     .lo-container
-      %h2 About this exercise
-      -length_word = exercise_length_word(@exercise)
       -difficulty_word = exercise_difficulty_word(@exercise)
       .difficulty{class: difficulty_word}= difficulty_word
+      %h2 About this exercise
+      -length_word = exercise_length_word(@exercise)
       -# TODO: Uncomment this when exercise_length_word has been fix to no longer return medium by default
       -# .length{class: length_word}= length_word
 
@@ -39,6 +39,6 @@
   .lo-container
     .pure-g
       -@solutions.each do |solution|
-        .pure-u-1-3
+        .pure-u-1.pure-u-md-1-3
           =render "solutions/solution", solution: solution, user_track: @user_tracks[solution.user_id]
     =link_to "View all solutions", [@track, @exercise, :solutions], class: 'pure-button more-button'

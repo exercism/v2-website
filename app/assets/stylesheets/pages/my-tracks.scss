@@ -26,23 +26,40 @@
     form {
         margin-bottom:20px;
         position: relative;
-        &:before {
-            font-family: "Font Awesome 5 Pro"; 
-            font-weight: 900;
-            content: "\f002";
-            position: absolute;
-            left: 10px;
-            top: 8px;
-            color:#bbb;
+        display:table-row;
+        .search-button,
+        .search-bar {
+            display:table-cell;
+        }
+        .search-bar {
+            width:100%;
+            @include width-small() {
+                width:auto;
+            }
+            position: relative;
+            &:before {
+                font-family: "Font Awesome 5 Pro"; 
+                font-weight: 900;
+                content: "\f002";
+                position: absolute;
+                left: 10px;
+                top: 8px;
+                color:#bbb;
+            }
+        }
+        .search-button {
+            display:table-cell;
+            width:0;
+            white-space:nowrap;
         }
         input {
             @include font-size(14, 14);
             border:1px solid #ddd;
             padding:7px 10px 7px 30px;
             border-radius:2px;
-            width:350px;
+            width: 100%;
+            max-width:100%;
             vertical-align:middle;
-            margin-right:5px;
         }
         button {
             border:1px solid #ddd;
@@ -51,13 +68,14 @@
             border-radius:2px;
             background:#f6f6f6;
             color:#666;
+            margin-left:5px;
         }
 
     }
     .joined-tracks {
         margin-top:40px;
     }
-    .other-tracks {
+    .other-tracks, .no-results {
         margin-top:30px;
     }
     h2 {
@@ -105,7 +123,10 @@
         border:1px solid #c2c3c3;
         border-radius:2px;
         padding:10px 20px;
-        margin: 0 20px 20px 0;
+        margin: 0 0 20px 0;
+        @include width-medium() {
+            margin: 0 20px 20px 0;
+        }
         position:relative;
         overflow:hidden;
 

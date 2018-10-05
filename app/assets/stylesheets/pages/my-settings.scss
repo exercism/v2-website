@@ -2,6 +2,13 @@
 @import 'mixins';
 
 #my-settings-page, #my-track-settings-page {
+    padding-top:30px;
+    @include width-small() {
+        padding-top:0;
+    }
+    #nav {
+        margin-bottom:30px;
+    }
     #notice, #alert, #errors {
         margin-top: -20px;
         margin-bottom: 20px;
@@ -46,6 +53,7 @@
         display:inline-block;
         input {
             width:252px;
+            max-width: 95%;
         }
     }
     .field {
@@ -59,6 +67,7 @@
         input {
             padding:8px 10px;
             width:250px;
+            max-width:100%;
             border:1px solid #ddd;
             border-radius:2px;
         }
@@ -93,11 +102,14 @@
         .anon {
             vertical-align:middle;
             img {
-                display:inline-block;
+                display:none;
                 height:35px;
                 border-radius:2px;
                 margin-right:5px;
                 vertical-align:bottom;
+                @include width-small() {
+                    display:inline-block;
+                }
             }
             .handle {
                 display:inline-block;
@@ -107,7 +119,8 @@
             }
             input[type='text'] {
                 padding:8px 10px;
-                width:210px;
+                max-width:210px;
+                width:100%;
                 border:1px solid #ddd;
                 border-radius:2px;
             }

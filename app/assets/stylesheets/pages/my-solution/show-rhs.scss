@@ -23,8 +23,11 @@
     .next-steps {
         background:rgba($color-1, 0.05);
         border-radius:2px;
-        padding:20px 40px 20px 20px;
+        padding:20px 20px 20px 20px;
         margin-bottom:20px;
+        @include width-small() {
+            padding:20px 40px 20px 20px;
+        }
         .title {
             @include font-size(16, 16);
             font-weight:$regular;
@@ -34,7 +37,9 @@
         }
         p {
             @include font-size(13, 19);
-            padding-left:19px;
+            @include width-small() {
+                padding-left:19px;
+            }
             margin-bottom:10px;
             &:last-child {
                 margin-bottom:0;
@@ -45,7 +50,9 @@
             }
         }
         .pure-button {
-            margin-left:20px;
+            @include width-small() {
+                margin-left:20px;
+            }
         }
     }
     .pane.markdown,
@@ -70,6 +77,10 @@
         margin-top:10px;
         border-radius:2px;
         padding:8px 25px;
+        width:100%;
+        @include width-small() {
+            width:auto;
+        }
     }
     .complete-button {
         &.unapproved {

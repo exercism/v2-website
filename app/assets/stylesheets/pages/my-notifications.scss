@@ -43,6 +43,7 @@
         margin-bottom:15px;
         position:relative;
         transition:opacity 0.2s;
+        max-width:600px;
         &.read {
             opacity:0.4;
             .mark-as-read-button {
@@ -55,7 +56,7 @@
             position:absolute;
             top:0;
             left:0;
-            bottom:0;
+            bottom:40px;
             width:60px;
             text-decoration:none;
             color:#333;
@@ -64,16 +65,19 @@
             background-size:50px;
             background-position:center center;
             border-right:1px solid #ccc;
-
+            @include width-small() {
+                bottom:0;
+            }
         }
         .info {
             display:block;
             text-decoration:none;
             color:#333;
-            width:600px;
             margin-left:60px;
-            margin-right:60px;
             padding:12px 15px;
+            @include width-small() {
+                margin-right:60px;
+            }
 
             .content {
                 @include font-size(14, 19);
@@ -90,17 +94,23 @@
         }
         .mark-as-read-button {
             display:block;
-            position:absolute;
-            top:-1px;
-            bottom:-1px;
-            right:-1px;
-            width:60px;
+            height:40px;
             background-color:$color-2;
             background-image:image-url('tick-white.png');
             background-repeat:no-repeat;
             background-size:15px;
             background-position:center center;
-            border-radius:2px 2px 0 0;
+            border-radius:0 0 1px 1px;
+            border:1px solid $color-2;
+            @include width-small() {
+                position:absolute;
+                top:-1px;
+                bottom:-1px;
+                right:-1px;
+                width:60px;
+                border-radius:0 2px 2px 0;
+                height:auto;
+            }
         }
     }
     .no-notifications {

@@ -1,0 +1,63 @@
+@import 'variables';
+@import 'mixins';
+
+#my-communication-preferences-page {
+    padding-top:30px;
+    @include width-small() {
+        padding-top:0;
+    }
+    #nav {
+        margin-bottom:30px;
+    }
+    .lhs {
+        @include width-medium() {
+            border-right:1px solid #eee;
+            padding-right:30px;
+        }   
+    }
+    .rhs {
+        @include width-medium() {
+            padding-left:30px;
+        }
+    }
+    h1 {
+        @include font-size(25, 25);
+        font-weight:$bold;
+        margin-bottom:30px;
+        color:#555;
+    }
+    h2 {
+        @include font-size(18, 18);
+        font-weight:$bold;
+        margin-bottom:10px;
+        color:#555;
+    }
+    p {
+        @include font-size(14, 14);
+        font-weight:$light;
+        margin-bottom:15px;
+        padding-bottom:15px;
+        display:inline-block;
+        color:#999;
+        border-bottom:1px solid #eee;
+
+    }
+
+    label {
+        display:block;
+        color:#999;
+        @include font-size(14, 14);
+        margin-bottom:10px;
+        input {
+            margin-right:5px;
+        }
+    }
+
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+        margin-top:20px;
+        padding:8px 20px;
+        display:block;
+    }
+}

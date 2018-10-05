@@ -6,16 +6,24 @@
         background: $color-1;
         background-image:image-url('background-overlay-1.png');
         background-size:cover;
-        padding:100px 0 35px;
+        padding:15px 0 15px;
         margin-bottom:35px;
+        @include width-small() {
+            padding:100px 0 35px;
+        }
         .edit-button {
-            float:right;
+            margin-bottom:15px;
             border:1px solid #fff;
             border-radius:2px;
             background:#fff;
             background:#4accaa;
             font-weight:$regular;
             margin-top:25px;
+            @include width-small() {
+                float:right;
+                margin-bottom:0;
+                margin-top: -50px;
+            }
             i {
                 margin-right:3px;
             }
@@ -36,11 +44,20 @@
 
     }
     .lhs {
-        padding:0 0px 30px 0;
+        @include width-medium() {
+            padding:0 0px 30px 0;
+        }
         .sidebar {
             background: #f8f8f8;
             border-radius:2px;
-            padding:50px 30px;
+            padding:50px 15px;
+            margin-bottom:15px;
+            @include width-medium() {
+                margin-bottom:0;
+            }
+            @include width-small() {
+                padding:50px 30px;
+            }
             .avatar {
                 display:block;
                 width:70px;
@@ -123,10 +140,16 @@
         }
     }
     .rhs {
-        padding-left:45px;
+        @include width-medium() {
+            padding-left:45px;
+        }
         .num-solutions {
             color:#fff;
-            float:right;
+            margin-bottom:5px;
+            @include width-medium() {
+                float:right;
+                margin-bottom:0;
+            }
             color:#999;
             font-weight:$regular;
             @include font-size(14, 14);
@@ -136,12 +159,15 @@
             margin-bottom:10px;
             .selectize-input {
                 width:180px;
+                max-width: 100%;
             }
         }
         .solutions {
-            .pure-u-1-2 {
-                &:nth-child(odd) { padding-right:10px }
-                &:nth-child(even) { padding-left:10px }
+            @include width-large() {
+                .pure-u-1 {
+                    &:nth-child(odd) { padding-right:10px }
+                    &:nth-child(even) { padding-left:10px }
+                }
             }
             .solution {
                 display:block;
@@ -172,7 +198,6 @@
                     }
                 }
                 .title-bar {
-                    margin-bottom:10px;
                     text-overflow:ellipsis;
                     white-space:nowrap;
                     overflow:hidden;
@@ -206,10 +231,15 @@
                     border:1px solid #eee;
                     border-radius:2px;
                     overflow:hidden;
+                    display:inline-block;
+                    margin-top:10px;
                     .reaction {
                         float:left;
                         border-right:1px solid #eee;
-                        padding:9px 10px 8px 10px;
+                        padding:4px 5px 4px 5px;
+                        @include width-small() {
+                            padding:9px 10px 8px 10px;
+                        }
                         &:last-child {
                             border:none;
                         }
@@ -231,8 +261,11 @@
                         }
 
                         i {
-                            @include font-size(16, 16);
+                            @include font-size(12, 12);
                             color:#aaa;
+                            @include width-small() {
+                                @include font-size(16, 16);
+                            }
                         }
                         img {
                             vertical-align:bottom;

@@ -48,7 +48,10 @@
         .solution-code {
             min-height:200px;
             margin:0;
-            padding:10px 15px 10px 55px;
+            padding:10px 15px 10px 45px;
+            @include width-small() {
+                padding: 10px 15px 10px 55px;
+            }
         }
     }
 
@@ -120,14 +123,17 @@
             display:block;
             width:75px;
             height:75px;
-            float:left;
-            margin-right:15px;
+            float:right;
             background-color:#fff;
-            margin-left: -60px;
             margin-top: -10px;
             border:3px solid $color-2;
             border-radius: 100%;
             overflow:hidden;
+            @include width-medium() {
+                float:left;
+                margin-right:15px;
+                margin-left: -60px;
+            }
             .img {
                 width:60px;
                 height:60px;
@@ -145,6 +151,7 @@
             @include font-size(15, 15);
             color:#999;
             letter-spacing:-0.1px;
+            line-height: 20px;
             a {
                 color:#999;
                 text-decoration:none;
@@ -152,9 +159,6 @@
                 border-bottom:1px solid #ddd;
             }
             .track {
-                margin-left:10px;
-                vertical-align:middle;
-                display:inline-block;
                 color:#333;
                 text-decoration:none;
                 img {
@@ -169,16 +173,34 @@
                 }
             }
         }
+        .reactions-desktop {
+            display:none;
+            @include width-medium() {
+                display:block;
+            }
+        }
+        .reactions-mobile {
+            margin-top:10px;
+            @include width-medium() {
+                display:none;
+            }
+        }
         .reactions {
             background:#fafafa;
             border:1px solid #eee;
             border-radius:2px;
             overflow:hidden;
-            float:right;
+            display:inline-block;
+            @include width-medium() {
+                float:right;
+            }
             .reaction {
                 float:left;
                 border-right:1px solid #eee;
-                padding:10px 16px;
+                padding:5px 8px;
+                @include width-small() {
+                    padding:10px 16px;
+                }
                 &:last-child {
                     border:none;
                 }
@@ -199,8 +221,11 @@
                 }
 
                 i {
-                    @include font-size(20, 20);
+                    @include font-size(14, 14);
                     color:#aaa;
+                    @include width-small() {
+                        @include font-size(20, 20);
+                    }
                 }
                 img {
                     vertical-align:bottom;
@@ -216,6 +241,7 @@
         border:1px solid #ddd;
         padding:10px;
         width:315px;
+        max-width: 100%;
         float:right;
         h3 {
             float:left;
@@ -296,7 +322,10 @@
     }
     .no-reflection,
     .reflection {
-        margin:48px 0 0 50px;
+        margin: 15px 0 30px 0;
+        @include width-medium() {
+           margin:48px 0 0 50px; 
+        }
         padding:40px 40px;
         h3 {
             @include font-size(16, 16);

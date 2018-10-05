@@ -8,4 +8,4 @@
     %p Once you join the #{track.title} language track, you will receive support and feedback from our team of mentors. Here are the bios of a few of #{link_to "the mentors of this track", track_mentors_path(track)}.
     .pure-g.mentors
       -mentors.each do |mentor|
-        .pure-u-1-2= render "widgets/mentor", mentor: mentor
+        .pure-u-1.pure-u-md-1-2= render "widgets/mentor", mentor: mentor

@@ -38,7 +38,7 @@
           .pane.pane-2.preview
             .preview-area
 
+      =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"
+
       -if !@solution.approved?
         =link_to "Complete exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved"
-
-      =button_tag "Comment", class: "comment-button pure-button #{@solution.approved?? "faded" : ""}"

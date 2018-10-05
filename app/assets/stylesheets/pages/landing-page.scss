@@ -1,13 +1,28 @@
 @import 'variables';
 @import 'mixins';
 
+body.controller-pages.action-index footer {
+    margin-top:0;
+}
 #landing-page {
     .welcome-section {
         .lhs {
-            padding-bottom:50px;
+            display:none;
+            @include width-medium() {
+                display: block;
+            }
+            @include width-medium() {
+                padding-bottom:50px; 
+            }
+            z-index: -1;
         }
         .rhs {
-            padding-top:100px;
+            padding-top:50px;
+            margin-bottom:50px;
+            @include width-medium() {
+                padding-top:150px;
+                margin-bottom:150px;
+            }
             h1 {
                 @include header-font;
                 @include font-size(32,24);
@@ -39,6 +54,12 @@
                 @include font-size(16, 16);
                 font-weight:$regular;
                 border-radius:2px;
+                width:100%;
+                margin-bottom:15px;
+                @include width-small() {
+                    width:auto;
+                    margin-bottom:0;
+                }
                 &.sign-up-button {
                     background:$color-3;
                     color:#fff;
@@ -61,15 +82,19 @@
             h2 {
                 @include header-font;
                 font-weight:600;
-                text-align:center;
+                @include width-small() {
+                    text-align:center;
+                }
                 @include font-size(30, 30);
                 margin-bottom:15px;
             }
             p {
-                text-align:center;
+                @include width-small() {
+                    text-align:center;
+                    margin: 0px auto 40px auto;
+                }
                 @include font-size(17, 22);
                 max-width: 600px;
-                margin: 0px auto 40px auto;
                 a {
                     text-decoration:none;
                     color:#333;
@@ -102,7 +127,12 @@
             }
         }
         .tracks {
-            margin:0 20px;
+            display:none;
+            width: 1100px;
+            @media screen and (min-width: 1200px) {
+                display:block;
+            }
+            margin:0 auto;
             padding:20px 20px 0 20px;
             border-radius:10px;
             //background:rgba(#fff, 0.5);
@@ -182,28 +212,108 @@
                 }
             }
         }
+        .tracks-mini {
+            display:flex;
+            @media screen and (min-width: 1200px) {
+                display:none;
+            }
+            flex-wrap:wrap;
+            align-items: center;
+            justify-content: center;
+            a {
+                color: #333;
+                text-decoration:none;
+                .track-mini {   
+                    display:flex;
+                    border-radius:5px;
+                    border: 2px solid $color-2;
+                    margin:10px 5px;
+                    @include width-small() {
+                        margin:10px;
+                    }
+                    .logo, .title {
+                        height:36px;
+                        display:inline-block;
+                    }
+                    .logo {
+                        background-color: $color-2;
+                        color: $color-2;
+                        &, img {
+                            height:36px;
+                            width:36px;
+                        }
+                    }
+                    .title {
+                        background-color:#fff;
+                        padding:0 10px;
+                        border-radius:0 5px 5px 0;
+                        vertical-align: middle;
+                        line-height:36px;
+                        font-size:12px;
+                        overflow:hidden;
+                        text-overflow:ellipsis;
+                    }
+                }
+                &:hover .track-mini, &:hover .track-mini .title {
+                    background-color: $color-2 !important;
+                    color: #fff;
+                }
+            }
+        }
     }
     .how-section {
         .divider {
             text-align:center;
-            margin-bottom:30px;
-            margin:0 400px 30px;
-            border-bottom:1px solid #eee;
+            margin-bottom:15px;
+            margin:10px 0 20px;
+            width:80px;
+            border-bottom:1px solid #ddd;
+            @include width-small() {
+                width:0;
+                border-bottom:1px solid #eee;
+            }
+            @include width-medium() {
+                margin:0 400px 30px;
+            }
         }
-
+        .step.step-small {
+            margin-top:15px;
+            img {
+                margin:0 auto;
+            }
+            @include width-small() {
+                display:none;
+            }
+        }
+        .step .step-image {
+            display:none;
+            @include width-small() {
+                display:block;
+            }
+        }
         .step {
             overflow:hidden;
-            margin:0 auto 30px;
-            width:700px;
+            margin:0 auto 15px;
+            @include width-medium() {
+               margin:0 auto 30px; 
+            }
+            max-width:700px;
             img {
                 display:block;
-                width:100%;
+                width:80%;
+                max-width:230px;
+                @include width-small() {
+                    width:100%;
+                }
             }
             h3 {
-                margin-top:30px;
+                margin-top:15px;
                 font-weight:$regular;
                 @include font-size(18, 18);
                 margin-bottom:10px;
+                @include width-medium() {
+                    margin-top:30px;
+                }
             }
             p {
                 @include font-size(16, 22);
@@ -221,6 +331,7 @@
                   left:0px;
                   background-image:image-url("how-step-4-exercises.png");
                   background-size:100%;
+                  z-index:-1;
               }
             }
         }
@@ -254,7 +365,9 @@
         padding:60px 0;
         h2 {
             color:#fff;
-            text-align:center;
+            @include width-small() {
+                text-align:center;
+            }
             @include font-size(17, 17);
             font-weight:$light;
             margin-bottom:20px;
@@ -268,7 +381,10 @@
             @include font-size(16, 16);
             margin:0 auto;
             display:block;
-            width:280px;
+            width:100%;
+            @include width-small() {
+                width:280px;
+            }
             color:#fff;
         }
     }
@@ -276,9 +392,14 @@
 }
 
 #modal.announcement {
-    padding:50px;
-    margin:40px auto !important;
-    max-height:85% !important;
+    padding:50px 15px;
+    @include width-small() {
+        padding:50px;
+    }
+    @include width-medium() {
+        margin:40px auto !important;
+        max-height:85% !important;
+    }
     img {
         width:50px;
         display:block;
@@ -304,9 +425,10 @@
     .pure-button {
         background:$color-1;
         display:block;
-        width:280px;
+        max-width:280px;
+        width:100%;
         padding:11px 10px;
         text-align:center;
-        margin: 30px auto 0 auto;
+        margin: 30px auto 30px auto;
     }
 }

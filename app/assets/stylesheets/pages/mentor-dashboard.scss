@@ -84,14 +84,37 @@ $blue: #4A90E2;
     }
     .widget-filter {
         margin-right:0;
+        margin-bottom:5px;
+        display:flex;
+        align-items:stretch;
+        
+        .title {
+            width:120px;
+        }
+        .title, .selectize-control {
+            display:flex;
+        }
+
         &.status .selectize-control {
-            width:200px;
+            width:100%;
+            max-width:100%;
+            @include width-medium() {
+                width:200px;
+            }
         }
         &.track_id .selectize-control {
-            width:130px;
+            width:100%;
+            max-width:100%;
+            @include width-medium() {
+                width:130px;
+            }
         }
         &.exercise_id .selectize-control {
-            width:155px;
+            width:100%;
+            max-width:100%;
+            @include width-medium() {
+                width:155px;
+            }
         }
     }
 
@@ -122,7 +145,9 @@ $blue: #4A90E2;
         }
         .icons {
             position:relative;
-            float:left;
+            @include width-medium() {
+                float:left;
+            }
             margin-right:20px;
             .exercise {
                 overflow:hidden;
@@ -140,18 +165,21 @@ $blue: #4A90E2;
                     margin:0 auto;
                     display:block;
                 }
-            }
-            .track {
-                width: 30px;
-                position: absolute;
-                top: -15px;
-                left: 35px;
+
+                display:none;
+                @include width-medium() {
+                    display:block;
+                }
             }
             .joiner {
                 float:left;
                 height:25px;
                 width:20px;
                 border-bottom:2px solid $color-2;
+                display:none;
+                @include width-medium() {
+                    display:block;
+                }
             }
             .person {
                 border-radius:2px;
@@ -159,14 +187,22 @@ $blue: #4A90E2;
                 width:50px;
                 height:50px;
                 float:left;
-                display:block;
+                display:none;
+                @include width-medium() {
+                    display:block;
+                }
             }
         }
         .details {
-            overflow:hidden;
             margin-bottom:6px;
-            padding-left:10px;
-            border-left:2px solid #ddd;
+            clear:both;
+            @include width-small() {
+                clear:none;
+            }
+            @include width-medium() {
+                padding-left:10px;
+                border-left:2px solid #ddd;
+            }
             margin-top:6px;
             .difficulty {
                 display:inline-block;
@@ -185,9 +221,6 @@ $blue: #4A90E2;
                 margin-bottom:5px;
                 font-weight:$regular;
                 max-width: 480px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
 
                 .handle {
                     display:inline-block;
@@ -214,13 +247,36 @@ $blue: #4A90E2;
                     margin:0 5px;
                     display:inline-block;
                     border-right:1px solid #bbb;
+                    &:nth-child(4) {
+                        display:none;
+                        @include width-small() {
+                            display:inline-block;
+                        }
+                    }
                 }
                 .submitted-at {
-                    display:inline-block;
+                    display:block;
+                    @include width-small() {
+                        display:inline-block;
+                    }
                 }
             }
         }
-
+        .track-icon {
+            float:right;
+            width:20px;
+            margin-top:-30px;
+            position:relative;
+            @include width-medium() {
+                width: 30px;
+                position: absolute;
+                top: -15px;
+                left: 35px;
+                margin-top:0;
+                float:none;
+                padding-top:0;
+            }
+        }
     }
     .help-section {
         p {
@@ -283,10 +339,19 @@ $blue: #4A90E2;
     .weekly-section,
     .contributions-section,
     .celebration-section {
-        padding:30px 30px;
+        padding:15px;
+        @include width-medium() {
+            padding:30px 30px;
+        }
         background:#f9f9f9;
         border-radius:2px;
-        margin-left:50px;
+        margin-top:15px;
+        margin-bottom:15px;
+        @include width-medium() {
+            margin-top:0;
+            margin-bottom:0;
+            margin-left:50px;
+        }
         h2 {
             color:$color-2;
             font-weight:$bold;

@@ -1,7 +1,13 @@
 .progress
-  =graphical_icon 'circle filled'
-  =graphical_icon 'circle filled'
-  =icon 'circle', 'Step 2 of 3'
+  - if @solution.auto_approve?
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle filled'
+    =icon 'circle', 'Step 2 of 3'
+  - else
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle'
+    =icon 'circle', 'Step 2 of 4'
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
   .pure-g
@@ -9,4 +15,8 @@
     solution: @solution,
     mentor_iterations: @mentor_iterations
 
-  =button_tag "Save and continue", class: 'pure-button'
+  - if @solution.auto_approve?
+    =button_tag "Save and continue", class: 'pure-button reflection-submit-button'
+  - else
+    =button_tag "Continue", class: 'pure-button reflection-continue-button'
+    =button_tag "Save and continue", class: 'pure-button reflection-submit-button', style: 'display:none;'

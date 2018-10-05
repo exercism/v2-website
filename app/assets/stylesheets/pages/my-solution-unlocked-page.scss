@@ -8,11 +8,16 @@
     }
 
     .lhs {
-        padding-right:60px;
+        @include width-medium() {
+            padding-right:60px;
+        }
+        
     }
     .rhs {
-        padding-left:60px;
-        border-left:1px solid #e5e5e5;
+        @include width-medium() {
+            padding-left:60px;
+            border-left:1px solid #e5e5e5;
+        } 
     }
 
     .instructions {
@@ -62,6 +67,7 @@
                 text-decoration:none;
                 border-bottom:1px solid #ccc;
                 font-weight:$light;
+                word-wrap:break-word;
             }
             li {
                 margin-bottom: 4px;
@@ -90,7 +96,7 @@
             margin-bottom:6px;
         }
         .widget-code-snippet input {
-            width:287px;
+            width:90%;
         }
         .step {
             margin-bottom:20px;

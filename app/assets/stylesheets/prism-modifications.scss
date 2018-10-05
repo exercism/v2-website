@@ -2,12 +2,23 @@
 @import 'mixins';
 
 pre.line-numbers {
+<<<<<<< HEAD
     margin: 0 !important;
     padding-bottom: 1em !important;
+=======
+    font-size:70%;
+    @include width-small() {
+        font-size:100%;
+    }
+>>>>>>> 7d68406af3255e04a4982f183636172e9d8c5bfd
     .line-numbers-rows {
         span {
-            line-height:16px;
-            padding-bottom:5px;
+            line-height:13px;
+            padding-bottom:1px;
+            @include width-small() {
+                line-height:16px;
+                padding-bottom:5px;
+            }
             &:before {
             }
         }
