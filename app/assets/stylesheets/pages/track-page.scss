@@ -62,25 +62,26 @@ body.controller-my-tracks.action-show {
         h1 {
             margin-bottom:10px;
             color:#fff;
-            @include width-large() {
-                float:left;
-            }
         }
         .h1-subtitle {
-            max-width:70%;
+            @include width-medium() {
+                max-width:70%;
+            }
+
             @include font-size(16, 21);
             color:#fff;
             font-weight:$light;
-            clear:both;
+            clear:left;
         }
+
         .pure-button {
-            float:left;
-            margin-top:15px;
-            margin-bottom:15px;
-            @include width-large() {
-                float:right; 
-                margin-top:35px;
+            margin-top:20px;
+            @include width-medium() {
+                float:right;
+                margin-top:0;
                 margin-bottom:0;
+                margin-left: 60px;
+                margin-bottom: 20px;
             }
             border:1px solid #fff;
             @include font-size(15, 15);
@@ -143,20 +144,22 @@ body.controller-my-tracks.action-show {
     .about-section {
         padding:60px 0;
         .about {
-            @include width-large() {
-                padding-right:100px;
-            } 
+            text-align:justify;
         }
         .code-sample {
+            @include width-medium() {
+                display:block;
+                float:right;
+                margin:0 0 20px 50px;
+            }
+            display:none;
             margin-top:35px;
             background-image:image-url("code-sample-frame.png");
             background-size:contain;
             background-repeat:no-repeat;
             padding:30px 10px;
             height:200px;
-            max-height:80%;
-            width:98%;
-            max-width: 258px;
+            width: 258px;
 
             pre {
                 background:#fafafa;

@@ -7,16 +7,7 @@
       =nav_divider
       %span #{@track.title} Track
 
-  .header
-    .visual-section
-      .line
-      .lo-container
-        =bordered_turquoise_track_icon(@track, class: 'logo')
-    .lo-container
-      %h1= @track.title
-      = link_to "Join the #{@track.title} Track", [:join, @track], method: :post, class: 'pure-button'
-      .h1-subtitle= @track.introduction
-
+  =render "tracks/header", button_url: [:join, @track]
   =render "tracks/overview"
   =render "tracks/about", button_url: [:join, @track]
   =render "tracks/testimonial", testimonial: @testimonial
