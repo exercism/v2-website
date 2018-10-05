@@ -1,0 +1,10 @@
+.header
+  .visual-section
+    .line
+    .lo-container
+      =bordered_turquoise_track_icon(@track, class: 'logo')
+  .lo-container
+    %h1= @track.title
+    = link_to "Join the #{@track.title} Track", button_url, method: :post, class: 'pure-button pure-x-hide pure-u-md-show'
+    .h1-subtitle= @track.introduction
+    = link_to "Join the #{@track.title} Track", button_url, method: :post, class: 'pure-button pure-u-md-hide'
