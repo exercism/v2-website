@@ -36,13 +36,13 @@ module MetadataHelper
         when "reactions"
           { title: "My Reactions" }
         when "solutions"
-          { title: "My #{@track.title}/#{@exercise.title}" }
+          { title: "#{@track.title} | #{@exercise.title}" }
         when "tracks"
           case action_name
           when "index"
-            { title: "My Tracks" }
+            { title: "Tracks" }
           when "show"
-            { title: @mentors ? "#{@track.title} Track Preview" : "My #{@track.title} Track" }
+            { title: "#{@track.title} Track" }
           end
         end
       when "mentor"
@@ -50,7 +50,7 @@ module MetadataHelper
         when "solutions"
           { title: "#{display_handle(@solution.user, @solution_user_track)} | #{@track.title}/#{@exercise.title}" }
         else
-          { title: "Mentor" }
+          { title: "Mentor Dashboard" }
         end
       else
         case controller_name
@@ -89,7 +89,7 @@ module MetadataHelper
         when "profiles"
           case action_name
           when "show"
-            { title: user_signed_in? && current_user == @user ? "My Profile" : "#{@profile.display_name}'s Profile" }
+            { title: @user == current_user ? "My Profile" : "#{@profile.display_name}'s Profile" }
           when "index"
             { title: "Profiles" }
           end
