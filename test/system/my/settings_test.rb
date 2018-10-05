@@ -32,7 +32,21 @@ class My::SettingsTest < ApplicationSystemTestCase
 
     click_on "Update password"
 
-    assert_selector "#notice", text: "Password updated successfully" 
+    assert_selector "#notice", text: "Password updated successfully"
+  end
+
+  test "sees errors when changing password" do
+    visit my_settings_path
+
+    old_password = FactoryBot.attributes_for(:user)[:password]
+
+    fill_in "Enter your current password", with: old_password
+    fill_in "Enter your new password", with: "test"
+    fill_in "Confirm your current password", with: "test"
+
+    click_on "Update password"
+
+    assert_selector "#errors", text: "Password is too short (minimum is 6 characters)"
   end
 
   test "can change handle successfully" do

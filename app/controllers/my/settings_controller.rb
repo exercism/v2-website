@@ -24,7 +24,6 @@ class My::SettingsController < MyController
       flash.notice = "Password updated successfully"
       return true
     else
-      setup_show
       render action: :show
       return false
     end
