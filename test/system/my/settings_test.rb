@@ -59,9 +59,20 @@ class My::SettingsTest < ApplicationSystemTestCase
 
     click_on "Update handle"
 
-    assert_selector "#notice", text: "Handle updated successfully" 
+    assert_selector "#notice", text: "Handle updated successfully"
     @user.reload
     assert_equal @user.handle, new_handle
+  end
+
+  test "sees errors when changing handle" do
+    user = create(:user, handle: "handle")
+
+    visit my_settings_path
+
+    fill_in "Enter your new handle", with: "handle"
+    click_on "Update handle"
+
+    assert_selector "#errors", text: "Handle is already taken"
   end
 
   test "CLI token field should be readonly" do

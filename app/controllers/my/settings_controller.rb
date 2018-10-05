@@ -34,7 +34,6 @@ class My::SettingsController < MyController
       flash.notice = "Handle updated successfully"
       return true
     else
-      setup_show
       render action: :show
       return false
     end
