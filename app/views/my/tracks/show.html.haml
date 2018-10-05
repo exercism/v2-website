@@ -21,8 +21,8 @@
       .stats
         .stat= pluralize @track.exercises.active.count, "Exercise"
         .stat #{number_with_delimiter(@track.user_tracks.count)} Students
-        .stat= link_to pluralize(@track.mentors.count, "Mentors"), track_mentors_path(@track)
-        .stat= link_to pluralize(@track.maintainers.count, "Maintainers"), track_maintainers_path(@track)
+        .stat= link_to pluralize(@track.mentors.count, "Mentor".pluralize(@track.mentors.count)), track_mentors_path(@track)
+        .stat= link_to pluralize(@track.maintainers.count, "Maintainer".pluralize(@track.maintainers.count)), track_maintainers_path(@track)
 
       .title
         %h1 #{@track.title} Track
