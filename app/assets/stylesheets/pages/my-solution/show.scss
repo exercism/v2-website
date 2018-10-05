@@ -18,21 +18,22 @@
         }
     }
     .track-header {
-        margin-top:20px;
         padding:22px 10px;
+        border-radius:2px;
+        margin-bottom:10px;
+
         @include width-small() {
             border:1px solid #e5e5e5;
             padding:22px 20px;
+            margin-top:20px;
         }
-        border-radius:2px;
-        margin-bottom:10px;
         .icon {
             display:block;
             width:70px;
             height:70px;
             padding:8px;
             float:right;
-            margin-top: -25px;
+            margin-top: -12px;
             border-radius: 100%;
             overflow:hidden;
             background:$color-1;

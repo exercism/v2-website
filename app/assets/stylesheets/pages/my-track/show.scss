@@ -16,7 +16,7 @@ body.namespace-my.controller-tracks.action-show {
         .title {
             @include width-medium() {
                 float:left;
-            }     
+            }
         }
 
         .h1-subtitle {
@@ -289,7 +289,9 @@ body.namespace-my.controller-tracks.action-show {
                         color:$color-1;
                         &.completed-unmentored {
                             color:#bbb;
-                            text-align:right;
+                            @include width-medium() {
+                                text-align:right;
+                            }
                             .unmentored {
                                 margin-top:4px;
                                 @include font-size(9, 10);
@@ -438,7 +440,7 @@ body.namespace-my.controller-tracks.action-show {
                     @include width-medium() {
                         display:inline-block;
                     }
-                    
+
                 }
                 .title {
                     width:120px;

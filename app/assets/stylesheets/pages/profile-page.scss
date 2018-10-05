@@ -36,10 +36,13 @@
             color:#fff;
         }
         .h1-subtitle {
-            max-width:70%;
-            @include font-size(15, 15);
             color:#fff;
             font-weight:$light;
+            @include font-size(15, 17);
+
+            @include width-small() {
+                max-width:70%;
+            }
         }
 
     }
@@ -75,6 +78,7 @@
                 @include font-size(13, 19);
                 color:#666;
                 text-align:center;
+                word-break: break-word;
             }
             .hr {
                 border-bottom:1px solid #e8e8e8;
@@ -207,7 +211,7 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         max-width: 160px;
-                        @include font-size(18, 19);
+                        @include font-size(18, 20);
                         font-weight:$bold;
                         color:#555;
                     }
@@ -232,7 +236,7 @@
                     border-radius:2px;
                     overflow:hidden;
                     display:inline-block;
-                    margin-top:10px;
+                    margin-top:8px;
                     .reaction {
                         float:left;
                         border-right:1px solid #eee;
