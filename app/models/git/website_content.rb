@@ -25,6 +25,10 @@ class Git::WebsiteContent < Git::RepoBase
     FolderReader.new(self, head_commit, 'pages')
   end
 
+  def licences
+    FolderReader.new(self, head_commit, 'licences')
+  end
+
   def walkthrough
     FolderReader.new(self, head_commit, 'walkthrough')["index.html"]
   end
