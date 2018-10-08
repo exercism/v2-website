@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   test "approve calls service" do
-    mentor = create :user
+    mentor = create :user_mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -16,7 +16,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show clears notifications" do
-    mentor = create :user
+    mentor = create :user_mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track

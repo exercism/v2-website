@@ -57,7 +57,7 @@ class DiscussionPostTest < ApplicationSystemTestCase
   end
 
   test "mentor edits a discussion post" do
-    mentor = create(:user,
+    mentor = create(:user_mentor,
                     accepted_terms_at: Date.new(2016, 12, 25),
                     accepted_privacy_policy_at: Date.new(2016, 12, 25))
     track = create(:track)
@@ -85,7 +85,7 @@ class DiscussionPostTest < ApplicationSystemTestCase
   end
 
   test "mentor deletes a discussion post" do
-    mentor = create(:user,
+    mentor = create(:user_mentor,
                     accepted_terms_at: Date.new(2016, 12, 25),
                     accepted_privacy_policy_at: Date.new(2016, 12, 25))
     track = create(:track)

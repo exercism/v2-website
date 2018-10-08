@@ -125,10 +125,6 @@ class User < ApplicationRecord
     user_track.try(:independent_mode?) || (!exercise.core && !exercise.unlocked_by)
   end
 
-  def mentor?
-    track_mentorships.exists?
-  end
-
   def mentoring_track?(track)
     track_mentorships.where(track_id: track.id).exists?
   end

@@ -13,7 +13,7 @@
       %li Email: #{@user.email}
       %li Signed up on #{@user.created_at}
       %li Current session started at #{@user.current_sign_in_at}
-      %li Mentor: #{@user.mentor?? "Yes" : "No"}
+      %li Mentor: #{@user.is_mentor?? "Yes" : "No"}
       %li Tracks: #{@user.tracks.pluck(:title).sort.join(", ")}
 
     %h2 Comments

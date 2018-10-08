@@ -11,7 +11,7 @@
         /-if current_user.admin?
         /  %h2 Admin communications
 
-        -if current_user.mentor?
+        -if current_user.is_mentor?
           %h3 Mentor emails
           =f.label :email_on_new_discussion_post_for_mentor do
             =f.check_box :email_on_new_discussion_post_for_mentor

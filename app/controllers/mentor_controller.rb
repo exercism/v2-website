@@ -5,7 +5,7 @@ class MentorController < ApplicationController
   private
 
   def restrict_to_mentors!
-    return if current_user.mentor?
+    return if current_user.is_mentor?
     redirect_to root_path, status: 401
   end
 end
