@@ -6,10 +6,11 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
     assert_response 302
   end
 
-  test "401 unless mentor" do
+  test "302 unless mentor" do
     sign_in!
     get mentor_dashboard_url
-    assert_response 401
+    assert_response 302
+    assert_redirected_to new_mentor_registrations_url
   end
 
   test "200 if mentor" do
