@@ -126,6 +126,7 @@ $blue: #4A90E2;
         display:block;
         text-decoration:none;
         overflow:hidden;
+        position:relative;
 
         &:hover {
             border-color:$color-2;
@@ -270,8 +271,8 @@ $blue: #4A90E2;
             @include width-medium() {
                 width: 30px;
                 position: absolute;
-                top: -15px;
-                left: 35px;
+                top: 5px;
+                left: 55px;
                 margin-top:0;
                 float:none;
                 padding-top:0;
