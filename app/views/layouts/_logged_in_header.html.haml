@@ -24,12 +24,15 @@
         = link_to "Tracks", [:my, :tracks]
         = link_to "Your profile", [:my, :profile]
         = link_to "Solutions you've liked", [:my, :reactions]
-        -if current_user.admin? || current_user.mentor?
-          .hr
+        .hr
         -if current_user.admin?
           = link_to "Admin dashboard", [:admin, :dashboard]
+
         -if current_user.mentor?
           = link_to "Mentor dashboard", [:mentor, :dashboard]
+        -else
+          = link_to "Become a mentor", "#"
+
         .hr
         = link_to "Settings", [:my, :settings]
         = link_to "Sign out", destroy_user_session_path, method: :delete
