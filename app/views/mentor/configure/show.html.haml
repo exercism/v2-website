@@ -6,17 +6,17 @@
         Thanks for being here. Let's get you set up.
 
   .lo-container
-    .pure-g
-      .pure-u-1.pure-u-md-3-5.lhs
-        %h2 Choose the tracks you would like to mentor
-        =notice_and_alert
-        =form_tag mentor_configure_path, method: :patch do
-          -Track.all.order(:title).pluck(:title, :id).each do |track_title, track_id|
+    %h2 Choose the tracks you would like to mentor
+    %p You can mentor as many tracks as you like although we suggest just getting started with one.
+    =notice_and_alert
+    =form_tag mentor_configure_path, method: :patch do
+      .pure-g
+        -Track.all.order(:title).pluck(:title, :id).each do |track_title, track_id|
+          .pure-u-1.pure-u-md-1-3
             .field
               =label_tag "track_id_#{track_id}" do
                 - is_mentored = @mentored_track_ids.include?(track_id)
                 =check_box_tag "track_id[#{track_id}]", 1, is_mentored
                 .text= track_title
 
-          =button_tag "Save settings", class: 'pure-button'
-      .pure-u-1.pure-u-md-2-5.rhs
+      =button_tag "Save settings", class: 'pure-button'
