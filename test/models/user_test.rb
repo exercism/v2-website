@@ -24,15 +24,6 @@ class UserTest < ActiveSupport::TestCase
     refute user.previously_joined_track?(currently_joined)
   end
 
-  test "mentor?" do
-    user = create :user
-    refute user.mentor?
-
-    create :track_mentorship, user: user
-    user.reload
-    assert user.mentor?
-  end
-
   test "record cannot be saved without a handle" do
     user = build :user, handle: nil
     refute user.valid?

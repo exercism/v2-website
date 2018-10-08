@@ -9,7 +9,7 @@ class MenuTest < ApplicationSystemTestCase
     assert_selector "header.logged-in a", text: "Become a mentor"
     refute_selector "header.logged-in a", text: "Mentor dashboard"
 
-    create :track_mentorship, user: @current_user
+    @current_user.update(is_mentor: true)
 
     visit root_path
     find('header.logged-in .misc-menu').hover
