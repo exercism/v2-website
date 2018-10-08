@@ -142,16 +142,15 @@ class FilterSolutionsTest < ApplicationSystemTestCase
                     accepted_privacy_policy_at: Date.new(2016, 12, 25),
                     mentored_tracks: [track])
     exercise1 = create(:exercise, title: "Exercise 1", track: track)
-    exercise2 = create(:exercise, title: "Exercise 2", track: track)
-    solution1 = create(:solution, exercise: exercise1)
-    solution2 = create(:solution, exercise: exercise2)
+    exercise2 = create(:exercise, title: "Exercise 2", track: track) 
+    solution1 = create(:solution, exercise: exercise1, mentoring_requested_at: Time.current)
+    solution2 = create(:solution, exercise: exercise2, mentoring_requested_at: Time.current)
     create(:iteration, solution: solution1)
     create(:solution_mentorship,
            user: mentor,
            solution: solution1,
            requires_action: true)
 
-    create(:iteration, solution: solution2)
     create(:iteration, solution: solution2)
 
     sign_in!(mentor)
