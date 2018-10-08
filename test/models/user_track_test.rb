@@ -148,8 +148,8 @@ class UserTrackTest < ActiveSupport::TestCase
     user_track = create :user_track, user: user, track: track, independent_mode: false
     assert_equal 1, user_track.num_completed_core_exercises
     assert_equal 2, user_track.num_completed_side_exercises
-    assert_equal 1, user_track.num_avaliable_core_exercises
-    assert_equal 2, user_track.num_avaliable_side_exercises
+    assert_equal 1, user_track.num_available_core_exercises
+    assert_equal 2, user_track.num_available_side_exercises
   end
 
   test "counters in independent mode" do
@@ -176,7 +176,7 @@ class UserTrackTest < ActiveSupport::TestCase
     user_track = create :user_track, user: user, track: track, independent_mode: true
     assert_equal 1, user_track.num_completed_core_exercises
     assert_equal 2, user_track.num_completed_side_exercises
-    assert_equal 2, user_track.num_avaliable_core_exercises
-    assert_equal 4, user_track.num_avaliable_side_exercises
+    assert_equal 2, user_track.num_available_core_exercises
+    assert_equal 4, user_track.num_available_side_exercises
   end
 end

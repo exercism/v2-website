@@ -1,4 +1,4 @@
-- num_avaliable_exercises = @user_track.num_avaliable_exercises
+- num_available_exercises = @user_track.num_available_exercises
 
 .finished-section
   .title-block
@@ -31,12 +31,12 @@
 
     =render "my/solutions/widgets/community_solutions"
 
-    -if num_avaliable_exercises.size > 0
+    -if num_available_exercises.size > 0
       .next-option
         %p
           %strong Carry on coding.
           You have
-          #{pluralize num_avaliable_exercises, "exercise"}
+          #{pluralize num_available_exercises, "exercise"}
           that you have not yet completed on this track. Why not try a new challenge?
 
         =link_to "Choose next exercise", my_track_path(@track), class: 'pure-button'
