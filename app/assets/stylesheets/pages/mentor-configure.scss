@@ -29,7 +29,11 @@
     h2 {
         @include font-size(18, 18);
         font-weight:$regular;
-        margin-bottom:15px;
+        margin-bottom:5px;
+    }
+    p {
+        margin-bottom:20px;
+        @include font-size(15, 18);
     }
 
     #alert {
@@ -39,12 +43,16 @@
 
     label {
         background:rgba($color-2, 0.1);
+        border:1px solid rgba($color-2, 0.2);
         padding:10px;
         border-radius:2px;
-        margin-bottom:10px;
+        margin-bottom:15px;
         display:block;
         cursor:pointer;
         @include font-size(15, 16);
+        @include width-medium() {
+            margin-right:15px;
+        }
         input {
             float:left;
             margin-right:8px;
