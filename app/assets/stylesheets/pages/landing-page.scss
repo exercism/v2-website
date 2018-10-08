@@ -20,8 +20,8 @@ body.controller-pages.action-index footer {
             padding-top:50px;
             margin-bottom:50px;
             @include width-medium() {
-                padding-top:150px;
-                margin-bottom:150px;
+                padding-top:80px;
+                margin-bottom:130px;
             }
             h1 {
                 @include header-font;
