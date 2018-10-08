@@ -60,7 +60,7 @@ bundle exec rails s
 ```
 
 Something like this will get a working webserver on http://lvh.me:3000
-Note: Teams will be avaliable on http://teams.lvh.me:3000
+Note: Teams will be available on http://teams.lvh.me:3000
 
 ### Notes
 

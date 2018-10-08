@@ -1,5 +1,5 @@
-- num_avaliable_core_exercises = @user_track.num_avaliable_core_exercises
-- num_avaliable_side_exercises = @user_track.num_avaliable_side_exercises
+- num_available_core_exercises = @user_track.num_available_core_exercises
+- num_available_side_exercises = @user_track.num_available_side_exercises
 .finsished-section
   .title-block
     %h3
@@ -31,17 +31,17 @@
 
       =link_to "View community solutions", track_exercise_solutions_path(@track, @exercise), class: 'pure-button'
 
-    -if num_avaliable_core_exercises.size > 0 || num_avaliable_side_exercises.size > 0
+    -if num_available_core_exercises.size > 0 || num_available_side_exercises.size > 0
       .next-option
         %p
           %strong Carry on coding.
           You have
-          -if num_avaliable_core_exercises > 0
-            #{pluralize num_avaliable_core_exercises, "core exercise"}
-            -if num_avaliable_side_exercises > 0
+          -if num_available_core_exercises > 0
+            #{pluralize num_available_core_exercises, "core exercise"}
+            -if num_available_side_exercises > 0
               and
-          -if num_avaliable_side_exercises > 0
-            #{pluralize num_avaliable_side_exercises, "side exercise"}
+          -if num_available_side_exercises > 0
+            #{pluralize num_available_side_exercises, "side exercise"}
           that you have not yet completed on this track. Why not try a new challenge?
 
         =link_to "Choose next exercise", my_track_path(@track), class: 'pure-button'

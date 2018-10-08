@@ -2,7 +2,7 @@
 
 ## V1
 
-- The API is avaliable at `https://api.exercism.io/api/v1`
+- The API is available at `https://api.exercism.io/api/v1`
 - The API uses the Bearer Authentication header to identify a user
 
 ### Ping
