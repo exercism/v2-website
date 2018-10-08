@@ -87,12 +87,21 @@ $blue: #4A90E2;
         margin-bottom:5px;
         display:flex;
         align-items:stretch;
-        
+        @include width-medium {
+            display:inline-block;
+        }
+
         .title {
             width:120px;
+            @include width-medium {
+                width:auto;
+            }
         }
         .title, .selectize-control {
             display:flex;
+            @include width-medium {
+                display:inline-block;
+            }
         }
 
         &.status .selectize-control {
