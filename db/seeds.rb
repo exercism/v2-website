@@ -2,7 +2,7 @@ ihid = User.create!(name: "Jeremy Walker", handle: 'iHiD', email: "jeremy@thalam
 BootstrapUser.(ihid)
 
 # Seed tracks
-Git::SeedsTracks.seed!
+Git::SeedTracks.()
 
 Testimonial.create!(
   headline: "Exercism is a great website",
