@@ -1,6 +1,23 @@
 require 'application_system_test_case'
 
 class FilterSolutionsTest < ApplicationSystemTestCase
+  test "your solutions section does not show up if you do not mentor any" do
+    track = create(:track)
+    mentor = create(:user_mentor,
+                    accepted_terms_at: Date.new(2016, 12, 25),
+                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
+                    mentored_tracks: [track])
+
+    sign_in!(mentor)
+    visit mentor_dashboard_path
+    refute_selector ".your-solutions"
+
+    solution = create :solution, exercise: create(:exercise, track: track)
+    create :solution_mentorship, user: mentor, requires_action: true, solution: solution
+    visit mentor_dashboard_path
+    assert_selector ".your-solutions"
+  end
+
   test "filters solutions by status" do
     track = create(:track)
     mentor = create(:user_mentor,
