@@ -31,7 +31,7 @@
         -if current_user.is_mentor?
           = link_to "Mentor dashboard", [:mentor, :dashboard]
         -else
-          = link_to "Become a mentor", [:new, :mentor, :registrations]
+          = link_to "Become a mentor", become_a_mentor_path
 
         .hr
         = link_to "Settings", [:my, :settings]
