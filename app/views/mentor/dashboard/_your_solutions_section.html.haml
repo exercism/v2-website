@@ -1,3 +1,5 @@
+-return if current_user.solution_mentorships.count == 0
+
 %h2 Solutions you're mentoring
 = render "your_solutions_filters",
   status: @your_status,
