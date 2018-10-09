@@ -6,6 +6,7 @@ class MakeUserAMentorTest < ActiveSupport::TestCase
     track = create :track
     create :track
 
+    RestClient.stubs(:post)
     MakeUserAMentor.(user, track.id)
 
     user.reload
