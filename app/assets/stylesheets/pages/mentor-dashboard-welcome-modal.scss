@@ -1,0 +1,48 @@
+@import 'variables';
+@import 'mixins';
+
+#modal.welcome-to-mentoring {
+    padding:50px 15px;
+    @include width-small() {
+        padding:50px;
+    }
+    @include width-medium() {
+        margin:40px auto !important;
+        max-height:85% !important;
+    }
+    img {
+        width:50px;
+        display:block;
+        width:100px;
+        margin: 0 auto 15px auto;
+    }
+    h2 {
+        @include font-size(20, 20);
+        font-weight:$regular;
+        color:#555;
+        margin-bottom:15px;
+    }
+    p {
+        color:#555;
+        @include font-size(14, 20);
+        margin-bottom:10px;
+        a {
+            color:#555;
+        }
+    }
+    ul {
+        padding-left:18px;
+        li {
+            margin-bottom:3px;
+        }
+    }
+    .pure-button {
+        background:$color-1;
+        display:block;
+        max-width:280px;
+        width:100%;
+        padding:11px 10px;
+        text-align:center;
+        margin: 30px auto 0 auto;
+    }
+}

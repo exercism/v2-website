@@ -88,3 +88,8 @@
 -content_for :js do
   :javascript
     submitOnChange($('select'))
+
+-if current_user.solution_mentorships.count == 0
+  -content_for :js do
+    :javascript
+      showModal('welcome-to-mentoring', '#{j render "welcome_modal"}')
