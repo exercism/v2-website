@@ -10,8 +10,7 @@ class Mentor::RegistrationsController < ApplicationController
   end
 
   def create
-    current_user.update(is_mentor: true)
-    current_user.track_mentorships.create(track_id: params[:track_id])
+    MakeUserAMentor.(current_user, params[:track_id])
     redirect_to mentor_dashboard_path
   end
 
