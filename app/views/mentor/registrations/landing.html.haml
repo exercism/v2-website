@@ -1,0 +1,79 @@
+#become-a-mentor-page
+  .welcome-section
+    .lo-container
+      .box
+        %h1 Become an Exercism mentor
+        %h2 help others improve their coding fluency
+        %p Exercism is looking for friendly people to help others improve their fluency. If you are comfortable with a programming language and like helping others, then this is for you.
+        %a.pure-button.register-button{href: new_mentor_registrations_path} Become a Mentor
+        %a.pure-button.learn-more-button{href: "#more-info"} Tell me more
+
+  #more-info
+    -unless user_signed_in?
+      .vision-section.section
+        .lo-container
+          .box
+            %h2 What is Exercism?
+            %p Exercism helps people improve their programming skills with thousands of exercises across 45 languages with help from our dedicated team of welcoming mentors. Our mentors help guide others through a language track offering feedback and encouraging people to think critically about their code. It is crucial to Exercism that our mentors share our vision and care passionately about delivering feedback empathetically and that Exercism remains a comfortable and friendly learning environment. To support this we offer mentor guidance and ask that everyone contributing to Exercism follows a code of conduct which is grounded in research on how people learn.
+
+  .role-section.section
+    .lo-container
+      %h2
+        What
+        %strong mentors
+        do to help
+      %h3 Mentors are at the core of Exercism. Let's see how they're involved.
+      .pure-g
+        .pure-u-1-1.pure-u-md-1-2.lhs
+          =image "become-a-mentor-chat.png", "A mentor and learner having a conversation", class: "chat"
+          =graphical_image "become-a-mentor-line.png", class: "line"
+        .pure-u-1-1.pure-u-md-1-2.rhs
+          %ul
+            %li A student joins a language track and submits their solution to a coding challenge.
+            %li A Mentor give feedback and guides the student to a more ideomatic solution, helping them become more fluent in a new language.
+            %li With their mentors help, people complete all the challenges on their track and achieve fluency in a new language.
+  .benefits-section.section
+    .lo-container
+      %h2
+        What are the
+        %strong benefits
+        of being a mentor?
+      %h3 Being a mentor is great for the people you mentor, but also great for you!
+      .pure-g
+        .pure-u-1-1.pure-u-md-1-2
+          %ul
+            %li
+              Teaching is powerful route to mastery. It's how the
+              %a{href: "https://twitter.com/ProfFeynman/status/996382321916895232", target: "_blank"} smartest people learn
+            %li Mentoring is a great way to give back to the community that has nurtured you
+            %li You can share your passion for your language with people who actively want to learn about it
+        .pure-u-1-1.pure-u-md-1-2
+          %ul
+            %li Get that warm happy feeling of knowing you have helped give someone access to education and opportunities so they can better their life
+            %li Meet other mentors, get to know the Exercism community, and make new friends
+            %li
+              %a{href: "https://www.livescience.com/15978-volunteers-live-longer.html", target: "_blank"} Live longer
+  .great-mentor-section.section
+    .lo-container
+      %h2
+        What makes a
+        %strong great
+        mentor?
+      %h3 Based on our 2017 survey on effective code reviews and the feedback we've gathered from people learning on Exercism
+      .pure-g
+        .pure-u-1-1.pure-u-md-1-2
+          %ul
+            %li You are passionate about sharing your programming experience
+            %li You can communicate in a clear and friendly manner
+            %li You have empathy for learners, and can adapt your feedback to suit your students
+        .pure-u-1-1.pure-u-md-1-2
+          %ul
+            %li You can commit to giving an hour per week most weeks
+            %li You want to give back to open source projects and the tech community in a way other than coding
+  .cta-section.section
+    .lo-container
+      .box
+        %p
+          %strong Sound like you?
+          %a.pure-button{href: new_mentor_registrations_path} Become a mentor
+          Want to help out? No qualifications are necessary, just come and get involved.
