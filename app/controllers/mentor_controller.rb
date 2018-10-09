@@ -6,6 +6,6 @@ class MentorController < ApplicationController
 
   def restrict_to_mentors!
     return if current_user.is_mentor?
-    redirect_to new_mentor_registrations_path
+    redirect_to become_a_mentor_path
   end
 end

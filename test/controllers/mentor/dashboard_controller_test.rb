@@ -10,7 +10,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
     sign_in!
     get mentor_dashboard_url
     assert_response 302
-    assert_redirected_to new_mentor_registrations_url
+    assert_redirected_to become_a_mentor_path
   end
 
   test "200 if mentor" do

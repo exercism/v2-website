@@ -7,7 +7,7 @@ class MentorRegistrationTest < ApplicationSystemTestCase
 
     sign_in!(user)
 
-    visit new_mentor_registrations_path
+    visit become_a_mentor_path
     within("#mentor-registration-page") { click_on "Become a mentor" }
 
     check "Ruby"

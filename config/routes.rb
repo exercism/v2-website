@@ -41,9 +41,10 @@ Rails.application.routes.draw do
   # Mentor #
   # ###### #
 
+  get "become-a-mentor" => "mentor/registrations#new", as: :become_a_mentor
   namespace :mentor do
     get "/", to: redirect("mentor/dashboard")
-    resource :registrations, only: [:new, :create]
+    resource :registrations, only: [:create]
     resource :configure, only: [:show, :update], controller: "configure"
     resource :dashboard, only: [:show], controller: "dashboard" do
       get :your_solutions

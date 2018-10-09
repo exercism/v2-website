@@ -47,6 +47,8 @@ module MetadataHelper
         end
       when "mentor"
         case controller_name
+        when "registrations"
+          { title: "Become a mentor" }
         when "solutions"
           { title: "#{display_handle(@solution.user, @solution_user_track)} | #{@track.title}/#{@exercise.title}" }
         else
