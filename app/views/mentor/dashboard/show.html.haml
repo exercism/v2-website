@@ -43,9 +43,7 @@
                   So far this week you've given feedback on
                   %strong #{@weekly_solutions_count} solutions.
                   Thank you for putting in the time and helping so many others learn. You're making the world better.
-
                 .hr
-
                 Know someone who would be a good mentor? Ask them to visit
                 =link_to become_a_mentor_url, become_a_mentor_url
 
@@ -53,6 +51,9 @@
                 So far this week you've given feedback on
                 %strong #{@weekly_solutions_count} solutions.
                 Thank you!
+                .hr
+                Know someone who would be a good mentor? Ask them to visit
+                =link_to become_a_mentor_url, become_a_mentor_url
 
         -if @total_solutions_count > 0
           .contributions-section
@@ -80,9 +81,10 @@
             %p
               We've put together some guides and information to help with mentoring. We also have a Slack room where you can chat about exercises and socialise with the community.
             %ul
-              %li= link_to "Mentoring Guide", mentoring_guide_page_path
+              %li= link_to "Getting started guide", mentoring_getting_started_page_path
+              %li= link_to "Mentoring workflow", mentoring_workflow_page_path
               %li= link_to "Mentoring FAQs", mentoring_faqs_page_path
-              %li= link_to "Our Slack Room", "https://exercism-team.slack.com/messages/CARRG4MNC"
+              %li= link_to "Our Slack room", "https://exercism-team.slack.com/messages/CARRG4MNC"
 
 
 -content_for :js do
