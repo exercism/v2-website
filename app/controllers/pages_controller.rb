@@ -10,7 +10,6 @@ class PagesController < ApplicationController
     "Exercism's Values": :values,
     "About Exercism": :about,
     "Getting Started": :getting_started,
-    "Become a Mentor": :become_a_mentor,
     "Become a Maintainer": :become_a_maintainer,
     "Report Abuse": :report_abuse,
     "Contact": :contact,
