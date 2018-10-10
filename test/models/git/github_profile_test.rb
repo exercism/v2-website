@@ -1,5 +1,5 @@
 require 'test_helper'
-require "webmock/minitest"
+require 'webmock/minitest'
 
 class Git::GithubProfileTest < ActiveSupport::TestCase
   test "provides access to underlying GitHub user" do

@@ -1,5 +1,5 @@
 require_relative '../../test_helper'
-require "webmock/minitest"
+require 'webmock/minitest'
 
 class Git::SyncWebsiteCopyTest < ActiveJob::TestCase
   test "syncs mentors" do
