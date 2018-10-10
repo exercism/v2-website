@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'webmock/minitest'
 
 class MakeUserAMentorTest < ActiveSupport::TestCase
   test "makes user a mentor of the relevant track" do
@@ -6,7 +7,7 @@ class MakeUserAMentorTest < ActiveSupport::TestCase
     track = create :track
     create :track
 
-    RestClient.stubs(:post)
+    stub_request(:post, "https://dev.null.exercism.io")
     MakeUserAMentor.(user, track.id)
 
     user.reload
