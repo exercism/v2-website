@@ -37,7 +37,7 @@
     .token-explanation {
         @include font-size(14, 18);
         font-weight:$light;
-        color:#999;
+        color:#666;
     }
     .token-explanation {
         margin-bottom:10px;
@@ -60,7 +60,7 @@
         margin-bottom:15px;
         label {
             display:block;
-            color:#999;
+            color:#666;
             @include font-size(14, 14);
             margin-bottom:6px;
         }
