@@ -5,7 +5,10 @@ namespace :mailers do
       joins("INNER JOIN solutions on solutions.id = iterations.solution_id").
       distinct.
       select(:user_id)
-    ).order('id asc')
+    ).
+    joins(:communication_preferences).
+    where('communication_preferences.receive_product_updates': true).
+    order('id asc')
 
     users.each do |user|
       begin
