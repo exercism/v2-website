@@ -10,7 +10,7 @@
     =icon 'circle filled', 'Step 4 of 4'
 
 %h2 Exercises unlocked
-%h3 You have unlocked the following core exercise:
+%h3 You have unlocked the following Core Exercise:
 
 -if @next_core_solution
   =link_to [:my, @next_core_solution], class: 'core-exercise' do
@@ -28,7 +28,7 @@
     %h4
       You have also unlocked
       %strong #{@unlocked_side_exercise_solutions.size}
-      bonus exercises:
+      Side Exercises:
     -@unlocked_side_exercise_solutions.each do |solution|
       =link_to [:my, solution], target: "_blank", class: 'side-exercise' do
         =graphical_image solution.exercise.turquoise_icon_url, class: 'turquoise'

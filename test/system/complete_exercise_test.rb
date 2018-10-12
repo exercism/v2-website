@@ -28,12 +28,15 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     click_on "Complete exercise (Unapproved)"
     check "I understand and agree to continue."
     click_on "Mark as completed"
+    sleep(0.1)
     click_on "Continue"
+    sleep(0.1)
     click_on "Continue"
+    sleep(0.1)
     click_on "Save and continue"
 
-    assert_text "You have unlocked the following core exercise:\nCore Exercise"
-    assert_no_text "You have also unlocked 1 bonus exercises"
+    assert_text "You have unlocked the following Core Exercise:\nCore Exercise"
+    assert_no_text "You have also unlocked 1 Side Exercises"
   end
 
   test "unlocks core exercises and side exercises for an approved solution" do
@@ -64,11 +67,14 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     sign_in!(user)
     visit my_solution_path(solution)
     click_on "Complete Exercise"
+    sleep(0.1)
     click_on "Continue"
+    sleep(0.1)
     click_on "Continue"
+    sleep(0.1)
     click_on "Save and continue"
 
-    assert_text "You have unlocked the following core exercise:\nCore Exercise"
-    assert_text "You have also unlocked 1 bonus exercises"
+    assert_text "You have unlocked the following Core Exercise:\nCore Exercise"
+    assert_text "You have also unlocked 1 Side Exercises"
   end
 end
