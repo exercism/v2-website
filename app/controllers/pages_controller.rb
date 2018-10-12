@@ -45,7 +45,7 @@ class PagesController < ApplicationController
       end
     end
   end
-  
+
   PAGE_GENERATOR.(PAGES, :pages)
   PAGE_GENERATOR.(LICENCES, :licences)
 
