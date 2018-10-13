@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_054326) do
     t.boolean "show_feedback_to_mentor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "paused", default: false
     t.index ["solution_id"], name: "fk_rails_704ccdde73"
     t.index ["user_id"], name: "fk_rails_578676d431"
   end
@@ -408,6 +409,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_054326) do
     t.datetime "updated_at", null: false
     t.boolean "independent_mode"
     t.datetime "archived_at"
+    t.boolean "paused", default: false
     t.index ["independent_mode"], name: "ihid-1"
     t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_99e944edbc"

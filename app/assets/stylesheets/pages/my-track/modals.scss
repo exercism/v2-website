@@ -6,7 +6,8 @@
 #modal.my-track-v1-migration,
 #modal.change-to-independent-mode,
 #modal.change-to-mentored-mode,
-#modal.leave-track {
+#modal.leave-track,
+#modal.pause-track {
     max-width:540px;
     padding:50px 15px 50px 15px;
     @include width-small() {
@@ -124,7 +125,8 @@
 
 #modal.change-to-independent-mode,
 #modal.change-to-mentored-mode,
-#modal.leave-track {
+#modal.leave-track,
+#modal.pause-track {
     .pure-button {
         margin: 0 auto;
 

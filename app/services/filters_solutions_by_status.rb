@@ -23,7 +23,8 @@ class FiltersSolutionsByStatus
   def filter_require_action
     solutions.
       where("solution_mentorships.abandoned": false).
-      where("solution_mentorships.requires_action": true)
+      where("solution_mentorships.requires_action": true).
+      where("solution_mentorships.paused": false)
   end
 
   def filter_completed
