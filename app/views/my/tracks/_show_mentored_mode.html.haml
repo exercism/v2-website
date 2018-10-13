@@ -40,6 +40,7 @@
 
           .danger-zone
             %h3 Danger zone
+            =link_to "Pause track", "#", class: 'pure-button pause-track-btn'
             =link_to "Leave track", "#", class: 'pure-button leave-track-btn'
             -if !@user_track.independent_mode?
               =link_to "Switch to Independent Mode", "#", class: 'pure-button change-to-independent-btn'

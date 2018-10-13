@@ -1,0 +1,5 @@
+%h2
+  This track is paused
+%p
+  Your solutions are still in place but you can access the track unless you unpause it.
+= link_to "Unpause the #{@track.title} Track", my_pause_user_track_path(@user_track), method: :delete, class: 'pure-button'

@@ -4,7 +4,7 @@ class My::TracksController < MyController
   def index
     tracks = Track.active.order('title ASC')
     tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
-    joined_track_ids = current_user.user_tracks.unarchived.pluck(:track_id)
+    joined_track_ids = current_user.user_tracks.active.pluck(:track_id)
 
     @joined_tracks, @other_tracks = tracks.partition {|t|joined_track_ids.include?(t.id)}
     @completed_exercise_counts = current_user.

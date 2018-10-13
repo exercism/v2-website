@@ -56,11 +56,12 @@
       });
       submitOnChange($('.side_exercises_form select'))
 
--content_for :js do
-  :javascript
-    $('.leave-track-btn').click(function() {
-      showModal("leave-track", "#{j(render "leave_track_modal", track: @track)}")
-    })
+- ['leave', 'pause'].each do |action|
+  -content_for :js do
+    :javascript
+      $('.#{action}-track-btn').click(function() {
+        showModal("#{action}-track", "#{j(render "#{action}_track_modal", track: @track)}")
+      })
 
 -if @user_track.independent_mode?
   -content_for :js do
@@ -74,3 +75,8 @@
       $('.change-to-independent-btn').click(function() {
         showModal("change-to-independent-mode", "#{j(render "change_to_independent_mode_modal", track: @track)}")
       })
+
+-if @user_track.paused?
+  -content_for :js do
+    :javascript
+      showModal('announcement', '#{j render "paused_modal"}')

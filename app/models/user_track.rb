@@ -4,8 +4,8 @@ class UserTrack < ApplicationRecord
 
   validates :handle, handle: true
 
+  scope :active, -> { where(archived_at: nil, paused: false) }
   scope :archived, -> { where.not(archived_at: nil) }
-  scope :unarchived, -> { where(archived_at: nil) }
 
   MAX_INDEPENDENT_MODE_MENTORING_SLOTS = 1
   MAX_MENTORED_MODE_MENTORING_SLOTS = 3
