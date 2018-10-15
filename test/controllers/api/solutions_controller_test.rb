@@ -297,6 +297,83 @@ class API::SolutionsControllerTest < API::TestBase
     end
   end
 
+  test "updates git sha if exercise is downloaded for the first time" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: nil,
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get latest_api_solutions_path(track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "4567", solution.git_sha
+    end
+  end
+
+  test "does not update git sha if exercise was downloaded" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: Time.utc(2016, 12, 25),
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get latest_api_solutions_path(track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "1234", solution.git_sha
+    end
+  end
+
+  test "updates team solution git sha if exercise is downloaded for the first time" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :team_solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: nil,
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get latest_api_solutions_path(team_id: solution.team.slug, track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "4567", solution.git_sha
+    end
+  end
+
+  test "does not update team solution git sha if exercise was downloaded" do
+    Timecop.freeze do
+      setup_user
+      exercise = create :exercise
+      track = exercise.track
+      solution = create :team_solution,
+        user: @current_user,
+        exercise: exercise,
+        downloaded_at: Time.utc(2016, 12, 25),
+        git_sha: "1234"
+      create :user_track, user: solution.user, track: track
+
+      get latest_api_solutions_path(team_id: solution.team.slug, track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
+
+      solution.reload
+      assert_equal "1234", solution.git_sha
+    end
+  end
+
+
   ###
   # SHOW
   ###
@@ -330,44 +407,6 @@ class API::SolutionsControllerTest < API::TestBase
     end
   end
 
-  test "updates git sha if exercise is downloaded for the first time" do
-    Timecop.freeze do
-      setup_user
-      exercise = create :exercise
-      track = exercise.track
-      solution = create :solution,
-        user: @current_user,
-        exercise: exercise,
-        downloaded_at: nil,
-        git_sha: "1234"
-      create :user_track, user: solution.user, track: track
-
-      get api_solution_path(solution), headers: @headers, as: :json
-
-      solution.reload
-      assert_equal "4567", solution.git_sha
-    end
-  end
-
-  test "does not update git sha if exercise was downloaded" do
-    Timecop.freeze do
-      setup_user
-      exercise = create :exercise
-      track = exercise.track
-      solution = create :solution,
-        user: @current_user,
-        exercise: exercise,
-        downloaded_at: Time.utc(2016, 12, 25),
-        git_sha: "1234"
-      create :user_track, user: solution.user, track: track
-
-      get api_solution_path(solution), headers: @headers, as: :json
-
-      solution.reload
-      assert_equal "1234", solution.git_sha
-    end
-  end
-
   test "show should return 200 for team_solution if user is solution_user" do
     Timecop.freeze do
       setup_user
@@ -380,44 +419,6 @@ class API::SolutionsControllerTest < API::TestBase
 
       solution.reload
       assert_equal solution.downloaded_at.to_i, DateTime.now.to_i
-    end
-  end
-
-  test "updates team solution git sha if exercise is downloaded for the first time" do
-    Timecop.freeze do
-      setup_user
-      exercise = create :exercise
-      track = exercise.track
-      solution = create :team_solution,
-        user: @current_user,
-        exercise: exercise,
-        downloaded_at: nil,
-        git_sha: "1234"
-      create :user_track, user: solution.user, track: track
-
-      get api_solution_path(solution), headers: @headers, as: :json
-
-      solution.reload
-      assert_equal "4567", solution.git_sha
-    end
-  end
-
-  test "does not update team solution git sha if exercise was downloaded" do
-    Timecop.freeze do
-      setup_user
-      exercise = create :exercise
-      track = exercise.track
-      solution = create :team_solution,
-        user: @current_user,
-        exercise: exercise,
-        downloaded_at: Time.utc(2016, 12, 25),
-        git_sha: "1234"
-      create :user_track, user: solution.user, track: track
-
-      get api_solution_path(solution), headers: @headers, as: :json
-
-      solution.reload
-      assert_equal "1234", solution.git_sha
     end
   end
 
