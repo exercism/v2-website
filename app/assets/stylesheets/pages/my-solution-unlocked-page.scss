@@ -55,14 +55,6 @@
             p+h2 {
                 margin-top:20px;
             }
-            pre {
-                margin-bottom:10px;
-                background:#f6f6f6;
-            }
-            code {
-                @include font-size(12, 12);
-                color:#666;
-            }
             a {
                 color:#333;
                 text-decoration:none;
@@ -153,5 +145,19 @@
             margin-bottom:0;
         }
     }
+}
 
+body:not(.prism-dark) #my-solution-unlocked-page {
+    .instructions {
+        .rendered {
+            pre {
+                margin-bottom:10px;
+                background:#f6f6f6;
+            }
+            code {
+                @include font-size(12, 12);
+                color:#666;
+            }
+        }
+    }
 }

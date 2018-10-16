@@ -31,14 +31,6 @@
         p+h2 {
             margin-top:20px;
         }
-        pre {
-            margin-bottom:10px;
-            background:#f6f6f6;
-        }
-        code {
-            @include font-size(12, 12);
-            color:#666;
-        }
         a {
             color:#333;
         }
@@ -107,6 +99,23 @@
                 overflow:auto;
                 padding:15px;
             }
+        }
+    }
+}
+
+body:not(.prism-dark) #solution-page,
+body:not(.prism-dark) #mentor-solution-page,
+body:not(.prism-dark) #my-solution-page,
+body:not(.prism-dark) #teams-solution-page,
+body:not(.prism-dark) #teams-my-solution-page {
+    .pane.instructions {
+        pre {
+            margin-bottom:10px;
+            background:#f6f6f6;
+        }
+        code {
+            @include font-size(12, 12);
+            color:#666;
         }
     }
 }
