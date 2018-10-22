@@ -40,8 +40,9 @@
 
 -elsif @solution.track_in_mentored_mode? && !@solution.mentoring_requested?
   .notifications-bar
-    .notification
-      Your exercise has been submitted successfully. You may mark it as completed, browse other solutions, or request mentoring.
+    .lo-container
+      .notification
+        Your exercise has been submitted successfully. You may mark it as completed, browse other solutions, or request mentoring.
 
 -elsif @iteration.discussion_post_notifications_for_user.unread.size > 0
   .notifications-bar
