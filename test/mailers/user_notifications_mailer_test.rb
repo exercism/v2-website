@@ -16,7 +16,8 @@ class UserNotificationsMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal ["hello@exercism.io"], email.from
+    assert_equal ["hello@mail.exercism.io"], email.from
+    assert_equal ["hello@exercism.io"], email.reply_to
     assert_equal [user.email], email.to
     assert_equal "[Exercism] A mentor has commented on your solution to #{track_title}/#{exercise_title}", email.subject
   end
@@ -35,7 +36,8 @@ class UserNotificationsMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal ["hello@exercism.io"], email.from
+    assert_equal ["hello@mail.exercism.io"], email.from
+    assert_equal ["hello@exercism.io"], email.reply_to
     assert_equal [user.email], email.to
     assert_equal "[Exercism] A mentor has approved your solution to #{track_title}/#{exercise_title}", email.subject
   end
