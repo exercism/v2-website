@@ -16,7 +16,8 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal ["hello@exercism.io"], email.from
+    assert_equal ["hello@mail.exercism.io"], email.from
+    assert_equal ["hello@exercism.io"], email.reply_to
     assert_equal [mentor.email], email.to
     assert_equal "[Exercism Mentor Notification] New comment on #{exercise.track.title}/#{exercise.title} - #{solution.uuid[0,5]}", email.subject
 
@@ -56,7 +57,8 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal ["hello@exercism.io"], email.from
+    assert_equal ["hello@mail.exercism.io"], email.from
+    assert_equal ["hello@exercism.io"], email.reply_to
     assert_equal [mentor.email], email.to
     assert_equal "[Exercism Mentor Notification] New iteration on #{exercise.track.title}/#{exercise.title} - #{solution.uuid[0,5]}", email.subject
 
