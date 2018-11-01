@@ -1,0 +1,100 @@
+@import 'variables';
+@import 'mixins';
+
+#mentor-exercise-notes {
+    h1 {
+        @include font-size(20, 20);
+        font-weight:$regular;
+    }
+    h2,
+    h3 {
+        @include font-size(18, 18);
+        font-weight:$regular;
+        margin:20px 0 10px 0;
+        &:first-child {
+            margin-top:0px;
+        }
+    }
+    h4 {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        text-decoration: underline;
+    }
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    p+ul {
+        margin-top:-10px;
+    }
+    p,ul,ol {
+        @include font-size(14, 20);
+        margin-bottom:10px;
+        strong {
+            font-weight:$bold;
+        }
+        a {
+            color:#333;
+            text-decoration:none;
+            border-bottom:1px solid #aaa;
+        }
+        li {
+            margin-bottom:5px;
+        }
+    }
+    pre {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    .changes {
+        padding-top:20px;
+        border-top:1px solid #ddd;
+    }
+}
+body.namespace-mentor.controller-exercise_notes.action-show {
+    #mentor-exercise-notes {
+        .header {
+            background-image:image-url('background-overlay-2.png');
+            background-size:cover;
+            background-color:$color-2;
+            padding:40px 0 20px 0;
+            margin-bottom:20px;
+            h1 {
+                @include font-size(38, 38);
+                @include header-font;
+                font-weight:600;
+                letter-spacing:-0.3px;
+                color:#fff;
+            }
+        }
+    }
+}
+#modal-wrapper #modal.mentor-exercise-notes {
+    @include width-small() {
+        max-width:800px;
+    }
+    h1, .notes, .changes {
+        padding:20px 5%;
+        @include width-small() {
+            padding:20px 30px;
+        }
+    }
+
+    h1 {
+        background:$color-1;
+        color:#fff;
+    }
+    #modal-close-button {
+        height:60px;
+        width:60px;
+        text-align:center;
+        background:$color-1;
+        color:#fff;
+        i {
+            line-height:60px;
+        }
+    }
+}

@@ -18,6 +18,11 @@
         .small-iterations-nav
           =iterations_nav_widget(:mentor, @solution, @iteration)
 
+  .tools-bar
+    .lo-container
+      =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
+        View Community Mentoring Notes
+
   .lo-container
     .pure-g.panels
       .pure-u-1.pure-u-md-1-2.lhs

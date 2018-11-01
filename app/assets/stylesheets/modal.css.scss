@@ -36,23 +36,7 @@
             box-shadow:0 0 1px 1px rgba(#000, 0.13);
         }
     }
-    /*#modal-close-button  {
-        position:absolute;
-        top:-15px;
-        right:-15px;
-        width:36px;
-        height:36px;
-        padding:6px 10px 6px 13px;
-        border:1px solid #ccc;
-        border-radius:100%;
-        background:#fff;
-        cursor:pointer;
-        color:#aaa;
-        @include font-size(16, 18);
-        box-shadow:0 0 1px rgba(0,0,0,0.3);
-        z-index:10;
-        font-weight: 500;
-    }*/
+
     #modal-close-button  {
         position:absolute;
         top:0px;

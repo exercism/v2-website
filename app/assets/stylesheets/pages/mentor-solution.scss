@@ -6,7 +6,6 @@
         overflow:hidden;
         background:$color-1;
         padding:20px 0;
-        margin-bottom:40px;
         img {
             float:left;
             margin-right:15px;
@@ -53,50 +52,23 @@
         }
     }
 
-    .notifications-bar {
+    .tools-bar {
         overflow:hidden;
         margin-bottom:20px;
+        background:rgba($color-1, 0.55);
+        border:1px solid rgba($color-1, 0.7);
+        padding:8px 0;
         @include width-medium() {
             margin-bottom:40px;
         }
-        .community-solutions {
-            margin-bottom:15px;
-            @include width-medium() {
-                float:right;
-                margin-bottom:0;
-            }
-            border:1px solid #ddd;
-            border-radius:2px;
+        .mentoring-notes {
+            float:right;
+            padding:6px 10px;
             background:#fff;
-            color:#aaa;
-            @include font-size(12, 12);
-            font-weight:$regular;
-            padding:9px 20px;
-
-            i {
-                margin-right:3px;
-            }
-        }
-        .notification {
-            margin-right:190px;
-            background:rgba($color-1, 0.05);
-            @include font-size(13, 13);
-            padding:8px 20px;
-            border:1px solid rgba($color-1, 0.2);
-            border-radius:2px;
-            font-weight:$regular;
             color:$color-1;
-            a {
-                margin-left:3px;
-                color:#333;
-            }
-            i {
-                @include font-size(14, 14);
-                color:$color-1;
-                margin-right:5px;
-            }
-            &.action {
-                border-color:$color-1;
+            font-weight:$regular;
+            &:hover {
+                background: rgba(#fff, 0.9);
             }
         }
     }

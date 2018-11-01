@@ -45,7 +45,10 @@ class ApplicationController < ActionController::Base
 
   def render_modal(class_name, template, options = {})
     html = EscapesJavascript.escape(render_to_string(template, layout: false))
-    render js: %Q{ showModal('#{class_name}', '#{html}', '#{options.to_json}') }
+    render js: %Q{
+      showModal('#{class_name}', '#{html}', '#{options.to_json}')
+      Prism.highlightAll()
+    }
   end
 
   def js_redirect_to(*objs)

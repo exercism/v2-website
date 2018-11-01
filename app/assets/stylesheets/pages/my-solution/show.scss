@@ -199,22 +199,8 @@
         @include width-small() {
             background:none;
         }
-        /*.community-solutions {
-            float:right;
-            border:1px solid #ddd;
-            border-radius:2px;
-            background:#fff;
-            color:#aaa;
-            @include font-size(12, 12);
-            font-weight:$regular;
-            padding:9px 20px;
 
-            i {
-                margin-right:3px;
-            }
-        }*/
         .notification {
-            //margin-right:190px;
             @include font-size(13, 16);
             padding:8px 10px;
             border-radius:2px;

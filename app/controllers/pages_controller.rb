@@ -36,7 +36,6 @@ class PagesController < ApplicationController
   PAGE_GENERATOR = -> (pages, repo_location) do
     pages.each do |title, page|
       define_method page do
-        p Git::WebsiteContent.head.send(repo_location)
         markdown = Git::WebsiteContent.head.send(repo_location)["#{page}.md"] || ""
         @page = page
         @page_title = title
