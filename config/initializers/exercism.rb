@@ -14,3 +14,6 @@ elsif Rails.env.test?
 else
   Exercism::API_HOST = "http://lvh.me:3000/api"
 end
+
+Exercism::MENTOR_RATING_THRESHOLD = 5
+Exercism::AVERAGE_MENTOR_RATING = 4.45

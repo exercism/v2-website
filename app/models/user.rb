@@ -140,6 +140,19 @@ class User < ApplicationRecord
     solution_mentorships.where(solution_id: solution.id).exists?
   end
 
+  def num_rated_mentored_solutions
+    @num_rated_mentored_solutions ||=
+      solution_mentorships.where.not(rating: nil).
+                           count
+  end
+
+  def mentor_rating
+   @mentor_rating ||=
+      solution_mentorships.where.not(rating: nil).
+                           pluck(Arel.sql("AVG(rating) as r")).
+                           first.to_f.round(2)
+  end
+
   def has_active_lock_for_solution?(solution)
     SolutionLock.where(solution: solution, user_id: id).
                  where('locked_until > ?', Time.current).
