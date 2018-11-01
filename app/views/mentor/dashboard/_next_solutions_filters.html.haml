@@ -2,7 +2,7 @@
   .widget-filter.triaged_as
     .title Triaged:
     = select_tag :next_triaged_as,
-      options_for_select(Solution::TRIAGED_AS_OPTIONS.map{|key|[key.to_s.titleize, key]}, triaged_as),
+      options_for_select(Solution::TRIAGED_AS_ENUM.keys.map{|key|[key.to_s.titleize, key]}, triaged_as),
       include_blank: true
   .widget-filter.track_id
     .title Track:
