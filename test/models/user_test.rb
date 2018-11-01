@@ -214,4 +214,31 @@ class UserTest < ActiveSupport::TestCase
     lock.update(locked_until: Time.current + 1.minute)
     assert user.has_active_lock_for_solution?(solution)
   end
+
+  test "auth_token" do
+    user = create :user
+    t1 = create :auth_token, user: user, active: false
+    t2 = create :auth_token, user: user, active: true
+    t3 = create :auth_token, user: user, active: false
+
+    assert_equal t2.token, user.auth_token
+  end
+
+  test "create_auth_token!" do
+    user = create :user
+
+    user.create_auth_token!
+    token1 = user.auth_tokens.first
+
+    assert_equal 1, user.auth_tokens.size
+    assert token1.active?
+
+    user.create_auth_token!
+    token1.reload
+    token2 = user.auth_tokens.last
+
+    assert_equal 2, user.auth_tokens.size
+    refute token1.active?
+    assert token2.active?
+  end
 end
