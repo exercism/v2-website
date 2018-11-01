@@ -8,6 +8,11 @@ class My::SettingsController < MyController
     redirect_to action: :show
   end
 
+  def reset_auth_token
+    current_user.create_auth_token!
+    redirect_to action: :show
+  end
+
   private
 
   def update_password

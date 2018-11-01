@@ -145,6 +145,8 @@ Rails.application.routes.draw do
     resource :profile, controller: "profile"
 
     resource :settings do
+      patch :reset_auth_token
+
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
     end

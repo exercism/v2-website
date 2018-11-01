@@ -8,6 +8,8 @@
       %h2 CLI token
       .token-explanation Your authentication token for the CLI is:
       =render "widgets/code_snippet", code: current_user.auth_token
+      .token-reset
+        = link_to "Reset Token", [:reset_auth_token, :my, :settings], method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to reset your CLI token?"}
 
     .settings-section
       %h2 Change your password

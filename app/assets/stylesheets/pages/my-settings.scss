@@ -42,6 +42,12 @@
     .token-explanation {
         margin-bottom:10px;
     }
+    .token-reset {
+        margin-top:5px;
+        .pure-button {
+            background:#dd0000;
+        }
+    }
     p {
         display:inline-block;
         margin-bottom:15px;
