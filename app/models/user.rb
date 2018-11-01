@@ -65,8 +65,15 @@ class User < ApplicationRecord
     create_communication_preferences
   end
 
+  def create_auth_token!
+    transaction do
+      auth_tokens.update_all(active: false)
+      auth_tokens.create!(active: true)
+    end
+  end
+
   def auth_token
-    @auth_token ||= auth_tokens.first.token
+    @auth_token ||= auth_tokens.active.first.token
   end
 
   def onboarded?
