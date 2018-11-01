@@ -1,4 +1,4 @@
-= form_for team, url: teams_team_path(team), html: { class: "section-inner" } do |f|
+= form_for team, url: update_settings_teams_team_path(team), html: { class: "section-inner" } do |f|
   = f.check_box :url_join_allowed, class: "js-team-url-join-toggle"
   = f.label :url_join_allowed, "Allow joining via URL"
 
