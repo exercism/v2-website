@@ -59,7 +59,7 @@ Rails.application.routes.draw do
       end
     end
     resources :discussion_posts, only: [:create]
-    resource :exercise_notes, only: [:show], controller: "exercise_notes"
+    resource :exercise_notes, only: [:show, :new], controller: "exercise_notes"
   end
 
   # #### #

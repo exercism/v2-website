@@ -9,4 +9,11 @@ class Mentor::ExerciseNotesController < MentorController
       format.html
     end
   end
+
+  def new
+    @track = Track.find_by_slug!(params[:track_id])
+    @exercise = @track.exercises.find_by_slug!(params[:exercise_id])
+
+    redirect_to "https://github.com/exercism/website-copy/blob/master/tracks/#{@track.slug}/exercises/#{@exercise.slug}/mentoring.md"
+  end
 end
