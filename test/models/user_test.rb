@@ -241,4 +241,26 @@ class UserTest < ActiveSupport::TestCase
     refute token1.active?
     assert token2.active?
   end
+
+  test "num_rated_mentored_solutions" do
+    user = create :user
+    create :solution_mentorship, user: user
+    create :solution_mentorship, user: user, rating: 2
+    create :solution_mentorship, user: user, rating: 3
+
+    assert_equal 2, user.num_rated_mentored_solutions
+  end
+
+  test "mentor_rating" do
+    user = create :user
+    assert_equal 0, user.mentor_rating
+
+    create :solution_mentorship, user: user, rating: 2
+    create :solution_mentorship, user: user, rating: 5
+    create :solution_mentorship, user: user, rating: 4
+    create :solution_mentorship, user: user, rating: nil
+
+    user = User.find(user.id) # Clear the cache
+    assert_equal 3.67, user.mentor_rating
+  end
 end

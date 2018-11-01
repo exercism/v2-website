@@ -11,6 +11,11 @@ class Mentor::DashboardController < MentorController
     @total_students_count = current_user.mentored_solutions.select(:user_id).distinct.count
     @weekly_solutions_count = current_user.solution_mentorships.where("solution_mentorships.created_at > ?", Time.now.beginning_of_week).count
     @feedbacks = current_user.solution_mentorships.where(show_feedback_to_mentor: true).order('updated_at desc').limit(5).pluck(:feedback)
+
+    if current_user.num_rated_mentored_solutions > Exercism::MENTOR_RATING_THRESHOLD
+      @rating_threshold_reached = true
+      @mentor_rating = current_user.mentor_rating
+    end
   end
 
   def your_solutions
