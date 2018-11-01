@@ -1,6 +1,8 @@
 class Solution < ApplicationRecord
   include SolutionBase
 
+  #enum triaged_as: [:approve, :approve_with_suggestion, :minor_refactoring_required, :major_refactoring_required]
+
   belongs_to :approved_by, class_name: "User", optional: true
 
   has_many :iterations, dependent: :destroy
