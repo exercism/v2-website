@@ -4,7 +4,7 @@
 body.controller-pages.action-index footer {
     margin-top:0;
 }
-#landing-page {
+#teams-landing-page {
     .welcome-section {
         .lhs {
             display:none;
@@ -25,7 +25,7 @@ body.controller-pages.action-index footer {
             }
             h1 {
                 @include header-font;
-                @include font-size(32,24);
+                @include font-size(30,24);
                 color:$color-2;
                 margin-bottom:10px;
                 position:relative;
@@ -35,6 +35,10 @@ body.controller-pages.action-index footer {
                     position:absolute;
                     top:0;
                     left:0;
+                }
+                span {
+                    width:140px;
+                    display:inline-block;
                 }
             }
             h2 {
@@ -101,6 +105,9 @@ body.controller-pages.action-index footer {
                     &:hover {
                         text-decoration:underline;
                     }
+                }
+                &+p {
+                    margin-top:-30px;
                 }
             }
         }
@@ -432,3 +439,4 @@ body.controller-pages.action-index footer {
         margin: 30px auto 30px auto;
     }
 }
+
