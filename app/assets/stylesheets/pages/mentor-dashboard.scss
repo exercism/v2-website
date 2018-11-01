@@ -87,13 +87,13 @@ $blue: #4A90E2;
         margin-bottom:5px;
         display:flex;
         align-items:stretch;
-        @include width-medium {
+        @include width-medium() {
             display:inline-block;
         }
 
         .title {
             width:120px;
-            @include width-medium {
+            @include width-medium() {
                 width:auto;
             }
         }
@@ -124,6 +124,10 @@ $blue: #4A90E2;
             @include width-medium() {
                 width:155px;
             }
+        }
+        &.triaged_as .selectize-control {
+            max-width:100%;
+            min-width: 220px;
         }
     }
 

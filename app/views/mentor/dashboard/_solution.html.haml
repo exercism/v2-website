@@ -8,7 +8,7 @@
 
   .details
     -if solution.triaged_as
-      .triaged-as{class: solution.triaged_as}= solution.triaged_as.tr('_', ' ')
+      .triaged-as{class: solution.triaged_as}= solution.triaged_as.to_s.titleize
 
     .title
       .handle #{display_handle(solution.user, user_track)}'s

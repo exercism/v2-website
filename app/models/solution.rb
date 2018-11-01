@@ -1,7 +1,7 @@
 class Solution < ApplicationRecord
   include SolutionBase
 
-  #enum triaged_as: [:approve, :approve_with_suggestion, :minor_refactoring_required, :major_refactoring_required]
+  TRIAGED_AS_OPTIONS = [:approve, :approve_with_suggestion, :minor_refactoring_required, :major_refactoring_required]
 
   belongs_to :approved_by, class_name: "User", optional: true
 
@@ -93,5 +93,10 @@ class Solution < ApplicationRecord
 
   def user_track
     UserTrack.find_by(user_id: user_id, track_id: exercise.track_id)
+  end
+
+  def triaged_as
+    s = super
+    s.present?? s.to_sym : nil
   end
 end
