@@ -30,7 +30,7 @@
         -@teams.each do |team|
           .pure-u-1.pure-u-md-1-5
             = link_to [:teams, team], class: "team" do
-              .img
+              .img{style: "background-image:url(#{image_url(team.avatar_url)})"}
               %h3= team.name
               .members
                 =icon :group

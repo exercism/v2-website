@@ -53,6 +53,14 @@ body.namespace-teams {
     #team-header {
         margin-bottom:20px;
         background:#eee;
+        .avatar {
+            height:50px;
+            display:block;
+            float:right;
+            border:1px solid rgba(#fff, 0.5);
+            margin-top: -20px;
+            border-radius:3px;
+        }
         h1 {
             background-color:$color-2;
             background-image:image-url('background-overlay-2.png');

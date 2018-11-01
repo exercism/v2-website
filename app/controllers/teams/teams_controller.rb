@@ -1,5 +1,5 @@
 class Teams::TeamsController < Teams::BaseController
-  before_action :find_team, only: [:show, :update]
+  before_action :find_team, only: [:show, :edit, :update, :update_settings]
 
   def index
     @teams = current_user.teams
@@ -18,7 +18,8 @@ class Teams::TeamsController < Teams::BaseController
   def create
     @team = CreateTeam.(
       current_user,
-      params[:team][:name]
+      params[:team][:name],
+      params[:team][:avatar]
     )
 
     emails = params[:emails].to_s.split("\n").map(&:strip).compact
@@ -29,9 +30,22 @@ class Teams::TeamsController < Teams::BaseController
     redirect_to [:teams, @team]
   end
 
-  def update
-    @team.update(team_params) if @team.admin?(current_user)
+  def edit
+  end
 
+  def update
+    if @team.admin?(current_user)
+      team_params = params.require(:team).permit(:name, :avatar)
+      @team.update(team_params)
+    end
+    redirect_to teams_team_path(@team)
+  end
+
+  def update_settings
+    if @team.admin?(current_user)
+      team_params = params.require(:team).permit(:url_join_allowed)
+      @team.update(team_params)
+    end
     redirect_to teams_team_memberships_path(@team)
   end
 

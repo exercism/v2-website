@@ -179,6 +179,8 @@ Rails.application.routes.draw do
     end
 
     resources :teams do
+      patch :update_settings, on: :member
+
       resources :my_solutions, controller: "teams/my_solutions" do
         get :possible_exercises, on: :collection
       end
