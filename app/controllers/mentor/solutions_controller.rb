@@ -22,6 +22,8 @@ class Mentor::SolutionsController < MentorController
 
     @current_user_lock = SolutionLock.find_by(solution: @solution, user: current_user)
 
+    @mentoring_notes_created = RetrieveMentorExerciseNotes.(@track, @exercise).present?
+
     ClearNotifications.(current_user, @solution)
     ClearNotifications.(current_user, @iteration)
   end

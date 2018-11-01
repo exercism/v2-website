@@ -20,8 +20,12 @@
 
   .tools-bar
     .lo-container
-      =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
-        View Community Mentoring Notes
+      -if @mentoring_notes_created
+        =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
+          View community mentoring notes
+      -else
+        =link_to [:new, :mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], target: "_blank", class: "mentoring-notes pure-button" do
+          Start community mentoring notes
 
   .lo-container
     .pure-g.panels
