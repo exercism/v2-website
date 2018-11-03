@@ -22,15 +22,14 @@
           .box
             -if @rating_threshold_reached
               .rating #{@mentor_rating} / 5
-              -if @mentor_rating > Exercism::AVERAGE_MENTOR_RATING
-                %p The average mentor achieves #{Exercism::AVERAGE_MENTOR_RATING} so you are doing a great job. Thank you on behalf of all the people you've helped.
+              -if @mentor_rating > Exercism::MEDIAN_MENTOR_RATING
+                %p The median mentor rating is #{Exercism::MEDIAN_MENTOR_RATING} so you are doing a great job. Thank you on behalf of all the people you've helped.
               -else
-                %p If you'd like to improve your mentor rating, check out the community mentor notes on each solution, which provide useful pointers.
+                %p The median mentor rating is #{Exercism::MEDIAN_MENTOR_RATING}. If you'd like to improve your mentor rating, check out the community mentor notes on each solution, which provide useful pointers.
             -else
               %p
                 When someone completes a solution they are asked to rate their mentor.
                 Once five learners have rated your mentoring, we wil show you your average score.
-
 
         -if @weekly_solutions_count > 0
           .weekly-section
