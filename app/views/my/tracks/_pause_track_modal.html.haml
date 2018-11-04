@@ -1,11 +1,8 @@
 =hex_green_track_icon(track)
 .main-section
   %h2 Pause the #{track.title} Track
-
   %p
-    Pausing this track will remove it from your list of tracks and
-    leave all of your existing solutions in place.
-  %p Are you sure you want to continue?
+    Pausing this track will remove it from your list of tracks but will save your solutions in case you choose to unpause the track. If you would like to delete your solutions and start the track again, please close this modal and choose the "Leave Track" option instead.
   .buttons
     =link_to "Pause track", pause_my_user_track_path(@user_track), method: :patch, class: 'pure-button action-button'
     =link_to "Cancel", "#", class: "pure-button close-modal cancel-button"
