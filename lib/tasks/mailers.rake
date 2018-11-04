@@ -22,7 +22,7 @@ namespace :mailers do
 
   task :deliver_mentor_changes_1  => :environment do
     users = User.
-      where(id: SolutionMentorship.select(:user_id))
+      where(id: TrackMentorship.select(:user_id)).
       order('users.id asc')
 
     users.each do |user|
