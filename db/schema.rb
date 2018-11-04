@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_054326) do
+ActiveRecord::Schema.define(version: 2018_11_01_162622) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -258,7 +258,6 @@ ActiveRecord::Schema.define(version: 2018_11_01_054326) do
     t.boolean "show_feedback_to_mentor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "paused", default: false
     t.index ["solution_id"], name: "fk_rails_704ccdde73"
     t.index ["user_id"], name: "fk_rails_578676d431"
   end
@@ -284,11 +283,15 @@ ActiveRecord::Schema.define(version: 2018_11_01_054326) do
     t.boolean "track_in_independent_mode", default: false, null: false
     t.datetime "mentoring_requested_at"
     t.boolean "independent_mode", default: false, null: false
+    t.string "triaged_as"
+    t.boolean "paused", default: false, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
-    t.index ["num_mentors", "created_at", "exercise_id"], name: "mentor_selection_idx_1"
+    t.index ["last_updated_by_user_at"], name: "ihid-3"
+    t.index ["num_mentors", "exercise_id", "user_id"], name: "fix-4"
+    t.index ["num_mentors", "exercise_id"], name: "fix-2"
     t.index ["num_mentors", "last_updated_by_user_at"], name: "ihid-4"
     t.index ["num_mentors", "track_in_independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_2"
     t.index ["num_mentors", "user_id", "exercise_id"], name: "fix-5"
@@ -408,8 +411,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_054326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "independent_mode"
-    t.datetime "archived_at"
-    t.boolean "paused", default: false
+    t.datetime "paused_at"
     t.index ["independent_mode"], name: "ihid-1"
     t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_99e944edbc"

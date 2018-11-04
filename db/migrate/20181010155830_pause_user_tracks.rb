@@ -1,6 +1,6 @@
 class PauseUserTracks < ActiveRecord::Migration[5.2]
   def change
-    add_column :user_tracks, :paused, :boolean, default: false
-    add_column :solution_mentorships, :paused, :boolean, default: false
+    rename_column :user_tracks, :archived_at, :paused_at
+    add_column :solutions, :paused, :boolean, default: false, null: false
   end
 end

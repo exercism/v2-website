@@ -4,8 +4,8 @@ class UserTrack < ApplicationRecord
 
   validates :handle, handle: true
 
-  scope :active, -> { where(archived_at: nil, paused: false) }
-  scope :archived, -> { where.not(archived_at: nil) }
+  scope :active, -> { where(paused_at: nil) }
+  scope :paused, -> { where.not(paused_at: nil) }
 
   MAX_INDEPENDENT_MODE_MENTORING_SLOTS = 1
   MAX_MENTORED_MODE_MENTORING_SLOTS = 3
@@ -71,8 +71,8 @@ class UserTrack < ApplicationRecord
                    where("exercises.track_id": track_id)
   end
 
-  def archived?
-    archived_at.present?
+  def paused?
+    paused_at.present?
   end
 
   def solutions_using_mentoring_allowance

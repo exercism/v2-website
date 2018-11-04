@@ -24,7 +24,7 @@ class FiltersSolutionsByStatus
     solutions.
       where("solution_mentorships.abandoned": false).
       where("solution_mentorships.requires_action": true).
-      where("solution_mentorships.paused": false)
+      where("solutions.paused": false)
   end
 
   def filter_completed
@@ -39,7 +39,8 @@ class FiltersSolutionsByStatus
       where("solution_mentorships.abandoned": false).
       not_completed.
       where("solution_mentorships.requires_action": false).
-      where("last_updated_by_user_at > ?", Time.current - 7.days)
+      where("last_updated_by_user_at > ?", Time.current - 7.days).
+      where("solutions.paused": false)
   end
 
   def filter_stale
@@ -48,7 +49,8 @@ class FiltersSolutionsByStatus
       not_completed.
       where("solution_mentorships.requires_action": false).
       where("last_updated_by_user_at <= ?", Time.current - 7.days).
-      where("last_updated_by_user_at > ?", Exercism::V2_MIGRATED_AT)
+      where("last_updated_by_user_at > ?", Exercism::V2_MIGRATED_AT).
+      where("solutions.paused": false)
   end
 
   def filter_legacy
@@ -60,6 +62,10 @@ class FiltersSolutionsByStatus
   end
 
   def filter_abandoned
-    solutions.where("solution_mentorships.abandoned": true)
+    solutions.where("(solution_mentorships.abandoned = ?) OR
+                     (
+                       solutions.completed_at IS NULL AND
+                       solutions.paused = ?
+                     )", true, true)
   end
 end
