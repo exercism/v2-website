@@ -19,4 +19,19 @@ namespace :mailers do
       end
     end
   end
+
+  task :deliver_mentor_changes_1  => :environment do
+    users = User.
+      where(id: SolutionMentorship.select(:user_id))
+      order('users.id asc')
+
+    users.each do |user|
+      begin
+        NewsletterMailer.with(user: user).mentor_changes_1.deliver
+        p "+ #{user.id}"
+      rescue
+        p "- #{user.id}"
+      end
+    end
+  end
 end
