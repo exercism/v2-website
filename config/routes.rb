@@ -118,7 +118,9 @@ Rails.application.routes.draw do
       member do
         patch :set_mentored_mode
         patch :set_independent_mode
-        post :leave
+        patch :pause
+        patch :unpause
+        delete :leave
       end
     end
     resources :solutions, only: [:show, :create] do
@@ -151,7 +153,6 @@ Rails.application.routes.draw do
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
     end
-    resources :pause_user_tracks, only: [:update, :destroy]
   end
 
   # ##### #
