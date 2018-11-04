@@ -4,9 +4,9 @@ class UnpauseUserTrack
   initialize_with :user_track
 
   def call
-    user_track.update paused: false
-    solution_ids = user_track.solutions.pluck(:id)
-    SolutionMentorship.
-      update_all(paused: false)
+    ActiveRecord::Base.transaction do
+      user_track.update(paused_at: nil)
+      user_track.solutions.update_all(paused: false)
+    end
   end
 end

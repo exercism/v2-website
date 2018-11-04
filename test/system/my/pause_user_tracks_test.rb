@@ -27,12 +27,13 @@ class My::PauseUserTracksTest < ApplicationSystemTestCase
     track = create(:track,
                    title: "Ruby",
                    repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
-    user_track = create :user_track, user: user, track: track, paused: true
+    user_track = create :user_track, user: user, track: track, paused_at: Time.current
 
     sign_in!(user)
     visit my_track_path(user_track.track)
     click_on "Unpause the #{track.title} Track"
 
+    within(".exercise-wrapper.completed") { assert_text "Hello World" }
     refute user_track.reload.paused?
   end
 end

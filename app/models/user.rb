@@ -111,7 +111,7 @@ class User < ApplicationRecord
 
   def previously_joined_track?(track)
     user_tracks.
-      archived.
+      paused.
       where(track_id: track.id).
       exists?
   end

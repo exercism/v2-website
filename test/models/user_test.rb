@@ -17,8 +17,8 @@ class UserTest < ActiveSupport::TestCase
     create(:user_track,
            user: user,
            track: previously_joined,
-           archived_at: Date.new(2016, 12, 25))
-    create(:user_track, track: currently_joined, user: user, archived_at: nil)
+           paused_at: Date.new(2016, 12, 25))
+    create(:user_track, track: currently_joined, user: user, paused_at: nil)
 
     assert user.previously_joined_track?(previously_joined)
     refute user.previously_joined_track?(currently_joined)

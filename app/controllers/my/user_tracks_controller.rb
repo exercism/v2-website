@@ -6,7 +6,7 @@ class My::UserTracksController < MyController
 
     if current_user.previously_joined_track?(track)
       user_track = current_user.user_tracks.find_by(track: track)
-      user_track.update!(archived_at: nil)
+      UnpauseUserTrack.(user_track)
     else
       JoinTrack.(current_user, track)
     end
