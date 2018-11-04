@@ -31,9 +31,11 @@ class My::PauseUserTracksTest < ApplicationSystemTestCase
 
     sign_in!(user)
     visit my_track_path(user_track.track)
-    click_on "Unpause the #{track.title} Track"
+    within("#modal") do
+      click_on "Unpause the #{track.title} Track"
+    end
+    refute_selector "#modal"
 
-    within(".exercise-wrapper.completed") { assert_text "Hello World" }
     refute user_track.reload.paused?
   end
 end
