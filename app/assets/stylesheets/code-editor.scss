@@ -70,12 +70,14 @@ body .md-editor {
         }
     }
 
-    p code {
-        border:1px solid #fafafa;
-        background:#f5f5f5;
-        @include code-font;
-        font-size:12px;
-        padding:2px;
+    p,li {
+        code {
+            border:1px solid #fafafa;
+            background:#f5f5f5;
+            @include code-font;
+            font-size:12px;
+            padding:2px;
+        }
     }
 
     table {
