@@ -44,12 +44,16 @@ class FixUnlockingInUserTrack
                                     pluck(:id)
 
     # Make sure there is one unlocked core
-    next_exercise = track.exercises.core.
-                                    not_completed_for(user).
-                                    order(:position).
-                                    first
+    next_core_exercise = track.exercises.core.
+                                         not_completed_for(user).
+                                         order(:position).
+                                         first
 
-    keep_solution_ids << UnlockCoreExercise.(user, next_exercise).try(:id) if next_exercise
+    # We can just use UnlockCoreExercise here, but it's more efficent to do the extra lookup
+    if next_core_exercise
+      next_core_solution = Solution.where(user: user, exercise: next_core_exercise).first
+      keep_solution_ids << (next_core_solution.try(:id) || UnlockCoreExercise.(user, next_core_exercise).try(:id))
+    end
 
     # Delete all unsubmitted exercises that we haven't just
     # agreed to unlocked
