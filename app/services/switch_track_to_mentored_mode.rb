@@ -9,8 +9,14 @@ class SwitchTrackToMentoredMode
 
     FixUnlockingInUserTrack.(user_track)
 
-    # Set all core solutions to have mentoring
-    user_track.solutions.core.update_all(mentoring_requested_at: Time.current)
+    # Set at least one core solution to have mentoring
+    unless user_track.solutions.core.where.not(mentoring_requested_at: nil).exists?
+      user_track.solutions.core.
+        joins(:exercise).
+        order('exercises.position ASC').
+        first.
+        try {|s| s.update(mentoring_requested_at: Time.current) }
+    end
   end
 
   memoize

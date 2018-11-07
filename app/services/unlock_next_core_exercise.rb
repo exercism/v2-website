@@ -4,7 +4,10 @@ class UnlockNextCoreExercise
   initialize_with :track, :user
 
   def call
-    return core_exercise_in_progress if core_exercise_in_progress
+    if existing_core_exercise
+      existing_core_exercise.update(mentoring_requested_at: Time.now) unless existing_core_exercise.mentoring_requested_at
+      return existing_core_exercise
+    end
 
     next_exercise = track.exercises.core.
                                     locked_for(user).
@@ -22,7 +25,7 @@ class UnlockNextCoreExercise
   private
 
   memoize
-  def core_exercise_in_progress
+  def existing_core_exercise
     user.
       solutions.
       joins(:exercise).
