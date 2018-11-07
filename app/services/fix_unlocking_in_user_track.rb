@@ -35,7 +35,7 @@ class FixUnlockingInUserTrack
                                   where.not(id: existing_exercise_ids.to_a).
                                   map { |e|CreateSolution.(user, e).id }
 
-    # Check all the bonus exercises are avalaible but don't unlock them.
+    # Check all the bonus exercises are avaliable but don't unlock them.
     keep_solution_ids += user_track.solutions.
                                     where(exercise_id:
                                             track.exercises.
@@ -48,6 +48,7 @@ class FixUnlockingInUserTrack
                                     not_completed_for(user).
                                     order(:position).
                                     first
+
     keep_solution_ids << UnlockCoreExercise.(user, next_exercise).try(:id) if next_exercise
 
     # Delete all unsubmitted exercises that we haven't just
