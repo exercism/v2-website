@@ -47,6 +47,6 @@ class FiltersSolutionsByStatusTest < ActiveSupport::TestCase
     assert_equal [completed, completed_and_stale, completed_and_paused], FiltersSolutionsByStatus.filter(user.mentored_solutions, :completed)
     assert_equal [awaiting_user_and_stale], FiltersSolutionsByStatus.filter(user.mentored_solutions, :stale)
     assert_equal [legacy_awaiting_user], FiltersSolutionsByStatus.filter(user.mentored_solutions, :legacy)
-    assert_equal [awaiting_user_and_paused, requires_action_and_paused, abandoned_and_paused, abandoned_and_awaiting_user, abandoned_and_requires_action, abandoned_and_completed, abandoned_and_stale].sort.map(&:id), FiltersSolutionsByStatus.filter(user.mentored_solutions, :abandoned).sort.map(&:id)
+    assert_equal [awaiting_user_and_paused, requires_action_and_paused, abandoned_and_paused, abandoned_and_awaiting_user, abandoned_and_requires_action, abandoned_and_completed, abandoned_and_stale].sort.map(&:id), FiltersSolutionsByStatus.filter(user.mentored_solutions, :unsubscribed).sort.map(&:id)
   end
 end

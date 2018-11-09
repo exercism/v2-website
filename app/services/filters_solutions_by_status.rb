@@ -61,7 +61,7 @@ class FiltersSolutionsByStatus
       where("last_updated_by_user_at <= ?", Exercism::V2_MIGRATED_AT)
   end
 
-  def filter_abandoned
+  def filter_unsubscribed
     solutions.where("(solution_mentorships.abandoned = ?) OR
                      (
                        solutions.completed_at IS NULL AND
