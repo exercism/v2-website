@@ -23,7 +23,10 @@ class ExerciseMap
   def exercises
     @exercises ||= track.
       exercises.
-      map { |e| ExerciseWithSolution.new(e, solution_for(e)) }
+      left_outer_joins(:solutions).
+      includes(:unlocks).
+      where("solutions.user_id = ? OR solutions.user_id IS NULL", user.id).
+      map { |e| ExerciseWithSolution.new(e, e.solutions.first) }
   end
 
   def exercises_to_unlock_for(exercise)
@@ -40,16 +43,5 @@ class ExerciseMap
     end
 
     bonus_exercises + unlocked_exercises
-  end
-
-  def solution_for(exercise)
-    solutions.find { |solution| solution.exercise_id == exercise.id }
-  end
-
-  def solutions
-    @solutions ||= user.
-      solutions.
-      includes(:exercise).
-      where(exercises: { track: track })
   end
 end

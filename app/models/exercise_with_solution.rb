@@ -37,7 +37,5 @@ class ExerciseWithSolution < SimpleDelegator
   end
 
   private
-  delegate :user, to: :solution
-
   attr_reader :exercise
 end
