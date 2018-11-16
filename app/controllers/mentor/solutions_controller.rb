@@ -37,6 +37,12 @@ class Mentor::SolutionsController < MentorController
     redirect_to [:mentor, :dashboard]
   end
 
+  def ignore_requires_action
+    @mentor_solution = SolutionMentorship.where(user: current_user, solution: @solution).first
+    @mentor_solution.update(requires_action: false)
+    redirect_to mentor_dashboard_path
+  end
+
   def abandon
     @mentor_solution = SolutionMentorship.where(user: current_user, solution: @solution).first
     if @mentor_solution.nil?
