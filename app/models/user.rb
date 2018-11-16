@@ -140,6 +140,10 @@ class User < ApplicationRecord
     solution_mentorships.where(solution_id: solution.id).exists?
   end
 
+  def mentorship_for_solution(solution)
+    solution_mentorships.where(solution_id: solution.id).first
+  end
+
   def num_rated_mentored_solutions
     @num_rated_mentored_solutions ||=
       solution_mentorships.where.not(rating: nil).

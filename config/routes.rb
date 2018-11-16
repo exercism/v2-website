@@ -56,6 +56,7 @@ Rails.application.routes.draw do
         patch :approve
         patch :abandon
         patch :ignore
+        patch :ignore_requires_action
       end
     end
     resources :discussion_posts, only: [:create]

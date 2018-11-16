@@ -20,9 +20,18 @@
 
   .tools-bar
     .lo-container
-      -if @mentoring_notes_created
-        =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
-          View community mentoring notes
+      .pure-g
+        .pure-u-1-1.pure-u-md-1-2
+          -if current_user.mentorship_for_solution(@solution).try(&:requires_action)
+            .notification
+              This solution requires your action.
+              =link_to "Ignore", [:ignore_requires_action, :mentor, @solution], method: :patch
+
+        .pure-u-1-1.pure-u-md-1-2
+          -if @mentoring_notes_created
+            =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
+              View community mentoring notes
+
       /-else
       /  =link_to [:new, :mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], target: "_blank", class: "mentoring-notes pure-button" do
       /    Start community mentoring notes
