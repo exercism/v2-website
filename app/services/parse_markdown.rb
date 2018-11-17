@@ -19,7 +19,11 @@ class ParseMarkdown
   end
 
   def raw_html
-    @raw_html ||= Renderer.new.render(CommonMarker.render_doc(preprocessed_text, :DEFAULT, [:table]))
+    @raw_html ||= begin
+      renderer = Renderer.new(options: [:UNSAFE])
+      html = CommonMarker.render_doc(preprocessed_text, :DEFAULT, [:table, :tagfilter])
+      renderer.render(html)
+    end
   end
 
   def preprocessed_text
