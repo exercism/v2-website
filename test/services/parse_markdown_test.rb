@@ -32,6 +32,35 @@ $ go home
     assert_equal expected.chomp, actual.chomp
   end
 
+  test "sanitizes bad tags" do
+    expected = %q{<p>Here is a sample of what a textarea block looks like:</p>
+&lt;iframe&gt;&lt;/iframe&gt;
+<p>Done</p>}
+
+    actual = ParseMarkdown.(%q{
+Here is a sample of what a textarea block looks like:
+
+<iframe></iframe>
+
+Done})
+    assert_equal expected.chomp, actual.chomp
+  end
+  test "allows details" do
+    expected = %q{<p>Here is a sample of what a details/summary block looks like:</p>
+<details><summary>Click the little arrow to get a hint!</summary>
+This is the spoiler that I want to show.</details>
+<p>Done</p>}
+
+    actual = ParseMarkdown.(%q{
+Here is a sample of what a details/summary block looks like:
+
+<details><summary>Click the little arrow to get a hint!</summary>
+This is the spoiler that I want to show.</details>
+
+Done})
+    assert_equal expected.chomp, actual.chomp
+  end
+
   test "doesn't blow up with nil" do
     assert_equal "", ParseMarkdown.(nil)
   end
