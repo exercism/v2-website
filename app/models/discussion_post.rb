@@ -1,5 +1,6 @@
 class DiscussionPost < ApplicationRecord
   belongs_to :iteration
+  has_one :solution, through: :iteration
 
   belongs_to :user, optional: true
 

@@ -10,4 +10,6 @@ class SolutionMentorship < ApplicationRecord
 
   belongs_to :user
   belongs_to :solution
+
+  scope :active, -> { where(abandoned: false) }
 end

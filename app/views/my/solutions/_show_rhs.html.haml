@@ -11,7 +11,7 @@
   -elsif @solution.approved? && !@exercise.auto_approve?
     =render "show_approved"
 
-  -elsif @solution.exercise.side? && @solution.mentorships.count == 0 && @solution.discussion_posts.count == 0 && !@solution.exercise.auto_approve?
+  -elsif @solution.exercise.side? && @solution.mentorships.active.count == 0 && @solution.mentor_discussion_posts.count == 0 && !@solution.exercise.auto_approve?
     .finished-section
       .title-block
         %h3

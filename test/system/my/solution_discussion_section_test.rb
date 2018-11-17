@@ -5,6 +5,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   REQUEST_MENTORING_TEXT = "Request mentor feedback."
   COMPLETE_TEXT = "Complete this solution."
   PUBLISH_TEXT = "Publish this solution."
+  CANCEL_MENTORING_TEXT = "Don't want mentoring after all?"
 
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
@@ -60,6 +61,46 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+  end
+
+  test "mentored mode / side solution with mentoring requested and abaondoned mentor" do
+    solution = create(:solution, user: @user, mentoring_requested_at: Time.current, exercise: create(:exercise, core: false))
+    create :iteration, solution: solution
+    create :user_track, track: solution.track, user: @user
+    create :solution_mentorship, solution: solution, abandoned: true
+
+    visit my_solution_path(solution)
+
+    assert_selector ".discussion h3", text: "Mentor discussion"
+    assert_selector ".discussion form"
+
+    assert_selector ".next-steps"
+    assert_selector ".next-steps a", text: "other people have solved this"
+
+    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+  end
+
+  test "mentored mode / side solution with mentoring requested and non-mentor comment" do
+    solution = create(:solution, user: @user, mentoring_requested_at: Time.current, exercise: create(:exercise, core: false))
+    iteration = create :iteration, solution: solution
+    create(:user_track, track: solution.track, user: @user)
+    create :discussion_post, iteration: iteration, user: @user
+
+    visit my_solution_path(solution)
+
+    assert_selector ".discussion h3", text: "Mentor discussion"
+    assert_selector ".discussion form"
+
+    refute_selector ".next-steps"
+
+    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
   end
 
   test "mentored section with auto approve" do
