@@ -134,6 +134,7 @@ Rails.application.routes.draw do
         patch :cancel_mentoring_request
         patch :reflect
         patch :publish
+        patch :update_exercise
       end
 
       resources :iterations, only: [:show]

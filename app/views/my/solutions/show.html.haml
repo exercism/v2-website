@@ -22,5 +22,16 @@
 
             =render "solutions/panes", iteration: @iteration
 
+        -if !@solution.latest_exercise_version?
+          .update-exercise-section
+            %strong Update this exercise
+            %p This exercise has been improved since you started it. You can update the exercise to the latest version by using the button below then redownloading the exercise. Please note that this may mean your existing code fails the new tests.
+            =link_to "Update exercise to latest version", [:update_exercise, :my, @solution], method: :patch, class: 'pure-button'
+
+        .download-section
+          %strong Download your solution
+          %p Changed computer or want to re-download the exercise after updating to the latest version? Use this command:
+          =render "widgets/code_snippet", code: @exercise.download_command
+
       .pure-u-1.pure-u-md-1-2.rhs
         =render "show_rhs"
