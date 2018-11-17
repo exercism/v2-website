@@ -50,6 +50,16 @@ module SolutionBase
     !!downloaded_at
   end
 
+  def latest_exercise_version?
+    latest_head = Git::ExercismRepo.current_head(exercise.track.repo_url)
+    return true if git_sha == latest_head
+    test_suite == Git::Exercise.new(exercise, git_slug, latest_head).test_suite
+  rescue
+    p "!!! solution#latest_exercise_version failed for #{uuid}"
+    p "!!! #{e.class.name}"
+    p "!!! #{e.message}"
+    true
+  end
 
   #class_methods do
   #  ...
