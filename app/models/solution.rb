@@ -89,6 +89,10 @@ class Solution < ApplicationRecord
     mentors.where("solution_mentorships.user_id": TrackMentorship.select(:user_id))
   end
 
+  def mentor_discussion_posts
+    discussion_posts.where.not(user_id: user_id)
+  end
+
   def user_track
     UserTrack.find_by(user_id: user_id, track_id: exercise.track_id)
   end
