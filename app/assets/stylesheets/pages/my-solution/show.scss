@@ -226,6 +226,35 @@
             }
         }
     }
+
+    .update-exercise-section,
+    .download-section {
+        border:1px solid #ddd;
+        padding:15px;
+        margin-top:20px;
+        strong {
+            display:block;
+            margin-bottom:5px;
+            font-weight:500;
+        }
+        p {
+            margin-bottom:10px;
+            @include font-size(14, 18);
+        }
+    }
+    .update-exercise-section {
+        .pure-button {
+            background:$color-1;
+            color:#fff;
+        }
+    }
+    .download-section {
+        .widget-code-snippet .download-code {
+            width: 90%;
+        }
+    }
+
+
 }
 
 #modal.solution-confirm-unapproved-completion {
