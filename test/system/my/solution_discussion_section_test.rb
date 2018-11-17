@@ -8,6 +8,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
+    Git::Exercise.any_instance.stubs(test_suite: [])
+
     @user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))

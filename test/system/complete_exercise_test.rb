@@ -1,6 +1,11 @@
 require 'application_system_test_case'
 
 class CompleteExerciseTest < ApplicationSystemTestCase
+  setup do
+    Git::ExercismRepo.stubs(current_head: "dummy-sha1")
+    Git::Exercise.any_instance.stubs(test_suite: [])
+  end
+
   test "unlocks only core exercises for an unapproved solution" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
