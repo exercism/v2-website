@@ -10,8 +10,8 @@
             =image_tag "logo-green.png", title: "Exercism", alt: "Exercism"
             %span exercism
             |&nbsp;&nbsp;teams edition
-          %h2 Code practice and mentoring with friends or colleagues
-          %p Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{num_tracks} languages, with support and mentorship from friends and colleagues. Perfect for Friday afternoons at work, social evenings, or weekend bootcamps.
+          %h2 Code practice and mentoring with people you trust
+          %p Practice and discuss over #{number_with_delimiter Exercise.active.count} exercises across #{num_tracks} languages with your friends, colleagues, or instructors. Perfect for Friday afternoons at work, social evenings, bootcamps, and weekend workshops.
 
           =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
           =link_to "Explore languages", "#explore-languages", class: "pure-button languages-button"
@@ -31,9 +31,8 @@
   .how-section
     .lo-container
       .title-block
-        %h2 How Exercism Teams Edition works
-        %p Exercism is the home of code practice and mentorship. In Teams Edition, rather than learning from our mentors, you learn from your friends, colleagues or bootcamp instructions. 
-        %p Teams edition has the same concept and exercises as normal Exercism but lets you choose who you learn alongside.
+        %h2 How Teams Edition works
+        %p Exercism is the home of code practice and mentorship. Teams Edition has the same concept and exercises as our Personal Edition, but rather than learning from our mentors, you can learn from your friends, colleagues or bootcamp instructors.
 
       .step.step-small.pure-g
         .pure-u-1
@@ -45,7 +44,7 @@
         .pure-u-1.pure-u-sm-1-12
         .pure-u-1.pure-u-sm-7-12
           %h3 1. Choose a language to master
-          %p Object oriented, functional, popular, emerging, or just plain obscure. Chat to your group and work out which of our #{num_tracks} different languages you want to explore first.
+          %p Object oriented, functional, popular, emerging, or just plain obscure. Chat to your team and work out which of our #{num_tracks} different languages you want to explore first.
       .divider
 
       .step.pure-g
@@ -54,7 +53,7 @@
         .pure-u-1.pure-u-sm-1-12
         .pure-u-1.pure-u-sm-7-12
           %h3 2. Complete a coding challenge on your computer
-          %p All the coding happens on your machine in an environment you're familiar with. Download the template, solve the problem, and then upload your solution.
+          %p All the coding happens on your machine in an environment you're familiar with. Download the template, solve the problem, and then upload your solution for your team to see.
       .divider
 
       .step.pure-g
@@ -74,7 +73,7 @@
         .pure-u-1.pure-u-sm-1-12
         .pure-u-1.pure-u-sm-7-12
           %h3 4. Unlock different concepts and exercises
-          %p Our tracks have between 40 and 100 exercise each - some are fun, some are tricky, some are weird, but all will teach you something new.
+          %p Our tracks have up to 120 exercise each - some are fun, some are tricky, some are weird, but all will teach you something new.
       .divider
 
       .step.pure-g

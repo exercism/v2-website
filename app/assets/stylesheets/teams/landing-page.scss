@@ -45,6 +45,7 @@ body.controller-pages.action-index footer {
                 @include header-font;
                 font-weight:600;
                 @include font-size(26, 26);
+                max-width:400px;
                 margin-bottom:10px;
             }
             p {
