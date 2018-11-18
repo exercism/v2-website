@@ -1,17 +1,9 @@
 class Admin::IterationsController < AdminController
   def show
-    redirect_to admin_solution_path(solution, iteration_idx: iteration_idx)
-  end
-
-  private
-
-  def solution
-    @solution ||= current_user.solutions.find_by_uuid!(params[:solution_id])
-  end
-
-  def iteration_idx
+    solution = Solution.find_by_uuid!(params[:solution_id])
     iteration = solution.iterations.find(params[:id])
+    iteration_idx = solution.iterations.index(iteration) + 1
 
-    solution.iterations.index(iteration) + 1
+    redirect_to admin_solution_path(solution, iteration_idx: iteration_idx)
   end
 end
