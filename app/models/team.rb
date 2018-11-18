@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
   extend FriendlyId
-  DEFAULT_AVATAR = "track-page-students.png"
+  DEFAULT_AVATAR = "team-default-avatar.png"
 
   friendly_id :slug_candidates, use: :slugged
 
