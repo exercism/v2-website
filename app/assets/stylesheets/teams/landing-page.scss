@@ -25,6 +25,7 @@ body.controller-pages.action-index footer {
             }
             h1 {
                 @include header-font;
+                font-weight:500;
                 @include font-size(30,24);
                 color:$color-2;
                 margin-bottom:10px;
