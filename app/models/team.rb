@@ -36,7 +36,6 @@ class Team < ApplicationRecord
     Team::DEFAULT_AVATAR
   end
 
-
   def admin?(user)
     memberships.where(admin: true).where(user_id: user.id).exists?
   end
