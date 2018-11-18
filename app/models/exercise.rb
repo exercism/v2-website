@@ -29,8 +29,10 @@ class Exercise < ApplicationRecord
     where.not(id: user.solutions.completed.select(:exercise_id))
   }
 
-  def download_command
-    "exercism download --exercise=#{slug} --track=#{track.slug}"
+  def download_command(team: nil)
+    cmd = "exercism download --exercise=#{slug} --track=#{track.slug}"
+    cmd += " --team=#{team.slug}" if team
+    cmd
   end
 
   def submit_command
