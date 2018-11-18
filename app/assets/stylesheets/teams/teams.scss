@@ -11,6 +11,7 @@
         padding:10px;
         color:#333;
         margin-right:20px;
+        margin-bottom:20px;
         text-align:center;
         &:hover {
             border-color:rgba($color-2, 0.5);
@@ -21,7 +22,7 @@
         .img {
             border:1px solid #ccc;
             border-radius:2px;
-            background:#eee;
+            background:#fff;
             width:100%;
             height: 180px;
             margin-bottom:10px;
@@ -55,7 +56,14 @@
     }
     .new-team {
         h3 {
-            margin-bottom:20px;
+            margin:0px;
+            line-height:36px;
+        }
+        .img {
+            i {
+                @include font-size(30, 180);
+                color:#666;
+            }
         }
     }
 }

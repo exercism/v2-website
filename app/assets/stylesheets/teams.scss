@@ -33,22 +33,6 @@ body.namespace-teams {
     }
 }
 
-.teams-page {
-    ul.inline-list {
-        padding: 0;
-        margin: 0;
-
-        > li {
-          display: inline-block;
-          margin-right: 5px;
-
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-    }
-}
-
 .team-page {
     #team-header {
         margin-bottom:20px;
