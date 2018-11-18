@@ -33,15 +33,15 @@
 
         -if @weekly_solutions_count > 0
           .weekly-section
-            -weekly_progress_percentage = @weekly_solutions_count / 20.0 * 100
+            -weekly_progress_percentage = @weekly_solutions_count / 10.0 * 100
             %h2 Your weekly progress
             .h2-subtitle See how you're helping
             .box
               %p
                 For all learners to receive mentoring, we need each mentor to give feedback on
-                %strong 20 solutions per week.
+                %strong 10 solutions per week.
 
-              .bar-widget{class: (@weekly_solutions_count >= 20 ? "completed" : "")}
+              .bar-widget{class: (@weekly_solutions_count >= 10 ? "completed" : "")}
                 .count= @weekly_solutions_count
                 .bar
                   .fill{style: "width:#{weekly_progress_percentage}%"}
@@ -52,7 +52,7 @@
                 or reach out to the community on
                 #{link_to "Slack", "https://exercism-mentors.slack.com/archives/CBDA9LMDF/p1529968977000336"}.
 
-              -elsif @weekly_solutions_count >= 20
+              -elsif @weekly_solutions_count >= 10
                 %p
                   So far this week you've given feedback on
                   %strong #{@weekly_solutions_count} solutions.
