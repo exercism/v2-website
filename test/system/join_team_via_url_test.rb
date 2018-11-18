@@ -14,7 +14,7 @@ class JoinTeamViaUrlTest < ApplicationSystemTestCase
     visit teams_team_join_path("TOKEN")
     click_on "Join team"
 
-    assert_text "Team Team A"
+    assert_text "Team A"
     team.reload
     assert_includes team.members, user
 
