@@ -10,6 +10,19 @@ class My::SettingsController < MyController
     redirect_to action: :show
   end
 
+  def confirm_delete_account
+  end
+
+  def delete_account
+    if !current_user.provider? && !current_user.valid_password?(params[:password])
+      flash.alert = "Your password was incorrect"
+      return redirect_to action: :confirm_delete_account
+    end
+
+    current_user.destroy
+    redirect_to root_path
+  end
+
   def reset_auth_token
     current_user.create_auth_token!
     redirect_to action: :show

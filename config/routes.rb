@@ -153,6 +153,9 @@ Rails.application.routes.draw do
       patch :reset_auth_token
       patch :cancel_unconfirmed_email
 
+      get :confirm_delete_account
+      delete :delete_account
+
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
     end
