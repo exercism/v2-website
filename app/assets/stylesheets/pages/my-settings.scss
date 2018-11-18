@@ -32,6 +32,15 @@
         &:last-child {
             border-bottom:none;
         }
+        .alert {
+            color:red;
+            @include font-size(14, 14);
+            font-weight:500;
+            a {
+                color:red;
+                text-decoration:underline;
+            }
+        }
     }
     p,
     .token-explanation {

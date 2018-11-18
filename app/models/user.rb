@@ -73,7 +73,7 @@ class User < ApplicationRecord
   end
 
   def auth_token
-    @auth_token ||= auth_tokens.active.first.token
+    @auth_token ||= auth_tokens.active.first.try(&:token)
   end
 
   def onboarded?
