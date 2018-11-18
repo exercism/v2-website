@@ -2,6 +2,14 @@
 @import 'variables';
 
 #teams-teams-page {
+    .invitations {
+        .pure-button {
+            background:$color-2;
+            color:#fff;
+            width:48%;
+            padding:8px;
+        }
+    }
     .team,
     .new-team {
         display:block;
