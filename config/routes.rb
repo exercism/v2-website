@@ -149,6 +149,7 @@ Rails.application.routes.draw do
 
     resource :settings do
       patch :reset_auth_token
+      patch :cancel_unconfirmed_email
 
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
