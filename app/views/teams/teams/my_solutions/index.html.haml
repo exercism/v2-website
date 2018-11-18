@@ -2,7 +2,7 @@
   =teams_header
   .lo-container
     %h2 Your solutions
-    .h2-subheading Solutions you have started with the #{@team.name} team.
+    .h2-subheading These are the solutions you have started with the #{@team.name} team.
     .num-solutions= pluralize @solutions.size, "Solutions"
     .filters
       =form_tag [:teams, @team, :my_solutions], remote: true, method: :get, class: "my-solutions-form" do

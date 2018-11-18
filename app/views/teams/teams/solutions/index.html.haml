@@ -2,7 +2,7 @@
   =teams_header
   .lo-container
     %h2 Your team's solutions
-    .h2-subheading Explore what your teammates have been up to
+    .h2-subheading Explore what your teammates have been up to.
     .num-solutions= pluralize @solutions.size, "Solutions"
     .filters
       =form_tag [:teams, @team, :solutions], remote: true, method: :get, class: "solutions-form" do

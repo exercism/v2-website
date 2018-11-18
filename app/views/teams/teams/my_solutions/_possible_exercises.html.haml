@@ -1,7 +1,6 @@
 .pure-g
   -@exercises.each do |exercise|
-    .pure-u-1.pure-u-md-1-4
-    .pure-u-1-4
+    .pure-u-1.pure-u-md-1-3.pure-u-lg-1-4
       =button_tag name: 'exercise_id', value: exercise.id, class: "widget-side-exercise unlocked" do
         .icon
           .img{style: "background-image:url('#{image_path(exercise.dark_icon_url)}')"}
