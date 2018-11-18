@@ -35,4 +35,17 @@ class ExerciseTest < ActiveSupport::TestCase
       Exercise.locked_for(user).sort
     )
   end
+
+  test "download_command" do
+    exercise = create :exercise
+    expected = "exercism download --exercise=#{exercise.slug} --track=#{exercise.track.slug}"
+    assert_equal expected, exercise.download_command
+  end
+
+  test "download_command with team" do
+    exercise = create :exercise
+    team = create :team
+    expected = "exercism download --exercise=#{exercise.slug} --track=#{exercise.track.slug} --team=#{team.slug}"
+    assert_equal expected, exercise.download_command(team: team)
+  end
 end
