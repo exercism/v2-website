@@ -46,10 +46,9 @@
       %h2 Change your email
 
       -if current_user.unconfirmed_email
-        %p.alert 
+        %p.alert
           We have sent a confirmation email to #{current_user.unconfirmed_email}. Please click the link there to finish changing your email address.
           =link_to "Cancel", [:cancel_unconfirmed_email, :my, :settings], method: :patch
-
 
       %p Change your email using the form below. We will send you a new email confirmation for you to accept.
       =form_for current_user, url: [:my, :settings] do |f|
@@ -59,4 +58,10 @@
 
         =button_tag "Update email", class: 'pure-button'
 
+    .settings-section.danger
+      %h2
+        %i.fas.fa-exclamation-triangle
+        Delete your account
 
+      %p You can choose to delete your account at any time.
+      %p= link_to "Delete my account", [:confirm_delete_account, :my, :settings], class: 'pure-button'

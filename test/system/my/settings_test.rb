@@ -97,4 +97,18 @@ class My::SettingsTest < ApplicationSystemTestCase
     click_on "Cancel"
     assert_nil @user.reload.unconfirmed_email
   end
+
+  test "can delete account" do
+    visit my_settings_path
+
+    click_on "Delete my account"
+
+    old_password = FactoryBot.attributes_for(:user)[:password]
+    fill_in "Enter your password", with: old_password
+
+    check "I understand"
+    click_on "Delete my account"
+
+    refute User.where(id: @user.id).exists?
+  end
 end

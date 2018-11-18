@@ -1,0 +1,29 @@
+#my-settings-delete-account-page
+  = notice_and_alert(current_user)
+
+  .lo-container
+    =form_tag [:delete_account, :my, :settings], method: :delete do
+      .settings-section.danger
+        %h2
+          %i.fas.fa-exclamation-triangle
+          Delete your account
+
+        %p Deleting your account has the following consequences.
+        %ul
+          %li All personal data (name, handle, email, etc) will be removed
+          %li All your solutions will be deleted
+          %li Any comments you have made will be anonymised
+
+        %p This process is irreversible. We won't be able to get your data back once you delete it.
+
+        -unless current_user.provider?
+          .field
+            =label_tag :password, "Enter your password"
+            =password_field_tag :password, '', required: true
+
+        .field.checkbox
+          =check_box_tag :understand, 0, false, required: true
+          =label_tag :understand, "I understand that this is irreversible"
+
+        %p= button_tag "Delete my account", class: 'pure-button'
+

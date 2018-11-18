@@ -38,6 +38,8 @@ class User < ApplicationRecord
   has_many :solution_mentorships, dependent: :destroy
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
+  has_many :solution_locks, dependent: :destroy
+
   has_many :ignored_solution_mentorships, dependent: :destroy
   has_many :ignored_solutions, through: :ignored_solution_mentorships, source: :solution
 
