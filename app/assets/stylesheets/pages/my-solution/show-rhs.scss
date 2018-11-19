@@ -1,7 +1,9 @@
 @import 'variables';
 @import 'mixins';
 
-#my-solution-page .rhs {
+#my-solution-page .rhs,
+#teams-solution-page .rhs,
+#teams-my-solution-page .rhs {
     h3.rhs-heading {
         padding:7px 0;
         border-bottom:1px solid #ddd;

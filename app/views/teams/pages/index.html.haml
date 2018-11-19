@@ -1,1 +1,111 @@
-Welcome to teams.
+-num_tracks = @tracks.size
+
+#teams-landing-page
+  .welcome-section
+    .lo-container
+      .pure-g
+        .pure-u-1.pure-u-md-1-2.lhs= code_person_widget
+        .pure-u-1.pure-u-md-1-2.rhs
+          %h1
+            =image_tag "logo-green.png", title: "Exercism", alt: "Exercism"
+            %span exercism
+            |&nbsp;&nbsp;teams edition
+          %h2 Code practice and mentoring with people you trust
+          %p Practice and discuss over #{number_with_delimiter Exercise.active.count} exercises across #{num_tracks} languages with your friends, colleagues, or instructors. Perfect for Friday afternoons at work, social evenings, bootcamps, and weekend workshops.
+
+          =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
+          =link_to "Explore languages", "#explore-languages", class: "pure-button languages-button"
+
+  .pr-section
+    .lo-container
+      %h2 Exercism has been featured in...
+      .logos
+        =link_to image("pr-logos/changelog.png", "Changelog"), "https://changelog.com/108/", target: "blank"
+        =link_to image("pr-logos/codeship.png", "Codeship"), "http://blog.codeship.com/an-inside-look-with-codeship-katrina-owen-of-exercism-io/", target: "blank"
+        =link_to image("pr-logos/code-newbie.png", "Code Newbie"), "http://www.codenewbie.org/podcast/nitpicks-and-devils", target: "blank"
+        =link_to image("pr-logos/wired.png", "Wired"), "https://www.wired.com/2014/09/exercism/", target: "blank"
+        =link_to image("pr-logos/opensource.png", "Open Source"), "https://opensource.com/article/17/1/exercism-learning-programming", target: "blank"
+        =link_to image("pr-logos/sd-times.png", "SD Times"), "http://sdtimes.com/sd-times-github-project-week-exercism/", target: "blank"
+        =link_to image("pr-logos/linux.png", "Linux"), "", target: "blank"
+
+  .how-section
+    .lo-container
+      .title-block
+        %h2 How Teams Edition works
+        %p Exercism is the home of code practice and mentorship. Teams Edition has the same concept and exercises as our Personal Edition, but rather than learning from our mentors, you can learn from your friends, colleagues or bootcamp instructors.
+
+      .step.step-small.pure-g
+        .pure-u-1
+          =graphical_image "how-step-3.png"
+
+      .step.pure-g.lalign
+        .pure-u-1.pure-u-sm-1-3.step-image
+          =graphical_image "how-step-1.png"
+        .pure-u-1.pure-u-sm-1-12
+        .pure-u-1.pure-u-sm-7-12
+          %h3 1. Choose a language to master
+          %p Object oriented, functional, popular, emerging, or just plain obscure. Chat to your team and work out which of our #{num_tracks} different languages you want to explore first.
+      .divider
+
+      .step.pure-g
+        .pure-u-1.pure-u-sm-1-3.step-image
+          =graphical_image "how-step-2.png"
+        .pure-u-1.pure-u-sm-1-12
+        .pure-u-1.pure-u-sm-7-12
+          %h3 2. Complete a coding challenge on your computer
+          %p All the coding happens on your machine in an environment you're familiar with. Download the template, solve the problem, and then upload your solution for your team to see.
+      .divider
+
+      .step.pure-g
+        .pure-u-1.pure-u-sm-1-3.step-image
+          =graphical_image "how-step-3.png"
+        .pure-u-1.pure-u-sm-1-12
+        .pure-u-1.pure-u-sm-7-12
+          %h3 3. Upload your solution and review it with a friend, colleague or instructor
+          %p Discussing code is one of the best ways to learn. Explore ideas with those who have a little more experience or a different point of view.
+      .divider
+
+      .step.step-4.pure-g
+        .pure-u-1.pure-u-sm-1-3.step-image
+          .waterfall
+          =graphical_image "how-step-4.png"
+
+        .pure-u-1.pure-u-sm-1-12
+        .pure-u-1.pure-u-sm-7-12
+          %h3 4. Unlock different concepts and exercises
+          %p Our tracks have up to 120 exercise each - some are fun, some are tricky, some are weird, but all will teach you something new.
+      .divider
+
+      .step.pure-g
+        .pure-u-1.pure-u-sm-1-3.step-image
+          =graphical_image "how-step-5.png"
+        .pure-u-1.pure-u-sm-1-12
+        .pure-u-1.pure-u-sm-7-12
+          %h3 5. Complete the language track and achieve fluency
+          %p At the end of your language track you will have mastered the core concepts and idioms of your language and be ready to use it in the real world.
+
+
+  .tracks-section#explore-languages
+    .lo-container
+      .title-block
+        %h2 Available language tracks
+        %p There are #{num_tracks} different #{link_to "language tracks", tracks_path} on Exercism for you to explore. Which one will you choose to learn first?
+      .tracks
+        =render 'pages/tracks_display', tracks: @tracks
+      .tracks-mini
+        -@tracks.each do |track|
+          =link_to track, class: 'pure-u-1-2 pure-u-sm-1-3 pure-u-md-1-4 pure-u-lg-1-5' do
+            .track-mini
+              .logo
+                =image(track.hex_turquoise_icon_url, track.title)
+              .title
+                =track.title
+
+  .cta-section
+    .lo-container
+      %h2 Sign up to Exercism and get started on your first track now.
+      = link_to "Sign up for FREE", new_user_registration_path, class: 'pure-button'
+
+-content_for :js do
+  :javascript
+    setupLandingPage()

@@ -15,6 +15,7 @@ This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to
 - **Ruby**: We recommend Ruby >=2.4 (and this will soon become a requirement). We recommend using [RVM](http://rvm.io/)
 - **MySQL**: MySQL >=5.7 required. Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
 - **Yarn**: Yarn handles front-end dependencies. See Yarn's [installation instructions](https://yarnpkg.com/lang/en/docs/install).
+- **Redis**: Redis >=2.8 required. Sidekiq uses Redis to store all of its job and operational data. [Installation instructions](https://redis.io/topics/quickstart) or checkout your OS's package manager.
 
 ### Configure the database
 
@@ -90,17 +91,6 @@ The user record is deleted, as well as associated objects except the ff:
 
 - Discussion posts where they are a mentor.
 - Maintainer records where their user record is associated.
-
-### Unlock first exercise for each user track
-
-For when @iHiD breaks things.
-
-```
-user_track_ids.each do |id|
-  ut = UserTrack.find(id)
-  CreateSolution.(ut.user, ut.track.exercises.core.first) if ut.solutions.size == 0
-end
-```
 
 ## Troubleshooting
 ### MySQL < 5.7

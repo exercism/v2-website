@@ -10,6 +10,9 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     @exercise = create(:exercise, track: @track)
     @solution = create :solution, user: @user, exercise: @exercise, track_in_independent_mode: false, mentoring_requested_at: Time.current
     @iteration = create(:iteration, solution: @solution)
+
+    Git::ExercismRepo.stubs(current_head: "dummy-sha1")
+    Git::Exercise.any_instance.stubs(test_suite: [])
   end
 
   test "On submission" do

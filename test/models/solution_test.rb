@@ -114,4 +114,62 @@ class SolutionTest < ActiveSupport::TestCase
     solution.update(mentoring_requested_at: Time.current)
     assert solution.mentoring_requested?
   end
+
+  test "latest_exercise_version? with same sha" do
+    track_repo_url = "repo_url"
+    locked_sha = "1234"
+
+    track = create :track, repo_url: track_repo_url
+    exercise = create :exercise, track: track
+    solution = create :solution, git_sha: locked_sha, exercise: exercise
+
+    Git::ExercismRepo.expects(:current_head).with(track_repo_url).returns(locked_sha)
+
+    assert solution.latest_exercise_version?
+  end
+
+  test "latest_exercise_version? with different sha but same tests" do
+    track_repo_url = "locked_sha"
+    locked_sha = "1234"
+    latest_sha = "5678"
+
+    locked_exercise_repo = mock
+    latest_exercise_repo = mock
+
+    test_suite = mock
+    locked_exercise_repo.stubs(test_suite: test_suite)
+    latest_exercise_repo.stubs(test_suite: test_suite)
+
+    track = create :track, repo_url: track_repo_url
+    exercise = create :exercise, track: track
+    solution = create :solution, git_sha: locked_sha, git_slug: exercise.slug, exercise: exercise
+
+    Git::ExercismRepo.expects(:current_head).with(track_repo_url).returns(latest_sha)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, locked_sha).returns(locked_exercise_repo)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, latest_sha).returns(latest_exercise_repo)
+
+    assert solution.latest_exercise_version?
+  end
+  test "latest_exercise_version? with different sha and tests" do
+    track_repo_url = "locked_sha"
+    locked_sha = "1234"
+    latest_sha = "5678"
+
+    locked_exercise_repo = mock
+    latest_exercise_repo = mock
+
+    locked_exercise_repo.stubs(test_suite: ["foobar"])
+    latest_exercise_repo.stubs(test_suite: ["barfoo"])
+
+    track = create :track, repo_url: track_repo_url
+    exercise = create :exercise, track: track
+    solution = create :solution, git_sha: locked_sha, git_slug: exercise.slug, exercise: exercise
+
+    Git::ExercismRepo.expects(:current_head).with(track_repo_url).returns(latest_sha)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, locked_sha).returns(locked_exercise_repo)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, latest_sha).returns(latest_exercise_repo)
+
+    refute solution.latest_exercise_version?
+  end
+
 end

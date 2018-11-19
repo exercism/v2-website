@@ -113,6 +113,11 @@ class My::SolutionsController < MyController
     redirect_to [:my, @solution]
   end
 
+  def update_exercise
+    @solution.update(git_sha: @solution.track_head)
+    redirect_to [:my, @solution]
+  end
+
   private
 
   def set_solution

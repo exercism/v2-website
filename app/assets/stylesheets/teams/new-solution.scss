@@ -2,6 +2,10 @@
 @import 'mixins';
 
 #teams-new-solution-page {
+    h3 {
+        font-weight:$regular;
+        margin-bottom:8px;
+    }
     .widget-filter {
         margin-bottom:20px;
         .selectize-control {
@@ -17,9 +21,12 @@
         }
     }
     .widget-side-exercise {
+        display:block;
         cursor:pointer;
         padding:15px;
         height:92px;
+        width:93%;
+        text-align:left;
         .icon {
             width:60px;
             height:60px;

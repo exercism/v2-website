@@ -1,7 +1,9 @@
 @import 'variables';
 @import 'mixins';
 
-#my-settings-page, #my-track-settings-page {
+#my-settings-page,
+#my-track-settings-page,
+#my-settings-delete-account-page {
     padding-top:30px;
     @include width-small() {
         padding-top:0;
@@ -32,12 +34,40 @@
         &:last-child {
             border-bottom:none;
         }
+        &.danger {
+            border:1px solid red;
+            background:rgba(red, 0.03);
+            padding:20px;
+            h2 {
+                i {
+                    color:darkred;
+                    @include font-size(15, 18);
+                }
+            }
+            .pure-button {
+                background:darkred;
+            }
+        }
+        .alert {
+            color:red;
+            @include font-size(14, 14);
+            font-weight:500;
+            a {
+                color:red;
+                text-decoration:underline;
+            }
+        }
     }
     p,
+    ul,
     .token-explanation {
         @include font-size(14, 18);
         font-weight:$light;
-        color:#999;
+        color:#666;
+    }
+    ul {
+        margin:0 0 10px 0;
+        padding: 0 0 0 25px;
     }
     .token-explanation {
         margin-bottom:10px;
@@ -49,7 +79,6 @@
         }
     }
     p {
-        display:inline-block;
         margin-bottom:15px;
         //padding-bottom:15px;
         //border-bottom:1px solid #eee;
@@ -102,7 +131,7 @@
             padding:10px;
         }
 
-        .anonymous { 
+        .anonymous {
             text-align:center;
         }
         .default,
@@ -154,7 +183,7 @@
                 display:none;
                 color: $color-2;
             }
-            i.fa.fa-toggle-off { 
+            i.fa.fa-toggle-off {
                 display:block;
                 color: #aaa;
             }
@@ -165,6 +194,25 @@
             @include font-size(11, 11);
             padding-top:4px;
             font-weight:500;
+        }
+    }
+}
+
+#my-settings-delete-account-page {
+    padding-top:30px;
+    .field {
+        label {
+            color:#666;
+        }
+    }
+    .field.checkbox {
+        input[type=checkbox] {
+            width:auto;
+            display:inline-block;
+        }
+        label {
+            display:inline-block;
+            color:#666;
         }
     }
 }

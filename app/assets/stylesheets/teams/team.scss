@@ -1,0 +1,46 @@
+@import 'mixins';
+@import 'variables';
+
+#teams-team-page {
+
+    a.activity {
+        &:hover {
+            border-color:rgba($color-2, 0.3);
+            background:rgba($color-2, 0.05);
+        }
+    }
+
+    .activity {
+        overflow:hidden;
+        margin-bottom:20px;
+        display:block;
+        color:#333;
+        border:1px solid #ddd;
+        border-radius:2px;
+        margin-bottom:15px;
+        max-width:600px;
+        padding:10px 15px;
+        text-decoration:none;
+
+        img {
+            width:35px;
+            height:35px;
+            display:block;
+            float:left;
+        }
+        .title {
+            margin-left:50px;
+            strong {
+                color:$color-2;
+                font-weight:$bold;
+            }
+        }
+        &.team-membership,
+        &.iteration,
+        &.solution {
+            .title {
+                line-height:35px;
+            }
+        }
+    }
+}

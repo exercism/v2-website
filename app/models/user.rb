@@ -38,6 +38,8 @@ class User < ApplicationRecord
   has_many :solution_mentorships, dependent: :destroy
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
+  has_many :solution_locks, dependent: :destroy
+
   has_many :ignored_solution_mentorships, dependent: :destroy
   has_many :ignored_solutions, through: :ignored_solution_mentorships, source: :solution
 
@@ -73,7 +75,7 @@ class User < ApplicationRecord
   end
 
   def auth_token
-    @auth_token ||= auth_tokens.active.first.token
+    @auth_token ||= auth_tokens.active.first.try(&:token)
   end
 
   def onboarded?
@@ -138,6 +140,10 @@ class User < ApplicationRecord
 
   def mentoring_solution?(solution)
     solution_mentorships.where(solution_id: solution.id).exists?
+  end
+
+  def mentorship_for_solution(solution)
+    solution_mentorships.where(solution_id: solution.id).first
   end
 
   def num_rated_mentored_solutions

@@ -55,20 +55,32 @@
     .tools-bar {
         overflow:hidden;
         margin-bottom:20px;
-        background:rgba($color-1, 0.55);
-        border:1px solid rgba($color-1, 0.7);
+        background:rgba($color-1, 0.70);
+        border:1px solid rgba($color-1, 0.8);
         padding:8px 0;
         @include width-medium() {
             margin-bottom:40px;
         }
         .mentoring-notes {
-            float:right;
+            @include width-medium() {
+                float:right;
+            }
             padding:6px 10px;
             background:#fff;
             color:$color-1;
             font-weight:$regular;
             &:hover {
                 background: rgba(#fff, 0.9);
+            }
+        }
+        .notification {
+            padding:5px;
+            color:#fff;
+            font-weight:400;
+            a {
+                font-weight:400;
+                color:#fff;
+                text-decoration:underline;
             }
         }
     }

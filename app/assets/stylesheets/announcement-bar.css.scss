@@ -2,12 +2,12 @@
 @import 'mixins';
 
 .announcement-bar {
-    background:$error-red-color;
+    background:#fff;//$error-red-color;
     padding:10px;
     text-align:center;
-    color:$error-red-text-color;
+    color: #666;
     a {
-        color:#f34a56;
+        color: #666;
         font-weight:normal;
     }
 }

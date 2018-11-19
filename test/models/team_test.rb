@@ -27,20 +27,4 @@ class TeamTest < ActiveSupport::TestCase
     assert team.admin?(admin)
     refute team.admin?(non_admin)
   end
-
-  test "returns team admins" do
-    non_admin = create(:user)
-    admin = create(:user)
-    team = create(:team, url_join_allowed: false)
-    create(:team_membership,
-           user: non_admin,
-           team: team,
-           admin: false)
-    create(:team_membership,
-           user: admin,
-           team: team,
-           admin: true)
-
-    assert_equal [admin], team.admins
-  end
 end

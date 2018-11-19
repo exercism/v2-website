@@ -56,6 +56,7 @@ Rails.application.routes.draw do
         patch :approve
         patch :abandon
         patch :ignore
+        patch :ignore_requires_action
       end
     end
     resources :discussion_posts, only: [:create]
@@ -133,6 +134,7 @@ Rails.application.routes.draw do
         patch :cancel_mentoring_request
         patch :reflect
         patch :publish
+        patch :update_exercise
       end
 
       resources :iterations, only: [:show]
@@ -149,6 +151,10 @@ Rails.application.routes.draw do
 
     resource :settings do
       patch :reset_auth_token
+      patch :cancel_unconfirmed_email
+
+      get :confirm_delete_account
+      delete :delete_account
 
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
@@ -173,6 +179,8 @@ Rails.application.routes.draw do
     end
 
     resources :teams do
+      patch :update_settings, on: :member
+
       resources :my_solutions, controller: "teams/my_solutions" do
         get :possible_exercises, on: :collection
       end
