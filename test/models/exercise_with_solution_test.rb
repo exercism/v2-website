@@ -3,7 +3,7 @@ require "test_helper"
 class ExerciseWithSolutionTest < ActiveSupport::TestCase
   test "exercise is unlocked when solution is present" do
     exercise = create(:exercise)
-    solution = create(:solution)
+    solution = create(:solution, exercise: exercise)
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -20,7 +20,9 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "exercise is completed when solution is completed" do
     exercise = create(:exercise)
-    solution = create(:solution, completed_at: Date.new(2016, 12, 25))
+    solution = create(:solution,
+                      exercise: exercise,
+                      completed_at: Date.new(2016, 12, 25))
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -29,7 +31,9 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "exercise is approved when solution is approved" do
     exercise = create(:exercise)
-    solution = create(:solution, approved_by: create(:user))
+    solution = create(:solution,
+                      exercise: exercise,
+                      approved_by: create(:user))
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -38,7 +42,9 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "exercise is in progress when solution is in progress" do
     exercise = create(:exercise)
-    solution = create(:solution, downloaded_at: Time.utc(2018, 12, 25))
+    solution = create(:solution,
+                      exercise: exercise,
+                      downloaded_at: Time.utc(2018, 12, 25))
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -47,7 +53,9 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "status is 'Completed' when solution is completed" do
     exercise = create(:exercise)
-    solution = create(:solution, completed_at: Date.new(2016, 12, 25))
+    solution = create(:solution,
+                      exercise: exercise,
+                      completed_at: Date.new(2016, 12, 25))
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -56,7 +64,9 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "status is 'Approved' when solution is approved" do
     exercise = create(:exercise)
-    solution = create(:solution, approved_by: create(:user))
+    solution = create(:solution,
+                      exercise: exercise,
+                      approved_by: create(:user))
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -65,7 +75,9 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "status is 'In progress' when solution is in progress" do
     exercise = create(:exercise)
-    solution = create(:solution, downloaded_at: Time.utc(2018, 12, 25))
+    solution = create(:solution,
+                      exercise: exercise,
+                      downloaded_at: Time.utc(2018, 12, 25))
 
     object = ExerciseWithSolution.new(exercise, solution)
 
@@ -74,7 +86,7 @@ class ExerciseWithSolutionTest < ActiveSupport::TestCase
 
   test "status is 'Unlocked' when solution is unlocked" do
     exercise = create(:exercise)
-    solution = create(:solution)
+    solution = create(:solution, exercise: exercise)
 
     object = ExerciseWithSolution.new(exercise, solution)
 
