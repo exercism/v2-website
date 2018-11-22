@@ -11,19 +11,24 @@ class ExerciseMap
   private
   attr_reader :user, :track
 
+  memoize
   def map
-    @map ||= exercises.map do |e|
+    exercises.map do |e|
       ExerciseMapNode.new(
-        exercise: e,
+        exercise: ExerciseWithSolution.new(e, solutions[e.id]),
         unlocks: exercises_to_unlock_for(e)
       )
     end
   end
 
+  memoize
   def exercises
-    @exercises ||= track.
-      exercises.
-      map { |e| ExerciseWithSolution.new(e, solution_for(e)) }
+    track.exercises.includes(:unlocks)
+  end
+
+  memoize
+  def solutions
+    user.solutions.where(exercise: exercises).each_with_object({}){|s,h|h[s.exercise_id] = s}
   end
 
   def exercises_to_unlock_for(exercise)
@@ -40,16 +45,5 @@ class ExerciseMap
     end
 
     bonus_exercises + unlocked_exercises
-  end
-
-  def solution_for(exercise)
-    solutions.find { |solution| solution.exercise_id == exercise.id }
-  end
-
-  def solutions
-    @solutions ||= user.
-      solutions.
-      includes(:exercise).
-      where(exercises: { track: track })
   end
 end
