@@ -18,3 +18,17 @@
         background:$color-2;
     }
 }
+
+#teams-invitation-page {
+    strong {
+        font-weight:400;
+    }
+    p {
+        margin-bottom:15px;
+    }
+    .pure-button {
+        background:$color-2;
+        padding:10px 30px;
+        margin-right:5px;
+    }
+}
