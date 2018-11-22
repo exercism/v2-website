@@ -1,4 +1,6 @@
 class ExerciseMap
+  include Mandate
+
   def initialize(user, track)
     @user = user
     @track = track
@@ -11,21 +13,24 @@ class ExerciseMap
   private
   attr_reader :user, :track
 
+  memoize
   def map
-    @map ||= exercises.map do |e|
+    exercises.map do |e|
       ExerciseMapNode.new(
-        exercise: e,
+        exercise: ExerciseWithSolution.new(e, solutions[e.id]),
         unlocks: exercises_to_unlock_for(e)
       )
     end
   end
 
+  memoize
   def exercises
-    @exercises ||= track.
-      exercises.
-      joins("LEFT OUTER JOIN solutions ON exercises.id = solutions.exercise_id AND solutions.user_id = #{user.id}").
-      includes(:unlocks).
-      map { |e| ExerciseWithSolution.new(e, e.solutions.first) }
+    track.exercises.includes(:unlocks)
+  end
+
+  memoize
+  def solutions
+    user.solutions.where(exercise: exercises).each_with_object({}){|s,h|h[s.exercise_id] = s}
   end
 
   def exercises_to_unlock_for(exercise)
