@@ -16,6 +16,10 @@ class ExerciseMapTest < ActiveSupport::TestCase
                                unlocked_by: exercise,
                                track: track)
 
+    # Add exercises solved by others
+    create(:exercise, track: track, unlocked_by: create(:exercise))
+    solution = create(:solution, exercise: exercise)
+
     core_exercises = ExerciseMap.new(user, track).core_exercises
 
     assert_delegated_equal exercise, core_exercises[0].exercise
@@ -23,6 +27,17 @@ class ExerciseMapTest < ActiveSupport::TestCase
       [side_exercise, unlocked_exercise],
       core_exercises[0].unlocks
     )
+  end
+
+  test "correctly marks unlocked exercises" do
+    user = create(:user)
+    track = create(:track)
+    exercise = create(:exercise, core: true, track: track)
+    create(:solution, exercise: exercise)
+
+    core_exercises = ExerciseMap.new(user, track).core_exercises
+
+    refute core_exercises[0].exercise.unlocked?
   end
 
   private
