@@ -1,0 +1,15 @@
+#teams-invitation-page
+  .lo-general-header
+    .lo-container
+      %h1 #{@invitation.team.name}
+      .h1-subtitle Join this team
+
+  .lo-container
+    %p
+      You have been invited to the 
+      %strong #{@invitation.team.name}
+      team by
+      %strong @#{@invitation.invited_by.handle}.
+
+    = link_to "Accept", accept_teams_invitation_path(@invitation), method: :post, class: 'pure-button'
+    = link_to "Ignore", root_path, class: 'pure-button'

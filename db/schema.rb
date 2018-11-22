@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_162622) do
+ActiveRecord::Schema.define(version: 2018_11_22_150334) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -309,6 +309,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_162622) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token", null: false
     t.index ["invited_by_id"], name: "fk_rails_654806c772"
     t.index ["team_id", "email"], name: "index_team_invitations_on_team_id_and_email", unique: true
   end

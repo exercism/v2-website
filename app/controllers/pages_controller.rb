@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :redirect_if_signed_in!, only: [:index]
+  skip_before_action :store_location
 
   PAGES = {
     "Terms of Service": :terms_of_service,
