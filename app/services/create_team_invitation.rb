@@ -4,10 +4,12 @@ class CreateTeamInvitation
   initialize_with :team, :invited_by, :email
 
   def call
-    create_invite!
-    send_invite!
+    ActiveRecord::Base.transaction do
+      return if existing_user? && team.memberships.where(user: existing_user).exists?
 
-    team
+      create_invite!
+      send_invite!
+    end
   end
 
   private
@@ -30,6 +32,11 @@ class CreateTeamInvitation
   end
 
   def existing_user?
-    User.find_by(email: invite.email).present?
+    existing_user.present?
+  end
+
+  memoize
+  def existing_user
+    User.find_by(email: email)
   end
 end
