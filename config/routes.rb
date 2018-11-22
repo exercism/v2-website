@@ -173,7 +173,7 @@ Rails.application.routes.draw do
       resource :join, controller: "teams/joins"
     end
 
-    resources :invitations, only: [] do
+    resources :invitations, only: [:show] do
       post :accept, on: :member
       post :reject, on: :member
     end

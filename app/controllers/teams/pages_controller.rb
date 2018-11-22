@@ -21,6 +21,6 @@ class Teams::PagesController < Teams::BaseController
 
   # Landing page
   def index
-    @tracks = Track.active.reorder("rand()").to_a
+    @tracks = Track.active.reorder(Arel.sql("rand()")).to_a
   end
 end

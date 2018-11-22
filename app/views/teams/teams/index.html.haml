@@ -17,12 +17,12 @@
                 %h3= invite.team.name
                 .members
                   = link_to "Accept",
-                  accept_teams_invitation_path(invite.id),
+                  accept_teams_invitation_path(invite),
                   method: :post,
                   class: 'pure-button'
 
                   = link_to "Reject",
-                  reject_teams_invitation_path(invite.id),
+                  reject_teams_invitation_path(invite),
                   method: :post,
                   class: 'pure-button',
                   data: { confirm: "Are you sure you want to reject your invitation to #{invite.team_name}?" }
