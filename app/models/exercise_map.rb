@@ -23,8 +23,9 @@ class ExerciseMap
   def exercises
     @exercises ||= track.
       exercises.
-      joins("LEFT OUTER JOIN solutions ON exercises.id = solutions.exercise_id AND solutions.user_id = #{user.id}").
+      left_outer_joins(:solutions).
       includes(:unlocks).
+      where("solutions.user_id = ? OR solutions.user_id IS NULL", user.id).
       map { |e| ExerciseWithSolution.new(e, e.solutions.first) }
   end
 
