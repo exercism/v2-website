@@ -11,7 +11,7 @@ class Teams::InvitationsController < Teams::BaseController
   end
 
   def reject
-    invitation = TeamInvitation.find_by_token(params[:token])
+    invitation = TeamInvitation.find_by_token(params[:id])
     invitation.destroy!
 
     redirect_to teams_teams_path

@@ -25,7 +25,7 @@ class CreateTeamInvitationTest < ActiveSupport::TestCase
     end
 
     email = ActionMailer::Base.deliveries.last
-    assert_equal "Leader has invited you to join Exercism", email.subject
+    assert_equal "Leader has invited you to join their team on Exercism", email.subject
     assert_equal "test@example.com", email.to[0]
     assert_includes email.text_part.decoded, "https://teams.exercism.io"
     assert_includes email.html_part.decoded, "https://teams.exercism.io"
@@ -42,7 +42,7 @@ class CreateTeamInvitationTest < ActiveSupport::TestCase
 
     email = ActionMailer::Base.deliveries.last
     assert_equal(
-      "Leader has invited you to join their team",
+      "[Exercism] Leader has invited you to join their team",
       email.subject
     )
     assert_equal "test@example.com", email.to[0]
