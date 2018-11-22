@@ -49,4 +49,13 @@ class CreateTeamInvitationTest < ActiveSupport::TestCase
     assert_includes email.text_part.decoded, "https://teams.exercism.io"
     assert_includes email.html_part.decoded, "https://teams.exercism.io"
   end
+
+  test "don't reinvite a member" do
+    user = create :user
+    team = create :team
+    create :team_membership, user: user, team: team
+
+    CreateTeamInvitation.(team, create(:user), user.email)
+    refute TeamInvitation.exists?
+  end
 end
