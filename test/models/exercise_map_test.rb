@@ -15,6 +15,9 @@ class ExerciseMapTest < ActiveSupport::TestCase
     unlocked_exercise = create(:exercise,
                                unlocked_by: exercise,
                                track: track)
+    # Add exercises solved by others
+    create(:exercise, track: track, unlocked_by: create(:exercise))
+    solution = create(:solution, exercise: exercise)
 
     core_exercises = ExerciseMap.new(user, track).core_exercises
 
