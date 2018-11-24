@@ -1,5 +1,20 @@
 class My::SolutionsController < MyController
-  before_action :set_solution, except: [:create, :walkthrough]
+  before_action :set_solution, except: [:index, :create, :walkthrough]
+
+  def index
+    @solutions = current_user.solutions.completed.includes(exercise: :track)
+    if params[:track_id].to_i > 0
+      @solutions = @solutions.
+        joins(:exercise).
+        where("exercises.track_id": params[:track_id])
+    end
+
+    track_ids = Exercise.where(id: @solutions.map(&:exercise_id)).distinct.pluck(:track_id)
+    @tracks_for_select = Track.where(id: track_ids).
+      map{|l|[l.title, l.id]}.
+      unshift(["Any", 0])
+    @track = Track.find_by_id(params[:track_id]) if params[:track_id].to_i > 0
+  end
 
   def create
     track = Track.find(params[:track_id])
@@ -71,7 +86,7 @@ class My::SolutionsController < MyController
 
   def reflect
     @solution.update(reflection: params[:reflection])
-    @solution.update(published_at: Time.current) if params[:publish]
+    PublishSolution.(@solution) if params[:publish]
 
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewSolutionMentoring.(
@@ -116,6 +131,26 @@ class My::SolutionsController < MyController
   def update_exercise
     @solution.update(git_sha: @solution.track_head)
     redirect_to [:my, @solution]
+  end
+
+  def toggle_published
+    if @solution.published?
+      @solution.update(published_at: nil)
+    else
+      PublishSolution.(@solution)
+    end
+
+    render "toggle"
+  end
+
+  def toggle_show_on_profile
+    @solution.update(show_on_profile: !@solution.show_on_profile?)
+    render "toggle"
+  end
+
+  def toggle_allow_comments
+    @solution.update(allow_comments: !@solution.allow_comments?)
+    render "toggle"
   end
 
   private

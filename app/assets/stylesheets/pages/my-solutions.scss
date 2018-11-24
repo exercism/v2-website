@@ -1,0 +1,164 @@
+@import 'variables';
+@import 'mixins';
+
+#my-solutions {
+    .header {
+        background: $color-1;
+        background-image:image-url('background-overlay-1.png');
+        background-size:cover;
+        padding:15px 0 15px;
+        margin-bottom:35px;
+        @include width-small() {
+            padding:100px 0 35px;
+        }
+
+        h1 {
+            @include font-size(34, 34);
+            letter-spacing:-0.67px;
+            font-weight:$bold;
+            margin-bottom:10px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            color:#fff;
+            font-weight:$light;
+
+            @include width-small() {
+                max-width:70%;
+            }
+            p {
+                @include font-size(15, 17);
+                margin-bottom:5px;
+                &:last-child {
+                    margin-bottom:0;
+                }
+            }
+        }
+
+    }
+    .num-solutions {
+        color:#fff;
+        margin-bottom:5px;
+        @include width-medium() {
+            float:right;
+            margin-bottom:0;
+        }
+        color:#999;
+        font-weight:$regular;
+        @include font-size(14, 14);
+        margin-top:20px;
+    }
+    .filters {
+        margin-bottom:10px;
+        .selectize-input {
+            width:180px;
+            max-width: 100%;
+        }
+    }
+    .solutions {
+        @include width-large() {
+            .pure-u-1 {
+                &:nth-child(odd) { padding-right:10px }
+                &:nth-child(even) { padding-left:10px }
+            }
+        }
+        .solution {
+            display:block;
+            text-decoration:none;
+            color:#333;
+            border:1px solid #ddd;
+            border-radius:2px;
+            padding:15px 15px;
+            margin-bottom:20px;
+            overflow:hidden;
+
+            .icon {
+                display:block;
+                width:50px;
+                height:50px;
+                padding:7px;
+                float:left;
+                margin-right:15px;
+                border-radius:2px;
+                border:1px solid $color-1;
+                background:$color-1;
+
+                .img {
+                    width:33px;
+                    height:33px;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center center;
+                }
+            }
+            .title-bar {
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                overflow:hidden;
+                margin-bottom:4px;
+                .title {
+                    display:inline-block;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    text-decoration:none;
+                    border-bottom:1px solid #fff;
+
+                    max-width: 160px;
+                    @include font-size(18, 20);
+                    font-weight:$bold;
+                    color:#555;
+                    &:hover {
+                        border-bottom:1px solid #ddd;
+                    }
+                }
+                .track {
+                    display:inline-block;
+                    border-left:1px solid #ddd;
+                    padding-left:10px;
+                    margin-left:10px;
+                    color:#aaa;
+                    font-weight:$light;
+                    @include font-size(12, 19);
+                    vertical-align:top;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    max-width: 83px;
+                    overflow: hidden;
+                }
+            }
+            .options {
+                .option {
+                    &.true .true { display:inline-block }
+                    &.false .false { display:inline-block }
+                    display:inline-block;
+                    cursor:pointer;
+                    text-decoration:none;
+                    color:#333;
+
+                    .true, .false {
+                        width:20px;
+                        height:20px;
+                        margin-right:5px;
+                        text-align:center;
+                        @include font-size(10, 20);
+                        display:none;
+                        vertical-align:middle;
+                        &.true {
+                            background:$color-1;
+                            color:#fff;
+                        }
+                        &.false {
+                            background:#c11220;
+                            color:#fff;
+                        }
+                    }
+                    .desc {
+                        display:inline-block;
+                        vertical-align:middle;
+                    }
+                }
+            }
+        }
+    }
+}

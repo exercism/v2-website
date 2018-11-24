@@ -22,6 +22,7 @@ class Solution < ApplicationRecord
   scope :not_completed, -> { where(completed_at: nil) }
 
   scope :published, -> { where.not(published_at: nil) }
+  scope :on_profile, -> { where(show_on_profile: true) }
 
   scope :legacy, -> { where("solutions.created_at < ?", Exercism::V2_MIGRATED_AT) }
   scope :not_legacy, -> { where("solutions.created_at >= ?", Exercism::V2_MIGRATED_AT) }
