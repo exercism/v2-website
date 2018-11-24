@@ -124,8 +124,8 @@ class My::SolutionsController < MyController
   end
 
   def publish
-    @solution.update(published_at: Time.current) if params[:publish]
-    redirect_to [:my, @solution]
+    PublishSolution.(@solution) if params[:publish]
+    redirect_to [@solution]
   end
 
   def update_exercise
