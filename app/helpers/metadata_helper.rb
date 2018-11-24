@@ -36,7 +36,12 @@ module MetadataHelper
         when "reactions"
           { title: "My Reactions" }
         when "solutions"
-          { title: "#{@track.title} | #{@exercise.title}" }
+          case action_name
+          when "index"
+            { title: "Completed solutions" }
+          else
+            { title: "#{@track.title} | #{@exercise.title}" }
+          end
         when "tracks"
           case action_name
           when "index"

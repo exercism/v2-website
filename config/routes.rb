@@ -124,7 +124,7 @@ Rails.application.routes.draw do
         delete :leave
       end
     end
-    resources :solutions, only: [:show, :create] do
+    resources :solutions, only: [:index, :show, :create] do
       member do
         get :walkthrough
         get :confirm_unapproved_completion
@@ -135,6 +135,10 @@ Rails.application.routes.draw do
         patch :reflect
         patch :publish
         patch :update_exercise
+
+        patch :toggle_published
+        patch :toggle_show_on_profile
+        patch :toggle_allow_comments
       end
 
       resources :iterations, only: [:show]

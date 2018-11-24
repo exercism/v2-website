@@ -1,0 +1,30 @@
+#my-solutions
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      =nav_divider
+      =link_to "Your Profile", my_profile_path
+      =nav_divider
+      %span Your completed solutions
+
+  .header
+    .lo-container
+      %h1 Your completed solutions
+      .h1-subtitle 
+        %p You can choose whether to publish your solutions or not. If you publish them they will appear around the site.
+        %p If you publish a solution you can also choose whether you want this to show up on your public profile.
+        %p You can also choose whether you would like to allow others to comment on your solution or not.
+
+  .lo-container
+
+    .num-solutions Showing #{pluralize @solutions.size, "solution"}
+    =form_tag [:my, :solutions], method: :get, remote: true, class: "filters" do
+      .widget-filter
+        .title Language:
+        =select_tag :track_id, options_for_select(@tracks_for_select, value: @track_id), id: nil
+    .solutions.pure-g
+      =render "solutions", solutions: @solutions
+
+  -content_for :js do
+    :javascript
+      submitOnChange($('.filters select'))
