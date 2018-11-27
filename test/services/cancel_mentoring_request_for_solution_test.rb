@@ -18,12 +18,14 @@ class RequestMentoringOnSolutionTest < ActiveSupport::TestCase
   end
 
   test "doesn't do anyting if solution is mentored" do
-    time = Time.now
-    solution = create :solution, mentoring_requested_at: time
-    create :solution_mentorship, solution: solution
+    Timecop.freeze do
+      time = Time.now
+      solution = create :solution, mentoring_requested_at: time
+      create :solution_mentorship, solution: solution
 
-    CancelMentoringRequestForSolution.(solution)
-    assert_equal Time.now.to_i, solution.mentoring_requested_at.to_i
+      CancelMentoringRequestForSolution.(solution)
+      assert_equal Time.now.to_i, solution.mentoring_requested_at.to_i
+    end
   end
 end
 
