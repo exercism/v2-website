@@ -12,34 +12,9 @@ class ExerciseMap
   attr_reader :user, :track
 
   def map
-    @map ||= exercises.map do |e|
-      ExerciseMapNode.new(
-        exercise: e,
-        unlocks: exercises_to_unlock_for(e)
-      )
-    end
-  end
-
-  def exercises
-    @exercises ||= track.
-      exercises.
-      map { |e| ExerciseWithSolution.new(e, solution_for(e)) }
-  end
-
-  def exercises_to_unlock_for(exercise)
-    bonus_exercises = if exercise.auto_approve?
-                        exercises.
-                          select(&:side?).
-                          select { |e| e.unlocked_by.blank? }[0, 10]
-                      else
-                        []
-                      end
-
-    unlocked_exercises = exercise.unlocks.map do |exercise_to_unlock|
-      exercises.find { |e| e.id == exercise_to_unlock.id }
-    end
-
-    bonus_exercises + unlocked_exercises
+    exercises.
+      map { |e| ExerciseWithStatus.new(e, solution_for(e)) }.
+      map { |e| ExerciseMapNode.new(exercise: e, unlocks: exercises_to_unlock_for(e)) }
   end
 
   def solution_for(exercise)
@@ -49,7 +24,26 @@ class ExerciseMap
   def solutions
     @solutions ||= user.
       solutions.
-      includes(:exercise).
+      includes(:approved_by).
+      joins(:exercise).
       where(exercises: { track: track })
+  end
+
+  def exercises
+    @exercises ||= track.exercises.includes(:unlocks)
+  end
+
+  def exercises_to_unlock_for(exercise)
+    exercises = []
+    exercises += bonus_exercises if exercise.auto_approve?
+    exercises += exercise.unlocks
+
+    exercises.map { |e| ExerciseWithStatus.new(e, solution_for(e)) }
+  end
+
+  def bonus_exercises
+    @bonus_exercises ||= exercises.
+      where(core: false, unlocked_by: nil).
+      limit(10)
   end
 end

@@ -64,8 +64,10 @@ class ExerciseTest < ApplicationSystemTestCase
                                         completed_at: nil,
                                         exercise: side_exercise)
 
-    sign_in!(user)
-    visit my_track_path(track)
+    with_bullet do
+      sign_in!(user)
+      visit my_track_path(track)
+    end
 
     assert_text "You've unlocked extra exercises"
     assert_link nil, href: my_solution_path(unlocked_exercise_solution)
