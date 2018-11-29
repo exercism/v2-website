@@ -1,4 +1,4 @@
-class ExerciseWithSolution < SimpleDelegator
+class ExerciseWithStatus < SimpleDelegator
   attr_reader :solution
 
   delegate :approved?, :in_progress?, to: :solution
