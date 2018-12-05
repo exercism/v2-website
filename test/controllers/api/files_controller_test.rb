@@ -121,4 +121,23 @@ class API::FilesControllerTest < API::TestBase
     assert_response 200
     assert file.file_contents, response.body
   end
+
+  test "show should return 404 when file is missing" do
+    @mock_exercise = stub(read_file: nil)
+    @mock_repo = stub(exercise: @mock_exercise)
+    Git::ExercismRepo.stubs(new: @mock_repo)
+
+    setup_user
+    solution = create :solution, user: @current_user
+
+    get api_solution_file_path(solution.uuid, "foobar"), headers: @headers, as: :json
+    assert_response 404
+
+    expected = {error: {
+      type: "file_not_found",
+      message: "The file was not found"
+    }}
+    actual = JSON.parse(response.body, symbolize_names: true)
+    assert_equal expected, actual
+  end
 end
