@@ -1,4 +1,4 @@
-class AbandonMentoringSolution
+class AbandonSolutionMentorship
   include Mandate
 
   initialize_with :mentor, :solution
