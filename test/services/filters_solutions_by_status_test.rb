@@ -27,11 +27,11 @@ class FiltersSolutionsByStatusTest < ActiveSupport::TestCase
 
     user = create :user
     [awaiting_user, awaiting_user_and_paused, completed, completed_and_stale, completed_and_paused, awaiting_user_and_stale, legacy_awaiting_user].each do |solution|
-      create :solution_mentorship, solution: solution, user: user, requires_action: false
+      create :solution_mentorship, solution: solution, user: user, requires_action_since: nil
     end
 
     [requires_action, requires_action_and_stale, requires_action_and_paused, legacy_requires_action].each do |solution|
-      create :solution_mentorship, solution: solution, user: user, requires_action: true
+      create :solution_mentorship, solution: solution, user: user, requires_action_since: Time.current
     end
 
     [abandoned_and_awaiting_user, abandoned_and_completed, abandoned_and_stale, abandoned_and_paused].each do |solution|
@@ -39,7 +39,7 @@ class FiltersSolutionsByStatusTest < ActiveSupport::TestCase
     end
 
     [abandoned_and_requires_action].each do |solution|
-      create :solution_mentorship, solution: solution, user: user, abandoned: true, requires_action: true
+      create :solution_mentorship, solution: solution, user: user, abandoned: true, requires_action_since: Time.current
     end
 
     assert_equal [requires_action, requires_action_and_stale, legacy_requires_action], FiltersSolutionsByStatus.filter(user.mentored_solutions, :requires_action)
