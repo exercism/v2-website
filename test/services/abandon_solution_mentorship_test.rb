@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class AbandonMentoringSolutionTest < ActiveSupport::TestCase
+class AbandonSolutionMentorshipTest < ActiveSupport::TestCase
   test "works with existing mentorship" do
     mentor = create :user_mentor
     solution = create :solution
     mentorship = create :solution_mentorship, user: mentor, solution: solution
 
-    AbandonMentoringSolution.(mentor, solution)
+    AbandonSolutionMentorship.(mentor, solution)
 
     [solution, mentorship].each(&:reload)
     assert mentorship.abandoned
@@ -20,7 +20,7 @@ class AbandonMentoringSolutionTest < ActiveSupport::TestCase
     # Create a different mentor's mentorship
     create :solution_mentorship, solution: solution
 
-    AbandonMentoringSolution.(mentor, solution)
+    AbandonSolutionMentorship.(mentor, solution)
 
     solution.reload
 

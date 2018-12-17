@@ -48,7 +48,7 @@ class Mentor::SolutionsController < MentorController
     if @mentor_solution.nil?
       @mentor_solution = CreateSolutionMentorship.(@solution, current_user)
     end
-    AbandonMentoringSolution.(current_user, @solution)
+    AbandonSolutionMentorship.(current_user, @solution)
 
     redirect_to [:mentor, :dashboard]
   end

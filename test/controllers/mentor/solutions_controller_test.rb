@@ -41,7 +41,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in!(mentor)
 
-    AbandonMentoringSolution.expects(:call).with(mentor, solution)
+    AbandonSolutionMentorship.expects(:call).with(mentor, solution)
     patch abandon_mentor_solution_url(solution), as: :js
     assert SolutionMentorship.where(solution: solution, user: mentor).exists?
     assert_redirected_to mentor_dashboard_path
@@ -57,7 +57,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in!(mentor)
 
-    AbandonMentoringSolution.expects(:call).with(mentor, solution)
+    AbandonSolutionMentorship.expects(:call).with(mentor, solution)
     patch abandon_mentor_solution_url(solution), as: :js
     assert_redirected_to mentor_dashboard_path
   end
