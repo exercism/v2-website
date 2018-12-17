@@ -44,11 +44,11 @@ class Mentor::SolutionsController < MentorController
   end
 
   def abandon
-    @mentor_solution = SolutionMentorship.where(user: current_user, solution: @solution).first
-    if @mentor_solution.nil?
-      @mentor_solution = CreateSolutionMentorship.(@solution, current_user)
+    mentor_solution = SolutionMentorship.where(user: current_user, solution: @solution).first
+    if mentor_solution.nil?
+      mentor_solution = CreateSolutionMentorship.(@solution, current_user)
     end
-    AbandonSolutionMentorship.(current_user, @solution)
+    AbandonSolutionMentorship.(mentor_solution)
 
     redirect_to [:mentor, :dashboard]
   end
