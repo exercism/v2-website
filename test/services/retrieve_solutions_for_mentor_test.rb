@@ -18,7 +18,7 @@ class RetrieveSolutionsForMentorTest < ActiveSupport::TestCase
     create(:solution_mentorship,
            user: user,
            solution: solution,
-           requires_action: false,
+           requires_action_since: nil,
            abandoned: false
           )
 
@@ -46,11 +46,11 @@ class RetrieveSolutionsForMentorTest < ActiveSupport::TestCase
     create(:solution_mentorship,
            user: user,
            solution: solution_ruby,
-           requires_action: true)
+           requires_action_since: Time.current)
     create(:solution_mentorship,
            user: user,
            solution: solution_cpp,
-           requires_action: true)
+           requires_action_since: Time.current)
 
     cpp_solutions = RetrieveSolutionsForMentor.(
       user,
@@ -74,12 +74,12 @@ class RetrieveSolutionsForMentorTest < ActiveSupport::TestCase
     create(:solution_mentorship,
            user: user,
            solution: hello_world_solution,
-           requires_action: true)
+           requires_action_since: Time.current)
     sorting_solution = create(:solution, exercise: sorting)
     create(:solution_mentorship,
            user: user,
            solution: sorting_solution,
-           requires_action: true)
+           requires_action_since: Time.current)
 
     hello_world_solutions = RetrieveSolutionsForMentor.(
       user,

@@ -92,13 +92,13 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     mentor2 = create :user
     create :track_mentorship, user: mentor1, track: solution.exercise.track
     create :track_mentorship, user: mentor2, track: solution.exercise.track
-    mentorship1 = create :solution_mentorship, user: mentor1, solution: solution, requires_action: true
-    mentorship2 = create :solution_mentorship, user: mentor2, solution: solution, requires_action: true
+    mentorship1 = create :solution_mentorship, user: mentor1, solution: solution, requires_action_since: Time.current
+    mentorship2 = create :solution_mentorship, user: mentor2, solution: solution, requires_action_since: Time.current
 
     ApproveSolution.(solution, mentor1)
 
     [mentorship1, mentorship2].each(&:reload)
-    refute mentorship1.requires_action
-    refute mentorship2.requires_action
+    refute mentorship1.requires_action?
+    refute mentorship2.requires_action?
   end
 end

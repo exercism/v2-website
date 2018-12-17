@@ -22,7 +22,7 @@
     .lo-container
       .pure-g
         .pure-u-1-1.pure-u-md-1-2
-          -if current_user.mentorship_for_solution(@solution).try(&:requires_action)
+          -if current_user.mentorship_for_solution(@solution).try(&:requires_action?)
             .notification
               This solution requires your action.
               =link_to "Ignore", [:ignore_requires_action, :mentor, @solution], method: :patch
