@@ -1,19 +1,11 @@
 class AbandonSolutionMentorship
   include Mandate
 
-  initialize_with :mentor, :solution
+  initialize_with :solution_mentorship
 
   def call
     solution_mentorship.update(abandoned: true)
-    CacheSolutionNumMentors.(solution)
-  end
-
-  private
-
-  memoize
-  def solution_mentorship
-    SolutionMentorship.where(user: mentor, solution: solution).first ||
-    CreateSolutionMentorship.(solution, mentor)
+    CacheSolutionNumMentors.(solution_mentorship.solution)
   end
 end
 
