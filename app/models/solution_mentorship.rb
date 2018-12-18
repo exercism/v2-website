@@ -12,6 +12,7 @@ class SolutionMentorship < ApplicationRecord
   belongs_to :solution
 
   scope :active, -> { where(abandoned: false) }
+  scope :requires_action, -> { where.not(requires_action_since: nil) }
 
   def requires_action?
     !!requires_action_since
