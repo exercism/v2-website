@@ -22,15 +22,14 @@ class FiltersSolutionsByStatus
 
   def filter_require_action
     solutions.
-      where("solution_mentorships.abandoned": false).
-      where.not("solution_mentorships.requires_action_since": nil).
-      where("solutions.paused": false)
+      where("solutions.paused": false).
+      merge( SolutionMentorship.active.requires_action )
   end
 
   def filter_completed
     solutions.
-      where("solution_mentorships.abandoned": false).
       completed.
+      where("solution_mentorships.abandoned": false).
       where("solution_mentorships.requires_action_since": nil)
   end
 
