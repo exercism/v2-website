@@ -33,7 +33,7 @@ mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'l
 
 ### Install Bundler
 
-Bundle is used to handle the project's Ruby dependancies. You can install it via
+Bundle is used to handle the project's Ruby dependencies. You can install it via
 ```bash
 gem install bundler
 ```
