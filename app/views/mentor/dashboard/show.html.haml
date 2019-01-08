@@ -21,7 +21,7 @@
           %h2 Your Mentor Rating
           .box
             -if @rating_threshold_reached
-              .rating #{@mentor_rating} / 5
+              .rating #{number_with_precision(@mentor_rating, precision: 2)} / 5 
               -if @mentor_rating > Exercism::MEDIAN_MENTOR_RATING
                 %p The median mentor rating is #{Exercism::MEDIAN_MENTOR_RATING} so you are doing a great job. Thank you on behalf of all the people you've helped.
               -else
