@@ -21,4 +21,19 @@ class BlogPostTest < ActiveSupport::TestCase
     blog_post = create :blog_post, slug: slug
     assert_equal slug, blog_post.to_param
   end
+
+  test "BlogPost.categories" do
+    categories = ["first", "second"]
+
+    create :blog_post, category: categories[0], published_at: DateTime.now + 1.minute
+    create :blog_post, category: categories[1], published_at: DateTime.now - 1.minute
+
+    # Duplicate
+    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
+
+    # Not published
+    create :blog_post, category: "unpublished", published_at: DateTime.now + 1.minute
+
+    assert_equal categories, BlogPost.categories
+  end
 end

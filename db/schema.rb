@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_171100) do
   create_table "blog_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "slug", null: false
+    t.string "category", null: false
     t.datetime "published_at", null: false
     t.string "title", null: false
     t.string "author_handle", null: false

@@ -9,6 +9,10 @@ class BlogPost < ApplicationRecord
   scope :published, -> { where('published_at <= NOW()') }
   scope :scheduled, -> { where('published_at > NOW()') }
 
+  def self.categories
+    BlogPost.published.distinct.pluck(:category).sort
+  end
+
   def to_param
     slug
   end
