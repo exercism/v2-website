@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :blog_post do
     uuid { SecureRandom.uuid }
     slug { SecureRandom.uuid }
+    category { SecureRandom.uuid }
     published_at { DateTime.now }
     title { "Some blog post" }
     author_handle { create(:user).handle }

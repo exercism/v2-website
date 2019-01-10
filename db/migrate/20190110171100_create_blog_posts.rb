@@ -3,6 +3,7 @@ class CreateBlogPosts < ActiveRecord::Migration[5.2]
     create_table :blog_posts do |t|
       t.string :uuid, null: false
       t.string :slug, null: false
+      t.string :category, null: false
       t.datetime :published_at, null: false
 
       t.string :title, null: false
