@@ -1,3 +1,6 @@
+-content_for :head do
+  =auto_discovery_link_tag :rss, blog_posts_url(:format => :rss) , title: "Exercism's blog"
+
 #blog-posts
   .lo-container
     -@blog_posts.each do |post|
