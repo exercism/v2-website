@@ -1,0 +1,7 @@
+#blog-post
+  .lo-container
+    %h1= @blog_post.title
+    .byline By #{@blog_post.author ? link_to(@blog_post.author_handle, profile_path(@blog_post.author.handle)) : @blog_post.author_handle}
+    .article
+      =@blog_post.content
+
