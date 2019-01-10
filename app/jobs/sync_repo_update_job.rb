@@ -22,6 +22,8 @@ class SyncRepoUpdateJob < ApplicationJob
     case repo_update.slug
     when "website-copy"
       Git::SyncWebsiteCopy.()
+    when "blog"
+      Git::SyncBlogPosts.()
     else
       track = Track.find_by(slug: repo_update.slug)
 

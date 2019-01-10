@@ -1,12 +1,13 @@
 class BlogPostsController < ApplicationController
   def index
+    @blog_posts = BlogPost.published.order('published_at DESC')
+
     respond_to do |format|
       format.html do
-        @blog_posts = BlogPost.published.order('published_at DESC').page(params[:page]).per(10)
+        @blog_posts = @blog_posts.page(params[:page]).per(10)
       end
 
       format.rss do
-        @blog_posts = BlogPost.published.order('published_at DESC')
         render content_type: "application/rss", disposition: 'inline'
       end
     end

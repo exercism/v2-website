@@ -24,11 +24,19 @@ class SyncRepoUpdateJobTest < ActiveJob::TestCase
   test "syncs website-copy repo" do
     repo_update = create(:repo_update, slug: "website-copy")
     Git::FetchRepo.stubs(:call)
-
     Git::SyncWebsiteCopy.expects(:call)
 
     SyncRepoUpdateJob.perform_now(repo_update.id)
   end
+
+  test "syncs blog repo" do
+    repo_update = create(:repo_update, slug: "blog")
+    Git::FetchRepo.stubs(:call)
+    Git::SyncBlogPosts.expects(:call)
+
+    SyncRepoUpdateJob.perform_now(repo_update.id)
+  end
+
 
   test "does not sync unregistered repos" do
     repo_update = create(:repo_update, slug: "problem-specifications")
