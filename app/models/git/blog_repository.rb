@@ -17,7 +17,13 @@ class Git::BlogRepository < Git::RepoBase
     super
   end
 
-  def blog_post(filepath)
+  def blog_posts
+    config_pointer = commit.tree['blog.json']
+    config_blob = lookup(config_pointer[:oid])
+    read_json_blob(config_pointer[:oid])
+  end
+
+  def blog_post_content(filepath)
     # We want to strip out the posts/ path and just have a filename
     # We're not supporting nested things atm.
     filename = filepath.gsub(/^posts\//, "")

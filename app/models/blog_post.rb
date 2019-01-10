@@ -24,11 +24,11 @@ class BlogPost < ApplicationRecord
   def content
     markdown = case content_repository
       when "blog"
-        Git::BlogRepository.head.blog_post(content_filepath)
+        Git::BlogRepository.head.blog_post_content(content_filepath)
       else
         # This will hit our bugsnag and we'll realise we've done something horribly
         # wrong in the blog.json quite quickly.
-        raise "Unknown content repository for blog post #{blog_post.uuid}"
+        raise "Unknown content repository for blog post #{uuid}"
       end
 
     ParseMarkdown.(markdown.to_s)

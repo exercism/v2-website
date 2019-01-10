@@ -10,6 +10,9 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show finds by slug" do
+    # TODO - Is there a nicer way of doing this?
+    BlogPost.any_instance.stubs(content: "Foobar")
+
     blog_post = create :blog_post, published_at: DateTime.now - 1.minute
     get blog_post_path(id: blog_post.slug)
     assert_equal blog_post, assigns(:blog_post)
