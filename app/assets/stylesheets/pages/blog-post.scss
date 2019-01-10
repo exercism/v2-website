@@ -1,0 +1,71 @@
+@import 'variables';
+@import 'mixins';
+
+#blog-post {
+    .header {
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        background-color:$color-2;
+        padding:20px 0 20px 0;
+        margin-bottom:40px;
+        .heading {
+            @include font-size(25, 25);
+            @include header-font;
+            font-weight:600;
+            letter-spacing:-0.3px;
+            color:#fff;
+        }
+    }
+    .sidebar {
+        border-left:1px solid #ddd;
+        padding-left:50px;
+        margin-left:50px;
+        height:100%;
+        ul {
+            margin:0 0 20px 0;
+            padding-left:0;
+            list-style:none;
+            a {
+                color:#333;
+            }
+        }
+
+        h3 {
+            @include font-size(14, 14);
+            margin-bottom:8px;
+            font-weight:$bold;
+        }
+    }
+    h1 {
+        @include font-size(30, 30);
+        font-weight:$regular;
+        letter-spacing:-0.3px;
+        color:#333;
+        margin-bottom:10px;
+    }
+    .byline {
+        @include font-size(16, 16);
+        display:inline-block;
+        margin-bottom:20px;
+        padding-right:50px; 
+        border-bottom:1px solid #ccc;
+        padding-bottom:20px;
+        a {
+            color:#333;
+            font-weight:$bold;
+        }
+    }
+
+    .article {
+        p, li {
+            @include font-size(18, 26);
+        }
+        li {
+            margin-bottom:5px;
+        }
+        p {
+            margin-bottom:20px;
+        }
+    }
+}
+

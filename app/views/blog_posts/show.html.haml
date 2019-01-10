@@ -1,7 +1,21 @@
 #blog-post
+  .header
+    .lo-container
+      .heading Exercism's Blog
   .lo-container
-    %h1= @blog_post.title
-    .byline By #{@blog_post.author ? link_to(@blog_post.author_handle, profile_path(@blog_post.author.handle)) : @blog_post.author_handle}
-    .article
-      =@blog_post.content
-
+    .pure-g
+      .pure-u-1-1.pure-u-md-2-3
+        %h1= @blog_post.title
+        .byline By #{@blog_post.author ? link_to(@blog_post.author_handle, profile_path(@blog_post.author.handle)) : @blog_post.author_handle}
+        .article
+          =raw @blog_post.content
+      .pure-u-1-1.pure-u-md-1-3
+        .sidebar
+          %h3 Quick Links
+          %ul
+            %li= link_to "Recent Blog Posts", blog_posts_path
+            %li= link_to "Our RSS Feed", blog_posts_path(format: 'rss')
+          %h3 Categories
+          %ul
+            -BlogPost.categories.each do |category|
+              %li= link_to category.titleize, blog_posts_path(category: category)
