@@ -1,4 +1,14 @@
 FactoryBot.define do
+  factory :blog_post do
+    uuid { SecureRandom.uuid }
+    slug { SecureRandom.uuid }
+    published_at { DateTime.now }
+    title { "Some blog post" }
+    author_handle { create(:user).handle }
+    content_repository { SecureRandom.uuid }
+    content_filepath { SecureRandom.uuid }
+  end
+
   factory :solution_lock do
     solution { create :solution }
     user { create :user }
