@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_150935) do
+ActiveRecord::Schema.define(version: 2019_01_10_171100) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,21 @@ ActiveRecord::Schema.define(version: 2018_12_17_150935) do
     t.boolean "active", default: true, null: false
     t.index ["user_id", "active"], name: "index_auth_tokens_on_user_id_and_active"
     t.index ["user_id"], name: "fk_rails_0d66c22f4c"
+  end
+
+  create_table "blog_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "slug", null: false
+    t.datetime "published_at", null: false
+    t.string "title", null: false
+    t.string "author_handle", null: false
+    t.string "marketing_copy", limit: 280
+    t.string "content_repository", null: false
+    t.string "content_filepath", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["published_at"], name: "index_blog_posts_on_published_at"
+    t.index ["slug"], name: "index_blog_posts_on_slug", unique: true
   end
 
   create_table "communication_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
