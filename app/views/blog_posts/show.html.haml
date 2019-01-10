@@ -6,7 +6,12 @@
     .pure-g
       .pure-u-1-1.pure-u-md-2-3
         %h1= @blog_post.title
-        .byline By #{@blog_post.author ? link_to(@blog_post.author_handle, profile_path(@blog_post.author.handle)) : @blog_post.author_handle}
+        .byline 
+          By #{@blog_post.author ? link_to(@blog_post.author_handle, profile_path(@blog_post.author.handle)) : @blog_post.author_handle}
+          &middot;
+          =@blog_post.published_at
+          &middot;
+          =link_to @blog_post.category.titleize, blog_posts_path(category: @blog_post.category)
         .article
           =raw @blog_post.content
       .pure-u-1-1.pure-u-md-1-3
