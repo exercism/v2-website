@@ -14,5 +14,6 @@ class BlogPost < ApplicationRecord
   end
 
   def content
+    nil.to_s
   end
 end
