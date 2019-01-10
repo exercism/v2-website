@@ -1,0 +1,6 @@
+#blog-posts
+  .lo-container
+    -@blog_posts.each do |post|
+      .blog-post
+        =link_to post.title, post
+    =paginate(@blog_posts)

@@ -224,6 +224,11 @@ Rails.application.routes.draw do
     get :contributors
   end
 
+  # #### #
+  # Blog #
+  # #### #
+  resources :blog_posts, only: [:index, :show], path: "blog"
+
   # ############ #
   # Weird things #
   # ############ #
