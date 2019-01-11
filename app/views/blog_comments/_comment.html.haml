@@ -1,0 +1,33 @@
+.blog-comment{id: "blog-comment-#{comment.id}", class: (comment.deleted?? "delete" : "")}
+  =image comment.user.avatar_url, "Avatar of #{comment.user.handle}", class: 'avatar'
+  .comment-body
+    .comment-header
+      .user-handle= comment.user.handle
+      .created-at commented #{time_ago_in_words(comment.created_at)} ago
+
+    .comment-viewer
+      - if comment.deleted?
+        .comment-html
+          .deleted-status This message has been deleted
+      - else
+        .comment-html
+          = raw comment.html
+        - if comment.user == current_user
+          .comment-options
+            = link_to "Edit", "#", class: "js-edit-blog-comment"
+            or
+            = link_to "Delete", blog_comment_path(comment), class: "js-delete-blog-comment", data: { confirm: "Are you sure you want to delete this comment?", remote: true, method: :delete, "disabled-with": "Deleting..." }
+        - if comment.edited?
+          .edited-status (edited #{time_ago_in_words(comment.updated_at)} ago)
+
+    .comment-editor
+      = form_for comment, url: blog_comment_path(comment), remote: true do |f|
+        = f.text_area :content
+        .buttons
+          = f.submit "Save changes", class: "pure-button update-button", data: { "disable-with": "Saving..." }
+          = link_to "Cancel", "#", class: "pure-button cancel-button js-show-blog-comment"
+
+- content_for :js do
+  :javascript
+    $(function() { new BlogComment(#{comment.id}) });
+

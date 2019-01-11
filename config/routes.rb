@@ -228,6 +228,7 @@ Rails.application.routes.draw do
   # Blog #
   # #### #
   resources :blog_posts, only: [:index, :show], path: "blog"
+  resources :blog_comments, only: [:create, :update, :destroy]
 
   # ############ #
   # Weird things #

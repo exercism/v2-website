@@ -47,6 +47,7 @@ class User < ApplicationRecord
   has_many :reactions, dependent: :destroy
 
   has_many :discussion_posts, dependent: :nullify
+  has_many :blog_comments, dependent: :destroy
 
   has_one_attached :avatar
 

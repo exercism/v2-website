@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :blog_comment do
+    blog_post { create :blog_post }
+    user { create :user }
+    content { "foobar" }
+    html { "<p>foobar</p>" }
+  end
+
   factory :blog_post do
     uuid { SecureRandom.uuid }
     slug { SecureRandom.uuid }
@@ -6,7 +13,7 @@ FactoryBot.define do
     published_at { DateTime.now }
     title { "Some blog post" }
     author_handle { create(:user).handle }
-    content_repository { SecureRandom.uuid }
+    content_repository { "blog" }
     content_filepath { SecureRandom.uuid }
   end
 

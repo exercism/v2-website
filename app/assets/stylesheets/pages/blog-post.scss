@@ -67,5 +67,183 @@
             margin-bottom:20px;
         }
     }
-}
 
+    .comments-section {
+        margin-top:20px;
+        padding-top:20px;
+        border-top:1px solid #eee;
+        h3 {
+            @include font-size(18, 18);
+            font-weight:$bold;
+            margin-bottom:10px;
+        }
+        .comments {
+            margin-bottom:20px;
+            .no-comments {
+                font-style:italic;
+            }
+        }
+        .new-blog-comment {
+            form {
+                margin:0px 0 20px 0;
+                .md-editor, .preview-area {
+                    width:100%;
+                    resize:none;
+                    border:1px solid #ddd;
+                }
+                .preview-area {
+                    height:248px;
+                    overflow:auto;
+                    padding:15px;
+                }
+            }
+        }
+        .comments+form {
+            margin-top:40px;
+        }
+        form {
+            margin:20px 0 20px 0;
+            textarea, .preview-area {
+                width:100%;
+                resize:none;
+                padding:15px;
+                border:1px solid #ddd;
+            }
+        }
+        .comment-button {
+            margin-top:10px;
+            border-radius:2px;
+            padding:8px 25px;
+            width:100%;
+            background:$color-1;
+            color:#fff;
+            float:right;
+            @include width-small() {
+                width:auto;
+            }
+        }
+
+        .blog-comment {
+            margin-bottom:20px;
+            overflow:hidden;
+            &.delete {
+                .avatar, .comment-body {
+                    opacity:0.3;
+                }
+            }
+            &+.blog-comment {
+                border-top:1px solid #f4f4f4;
+                padding-top:20px;
+            }
+            .avatar {
+                margin-right:3%;
+                float:left;
+                width:8%;
+                display:block;
+                border-radius:3px;
+            }
+            .comment-body {
+                min-width:100px;
+                width:89%;
+                float:left;
+            }
+
+            .comment-header {
+                overflow:hidden;
+                margin-bottom:10px;
+                .user-handle {
+                    display:inline-block;
+                    color:#333;
+                    font-weight:$regular;
+                    margin-right:5px;
+                    @include font-size(13, 13);
+                }
+                .created-at {
+                    margin-top:5px;
+                    @include font-size(11, 13);
+                    color:#999;
+                    @include width-medium() {
+                        float:right;
+                        margin-top:0px;
+                    }
+                }
+            }
+
+            .comment-viewer {
+                overflow:hidden;
+                .comment-options {
+                    margin-top:7px;
+                    float:right;
+                    @include font-size(12, 12);
+                    color: #999;
+                    a {
+                        color: #999;
+                        font-weight:400;
+                        text-decoration: underline;
+                        &:hover {
+                            color:#666;
+                        }
+                    }
+                }
+
+                .edited-status {
+                    float:left;
+                    color: #999;
+                    margin-top:8px;
+                    @include font-size(11, 13);
+                }
+
+                .deleted-status {
+                    font-style: italic;
+                    margin-top:5px;
+                    @include font-size(13, 15);
+                }
+            }
+
+            &.editing {
+                .comment-viewer {
+                    display: none;
+                }
+
+                .comment-editor {
+                    display: block;
+                }
+            }
+
+            .comment-editor {
+                margin-top:10px;
+                display: none;
+
+                .buttons {
+                    text-align:right;
+                    margin-top:10px;
+                    .update-button {
+                        border: 1px solid $color-1;
+                        background: $color-1;
+                        color: #fff;
+                        padding:7px 25px;
+                        width:100%;
+                        margin-bottom:10px;
+                        @include width-small() {
+                            width:auto;
+                            margin-bottom:0;
+                        }
+                    }
+                    .cancel-button {
+                        background:#fff;
+                        border:1px solid #ccc;
+                        color:#999;
+                        width:100%;
+                        @include width-small() {
+                            width:auto;
+                        }
+                    }
+                }
+
+                .pure-button {
+                    text-decoration: none !important;
+                }
+            }
+        }
+    }
+}
