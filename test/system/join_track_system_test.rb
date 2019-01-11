@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class JoinTrackTest < ApplicationSystemTestCase
+class JoinTrackSystemTest < ApplicationSystemTestCase
   test "user joins a track in mentored mode" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),

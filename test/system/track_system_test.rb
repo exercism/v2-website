@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class TrackTest < ApplicationSystemTestCase
+class TrackSystemTest < ApplicationSystemTestCase
   test "does not show missing maintainers" do
     Track.any_instance.stubs(:about)
     track = create(:track)
