@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_171100) do
+ActiveRecord::Schema.define(version: 2019_01_11_203839) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,22 @@ ActiveRecord::Schema.define(version: 2019_01_10_171100) do
     t.boolean "active", default: true, null: false
     t.index ["user_id", "active"], name: "index_auth_tokens_on_user_id_and_active"
     t.index ["user_id"], name: "fk_rails_0d66c22f4c"
+  end
+
+  create_table "blog_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "blog_post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "blog_comment_id"
+    t.text "content", limit: 4294967295, null: false
+    t.text "html", limit: 4294967295, null: false
+    t.boolean "edited", default: false, null: false
+    t.text "previous_content"
+    t.boolean "deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_comment_id"], name: "fk_rails_de25ffa957"
+    t.index ["blog_post_id"], name: "fk_rails_ccd98ed6ee"
+    t.index ["user_id"], name: "fk_rails_a2e6f28c3a"
   end
 
   create_table "blog_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -472,6 +488,9 @@ ActiveRecord::Schema.define(version: 2019_01_10_171100) do
   end
 
   add_foreign_key "auth_tokens", "users", name: "auth_tokens_ibfk_1"
+  add_foreign_key "blog_comments", "blog_comments"
+  add_foreign_key "blog_comments", "blog_posts"
+  add_foreign_key "blog_comments", "users"
   add_foreign_key "communication_preferences", "users", name: "communication_preferences_ibfk_1"
   add_foreign_key "discussion_posts", "iterations", name: "discussion_posts_ibfk_1"
   add_foreign_key "exercise_topics", "exercises", name: "exercise_topics_ibfk_1"
