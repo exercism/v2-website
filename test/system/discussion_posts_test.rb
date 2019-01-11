@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class DiscussionPostTest < ApplicationSystemTestCase
+class DiscussionPostsTest < ApplicationSystemTestCase
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::Exercise.any_instance.stubs(test_suite: [])

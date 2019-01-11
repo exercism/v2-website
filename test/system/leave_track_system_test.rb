@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class LeaveTrackTest < ApplicationSystemTestCase
+class LeaveTrackSystemTest < ApplicationSystemTestCase
   test "user leaves a track" do
     Git::ExercismRepo.stubs(pages: [])
 

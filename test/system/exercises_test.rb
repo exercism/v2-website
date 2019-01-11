@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class ExerciseTest < ApplicationSystemTestCase
+class ExercisesTest < ApplicationSystemTestCase
   test "shows exercises in order" do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
