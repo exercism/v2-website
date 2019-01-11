@@ -39,7 +39,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     refute_selector ".discussion"
     refute_selector ".new-discussion-post"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
     assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
@@ -53,7 +53,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     assert_selector ".discussion"
     refute_selector ".new-discussion-post"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
     assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
@@ -68,12 +68,12 @@ class SolutionLocksTest < ApplicationSystemTestCase
     refute_selector ".discussion"
     refute_selector ".new-discussion-post"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".claim-section"
     refute_selector ".discussion"
     refute_selector ".new-discussion-post"
 
-    click_on "Mentor this solution anyway"
+    click_on "Review this solution anyway"
     assert_selector ".discussion"
     assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
@@ -89,7 +89,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     refute_selector ".discussion"
     refute_selector ".new-discussion-post"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
     assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
@@ -109,7 +109,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     refute_selector ".discussion"
     refute_selector ".new-discussion-post"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
     assert_selector ".new-discussion-post"
     refute_selector ".claim-section"
