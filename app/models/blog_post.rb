@@ -22,10 +22,6 @@ class BlogPost < ApplicationRecord
     slug
   end
 
-  # TODO Temporary content
-  # BlogPost.create(title: "Exercism in 2019", slug: "exercise-in-2019", author_handle: 'iHiD', published_at: DateTime.now, uuid: SecureRandom.uuid, marketing_copy: nil, content_repository: "blog", content_filepath: "posts/exercism-in-2019.md", category: 'interview')
-
-  # TODO
   def content
     markdown = case content_repository
       when "blog"
