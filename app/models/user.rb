@@ -89,7 +89,14 @@ class User < ApplicationRecord
     accepted_privacy_policy_at.present?
   end
 
+  # TODO - Delete
+  #def bio
+    #"Jeremy is the CEO of Thalamus and likes programming and other good things. He does all the Exercism stuff and works a lot of the time and needs a break sometimes but doesn't give himself one enough."
+  #end
+
   def avatar_url
+    # TODO - Delete
+    #return "people/1.png"
     img = super
     if avatar.attached?
       avatar_thumbnail_url

@@ -8,11 +8,28 @@
         background-color:$color-2;
         padding:20px 0 20px 0;
         margin-bottom:40px;
+        text-align:center;
         .heading {
-            @include font-size(25, 25);
+            @include font-size(20, 20);
             @include header-font;
             font-weight:600;
             letter-spacing:-0.3px;
+            margin-bottom:5px;
+            a {
+                color:#fff;
+                text-decoration:none;
+                border-bottom:1px solid transparent;
+                padding:0 5px;
+                &:hover {
+                    border-bottom-color:rgba(#fff, 0.5);
+                }
+            }
+        }
+        .subheading {
+            @include font-size(16, 16);
+            //@include header-font;
+            //font-weight:600;
+            //letter-spacing:-0.3px;
             color:#fff;
         }
     }
@@ -36,27 +53,41 @@
             font-weight:$bold;
         }
     }
-    h1 {
-        @include font-size(30, 30);
-        font-weight:$regular;
-        letter-spacing:-0.3px;
-        color:#333;
-        margin-bottom:10px;
-    }
-    .byline {
-        @include font-size(16, 16);
-        display:inline-block;
-        margin-bottom:20px;
-        padding-right:50px; 
-        border-bottom:1px solid #ccc;
-        padding-bottom:20px;
+    .blog-content {
+        max-width:700px;
+        margin: 0 auto;
         a {
-            color:#333;
+            font-weight:$bold;
+            color:$color-1;
+        }
+        strong {
             font-weight:$bold;
         }
     }
+    h1 {
+        @include font-size(34, 34);
+        font-weight:$regular;
+        color:#333;
+        margin-bottom:10px;
+        text-align:center;
+    }
+    .byline {
+        @include font-size(15, 16);
+        margin-bottom:20px;
+        border-bottom:1px solid #ccc;
+        padding-bottom:20px;
+        text-align:center;
+        font-weight:$regular;
+        a {
+            color:#333;
+            font-weight:$regular;
+        }
+        .handle {
+            text-transform:none;
+        }
+    }
 
-    .article {
+    article {
         p, li {
             @include font-size(18, 26);
         }
@@ -67,20 +98,74 @@
             margin-bottom:20px;
         }
     }
+    .categories {
+        overflow:hidden;
+        a {
+            background: #eee;
+            color:#333;
+            font-weight:500;
+            margin-right:10px;
+            padding: 10px;
+            display:block;
+            float:left;
+            margin-right:8px;
+            text-decoration: none;
+            border-radius: 2px;
+            @include font-size(12,12)
+        }
+    }
+
+    .author {
+        overflow:hidden;
+        margin-top:30px;
+        padding-top:30px;
+        border-top:1px solid #eee;
+        img {
+            width:70px;
+            height:70px;
+            float:left;
+            display:block;
+            border-radius: 100%;
+            margin-right:15px;
+            background:#eee;
+        }
+        .name {
+            font-weight:$bold;
+            margin-bottom:5px;
+            @include font-size(20, 20);
+            letter-spacing:0.4px;
+            margin-bottom:5px;
+        }
+        .bio {
+            @include font-size(15, 20);
+            color:#333;
+            max-height:59px;
+            overflow:hidden;
+            margin-bottom:10px;
+        }
+        a {
+            background:$color-1;
+            color:#fff;
+            vertical-align:middle;
+            font-weight:$bold;
+            margin-left:85px;
+        }
+    }
 
     .comments-section {
-        margin-top:20px;
-        padding-top:20px;
+        margin-top:30px;
+        padding-top:30px;
         border-top:1px solid #eee;
         h3 {
-            @include font-size(18, 18);
+            @include font-size(20,20);
             font-weight:$bold;
-            margin-bottom:10px;
+            margin-bottom:20px;
+            letter-spacing:0.4px;
         }
         .comments {
             margin-bottom:20px;
             .no-comments {
-                font-style:italic;
+                color:#666;
             }
         }
         .new-blog-comment {
@@ -126,51 +211,44 @@
         .blog-comment {
             margin-bottom:20px;
             overflow:hidden;
+            //border-left:3px solid #eee;
+            //padding-left:10px;
+            .divider {
+                height:1px;
+                background:#eaeaea;
+                margin-top:20px;
+            }
             &.delete {
                 .avatar, .comment-body {
                     opacity:0.3;
                 }
             }
-            &+.blog-comment {
-                border-top:1px solid #f4f4f4;
-                padding-top:20px;
-            }
-            .avatar {
-                margin-right:3%;
-                float:left;
-                width:8%;
-                display:block;
-                border-radius:3px;
-            }
-            .comment-body {
-                min-width:100px;
-                width:89%;
-                float:left;
-            }
 
-            .comment-header {
+            .comment-footer {
                 overflow:hidden;
-                margin-bottom:10px;
-                .user-handle {
-                    display:inline-block;
-                    color:#333;
-                    font-weight:$regular;
-                    margin-right:5px;
-                    @include font-size(13, 13);
-                }
-                .created-at {
-                    margin-top:5px;
-                    @include font-size(11, 13);
-                    color:#999;
-                    @include width-medium() {
-                        float:right;
-                        margin-top:0px;
-                    }
+                color:#666;
+
+                a {
+                    color:#666;
                 }
             }
 
             .comment-viewer {
                 overflow:hidden;
+
+                .comment-html {
+                    margin-bottom:10px;
+                    * {
+                        @include font-size(15, 20);
+                    }
+
+                    pre code {
+                        &, * {
+                            font-size:12px;
+                        }
+                    }
+                }
+
                 .comment-options {
                     margin-top:7px;
                     float:right;

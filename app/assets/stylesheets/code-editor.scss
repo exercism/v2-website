@@ -31,7 +31,9 @@ body .md-editor {
 
 
 .widget-discussion-post .post-html, 
-.new-discussion-post .preview-area {
+.new-discussion-post .preview-area,
+.blog-comment .comment-html, 
+.new-blog-comment .preview-area {
     * {
         @include font-size(14, 19);
     }
