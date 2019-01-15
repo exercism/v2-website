@@ -24,15 +24,3 @@
           =link_to "View Profile", profile_path(@blog_post.author.profile), class: 'pure-button'
 
       =render "comments"
-
-    -#
-      .pure-u-1-1.pure-u-md-1-3
-        .sidebar
-          %h3 Quick Links
-          %ul
-            %li= link_to "Recent Blog Posts", blog_posts_path
-            %li= link_to "Our RSS Feed", blog_posts_path(format: 'rss')
-          %h3 Categories
-          %ul
-            -BlogPost.categories.each do |category|
-              %li= link_to category.titleize, blog_posts_path(category: category)

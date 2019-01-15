@@ -4,7 +4,16 @@ class BlogPostsController < ApplicationController
 
     respond_to do |format|
       format.html do
+        if params[:category].present?
+          @category = params[:category]
+          @blog_posts = @blog_posts.where(category: params[:category])
+        else
+          @category = nil
+        end
+
         @blog_posts = @blog_posts.page(params[:page]).per(10)
+        @comment_counts = BlogComment.where(blog_post_id: @blog_posts.map(&:id)).group(:blog_post_id).count
+        p @comment_counts
       end
 
       format.rss do
