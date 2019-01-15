@@ -153,10 +153,17 @@ class User < ApplicationRecord
   end
 
   def mentor_rating
-   @mentor_rating ||=
-      solution_mentorships.where.not(rating: nil).
-                           pluck(Arel.sql("AVG(rating) as r")).
-                           first.to_f.round(2)
+    return @mentor_rating if @mentor_rating
+
+    rating_arr = solution_mentorships.where.not(rating: nil).order(:rating).pluck(:rating)
+    if rating_arr.empty?
+      @mentor_rating = 0.0
+    else
+      five_percent = (rating_arr.length * 0.05).round
+      rating_arr.shift(five_percent)
+      rating_arr.pop(five_percent)
+      @mentor_rating = (rating_arr.sum.to_f / rating_arr.length).round(2)
+    end
   end
 
   def has_active_lock_for_solution?(solution)
