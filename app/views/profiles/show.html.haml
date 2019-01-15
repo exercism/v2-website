@@ -30,6 +30,7 @@
               .badge.mentor #{track.title} mentor
             -@profile.user.maintained_tracks.each do |track|
               .badge.maintainer #{track.title} maintainer
+
           .member-since
             =graphical_icon 'calendar fa-fw'
             Since #{@profile.user.created_at.strftime("%b %Y")}
