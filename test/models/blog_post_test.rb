@@ -25,7 +25,7 @@ class BlogPostTest < ActiveSupport::TestCase
   test "BlogPost.categories" do
     categories = ["first", "second"]
 
-    create :blog_post, category: categories[0], published_at: DateTime.now + 1.minute
+    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
     create :blog_post, category: categories[1], published_at: DateTime.now - 1.minute
 
     # Duplicate
@@ -36,4 +36,21 @@ class BlogPostTest < ActiveSupport::TestCase
 
     assert_equal categories, BlogPost.categories
   end
+
+  test "BlogPost.categories_woth_counts" do
+    categories = ["first", "second"]
+
+    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
+    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
+    create :blog_post, category: categories[1], published_at: DateTime.now - 1.minute
+
+    # Not published
+    create :blog_post, category: "unpublished", published_at: DateTime.now + 1.minute
+
+    assert_equal [
+      ["first", 2],
+      ["second", 1]
+    ], BlogPost.categories_with_counts
+  end
+
 end

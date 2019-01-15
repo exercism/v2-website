@@ -14,6 +14,10 @@ class BlogPost < ApplicationRecord
     BlogPost.published.distinct.pluck(:category).sort
   end
 
+  def self.categories_with_counts
+    BlogPost.published.group(:category).count.sort_by { |cat,_| cat }
+  end
+
   def to_param
     slug
   end
