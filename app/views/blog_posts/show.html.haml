@@ -16,7 +16,7 @@
         =raw @blog_post.content
       .categories
         =link_to @blog_post.category.titleize, blog_posts_path(category: @blog_post.category)
-      -if @blog_post.author
+      -if @blog_post.author.try(:profile)
         .author
           =image_tag @blog_post.author.avatar_url
           .name= @blog_post.author.name
