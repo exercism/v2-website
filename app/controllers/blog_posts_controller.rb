@@ -13,7 +13,6 @@ class BlogPostsController < ApplicationController
 
         @blog_posts = @blog_posts.page(params[:page]).per(10)
         @comment_counts = BlogComment.where(blog_post_id: @blog_posts.map(&:id)).group(:blog_post_id).count
-        p @comment_counts
       end
 
       format.rss do
