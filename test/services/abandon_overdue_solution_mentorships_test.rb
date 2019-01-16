@@ -6,7 +6,7 @@ class AbandomOverdueSolutionMentorshipsTest < ActiveSupport::TestCase
     new_mentorship = create :solution_mentorship, requires_action_since: Time.current - 6.days
     completed_mentorship = create :solution_mentorship, requires_action_since: nil
 
-    AbandonSolutionMentorship.expects(:call).with(overdue_mentorship)
+    AbandonSolutionMentorship.expects(:call).with(overdue_mentorship, :timed_out)
     AbandonOverdueSolutionMentorships.()
   end
 end

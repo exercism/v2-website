@@ -146,6 +146,10 @@ FactoryBot.define do
     factory :user_mentor do
       is_mentor { true }
     end
+
+    factory :system_user do
+      id { User::SYSTEM_USER_ID }
+    end
   end
 
   factory :solution do
