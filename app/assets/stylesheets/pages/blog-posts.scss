@@ -94,7 +94,7 @@
             display:inline-block;
             padding-right:20px;
         }
-        &+.blog-post { 
+        +.blog-post {
             margin-top:40px;
         }
     }
