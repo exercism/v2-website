@@ -251,7 +251,15 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 2, user.num_rated_mentored_solutions
   end
 
-  test "mentor_rating" do
+  test "User#system_user" do
+    other_user = create :user, id: 5
+    system_user = create :user, id: User::SYSTEM_USER_ID
+
+    assert_equal system_user, User.system_user
+  end
+
+
+  test "trimmed mentor_rating when 5% is under 0.5" do
     user = create :user
     assert_equal 0, user.mentor_rating
 
@@ -264,10 +272,39 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 3.67, user.mentor_rating
   end
 
-  test "User#system_user" do
-    other_user = create :user, id: 5
-    system_user = create :user, id: User::SYSTEM_USER_ID
+  test "trimmed mentor_rating with 20 solution memberships" do
+    user = create :user
+    assert_equal 0, user.mentor_rating
 
-    assert_equal system_user, User.system_user
+    2.times do
+      create :solution_mentorship, user: user, rating: 1
+    end
+
+    5.times do
+      create :solution_mentorship, user: user, rating: 2
+    end
+
+    create :solution_mentorship, user: user, rating: 3
+
+    5.times do
+      create :solution_mentorship, user: user, rating: 4
+    end
+
+    7.times do
+      create :solution_mentorship, user: user, rating: 5
+    end
+
+    create :solution_mentorship, user: user, rating: nil
+
+    user = User.find(user.id) # Clear the cache
+    assert_equal 3.56, user.mentor_rating
+  end
+
+  test "trimmed mentor rating when no ratings are present" do
+    user = create :user
+    assert_equal 0, user.mentor_rating
+
+    user = User.find(user.id) # Clear the cache
+    assert_equal 0.0, user.mentor_rating
   end
 end
