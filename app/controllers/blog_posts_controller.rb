@@ -1,6 +1,6 @@
 class BlogPostsController < ApplicationController
   def index
-    @blog_posts = BlogPost.published.order('published_at DESC')
+    @blog_posts = BlogPost.published.ordered_by_recency
 
     respond_to do |format|
       format.html do
