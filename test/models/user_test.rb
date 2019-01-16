@@ -263,4 +263,11 @@ class UserTest < ActiveSupport::TestCase
     user = User.find(user.id) # Clear the cache
     assert_equal 3.67, user.mentor_rating
   end
+
+  test "User#system_user" do
+    other_user = create :user, id: 5
+    system_user = create :user, id: User::SYSTEM_USER_ID
+
+    assert_equal system_user, User.system_user
+  end
 end
