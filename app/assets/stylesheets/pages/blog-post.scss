@@ -73,7 +73,7 @@ body.controller-blog_posts.action-show.user-signed_out {
 
     article {
         p, li {
-            @include font-size(18, 26);
+            @include font-size(18, 28);
         }
         li {
             margin-bottom:5px;
