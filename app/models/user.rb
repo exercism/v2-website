@@ -166,7 +166,6 @@ class User < ApplicationRecord
       else
         five_percent = (rating_arr.length * 0.05).round
         rating_arr.shift(five_percent)
-        rating_arr.pop(five_percent)
         (rating_arr.sum.to_f / rating_arr.length).round(2)
       end
     end
