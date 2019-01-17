@@ -8,7 +8,7 @@ module MetadataHelper
   end
 
   def metadata_image_url
-    @metadata_image_url ||= metadata.try(:fetch, :image_url, nil) || image_url("icon.png")
+    @metadata_image_url ||= metadata.try(:fetch, :image_url, nil) || "https://assets.exercism.io/social/general.png"
   end
 
   def metadata_url
