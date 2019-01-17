@@ -11,7 +11,7 @@ class My::DiscussionPostsController < MyController
     @user_track = UserTrack.where(user: current_user, track: @iteration.solution.exercise.track).first
 
     @post.update!(
-      previous_content: @post.content,
+      previous_content: [@post.previous_content, @post.content].compact.join("\n---\n"),
       content: discussion_post_params[:content],
       html: ParseMarkdown.(discussion_post_params[:content]),
       edited: true

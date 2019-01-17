@@ -8,7 +8,7 @@ module MetadataHelper
   end
 
   def metadata_image_url
-    @metadata_image_url ||= metadata.try(:fetch, :image_url, nil) || image_url("icon.png")
+    @metadata_image_url ||= metadata.try(:fetch, :image_url, nil) || "https://assets.exercism.io/social/general.png"
   end
 
   def metadata_url
@@ -61,6 +61,21 @@ module MetadataHelper
         end
       else
         case controller_name
+        when "blog_posts"
+          case action_name
+          when 'index'
+            {
+              title: "The Exercism Blog",
+              description: "News, interviews and articles from the Exercism community.",
+              image_url: "https://assets.exercism.io/social/blog.png"
+            }
+          else
+            {
+              title: @blog_post.title,
+              description: blog_post_summary(@blog_post),
+              image_url: "https://assets.exercism.io/social/blog.png"
+            }
+          end
         when "pages"
           case action_name
           when :index

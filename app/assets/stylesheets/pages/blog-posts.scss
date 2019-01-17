@@ -1,0 +1,102 @@
+@import 'variables';
+@import 'mixins';
+
+#blog-posts {
+    .header {
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        background-color:$color-2;
+        padding:20px 0 20px 0;
+        margin-bottom:40px;
+        .heading {
+            @include font-size(20, 20);
+            @include header-font;
+            font-weight:600;
+            letter-spacing:-0.3px;
+            margin-bottom:5px;
+            color:#fff;
+            a {
+                color:#fff;
+                text-decoration:none;
+                border-bottom:1px solid transparent;
+                padding:0 5px;
+                &:hover {
+                    border-bottom-color:rgba(#fff, 0.5);
+                }
+            }
+        }
+        .subheading {
+            @include font-size(16, 16);
+            color:#fff;
+        }
+    }
+    .sidebar {
+        border-left:1px solid #ddd;
+        padding-left:50px;
+        margin-left:50px;
+        height:100%;
+        ul {
+            margin:0 0 20px 0;
+            padding-left:0;
+            list-style:none;
+            li {
+                margin-bottom:3px;
+            }
+            a {
+                color:#333;
+                text-decoration:none;
+                border-bottom:1px solid #ccc;
+            }
+        }
+
+        h3 {
+            @include font-size(14, 14);
+            margin-bottom:8px;
+            font-weight:$bold;
+        }
+    }
+
+    h2 {
+        color:$color-2;
+        font-weight:$black;
+        @include font-size(15, 22);
+        margin-bottom:25px;
+        text-transform:uppercase;
+    }
+
+    .blog-post {
+        display:block;
+        color:#333;
+        text-decoration:none;
+        border-left:3px solid #eee;
+        padding-left:10px;
+
+        &:hover {
+            h3 .text {
+                border-bottom-color:#ddd;
+            }
+            border-left-color:$color-2;
+        }
+        h3 {
+            @include font-size(22, 25);
+            font-weight:$bold;
+            margin-bottom:5px;
+            .text {
+                display:inline-block;
+                border-bottom: 1px solid transparent;
+            }
+        }
+        .synopsis {
+            margin-bottom:5px;
+        }
+        .details {
+            color:#888;
+            display:inline-block;
+            padding-right:20px;
+        }
+        +.blog-post {
+            margin-top:40px;
+        }
+    }
+
+}
