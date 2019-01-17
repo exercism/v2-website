@@ -20,7 +20,7 @@
           %strong #{current_user.handle}
         .hr
         = link_to "Exercism: Personal Edition", "https://exercism.io"
-        = link_to "Community Blog", "https://teams.exercism.io"
+        /= link_to "Community Blog", "https://teams.exercism.io"
         .hr
         = link_to "Sign out", destroy_user_session_path, method: :delete
 
