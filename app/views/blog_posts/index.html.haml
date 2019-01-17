@@ -20,7 +20,7 @@
           =link_to post, class: 'blog-post' do
             %h3
               .text= post.title
-            .synopsis= post.marketing_copy || strip_tags(post.content)[0,280]
+            .synopsis= blog_post_summary(post)
             .details
               By
               %span.handle #{post.author.profile ? post.author.profile.display_name : post.author_handle}

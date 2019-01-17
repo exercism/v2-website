@@ -19,7 +19,7 @@
       %item
         %title= post.title
         %link= blog_post_url(post)
-        %description= post.marketing_copy || strip_tags(post.content)[0,280]
+        %description= blog_post_summary(post)
         %pubDate= post.published_at.rfc822
         %guid{isPermaLink: 'true'}= blog_post_url(post)
         %comments= blog_post_url(post, anchor: 'comments')

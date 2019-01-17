@@ -61,6 +61,21 @@ module MetadataHelper
         end
       else
         case controller_name
+        when "blog_posts"
+          case action_name
+          when 'index'
+            {
+              title: "The Exercism Blog",
+              description: "News, interviews and articles from the Exercism community.",
+              image_url: "https://assets.exercism.io/social/blog.png"
+            }
+          else
+            {
+              title: @blog_post.title,
+              description: blog_post_summary(@blog_post),
+              image_url: "https://assets.exercism.io/social/blog.png"
+            }
+          end
         when "pages"
           case action_name
           when :index
