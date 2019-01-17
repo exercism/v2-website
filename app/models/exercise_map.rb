@@ -1,36 +1,35 @@
 class ExerciseMap
-  def initialize(user, track)
-    @user = user
-    @track = track
-  end
+  include Mandate
+  initialize_with :user, :track
 
   def core_exercises
-    map.select(&:core?)
+    exercises.select(&:core?).map do |exercise|
+      ExerciseMapNode.new(
+        exercise: exercise,
+        solution: solution_for(exercise),
+        unlocks: exercises_to_unlock_for(exercise)
+      )
+    end
   end
 
   private
   attr_reader :user, :track
 
-  def map
-    exercises.
-      map { |e| ExerciseWithStatus.new(e, solution_for(e)) }.
-      map { |e| ExerciseMapNode.new(exercise: e, unlocks: exercises_to_unlock_for(e)) }
+  memoize
+  def exercises
+    track.exercises.includes(:unlocks)
   end
 
   def solution_for(exercise)
     solutions.find { |solution| solution.exercise_id == exercise.id }
   end
 
+  memoize
   def solutions
-    @solutions ||= user.
-      solutions.
-      includes(:approved_by).
-      joins(:exercise).
-      where(exercises: { track: track })
-  end
-
-  def exercises
-    @exercises ||= track.exercises.includes(:unlocks)
+    user.solutions.
+         includes(:approved_by).
+         joins(:exercise).
+         where(exercises: { track: track })
   end
 
   def exercises_to_unlock_for(exercise)
@@ -38,12 +37,17 @@ class ExerciseMap
     exercises += bonus_exercises if exercise.auto_approve?
     exercises += exercise.unlocks
 
-    exercises.map { |e| ExerciseWithStatus.new(e, solution_for(e)) }
+    exercises.map do |e|
+      ExerciseMapNode.new(
+        exercise: e,
+        solution: solution_for(e)
+      )
+    end
   end
 
+  memoize
   def bonus_exercises
-    @bonus_exercises ||= exercises.
-      where(core: false, unlocked_by: nil).
-      limit(10)
+    exercises.where(core: false, unlocked_by: nil).
+              limit(10)
   end
 end

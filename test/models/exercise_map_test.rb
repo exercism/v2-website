@@ -23,6 +23,10 @@ class ExerciseMapTest < ActiveSupport::TestCase
       [side_exercise, unlocked_exercise],
       core_exercises[0].unlocks
     )
+
+    # Check that the ExeciseMapNode class is being used correctly
+    assert_equal "Locked", core_exercises[0].status
+    assert_equal "Locked", core_exercises[0].unlocks[0].status
   end
 
   private
