@@ -26,6 +26,12 @@
     }
 }
 
+@mixin width-smaller-than-medium() {
+    @media screen and (max-width: 48em) {
+        @content;
+    }
+}
+
 @mixin width-medium() {
     @media screen and (min-width: 48em) {
         @content;

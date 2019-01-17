@@ -4,7 +4,7 @@
     -if @blog_post.comments.size > 0
       -@blog_post.comments.each do |comment|
         =render "blog_comments/comment", comment: comment
-    -else
+    -elsif user_signed_in?
       .no-comments There are no comments yet. Be the first to add one.
 
   -if user_signed_in?
