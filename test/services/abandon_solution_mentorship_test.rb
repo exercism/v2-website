@@ -50,8 +50,6 @@ class AbandonSolutionMentorshipTest < ActiveSupport::TestCase
   end
 
   test "works with mentorship for other reason" do
-    create :system_user
-
     mentor = create :user_mentor
     solution = create :solution
     iteration = create :iteration, solution: solution
@@ -65,4 +63,19 @@ class AbandonSolutionMentorshipTest < ActiveSupport::TestCase
 
     refute DiscussionPost.where(iteration: iteration).exists?
   end
+
+  test "if the user has already abandoned this is a no-op" do
+    mentor = create :user_mentor
+    solution = create :solution
+    iteration = create :iteration, solution: solution
+    mentorship = create :solution_mentorship, user: mentor, solution: solution, abandoned: true
+
+    AbandonSolutionMentorship.(mentorship, :left_conversation)
+
+    [solution, mentorship].each(&:reload)
+    assert mentorship.abandoned
+    assert_equal 0, solution.num_mentors
+    refute DiscussionPost.where(iteration: iteration).exists?
+  end
+
 end
