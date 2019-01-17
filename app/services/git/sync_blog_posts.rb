@@ -1,7 +1,7 @@
 class Git::SyncBlogPosts
   include Mandate
 
-  def initialize(repo = Git::WebsiteContent.head)
+  def initialize(repo = Git::BlogRepository.head)
     @repo = repo
   end
 
