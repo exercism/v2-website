@@ -18,7 +18,7 @@ class Git::BlogRepository < Git::RepoBase
   end
 
   def blog_posts
-    config_pointer = commit.tree['blog.json']
+    config_pointer = head_commit.tree['blog.json']
     config_blob = lookup(config_pointer[:oid])
     read_json_blob(config_pointer[:oid])
   end
