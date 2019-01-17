@@ -1,11 +1,11 @@
 require "test_helper"
 
-class ExerciseWithStatusTest < ActiveSupport::TestCase
+class ExerciseMapNoteTest < ActiveSupport::TestCase
   test "exercise is unlocked when solution is present" do
     exercise = create(:exercise)
     solution = create(:solution)
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert object.unlocked?
   end
@@ -13,7 +13,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
   test "exercise is locked when solution is blank" do
     exercise = create(:exercise)
 
-    object = ExerciseWithStatus.new(exercise, nil)
+    object = ExerciseMapNode.new(exercise: exercise, solution: nil)
 
     assert object.locked?
   end
@@ -22,7 +22,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution, completed_at: Date.new(2016, 12, 25))
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert object.completed?
   end
@@ -31,7 +31,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution, approved_by: create(:user))
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert object.approved?
   end
@@ -40,7 +40,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution, downloaded_at: Time.utc(2018, 12, 25))
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert object.in_progress?
   end
@@ -49,7 +49,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution, completed_at: Date.new(2016, 12, 25))
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert_equal "Completed", object.status
   end
@@ -58,7 +58,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution, approved_by: create(:user))
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert_equal "Approved", object.status
   end
@@ -67,7 +67,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution, downloaded_at: Time.utc(2018, 12, 25))
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert_equal "In progress", object.status
   end
@@ -76,7 +76,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
     exercise = create(:exercise)
     solution = create(:solution)
 
-    object = ExerciseWithStatus.new(exercise, solution)
+    object = ExerciseMapNode.new(exercise: exercise, solution: solution)
 
     assert_equal "Unlocked", object.status
   end
@@ -84,7 +84,7 @@ class ExerciseWithStatusTest < ActiveSupport::TestCase
   test "status is 'Locked' when solution is locked" do
     exercise = create(:exercise)
 
-    object = ExerciseWithStatus.new(exercise, nil)
+    object = ExerciseMapNode.new(exercise: exercise, solution: nil)
 
     assert_equal "Locked", object.status
   end
