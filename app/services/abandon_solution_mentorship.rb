@@ -4,6 +4,8 @@ class AbandonSolutionMentorship
   initialize_with :solution_mentorship, :message_type
 
   def call
+    return if solution_mentorship.abandoned?
+
     create_system_discussion_post
     solution_mentorship.update!(abandoned: true)
     CacheSolutionNumMentors.(solution)
