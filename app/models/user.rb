@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   DEFAULT_AVATAR = "anonymous.png"
+  SYSTEM_USER_ID = 1
 
   # Remove this so devise can't use it.
   def self.validates_uniqueness_of(*args)
@@ -46,6 +47,7 @@ class User < ApplicationRecord
   has_many :reactions, dependent: :destroy
 
   has_many :discussion_posts, dependent: :nullify
+  has_many :blog_comments, dependent: :destroy
 
   has_one_attached :avatar
 
@@ -61,6 +63,10 @@ class User < ApplicationRecord
         user.handle = data["info"]["nickname"] if user.handle.blank?
       end
     end
+  end
+
+  def User.system_user
+    User.find(SYSTEM_USER_ID)
   end
 
   after_create do
@@ -160,7 +166,6 @@ class User < ApplicationRecord
       else
         five_percent = (rating_arr.length * 0.05).round
         rating_arr.shift(five_percent)
-        rating_arr.pop(five_percent)
         (rating_arr.sum.to_f / rating_arr.length).round(2)
       end
     end

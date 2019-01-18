@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class ProfileTest < ApplicationSystemTestCase
+class ProfilesTest < ApplicationSystemTestCase
   test "user uploads profile image" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),

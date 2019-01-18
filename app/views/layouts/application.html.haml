@@ -8,6 +8,7 @@
 
     =render "layouts/meta_tags"
     =csrf_meta_tags
+    =yield(:head)
 
   %body{class: body_class}
 

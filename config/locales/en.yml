@@ -43,3 +43,7 @@ en:
       track_not_found: "The track you specified does not exist"
       track_not_joined: "You have not joined this track"
       file_not_found: "The file was not found"
+
+  system_messages:
+    mentor_timed_out: "Mentor '%{handle}' has being removed from this conversation due to inactivity. This solution will be placed into the queue for a new mentor to review."
+    mentor_left_conversation: "Mentor '%{handle}' has left this conversation. This solution will be placed into the queue for a new mentor to review."
