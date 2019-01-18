@@ -289,7 +289,7 @@ class UserTest < ActiveSupport::TestCase
   create :solution_mentorship, user: user, rating: nil
 
   user = User.find(user.id) # Clear the cache
-  assert_equal 3.56, user.mentor_rating
+  assert_equal 3.63, user.mentor_rating
 end
 
 test "trimmed mentor rating when no ratings are present" do
