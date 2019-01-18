@@ -45,7 +45,11 @@ body.controller-blog_posts.action-show.user-signed_out {
             color:$color-2;
         }
         strong {
+<<<<<<< HEAD
             font-weight:$black;
+=======
+            font-weight:$bold;
+>>>>>>> ff7c23cc211d9b5801f8ed36fb3a6eab71beee54
         }
     }
     h1 {

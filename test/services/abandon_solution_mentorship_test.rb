@@ -17,7 +17,11 @@ class AbandonSolutionMentorshipTest < ActiveSupport::TestCase
 
     # Check discussion post has been created
     content = {'i18n_message' => 'system_messages.mentor_timed_out', 'handle' => mentor.handle}
+<<<<<<< HEAD
     html = ParseMarkdown.("Mentor 'freddie' has being removed from this conversation due to inactivity. This solution will be placed into the queue for a new mentor to review.")
+=======
+    html = ParseMarkdown.("Mentor 'freddie' has been removed from this conversation due to inactivity. This solution has been resubmitted to the queue for a new mentor to review.")
+>>>>>>> ff7c23cc211d9b5801f8ed36fb3a6eab71beee54
 
     dp = DiscussionPost.last
     assert_equal User.system_user, dp.user
@@ -41,7 +45,11 @@ class AbandonSolutionMentorshipTest < ActiveSupport::TestCase
     assert_equal 0, solution.num_mentors
 
     content = {'i18n_message' => 'system_messages.mentor_left_conversation', 'handle' => mentor.handle}
+<<<<<<< HEAD
     html = ParseMarkdown.("Mentor 'bobby' has left this conversation. This solution will be placed into the queue for a new mentor to review.")
+=======
+    html = ParseMarkdown.("Mentor 'bobby' has left this conversation. This solution has been resubmitted to the queue for a new mentor to review.")
+>>>>>>> ff7c23cc211d9b5801f8ed36fb3a6eab71beee54
     dp = DiscussionPost.last
     assert_equal User.system_user, dp.user
     assert_equal iteration, dp.iteration

@@ -4,7 +4,11 @@
     -if @blog_post.comments.size > 0
       -@blog_post.comments.each do |comment|
         =render "blog_comments/comment", comment: comment
+<<<<<<< HEAD
     -else
+=======
+    -elsif user_signed_in?
+>>>>>>> ff7c23cc211d9b5801f8ed36fb3a6eab71beee54
       .no-comments There are no comments yet. Be the first to add one.
 
   -if user_signed_in?
