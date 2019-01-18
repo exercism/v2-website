@@ -82,4 +82,44 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     assert_body_not_includes email, user.handle
     assert_text_not_includes email, user.handle
   end
+
+  test "remind" do
+    solution = create :solution
+    exercise = solution.exercise
+    user = solution.user
+    user_track = create :user_track, user: user, track: exercise.track
+    mentor = create :user
+
+    email = MentorNotificationsMailer.remind(mentor, solution)
+
+    assert_emails 1 do
+      email.deliver_now
+    end
+
+    assert_equal ["hello@mail.exercism.io"], email.from
+    assert_equal ["hello@exercism.io"], email.reply_to
+    assert_equal [mentor.email], email.to
+    assert_equal "[Exercism Mentor Reminder] Action required on #{exercise.track.title}/#{exercise.title} - #{solution.uuid[0,5]}", email.subject
+
+    str = %Q{since "#{user.handle}" last}
+    assert_body_includes email, str
+    assert_text_includes email, str
+  end
+
+  test "remind with anon handle" do
+    handle = "foobar-ftw"
+    solution = create :solution
+    user = solution.user
+    user_track = create :user_track, handle: handle, anonymous: true, user: user, track: solution.exercise.track
+
+    mentor = create :user
+
+    email = MentorNotificationsMailer.remind(mentor, solution)
+    str = %Q{since "#{handle}" last}
+    assert_body_includes email, str
+    assert_text_includes email, str
+    assert_body_not_includes email, user.handle
+    assert_text_not_includes email, user.handle
+  end
+
 end

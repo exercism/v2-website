@@ -74,13 +74,19 @@
             }
         }
         .notification {
-            padding:5px;
             color:#fff;
             font-weight:400;
-            a {
+            vertical-align:middle;
+            .ignore {
                 font-weight:400;
                 color:#fff;
                 text-decoration:underline;
+                background: #fff;
+                padding: 6px 10px;
+                color: $color-1;
+                text-decoration: none;
+                vertical-align: baseline;
+                margin-left: 5px;
             }
         }
     }
