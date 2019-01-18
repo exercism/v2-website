@@ -17,7 +17,7 @@ class SolutionIgnoreRequireActionTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     within ".tools-bar .notification" do
-      click_on "Ignore"
+      click_on "No action is required"
     end
 
     assert_selector "body.namespace-mentor.controller-dashboard.action-show"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_203839) do
+ActiveRecord::Schema.define(version: 2019_01_18_221754) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_203839) do
     t.datetime "updated_at", null: false
     t.boolean "receive_product_updates", default: true, null: false
     t.boolean "email_on_solution_approved", default: true, null: false
+    t.boolean "email_on_remind_mentor", default: true, null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
@@ -290,6 +291,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_203839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "requires_action_since"
+    t.datetime "mentor_reminder_sent_at"
     t.index ["solution_id"], name: "fk_rails_704ccdde73"
     t.index ["user_id"], name: "fk_rails_578676d431"
   end

@@ -24,8 +24,8 @@
         .pure-u-1-1.pure-u-md-1-2
           -if current_user.mentorship_for_solution(@solution).try(&:requires_action?)
             .notification
-              This solution requires your action.
-              =link_to "Ignore", [:ignore_requires_action, :mentor, @solution], method: :patch
+              We think this solution requires your action.
+              =link_to "No action is required", [:ignore_requires_action, :mentor, @solution], method: :patch, class: 'pure-button ignore'
 
         .pure-u-1-1.pure-u-md-1-2
           -if @mentoring_notes_created
