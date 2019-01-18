@@ -172,4 +172,14 @@ class SolutionTest < ActiveSupport::TestCase
     refute solution.latest_exercise_version?
   end
 
+  test "only correct polymorphic iterations are returned" do
+    normal_solution = create :solution, id: 1
+    team_solution = create :team_solution, id: 1
+
+    normal_iteration = create :iteration, solution: normal_solution
+    team_iteration = create :iteration, solution: team_solution
+
+    assert_equal [normal_iteration], normal_solution.iterations
+    assert_equal [team_iteration], team_solution.iterations
+  end
 end
