@@ -81,6 +81,10 @@ body.controller-blog_posts.action-show.user-signed_out {
         p {
             margin-bottom:20px;
         }
+        img {
+            max-width:100%;
+            display:block;
+        }
     }
     .categories {
         overflow:hidden;
