@@ -24,6 +24,7 @@ window.setupSolution = (solutionID, iterationID) ->
     $textarea.markdown
       iconlibrary: 'fa'
       hiddenButtons: 'cmdHeading cmdImage cmdPreview'
+      resize: 'vertical'
 
     $textarea.val(getLocalStoragePost())
     $textarea.keyup()

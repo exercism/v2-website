@@ -19,7 +19,8 @@ BlogComment.prototype.startEditing = function(e) {
   if (!this.editorInitialized) {
     this.node.find('textarea').markdown({
       iconlibrary: 'fa',
-      hiddenButtons: 'cmdHeading cmdImage cmdPreview'
+      hiddenButtons: 'cmdHeading cmdImage cmdPreview',
+      resize: 'vertical'
     })
 
     this.editorInitialized = true;
