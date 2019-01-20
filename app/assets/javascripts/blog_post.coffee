@@ -24,6 +24,7 @@ window.setupBlogPost = (blogcommentId) ->
     $textarea.markdown
       iconlibrary: 'fa'
       hiddenButtons: 'cmdHeading cmdImage cmdPreview'
+      resize: 'vertical'
 
     $textarea.val(getLocalStoragecomment())
     $textarea.keyup()
