@@ -44,7 +44,7 @@ body.namespace-my.controller-tracks.action-show {
             border:1px solid $color-1;
             text-transform:uppercase;
             color:#555;
-            font-weight:500;
+            font-weight:$bold;
             padding:9px 15px;
             @media screen and (max-width: 300px) {
                 @include font-size(8, 8);

@@ -150,7 +150,7 @@ $blue: #4A90E2;
             color:$blue;
             text-transform:uppercase;
             @include font-size(12, 12);
-            font-weight:500;
+            font-weight:$bold;
 
         }
         .icons {

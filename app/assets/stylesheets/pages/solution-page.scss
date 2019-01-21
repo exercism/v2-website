@@ -52,7 +52,7 @@
         background:#f9f9f9;
         h3 {
             padding:10px 50px 10px 27px;
-            font-weight:500;
+            font-weight:$bold;
             @include font-size(13, 13);
             background:#eee;
             color:#666;
