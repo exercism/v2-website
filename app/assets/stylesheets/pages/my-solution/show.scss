@@ -358,7 +358,7 @@
     h3 {
         @include font-size(14, 14);
         color:#555;
-        font-weight:$light;
+        font-weight:$fw-regular;
         text-align:center;
         margin-bottom:30px;
     }
@@ -492,7 +492,7 @@
     h3 {
         @include font-size(14, 14);
         color:#555;
-        font-weight:$light;
+        font-weight:$fw-regular;
         text-align:center;
         margin-bottom:30px;
     }
@@ -550,7 +550,7 @@
             }
         }
         .blurb {
-            font-weight:$light;
+            font-weight:$fw-regular;
             @include font-size(13, 17);
             color:#666;
             max-height:50px;
@@ -565,7 +565,7 @@
         padding:15px 0;
         text-align:center;
         h4 {
-            font-weight:$light;
+            font-weight:$fw-regular;
             color:#666;
             margin-bottom:10px;
             strong {

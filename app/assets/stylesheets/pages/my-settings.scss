@@ -62,7 +62,7 @@
     ul,
     .token-explanation {
         @include font-size(14, 18);
-        font-weight:$light;
+        font-weight:$fw-regular;
         color:#666;
     }
     ul {

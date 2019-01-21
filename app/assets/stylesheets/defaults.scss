@@ -24,7 +24,6 @@ select,
 textarea {
     @include normal-font;
     @include font-size(14, 14);
-    font-weight:$light;
     color:#333;
 }
 

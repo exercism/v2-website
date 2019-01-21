@@ -176,7 +176,7 @@ body:not(.prism-dark) #teams-my-solution-page {
                 }
                 .title {
                     @include font-size(14, 18);
-                    font-weight:$light;
+                    font-weight:$fw-regular;
                     display:inline-block;
                     color:green;
                 }

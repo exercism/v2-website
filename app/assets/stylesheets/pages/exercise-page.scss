@@ -52,7 +52,7 @@
             color:#eee;
             @include font-size(12, 12);
             a {
-                font-weight:$light;
+                font-weight:$fw-regular;
                 color:#fff;
             }
         }

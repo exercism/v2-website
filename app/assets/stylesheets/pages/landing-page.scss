@@ -44,7 +44,6 @@ body.controller-pages.action-index footer {
                 margin-bottom:10px;
             }
             p {
-                font-weight:$regular;
                 color:#333;
                 @include font-size(16, 22);
                 max-width:450px;
@@ -52,7 +51,6 @@ body.controller-pages.action-index footer {
             }
             .pure-button {
                 @include font-size(16, 16);
-                font-weight:$regular;
                 border-radius:2px;
                 width:100%;
                 margin-bottom:15px;
@@ -166,7 +164,6 @@ body.controller-pages.action-index footer {
                     }
                     .title {
                         @include font-size(14, 101);
-                        font-weight:$regular;
                         text-align:center;
                         display:none;
                         color:#fff;
@@ -369,12 +366,11 @@ body.controller-pages.action-index footer {
                 text-align:center;
             }
             @include font-size(17, 17);
-            font-weight:$light;
+            font-weight:$fw-regular;
             margin-bottom:20px;
         }
         .pure-button {
             border:1px solid #fff;
-            font-weight:$regular;
             border-radius:2px;
             background:#00bac9;
             padding:12px 35px;
