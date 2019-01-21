@@ -21,7 +21,7 @@
             max-width:70%;
             @include font-size(16, 21);
             color:#fff;
-            font-weight:$light;
+            font-weight:$fw-regular;
         }
     }
     h2 {
@@ -51,6 +51,10 @@
         position:relative;
         overflow:hidden;
 
+        @include width-smaller-than-medium() {
+            text-align:center;
+        }
+
         &:hover {
             border-color:$color-2;
         }
@@ -64,20 +68,28 @@
             height:78px;
             width:70px;
             display:block;
-            float:left;
-            margin-right:15px;
+
+            @include width-smaller-than-medium() {
+                margin: 0 auto 15px auto;
+            }
+            @include width-medium() {
+                margin-right:15px;
+                float:left;
+            }
+
         }
         .title {
-            clear:both;
             overflow:hidden;
             white-space:nowrap;
             h2 {
                 @include font-size(18, 18);
                 font-weight:$bold;
                 margin-right:5px;
-                display:inline-block;
                 vertical-align:bottom;
                 margin-bottom:7px;
+                @include width-medium() {
+                    display:inline-block;
+                }
             }
             .num-exercises {
                 padding:4px 7px;
@@ -87,15 +99,25 @@
                 font-weight:$regular;
                 color:#999;
                 background:#f3f3f3;
+
+                @include width-smaller-than-medium() {
+                    display:inline-block;
+                    margin-top:3px;
+                }
+            }
+            @include width-smaller-than-medium() {
+                clear:both;
             }
         }
         summary {
             @include font-size(14, 19);
-            display:inline-block;
+            //display:inline-block;
             vertical-align:bottom;
-            max-width:390px;
             height:76px;
             overflow:hidden;
+            @include width-medium() {
+                max-width:390px;
+            }
         }
     }
 }
