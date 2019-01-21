@@ -18,7 +18,7 @@
     @include font-size(14, 20);
     a {
         color:$error-red-text-color;
-        font-weight:400;
+        font-weight:$regular;
         text-decoration:underline;
     }
 }

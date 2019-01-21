@@ -92,7 +92,7 @@ $inner-width: 800px;
         padding:40px 0;
         h2 {
             @include font-size(20, 20);
-            font-weight:400;
+            font-weight:$regular;
             font-style:italic;
             letter-spacing:-0.5px;
             margin-bottom:7px;
@@ -118,7 +118,7 @@ $inner-width: 800px;
             a {
                 color:#333;
                 text-decoration:underline;
-                font-weight:400;
+                font-weight:$regular;
             }
         }
     }

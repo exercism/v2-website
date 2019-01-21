@@ -36,12 +36,12 @@
                 padding-right: 5px;
                 border-right: 1px solid #aaa;
                 color: #aaa;
-                font-weight: 400;
+                font-weight:$regular;
             }
             .num-iterations {
                 display: inline-block;
                 color: #aaa;
-                font-weight: 400;
+                font-weight:$regular;
             }
         }
         .status {

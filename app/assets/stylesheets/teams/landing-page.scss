@@ -175,7 +175,7 @@ body.controller-pages.action-index footer {
                     }
                     .title {
                         @include font-size(14, 101);
-                        font-weight:400;
+                        font-weight:$regular;
                         text-align:center;
                         display:none;
                         color:#fff;
