@@ -247,7 +247,7 @@ body.controller-blog_posts.action-show.user-signed_out {
                     color: #999;
                     a {
                         color: #999;
-                        font-weight:400;
+                        font-weight:$regular;
                         text-decoration: underline;
                         &:hover {
                             color:#666;
