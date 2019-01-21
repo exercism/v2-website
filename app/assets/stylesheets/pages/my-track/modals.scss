@@ -80,12 +80,12 @@
             }
             border:1px solid $color-1;
             padding: 10px 13px;
-            font-weight:400;
+            font-weight:$regular;
             &.independent-mode-button {
                 border:1px solid $color-1;
                 background:#fff;
                 color:$color-1;
-                font-weight:300;
+                font-weight:$light;
             }
         }
     }
@@ -109,7 +109,7 @@
         width:auto;
         border:1px solid $color-1;
         padding: 10px 13px;
-        font-weight:400;
+        font-weight:$regular;
 
         &.normal-mode {
             width:59%;
@@ -118,7 +118,7 @@
             border:1px solid $color-1;
             background:#fff;
             color:$color-1;
-            font-weight:300;
+            font-weight:$light;
             width:40%;
         }
     }
@@ -136,7 +136,7 @@
         width:auto;
         border:1px solid $color-1;
         padding: 10px 13px;
-        font-weight:400;
+        font-weight:$regular;
 
         &.action-button {
             width:100%;
@@ -150,7 +150,7 @@
             border:1px solid $color-1;
             background:#fff;
             color:$color-1;
-            font-weight:300;
+            font-weight:$light;
             width:100%;
             @include width-medium() {
                 width:30%;
