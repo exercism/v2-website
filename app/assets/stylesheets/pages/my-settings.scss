@@ -51,7 +51,7 @@
         .alert {
             color:red;
             @include font-size(14, 14);
-            font-weight:500;
+            font-weight:$bold;
             a {
                 color:red;
                 text-decoration:underline;
@@ -193,7 +193,7 @@
             text-transform:uppercase;
             @include font-size(11, 11);
             padding-top:4px;
-            font-weight:500;
+            font-weight:$bold;
         }
     }
 }

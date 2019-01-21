@@ -88,7 +88,7 @@ body .md-editor {
             padding:5px 10px;
         }
         th {
-            font-weight:500;
+            font-weight:$bold;
         }
         tr:nth-child(even) {
             background:#fafafa;
@@ -96,6 +96,6 @@ body .md-editor {
         }
     }
     strong {
-        font-weight:500;
+        font-weight:$bold;
     }
 }

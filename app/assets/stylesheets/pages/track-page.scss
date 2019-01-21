@@ -271,7 +271,7 @@ body.controller-my-tracks.action-show {
         h2 {
             text-align:center;
             @include font-size(26, 26);
-            font-weight:500;
+            font-weight:$bold;
             margin-bottom:15px;
         }
         p {

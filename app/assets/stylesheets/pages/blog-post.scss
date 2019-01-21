@@ -91,7 +91,7 @@ body.controller-blog_posts.action-show.user-signed_out {
         a {
             background: #eee;
             color:#333;
-            font-weight:500;
+            font-weight:$bold;
             margin-right:10px;
             padding: 10px;
             display:block;
@@ -135,7 +135,7 @@ body.controller-blog_posts.action-show.user-signed_out {
             background: #fff;
             border:1px solid $color-2;
             color:$color-2;
-            font-weight:500;
+            font-weight:$bold;
             vertical-align:middle;
             margin-left:85px;
         }
