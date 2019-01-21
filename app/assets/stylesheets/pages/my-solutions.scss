@@ -21,7 +21,7 @@
         }
         .h1-subtitle {
             color:#fff;
-            font-weight:$light;
+            font-weight:$fw-regular;
 
             @include width-small() {
                 max-width:70%;
@@ -118,7 +118,7 @@
                     padding-left:10px;
                     margin-left:10px;
                     color:#aaa;
-                    font-weight:$light;
+                    font-weight:$fw-regular;
                     @include font-size(12, 19);
                     vertical-align:top;
                     white-space: nowrap;

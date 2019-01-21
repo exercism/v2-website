@@ -37,7 +37,7 @@
     }
     p {
         @include font-size(14, 14);
-        font-weight:$light;
+        font-weight:$fw-regular;
         margin-bottom:15px;
         padding-bottom:15px;
         display:inline-block;

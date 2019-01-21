@@ -336,7 +336,6 @@ body.controller-blog_posts.action-show.user-signed_out {
             margin-bottom:10px;
         }
         p {
-            font-weight:$regular;
             color:#fff;
             @include font-size(16, 22);
             max-width:450px;
@@ -344,7 +343,6 @@ body.controller-blog_posts.action-show.user-signed_out {
         }
         .pure-button {
             @include font-size(16, 16);
-            font-weight:$regular;
             border-radius:2px;
             width:100%;
             margin-bottom:15px;
