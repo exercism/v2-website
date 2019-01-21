@@ -45,7 +45,9 @@ body.controller-blog_posts.action-show.user-signed_out {
             color:$color-2;
         }
         strong {
-            font-weight:$bold;
+            // This removes too much contrast for
+            // some linux users which breaks interviews
+            //font-weight:$bold;
         }
     }
     h1 {
