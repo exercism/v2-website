@@ -2,11 +2,8 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =nav_divider
       =link_to "Language tracks", [:tracks]
-      =nav_divider
       =link_to "#{@track.title} track", @track
-      =nav_divider
       %span Exercises
 
   .header

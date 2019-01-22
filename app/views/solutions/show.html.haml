@@ -3,29 +3,19 @@
     .lo-container
       -if user_signed_in?
         /=link_to "Dashboard", root_path
-        /=nav_divider
         =link_to "Language tracks", [:my, :tracks]
-        =nav_divider
         =link_to "#{@track.title} track", [:my, @track]
-        =nav_divider
         -if @user_solution
           =link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
-          =nav_divider
         =link_to "Community solutions", [@track, @exercise, :solutions]
-        =nav_divider
         %span This solution
 
       -else
         =link_to "Language tracks", :tracks
-        =nav_divider
         =link_to "#{@track.title} track", @track
-        =nav_divider
         =link_to "Exercises", [@track, :exercises]
-        =nav_divider
         =link_to @exercise.title, [@track, @exercise]
-        =nav_divider
         =link_to "Community solutions", [@track, @exercise, :solutions]
-        =nav_divider
         %span This solution
 
   .lo-container
