@@ -4,4 +4,4 @@
   %p This track is currently paused. If you would like to continue this track and view your solutuions, please unpause the track.
   .buttons
     = link_to "Unpause the #{@track.title} Track", unpause_my_user_track_path(@user_track), method: :patch, class: 'pure-button action-button'
-    =link_to "Cancel", tracks_path, class: "pure-button close-modal cancel-button"
+    = link_to "Cancel", tracks_path, class: "pure-button cancel-button"
