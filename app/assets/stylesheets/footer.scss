@@ -33,9 +33,9 @@ footer {
         }
     }
     a {
-        text-decoration:none;
-        color:#507679;
-        @include font-size(13, 13);
+        color:#555;
+        @include font-size(14, 18);
+        text-decoration: underline;
         display:block;
         margin-bottom:16px;
         @include width-medium() {
