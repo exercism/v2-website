@@ -13,7 +13,7 @@
     a, span {
         display:inline-block;
         @include font-size(12, 12);
-        padding:11px 5px 5px 5px;
+        padding:11px 10px 5px 17px;
         &:first-child {
             padding-left:0;
         }
@@ -33,13 +33,21 @@
             height: 1px;
             background: #ccc;
         }
+
+        &:nth-child(n+1){
+            &:after {
+                content: url('nav-divider.png');
+                overflow: hidden;
+                position: absolute;
+                display: inline-block;
+                height: 33px;
+                top: 0;
+                bottom: 0;
+                padding-left: 7px;
+            }
+        }
     }
-    img {
-        height:33px;
-        width:13px;
-        display:inline-block;
-        vertical-align:middle;
-    }
+
 }
 
 #nav.lo-external-nav-bar {

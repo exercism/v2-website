@@ -1,9 +1,7 @@
 #nav.lo-nav-bar
   .lo-container
     =link_to "Language tracks", [:my, :tracks]
-    =nav_divider
     =link_to "#{@track.title} track", [:my, @track]
-    =nav_divider
     %span= @exercise.title
 
 .lo-container.track-header-container
