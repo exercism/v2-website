@@ -1,9 +1,15 @@
 namespace :mentors do
   task :remind_overdue => :environment do
-    RemindOverdueSolutionMentorships.()
+    loop do
+      RemindOverdueSolutionMentorships.()
+      sleep(10*60) # Sleep for 10mins
+    end
   end
 
   task :abandon_overdue => :environment do
-    AbandonOverdueSolutionMentorships.()
+    loop do
+      AbandonOverdueSolutionMentorships.()
+      sleep(10*60) # Sleep for 10mins
+    end
   end
 end
