@@ -229,6 +229,8 @@ body.controller-blog_posts.action-show.user-signed_out {
 
                 .comment-html {
                     margin-bottom:10px;
+                    border-left: 3px solid #eee;
+                    padding-left: 10px;
                     * {
                         @include font-size(15, 20);
                     }
