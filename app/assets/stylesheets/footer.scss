@@ -32,6 +32,18 @@ footer {
             margin-bottom:15px;
         }
     }
+
+    ul{
+        padding: 0;
+        list-style: none;
+
+        &.social{
+            li{
+                display: inline-block;
+            }
+        }
+    }
+
     a {
         color:#555;
         @include font-size(14, 18);
@@ -42,7 +54,7 @@ footer {
             margin-bottom:12px;
         }
         &.icon {
-            margin-right:20px;
+            margin-right:15px;
             display:inline-block;
             i {
                 @include font-size(25, 25);
