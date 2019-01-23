@@ -52,8 +52,18 @@ namespace :assets do
   end
 end
 
+namespace :processors do
+  task :restart do
+    on roles(:processors) do
+      execute "sudo /usr/sbin/service mentors_remind_overdue restart"
+      execute "sudo /usr/sbin/service mentors_abandon_overdue restart"
+    end
+  end
+end  
+
 after "deploy:assets:precompile", "assets:upload"
 after "deploy:starting", "sidekiq:shutdown"
 after "deploy:published", "puma_service:restart"
 after "deploy:published", "sidekiq:restart"
 after "deploy:published", "git_sync:restart"
+after "deploy:published", "processors:restart"
