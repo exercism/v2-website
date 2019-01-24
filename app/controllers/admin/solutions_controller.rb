@@ -7,7 +7,7 @@ class Admin::SolutionsController < AdminController
     @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
     @iteration = @solution.iterations.last unless @iteration
 
-    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
+    @comments = @solution.comments.includes(user: [:profile, { avatar_attachment: :blob }])
     @reaction_counts = @solution.reactions.group(:emotion).count.to_h
     @solution_user_track = UserTrack.where(user: @solution.user, track: @track).first
 

@@ -17,6 +17,13 @@ FactoryBot.define do
     content_filepath { SecureRandom.uuid }
   end
 
+  factory :solution_comment do
+    solution { create :solution }
+    user { create :user }
+      content { "Hello. World!" }
+      html { "<p>Hello. World!</p>" }
+  end
+
   factory :solution_lock do
     solution { create :solution }
     user { create :user }
@@ -74,7 +81,6 @@ FactoryBot.define do
     solution { create :solution }
     user { create :user }
     emotion { :love }
-    comment { "The cat was all like and the mat and whatnot" }
   end
 
   factory :maintainer do

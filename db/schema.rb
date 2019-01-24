@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_18_221754) do
+ActiveRecord::Schema.define(version: 2019_01_24_043325) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -247,7 +247,6 @@ ActiveRecord::Schema.define(version: 2019_01_18_221754) do
     t.bigint "solution_id", null: false
     t.bigint "user_id", null: false
     t.integer "emotion", null: false
-    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["solution_id"], name: "fk_rails_51c7d8b8ad"
@@ -267,6 +266,17 @@ ActiveRecord::Schema.define(version: 2019_01_18_221754) do
   create_table "repo_updates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.timestamp "synced_at"
     t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solution_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content", limit: 4294967295, null: false
+    t.text "html", limit: 4294967295, null: false
+    t.boolean "edited", default: false, null: false
+    t.text "previous_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

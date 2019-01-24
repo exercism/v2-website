@@ -52,9 +52,8 @@ class ProfilePresenter
 
   memoize
   def comment_counts
-    Reaction.
+    SolutionComment.
       where(solution_id: solutions).
-      with_comments.
       group(:solution_id).
       count
   end
