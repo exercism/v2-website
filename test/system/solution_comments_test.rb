@@ -119,4 +119,47 @@ class SolutionCommentsTest < ApplicationSystemTestCase
     refute_selector(".new-editable-text textarea")
   end
 
+  test "non-solution user cannot enable comments" do
+    @solution.update(allow_comments: false)
+
+    sign_in!(@user)
+    visit solution_path(@solution)
+
+    assert_selector(".comments-disabled")
+    refute_selector(".comments-disabled .pure-button")
+    refute_selector(".new-editable-text textarea")
+  end
+
+  test "solution user can enable comments" do
+    @solution.update(allow_comments: false, user: @user)
+
+    sign_in!(@user)
+    visit solution_path(@solution)
+
+    assert_selector(".comments-disabled .pure-button")
+    refute_selector(".new-editable-text textarea")
+    click_on "Enable comments"
+
+    assert_selector(".new-editable-text textarea")
+  end
+
+  test "non-solution user cannot disable comments" do
+    sign_in!(@user)
+    visit solution_path(@solution)
+
+    refute_selector(".disable-comments.pure-button")
+  end
+
+  test "solution user can disable comments" do
+    @solution.update(user: @user)
+
+    sign_in!(@user)
+    visit solution_path(@solution)
+
+    assert_selector(".disable-comments.pure-button")
+    assert_selector(".new-editable-text textarea")
+    click_on "Disable comments"
+
+    refute_selector(".new-editable-text textarea")
+  end
 end

@@ -15,7 +15,7 @@
 
   -if user_signed_in?
     -if readonly
-      .comments-disabled Comments have been disabled for this solution.
+      =render "comments_disabled"
     -else
       .new-editable-text
         =form_for SolutionComment.new, url: solution_comments_path(@solution), remote: true do |f|
@@ -31,6 +31,8 @@
               .pane.pane-2.preview
                 .preview-area
 
+          -if current_user == @solution.user
+            =link_to "Disable comments", [:toggle_allow_comments, :my, @solution], method: :patch, class: 'pure-button disable-comments'
           =button_tag "Comment", class: "comment-button js-disable-on-click pure-button #{@solution.approved?? "faded" : ""}"
   -else
     / TODO

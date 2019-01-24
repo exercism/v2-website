@@ -150,7 +150,10 @@ class My::SolutionsController < MyController
 
   def toggle_allow_comments
     @solution.update(allow_comments: !@solution.allow_comments?)
-    render "toggle"
+    respond_to do |format|
+      format.html { redirect_to solution_path }
+      format.js { render "toggle" }
+    end
   end
 
   private
