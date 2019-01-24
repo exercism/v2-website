@@ -9,8 +9,8 @@ class BlogPostTest < ActiveSupport::TestCase
   end
 
   test "published and scheduled scopes works" do
-    published = create :blog_post, published_at: DateTime.now - 1.minute
-    scheduled = create :blog_post, published_at: DateTime.now + 1.minute
+    published = create :blog_post, published_at: Time.current - 1.minute
+    scheduled = create :blog_post, published_at: Time.current + 1.minute
 
     assert_equal [published], BlogPost.published
     assert_equal [scheduled], BlogPost.scheduled
@@ -25,14 +25,14 @@ class BlogPostTest < ActiveSupport::TestCase
   test "BlogPost.categories" do
     categories = ["first", "second"]
 
-    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
-    create :blog_post, category: categories[1], published_at: DateTime.now - 1.minute
+    create :blog_post, category: categories[0], published_at: Time.current - 1.minute
+    create :blog_post, category: categories[1], published_at: Time.current - 1.minute
 
     # Duplicate
-    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
+    create :blog_post, category: categories[0], published_at: Time.current - 1.minute
 
     # Not published
-    create :blog_post, category: "unpublished", published_at: DateTime.now + 1.minute
+    create :blog_post, category: "unpublished", published_at: Time.current + 1.minute
 
     assert_equal categories, BlogPost.categories
   end
@@ -40,12 +40,12 @@ class BlogPostTest < ActiveSupport::TestCase
   test "BlogPost.categories_woth_counts" do
     categories = ["first", "second"]
 
-    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
-    create :blog_post, category: categories[0], published_at: DateTime.now - 1.minute
-    create :blog_post, category: categories[1], published_at: DateTime.now - 1.minute
+    create :blog_post, category: categories[0], published_at: Time.current - 1.minute
+    create :blog_post, category: categories[0], published_at: Time.current - 1.minute
+    create :blog_post, category: categories[1], published_at: Time.current - 1.minute
 
     # Not published
-    create :blog_post, category: "unpublished", published_at: DateTime.now + 1.minute
+    create :blog_post, category: "unpublished", published_at: Time.current + 1.minute
 
     assert_equal [
       ["first", 2],
