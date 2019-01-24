@@ -3,13 +3,26 @@
 
   .lo-container
     =notice_and_alert
-    %h1 Preferences
     .settings-section
       %h2 Communication preferences
 
       =form_for current_user.communication_preferences, url: [:my, :settings, :preferences] do |f|
         /-if current_user.admin?
         /  %h2 Admin communications
+
+        %h3 General communications
+        =f.label :receive_product_updates do
+          =f.check_box :receive_product_updates
+          %span Email me about product updates
+
+        %h3 Usage emails
+        =f.label :email_on_new_discussion_post do
+          =f.check_box :email_on_new_discussion_post
+          %span Email me when a mentor comments on my solution
+
+        =f.label :email_on_solution_approved do
+          =f.check_box :email_on_solution_approved
+          %span Email me when a mentor approves my solution
 
         -if current_user.is_mentor?
           %h3 Mentor emails
@@ -21,19 +34,6 @@
             =f.check_box :email_on_new_iteration_for_mentor
             %span Email me when a student posts a new iteration to a solution I'm mentoring
 
-        %h3 Usage emails
-        =f.label :email_on_new_discussion_post do
-          =f.check_box :email_on_new_discussion_post
-          %span Email me when a mentor comments on my solution
-
-        =f.label :email_on_solution_approved do
-          =f.check_box :email_on_solution_approved
-          %span Email me when a mentor approves my solution
-
-        %h3 General communications
-        =f.label :receive_product_updates do
-          =f.check_box :receive_product_updates
-          %span Email me about product updates
 
         =f.button "Save communication settings", class: 'pure-button'
     .settings-section.dark-toggle
