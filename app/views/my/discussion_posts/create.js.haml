@@ -2,4 +2,5 @@ var newPost = '#{j discussion_post_widget(@post, @iteration.solution, @user_trac
 $('.discussion .posts').show().append(newPost)
 $('.discussion .next-steps').hide()
 window.location.href = "#discussion-post-#{@post.id}"
-#{yield(:js).gsub(/<\/?script>/, "")}
+
+=raw yield(:js).gsub(/<\/?script>/, "")

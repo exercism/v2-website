@@ -1,6 +1,6 @@
 var newPost = '#{j discussion_post_widget(@post, @solution, @user_track)}';
 $('.discussion .posts').show().append(newPost)
-#{yield(:js).gsub(/<\/?script>/, "")}
+=raw yield(:js).gsub(/<\/?script>/, "")
 
 $('.pass-button').remove()
 

@@ -2,4 +2,4 @@ var newComment = '#{j render("blog_comments/comment", comment: @comment)}';
 $('#blog-post .comments .no-comments').hide()
 $('#blog-post .comments').append(newComment)
 window.location.href = "#blog-comment-#{@comment.id}"
-#{yield(:js).gsub(/<\/?script>/, "")}
+=raw yield(:js).gsub(/<\/?script>/, "")

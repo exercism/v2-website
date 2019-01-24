@@ -1,17 +1,18 @@
-function DiscussionPost(id, content) {
+// Type is hyphenated node
+function EditableText(type, id, content) {
   this.id = id;
   this.editorInitialized = false;
-  this.node = $('#discussion-post-' + id);
+  this.node = $('#' + type + '-' + id); // e.g. #discussion-post-10
 
   this.bindEvents();
 }
 
-DiscussionPost.prototype.bindEvents = function() {
-  this.node.find('.js-edit-discussion-post').on('click', this.startEditing.bind(this));
-  this.node.find('.js-show-discussion-post').on('click', this.stopEditing.bind(this));
+EditableText.prototype.bindEvents = function() {
+  this.node.find('.js-edit-editable-text').on('click', this.startEditing.bind(this));
+  this.node.find('.js-show-editable-text').on('click', this.stopEditing.bind(this));
 }
 
-DiscussionPost.prototype.startEditing = function(e) {
+EditableText.prototype.startEditing = function(e) {
   e.preventDefault();
 
   this.node.addClass('editing');
@@ -29,7 +30,7 @@ DiscussionPost.prototype.startEditing = function(e) {
   this.bindEvents();
 };
 
-DiscussionPost.prototype.stopEditing = function(e) {
+EditableText.prototype.stopEditing = function(e) {
   e.preventDefault();
 
   this.node.removeClass('editing');
