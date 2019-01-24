@@ -47,6 +47,7 @@ class User < ApplicationRecord
   has_many :reactions, dependent: :destroy
 
   has_many :discussion_posts, dependent: :nullify
+  has_many :solution_comments, dependent: :destroy # TODO - set deleted status instead
   has_many :blog_comments, dependent: :destroy
 
   has_one_attached :avatar
@@ -129,7 +130,8 @@ class User < ApplicationRecord
   end
 
   def user_track_for(track)
-    user_tracks.where(track_id: track.id).first
+    @user_tracks ||= []
+    @user_tracks[track.id] ||= user_tracks.where(track_id: track.id).first
   end
 
   def may_unlock_exercise?(exercise, user_track: user_track_for(exercise.track))

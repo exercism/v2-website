@@ -7,6 +7,7 @@ class CreateSolutionComments < ActiveRecord::Migration[5.2]
       t.text :html, limit: 4294967295, null: false
       t.boolean :edited, default: false, null: false
       t.text :previous_content, null: true
+      t.boolean :deleted, default: false, null: false
 
       t.timestamps
     end

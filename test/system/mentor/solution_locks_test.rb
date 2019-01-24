@@ -18,7 +18,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -28,7 +28,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -37,11 +37,11 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
     click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -51,11 +51,11 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     assert_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
     click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -66,16 +66,16 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
     click_on "Review this solution"
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
     click_on "Review this solution anyway"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -89,11 +89,11 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
     click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
 
     click_on "Leave conversation"
@@ -111,14 +111,14 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
     click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
 
-    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
     click_on "Comment"
 
     click_on "Leave conversation"

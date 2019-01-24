@@ -86,7 +86,7 @@
             border-radius:2px;
         }
     }
-    .new-discussion-post {
+    .new-editable-text {
         form {
             margin:0px 0 20px 0;
             .md-editor, .preview-area {
@@ -367,7 +367,7 @@ body:not(.prism-dark) #teams-my-solution-page {
         }
     }
     .comments-section {
-        background:#f5f5f5;
+        clear:both;
         border-top:1px solid #eee;
         padding-top:20px;
         margin-top:20px;
@@ -383,56 +383,8 @@ body:not(.prism-dark) #teams-my-solution-page {
             color:#666;
             margin-bottom:20px;
         }
-        .comment {
-            margin-bottom:20px;
-            border:1px solid #ccc;
-            border-radius:2px;
-            padding:30px;
-            background:#fff;
-            .content {
-                border-left:3px solid #f0f0f0;
-                padding-left:15px;
-            }
-            i {
-                float:left;
-                @include font-size(30, 30);
-                color:$color-2;
-                padding:5px 0;
-            }
-            img {
-                float:left;
-                width:30px;
-            }
-            .when {
-                float:right;
-                color:#c4c4c4;
-                @include font-size(12, 12);
-            }
-            .who {
-                @include font-size(14, 16);
-                vertical-align:bottom;
-                color:#888;
-                margin-bottom:5px;
-                strong {
-                    @include font-size(16, 16);
-                    vertical-align:bottom;
-                    font-weight:$regular;
-                    color:#333;
-                }
-            }
-            .text {
-                word-wrap:break-word;
-                &, * {
-                    @include font-size(14, 20);
-                }
-                p {
-                    @include font-size(14, 20);
-                    margin-bottom:10px;
-                    &:last-child {
-                        margin-bottom:0;
-                    }
-                }
-            }
+        .comments+form {
+            margin-top:40px;
         }
     }
 }

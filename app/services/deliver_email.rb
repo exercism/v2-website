@@ -43,6 +43,6 @@ class DeliverEmail
   end
 
   def should_deliver?
-    user.communication_preferences.send("email_on_#{mail_type}")
+    user.communication_preferences.try {|cp| cp.send("email_on_#{mail_type}") }
   end
 end

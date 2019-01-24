@@ -1,8 +1,8 @@
-.widget-discussion-post{id: "discussion-post-#{post.id}"}
+.editable-text.widget-discussion-post{id: "discussion-post-#{post.id}"}
   =image "icon.png", "Exercism", class: 'avatar'
   .post-body
     .post-header
       .user-handle Automated Message
       .created-at posted #{time_ago_in_words(post.created_at)} ago
 
-    .post-html= raw post.html
+    .editable-text-html= raw post.html

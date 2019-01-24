@@ -10,7 +10,7 @@ FactoryBot.define do
     uuid { SecureRandom.uuid }
     slug { "slug-#{SecureRandom.uuid}" }
     category { "category-#{SecureRandom.uuid}" }
-    published_at { DateTime.now }
+    published_at { Time.current - 1.minute }
     title { "Some blog post" }
     author_handle { create(:user).handle }
     content_repository { "blog" }

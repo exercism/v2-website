@@ -256,7 +256,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".markdown"
     refute_selector ".preview"
 
-    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
     find(".preview-tab").click
     within(".preview-area") { assert_text "An example mentor comment to test the comment button!" }
     click_on "Comment"
@@ -274,16 +274,16 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".markdown"
     refute_selector ".preview"
 
-    assert_equal "", find(".new-discussion-post-form textarea").value
-    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    assert_equal "", find(".new-editable-text textarea").value
+    find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
 
     visit my_solution_path(solution)
 
-    assert_equal "An example mentor comment to test the comment button!", find(".new-discussion-post-form textarea").value
-    find(".new-discussion-post-form textarea").set("")
+    assert_equal "An example mentor comment to test the comment button!", find(".new-editable-text textarea").value
+    find(".new-editable-text textarea").set("")
 
     visit my_solution_path(solution)
 
-    assert_equal "", find(".new-discussion-post-form textarea").value
+    assert_equal "", find(".new-editable-text textarea").value
   end
 end
