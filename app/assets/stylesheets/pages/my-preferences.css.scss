@@ -17,23 +17,19 @@
             padding-left:30px;
         }
     }
-    h1 {
-        @include font-size(25, 25);
-        font-weight:$bold;
-        margin-bottom:30px;
-        color:#555;
-    }
     h2 {
-        @include font-size(18, 18);
+        @include font-size(20, 20);
         font-weight:$bold;
-        margin-bottom:10px;
-        color:#555;
+        margin-bottom:15px;
     }
     h3 {
         @include font-size(16, 16);
         font-weight:$bold;
         margin-bottom:10px;
         color:#555;
+    }
+    label+h3 {
+        margin-top:25px;
     }
     p {
         @include font-size(14, 14);
