@@ -65,7 +65,7 @@
         -if @solution.allow_comments? || @solution.comments.size > 0
           =render "comments"
         -else
-          .comments-disabled Comments have been disabled for this solution.
+          =render "comments_disabled"
 
       .pure-u-1.pure-u-md-1-2.rhs
         -if @solution.reflection.present?

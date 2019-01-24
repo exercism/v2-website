@@ -392,7 +392,21 @@ body:not(.prism-dark) #teams-my-solution-page {
             border: 1px solid #ddd;
             text-align: center;
             background: #fafafa;
-            color: #666;
+            .text {
+                color: #666;
+            }
+
+            .pure-button {
+                margin-top:10px;
+                background:$color-2;
+                color:#fff;
+            }
+        }
+        .disable-comments {
+            float:left;
+            border:1px solid $color-2;
+            color:$color-2;
+            background:#fff;
         }
     }
 }
