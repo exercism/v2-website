@@ -12,6 +12,7 @@ class Solution < ApplicationRecord
   has_many :mentors, through: :mentorships, source: :user
 
   has_many :reactions, dependent: :destroy
+  has_many :comments, class_name: "SolutionComment", dependent: :destroy
 
   delegate :auto_approve?, to: :exercise
 

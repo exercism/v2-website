@@ -2,6 +2,8 @@ require "application_system_test_case"
 
 class MentorRegistrationTest < ApplicationSystemTestCase
   test "signed in mentor flow works" do
+    RestClient.expects(:post)
+
     user = create :user
     ruby = create(:track, title: "Ruby")
     python = create(:track, title: "Python")
@@ -27,6 +29,8 @@ class MentorRegistrationTest < ApplicationSystemTestCase
   end
 
   test "logging in mentor flow works" do
+    RestClient.expects(:post)
+
     password = "foobar"
     user = create :user, password: password
     user.confirm

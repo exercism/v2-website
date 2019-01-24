@@ -47,7 +47,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     user = create :user
     solution = create :solution
     emotion = 'genius'
-    original_reaction = create :reaction, user: user, solution: solution, emotion: emotion, comment: ""
+    original_reaction = create :reaction, user: user, solution: solution, emotion: emotion
     CreateReaction.(user, solution, emotion)
     solution.reload
 
@@ -59,7 +59,7 @@ class CreatesReactionTest < ActiveSupport::TestCase
     user = create :user
     solution = create :solution
     emotion = 'genius'
-    reaction = create :reaction, user: user, solution: solution, emotion: emotion, comment: ""
+    reaction = create :reaction, user: user, solution: solution, emotion: emotion
     other_notification = create :notification, user: solution.user
     notification = create :notification, user: solution.user, type: :new_reaction, trigger: reaction
 
@@ -67,22 +67,5 @@ class CreatesReactionTest < ActiveSupport::TestCase
 
     solution.user.reload
     assert_equal [other_notification], solution.user.notifications
-  end
-
-  test "does not destroy if there is a comment" do
-    user = create :user
-    solution = create :solution, num_reactions: 1
-    emotion = 'genius'
-    original_reaction = create :reaction, user: user, solution: solution, emotion: emotion, comment: "Foobar"
-    reaction = CreateReaction.(user, solution, emotion)
-    solution.reload
-
-    assert_equal original_reaction, reaction
-    assert_equal 1, solution.reactions.count
-    assert reaction.persisted?
-    assert_equal solution, reaction.solution
-    assert_equal user, reaction.user
-    assert_equal 'legacy', reaction.emotion
-    assert_equal 1, solution.num_reactions
   end
 end
