@@ -7,8 +7,8 @@ class BlogPost < ApplicationRecord
   belongs_to :author, class_name: 'User', optional: true, foreign_key: 'author_handle', primary_key: 'handle'
   has_many :comments, class_name: "BlogComment", dependent: :destroy
 
-  scope :published, -> { where('published_at <= NOW()') }
-  scope :scheduled, -> { where('published_at > NOW()') }
+  scope :published, -> { where('published_at <= ?', Time.current) }
+  scope :scheduled, -> { where('published_at > ?', Time.current) }
   scope :ordered_by_recency, -> { order('published_at DESC') }
 
   def self.categories
