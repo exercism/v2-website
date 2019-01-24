@@ -1,4 +1,4 @@
--readonly ||= false
+-readonly = !@solution.allow_comments?
 -solution_user_user_track = UserTrack.where(user: @solution.user, track: @solution.exercise.track).first
 
 .comments-section
@@ -10,24 +10,31 @@
       -@solution.comments.each do |comment|
         =solution_comment_widget(comment, @solution)
   -else
+    .no-comments Be the first to comment!
     .comments{style: "display:none"}
 
-  -unless readonly
-    .new-editable-text
-      =form_for SolutionComment.new, url: solution_comments_path(@solution), remote: true do |f|
-        =hidden_field_tag :solution_id, @solution.id
+  -if user_signed_in?
+    -if readonly
+      .comments-disabled Comments have been disabled for this solution.
+    -else
+      .new-editable-text
+        =form_for SolutionComment.new, url: solution_comments_path(@solution), remote: true do |f|
+          =hidden_field_tag :solution_id, @solution.id
 
-        .tabs-and-panes.selected-1
-          .tabs
-            .tab.tab-1.write-tab{data: {tab: "markdown"}} Write
-            .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
-          .panes
-            .pane.pane-1.markdown
-              =f.text_area :content, required: true
-            .pane.pane-2.preview
-              .preview-area
+          .tabs-and-panes.selected-1
+            .tabs
+              .tab.tab-1.write-tab{data: {tab: "markdown"}} Write
+              .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+            .panes
+              .pane.pane-1.markdown
+                =f.text_area :content, required: true
+              .pane.pane-2.preview
+                .preview-area
 
-        =button_tag "Comment", class: "comment-button js-disable-on-click pure-button #{@solution.approved?? "faded" : ""}"
+          =button_tag "Comment", class: "comment-button js-disable-on-click pure-button #{@solution.approved?? "faded" : ""}"
+  -else
+    / TODO
+    Please sign in to post comments
 
 -content_for :js do
   :javascript
