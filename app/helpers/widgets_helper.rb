@@ -48,4 +48,14 @@ module WidgetsHelper
                                         user_track: user_track
     end
   end
+
+  def solution_comment_widget(comment, solution)
+    user_track = comment.user_id == solution.user_id ?
+      solution.user.user_track_for(solution.exercise.track) :
+      nil
+
+    render "widgets/solution_comment", comment: comment,
+                                       solution: solution,
+                                       user_track: user_track
+  end
 end

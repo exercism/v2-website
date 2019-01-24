@@ -91,7 +91,7 @@
         }
     }
     .discussion,
-    .new-discussion-post {
+    .new-editable-text {
         h3 {
             padding:7px 0;
             border-bottom:1px solid #ddd;
@@ -100,15 +100,12 @@
             font-weight:$regular;
             color:#333;
         }
-        .pane.markdown,
-        .pane.preview {
-            padding:0;
-        }
+
         .posts {
             //margin-bottom:40px;
         }
     }
-    .new-discussion-post {
+    .new-editable-text {
         .approved {
             color:$color-1;
             padding-top:17px;

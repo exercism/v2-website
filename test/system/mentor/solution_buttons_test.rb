@@ -41,7 +41,7 @@ class SolutionButtonsTest < ApplicationSystemTestCase
     assert_selector ".comment-button"
     assert_selector ".markdown"
     refute_selector ".preview"
-    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
     find(".preview-tab").click
     within(".preview-area") { assert_text "An example mentor comment to test the comment button!" }
     click_on "Comment"

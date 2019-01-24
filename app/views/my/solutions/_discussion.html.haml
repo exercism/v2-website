@@ -24,8 +24,8 @@
   .posts{style: "display:none"}
 
 -unless readonly
-  .new-discussion-post
-    =form_for [:my, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+  .new-editable-text
+    =form_for [:my, DiscussionPost.new], remote: true do |f|
       =hidden_field_tag :iteration_id, @iteration.id
 
       .tabs-and-panes.selected-1

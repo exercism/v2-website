@@ -1,63 +1,60 @@
 require "application_system_test_case"
 
-class BlogCommentsTest < ApplicationSystemTestCase
-
-  test "user posts a blog comment" do
-    user = create(:user,
+class Mentor::DiscussionPostsTest < ApplicationSystemTestCase
+  setup do
+    @mentor = create(:user_mentor,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
-    blog_post = create(:blog_post)
 
-    sign_in!(user)
-    visit blog_post_path(blog_post)
+    @track = create :track
+    @solution = create :solution, exercise: create(:exercise, track: @track), mentoring_requested_at: Time.current
+    @iteration = create :iteration, solution: @solution
+    create :track_mentorship, user: @mentor, track: @track
+    create :solution_mentorship, user: @mentor, solution: @solution
+
+    sign_in!(@mentor)
+  end
+
+  test "user posts a discussion post" do
+    visit mentor_solution_path(@solution)
 
     text = "Some sample content"
     find(".new-editable-text textarea").set(text)
     click_on "Comment"
 
     assert_text text
-    comment = BlogComment.last
-    assert_equal text, comment.content
-    assert_equal user, comment.user
-    assert_equal blog_post, comment.blog_post
+    discussion_post = DiscussionPost.last
+    assert_equal text, discussion_post.content
+    assert_equal @mentor, discussion_post.user
+    assert_equal @iteration, discussion_post.iteration
   end
 
-  test "user edits a blog comment" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
-    blog_post = create(:blog_post)
-    blog_comment = create(:blog_comment,
+  test "user edits a discussion post" do
+    discussion_post = create(:discussion_post,
                              content: "Hello!",
                              html: "<p>Hello!</p>",
-                             user: user,
-                             blog_post: blog_post)
-    sign_in!(user)
-    visit blog_post_path(blog_post)
+                             user: @mentor,
+                             iteration: @iteration)
+    visit mentor_solution_path(@solution)
     click_on "Edit"
-    within(".blog-comment.editing") { fill_in("blog_comment_content", with: "Hey!") }
+    within(".editable-text.editing") { fill_in("discussion_post_content", with: "Hey!") }
     click_on "Save changes"
 
     assert_text "Hey!"
     # I've commented this line out in the HAML for now
     # assert_text "(edited less than a minute ago)"
-    blog_comment.reload
-    assert_equal "Hello!", blog_comment.previous_content
+    discussion_post.reload
+    assert_equal "Hello!", discussion_post.previous_content
   end
 
-  test "user deletes a blog comment" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
-    blog_post = create(:blog_post)
-    blog_comment = create(:blog_comment,
+  test "user deletes a discussion post" do
+    discussion_post = create(:discussion_post,
                              content: "Hello!",
                              html: "<p>Hello!</p>",
-                             user: user,
-                             blog_post: blog_post)
+                             user: @mentor,
+                             iteration: @iteration)
 
-    sign_in!(user)
-    visit blog_post_path(blog_post)
+    visit mentor_solution_path(@solution)
     accept_confirm do
       click_on "Delete"
     end
@@ -66,10 +63,8 @@ class BlogCommentsTest < ApplicationSystemTestCase
   end
 
   test "comment button clears preview tab" do
-    blog_post = create(:blog_post)
 
-    sign_in!
-    visit blog_post_path(blog_post)
+    visit mentor_solution_path(@solution)
 
     assert_selector ".comment-button"
     assert_selector ".markdown"
@@ -83,10 +78,7 @@ class BlogCommentsTest < ApplicationSystemTestCase
   end
 
   test "localstorage saves comment draft" do
-    blog_post = create(:blog_post)
-
-    sign_in!
-    visit blog_post_path(blog_post)
+    visit mentor_solution_path(@solution)
 
     assert_selector ".comment-button"
     assert_selector ".markdown"
@@ -95,12 +87,12 @@ class BlogCommentsTest < ApplicationSystemTestCase
     assert_equal "", find(".new-editable-text textarea").value
     find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
 
-    visit blog_post_path(blog_post)
+    visit mentor_solution_path(@solution)
 
     assert_equal "An example mentor comment to test the comment button!", find(".new-editable-text textarea").value
     find(".new-editable-text textarea").set("")
 
-    visit blog_post_path(blog_post)
+    visit mentor_solution_path(@solution)
 
     assert_equal "", find(".new-editable-text textarea").value
   end

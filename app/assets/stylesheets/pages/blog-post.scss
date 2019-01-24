@@ -158,44 +158,8 @@ body.controller-blog_posts.action-show.user-signed_out {
                 color:#666;
             }
         }
-        .new-blog-comment {
-            form {
-                margin:0px 0 20px 0;
-                .md-editor, .preview-area {
-                    width:100%;
-                    resize:none;
-                    border:1px solid #ddd;
-                }
-                .preview-area {
-                    height:248px;
-                    overflow:auto;
-                    padding:15px;
-                }
-            }
-        }
         .comments+form {
             margin-top:40px;
-        }
-        form {
-            margin:20px 0 20px 0;
-            textarea, .preview-area {
-                width:100%;
-                resize:none;
-                padding:15px;
-                border:1px solid #ddd;
-            }
-        }
-        .comment-button {
-            margin-top:10px;
-            border-radius:2px;
-            padding:8px 25px;
-            width:100%;
-            background:$color-2;
-            color:#fff;
-            float:right;
-            @include width-small() {
-                width:auto;
-            }
         }
 
         .blog-comment {

@@ -135,6 +135,9 @@ class UserTest < ActiveSupport::TestCase
     assert user.may_unlock_exercise?(side_exercise_without_unlock)
 
     user_track.update(independent_mode: true)
+
+    # Reset user to empty caches
+    user = User.find(user.id)
     assert user.may_unlock_exercise?(core_exercise)
     assert user.may_unlock_exercise?(side_exercise_with_unlock)
     assert user.may_unlock_exercise?(side_exercise_without_unlock)

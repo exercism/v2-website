@@ -32,7 +32,7 @@
 
               %p Well done on submitting your iteration. Your team can now post comments giving feedback, suggestions and ideas.
 
-          =form_for [:teams, @team, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+          =form_for [:teams, @team, DiscussionPost.new], remote: true do |f|
             =hidden_field_tag :iteration_id, @iteration.id
 
             .tabs-and-panes.selected-1

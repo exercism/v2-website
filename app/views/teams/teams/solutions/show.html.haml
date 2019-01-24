@@ -43,7 +43,7 @@
 
               %p Help your teammate by leaving feedback on their post. Try and be encouraging and helpful!
 
-          =form_for [:teams, @team, DiscussionPost.new], remote: true, html: {class: "new-discussion-post-form"} do |f|
+          =form_for [:teams, @team, DiscussionPost.new], remote: true do |f|
             =hidden_field_tag :iteration_id, @iteration.id
 
             .tabs-and-panes.selected-1

@@ -62,6 +62,8 @@
               .hover Genius!
               =reaction_genius_icon
 
+        =render "comments", readonly: false
+
       .pure-u-1.pure-u-md-1-2.rhs
         -if @solution.reflection.present?
           .reflection
@@ -76,31 +78,33 @@
               %li What compromises have been made?
               %li Are there new concepts here that you could read more about to improve your understanding?
 
-  -if @comments.size > 0
-    .comments-section
-      .lo-container
-        .pure-g
-          .pure-u-1.pure-u-md-1-2
-            %h2 Community comments
-            .h2-subtitle See what others have said about this solution
-            -@comments.each do |reaction|
-              .comment.pure-g
-                .pure-u-1.pure-u-md-2-24
-                  -if reaction.emotion == "like"
-                    =reaction_like_icon
-                  -elsif reaction.emotion == "love"
-                    reaction_love_icon
-                  -elsif reaction.emotion == "genius"
-                    =reaction_genius_icon
-                  -else reaction.emotion == "legacy"
-                    =icon 'comment'
 
-                .pure-u-1.pure-u-md-22-24.content
-                  .when #{time_ago_in_words(reaction.created_at)} ago
-                  .who
-                    %strong #{reaction.user.handle}
-                    says
-                  .text= simple_format reaction.comment
+  -#
+    -if @comments.size > 0
+      .comments-section
+        .lo-container
+          .pure-g
+            .pure-u-1.pure-u-md-1-2
+              %h2 Community comments
+              .h2-subtitle See what others have said about this solution
+              -@comments.each do |reaction|
+                .comment.pure-g
+                  .pure-u-1.pure-u-md-2-24
+                    -if reaction.emotion == "like"
+                      =reaction_like_icon
+                    -elsif reaction.emotion == "love"
+                      reaction_love_icon
+                    -elsif reaction.emotion == "genius"
+                      =reaction_genius_icon
+                    -else reaction.emotion == "legacy"
+                      =icon 'comment'
+
+                  .pure-u-1.pure-u-md-22-24.content
+                    .when #{time_ago_in_words(reaction.created_at)} ago
+                    .who
+                      %strong #{reaction.user.handle}
+                      says
+                    .text= simple_format reaction.comment
 
 -content_for :js do
   :javascript
