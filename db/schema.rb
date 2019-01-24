@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 2019_01_24_043325) do
     t.text "previous_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "deleted", default: false, null: false
   end
 
   create_table "solution_locks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
