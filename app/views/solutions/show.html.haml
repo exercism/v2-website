@@ -2,7 +2,6 @@
   #nav.lo-nav-bar
     .lo-container
       -if user_signed_in?
-        /=link_to "Dashboard", root_path
         =link_to "Language tracks", [:my, :tracks]
         =link_to "#{@track.title} track", [:my, @track]
         -if @user_solution
@@ -54,15 +53,14 @@
           .react
             %h3 React to this solution
             =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
-              .hover Well done
-              =icon 'thumbs-up fa-fw', 'Thumbs up'
+              .hover Nice work!
+              =reaction_like_icon
             =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
               .hover Love it!
-              =icon 'heart fa-fw', 'Heart'
+              =reaction_love_icon
             =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
               .hover Genius!
-              =graphical_image "genius.png", class: 'not-selected'
-              =graphical_image "genius-turquoise.png", class: 'selected'
+              =reaction_genius_icon
 
       .pure-u-1.pure-u-md-1-2.rhs
         -if @solution.reflection.present?
@@ -89,11 +87,11 @@
               .comment.pure-g
                 .pure-u-1.pure-u-md-2-24
                   -if reaction.emotion == "like"
-                    =icon 'thumbs-up'
+                    =reaction_like_icon
                   -elsif reaction.emotion == "love"
-                    =icon 'heart'
+                    reaction_love_icon
                   -elsif reaction.emotion == "genius"
-                    =graphical_image "genius-turquoise.png"
+                    =reaction_genius_icon
                   -else reaction.emotion == "legacy"
                     =icon 'comment'
 

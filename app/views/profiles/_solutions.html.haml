@@ -9,13 +9,13 @@
         .track #{exercise.track.title} track
       .reactions
         .reaction
-          =icon 'thumbs-up fa-fw', 'thumbs-up'
+          =reaction_like_icon
           .count= reaction_counts[[solution.id, "like"]].to_i
         .reaction
-          =icon 'heart fa-fw', 'heart'
+          =reaction_love_icon
           .count= reaction_counts[[solution.id, "love"]].to_i
         .reaction
-          =image "genius.png", 'genius'
+          =reaction_genius_icon
           .count= reaction_counts[[solution.id, "genius"]].to_i
         .reaction
           =icon 'comment fa-fw', 'comment'

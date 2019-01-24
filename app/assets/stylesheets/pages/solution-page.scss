@@ -129,7 +129,7 @@ body:not(.prism-dark) #teams-my-solution-page {
         margin-bottom:30px;
 
         .avatar {
-            display:block;
+            display:none;
             width:75px;
             height:75px;
             float:right;
@@ -139,6 +139,7 @@ body:not(.prism-dark) #teams-my-solution-page {
             border-radius: 100%;
             overflow:hidden;
             @include width-medium() {
+                display:block;
                 float:left;
                 margin-right:15px;
                 margin-left: -60px;
@@ -200,6 +201,14 @@ body:not(.prism-dark) #teams-my-solution-page {
             border-radius:2px;
             overflow:hidden;
             display:inline-block;
+            @include width-smaller-than-medium() {
+                width:100%;
+                .reaction {
+                    width:25%;
+                    text-align:center;
+                }
+            }
+
             @include width-medium() {
                 float:right;
             }
@@ -212,11 +221,6 @@ body:not(.prism-dark) #teams-my-solution-page {
                 }
                 &:last-child {
                     border:none;
-                }
-                &.highlight {
-                    i, .count {
-                        color:$color-2;
-                    }
                 }
                 .count {
                     display:inline-block;
@@ -271,7 +275,7 @@ body:not(.prism-dark) #teams-my-solution-page {
                 font-weight:$regular;
                 border:1px solid #ccc;
                 padding:6px 8px;
-                width:78px;
+                width:83px;
                 @include font-size(13, 13);
                 position:absolute;
                 top:-27px;

@@ -5,13 +5,13 @@
     .published-at Published #{time_ago_in_words(solution.display_published_at)} ago
   .reactions
     .reaction
-      =icon 'thumbs-up fa-fw', 'Thumbs up'
+      =reaction_like_icon
       .count= @reaction_counts[[solution.id, "like"]].to_i
     .reaction
-      =icon 'heart fa-fw', 'Heart'
+      =reaction_love_icon
       .count= @reaction_counts[[solution.id, "love"]].to_i
     .reaction
-      =image "genius.png", 'Genius'
+      =reaction_genius_icon
       .count= @reaction_counts[[solution.id, "genius"]].to_i
     .reaction
       =icon 'comment fa-fw', 'Comment'
