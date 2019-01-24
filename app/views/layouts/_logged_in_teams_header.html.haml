@@ -18,11 +18,11 @@
         .person
           Logged in as
           %strong #{current_user.handle}
-        .hr
-        = link_to "Exercism: Personal Edition", "https://exercism.io"
-        = link_to "Community Blog", blog_posts_path
-        .hr
-        = link_to "Sign out", destroy_user_session_path, method: :delete
+        %ul
+          %li= link_to "Exercism: Personal Edition", "https://exercism.io"
+          %li= link_to "Community Blog", blog_posts_path
+        %ul
+          %li= link_to "Sign out", destroy_user_session_path, method: :delete
 
 
 -content_for :js do
