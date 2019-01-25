@@ -19,6 +19,9 @@ class CreateNotification
 
     new_blog_comment_for_blog_post_author
     new_blog_comment_for_other_commenter
+
+    new_solution_comment_for_solution_user
+    new_solution_comment_for_other_commenter
   }
 
   attr_reader :user, :type, :content, :link, :trigger, :about
