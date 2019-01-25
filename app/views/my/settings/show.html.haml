@@ -1,9 +1,12 @@
 #my-settings-page
   =settings_bar
+  .lo-general-header
+    .lo-container
+      %h1 Settings
+      .h1-subtitle Manage your account setings
 
   = notice_and_alert(current_user)
   .lo-container
-    %h1 Account settings
     .settings-section
       %h2 CLI token
       .token-explanation Your authentication token for the CLI is:
@@ -64,4 +67,4 @@
         Delete your account
 
       %p You can choose to delete your account at any time.
-      %p= link_to "Delete my account", [:confirm_delete_account, :my, :settings], class: 'pure-button'
+      %div= link_to "Delete my account", [:confirm_delete_account, :my, :settings], class: 'pure-button'

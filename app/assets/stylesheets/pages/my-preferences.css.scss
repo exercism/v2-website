@@ -2,10 +2,6 @@
 @import 'mixins';
 
 #my-preferences-page {
-    padding-top:30px;
-    @include width-small() {
-        padding-top:0;
-    }
     .lhs {
         @include width-medium() {
             border-right:1px solid #eee;
@@ -70,7 +66,7 @@
                     display:none;
                     color: $color-2;
                 }
-                i.fa.fa-toggle-off { 
+                i.fa.fa-toggle-off {
                     display:block;
                     color: #aaa;
                 }
