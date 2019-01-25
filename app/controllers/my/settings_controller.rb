@@ -33,6 +33,18 @@ class My::SettingsController < MyController
     redirect_to action: :show
   end
 
+  def set_default_allow_comments
+    current_user.update!(default_allow_comments: params[:allow_comments])
+    if params[:update_solutions]
+      current_user.solutions.published.update_all(allow_comments: params[:allow_comments])
+    end
+
+    respond_to do |format|
+      format.html { redirect_to my_settings_path }
+      format.js { render js: "window.closeModal()" }
+    end
+  end
+
   private
 
   def update_password
