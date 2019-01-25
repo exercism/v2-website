@@ -34,7 +34,7 @@ module MetadataHelper
         when "settings", "track_settings", "preferences"
           { title: "Settings" }
         when "reactions"
-          { title: "My Reactions" }
+          { title: "Starred solutions" }
         when "solutions"
           case action_name
           when "index"
@@ -81,6 +81,18 @@ module MetadataHelper
           when :index
           else
             { title: @page_title }
+          end
+        when "solutions"
+          case action_name
+          when "show"
+            exercise = @solution.exercise
+            track = exercise.track
+            handle = @solution.user.handle_for(track)
+            {
+              title: "#{handle}'s solution to #{exercise.title} on the #{track.title} track",
+              description: "See how #{handle} solved the #{exercise.title} exercise on the #{track.title} track",
+              image_url: track.bordered_turquoise_icon_url
+            }
           end
         when "tracks"
           case action_name

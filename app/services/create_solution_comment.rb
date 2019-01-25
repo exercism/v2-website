@@ -44,19 +44,12 @@ class CreateSolutionComment < CreatesDiscussionPost
       CreateNotification.(
         user,
         :new_solution_comment_for_other_commenter,
-        "Someone has commented on #{solution_user_handle}'s solution to <strong>#{solution.exercise.title}</strong> on the "\
+        "Someone has commented on #{solution.user.handle_for(solution.exercise.track)}'s solution to <strong>#{solution.exercise.title}</strong> on the "\
         "<strong>#{solution.exercise.track.title}</strong>.",
         Rails.application.routes.url_helpers.solution_url(solution, anchor: "comment-#{comment}"),
         trigger: comment,
         about: solution
       )
-    end
-  end
-
-  def solution_user_handle
-    @solution_user_handle ||= begin
-      ut = solution.user.user_track_for(solution.exercise.track)
-      (ut && ut.anonymous?) ? ut.handle : solution.user.handle
     end
   end
 end
