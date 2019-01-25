@@ -2,6 +2,14 @@
 @import 'mixins';
 
 #my-settings-page,
+#my-preferences-page,
+#my-track-settings-page {
+    .lo-general-header {
+        padding: 50px 0 20px;
+    }
+}
+
+#my-settings-page,
 #my-track-settings-page,
 #my-settings-delete-account-page {
     padding-top:30px;
@@ -14,12 +22,6 @@
     #notice, #alert, #errors {
         margin-top: -20px;
         margin-bottom: 20px;
-    }
-    h1 {
-        @include font-size(25, 25);
-        font-weight:$bold;
-        margin-bottom:30px;
-        color:#555;
     }
     h2 {
         @include font-size(18, 18);
