@@ -2,17 +2,23 @@
 -user_handle = user_track ? display_handle(comment.user, user_track) : comment.user.handle
 
 .widget-solution-comment.editable-text{id: "solution-comment-#{comment.id}", class: (comment.deleted?? "delete" : "")}
-  =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
+  -if comment.user.profile
+    = link_to comment.user.profile, class: 'avatar' do
+      =image avatar_url, "Avatar of #{user_handle}"
+  -else
+    =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
   .comment-body
     .comment-header
-      .user-handle= user_handle
-      .user-role
-        -if comment.user == solution.user
-          Student
+      .user-handle
+        -if comment.user.profile
+          = link_to user_handle, comment.user.profile
+        -else
+          = user_handle
+      -if comment.user == solution.user
+        .user-role
+          Solution Author
           -if user_track && user_track.anonymous?
             (Anonymous Mode)
-        -else
-          Mentor
       .created-at commented #{time_ago_in_words(comment.created_at)} ago
 
     .editable-text-viewer

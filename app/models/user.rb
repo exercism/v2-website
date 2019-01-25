@@ -130,8 +130,12 @@ class User < ApplicationRecord
   end
 
   def user_track_for(track)
-    @user_tracks ||= []
-    @user_tracks[track.id] ||= user_tracks.where(track_id: track.id).first
+    user_tracks.where(track_id: track.id).first
+  end
+
+  def handle_for(track)
+    ut = user_track_for(track)
+    (ut && ut.anonymous?) ? ut.handle : handle
   end
 
   def may_unlock_exercise?(exercise, user_track: user_track_for(exercise.track))

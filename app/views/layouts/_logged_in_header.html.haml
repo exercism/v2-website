@@ -23,7 +23,7 @@
         %ul
           %li= link_to "Tracks", [:my, :tracks]
           %li= link_to "Your profile", [:my, :profile]
-          %li= link_to "Solutions you've liked", [:my, :reactions]
+          %li= link_to "Starred solutions", [:my, :reactions]
         %ul
           -if current_user.admin?
             %li= link_to "Admin dashboard", [:admin, :dashboard]

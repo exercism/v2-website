@@ -20,6 +20,11 @@
         min-height:20px;
         display:block;
         border-radius:3px;
+        overflow:hidden;
+        img {
+            display:block;
+            width:100%;
+        }
     }
     .comment-body {
         min-width:100px;
@@ -36,6 +41,10 @@
             font-weight:$regular;
             margin-right:5px;
             @include font-size(13, 13);
+            a {
+                color:#333;
+                font-weight:$bold;
+            }
         }
         .user-role {
             display:inline-block;
