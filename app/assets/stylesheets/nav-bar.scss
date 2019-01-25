@@ -27,8 +27,8 @@
             content: "";
             content: "";
             bottom: 4px;
-            left: 5px;
-            right: 5px;
+            left: 0px;
+            right: 10px;
             position: absolute;
             height: 1px;
             background: #ccc;
@@ -36,11 +36,16 @@
 
         &:nth-child(n+1){
             &:after {
-                content: url('nav-divider.png');
+                content: "";
+                background-image: url('nav-divider.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center right;
                 overflow: hidden;
                 position: absolute;
                 display: inline-block;
                 height: 33px;
+                width:13px;
                 top: 0;
                 bottom: 0;
                 padding-left: 7px;
