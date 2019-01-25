@@ -23,5 +23,6 @@ class BlogPostsController < ApplicationController
 
   def show
     @blog_post = BlogPost.published.find(params[:id])
+    ClearNotifications.(current_user, @blog_post)
   end
 end
