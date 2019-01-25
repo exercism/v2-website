@@ -17,7 +17,7 @@
   .status.completed
     =icon :check
 
-  .title= exercise.title
+  %h2.title= exercise.title
   -length_word = exercise_length_word(exercise)
   -difficulty_word = exercise_difficulty_word(exercise)
   .stats
