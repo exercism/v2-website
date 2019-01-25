@@ -87,6 +87,8 @@ class My::SolutionsController < MyController
   def reflect
     @solution.update(reflection: params[:reflection])
     PublishSolution.(@solution) if params[:publish]
+    @solution.update(allow_comments: params[:allow_comments])
+    current_user.update(default_allow_comments: params[:allow_comments]) if current_user.default_allow_comments === nil
 
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewSolutionMentoring.(

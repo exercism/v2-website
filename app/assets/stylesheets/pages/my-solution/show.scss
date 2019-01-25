@@ -400,11 +400,14 @@
     }
     .checkbox {
         color:#555;
-        margin-bottom:15px;
+        margin-bottom:5px;
         font-weight:$regular;
         input {
             margin-right:5px;
         }
+    }
+    textarea {
+        margin-top:10px;
     }
     .mentor-review {
         margin-bottom:10px;
