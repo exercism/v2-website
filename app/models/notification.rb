@@ -5,7 +5,6 @@ class Notification < ApplicationRecord
   belongs_to :about, polymorphic: true, optional: true
   belongs_to :trigger, polymorphic: true, optional: true
 
-  def self.unread
-    where(read: false)
-  end
+  scope :read, -> { where(read: true) }
+  scope :unread, -> { where(read: false) }
 end
