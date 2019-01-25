@@ -42,3 +42,9 @@
       %h2 Available tracks
       .tracks.pure-g
         =render 'tracks', joined: false, tracks: @other_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts
+
+-if show_decide_default_allow_comments_modal?
+  -content_for :js do
+    :javascript
+      showModal('decide-allow-comments', '#{j render "my/settings/decide_allow_comments"}')
+

@@ -13,4 +13,26 @@ class My::SettingsControllerTest < ActionDispatch::IntegrationTest
     new_token = User.find(@current_user.id).auth_token
     refute_equal old_token, new_token
   end
+
+  test "allows comments and updates existing" do
+    sign_in!
+    @current_user.update(default_allow_comments: nil)
+    solution = create :solution, user: @current_user, published_at: Time.current, allow_comments: false
+
+    patch set_default_allow_comments_my_settings_path(allow_comments: true, update_solutions: true)
+
+    assert @current_user.reload.default_allow_comments
+    assert solution.reload.allow_comments
+  end
+
+  test "allows comments but does not update existing" do
+    sign_in!
+    @current_user.update(default_allow_comments: nil)
+    solution = create :solution, user: @current_user, published_at: Time.current, allow_comments: false
+
+    patch set_default_allow_comments_my_settings_path(allow_comments: true)
+
+    assert @current_user.reload.default_allow_comments
+    refute solution.reload.allow_comments
+  end
 end

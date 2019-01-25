@@ -160,6 +160,7 @@ Rails.application.routes.draw do
     resource :settings do
       patch :reset_auth_token
       patch :cancel_unconfirmed_email
+      patch :set_default_allow_comments
 
       get :confirm_delete_account
       delete :delete_account

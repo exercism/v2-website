@@ -43,7 +43,7 @@
 
 
         =f.button "Save communication settings", class: 'pure-button'
-    .settings-section.dark-toggle
+    .settings-section.toggle
       %h2 Dark Code Theme
       =form_tag [:my, :settings, :preferences], method: :patch do |f|
         =hidden_field_tag 'update_dark_theme', true

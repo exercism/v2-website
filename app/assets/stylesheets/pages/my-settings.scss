@@ -7,6 +7,48 @@
     .lo-general-header {
         padding: 50px 0 20px;
     }
+    .settings-section {
+        &.toggle {
+            input[type='checkbox'] {
+                display:inline-block;
+                position:absolute;
+                width:25px;
+                height:40px;
+                cursor:pointer;
+                opacity:0;
+                &:checked {
+                    &+.toggles {
+                        i.fa.fa-toggle-on { display:block; }
+                        i.fa.fa-toggle-off { display:none; }
+                    }
+                }
+            }
+            .toggles {
+                display:inline-block;
+                @include font-size(20, 20);
+                margin-right:5px;
+                i.fa.fa-toggle-on {
+                    display:none;
+                    color: $color-2;
+                }
+                i.fa.fa-toggle-off {
+                    display:block;
+                    color: #aaa;
+                }
+            }
+            label {
+                display:inline-block;
+                position:relative;
+                top:-2px;
+                margin-bottom:0px;
+                color:#666;
+            }
+            .pure-button {
+                display:block;
+                margin-top:10px;
+            }
+        }
+    }
 }
 
 #my-settings-page,
