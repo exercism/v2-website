@@ -37,4 +37,23 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       get solution_url(solution.uuid)
     end
   end
+
+  test "show should clear notifications" do
+    exercise = create :exercise
+    solution = create :solution, exercise: exercise, published_at: DateTime.now - 1.week
+    user = create :user
+    create :iteration, solution: solution
+
+    create :notification, about: solution, user: user
+    create :notification, about: solution # A different user
+    create :notification, about: exercise, user: user # A random notification
+    assert_equal 3, Notification.unread.count
+    assert_equal 0, Notification.read.where(about: solution, user: user).count
+
+    sign_in!(user)
+    get track_exercise_solution_url(exercise.track, exercise, solution)
+    assert_equal 2, Notification.unread.count
+    assert_equal 1, Notification.read.where(about: solution, user: user).count
+  end
+
 end

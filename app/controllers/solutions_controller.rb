@@ -24,6 +24,7 @@ class SolutionsController < ApplicationController
 
   def show
     @solution = Solution.published.find_by_uuid(params[:id])
+    ClearNotifications.(current_user, @solution)
 
     # Allow /solutions/uuid to redirect, or if the solution isn't
     # valid (not published etc) then redirect to sensible place if
