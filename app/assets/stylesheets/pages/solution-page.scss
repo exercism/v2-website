@@ -87,6 +87,22 @@
         }
     }
     .new-editable-text {
+        .warning {
+            display:none;
+            background: #eee;
+            border:solid #ddd;
+            border-width:0 1px 1px 1px;
+            color:#666;
+            padding: 15px;
+            h4 {
+                display:inline-block;
+                font-weight:$fw-semibold;
+            }
+        }
+        .md-editor.active+.warning {
+            background: $error-red-text-color;
+            color: #fff;
+        }
         form {
             margin:0px 0 20px 0;
             .md-editor, .preview-area {
@@ -98,6 +114,14 @@
                 height:248px;
                 overflow:auto;
                 padding:15px;
+            }
+        }
+        &.show-warning {
+            .warning {
+                display:block;
+            }
+            form .preview-area {
+                height:317px;
             }
         }
     }
