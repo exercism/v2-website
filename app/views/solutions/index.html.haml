@@ -32,25 +32,33 @@
   .lo-container
     .pure-g
       -if @user_solution
-        .pure-u-1.pure-u-md-1-3
-          -if @user_solution.published?
-            =render "solution", solution: @user_solution, track: @track, exercise: @exercise, user_track: @current_user_track
-          -else
+        .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
+          /-if @user_solution.published?
+          /  =render "solution", solution: @user_solution, track: @track, exercise: @exercise, user_track: @current_user_track
+          /-else
+          -if true
             =link_to [:my, @user_solution], class: 'user-solution' do
-              .person
-                =graphical_icon 'eye-slash not-published-icon'
-                =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
-                .handle
-                  Your solution
-                  .hidden-box Hidden
-                -if @user_solution.completed?
-                  .published-at Completed #{time_ago_in_words(@user_solution.completed_at)} ago
+              .hidden-box Not published
+              =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
+              .exercise= @user_solution.exercise.title
+              .track #{@user_solution.exercise.track.title} track
 
-              .no-reactions
-                Publish your solution to help others
+              .details-bar
+                .handle
+                  %i.fal.fa-fw.fa-user
+                  Your solution
+                .published-at
+                  %i.fal.fa-fw.fa-clock
+                  #{@user_solution.published_at.strftime("%b %d %Y")}
+                .detail
+                  %i.fal.fa-fw.fa-comment
+                  0
+                .detail
+                  %i.fal.fa-fw.fa-star
+                  0
 
       -@solutions.each do |solution|
-        .pure-u-1.pure-u-md-1-3
+        .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
           =render "solution", solution: solution, track: @track, exercise: @exercise, user_track: @user_tracks[solution.user_id]
 
     =paginate @solutions
