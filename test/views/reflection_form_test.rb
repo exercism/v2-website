@@ -1,6 +1,12 @@
 require "test_helper"
 
 class ReflectionFormTest < ActionView::TestCase
+  include Devise::Test::ControllerHelpers
+
+  setup do
+    view.stubs(current_user: create(:user))
+  end
+
   test "hides mentor rating for an auto approved solution" do
     exercise = build(:exercise, auto_approve: true)
     solution = build(:solution, exercise: exercise)

@@ -58,7 +58,7 @@ class SolutionsTest < ApplicationSystemTestCase
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
     solution = create(:solution, published_at: Time.now)
-    star = create(:solution_star, user: user, solution: solution, emotion: :like)
+    star = create(:solution_star, user: user, solution: solution)
 
     sign_in!(user)
     visit solution_path(solution)
