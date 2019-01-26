@@ -191,9 +191,9 @@
 
                 .icon {
                     display:block;
-                    width:70px;
-                    height:70px;
-                    padding:10px;
+                    width:50px;
+                    height:50px;
+                    padding:6px;
                     float:left;
                     margin-right:15px;
                     border-radius:2px;
@@ -201,8 +201,8 @@
                     background:$color-1;
 
                     .img {
-                        width:48px;
-                        height:48px;
+                        width:35px;
+                        height:35px;
                         background-repeat:no-repeat;
                         background-size:contain;
                         background-position:center center;
@@ -212,6 +212,7 @@
                     text-overflow:ellipsis;
                     white-space:nowrap;
                     overflow:hidden;
+                    padding-top:4px;
                     .title {
                         display:inline-block;
                         overflow: hidden;
@@ -237,51 +238,18 @@
                         overflow: hidden;
                     }
                 }
-                .reactions {
-                    background:#fafafa;
-                    border:1px solid #eee;
-                    border-radius:2px;
+                .details {
                     overflow:hidden;
                     display:inline-block;
-                    margin-top:8px;
-                    .reaction {
-                        float:left;
-                        border-right:1px solid #eee;
-                        padding:4px 5px 4px 5px;
-                        @include width-small() {
-                            padding:9px 10px 8px 10px;
-                        }
-                        &:last-child {
-                            border:none;
-                        }
-                        &.highlight {
-                            i, .count {
-                                color:$color-1;
-                            }
-                        }
-                        .count {
-                            display:inline-block;
-                            @include font-size(12, 12);
-                            width:16px;
-                            font-weight:$regular;
-                            color:#888;
-                        }
-                        i, img {
-                            display:inline-block;
-                            margin-right:5px;
-                        }
-
-                        i {
-                            @include font-size(12, 12);
-                            color:#aaa;
-                            @include width-small() {
-                                @include font-size(16, 16);
-                            }
-                        }
-                        img {
-                            vertical-align:bottom;
-                            height:16px;
-                        }
+                    margin-top:3px;
+                    @include font-size(13, 15);
+                    .published-at,
+                    .detail {
+                        display:inline-block;
+                        color:#666;
+                    }
+                    .detail {
+                        padding-left:10px;
                     }
                 }
             }

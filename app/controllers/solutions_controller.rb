@@ -3,7 +3,7 @@ class SolutionsController < ApplicationController
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
 
-    @solutions = @exercise.solutions.published.reorder('solutions.num_reactions DESC').includes(:user)
+    @solutions = @exercise.solutions.published.reorder('solutions.published_at DESC').includes(:user)
 
     if user_signed_in?
       @solutions = @solutions.where.not(user_id: current_user.id)
@@ -16,8 +16,6 @@ class SolutionsController < ApplicationController
 
     @total_solutions = @solutions.count
     @solutions = @solutions.page(params[:page]).per(21)
-    @reaction_counts = Reaction.where(solution_id: @solutions.map(&:id)).group(:solution_id, :emotion).count
-    @comment_counts = SolutionComment.where(solution_id: @solutions.map(&:id)).group(:solution_id).count
     @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
                              each_with_object({}) { |ut, h| h[ut.user_id] = ut }
   end
@@ -49,8 +47,5 @@ class SolutionsController < ApplicationController
 
     @iteration = @solution.iterations.last
     @comments = @solution.comments.includes(user: [:profile, { avatar_attachment: :blob }])
-    @reaction_counts = @solution.reactions.group(:emotion).count.to_h
-
-    @user_reaction = Reaction.where(user: current_user, solution: @solution).first if user_signed_in?
   end
 end

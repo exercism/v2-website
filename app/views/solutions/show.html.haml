@@ -19,19 +19,26 @@
 
   .lo-container
     .header
-      =image display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), "Avatar of #{display_handle(@solution.user, @solution.user.user_track_for(@track))}", class: "avatar"
+      .info
+        =image display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), "Avatar of #{display_handle(@solution.user, @solution.user.user_track_for(@track))}", class: "avatar"
+        %h1 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s solution
+        %h2
+          to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
+          in the #{link_to "#{@track.title} Track", @track, class: "track"}
+      .details
+        -if @solution.user == current_user
+          .starred-count
+            %i.fas.fa-star
+            Starred #{pluralize @solution.num_stars, "time"}
+        -else
+          =render "my/starred_solutions/star_button"
 
-      .reactions-desktop
-        =render "reactions"
+        .published-at
+          Published at #{@solution.published_at.strftime("%b %d %Y")}
+          &middot;
+          =pluralize @solution.num_comments, "comment"
 
-      %h1 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s solution
-
-      %h2
-        to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
-        in the #{link_to "#{@track.title} Track", @track, class: "track"}
-
-      .reactions-mobile
-        =render "reactions"
+      .clearfix
 
   .lo-container
     .pure-g.panels
@@ -48,20 +55,6 @@
 
             -if @iteration
               =render "solutions/panes", iteration: @iteration
-
-        -#
-          -if user_signed_in?
-            .react
-              %h3 React to this solution
-              =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
-                .hover Nice work!
-                =reaction_like_icon
-              =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
-                .hover Love it!
-                =reaction_love_icon
-              =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
-                .hover Genius!
-                =reaction_genius_icon
 
         -if @solution.allow_comments? || @solution.comments.size > 0
           =render "comments"

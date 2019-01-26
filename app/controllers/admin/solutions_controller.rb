@@ -8,7 +8,6 @@ class Admin::SolutionsController < AdminController
     @iteration = @solution.iterations.last unless @iteration
 
     @comments = @solution.comments.includes(user: [:profile, { avatar_attachment: :blob }])
-    @reaction_counts = @solution.reactions.group(:emotion).count.to_h
     @solution_user_track = UserTrack.where(user: @solution.user, track: @track).first
 
     @user_tracks = UserTrack.where(track: @track, user_id: @iteration.discussion_posts.map(&:user_id)).

@@ -18,7 +18,8 @@ module NotificationsHelper
       # about = solution
       display_avatar_url(notification.about.user, notification.about.user_track)
 
-    when 'new_reaction'
+    when 'new_reaction',
+         'new_solution_star'
       # Face of the reacting user
       # trigger = reaction
       notification.trigger.user.avatar_url

@@ -43,33 +43,33 @@ class SolutionsTest < ApplicationSystemTestCase
     sign_in!(user)
     visit solution_path(solution)
 
-    assert_equal 0, solution.reactions.count
+    assert_equal 0, solution.stars.count
 
     assert_selector ".react", text: "React to this solution"
     find(".react .like").click
     assert_selector ".react .like.selected"
 
     solution.reload
-    assert_equal 1, solution.reactions.count
+    assert_equal 1, solution.stars.count
   end
 
-  test "can unreact to a solution" do
+  test "can unstar to a solution" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
     solution = create(:solution, published_at: Time.now)
-    reaction = create(:reaction, user: user, solution: solution, emotion: :like)
+    star = create(:solution_star, user: user, solution: solution, emotion: :like)
 
     sign_in!(user)
     visit solution_path(solution)
 
-    assert_equal 1, solution.reactions.count
+    assert_equal 1, solution.stars.count
 
     assert_selector ".react", text: "React to this solution"
     find(".react .like.selected").click
     assert_no_selector ".react .like.selected", wait: 10
 
     solution.reload
-    assert_equal 0, solution.reactions.count
+    assert_equal 0, solution.stars.count
   end
 end

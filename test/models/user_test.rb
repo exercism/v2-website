@@ -310,4 +310,14 @@ class UserTest < ActiveSupport::TestCase
     user = User.find(user.id) # Clear the cache
     assert_equal 0.0, user.mentor_rating
   end
+
+  test "starred_solution?" do
+    user = create :user
+    solution = create :solution
+
+    refute user.starred_solution?(solution)
+
+    create :solution_star, user: user, solution: solution
+    assert user.reload.starred_solution?(solution)
+  end
 end

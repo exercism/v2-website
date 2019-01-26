@@ -44,11 +44,10 @@ class User < ApplicationRecord
   has_many :ignored_solution_mentorships, dependent: :destroy
   has_many :ignored_solutions, through: :ignored_solution_mentorships, source: :solution
 
-  has_many :reactions, dependent: :destroy
-
   has_many :discussion_posts, dependent: :nullify
   has_many :solution_comments, dependent: :destroy # TODO - set deleted status instead
   has_many :blog_comments, dependent: :destroy
+  has_many :solution_stars, dependent: :destroy
 
   has_one_attached :avatar
 
@@ -191,6 +190,10 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def starred_solution?(solution)
+    solution_stars.where(solution: solution).exists?
   end
 
   private

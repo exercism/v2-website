@@ -78,7 +78,7 @@
             .title Language:
             =select_tag :track_id, options_for_select(@profile_view.tracks_for_select, value: @profile_view.track_id), id: nil
         .solutions.pure-g
-          =render "profiles/solutions", solutions: @profile_view.solutions, reaction_counts: @profile_view.reaction_counts, comment_counts: @profile_view.comment_counts
+          =render "profiles/solutions", solutions: @profile_view.solutions
 
   -content_for :js do
     :javascript

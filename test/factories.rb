@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :solution_star do
+    solution { create :solution }
+    user { create :user }
+  end
   factory :blog_comment do
     blog_post { create :blog_post }
     user { create :user }
@@ -75,12 +79,6 @@ FactoryBot.define do
     iteration { create :iteration }
     filename { "foobar-#{SecureRandom.uuid}.rb"}
     file_contents { "something = :else" }
-  end
-
-  factory :reaction do
-    solution { create :solution }
-    user { create :user }
-    emotion { :love }
   end
 
   factory :maintainer do
