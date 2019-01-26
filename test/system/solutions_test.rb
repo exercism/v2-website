@@ -34,7 +34,7 @@ class SolutionsTest < ApplicationSystemTestCase
     visit track_exercise_solutions_path(solution.track, solution.exercise)
   end
 
-  test "can react to a solution" do
+  test "can star a solution" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
@@ -45,15 +45,14 @@ class SolutionsTest < ApplicationSystemTestCase
 
     assert_equal 0, solution.stars.count
 
-    assert_selector ".react", text: "React to this solution"
-    find(".react .like").click
-    assert_selector ".react .like.selected"
+    click_on "Star this solution"
+    sleep(0.1)
 
     solution.reload
     assert_equal 1, solution.stars.count
   end
 
-  test "can unstar to a solution" do
+  test "can unstar a solution" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
@@ -65,9 +64,8 @@ class SolutionsTest < ApplicationSystemTestCase
 
     assert_equal 1, solution.stars.count
 
-    assert_selector ".react", text: "React to this solution"
-    find(".react .like.selected").click
-    assert_no_selector ".react .like.selected", wait: 10
+    click_on "Starred solution"
+    sleep(0.1)
 
     solution.reload
     assert_equal 0, solution.stars.count
