@@ -147,7 +147,7 @@ class SolutionCommentsTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit solution_path(@solution)
 
-    refute_selector(".disable-comments.pure-button")
+    refute_selector(".disable-comments")
   end
 
   test "solution user can disable comments" do
@@ -156,7 +156,7 @@ class SolutionCommentsTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit solution_path(@solution)
 
-    assert_selector(".disable-comments.pure-button")
+    assert_selector(".disable-comments")
     assert_selector(".new-editable-text textarea")
     click_on "Disable comments"
 

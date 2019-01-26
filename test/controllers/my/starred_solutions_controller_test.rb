@@ -13,19 +13,6 @@ class My::StarredSolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @current_user, solution_star.user
   end
 
-  test "create updates" do
-    sign_in!
-    solution = create :solution, published_at: DateTime.now
-    solution_star = create :solution_star, solution: solution, user: @current_user
-    post my_starred_solutions_path, params: {solution_id: solution.uuid, format: 'js'}
-
-    assert_response :success
-    assert_equal 1, solution.stars.size
-    solution_star = solution.stars.first
-
-    assert_equal @current_user, solution_star.user
-  end
-
   test "create destroys" do
     sign_in!
     solution = create :solution, published_at: DateTime.now
@@ -33,7 +20,7 @@ class My::StarredSolutionsControllerTest < ActionDispatch::IntegrationTest
     post my_starred_solutions_path, params: {solution_id: solution.uuid, format: 'js'}
 
     assert_response :success
-    assert_equal 0, StarredSolution.where(solution: solution).size
+    assert_equal 0, SolutionStar.where(solution: solution).size
   end
 
   test "index only shows published solutions" do
