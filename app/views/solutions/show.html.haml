@@ -49,18 +49,19 @@
             -if @iteration
               =render "solutions/panes", iteration: @iteration
 
-        -if user_signed_in?
-          .react
-            %h3 React to this solution
-            =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
-              .hover Nice work!
-              =reaction_like_icon
-            =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
-              .hover Love it!
-              =reaction_love_icon
-            =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
-              .hover Genius!
-              =reaction_genius_icon
+        -#
+          -if user_signed_in?
+            .react
+              %h3 React to this solution
+              =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
+                .hover Nice work!
+                =reaction_like_icon
+              =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
+                .hover Love it!
+                =reaction_love_icon
+              =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
+                .hover Genius!
+                =reaction_genius_icon
 
         -if @solution.allow_comments? || @solution.comments.size > 0
           =render "comments"

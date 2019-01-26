@@ -366,6 +366,23 @@ body:not(.prism-dark) #teams-my-solution-page {
             margin-bottom:0;
         }
     }
+    .comments-disabled {
+        margin-top:10px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+        background: #fafafa;
+        .text {
+            color: #666;
+        }
+
+        .pure-button {
+            margin-top:10px;
+            background:$color-2;
+            color:#fff;
+        }
+    }
+
     .comments-section {
         clear:both;
         border-top:1px solid #eee;
@@ -376,37 +393,24 @@ body:not(.prism-dark) #teams-my-solution-page {
             @include font-size(18, 18);
             letter-spacing:-0.4px;
             font-weight: $regular;
-            margin-bottom:5px;
+            margin-bottom:8px;
         }
         .h2-subtitle {
             @include font-size(14, 14);
             color:#666;
             margin-bottom:20px;
         }
+        .no-comments {
+        }
         .comments+form {
             margin-top:40px;
         }
-        .comments-disabled {
-            margin-top:10px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            text-align: center;
-            background: #fafafa;
-            .text {
-                color: #666;
-            }
-
-            .pure-button {
-                margin-top:10px;
-                background:$color-2;
-                color:#fff;
-            }
-        }
         .disable-comments {
-            float:left;
-            border:1px solid $color-2;
-            color:$color-2;
-            background:#fff;
+            float:right;
+            color:#666;
+            @include font-size(13, 18);
+            //border-bottom:1px solid #ddd;
+            //text-decoration:none;
         }
     }
 }
