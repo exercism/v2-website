@@ -1,2 +1,2 @@
-$('.solutions').html('#{j render "solutions", solutions: @profile_view.solutions, reaction_counts: @profile_view.reaction_counts, comment_counts: @profile_view.comment_counts}')
+$('.solutions').html('#{j render "solutions", solutions: @profile_view.solutions}')
 $('.num-solutions').html('Showing #{pluralize @profile_view.solutions.size, "solution"}')

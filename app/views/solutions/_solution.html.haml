@@ -3,16 +3,3 @@
     =image display_avatar_url(solution.user, user_track), "Avatar of #{display_handle(solution.user, user_track)}"
     .handle= display_handle(solution.user, user_track)
     .published-at Published #{time_ago_in_words(solution.display_published_at)} ago
-  .reactions
-    .reaction
-      =reaction_like_icon
-      .count= @reaction_counts[[solution.id, "like"]].to_i
-    .reaction
-      =reaction_love_icon
-      .count= @reaction_counts[[solution.id, "love"]].to_i
-    .reaction
-      =reaction_genius_icon
-      .count= @reaction_counts[[solution.id, "genius"]].to_i
-    .reaction
-      =icon 'comment fa-fw', 'Comment'
-      .count= @comment_counts[solution.id].to_i

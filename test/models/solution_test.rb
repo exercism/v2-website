@@ -102,7 +102,7 @@ class SolutionTest < ActiveSupport::TestCase
     create(:solution_lock, solution: solution)
     create(:solution_mentorship, solution: solution)
     create(:ignored_solution_mentorship, solution: solution)
-    create(:reaction, solution: solution)
+    create(:solution_star, solution: solution)
 
     solution.destroy!
   end

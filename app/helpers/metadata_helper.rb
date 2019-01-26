@@ -33,7 +33,7 @@ module MetadataHelper
           { title: "Notifications" }
         when "settings", "track_settings", "preferences"
           { title: "Settings" }
-        when "reactions"
+        when "starred_solutions"
           { title: "Starred solutions" }
         when "solutions"
           case action_name

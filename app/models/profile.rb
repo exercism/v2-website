@@ -18,6 +18,6 @@ class Profile < ApplicationRecord
     joins("INNER JOIN user_tracks ON user_tracks.track_id = exercises.track_id").
     where("user_tracks.user_id = #{user_id}").
     where("user_tracks.anonymous": false).
-    reorder('solutions.num_reactions DESC')
+    reorder('solutions.num_stars DESC')
   end
 end

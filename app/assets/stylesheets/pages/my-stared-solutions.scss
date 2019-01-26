@@ -2,7 +2,7 @@
 @import 'mixins';
 
 // Also see /pages/solutions-page.scss
-#my-reactions-page {
+#my-starred-solutions-page {
     min-height: 380px;
     .header {
         background-color:$color-2;
@@ -22,5 +22,9 @@
             color:#fff;
             font-weight:$fw-regular;
         }
+    }
+    .no-solutions {
+        @include font-size(16, 16);
+        color:#666;
     }
 }

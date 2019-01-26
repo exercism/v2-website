@@ -147,7 +147,7 @@ Rails.application.routes.draw do
 
       resources :iterations, only: [:show]
     end
-    resources :reactions, only: [:index, :create]
+    resources :starred_solutions, only: [:index, :create]
 
     resources :discussion_posts, only: [:create, :update, :destroy]
     resources :notifications, only: [:index] do

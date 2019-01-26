@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_193618) do
+ActiveRecord::Schema.define(version: 2019_01_26_005925) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -243,16 +243,6 @@ ActiveRecord::Schema.define(version: 2019_01_25_193618) do
     t.index ["user_id"], name: "fk_rails_e424190865"
   end
 
-  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "solution_id", null: false
-    t.bigint "user_id", null: false
-    t.integer "emotion", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["solution_id"], name: "fk_rails_51c7d8b8ad"
-    t.index ["user_id"], name: "fk_rails_9f02fc96a0"
-  end
-
   create_table "repo_update_fetches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.timestamp "completed_at"
     t.bigint "repo_update_id", null: false
@@ -307,6 +297,15 @@ ActiveRecord::Schema.define(version: 2019_01_25_193618) do
     t.index ["user_id"], name: "fk_rails_578676d431"
   end
 
+  create_table "solution_stars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id", "user_id"], name: "index_solution_stars_on_solution_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_solution_stars_on_user_id"
+  end
+
   create_table "solutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "uuid", null: false
@@ -320,7 +319,6 @@ ActiveRecord::Schema.define(version: 2019_01_25_193618) do
     t.datetime "last_updated_by_user_at"
     t.datetime "last_updated_by_mentor_at"
     t.integer "num_mentors", default: 0, null: false
-    t.integer "num_reactions", default: 0, null: false
     t.text "reflection"
     t.boolean "is_legacy", default: false, null: false
     t.datetime "created_at", null: false
@@ -332,6 +330,8 @@ ActiveRecord::Schema.define(version: 2019_01_25_193618) do
     t.boolean "paused", default: false, null: false
     t.boolean "show_on_profile", default: false, null: false
     t.boolean "allow_comments", default: false, null: false
+    t.integer "num_comments", limit: 2, default: 0, null: false
+    t.integer "num_stars", limit: 2, default: 0, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
@@ -519,8 +519,6 @@ ActiveRecord::Schema.define(version: 2019_01_25_193618) do
   add_foreign_key "mentors", "tracks"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "reactions", "solutions"
-  add_foreign_key "reactions", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
   add_foreign_key "solution_locks", "solutions"
   add_foreign_key "solution_locks", "users"

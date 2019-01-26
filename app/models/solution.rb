@@ -11,7 +11,7 @@ class Solution < ApplicationRecord
   has_many :solution_locks, dependent: :destroy
   has_many :mentors, through: :mentorships, source: :user
 
-  has_many :reactions, dependent: :destroy
+  has_many :stars, class_name: "SolutionStar", dependent: :destroy
   has_many :comments, class_name: "SolutionComment", dependent: :destroy
 
   delegate :auto_approve?, to: :exercise

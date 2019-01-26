@@ -1,7 +1,7 @@
 require 'application_system_test_case'
 
 class ProfileSolutionsTest < ApplicationSystemTestCase
-  test "orders solutions by number of reactions" do
+  test "orders solutions by number of stars" do
     user = create(:user,
                   accepted_terms_at: Date.new(2016, 12, 25),
                   accepted_privacy_policy_at: Date.new(2016, 12, 25))
@@ -11,25 +11,25 @@ class ProfileSolutionsTest < ApplicationSystemTestCase
 
     solution1 = create(:solution,
                        user: user,
-                       num_reactions: 1,
+                       num_stars: 1,
                        exercise: create(:exercise, title: "Exercise 3", track: track),
                        published_at: Date.new(2016, 12, 25),
                        show_on_profile: true)
-    create_list(:reaction, 1, solution: solution1)
+    create_list(:starred_solution, 1, solution: solution1)
     solution2 = create(:solution,
                        user: user,
-                       num_reactions: 2,
+                       num_stars: 2,
                        exercise: create(:exercise, title: "Exercise 2", track: track),
                        published_at: Date.new(2016, 12, 25),
                        show_on_profile: true)
-    create_list(:reaction, 2, solution: solution2)
+    create_list(:starred_solution, 2, solution: solution2)
     solution3 = create(:solution,
                         user: user,
-                        num_reactions: 3,
+                        num_stars: 3,
                         exercise: create(:exercise, title: "Exercise 1", track: track),
                         published_at: Date.new(2016, 12, 25),
                         show_on_profile: true)
-    create_list(:reaction, 3, solution: solution3)
+    create_list(:starred_solution, 3, solution: solution3)
 
     sign_in!(user)
     visit profile_path(user.handle)

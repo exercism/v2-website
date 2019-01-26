@@ -4,7 +4,7 @@ class MigrateReactionsIntoComments < ActiveRecord::Migration[5.2]
     # and takes *forever* on development with a legacy db
     return
 
-    Reaction.where.not(comment: nil).find_each do |reaction|
+    LegacyReaction.where.not(comment: nil).find_each do |reaction|
       SolutionComment.create!(
         solution_id: reaction.solution_id,
         user_id: reaction.user_id,
@@ -14,6 +14,11 @@ class MigrateReactionsIntoComments < ActiveRecord::Migration[5.2]
         updated_at: reaction.updated_at
       )
     end
-    Reaction.where(emotion: :legacy).delete_all
+    LegacyReaction.where.not(emotion: :legacy).find_each do |reaction|
+      SolutionStar.create(
+        user_id: reaction.user_id,
+        solution_id: reaction.user_id
+      )
+    end
   end
 end
