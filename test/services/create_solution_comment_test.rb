@@ -14,6 +14,7 @@ class CreateSolutionCommentTest < ActiveSupport::TestCase
     assert_equal user, comment.user
     assert_equal content, comment.content
     assert_equal html, comment.html.strip
+    assert_equal 1, solution.reload.num_comments
   end
 
   test "notifications work correctly" do

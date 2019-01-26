@@ -32,16 +32,16 @@ class CreateSolutionStar
       # go into every single iteration
       about: solution
     )
-    update_solution_star_counter
+    update_solution_stars_counter
   end
 
   def destroy_solution_star
     solution_star.destroy!
     Notification.where(user: solution.user, trigger: solution_star).delete_all
-    update_solution_star_counter
+    update_solution_stars_counter
   end
 
-  def update_solution_star_counter
+  def update_solution_stars_counter
     Solution.where(id: solution).update_all(
       "num_stars = (SELECT COUNT(*) from solution_stars where solution_id = #{solution.id})"
     )

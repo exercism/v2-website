@@ -11,6 +11,7 @@ class CreateSolutionComment < CreatesDiscussionPost
       html: html
     )
 
+    update_solution_comments_counter
     create_solution_user_notification
     create_commenter_notifications
 
@@ -23,6 +24,13 @@ class CreateSolutionComment < CreatesDiscussionPost
   def html
     ParseMarkdown.(content)
   end
+
+  def update_solution_comments_counter
+    Solution.where(id: solution).update_all(
+      "num_comments = (SELECT COUNT(*) from solution_comments where solution_id = #{solution.id})"
+    )
+  end
+
 
   def create_solution_user_notification
     return if solution.user == commenter
