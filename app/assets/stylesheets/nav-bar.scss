@@ -27,11 +27,16 @@
             content: "";
             content: "";
             bottom: 4px;
-            left: 0px;
+            left: 16px;
             right: 10px;
             position: absolute;
             height: 1px;
             background: #ccc;
+        }
+        &:first-child {
+            &:before {
+                left: 0px;
+            }
         }
 
         &:nth-child(n+1){
