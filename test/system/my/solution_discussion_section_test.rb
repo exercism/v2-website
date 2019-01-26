@@ -47,6 +47,20 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".discussion"
   end
 
+  test "mentored mode / side-promoted-to-core solution" do
+    solution = create(:solution, user: @user, mentoring_requested_at: nil, exercise: create(:exercise, core: true), completed_at: Time.current)
+    create :iteration, solution: solution
+    create(:user_track, track: solution.track, user: @user)
+
+    visit my_solution_path(solution)
+
+    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
+    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+
+    refute_selector ".discussion"
+  end
+
   test "mentored mode / side solution with mentoring requested" do
     solution = create(:solution, user: @user, mentoring_requested_at: Time.current, exercise: create(:exercise, core: false))
     create :iteration, solution: solution

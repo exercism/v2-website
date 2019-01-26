@@ -10,7 +10,6 @@
       =graphical_icon("question-circle")
       What's next?
 
-
     -if @solution.published?
       =render "my/solutions/widgets/published"
     -elsif @solution.completed?
@@ -21,7 +20,12 @@
     =render "my/solutions/widgets/community_solutions"
 
     .next-option
-      -if @user_track.mentoring_slots_remaining?
+      -if @solution.exercise.core?
+        %p
+          %strong Request mentor feedback.
+          This exercise has been promoted to a core exercise. You may request mentoring on it without affecting your allowance.
+        =link_to "Request mentor feedback", request_mentoring_my_solution_path(@solution), method: :patch, class: 'pure-button'
+      -elsif @user_track.mentoring_slots_remaining?
         %p
           %strong Request mentor feedback.
           You may request mentoring on up to #{@user_track.max_mentoring_slots} non-core exercises per track. You have #{@user_track.mentoring_slots_remaining} slots remaining.
