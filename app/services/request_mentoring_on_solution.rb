@@ -4,7 +4,10 @@ class RequestMentoringOnSolution
   initialize_with :solution
 
   def call
-    return if user_track.mentoring_allowance_used_up?
+    # We guard this for exercises that are promoted to core
+    unless (user_track.mentored_mode? && solution.exercise.core?)
+      return if user_track.mentoring_allowance_used_up?
+    end
 
     solution.update(
       completed_at: nil,

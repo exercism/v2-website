@@ -40,4 +40,33 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
       assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
     end
   end
+
+  test "core non-independent exercises can always be mentored" do
+    Timecop.freeze do
+      solution = create :solution, mentoring_requested_at: nil
+      ut = create :user_track, user: solution.user, track: solution.track
+      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
+
+      solution.exercise.update(core: true)
+      ut.update(independent_mode: true)
+      RequestMentoringOnSolution.(solution)
+      assert_nil solution.mentoring_requested_at
+
+      solution.exercise.update(core: false)
+      ut.update(independent_mode: false)
+      RequestMentoringOnSolution.(solution)
+      assert_nil solution.mentoring_requested_at
+
+      solution.exercise.update(core: false)
+      ut.update(independent_mode: true)
+      RequestMentoringOnSolution.(solution)
+      assert_nil solution.mentoring_requested_at
+
+      solution.exercise.update(core: true)
+      ut.update(independent_mode: false)
+      RequestMentoringOnSolution.(solution)
+      assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
+    end
+  end
+
 end
