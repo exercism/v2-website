@@ -34,9 +34,6 @@
           -if current_user == @solution.user
             =link_to "Disable comments", [:toggle_allow_comments, :my, @solution], method: :patch, class: 'pure-button disable-comments'
           =button_tag "Comment", class: "comment-button js-disable-on-click pure-button #{@solution.approved?? "faded" : ""}"
-  -else
-    / TODO
-    Please sign in to post comments
 
 -content_for :js do
   :javascript

@@ -68,4 +68,8 @@ module LayoutHelper
       render "layouts/logged_out_teams_header"
     end
   end
+
+  def render_cta_footer
+    render "layouts/cta_footer"
+  end
 end
