@@ -46,6 +46,8 @@ class SolutionsController < ApplicationController
     end
 
     @iteration = @solution.iterations.last
-    @comments = @solution.comments.includes(user: [:profile, { avatar_attachment: :blob }])
+    @comments = @solution.comments.
+                          order('created_at ASC').
+                          includes(user: [:profile, { avatar_attachment: :blob }])
   end
 end
