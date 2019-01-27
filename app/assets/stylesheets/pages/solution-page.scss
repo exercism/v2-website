@@ -100,8 +100,11 @@
             }
         }
         .md-editor.active+.warning {
-            background: $error-red-text-color;
-            color: #fff;
+            background: #EBF7F8;
+            color: #666;
+            h4 {
+                color:$color-2;
+            }
         }
         form {
             margin:0px 0 20px 0;
