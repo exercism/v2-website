@@ -1,8 +1,8 @@
 =link_to solution, class: 'solution' do
   =image display_avatar_url(solution.user, user_track), "Avatar of #{display_handle(solution.user, user_track)}"
 
-  .exercise= exercise.title
-  .track #{exercise.track.title} track
+  .exercise= solution.exercise.title
+  .track #{solution.exercise.track.title} track
 
   .details-bar
     .handle
