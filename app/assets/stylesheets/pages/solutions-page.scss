@@ -67,18 +67,18 @@
         }
     }
     .user-solution {
-        background:#f3f3f3;
-        border:1px solid #ccc;
+        background:#fafafa;
+        border:1px solid #ddd;
         color:#999;
         display:block;
-        .hidden-box {
+        .not-published {
             float:right;
             display:inline-block;
-            border:1px solid #aaa;
+            border:1px solid $color-2;
             background:#fff;
             text-transform:uppercase;
             @include font-size(9, 9);
-            color:#999;
+            color:$color-2;
             padding:4px;
             font-weight:$bold;
             vertical-align:bottom;

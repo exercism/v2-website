@@ -8,9 +8,9 @@
     .handle
       %i.fal.fa-fw.fa-user
       =display_handle(solution.user, user_track)
-    .published-at
-      %i.fal.fa-fw.fa-clock
-      #{solution.published_at.strftime("%b %d %Y")}
+    /.published-at
+    /  %i.fal.fa-fw.fa-clock
+    /  #{solution.published_at.strftime("%b %d %Y")}
     .detail
       %i.fal.fa-fw.fa-comment
       =solution.num_comments
