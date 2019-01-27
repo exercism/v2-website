@@ -25,7 +25,9 @@ class MigrateReactionsIntoComments < ActiveRecord::Migration[5.2]
       begin
         SolutionStar.create!(
           user_id: reaction.user_id,
-          solution_id: reaction.user_id
+          solution_id: reaction.user_id,
+          created_at: reaction.created_at,
+          updated_at: reaction.updated_at
         )
       rescue => e
         p "Failed to create solution star"
