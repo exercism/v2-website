@@ -2,7 +2,8 @@
 @import 'mixins';
 
 #solutions-page,
-#my-starred-solutions-page {
+#my-starred-solutions-page,
+#exercise-page {
     .user-solution,
     .solution {
         border:1px solid #eee;

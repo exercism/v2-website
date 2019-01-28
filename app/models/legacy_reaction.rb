@@ -1,3 +1,4 @@
 class LegacyReaction < ApplicationRecord
-  self.table_name = 'reactions'
+  belongs_to :solution
+  belongs_to :user
 end
