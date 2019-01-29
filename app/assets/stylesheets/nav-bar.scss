@@ -42,7 +42,7 @@
         &:nth-child(n+1){
             &:after {
                 content: "";
-                background-image: url('nav-divider.png');
+                background-image: image-url('nav-divider.png');
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center right;
