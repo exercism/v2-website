@@ -6,6 +6,18 @@
 #my-solution-page,
 #teams-solution-page,
 #teams-my-solution-page {
+    .legacy-warning {
+        background: #eee;
+        padding: 15px 20px;
+        color: #666;
+        border: solid #ddd;
+        border-width: 1px 1px 0 1px;
+        border-radius: 2px 2px 0 0;
+        h4 {
+            font-weight:$fw-bold;
+            display:inline-block;
+        }
+    }
     .pane.instructions {
         padding:20px 30px;
         h1,h2,h3,h4,h5,h6 {
@@ -84,6 +96,9 @@
         .panes {
             border:1px solid #ddd;
             border-radius:2px;
+        }
+        .legacy-warning+.panes {
+            border-radius:0 0 2px 2px;
         }
     }
     .new-editable-text {
