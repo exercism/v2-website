@@ -3,7 +3,9 @@ class SolutionsController < ApplicationController
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
 
-    @solutions = @exercise.solutions.published.reorder('solutions.published_at DESC').includes(:user)
+    @solutions = @exercise.solutions.
+                           published.
+                           includes(user: [:profile, { avatar_attachment: :blob }])
 
     if user_signed_in?
       @solutions = @solutions.where.not(user_id: current_user.id)
@@ -14,6 +16,15 @@ class SolutionsController < ApplicationController
                                     first
     end
 
+    @order = params[:order]
+    sql_order = case @order
+                when "num_stars"; "num_stars DESC"
+                when "num_comments"; "num_comments DESC"
+                when "published_at_asc"; "published_at ASC"
+                else;"published_at DESC"
+                end
+
+    @solutions = @solutions.reorder(sql_order)
     @total_solutions = @solutions.count
     @solutions = @solutions.page(params[:page]).per(21)
     @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
