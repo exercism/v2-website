@@ -4,6 +4,23 @@
 #solutions-page,
 #my-starred-solutions-page,
 #exercise-page {
+    .orderer {
+        margin-bottom:10px;
+
+        .label {
+            display:inline-block;
+            margin-right:2px;
+        }
+
+        .selectize-control {
+            display:inline-block;
+            vertical-align:middle;
+        }
+        .selectize-input {
+            width:180px;
+            max-width: 100%;
+        }
+    }
     .user-solution,
     .solution {
         border:1px solid #eee;
