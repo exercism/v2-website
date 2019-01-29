@@ -53,6 +53,14 @@
               .tab.tab-3
                 Solution
 
+            -unless @solution.latest_exercise_version?
+              .legacy-warning
+                %h4 Note:
+                -if @solution.published_at <= Exercism::V2_MIGRATED_AT
+                  This solution was written on an old version of Exercism. The tests show below might not corrospond to the solution code, and the exercise may have changed since this code was written.
+                -else
+                  This exercise has changed since this solution was written.
+
             -if @iteration
               =render "solutions/panes", iteration: @iteration
 
