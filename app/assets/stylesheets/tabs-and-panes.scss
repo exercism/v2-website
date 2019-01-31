@@ -5,6 +5,7 @@
     &>.tabs {
         border-bottom:1px solid #ddd;
         padding-left:5px;
+        margin-bottom:20px;
         @include width-small() {
             padding-left:10px;
         }
@@ -29,7 +30,6 @@
     }
     &>.panes {
         //overflow:scroll;
-        margin-top:20px;
         .pane {
             display:none;
         }

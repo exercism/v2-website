@@ -21,11 +21,13 @@ class MigrateReactionsIntoComments < ActiveRecord::Migration[5.2]
       end
     end
 
-    LegacyReaction.where.not(emotion: :legacy).find_each do |reaction|
+    LegacyReaction.includes(:solution).find_each do |reaction|
+      next if reaction.user_id == reaction.solution.user_id
+
       begin
         SolutionStar.create!(
           user_id: reaction.user_id,
-          solution_id: reaction.user_id,
+          solution_id: reaction.solution_id,
           created_at: reaction.created_at,
           updated_at: reaction.updated_at
         )

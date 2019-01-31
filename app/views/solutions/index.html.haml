@@ -2,7 +2,6 @@
   #nav.lo-nav-bar
     .lo-container
       -if user_signed_in?
-        /=link_to "Dashboard", root_path
         =link_to "Language tracks", [:my, :tracks]
         =link_to "#{@track.title} track", [:my, @track]
         -if @user_solution
@@ -30,6 +29,10 @@
         Explore #{number_with_delimiter @total_solutions} community solutions.
 
   .lo-container
+    =form_tag track_exercise_solutions_path(@track, @exercise), class: "orderer", method: :get do
+      .label Sort by:
+      =select_tag(:order, options_for_select([["Newest first", "published_at_desc"], ["Oldest first", "published_at_asc"], ["Most stars first", "num_stars"], ["Most comments first", "num_comments"]], @order))
+
     .pure-g
       -if @user_solution
         .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
@@ -58,3 +61,7 @@
           =render "solution", solution: solution, track: @track, exercise: @exercise, user_track: @user_tracks[solution.user_id]
 
     =paginate @solutions
+
+-content_for :js do
+  :javascript
+    submitOnChange($('.orderer select'))

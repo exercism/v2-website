@@ -25,6 +25,9 @@ class Git::SyncUpdatedRepos
     repo_updates.each do |update|
       begin
         SyncRepoUpdateJob.perform_now(update.id)
+      rescue Octokit::TooManyRequests
+        sleep(60.seconds)
+        retry
       rescue => exception
         Bugsnag.notify(exception)
       end
