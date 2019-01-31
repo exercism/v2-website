@@ -13,9 +13,6 @@ class RemindSolutionMentorship
       :remind_mentor,
       solution
     )
-
-    solution_mentorship.update!(abandoned: true)
-    CacheSolutionNumMentors.(solution)
   end
 
   private
