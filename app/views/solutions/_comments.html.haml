@@ -11,9 +11,9 @@
     -else
       Find this solution interesting? Ask the author a question to learn more.
 
-  -if @solution.comments.size > 0
+  -if @comments.size > 0
     .comments
-      -@solution.comments.each do |comment|
+      -@comments.each do |comment|
         =solution_comment_widget(comment, @solution)
   -else
     /.no-comments Be the first to comment!

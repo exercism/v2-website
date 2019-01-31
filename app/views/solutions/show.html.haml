@@ -64,7 +64,7 @@
             -if @iteration
               =render "solutions/panes", iteration: @iteration
 
-        -if @solution.allow_comments? || @solution.comments.size > 0
+        -if @solution.allow_comments? || @comments.size > 0
           =render "comments"
         -else
           =render "comments_disabled"
