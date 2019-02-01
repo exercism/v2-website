@@ -27,6 +27,14 @@
           =f.check_box :email_on_solution_approved
           %span Email me when a mentor approves my solution
 
+        =f.label :email_on_new_solution_comment_for_solution_user do
+          =f.check_box :email_on_new_solution_comment_for_solution_user
+          %span Email me when someone comments on my published solution
+
+        =f.label :email_on_new_solution_comment_for_other_commenter do
+          =f.check_box :email_on_new_solution_comment_for_other_commenter
+          %span Email me when someone replies to a comment I've made on a published solution
+
         -if current_user.is_mentor?
           %h3 Mentor emails
           =f.label :email_on_new_discussion_post_for_mentor do
