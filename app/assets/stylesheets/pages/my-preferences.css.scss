@@ -48,10 +48,16 @@
     label {
         display:block;
         color:#666;
-        @include font-size(14, 14);
+        @include font-size(14, 16);
         margin-bottom:10px;
+        overflow:hidden;
+        cursor:pointer;
         input {
-            margin-right:5px;
+            float:left;
+        }
+        span {
+            display:block;
+            margin-left:20px;
         }
     }
 
