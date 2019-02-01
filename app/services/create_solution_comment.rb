@@ -44,6 +44,12 @@ class CreateSolutionComment < CreatesDiscussionPost
       trigger: comment,
       about: solution
     )
+
+    DeliverEmail.(
+      solution.user,
+      :new_solution_comment_for_solution_user,
+      comment
+    )
   end
 
   def create_commenter_notifications
@@ -57,6 +63,12 @@ class CreateSolutionComment < CreatesDiscussionPost
         Rails.application.routes.url_helpers.solution_url(solution, anchor: "comment-#{comment}"),
         trigger: comment,
         about: solution
+      )
+
+      DeliverEmail.(
+        user,
+        :new_solution_comment_for_other_commenter,
+        comment
       )
     end
   end
