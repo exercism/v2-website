@@ -37,6 +37,11 @@ class DeliverEmail
       [:mentor_notifications, :new_iteration]
     when :remind_mentor
       [:mentor_notifications, :remind]
+
+    when :new_solution_comment_for_solution_user
+      [:solution_comments, :new_comment_for_solution_user]
+    when :new_solution_comment_for_commenter
+      [:user_notifications, :new_comment_for_commenter]
     else
       raise UnknownMailTypeError.new(mail_type)
     end
