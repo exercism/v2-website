@@ -34,4 +34,20 @@ namespace :mailers do
       end
     end
   end
+
+  task :deliver_mentor_jan_2019  => :environment do
+    users = User.
+      where(id: TrackMentorship.select(:user_id)).
+      order('users.id asc')
+
+    users.each do |user|
+      begin
+        NewsletterMailer.with(user: user).mentor_jan_2019.deliver
+        p "+ #{user.id}"
+      rescue
+        p "- #{user.id}"
+      end
+    end
+  end
+
 end
