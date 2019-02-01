@@ -1,0 +1,5 @@
+.content
+  %p Hi there,
+  %p
+    User "#{@comment.user.handle}" has commented on #{@solution_user_handle}'s solution to #{@exercise_title} on the #{@track_title} track.
+    You can #{link_to "view it here", @solution}.
