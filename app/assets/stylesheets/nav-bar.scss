@@ -13,7 +13,7 @@
     a, span {
         display:inline-block;
         @include font-size(12, 12);
-        padding:11px 5px 5px 5px;
+        padding:11px 10px 5px 17px;
         &:first-child {
             padding-left:0;
         }
@@ -27,19 +27,37 @@
             content: "";
             content: "";
             bottom: 4px;
-            left: 5px;
-            right: 5px;
+            left: 16px;
+            right: 10px;
             position: absolute;
             height: 1px;
             background: #ccc;
         }
+        &:first-child {
+            &:before {
+                left: 0px;
+            }
+        }
+
+        &:nth-child(n+1){
+            &:after {
+                content: "";
+                background-image: image-url('nav-divider.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center right;
+                overflow: hidden;
+                position: absolute;
+                display: inline-block;
+                height: 33px;
+                width:13px;
+                top: 0;
+                bottom: 0;
+                padding-left: 7px;
+            }
+        }
     }
-    img {
-        height:33px;
-        width:13px;
-        display:inline-block;
-        vertical-align:middle;
-    }
+
 }
 
 #nav.lo-external-nav-bar {

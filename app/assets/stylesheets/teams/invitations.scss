@@ -7,14 +7,28 @@
         color:#999;
     }
     textarea {
-        width:300px;
+        width:400px;
         height:200px;
         padding:10px;
         margin-bottom:10px;
-        border:1px solid #aaa;
+        border:1px solid #ccc;
         border-radius:3px;
     }
     .pure-button {
         background:$color-2;
+    }
+}
+
+#teams-invitation-page {
+    strong {
+        font-weight:$regular;
+    }
+    p {
+        margin-bottom:15px;
+    }
+    .pure-button {
+        background:$color-2;
+        padding:10px 30px;
+        margin-right:5px;
     }
 }

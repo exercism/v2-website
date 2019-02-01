@@ -2,47 +2,43 @@
   #nav.lo-nav-bar
     .lo-container
       -if user_signed_in?
-        /=link_to "Dashboard", root_path
-        /=nav_divider
         =link_to "Language tracks", [:my, :tracks]
-        =nav_divider
         =link_to "#{@track.title} track", [:my, @track]
-        =nav_divider
         -if @user_solution
           =link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
-          =nav_divider
         =link_to "Community solutions", [@track, @exercise, :solutions]
-        =nav_divider
         %span This solution
 
       -else
         =link_to "Language tracks", :tracks
-        =nav_divider
         =link_to "#{@track.title} track", @track
-        =nav_divider
         =link_to "Exercises", [@track, :exercises]
-        =nav_divider
         =link_to @exercise.title, [@track, @exercise]
-        =nav_divider
         =link_to "Community solutions", [@track, @exercise, :solutions]
-        =nav_divider
         %span This solution
 
   .lo-container
     .header
-      =image display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), "Avatar of #{display_handle(@solution.user, @solution.user.user_track_for(@track))}", class: "avatar"
+      .info
+        =image display_avatar_url(@solution.user, @solution.user.user_track_for(@track)), "Avatar of #{display_handle(@solution.user, @solution.user.user_track_for(@track))}", class: "avatar"
+        %h1 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s solution
+        %h2
+          to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
+          in the #{link_to "#{@track.title} Track", @track, class: "track"}
+      .details
+        -if @solution.user == current_user
+          .starred-count
+            %i.fas.fa-star
+            Starred #{pluralize @solution.num_stars, "time"}
+        -else
+          =render "my/starred_solutions/star_button"
 
-      .reactions-desktop
-        =render "reactions"
+        .published-at
+          Published at #{@solution.published_at.strftime("%b %d %Y")}
+          &middot;
+          =pluralize @solution.num_comments, "comment"
 
-      %h1 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s solution
-
-      %h2
-        to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
-        in the #{link_to "#{@track.title} Track", @track, class: "track"}
-
-      .reactions-mobile
-        =render "reactions"
+      .clearfix
 
   .lo-container
     .pure-g.panels
@@ -57,22 +53,21 @@
               .tab.tab-3
                 Solution
 
+            -unless @solution.latest_exercise_version?
+              .legacy-warning
+                %h4 Note:
+                -if @solution.published_at <= Exercism::V2_MIGRATED_AT
+                  This solution was written on an old version of Exercism. The tests show below might not corrospond to the solution code, and the exercise may have changed since this code was written.
+                -else
+                  This exercise has changed since this solution was written.
+
             -if @iteration
               =render "solutions/panes", iteration: @iteration
 
-        -if user_signed_in?
-          .react
-            %h3 React to this solution
-            =link_to [:my, :reactions, solution_id: @solution, emotion: 'like'], class: "like #{@user_reaction.try(:emotion) == "like" ? "selected" : ''}", method: :post, remote: true do
-              .hover Well done
-              =icon 'thumbs-up fa-fw', 'Thumbs up'
-            =link_to [:my, :reactions, solution_id: @solution, emotion: 'love'], class: "love #{@user_reaction.try(:emotion) == "love" ? "selected" : ''}", method: :post, remote: true do
-              .hover Love it!
-              =icon 'heart fa-fw', 'Heart'
-            =link_to [:my, :reactions, solution_id: @solution, emotion: 'genius'], class: "genius #{@user_reaction.try(:emotion) == "genius" ? "selected" : ''}", method: :post, remote: true do
-              .hover Genius!
-              =graphical_image "genius.png", class: 'not-selected'
-              =graphical_image "genius-turquoise.png", class: 'selected'
+        -if @solution.allow_comments? || @comments.size > 0
+          =render "comments"
+        -else
+          =render "comments_disabled"
 
       .pure-u-1.pure-u-md-1-2.rhs
         -if @solution.reflection.present?
@@ -82,38 +77,14 @@
         -else
           .no-reflection
             %h3 What can you learn from this solution?
-            %p A huge amount can be learnt from reading other people’s code. This is why we wanted to give exercism users the option of making their solutions public.
+            %p A huge amount can be learned from reading other people’s code. This is why we wanted to give exercism users the option of making their solutions public.
             %p Here are some questions to help you reflect on this solution and learn the most from it.
             %ul
               %li What compromises have been made?
-              %li Are there new concepts here that I could read more about to develop my understanding?
+              %li Are there new concepts here that you could read more about to improve your understanding?
 
-  -if @comments.size > 0
-    .comments-section
-      .lo-container
-        .pure-g
-          .pure-u-1.pure-u-md-1-2
-            %h2 Community comments
-            .h2-subtitle See what others have said about this solution
-            -@comments.each do |reaction|
-              .comment.pure-g
-                .pure-u-1.pure-u-md-2-24
-                  -if reaction.emotion == "like"
-                    =icon 'thumbs-up'
-                  -elsif reaction.emotion == "love"
-                    =icon 'heart'
-                  -elsif reaction.emotion == "genius"
-                    =graphical_image "genius-turquoise.png"
-                  -else reaction.emotion == "legacy"
-                    =icon 'comment'
-
-                .pure-u-1.pure-u-md-22-24.content
-                  .when #{time_ago_in_words(reaction.created_at)} ago
-                  .who
-                    %strong #{reaction.user.handle}
-                    says
-                  .text= simple_format reaction.comment
+=render_cta_footer
 
 -content_for :js do
   :javascript
-    window.setupSolutionTabs()
+    window.setupTabs()

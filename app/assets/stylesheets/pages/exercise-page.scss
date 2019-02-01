@@ -52,7 +52,7 @@
             color:#eee;
             @include font-size(12, 12);
             a {
-                font-weight:$light;
+                font-weight:$fw-regular;
                 color:#fff;
             }
         }
@@ -109,91 +109,15 @@
             }
         }
     }
-    .solution {
-        border:1px solid #eee;
-        border-radius:2px;
-        margin:0 20px 20px 0;
-        padding:20px;
-        display:block;
-        text-decoration:none;
-        &:hover {
-            border-color:$color-2;
-        }
-        .person {
-            overflow:hidden;
-            margin-bottom:15px;
-            img {
-                border-radius:100%;
-                width:40px;
-                height:40px;
-                float:left;
-                display:block;
-                margin-right:10px;
-            }
-            .handle {
-                padding-top:5px;
-                @include font-size(18, 18);
-                color:#666;
-                font-weight:$regular;
-                margin-bottom:3px;
-
-            }
-            .published-at {
-                @include font-size(10, 10);
-                color:#bbb;
-                font-weight:$regular;
-            }
-        }
-        .reactions {
-            background:#fafafa;
-            border:1px solid #eee;
-            border-radius:2px;
-            overflow:hidden;
-            display:inline-block;
-            .reaction {
-                float:left;
-                border-right:1px solid #eee;
-                padding:10px 16px;
-                &:last-child {
-                    border:none;
-                }
-                &.highlight {
-                    i, .count {
-                        color:$color-2;
-                    }
-                }
-                .count {
-                    display:inline-block;
-                    @include font-size(12, 12);
-                    font-weight:$regular;
-                    color:#888;
-                    width:14px;
-                }
-                i, img {
-                    display:inline-block;
-                    margin-right:5px;
-                }
-
-                i {
-                    @include font-size(16, 16);
-                    color:#aaa;
-                }
-                img {
-                    vertical-align:bottom;
-                    height:16px;
-                }
-            }
-        }
-    }
     .more-button {
-        display:block;
-        width:100%;
-        padding:20px;
-        border:1px solid $color-2;
-        color:$color-2;
-        background:#fff;
-        font-weight:$regular;
-        margin-bottom:20px;
+       display:block;
+       width:100%;
+       padding:20px;
+       border:1px solid $color-2;
+       color:$color-2;
+       background:#fff;
+       font-weight:$regular;
+       margin-bottom:20px;
     }
 }
 

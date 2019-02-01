@@ -1,5 +1,0 @@
-$("#solution-page .react a").removeClass('selected')
--if @reaction.persisted?
-  $("#solution-page .react a.#{@reaction.emotion}").addClass('selected')
-
-$("#solution-page .reactions").replaceWith("#{j render "solutions/reactions"}")

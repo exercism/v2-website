@@ -26,8 +26,8 @@ class Git::ExerciseReader
     end
     test_suites
   rescue => e
-    puts e.message
-    puts e.backtrace
+    puts "!!! #{e.message}"
+    puts "!!! #{e.backtrace}"
     []
   end
 

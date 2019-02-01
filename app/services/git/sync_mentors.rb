@@ -21,7 +21,6 @@ class Git::SyncMentors
   def upsert_mentors!
     @mentor_ids ||= repo.mentors.map do |mentor_data|
       mentor = upsert_mentor!(mentor_data)
-
       mentor.id
     end
   end

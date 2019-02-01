@@ -1,6 +1,8 @@
+@import 'variables';
+
 @mixin normal-font {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 300;
+    font-weight: $regular;
 }
 
 @mixin header-font {
@@ -22,6 +24,12 @@
 
 @mixin width-small() {
     @media screen and (min-width: 35.5em) {
+        @content;
+    }
+}
+
+@mixin width-smaller-than-medium() {
+    @media screen and (max-width: 48em) {
         @content;
     }
 }

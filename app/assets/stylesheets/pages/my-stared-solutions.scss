@@ -1,0 +1,30 @@
+@import 'variables';
+@import 'mixins';
+
+// Also see /pages/solutions-page.scss
+#my-starred-solutions-page {
+    min-height: 380px;
+    .header {
+        background-color:$color-2;
+        padding:35px 0 20px 0;
+        margin-bottom:35px;
+
+        h1 {
+            @include font-size(30, 30);
+            letter-spacing:-0.56px;
+            font-weight:$bold;
+            margin-bottom:5px;
+            color:#fff;
+        }
+        .h1-subtitle {
+            max-width:70%;
+            @include font-size(15, 21);
+            color:#fff;
+            font-weight:$fw-regular;
+        }
+    }
+    .no-solutions {
+        @include font-size(16, 16);
+        color:#666;
+    }
+}

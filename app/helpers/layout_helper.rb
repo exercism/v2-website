@@ -6,6 +6,7 @@ module LayoutHelper
     classes << "controller-#{controller_name}"
     classes << "action-#{action_name}"
     classes << "prism-dark" if user_signed_in? && current_user.dark_code_theme
+    classes << (user_signed_in?? "user-signed_in" : "user-signed_out")
     classes.join(" ")
   end
 
@@ -66,5 +67,9 @@ module LayoutHelper
     else
       render "layouts/logged_out_teams_header"
     end
+  end
+
+  def render_cta_footer
+    render "layouts/cta_footer"
   end
 end

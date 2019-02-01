@@ -2,7 +2,6 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =nav_divider
       %span The Exercism team
   =render "header"
 
@@ -25,18 +24,6 @@
                   .tag CLI
 
         .pure-u-1.pure-u-md-1-2
-          =link_to "https://twitter.com/n_chalmers", class: 'core-person' do
-            .pure-g
-              .pure-u-1-4
-                =image "https://avatars0.githubusercontent.com/u/5421823?v=4&s=460", "Photo of Nicole Chalmers"
-              .pure-u-3-4
-                %h3 Nicole Chalmers
-                %p.bio Nicole is responsible for the product-side of Exercism. She is the brains behind the user experience and beautiful design of Exercism. She is passionate about education, equality and inclusiveness. Nicole is part of the team at Thalamus.
-                .tags
-                  .tag Leadership
-                  .tag Product
-
-        .pure-u-1.pure-u-md-1-2
           =link_to "http://ihid.co.uk", class: 'core-person' do
             .pure-g
               .pure-u-1-4
@@ -48,6 +35,18 @@
                   .tag Leadership
                   .tag Product
                   .tag Platform
+
+        .pure-u-1.pure-u-md-1-2
+          =link_to "https://twitter.com/n_chalmers", class: 'core-person' do
+            .pure-g
+              .pure-u-1-4
+                =image "https://avatars0.githubusercontent.com/u/5421823?v=4&s=460", "Photo of Nicole Chalmers"
+              .pure-u-3-4
+                %h3 Nicole Chalmers
+                %p.bio Nicole is responsible for the product-side of Exercism. She is the brains behind the user experience and beautiful design of Exercism. She is passionate about education, equality and inclusiveness. Nicole is part of the team at Thalamus.
+                .tags
+                  .tag Leadership
+                  .tag Product
 
         .pure-u-1.pure-u-md-1-2
           =link_to "https://twitter.com/charlescare", class: 'core-person' do

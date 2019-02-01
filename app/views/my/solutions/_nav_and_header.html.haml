@@ -1,11 +1,7 @@
 #nav.lo-nav-bar
   .lo-container
-    /=link_to "Dashboard", root_path
-    /=nav_divider
     =link_to "Language tracks", [:my, :tracks]
-    =nav_divider
     =link_to "#{@track.title} track", [:my, @track]
-    =nav_divider
     %span= @exercise.title
 
 .lo-container.track-header-container
@@ -30,7 +26,7 @@
             %h3 Track progress:
             -num_core_exercises = @track.exercises.core.count
             -num_completed_exercises = @user_track.num_completed_core_exercises
-            -num_available_exercises = @user_track.num_avaliable_core_exercises + num_completed_exercises
+            -num_available_exercises = @user_track.num_available_core_exercises + num_completed_exercises
 
             .dots
               -num_core_exercises.times do |i|

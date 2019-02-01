@@ -7,16 +7,13 @@
       .title-bar
         .title= exercise.title
         .track #{exercise.track.title} track
-      .reactions
-        .reaction
-          =icon 'thumbs-up fa-fw', 'thumbs-up'
-          .count= reaction_counts[[solution.id, "like"]].to_i
-        .reaction
-          =icon 'heart fa-fw', 'heart'
-          .count= reaction_counts[[solution.id, "love"]].to_i
-        .reaction
-          =image "genius.png", 'genius'
-          .count= reaction_counts[[solution.id, "genius"]].to_i
-        .reaction
-          =icon 'comment fa-fw', 'comment'
-          .count= comment_counts[solution.id].to_i
+      .details
+        .published-at
+          %i.fal.fa-clock
+          #{solution.published_at.strftime("%b %d %Y")}
+        .detail
+          %i.fal.fa-comment
+          =solution.num_comments
+        .detail
+          %i.fal.fa-star
+          =solution.num_stars

@@ -3,7 +3,9 @@ class SolutionsController < ApplicationController
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
 
-    @solutions = @exercise.solutions.published.reorder('solutions.num_reactions DESC').includes(:user)
+    @solutions = @exercise.solutions.
+                           published.
+                           includes(user: [:profile, { avatar_attachment: :blob }])
 
     if user_signed_in?
       @solutions = @solutions.where.not(user_id: current_user.id)
@@ -14,16 +16,24 @@ class SolutionsController < ApplicationController
                                     first
     end
 
+    @order = params[:order]
+    sql_order = case @order
+                when "num_stars"; "num_stars DESC"
+                when "num_comments"; "num_comments DESC"
+                when "published_at_asc"; "published_at ASC"
+                else;"published_at DESC"
+                end
+
+    @solutions = @solutions.reorder(sql_order)
     @total_solutions = @solutions.count
     @solutions = @solutions.page(params[:page]).per(21)
-    @reaction_counts = Reaction.where(solution_id: @solutions.map(&:id)).group(:solution_id, :emotion).count
-    @comment_counts = Reaction.where(solution_id: @solutions.map(&:id)).with_comments.group(:solution_id).count
     @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
                              each_with_object({}) { |ut, h| h[ut.user_id] = ut }
   end
 
   def show
     @solution = Solution.published.find_by_uuid(params[:id])
+    ClearNotifications.(current_user, @solution)
 
     # Allow /solutions/uuid to redirect, or if the solution isn't
     # valid (not published etc) then redirect to sensible place if
@@ -47,9 +57,8 @@ class SolutionsController < ApplicationController
     end
 
     @iteration = @solution.iterations.last
-    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
-    @reaction_counts = @solution.reactions.group(:emotion).count.to_h
-
-    @user_reaction = Reaction.where(user: current_user, solution: @solution).first if user_signed_in?
+    @comments = @solution.comments.
+                          order('created_at ASC').
+                          includes(user: [:profile, { avatar_attachment: :blob }])
   end
 end

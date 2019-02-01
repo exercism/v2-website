@@ -11,8 +11,7 @@ class Teams::Teams::InvitationsController < Teams::Teams::BaseController
   end
 
   def destroy
-    invitation = @team.invitations.find(params[:id])
-
+    invitation = @team.invitations.find_by_token(params[:id])
     invitation.destroy!
 
     redirect_to teams_team_memberships_path(invitation.team)

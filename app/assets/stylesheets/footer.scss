@@ -17,7 +17,7 @@ footer {
     padding-top:60px;
     padding-bottom:env(safe-area-inset-bottom);
     border-top:1px solid #f3f3f3;
-    margin-top:25px;
+    margin-top:55px;
     @include width-medium() {
         margin-top:100px;
     }
@@ -25,25 +25,36 @@ footer {
     h4 {
         @include font-size(16, 16);
         color:#333;
-        font-weight:$bold;
+        font-weight:$fw-bold;
         margin-top:15px;
         margin-bottom:15px;
         @include width-medium() {
             margin-bottom:15px;
         }
     }
+
+    ul{
+        padding: 0;
+        list-style: none;
+
+        &.social{
+            li{
+                display: inline-block;
+            }
+        }
+    }
+
     a {
-        text-decoration:none;
-        font-weight:$regular;
-        color:#507679;
-        @include font-size(13, 13);
+        color:#555;
+        @include font-size(14, 18);
+        text-decoration: underline;
         display:block;
         margin-bottom:16px;
         @include width-medium() {
             margin-bottom:12px;
         }
         &.icon {
-            margin-right:20px;
+            margin-right:15px;
             display:inline-block;
             i {
                 @include font-size(25, 25);

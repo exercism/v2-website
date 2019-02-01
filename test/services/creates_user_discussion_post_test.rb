@@ -67,23 +67,23 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
   test "set all mentors' requires_action" do
     iteration = create :iteration
     mentor = create :user
-    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action: false
+    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action_since: nil
 
     CreatesUserDiscussionPost.create!(iteration, iteration.solution.user, "Foobar")
 
     mentorship.reload
-    assert mentorship.requires_action
+    assert mentorship.requires_action?
   end
 
   test "does not set all mentors' requires_action if approved" do
     solution = create :solution, approved_by: create(:user)
     iteration = create :iteration, solution: solution
     mentor = create :user
-    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action: false
+    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action_since: nil
 
     CreatesUserDiscussionPost.create!(iteration, iteration.solution.user, "Foobar")
 
     mentorship.reload
-    refute mentorship.requires_action
+    refute mentorship.requires_action?
   end
 end

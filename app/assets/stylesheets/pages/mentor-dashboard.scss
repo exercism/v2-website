@@ -21,7 +21,7 @@ $blue: #4A90E2;
             max-width:70%;
             @include font-size(15, 19);
             color:#fff;
-            font-weight:$light;
+            font-weight:$fw-regular;
             a {
                 color:#fff;
                 font-weight:$regular;
@@ -150,7 +150,7 @@ $blue: #4A90E2;
             color:$blue;
             text-transform:uppercase;
             @include font-size(12, 12);
-            font-weight:500;
+            font-weight:$bold;
 
         }
         .icons {
@@ -288,64 +288,9 @@ $blue: #4A90E2;
             }
         }
     }
-    .help-section {
-        p {
-            @include font-size(14, 17);
-            margin-bottom:15px;
-        }
-        ul {
-            margin:0 0 0 0;
-            @include font-size(14, 17);
-            li {
-                margin-bottom:2px;
-            }
-        }
-    }
-    .weekly-section {
-        margin-top:0;
-        margin-bottom:20px;
-        p {
-            @include font-size(13, 16);
-            margin-bottom:15px;
-        }
-        .bar-widget {
-            overflow:hidden;
-            margin-bottom:15px;
-            .bar {
-                height:28px;
-                background:#ddd;
-                margin-right:35px;
-                border-radius:2px;
-                overflow:hidden;
-                .fill {
-                    background:$color-2;
-                    height:28px;
-                }
-            }
-            .count {
-                border-radius:2px;
-                float:right;
-                padding:5px;
-                background:#fff;
-                border:1px solid $color-2;
-                width:30px;
-                text-align:center;
-            }
-            &.completed {
-                .fill { background-color: $blue; }
-                .count { border-color: $blue;}
-            }
-        }
-        .hr {
-            margin:10px 0;
-            border-top:1px solid #ddd;
-        }
-    }
-    .contributions-section {
-        margin-top:0;
-        margin-bottom:20px;
-    }
+
     .help-section,
+    .rating-section,
     .weekly-section,
     .contributions-section,
     .celebration-section {
@@ -394,5 +339,91 @@ $blue: #4A90E2;
                 text-decoration:none;
             }
         }
+    }
+    .help-section {
+        p {
+            @include font-size(14, 17);
+            margin-bottom:15px;
+        }
+        ul {
+            margin:0 0 0 0;
+            @include font-size(14, 17);
+            li {
+                margin-bottom:2px;
+            }
+        }
+    }
+    .rating-section {
+        padding:0px;
+        margin-bottom:20px;
+        text-align: center;
+        border:1px solid #eaeaea;
+        h2 {
+            background:#f9f9f9;
+            border-bottom:1px solid #eaeaea;
+            color:$color-2;
+            text-align:center;
+            padding:10px;
+            margin:0;
+            letter-spacing:-0.7px
+        }
+        p {
+            @include font-size(14, 17);
+        }
+        p+p {
+            margin-top:15px;
+        }
+        .rating {
+            color:$color-2;
+            font-weight:$black;
+            @include font-size(16, 16);
+            padding-bottom:8px;
+            margin-bottom:8px;
+            border-bottom:1px solid rgba($color-1, 0.2);
+        }
+    }
+    .weekly-section {
+        margin-top:0;
+        margin-bottom:20px;
+        p {
+            @include font-size(13, 16);
+            margin-bottom:15px;
+        }
+        .bar-widget {
+            overflow:hidden;
+            margin-bottom:15px;
+            .bar {
+                height:28px;
+                background:#ddd;
+                margin-right:35px;
+                border-radius:2px;
+                overflow:hidden;
+                .fill {
+                    background:$color-2;
+                    height:28px;
+                }
+            }
+            .count {
+                border-radius:2px;
+                float:right;
+                padding:5px;
+                background:#fff;
+                border:1px solid $color-2;
+                width:30px;
+                text-align:center;
+            }
+            &.completed {
+                .fill { background-color: $blue; }
+                .count { border-color: $blue;}
+            }
+        }
+        .hr {
+            margin:10px 0;
+            border-top:1px solid #ddd;
+        }
+    }
+    .contributions-section {
+        margin-top:0;
+        margin-bottom:20px;
     }
 }

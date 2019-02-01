@@ -15,6 +15,7 @@ This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to
 - **Ruby**: We recommend Ruby >=2.4 (and this will soon become a requirement). We recommend using [RVM](http://rvm.io/)
 - **MySQL**: MySQL >=5.7 required. Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
 - **Yarn**: Yarn handles front-end dependencies. See Yarn's [installation instructions](https://yarnpkg.com/lang/en/docs/install).
+- **Redis**: Redis >=2.8 required. Sidekiq uses Redis to store all of its job and operational data. [Installation instructions](https://redis.io/topics/quickstart) or checkout your OS's package manager.
 
 ### Configure the database
 
@@ -32,7 +33,7 @@ mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'l
 
 ### Install Bundler
 
-Bundle is used to handle the project's Ruby dependancies. You can install it via
+Bundle is used to handle the project's Ruby dependencies. You can install it via
 ```bash
 gem install bundler
 ```
@@ -60,7 +61,7 @@ bundle exec rails s
 ```
 
 Something like this will get a working webserver on http://lvh.me:3000
-Note: Teams will be avaliable on http://teams.lvh.me:3000
+Note: Teams will be available on http://teams.lvh.me:3000
 
 ### Notes
 
@@ -91,17 +92,6 @@ The user record is deleted, as well as associated objects except the ff:
 - Discussion posts where they are a mentor.
 - Maintainer records where their user record is associated.
 
-### Unlock first exercise for each user track
-
-For when @iHiD breaks things.
-
-```
-user_track_ids.each do |id|
-  ut = UserTrack.find(id)
-  CreateSolution.(ut.user, ut.track.exercises.core.first) if ut.solutions.size == 0
-end
-```
-
 ## Troubleshooting
 ### MySQL < 5.7
 The following error is seen using MySQL prior to version 5.7 as discussed at [gogs/gogs#4894](https://github.com/gogs/gogs/issues/4894).
@@ -112,5 +102,5 @@ Mysql2::Error: Specified key was too long; max key length is 767 bytes:
 If your system doesn't have a pre-built 5.7 package, [this install log](https://github.com/exercism/pharo/issues/103#issuecomment-420769061) may be helpful.
 
 ### Windows Subsystem For Linux
-Installation on Windows Subsystem For Linux requires Windows Version 1809 (release due October 2018). 
+Installation on Windows Subsystem For Linux requires Windows Version 1809 (release due October 2018).
 Tracked at [exercism/exercism#4346](https://github.com/exercism/exercism/issues/4346).

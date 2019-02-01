@@ -74,11 +74,11 @@ class CreatesMentorDiscussionPostTest < ActiveSupport::TestCase
     iteration = create :iteration
     mentor = create :user
     create :track_mentorship, user: mentor, track: iteration.solution.exercise.track
-    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action: true
+    mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action_since: Time.current
 
     CreatesMentorDiscussionPost.create!(iteration, mentor, "Foobar")
 
     mentorship.reload
-    refute mentorship.requires_action
+    refute mentorship.requires_action?
   end
 end

@@ -1,0 +1,8 @@
+-return unless user_signed_in?
+
+.comments-disabled
+  -if current_user == @solution.user
+    .text You have disabled comments for this solution.
+    =link_to "Enable comments", [:toggle_allow_comments, :my, @solution], method: :patch, class: 'pure-button'
+  -else
+    .text Comments have been disabled for this solution.

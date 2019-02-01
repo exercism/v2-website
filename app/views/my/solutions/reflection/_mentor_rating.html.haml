@@ -1,8 +1,9 @@
 %h2 Rate your mentors
--if solution.independent_mode?
-  %p You completed this solution in independent mode so mentor rating is not available.
--elsif solution.mentors.size == 0
-  %p You had no mentors for this solution.
+-if solution.mentors.size == 0
+  -if solution.track_in_independent_mode?
+    %p You completed this solution in independent mode so mentor rating is not available.
+  -else solution.mentors.size == 0
+    %p You had no mentors for this solution.
 -else
   %p
     Help us improve our mentoring by rating your mentors.

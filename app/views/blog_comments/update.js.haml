@@ -1,0 +1,5 @@
+var newComment = '#{j render("blog_comments/comment", comment: @comment)}';
+$('#blog-comment-#{@comment.id}').replaceWith(newComment);
+Prism.highlightAll()
+
+=raw yield(:js).gsub(/<\/?script>/, "")

@@ -1,7 +1,59 @@
 @import 'variables';
 @import 'mixins';
 
-#my-settings-page, #my-track-settings-page {
+#my-settings-page,
+#my-preferences-page,
+#my-track-settings-page {
+    .lo-general-header {
+        padding: 50px 0 20px;
+    }
+    .settings-section {
+        &.toggle {
+            input[type='checkbox'] {
+                display:inline-block;
+                position:absolute;
+                width:25px;
+                height:40px;
+                cursor:pointer;
+                opacity:0;
+                &:checked {
+                    &+.toggles {
+                        i.fa.fa-toggle-on { display:block; }
+                        i.fa.fa-toggle-off { display:none; }
+                    }
+                }
+            }
+            .toggles {
+                display:inline-block;
+                @include font-size(20, 20);
+                margin-right:5px;
+                i.fa.fa-toggle-on {
+                    display:none;
+                    color: $color-2;
+                }
+                i.fa.fa-toggle-off {
+                    display:block;
+                    color: #aaa;
+                }
+            }
+            label {
+                display:inline-block;
+                position:relative;
+                top:-2px;
+                margin-bottom:0px;
+                color:#666;
+            }
+            .pure-button {
+                display:block;
+                margin-top:10px;
+            }
+        }
+    }
+}
+
+#my-settings-page,
+#my-track-settings-page,
+#my-settings-delete-account-page {
     padding-top:30px;
     @include width-small() {
         padding-top:0;
@@ -12,12 +64,6 @@
     #notice, #alert, #errors {
         margin-top: -20px;
         margin-bottom: 20px;
-    }
-    h1 {
-        @include font-size(25, 25);
-        font-weight:$bold;
-        margin-bottom:30px;
-        color:#555;
     }
     h2 {
         @include font-size(18, 18);
@@ -32,18 +78,51 @@
         &:last-child {
             border-bottom:none;
         }
+        &.danger {
+            border:1px solid red;
+            background:rgba(red, 0.03);
+            padding:20px;
+            h2 {
+                i {
+                    color:darkred;
+                    @include font-size(15, 18);
+                }
+            }
+            .pure-button {
+                background:darkred;
+            }
+        }
+        .alert {
+            color:red;
+            @include font-size(14, 14);
+            font-weight:$bold;
+            a {
+                color:red;
+                text-decoration:underline;
+            }
+        }
     }
     p,
+    ul,
     .token-explanation {
         @include font-size(14, 18);
-        font-weight:$light;
+        font-weight:$fw-regular;
         color:#666;
+    }
+    ul {
+        margin:0 0 10px 0;
+        padding: 0 0 0 25px;
     }
     .token-explanation {
         margin-bottom:10px;
     }
+    .token-reset {
+        margin-top:5px;
+        .pure-button {
+            background:#dd0000;
+        }
+    }
     p {
-        display:inline-block;
         margin-bottom:15px;
         //padding-bottom:15px;
         //border-bottom:1px solid #eee;
@@ -51,8 +130,9 @@
     }
     .widget-code-snippet {
         display:inline-block;
+
         input {
-            width:252px;
+            width:320px;
             max-width: 95%;
         }
     }
@@ -82,7 +162,7 @@
         th {
             text-align:left;
             padding:10px;
-            font-weight:400;
+            font-weight:$regular;
             border-bottom:1px solid #eee;
         }
     }
@@ -95,7 +175,7 @@
             padding:10px;
         }
 
-        .anonymous { 
+        .anonymous {
             text-align:center;
         }
         .default,
@@ -114,7 +194,7 @@
             .handle {
                 display:inline-block;
                 padding:8px 5px;
-                font-weight:400;
+                font-weight:$regular;
                 color:#666;
             }
             input[type='text'] {
@@ -147,7 +227,7 @@
                 display:none;
                 color: $color-2;
             }
-            i.fa.fa-toggle-off { 
+            i.fa.fa-toggle-off {
                 display:block;
                 color: #aaa;
             }
@@ -157,7 +237,26 @@
             text-transform:uppercase;
             @include font-size(11, 11);
             padding-top:4px;
-            font-weight:500;
+            font-weight:$bold;
+        }
+    }
+}
+
+#my-settings-delete-account-page {
+    padding-top:30px;
+    .field {
+        label {
+            color:#666;
+        }
+    }
+    .field.checkbox {
+        input[type=checkbox] {
+            width:auto;
+            display:inline-block;
+        }
+        label {
+            display:inline-block;
+            color:#666;
         }
     }
 }

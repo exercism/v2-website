@@ -140,7 +140,7 @@ class Git::SyncTrack
   end
 
   def sync_maintainers
-    puts "Syncing Maintainers"
+    puts "Syncing Maintainers" unless Rails.env.test?
     Git::SyncMaintainers.(track, repo.maintainer_config)
   end
 

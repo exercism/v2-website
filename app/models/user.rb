@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   DEFAULT_AVATAR = "anonymous.png"
+  SYSTEM_USER_ID = 1
 
   # Remove this so devise can't use it.
   def self.validates_uniqueness_of(*args)
@@ -38,12 +39,15 @@ class User < ApplicationRecord
   has_many :solution_mentorships, dependent: :destroy
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
 
+  has_many :solution_locks, dependent: :destroy
+
   has_many :ignored_solution_mentorships, dependent: :destroy
   has_many :ignored_solutions, through: :ignored_solution_mentorships, source: :solution
 
-  has_many :reactions, dependent: :destroy
-
   has_many :discussion_posts, dependent: :nullify
+  has_many :solution_comments, dependent: :destroy # TODO - set deleted status instead
+  has_many :blog_comments, dependent: :destroy
+  has_many :solution_stars, dependent: :destroy
 
   has_one_attached :avatar
 
@@ -61,12 +65,23 @@ class User < ApplicationRecord
     end
   end
 
+  def User.system_user
+    User.find(SYSTEM_USER_ID)
+  end
+
   after_create do
     create_communication_preferences
   end
 
+  def create_auth_token!
+    transaction do
+      auth_tokens.update_all(active: false)
+      auth_tokens.create!(active: true)
+    end
+  end
+
   def auth_token
-    @auth_token ||= auth_tokens.first.token
+    @auth_token ||= auth_tokens.active.first.try(&:token)
   end
 
   def onboarded?
@@ -104,7 +119,7 @@ class User < ApplicationRecord
 
   def previously_joined_track?(track)
     user_tracks.
-      archived.
+      paused.
       where(track_id: track.id).
       exists?
   end
@@ -115,6 +130,11 @@ class User < ApplicationRecord
 
   def user_track_for(track)
     user_tracks.where(track_id: track.id).first
+  end
+
+  def handle_for(track)
+    ut = user_track_for(track)
+    (ut && ut.anonymous?) ? ut.handle : handle
   end
 
   def may_unlock_exercise?(exercise, user_track: user_track_for(exercise.track))
@@ -133,6 +153,29 @@ class User < ApplicationRecord
     solution_mentorships.where(solution_id: solution.id).exists?
   end
 
+  def mentorship_for_solution(solution)
+    solution_mentorships.where(solution_id: solution.id).first
+  end
+
+  def num_rated_mentored_solutions
+    @num_rated_mentored_solutions ||=
+      solution_mentorships.where.not(rating: nil).
+                           count
+  end
+
+  def mentor_rating
+    @mentor_rating ||= begin
+      rating_arr = solution_mentorships.where.not(rating: nil).order(:rating).pluck(:rating)
+      if rating_arr.empty?
+        0.0
+      else
+        five_percent = (rating_arr.length * 0.05).round
+        rating_arr.shift(five_percent)
+        (rating_arr.sum.to_f / rating_arr.length).round(2)
+      end
+    end
+  end
+
   def has_active_lock_for_solution?(solution)
     SolutionLock.where(solution: solution, user_id: id).
                  where('locked_until > ?', Time.current).
@@ -147,6 +190,10 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def starred_solution?(solution)
+    solution_stars.where(solution: solution).exists?
   end
 
   private

@@ -70,7 +70,7 @@ body.controller-my-tracks.action-show {
 
             @include font-size(16, 21);
             color:#fff;
-            font-weight:$light;
+            font-weight:$fw-regular;
             clear:left;
         }
 
@@ -184,11 +184,11 @@ body.controller-my-tracks.action-show {
             @include font-size(15, 21);
             color:#555;
             margin-bottom:12px;
-            font-weight:$light;
+            font-weight:$fw-regular;
             a {
                 color:#555;
                 text-decoration:underline;
-                font-weight:$light;
+                font-weight:$fw-regular;
             }
         }
         .pure-button {
@@ -271,7 +271,7 @@ body.controller-my-tracks.action-show {
         h2 {
             text-align:center;
             @include font-size(26, 26);
-            font-weight:500;
+            font-weight:$bold;
             margin-bottom:15px;
         }
         p {
@@ -335,7 +335,7 @@ body.controller-my-tracks.action-show {
             color:#fff;
             text-align:center;
             @include font-size(17, 17);
-            font-weight:$light;
+            font-weight:$fw-regular;
             margin-bottom:20px;
         }
         .pure-button {

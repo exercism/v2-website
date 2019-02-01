@@ -1,0 +1,34 @@
+- num_available_core_exercises = @user_track.num_available_core_exercises
+- num_available_side_exercises = @user_track.num_available_side_exercises
+.finished-section
+  .title-block
+    %h3
+      =icon("check-circle", "checkmark")
+      Congratulations - you've completed this exercise!
+  .next-block
+    %h3
+      =graphical_icon("question-circle")
+      What's next?
+
+    -if @solution.published?
+      =render "my/solutions/widgets/published"
+    -else
+      =render "my/solutions/widgets/publish_prompt"
+
+    =render "my/solutions/widgets/community_solutions"
+
+    -if num_available_core_exercises.size > 0 || num_available_side_exercises.size > 0
+      .next-option
+        %p
+          %strong Carry on coding.
+          You have
+          -if num_available_core_exercises > 0
+            #{pluralize num_available_core_exercises, "unlocked core exercise"}
+            -if num_available_side_exercises > 0
+              and
+          -if num_available_side_exercises > 0
+            #{pluralize num_available_side_exercises, "unlocked side exercise"}
+          that you have not yet completed on this track. Why not try a new challenge?
+
+        =link_to "Choose next exercise", my_track_path(@track), class: 'pure-button'
+

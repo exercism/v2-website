@@ -4,22 +4,21 @@ class Mentor::ConfigureController < MentorController
   end
 
   def update
-    if params["track_id"].present?
-      mentored_track_ids = Set.new(current_user.mentored_tracks.pluck(:id).map(&:to_s))
-      selected_tracks = Set.new(params["track_id"].keys)
+    selected_tracks = Set.new((params["track_id"].presence || {}).keys)
 
-      tracks_to_create = selected_tracks - mentored_track_ids
-      tracks_to_remove = mentored_track_ids - selected_tracks
+    mentored_track_ids = Set.new(current_user.mentored_tracks.pluck(:id).map(&:to_s))
 
-      TrackMentorship.transaction do
-        tracks_to_create.each do |track_id|
-          begin
-            TrackMentorship.create!(user: current_user, track_id: track_id)
-          rescue ActiveRecord::RecordNotUnique
-          end
+    tracks_to_create = selected_tracks - mentored_track_ids
+    tracks_to_remove = mentored_track_ids - selected_tracks
+
+    TrackMentorship.transaction do
+      tracks_to_create.each do |track_id|
+        begin
+          TrackMentorship.create!(user: current_user, track_id: track_id)
+        rescue ActiveRecord::RecordNotUnique
         end
-        TrackMentorship.where(user: current_user, track_id: tracks_to_remove).destroy_all
       end
+      TrackMentorship.where(user: current_user, track_id: tracks_to_remove).destroy_all
     end
 
     if TrackMentorship.where(user_id: current_user.id).exists?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_215319) do
+ActiveRecord::Schema.define(version: 2019_02_01_050321) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -38,7 +38,41 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.index ["user_id", "active"], name: "index_auth_tokens_on_user_id_and_active"
     t.index ["user_id"], name: "fk_rails_0d66c22f4c"
+  end
+
+  create_table "blog_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "blog_post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "blog_comment_id"
+    t.text "content", limit: 4294967295, null: false
+    t.text "html", limit: 4294967295, null: false
+    t.boolean "edited", default: false, null: false
+    t.text "previous_content"
+    t.boolean "deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_comment_id"], name: "fk_rails_de25ffa957"
+    t.index ["blog_post_id"], name: "fk_rails_ccd98ed6ee"
+    t.index ["user_id"], name: "fk_rails_a2e6f28c3a"
+  end
+
+  create_table "blog_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "slug", null: false
+    t.string "category", null: false
+    t.datetime "published_at", null: false
+    t.string "title", null: false
+    t.string "author_handle", null: false
+    t.string "marketing_copy", limit: 280
+    t.string "content_repository", null: false
+    t.string "content_filepath", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["published_at"], name: "index_blog_posts_on_published_at"
+    t.index ["slug"], name: "index_blog_posts_on_slug", unique: true
   end
 
   create_table "communication_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -50,6 +84,9 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.datetime "updated_at", null: false
     t.boolean "receive_product_updates", default: true, null: false
     t.boolean "email_on_solution_approved", default: true, null: false
+    t.boolean "email_on_remind_mentor", default: true, null: false
+    t.boolean "email_on_new_solution_comment_for_solution_user", default: true, null: false
+    t.boolean "email_on_new_solution_comment_for_other_commenter", default: true, null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
@@ -208,17 +245,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.index ["user_id"], name: "fk_rails_e424190865"
   end
 
-  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "solution_id", null: false
-    t.bigint "user_id", null: false
-    t.integer "emotion", null: false
-    t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["solution_id"], name: "fk_rails_51c7d8b8ad"
-    t.index ["user_id"], name: "fk_rails_9f02fc96a0"
-  end
-
   create_table "repo_update_fetches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.timestamp "completed_at"
     t.bigint "repo_update_id", null: false
@@ -236,6 +262,18 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "solution_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content", limit: 4294967295, null: false
+    t.text "html", limit: 4294967295, null: false
+    t.boolean "edited", default: false, null: false
+    t.text "previous_content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "deleted", default: false, null: false
+  end
+
   create_table "solution_locks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "solution_id", null: false
     t.bigint "user_id", null: false
@@ -250,14 +288,24 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.bigint "user_id", null: false
     t.bigint "solution_id", null: false
     t.boolean "abandoned", default: false, null: false
-    t.boolean "requires_action", default: false, null: false
     t.integer "rating"
     t.text "feedback"
     t.boolean "show_feedback_to_mentor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "requires_action_since"
+    t.datetime "mentor_reminder_sent_at"
     t.index ["solution_id"], name: "fk_rails_704ccdde73"
     t.index ["user_id"], name: "fk_rails_578676d431"
+  end
+
+  create_table "solution_stars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id", "user_id"], name: "index_solution_stars_on_solution_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_solution_stars_on_user_id"
   end
 
   create_table "solutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -273,7 +321,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.datetime "last_updated_by_user_at"
     t.datetime "last_updated_by_mentor_at"
     t.integer "num_mentors", default: 0, null: false
-    t.integer "num_reactions", default: 0, null: false
     t.text "reflection"
     t.boolean "is_legacy", default: false, null: false
     t.datetime "created_at", null: false
@@ -281,6 +328,12 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.boolean "track_in_independent_mode", default: false, null: false
     t.datetime "mentoring_requested_at"
     t.boolean "independent_mode", default: false, null: false
+    t.string "triaged_as"
+    t.boolean "paused", default: false, null: false
+    t.boolean "show_on_profile", default: false, null: false
+    t.boolean "allow_comments", default: false, null: false
+    t.integer "num_comments", limit: 2, default: 0, null: false
+    t.integer "num_stars", limit: 2, default: 0, null: false
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
@@ -305,6 +358,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token", null: false
     t.index ["invited_by_id"], name: "fk_rails_654806c772"
     t.index ["team_id", "email"], name: "index_team_invitations_on_team_id_and_email", unique: true
   end
@@ -315,6 +369,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id", "user_id"], name: "index_team_memberships_on_team_id_and_user_id", unique: true
     t.index ["team_id"], name: "fk_rails_61c29b529e"
     t.index ["user_id"], name: "fk_rails_5aba9331a7"
   end
@@ -407,7 +462,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "independent_mode"
-    t.datetime "archived_at"
+    t.datetime "paused_at"
     t.index ["independent_mode"], name: "ihid-1"
     t.index ["track_id", "user_id"], name: "index_user_tracks_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "fk_rails_99e944edbc"
@@ -441,6 +496,7 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
     t.datetime "accepted_terms_at"
     t.boolean "dark_code_theme", default: false, null: false
     t.boolean "is_mentor", default: false, null: false
+    t.boolean "default_allow_comments"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
@@ -448,6 +504,9 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
   end
 
   add_foreign_key "auth_tokens", "users", name: "auth_tokens_ibfk_1"
+  add_foreign_key "blog_comments", "blog_comments"
+  add_foreign_key "blog_comments", "blog_posts"
+  add_foreign_key "blog_comments", "users"
   add_foreign_key "communication_preferences", "users", name: "communication_preferences_ibfk_1"
   add_foreign_key "discussion_posts", "iterations", name: "discussion_posts_ibfk_1"
   add_foreign_key "exercise_topics", "exercises", name: "exercise_topics_ibfk_1"
@@ -462,8 +521,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_215319) do
   add_foreign_key "mentors", "tracks"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "reactions", "solutions"
-  add_foreign_key "reactions", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
   add_foreign_key "solution_locks", "solutions"
   add_foreign_key "solution_locks", "users"

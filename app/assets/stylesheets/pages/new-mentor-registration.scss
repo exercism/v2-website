@@ -24,7 +24,7 @@
     }
     h1 {
         @include font-size(22, 22);
-        font-weight:$light;
+        font-weight:$fw-regular;
         color:#555;
         border-bottom:1px solid #ddd;
         padding-bottom:10px;

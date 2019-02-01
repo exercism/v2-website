@@ -14,7 +14,7 @@
                 %i.fa.fa-user-times
                 Unmentored
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-          .title
+          %h2.title
             = exercise.title
             .topics
               - exercise.topic_names.each do |topic_name|
@@ -33,7 +33,7 @@
         = link_to [:my, exercise.solution], class: "exercise", id: "exercise-#{exercise.slug}" do
           .status= exercise.solution.approved?? "Approved" : "In Progress"
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-          .title
+          %h2.title
             = exercise.title
             .topics
               - exercise.topic_names.each do |topic_name|
@@ -46,7 +46,7 @@
         .exercise{id: "exercise-#{exercise.slug}"}
           .status Locked
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-          .title
+          %h2.title
             = exercise.title
             .topics
               - exercise.topic_names.each do |topic_name|

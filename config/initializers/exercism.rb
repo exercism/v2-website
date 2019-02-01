@@ -14,3 +14,17 @@ elsif Rails.env.test?
 else
   Exercism::API_HOST = "http://lvh.me:3000/api"
 end
+
+Exercism::MENTOR_RATING_THRESHOLD = 5
+Exercism::MEDIAN_MENTOR_RATING = 4.83
+
+# To calculate median rating
+=begin
+def median(array)
+  sorted = array.sort
+  len = sorted.length
+  (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+end
+rs = SolutionMentorship.where.not(rating: nil).group(:user_id).having("c > 4").select("user_id, COUNT(*) as c, AVG(rating) as r").map(&:r)
+median(rs).to_f
+=end

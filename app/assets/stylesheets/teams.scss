@@ -15,63 +15,55 @@ body.namespace-teams {
             padding-left:7px;
             display: inline-block;
             line-height: 18px;
-            font-weight: 400;
+            font-weight:$regular;
             margin-top:2px;
         }
     }
 }
 
-.teams-page,
-.team-page {
-    h1 {
-        font-weight:$bold;
-        @include font-size(16, 16);
-        margin-bottom:20px;
-        padding-bottom:7px;
-        border-bottom:1px solid #ddd;
-    }
+.namespace-teams {
     h2 {
-        font-weight:$bold;
-        @include font-size(14, 14);
-        margin-bottom:10px;
+        font-weight:$regular;
+        @include font-size(20, 20);
+        margin-bottom:3px;
     }
-}
-
-.teams-page {
-    padding-top:20px;
-
-    ul.inline-list {
-        padding: 0;
-        margin: 0;
-
-        > li {
-          display: inline-block;
-          margin-right: 5px;
-
-          &:last-child {
-            margin-right: 0;
-          }
-        }
+    .h2-subheading {
+        color:#666;
+        margin-bottom:20px;
     }
 }
 
 .team-page {
     #team-header {
-        background:#eee;
         margin-bottom:20px;
-        .name {
-            display:inline-block;
+        background:#eee;
+        .avatar {
+            height:50px;
+            display:block;
+            float:right;
+            border:1px solid rgba(#fff, 0.5);
+            margin-top: -20px;
+            border-radius:3px;
+        }
+        h1 {
+            background-color:$color-2;
+            background-image:image-url('background-overlay-2.png');
+            background-size:cover;
+            padding:30px 0 15px;
+            @include font-size(30, 30);
+            font-weight:$bold;
+            color:#fff;
         }
         a {
             text-decoration:none;
             padding:7px 0;
             display:inline-block;
-            color:#999;
-            margin-left:20px;
+            color:#666;
+            margin-right:20px;
             &.selected {
-                color:#333;
-                font-weight:500;
-                border-bottom:3px solid #333;
+                color:$color-2;
+                font-weight:$bold;
+                border-bottom:3px solid $color-2;
             }
         }
     }

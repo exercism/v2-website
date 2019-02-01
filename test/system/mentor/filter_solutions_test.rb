@@ -13,7 +13,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
     refute_selector ".your-solutions"
 
     solution = create :solution, exercise: create(:exercise, track: track)
-    create :solution_mentorship, user: mentor, requires_action: true, solution: solution
+    create :solution_mentorship, user: mentor, requires_action_since: Time.current, solution: solution
     visit mentor_dashboard_path
     assert_selector ".your-solutions"
   end
@@ -33,7 +33,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
            user: mentor,
            solution: solution,
            abandoned: false,
-           requires_action: false)
+           requires_action_since: nil)
 
     sign_in!(mentor)
     visit mentor_dashboard_path
@@ -60,12 +60,12 @@ class FilterSolutionsTest < ApplicationSystemTestCase
            user: mentor,
            solution: action_required_solution,
            abandoned: false,
-           requires_action: true)
+           requires_action_since: Time.current)
     create(:solution_mentorship,
            user: mentor,
            solution: completed_solution,
            abandoned: false,
-           requires_action: false)
+           requires_action_since: nil)
 
     sign_in!(mentor)
     visit mentor_dashboard_path
@@ -89,12 +89,12 @@ class FilterSolutionsTest < ApplicationSystemTestCase
     create(:solution_mentorship,
            user: mentor,
            solution: solution_ruby,
-           requires_action: true)
+           requires_action_since: Time.current)
     create(:iteration, solution: solution_cpp)
     create(:solution_mentorship,
            user: mentor,
            solution: solution_cpp,
-           requires_action: true)
+           requires_action_since: Time.current)
 
     sign_in!(mentor)
     visit mentor_dashboard_path
@@ -118,13 +118,13 @@ class FilterSolutionsTest < ApplicationSystemTestCase
     create(:solution_mentorship,
            user: mentor,
            solution: hello_world_solution,
-           requires_action: true)
+           requires_action_since: Time.current)
     sorting_solution = create(:solution, exercise: sorting)
     create(:iteration, solution: sorting_solution)
     create(:solution_mentorship,
            user: mentor,
            solution: sorting_solution,
-           requires_action: true)
+           requires_action_since: Time.current)
 
     sign_in!(mentor)
     visit mentor_dashboard_path
@@ -142,16 +142,15 @@ class FilterSolutionsTest < ApplicationSystemTestCase
                     accepted_privacy_policy_at: Date.new(2016, 12, 25),
                     mentored_tracks: [track])
     exercise1 = create(:exercise, title: "Exercise 1", track: track)
-    exercise2 = create(:exercise, title: "Exercise 2", track: track)
-    solution1 = create(:solution, exercise: exercise1)
-    solution2 = create(:solution, exercise: exercise2)
+    exercise2 = create(:exercise, title: "Exercise 2", track: track) 
+    solution1 = create(:solution, exercise: exercise1, mentoring_requested_at: Time.current)
+    solution2 = create(:solution, exercise: exercise2, mentoring_requested_at: Time.current)
     create(:iteration, solution: solution1)
     create(:solution_mentorship,
            user: mentor,
            solution: solution1,
-           requires_action: true)
+           requires_action_since: Time.current)
 
-    create(:iteration, solution: solution2)
     create(:iteration, solution: solution2)
 
     sign_in!(mentor)

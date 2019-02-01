@@ -2,27 +2,17 @@
   #nav.lo-nav-bar
     .lo-container
       -if user_signed_in?
-        /=link_to "Dashboard", root_path
-        /=nav_divider
         =link_to "Language tracks", [:my, :tracks]
-        =nav_divider
         =link_to "#{@track.title} track", [:my, @track]
-        =nav_divider
         -if @user_solution
           =link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
-          =nav_divider
         %span Community solutions
       -else
         =link_to "Home", root_path
-        =nav_divider
         =link_to "Language tracks", :tracks
-        =nav_divider
         =link_to "#{@track.title} track", @track
-        =nav_divider
         =link_to "Exercises", [@track, :exercises]
-        =nav_divider
         =link_to @exercise.title, [@track, @exercise]
-        =nav_divider
         %span Solutions
 
   .header
@@ -39,27 +29,39 @@
         Explore #{number_with_delimiter @total_solutions} community solutions.
 
   .lo-container
+    =form_tag track_exercise_solutions_path(@track, @exercise), class: "orderer", method: :get do
+      .label Sort by:
+      =select_tag(:order, options_for_select([["Newest first", "published_at_desc"], ["Oldest first", "published_at_asc"], ["Most stars first", "num_stars"], ["Most comments first", "num_comments"]], @order))
+
     .pure-g
       -if @user_solution
-        .pure-u-1.pure-u-md-1-3
+        .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
           -if @user_solution.published?
             =render "solution", solution: @user_solution, track: @track, exercise: @exercise, user_track: @current_user_track
           -else
             =link_to [:my, @user_solution], class: 'user-solution' do
-              .person
-                =graphical_icon 'eye-slash not-published-icon'
-                =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
-                .handle
-                  Your solution
-                  .hidden-box Hidden
-                -if @user_solution.completed?
-                  .published-at Completed #{time_ago_in_words(@user_solution.completed_at)} ago
+              .not-published Not published
+              =image display_avatar_url(current_user, @current_user_track), "Avatar of #{display_handle(current_user, @current_user_track)}"
+              .exercise= @user_solution.exercise.title
+              .track #{@user_solution.exercise.track.title} track
 
-              .no-reactions
-                Publish your solution to see others' reactions
+              .details-bar
+                .handle
+                  %i.fal.fa-fw.fa-user
+                  Your solution
+                .detail
+                  %i.fal.fa-fw.fa-comment
+                  0
+                .detail
+                  %i.fal.fa-fw.fa-star
+                  0
 
       -@solutions.each do |solution|
-        .pure-u-1.pure-u-md-1-3
+        .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
           =render "solution", solution: solution, track: @track, exercise: @exercise, user_track: @user_tracks[solution.user_id]
 
     =paginate @solutions
+
+-content_for :js do
+  :javascript
+    submitOnChange($('.orderer select'))

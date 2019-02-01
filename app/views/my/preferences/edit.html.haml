@@ -1,15 +1,39 @@
 #my-preferences-page
   =settings_bar
-
+  .lo-general-header
+    .lo-container
+      %h1 Preferences
+      .h1-subtitle Manage your communication and site preferences
   .lo-container
     =notice_and_alert
-    %h1 Preferences
     .settings-section
       %h2 Communication preferences
 
       =form_for current_user.communication_preferences, url: [:my, :settings, :preferences] do |f|
         /-if current_user.admin?
         /  %h2 Admin communications
+
+        %h3 General communications
+        =f.label :receive_product_updates do
+          =f.check_box :receive_product_updates
+          %span Email me about product updates
+
+        %h3 Usage emails
+        =f.label :email_on_new_discussion_post do
+          =f.check_box :email_on_new_discussion_post
+          %span Email me when a mentor comments on my solution
+
+        =f.label :email_on_solution_approved do
+          =f.check_box :email_on_solution_approved
+          %span Email me when a mentor approves my solution
+
+        =f.label :email_on_new_solution_comment_for_solution_user do
+          =f.check_box :email_on_new_solution_comment_for_solution_user
+          %span Email me when someone comments on my published solution
+
+        =f.label :email_on_new_solution_comment_for_other_commenter do
+          =f.check_box :email_on_new_solution_comment_for_other_commenter
+          %span Email me when someone replies to a comment I've made on a published solution
 
         -if current_user.is_mentor?
           %h3 Mentor emails
@@ -21,22 +45,13 @@
             =f.check_box :email_on_new_iteration_for_mentor
             %span Email me when a student posts a new iteration to a solution I'm mentoring
 
-        %h3 Usage emails
-        =f.label :email_on_new_discussion_post do
-          =f.check_box :email_on_new_discussion_post
-          %span Email me when a mentor comments on my solution
+          =f.label :email_on_remind_mentor do
+            =f.check_box :email_on_remind_mentor
+            %span Email me when I am about to be timed out of a solution
 
-        =f.label :email_on_solution_approved do
-          =f.check_box :email_on_solution_approved
-          %span Email me when a mentor approves my solution
-
-        %h3 General communications
-        =f.label :receive_product_updates do
-          =f.check_box :receive_product_updates
-          %span Email me about product updates
 
         =f.button "Save communication settings", class: 'pure-button'
-    .settings-section.dark-toggle
+    .settings-section.toggle
       %h2 Dark Code Theme
       =form_tag [:my, :settings, :preferences], method: :patch do |f|
         =hidden_field_tag 'update_dark_theme', true

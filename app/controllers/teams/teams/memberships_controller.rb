@@ -2,7 +2,7 @@ class Teams::Teams::MembershipsController < Teams::Teams::BaseController
   before_action :check_admin!, only: [:destroy]
 
   def index
-    @memberships = @team.memberships
+    @memberships = @team.memberships.includes(:user)
     @invitations = @team.invitations
   end
 

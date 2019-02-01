@@ -24,7 +24,6 @@ select,
 textarea {
     @include normal-font;
     @include font-size(14, 14);
-    font-weight:$light;
     color:#333;
 }
 
@@ -35,7 +34,7 @@ textarea {
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: #ddd;
     @include font-size(14, 20);
-    font-weight:300;
+    @include normal-font;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #ddd;
@@ -61,7 +60,7 @@ textarea {
 h1, h2, h3, h4, h5, h6, p {
     margin:0;
     @include font-size(14, 14);
-    font-weight:300;
+    @include normal-font;
 }
 p {
     margin:0;

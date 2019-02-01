@@ -23,7 +23,7 @@ body.namespace-my.controller-tracks.action-show {
             @include font-size(12, 12);
             color:#fff;
             opacity:0.75;
-            font-weight:$light;
+            font-weight:$fw-regular;
         }
         .num-solutions {
             float:right;
@@ -44,7 +44,7 @@ body.namespace-my.controller-tracks.action-show {
             border:1px solid $color-1;
             text-transform:uppercase;
             color:#555;
-            font-weight:500;
+            font-weight:$bold;
             padding:9px 15px;
             @media screen and (max-width: 300px) {
                 @include font-size(8, 8);
@@ -177,7 +177,7 @@ body.namespace-my.controller-tracks.action-show {
                 }
                 .position {
                     @include font-size(10, 10);
-                    font-weight:$light;
+                    font-weight:$fw-regular;
                     letter-spacing:-0.0px;
                     color:#ccc;
                     margin-bottom:5px;
@@ -489,7 +489,7 @@ body.namespace-my.controller-tracks.action-show {
         }
         .h2-subtitle {
             @include font-size(14, 14);
-            font-weight:$light;
+            font-weight:$fw-regular;
             color:#666;
             margin-bottom:35px;
         }

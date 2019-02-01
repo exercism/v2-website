@@ -10,6 +10,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     )
 
     @mock_repo = stub(exercise: @mock_exercise)
+    @mock_repo = stub(head: "")
     Git::Exercise.stubs(new: @mock_exercise)
     Git::ExercismRepo.stubs(new: @mock_repo)
     Git::ExercismRepo::PAGES.each do |page|
@@ -86,7 +87,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       sign_in!
       solution = create :solution, user: @current_user
 
-      SwitchSolutionToMentoredMode.expects(:call).with(solution)
+      RequestMentoringOnSolution.expects(:call).with(solution)
 
       patch request_mentoring_my_solution_url(solution.uuid)
       assert_redirected_to my_solution_url(solution.uuid)

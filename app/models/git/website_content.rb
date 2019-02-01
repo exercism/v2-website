@@ -33,6 +33,22 @@ class Git::WebsiteContent < Git::RepoBase
     FolderReader.new(self, head_commit, 'walkthrough')["index.html"]
   end
 
+  def mentor_notes_for(track_slug, exercise_slug)
+    repo_path = "tracks/"
+
+    ptr = head_commit.tree["tracks"]
+    tree = repo.lookup(ptr[:oid])
+    target = "#{track_slug}/exercises/#{exercise_slug}/"
+    tree.walk_blobs do |root, file|
+      next unless root == target
+      next unless file[:name] == "mentoring.md"
+      file_blob = repo.lookup(file[:oid])
+      return file_blob.text
+    end
+
+    nil
+  end
+
   def mentors
     ptr = head_commit.tree["mentors"]
     tree = repo.lookup(ptr[:oid])

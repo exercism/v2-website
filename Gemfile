@@ -69,6 +69,7 @@ group :test do
   gem 'timecop'
   gem 'chromedriver-helper'
   gem 'webmock'
+  gem 'bullet'
 end
 
 group :development, :production do

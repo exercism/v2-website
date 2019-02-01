@@ -17,14 +17,14 @@
 
           .side
             .completed #{@num_solved_side_exercises} / #{@num_side_exercises}
-            %h3 Extra exercises completed
+            %h3 Side Exercises completed
             .squares
               -@num_side_exercises.times do |i|
                 -if i < @num_solved_side_exercises
                   .square.completed
                 -else
                   .square
-            =link_to "See all extra exercises", "#side-exercises", class: 'pure-button'
+            =link_to "See all Side Exercises", "#side-exercises", class: 'pure-button'
 
           .topics
             %h3 Concepts
@@ -40,6 +40,7 @@
 
           .danger-zone
             %h3 Danger zone
+            =link_to "Pause track", "#", class: 'pure-button pause-track-btn'
             =link_to "Leave track", "#", class: 'pure-button leave-track-btn'
             -if !@user_track.independent_mode?
               =link_to "Switch to Independent Mode", "#", class: 'pure-button change-to-independent-btn'

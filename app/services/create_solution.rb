@@ -9,8 +9,7 @@ class CreateSolution
       exercise: exercise,
       git_sha: git_sha,
       git_slug: exercise.slug,
-      last_updated_by_user_at: Time.now,
-      independent_mode: independent_mode,
+      last_updated_by_user_at: Time.current,
       track_in_independent_mode: independent_mode
     )
   rescue ActiveRecord::RecordNotUnique

@@ -32,6 +32,12 @@ class CreateIteration
   def update_solution
     solution.update(last_updated_by_user_at: Time.current)
 
+    if !solution.mentoring_requested? &&
+       solution.track_in_mentored_mode? &&
+       solution.exercise.core?
+      solution.update(mentoring_requested_at: Time.current)
+    end
+
     if solution.exercise.auto_approve?
       solution.update(approved_by: user)
       CreateNotification.(
@@ -44,7 +50,7 @@ class CreateIteration
         about: solution
       )
     else
-      solution.mentorships.update_all(requires_action: true) unless solution.approved?
+      solution.mentorships.update_all(requires_action_since: Time.current) unless solution.approved?
       notify_mentors
     end
 

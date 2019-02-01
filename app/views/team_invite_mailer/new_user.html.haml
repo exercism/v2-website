@@ -1,4 +1,3 @@
 .content
-  %p #{@invite.inviter_name} has invited you to join Exercism!
-
-  %p Join by following this #{link_to "link", teams_url}.
+  %p #{@invitation.inviter_name} has invited you to join their team "#{@invitation.team_name}" on Exercism!
+  %p Join the team by following #{link_to "this link", teams_invitation_url(@invitation)}.

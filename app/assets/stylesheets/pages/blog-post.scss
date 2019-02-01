@@ -1,0 +1,185 @@
+@import 'variables';
+@import 'mixins';
+
+#blog-post {
+    .header {
+        background-image:image-url('background-overlay-2.png');
+        background-size:cover;
+        background-color:$color-2;
+        padding:20px 0 20px 0;
+        margin-bottom:40px;
+        text-align:center;
+        .heading {
+            @include font-size(20, 20);
+            @include header-font;
+            font-weight:600;
+            letter-spacing:-0.3px;
+            margin-bottom:5px;
+            a {
+                color:#fff;
+                text-decoration:none;
+                border-bottom:1px solid transparent;
+                padding:0 5px;
+                &:hover {
+                    border-bottom-color:rgba(#fff, 0.5);
+                }
+            }
+        }
+        .subheading {
+            @include font-size(16, 16);
+            color:#fff;
+        }
+    }
+    .blog-content {
+        max-width:700px;
+        margin: 0 auto;
+        a {
+            font-weight:$bold;
+            color:$color-2;
+        }
+        strong {
+            // This removes too much contrast for
+            // some linux users which breaks interviews
+            //font-weight:$bold;
+        }
+    }
+    h1 {
+        @include font-size(34, 34);
+        font-weight:$regular;
+        color:#333;
+        margin-bottom:10px;
+        text-align:center;
+    }
+    .byline {
+        @include font-size(15, 16);
+        margin-bottom:20px;
+        border-bottom:1px solid #ccc;
+        padding-bottom:20px;
+        text-align:center;
+        font-weight:$regular;
+        a {
+            color:#333;
+            font-weight:$regular;
+        }
+        .handle {
+            text-transform:none;
+        }
+    }
+
+    article {
+        p, li {
+            @include font-size(18, 28);
+        }
+        li {
+            margin-bottom:5px;
+        }
+        p {
+            margin-bottom:20px;
+        }
+        img {
+            max-width:100%;
+            display:block;
+        }
+    }
+    .categories {
+        overflow:hidden;
+        a {
+            background: #eee;
+            color:#333;
+            font-weight:$bold;
+            margin-right:10px;
+            padding: 10px;
+            display:block;
+            float:left;
+            margin-right:8px;
+            text-decoration: none;
+            border-radius: 2px;
+            @include font-size(12,12)
+        }
+    }
+
+    .author {
+        overflow:hidden;
+        margin-top:30px;
+        padding-top:30px;
+        border-top:1px solid #eee;
+        img {
+            width:70px;
+            height:70px;
+            float:left;
+            display:block;
+            border-radius: 100%;
+            margin-right:15px;
+            background:#eee;
+        }
+        .name {
+            font-weight:$bold;
+            margin-bottom:5px;
+            @include font-size(20, 20);
+            letter-spacing:0.4px;
+            margin-bottom:5px;
+        }
+        .bio {
+            @include font-size(15, 20);
+            color:#333;
+            max-height:59px;
+            overflow:hidden;
+            margin-bottom:10px;
+        }
+        a {
+            background: #fff;
+            border:1px solid $color-2;
+            color:$color-2;
+            font-weight:$bold;
+            vertical-align:middle;
+            margin-left:85px;
+        }
+    }
+
+    .comments-section {
+        margin-top:30px;
+        padding-top:30px;
+        border-top:1px solid #eee;
+        h3 {
+            @include font-size(20,20);
+            font-weight:$bold;
+            margin-bottom:20px;
+            letter-spacing:0.4px;
+        }
+        .comments {
+            margin-bottom:20px;
+            .no-comments {
+                color:#666;
+            }
+        }
+        .comments+form {
+            margin-top:40px;
+        }
+
+        .blog-comment {
+            margin-bottom:20px;
+            overflow:hidden;
+            //border-left:3px solid #eee;
+            //padding-left:10px;
+            .divider {
+                height:1px;
+                background:#eaeaea;
+                margin-top:20px;
+            }
+            &.delete {
+                .avatar, .comment-body {
+                    opacity:0.3;
+                }
+            }
+
+            .comment-footer {
+                overflow:hidden;
+                color:#666;
+
+                a {
+                    color:#666;
+                }
+            }
+        }
+    }
+}

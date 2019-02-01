@@ -1,18 +1,19 @@
 =link_to solution, class: 'solution' do
-  .person
-    =image display_avatar_url(solution.user, user_track), "Avatar of #{display_handle(solution.user, user_track)}"
-    .handle= display_handle(solution.user, user_track)
-    .published-at Published #{time_ago_in_words(solution.display_published_at)} ago
-  .reactions
-    .reaction
-      =icon 'thumbs-up fa-fw', 'Thumbs up'
-      .count= @reaction_counts[[solution.id, "like"]].to_i
-    .reaction
-      =icon 'heart fa-fw', 'Heart'
-      .count= @reaction_counts[[solution.id, "love"]].to_i
-    .reaction
-      =image "genius.png", 'Genius'
-      .count= @reaction_counts[[solution.id, "genius"]].to_i
-    .reaction
-      =icon 'comment fa-fw', 'Comment'
-      .count= @comment_counts[solution.id].to_i
+  =image display_avatar_url(solution.user, user_track), "Avatar of #{display_handle(solution.user, user_track)}"
+
+  .exercise= solution.exercise.title
+  .track #{solution.exercise.track.title} track
+
+  .details-bar
+    .handle
+      %i.fal.fa-fw.fa-user
+      =display_handle(solution.user, user_track)
+    /.published-at
+    /  %i.fal.fa-fw.fa-clock
+    /  #{solution.published_at.strftime("%b %d %Y")}
+    .detail
+      %i.fal.fa-fw.fa-comment
+      =solution.num_comments
+    .detail
+      %i.fal.fa-fw.fa-star
+      =solution.num_stars

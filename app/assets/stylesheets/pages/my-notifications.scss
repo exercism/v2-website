@@ -18,7 +18,7 @@
             max-width:70%;
             @include font-size(15, 21);
             color:#fff;
-            font-weight:$light;
+            font-weight:$fw-regular;
         }
     }
     .header-bar {
@@ -83,7 +83,7 @@
                 @include font-size(14, 19);
                 margin-bottom:5px;
                 strong {
-                    font-weight:400;
+                    font-weight:$regular;
                 }
             }
             .when {

@@ -1,0 +1,30 @@
+.comments-section
+  -if @blog_post.comments.size > 0 || user_signed_in?
+    %h3 Community Comments
+
+    .comments
+      -if @blog_post.comments.size > 0
+        -@blog_post.comments.each do |comment|
+          =render "blog_comments/comment", comment: comment
+      -else user_signed_in?
+        .no-comments There are no comments yet. Be the first to add one.
+
+    .new-editable-text
+      =form_for BlogComment.new, remote: true do |f|
+        =hidden_field_tag :blog_post_id, @blog_post.id
+
+        .tabs-and-panes.selected-1
+          .tabs
+            .tab.tab-1.write-tab{data: {tab: "markdown"}} Write
+            .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+          .panes
+            .pane.pane-1.markdown
+              =f.text_area :content, required: true
+            .pane.pane-2.preview
+              .preview-area
+
+        =button_tag "Comment", class: "comment-button js-disable-on-click pure-button"
+
+    -content_for :js do
+      :javascript
+        window.setupBlogPost(#{@blog_post.id})

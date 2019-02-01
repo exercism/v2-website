@@ -56,9 +56,11 @@ Rails.application.routes.draw do
         patch :approve
         patch :abandon
         patch :ignore
+        patch :ignore_requires_action
       end
     end
     resources :discussion_posts, only: [:create]
+    resource :exercise_notes, only: [:show, :new], controller: "exercise_notes"
   end
 
   # #### #
@@ -85,7 +87,11 @@ Rails.application.routes.draw do
   resources :profiles, only: [:index, :show] do
     get :solutions, on: :member
   end
-  resources :solutions, only: [:show]
+
+  resources :solutions, only: [:show] do
+    resources :comments, controller: "solution_comments"
+  end
+
   resources :tracks, only: [:index, :show] do
     member do
       post :join
@@ -117,23 +123,31 @@ Rails.application.routes.draw do
       member do
         patch :set_mentored_mode
         patch :set_independent_mode
-        post :leave
+        patch :pause
+        patch :unpause
+        delete :leave
       end
     end
-    resources :solutions, only: [:show, :create] do
+    resources :solutions, only: [:index, :show, :create] do
       member do
         get :walkthrough
         get :confirm_unapproved_completion
         patch :complete
         get :reflection
         patch :request_mentoring
+        patch :cancel_mentoring_request
         patch :reflect
         patch :publish
+        patch :update_exercise
+
+        patch :toggle_published
+        patch :toggle_show_on_profile
+        patch :toggle_allow_comments
       end
 
       resources :iterations, only: [:show]
     end
-    resources :reactions, only: [:index, :create]
+    resources :starred_solutions, only: [:index, :create]
 
     resources :discussion_posts, only: [:create, :update, :destroy]
     resources :notifications, only: [:index] do
@@ -144,6 +158,13 @@ Rails.application.routes.draw do
     resource :profile, controller: "profile"
 
     resource :settings do
+      patch :reset_auth_token
+      patch :cancel_unconfirmed_email
+      patch :set_default_allow_comments
+
+      get :confirm_delete_account
+      delete :delete_account
+
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
     end
@@ -161,12 +182,14 @@ Rails.application.routes.draw do
       resource :join, controller: "teams/joins"
     end
 
-    resources :invitations, only: [] do
+    resources :invitations, only: [:show] do
       post :accept, on: :member
       post :reject, on: :member
     end
 
     resources :teams do
+      patch :update_settings, on: :member
+
       resources :my_solutions, controller: "teams/my_solutions" do
         get :possible_exercises, on: :collection
       end
@@ -205,6 +228,12 @@ Rails.application.routes.draw do
     get :mentors
     get :contributors
   end
+
+  # #### #
+  # Blog #
+  # #### #
+  resources :blog_posts, only: [:index, :show], path: "blog"
+  resources :blog_comments, only: [:create, :update, :destroy]
 
   # ############ #
   # Weird things #

@@ -1,0 +1,46 @@
+@import 'variables';
+@import 'mixins';
+
+.new-editable-text {
+    .pane.markdown,
+    .pane.preview {
+        padding:0;
+    }
+    form {
+        margin:0px 0 20px 0;
+        .md-editor, .preview-area {
+            width:100%;
+            resize:none;
+            border:1px solid #ddd;
+        }
+        .preview-area {
+            min-height:248px;
+            height:100%;
+            overflow:auto;
+            padding:15px;
+        }
+    }
+    form {
+        margin:20px 0 20px 0;
+        textarea, .preview-area {
+            width:100%;
+            resize:none;
+            padding:15px;
+            border:1px solid #ddd;
+        }
+    }
+
+    .pure-button {
+        margin-top:10px;
+        border-radius:2px;
+        padding:8px 25px;
+        width:100%;
+        background:$color-2;
+        color:#fff;
+        float:right;
+        @include width-small() {
+            width:auto;
+        }
+    }
+}
+

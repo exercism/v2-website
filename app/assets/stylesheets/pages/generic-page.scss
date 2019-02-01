@@ -31,7 +31,7 @@
     h2,
     h3 {
         @include font-size(18, 18);
-        font-weight:$regular;
+        font-weight:$fw-bold;
         margin:30px 0 10px 0;
         &:first-child {
             margin-top:0px;
@@ -39,7 +39,7 @@
     }
     h4 {
         font-size: 15px;
-        font-weight: 500;
+        font-weight:$fw-bold;
         margin-bottom: 5px;
         text-decoration: underline;
     }
@@ -86,7 +86,8 @@
     }
 
 
-    &.roadmap {
+    &.roadmap,
+    &.faqs {
         h2 {
             @include font-size(20, 20);
         }

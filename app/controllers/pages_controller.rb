@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :redirect_if_signed_in!, only: [:index]
+  skip_before_action :store_location
 
   PAGES = {
     "Terms of Service": :terms_of_service,
@@ -36,7 +37,6 @@ class PagesController < ApplicationController
   PAGE_GENERATOR = -> (pages, repo_location) do
     pages.each do |title, page|
       define_method page do
-        p Git::WebsiteContent.head.send(repo_location)
         markdown = Git::WebsiteContent.head.send(repo_location)["#{page}.md"] || ""
         @page = page
         @page_title = title
@@ -45,7 +45,7 @@ class PagesController < ApplicationController
       end
     end
   end
-  
+
   PAGE_GENERATOR.(PAGES, :pages)
   PAGE_GENERATOR.(LICENCES, :licences)
 

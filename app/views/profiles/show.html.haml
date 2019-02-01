@@ -4,9 +4,13 @@
       %h1 #{@profile.display_name}'s Profile
       .h1-subtitle This is a showcase of some of the solutions that #{@profile.display_name} has published on Exercism.
       -if user_signed_in? && current_user == @profile.user
-        =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
-          =graphical_icon :cogs
-          Edit public profile
+        .btns
+          =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
+            =graphical_icon :cogs
+            Edit public profile
+          =link_to [:my, :solutions], class: "pure-button edit-button" do
+            =graphical_icon :cogs
+            Change public solutions
 
   .lo-container
     .pure-g
@@ -26,6 +30,7 @@
               .badge.mentor #{track.title} mentor
             -@profile.user.maintained_tracks.each do |track|
               .badge.maintainer #{track.title} maintainer
+
           .member-since
             =graphical_icon 'calendar fa-fw'
             Since #{@profile.user.created_at.strftime("%b %Y")}
@@ -73,8 +78,7 @@
             .title Language:
             =select_tag :track_id, options_for_select(@profile_view.tracks_for_select, value: @profile_view.track_id), id: nil
         .solutions.pure-g
-          =render "profiles/solutions", solutions: @profile_view.solutions, reaction_counts: @profile_view.reaction_counts, comment_counts: @profile_view.comment_counts
-
+          =render "profiles/solutions", solutions: @profile_view.solutions
 
   -content_for :js do
     :javascript

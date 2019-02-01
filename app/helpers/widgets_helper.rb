@@ -40,8 +40,22 @@ module WidgetsHelper
   end
 
   def discussion_post_widget(post, solution, user_track)
-    render "widgets/discussion_post", post: post,
-                                      solution: solution,
-                                      user_track: user_track
+    if post.user_id == User::SYSTEM_USER_ID
+      render "widgets/system_discussion_post", post: post
+    else
+      render "widgets/discussion_post", post: post,
+                                        solution: solution,
+                                        user_track: user_track
+    end
+  end
+
+  def solution_comment_widget(comment, solution)
+    user_track = comment.user_id == solution.user_id ?
+      solution.user.user_track_for(solution.exercise.track) :
+      nil
+
+    render "widgets/solution_comment", comment: comment,
+                                       solution: solution,
+                                       user_track: user_track
   end
 end

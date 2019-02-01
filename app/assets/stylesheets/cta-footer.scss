@@ -1,0 +1,54 @@
+@import 'variables';
+@import 'mixins';
+
+#cta-footer {
+    text-align:center;
+    background:$color-2;
+    color:#fff;
+    padding:40px 20px;
+    margin: 50px 0 -100px 0;
+    .logo {
+        @include header-font;
+        @include font-size(32,24);
+        color:#fff;
+        margin-bottom:20px;
+        position:relative;
+    }
+
+    h2 {
+        @include header-font;
+        font-weight:600;
+        @include font-size(26, 26);
+        margin-bottom:10px;
+    }
+    p {
+        color:#fff;
+        @include font-size(16, 22);
+        max-width:450px;
+        margin:0 auto 20px auto;
+    }
+    .pure-button {
+        @include font-size(16, 16);
+        border-radius:2px;
+        width:100%;
+        margin-bottom:15px;
+        @include width-small() {
+            width:auto;
+            margin-bottom:0;
+        }
+        &.sign-up-button {
+            margin-right:5px;
+        }
+        &.sign-up-button,
+        &.languages-button {
+            border:1px solid #fff;
+            color:#fff;
+            background:$color-2;
+            padding:15px 30px;
+            &:hover {
+                color:$color-2;
+                background:#fff;
+            }
+        }
+    }
+}

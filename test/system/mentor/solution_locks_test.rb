@@ -6,7 +6,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     @track = create(:track, title: "Ruby")
     create :track_mentorship, user: @mentor, track: @track
 
-    @solution = create :solution, exercise: create(:exercise, track: @track)
+    @solution = create :solution, exercise: create(:exercise, track: @track), mentoring_requested_at: Time.current
     @iteration = create :iteration, solution: @solution
 
     sign_in!(@mentor)
@@ -18,7 +18,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -28,7 +28,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     visit mentor_solution_path(@solution)
 
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -37,11 +37,11 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -51,11 +51,11 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     assert_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
@@ -66,20 +66,22 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
-    click_on "Mentor this solution anyway"
+    click_on "Review this solution anyway"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
   end
 
   test "mentor can leave solution without adding a comment" do
+    create :system_user
+
     visit mentor_dashboard_path
     assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
 
@@ -87,11 +89,11 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
 
     click_on "Leave conversation"
@@ -100,6 +102,8 @@ class SolutionLocksTest < ApplicationSystemTestCase
   end
 
   test "mentor can leave solution after adding a comment" do
+    create :system_user
+
     visit mentor_dashboard_path
     assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
 
@@ -107,14 +111,14 @@ class SolutionLocksTest < ApplicationSystemTestCase
 
     assert_selector ".claim-section"
     refute_selector ".discussion"
-    refute_selector ".new-discussion-post"
+    refute_selector ".new-editable-text"
 
-    click_on "Mentor this solution"
+    click_on "Review this solution"
     assert_selector ".discussion"
-    assert_selector ".new-discussion-post"
+    assert_selector ".new-editable-text"
     refute_selector ".claim-section"
 
-    find(".new-discussion-post-form textarea").set("An example mentor comment to test the comment button!")
+    find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
     click_on "Comment"
 
     click_on "Leave conversation"

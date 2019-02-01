@@ -1,0 +1,12 @@
+=link_to teams_team_solution_path(@team, activity.solution), class: 'activity' do
+  =image_tag activity.user.avatar_url
+  .title
+    %strong #{activity.user.handle} 
+    posted feedback on
+    %strong #{activity.solution.user.handle}'s
+    solution to
+    %strong #{activity.solution.exercise.title}
+    on the
+    %strong #{activity.solution.exercise.track.title}
+    Track.
+
