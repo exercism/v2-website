@@ -4,7 +4,7 @@ class SolutionCommentsMailerPreview < ActionMailer::Preview
     SolutionCommentsMailer.new_comment_for_solution_user(User.first, SolutionComment.first)
   end
 
-  def new_discussion_post
+  def new_comment_for_commenter
     SolutionCommentsMailer.new_comment_for_commenter(User.first, SolutionComment.first)
   end
 end
