@@ -121,25 +121,12 @@
                 color:$color-2;
             }
         }
-        form {
-            margin:0px 0 20px 0;
-            .md-editor, .preview-area {
-                width:100%;
-                resize:none;
-                border:1px solid #ddd;
-            }
-            .preview-area {
-                height:248px;
-                overflow:auto;
-                padding:15px;
-            }
-        }
         &.show-warning {
             .warning {
                 display:block;
             }
             form .preview-area {
-                height:317px;
+                min-height:317px;
             }
         }
     }

@@ -14,7 +14,8 @@
             border:1px solid #ddd;
         }
         .preview-area {
-            height:248px;
+            min-height:248px;
+            height:100%;
             overflow:auto;
             padding:15px;
         }

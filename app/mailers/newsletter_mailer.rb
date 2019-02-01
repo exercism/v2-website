@@ -26,6 +26,4 @@ class NewsletterMailer < ApplicationMailer
       subject: "[Exercism] We've improved lots during January"
     )
   end
-
-
 end
