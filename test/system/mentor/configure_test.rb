@@ -25,6 +25,15 @@ class MentorConfigureTest < ApplicationSystemTestCase
 
     visit mentor_configure_path
     assert_track_selections(selected: ["Elm"], not_selected: ["Ruby", "Piet"])
+
+    uncheck "Elm"
+    click_on "Save settings"
+    user.reload
+    assert_equal user.mentored_tracks, []
+
+    visit mentor_configure_path
+    assert_track_selections(not_selected: ["Elm", "Ruby", "Piet"])
+
   end
 
   def assert_track_selections(selected: [], not_selected: [])
