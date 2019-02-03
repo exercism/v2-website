@@ -11,7 +11,7 @@ class SolutionCommentsMailer < ApplicationMailer
     )
   end
 
-  def new_comment_for_commenter(user, comment)
+  def new_comment_for_other_commenter(user, comment)
     @user = user
     @comment = comment
     @solution = comment.solution
