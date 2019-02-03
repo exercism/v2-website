@@ -54,7 +54,7 @@ end
 
 namespace :processors do
   task :restart do
-    on roles(:processors) do
+    on roles(:processor) do
       execute "sudo /usr/sbin/service mentors_remind_overdue restart"
       execute "sudo /usr/sbin/service mentors_abandon_overdue restart"
     end
