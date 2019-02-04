@@ -21,7 +21,7 @@ class SolutionCommentsMailerTest < ActionMailer::TestCase
     assert_equal "[Exercism] Someone has commented on your solution to #{track_title}/#{exercise_title}", email.subject
   end
 
-  test "new_comment_for_commenter" do
+  test "new_comment_for_other_commenter" do
     comment = create :solution_comment
     user = create :user
 
@@ -29,7 +29,7 @@ class SolutionCommentsMailerTest < ActionMailer::TestCase
     exercise_title = solution.exercise.title
     track_title = solution.track.title
 
-    email = SolutionCommentsMailer.new_comment_for_commenter(user, comment)
+    email = SolutionCommentsMailer.new_comment_for_other_commenter(user, comment)
 
     assert_emails 1 do
       email.deliver_now
