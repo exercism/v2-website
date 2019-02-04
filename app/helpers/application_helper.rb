@@ -1,4 +1,18 @@
 module ApplicationHelper
+  def async_stylesheet_link_tag(url, options = {})
+    content_for :async_css do
+      stylesheet_link_tag(url, options)
+    end
+
+    stylesheet_link_tag(
+      url,
+      {
+        rel: "preload",
+        as: "style"
+      }.merge(options)
+    )
+  end
+
   def code_person_widget
     content_tag :div, id: "widget-code-person" do
       image_tag random_person_image_url,
