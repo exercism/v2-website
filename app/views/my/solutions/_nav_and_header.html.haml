@@ -36,3 +36,6 @@
                   .dot.current
                 -else
                   .dot.locked
+      .topics
+        - @exercise.topic_names.each do |topic_name|
+          .topic= topic_name

@@ -33,7 +33,7 @@
             height:70px;
             padding:8px;
             float:right;
-            margin-top: -12px;
+            margin-top: 5px;
             border-radius: 100%;
             overflow:hidden;
             background:$color-1;
@@ -43,7 +43,7 @@
                 float:left;
                 margin-left: -54px;
                 margin-right:20px;
-                margin-top: -11px;
+                margin-top: 5px;
             }
             img {
                 height:42px;
@@ -118,6 +118,21 @@
                         }
                     }
                 }
+            }
+        }
+        
+        .topics {
+            margin-top: 10px;
+            overflow:hidden;
+            height:21px;
+            .topic {
+                @include font-size(11, 11);
+                display:inline-block;
+                font-weight:$regular;
+                background:#eee;
+                color:#999;
+                padding:3px 6px 4px;
+                border-radius:2px;
             }
         }
     }
