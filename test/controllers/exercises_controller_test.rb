@@ -15,5 +15,19 @@ class ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [active_exercise], assigns(:exercises)
   end
 
+  test "index 404s with incorrect track id" do
+    get track_exercises_path(38383)
+    assert_response :missing
+  end
+
+  test "show 404s with incorrect track id" do
+    get track_exercise_path(38383, create(:exercise))
+    assert_response :missing
+  end
+
+  test "show 404s with incorrect exercise id" do
+    get track_exercise_path(create(:track), 33838)
+    assert_response :missing
+  end
 end
 
