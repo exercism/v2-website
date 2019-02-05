@@ -43,7 +43,7 @@ class Mentor::DashboardController < MentorController
       status: @your_status,
       track_id: @your_track_id,
       exercise_id: @your_exercise_id
-    ).to_a
+    ).page(params[:page]).per(20)
 
     user_ids = @your_solutions.map(&:user_id)
     @user_tracks = UserTrack.where(user_id: user_ids).
