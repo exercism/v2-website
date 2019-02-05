@@ -19,7 +19,7 @@
           Solution Author
           -if user_track && user_track.anonymous?
             (Anonymous Mode)
-      .created-at commented #{time_ago_in_words(comment.created_at)} ago
+      =link_to "commented #{time_ago_in_words(comment.created_at)} ago", solution_comment_path(solution, comment), class: "created-at"
 
     .editable-text-viewer
       - if comment.deleted?

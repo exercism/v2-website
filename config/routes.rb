@@ -89,7 +89,7 @@ Rails.application.routes.draw do
   end
 
   resources :solutions, only: [:show] do
-    resources :comments, controller: "solution_comments"
+    resources :comments, controller: "solution_comments", only: [:show, :create, :update, :destroy]
   end
 
   resources :tracks, only: [:index, :show] do
