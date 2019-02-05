@@ -18,6 +18,19 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "404s with invalid solution uuid" do
+    sign_in!
+    get my_solution_url("1234")
+    assert_response :missing
+  end
+
+  test "301s with someone else's solution uuid" do
+    sign_in!
+    solution = create :solution
+    get my_solution_url(solution.uuid)
+    assert_redirected_to solution_url(solution)
+  end
+
   {
     unlocked: "my-solution-unlocked-page",
     iterating: "my-solution-page",
