@@ -85,6 +85,8 @@ module MetadataHelper
         when "solutions"
           case action_name
           when "show"
+            return {} unless @solution
+
             exercise = @solution.exercise
             track = exercise.track
             handle = @solution.user.handle_for(track)
