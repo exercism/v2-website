@@ -1,7 +1,18 @@
 class SolutionsController < ApplicationController
   def index
-    @track = Track.find(params[:track_id])
-    @exercise = @track.exercises.find(params[:exercise_id])
+    begin
+      @track = Track.find(params[:track_id])
+    rescue
+      # Avoid bugsnag
+      return render_404
+    end
+
+    begin
+      @exercise = @track.exercises.find(params[:exercise_id])
+    rescue
+      # Avoid bugsnag
+      return render_404
+    end
 
     @solutions = @exercise.solutions.
                            published.
