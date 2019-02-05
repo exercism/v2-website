@@ -21,21 +21,27 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "show should fail for unpublished solution with full path" do
-    exercise = create :exercise
-    solution = create :solution, exercise: exercise, published_at: nil
+  test "show should render not_published for unpublished solution with uuid" do
+    sign_in!
+    solution = create :solution, published_at: nil
 
-    get track_exercise_solution_url(exercise.track, exercise, solution.uuid)
-    assert_redirected_to track_exercise_url(exercise.track, exercise)
+    get solution_url(solution)
+    assert_template :not_published
+    assert_response :missing
   end
 
-  test "show should explode for unpublished solution with uuid" do
-    exercise = create :exercise
-    solution = create :solution, exercise: exercise, published_at: nil
+  test "show should redirect for unpublished for same user" do
+    sign_in!
+    solution = create :solution, published_at: nil, user: @current_user
 
-    assert_raises(ActionController::RoutingError) do
-      get solution_url(solution.uuid)
-    end
+    get solution_url(solution)
+    assert_redirected_to my_solution_path(solution)
+  end
+
+  test "show should explode for missing solution" do
+    get solution_url('1234')
+    assert_template :not_found
+    assert_response :missing
   end
 
   test "show should clear notifications" do

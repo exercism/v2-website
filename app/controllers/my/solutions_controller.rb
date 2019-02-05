@@ -163,7 +163,10 @@ class My::SolutionsController < MyController
   private
 
   def set_solution
-    @solution = current_user.solutions.find_by_uuid!(params[:id])
+    @solution = Solution.find_by_uuid!(params[:id])
+    redirect_to @solution unless @solution.user == current_user
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
   def show_unlocked
@@ -180,5 +183,9 @@ class My::SolutionsController < MyController
     ClearNotifications.(current_user, @iteration)
 
     render :show
+  end
+
+  def render_404
+    render file: "#{Rails.root}/public/404", layout: false, status: :not_found
   end
 end

@@ -59,6 +59,8 @@
             margin-top:5px;
             @include font-size(11, 13);
             color:#999;
+            text-decoration:none;
+            border-bottom:1px solid #eee;
             @include width-medium() {
                 float:right;
                 margin-top:0px;
