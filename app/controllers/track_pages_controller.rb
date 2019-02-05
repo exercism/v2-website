@@ -1,4 +1,5 @@
 class TrackPagesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
   before_action :get_track
 
   Git::ExercismRepo::PAGES.each do |page|
