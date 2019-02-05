@@ -16,8 +16,7 @@ class FiltersSolutionsByStatus
       else
         filter_require_action
       end
-    solutions.includes(iterations: [], exercise: {track: []}, user: [:profile]).
-              limit(20) # TODO - Paginate
+    solutions.includes(iterations: [], exercise: {track: []}, user: [:profile])
   end
 
   def filter_require_action
