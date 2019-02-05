@@ -1,19 +1,9 @@
 class SolutionsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
   def index
-    begin
-      @track = Track.find(params[:track_id])
-    rescue
-      # Avoid bugsnag
-      return render_404
-    end
-
-    begin
-      @exercise = @track.exercises.find(params[:exercise_id])
-    rescue
-      # Avoid bugsnag
-      return render_404
-    end
-
+    @track = Track.find(params[:track_id])
+    @exercise = @track.exercises.find(params[:exercise_id])
     @solutions = @exercise.solutions.
                            published.
                            includes(user: [:profile, { avatar_attachment: :blob }])
