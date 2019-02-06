@@ -7,15 +7,6 @@
 
         .editable-text-html {
             margin-bottom:17px;
-            * {
-                @include font-size(15, 20);
-            }
-
-            pre code {
-                &, * {
-                    font-size:12px;
-                }
-            }
         }
 
         .editable-text-options {
