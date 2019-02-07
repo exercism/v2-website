@@ -1,0 +1,21 @@
+#mentor-dashboard-page
+  .header
+    .lo-container
+      %h1 Mentor dashboard
+      .h1-subtitle
+        You can keep track of what needs responding to here.
+        If you're stuck, check out the #{link_to "Mentoring guide", mentoring_guide_page_path}, #{link_to "Mentoring FAQs", mentoring_faqs_page_path} or ask questions on Slack.
+
+  .lo-container
+    .pure-g
+      .pure-u-1.pure-u-lg-2-3
+        -if @next_solutions.present?
+          =render "next_solutions_section"
+        -else
+          =render "no_solutions_section"
+
+      .pure-u-1.pure-u-lg-1-3
+
+-content_for :js do
+  :javascript
+    submitOnChange($('select'))
