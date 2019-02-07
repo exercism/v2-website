@@ -20,7 +20,7 @@
 
     -unless @solution.approved?
       =link_to "Leave conversation", [:abandon, :mentor, @solution], method: :patch, class: 'pure-button leave-button button'
-      =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: 'approve-button pure-button button js-disable-on-click', value: "approved"
+      =link_to "Approve", [:approve, :mentor, @solution], method: :patch, remote: true, class: "approve-button pure-button button js-disable-on-click #{@solution.discussion_posts.size == 0 ? "force-hidden" : ""}", value: "approved"
       =button_tag "Approve and comment", class: 'approve-and-comment-button pure-button button', value: "approved"
 
 -content_for :js do
