@@ -1,25 +1,14 @@
 class Mentor::DashboardController < MentorController
   def show
-    load_your_solutions
-    load_next_solutions
-
-    user_ids = @your_solutions.map(&:user_id) + @next_solutions.map(&:user_id)
-    @user_tracks = UserTrack.where(user_id: user_ids).
-                             each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
-
-    @total_solutions_count = current_user.solution_mentorships.count
-    @total_students_count = current_user.mentored_solutions.select(:user_id).distinct.count
-    @weekly_solutions_count = current_user.solution_mentorships.where("solution_mentorships.created_at > ?", Time.now.beginning_of_week).count
-    @feedbacks = current_user.solution_mentorships.where(show_feedback_to_mentor: true).order('updated_at desc').limit(5).pluck(:feedback)
-
-    if current_user.num_rated_mentored_solutions > Exercism::MENTOR_RATING_THRESHOLD
-      @rating_threshold_reached = true
-      @mentor_rating = current_user.mentor_rating
-    end
+    redirect_to action: :your_solutions
   end
 
   def your_solutions
     load_your_solutions
+    respond_to do |format|
+      format.js
+      format.html { load_general_stats }
+    end
   end
 
   def next_solutions
@@ -50,6 +39,18 @@ class Mentor::DashboardController < MentorController
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
   end
 
+  def load_general_stats
+    @total_solutions_count = current_user.solution_mentorships.count
+    @total_students_count = current_user.mentored_solutions.select(:user_id).distinct.count
+    @weekly_solutions_count = current_user.solution_mentorships.where("solution_mentorships.created_at > ?", Time.now.beginning_of_week).count
+    @feedbacks = current_user.solution_mentorships.where(show_feedback_to_mentor: true).order('updated_at desc').limit(5).pluck(:feedback)
+
+    if current_user.num_rated_mentored_solutions > Exercism::MENTOR_RATING_THRESHOLD
+      @rating_threshold_reached = true
+      @mentor_rating = current_user.mentor_rating
+    end
+  end
+
   def load_next_solutions
     @next_track_id = params[:next_track_id].presence || single_track_id
     @next_track_id_options = track_id_options
@@ -60,8 +61,7 @@ class Mentor::DashboardController < MentorController
     @next_solutions = SelectSuggestedSolutionsForMentor.(
       current_user,
       filtered_track_ids: @next_track_id,
-      filtered_exercise_ids: @next_exercise_id,
-      page: params[:page]
+      filtered_exercise_ids: @next_exercise_id
     ).to_a
 
     user_ids = @next_solutions.map(&:user_id)
