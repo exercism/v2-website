@@ -129,6 +129,9 @@
             &.approve-and-comment-button {
                 display:none;
             }
+            &.approve-button.force-hidden {
+                display:none !important;
+            }
 
             &.leave-button,
             &.pass-button {
