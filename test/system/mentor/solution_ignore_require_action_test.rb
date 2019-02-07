@@ -20,7 +20,7 @@ class SolutionIgnoreRequireActionTest < ApplicationSystemTestCase
       click_on "No action is required"
     end
 
-    assert_selector "body.namespace-mentor.controller-dashboard.action-show"
+    assert_selector "body.namespace-mentor.controller-dashboard.action-your_solutions"
     refute solution_mentorship.reload.requires_action?
   end
 end
