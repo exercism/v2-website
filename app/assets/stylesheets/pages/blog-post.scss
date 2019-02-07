@@ -67,6 +67,12 @@
     }
 
     article {
+        h2 {
+            @include font-size(23,30);
+            font-weight:$fw-bold;
+            margin-top:30px;
+            margin-bottom:10px;
+        }
         p, li {
             @include font-size(18, 28);
         }
