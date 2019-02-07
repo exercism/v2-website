@@ -3,12 +3,13 @@
 
 $blue: #4A90E2;
 
-#mentor-dashboard-page {
+#mentor-dashboard-page,
+#mentor-next-solutions-page {
     .header {
         background: $color-2;
         background-image:image-url('background-overlay-2.png');
         background-size:cover;
-        padding:100px 0 35px;
+        padding:60px 0 0 0;
         margin-bottom:35px;
         h1 {
             @include font-size(34, 34);
@@ -22,9 +23,32 @@ $blue: #4A90E2;
             @include font-size(15, 19);
             color:#fff;
             font-weight:$fw-regular;
+            margin-bottom:30px;
             a {
                 color:#fff;
                 font-weight:$regular;
+            }
+        }
+        .header-tabs {
+            overflow:hidden;
+            .header-tab {
+                background:darken($color-2, 10%);
+                color:#fff;
+                padding:10px 30px;
+                border-radius:5px 5px 0 0;
+                float:left;
+                text-decoration:none;
+
+
+                &.selected {
+                    background:#fff;
+                    color:$color-2;
+                    font-weight:$fw-bold;
+                }
+                &+.header-tab {
+                    margin-left:10px;
+                }
+
             }
         }
     }
@@ -425,5 +449,73 @@ $blue: #4A90E2;
     .contributions-section {
         margin-top:0;
         margin-bottom:20px;
+    }
+}
+
+
+#mentor-next-solutions-page {
+    .widget-filter.track_id {
+        margin-bottom:10px;
+        .title {
+            display:block;
+            width:100%;
+            border-width: 1px 1px 0 1px;
+        }
+        .selectize-control {
+            display:block;
+            width:100%;
+        }
+
+    }
+
+    .next-exercises-navigation {
+        padding-left:50px;
+        .label {
+            display:inline-block;
+            color:#666;
+            text-decoration:none;
+            margin-bottom:10px;
+            font-weight:$fw-semibold;
+            &.zero-count {
+                color:#bbb;
+                cursor:default;
+            }
+            &.selected {
+                color:$color-2 !important;
+                font-weight:$fw-black !important;
+            }
+        }
+        .title {
+            .label {
+                color:#333;
+                font-weight:$fw-bold;
+                margin-bottom:12px;
+            }
+        }
+        .subtitle {
+            .label {
+                color:#aaa;
+                margin-bottom:12px;
+            }
+        }
+        .exercises {
+            border-left:2px solid #eee;
+            padding-left:20px;
+            margin:0 0 30px 0;
+            list-style:none;
+            .label {
+                &.selected {
+                    position:relative;
+                    &:before {
+                        content: "";
+                        border-left:2px solid $color-2;
+                        position:absolute;
+                        top:0;
+                        left:-21px;
+                        bottom:0px;
+                    }
+                }
+            }
+        }
     }
 }

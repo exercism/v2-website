@@ -1,9 +1,4 @@
 %h2 Next solutions to mentor
-= render "next_solutions_filters",
-  track_id: @next_track_id,
-  track_id_options: @next_track_id_options,
-  exercise_id: @next_exercise_id,
-  exercise_id_options: @next_exercise_id_options
 
 .next-solutions{style: @next_solutions.present?? "display:block" : "display:none"}
   .subheading These are new solutions that need feedback.

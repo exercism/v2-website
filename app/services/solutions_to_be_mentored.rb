@@ -3,6 +3,18 @@ class SolutionsToBeMentored
 
   initialize_with :user, :filtered_track_ids, :filtered_exercise_ids
 
+  def all_solutions
+    base_query
+  end
+
+  def core_solutions
+    base_query.where('exercises.core': true)
+  end
+
+  def side_solutions
+    base_query.where('exercises.core': false)
+  end
+
   def new_core_solutions
     base_mentored_mode_new_query.
       where('exercises.core': true)

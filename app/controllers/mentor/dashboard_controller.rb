@@ -7,12 +7,24 @@ class Mentor::DashboardController < MentorController
     load_your_solutions
     respond_to do |format|
       format.js
-      format.html { load_general_stats }
+      format.html do
+        load_general_stats
+        load_tab_stats
+      end
     end
   end
 
   def next_solutions
+    return redirect_to mentor_configure_path unless current_user.mentored_tracks.exists?
+
     load_next_solutions
+    respond_to do |format|
+      format.js
+      format.html do
+        load_track_stats
+        load_tab_stats
+      end
+    end
   end
 
   private
@@ -52,11 +64,11 @@ class Mentor::DashboardController < MentorController
   end
 
   def load_next_solutions
-    @next_track_id = params[:next_track_id].presence || single_track_id
+    @next_track_id = params[:next_track_id].presence || first_track_id
+    @next_track = Track.find(@next_track_id)
     @next_track_id_options = track_id_options
 
     @next_exercise_id = params[:next_exercise_id]
-    @next_exercise_id_options = exercise_id_options_for(@next_track_id)
 
     @next_solutions = SelectSuggestedSolutionsForMentor.(
       current_user,
@@ -69,15 +81,40 @@ class Mentor::DashboardController < MentorController
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
   end
 
+  def load_track_stats
+    service = SolutionsToBeMentored.new(current_user, @next_track_id, nil)
+    core_counts = service.core_solutions.group(:exercise_id).count
+    @core_exercise_counts = @next_track.exercises.core.
+      map{|e| [e, core_counts[e.id].to_i]}.
+      sort_by {|e,c|e.position}
+    @total_core_count = @core_exercise_counts.map(&:second).sum
+
+    side_counts = service.side_solutions.group(:exercise_id).count
+    @side_exercise_counts = @next_track.exercises.where(id: side_counts.map(&:first)).
+      map{|e| [e, side_counts[e.id].to_i]}.
+      sort_by {|e,c|e.slug}
+    @total_side_count = @side_exercise_counts.map(&:second).sum
+    @total_count = @total_core_count + @total_side_count
+
+    @total_core_count
+  end
+
+  def load_tab_stats
+    @tab_your_count = RetrieveSolutionsForMentor.(current_user).count
+    @tab_next_count = SolutionsToBeMentored.new(current_user, nil, nil).all_solutions.count
+  end
+
   def track_id_options
     @track_id_options ||=
-      OptionsHelper.as_options(current_user.mentored_tracks,
-                                                       :title,
-                                                       :id)
+      OptionsHelper.as_options(current_user.mentored_tracks, :title, :id)
   end
 
   def single_track_id
-    track_id_options.first[:value] if track_id_options.one?
+    first_track_id if track_id_options.one?
+  end
+
+  def first_track_id
+    track_id_options.first[:value]
   end
 
   def exercise_id_options_for(track_id)

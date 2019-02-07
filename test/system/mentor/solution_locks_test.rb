@@ -82,7 +82,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
   test "mentor can leave solution without adding a comment" do
     create :system_user
 
-    visit mentor_dashboard_path
+    visit next_solutions_mentor_dashboard_path
     assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
 
     visit mentor_solution_path(@solution)
@@ -104,7 +104,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
   test "mentor can leave solution after adding a comment" do
     create :system_user
 
-    visit mentor_dashboard_path
+    visit next_solutions_mentor_dashboard_path
     assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
 
     visit mentor_solution_path(@solution)
