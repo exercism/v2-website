@@ -129,9 +129,6 @@
             &.approve-and-comment-button {
                 display:none;
             }
-            &.approve-button.force-hidden {
-                display:none !important;
-            }
 
             &.leave-button,
             &.pass-button {
@@ -158,7 +155,7 @@
             padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:10px;
-        } 
+        }
         p {
             margin-bottom:10px;
             @include font-size(14, 19);
@@ -201,7 +198,7 @@
             padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:10px;
-        } 
+        }
         p {
             margin-bottom:10px;
             @include font-size(14, 19);

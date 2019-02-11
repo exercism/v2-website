@@ -10,7 +10,7 @@ $('.pass-button').remove()
   $('.approve-and-comment-button').remove()
   $('.leave-button').remove()
 -else
-  $('.approve-button').removeClass('force-hidden').show()
+  $('.approve-button').attr({'disabled': false}).show()
   $('.approve-and-comment-button').hide()
 
 window.location.href = "#discussion-post-#{@post.id}"
