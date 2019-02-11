@@ -146,35 +146,7 @@ body.controller-my-tracks.action-show {
         .about {
             text-align:justify;
         }
-        .code-sample {
-            @include width-medium() {
-                display:block;
-                float:right;
-                margin:0 0 20px 50px;
-            }
-            display:none;
-            margin-top:35px;
-            background-image:image-url("code-sample-frame.png");
-            background-size:contain;
-            background-repeat:no-repeat;
-            padding:30px 10px;
-            height:200px;
-            width: 258px;
 
-            pre {
-                background:#fafafa;
-                @include font-size(10, 13);
-                padding:2px 5px;
-                height:144px;
-                code {
-                    background:#f8f8f8;
-                }
-            }
-            img {
-                display:block;
-                width:100%;
-            }
-        }
         h2 {
             @include font-size(22, 22);
             font-weight:$regular;
@@ -204,6 +176,37 @@ body.controller-my-tracks.action-show {
             }
         }
     }
+
+    .code-sample {
+        @include width-medium() {
+            display:block;
+            float:right;
+            margin:0 0 20px 50px;
+        }
+        display:none;
+        margin-top:35px;
+        background-image:image-url("code-sample-frame.png");
+        background-size:contain;
+        background-repeat:no-repeat;
+        padding:30px 10px;
+        height:200px;
+        width: 258px;
+
+        pre {
+            background:#fafafa;
+            @include font-size(10, 13);
+            padding:2px 5px;
+            height:144px;
+            code {
+                background:#f8f8f8;
+            }
+        }
+        img {
+            display:block;
+            width:100%;
+        }
+    }
+
     .testimonal-section {
         padding:70px 0;
         border:solid #eee;
