@@ -73,7 +73,7 @@ module MetadataHelper
             {
               title: @blog_post.title,
               description: blog_post_summary(@blog_post),
-              image_url: "https://assets.exercism.io/social/blog.png"
+              image_url: @blog_post.image_url.presence || "https://assets.exercism.io/social/blog.png"
             }
           end
         when "pages"
