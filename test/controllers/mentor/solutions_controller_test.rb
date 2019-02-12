@@ -1,6 +1,26 @@
 require 'test_helper'
 
 class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
+  test "show permissions" do
+    user = create :user
+    solution = create :solution
+    create :iteration, solution: solution
+
+    sign_in!(user)
+
+    get mentor_solution_url(solution)
+    assert_redirected_to new_mentor_registrations_path
+
+    user.update(is_mentor: true)
+    get mentor_solution_url(solution)
+    assert_response :success
+
+    solution.update(user: user)
+    get mentor_solution_url(solution)
+    assert_redirected_to my_solution_path(solution)
+
+  end
+
   test "approve calls service" do
     mentor = create :user_mentor
     track = create :track
