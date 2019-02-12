@@ -11,7 +11,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
     get mentor_solution_url(solution)
     assert_redirected_to new_mentor_registrations_path
 
-    user.update(is_mentor: true)
+    create :mentor_profile, user: user
     get mentor_solution_url(solution)
     assert_response :success
 
