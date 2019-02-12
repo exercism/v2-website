@@ -27,7 +27,9 @@ class Mentor::SolutionsController < MentorController
     ClearNotifications.(current_user, @solution)
     ClearNotifications.(current_user, @iteration)
 
-    @redact_users = !@solution.mentors.include?(current_user)
+    # Redact if a solution is approved or being mentored and you're not the mentor
+    @redact_users = (@solution.approved? || @solution.num_mentors > 0) &&
+                    !current_user.mentoring_solution?(@solution)
   end
 
   def approve
