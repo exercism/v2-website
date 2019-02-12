@@ -1,19 +1,28 @@
+-if @redact_users
+  -user_display_handle = "[Redacted]"
+  -user_display_handle_link = "[Redacted]"
+  -user_display_avatar_url = image_url("anonymous.png")
+-else
+  -user_display_handle = display_handle(@solution.user, @solution_user_track)
+  -user_display_handle_link = display_handle_link(@solution.user, @solution_user_track)
+  -user_display_avatar_url = display_avatar_url(@solution.user, @solution_user_track)
+
 #mentor-solution-page
   #nav.lo-nav-bar
     .lo-container
       =link_to "Mentor dashboard", [:mentor, :dashboard]
-      %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
+      %span #{user_display_handle}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
-      =image display_avatar_url(@solution.user, @solution_user_track), display_handle(@solution.user, @solution_user_track)
+      =image user_display_avatar_url, user_display_handle
       .inner
         =iterations_nav_widget(:mentor, @solution, @iteration)
         %h2
           %strong #{@exercise.title}
           on the
           %strong #{@exercise.track.title} Track
-        .byline by #{display_handle_link(@solution.user, @solution_user_track)}
+        .byline by #{user_display_handle_link}
         .small-iterations-nav
           =iterations_nav_widget(:mentor, @solution, @iteration)
 
@@ -30,10 +39,6 @@
           -if @mentoring_notes_created
             =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
               View community mentoring notes
-
-      /-else
-      /  =link_to [:new, :mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], target: "_blank", class: "mentoring-notes pure-button" do
-      /    Start community mentoring notes
 
   .lo-container
     .pure-g.panels
