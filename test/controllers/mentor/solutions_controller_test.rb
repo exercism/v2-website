@@ -15,6 +15,26 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "show sets anonmyous mode correctly" do
+    mentor = create :user_mentor
+    track = create :track
+    exercise = create :exercise, track: track
+    create :track_mentorship, user: mentor, track: track
+    solution = create :solution, exercise: exercise
+    iteration = create :iteration, solution: solution
+
+    sign_in!(mentor)
+
+    get mentor_solution_url(solution)
+    assert_response :success
+    assert assigns[:redact_users]
+
+    create :solution_mentorship, user: mentor, solution: solution
+    get mentor_solution_url(solution)
+    assert_response :success
+    refute assigns[:redact_users]
+  end
+
   test "show clears notifications" do
     mentor = create :user_mentor
     track = create :track

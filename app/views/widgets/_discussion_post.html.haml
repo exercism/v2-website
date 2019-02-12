@@ -1,5 +1,9 @@
--avatar_url = post.user == solution.user ?  display_avatar_url(post.user, user_track) : post.avatar_url
--user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.handle
+-if redact_user
+  -avatar_url = image_url("anonymous.png")
+  -user_handle = "[Redacted]"
+-else
+  -avatar_url = post.user == solution.user ?  display_avatar_url(post.user, user_track) : post.avatar_url
+  -user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.handle
 
 .widget-discussion-post.editable-text{id: "discussion-post-#{post.id}", class: (post.deleted?? "delete" : "")}
   =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
