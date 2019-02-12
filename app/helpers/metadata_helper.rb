@@ -55,7 +55,10 @@ module MetadataHelper
         when "registrations"
           { title: "Become a mentor" }
         when "solutions"
-          { title: "#{display_handle(@solution.user, @solution_user_track)} | #{@track.title}/#{@exercise.title}" }
+          handle = @redact_users ? "[Redacted]" : display_handle(@solution.user, @solution_user_track)
+          {
+            title: "#{handle} | #{@track.title}/#{@exercise.title}"
+          }
         else
           { title: "Mentor Dashboard" }
         end
