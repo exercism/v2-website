@@ -90,12 +90,32 @@
         text-decoration:none;
         border-left:3px solid #eee;
         padding-left:10px;
+        overflow:hidden;
 
         &:hover {
+            border-left-color:$color-2;
             h3 .text {
                 border-bottom-color:#ddd;
             }
-            border-left-color:$color-2;
+            .img {
+                box-shadow: 0 0 0 2px $color-2;
+            }
+        }
+        .img {
+            display:none;
+            float:right;
+            margin:2px 2px 2px 20px;
+            height:110px;
+            width:110px;
+            background-position:center center;
+            background-size:cover;
+            border:1px solid #fff;
+            box-shadow: 0 0 0 2px #eee;
+            border-radius:2px;
+
+            @include width-large() {
+                display:block;
+            }
         }
         h3 {
             @include font-size(22, 25);
