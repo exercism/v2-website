@@ -15,6 +15,10 @@ class SolutionTest < ApplicationSystemTestCase
 
   test "title is redacted" do
     visit mentor_solution_path(@solution)
+    assert_equal "#{@solution.user.handle} | Ruby/Two Fer | Exercism", page.title
+
+    @solution.update(num_mentors: 1)
+    visit mentor_solution_path(@solution)
     assert_equal "[Redacted] | Ruby/Two Fer | Exercism", page.title
 
     create :solution_mentorship, user: @mentor, solution: @solution

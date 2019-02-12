@@ -18,7 +18,6 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
     solution.update(user: user)
     get mentor_solution_url(solution)
     assert_redirected_to my_solution_path(solution)
-
   end
 
   test "approve calls service" do
@@ -45,6 +44,16 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in!(mentor)
 
+    get mentor_solution_url(solution)
+    assert_response :success
+    refute assigns[:redact_users]
+
+    solution.update(num_mentors: 1)
+    get mentor_solution_url(solution)
+    assert_response :success
+    assert assigns[:redact_users]
+
+    solution.update(num_mentors: 0, approved_by: create(:user))
     get mentor_solution_url(solution)
     assert_response :success
     assert assigns[:redact_users]
