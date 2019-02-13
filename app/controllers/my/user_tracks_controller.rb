@@ -54,5 +54,7 @@ class My::UserTracksController < MyController
   private
   def set_user_track
     @user_track = current_user.user_tracks.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to my_tracks_path
   end
 end

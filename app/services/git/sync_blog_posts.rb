@@ -31,6 +31,7 @@ class Git::SyncBlogPosts
         marketing_copy: blog_post_data[:marketing_copy],
         content_repository: blog_post_data[:content_repository],
         content_filepath: blog_post_data[:content_filepath],
+        image_url: blog_post_data[:image_url].presence
       )
       blog_post.save!
     end

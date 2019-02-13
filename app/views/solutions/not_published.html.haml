@@ -1,0 +1,29 @@
+#not-published-solution-page
+  #nav.lo-nav-bar
+    .lo-container
+      -if user_signed_in?
+        =link_to "Language tracks", [:my, :tracks]
+        =link_to "#{@track.title} track", [:my, @track]
+        -if @user_solution
+          =link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
+        =link_to "Community solutions", [@track, @exercise, :solutions]
+        %span This solution
+
+      -else
+        =link_to "Language tracks", :tracks
+        =link_to "#{@track.title} track", @track
+        =link_to "Exercises", [@track, :exercises]
+        =link_to @exercise.title, [@track, @exercise]
+        =link_to "Community solutions", [@track, @exercise, :solutions]
+        %span This solution
+
+  .lo-container
+    %h1
+      A solution
+      to #{link_to @exercise.title, [@track, @exercise], class: "exercise"}
+      in the #{link_to "#{@track.title} Track", @track, class: "track"}
+
+    %p Sorry, this solution is not public. It may have been previously avaliable but since removed by it's author. Or you may have an incorrect URL.
+    =link_to "Get me out of here", root_path, class: 'pure-button'
+
+=render_cta_footer

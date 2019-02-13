@@ -264,13 +264,28 @@ body:not(.prism-dark) #teams-my-solution-page {
 
         }
     }
+   .info-bar {
+        overflow:hidden;
+        margin-top:-10px;
+        margin-bottom:30px;
+        background:rgba($color-1, 0.1);
+        padding:10px;
+        color:$color-1;
+
+        a {
+            border-radius:2px;
+            font-weight:$fw-semibold;
+            color:$color-1;
+        }
+    }
+
     .no-reflection,
     .reflection {
         margin: 15px 0 30px 0;
+        padding:40px 40px;
         @include width-medium() {
            margin:48px 0 0 50px;
         }
-        padding:40px 40px;
         h3 {
             @include font-size(16, 16);
             font-weight:$regular;

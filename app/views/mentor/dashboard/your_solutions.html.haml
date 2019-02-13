@@ -6,15 +6,14 @@
         You can keep track of what needs responding to here.
         If you're stuck, check out the #{link_to "Mentoring guide", mentoring_guide_page_path}, #{link_to "Mentoring FAQs", mentoring_faqs_page_path} or ask questions on Slack.
 
+      .header-tabs
+        =link_to "Solutions you're mentoring (#{@tab_your_count})", your_solutions_mentor_dashboard_path, class: 'header-tab selected'
+        =link_to "New solutions (#{@tab_next_count})", next_solutions_mentor_dashboard_path, class: 'header-tab'
+
   .lo-container
     .pure-g
       .pure-u-1.pure-u-lg-2-3
         =render "your_solutions_section"
-
-        -if @next_solutions.present?
-          =render "next_solutions_section"
-        -else
-          =render "no_solutions_section"
 
       .pure-u-1.pure-u-lg-1-3
         .rating-section

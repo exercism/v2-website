@@ -1,4 +1,5 @@
 class My::SolutionsController < MyController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
   before_action :set_solution, except: [:index, :create, :walkthrough]
 
   def index
@@ -163,7 +164,8 @@ class My::SolutionsController < MyController
   private
 
   def set_solution
-    @solution = current_user.solutions.find_by_uuid!(params[:id])
+    @solution = Solution.find_by_uuid!(params[:id])
+    redirect_to @solution unless @solution.user == current_user
   end
 
   def show_unlocked

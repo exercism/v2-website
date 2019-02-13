@@ -1,5 +1,11 @@
 class SolutionCommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
+
+  def show
+    solution = Solution.find_by_uuid!(params[:solution_id])
+    comment = solution.comments.find(params[:id])
+    redirect_to solution_path(solution, anchor: "solution-comment-#{comment.id}")
+  end
 
   def create
     # TODO - Check alow to comment here

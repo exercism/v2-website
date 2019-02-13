@@ -1,6 +1,7 @@
 class Mentor::SolutionsController < MentorController
   before_action :set_solution
-  before_action :check_mentor_may_mentor_solution!
+  before_action :check_mentor_may_view_solution!
+  before_action :check_mentor_may_mentor_solution!, except: [:show]
 
   def show
     if current_user == @solution.user
@@ -25,6 +26,10 @@ class Mentor::SolutionsController < MentorController
 
     ClearNotifications.(current_user, @solution)
     ClearNotifications.(current_user, @iteration)
+
+    # Redact if a solution is approved or being mentored and you're not the mentor
+    @redact_users = (@solution.approved? || @solution.num_mentors > 0) &&
+                    !current_user.mentoring_solution?(@solution)
   end
 
   def approve
@@ -69,9 +74,14 @@ class Mentor::SolutionsController < MentorController
     @solution = Solution.find_by_uuid!(params[:id])
   end
 
-  def check_mentor_may_mentor_solution!
-    return head 403 if current_user == @solution.user
+  def check_mentor_may_view_solution!
+    return redirect_to [:my, @solution] if current_user == @solution.user
+    return true if current_user.is_mentor?
 
+    head 403
+  end
+
+  def check_mentor_may_mentor_solution!
     return true if current_user.mentoring_solution?(@solution)
     return true if current_user.mentoring_track?(@solution.exercise.track)
 

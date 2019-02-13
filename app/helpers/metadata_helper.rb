@@ -55,7 +55,10 @@ module MetadataHelper
         when "registrations"
           { title: "Become a mentor" }
         when "solutions"
-          { title: "#{display_handle(@solution.user, @solution_user_track)} | #{@track.title}/#{@exercise.title}" }
+          handle = @redact_users ? "[Redacted]" : display_handle(@solution.user, @solution_user_track)
+          {
+            title: "#{handle} | #{@track.title}/#{@exercise.title}"
+          }
         else
           { title: "Mentor Dashboard" }
         end
@@ -73,7 +76,7 @@ module MetadataHelper
             {
               title: @blog_post.title,
               description: blog_post_summary(@blog_post),
-              image_url: "https://assets.exercism.io/social/blog.png"
+              image_url: @blog_post.image_url.presence || "https://assets.exercism.io/social/blog.png"
             }
           end
         when "pages"
@@ -85,6 +88,8 @@ module MetadataHelper
         when "solutions"
           case action_name
           when "show"
+            return {} unless @solution
+
             exercise = @solution.exercise
             track = exercise.track
             handle = @solution.user.handle_for(track)

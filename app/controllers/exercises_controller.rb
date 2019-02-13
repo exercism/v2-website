@@ -1,4 +1,6 @@
 class ExercisesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
   def index
     @track = Track.find(params[:track_id])
     return redirect_to [:my, @track] if user_signed_in?

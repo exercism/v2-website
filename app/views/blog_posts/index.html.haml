@@ -13,11 +13,13 @@
         %h2
           -if @category.present?
             All posts in "#{@category.titleize}"
-          -else 
+          -else
             Latest Posts
 
         -@blog_posts.each do |post|
           =link_to post, class: 'blog-post' do
+            -if post.image_url.present?
+              .img{style: "background-image:url(#{image_url(post.image_url.presence)})"}
             %h3
               .text= post.title
             .synopsis= blog_post_summary(post)

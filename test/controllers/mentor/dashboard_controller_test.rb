@@ -13,13 +13,39 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_mentor_registrations_path
   end
 
-  test "200 if mentor" do
+  test "redirects_correctly if mentor" do
     user = create :user_mentor
 
     sign_in!(user)
     get mentor_dashboard_url
+    assert_redirected_to your_solutions_mentor_dashboard_url
+  end
+
+  test "200 in your_solutions if mentor" do
+    user = create :user_mentor
+
+    sign_in!(user)
+    get your_solutions_mentor_dashboard_url
     assert_response :success
     assert_correct_page "mentor-dashboard-page"
+  end
+
+  test "200 in next_solutions if mentor" do
+    user = create :user_mentor
+    mentorship = create :track_mentorship, user: user
+
+    sign_in!(user)
+    get next_solutions_mentor_dashboard_url
+    assert_response :success
+    assert_correct_page "mentor-next-solutions-page"
+  end
+
+  test "redirects_to configure path without track" do
+    user = create :user_mentor
+
+    sign_in!(user)
+    get next_solutions_mentor_dashboard_url
+    assert_redirected_to mentor_configure_path
   end
 
   test "/mentor redirects to dashboard" do
