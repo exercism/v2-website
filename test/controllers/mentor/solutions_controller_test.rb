@@ -22,7 +22,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "approve calls service" do
-    mentor = create :user_mentor
+    mentor = create :mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -36,7 +36,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show sets anonmyous mode correctly" do
-    mentor = create :user_mentor
+    mentor = create :mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -56,7 +56,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show clears notifications" do
-    mentor = create :user_mentor
+    mentor = create :mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -73,7 +73,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "abandon works without solution mentorship" do
-    mentor = create :user_mentor
+    mentor = create :mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -94,7 +94,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "abandon works with solution mentorship" do
-    mentor = create :user_mentor
+    mentor = create :mentor
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track

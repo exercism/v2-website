@@ -9,7 +9,7 @@ class RecalculateMentorStatsJobTest < ActiveJob::TestCase
   end
 
   test "calls recalculate_stats!" do
-    user = create :user_mentor
+    user = create :mentor
     user.mentor_profile.expects(:recalculate_stats!)
     RecalculateMentorStatsJob.perform_now(user)
   end

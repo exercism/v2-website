@@ -12,9 +12,9 @@ class UserTest < ActiveSupport::TestCase
   test "self.active_mentors" do
     track = create :track
     exercise = create :exercise, track: track
-    user1 = create :user_mentor
-    user2 = create :user_mentor
-    user3 = create :user_mentor
+    user1 = create :mentor
+    user2 = create :mentor
+    user3 = create :mentor
 
     assert_equal [], User.active_mentors
 

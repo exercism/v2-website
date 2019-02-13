@@ -5,7 +5,7 @@ class ReviewSolutionMentoringTest < ActiveSupport::TestCase
     solution_mentorship = create :solution_mentorship
     solution = solution_mentorship.solution
     mentor = solution_mentorship.user
-    um = create :user_mentor
+    um = create :mentor
 
     rating = 2
     feedback = "The foo was not enough bar"
@@ -21,7 +21,7 @@ class ReviewSolutionMentoringTest < ActiveSupport::TestCase
   end
 
   test "recalculates_average_rating" do
-    mentor = create :user_mentor
+    mentor = create :mentor
     solution_mentorship = create :solution_mentorship, user: mentor
     create :solution_mentorship, user: mentor, rating: 5
 

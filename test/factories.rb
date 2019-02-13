@@ -62,7 +62,7 @@ FactoryBot.define do
   end
 
   factory :ignored_solution_mentorship do
-    user { create :user_mentor }
+    user { create :mentor }
     solution { create :solution }
   end
 
@@ -118,7 +118,7 @@ FactoryBot.define do
   end
 
   factory :track_mentorship do
-    user { create :user_mentor }
+    user { create :mentor }
     track { create :track }
   end
 
@@ -128,7 +128,7 @@ FactoryBot.define do
   end
 
   factory :solution_mentorship do
-    user { create :user_mentor }
+    user { create :mentor }
     solution { create :solution }
   end
 
@@ -169,7 +169,7 @@ FactoryBot.define do
     email { "jez.walker+#{SecureRandom.uuid}@gmail.com" }
     password { "foobar123" }
 
-    factory :user_mentor do
+    factory :mentor do
       after(:create) do |user|
         create(:mentor_profile, user: user) unless user.mentor_profile
       end

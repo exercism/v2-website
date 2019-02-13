@@ -4,9 +4,9 @@ class TrackTest < ActiveSupport::TestCase
   test "active_mentors" do
     track = create :track
     exercise = create :exercise, track: track
-    user1 = create :user_mentor
-    user2 = create :user_mentor
-    user3 = create :user_mentor
+    user1 = create :mentor
+    user2 = create :mentor
+    user3 = create :mentor
 
     assert_equal 0, track.num_active_mentors
     assert_equal [], track.active_mentors

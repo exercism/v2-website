@@ -3,7 +3,7 @@ require 'test_helper'
 class MentorProfileTest < ActiveSupport::TestCase
 
   test "recalculate_stats! - num_solutions_mentored" do
-    user = create :user_mentor
+    user = create :mentor
     mentor_profile = user.mentor_profile
     assert_equal 0, user.mentor_profile.num_solutions_mentored
 
@@ -32,7 +32,7 @@ class MentorProfileTest < ActiveSupport::TestCase
   end
 
   test "trimmed average_rating when 5% is under 0.5" do
-    user = create :user_mentor
+    user = create :mentor
     mentor_profile = user.mentor_profile
     assert_nil user.mentor_profile.average_rating
 
@@ -46,7 +46,7 @@ class MentorProfileTest < ActiveSupport::TestCase
   end
 
   test "trimmed average_rating with 20 solution memberships" do
-    user = create :user_mentor
+    user = create :mentor
     assert_nil user.mentor_profile.average_rating
 
     2.times do
@@ -74,7 +74,7 @@ class MentorProfileTest < ActiveSupport::TestCase
   end
 
   test "trimmed mentor rating when no ratings are present" do
-    user = create :user_mentor
+    user = create :mentor
     assert_nil user.mentor_profile.average_rating
 
     user.mentor_profile.recalculate_stats!

@@ -14,7 +14,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "redirects_correctly if mentor" do
-    user = create :user_mentor
+    user = create :mentor
 
     sign_in!(user)
     get mentor_dashboard_url
@@ -22,7 +22,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "200 in your_solutions if mentor" do
-    user = create :user_mentor
+    user = create :mentor
 
     sign_in!(user)
     get your_solutions_mentor_dashboard_url
@@ -31,7 +31,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "200 in your_solutions if mentor with solutions" do
-    user = create :user_mentor
+    user = create :mentor
     Exercism::MENTOR_RATING_THRESHOLD.times {
       create :solution_mentorship, user: user, rating: 5
     }
@@ -44,7 +44,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
 
 
   test "200 in next_solutions if mentor" do
-    user = create :user_mentor
+    user = create :mentor
     mentorship = create :track_mentorship, user: user
 
     sign_in!(user)
@@ -54,7 +54,7 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "redirects_to configure path without track" do
-    user = create :user_mentor
+    user = create :mentor
 
     sign_in!(user)
     get next_solutions_mentor_dashboard_url
