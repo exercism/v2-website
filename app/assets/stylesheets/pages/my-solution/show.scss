@@ -147,7 +147,7 @@
             border-color:$color-1;
         }
         .num-comments {
-            &:after { 
+            &:after {
                 color:$color-1;
                 text-shadow:0 0 2px #fff;
             }
@@ -160,7 +160,7 @@
                 color:#fff;
             }
             .num-comments {
-                &:after { 
+                &:after {
                     color:#fff;
                     text-shadow: -1px -1px 0 $color-1,  1px -1px 0 $color-1, -1px 1px 0 $color-1, 1px 1px 0 $color-1;
                 }
@@ -382,7 +382,7 @@
 
 #modal.solution-reflection {
     max-width:850px !important;
-    
+
     h2 {
         @include font-size(18, 18);
         font-weight:$regular;
@@ -403,8 +403,13 @@
         margin-bottom:5px;
         font-weight:$regular;
         input {
-            margin-right:5px;
+            margin-right:3px;
         }
+        label {
+            vertical-align: middle;
+            line-height:14px;
+        }
+
     }
     textarea {
         margin-top:10px;
@@ -443,7 +448,7 @@
             label:before {
               margin: 5px;
               font-size: 1.25em;
-              font-family: "Font Awesome 5 Pro"; 
+              font-family: "Font Awesome 5 Pro";
               font-weight: 900;
               display: inline-block;
               content: "\f005";
@@ -615,7 +620,7 @@
                 &:before,
                 &:after {
                     content: "\f0d7";
-                    font-family: "Font Awesome 5 Pro"; 
+                    font-family: "Font Awesome 5 Pro";
                     font-weight: 900;
                     position:absolute;
                     left:50%;
