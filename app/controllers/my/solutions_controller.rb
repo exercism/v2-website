@@ -81,8 +81,7 @@ class My::SolutionsController < MyController
   end
 
   def reflection
-    @mentor_iterations = @solution.discussion_posts.group(:user_id).count
-    render_modal("solution-reflection", "reflection")
+    show_reflection_modal
   end
 
   def reflect
@@ -93,6 +92,14 @@ class My::SolutionsController < MyController
     @solution.update(allow_comments: allow_comments)
     current_user.update(default_allow_comments: allow_comments) if current_user.default_allow_comments === nil
 
+    if @solution.mentorships.count > 0
+      show_mentor_ratings_modal
+    else
+      show_unlocked_modal_or_redirect
+    end
+  end
+
+  def rate_mentors
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewSolutionMentoring.(
         @solution,
@@ -102,30 +109,7 @@ class My::SolutionsController < MyController
       )
     end
 
-    @track = @solution.exercise.track
-    user_track = UserTrack.where(user: current_user, track: @track).first
-
-    if user_track.mentored_mode?
-      if @solution.exercise.core?
-        @next_core_solution = current_user.solutions.not_completed.
-                              includes(exercise: :topics).
-                              where("exercises.track_id": @track.id).
-                              where("exercises.core": true).
-                              first
-      end
-
-      @unlocked_side_exercise_solutions = current_user.
-        solutions.
-        not_completed.
-        includes(:exercise).
-        where("exercises.id": @solution.exercise.unlocks.side)
-    end
-
-    if @next_core_solution || @unlocked_side_exercise_solutions.present?
-      render_modal("solution-unlocked", "unlocked")
-    else
-      js_redirect_to([:my, @solution])
-    end
+    show_unlocked_modal_or_redirect
   end
 
   def publish
@@ -182,5 +166,41 @@ class My::SolutionsController < MyController
     ClearNotifications.(current_user, @iteration)
 
     render :show
+  end
+
+  def show_reflection_modal
+    render_modal("solution-reflection", "reflection")
+  end
+
+  def show_mentor_ratings_modal
+    @mentor_interations = @solution.discussion_posts.group(:user_id).count
+    render_modal("solution-mentor-ratings", "mentor_ratings")
+  end
+
+  def show_unlocked_modal_or_redirect
+    @track = @solution.exercise.track
+    user_track = UserTrack.where(user: current_user, track: @track).first
+
+    if user_track.mentored_mode?
+      if @solution.exercise.core?
+        @next_core_solution = current_user.solutions.not_completed.
+                              includes(exercise: :topics).
+                              where("exercises.track_id": @track.id).
+                              where("exercises.core": true).
+                              first
+      end
+
+      @unlocked_side_exercise_solutions = current_user.
+        solutions.
+        not_completed.
+        includes(:exercise).
+        where("exercises.id": @solution.exercise.unlocks.side)
+    end
+
+    if @next_core_solution || @unlocked_side_exercise_solutions.present?
+      render_modal("solution-unlocked", "unlocked")
+    else
+      js_redirect_to([:my, @solution])
+    end
   end
 end
