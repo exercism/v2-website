@@ -14,7 +14,8 @@ class ExportSolutionsData
       FileUtils.mkdir(solution_dir)
 
       solution.iterations.first.files.each do |iteration_file|
-        File.open(solution_dir / iteration_file.filename, "w+") do |file|
+        filename = iteration_file.filename.split("/").last
+        File.open(solution_dir / filename, "w+") do |file|
           file << iteration_file.file_contents
         end
       end
