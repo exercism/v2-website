@@ -16,7 +16,7 @@ class ExportSolutionsData
       solution.iterations.first.files.each do |iteration_file|
         filename = iteration_file.filename.split("/").last
         File.open(solution_dir / filename, "w+") do |file|
-          file << iteration_file.file_contents
+          file << iteration_file.file_contents.force_encoding("utf-8")
         end
       end
     end
