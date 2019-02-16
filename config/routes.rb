@@ -35,6 +35,11 @@ Rails.application.routes.draw do
       resources :iterations, only: [:show]
     end
     resources :mentors, only: [:index]
+    namespace :data do
+      resources :tracks, only: [:index, :show] do
+        resources :exercises, only: [:show]
+      end
+    end
   end
 
   # ###### #

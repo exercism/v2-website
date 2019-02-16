@@ -434,6 +434,7 @@ DEPENDENCIES
   rails (~> 5.2)
   rails-controller-testing
   rest-client
+  rubyzip
   rugged
   sass-rails (~> 5.0)
   selenium-webdriver
