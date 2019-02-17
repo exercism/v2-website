@@ -38,7 +38,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     sleep(0.1)
     click_on "Continue"
     sleep(0.1)
-    click_on "Save and continue"
+    click_on "Continue"
 
     assert_text "You have unlocked the following Core Exercise:\nCore Exercise"
     assert_no_text "You have also unlocked 1 Side Exercises"
@@ -77,7 +77,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
     sleep(0.1)
     click_on "Continue"
     sleep(0.1)
-    click_on "Save and continue"
+    click_on "Continue"
 
     assert_text "You have unlocked the following Core Exercise:\nCore Exercise"
     assert_text "You have also unlocked 1 Side Exercises"
