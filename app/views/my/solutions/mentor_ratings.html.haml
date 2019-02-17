@@ -28,7 +28,7 @@
         %p Leave a public testimonial for this mentor (optional):
         =text_area_tag "mentor_reviews[#{mentor.id}][feedback]"
 
-  =button_tag "Continue", class: 'pure-button', disabled: true
+  =button_tag "Continue", class: 'pure-button'#, disabled: true
 
 :javascript
   $('.mentor-review .stars input[type=radio]').click(function() { $('#modal.solution-mentor-ratings .pure-button').prop({'disabled': false}) });
