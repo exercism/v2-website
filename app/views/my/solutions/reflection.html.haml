@@ -1,5 +1,5 @@
 .progress
-  - if @solution.auto_approve?
+  - if @solution.mentorships.count == 0
     =graphical_icon 'circle filled'
     =graphical_icon 'circle filled'
     =icon 'circle', 'Step 2 of 3'
@@ -10,13 +10,18 @@
     =icon 'circle', 'Step 2 of 4'
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
-  .pure-g
-    = render "my/solutions/reflection/form",
-    solution: @solution,
-    mentor_iterations: @mentor_iterations
+  %h2 Make your solution public?
+  %p You can make your solution public to allow other Exercism users to find it and learn from your ideas. You can also allow others to leave comments so that they can ask you questions about or make suggestions about you solution. Your previous iterations and mentor feedback will remain private. You can change these options later via your profile.
+  .checkbox
+    =check_box_tag :publish, 1, true
+    =label_tag :publish do
+      Publish my solution
+  .checkbox
+    / User's setting or default to true
+    -allow_comments = current_user.default_allow_comments === nil ? true : current_user.default_allow_comments
+    =check_box_tag :allow_comments, 1, allow_comments
+    =label_tag :allow_comments do
+      Allow others to comment
 
-  - if @solution.auto_approve?
-    =button_tag "Save and continue", class: 'pure-button reflection-submit-button'
-  - else
-    =button_tag "Continue", class: 'pure-button reflection-continue-button'
-    =button_tag "Save and continue", class: 'pure-button reflection-submit-button', style: 'display:none;'
+  =text_area_tag :reflection, '', placeholder: "Leave some notes next to your public solution to tell others what you learnt from this exercise, what you found easy and hard, and about any challenges you overcame."
+  =button_tag "Continue", class: 'pure-button reflection-continue-button'

@@ -142,6 +142,7 @@ Rails.application.routes.draw do
         patch :request_mentoring
         patch :cancel_mentoring_request
         patch :reflect
+        patch :rate_mentors
         patch :publish
         patch :update_exercise
 

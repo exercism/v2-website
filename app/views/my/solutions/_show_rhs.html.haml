@@ -47,13 +47,3 @@
 -content_for :js do
   :javascript
     setupSolution("#{@solution.uuid}", #{@iteration.id})
-    $('body').on('click', '.reflection-continue-button', function(e) {
-      e.preventDefault();
-      $(this).hide();
-      $('form .reflection-submit-button').show();
-      $('form .modal-lhs').hide();
-      $('form .modal-rhs').show();
-      $('.progress i:nth-child(3)').addClass('filled');
-      $('.progress i:last-child').attr('aria-label', 'Step 3 of 4');
-    });
-
