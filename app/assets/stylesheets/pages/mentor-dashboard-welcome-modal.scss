@@ -23,12 +23,8 @@
         margin-bottom:15px;
     }
     p {
-        color:#555;
         @include font-size(14, 20);
         margin-bottom:10px;
-        a {
-            color:#555;
-        }
     }
     ul {
         padding-left:18px;
@@ -36,6 +32,12 @@
             margin-bottom:3px;
         }
     }
+    p, li {
+        a {
+            color:#333;
+        }
+    }
+
     .pure-button {
         background:$color-2;
         display:block;
