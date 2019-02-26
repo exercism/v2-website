@@ -21,7 +21,7 @@ class MentorRegistrationTest < ApplicationSystemTestCase
       click_on "Become a mentor"
     }
 
-    assert_selector "#mentor-dashboard-page"
+    assert_selector "#mentor-next-solutions-page"
 
     user.reload
     assert user.is_mentor?
@@ -55,7 +55,7 @@ class MentorRegistrationTest < ApplicationSystemTestCase
       click_on "Become a mentor"
     }
 
-    assert_selector "#mentor-dashboard-page"
+    assert_selector "#mentor-next-solutions-page"
 
     user.reload
     assert user.is_mentor?
