@@ -6,6 +6,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   COMPLETE_TEXT = "Complete this solution."
   PUBLISH_TEXT = "Publish this solution."
   CANCEL_MENTORING_TEXT = "Don't want mentoring after all?"
+  CANCEL_MENTORING_BTN_TEXT = "Cancel mentoring request"
 
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
@@ -78,6 +79,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
     assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+
   end
 
   test "mentored mode / side solution with mentoring requested and abaondoned mentor" do
@@ -98,6 +101,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
     assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+
   end
 
   test "mentored mode / side solution with mentoring requested and non-mentor comment" do
@@ -117,6 +122,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
     assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+
   end
 
   test "mentored section with auto approve" do
@@ -195,8 +202,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     refute_selector ".discussion form"
   end
 
-  test "independent mode - requested mentoring" do
-    solution = create(:solution, user: @user, mentoring_requested_at: Time.current)
+  test "independent mode - core - requested mentoring" do
+    solution = create(:solution, user: @user, mentoring_requested_at: Time.current, exercise: create(:exercise, core: true))
     create :iteration, solution: solution
     create(:user_track, track: solution.track, user: @user, independent_mode: true)
 
@@ -204,7 +211,25 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
+
+    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
   end
+
+  test "independent mode - side - requested mentoring" do
+    solution = create(:solution, user: @user, mentoring_requested_at: Time.current, exercise: create(:exercise, core: false))
+    create :iteration, solution: solution
+    create(:user_track, track: solution.track, user: @user, independent_mode: true)
+
+    visit my_solution_path(solution)
+
+    assert_selector ".discussion h3", text: "Mentor discussion"
+    assert_selector ".discussion form"
+
+    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+  end
+
 
   test "independent mode / not requested mentoring" do
     solution = create(:solution, user: @user, mentoring_requested_at: nil)
