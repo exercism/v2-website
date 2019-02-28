@@ -39,5 +39,7 @@
             .preview-area
 
       =button_tag "Comment", class: "comment-button js-disable-on-click pure-button #{@solution.approved?? "faded" : ""}"
-      -if !@solution.approved?
+      -if @solution.user_track.independent_mode? && !@solution.completed?
+        =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button independent js-disable-on-click"
+      -elsif @solution.user_track.mentored_mode? && !@solution.approved?
         =link_to "Complete exercise (Unapproved)", [:confirm_unapproved_completion, :my, @solution], method: :get, remote: true, class: "pure-button complete-button unapproved js-disable-on-click"
