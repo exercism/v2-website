@@ -41,7 +41,8 @@ module LayoutHelper
     end
 
     tags << content_tag(:div, n, id: "notice") unless n.blank?
-    tags << content_tag(:div, a, id: "alert") unless a.blank?
+    tags << content_tag(:div, (html_messages ? raw(a) : a), id: "alert") unless a.blank?
+
     safe_join(tags)
   end
 
