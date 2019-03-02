@@ -20,17 +20,18 @@
 
   %p{style: "font-weight:600;text-decoration:underline;margin-bottom:5px;margin-top:20px"} Site Summary
   %p
-    This week across Exercism
-    %strong #{@stats[:site][:num_solutions]} solutions
-    were submitted by
-    %strong #{@stats[:site][:num_learners]} people.
-    Of these,
-    %strong #{@stats[:site][:num_solutions_for_mentoring]} solutions
+    This week
+    %strong #{number_with_delimiter @stats[:site][:num_learners]} people
+    submitted
+    %strong #{number_with_delimiter @stats[:site][:num_solutions]} solutions
+    across all the language tracks. Of these
+    %strong #{number_with_delimiter @stats[:site][:num_solutions_for_mentoring]} solutions
     were submitted for mentoring.
-    A total of
-    %strong #{@stats[:site][:num_mentors]} mentors
+  %p 
+    In total,
+    %strong #{number_with_delimiter @stats[:site][:num_mentors]} mentors
     gave feedback on
-    %strong #{@stats[:site][:num_solution_mentorships]} solutions.
+    %strong #{number_with_delimiter @stats[:site][:num_solution_mentorships]} solutions.
 
   -@stats[:tracks].each do |slug, track|
     %p{style: "font-weight:600;text-decoration:underline;margin-bottom:5px;margin-top:20px;"} #{track[:title]}
@@ -39,6 +40,6 @@
       -track[:stats].each do |key, value|
         %tr
           %th - #{key.to_s.humanize}:
-          %td= value
+          %td= number_with_delimiter value
 
   %p{style: "margin-top:20px;"} Thanks for all your hard work this week!

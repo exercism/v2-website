@@ -3,11 +3,11 @@ class HeartbeatMailerPreview < ActionMailer::Preview
   def mentoring_heartbeat
     data = {
       site: {
-        num_solutions: 5,
-        num_solutions_for_mentoring: 3,
-        num_solution_mentorships: 2,
-        num_learners: 4,
-        num_mentors: 1
+        num_solutions: 5000,
+        num_solutions_for_mentoring: 3000,
+        num_solution_mentorships: 2000,
+        num_learners: 400,
+        num_mentors: 100
       },
       tracks: {
         ruby: {
