@@ -38,8 +38,8 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     str = "A student you are mentoring (#{handle}) has posted"
     assert_body_includes email, str
     assert_text_includes email, str
-    assert_body_not_includes email, user.handle
-    assert_text_not_includes email, user.handle
+    refute_body_includes email, user.handle
+    refute_text_includes email, user.handle
   end
 
   test "new_iteration" do
@@ -79,8 +79,8 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     str = "A student you are mentoring (#{handle}) has posted"
     assert_body_includes email, str
     assert_text_includes email, str
-    assert_body_not_includes email, user.handle
-    assert_text_not_includes email, user.handle
+    refute_body_includes email, user.handle
+    refute_text_includes email, user.handle
   end
 
   test "remind" do
@@ -118,8 +118,8 @@ class MentorNotificationsMailerTest < ActionMailer::TestCase
     str = %Q{since "#{handle}" last}
     assert_body_includes email, str
     assert_text_includes email, str
-    assert_body_not_includes email, user.handle
-    assert_text_not_includes email, user.handle
+    refute_body_includes email, user.handle
+    refute_text_includes email, user.handle
   end
 
 end

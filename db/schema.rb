@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_131553) do
+ActiveRecord::Schema.define(version: 2019_03_02_212514) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_131553) do
     t.boolean "email_on_remind_mentor", default: true, null: false
     t.boolean "email_on_new_solution_comment_for_solution_user", default: true, null: false
     t.boolean "email_on_new_solution_comment_for_other_commenter", default: true, null: false
+    t.boolean "email_on_mentor_heartbeat", default: true, null: false
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
@@ -455,6 +456,14 @@ ActiveRecord::Schema.define(version: 2019_02_26_131553) do
     t.boolean "active", default: true, null: false
   end
 
+  create_table "user_email_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "mentor_heartbeat_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_email_logs_on_user_id", unique: true
+  end
+
   create_table "user_tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "track_id", null: false
@@ -541,6 +550,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_131553) do
   add_foreign_key "testimonials", "tracks"
   add_foreign_key "track_mentorships", "tracks"
   add_foreign_key "track_mentorships", "users"
+  add_foreign_key "user_email_logs", "users"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end
