@@ -7,7 +7,7 @@ class GenerateMentorHeartbeats
       next if email_log.mentor_heartbeat_sent_at.to_i > (Time.current - 6.days).to_i
 
       if email_log.mentor_heartbeat_sent_at.nil?
-        introduction = %q{Starting from today, we'll be sending you a brief weekly summary on the state of each track you're mentoring, along with some information on any changes or updates to the mentoring side of Exercism that have occurred during the week. If you have any thoughts or ideas on what you'd like to see here, please open an issue at on GitHub. If you want to opt out, there's a link at the bottom of the email. Which leaves me just to say a huge thank you for your hard work!}
+        introduction = %Q{Welcome to your first Mentor Heartbeat!\n\nEach week, we'll be sending you an email that summarises the activity on each track you're mentoring. We'll also include information on any changes or updates to the mentoring side of Exercism. If you have any ideas on what you'd like to see here, please open an issue at on GitHub and let us know your thoughts. If you want to opt out, there's a link at the bottom of the email. Finally I just want to say a huge thank you for your hard work and for the thousands of people you're all helping on Exercism!}
       end
 
       merged_stats = {}
