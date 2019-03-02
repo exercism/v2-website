@@ -5,14 +5,16 @@ Hi #{@user.handle},
   \
 Site Summary
 \------------
-This week across Exercism #{@stats[:site][:num_solutions]} solutions were submitted by #{@stats[:site][:num_learners]} people. Of these, #{@stats[:site][:num_solutions_for_mentoring]} solutions were submitted for mentoring. A total of #{@stats[:site][:num_mentors]} mentors gave feedback on #{@stats[:site][:num_solution_mentorships]} solutions.
+This week #{number_with_delimiter @stats[:site][:num_learners]} people submitted #{number_with_delimiter @stats[:site][:num_solutions]} solutions across all the language tracks. Of these #{number_with_delimiter @stats[:site][:num_solutions_for_mentoring]} solutions were submitted for mentoring.
+\
+In total, #{number_with_delimiter @stats[:site][:num_mentors]} mentors gave feedback on #{number_with_delimiter @stats[:site][:num_solution_mentorships]} solutions.
 \
 
 -@stats[:tracks].each do |slug, track|
   #{track[:title]}
   \------------
   -track[:stats].each do |key, value|
-    \- #{key.to_s.humanize}: #{value}
+    \- #{key.to_s.humanize}: #{number_with_delimiter value}
   \
 
 Thanks for all your hard work this week!
