@@ -8,7 +8,7 @@ Site Summary
 This week across Exercism #{@stats[:site][:num_solutions]} solutions were submitted by #{@stats[:site][:num_learners]} people. Of these, #{@stats[:site][:num_solutions_for_mentoring]} solutions were submitted for mentoring. A total of #{@stats[:site][:num_mentors]} mentors gave feedback on #{@stats[:site][:num_solution_mentorships]} solutions.
 \
 
--@stats[:tracks].each do |track|
+-@stats[:tracks].each do |slug, track|
   #{track[:title]}
   \------------
   -track[:stats].each do |key, value|

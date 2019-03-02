@@ -16,7 +16,7 @@
   %p Hi #{@user.handle},
 
   -if @introduction.present?
-    %p= raw @introduction
+    %p= raw simple_format(@introduction)
 
   %p{style: "font-weight:600;text-decoration:underline;margin-bottom:5px;margin-top:20px"} Site Summary
   %p
@@ -32,7 +32,7 @@
     gave feedback on
     %strong #{@stats[:site][:num_solution_mentorships]} solutions.
 
-  -@stats[:tracks].each do |track|
+  -@stats[:tracks].each do |slug, track|
     %p{style: "font-weight:600;text-decoration:underline;margin-bottom:5px;margin-top:20px;"} #{track[:title]}
 
     %table#mentoring-heartbeat-table
