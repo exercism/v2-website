@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_212514) do
+ActiveRecord::Schema.define(version: 2019_03_02_222704) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 2019_03_02_212514) do
     t.boolean "email_on_new_solution_comment_for_solution_user", default: true, null: false
     t.boolean "email_on_new_solution_comment_for_other_commenter", default: true, null: false
     t.boolean "email_on_mentor_heartbeat", default: true, null: false
+    t.string "token"
+    t.index ["token"], name: "index_communication_preferences_on_token"
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
