@@ -145,12 +145,13 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
     track_stats = {
       new_solutions_submitted: 5,
       solutions_submitted_for_mentoring: 3,
-      current_queue_length: 4,
       total_solutions_mentored: 2,
       solutions_mentored_by_you: 1,
+      current_queue_length: 4
     }
 
     DeliverEmail.expects(:call).with do |_, _, stats|
+      assert_equal track.title, stats[:tracks][track.slug][:title]
       assert_equal track_stats, stats[:tracks][track.slug][:stats]
     end
 
