@@ -10,18 +10,35 @@ class GenerateMentorHeartbeats
         introduction = %Q{Welcome to your first Mentor Heartbeat!\n\nEach week, we'll be sending you an email that summarises the activity on each track you're mentoring. We'll also include information on any changes or updates to the mentoring side of Exercism. If you have any ideas on what you'd like to see here, please open an issue at on GitHub and let us know your thoughts. If you want to opt out, there's a link at the bottom of the email. Finally I just want to say a huge thank you for your hard work and for the thousands of people you're all helping on Exercism!}
       end
 
-      merged_stats = {}
-      mentor_track_stats = generate_mentor_track_stats(mentor)
-      mentor_track_stats.each do |slug, personal_stats|
-        merged_stats[slug] = track_stats[slug].clone
-        merged_stats[slug][:stats].merge!(personal_stats)
+      merged_tracks_stats = {}
+      mentor_tracks_stats = generate_mentor_tracks_stats(mentor)
+      mentor_tracks_stats.each do |slug, personal_stats|
+        track_stats = tracks_stats[slug][:stats]
+        merged_tracks_stats[slug] = {
+          title: tracks_stats[slug][:title],
+          stats: {
+            new_solutions_submitted: track_stats[:new_solutions_submitted],
+            solutions_submitted_for_mentoring: track_stats[:solutions_submitted_for_mentoring],
+            total_solutions_mentored: track_stats[:total_solutions_mentored],
+            solutions_mentored_by_you: mentor_tracks_stats[slug][:solutions_mentored_by_you],
+            current_queue_length: track_stats[:current_queue_length],
+          }
+        }
       end
-      next if merged_stats.empty?
+      next if merged_tracks_stats.empty?
+
+      num_solutions_mentored_by_user = SolutionMentorship.where(user: mentor).
+                                         where("solution_mentorships.created_at >= ?", stats_time).
+                                         count
 
       DeliverEmail.(
         mentor,
         :mentor_heartbeat,
-        { site: site_stats, tracks: merged_stats },
+        {
+          site: site_stats,
+          tracks: merged_tracks_stats,
+          num_solutions_mentored_by_user: num_solutions_mentored_by_user
+        },
         introduction
       )
     end
@@ -29,7 +46,7 @@ class GenerateMentorHeartbeats
 
   private
 
-  def generate_mentor_track_stats(mentor)
+  def generate_mentor_tracks_stats(mentor)
     tracks = Track.where(id: TrackMentorship.where(user: mentor).select(:track_id))
     track_counts = SolutionMentorship.where(user: mentor).
                                       where("solution_mentorships.created_at >= ?", stats_time).
@@ -69,7 +86,7 @@ class GenerateMentorHeartbeats
   end
 
   memoize
-  def track_stats
+  def tracks_stats
     Track.all.each_with_object({}) do |track, stats|
       track_solutions = Solution.where(id: submitted_solution_ids).
                                     joins(:exercise).where('exercises.track_id': track.id)
