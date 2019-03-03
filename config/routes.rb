@@ -242,6 +242,11 @@ Rails.application.routes.draw do
   resources :blog_comments, only: [:create, :update, :destroy]
 
   # ############ #
+  # Unsubscribe  #
+  # ############ #
+  resource :unsubscribe, only: [:show, :update], controller: "unsubscribe"
+
+  # ############ #
   # Weird things #
   # ############ #
   post "markdown/parse" => "markdown#parse"
