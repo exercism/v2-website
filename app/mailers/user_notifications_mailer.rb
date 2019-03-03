@@ -1,5 +1,7 @@
 class UserNotificationsMailer < ApplicationMailer
   def new_discussion_post(user, discussion_post)
+    @unsubscribe_key = :email_on_new_discussion_post
+
     @user = user
     @discussion_post = discussion_post
     @solution = discussion_post.solution
@@ -12,6 +14,8 @@ class UserNotificationsMailer < ApplicationMailer
   end
 
   def solution_approved(user, solution)
+    @unsubscribe_key = :email_on_solution_approved
+
     @user = user
     @solution = solution
     exercise_title = @solution.exercise.title

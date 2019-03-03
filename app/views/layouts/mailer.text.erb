@@ -3,5 +3,12 @@ The Exercism Team
 
 ---
 This email was sent by Exercism, Inc
-You can change your notification settings at <%= edit_my_settings_preferences_url %>
+
+<% if @user && @unsubscribe_key %>
+You can unsubscribe from this email at <%= unsubscribe_url(token: @user.communication_preferences.token, key: @unsubscribe_key) %>
+<% end %>
+<% if @user %>
+You can change your notification settings at <%= unsubscribe_url(token: @user.communication_preferences.token) %>
+<% end %>
+
 Exercism, Inc - 1605 George Dieter Dr #576 - El Paso, TX 79936
