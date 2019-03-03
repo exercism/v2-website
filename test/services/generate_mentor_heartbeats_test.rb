@@ -13,10 +13,10 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
 
     # Create solution mentorships at various boundary conditions
     [active_mentor_1, antispam_mentor].each do |user|
-      create :solution_mentorship, created_at: Time.current - 20.days, user: user
+      create :solution_mentorship, created_at: Time.current - 59.days, user: user
     end
-    create :solution_mentorship, created_at: Time.current - 20.5.days, user: active_mentor_2
-    create :solution_mentorship, created_at: Time.current - 21.5.days, user: inactive_mentor
+    create :solution_mentorship, created_at: Time.current - 59.5.days, user: active_mentor_2
+    create :solution_mentorship, created_at: Time.current - 60.5.days, user: inactive_mentor
 
     # We should sent to users who have received it < 7 days ago.
     create :user_email_log, user: active_mentor_1, mentor_heartbeat_sent_at: Time.current - 6.1.days
