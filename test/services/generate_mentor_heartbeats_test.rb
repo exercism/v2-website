@@ -46,7 +46,6 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
     GenerateMentorHeartbeats.()
   end
 
-
   test "generates no introduction for existing users" do
     mentor = create :user
     create :track_mentorship, user: mentor
@@ -59,6 +58,21 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
     end
     GenerateMentorHeartbeats.()
   end
+
+  test "generates personal stats correctly" do
+    mentor = create :user
+    create :track_mentorship, user: mentor
+    create :solution_mentorship, user: mentor, created_at: Time.now - 6.9.days
+    create :solution_mentorship, user: mentor, created_at: Time.now - 6.9.days
+    create :solution_mentorship, user: mentor, created_at: Time.now - 7.1.days
+
+    DeliverEmail.expects(:call).with do |user, _, stats, _|
+      assert_equal user, mentor
+      assert_equal 2, stats[:num_solutions_mentored_by_user]
+    end
+    GenerateMentorHeartbeats.()
+  end
+
 
   test "generates site stats correctly" do
     mentor = create :user
