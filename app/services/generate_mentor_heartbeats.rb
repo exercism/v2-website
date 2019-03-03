@@ -124,7 +124,7 @@ class GenerateMentorHeartbeats
 
   def active_mentors
     User.where(id: SolutionMentorship.
-                     where("created_at > ?", Time.current - 21.days).
+                     where("created_at > ?", Time.current - 60.days).
                      select(:user_id).distinct)
   end
 
