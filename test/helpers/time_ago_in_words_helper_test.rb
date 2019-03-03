@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MentorDashboardHelperTest < ActionView::TestCase
+class TimeAgoInWordsHelperTest < ActionView::TestCase
   test "time_ago_in_words calculates time in days, not months" do
     assert_equal "33 days", time_ago_in_words(Time.now - 33.days)
   end
@@ -23,5 +23,9 @@ class MentorDashboardHelperTest < ActionView::TestCase
 
   test "time_ago_in_words correctly calculates one day minus one minute" do
     assert_equal "about 24 hours", time_ago_in_words(Time.now - (SECONDS_PER_DAY - 60))
+  end
+
+  test "time_ago_in_words calculates time in years, not days" do
+    assert_equal "about 1 year", time_ago_in_words(Time.now - 366.days)
   end
 end
