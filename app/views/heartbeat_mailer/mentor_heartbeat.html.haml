@@ -42,4 +42,5 @@
           %th - #{key.to_s.humanize}:
           %td= number_with_delimiter value
 
-  %p{style: "margin-top:20px;"} Thanks for all your hard work this week!
+  -if @stats[:num_solutions_mentored_by_user] > 0
+    %p{style: "margin-top:20px;"} Thanks for all your hard work this week!

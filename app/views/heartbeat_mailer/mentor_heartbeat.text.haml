@@ -17,4 +17,5 @@ In total, #{number_with_delimiter @stats[:site][:num_mentors]} mentors gave feed
     \- #{key.to_s.humanize}: #{number_with_delimiter value}
   \
 
-Thanks for all your hard work this week!
+-if @stats[:num_solutions_mentored_by_user] > 0
+  Thanks for all your hard work this week!
