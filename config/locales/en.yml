@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   api:
     errors:
@@ -47,3 +16,14 @@ en:
   system_messages:
     mentor_timed_out: "Mentor '%{handle}' has been removed from this conversation due to inactivity. This solution has been resubmitted to the queue for a new mentor to review."
     mentor_left_conversation: "Mentor '%{handle}' has left this conversation. This solution has been resubmitted to the queue for a new mentor to review."
+
+  communication_preferences: 
+    receive_product_updates: "Email me about product updates"
+    email_on_new_discussion_post: "Email me when a mentor comments on my solution"
+    email_on_solution_approved: "Email me when a mentor approves my solution"
+    email_on_new_solution_comment_for_solution_user: "Email me when someone comments on my published solution"
+    email_on_new_solution_comment_for_other_commenter: "Email me when someone replies to a comment I've made on a published solution"
+    email_on_new_discussion_post_for_mentor: "Email me when a student comments on a solution I'm mentoring"
+    email_on_new_iteration_for_mentor: "Email me when a student posts a new iteration to a solution I'm mentoring"
+    email_on_remind_mentor: "Email me when I am about to be timed out of a solution"
+    email_on_mentor_heartbeat: "Email me with weekly mentor summaries"
