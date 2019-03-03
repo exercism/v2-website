@@ -1,5 +1,7 @@
 class SolutionCommentsMailer < ApplicationMailer
   def new_comment_for_solution_user(user, comment)
+    @unsubscribe_key = :email_on_new_solution_comment_for_solution_user
+
     @user = user
     @comment = comment
     @solution = comment.solution
@@ -12,6 +14,8 @@ class SolutionCommentsMailer < ApplicationMailer
   end
 
   def new_comment_for_other_commenter(user, comment)
+    @unsubscribe_key = :email_on_new_solution_comment_for_other_commenter
+
     @user = user
     @comment = comment
     @solution = comment.solution
