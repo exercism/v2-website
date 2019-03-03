@@ -3,7 +3,6 @@ require 'test_helper'
 class HeartbeatMailerTest < ActionMailer::TestCase
   test "mentor_heartbeat - general" do
     user = create :user_mentor
-    data = {site: {}, tracks: []}
 
     email = HeartbeatMailer.mentor_heartbeat(user, minimal_mentor_heartbeat_data, nil)
     assert_emails 1 do
@@ -27,7 +26,7 @@ class HeartbeatMailerTest < ActionMailer::TestCase
   end
 
   def minimal_mentor_heartbeat_data
-    {site: {}, tracks: []}
+    {site: {}, tracks: [], num_solutions_mentored_by_user: 0}
   end
 end
 
