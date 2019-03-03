@@ -14,6 +14,22 @@
         =f.button "Save communication settings", class: 'pure-button'
 
     .settings-section.toggle
+      %h2 Communication Preferences Security
+      %p 
+        By default you can unsubscribe from emails directly from an email. 
+        %br
+        To protect against unauthorised unsubscribes, you disable this feature and require a password to edit your settings.
+      =form_tag [:my, :settings, :preferences], method: :patch do |f|
+        =hidden_field_tag 'update_require_password_to_update_communication_preferences', true
+        =check_box_tag 'require_password_to_update_communication_preferences', 1, current_user.communication_preferences.token.nil?
+        .toggles
+          =icon 'toggle-on'
+          =icon 'toggle-off'
+        =label_tag 'require_password_to_update_communication_preferences', "Require password to update communication preferences"
+
+        =button_tag "Update communication preference security", class: 'pure-button'
+
+    .settings-section.toggle
       %h2 Dark Code Theme
       =form_tag [:my, :settings, :preferences], method: :patch do |f|
         =hidden_field_tag 'update_dark_theme', true
