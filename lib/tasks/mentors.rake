@@ -23,7 +23,7 @@ namespace :mentors do
     end
   end
 
-  task :send_mentors_weekly_update => :environment do
+  task :send_weekly_update => :environment do
     begin
       GenerateMentorHeartbeats.()
     rescue => e
