@@ -54,7 +54,9 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
     log = create :user_email_log, user: mentor, mentor_heartbeat_sent_at: Time.now - 20.days
 
     DeliverEmail.expects(:call).with do |user, _, _, introduction|
-      user == mentor && introduction == %Q{This week I want to draw attention to the Track Anatomy Project - the work Maud and our maintainers are doing in restructuring tracks to make them more enjoyable to work through and easier to mentor. Our initial testbed has been Ruby, where we've seen a reduction in the average time-to-mentor from days to only a couple of hours. The maintainers of C#, JavaScript, Rust, Python, Haskell, Elixir and Prolog are all working on implementing Maud's work on their tracks too, so if you mentor those tracks, you should start to notice an improvement in your mentoring experience over the coming weeks. Thank you to everyone involved!\n\nHere are this weeks mentoring stats:}
+      user == mentor &&
+      introduction.present? &&
+      !introduction.starts_with?("Welcome to your")
     end
     GenerateMentorHeartbeats.()
   end
