@@ -23,7 +23,7 @@ class HeartbeatMailerPreview < ActionMailer::Preview
       },
       num_solutions_mentored_by_user: 10
     }
-    introduction = %Q{This week I want to draw attention to the Track Anatomy Project - the work Maud and our maintainers are doing in restructuring tracks to make them more enjoyable to work through and easier to mentor. Our initial testbed has been Ruby, where we've seen a reduction in the average time-to-mentor from days to only a couple of hours. The maintainers of C#, JavaScript, Rust, Python, Haskell, Elixir and Prolog are all working on implementing Maud's work on their tracks too, so if you mentor those tracks, you should start to notice an improvement in your mentoring experience over the coming weeks. Thank you to everyone involved!\n\nHere are this weeks mentoring stats:}
+    introduction = %Q{This week our core team has started working on the Automated Mentoring Support Project. Our canonical prototype is the implementation of automatic approval for the two-fer exercise in Ruby, but analyzers are also being created by the community for Go, C#, Python, Java, JavaScript and Typescript. The project involves not only the development of static analysis software, but also various changes within the website, and the development of infrastructure and orchestration that can handle analysers for multiple languages in a performant and cost-effective manner. You can read more in the project repository at http://bit.ly/2HCN8gB - please open an issue there if you have questions or would like to get involved. Thanks to all those who have been helping so far!}
     HeartbeatMailer.mentor_heartbeat(User.first, data, introduction)
   end
 end
