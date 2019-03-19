@@ -29,15 +29,15 @@ class Git::SyncTrack
 
   def populate_unlocked_by_relationships
     @unlocked_by_relationships.each do |exercise_uuid, unlocked_by_slug|
-      a = Exercise.find_by(uuid: exercise_uuid)
-      b = a.track.exercises.find_by(slug: unlocked_by_slug)
-      a.update!( unlocked_by: b )
+      exercise = track.exercises.find_by(uuid: exercise_uuid)
+      unlocked_by = track.exercises.find_by(slug: unlocked_by_slug)
+      exercise.update!(unlocked_by: unlocked_by)
     end
   end
 
   def create_or_update_exercise(exercise_slug, exercise_uuid, exercise_data)
     if current_exercises_uuids.include?(exercise_uuid)
-      ex = Exercise.find_by(uuid: exercise_uuid)
+      ex = track.exercises.find_by(uuid: exercise_uuid)
       ex.update!(exercise_data)
     else
       exercise_data.merge!({
@@ -70,7 +70,7 @@ class Git::SyncTrack
   end
 
   def deprecate_exercise(exercise_uuid)
-    ex = Exercise.find_by(uuid: exercise_uuid)
+    ex = track.exercises.find_by(uuid: exercise_uuid)
     ex.update!(active: false) unless ex.nil?
   end
 
