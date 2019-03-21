@@ -123,7 +123,7 @@ GEM
     css_parser (1.6.0)
       addressable
     dalli (2.7.9)
-    devise (4.5.0)
+    devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -299,9 +299,9 @@ GEM
       ffi (>= 0.5.0, < 2)
     redis (4.0.3)
     regexp_parser (1.3.0)
-    responders (2.4.0)
-      actionpack (>= 4.2.0, < 5.3)
-      railties (>= 4.2.0, < 5.3)
+    responders (2.4.1)
+      actionpack (>= 4.2.0, < 6.0)
+      railties (>= 4.2.0, < 6.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -411,7 +411,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   commonmarker
   dalli
-  devise (~> 4.3)
+  devise (~> 4.6)
   factory_bot_rails
   friendly_id (~> 5.2)
   haml-rails
