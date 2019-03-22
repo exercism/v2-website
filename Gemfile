@@ -26,6 +26,7 @@ gem 'premailer-rails'
 gem 'commonmarker', require: false
 gem 'rugged'
 gem 'sidekiq'
+gem 'sidekiq-failures'
 gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
