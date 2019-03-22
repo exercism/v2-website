@@ -23,21 +23,6 @@ namespace :git_sync do
   end
 end
 
-=begin
-namespace :sidekiq do
-  task :shutdown do
-    on roles(:processor), in: :groups, limit: 3, wait: 10 do
-      execute "[ -e /opt/exercism/current/tmp/pids/sidekiq.pid ] && kill -TERM `cat /opt/exercism/current/tmp/pids/sidekiq.pid`; exit 0"
-    end
-  end
-  task :restart do
-    on roles(:processor), in: :groups, limit: 3, wait: 10 do
-      execute "sudo /usr/sbin/service exercism-sidekiq restart"
-    end
-  end
-end
-=end
-
 namespace :memcached do
   task :restart do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
@@ -63,14 +48,34 @@ namespace :processors do
   end
 end
 
+namespace :delayed_job do
+  desc "Stop the delayed_job process"
+  task :stop do
+    on roles(:processor) do
+      execute "cd #{current_path}; script/delayed_job -e #{rails_env} stop"
+    end
+  end
+
+  desc "Start the delayed_job process"
+  task :start do
+    on roles(:processor) do
+      execute "cd #{current_path}; script/delayed_job -e #{rails_env} start"
+    end
+  end
+
+  desc "Restart the delayed_job process"
+  task :restart do
+    on roles(:processor) do
+      execute "cd #{current_path}; script/delayed_job -e #{rails_env} restart"
+    end
+  end
+end
+
 after "deploy:assets:precompile", "assets:upload"
 after "deploy:published", "puma_service:restart"
 
 after "deploy:published", "git_sync:restart"
 after "deploy:published", "processors:restart"
-
-#after "deploy:starting", "sidekiq:shutdown"
-#after "deploy:published", "sidekiq:restart"
 
 #after "deploy:stop",    "delayed_job:stop"
 #after "deploy:start",   "delayed_job:start"

@@ -25,9 +25,6 @@ gem 'premailer-rails'
 
 gem 'commonmarker', require: false
 gem 'rugged'
-#gem 'sidekiq'
-#gem 'sidekiq-failures'
-gem 'delayed_job_active_record'
 gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
@@ -36,6 +33,9 @@ gem 'aws-sdk-s3'
 gem 'image_processing', '~> 1.2'
 gem 'rest-client'
 gem 'rubyzip', require: false
+
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
