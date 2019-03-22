@@ -1,0 +1,20 @@
+default: &default
+  region: eu-west-1
+
+development:
+  <<: *default
+  access_key:
+  secret_key:
+  iterations_bucket:
+
+test:
+  <<: *default
+  access_key:
+  secret_key:
+  iterations_bucket: 
+
+production:
+  <<: *default
+  use_iam_profile: true
+  iterations_bucket:
+

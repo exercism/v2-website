@@ -29,12 +29,12 @@ gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
 gem "bugsnag"
-gem 'aws-sdk-s3'
 gem 'image_processing', '~> 1.2'
 gem 'rest-client'
 gem 'rubyzip', require: false
 
 gem 'propono'
+gem 'aws-sdk-s3'
 
 gem 'delayed_job_active_record'
 gem 'daemons'

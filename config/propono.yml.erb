@@ -1,0 +1,21 @@
+development:
+  access_key:
+  secret_key:
+  queue_region: eu-west-1
+  application_name: exercism_dev_<%= `whoami` %>
+  queue_suffix: -dev_<%= `whoami` %>
+
+test:
+  access_key:
+  secret_key:
+  queue_region: eu-west-1
+  application_name: exercism_test_<%= `whoami` %>
+  queue_suffix: -test_<%= `whoami` %>
+
+production:
+  access_key:
+  secret_key:
+  queue_region: eu-west-1
+  application_name: exercism
+  queue_suffix:
+
