@@ -52,21 +52,21 @@ namespace :delayed_job do
   desc "Stop the delayed_job process"
   task :stop do
     on roles(:processor) do
-      execute "cd #{current_path}; script/delayed_job -e #{rails_env} stop"
+      execute "cd #{current_path}; RAILS_ENV=production bundle exec ./bin/delayed_job stop"
     end
   end
 
   desc "Start the delayed_job process"
   task :start do
     on roles(:processor) do
-      execute "cd #{current_path}; script/delayed_job -e #{rails_env} start"
+      execute "cd #{current_path}; RAILS_ENV=production bundle exec ./bin/delayed_job start"
     end
   end
 
   desc "Restart the delayed_job process"
   task :restart do
     on roles(:processor) do
-      execute "cd #{current_path}; script/delayed_job -e #{rails_env} restart"
+      execute "cd #{current_path}; RAILS_ENV=production bundle exec ./bin/delayed_job restart"
     end
   end
 end
