@@ -4,7 +4,7 @@ class UploadIterationToS3
   initialize_with :iteration
 
   def call
-    path = "iterations/#{iteration.id}"
+    path = "#{Rails.env}/iterations/#{iteration.id}"
     iteration.files.each do |file|
       key = "#{path}/#{file.filename}"
       s3_client.put_object(body: file.file_contents,

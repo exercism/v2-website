@@ -12,14 +12,14 @@ class UploadIterationToS3Test < ActiveSupport::TestCase
     s3_client.expects(:put_object).with(
       body: file_1.file_contents,
       bucket: bucket,
-      key: "iterations/#{iteration.id}/#{file_1.filename}",
+      key: "test/iterations/#{iteration.id}/#{file_1.filename}",
       acl: 'private'
     )
 
     s3_client.expects(:put_object).with(
       body: file_2.file_contents,
       bucket: bucket,
-      key: "iterations/#{iteration.id}/#{file_2.filename}",
+      key: "test/iterations/#{iteration.id}/#{file_2.filename}",
       acl: 'private'
     )
 
