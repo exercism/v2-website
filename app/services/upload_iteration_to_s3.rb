@@ -16,12 +16,14 @@ class UploadIterationToS3
 
 
   def s3_client
-    # CCARE - We need the config reading/setting here.
-    @s3_client ||= Aws::S3::Client.new
+    @client ||= Aws::S3::Client.new(
+      access_key_id: Rails.application.secrets.aws_access_key_id,
+      secret_access_key: Rails.application.secrets.aws_secret_access_key,
+      region: Rails.application.secrets.aws_region
+    )
   end
 
   def iterations_bucket
-    # CCARE - We need the config reading/setting here.
-    ""
+    Rails.application.secrets.aws_iterations_bucket
   end
 end
