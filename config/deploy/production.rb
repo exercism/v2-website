@@ -52,21 +52,21 @@ namespace :delayed_job do
   desc "Stop the delayed_job process"
   task :stop do
     on roles(:processor) do
-      execute "cd #{current_path}; RAILS_ENV=production bundle exec ./bin/delayed_job stop"
+      execute "sudo systemctl stop exercism_delayedjob"
     end
   end
 
   desc "Start the delayed_job process"
   task :start do
     on roles(:processor) do
-      execute "cd #{current_path}; RAILS_ENV=production bundle exec ./bin/delayed_job start"
+      execute "sudo systemctl start exercism_delayedjob"
     end
   end
 
   desc "Restart the delayed_job process"
   task :restart do
     on roles(:processor) do
-      execute "cd #{current_path}; RAILS_ENV=production bundle exec ./bin/delayed_job restart"
+      execute "sudo systemctl restart exercism_delayedjob"
     end
   end
 end
@@ -76,7 +76,4 @@ after "deploy:published", "puma_service:restart"
 
 after "deploy:published", "git_sync:restart"
 after "deploy:published", "processors:restart"
-
-#after "deploy:stop",    "delayed_job:stop"
-#after "deploy:start",   "delayed_job:start"
-#after "deploy:restart", "delayed_job:restart"
+after "deploy:published", "delayed_job:restart"
