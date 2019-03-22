@@ -23,6 +23,7 @@ namespace :git_sync do
   end
 end
 
+=begin
 namespace :sidekiq do
   task :shutdown do
     on roles(:processor), in: :groups, limit: 3, wait: 10 do
@@ -35,6 +36,7 @@ namespace :sidekiq do
     end
   end
 end
+=end
 
 namespace :memcached do
   task :restart do
@@ -59,11 +61,17 @@ namespace :processors do
       execute "sudo /usr/sbin/service mentors_abandon_overdue restart"
     end
   end
-end  
+end
 
 after "deploy:assets:precompile", "assets:upload"
-after "deploy:starting", "sidekiq:shutdown"
 after "deploy:published", "puma_service:restart"
-after "deploy:published", "sidekiq:restart"
+
 after "deploy:published", "git_sync:restart"
 after "deploy:published", "processors:restart"
+
+#after "deploy:starting", "sidekiq:shutdown"
+#after "deploy:published", "sidekiq:restart"
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"

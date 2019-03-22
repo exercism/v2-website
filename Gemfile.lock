@@ -116,13 +116,17 @@ GEM
     commonmarker (0.18.1)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.5)
-    connection_pool (2.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
     css_parser (1.6.0)
       addressable
     dalli (2.7.9)
+    delayed_job (4.1.5)
+      activesupport (>= 3.0, < 5.3)
+    delayed_job_active_record (4.1.3)
+      activerecord (>= 3.0, < 5.3)
+      delayed_job (>= 3.0, < 5)
     devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -261,8 +265,6 @@ GEM
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.6)
-    rack-protection (2.0.5)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.2.1)
@@ -297,7 +299,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redis (4.1.0)
     regexp_parser (1.3.0)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -334,13 +335,6 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
     sexp_processor (4.11.0)
-    sidekiq (5.2.5)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
-    sidekiq-failures (1.0.0)
-      sidekiq (>= 4.0.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -414,6 +408,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   commonmarker
   dalli
+  delayed_job_active_record
   devise (~> 4.6)
   factory_bot_rails
   friendly_id (~> 5.2)
@@ -441,8 +436,6 @@ DEPENDENCIES
   rugged
   sass-rails (~> 5.0)
   selenium-webdriver
-  sidekiq
-  sidekiq-failures
   simplecov
   skylight
   spring
