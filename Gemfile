@@ -50,6 +50,7 @@ group :development, :test do
   gem 'capybara', '~> 3.0'
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
+  gem 'bullet'
 end
 
 group :development do
@@ -62,7 +63,6 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-yarn'
   gem 'letter_opener'
-  gem 'bullet'
 end
 
 group :test do
@@ -74,7 +74,6 @@ group :test do
   gem 'timecop'
   gem 'chromedriver-helper'
   gem 'webmock'
-  gem 'bullet'
 end
 
 group :development, :production do
