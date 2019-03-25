@@ -1,9 +1,8 @@
 #my-solutions
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      =link_to "Your Profile", my_profile_path
-      %span Your completed solutions
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=link_to "Your Profile", my_profile_path
+    %li=current_link "Your completed solutions"
 
   .header
     .lo-container

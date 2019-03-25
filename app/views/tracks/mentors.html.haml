@@ -1,10 +1,9 @@
 #track-mentors-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      =link_to "Language tracks", [:tracks]
-      =link_to "#{@track.title} track", @track
-      %span Mentors
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=link_to "Language tracks", [:tracks]
+    %li=link_to "#{@track.title} track", @track
+    %li=current_link "Mentors"
 
   .header
     .visual-section

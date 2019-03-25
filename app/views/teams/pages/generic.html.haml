@@ -1,8 +1,7 @@
 #generic-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      %span #{@title}
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=current_link "#{@title}"
   .header
     .lo-container
       %h1= @title

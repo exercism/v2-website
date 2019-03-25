@@ -1,8 +1,7 @@
 #tracks-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      %span Language tracks
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=current_link "Language tracks"
 
   .lo-general-header
     .lo-container

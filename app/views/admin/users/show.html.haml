@@ -1,8 +1,7 @@
 #admin-users-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Admin dashboard", [:admin, :dashboard]
-      %span User ##{@user.id}
+  = breadcrumb_nav do
+    %li=link_to "Admin dashboard", [:admin, :dashboard]
+    %li=current_link "User ##{@user.id}"
 
   .lo-container
     %h1 User ##{@user.id}: #{@user.handle}
