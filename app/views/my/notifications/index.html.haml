@@ -1,8 +1,6 @@
 #notifications-page
-  #nav.lo-nav-bar
-    .lo-container
-      /=link_to "Language tracks", :tracks
-      %span Notifications
+  = breadcrumb_nav do
+    %li=current_link "Notifications"
 
   .header
     .lo-container

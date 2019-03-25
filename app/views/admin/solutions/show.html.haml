@@ -1,8 +1,7 @@
 #mentor-solution-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Admin dashboard", [:admin, :dashboard]
-      %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
+  = breadcrumb_nav do
+    %li=link_to "Admin dashboard", [:admin, :dashboard]
+    %li=current_link "#{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}"
 
   .track-header
     .lo-container

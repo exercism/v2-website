@@ -1,13 +1,12 @@
 #generic-page{class: @page.to_s}
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      %span= @page_title
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=current_link @page_title
   .header
     .lo-container
       %h1= @page_title
   .lo-container
-    .pure-g
+    .pure-g.generic
       .pure-u-1.pure-u-lg-2-3.lhs
         .content=raw @content
         .changes
