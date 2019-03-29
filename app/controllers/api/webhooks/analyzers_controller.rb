@@ -7,9 +7,13 @@ class API::Webhooks::AnalyzersController < API::WebhooksController
 
     return unless Exercism::ANALYZERS.include?(track_slug)
 
+    tag = params[:release][:tag_name]
+
     PubSub::PublishMessage.(:analyzer_ready_to_build, {
       track_slug: track_slug,
-      tag: params[:release][:tag_name],
+      tag: tag,
     })
+
+    head :ok
   end
 end
