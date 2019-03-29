@@ -63,6 +63,12 @@ GEM
       aws-sdk-core (~> 3, >= 3.26.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
+    aws-sdk-sns (1.3.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-sqs (1.4.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -263,6 +269,9 @@ GEM
     premailer-rails (1.10.2)
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
+    propono (2.1.0)
+      aws-sdk-sns
+      aws-sdk-sqs
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.6)
@@ -430,6 +439,7 @@ DEPENDENCIES
   octokit
   omniauth-github
   premailer-rails
+  propono
   puma (~> 3.7)
   rails (~> 5.2)
   rails-controller-testing
