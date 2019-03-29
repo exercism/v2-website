@@ -4,6 +4,14 @@ server 'web1.exercism.io', user: fetch(:application), roles: %w{app web db git_f
 server 'web2.exercism.io', user: fetch(:application), roles: %w{app web db git_fetch}
 server 'processor.exercism.io', user: fetch(:application), roles: %w{app assets web db processor git_sync}
 
+namespace :deploy do
+  task :rm_stubs do
+    on roles(:app) do
+      execute "rm #{release_path.join("config/secrets.yml")}"
+    end
+  end
+end
+
 namespace :puma_service do
   task :restart do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -71,9 +79,11 @@ namespace :delayed_job do
   end
 end
 
-after "deploy:assets:precompile", "assets:upload"
-after "deploy:published", "puma_service:restart"
+before 'deploy:symlink:shared', 'deploy:rm_stubs'
 
-after "deploy:published", "git_sync:restart"
-after "deploy:published", "processors:restart"
+after "deploy:assets:precompile", "assets:upload"
+
 after "deploy:published", "delayed_job:restart"
+after "deploy:published", "git_sync:restart"
+after "deploy:published", "puma_service:restart"
+after "deploy:published", "processors:restart"
