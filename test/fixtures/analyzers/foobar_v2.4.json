@@ -1,0 +1,8 @@
+{
+  "release": {
+    "tag_name": "v2.4"
+  },
+  "repository": {
+    "name": "foobar-analyzer"
+  }
+}

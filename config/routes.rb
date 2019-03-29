@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       namespace :webhooks do
         resources :repo_updates, only: [:create]
         resources :contributors, only: [:create]
+        resources :analyzers, only: [:create]
       end
     end
   end
