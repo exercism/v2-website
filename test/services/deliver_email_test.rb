@@ -5,7 +5,6 @@ class DeliverEmailTest < ActiveSupport::TestCase
     new_discussion_post: [UserNotificationsMailer, :new_discussion_post],
     new_discussion_post_for_mentor: [MentorNotificationsMailer, :new_discussion_post],
 
-    new_discussion_post_for_mentor: [MentorNotificationsMailer, :new_discussion_post],
     new_iteration_for_mentor: [MentorNotificationsMailer, :new_iteration],
     remind_mentor: [MentorNotificationsMailer, :remind],
 

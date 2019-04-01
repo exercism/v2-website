@@ -1,0 +1,3 @@
+Exercism::ANALYZERS = %i{
+  ruby
+}

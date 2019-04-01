@@ -9,6 +9,10 @@ class CreateIterationTest < ActiveSupport::TestCase
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{filename}\"\r\nContent-Type: application/octet-stream\r\n"
     file = mock(read: file_contents, headers: headers)
 
+    ProcessNewIterationJob.expects(:perform_later).with do |iteration|
+      assert iteration.is_a?(Iteration)
+    end
+
     iteration = CreateIteration.(solution, [file])
 
     assert iteration.persisted?
