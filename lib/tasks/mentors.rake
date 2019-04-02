@@ -22,4 +22,13 @@ namespace :mentors do
       sleep(10*60) # Sleep for 10mins
     end
   end
+
+  task :send_weekly_update => :environment do
+    begin
+      GenerateMentorHeartbeats.()
+    rescue => e
+      Bugsnag.notify(e)
+      raise
+    end
+  end
 end

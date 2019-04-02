@@ -23,6 +23,8 @@ class CreateIteration
       update_solution
     end
 
+    ProcessNewIterationJob.perform_later(iteration)
+
     iteration
   end
 

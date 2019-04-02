@@ -10,47 +10,25 @@
       %h2 Communication preferences
 
       =form_for current_user.communication_preferences, url: [:my, :settings, :preferences] do |f|
-        /-if current_user.admin?
-        /  %h2 Admin communications
-
-        %h3 General communications
-        =f.label :receive_product_updates do
-          =f.check_box :receive_product_updates
-          %span Email me about product updates
-
-        %h3 Usage emails
-        =f.label :email_on_new_discussion_post do
-          =f.check_box :email_on_new_discussion_post
-          %span Email me when a mentor comments on my solution
-
-        =f.label :email_on_solution_approved do
-          =f.check_box :email_on_solution_approved
-          %span Email me when a mentor approves my solution
-
-        =f.label :email_on_new_solution_comment_for_solution_user do
-          =f.check_box :email_on_new_solution_comment_for_solution_user
-          %span Email me when someone comments on my published solution
-
-        =f.label :email_on_new_solution_comment_for_other_commenter do
-          =f.check_box :email_on_new_solution_comment_for_other_commenter
-          %span Email me when someone replies to a comment I've made on a published solution
-
-        -if current_user.is_mentor?
-          %h3 Mentor emails
-          =f.label :email_on_new_discussion_post_for_mentor do
-            =f.check_box :email_on_new_discussion_post_for_mentor
-            %span Email me when a student comments on a solution I'm mentoring
-
-          =f.label :email_on_new_iteration_for_mentor do
-            =f.check_box :email_on_new_iteration_for_mentor
-            %span Email me when a student posts a new iteration to a solution I'm mentoring
-
-          =f.label :email_on_remind_mentor do
-            =f.check_box :email_on_remind_mentor
-            %span Email me when I am about to be timed out of a solution
-
-
+        =render "communication_preferences", f: f
         =f.button "Save communication settings", class: 'pure-button'
+
+    .settings-section.toggle
+      %h2 Communication Preferences Security
+      %p 
+        By default you can unsubscribe from emails directly from an email. 
+        %br
+        To protect against unauthorised unsubscribes, you disable this feature and require a password to edit your settings.
+      =form_tag [:my, :settings, :preferences], method: :patch do |f|
+        =hidden_field_tag 'update_require_password_to_update_communication_preferences', true
+        =check_box_tag 'require_password_to_update_communication_preferences', 1, current_user.communication_preferences.token.nil?
+        .toggles
+          =icon 'toggle-on'
+          =icon 'toggle-off'
+        =label_tag 'require_password_to_update_communication_preferences', "Require password to update communication preferences"
+
+        =button_tag "Update communication preference security", class: 'pure-button'
+
     .settings-section.toggle
       %h2 Dark Code Theme
       =form_tag [:my, :settings, :preferences], method: :patch do |f|

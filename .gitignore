@@ -31,3 +31,6 @@ storage/
 coverage/
 /test/tmp/*
 !/test/tmp/.gitkeep
+
+dump.sql
+dump.sql.gz

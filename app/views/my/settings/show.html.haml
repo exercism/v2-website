@@ -3,7 +3,7 @@
   .lo-general-header
     .lo-container
       %h1 Settings
-      .h1-subtitle Manage your account setings
+      .h1-subtitle Manage your account settings
 
   = notice_and_alert(current_user)
   .lo-container
@@ -35,8 +35,8 @@
 
     .settings-section
       %h2 Change your handle
-      %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes reguarly.
-      %p Note that you can change the name that appears on your profile seperately by using the "Edit profile" button in your profile.
+      %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes regularly.
+      %p Note that you can change the name that appears on your profile separately by using the "Edit profile" button in your profile.
 
       =form_for current_user, url: [:my, :settings] do |f|
         .field

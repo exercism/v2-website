@@ -20,9 +20,18 @@ class DeliverEmail
     return false unless should_deliver?
     mail = "#{mailer}_mailer".classify.constantize.send(action, user, *objects)
     mail.deliver_later
+    update_email_log!
   end
 
   private
+
+  def update_email_log!
+    log = UserEmailLog.for_user(user)
+    key = "#{mail_type}_sent_at"
+    return unless log.respond_to?(key)
+
+    log.update!(key => Time.current)
+  end
 
   def parse_mail_type
     case mail_type
@@ -42,6 +51,10 @@ class DeliverEmail
       [:solution_comments, :new_comment_for_solution_user]
     when :new_solution_comment_for_other_commenter
       [:solution_comments, :new_comment_for_other_commenter]
+
+    when :mentor_heartbeat
+      [:heartbeat, :mentor_heartbeat]
+
     else
       raise UnknownMailTypeError.new(mail_type)
     end

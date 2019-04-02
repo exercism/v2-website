@@ -1,5 +1,5 @@
 .progress
-  - if @solution.auto_approve?
+  - if @solution.mentorships.count == 0
     =graphical_icon 'circle filled'
     =graphical_icon 'circle filled'
     =icon 'circle filled', 'Step 3 of 3'

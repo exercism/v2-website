@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_000818) do
+ActiveRecord::Schema.define(version: 2019_03_22_130729) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,9 @@ ActiveRecord::Schema.define(version: 2019_02_12_000818) do
     t.boolean "email_on_remind_mentor", default: true, null: false
     t.boolean "email_on_new_solution_comment_for_solution_user", default: true, null: false
     t.boolean "email_on_new_solution_comment_for_other_commenter", default: true, null: false
+    t.boolean "email_on_mentor_heartbeat", default: true, null: false
+    t.string "token"
+    t.index ["token"], name: "index_communication_preferences_on_token"
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
 
@@ -101,6 +104,21 @@ ActiveRecord::Schema.define(version: 2019_02_12_000818) do
     t.datetime "updated_at", null: false
     t.integer "github_id", null: false
     t.index ["is_maintainer", "is_core", "num_contributions"], name: "main_find_idx"
+  end
+
+  create_table "delayed_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "discussion_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -338,6 +356,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_000818) do
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
+    t.index ["exercise_id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "mentor_selection_idx_3"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
     t.index ["last_updated_by_user_at"], name: "ihid-3"
     t.index ["num_mentors", "exercise_id", "user_id"], name: "fix-4"
@@ -454,6 +473,14 @@ ActiveRecord::Schema.define(version: 2019_02_12_000818) do
     t.boolean "active", default: true, null: false
   end
 
+  create_table "user_email_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "mentor_heartbeat_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_email_logs_on_user_id", unique: true
+  end
+
   create_table "user_tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "track_id", null: false
@@ -540,6 +567,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_000818) do
   add_foreign_key "testimonials", "tracks"
   add_foreign_key "track_mentorships", "tracks"
   add_foreign_key "track_mentorships", "users"
+  add_foreign_key "user_email_logs", "users"
   add_foreign_key "user_tracks", "tracks"
   add_foreign_key "user_tracks", "users"
 end

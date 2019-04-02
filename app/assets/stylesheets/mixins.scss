@@ -17,7 +17,7 @@
 @mixin font-size($size: 16, $line_height: null) {
     font-size: $size  + px;
     @if $line_height == null {
-        $line_height: 1.428 * $size;
+        $line_height: floor(1.428 * $size);
     }
     line-height: $line_height + px;
 }

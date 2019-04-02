@@ -1,0 +1,15 @@
+%h3 General communications
+=communication_preference_option(f, :receive_product_updates)
+
+%h3 Usage emails
+=communication_preference_option(f, :email_on_new_discussion_post)
+=communication_preference_option(f, :email_on_solution_approved)
+=communication_preference_option(f, :email_on_new_solution_comment_for_solution_user)
+=communication_preference_option(f, :email_on_new_solution_comment_for_other_commenter)
+
+-if f.object.user.is_mentor?
+  %h3 Mentor emails
+  =communication_preference_option(f, :email_on_new_discussion_post_for_mentor)
+  =communication_preference_option(f, :email_on_new_iteration_for_mentor)
+  =communication_preference_option(f, :email_on_remind_mentor)
+  =communication_preference_option(f, :email_on_mentor_heartbeat)

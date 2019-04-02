@@ -4,6 +4,10 @@ class Mentor::DashboardController < MentorController
   end
 
   def your_solutions
+    if current_user.solution_mentorships.count == 0
+      return redirect_to action: :next_solutions
+    end
+
     load_your_solutions
     respond_to do |format|
       format.js

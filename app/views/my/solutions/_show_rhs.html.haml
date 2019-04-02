@@ -11,22 +11,40 @@
   -elsif @solution.approved? && !@exercise.auto_approve?
     =render "show_approved"
 
-  -elsif @solution.exercise.side? && @solution.mentorships.active.count == 0 && @solution.mentor_discussion_posts.count == 0 && !@solution.exercise.auto_approve?
-    .finished-section
-      .title-block
-        %h3
-          =icon("clock-circle", "Clock")
-          You have requested mentoring for this exercise.
-      .next-block
-        .next-option
-          %p
-            %strong A mentor will be with you as soon as they can.
-            As side exercises don't block progression, they normally take longer to receive mentoring on than core exercises. For some tracks this might be a few hours but for the busiest tracks it might be a few days.
-        .next-option
-          %p
-            %strong Don't want mentoring after all?
-            Changed your mind and decided you don't want mentoring on this exercise? Want to free up your mentoring allowance for a different exercise? No problem!
-          =link_to "Cancel mentoring request", [:cancel_mentoring_request, :my, @solution], class: 'pure-button', method: :patch
+  -elsif @solution.mentorships.active.count == 0 && @solution.mentor_discussion_posts.count == 0 && !@solution.exercise.auto_approve?
+    -if @solution.user_track.independent_mode?
+      .finished-section
+        .title-block
+          %h3
+            =icon("clock-circle", "Clock")
+            You have requested mentoring for this exercise.
+        .next-block
+          .next-option
+            %p
+              %strong A mentor will be with you as soon as they can.
+              Exercises in independent mode normally take longer to receive mentoring on than those in mentored mode. For some tracks this might be a few hours but for the busiest tracks it might be a few days.
+          .next-option
+            %p
+              %strong Don't want mentoring after all?
+              Changed your mind and decided you don't want mentoring on this exercise? Want to free up your mentoring allowance for a different exercise? No problem!
+            =link_to "Cancel mentoring request", [:cancel_mentoring_request, :my, @solution], class: 'pure-button', method: :patch
+
+    -elsif @solution.exercise.side?
+      .finished-section
+        .title-block
+          %h3
+            =icon("clock-circle", "Clock")
+            You have requested mentoring for this exercise.
+        .next-block
+          .next-option
+            %p
+              %strong A mentor will be with you as soon as they can.
+              As side exercises don't block progression, they normally take longer to receive mentoring on than core exercises. For some tracks this might be a few hours but for the busiest tracks it might be a few days.
+          .next-option
+            %p
+              %strong Don't want mentoring after all?
+              Changed your mind and decided you don't want mentoring on this exercise? Want to free up your mentoring allowance for a different exercise? No problem!
+            =link_to "Cancel mentoring request", [:cancel_mentoring_request, :my, @solution], class: 'pure-button', method: :patch
 
   .discussion
     %h3.rhs-heading Mentor discussion
@@ -47,13 +65,3 @@
 -content_for :js do
   :javascript
     setupSolution("#{@solution.uuid}", #{@iteration.id})
-    $('body').on('click', '.reflection-continue-button', function(e) {
-      e.preventDefault();
-      $(this).hide();
-      $('form .reflection-submit-button').show();
-      $('form .modal-lhs').hide();
-      $('form .modal-rhs').show();
-      $('.progress i:nth-child(3)').addClass('filled');
-      $('.progress i:last-child').attr('aria-label', 'Step 3 of 4');
-    });
-

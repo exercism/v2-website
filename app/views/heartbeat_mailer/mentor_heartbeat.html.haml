@@ -1,0 +1,46 @@
+:css
+  #mentoring-heartbeat-table {
+    width:auto;
+  }
+  #mentoring-heartbeat-table th {
+    padding:0px 10px 5px 0;
+    text-align:left;
+  }
+  #mentoring-heartbeat-table td {
+    padding:0px 0px 5px 10px;
+    text-align:right;
+    color:#333;
+  }
+
+.content
+  %p Hi #{@user.handle},
+
+  -if @introduction.present?
+    %p= raw simple_format(@introduction)
+
+  %p{style: "font-weight:600;text-decoration:underline;margin-bottom:5px;margin-top:20px"} Site Summary
+  %p
+    This week
+    %strong #{number_with_delimiter @stats[:site][:num_learners]} people
+    submitted
+    %strong #{number_with_delimiter @stats[:site][:num_solutions]} solutions
+    across all the language tracks. Of these
+    %strong #{number_with_delimiter @stats[:site][:num_solutions_for_mentoring]} solutions
+    were submitted for mentoring.
+  %p 
+    In total,
+    %strong #{number_with_delimiter @stats[:site][:num_mentors]} mentors
+    gave feedback on
+    %strong #{number_with_delimiter @stats[:site][:num_solution_mentorships]} solutions.
+
+  -@stats[:tracks].each do |slug, track|
+    %p{style: "font-weight:600;text-decoration:underline;margin-bottom:5px;margin-top:20px;"} #{track[:title]}
+
+    %table#mentoring-heartbeat-table
+      -track[:stats].each do |key, value|
+        %tr
+          %th - #{key.to_s.humanize}:
+          %td= number_with_delimiter value
+
+  -if @stats[:num_solutions_mentored_by_user] > 0
+    %p{style: "margin-top:20px;"} Thanks for all your hard work this week!

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # ### #
   # API #
   # ### #
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       namespace :webhooks do
         resources :repo_updates, only: [:create]
         resources :contributors, only: [:create]
+        resources :analyzers, only: [:create]
       end
     end
   end
@@ -35,6 +37,11 @@ Rails.application.routes.draw do
       resources :iterations, only: [:show]
     end
     resources :mentors, only: [:index]
+    namespace :data do
+      resources :tracks, only: [:index, :show] do
+        resources :exercises, only: [:show]
+      end
+    end
   end
 
   # ###### #
@@ -137,6 +144,7 @@ Rails.application.routes.draw do
         patch :request_mentoring
         patch :cancel_mentoring_request
         patch :reflect
+        patch :rate_mentors
         patch :publish
         patch :update_exercise
 
@@ -234,6 +242,11 @@ Rails.application.routes.draw do
   # #### #
   resources :blog_posts, only: [:index, :show], path: "blog"
   resources :blog_comments, only: [:create, :update, :destroy]
+
+  # ############ #
+  # Unsubscribe  #
+  # ############ #
+  resource :unsubscribe, only: [:show, :update], controller: "unsubscribe"
 
   # ############ #
   # Weird things #

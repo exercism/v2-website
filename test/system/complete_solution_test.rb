@@ -62,7 +62,7 @@ class CompleteSolutionSystemTest < ApplicationSystemTestCase
     fill_in "reflection", with: "Printing to the console was easy!"
     click_button "Continue"
     find("label[for=mentor_reviews_#{@mentor.id}_rating_5]").click
-    click_button "Save and continue"
+    click_button "Continue"
     click_link "Continue"
   end
 end

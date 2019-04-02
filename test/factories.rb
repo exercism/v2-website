@@ -1,4 +1,7 @@
 FactoryBot.define do
+  factory :user_email_log do
+    user { create :user }
+  end
   factory :solution_star do
     solution { create :solution }
     user { create :user }

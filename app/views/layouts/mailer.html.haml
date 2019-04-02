@@ -25,7 +25,11 @@
               This email sent by Exercism, Inc
             .footer
               =link_to "Visit Exercism", root_url
-              &middot;
-              =link_to "Change your notification settings", edit_my_settings_preferences_url
+              -if @user && @unsubscribe_key
+                &middot;
+                =link_to "Unsubscribe from this email", unsubscribe_url(token: @user.communication_preferences.token, key: @unsubscribe_key)
+              -if @user
+                &middot;
+                =link_to "Change your notification settings", unsubscribe_url(token: @user.communication_preferences.token)
             .footer
               Exercism, Inc &middot; 1605 George Dieter Dr #576 &middot; El Paso, TX 79936

@@ -1,0 +1,39 @@
+-mentors_word = "mentor".pluralize(@solution.mentors.size)
+.progress
+  =graphical_icon 'circle filled'
+  =graphical_icon 'circle filled'
+  =graphical_icon 'circle'
+  =icon 'circle', 'Step 3 of 4'
+
+=form_tag [:rate_mentors, :my, @solution], method: :patch, remote: true do
+  %h2 Rate your #{mentors_word}
+  %p
+    Help us improve our mentoring by rating your #{mentors_word}.
+    Your #{mentors_word} will
+    %strong not
+    see your rating.
+
+  -@solution.mentors.each do |mentor|
+    .mentor-review
+      =image mentor.avatar_url, mentor.name, class: "avatar"
+      .details
+        .handle= mentor.handle
+        .interactions= pluralize @mentor_interations[mentor.id], "interaction"
+      .stars
+        -[5,4,3,2,1].each do |i|
+          =radio_button_tag "mentor_reviews[#{mentor.id}][rating]", i, false, class: "rating-#{i}"
+          =label_tag "mentor_reviews_#{mentor.id}_rating_#{i}", ""
+
+      .feedback
+        %p Leave a public testimonial for this mentor (optional):
+        =text_area_tag "mentor_reviews[#{mentor.id}][feedback]"
+
+  =button_tag "Continue", class: 'pure-button'#, disabled: true
+
+:javascript
+  $('.mentor-review .stars input[type=radio]').click(function() { $('#modal.solution-mentor-ratings .pure-button').prop({'disabled': false}) });
+  $('.mentor-review .stars input[type=radio]').click(function() {
+    $feedback = $(this).parents('.stars').next()
+    if($(this).hasClass('rating-5')) { $feedback.show() }
+    else { $feedback.hide() }
+  })
