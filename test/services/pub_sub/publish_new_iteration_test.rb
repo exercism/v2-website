@@ -6,7 +6,8 @@ class PublishNewIterationTest < ActiveSupport::TestCase
     iteration = create :iteration
     PubSub::PublishMessage.expects(:call).with(:new_iteration,
       track_slug: iteration.solution.exercise.track.slug,
-      id: iteration.id
+      exercise_slug: iteration.solution.exercise.slug,
+      iteration_id: iteration.id
     )
     PubSub::PublishNewIteration.(iteration)
   end
