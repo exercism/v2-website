@@ -1,0 +1,19 @@
+.content
+  %p Hi there,
+  %p
+    -if @solution.approved?
+      This is a friendly reminder that a mentor has approved your solution to #{@solution.exercise.title} on the #{@solution.track.title} Track.
+      You can #{link_to "complete the exercise here", [:my, @solution]}.
+    -else
+      This is a friendly reminder that a mentor has posted a comment on your solution to #{@solution.exercise.title} on the #{@solution.track.title} Track.
+      You can #{link_to "review the comment here", [:my, @solution]}.
+
+  -if @other_solutions.present?
+    %p You also have #{pluralize @other_solutions.size, "other solution"} that you can proceed with:
+    %ul
+      -@other_solutions.each do |solution|
+        %li
+          = link_to [:my, solution] do
+            #{solution.exercise.title} on the #{solution.track.title} Track
+            -if solution.approved?
+              (approved)

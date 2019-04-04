@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_130729) do
+ActiveRecord::Schema.define(version: 2019_04_04_201717) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_130729) do
     t.boolean "email_on_new_solution_comment_for_other_commenter", default: true, null: false
     t.boolean "email_on_mentor_heartbeat", default: true, null: false
     t.string "token"
+    t.boolean "email_on_remind_about_solution", default: true, null: false
     t.index ["token"], name: "index_communication_preferences_on_token"
     t.index ["user_id"], name: "fk_rails_65642a5510"
   end
@@ -353,6 +354,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_130729) do
     t.boolean "allow_comments", default: false, null: false
     t.integer "num_comments", limit: 2, default: 0, null: false
     t.integer "num_stars", limit: 2, default: 0, null: false
+    t.datetime "reminder_sent_at"
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
     t.index ["approved_by_id"], name: "ihid-5"
     t.index ["completed_at"], name: "ihid-6"
@@ -478,6 +480,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_130729) do
     t.datetime "mentor_heartbeat_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "remind_about_solution_sent_at"
     t.index ["user_id"], name: "index_user_email_logs_on_user_id", unique: true
   end
 

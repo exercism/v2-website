@@ -39,6 +39,8 @@ class DeliverEmail
       [:user_notifications, :new_discussion_post]
     when :solution_approved
       [:user_notifications, :solution_approved]
+    when :remind_about_solution
+      [:user_notifications, :remind_about_solution]
 
     when :new_discussion_post_for_mentor
       [:mentor_notifications, :new_discussion_post]
