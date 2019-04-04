@@ -4,6 +4,7 @@ class DeliverEmailTest < ActiveSupport::TestCase
   {
     new_discussion_post: [UserNotificationsMailer, :new_discussion_post],
     new_discussion_post_for_mentor: [MentorNotificationsMailer, :new_discussion_post],
+    remind_about_solution: [UserNotificationsMailer, :remind_about_solution],
 
     new_iteration_for_mentor: [MentorNotificationsMailer, :new_iteration],
     remind_mentor: [MentorNotificationsMailer, :remind],
@@ -48,7 +49,7 @@ class DeliverEmailTest < ActiveSupport::TestCase
     end
   end
 
-  test "sets_email_log_for_preexisting_log" do
+  test "sets email_log for preexisting log" do
     Timecop.freeze do
       user = create :user
       log = create :user_email_log, user: user
@@ -58,12 +59,21 @@ class DeliverEmailTest < ActiveSupport::TestCase
     end
   end
 
-  test "sets_email_log_for_missing_log" do
+  test "sets email_log for missing log" do
     Timecop.freeze do
       user = create :user
 
       DeliverEmail.(user, :mentor_heartbeat, 1, 1)
       assert_equal Time.current.to_i, UserEmailLog.for_user(user).mentor_heartbeat_sent_at.to_i
+    end
+  end
+
+  test "sets email log for remind_about_solution" do
+    Timecop.freeze do
+      user = create :user
+
+      DeliverEmail.(user, :remind_about_solution, 1, 1)
+      assert_equal Time.current.to_i, UserEmailLog.for_user(user).remind_about_solution_sent_at.to_i
     end
   end
 end

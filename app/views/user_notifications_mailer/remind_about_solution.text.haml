@@ -1,0 +1,13 @@
+Hi there,
+\
+-if @solution.approved?
+  This is a friendly reminder that a mentor has approved your solution to #{@solution.exercise.title} on the #{@solution.track.title} Track.
+  You can complete the exercise here: #{my_solution_url(@solution)}
+-else
+  This is a friendly reminder that a mentor has posted a comment on your solution to #{@solution.exercise.title} on the #{@solution.track.title} Track.
+  You can review the comment here: #{my_solution_url(@solution)}
+\
+-if @other_solutions.present?
+  You also have #{pluralize @other_solutions.size, "other solution"} that you can proceed with:
+  -@other_solutions.each do |solution|
+    \- #{solution.exercise.title} on the #{solution.track.title} Track#{solution.approved?? " (approved):" : ":"} #{my_solution_url(@solution)}

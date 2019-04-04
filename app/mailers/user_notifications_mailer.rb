@@ -25,4 +25,16 @@ class UserNotificationsMailer < ApplicationMailer
       subject: "[Exercism] A mentor has approved your solution to #{track_title}/#{exercise_title}"
     )
   end
+
+  def remind_about_solution(user, solution, other_solutions)
+    @unsubscribe_key = :remind_about_solution
+
+    @user = user
+    @solution = solution
+    @other_solutions = other_solutions
+    mail(
+      to: @user.email,
+      subject: "[Exercism] Don't forget to continue your Exercism exercise"
+    )
+  end
 end
