@@ -46,7 +46,7 @@
         .exercise{id: "exercise-#{exercise.slug}"}
           .status Locked
           .position Exercise #{idx + 1} of #{num_core_exercises} in #{exercise.track_title} Track
-          %h2.title
+          .title
             = exercise.title
             .topics
               - exercise.topic_names.each do |topic_name|
