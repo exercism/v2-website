@@ -2,15 +2,15 @@ require "test_helper"
 
 class TimeAgoInWordsHelperTest < ActionView::TestCase
   test "time_ago_in_words calculates time in days, not months" do
-    assert_equal "33 days", time_ago_in_words(Time.now - 33.days)
+    assert_equal "33 days", time_ago_in_words(33.days.ago)
   end
 
   test "time_ago_in_words calculates time in days" do
-    assert_equal "2 days", time_ago_in_words(Time.now - 2.days)
+    assert_equal "2 days", time_ago_in_words(2.days.ago)
   end
 
   test "time_ago_in_words calculates time less than one day in hours or minutes" do
-    assert_equal "about 2 hours", time_ago_in_words(Time.now - 2.hours)
+    assert_equal "about 2 hours", time_ago_in_words(2.hours.ago)
   end
 
   test "time_ago_in_words correctly calculates one day plus one second" do
@@ -26,6 +26,6 @@ class TimeAgoInWordsHelperTest < ActionView::TestCase
   end
 
   test "time_ago_in_words calculates time in years, not days" do
-    assert_equal "about 1 year", time_ago_in_words(Time.now - 366.days)
+    assert_equal "about 1 year", time_ago_in_words(366.days.ago)
   end
 end
