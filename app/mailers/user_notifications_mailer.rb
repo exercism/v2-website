@@ -27,7 +27,7 @@ class UserNotificationsMailer < ApplicationMailer
   end
 
   def remind_about_solution(user, solution, other_solutions)
-    @unsubscribe_key = :remind_about_solution
+    @unsubscribe_key = :email_on_remind_about_solution
 
     @user = user
     @solution = solution
