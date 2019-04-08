@@ -19,6 +19,9 @@ class Solution < ApplicationRecord
   scope :core, -> { joins(:exercise).merge(Exercise.core) }
   scope :side, -> { joins(:exercise).merge(Exercise.side) }
 
+  scope :approved, -> { where.not(approved_by_id: nil) }
+  scope :not_approved, -> { where(approved_by_id: nil) }
+
   scope :completed, -> { where.not(completed_at: nil) }
   scope :not_completed, -> { where(completed_at: nil) }
 
