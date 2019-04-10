@@ -98,7 +98,7 @@ class API::SolutionResponder
   private
 
   def exercise_reader
-    exercise_slug = solution.exercise.slug
+    exercise_slug = solution.git_slug
     track_url = solution.exercise.track.repo_url
     Git::ExercismRepo.new(track_url).exercise(exercise_slug, solution.git_sha)
   end
