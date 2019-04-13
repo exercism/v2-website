@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     "Contribute": :contribute,
     "Mentored Mode vs Independent Mode": :mentored_mode_vs_independent_mode,
 
+    "Strategy": :strategy,
     "Roadmap": :roadmap,
     "Changelog": :changelog,
 
