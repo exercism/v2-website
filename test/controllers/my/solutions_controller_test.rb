@@ -131,6 +131,23 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     skip
   end
 
+  test "updates exercise correctly" do
+    sign_in!
+
+    sha = SecureRandom.uuid
+    slug = "foobar"
+    Solution.any_instance.expects(:track_head).returns(sha)
+    exercise = create :exercise, slug: slug
+    solution = create :solution, user: @current_user, git_slug: "meh", exercise: exercise
+
+    patch update_exercise_my_solution_url(solution.uuid)
+    assert_redirected_to my_solution_path(solution)
+
+    solution.reload
+    assert_equal slug, solution.git_slug
+    assert_equal sha, solution.git_sha
+  end
+
   def create_unlocked_solution
     create :solution, user: @current_user
   end
