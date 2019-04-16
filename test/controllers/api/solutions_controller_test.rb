@@ -297,7 +297,7 @@ class API::SolutionsControllerTest < API::TestBase
     end
   end
 
-  test "updates git sha if exercise is downloaded for the first time" do
+  test "updates git slug and sha if exercise is downloaded for the first time" do
     Timecop.freeze do
       setup_user
       exercise = create :exercise
@@ -306,12 +306,14 @@ class API::SolutionsControllerTest < API::TestBase
         user: @current_user,
         exercise: exercise,
         downloaded_at: nil,
-        git_sha: "1234"
+        git_sha: "1234",
+        git_slug: 'meh'
       create :user_track, user: solution.user, track: track
 
       get latest_api_solutions_path(track_id: track.slug, exercise_id: exercise.slug), headers: @headers, as: :json
 
       solution.reload
+      assert_equal exercise.slug, solution.git_slug
       assert_equal "4567", solution.git_sha
     end
   end

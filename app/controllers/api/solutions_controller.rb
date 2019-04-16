@@ -93,9 +93,15 @@ class API::SolutionsController < APIController
     end
 
     responder = API::SolutionResponder.new(solution, current_user)
-    solution.update(git_sha: solution.track_head) unless solution.downloaded?
-    solution.update(downloaded_at: Time.current)
+    solution.update(
+      git_slug: solution.exercise.slug,
+      git_sha: solution.track_head
+    ) unless solution.downloaded?
+
     render json: responder.to_hash
+
+    # Only set this if we've not 500'd
+    solution.update(downloaded_at: Time.current)
   end
 
   def update
