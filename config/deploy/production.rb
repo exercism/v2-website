@@ -52,6 +52,7 @@ namespace :processors do
     on roles(:processor) do
       execute "sudo /usr/sbin/service mentors_remind_overdue restart"
       execute "sudo /usr/sbin/service mentors_abandon_overdue restart"
+      execute "sudo /usr/sbin/service analyzed_iterations_listener restart"
     end
   end
 end

@@ -118,7 +118,10 @@ class My::SolutionsController < MyController
   end
 
   def update_exercise
-    @solution.update(git_sha: @solution.track_head)
+    @solution.update!(
+      git_slug: @solution.exercise.slug,
+      git_sha: @solution.track_head
+    )
     redirect_to [:my, @solution]
   end
 

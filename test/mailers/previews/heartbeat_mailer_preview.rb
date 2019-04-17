@@ -23,7 +23,7 @@ class HeartbeatMailerPreview < ActionMailer::Preview
       },
       num_solutions_mentored_by_user: 10
     }
-    introduction = %Q{This week we made some solid progress with the Automated Mentoring Support Project. Our canonical prototype is the implementation of automatic approval for the two-fer exercise in Ruby, but analyzers are also being created by the community for Go, C#, Python, Java, JavaScript and Typescript. The project involves not only the development of static analysis software, but also various changes within the website, and the development of infrastructure and orchestration that can handle analysers for multiple languages in a performant and cost-effective manner. You can read more in the project repository at http://bit.ly/2HCN8gB - please open an issue there if you have questions or would like to get involved. Thanks to all those who have been helping so far!}
+    introduction = %Q{We get a lot of questions in Slack and on GitHub about what Exercism's current priorities are and why we've made those decisions. To try and help be more clear and transparent about this we've added a strategy document to the website, which lays out what we're trying to achieve in 2019 and how we're progressing. You might like to have a read: https://exercism.io/strategy}
     HeartbeatMailer.mentor_heartbeat(User.first, data, introduction)
   end
 end

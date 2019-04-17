@@ -11,7 +11,7 @@
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
   %h2 Make your solution public?
-  %p You can make your solution public to allow other Exercism users to find it and learn from your ideas. You can also allow others to leave comments so that they can ask you questions about or make suggestions about you solution. Your previous iterations and mentor feedback will remain private. You can change these options later via your profile.
+  %p You can make your solution public to allow other Exercism users to find it and learn from your ideas. You can also allow others to leave comments so that they can ask you questions about or make suggestions about your solution. Your previous iterations and mentor feedback will remain private. You can change these options later via your profile.
   .checkbox
     =check_box_tag :publish, 1, true
     =label_tag :publish do
