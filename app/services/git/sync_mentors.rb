@@ -42,9 +42,9 @@ class Git::SyncMentors
         name: mentor_data[:name] || github_profile.name,
         avatar_url: mentor_data[:avatar_url] || github_profile.avatar_url,
         link_url: mentor_data[:link_url] || github_profile.link_url,
-        link_text: mentor_data[:link_text] || github_profile.link_url,
         bio: mentor_data[:bio] || github_profile.bio
       )
+      mentor.link_text = mentor_data[:link_text] || mentor.link_url
       mentor.save!
     end
   end
