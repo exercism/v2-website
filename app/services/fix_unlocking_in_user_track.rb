@@ -43,20 +43,40 @@ class FixUnlockingInUserTrack
                                          ).
                                     pluck(:id)
 
-    # Make sure there is one unlocked core
-    next_core_exercise = track.exercises.core.
-                                         not_completed_for(user).
-                                         order(:position).
-                                         first
+    next_submitted_core_solutions = user_track.solutions.
+                                    where(exercise_id: track.exercises.core).
+                                    submitted.
+                                    not_completed
 
-    # We can just use UnlockCoreExercise here, but it's more efficent to do the extra lookup
-    if next_core_exercise
-      next_core_solution = Solution.where(user: user, exercise: next_core_exercise).first
-      keep_solution_ids << (next_core_solution.try(:id) || UnlockCoreExercise.(user, next_core_exercise).try(:id))
+    if next_submitted_core_solutions.length > 0
+      next_submitted_core_solutions.each do |solution|
+        solution.update(mentoring_requested_at: Time.now) unless solution.mentoring_requested?
+        keep_solution_ids << solution.id
+      end
+    else
+      # Make sure there is one unlocked core
+      next_core_exercise = track.exercises.core.
+                                           not_completed_for(user).
+                                           order(:position).
+                                           first
+
+      # We can just use UnlockCoreExercise here, but it's more efficent to do the extra lookup
+      if next_core_exercise
+        next_core_solution = Solution.where(user: user, exercise: next_core_exercise).first
+        keep_solution_ids << (next_core_solution.try(:id) || UnlockCoreExercise.(user, next_core_exercise).try(:id))
+      end
     end
 
     # Delete all unsubmitted exercises that we haven't just
     # agreed to unlocked
     user_track.solutions.not_started.where.not(id: keep_solution_ids).destroy_all
+
+    # Reset mentoring_requested_at from all solutions that haven't had
+    # iterations set. I don't think we need this as a normal process but
+    # if we decide we do, we can uncomment this.
+    #user_track.solutions.
+    #  not_submitted
+    #  where.not(mentoring_requested_at: nil).
+    #  update_all(mentoring_requested_at: nil)
   end
 end

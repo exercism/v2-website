@@ -46,6 +46,10 @@ class Solution < ApplicationRecord
     where("EXISTS(SELECT TRUE FROM iterations WHERE iterations.solution_id = solutions.id)")
   }
 
+  scope :not_submitted, -> {
+    where("NOT EXISTS(SELECT TRUE FROM iterations WHERE iterations.solution_id = solutions.id)")
+  }
+
   scope :has_a_mentor, -> {
      where("EXISTS(SELECT TRUE FROM solution_mentorships WHERE solution_mentorships.solution_id = solutions.id)")
   }
