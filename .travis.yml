@@ -1,3 +1,4 @@
+dist: xenial
 env:
   global:
     - CC_TEST_REPORTER_ID=787a2f89b15c637323c7340d65ec17e898ac44480706b4b4122ea040c2a88f1d
@@ -6,6 +7,7 @@ sudo: true
 services:
   - mysql
   - redis-server
+  - xvfb
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
@@ -16,8 +18,6 @@ before_script:
   - sudo apt-get --only-upgrade install google-chrome-stable
   - sudo cp chromedriver /usr/local/bin/.
   - sudo chmod +x /usr/local/bin/chromedriver
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - sleep 3
 addons:
   sources:
@@ -25,17 +25,9 @@ addons:
   apt:
     packages:
       - google-chrome-stable
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
 before_install:
   - sudo rm config/secrets.yml
   - sudo cp config/secrets.yml.example config/secrets.yml
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-  - sudo mysql_upgrade
   - sudo service mysql restart
   - sudo mysql -e "CREATE USER 'exercism_reboot'@'localhost' IDENTIFIED BY 'exercism_reboot'" -u root
   - sudo mysql -e "create database exercism_reboot_test" -u root
