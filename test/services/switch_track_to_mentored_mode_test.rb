@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
-  test "sets one core solutions to be mentored" do
+  test "sets one core solutions to have mentoring_requested_at" do
     user = create :user
     track = create :track
     core_exercise_1 = create :exercise, track: track, core: true
@@ -31,6 +31,23 @@ class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
     refute core_solution_1.track_in_independent_mode?
     refute core_solution_2.track_in_independent_mode?
     refute side_solution.track_in_independent_mode?
+  end
+
+  test "don't set unsubmitted solutions to have mentoring_requested_at" do
+    user = create :user
+    track = create :track
+    core_exercise = create :exercise, track: track, core: true
+    core_solution = create :solution, user: user, exercise: core_exercise, mentoring_requested_at: nil, track_in_independent_mode: true
+    user_track = create :user_track, user: user, track: track
+
+    Git::ExercismRepo.stubs(current_head: "dummy-sha1")
+    SwitchTrackToMentoredMode.(user, track)
+
+    [user_track, core_solution].each(&:reload)
+
+    refute user_track.independent_mode?
+    refute core_solution.mentoring_requested?
+    refute core_solution.track_in_independent_mode?
   end
 
   test "don't let multiple core solutions be mentored" do

@@ -12,6 +12,7 @@ class SwitchTrackToMentoredMode
     # Set at least one core solution to have mentoring
     unless user_track.solutions.core.where.not(mentoring_requested_at: nil).exists?
       user_track.solutions.core.
+        submitted.
         joins(:exercise).
         order('exercises.position ASC').
         first.
