@@ -26,12 +26,40 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
     mentor = Mentor.last
     assert_equal track, mentor.track
     assert_equal "Katrina Owen", mentor.name
-    assert "avatar.png", mentor.avatar_url
+    assert_equal "avatar.png", mentor.avatar_url
     assert_equal "kytrinyx", mentor.github_username
-    assert "example.com", mentor.link_text
-    assert "Link", mentor.link_url
+    assert_equal "example.com", mentor.link_url
+    assert_equal "Link", mentor.link_text
     assert_equal "Bio", mentor.bio
   end
+
+  test "sets sensible default for link_text" do
+    Git::GithubProfile.stubs(:for_user)
+    track = create(:track, slug: "go")
+    repo = mock()
+    repo.
+      stubs(:mentors).
+      returns([
+        {
+          github_username: "kytrinyx",
+          name: "Katrina Owen",
+          link_text: nil,
+          link_url: "example.com",
+          avatar_url: "avatar.png",
+          bio: "Bio",
+          track: "go"
+        }
+      ])
+
+    stub_repo_cache! do
+      Git::SyncMentors.(repo)
+    end
+
+    mentor = Mentor.last
+    assert_equal "example.com", mentor.link_text
+    assert_equal "example.com", mentor.link_url
+  end
+
 
   test "updates mentors" do
     Git::GithubProfile.stubs(:for_user)
@@ -62,9 +90,9 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
     end
 
     mentor.reload
-    assert "avatar.png", mentor.avatar_url
-    assert "example.com", mentor.link_text
-    assert "Link", mentor.link_url
+    assert_equal "avatar.png", mentor.avatar_url
+    assert_equal "example.com", mentor.link_url
+    assert_equal "Link", mentor.link_text
   end
 
   test "deletes mentors" do

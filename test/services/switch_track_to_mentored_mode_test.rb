@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
-  test "sets one core solutions to be mentored" do
+  test "sets one core solutions to have mentoring_requested_at" do
     user = create :user
     track = create :track
     core_exercise_1 = create :exercise, track: track, core: true
@@ -25,7 +25,7 @@ class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
 
     refute user_track.independent_mode?
     assert core_solution_1.mentoring_requested?
-    refute core_solution_2.mentoring_requested?
+    assert core_solution_2.mentoring_requested?
     refute side_solution.mentoring_requested?
 
     refute core_solution_1.track_in_independent_mode?
@@ -33,27 +33,21 @@ class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
     refute side_solution.track_in_independent_mode?
   end
 
-  test "don't let multiple core solutions be mentored" do
+  test "don't set unsubmitted solutions to have mentoring_requested_at" do
     user = create :user
     track = create :track
-    exercise_1 = create :exercise, track: track, core: true
-    exercise_2 = create :exercise, track: track, core: true
-
-    solution_1 = create :solution, user: user, exercise: exercise_1, mentoring_requested_at: nil, track_in_independent_mode: true
-    solution_2 = create :solution, user: user, exercise: exercise_2, mentoring_requested_at: Time.current, track_in_independent_mode: true
-
-    create :iteration, solution: solution_1
-    create :iteration, solution: solution_2
-
+    core_exercise = create :exercise, track: track, core: true
+    core_solution = create :solution, user: user, exercise: core_exercise, mentoring_requested_at: nil, track_in_independent_mode: true
     user_track = create :user_track, user: user, track: track
 
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     SwitchTrackToMentoredMode.(user, track)
 
-    [solution_1, solution_2].each(&:reload)
+    [user_track, core_solution].each(&:reload)
 
-    refute solution_1.mentoring_requested?
-    assert solution_2.mentoring_requested?
+    refute user_track.independent_mode?
+    refute core_solution.mentoring_requested?
+    refute core_solution.track_in_independent_mode?
   end
 
   test "calls FixUnlockingInUserTrack" do

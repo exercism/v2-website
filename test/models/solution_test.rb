@@ -63,7 +63,7 @@ class SolutionTest < ActiveSupport::TestCase
     assert_equal [unstarted_solution], Solution.not_started
   end
 
-  test "submitted" do
+  test "submitted and not_submitted" do
     user_track = create :user_track
     submitted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
     create :iteration, solution: submitted_solution
@@ -71,6 +71,7 @@ class SolutionTest < ActiveSupport::TestCase
     downloaded_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track), downloaded_at: Time.now
 
     assert_equal [submitted_solution], Solution.submitted
+    assert_equal [unsubmitted_solution, downloaded_solution], Solution.not_submitted
   end
 
   test "has_a_mentor" do
