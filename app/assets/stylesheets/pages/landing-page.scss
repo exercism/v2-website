@@ -143,6 +143,7 @@ body.controller-pages.action-index footer {
                 &:first-child {
                     margin-top:0;
                 }
+
                 .track {
                     display:block;
                     position:relative;
@@ -169,10 +170,7 @@ body.controller-pages.action-index footer {
                         color:#fff;
                     }
                     &:hover {
-                        background-image:image-url("turquoise-hex.png") !important;
-                        .title {
-                            display:block;
-                        }
+
                         .left-eye,
                         .right-eye {
                             display:none;
@@ -205,6 +203,14 @@ body.controller-pages.action-index footer {
                         left: 49px;
                         width: 11px;
                         height: 11px;
+                    }
+                }
+                a.track {
+                    &:hover {
+                        background-image:image-url("turquoise-hex.png") !important;
+                        .title {
+                            display:block;
+                        }
                     }
                 }
             }
