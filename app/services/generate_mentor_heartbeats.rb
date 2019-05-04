@@ -9,7 +9,7 @@ class GenerateMentorHeartbeats
       if email_log.mentor_heartbeat_sent_at.nil?
         introduction = %Q{Welcome to your first Mentor Heartbeat!\n\nEach week, we'll be sending you an email that summarises the activity on each track you're mentoring. We'll also include information on any changes or updates to the mentoring side of Exercism. If you have any ideas on what you'd like to see here, please open an issue at on GitHub and let us know your thoughts. If you want to opt out, there's a link at the bottom of the email. Finally I just want to say a huge thank you for your hard work and for the thousands of people you're all helping on Exercism!}
       else
-        introduction = %Q{This week, we'd like to remind people about the mentors' Slack workspace. It's a great place to discuss solutions that you'd like a second opinion on, improve your mentoring skills, and get to know other mentors and enjoy the community vibe. We also post nice feedback from students in the #making-a-difference channel. Many people join up, say hello, then forget about Slack, so we thought we'd send a friendly reminder in case you'd forgotten about it and are missing out!}
+        introduction = %Q{In an exciting update on the Automated Mentoring Support Project, we now have analyzers for Ruby and C# deployed and silently analyzing Two-Fer submissions. We'll be deploying analyzers for more languages over the next couple of weeks. We now need to integrate these analyzers into the workflow of the site, and then publically launch the feature. Our deadline for this is the end of May. We're really excited to see this launch and to give maintainers the ability to start adding more analysis to other languages and exercises.}
       end
 
       merged_tracks_stats = {}
