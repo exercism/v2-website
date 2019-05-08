@@ -167,6 +167,7 @@ FactoryBot.define do
     handle { SecureRandom.uuid }
     email { "jez.walker+#{SecureRandom.uuid}@gmail.com" }
     password { "foobar123" }
+    current_sign_in_at { Time.now }
 
     factory :user_mentor do
       is_mentor { true }

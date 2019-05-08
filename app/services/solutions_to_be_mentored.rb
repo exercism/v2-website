@@ -69,6 +69,10 @@ class SolutionsToBeMentored
   def base_query
     Solution.
 
+      # Only users who have used the site in the last 60days
+      joins(:user).
+      where("users.current_sign_in_at > ?", Date.today - 2.months).
+
       # Only mentored tracks
       joins(:exercise).
       where("solutions.exercise_id": exercise_ids).
