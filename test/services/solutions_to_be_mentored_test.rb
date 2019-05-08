@@ -46,7 +46,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: bad_solution
     create :solution_mentorship, user: mentor, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
   end
 
   test "does not select solutions claimed by a mentor" do
@@ -94,7 +94,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
   end
 
   test "filters by track" do
@@ -114,7 +114,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, [track1.id], nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, [track1.id], nil).new_side_solutions.sort
   end
 
   test "filters by exercise" do
@@ -134,7 +134,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, [good_exercise.id]).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, [good_exercise.id]).new_side_solutions.sort
   end
 
   test "only selects solutions that have an iteration" do
@@ -151,7 +151,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                            mentoring_requested_at: Time.current)
     create :iteration, solution: good_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
 
   end
 
@@ -174,7 +174,31 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+  end
+
+
+  test "does not select solutions from inactive users" do
+    mentor, track = create_mentor_and_track
+    mentee = create_mentee([track])
+
+    inactive_user = create_mentee([track])
+    active_user = create_mentee([track])
+    inactive_user.update(current_sign_in_at: Date.today - 65.days)
+    active_user.update(current_sign_in_at: Date.today - 55.days)
+
+    bad_solution = create(:solution,
+                          exercise: create(:exercise, track: track),
+                          user: inactive_user,
+                          mentoring_requested_at: Time.current)
+    good_solution = create(:solution,
+                           exercise: create(:exercise, track: track),
+                           user: active_user,
+                           mentoring_requested_at: Time.current)
+    create :iteration, solution: good_solution
+    create :iteration, solution: bad_solution
+
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
   end
 
   test "does not select approved solutions" do
@@ -194,7 +218,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
   end
 
   test "does not select completed solutions" do
@@ -214,7 +238,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
   end
 
   test "does not select ignored solutions" do
@@ -233,7 +257,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: bad_solution
     create :ignored_solution_mentorship, solution: bad_solution, user: mentor
 
-    assert_equal [good_solution].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
   end
 
   test "filters correctly" do
