@@ -165,6 +165,12 @@ class UserTest < ActiveSupport::TestCase
 
   test "destroying a user preserves discussions as a mentor and deletes discussions as a learner" do
     user = create(:user)
+
+    # Create other models to check user can be deleted properly
+    create(:user_email_log, user: user)
+    create(:profile, user: user)
+    create(:auth_token, user: user)
+
     mentor_post = create(:discussion_post, user: user)
     solution = create(:solution, user: user)
     iteration = create(:iteration, solution: solution)

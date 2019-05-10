@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :auth_tokens, dependent: :destroy
   has_one :communication_preferences, dependent: :destroy
 
+  has_one :email_log, class_name: "UserEmailLog", dependent: :destroy
+
   has_one :profile, dependent: :destroy
   has_many :notifications, -> { order id: :desc }, dependent: :destroy
 
