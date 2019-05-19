@@ -225,11 +225,15 @@ Rails.application.routes.draw do
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
 
-  get "cli-walkthrough" => "pages#cli_walkthrough", as: "cli_walkthrough_page"
+  PagesController::HELP_PAGES.values.each do |page|
+    get "help/#{page.to_s.dasherize}" => "pages##{page}", as: "#{page}_help_page"
+  end
 
   PagesController::LICENCES.values.each do |licence|
     get "licences/#{licence.to_s.dasherize}" => "pages##{licence}", as: "#{licence}_licence"
   end
+
+  get "cli-walkthrough" => "pages#cli_walkthrough", as: "cli_walkthrough_page"
 
   resource :team_page, only: [:show], path: "team" do
     get :maintainers

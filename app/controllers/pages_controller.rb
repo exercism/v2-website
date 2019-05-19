@@ -30,6 +30,10 @@ class PagesController < ApplicationController
     "Migrating to the new CLI": :cli_v1_to_v2,
   }
 
+  HELP_PAGES = {
+    "Automated Solution Analysis": :automated_solution_analysis
+  }
+
   LICENCES = {
     "MIT": :mit,
     "CC-BY-SA-4.0": :cc_sa_4
@@ -49,6 +53,7 @@ class PagesController < ApplicationController
 
   PAGE_GENERATOR.(PAGES, :pages)
   PAGE_GENERATOR.(LICENCES, :licences)
+  PAGE_GENERATOR.(HELP_PAGES, :pages)
 
   # Landing page
   def index
