@@ -23,7 +23,7 @@ class HeartbeatMailerPreview < ActionMailer::Preview
       },
       num_solutions_mentored_by_user: 10
     }
-    introduction = %Q{We get a lot of questions in Slack and on GitHub about what Exercism's current priorities are and why we've made those decisions. To try and help be more clear and transparent about this we've added a strategy document to the website, which lays out what we're trying to achieve in 2019 and how we're progressing. You might like to have a read: https://exercism.io/strategy}
+    introduction = %Q{There's nothing new to report this week but we're now close to launching the Ruby automated mentoring solution for two-fer. We'll follow up with more information on that next week. Here are this weeks stats.}
     HeartbeatMailer.mentor_heartbeat(User.first, data, introduction)
   end
 end
