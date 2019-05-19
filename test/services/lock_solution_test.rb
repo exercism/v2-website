@@ -14,6 +14,22 @@ class LockSolutionTest < ActiveSupport::TestCase
     end
   end
 
+  test "creates with custom length" do
+    Timecop.freeze do
+      length = 50.minutes
+
+      user = create :user
+      solution = create :solution
+      assert LockSolution.(user, solution, lock_length: length)
+      assert SolutionLock.where(
+        user: user,
+        solution: solution,
+        locked_until: Time.current + length
+      ).exists?
+    end
+  end
+
+
   test "creates for expired lock" do
     Timecop.freeze do
       user = create :user
