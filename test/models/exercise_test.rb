@@ -1,6 +1,12 @@
 require_relative "../test_helper"
 
 class ExerciseTest < ActiveSupport::TestCase
+  test "slug isn't overriden" do
+    slug = "foobar"
+    exercise = create :exercise, slug: slug
+    assert_equal slug, exercise.slug
+  end
+
   test "an exercise is unlocked when a user has a solution for it" do
     user = create(:user)
     exercise = create(:exercise)
