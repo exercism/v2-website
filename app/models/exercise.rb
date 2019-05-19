@@ -1,6 +1,6 @@
 class Exercise < ApplicationRecord
   extend FriendlyId
-  friendly_id do |fid|
+  friendly_id :slug do |fid|
     fid.use [:history, :scoped]
     fid.scope = :track_id
   end
