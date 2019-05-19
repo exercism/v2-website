@@ -8,7 +8,7 @@ class ApproveSolution
     return false unless mentor_may_approve?
 
     solution.update(approved_by: mentor)
-    unlock_exercises! if solution.completed?
+    CompleteSolution.(solution) if solution.completed?
 
     CreateSolutionMentorship.(solution, mentor)
     solution.update!(last_updated_by_mentor_at: Time.current)
@@ -18,16 +18,6 @@ class ApproveSolution
   end
 
   private
-
-  def unlock_exercises!
-    user = solution.user
-    existing_exercise_ids = user.solutions.pluck(:exercise_id)
-
-    solution.exercise.unlocks.each do |exercise|
-      next if existing_exercise_ids.include?(exercise.id)
-      CreateSolution.(user, exercise)
-    end
-  end
 
   def notify_solution_user
     CreateNotification.(

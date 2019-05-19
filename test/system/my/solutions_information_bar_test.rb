@@ -65,7 +65,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     assert_selector ".notifications-bar .notification", text: "A mentor has approved this solution"
   end
 
-  test "on auto approve" do
+  test "on auto-approve" do
     dp = create :discussion_post, iteration: @iteration
     create :notification, about: @iteration, read: true, trigger: dp
     @solution.update(approved_by: @user)
@@ -76,6 +76,18 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
 
     assert_selector ".notifications-bar .notification", text: "Your exercise has been submitted successfully."
   end
+
+  test "on alogritmic approval" do
+    dp = create :discussion_post, iteration: @iteration
+    create :notification, about: @iteration, read: true, trigger: dp
+    @solution.update(approved_by: create(:system_user))
+
+    sign_in!(@user)
+    visit my_solution_path(@solution)
+
+    assert_selector ".notifications-bar .notification", text: "This solution has been automatically approved"
+  end
+
 
   test "completed" do
     @solution.update(completed_at: Time.now)
