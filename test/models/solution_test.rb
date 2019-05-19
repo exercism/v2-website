@@ -183,4 +183,31 @@ class SolutionTest < ActiveSupport::TestCase
     assert_equal [normal_iteration], normal_solution.iterations
     assert_equal [team_iteration], team_solution.iterations
   end
+
+  test "use_auto_analysis is true normally" do
+    create(:solution).use_auto_analysis?
+  end
+
+  test "use_auto_analysis is false if solution is already approved" do
+    approver = create(:user)
+    solution = create :solution, approved_by: approver
+    refute solution.use_auto_analysis?
+  end
+
+  test "use_auto_analysis is false if someone else is mentoring" do
+    solution = create :solution
+    create :solution_mentorship, solution: solution
+    refute solution.use_auto_analysis?
+  end
+
+  test "use_auto_analysis is false  if someone else has locked" do
+    system_user = create :system_user
+
+    solution = create :solution
+    lock = create :solution_lock, solution: solution
+    refute solution.reload.use_auto_analysis?
+
+    lock.update(user: system_user)
+    assert solution.reload.use_auto_analysis?
+  end
 end

@@ -1,0 +1,7 @@
+Hi there,
+
+<% if @solution.approved_by_id == User::SYSTEM_USER_ID %>
+Your solution to <%= @solution.exercise.title %> on the <%= @solution.exercise.track.title %> track has been automatically approved.  You can view it here: <%= my_solution_url(@solution) %>
+<% else %>
+A mentor has approved your solution to <%= @solution.exercise.title %> on the <%= @solution.exercise.track.title %> track. You can view it here: <%= my_solution_url(@solution) %>
+<% end %>

@@ -35,7 +35,11 @@
     .notifications-bar
       .lo-container
         .notification.action
-          %span.text A mentor has approved this solution
+          %span.text
+            -if @solution.approved_by_id == User::SYSTEM_USER_ID
+              This solution has been automatically approved
+            -else
+              A mentor has approved this solution
           =link_to "Complete exercise", [:complete, :my, @solution], method: :patch, remote: true
 
 -elsif @solution.track_in_mentored_mode? && !@solution.mentoring_requested?

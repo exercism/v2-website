@@ -4,6 +4,10 @@ class UserNotificationsMailerPreview < ActionMailer::Preview
     UserNotificationsMailer.new_discussion_post(User.first, DiscussionPost.first)
   end
 
+  def solution_approved
+    UserNotificationsMailer.solution_approved(User.first, Solution.approved.first)
+  end
+
   def remind_about_solution_with_unapproved_solution
     UserNotificationsMailer.remind_about_solution(User.first, Solution.not_approved.first, [Solution.approved.first, Solution.not_approved.first])
   end

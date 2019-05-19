@@ -105,4 +105,12 @@ class Solution < ApplicationRecord
   def user_track
     UserTrack.find_by(user_id: user_id, track_id: exercise.track_id)
   end
+
+  def use_auto_analysis?
+    return false if approved?
+    return false if mentorships.present?
+    return false if solution_locks.where.not(user_id: User::SYSTEM_USER_ID).present?
+
+    true
+  end
 end
