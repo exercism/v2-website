@@ -75,18 +75,21 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
     GenerateMentorHeartbeats.()
   end
 
-
   test "generates site stats correctly" do
     mentor = create :user
     create :track_mentorship, user: mentor
 
     # Only these solutions count at all
-    solutions = 5.times.map { create(:iteration, created_at: Time.now - 6.9.days).solution }
+    solutions = 5.times.map { create(:iteration, solution: create(:solution, user:(create :user, current_sign_in_at: Time.now - 59.days)), created_at: Time.now - 6.9.days).solution }
 
     # Old solutions with new iterations don't count
     old_solution = create :solution
     create(:iteration, solution: old_solution, created_at: Time.now - 8.days)
     create(:iteration, solution: old_solution, created_at: Time.now - 1.day)
+
+    # Generate solution with user who's not logged in recently
+    inactive_user = create :user, current_sign_in_at: Time.now - 61.days
+    create(:iteration, solution: create(:solution, user: inactive_user, mentoring_requested_at: Time.now - 62.days), created_at: Time.now - 62.days)
 
     # Old iterations don't count
     create(:iteration, created_at: Time.now - 7.1.days)
@@ -133,6 +136,10 @@ class GenerateMentorHeartbeatsTest < ActiveSupport::TestCase
 
     # Only these solutions count at all
     solutions = 5.times.map { create(:iteration, created_at: Time.now - 6.9.days, solution: create(:solution, exercise: exercise)).solution }
+
+    # Generate solution with user who's not logged in recently
+    inactive_user = create :user, current_sign_in_at: Time.now - 61.days
+    create(:iteration, created_at: Time.now - 62.days, solution: create(:solution, exercise: exercise, user: inactive_user, mentoring_requested_at: Time.now - 62.days))
 
     # Different track
     create(:iteration, created_at: Time.now - 6.9.days)

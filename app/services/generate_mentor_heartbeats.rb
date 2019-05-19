@@ -9,7 +9,7 @@ class GenerateMentorHeartbeats
       if email_log.mentor_heartbeat_sent_at.nil?
         introduction = %Q{Welcome to your first Mentor Heartbeat!\n\nEach week, we'll be sending you an email that summarises the activity on each track you're mentoring. We'll also include information on any changes or updates to the mentoring side of Exercism. If you have any ideas on what you'd like to see here, please open an issue at on GitHub and let us know your thoughts. If you want to opt out, there's a link at the bottom of the email. Finally I just want to say a huge thank you for your hard work and for the thousands of people you're all helping on Exercism!}
       else
-        introduction = %Q{You may have noticed this week that there was a sudden spike in queue lengths - probably an addition 200 exercises per language. This was the result of us fixing a bug that meant solutions to exercises that were promoted to 'core' weren't automatically submitted for mentoring. This initially lead to a larger spike in the queues, but we mitigated the effect by limiting the queues to only show solutions where the user has been active in the last 60 days. If you have any questions about this, please feel free to reach out on Slack.}
+        introduction = %Q{We're now very close to launching the Ruby automated mentoring software for Two-Fer within Exercism. We'll follow up with an update on that next week. We expect to follow with more languages this month too. Exciting times! Here are this weeks stats.}
       end
 
       merged_tracks_stats = {}
@@ -101,6 +101,7 @@ class GenerateMentorHeartbeats
                                                     count
 
       current_queue_length = Solution.joins(:exercise).where('exercises.track_id': track.id).
+                                      joins(:user).where("users.current_sign_in_at > ?", Date.today - 60.days).
                                       submitted.
                                       where.not(mentoring_requested_at: nil).
                                       where(approved_by: nil).
