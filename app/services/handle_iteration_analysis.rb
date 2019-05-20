@@ -9,7 +9,7 @@ class HandleIterationAnalysis
 
   def call
     create_database_record
-    #handle_analysis
+    handle_analysis
     remove_system_lock
   end
 
