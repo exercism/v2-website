@@ -6,6 +6,10 @@ class APIController < ApplicationController
   rescue_from ActionController::RoutingError, with: -> { render_404  }
 
   layout false
+  
+  def a 
+    "a"
+  end
 
   def authenticate_user!
     authenticate_with_http_token do |token, options|
