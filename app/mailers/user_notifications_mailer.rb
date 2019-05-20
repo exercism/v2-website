@@ -20,9 +20,14 @@ class UserNotificationsMailer < ApplicationMailer
     @solution = solution
     exercise_title = @solution.exercise.title
     track_title = @solution.track.title
+    subject = if @solution.approved_by_id == User::SYSTEM_USER_ID
+        "Your solution to #{track_title}/#{exercise_title} has been automatically approved"
+      else
+        "A mentor has approved your solution to #{track_title}/#{exercise_title}"
+      end
     mail(
       to: @user.email,
-      subject: "[Exercism] A mentor has approved your solution to #{track_title}/#{exercise_title}"
+      subject: "[Exercism] #{subject}"
     )
   end
 
