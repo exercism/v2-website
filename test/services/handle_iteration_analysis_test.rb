@@ -19,6 +19,18 @@ class HandleIterationAnalysisTest < ActiveSupport::TestCase
     assert mentor_lock.reload
   end
 
+  test "creates db record" do
+    iteration = create :iteration
+    status = "success"
+    analysis = {"foo" => "bar"}
+
+    HandleIterationAnalysis.(iteration, status, analysis)
+    ia = IterationAnalysis.last
+    assert_equal iteration, ia.iteration
+    assert_equal status, ia.status
+    assert_equal analysis, ia.analysis
+  end
+
   test "does not approve if we should have auto analysis" do
     solution = create :solution
     solution.stubs(use_auto_analysis?: false)

@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :iteration_analysis do
+    iteration { create :iteration }
+    status { "success" }
+  end
+
   factory :user_email_log do
     user { create :user }
   end

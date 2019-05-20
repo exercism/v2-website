@@ -8,12 +8,21 @@ class HandleIterationAnalysis
   end
 
   def call
+    create_database_record
     handle_analysis
     remove_system_lock
   end
 
   private
   attr_reader :iteration, :analysis_status, :analysis
+
+  def create_database_record
+    IterationAnalysis.create!(
+      iteration: iteration,
+      status: analysis_status,
+      analysis: analysis
+    )
+  end
 
   def handle_analysis
     return unless solution.use_auto_analysis?
