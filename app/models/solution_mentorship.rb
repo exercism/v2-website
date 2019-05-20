@@ -12,8 +12,10 @@ class SolutionMentorship < ApplicationRecord
   belongs_to :solution
 
   scope :active, -> {
-    where(abandoned: false)#.
-    #where("solution_mentorships.user_id": TrackMentorship.select(:user_id))
+    where(abandoned: false).
+    # If you user `user_id: ...` here, it overrides the scope when you
+    # do merge(...) and causes utter chaos.
+    where("solution_mentorships.user_id in (#{TrackMentorship.select(:user_id).to_sql})")
   }
 
   scope :requires_action, -> { where.not(requires_action_since: nil) }

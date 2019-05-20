@@ -68,6 +68,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     iteration = create :iteration
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action_since: nil
+    create :track_mentorship, user: mentor, track: iteration.solution.exercise.track
 
     CreatesUserDiscussionPost.create!(iteration, iteration.solution.user, "Foobar")
 
@@ -80,6 +81,7 @@ class CreatesUserDiscussionPostTest < ActiveSupport::TestCase
     iteration = create :iteration, solution: solution
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: iteration.solution, requires_action_since: nil
+    create :track_mentorship, user: mentor, track: iteration.solution.exercise.track
 
     CreatesUserDiscussionPost.create!(iteration, iteration.solution.user, "Foobar")
 

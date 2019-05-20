@@ -75,6 +75,7 @@ class CreateIterationTest < ActiveSupport::TestCase
     solution = create :solution
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action_since: nil
+    create :track_mentorship, user: mentor, track: solution.exercise.track
 
     CreateIteration.(solution, [])
 
@@ -86,6 +87,7 @@ class CreateIterationTest < ActiveSupport::TestCase
     solution = create :solution, approved_by: create(:user)
     mentor = create :user
     mentorship = create :solution_mentorship, user: mentor, solution: solution, requires_action_since: nil
+    create :track_mentorship, user: mentor, track: solution.exercise.track
 
     CreateIteration.(solution, [])
 
