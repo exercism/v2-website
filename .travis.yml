@@ -39,8 +39,8 @@ script:
   - "bundle exec rake test:system"
 cache:
   node_modules: true
-  bundler
-  yarn
+  bundler: true
+  yarn : true
   directories:
     - vendor/bundle
 
