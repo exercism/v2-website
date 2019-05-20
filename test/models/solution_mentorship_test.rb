@@ -9,4 +9,19 @@ class SolutionMentorshipTest < ActiveSupport::TestCase
     solution_mentorship.update(requires_action_since: Time.current)
     assert solution_mentorship.requires_action?
   end
+
+  test "active" do
+    solution = create :solution
+    active_mentor_on_solution = create :user
+    active_mentor_not_on_solution = create :user
+    inactive_mentor_on_solution = create :user
+
+    active_mentorship = create :solution_mentorship, solution: solution, user: active_mentor_on_solution
+    create :solution_mentorship, solution: solution, user: inactive_mentor_on_solution
+    create :track_mentorship, user: active_mentor_on_solution
+    create :track_mentorship, user: active_mentor_not_on_solution
+    create :solution_mentorship, solution: solution, user: active_mentor_on_solution, abandoned: true
+
+    assert_equal [active_mentorship], solution.mentorships.active
+  end
 end

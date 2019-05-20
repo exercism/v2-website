@@ -11,7 +11,11 @@ class SolutionMentorship < ApplicationRecord
   belongs_to :user
   belongs_to :solution
 
-  scope :active, -> { where(abandoned: false) }
+  scope :active, -> {
+    where(abandoned: false).
+    where("user_id": TrackMentorship.select(:user_id))
+  }
+
   scope :requires_action, -> { where.not(requires_action_since: nil) }
 
   def requires_action?

@@ -52,7 +52,7 @@ class CreateIteration
         about: solution
       )
     else
-      solution.mentorships.update_all(requires_action_since: Time.current) unless solution.approved?
+      solution.mentorships.active.update_all(requires_action_since: Time.current) unless solution.approved?
       notify_mentors
     end
 

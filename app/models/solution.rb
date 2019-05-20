@@ -95,7 +95,7 @@ class Solution < ApplicationRecord
   end
 
   def active_mentors
-    mentors.where("solution_mentorships.user_id": TrackMentorship.select(:user_id))
+    mentorships.active.includes(:user).map(&:user)
   end
 
   def mentor_discussion_posts

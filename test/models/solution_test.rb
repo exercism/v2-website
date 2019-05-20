@@ -48,6 +48,7 @@ class SolutionTest < ActiveSupport::TestCase
     create :solution_mentorship, solution: solution, user: inactive_mentor_on_solution
     create :track_mentorship, user: active_mentor_on_solution
     create :track_mentorship, user: active_mentor_not_on_solution
+    create :solution_mentorship, solution: solution, user: active_mentor_on_solution, abandoned: true
 
     assert_equal [active_mentor_on_solution], solution.active_mentors
   end
