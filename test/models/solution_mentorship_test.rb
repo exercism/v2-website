@@ -11,6 +11,7 @@ class SolutionMentorshipTest < ActiveSupport::TestCase
   end
 
   test "active" do
+    create :user
     solution = create :solution
     active_mentor_on_solution = create :user
     active_mentor_not_on_solution = create :user
