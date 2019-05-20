@@ -49,6 +49,7 @@ class HandleIterationAnalysisTest < ActiveSupport::TestCase
   end
 
   test "auto approves solutions" do
+    skip # TODO - Reenable when live
     solution = create :solution
     iteration = create :iteration, solution: solution
 
