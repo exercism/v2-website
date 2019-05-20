@@ -18,4 +18,8 @@ class TeamSolution < ApplicationRecord
   def team_solution?
     true
   end
+
+  def use_auto_analysis?
+    false
+  end
 end
