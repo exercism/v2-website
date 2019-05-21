@@ -6,8 +6,8 @@
         %th Analysed at
         %th Language
         %th Exercsie
-        %th Status
-        %th Analysis
+        %th Pipeline Status
+        %th Analysis Status
         %th
       -@analyses.each do |analysis|
         -iteration = analysis.iteration
@@ -19,10 +19,10 @@
           %td= analysis.created_at
           %td= track.slug
           %td= exercise.slug
-          %td= analysis.status.titleize
           %td
-            %pre
-              %code= analysis.analysis
+            %code= analysis.status
+          %td
+            %code= analysis.analysis.try {|a|a['status'] }
           %td= link_to "View", mentor_analysis_path(analysis)
 
     =paginate(@analyses)

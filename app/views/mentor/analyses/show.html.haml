@@ -7,6 +7,9 @@
   .lo-container
     %h1 Analysis ##{@analysis.id}
     .status
+      %h2 Iteration ID
+      #{@analysis.iteration_id}
+    .status
       %h2 Analysis Status
       #{@analysis.status.titleize}
 
