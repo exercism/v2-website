@@ -1,0 +1,34 @@
+-iteration = @analysis.iteration
+-solution = iteration.solution
+-exercise = solution.exercise
+-track = exercise.track
+
+#mentor-analysis
+  .lo-container
+    %h1 Analysis ##{@analysis.id}
+    .status
+      %h2 Analysis Status
+      #{@analysis.status.titleize}
+
+    .analysis
+      %h2 Analysis
+      %pre
+        %code= @analysis.analysis
+
+    .code
+      %h2 Submission
+      -if iteration.files.size == 1
+        -file = iteration.files.first
+        .solution.single-file
+          %pre.line-numbers.solution-code
+            %code{class: syntax_highlighter_for_filename(file.filename, track)}
+              = file.file_contents.force_encoding('utf-8')
+      -else
+        -iteration.files.each do |file|
+          .solution.multi-file
+            %h3= file.filename
+            %pre.line-numbers.solution-code
+              %code{class: syntax_highlighter_for_filename(file.filename, track)}
+                = file.file_contents.force_encoding('utf-8')
+
+

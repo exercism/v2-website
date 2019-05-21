@@ -1,0 +1,28 @@
+#mentor-analyses
+  .lo-container
+    %table
+      %tr
+        %th Id
+        %th Analysed at
+        %th Language
+        %th Exercsie
+        %th Status
+        %th Analysis
+        %th
+      -@analyses.each do |analysis|
+        -iteration = analysis.iteration
+        -solution = iteration.solution
+        -exercise = solution.exercise
+        -track = exercise.track
+        %tr
+          %td= analysis.id
+          %td= analysis.created_at
+          %td= track.slug
+          %td= exercise.slug
+          %td= analysis.status.titleize
+          %td
+            %pre
+              %code= analysis.analysis
+          %td= link_to "View", mentor_analysis_path(analysis)
+
+    =paginate(@analyses)
