@@ -16,7 +16,7 @@
     .analysis
       %h2 Analysis
       %pre
-        %code= @analysis.analysis
+        %code= JSON.pretty_generate(@analysis.analysis)
 
     .code
       %h2 Submission
