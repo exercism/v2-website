@@ -9,7 +9,7 @@ class GenerateMentorHeartbeats
       if email_log.mentor_heartbeat_sent_at.nil?
         introduction = %Q{Welcome to your first Mentor Heartbeat!\n\nEach week, we'll be sending you an email that summarises the activity on each track you're mentoring. We'll also include information on any changes or updates to the mentoring side of Exercism. If you have any ideas on what you'd like to see here, please open an issue at on GitHub and let us know your thoughts. If you want to opt out, there's a link at the bottom of the email. Finally I just want to say a huge thank you for your hard work and for the thousands of people you're all helping on Exercism!}
       else
-        introduction = %Q{We're now very close to launching the Ruby automated mentoring software for Two-Fer within Exercism. We'll follow up with an update on that next week. We expect to follow with more languages this month too. Exciting times! Here are this weeks stats.}
+        introduction = %Q{This week we launched automated analysis for Ruby, C# and Go! If you're interested in getting a glimpse behind the scenes, you can see what the analyser is doing here: https://exercism.io/mentor/analyses - We're currently only looking at the first couple of exercises and only acting upon solutions with the "approve_as_optimal" status, but soon we'll be acting on the others too, as well as adding other tracks and exercises. Thanks to all those who have contributed to this new part of the stack!}
       end
 
       merged_tracks_stats = {}
