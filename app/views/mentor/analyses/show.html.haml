@@ -10,6 +10,12 @@
       %h2 Iteration ID
       #{@analysis.iteration_id}
     .status
+      %h2 Track
+      #{@analysis.iteration.solution.exercise.track.title}
+    .status
+      %h2 Exercise
+      #{@analysis.iteration.solution.exercise.title}
+    .status
       %h2 Analysis Status
       #{@analysis.status.titleize}
 
