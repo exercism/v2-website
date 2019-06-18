@@ -14,7 +14,9 @@ class Teams::WalkthroughTest < ApplicationSystemTestCase
     create(:auth_token, user: user)
     team = create(:team)
     create(:team_membership, team: team, user: user)
-    solution = create(:team_solution, team: team, user: user)
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    exercise = create(:exercise, track: track)
+    solution = create(:team_solution, team: team, user: user, exercise: exercise)
 
     stub_repo_cache! do
       sign_in!(user)

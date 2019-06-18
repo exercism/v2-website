@@ -16,7 +16,6 @@
           =link_to "Begin walk-through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button js-disable-on-click'
 
         .experienced
-          /%h3 Been here before?
           .step
             %h3 1. Download
             =render "widgets/code_snippet", code: @exercise.download_command
