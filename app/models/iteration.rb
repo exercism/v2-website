@@ -9,6 +9,8 @@ class Iteration < ApplicationRecord
   has_many :discussion_posts, dependent: :destroy
   has_many :notifications, as: :about
 
+  has_many :analyses, class_name: "IterationAnalysis", dependent: :destroy
+
   def discussion_post_notifications_for_user
     notifications.where(trigger_type: "DiscussionPost", user_id: solution.user_id)
   end
