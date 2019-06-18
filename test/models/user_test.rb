@@ -174,10 +174,14 @@ class UserTest < ActiveSupport::TestCase
     mentor_post = create(:discussion_post, user: user)
     solution = create(:solution, user: user)
     iteration = create(:iteration, solution: solution)
+    iteration_analysis = create(:iteration_analysis, iteration: iteration)
     learner_post = create(:discussion_post, iteration: iteration, user: user)
     blog_comment = create(:blog_comment, user: user)
     solution_comment = create(:solution_comment, user: user)
     solution_star = create(:solution_star, user: user)
+
+    create :team_membership, user: user
+    create :team_invitation, invited_by: user
 
     user.destroy
 
@@ -185,6 +189,7 @@ class UserTest < ActiveSupport::TestCase
     refute BlogComment.exists?(blog_comment.id)
     refute SolutionComment.exists?(solution_comment.id)
     refute SolutionStar.exists?(solution_star.id)
+    refute IterationAnalysis.exists?(iteration_analysis.id)
     mentor_post.reload
     refute mentor_post.destroyed?
     assert_nil mentor_post.user
