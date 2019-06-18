@@ -42,7 +42,16 @@ class UserTracksControllerTest < ActionDispatch::IntegrationTest
 
   test "#leave removes track and redirects" do
     sign_in!
-    user_track = create :user_track, user: @current_user
+
+    track = create :track
+    exercise = create :exercise, track: track
+
+    user_track = create :user_track, track: track, user: @current_user
+
+    solution = create :solution, exercise: exercise, user: @current_user
+    iteration = create :iteration, solution: solution
+    create :iteration_analysis, iteration: iteration
+    create :discussion_post, iteration: iteration
 
     delete leave_my_user_track_url(user_track)
     assert_redirected_to my_tracks_path
