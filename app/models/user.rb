@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :notifications, -> { order id: :desc }, dependent: :destroy
 
   has_many :team_memberships, dependent: :destroy
+  has_many :team_sent_invitations, class_name: "TeamInvitation", foreign_key: :invited_by_id, dependent: :destroy
   has_many :teams, through: :team_memberships
   has_many :managed_teams, -> { where(team_memberships: { admin: true }) }, through: :team_memberships, source: :team
 
