@@ -1,0 +1,20 @@
+-return unless @user_track.mentored_mode?
+-return unless @exercise.core? 
+-return unless @solution.num_mentors == 0
+-return if @solution.approved? || @solution.completed?
+
+.next-steps
+  .title ↳ Next steps
+
+  %p Well done on submitting your iteration. A mentor will check out your work and leave a comment here on your solution soon.
+  -if @exercise.core?
+    %p There are currently #{@queue_position[:track] - 1} solutions ahead of this in the #{@track.title} queue, and #{@queue_position[:exercise] - 1} ahead in the #{@exercise.title} queue. #{link_to "Learn more about how mentor queues work", how_do_mentor_queues_work_help_page_path}.
+    %p
+      In the meantime why not try a different exercise on the
+      =link_to "#{@track.title} track", [:my, @track]
+      or explore the #{link_to "other Exercism tracks", [:my, :tracks]}.
+  -else
+    %p
+      
+      
+

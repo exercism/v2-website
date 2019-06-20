@@ -166,6 +166,10 @@ class My::SolutionsController < MyController
     @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
 
+    if @exercise.core? && @user_track.mentored_mode?
+      @queue_position = SolutionsToBeMentored.index_of_core_solution(@solution)
+    end
+
     ClearNotifications.(current_user, @iteration)
 
     render :show

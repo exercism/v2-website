@@ -31,7 +31,8 @@ class PagesController < ApplicationController
   }
 
   HELP_PAGES = {
-    "Automated Solution Analysis": :automated_solution_analysis
+    "Automated solution analysis": :automated_solution_analysis,
+    "How do mentor queues work?": :how_do_mentor_queues_work
   }
 
   LICENCES = {

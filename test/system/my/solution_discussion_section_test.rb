@@ -7,6 +7,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   PUBLISH_TEXT = "Publish this solution."
   CANCEL_MENTORING_TEXT = "Don't want mentoring after all?"
   CANCEL_MENTORING_BTN_TEXT = "Cancel mentoring request"
+  WHILE_YOU_WAIT_TEXT = "While you wait"
 
   setup do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
@@ -72,15 +73,14 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
 
-    assert_selector ".next-steps"
-    assert_selector ".next-steps a", text: "other people have solved this"
+    refute_selector ".next-steps"
 
     refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
     assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", text: WHILE_YOU_WAIT_TEXT
     assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
-
   end
 
   test "mentored mode / side solution with mentoring requested and abaondoned mentor" do
@@ -94,13 +94,13 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
 
-    assert_selector ".next-steps"
-    assert_selector ".next-steps a", text: "other people have solved this"
+    refute_selector ".next-steps"
 
     refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
     refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
     refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
     assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", text: WHILE_YOU_WAIT_TEXT
     assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
 
   end
