@@ -42,9 +42,14 @@
               As side exercises don't block progression, they normally take longer to receive mentoring on than core exercises. For some tracks this might be a few hours but for the busiest tracks it might be a few days.
           .next-option
             %p
+              %strong While you wait
+              In the meantime why not explore how #{link_to "other people have solved this", track_exercise_solutions_path(@track, @exercise)}.
+          .next-option
+            %p
               %strong Don't want mentoring after all?
               Changed your mind and decided you don't want mentoring on this exercise? Want to free up your mentoring allowance for a different exercise? No problem!
             =link_to "Cancel mentoring request", [:cancel_mentoring_request, :my, @solution], class: 'pure-button', method: :patch
+
 
   .discussion
     %h3.rhs-heading Mentor discussion
@@ -52,6 +57,7 @@
       =render "auto_approved"
       =render "discussion", readonly: @iteration.discussion_posts.size == 0
     -else
+      =render "next_steps"
       =render "discussion"
 
 -elsif @solution.user_track.independent_mode?
