@@ -70,7 +70,7 @@ class SolutionsToBeMentored
       WHERE s.id = "#{solution.id}"
     }
 
-    ActiveRecord::Base.connection.select_value(sql)
+    ActiveRecord::Base.connection.select_value(sql).try(&:to_i)
   end
 
   private
