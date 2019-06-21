@@ -403,13 +403,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       end
     end
 
-    # Non-core
-    non_core_solution = create(:solution,
-      exercise: create(:exercise, track: track, core: false),
-      mentoring_requested_at: Time.current - 15
-    )
-    create :iteration, solution: non_core_solution
-
     # 10 same-exercise solutions
     exercise = create(:exercise, track: track, core: true)
     solutions += 10.times.map do |idx|
@@ -426,7 +419,20 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       exercise: 5
     }
     assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[14])
-  end
+
+    # Add Non-core
+    non_core_solution = create(:solution,
+      exercise: create(:exercise, track: track, core: false),
+      mentoring_requested_at: Time.current - 15
+    )
+    create :iteration, solution: non_core_solution
+
+    expected = {
+      track: 15,
+      exercise: 5
+    }
+    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[14])
+end
 
   def create_mentor_and_track
     mentor = create :user
