@@ -102,7 +102,13 @@ class SolutionsToBeMentored
       where.not(id: user.ignored_solution_mentorships.select(:solution_id)).
 
       # Not your own solutions
-      where.not(user_id: user.id)
+      where.not(user_id: user.id).
+
+      # Where not locked by a different mentor
+      where("NOT EXISTS(SELECT NULL FROM solution_locks
+                        WHERE solution_locks.solution_id = solutions.id
+                        AND locked_until > ?
+                        AND user_id != ?)", Time.current, user.id)
   end
 
   def base_query
@@ -129,13 +135,7 @@ class SolutionsToBeMentored
       where.not(mentoring_requested_at: nil).
 
       # Where there are no mentors
-      where(num_mentors: 0).
-
-      # Where not locked by a different mentor
-      where("NOT EXISTS(SELECT NULL FROM solution_locks
-                        WHERE solution_locks.solution_id = solutions.id
-                        AND locked_until > ?
-                        AND user_id != ?)", Time.current, user ? user.id : 0)
+      where(num_mentors: 0)
   end
 
   memoize
