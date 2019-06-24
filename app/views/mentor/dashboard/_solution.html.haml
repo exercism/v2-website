@@ -18,6 +18,10 @@
       .divider &nbsp;
       .iteration Iteration ##{solution.iterations.size}
       .divider &nbsp;
-      .submitted-at Last updated #{time_ago_in_words(solution.last_updated_by_user_at || solution.created_at)} ago
-  =image solution.exercise.track.hex_turquoise_icon_url, solution.exercise.track.title, class: 'track-icon', onerror: 'if (this.src != "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") { this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; };'
+      .submitted-at
+        -if solution.num_mentors > 0
+          Last updated #{time_ago_in_words(solution.last_updated_by_user_at || solution.created_at)} ago
+        -else
+          Submitted for mentoring #{time_ago_in_words(solution.mentoring_requested_at || solution.created_at)} ago
 
+  =image solution.exercise.track.hex_turquoise_icon_url, solution.exercise.track.title, class: 'track-icon', onerror: 'if (this.src != "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") { this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; };'
