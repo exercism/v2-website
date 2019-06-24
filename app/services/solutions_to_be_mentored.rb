@@ -50,13 +50,13 @@ class SolutionsToBeMentored
   def independent_solutions
     base_user_query.
       where("solutions.track_in_independent_mode": true).
-      order(Arel.sql("last_updated_by_user_at ASC"))
+      order(Arel.sql("mentoring_requested_at ASC"))
   end
 
   def other_solutions(ignore_ids)
     base_user_query.
       where.not(id: ignore_ids).
-      order(Arel.sql("last_updated_by_user_at ASC"))
+      order(Arel.sql("mentoring_requested_at ASC"))
   end
 
   def index_of_core_solution(solution)
@@ -89,7 +89,7 @@ class SolutionsToBeMentored
   def base_mentored_mode_query
     base_user_query.
       where("solutions.track_in_independent_mode": false).
-      order(Arel.sql("last_updated_by_user_at ASC"))
+      order(Arel.sql("mentoring_requested_at ASC"))
   end
 
   def base_user_query
