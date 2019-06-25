@@ -54,6 +54,8 @@ class SolutionsToBeMentored
 
   def index_of_core_solution(solution)
     inner_query = base_query.where('exercises.core': true).
+                             where("solutions.track_in_independent_mode": false).
+                             order(Arel.sql("mentoring_requested_at ASC")).
                              joins("JOIN (SELECT @position := 0) r").
                              select("solutions.id, @position := @position + 1 AS position")
 
