@@ -87,13 +87,13 @@ class Mentor::DashboardController < MentorController
 
   def load_track_stats
     service = SolutionsToBeMentored.new(current_user, @next_track_id, nil)
-    core_counts = service.core_solutions.group(:exercise_id).count
+    core_counts = service.all_core_solutions.group(:exercise_id).count
     @core_exercise_counts = @next_track.exercises.core.
       map{|e| [e, core_counts[e.id].to_i]}.
       sort_by {|e,c|e.position}
     @total_core_count = @core_exercise_counts.map(&:second).sum
 
-    side_counts = service.side_solutions.group(:exercise_id).count
+    side_counts = service.all_side_solutions.group(:exercise_id).count
     @side_exercise_counts = @next_track.exercises.where(id: side_counts.map(&:first)).
       map{|e| [e, side_counts[e.id].to_i]}.
       sort_by {|e,c|e.slug}

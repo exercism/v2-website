@@ -9,8 +9,8 @@ class SelectSuggestedSolutionsForMentor
   end
 
   def call
-    solution_ids = select(:core_solutions, MAX_RESULTS)
-    solution_ids += select(:side_solutions, MAX_RESULTS - solution_ids.length)
+    solution_ids = select(:mentored_core_solutions, MAX_RESULTS)
+    solution_ids += select(:mentored_side_solutions, MAX_RESULTS - solution_ids.length)
     solution_ids += select(:independent_solutions, MAX_RESULTS - solution_ids.length)
     solution_ids += select(:other_solutions, MAX_RESULTS - solution_ids.length, solution_ids)
 
