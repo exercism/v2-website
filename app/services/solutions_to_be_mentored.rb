@@ -27,23 +27,13 @@ class SolutionsToBeMentored
     base_user_query.where('exercises.core': false)
   end
 
-  def new_core_solutions
-    base_mentored_mode_new_query.
+  def core_solutions
+    base_mentored_mode_query.
       where('exercises.core': true)
   end
 
-  def new_side_solutions
-    base_mentored_mode_new_query.
-      where('exercises.core': false)
-  end
-
-  def legacy_core_solutions
-    base_mentored_mode_legacy_query.
-      where('exercises.core': true)
-  end
-
-  def legacy_side_solutions
-    base_mentored_mode_legacy_query.
+  def side_solutions
+    base_mentored_mode_query.
       where('exercises.core': false)
   end
 
@@ -74,17 +64,6 @@ class SolutionsToBeMentored
   end
 
   private
-
-  def base_mentored_mode_new_query
-    base_mentored_mode_query.
-      not_legacy
-  end
-
-  def base_mentored_mode_legacy_query
-    base_mentored_mode_query.
-      legacy.
-      where("solutions.last_updated_by_user_at > ?", Exercism::V2_MIGRATED_AT.to_s(:db))
-  end
 
   def base_mentored_mode_query
     base_user_query.

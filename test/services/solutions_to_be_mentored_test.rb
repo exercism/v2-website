@@ -27,7 +27,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :track_mentorship, user: mentor, track: mentored_track1
     create :track_mentorship, user: mentor, track: mentored_track2
 
-    assert_equal [solution1, solution2].sort, SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [solution1, solution2].sort, SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "does not select solutions you already mentor" do
@@ -46,7 +46,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: bad_solution
     create :solution_mentorship, user: mentor, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "does not select solutions claimed by a mentor" do
@@ -76,7 +76,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     # Lock with the same mentor
     create :solution_lock, solution: good_solution1, user: mentor, locked_until: Time.now + 1.day
 
-    assert_equal [good_solution1, good_solution2], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution1, good_solution2], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "does not select solutions that haven't requested mentoring" do
@@ -94,7 +94,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "filters by track" do
@@ -114,7 +114,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, [track1.id], nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, [track1.id], nil).side_solutions.sort
   end
 
   test "filters by exercise" do
@@ -134,7 +134,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, [good_exercise.id]).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, [good_exercise.id]).side_solutions.sort
   end
 
   test "only selects solutions that have an iteration" do
@@ -151,7 +151,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
                            mentoring_requested_at: Time.current)
     create :iteration, solution: good_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
 
   end
 
@@ -174,7 +174,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
 
@@ -198,7 +198,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "does not select approved solutions" do
@@ -218,7 +218,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "does not select completed solutions" do
@@ -238,7 +238,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: good_solution
     create :iteration, solution: bad_solution
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "does not select ignored solutions" do
@@ -257,7 +257,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     create :iteration, solution: bad_solution
     create :ignored_solution_mentorship, solution: bad_solution, user: mentor
 
-    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions.sort
+    assert_equal [good_solution], SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.sort
   end
 
   test "filters correctly" do
@@ -271,7 +271,6 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       independent_solution = create(:solution,
                                     exercise: create(:exercise, track: track, core: true),
                                     num_mentors: 0,
-                                    last_updated_by_user_at: DateTime.now,
                                     user: independent_user,
                                     track_in_independent_mode: true,
                                     mentoring_requested_at: Time.current)
@@ -279,89 +278,47 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
-                                        last_updated_by_user_at: DateTime.now - 1.minute,
                                         user: mentored_user,
-                                        mentoring_requested_at: Time.current)
+                                        mentoring_requested_at: Time.current - 1.minute,)
 
       unmentored_core_solution_2 = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
                                         created_at: Exercism::V2_MIGRATED_AT,
-                                        last_updated_by_user_at: DateTime.now,
                                         user: mentored_user,
                                         mentoring_requested_at: Time.current)
 
       unmentored_side_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: false),
                                         num_mentors: 0,
-                                        last_updated_by_user_at: DateTime.now,
                                         user: mentored_user,
                                         mentoring_requested_at: Time.current)
 
       mentored_1_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 1,
-                                        last_updated_by_user_at: DateTime.now - 10.minutes,
                                         user: mentored_user,
-                                        mentoring_requested_at: Time.current)
+                                        mentoring_requested_at: Time.current - 10.minutes)
 
       mentored_2_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 2,
-                                        last_updated_by_user_at: DateTime.now,
-                                        user: mentored_user,
-                                        mentoring_requested_at: Time.current)
-
-      unmentored_older_legacy_core_solution = create(:solution,
-                                        exercise: create(:exercise, track: track, core: true),
-                                        num_mentors: 0,
-                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
-                                        last_updated_by_user_at: Time.now - 30.seconds,
-                                        user: mentored_user,
-                                        mentoring_requested_at: Time.current)
-
-      unmentored_newer_legacy_core_solution = create(:solution,
-                                        exercise: create(:exercise, track: track, core: true),
-                                        num_mentors: 0,
-                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
-                                        last_updated_by_user_at: Time.now + 30.seconds,
-                                        user: mentored_user,
-                                        mentoring_requested_at: Time.current)
-
-      unmentored_legacy_side_solution = create(:solution,
-                                        exercise: create(:exercise, track: track, core: false),
-                                        num_mentors: 0,
-                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
-                                        last_updated_by_user_at: Time.now + 30.seconds,
-                                        user: mentored_user,
-                                        mentoring_requested_at: Time.current)
-
-      unmentored_dead_legacy_core_solution = create(:solution,
-                                        exercise: create(:exercise, track: track, core: true),
-                                        num_mentors: 0,
-                                        created_at: Exercism::V2_MIGRATED_AT - 1.hour,
-                                        last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.hour,
                                         user: mentored_user,
                                         mentoring_requested_at: Time.current)
 
       old_unmentored_core_solution = create(:solution,
                                         exercise: create(:exercise, track: track, core: true),
                                         num_mentors: 0,
-                                        last_updated_by_user_at: Time.now - 1.day,
                                         user: mentored_user,
-                                        mentoring_requested_at: Time.current)
+                                        mentoring_requested_at: Time.current - 1.day)
 
       all_solutions = [
         independent_solution,
         old_unmentored_core_solution,
         unmentored_core_solution,
         unmentored_side_solution,
-        unmentored_older_legacy_core_solution,
-        unmentored_newer_legacy_core_solution,
         mentored_1_core_solution,
         mentored_2_core_solution,
-        unmentored_legacy_side_solution,
-        unmentored_dead_legacy_core_solution,
         unmentored_core_solution_2
       ]
 
@@ -369,24 +326,14 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
         create :iteration, solution: solution
       end
 
-      assert_equal [old_unmentored_core_solution,unmentored_core_solution,unmentored_core_solution_2],
-                   SolutionsToBeMentored.new(mentor, nil, nil).new_core_solutions
+      assert_equal [old_unmentored_core_solution, unmentored_core_solution, unmentored_core_solution_2].map(&:id),
+                    SolutionsToBeMentored.new(mentor, nil, nil).core_solutions.map(&:id)
 
-      assert_equal [unmentored_older_legacy_core_solution,unmentored_newer_legacy_core_solution],
-                   SolutionsToBeMentored.new(mentor, nil, nil).legacy_core_solutions
+      assert_equal [unmentored_side_solution].map(&:id),
+                   SolutionsToBeMentored.new(mentor, nil, nil).side_solutions.map(&:id)
 
-      assert_equal [unmentored_side_solution],
-                   SolutionsToBeMentored.new(mentor, nil, nil).new_side_solutions
-
-      assert_equal [unmentored_legacy_side_solution],
-                   SolutionsToBeMentored.new(mentor, nil, nil).legacy_side_solutions
-
-      assert_equal [independent_solution],
-                   SolutionsToBeMentored.new(mentor, nil, nil).independent_solutions
-
-      ignore_ids = all_solutions.map(&:id) - [unmentored_dead_legacy_core_solution.id]
-      assert_equal [unmentored_dead_legacy_core_solution],
-                   SolutionsToBeMentored.new(mentor, nil, nil).other_solutions(ignore_ids)
+      assert_equal [independent_solution].map(&:id),
+                   SolutionsToBeMentored.new(mentor, nil, nil).independent_solutions.map(&:id)
     end
   end
 
