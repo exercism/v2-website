@@ -32,7 +32,7 @@ class CreateBlogComment < CreatesDiscussionPost
       blog_post.author,
       :new_blog_comment_for_blog_post_author,
       "Someone has commented on <strong>#{blog_post.title}</strong>",
-      Rails.application.routes.url_helpers.blog_post_url(blog_post, anchor: "comment-#{comment}"),
+      Rails.application.routes.url_helpers.blog_post_url(blog_post, anchor: "comment-#{comment.id}"),
       trigger: comment,
       about: blog_post
     )
@@ -45,7 +45,7 @@ class CreateBlogComment < CreatesDiscussionPost
         user,
         :new_blog_comment_for_other_commenter,
         "Someone else has commented on #{blog_post.title}",
-        Rails.application.routes.url_helpers.blog_post_url(blog_post, anchor: "comment-#{comment}"),
+        Rails.application.routes.url_helpers.blog_post_url(blog_post, anchor: "comment-#{comment.id}"),
         trigger: comment,
         about: blog_post
       )
