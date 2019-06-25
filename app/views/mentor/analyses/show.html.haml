@@ -10,6 +10,9 @@
       %h2 Iteration ID
       #{@analysis.iteration_id}
     .status
+      %h2 Solution
+      #{link_to @analysis.iteration.solution.uuid, mentor_solution_path(@analysis.iteration.solution)}
+    .status
       %h2 Track
       #{@analysis.iteration.solution.exercise.track.title}
     .status
