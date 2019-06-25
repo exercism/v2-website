@@ -168,14 +168,24 @@ $blue: #4A90E2;
             border-color:$blue;
             .core { display:block }
         }
-        .core {
+        &.side { .side { display:block } }
+        &.independent { .independent { display:block } }
+
+        .core,
+        .side,
+        .independent {
             display:none;
             float:right;
-            color:$blue;
             text-transform:uppercase;
             @include font-size(12, 12);
             font-weight:$bold;
-
+        }
+        .core {
+            color:$blue;
+        }
+        .side,
+        .independent {
+            color:#999;
         }
         .icons {
             position:relative;

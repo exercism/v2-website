@@ -1,5 +1,12 @@
-=link_to [:mentor, solution], class: "solution #{solution.exercise.core? && !solution.track_in_independent_mode?? "core" : ""}" do
-  .core= solution.legacy?? "Core (Legacy)" : "Core"
+-if solution.track_in_independent_mode?
+  - klass = "solution independent"
+-else
+  - klass = "solution #{(solution.exercise.core?? "core" : "side")}"
+
+=link_to [:mentor, solution], class: klass do
+  .core Core
+  .side Side
+  .independent IM
   .icons
     .exercise
       =image solution.exercise.turquoise_icon_url, solution.exercise.track.title
