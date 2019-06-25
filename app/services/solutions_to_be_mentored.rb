@@ -19,20 +19,23 @@ class SolutionsToBeMentored
     base_user_query
   end
 
-  def core_solutions
-    base_user_query.where('exercises.core': true)
+  def all_core_solutions
+    base_user_query.where('exercises.core': true).
+                    order(Arel.sql("solutions.track_in_independent_mode ASC, mentoring_requested_at ASC"))
+
   end
 
-  def side_solutions
-    base_user_query.where('exercises.core': false)
+  def all_side_solutions
+    base_user_query.where('exercises.core': false).
+                    order(Arel.sql("solutions.track_in_independent_mode ASC, mentoring_requested_at ASC"))
   end
 
-  def core_solutions
+  def mentored_core_solutions
     base_mentored_mode_query.
       where('exercises.core': true)
   end
 
-  def side_solutions
+  def mentored_side_solutions
     base_mentored_mode_query.
       where('exercises.core': false)
   end
