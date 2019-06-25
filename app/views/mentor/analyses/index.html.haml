@@ -1,11 +1,15 @@
 #mentor-analyses
   .lo-container
+    =form_tag({}, method: :get) do
+      =select_tag :track_id, options_for_select(@tracks.map{|t|[t.title, t.id]}, @track_id), include_blank: true
+      =button_tag "Filter", class: "pure-button"
+
     %table
       %tr
         %th Id
         %th Analysed at
         %th Language
-        %th Exercsie
+        %th Exercise
         %th Pipeline Status
         %th Analysis Status
         %th
