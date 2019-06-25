@@ -3,6 +3,19 @@
 
 #mentor-analyses {
     padding-top:10px;
+    form {
+        padding-bottom:20px;
+        .selectize-control {
+            display:inline-block;
+            vertical-align:top;
+            width:200px;
+        }
+        .pure-button {
+            vertical-align:top;
+            background:$color-1;
+            padding: 9px 20px 10px 20px;
+        }
+    }
     table {
         width:100%;
     }
