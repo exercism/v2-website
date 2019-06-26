@@ -4,6 +4,8 @@ module AnalysisServices
   class ProcessAnalysisTest < ActiveSupport::TestCase
     SUCCESS_STATUS = 'success'.freeze
     APPROVAL_AS_OPTIMAL_DATA = {'status' => "approve_as_optimal"}.freeze
+    APPROVAL_WITH_COMMENT_DATA = {'status' => "approve_with_comment"}.freeze
+    APPROVAL_DATA = { 'status' => "approve" }.freeze
 
     test "removes any locks" do
       solution = create :solution
@@ -49,7 +51,15 @@ module AnalysisServices
       ProcessAnalysis.(iteration, 'failed', APPROVAL_AS_OPTIMAL_DATA)
     end
 
-    test "auto approves solutions" do
+    test "approves solutions for approve" do
+      solution = create :solution
+      iteration = create :iteration, solution: solution
+
+      Approve.expects(:call).with(solution)
+      ProcessAnalysis.(iteration, SUCCESS_STATUS, APPROVAL_DATA)
+    end
+
+    test "approves solutions for legacy approve_as_optimal" do
       solution = create :solution
       iteration = create :iteration, solution: solution
 
@@ -57,12 +67,12 @@ module AnalysisServices
       ProcessAnalysis.(iteration, SUCCESS_STATUS, APPROVAL_AS_OPTIMAL_DATA)
     end
 
-    test "does not approve unless optimal (for now)" do
+    test "approves solutions for legacy approve_with_comment" do
       solution = create :solution
       iteration = create :iteration, solution: solution
 
-      Approve.expects(:call).never
-      ProcessAnalysis.(iteration, SUCCESS_STATUS, {'status' => "approve"})
+      Approve.expects(:call).with(solution)
+      ProcessAnalysis.(iteration, SUCCESS_STATUS, APPROVAL_WITH_COMMENT_DATA)
     end
 
     test "does not approve if disapprove" do
@@ -79,6 +89,22 @@ module AnalysisServices
 
       Approve.expects(:call).never
       ProcessAnalysis.(iteration, SUCCESS_STATUS, {'status' => "refer_to_mentor"})
+    end
+
+    test "posts comments" do
+      comments = ["ruby.two-fer.string_building", "ruby.two-fer.avoid_kernel_format"]
+
+      data = {
+        'status' => "approve",
+        'comments' => comments
+      }.freeze
+
+      solution = create :solution
+      iteration = create :iteration, solution: solution
+
+      PostComments.expects(:call).with(iteration, comments)
+      Approve.expects(:call).with(solution)
+      ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
     end
   end
 end

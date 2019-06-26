@@ -30,10 +30,13 @@ module AnalysisServices
       return unless analysis_succeeded?
 
       case analysis[:status].to_s.to_sym
-      when :approve_as_optimal
+      when :approve,
+           :approve_as_optimal, :approve_with_comment # Legacy statuses
+
+        PostComments.(iteration, analysis[:comments]) if analysis[:comments].present?
         Approve.(solution)
       else
-        # We currently don't do anything with non-optimal solutions
+        # We currently don't do anything with non-approved solutions
       end
     end
 
@@ -48,6 +51,12 @@ module AnalysisServices
     memoize
     def solution
       iteration.solution
+    end
+
+    memoize
+
+    def system_user
+      User.system_user
     end
   end
 end
