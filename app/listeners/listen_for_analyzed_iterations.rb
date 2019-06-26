@@ -10,7 +10,7 @@ class ListenForAnalyzedIterations
       iteration = Iteration.find_by_id(iteration_id)
       if iteration
         p "Handling iteration analysis: #{iteration_id}"
-        HandleIterationAnalysis.(iteration, status, analysis)
+        AnalysisServices::ProcessAnalysis.(iteration, status, analysis)
       else
         p "No iteration: #{iteration_id}"
       end
