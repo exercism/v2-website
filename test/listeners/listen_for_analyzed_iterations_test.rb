@@ -15,7 +15,7 @@ class ListenForAnalyzedIterationsTest < ActiveSupport::TestCase
     propono_client.expects(:listen).with(:iteration_analyzed).yields(message)
     Propono.expects(:configure_client).returns(propono_client)
 
-    HandleIterationAnalysis.expects(:call).with(iteration, status, analysis)
+    AnalysisServices::ProcessAnalysis.expects(:call).with(iteration, status, analysis)
     ListenForAnalyzedIterations.()
   end
 end
