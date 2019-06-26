@@ -1,11 +1,12 @@
 class CreatesDiscussionPost
   include HTMLGenerationHelpers
 
-  attr_reader :iteration, :author, :content, :discussion_post
-  def initialize(iteration, author, content)
+  attr_reader :iteration, :author, :content, :type, :discussion_post
+  def initialize(iteration, author, content, type: nil)
     @iteration = iteration
     @author = author
     @content = content
+    @type = type
   end
 
   private
@@ -15,7 +16,8 @@ class CreatesDiscussionPost
       iteration: iteration,
       user: author,
       content: content,
-      html: html
+      html: html,
+      type: type
     )
   end
 

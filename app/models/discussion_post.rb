@@ -1,4 +1,6 @@
 class DiscussionPost < ApplicationRecord
+  self.inheritance_column = 'does_not_have_one'
+
   belongs_to :iteration
   has_one :solution, through: :iteration
 

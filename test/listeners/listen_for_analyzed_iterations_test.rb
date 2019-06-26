@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ListenForAnalyzedIterationsTest < ActiveSupport::TestCase
-
   def test_proxies_message_correctly
     iteration = create :iteration
     status = mock

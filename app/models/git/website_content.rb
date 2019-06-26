@@ -34,8 +34,6 @@ class Git::WebsiteContent < Git::RepoBase
   end
 
   def mentor_notes_for(track_slug, exercise_slug)
-    repo_path = "tracks/"
-
     ptr = head_commit.tree["tracks"]
     tree = repo.lookup(ptr[:oid])
     target = "#{track_slug}/exercises/#{exercise_slug}/"
@@ -48,6 +46,25 @@ class Git::WebsiteContent < Git::RepoBase
 
     nil
   end
+
+  def automated_comment_for(code)
+    ptr = head_commit.tree["automated-comments"]
+    tree = repo.lookup(ptr[:oid])
+    path = "#{code.split(".")[0...-1].join("/")}/"
+    filename = "#{code.split(".").last}.md"
+    p path
+    p filename
+
+    tree.walk_blobs do |root, file|
+      next unless root == path
+      next unless file[:name] == filename
+      file_blob = repo.lookup(file[:oid])
+      return file_blob.text
+    end
+
+    nil
+  end
+
 
   def mentors
     ptr = head_commit.tree["mentors"]
