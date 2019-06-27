@@ -17,4 +17,3 @@
 //= require_tree .
 
 $('select').selectize()
-

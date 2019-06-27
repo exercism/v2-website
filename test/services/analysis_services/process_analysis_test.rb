@@ -67,11 +67,11 @@ module AnalysisServices
       ProcessAnalysis.(iteration, SUCCESS_STATUS, APPROVAL_AS_OPTIMAL_DATA)
     end
 
-    test "approves solutions for legacy approve_with_comment" do
+    test "doesn't approves solutions for legacy approve_with_comment" do
       solution = create :solution
       iteration = create :iteration, solution: solution
 
-      Approve.expects(:call).with(solution)
+      Approve.expects(:call).never
       ProcessAnalysis.(iteration, SUCCESS_STATUS, APPROVAL_WITH_COMMENT_DATA)
     end
 
@@ -92,16 +92,18 @@ module AnalysisServices
     end
 
     test "posts comments" do
-      comments = ["ruby.two-fer.string_building", "ruby.two-fer.avoid_kernel_format"]
+      comment_data = [{"comment" => "foo"}]
+      comments = mock
 
       data = {
         'status' => "approve",
-        'comments' => comments
+        'comments' => comment_data
       }.freeze
 
       solution = create :solution
       iteration = create :iteration, solution: solution
 
+      BuildComments.expects(:call).with(comment_data).returns(comments)
       PostComments.expects(:call).with(iteration, comments)
       Approve.expects(:call).with(solution)
       ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
