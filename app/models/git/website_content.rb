@@ -52,8 +52,6 @@ class Git::WebsiteContent < Git::RepoBase
     tree = repo.lookup(ptr[:oid])
     path = "#{code.split(".")[0...-1].join("/")}/"
     filename = "#{code.split(".").last}.md"
-    p path
-    p filename
 
     tree.walk_blobs do |root, file|
       next unless root == path

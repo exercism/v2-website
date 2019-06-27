@@ -31,9 +31,9 @@ module AnalysisServices
 
       case analysis[:status].to_s.to_sym
       when :approve,
-           :approve_as_optimal, :approve_with_comment # Legacy statuses
+           :approve_as_optimal # Legacy status to be removed EO July 2019
 
-        PostComments.(iteration, analysis[:comments]) if analysis[:comments].present?
+        post_comments
         Approve.(solution)
       else
         # We currently don't do anything with non-approved solutions
@@ -46,6 +46,18 @@ module AnalysisServices
 
     def analysis_succeeded?
       analysis_status == :success
+    end
+
+    # This method will raise exceptions if
+    # comments are missing or invalid.
+    def post_comments
+      comments_data = analysis[:comments]
+
+      return unless comments_data.present?
+      return unless comments_data.is_a?(Array)
+
+      comments = BuildComments.(comments_data)
+      PostComments.(iteration, comments)
     end
 
     memoize
