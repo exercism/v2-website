@@ -485,6 +485,7 @@ ActiveRecord::Schema.define(version: 2019_07_03_133313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
+    t.integer "median_wait_time"
   end
 
   create_table "user_email_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
