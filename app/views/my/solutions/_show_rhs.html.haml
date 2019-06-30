@@ -50,7 +50,6 @@
               Changed your mind and decided you don't want mentoring on this exercise? Want to free up your mentoring allowance for a different exercise? No problem!
             =link_to "Cancel mentoring request", [:cancel_mentoring_request, :my, @solution], class: 'pure-button', method: :patch
 
-
   .discussion
     %h3.rhs-heading Mentor discussion
     -if @solution.exercise.auto_approve?

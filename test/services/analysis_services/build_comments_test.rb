@@ -2,8 +2,26 @@ require 'test_helper'
 
 module AnalysisServices
   class PostCommentsTest < ActiveSupport::TestCase
-    test "generates comments correctly" do
-      system_user = create :system_user
+    test "generates single comments correctly" do
+      system_user = create :user, :system
+      iteration = create :iteration
+
+      templates = {"tests.first-comment" => "first comment"}
+
+      website_copy = mock
+      website_copy.expects(:automated_comment_for).with("tests.first-comment").returns(templates["tests.first-comment"])
+      Git::WebsiteContent.expects(:head).returns(website_copy)
+
+      comments_data = [{
+        'comment' => "tests.first-comment"
+      }]
+
+      expected = "Our analyzer detected that this point might be helpful for you.\n\n---\n\nfirst comment"
+      assert_equal expected, BuildComments.(comments_data)
+    end
+
+    test "generates multiple comments correctly" do
+      system_user = create :user, :system
       iteration = create :iteration
 
       templates = {"tests.first-comment" => "first comment",
@@ -24,7 +42,7 @@ module AnalysisServices
         }
       ]
 
-      expected = "first comment\n\n---\n\nsecond comment me"
+      expected = "Our analyzer detected that these points might be helpful for you.\n\n---\n\nfirst comment\n\n---\n\nsecond comment me"
       assert_equal expected, BuildComments.(comments_data)
     end
   end
