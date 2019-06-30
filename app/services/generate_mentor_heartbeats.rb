@@ -9,7 +9,7 @@ class GenerateMentorHeartbeats
       if email_log.mentor_heartbeat_sent_at.nil?
         introduction = %Q{Welcome to your first Mentor Heartbeat!\n\nEach week, we'll be sending you an email that summarises the activity on each track you're mentoring. We'll also include information on any changes or updates to the mentoring side of Exercism. If you have any ideas on what you'd like to see here, please open an issue at on GitHub and let us know your thoughts. If you want to opt out, there's a link at the bottom of the email. Finally I just want to say a huge thank you for your hard work and for the thousands of people you're all helping on Exercism!}
       else
-        introduction = %Q{This week we added automated analysis in Python. Java should be coming this week and Erlang and Kotlin are now both in progress. This week we also added the ability to see the position of core exercises in the queues. This should hopefully reduce some of the frustration students have from not knowing how long it will be until their mentoring starts.}
+        introduction = %Q{Our analyzers currently only approve solutions where the submission is 'optimal' meaning there are no additional comments or suggestions. This week we have been working on also adding support for approval with an additional comment. This addition should improve our automated approval rate to over 50% the exercises that have this feature implemented. We're aiming to launch this functionality in the middle of this coming week. We also put the Java analyzer live this week. Thanks to those who worked on that.}
       end
 
       merged_tracks_stats = {}
