@@ -3,10 +3,21 @@ require 'test_helper'
 module AnalysisServices
   class PostCommentsTest < ActiveSupport::TestCase
     test "proxies correctly" do
-      system_user = create :system_user
+      system_user = create :user, :system
       iteration = create :iteration
 
-      content = "first comment\n\n---\n\nsecond comment me"
+      content = %q{
+Our analyzer detected that these points might be helpful for you:
+
+---
+
+first comment
+
+---
+
+second comment me
+      }.strip
+
       html = ParseMarkdown.(content)
 
       DiscussionPost.expects(:create!).with(

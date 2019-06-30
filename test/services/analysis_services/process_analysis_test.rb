@@ -108,5 +108,19 @@ module AnalysisServices
       Approve.expects(:call).with(solution)
       ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
     end
+
+    test "explodes if the comment doesn't work" do
+      data = {
+        'status' => "approve",
+        'comments' => [{"comment" => "foo"}]
+      }.freeze
+
+      solution = create :solution
+      iteration = create :iteration, solution: solution
+
+      assert_raises do
+        ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
+      end
+    end
   end
 end

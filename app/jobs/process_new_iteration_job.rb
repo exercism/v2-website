@@ -12,6 +12,6 @@ class ProcessNewIterationJob < ApplicationJob
         lock_length: 60.minutes
       )
     end
-  end
 =end
+  end
 end

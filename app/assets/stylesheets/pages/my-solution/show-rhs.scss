@@ -52,9 +52,13 @@
             }
         }
         .pure-button {
+            margin-top:0;
             @include width-small() {
                 margin-left:20px;
             }
+        }
+        .pure-button+p {
+            margin-top:10px;
         }
     }
     .pane.markdown,
