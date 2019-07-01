@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Teams::InvitationsControllerTest < ActionDispatch::IntegrationTest
   test "prevents non-admins from removing invites" do
-    non_admin = create(:user)
+    non_admin = create(:user, :onboarded)
     team = create(:team)
     create(:team_membership,
            user: non_admin,

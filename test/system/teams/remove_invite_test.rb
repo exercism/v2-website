@@ -5,7 +5,7 @@ class Teams::RemoveInviteTest < ApplicationSystemTestCase
     original_host = Capybara.app_host
     Capybara.app_host = SeleniumHelpers.teams_host
 
-    team_admin = create(:user)
+    team_admin = create(:user, :onboarded)
     team = create(:team)
     create(:team_membership, team: team, user: team_admin, admin: true)
     invite = create(:team_invitation, team: team)

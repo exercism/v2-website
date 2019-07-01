@@ -8,9 +8,7 @@ class Teams::WalkthroughTest < ApplicationSystemTestCase
     original_host = Capybara.app_host
     Capybara.app_host = "http://teams.lvh.me"
 
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     create(:auth_token, user: user)
     team = create(:team)
     create(:team_membership, team: team, user: user)

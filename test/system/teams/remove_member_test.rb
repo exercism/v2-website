@@ -5,9 +5,9 @@ class Teams::RemoveMemberTest < ApplicationSystemTestCase
     original_host = Capybara.app_host
     Capybara.app_host = SeleniumHelpers.teams_host
 
-    team_admin = create(:user)
+    team_admin = create(:user, :onboarded)
     team = create(:team)
-    member = create(:user, name: "Team member")
+    member = create(:user, :onboarded, name: "Team member")
     create(:team_membership, team: team, user: team_admin, admin: true)
     create(:team_membership, team: team, user: member, admin: false)
 

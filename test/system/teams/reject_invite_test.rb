@@ -5,7 +5,7 @@ class Teams::RejectInviteTest < ApplicationSystemTestCase
     original_host = Capybara.app_host
     Capybara.app_host = SeleniumHelpers.teams_host
 
-    user = create(:user, email: "test@example.com")
+    user = create(:user, :onboarded, email: "test@example.com")
     team = create(:team, name: "Team A")
     create(:team_invitation, team: team, email: "test@example.com")
 

@@ -181,6 +181,11 @@ FactoryBot.define do
     factory :system_user do
       id { User::SYSTEM_USER_ID }
     end
+
+    trait :onboarded do
+      accepted_terms_at { Date.new(2016, 12, 25) }
+      accepted_privacy_policy_at { Date.new(2016, 12, 25) }
+    end
   end
 
   factory :solution do
