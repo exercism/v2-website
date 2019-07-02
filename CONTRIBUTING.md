@@ -32,3 +32,15 @@ These are our style guidelines which are constantly evolving.
 ### Accessbility
 - Use the `image` method, not `image_tag` method and provide a sensible `alt` attribute
 - Use the `icon` or `graphical_icon` methods, not `%i.fa` when using font-awesome.
+
+## Creating test repos
+
+Since most of the content in the website is hosted as repositories on Github, we need to replicate it in our test environment. We do this by hosting our own repos in the `test/fixtures` folder.
+
+We currently have test repos for a track (`test/fixtures/track`), website-copy (`test/fixtures/website-copy`), and problem-specifications (`test/problem-specifications`).
+
+### Modifiying a test repo
+
+1. Clone the test repo. (`git clone /path/to/exercism_repo/test/fixtures/website-copy`)
+2. Make the necessary changes to the cloned repo.
+3. Commit and push to master. This pushes the changes to the test repo in the exercism codebase.
