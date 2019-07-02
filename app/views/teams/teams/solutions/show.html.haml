@@ -43,19 +43,20 @@
 
               %p Help your teammate by leaving feedback on their post. Try and be encouraging and helpful!
 
-          =form_for [:teams, @team, DiscussionPost.new], remote: true do |f|
-            =hidden_field_tag :iteration_id, @iteration.id
+          .new-editable-text
+            =form_for [:teams, @team, DiscussionPost.new], remote: true do |f|
+              =hidden_field_tag :iteration_id, @iteration.id
 
-            .tabs-and-panes.selected-1
-              .tabs
-                .tab.tab-1{data: {tab: "markdown"}} Write
-                .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
-              .panes
-                .pane.pane-1.markdown
-                  =f.text_area :content
-                .pane.pane-2.preview
-                  .preview-area
-            =button_tag "Comment", class: "comment-button pure-button"
+              .tabs-and-panes.selected-1
+                .tabs
+                  .tab.tab-1{data: {tab: "markdown"}} Write
+                  .tab.tab-2.preview-tab{data: {tab: "preview"}} Preview
+                .panes
+                  .pane.pane-1.markdown
+                    =f.text_area :content
+                  .pane.pane-2.preview
+                    .preview-area
+              =button_tag "Comment", class: "comment-button pure-button"
 
 -content_for :js do
   :javascript
