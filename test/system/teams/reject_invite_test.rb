@@ -1,10 +1,7 @@
-require 'application_system_test_case'
+require_relative "./test_case"
 
-class Teams::RejectInviteTest < ApplicationSystemTestCase
+class Teams::RejectInviteTest < Teams::TestCase
   test "user rejects invite" do
-    original_host = Capybara.app_host
-    Capybara.app_host = SeleniumHelpers.teams_host
-
     user = create(:user, :onboarded, email: "test@example.com")
     team = create(:team, name: "Team A")
     create(:team_invitation, team: team, email: "test@example.com")
@@ -16,7 +13,5 @@ class Teams::RejectInviteTest < ApplicationSystemTestCase
     end
 
     assert page.has_no_content?("Team A")
-
-    Capybara.app_host = original_host
   end
 end
