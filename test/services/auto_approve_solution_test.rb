@@ -5,7 +5,7 @@ class AutoApprovesSolutionTest < ActiveSupport::TestCase
     Timecop.freeze do
       solution = create :solution, last_updated_by_user_at: nil
       create :iteration, solution: solution
-      system_user = create :system_user
+      system_user = create :user, :system
 
       AutoApproveSolution.(solution)
 
@@ -16,7 +16,7 @@ class AutoApprovesSolutionTest < ActiveSupport::TestCase
   end
 
   test "noop unless solution.use_auto_analysis" do
-    system_user = create :system_user
+    system_user = create :user, :system
     solution = create :solution
     create :iteration, solution: solution
 
@@ -40,7 +40,7 @@ class AutoApprovesSolutionTest < ActiveSupport::TestCase
                       exercise: exercise,
                       completed_at: Time.utc(2018, 6, 25))
     create :iteration, solution: solution
-    system_user = create(:system_user)
+    system_user = create(:user, :system)
 
     stub_repo_cache! do
       AutoApproveSolution.(solution)
@@ -55,7 +55,7 @@ class AutoApprovesSolutionTest < ActiveSupport::TestCase
     user = solution.user
 
     # Setup mentor
-    system_user = create :system_user
+    system_user = create :user, :system
 
     CreateNotification.expects(:call).with do |*args|
       assert_equal user, args[0]
@@ -78,7 +78,7 @@ class AutoApprovesSolutionTest < ActiveSupport::TestCase
   test "discussion post created" do
     solution = create :solution, last_updated_by_user_at: nil
     iteration = create :iteration, solution: solution
-    system_user = create :system_user
+    system_user = create :user, :system
 
     AutoApproveSolution.(solution)
 

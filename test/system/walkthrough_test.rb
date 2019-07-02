@@ -5,9 +5,7 @@ class WalkthroughTest < ApplicationSystemTestCase
     Git::WebsiteContent.
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     create(:auth_token, user: user)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     create(:user_track, user: user, track: track)
@@ -27,9 +25,7 @@ class WalkthroughTest < ApplicationSystemTestCase
     Git::WebsiteContent.
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     create(:auth_token, user: user)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     create(:user_track, user: user, track: track)

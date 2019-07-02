@@ -5,9 +5,7 @@ class My::SideExercisesHoverTest < ApplicationSystemTestCase
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
 
-    @user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     @track = create :track
     @core_exercise = create :exercise, track: @track, core: true
     @side_exercise = create :exercise, track: @track, unlocked_by: @core_exercise, title: "side-1"

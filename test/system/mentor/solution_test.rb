@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class SolutionTest < ApplicationSystemTestCase
   setup do
-    @mentor = create(:user_mentor)
+    @mentor = create(:user, :mentor)
     @track = create(:track, title: "Ruby")
     create :track_mentorship, user: @mentor, track: @track
 

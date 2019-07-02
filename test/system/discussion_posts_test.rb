@@ -7,9 +7,7 @@ class DiscussionPostsTest < ApplicationSystemTestCase
   end
 
   test "user edits a discussion post" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track)
     create(:user_track, track: track, user: user, independent_mode: false)
     exercise = create(:exercise, track: track)
@@ -38,9 +36,7 @@ class DiscussionPostsTest < ApplicationSystemTestCase
   end
 
   test "user deletes a discussion post" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track)
     create(:user_track, track: track, user: user, independent_mode: false)
     exercise = create(:exercise, track: track)
@@ -62,9 +58,7 @@ class DiscussionPostsTest < ApplicationSystemTestCase
   end
 
   test "mentor edits a discussion post" do
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    mentor = create(:user, :mentor, :onboarded)
     track = create(:track)
     create(:track_mentorship, track: track, user: mentor)
     exercise = create(:exercise, track: track)
@@ -90,9 +84,7 @@ class DiscussionPostsTest < ApplicationSystemTestCase
   end
 
   test "mentor deletes a discussion post" do
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    mentor = create(:user, :mentor, :onboarded)
     track = create(:track)
     create(:track_mentorship, track: track, user: mentor)
     exercise = create(:exercise, track: track)

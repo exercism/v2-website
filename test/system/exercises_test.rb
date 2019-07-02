@@ -5,9 +5,7 @@ class ExercisesTest < ApplicationSystemTestCase
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
 
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track)
     create(:user_track, user: user, track: track, independent_mode: false)
     unlocked_exercise = create(:exercise,
@@ -45,9 +43,7 @@ class ExercisesTest < ApplicationSystemTestCase
   end
 
   test "shows unlocked exercises for an exercise" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     create(:user_track, user: user, track: track, independent_mode: false)
     exercise = create(:exercise, track: track, core: true)
