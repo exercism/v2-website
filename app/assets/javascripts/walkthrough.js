@@ -1,7 +1,9 @@
 var Walkthrough = {
   bindEvents: function(parent) {
+    var self = this;
+
     this.initialize();
-    this.scrollLinks(parent);
+    setTimeout(function() { self.scrollLinks(parent) }, 100)
   },
 
   initialize: function() {
@@ -33,10 +35,12 @@ var LZString=function(){function o(o,r){if(!t[o]){t[o]={};for(var n=0;n<o.length
   },
 
   scrollLinks: function(parent) {
+    var self = this;
+
     $("a[data-passage]").on("click", function() {
       setTimeout(
         function() {
-          this.scrollLinks(parent);
+          self.scrollLinks(parent);
           $(parent).animate({ scrollTop: 0 });
         },
         100
