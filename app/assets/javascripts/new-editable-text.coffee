@@ -13,7 +13,7 @@ window.setupNewEditableText = (localStorageKey) =>
   setLocalStoragePost = (content) =>
     if content.length > 0
       localStorage.setItem(localStorageKey, content)
-    else 
+    else
       localStorage.removeItem(localStorageKey)
     updateStatus(content)
 
