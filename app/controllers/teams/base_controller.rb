@@ -1,6 +1,7 @@
 class Teams::BaseController < ApplicationController
   layout 'teams'
   before_action :authenticate_user!
+  before_action :ensure_onboarded!
 
   def set_site_context
     cookies["site_context"] = {
@@ -19,5 +20,16 @@ class Teams::BaseController < ApplicationController
     else
       raise
     end
+  end
+
+  private
+
+  def ensure_onboarded!
+    return unless user_signed_in?
+    unless current_user.onboarded?
+      redirect_to onboarding_path
+      false
+    end
+    true
   end
 end

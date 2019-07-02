@@ -4,7 +4,7 @@ class GenerateTeamJoinUrlTest < ApplicationSystemTestCase
   test "generates a team join url" do
     original_host = Capybara.app_host
     Capybara.app_host = SeleniumHelpers.teams_host
-    team_admin = create(:user)
+    team_admin = create(:user, :onboarded)
     team = create(:team, token: "TOKEN", url_join_allowed: false)
     create(:team_membership,
            user: team_admin,
