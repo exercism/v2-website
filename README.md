@@ -46,6 +46,12 @@ Firstly, you need to set a server identity, which you can do like this:
 echo "host" > server_identity
 ```
 
+You also need to create a local version of secrets.yml:
+
+```bash
+cp config/secrets.yml.example config/secrets.yml
+```
+
 Then we've put a rake task together that should set everything else up. You can run it like this:
 
 ```bash

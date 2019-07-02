@@ -2,8 +2,8 @@ require 'test_helper'
 
 class Teams::TeamMembershipsControllerTest < ActionDispatch::IntegrationTest
   test "prevents non-admins from removing team members" do
-    non_admin = create(:user)
-    member = create(:user)
+    non_admin = create(:user, :onboarded)
+    member = create(:user, :onboarded)
     team = create(:team)
     create(:team_membership,
            user: non_admin,

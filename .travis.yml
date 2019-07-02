@@ -22,7 +22,6 @@ before_script:
 addons:
   chrome: stable
 before_install:
-  - sudo rm config/secrets.yml
   - sudo cp config/secrets.yml.example config/secrets.yml
   - sudo service mysql restart
   - sudo mysql -e "CREATE USER 'exercism_reboot'@'localhost' IDENTIFIED BY 'exercism_reboot'" -u root

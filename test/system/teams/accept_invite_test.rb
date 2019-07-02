@@ -5,7 +5,7 @@ class Teams::AcceptInviteTest < ApplicationSystemTestCase
     original_host = Capybara.app_host
     Capybara.app_host = SeleniumHelpers.teams_host
 
-    user = create(:user, email: "test@example.com")
+    user = create(:user, :onboarded, email: "test@example.com")
     team = create(:team, name: "Team A")
     create(:team_invitation, team: team, email: "test@example.com")
 
@@ -23,7 +23,7 @@ class Teams::AcceptInviteTest < ApplicationSystemTestCase
     original_host = Capybara.app_host
     Capybara.app_host = SeleniumHelpers.teams_host
 
-    user = create(:user)
+    user = create(:user, :onboarded)
     team = create(:team, name: "Team A")
     invitation = create(:team_invitation, team: team)
 
@@ -40,7 +40,7 @@ class Teams::AcceptInviteTest < ApplicationSystemTestCase
     Capybara.app_host = SeleniumHelpers.teams_host
 
     email = "foooos@fooooos.com"
-    user = create(:user, email: email)
+    user = create(:user, :onboarded, email: email)
     user.confirm
 
     team = create(:team, name: "Team A")

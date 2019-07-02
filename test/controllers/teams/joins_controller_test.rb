@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Teams::JoinsControllerTest < ActionDispatch::IntegrationTest
   test "redirects to team path if already part of team" do
-    user = create(:user)
+    user = create(:user, :onboarded)
     team = create(:team)
     create(:team_membership, user: user, team: team)
 
