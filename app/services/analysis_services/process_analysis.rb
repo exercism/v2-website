@@ -12,13 +12,15 @@ module AnalysisServices
       create_database_record
       handle_analysis
       remove_system_lock
+
+      record
     end
 
     private
-    attr_reader :iteration, :analysis_status, :analysis
+    attr_reader :iteration, :analysis_status, :analysis, :record
 
     def create_database_record
-      IterationAnalysis.create!(
+      @record = IterationAnalysis.create!(
         iteration: iteration,
         status: analysis_status,
         analysis: analysis
@@ -38,6 +40,9 @@ module AnalysisServices
       else
         # We currently don't do anything with non-approved solutions
       end
+
+    rescue => e
+      @record.update(website_error: e.message)
     end
 
     def remove_system_lock
