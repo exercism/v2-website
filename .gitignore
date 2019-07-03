@@ -34,3 +34,5 @@ coverage/
 
 dump.sql
 dump.sql.gz
+
+config/secrets.yml
