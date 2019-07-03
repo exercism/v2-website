@@ -1,6 +1,8 @@
 class ProcessNewIterationJob < ApplicationJob
   def perform(iteration)
     UploadIterationToS3.(iteration)
+
+=begin
     PubSub::PublishNewIteration.(iteration)
 
     if iteration.solution.use_auto_analysis?
@@ -11,4 +13,5 @@ class ProcessNewIterationJob < ApplicationJob
       )
     end
   end
+=end
 end
