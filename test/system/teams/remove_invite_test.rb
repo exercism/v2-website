@@ -1,10 +1,7 @@
-require 'application_system_test_case'
+require_relative "./test_case"
 
-class Teams::RemoveInviteTest < ApplicationSystemTestCase
+class Teams::RemoveInviteTest < Teams::TestCase
   test "team admin removes team invitation" do
-    original_host = Capybara.app_host
-    Capybara.app_host = SeleniumHelpers.teams_host
-
     team_admin = create(:user, :onboarded)
     team = create(:team)
     create(:team_membership, team: team, user: team_admin, admin: true)
@@ -17,7 +14,5 @@ class Teams::RemoveInviteTest < ApplicationSystemTestCase
     end
 
     assert page.has_no_content?("Remove")
-
-    Capybara.app_host = original_host
   end
 end

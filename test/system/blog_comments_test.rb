@@ -3,9 +3,7 @@ require "application_system_test_case"
 class BlogCommentsTest < ApplicationSystemTestCase
 
   test "user posts a blog comment" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     blog_post = create(:blog_post)
 
     sign_in!(user)
@@ -23,9 +21,7 @@ class BlogCommentsTest < ApplicationSystemTestCase
   end
 
   test "user edits a blog comment" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     blog_post = create(:blog_post)
     blog_comment = create(:blog_comment,
                              content: "Hello!",
@@ -46,9 +42,7 @@ class BlogCommentsTest < ApplicationSystemTestCase
   end
 
   test "user deletes a blog comment" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     blog_post = create(:blog_post)
     blog_comment = create(:blog_comment,
                              content: "Hello!",

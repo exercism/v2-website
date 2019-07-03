@@ -13,9 +13,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::Exercise.any_instance.stubs(test_suite: [])
 
-    @user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     sign_in!(@user)
   end
 
@@ -147,9 +145,7 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
   test "mentored section with auto approve and comment" do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
 
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     exercise = create :exercise, auto_approve: true
     solution = create(:solution, user: @user, mentoring_requested_at: Time.current, exercise: exercise, approved_by: create(:user))
     iteration = create :iteration, solution: solution

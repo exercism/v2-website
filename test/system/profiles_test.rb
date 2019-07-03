@@ -2,9 +2,7 @@ require "application_system_test_case"
 
 class ProfilesTest < ApplicationSystemTestCase
   test "user uploads profile image" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     profile = create(:profile, user: user)
 
     sign_in!(user)
@@ -19,9 +17,7 @@ class ProfilesTest < ApplicationSystemTestCase
   end
 
   test "user uploads profile image with an invalid format" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     profile = create(:profile, user: user)
 
     sign_in!(user)

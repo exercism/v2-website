@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class SolutionLocksTest < ApplicationSystemTestCase
   setup do
-    @mentor = create(:user_mentor)
+    @mentor = create(:user, :mentor)
     @track = create(:track, title: "Ruby")
     create :track_mentorship, user: @mentor, track: @track
 
@@ -80,7 +80,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
   end
 
   test "mentor can leave solution without adding a comment" do
-    create :system_user
+    create :user, :system
 
     visit next_solutions_mentor_dashboard_path
     assert page.has_link?(nil, {href: mentor_solution_path(@solution)})
@@ -102,7 +102,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
   end
 
   test "mentor can leave solution after adding a comment" do
-    create :system_user
+    create :user, :system
 
     visit next_solutions_mentor_dashboard_path
     assert page.has_link?(nil, {href: mentor_solution_path(@solution)})

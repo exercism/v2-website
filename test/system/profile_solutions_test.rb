@@ -2,9 +2,7 @@ require 'application_system_test_case'
 
 class ProfileSolutionsTest < ApplicationSystemTestCase
   test "orders solutions by number of stars" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track)
     create(:user_track, track: track, user: user)
     create(:profile, user: user)
@@ -39,9 +37,7 @@ class ProfileSolutionsTest < ApplicationSystemTestCase
   end
 
   test "updates solutions count correctly" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     ruby = create(:track, title: "Ruby")
     python = create(:track, title: "Python")
     create(:user_track, track: ruby, user: user)

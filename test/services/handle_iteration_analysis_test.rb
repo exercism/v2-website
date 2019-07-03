@@ -8,7 +8,7 @@ class HandleIterationAnalysisTest < ActiveSupport::TestCase
     solution = create :solution
     iteration = create :iteration, solution: solution
 
-    system_lock = create :solution_lock, solution: solution, user: create(:system_user)
+    system_lock = create :solution_lock, solution: solution, user: create(:user, :system)
     mentor_lock = create :solution_lock, solution: solution
     HandleIterationAnalysis.(iteration, nil, nil)
 

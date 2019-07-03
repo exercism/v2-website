@@ -3,10 +3,7 @@ require 'application_system_test_case'
 class FilterSolutionsTest < ApplicationSystemTestCase
   test "your solutions section does not show up if you do not mentor any" do
     track = create(:track)
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [track])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [track])
 
     sign_in!(mentor)
     visit your_solutions_mentor_dashboard_path
@@ -20,10 +17,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
   test "filters solutions by status" do
     track = create(:track)
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [track])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [track])
     hello_world = create(:exercise, track: track)
     solution = create(:solution,
                       exercise: hello_world,
@@ -44,10 +38,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
   test "displays solutions requiring action by default" do
     track = create(:track)
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [track])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [track])
     hello_world = create(:exercise, track: track)
     action_required_solution = create(:solution,
                                       exercise: hello_world)
@@ -77,10 +68,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
   test "filters solutions by track" do
     ruby = create(:track, title: "Ruby")
     cpp = create(:track, title: "C++")
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [ruby, cpp])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [ruby, cpp])
     hello_world_ruby = create(:exercise, track: ruby)
     solution_ruby = create(:solution, exercise: hello_world_ruby)
     hello_world_cpp = create(:exercise, track: cpp)
@@ -107,10 +95,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
   test "filters solutions by exercise" do
     ruby = create(:track, title: "Ruby")
     go = create(:track, title: "Go")
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [ruby, go])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [ruby, go])
     hello_world = create(:exercise, title: "Hello World", track: ruby)
     sorting = create(:exercise, title: "Sorting", track: ruby)
     hello_world_solution = create(:solution, exercise: hello_world)
@@ -137,10 +122,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
 
   test "autoselects your solutions when mentor has one track" do
     track = create(:track)
-    mentor = create(:user_mentor,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    mentored_tracks: [track])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [track])
     exercise1 = create(:exercise, title: "Exercise 1", track: track)
     exercise2 = create(:exercise, title: "Exercise 2", track: track)
     solution1 = create(:solution, exercise: exercise1, mentoring_requested_at: Time.current)
