@@ -39,6 +39,8 @@ cache:
   node_modules: true
   directories:
     - vendor/bundle
-
+branches:
+  only:
+  - master
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov
