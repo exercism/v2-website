@@ -1,10 +1,7 @@
-require 'application_system_test_case'
+require_relative "./test_case"
 
-class Teams::AcceptInviteTest < ApplicationSystemTestCase
+class Teams::AcceptInviteTest < Teams::TestCase
   test "user accepts invite with same email" do
-    original_host = Capybara.app_host
-    Capybara.app_host = SeleniumHelpers.teams_host
-
     user = create(:user, :onboarded, email: "test@example.com")
     team = create(:team, name: "Team A")
     create(:team_invitation, team: team, email: "test@example.com")
@@ -15,14 +12,9 @@ class Teams::AcceptInviteTest < ApplicationSystemTestCase
 
     assert page.has_link?("Team A")
     assert page.has_no_content?("Pending Invitations")
-
-    Capybara.app_host = original_host
   end
 
   test "user accepts invite with different email address" do
-    original_host = Capybara.app_host
-    Capybara.app_host = SeleniumHelpers.teams_host
-
     user = create(:user, :onboarded)
     team = create(:team, name: "Team A")
     invitation = create(:team_invitation, team: team)
@@ -36,9 +28,6 @@ class Teams::AcceptInviteTest < ApplicationSystemTestCase
   end
 
   test "user accepts invite with different new user" do
-    original_host = Capybara.app_host
-    Capybara.app_host = SeleniumHelpers.teams_host
-
     email = "foooos@fooooos.com"
     user = create(:user, :onboarded, email: email)
     user.confirm
@@ -61,7 +50,5 @@ class Teams::AcceptInviteTest < ApplicationSystemTestCase
 
     assert page.has_link?("Team A")
     assert page.has_no_content?("Pending Invitations")
-
-    Capybara.app_host = original_host
   end
 end
