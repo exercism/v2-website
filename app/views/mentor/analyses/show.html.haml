@@ -27,6 +27,12 @@
       %pre
         %code= JSON.pretty_generate(@analysis.analysis)
 
+    -if @analysis.website_error.present?
+      .analysis
+        %h2 Website Error
+        %pre
+          %code= @analysis.website_error
+
     .code
       %h2 Submission
       -if iteration.files.size == 1

@@ -24,7 +24,10 @@
           %td= track.slug
           %td= exercise.slug
           %td
-            %code= analysis.status
+            -if analysis.website_error.present?
+              %code errored
+            -else
+              %code= analysis.status
           %td
             %code= analysis.analysis.try {|a|a['status'] }
           %td= link_to "View", mentor_analysis_path(analysis)
