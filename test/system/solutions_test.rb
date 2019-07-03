@@ -2,9 +2,7 @@ require "application_system_test_case"
 
 class SolutionsTest < ApplicationSystemTestCase
   test "shows test suite" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     create(:user_track, track: track, user: user)
     exercise = create(:exercise, track: track, slug: "hello-world")
@@ -25,9 +23,7 @@ class SolutionsTest < ApplicationSystemTestCase
   end
 
   test "index test suite" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     solution = create(:solution, published_at: Time.now)
 
     sign_in!(user)
@@ -35,9 +31,7 @@ class SolutionsTest < ApplicationSystemTestCase
   end
 
   test "can star a solution" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     solution = create(:solution, published_at: Time.now)
 
     sign_in!(user)
@@ -53,9 +47,7 @@ class SolutionsTest < ApplicationSystemTestCase
   end
 
   test "can unstar a solution" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     solution = create(:solution, published_at: Time.now)
     star = create(:solution_star, user: user, solution: solution)
 

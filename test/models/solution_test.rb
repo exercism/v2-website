@@ -202,7 +202,7 @@ class SolutionTest < ActiveSupport::TestCase
   end
 
   test "use_auto_analysis is false  if someone else has locked" do
-    system_user = create :system_user
+    system_user = create :user, :system
 
     solution = create :solution
     lock = create :solution_lock, solution: solution

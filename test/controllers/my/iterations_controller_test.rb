@@ -2,7 +2,7 @@ require 'test_helper'
 
 class My::IterationsControllerTest < ActionDispatch::IntegrationTest
   test "redirects to the correct iteration index" do
-    user = create(:user, accepted_terms_at: Date.new(2016, 12, 25), accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     solution = create(:solution, user: user)
     iteration = create(:iteration, solution: solution)
     iteration2 = create(:iteration, solution: solution)

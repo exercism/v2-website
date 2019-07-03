@@ -8,7 +8,7 @@ class ProcessNewIterationJobTest < ActiveJob::TestCase
   end
 
   test "fans out correctly" do
-    system_user = create :system_user
+    system_user = create :user, :system
     iteration = create :iteration
 
     UploadIterationToS3.expects(:call).with(iteration)
@@ -18,7 +18,7 @@ class ProcessNewIterationJobTest < ActiveJob::TestCase
   end
 
   test "locks for auto analysis if appropriate" do
-    system_user = create :system_user
+    system_user = create :user, :system
     iteration = create :iteration
     iteration.solution.stubs(use_auto_analysis?: true)
 
