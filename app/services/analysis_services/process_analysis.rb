@@ -42,7 +42,7 @@ module AnalysisServices
       end
 
     rescue => e
-      @record.update(website_error: e.message)
+      record.update!(website_error: e.message)
     end
 
     def remove_system_lock
