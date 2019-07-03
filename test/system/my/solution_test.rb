@@ -4,9 +4,7 @@ class My::SolutionTest < ApplicationSystemTestCase
   test "command hint fields should be readonly" do
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
-    @user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     sign_in!(@user)
 
     exercise = create :exercise
@@ -18,9 +16,7 @@ class My::SolutionTest < ApplicationSystemTestCase
   end
 
   test "mentored section with auto approve and comment" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
 
     track_repo_url = "locked_sha"
     locked_sha = "1234"

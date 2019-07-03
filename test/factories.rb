@@ -174,11 +174,11 @@ FactoryBot.define do
     password { "foobar123" }
     current_sign_in_at { Time.now }
 
-    factory :user_mentor do
+    trait :mentor do
       is_mentor { true }
     end
 
-    factory :system_user do
+    trait :system do
       id { User::SYSTEM_USER_ID }
     end
 

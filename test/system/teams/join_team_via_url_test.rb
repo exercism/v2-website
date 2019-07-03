@@ -1,9 +1,7 @@
-require "application_system_test_case"
+require_relative "./test_case"
 
-class JoinTeamViaUrlTest < ApplicationSystemTestCase
+class JoinTeamViaUrlTest < Teams::TestCase
   test "join team via url" do
-    original_host = Capybara.app_host
-    Capybara.app_host = SeleniumHelpers.teams_host
     user = create(:user, :onboarded)
     team = create(:team,
                   token: "TOKEN",
@@ -17,7 +15,5 @@ class JoinTeamViaUrlTest < ApplicationSystemTestCase
     assert_text "Team A"
     team.reload
     assert_includes team.members, user
-
-    Capybara.app_host = original_host
   end
 end

@@ -7,9 +7,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
   end
 
   test "unlocks only core exercises for an unapproved solution" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     exercise = create(:exercise, track: track, core: true)
     create(:exercise,
@@ -44,9 +42,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
 
   test "unlocks core exercises and side exercises for an approved solution" do
     mentor = create(:user)
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     exercise = create(:exercise, track: track, core: true)
     create(:exercise,
@@ -80,9 +76,7 @@ class CompleteExerciseTest < ApplicationSystemTestCase
   end
 
   test "can complete independent mode exercise" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
     exercise = create(:exercise, track: track, core: true)
     create(:exercise,

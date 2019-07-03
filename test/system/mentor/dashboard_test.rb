@@ -6,10 +6,7 @@ class DashboardTest < ApplicationSystemTestCase
     solution_updated_at = Time.now - 33.days
 
     track = create(:track)
-    mentor = create(:user_mentor,
-                    accepted_terms_at: some_date,
-                    accepted_privacy_policy_at: some_date,
-                    mentored_tracks: [track])
+    mentor = create(:user, :mentor, :onboarded, mentored_tracks: [track])
     exercise = create(:exercise, title: "Exercise 1", track: track)
     solution = create(:solution, exercise: exercise,
                 mentoring_requested_at: solution_updated_at,

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HeartbeatMailerTest < ActionMailer::TestCase
   test "mentor_heartbeat - general" do
-    user = create :user_mentor
+    user = create :user, :mentor
 
     email = HeartbeatMailer.mentor_heartbeat(user, minimal_mentor_heartbeat_data, nil)
     assert_emails 1 do
@@ -16,7 +16,7 @@ class HeartbeatMailerTest < ActionMailer::TestCase
   end
 
   test "mentor_heartbeat - welcome for new mentors" do
-    user = create :user_mentor
+    user = create :user, :mentor
 
     text = "Welcome to your first mentor Heartbeat. Each week we'll be sending a brief summary on the state of each track you're mentor. We'll also include some information on any changes or updates to the mentor side of Exercism that have occurred this week, and some inspiration from our community. If you have any thoughts or ideas on what you'd like to see here, please open an issue on GitHub."
 

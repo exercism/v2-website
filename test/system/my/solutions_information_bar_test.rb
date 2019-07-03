@@ -2,9 +2,7 @@ require "application_system_test_case"
 
 class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   setup do
-    @user = create(:user,
-                    accepted_terms_at: Date.new(2016, 12, 25),
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     @track = create(:track)
     @user_track = create :user_track, user: @user, track: @track, independent_mode: false
     @exercise = create(:exercise, track: @track)
@@ -80,7 +78,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   test "on alogritmic approval" do
     dp = create :discussion_post, iteration: @iteration
     create :notification, about: @iteration, read: true, trigger: dp
-    @solution.update(approved_by: create(:system_user))
+    @solution.update(approved_by: create(:user, :system))
 
     sign_in!(@user)
     visit my_solution_path(@solution)

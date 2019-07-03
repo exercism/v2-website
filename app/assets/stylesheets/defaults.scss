@@ -18,6 +18,10 @@ body {
     }
 }
 
+summary {
+  display: list-item;
+}
+
 button,
 input,
 select,

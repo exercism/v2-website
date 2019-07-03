@@ -1,12 +1,10 @@
-require 'application_system_test_case'
+require_relative "./test_case"
 
-class Teams::WalkthroughTest < ApplicationSystemTestCase
+class Teams::WalkthroughTest < Teams::TestCase
   test "user views walkthrough from the team solutions page" do
     Git::WebsiteContent.
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
-    original_host = Capybara.app_host
-    Capybara.app_host = "http://teams.lvh.me"
 
     user = create(:user, :onboarded)
     create(:auth_token, user: user)
@@ -23,7 +21,5 @@ class Teams::WalkthroughTest < ApplicationSystemTestCase
     end
 
     assert_text "Welcome to the Exercism installation guide!"
-
-    Capybara.app_host = original_host
   end
 end
