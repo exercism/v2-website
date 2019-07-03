@@ -2,9 +2,7 @@ require "application_system_test_case"
 
 class JoinTrackSystemTest < ApplicationSystemTestCase
   test "user joins a track in mentored mode" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track,
                    title: "Ruby",
                    repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
@@ -31,9 +29,7 @@ class JoinTrackSystemTest < ApplicationSystemTestCase
   end
 
   test "user joins a track in independent mode" do
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track,
                    title: "Ruby",
                    repo_url: "file://#{Rails.root}/test/fixtures/website-copy")

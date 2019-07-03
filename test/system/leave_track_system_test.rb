@@ -4,9 +4,7 @@ class LeaveTrackSystemTest < ApplicationSystemTestCase
   test "user leaves a track" do
     Git::ExercismRepo.stubs(pages: [])
 
-    user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    user = create(:user, :onboarded)
     track = create(:track, title: "Ruby")
     create(:user_track,
            user: user,
