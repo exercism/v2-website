@@ -109,7 +109,7 @@ module AnalysisServices
       ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
     end
 
-    test "explodes if the comment doesn't work" do
+    test "stores error if the comment doesn't work" do
       data = {
         'status' => "approve",
         'comments' => [{"comment" => "foo"}]
@@ -118,9 +118,8 @@ module AnalysisServices
       solution = create :solution
       iteration = create :iteration, solution: solution
 
-      assert_raises do
-        ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
-      end
+      record = ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
+      assert_equal "undefined method `[]' for nil:NilClass", record.website_error
     end
   end
 end
