@@ -12,6 +12,7 @@
         %th Exercise
         %th Pipeline Status
         %th Analysis Status
+        %th.right # Comments
         %th
       -@analyses.each do |analysis|
         -iteration = analysis.iteration
@@ -30,6 +31,7 @@
               %code= analysis.status
           %td
             %code= analysis.analysis.try {|a|a['status'] }
+          %td.right= analysis.analysis.try {|a|a['comments'] }.try(&:size)
           %td= link_to "View", mentor_analysis_path(analysis)
 
     =paginate(@analyses)
