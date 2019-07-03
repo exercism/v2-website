@@ -25,10 +25,14 @@ module AnalysisServices
     def comments
       repo = Git::WebsiteContent.head
       comments = comments_data.map do |comment_data|
-        template = repo.automated_comment_for(comment_data['comment'])
-        params = (comment_data['params'] || {}).symbolize_keys
+        template, params =
+          if comment_data.is_a?(Hash)
+            [ comment_data['comment'], (comment_data['params'] || {}).symbolize_keys ]
+          else
+            [comment_data, {}]
+          end
 
-        template % params
+          repo.automated_comment_for(template) % params
       end
 
       comments.join("\n\n---\n\n")
