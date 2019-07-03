@@ -118,8 +118,11 @@ module AnalysisServices
       solution = create :solution
       iteration = create :iteration, solution: solution
 
+      error_msg = "some_error"
+      BuildComments.expects(:call).raises(RuntimeError, error_msg)
+
       record = ProcessAnalysis.(iteration, SUCCESS_STATUS, data)
-      assert_equal "undefined method `[]' for nil:NilClass", record.website_error
+      assert_equal error_msg, record.website_error
     end
   end
 end
