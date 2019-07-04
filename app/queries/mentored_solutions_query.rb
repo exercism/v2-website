@@ -11,7 +11,7 @@ class MentoredSolutionsQuery
       joins(:discussion_posts).
       where.not(mentoring_requested_at: nil).
       where(track_in_independent_mode: false).
-      where("num_mentors > 1").
+      where("num_mentors > 0").
       where.not(discussion_posts: { user_id: User::SYSTEM_USER_ID }).
       group(:solution_id)
   end

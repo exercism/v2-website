@@ -29,7 +29,7 @@ module ExerciseServices
                         exercise: exercise,
                         mentoring_requested_at: time - wait_time,
                         track_in_independent_mode: false,
-                        num_mentors: 2)
+                        num_mentors: 1)
       iteration = create(:iteration, solution: solution)
       create(:discussion_post, iteration: iteration, created_at: time)
     end

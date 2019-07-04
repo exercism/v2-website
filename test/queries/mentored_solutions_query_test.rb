@@ -5,7 +5,7 @@ class MentoredSolutionsQueryTest < ActiveSupport::TestCase
     solution = create(:solution,
                       mentoring_requested_at: nil,
                       track_in_independent_mode: false,
-                      num_mentors: 2)
+                      num_mentors: 1)
     iteration = create(:iteration, solution: solution)
     create(:discussion_post, user: create(:user), iteration: iteration)
 
@@ -16,18 +16,18 @@ class MentoredSolutionsQueryTest < ActiveSupport::TestCase
     solution = create(:solution,
                       mentoring_requested_at: Time.utc(2016, 12, 25),
                       track_in_independent_mode: true,
-                      num_mentors: 2)
+                      num_mentors: 1)
     iteration = create(:iteration, solution: solution)
     create(:discussion_post, user: create(:user), iteration: iteration)
 
     assert_empty MentoredSolutionsQuery.()
   end
 
-  test "excludes solutions where number of mentors less than 2" do
+  test "excludes solutions where number of mentors less than 1" do
     solution = create(:solution,
                       mentoring_requested_at: Time.utc(2016, 12, 25),
                       track_in_independent_mode: false,
-                      num_mentors: 1)
+                      num_mentors: 0)
     iteration = create(:iteration, solution: solution)
     create(:discussion_post, user: create(:user), iteration: iteration)
 
@@ -38,7 +38,7 @@ class MentoredSolutionsQueryTest < ActiveSupport::TestCase
     solution = create(:solution,
                       mentoring_requested_at: Time.utc(2016, 12, 25),
                       track_in_independent_mode: false,
-                      num_mentors: 2)
+                      num_mentors: 1)
     system = create(:user, :system)
     iteration = create(:iteration, solution: solution)
     create(:discussion_post,
@@ -53,7 +53,7 @@ class MentoredSolutionsQueryTest < ActiveSupport::TestCase
     solution = create(:solution,
                       mentoring_requested_at: Time.utc(2016, 12, 25),
                       track_in_independent_mode: false,
-                      num_mentors: 2)
+                      num_mentors: 1)
     system = create(:user, :system)
     human = create(:user, id: 2)
     iteration = create(:iteration, solution: solution)
@@ -79,7 +79,7 @@ class MentoredSolutionsQueryTest < ActiveSupport::TestCase
     solution = create(:solution,
                       mentoring_requested_at: Time.utc(2016, 12, 25),
                       track_in_independent_mode: false,
-                      num_mentors: 2)
+                      num_mentors: 1)
     human = create(:user, id: 2)
     iteration = create(:iteration, solution: solution)
     create(:discussion_post,
