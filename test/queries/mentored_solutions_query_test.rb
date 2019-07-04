@@ -49,24 +49,42 @@ class MentoredSolutionsQueryTest < ActiveSupport::TestCase
     assert_empty MentoredSolutionsQuery.()
   end
 
-  test "marks first_mentored_at as the time a human adds a discussion post" do
+  test "excludes solutions with discussions by the submitting user only" do
+    solution = create(:solution,
+                      mentoring_requested_at: Time.utc(2016, 12, 25),
+                      track_in_independent_mode: false,
+                      num_mentors: 1)
+    iteration = create(:iteration, solution: solution)
+    create(:discussion_post,
+           user: iteration.solution.user,
+           iteration: iteration,
+           created_at: Date.new(2016, 12, 25))
+
+    assert_empty MentoredSolutionsQuery.()
+  end
+
+  test "marks first_mentored_at as the time a mentor adds a discussion post" do
     solution = create(:solution,
                       mentoring_requested_at: Time.utc(2016, 12, 25),
                       track_in_independent_mode: false,
                       num_mentors: 1)
     system = create(:user, :system)
-    human = create(:user, id: 2)
+    mentor = create(:user, id: 2)
     iteration = create(:iteration, solution: solution)
+    create(:discussion_post,
+           user: iteration.solution.user,
+           iteration: iteration,
+           created_at: Date.new(2016, 12, 24))
     create(:discussion_post,
            user: system,
            iteration: iteration,
            created_at: Date.new(2016, 12, 25))
     create(:discussion_post,
-           user: human,
+           user: mentor,
            iteration: iteration,
            created_at: Date.new(2016, 12, 26))
     create(:discussion_post,
-           user: human,
+           user: mentor,
            iteration: iteration,
            created_at: Date.new(2016, 12, 27))
 

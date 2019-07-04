@@ -13,6 +13,7 @@ class MentoredSolutionsQuery
       where(track_in_independent_mode: false).
       where("num_mentors > 0").
       where.not(discussion_posts: { user_id: User::SYSTEM_USER_ID }).
+      where.not('discussion_posts.user_id = solutions.user_id').
       group(:solution_id)
   end
 end
