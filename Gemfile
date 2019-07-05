@@ -41,6 +41,8 @@ gem 'daemons'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'lograge'
+
 group :production do
   gem "skylight"
 end
