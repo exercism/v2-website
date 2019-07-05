@@ -65,6 +65,8 @@ Rails.application.configure do
 
   config.active_storage.service = :local
 
+  Exercism::configure_logging(config)
+
   config.after_initialize do
     Bullet.enable = true
   end
