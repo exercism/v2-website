@@ -13,6 +13,15 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     Git::Exercise.any_instance.stubs(test_suite: [])
   end
 
+  test "On core exercise submission" do
+    @exercise.update(core: true, median_wait_time: 3600)
+
+    sign_in!(@user)
+    visit my_solution_path(@solution)
+
+    assert_text "The median waiting time for mentoring on this exercise is about 1 hour."
+  end
+
   test "On submission" do
     sign_in!(@user)
     visit my_solution_path(@solution)
