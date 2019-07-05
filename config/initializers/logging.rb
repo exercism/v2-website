@@ -29,3 +29,5 @@ Rails.application.configure do
     }
   end
 end
+
+Rails.logger = Rails.application.config.logger
