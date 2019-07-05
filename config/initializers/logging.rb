@@ -1,7 +1,6 @@
 return unless Rails.env.development? || Rails.env.production?
 
 Rails.application.configure do
-
   # Move production log into a system folder
   log_prefix = Rails.env.production? ? "/var/log/exercism/exercism_" : "log/"
 
@@ -21,6 +20,12 @@ Rails.application.configure do
     {
       remote_ip: event.payload[:remote_ip],
       request_id: event.payload[:request_id]
+    }
+  end
+
+  config.lograge.custom_payload do |controller|
+    {
+      user_id: controller.current_user.try(:id)
     }
   end
 end
