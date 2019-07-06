@@ -14,11 +14,14 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
   end
 
   test "On core exercise submission" do
-    @exercise.update(core: true, median_wait_time: 3600)
-
+    @exercise.update(core: true, median_wait_time: nil)
     sign_in!(@user)
     visit my_solution_path(@solution)
+    refute_text "The median waiting time"
 
+    @exercise.update(median_wait_time: 3600)
+    sign_in!(@user)
+    visit my_solution_path(@solution)
     assert_text "The median waiting time for mentoring on this exercise is about 1 hour."
   end
 
