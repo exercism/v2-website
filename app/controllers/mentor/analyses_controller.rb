@@ -1,6 +1,6 @@
 class Mentor::AnalysesController < MentorController
   def index
-    @tracks = Track.where(id: IterationAnalysis.joins(iteration: {person_solution: :exercise}).select("exercises.track_id"))
+    @tracks = Track.where(id: IterationAnalysis.joins(iteration: {person_solution: :exercise}).where('iterations.solution_type': "Solution").select("exercises.track_id"))
 
     @track_id = params[:track_id]
     @analyses = IterationAnalysis.includes(iteration: {solution: {exercise: :track}}).
