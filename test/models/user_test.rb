@@ -337,4 +337,10 @@ class UserTest < ActiveSupport::TestCase
     create :solution_star, user: user, solution: solution
     assert user.reload.starred_solution?(solution)
   end
+
+  test "communication preferences is created automatically" do
+    user = create(:user)
+
+    refute_nil user.communication_preferences
+  end
 end
