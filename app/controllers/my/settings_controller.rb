@@ -19,7 +19,8 @@ class My::SettingsController < MyController
       return redirect_to action: :confirm_delete_account
     end
 
-    current_user.destroy
+    UserServices::Delete.(current_user)
+    sign_out(current_user)
     redirect_to root_path
   end
 

@@ -343,4 +343,14 @@ class UserTest < ActiveSupport::TestCase
 
     refute_nil user.communication_preferences
   end
+
+  test "user is deleted when deleted_at is present" do
+    user = create(:user, deleted_at: Time.current)
+
+    assert user.deleted?
+
+    user.deleted_at = nil
+
+    refute user.deleted?
+  end
 end

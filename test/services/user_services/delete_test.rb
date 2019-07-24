@@ -112,7 +112,7 @@ module UserServices
 
       UserServices::Delete.(user, time: time)
 
-      assert_equal time, user.deleted_at
+      assert user.deleted?
     end
   end
 end

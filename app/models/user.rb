@@ -200,7 +200,7 @@ class User < ApplicationRecord
   end
 
   def deleted?
-    !User.where(id: id).exists?
+    deleted_at.present?
   end
 
   private

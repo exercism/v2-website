@@ -107,6 +107,7 @@ class My::SettingsTest < ApplicationSystemTestCase
     check "I understand"
     click_on "Delete my account"
 
+    @user.reload
     assert @user.deleted?
     assert_selector "body.user-signed_out"
   end
