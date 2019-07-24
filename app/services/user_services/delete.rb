@@ -2,14 +2,19 @@ module UserServices
   class Delete
     include Mandate
 
-    initialize_with :user
+    def initialize(user, time: Time.current)
+      @user = user
+      @time = time
+    end
 
     def call
       redact_user_details
       delete_user_associations
+      mark_as_deleted
     end
 
     private
+    attr_reader :user, :time
 
     def redact_user_details
       user.skip_reconfirmation!
@@ -61,6 +66,10 @@ module UserServices
       user.email_log.destroy if user.email_log
       user.profile.destroy if user.profile
       user.communication_preferences.destroy if user.communication_preferences
+    end
+
+    def mark_as_deleted
+      user.update!(deleted_at: time)
     end
   end
 end

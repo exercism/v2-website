@@ -105,5 +105,14 @@ module UserServices
       assert_empty user.solution_stars
       refute user.avatar.attached?
     end
+
+    test "marks user as deleted" do
+      user = create(:user)
+      time = Date.new(2016, 12, 25)
+
+      UserServices::Delete.(user, time: time)
+
+      assert_equal time, user.deleted_at
+    end
   end
 end
