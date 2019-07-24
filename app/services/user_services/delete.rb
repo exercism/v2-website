@@ -6,6 +6,7 @@ module UserServices
 
     def call
       redact_user_details
+      delete_user_associations
     end
 
     private
@@ -36,6 +37,30 @@ module UserServices
         is_mentor: false,
         default_allow_comments: nil,
       )
+    end
+
+    def delete_user_associations
+      user.auth_tokens.destroy_all
+      user.notifications.destroy_all
+      user.team_memberships.destroy_all
+      user.team_sent_invitations.destroy_all
+      user.user_tracks.destroy_all
+      user.solutions.destroy_all
+      user.team_solutions.destroy_all
+      user.track_mentorships.destroy_all
+      user.track_maintainerships.update_all(user_id: nil)
+      user.solution_mentorships.destroy_all
+      user.solution_locks.destroy_all
+      user.ignored_solution_mentorships.destroy_all
+      user.discussion_posts.update_all(user_id: nil)
+      user.solution_comments.destroy_all
+      user.blog_comments.destroy_all
+      user.solution_stars.destroy_all
+      user.avatar.purge
+
+      user.email_log.destroy if user.email_log
+      user.profile.destroy if user.profile
+      user.communication_preferences.destroy if user.communication_preferences
     end
   end
 end

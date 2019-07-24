@@ -55,5 +55,55 @@ module UserServices
       refute user.is_mentor?
       assert_nil user.default_allow_comments
     end
+
+    test "deletes user associations" do
+      user = create(:user)
+      create(:auth_token, user: user)
+      create(:user_email_log, user: user)
+      create(:profile, user: user)
+      create(:notification, user: user)
+      create(:team_membership, user: user)
+      create(:team_invitation, invited_by: user)
+      create(:user_track, user: user)
+      create(:solution, user: user)
+      create(:team_solution, user: user)
+      create(:track_mentorship, user: user)
+      create(:maintainer, user: user)
+      create(:solution_mentorship, user: user)
+      create(:solution_lock, user: user)
+      create(:ignored_solution_mentorship, user: user)
+      create(:discussion_post, user: user)
+      create(:solution_comment, user: user)
+      create(:blog_comment, user: user)
+      create(:solution_star, user: user)
+      user.avatar.attach(
+        io: File.open("test/fixtures/test.png"),
+        filename: "test.png"
+      )
+
+      UserServices::Delete.(user)
+
+      user.reload
+      assert_empty user.auth_tokens
+      assert_nil user.communication_preferences
+      assert_nil user.email_log
+      assert_nil user.profile
+      assert_empty user.notifications
+      assert_empty user.team_memberships
+      assert_empty user.team_sent_invitations
+      assert_empty user.user_tracks
+      assert_empty user.solutions
+      assert_empty user.team_solutions
+      assert_empty user.track_mentorships
+      assert_empty user.track_maintainerships
+      assert_empty user.solution_mentorships
+      assert_empty user.solution_locks
+      assert_empty user.ignored_solution_mentorships
+      assert_empty user.discussion_posts
+      assert_empty user.solution_comments
+      assert_empty user.blog_comments
+      assert_empty user.solution_stars
+      refute user.avatar.attached?
+    end
   end
 end
