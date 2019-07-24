@@ -199,6 +199,10 @@ class User < ApplicationRecord
     solution_stars.where(solution: solution).exists?
   end
 
+  def deleted?
+    !User.where(id: id).exists?
+  end
+
   private
 
   def avatar_thumbnail_url
