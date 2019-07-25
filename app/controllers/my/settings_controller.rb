@@ -14,6 +14,11 @@ class My::SettingsController < MyController
   end
 
   def delete_account
+    unless params[:understand]
+      flash.alert = "Please tick the box if you understand that account deletion is irreverisble"
+      return redirect_to action: :confirm_delete_account
+    end
+
     if !current_user.provider? && !current_user.valid_password?(params[:password])
       flash.alert = "Your password was incorrect"
       return redirect_to action: :confirm_delete_account
