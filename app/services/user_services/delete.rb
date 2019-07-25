@@ -36,8 +36,6 @@ module UserServices
         provider: nil,
         uid: nil,
         admin: false,
-        accepted_privacy_policy_at: nil,
-        accepted_terms_at: nil,
         dark_code_theme: false,
         is_mentor: false,
         default_allow_comments: nil,

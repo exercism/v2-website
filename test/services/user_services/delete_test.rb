@@ -20,8 +20,6 @@ module UserServices
                     provider: "provider",
                     uid: "uid",
                     admin: true,
-                    accepted_privacy_policy_at: Date.new(2016, 12, 25),
-                    accepted_terms_at: Date.new(2016, 12, 25),
                     dark_code_theme: true,
                     is_mentor: true,
                     default_allow_comments: true,
@@ -49,8 +47,6 @@ module UserServices
       assert_nil user.provider
       assert_nil user.uid
       refute user.admin?
-      assert_nil user.accepted_privacy_policy_at
-      assert_nil user.accepted_terms_at
       refute user.dark_code_theme?
       refute user.is_mentor?
       assert_nil user.default_allow_comments
