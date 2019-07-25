@@ -337,4 +337,20 @@ class UserTest < ActiveSupport::TestCase
     create :solution_star, user: user, solution: solution
     assert user.reload.starred_solution?(solution)
   end
+
+  test "communication preferences is created automatically" do
+    user = create(:user)
+
+    refute_nil user.communication_preferences
+  end
+
+  test "user is deleted when deleted_at is present" do
+    user = create(:user, deleted_at: Time.current)
+
+    assert user.deleted?
+
+    user.deleted_at = nil
+
+    refute user.deleted?
+  end
 end

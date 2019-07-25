@@ -107,6 +107,8 @@ class My::SettingsTest < ApplicationSystemTestCase
     check "I understand"
     click_on "Delete my account"
 
-    refute User.where(id: @user.id).exists?
+    @user.reload
+    assert @user.deleted?
+    assert_selector "body.user-signed_out"
   end
 end

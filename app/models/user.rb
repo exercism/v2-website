@@ -36,8 +36,8 @@ class User < ApplicationRecord
 
   has_many :track_mentorships, dependent: :destroy
   has_many :mentored_tracks, through: :track_mentorships, source: :track
-  has_many :track_mantainerships, class_name: "Maintainer", dependent: :nullify
-  has_many :maintained_tracks, through: :track_mantainerships, source: :track
+  has_many :track_maintainerships, class_name: "Maintainer", dependent: :nullify
+  has_many :maintained_tracks, through: :track_maintainerships, source: :track
 
   has_many :solution_mentorships, dependent: :destroy
   has_many :mentored_solutions, through: :solution_mentorships, source: :solution
@@ -197,6 +197,10 @@ class User < ApplicationRecord
 
   def starred_solution?(solution)
     solution_stars.where(solution: solution).exists?
+  end
+
+  def deleted?
+    deleted_at.present?
   end
 
   private
