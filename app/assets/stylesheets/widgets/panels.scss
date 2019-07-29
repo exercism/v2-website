@@ -1,0 +1,28 @@
+@import "purecss/build/pure-min";
+@import "purecss/build/grids-responsive-min";
+
+.panels {
+  @extend .pure-g;
+
+  > .lhs, .rhs {
+    @extend .pure-u-1;
+  }
+
+  > .rhs {
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.panels.panels--vertical-split {
+  > .lhs, .rhs {
+    @extend .pure-u-md-1-2;
+  }
+
+  > .rhs {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 50px;
+  }
+}

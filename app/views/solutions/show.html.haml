@@ -47,8 +47,8 @@
         =link_to "Switch to solving mode.", [:my, @solution]
 
   .lo-container
-    .pure-g.panels
-      .pure-u-1.pure-u-md-1-2.lhs
+    = render "widgets/panels" do
+      .lhs
         .lhs-content
           .tabs-and-panes.selected-3
             .tabs
@@ -75,7 +75,7 @@
         -else
           =render "comments_disabled"
 
-      .pure-u-1.pure-u-md-1-2.rhs
+      .rhs
         -if @solution.reflection.present?
           .reflection
             %h3 #{display_handle(@solution.user, @solution.user.user_track_for(@track))}'s Reflection
