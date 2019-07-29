@@ -6,7 +6,8 @@
   -user_handle = post.user == solution.user ? display_handle(post.user, user_track) : post.handle
 
 .widget-discussion-post.editable-text{id: "discussion-post-#{post.id}", class: (post.deleted?? "delete" : "")}
-  =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
+  .post-avatar
+    =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
   .post-body
     .post-header
       .user-handle= user_handle

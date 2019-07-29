@@ -2,6 +2,16 @@
 @import 'mixins';
 
 .widget-discussion-post {
+    display:flex;
+
+    > .post-avatar {
+      margin-right:15px;
+    }
+
+    > .post-body {
+      width:100%;
+    }
+
     margin-bottom:20px;
     overflow:hidden;
     &.delete {
@@ -13,18 +23,11 @@
         border-top:1px solid #eee;
         padding-top:20px;
     }
+
     .avatar {
-        margin-right:3%;
-        float:left;
-        width:8%;
-        min-height:20px;
-        display:block;
-        border-radius:3px;
-    }
-    .post-body {
-        min-width:100px;
-        width:89%;
-        float:left;
+      max-width:40px;
+      min-height:20px;
+      border-radius:3px;
     }
 
     .post-header {
