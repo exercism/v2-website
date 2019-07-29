@@ -20,8 +20,25 @@ class My::PreferencesController < MyController
         current_user.communication_preferences.update(token: SecureRandom.uuid)
       end
       redirect_to({action: :edit}, notice: "Password preference updated successfully")
+    elsif update_code_viewing_preferences?
+      current_user.update!(code_viewing_preference_params)
+
+      redirect_to(
+        {action: :edit},
+        notice: "Code viewing preference updated successfully"
+      )
     else
       redirect_to({action: :edit})
     end
+  end
+
+  private
+
+  def update_code_viewing_preferences?
+    params[:user][:update_code_viewing_options].present?
+  end
+
+  def code_viewing_preference_params
+    params.require(:user).permit(:full_width_code_panes)
   end
 end

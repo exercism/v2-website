@@ -40,3 +40,15 @@
         =label_tag 'dark_code_theme', "Enable dark theme"
 
         =button_tag "Update theme preference", class: 'pure-button'
+
+    .settings-section.toggle
+      %h2 Code viewing options
+      = form_for current_user, url: [:my, :settings, :preferences], method: :patch do |f|
+        = f.hidden_field :update_code_viewing_options, value: true
+        = f.check_box :full_width_code_panes
+        .toggles
+          = icon 'toggle-on'
+          = icon 'toggle-off'
+        = f.label :full_width_code_panes, "Enable full width code panes"
+
+        = button_tag "Update code viewing preference", class: 'pure-button'
