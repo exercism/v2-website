@@ -1,20 +1,18 @@
 require "test_helper"
 
-class PanelWidgetTest < ActionView::TestCase
+class PanelHelperTest < ActionView::TestCase
   test "renders full width panel for user with setting" do
     user = build(:user, full_width_code_panes: true)
 
-    render "widgets/panels", user: user
-
-    assert_select ".panels"
-    assert_select ".panels.panels--vertical-split", false
+    assert_equal '<div class="panels"></div>', render_panels(user) { }
   end
 
   test "renders vertical split panel for user with setting" do
     user = build(:user, full_width_code_panes: false)
 
-    render "widgets/panels", user: user
-
-    assert_select ".panels.panels--vertical-split"
+    assert_equal(
+      '<div class="panels panels--vertical-split"></div>',
+      render_panels(user) { }
+    )
   end
 end
