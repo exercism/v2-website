@@ -1,5 +1,6 @@
 @import "purecss/build/pure-min";
 @import "purecss/build/grids-responsive-min";
+@import "mixins";
 
 .panels {
     @extend .pure-g;
@@ -21,8 +22,10 @@
     }
 
     & > .rhs {
-        margin-top:0;
-        margin-bottom:0;
-        padding-left:50px;
+        @include width-medium() {
+            margin-top:0;
+            margin-bottom:0;
+            padding-left:50px;
+        }
     }
 }
