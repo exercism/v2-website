@@ -62,4 +62,21 @@ class SolutionsTest < ApplicationSystemTestCase
     solution.reload
     assert_equal 0, solution.stars.count
   end
+
+  test "shows vertical split for guest" do
+    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    exercise = create(:exercise, track: track, slug: "hello-world")
+    solution = create(:solution,
+                      exercise: exercise,
+                      published_at: Date.new(2016, 12, 25),
+                      git_sha: Git::ExercismRepo.current_head(track.repo_url),
+                      git_slug: "hello-world")
+    iteration = create(:iteration, solution: solution)
+
+    stub_repo_cache! do
+      visit solution_path(solution)
+    end
+
+    assert_css ".panels.panels--vertical-split"
+  end
 end
