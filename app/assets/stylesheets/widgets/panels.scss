@@ -1,28 +1,22 @@
-@import "purecss/build/pure-min";
-@import "purecss/build/grids-responsive-min";
 @import "mixins";
 
-.panels {
-    @extend .pure-g;
-
-    & > .lhs, .rhs {
-        @extend .pure-u-1;
-    }
-
-    & > .rhs {
+.widget-panels {
+    &> .rhs {
         overflow:hidden;
         margin-top:30px;
         margin-bottom:30px;
     }
 }
 
-.panels.panels--vertical-split {
-    & > .lhs, .rhs {
-        @extend .pure-u-md-1-2;
-    }
+.widget-panels.widget-panels--vertical-split {
+    @include width-medium() {
+        display:flex;
+        
+        &> .lhs, .rhs {
+            width:50%;
+        }
 
-    & > .rhs {
-        @include width-medium() {
+        &> .rhs {
             margin-top:0;
             margin-bottom:0;
             padding-left:50px;

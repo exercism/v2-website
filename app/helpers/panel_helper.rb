@@ -8,9 +8,9 @@ module PanelHelper
   private
 
   def panel_classes(vertical_split:)
-    classes = ["panels"]
+    classes = ["widget-panels"]
 
-    classes << "panels--vertical-split" if vertical_split
+    classes << "widget-panels--vertical-split" if vertical_split
 
     classes.join(" ")
   end
