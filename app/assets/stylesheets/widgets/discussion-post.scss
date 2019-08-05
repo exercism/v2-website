@@ -2,34 +2,35 @@
 @import 'mixins';
 
 .widget-discussion-post {
-    display:flex;
+    margin-bottom:20px;
+    overflow:hidden;
 
-    & > .post-avatar {
+    &>.post-avatar {
         margin-right:15px;
+        float:left;
+
+        .avatar {
+            width:35px;
+            height:35px;
+            border-radius:3px;
+        }
     }
 
-    & > .post-body {
+    &>.post-body {
         width:100%;
     }
 
-    margin-bottom:20px;
-    overflow:hidden;
     &.delete {
         .avatar, .post-body {
             opacity:0.3;
         }
     }
+
     &+.widget-discussion-post {
         border-top:1px solid #eee;
         padding-top:20px;
     }
 
-    .avatar {
-        width:35px;
-        height:35px;
-        margin-right:8px;
-        border-radius:3px;
-    }
 
     .post-header {
         overflow:hidden;
