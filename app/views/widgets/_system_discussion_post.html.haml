@@ -6,4 +6,5 @@
       .user-handle Automated Message
       .created-at posted #{time_ago_in_words(post.created_at)} ago
 
-    .editable-text-html= raw post.html
+    .editable-text-viewer
+      .editable-text-html= raw post.html
