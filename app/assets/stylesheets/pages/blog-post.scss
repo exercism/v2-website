@@ -74,9 +74,10 @@
             margin-bottom:10px;
         }
         h3 {
-            @include font-size(23,30);
+            @include font-size(19,30);
             font-weight:$fw-bold;
-            margin-top:30px;
+            text-decoration: underline;
+            margin-top:20px;
             margin-bottom:10px;
         }
         p, li {
