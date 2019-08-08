@@ -9,6 +9,26 @@ class RequestMentoringOnSolution
       return if user_track.mentoring_allowance_used_up?
     end
 
+    post_system_messages!
+    update_solution!
+  end
+
+  private
+
+  def user_track
+    solution.user.user_track_for(solution.track)
+  end
+
+  def post_system_messages!
+    return unless solution.approved_by_system?
+
+    SystemDiscussionPost.create!(
+      message: 'system_messages.solution_mentoring_request_for_auto_approved',
+      iteration: solution.iterations.last
+    )
+  end
+
+  def update_solution!
     solution.update(
       completed_at: nil,
       published_at: nil,
@@ -17,11 +37,5 @@ class RequestMentoringOnSolution
       mentoring_requested_at: Time.current,
       updated_at: Time.current
     )
-  end
-
-  private
-
-  def user_track
-    solution.user.user_track_for(solution.track)
   end
 end
