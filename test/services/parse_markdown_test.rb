@@ -8,7 +8,7 @@ class ParseMarkdownTest < ActiveSupport::TestCase
 <li>Either method pairs with adjectives (which I did),</li>
 <li>Some sort of data structure (e.g. a hash might look like)</li>
 </ol>
-<p><a href="http://example.com" target="_blank">Some link</a></p>
+<p><a href="http://example.com" target="_blank" rel="nofollow">Some link</a></p>
 <p>Watch this:</p>
 <pre><code class="language-plain">$ go home
 </code></pre>}
