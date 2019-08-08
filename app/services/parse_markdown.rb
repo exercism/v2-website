@@ -37,6 +37,7 @@ class ParseMarkdown
       if node.title && !node.title.empty?
         out(' title="', escape_html(node.title), '"')
       end
+      out(' rel="nofollow"')
       out('>', :children, '</a>')
     end
 
