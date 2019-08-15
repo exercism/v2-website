@@ -21,6 +21,8 @@ class IterationAnalysis < ApplicationRecord
 
   def built_comments
     AnalysisServices::BuildComments.new(analysis_comments_data).comments
+  rescue
+    []
   end
 
   def analysis
