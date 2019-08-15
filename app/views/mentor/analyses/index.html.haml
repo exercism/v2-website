@@ -7,6 +7,7 @@
     %table
       %tr
         %th Id
+        %th Iteration Id
         %th Analysed at
         %th Language
         %th Exercise
@@ -21,6 +22,7 @@
         -track = exercise.track
         %tr
           %td= analysis.id
+          %td= iteration.id
           %td= analysis.created_at
           %td= track.slug
           %td= exercise.slug
