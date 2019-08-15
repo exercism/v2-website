@@ -32,8 +32,8 @@
             -else
               %code= analysis.status
           %td
-            %code= analysis.analysis.try {|a|a['status'] }
-          %td.right= analysis.analysis.try {|a|a['comments'] }.try(&:size)
+            %code= analysis.analysis_status
+          %td.right= analysis.analysis_comments_data.try(&:size)
           %td= link_to "View", mentor_analysis_path(analysis)
 
     =paginate(@analyses)

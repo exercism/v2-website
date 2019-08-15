@@ -7,7 +7,21 @@ module AnalysisServices
     def call
       return nil unless comments_data.size > 0
 
-      intro + comments
+      intro + comments.join("\n\n---\n\n")
+    end
+
+    def comments
+      repo = Git::WebsiteContent.head
+      comments_data.map do |comment_data|
+        template, params =
+          if comment_data.is_a?(Hash)
+            [ comment_data['comment'], (comment_data['params'] || {}).symbolize_keys ]
+          else
+            [comment_data, {}]
+          end
+
+          repo.automated_comment_for(template) % params
+      end
     end
 
     private
@@ -22,21 +36,6 @@ module AnalysisServices
       text + "\n\n---\n\n"
     end
 
-    def comments
-      repo = Git::WebsiteContent.head
-      comments = comments_data.map do |comment_data|
-        template, params =
-          if comment_data.is_a?(Hash)
-            [ comment_data['comment'], (comment_data['params'] || {}).symbolize_keys ]
-          else
-            [comment_data, {}]
-          end
-
-          repo.automated_comment_for(template) % params
-      end
-
-      comments.join("\n\n---\n\n")
-    end
   end
 end
 
