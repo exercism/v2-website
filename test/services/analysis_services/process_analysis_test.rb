@@ -25,13 +25,12 @@ module AnalysisServices
     test "creates db record" do
       iteration = create :iteration
       status = "success"
-      analysis = {"foo" => "bar"}
 
-      ProcessAnalysis.(iteration, status, analysis)
+      ProcessAnalysis.(iteration, status, {"foo" => "bar"})
       ia = IterationAnalysis.last
       assert_equal iteration, ia.iteration
       assert_equal status, ia.status
-      assert_equal analysis, ia.analysis
+      assert_equal({foo: "bar"}, ia.analysis)
     end
 
     test "does not approve if we should have auto analysis" do
