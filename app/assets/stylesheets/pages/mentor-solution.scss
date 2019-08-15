@@ -115,7 +115,9 @@
             }
             .comment.widget-code-snippet {
                 position: relative;
-                border-width:1px 0 0 0;
+                border-width:0 0 1px 0;
+                border-color: #ccc;
+                overflow: hidden;
                 background:#fcfcfc;
                 padding: 10px 15px;
                 input {
