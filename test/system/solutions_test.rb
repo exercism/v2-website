@@ -77,6 +77,6 @@ class SolutionsTest < ApplicationSystemTestCase
       visit solution_path(solution)
     end
 
-    assert_css ".panels.panels--vertical-split"
+    assert_css ".widget-panels.widget-panels--vertical-split"
   end
 end
