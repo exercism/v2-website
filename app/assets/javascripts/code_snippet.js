@@ -11,7 +11,7 @@ $('.widget-code-snippet button.copy-button').click(function() {
     $(btn).text(newMessage).removeClass('copied')
   }
 
-  $(this).parents('.widget-code-snippet').find('input.download-code').select();
+  $(this).parents('.widget-code-snippet').find('.download-code').select();
   document.execCommand('copy');
   updateButton(this, 'copied!');
 });

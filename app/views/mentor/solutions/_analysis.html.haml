@@ -20,7 +20,7 @@
     -analysis.built_comments.each.with_index do |comment, idx|
       .comment.widget-code-snippet
         =button_tag "copy", class: 'pure-button copy-button'
-        =text_field_tag "analysis-comment-#{idx}", comment, class: 'download-code', readonly: true
+        =text_area_tag "analysis-comment-#{idx}", comment, class: 'download-code', readonly: true
         .editable-text
           .editable-text-viewer
             .editable-text-html= raw ParseMarkdown.(comment)
