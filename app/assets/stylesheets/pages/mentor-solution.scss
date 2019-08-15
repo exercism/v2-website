@@ -90,6 +90,60 @@
             }
         }
     }
+    .analysis-section {
+        border:1px solid $color-1;
+        margin-bottom:20px;
+        h3 {
+            background:$color-1;
+            color:#fff;
+            padding:15px;
+            i {
+                color:#fff;
+                margin-left:5px;
+            }
+        }
+        .recommendation {
+            padding:10px 15px;
+            border-bottom:1px solid #aaa;
+            font-weight:$fw-semibold;
+        }
+
+        .comments {
+            h4 {
+                font-weight:$fw-bold;
+                padding:15px;
+            }
+            .comment.widget-code-snippet {
+                position: relative;
+                border-width:1px 0 0 0;
+                background:#fcfcfc;
+                padding: 10px 15px;
+                input {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 5px;
+                    height:5px;
+                    z-index:5
+                }
+                .copy-button {
+                    z-index:10;
+                }
+                .editable-text-html {
+                    padding-right:65px;
+                    margin-bottom:0;
+                   * {
+                        @include font-size(14, 19);
+                    }
+                    code { &, * { font-size:12px; } }
+
+                }
+                &:last-child {
+                    border-width:0;
+                }
+            }
+        }
+    }
     .discussion,
     .new-editable-text {
         h3 {

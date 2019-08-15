@@ -55,6 +55,7 @@
           =render "solutions/panes", iteration: @iteration
       .rhs
         -if current_user.mentoring_solution?(@solution) || current_user.has_active_lock_for_solution?(@solution)
+          =render "analysis"
           =render "discussion"
           =render "new_discussion_post"
           =render "download-section"
