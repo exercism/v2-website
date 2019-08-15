@@ -13,4 +13,10 @@ class Mentor::AnalysesController < MentorController
   def show
     @analysis = IterationAnalysis.find(params[:id])
   end
+
+  def replay
+    @analysis = IterationAnalysis.find(params[:id])
+    ProcessNewIterationJob.perform_now(@analysis.iteration)
+    redirect_to({action: :show}, notice: "Rerunning analysis")
+  end
 end

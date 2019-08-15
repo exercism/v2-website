@@ -5,6 +5,9 @@
 
 #mentor-analysis
   .lo-container
+
+    =notice_and_alert
+
     %h1 Analysis ##{@analysis.id}
     .status
       %h2 Iteration ID
@@ -49,4 +52,6 @@
               %code{class: syntax_highlighter_for_filename(file.filename, track)}
                 = file.file_contents.force_encoding('utf-8')
 
+    %h2 Options
+    =link_to "Replay", replay_mentor_analysis_path(@analysis), method: :patch, class: "pure-button"
 
