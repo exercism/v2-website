@@ -10,7 +10,7 @@ module AnalysisServices
 
       website_copy = mock
       website_copy.expects(:automated_comment_for).with("tests.first-comment").returns(templates["tests.first-comment"])
-      Git::WebsiteContent.expects(:head).returns(website_copy)
+      Git::WebsiteContent.stubs(head: website_copy)
 
       comments_data = [{
         'comment' => "tests.first-comment"
@@ -30,7 +30,7 @@ module AnalysisServices
       website_copy = mock
       website_copy.expects(:automated_comment_for).with("tests.first-comment").returns(templates["tests.first-comment"])
       website_copy.expects(:automated_comment_for).with("tests.second-comment").returns(templates["tests.second-comment"])
-      Git::WebsiteContent.expects(:head).returns(website_copy)
+      Git::WebsiteContent.stubs(head: website_copy)
 
       comments_data = [
         {
@@ -56,7 +56,7 @@ module AnalysisServices
       website_copy = mock
       website_copy.expects(:automated_comment_for).with("tests.first-comment").returns(templates["tests.first-comment"])
       website_copy.expects(:automated_comment_for).with("tests.second-comment").returns(templates["tests.second-comment"])
-      Git::WebsiteContent.expects(:head).returns(website_copy)
+      Git::WebsiteContent.stubs(head: website_copy)
 
       comments_data = [
         "tests.first-comment",

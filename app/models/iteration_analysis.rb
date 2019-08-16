@@ -20,9 +20,13 @@ class IterationAnalysis < ApplicationRecord
   end
 
   def built_comments
-    AnalysisServices::BuildComments.new(analysis_comments_data).comments
-  rescue
-    []
+    analysis_comments_data.map { |comment_data|
+      begin
+        AnalysisServices::BuildComment.(comment_data)
+      rescue
+        nil
+      end
+    }.compact
   end
 
   def analysis
