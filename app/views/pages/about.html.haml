@@ -1,0 +1,111 @@
+#about-page.lo-organisation-page
+  =render "organisation_menu", selected: "about"
+
+  %section.organisation-top-banner-section
+    .lo-container
+      .inner
+        %h1
+          %strong We are a not-for-profit organisation
+          providing opportunity through programming education
+
+  %section.vision-section
+    .lo-container
+      .info
+        %h2 Developing programming skills is fun and empowering. It is also a powerful route for economic and social mobility.
+        %p 
+          Exercism aims to provide opportunity for people of 
+          %strong all backgrounds 
+          by helping them develop their programming skills through practice and mentorship. We provide thousands of exercises spread across over 50 language tracks, and offer both 
+          %strong automated and human mentoring.
+        %p Our current platform is targeted at people with some programming experience who want to deepen their knowledge or learn new languages. In time, we will also offer support for total beginners.
+        %p
+          Exercism is
+          %strong 100% free.
+          It is entirely
+          %strong open source
+          and relies on the contributions of
+          %strong thousands of volunteers.
+          Our platform is designed to be fun and friendly, and we place a strong emphasis on empathetic communication.
+        =link_to "Learn more about our vision", "#", class: 'section-link'
+      .quote
+        .text
+          %i.fa.fa-quote-left
+          .copy Exercism is a great gift to the programming community and I hope when I finally achieve my Rock Star status I won’t forget to give back and do my own bit of mentoring.
+        .byline - Dr Moxie
+
+  %section.stats-section
+    .lo-container
+      .hexes
+        .hex
+          .value 1.4m
+          .label solutions submitted
+        .hex
+          .value 236k
+          .label conversations
+        .hex
+          .value 330k
+          .label users in 220 countries
+        .hex
+          .value 50
+          .label programming langugages
+        .hex
+          .value 2.5k
+          .label mentors in 29 timezones
+        .hex
+          .value 53k
+          .label git commits
+        .hex
+          .value 3.6k
+          .label contributions
+
+      %p Created by volunteers. Grown purely through word of mouth.
+
+  %section.supporters-section
+    .lo-container
+      .info
+        %h2 Supporters
+        %p Exercism relies on both the generosity of individuals with their time, and the generosity of organisations to financially support us. 
+        %p While much of Exercism is run by our volunteer community, the website and core infrastructure are managed by a full-time team. We also undertake specific larger projects, such as the development of our automated analyzers, which require a committed team working more intensely on something over a fixed period of time. 
+        %p In order to fund this core team and these products we rely on grant funding from companies or organisation that wish to contribute to our vision of helping providing free programming education for everyone.
+        =link_to "Learn more about how you can support us ⟶", supporters_page_path, class: 'pure-button'
+      .current
+        %h3 Current supporters
+        =link_to image_tag("supporter-logos/sloan-black.png"), supporter_sloan_page_path, class: 'logo'
+        =link_to image_tag("supporter-logos/mozilla-black.png"), supporter_mozilla_page_path, class: 'logo'
+        =link_to image_tag("supporter-logos/thalamus-black.png"), supporter_thalamus_page_path, class: 'logo'
+        =link_to "Your Organisation Here", "#", class: "your-organisation-here"
+
+  %section.methodology-section
+    .lo-container
+      %table
+        %tr
+          %th Decisions
+          %th Leadership
+          %th Execution
+        %tr
+          %td Balance quick wins with long-term vision
+          %td Mixing top-down direction with community wisdom
+          %td Focus on small, regular, high-quality improvements
+        %tr
+          %td Product-driven and grounded in science
+          %td Empowering and supporting our contributors
+          %td Providing openess, honesty and clarity.
+        %tr
+          %td Sticking to our principles
+          %td Enforcing our Code of Conduct
+          %td Always learning and being empathetic
+
+      .info
+        %h2 How we work
+        %p 
+          Exercism is developed through a mixture of top-down leadership and a collaberative community. We focus strongly on making product-driven decisions guided by our strategy, and then utilize the value and goodwill of our community, who implement those decisions across our 50+ language tracks. We work closely with key volunteer contributors to canvas opinions and knowledge, improving Exercism daily, while also staying focussed on our long-term vision.
+        =link_to "Read Exercism’s strategy", strategy_page_path, class: 'section-link'
+
+  %section.story-section
+    .lo-container
+      .content
+        %h2 Our story
+        %p Exercism was originally created by Katrina Owen in 2013 as a tool to be used by her programming students. Over the next three years it grew unintentially and organically to 200,000 users. In 2016, Katrina decided that for Exercism to fulfill its potential, it needed a professional product team to rethink Exercism from the ground up. She recruited Jeremy Walker as co-founder, and working with Nicole Chalmers and the team at Thalamus, they reconceived Exercism as the fully-fledged product you see today.
+        /=link_to "More on our story", "#", class: 'section-link'
+      .map
+        =image_tag "company/photo-map.png"

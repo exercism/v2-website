@@ -1,0 +1,9 @@
+=stylesheet_link_tag '//fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900&display=swap'
+
+.lo-organisation-pages-menu
+  .lo-container
+    =link_to "About", about_page_path, class: selected == "about" ? "selected" : ""
+    =link_to "Team", team_page_path, class: selected == "team" ? "selected" : ""
+    =link_to "Supporters", supporters_page_path, class: selected == "supporters" ? "selected" : ""
+    /=link_to "Values", "#", class: selected == "values" ? "selected" : ""
+    =link_to "Strategy", strategy_page_path, class: selected == "strategy" ? "selected" : ""

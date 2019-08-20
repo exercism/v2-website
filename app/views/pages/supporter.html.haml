@@ -1,0 +1,29 @@
+#supporter-page.lo-organisation-page
+  =render "organisation_menu", selected: "supporters"
+
+  %section.organisation-top-banner-section
+    .lo-container
+      .inner
+        %h1
+          .subtitle Exercism is supported by
+          =image_tag "supporter-logos/#{@supporter_logo}", alt: @supporter_name
+
+  %section.details-section
+    .lo-container
+      .info
+        %h2 How #{@supporter_name} supports Exercism
+        %p= raw @supporter_support_details
+
+        %h2 About #{@supporter_name}
+        %p= raw @supporter_about
+
+        =link_to "Visit #{@supporter_name}'s website", @supporter_website_url, class: 'section-link'
+      .read-more
+        %h2 Read more
+        -@supporter_blog_posts.each do |post|
+          =link_to post do
+            %h3= post.title
+            .blurb= post.marketing_copy
+            .date Published #{time_ago_in_words(post.published_at)} ago
+
+
