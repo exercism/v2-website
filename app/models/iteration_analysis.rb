@@ -20,6 +20,8 @@ class IterationAnalysis < ApplicationRecord
   end
 
   def built_comments
+    return [] unless analysis_comments_data.present?
+
     analysis_comments_data.map { |comment_data|
       begin
         AnalysisServices::BuildComment.(comment_data)
