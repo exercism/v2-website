@@ -9,6 +9,8 @@
       .header-tabs
         =link_to "Solutions you're mentoring (#{@tab_your_count})", your_solutions_mentor_dashboard_path, class: 'header-tab'
         =link_to "New solutions (#{@tab_next_count})", next_solutions_mentor_dashboard_path, class: 'header-tab selected'
+        -if @tab_testimonials_count > 0
+          =link_to "Testimonials (#{@tab_testimonials_count})", testimonials_mentor_dashboard_path, class: 'header-tab' 
 
   .lo-container
     .pure-g

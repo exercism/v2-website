@@ -31,6 +31,18 @@ class Mentor::DashboardController < MentorController
     end
   end
 
+  def testimonials
+    return redirect_to mentor_configure_path unless current_user.mentored_tracks.exists?
+
+    respond_to do |format|
+      format.js
+      format.html do
+        load_testimonials
+        load_tab_stats
+      end
+    end
+  end
+
   private
 
   def load_your_solutions
@@ -85,6 +97,13 @@ class Mentor::DashboardController < MentorController
                              each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
   end
 
+  def load_testimonials
+    @testimonials = current_user.solution_mentorships.
+                        with_feedback.
+                        includes(solution: [:user, {exercise: :track}]).
+                        page(params[:page]).per(20)
+  end
+
   def load_track_stats
     service = SolutionsToBeMentored.new(current_user, @next_track_id, nil)
     core_counts = service.all_core_solutions.group(:exercise_id).count
@@ -106,6 +125,7 @@ class Mentor::DashboardController < MentorController
   def load_tab_stats
     @tab_your_count = RetrieveSolutionsForMentor.(current_user).count
     @tab_next_count = SolutionsToBeMentored.new(current_user, nil, nil).all_solutions.count
+    @tab_testimonials_count = current_user.solution_mentorships.with_feedback.count
   end
 
   def track_id_options
