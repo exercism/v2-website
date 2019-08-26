@@ -22,6 +22,7 @@ pre.line-numbers {
         background: rgba($color-2, 0.1);
         margin-top:0;
         &:before {
+            content: '';
             background:$color-2;
             width:6px;
             height:6px;
