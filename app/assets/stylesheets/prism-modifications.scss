@@ -4,6 +4,7 @@
 pre.line-numbers {
     margin: 0 !important;
     padding-bottom: 1em !important;
+    border-radius: 0 !important;
     font-size:70%;
     @include width-small() {
         font-size:100%;
