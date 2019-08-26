@@ -54,9 +54,19 @@ body .md-editor {
         text-decoration: underline;
     }
 
-    pre {
+    pre:not([class*="language-"]) {
         border:1px solid #f3f3f3;
         background:#fafafa;
+    }
+
+    pre[class*="language-"] {
+      padding: 1em;
+      margin: .5em 0;
+      overflow: auto;
+      border-radius: 0.3em;
+    }
+
+    pre {
         padding: 10px;
         margin: 0 0 10px 0;
         overflow: auto;
