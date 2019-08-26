@@ -1,0 +1,9 @@
+= async_stylesheet_link_tag "#{prism_js_cdn}/themes/#{prism_js_theme}"
+= async_stylesheet_link_tag "#{prism_js_cdn}/plugins/line-numbers/prism-line-numbers.css"
+= async_stylesheet_link_tag "#{prism_js_cdn}/plugins/line-highlight/prism-line-highlight.css"
+
+= javascript_include_tag "#{prism_js_cdn}/components/prism-core.js"
+= javascript_include_tag "#{prism_js_cdn}/plugins/line-highlight/prism-line-highlight.js"
+= javascript_include_tag "#{prism_js_cdn}/plugins/line-numbers/prism-line-numbers.js"
+= javascript_include_tag "#{prism_js_cdn}/plugins/autoloader/prism-autoloader.js",
+  "data-autoloader-path" => "#{prism_js_cdn}/components"
