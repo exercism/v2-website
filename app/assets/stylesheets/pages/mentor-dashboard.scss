@@ -4,7 +4,8 @@
 $blue: #4A90E2;
 
 #mentor-dashboard-page,
-#mentor-next-solutions-page {
+#mentor-next-solutions-page,
+#mentor-testimonials-page {
     .header {
         background: $color-2;
         background-image:image-url('background-overlay-2.png');
@@ -527,5 +528,44 @@ $blue: #4A90E2;
                 }
             }
         }
+    }
+}
+
+#mentor-testimonials-page {
+    .testimonial {
+        max-width:670px;
+        .feedback {
+            @include font-size(16, 20);
+            margin-bottom:10px;
+            display:flex;
+            i {
+                margin-right:10px;
+                color:#666;
+            }
+        }
+        .about {
+            color:#999;
+        }
+        .user {
+            display:inline-block;
+            color:#333;
+        }
+        .exercise {
+            display:inline-block;
+            color:$color-2;
+            font-weight:$fw-semibold;
+
+        }
+        &+.testimonial {
+            border-top:1px solid #eee;
+            padding-top:15px;
+            margin-top:15px;
+        }
+    }
+    .pagination {
+        max-width:670px;
+        border-top: 1px solid #eee;
+        margin-top: 15px;
+        padding-top: 15px;
     }
 }

@@ -16,4 +16,8 @@ class NewsletterMailerPreview < ActionMailer::Preview
     NewsletterMailer.with(user: User.first).mentor_jan_2019
   end
 
+   def testimonials_launch
+    NewsletterMailer.with(user: User.first).testimonials_launch
+   end
+
 end

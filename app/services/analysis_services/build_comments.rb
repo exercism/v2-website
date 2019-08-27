@@ -11,6 +11,9 @@ module AnalysisServices
     end
 
     private
+    def comments
+      comments_data.map { |cd| BuildComment.(cd) }.join("\n\n---\n\n")
+    end
 
     def intro
       text = if comments_data.size == 1
@@ -22,22 +25,5 @@ module AnalysisServices
       text + "\n\n---\n\n"
     end
 
-    def comments
-      repo = Git::WebsiteContent.head
-      comments = comments_data.map do |comment_data|
-        template, params =
-          if comment_data.is_a?(Hash)
-            [ comment_data['comment'], (comment_data['params'] || {}).symbolize_keys ]
-          else
-            [comment_data, {}]
-          end
-
-          repo.automated_comment_for(template) % params
-      end
-
-      comments.join("\n\n---\n\n")
-    end
   end
 end
-
-

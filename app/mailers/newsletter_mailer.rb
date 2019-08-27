@@ -26,4 +26,14 @@ class NewsletterMailer < ApplicationMailer
       subject: "[Exercism] We've improved lots during January"
     )
   end
+
+  def testimonials_launch
+    @user = params[:user]
+    mail(
+      to: "#{@user.name} <#{@user.email}>",
+      reply_to: "jeremy@exercism.io",
+      subject: "[Exercism] See what your students have said about you"
+    )
+  end
+
 end
