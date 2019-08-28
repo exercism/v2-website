@@ -54,19 +54,9 @@ body .md-editor {
         text-decoration: underline;
     }
 
-    pre:not([class*="language-"]) {
+    pre {
         border:1px solid #f3f3f3;
         background:#fafafa;
-    }
-
-    pre[class*="language-"] {
-      padding: 1em;
-      margin: .5em 0;
-      overflow: auto;
-      border-radius: 0.3em;
-    }
-
-    pre {
         padding: 10px;
         margin: 0 0 10px 0;
         overflow: auto;
@@ -103,5 +93,14 @@ body .md-editor {
     }
     strong {
         font-weight:$bold;
+    }
+}
+
+body.prism-dark {
+    .editable-text .editable-text-html,
+    .new-editable-text .preview-area {
+        pre[class*="language-"] {
+            background: #272822;
+        }
     }
 }
