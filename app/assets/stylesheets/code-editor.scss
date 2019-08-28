@@ -95,3 +95,12 @@ body .md-editor {
         font-weight:$bold;
     }
 }
+
+body.prism-dark {
+    .editable-text .editable-text-html,
+    .new-editable-text .preview-area {
+        pre[class*="language-"] {
+            background: #272822;
+        }
+    }
+}
