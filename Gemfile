@@ -43,6 +43,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'lograge'
 
+gem 'recaptcha'
+
 group :production do
   gem "skylight"
 end
