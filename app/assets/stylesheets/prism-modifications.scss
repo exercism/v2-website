@@ -4,7 +4,6 @@
 pre.line-numbers {
     margin: 0 !important;
     padding-bottom: 1em !important;
-    border-radius: 0 !important;
     font-size:70%;
     @include width-small() {
         font-size:100%;
@@ -35,4 +34,8 @@ pre.line-numbers {
             box-shadow: none;
         }
     }
+}
+
+pre[class*="language-"] {
+  border-radius: 0 !important;
 }
