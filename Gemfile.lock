@@ -314,6 +314,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    recaptcha (5.1.0)
+      json
     regexp_parser (1.5.1)
     request_store (1.4.1)
       rack (>= 1.4)
@@ -449,6 +451,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.2)
   rails-controller-testing
+  recaptcha
   rest-client
   rubyzip
   rugged
@@ -464,4 +467,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.0.1
+   2.0.2

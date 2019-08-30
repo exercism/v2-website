@@ -1,0 +1,10 @@
+development:
+  site_key: 6Lc1SLUUAAAAADfAfrpWsh4m9uymCzgPatGIkbkh
+  secret_key: 6Lc1SLUUAAAAAITl1NFck-NGwJdBKqmy-7Y_Q3nh
+  fallback_site_key: 6LeqSrUUAAAAAOkCu13JbNnjoyf_i-mSWypA8Sxv
+  fallback_secret_key: 6LeqSrUUAAAAAJ5B41-vH_3Qcn_LsDC6w1N97DaT
+test:
+  site_key: SITE_KEY
+  secret_key: SECRET_KEY
+  fallback_site_key: SITE_KEY
+  fallback_secret_key: SECRET_KEY

@@ -78,6 +78,11 @@ body.devise {
         @include font-size(14, 18);
         margin-bottom:12px;
     }
+
+    .g-recaptcha {
+      margin-bottom: 12px;
+    }
+
     input {
         border:1px solid #cfcfcf;
         border-radius:2px;
