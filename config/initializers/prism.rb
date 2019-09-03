@@ -224,7 +224,7 @@ Exercism::PrismFileMappings = {
   "groovy": %w{groovy grt gtpl gvy},
   "haml": %w{haml haml.deface},
   "handlebars": %w{handlebars hbs},
-  "haskell": %w{hs hsc idr},
+  "haskell": %w{hs hsc idr purs},
   "haxe": %w{hx hxsl},
   "http": %w{http},
   "icon": %w{},
