@@ -49,7 +49,7 @@ class CreateBlogCommentTest < ActiveSupport::TestCase
       about: blog_post,
       user: user,
       type: type,
-      link: Rails.application.routes.url_helpers.blog_post_url(blog_post, anchor: "comment-#{comment.id}"),
+      link: Rails.application.routes.url_helpers.blog_post_url(blog_post, anchor: "blog-comment-#{comment.id}"),
       trigger: comment
     ).exists?
   end
