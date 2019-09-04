@@ -3,6 +3,12 @@
     .pure-g
       .pure-u-1.pure-u-md-3-5.lhs
         %h1 Become an Exercism mentor
+
+        - if @errors.any?
+          #errors
+            - @errors.full_messages.each do |error|
+              %div= error
+
         =form_tag [:mentor, :registrations], method: :post do
           .section
             %h2 It's great to see you here.

@@ -6,12 +6,23 @@ class Mentor::RegistrationsController < ApplicationController
   end
 
   def new
-    @tracks = Track.active.order(:title).map{|t|[t.title, t.id]}
+    load_tracks
+    @errors = []
   end
 
   def create
-    MakeUserAMentor.(current_user, params[:track_id])
-    redirect_to mentor_dashboard_path
+    command = MakeUserAMentor.new(current_user, params[:track_id])
+
+    command.()
+
+    if command.success?
+      redirect_to mentor_dashboard_path
+    else
+      load_tracks
+      @errors = command.errors
+
+      render :new
+    end
   end
 
   private
@@ -20,5 +31,9 @@ class Mentor::RegistrationsController < ApplicationController
     return unless user_signed_in?
     return unless current_user.is_mentor?
     redirect_to mentor_dashboard_path
+  end
+
+  def load_tracks
+    @tracks = Track.active.order(:title).map{|t|[t.title, t.id]}
   end
 end

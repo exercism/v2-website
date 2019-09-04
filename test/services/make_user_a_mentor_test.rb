@@ -4,6 +4,8 @@ require 'webmock/minitest'
 class MakeUserAMentorTest < ActiveSupport::TestCase
   test "makes user a mentor of the relevant track" do
     user = create :user
+    solution = create :solution, user: user
+    create :iteration, solution: solution
     track = create :track
     create :track
 
@@ -17,6 +19,8 @@ class MakeUserAMentorTest < ActiveSupport::TestCase
 
   test "invites to Slack" do
     user = create :user
+    solution = create :solution, user: user
+    create :iteration, solution: solution
 
     RestClient.expects(:post).with(
       "https://dev.null.exercism.io",
