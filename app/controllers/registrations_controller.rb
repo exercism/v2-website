@@ -23,7 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def check_recaptcha!
-    return if recaptcha_verified? || recaptcha_fallback_verified?
+    return if recaptcha_verified?
 
     clean_up_resource
     render :new
@@ -32,21 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
   def recaptcha_verified?
     build_resource(sign_up_params)
 
-    verify_recaptcha(
-      secret_key: RecaptchaConfig.secret_key,
-      model: resource,
-      action: "registration",
-      minimum_score: 0.5
-    )
-  end
-
-  def recaptcha_fallback_verified?
-    build_resource(sign_up_params)
-
-    verify_recaptcha(
-      model: resource,
-      secret_key: RecaptchaConfig.fallback_secret_key
-    )
+    verify_recaptcha(model: resource)
   end
 
   def clean_up_resource
