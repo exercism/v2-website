@@ -1,5 +1,6 @@
 class SolutionCommentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
+  before_action :check_if_allowed_to_comment!, only: [:create]
 
   def show
     solution = Solution.find_by_uuid!(params[:solution_id])
@@ -8,7 +9,6 @@ class SolutionCommentsController < ApplicationController
   end
 
   def create
-    # TODO - Check alow to comment here
     @solution = Solution.find_by_uuid!(params[:solution_id])
     @comment = CreateSolutionComment.(@solution, current_user, params[:solution_comment][:content])
   end
@@ -32,6 +32,12 @@ class SolutionCommentsController < ApplicationController
   end
 
   private
+
+  def check_if_allowed_to_comment!
+    unless AllowedToCommentPolicy.allowed?(current_user)
+      head :unprocessable_entity
+    end
+  end
 
   def solution_comment_params
     params.require(:solution_comment).permit(:content)
