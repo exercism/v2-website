@@ -110,6 +110,15 @@ class BlogCommentsTest < ApplicationSystemTestCase
     assert_equal "", find(".new-editable-text textarea").value
   end
 
+  test "not logged in user should should not see new comment box with existing solutions" do
+    blog_post = create(:blog_post)
+    create :blog_comment, blog_post: blog_post
+
+    visit blog_post_path(blog_post)
+
+    refute_selector ".new-editable-text"
+  end
+
   test "user without submitted solutions should not see new comment box" do
     user = create(:user, :onboarded)
     blog_post = create(:blog_post)

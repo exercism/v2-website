@@ -9,7 +9,8 @@
       -else user_signed_in?
         .no-comments There are no comments yet. Be the first to add one.
 
-    = render "new_comment", blog_post: @blog_post
+    -if user_signed_in?
+      = render "new_comment", blog_post: @blog_post
 
     -content_for :js do
       :javascript
