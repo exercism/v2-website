@@ -1,4 +1,6 @@
 class BlogCommentsController < MyController
+  before_action :check_if_allowed_to_comment!, only: [:create]
+
   def create
     @blog_post = BlogPost.published.find(params[:blog_post_id])
     @comment = CreateBlogComment.(@blog_post, current_user, params[:blog_comment][:content])
@@ -23,6 +25,12 @@ class BlogCommentsController < MyController
   end
 
   private
+
+  def check_if_allowed_to_comment!
+    unless AllowedToCommentPolicy.allowed?(current_user)
+      head :unprocessable_entity
+    end
+  end
 
   def blog_comment_params
     params.require(:blog_comment).permit(:content)
