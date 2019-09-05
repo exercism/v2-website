@@ -1,9 +1,10 @@
 require "application_system_test_case"
 
 class BlogCommentsTest < ApplicationSystemTestCase
-
   test "user posts a blog comment" do
     user = create(:user, :onboarded)
+    solution = create(:solution, user: user)
+    create(:iteration, solution: solution)
     blog_post = create(:blog_post)
 
     sign_in!(user)
@@ -22,6 +23,8 @@ class BlogCommentsTest < ApplicationSystemTestCase
 
   test "user edits a blog comment" do
     user = create(:user, :onboarded)
+    solution = create(:solution, user: user)
+    create(:iteration, solution: solution)
     blog_post = create(:blog_post)
     blog_comment = create(:blog_comment,
                              content: "Hello!",
@@ -43,6 +46,8 @@ class BlogCommentsTest < ApplicationSystemTestCase
 
   test "user deletes a blog comment" do
     user = create(:user, :onboarded)
+    solution = create(:solution, user: user)
+    create(:iteration, solution: solution)
     blog_post = create(:blog_post)
     blog_comment = create(:blog_comment,
                              content: "Hello!",
@@ -60,9 +65,12 @@ class BlogCommentsTest < ApplicationSystemTestCase
   end
 
   test "comment button clears preview tab" do
+    user = create(:user, :onboarded)
+    solution = create(:solution, user: user)
+    create(:iteration, solution: solution)
     blog_post = create(:blog_post)
 
-    sign_in!
+    sign_in!(user)
     visit blog_post_path(blog_post)
 
     assert_selector ".comment-button"
@@ -77,9 +85,12 @@ class BlogCommentsTest < ApplicationSystemTestCase
   end
 
   test "localstorage saves comment draft" do
+    user = create(:user, :onboarded)
+    solution = create(:solution, user: user)
+    create(:iteration, solution: solution)
     blog_post = create(:blog_post)
 
-    sign_in!
+    sign_in!(user)
     visit blog_post_path(blog_post)
 
     assert_selector ".comment-button"
@@ -97,5 +108,15 @@ class BlogCommentsTest < ApplicationSystemTestCase
     visit blog_post_path(blog_post)
 
     assert_equal "", find(".new-editable-text textarea").value
+  end
+
+  test "user without submitted solutions should not see new comment box" do
+    user = create(:user, :onboarded)
+    blog_post = create(:blog_post)
+
+    sign_in!(user)
+    visit blog_post_path(blog_post)
+
+    refute_selector ".new-editable-text"
   end
 end
