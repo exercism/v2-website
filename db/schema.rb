@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_064621) do
+ActiveRecord::Schema.define(version: 2019_09_04_023937) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_064621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "edited", default: false, null: false
-    t.text "previous_content"
+    t.text "previous_content", limit: 4294967295
     t.boolean "deleted", default: false, null: false
     t.string "type"
     t.index ["iteration_id"], name: "fk_rails_f58a02b68e"
