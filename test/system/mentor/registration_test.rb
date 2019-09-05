@@ -4,7 +4,7 @@ class MentorRegistrationTest < ApplicationSystemTestCase
   test "signed in mentor flow works" do
     RestClient.expects(:post)
 
-    user = create :user
+    user = create :user, :onboarded
     ruby = create(:track, title: "Ruby")
     python = create(:track, title: "Python")
     exercise = create(:exercise, track: ruby)
@@ -35,7 +35,7 @@ class MentorRegistrationTest < ApplicationSystemTestCase
     RestClient.expects(:post)
 
     password = "foobar"
-    user = create :user, password: password
+    user = create :user, :onboarded, password: password
     user.confirm
 
     ruby = create(:track, title: "Ruby")
@@ -69,7 +69,7 @@ class MentorRegistrationTest < ApplicationSystemTestCase
   end
 
   test "user must submit one solution before becoming a mentor" do
-    user = create(:user)
+    user = create(:user, :onboarded)
     ruby = create(:track, title: "Ruby")
 
     sign_in!(user)

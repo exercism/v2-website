@@ -9,7 +9,7 @@ class SolutionsCommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "prevents forbidden users from commenting" do
-    user = create(:user)
+    user = create(:user, :onboarded)
     solution = create(:solution)
     AllowedToCommentPolicy.stubs(:allowed?).returns(false)
 

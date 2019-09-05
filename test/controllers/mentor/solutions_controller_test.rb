@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   test "show permissions" do
-    user = create :user
+    user = create :user, :onboarded
     solution = create :solution
     create :iteration, solution: solution
 
@@ -21,7 +21,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "approve calls service" do
-    mentor = create :user, :mentor
+    mentor = create :user, :mentor, :onboarded
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -35,7 +35,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show sets anonmyous mode correctly" do
-    mentor = create :user, :mentor
+    mentor = create :user, :mentor, :onboarded
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -65,7 +65,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show clears notifications" do
-    mentor = create :user, :mentor
+    mentor = create :user, :mentor, :onboarded
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -82,7 +82,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "abandon works without solution mentorship" do
-    mentor = create :user, :mentor
+    mentor = create :user, :mentor, :onboarded
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
@@ -103,7 +103,7 @@ class Mentor::SolutionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "abandon works with solution mentorship" do
-    mentor = create :user, :mentor
+    mentor = create :user, :mentor, :onboarded
     track = create :track
     exercise = create :exercise, track: track
     create :track_mentorship, user: mentor, track: track
