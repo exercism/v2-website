@@ -27,6 +27,10 @@ FactoryBot.define do
     author_handle { create(:user).handle }
     content_repository { "blog" }
     content_filepath { SecureRandom.uuid }
+
+    trait :published do
+      published_at { 2.weeks.ago }
+    end
   end
 
   factory :solution_comment do
