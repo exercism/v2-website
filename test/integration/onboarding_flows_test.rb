@@ -17,8 +17,6 @@ class OnboardingFlowsTest < ActionDispatch::IntegrationTest
     assert_redirected_to track_path(track)
     assert_response :redirect
     follow_redirect!
-    assert_redirected_to my_track_path(track)
-    follow_redirect!
 
     # This should redirect to onboarding.
     assert_redirected_to onboarding_path
