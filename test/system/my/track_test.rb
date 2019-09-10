@@ -33,7 +33,7 @@ class My::TrackTest < ApplicationSystemTestCase
   end
 
   test "shows correct exercise count on track page" do
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     exercise = create(:exercise, track: track, core: true)
     create(:exercise,
            track: track,
@@ -57,7 +57,7 @@ class My::TrackTest < ApplicationSystemTestCase
   end
 
   test "shows migration modal for user tracks created before migration" do
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     exercise = create(:exercise, track: track, core: true)
 
     user_track = create(:user_track, {

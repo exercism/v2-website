@@ -159,7 +159,7 @@ FactoryBot.define do
     code_sample {%q{
       puts "Hello World"
     }}
-    repo_url { "http://example.com/ruby-#{SecureRandom.uuid}.git" }
+    repo_url { "file://#{Rails.root}/test/fixtures/track" }
   end
 
   factory :exercise do
@@ -196,7 +196,7 @@ FactoryBot.define do
     user { create :user }
     exercise { create :exercise }
     git_sha { SecureRandom.uuid }
-    git_slug { SecureRandom.uuid }
+    git_slug { "hello-world" }
   end
 
   factory :user_track do

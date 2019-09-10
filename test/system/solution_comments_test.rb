@@ -6,10 +6,9 @@ class SolutionCommentsTest < ApplicationSystemTestCase
     @user_solution = create(:solution, user: @user)
     create(:iteration, solution: @user_solution)
 
-    @track = create :track
-    @solution = create :solution, exercise: create(:exercise, track: @track),
-                                  published_at: Time.current,
-                                  allow_comments: true
+    @solution = create :solution,
+      published_at: Time.current,
+      allow_comments: true
     @iteration = create :iteration, solution: @solution
   end
 
