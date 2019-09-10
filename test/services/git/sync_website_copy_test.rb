@@ -3,7 +3,6 @@ require 'webmock/minitest'
 
 class Git::SyncWebsiteCopyTest < ActiveJob::TestCase
   test "syncs mentors" do
-    Git::WebsiteContent.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/website-copy")
     stub_request(:get, "https://api.github.com/users/kytrinyx").
       to_return(
         status: 200,

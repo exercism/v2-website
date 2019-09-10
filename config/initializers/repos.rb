@@ -5,3 +5,7 @@ end
 Git::ProblemSpecifications.configure do |config|
   config.repo_url = Rails.application.config_for("repos")["problem_specifications"]
 end
+
+Git::WebsiteContent.configure do |config|
+  config.repo_url = Rails.application.config_for("repos")["website_content"]
+end

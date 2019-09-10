@@ -165,8 +165,8 @@ FactoryBot.define do
   factory :exercise do
     track { create :track }
     uuid { SecureRandom.uuid }
-    slug { "bob-#{SecureRandom.uuid}" }
-    title { "Bob" }
+    slug { "hello-world" }
+    title { "Hello World" }
     core { false }
     position { 1 }
   end

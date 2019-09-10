@@ -2,10 +2,6 @@ require_relative "./test_case"
 
 class Teams::WalkthroughTest < Teams::TestCase
   test "user views walkthrough from the team solutions page" do
-    Git::WebsiteContent.
-      stubs(:repo_url).
-      returns("file://#{Rails.root}/test/fixtures/website-copy")
-
     user = create(:user, :onboarded)
     create(:auth_token, user: user)
     team = create(:team)

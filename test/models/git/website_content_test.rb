@@ -19,10 +19,6 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
     track = create :track, slug: "ruby"
     exercise = create :exercise, slug: "grains", track: track
 
-    Git::WebsiteContent.
-      stubs(:repo_url).
-      returns("file://#{Rails.root}/test/fixtures/website-copy")
-
     repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
 
     assert_equal(
@@ -50,10 +46,6 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
   end
 
   test "returns walkthrough content" do
-    Git::WebsiteContent.
-      stubs(:repo_url).
-      returns("file://#{Rails.root}/test/fixtures/website-copy")
-
     repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
 
     assert_equal(

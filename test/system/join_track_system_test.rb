@@ -3,9 +3,7 @@ require "application_system_test_case"
 class JoinTrackSystemTest < ApplicationSystemTestCase
   test "user joins a track in mentored mode" do
     user = create(:user, :onboarded)
-    track = create(:track,
-                   title: "Ruby",
-                   repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
+    track = create(:track, title: "Ruby")
     exercise = create(:exercise,
                       track: track,
                       title: "Hello World",
@@ -28,9 +26,7 @@ class JoinTrackSystemTest < ApplicationSystemTestCase
 
   test "user joins a track in independent mode" do
     user = create(:user, :onboarded)
-    track = create(:track,
-                   title: "Ruby",
-                   repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
+    track = create(:track, title: "Ruby")
     exercise = create(:exercise,
                       track: track,
                       title: "Hello World",

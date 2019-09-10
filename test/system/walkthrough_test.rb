@@ -2,9 +2,6 @@ require "application_system_test_case"
 
 class WalkthroughTest < ApplicationSystemTestCase
   test "shows walkthrough" do
-    Git::WebsiteContent.
-      stubs(:repo_url).
-      returns("file://#{Rails.root}/test/fixtures/website-copy")
     user = create(:user, :onboarded)
     create(:auth_token, user: user)
     track = create(:track)
@@ -20,9 +17,6 @@ class WalkthroughTest < ApplicationSystemTestCase
   end
 
   test "shows walkthrough in a different page" do
-    Git::WebsiteContent.
-      stubs(:repo_url).
-      returns("file://#{Rails.root}/test/fixtures/website-copy")
     user = create(:user, :onboarded)
     create(:auth_token, user: user)
     track = create(:track)
