@@ -12,10 +12,8 @@ class SolutionsTest < ApplicationSystemTestCase
                       git_sha: Git::ExercismRepo.current_head(track.repo_url))
     iteration = create(:iteration, solution: solution)
 
-    stub_repo_cache! do
-      sign_in!(user)
-      visit my_solution_path(solution)
-    end
+    sign_in!(user)
+    visit my_solution_path(solution)
 
     find(:css, ".tab", text: "Test suite").click
     assert_text "This is the test suite"
@@ -66,9 +64,7 @@ class SolutionsTest < ApplicationSystemTestCase
     solution = create(:solution, published_at: Date.new(2016, 12, 25))
     iteration = create(:iteration, solution: solution)
 
-    stub_repo_cache! do
-      visit solution_path(solution)
-    end
+    visit solution_path(solution)
 
     assert_css ".widget-panels.widget-panels--vertical-split"
   end

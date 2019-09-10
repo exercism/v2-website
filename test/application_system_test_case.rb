@@ -1,13 +1,11 @@
 require "test_helper"
 require "support/selectize_helpers"
-require "support/stub_repo_cache"
 require "support/selenium_helpers"
 require "support/bullet_helpers"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Devise::Test::IntegrationHelpers
   include SelectizeHelpers
-  include StubRepoCache
   include SeleniumHelpers
   include BulletHelpers
 
@@ -18,6 +16,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     Capybara.server_port = '3010'
     Capybara.app_host = "http://#{SeleniumHelpers.default_host}:3010"
   end
+
+  Git::RepoBase.clear!
 
   protected
 

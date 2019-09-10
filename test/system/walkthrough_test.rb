@@ -12,13 +12,11 @@ class WalkthroughTest < ApplicationSystemTestCase
     exercise = create(:exercise, track: track)
     solution = create(:solution, user: user, exercise: exercise)
 
-    stub_repo_cache! do
-      sign_in!(user)
-      visit my_solution_path(solution)
-      click_on "Begin walk-through"
+    sign_in!(user)
+    visit my_solution_path(solution)
+    click_on "Begin walk-through"
 
-      assert_text "Welcome to the Exercism installation guide!"
-    end
+    assert_text "Welcome to the Exercism installation guide!"
   end
 
   test "shows walkthrough in a different page" do
@@ -32,11 +30,9 @@ class WalkthroughTest < ApplicationSystemTestCase
     exercise = create(:exercise, track: track)
     solution = create(:solution, user: user, exercise: exercise)
 
-    stub_repo_cache! do
-      sign_in!(user)
-      visit walkthrough_my_solution_path(solution)
+    sign_in!(user)
+    visit walkthrough_my_solution_path(solution)
 
-      assert_text "Welcome to the Exercism installation guide!"
-    end
+    assert_text "Welcome to the Exercism installation guide!"
   end
 end

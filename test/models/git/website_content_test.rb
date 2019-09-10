@@ -23,34 +23,30 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
 
-    stub_repo_cache! do
-      repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+    repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
 
-      assert_equal(
-        "# Welcome to the Exercism mentoring guide!\n",
-        repo.mentor_notes_for(track.slug, exercise.slug)
-      )
-    end
+    assert_equal(
+      "# Welcome to the Exercism mentoring guide!\n",
+      repo.mentor_notes_for(track.slug, exercise.slug)
+    )
   end
 
   test "returns mentor data" do
-    stub_repo_cache! do
-      repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+    repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
 
-      expected = [
-        {
-          github_username: "kytrinyx",
-          name: "Katrina Owen",
-          link_text: "Link",
-          link_url: "example.com",
-          avatar_url: "avatar.png",
-          bio: "Bio",
-          track: "go"
-        }
-      ]
+    expected = [
+      {
+        github_username: "kytrinyx",
+        name: "Katrina Owen",
+        link_text: "Link",
+        link_url: "example.com",
+        avatar_url: "avatar.png",
+        bio: "Bio",
+        track: "go"
+      }
+    ]
 
-      assert_equal expected, repo.mentors
-    end
+    assert_equal expected, repo.mentors
   end
 
   test "returns walkthrough content" do
@@ -58,13 +54,11 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
       stubs(:repo_url).
       returns("file://#{Rails.root}/test/fixtures/website-copy")
 
-    stub_repo_cache! do
-      repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+    repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
 
-      assert_equal(
-        "Welcome to the Exercism installation guide!\n",
-        repo.walkthrough
-      )
-    end
+    assert_equal(
+      "Welcome to the Exercism installation guide!\n",
+      repo.walkthrough
+    )
   end
 end

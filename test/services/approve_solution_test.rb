@@ -32,9 +32,7 @@ class ApprovesSolutionTest < ActiveSupport::TestCase
     create(:track_mentorship, user: mentor, track: track)
     create(:solution_mentorship, solution: solution, user: mentor)
 
-    stub_repo_cache! do
-      ApproveSolution.(solution, mentor)
-    end
+    ApproveSolution.(solution, mentor)
 
     assert unlocked_exercise.unlocked_by_user?(user)
   end

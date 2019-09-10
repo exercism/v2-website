@@ -5,9 +5,7 @@ class Git::SyncTracksTest < ActiveSupport::TestCase
     Git::ProblemSpecifications.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/problem-specifications")
     track = create(:track, active: false)
 
-    stub_repo_cache! do
-      Git::SyncTrack.(track)
-    end
+    Git::SyncTrack.(track)
 
     assert track.active?
   end
@@ -21,9 +19,7 @@ class Git::SyncTracksTest < ActiveSupport::TestCase
                          unlocked_by: slugs,
                          uuid: "4e2533dd-3af5-400b-869d-78140764d533")
 
-    stub_repo_cache! do
-      Git::SyncTrack.(track)
-    end
+    Git::SyncTrack.(track)
 
     hello_world.reload
     assert_nil hello_world.unlocked_by
@@ -33,9 +29,7 @@ class Git::SyncTracksTest < ActiveSupport::TestCase
     Git::ProblemSpecifications.stubs(:repo_url).returns("file://#{Rails.root}/test/fixtures/problem-specifications")
     track = create(:track)
 
-    stub_repo_cache! do
-      Git::SyncTrack.(track)
-    end
+    Git::SyncTrack.(track)
 
     exercise = Exercise.last
     assert_equal "Hello World", exercise.title

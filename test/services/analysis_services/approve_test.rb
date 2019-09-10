@@ -43,9 +43,7 @@ module AnalysisServices
       create :iteration, solution: solution
       system_user = create(:user, :system)
 
-      stub_repo_cache! do
-        Approve.(solution)
-      end
+      Approve.(solution)
 
       assert unlocked_exercise.unlocked_by_user?(user)
     end

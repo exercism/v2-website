@@ -20,9 +20,7 @@ class Git::SyncWebsiteCopyTest < ActiveJob::TestCase
     )
     track = create(:track, slug: "go")
 
-    stub_repo_cache! do
-      Git::SyncWebsiteCopy.()
-    end
+    Git::SyncWebsiteCopy.()
 
     mentor = Mentor.last
     assert_equal track, mentor.track

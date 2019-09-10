@@ -1,0 +1,6 @@
+development:
+  base_dir: ./tmp/git_repo_cache
+production:
+  base_dir: ./tmp/git_repo_cache
+test:
+  base_dir: ./test/tmp/git_repo_cache

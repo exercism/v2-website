@@ -6,10 +6,8 @@ class Git::ProblemSpecifications::ExerciseTest < ActiveSupport::TestCase
     exercise_tree = Git::ProblemSpecifications.head.exercises.exercise_tree("hello-world")
 
 
-    stub_repo_cache! do
-      exercise = Git::ProblemSpecifications::Exercise.new(Git::ProblemSpecifications.head, exercise_tree)
+    exercise = Git::ProblemSpecifications::Exercise.new(Git::ProblemSpecifications.head, exercise_tree)
 
-      assert_equal "Hello World", exercise.title
-    end
+    assert_equal "Hello World", exercise.title
   end
 end

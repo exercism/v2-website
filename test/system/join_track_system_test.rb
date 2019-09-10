@@ -11,19 +11,17 @@ class JoinTrackSystemTest < ApplicationSystemTestCase
                       title: "Hello World",
                       core: true)
 
-    stub_repo_cache! do
-      sign_in!(user)
-      visit my_track_path(track)
-      click_on "Join the Ruby track"
+    sign_in!(user)
+    visit my_track_path(track)
+    click_on "Join the Ruby track"
 
-      assert_selector("#modal.my-track-started")
-      click_on "Mentored Mode (Recommended)"
-      click_on "Continue"
+    assert_selector("#modal.my-track-started")
+    click_on "Mentored Mode (Recommended)"
+    click_on "Continue"
 
-      within(".exercise-wrapper") { assert_text "Hello World" }
-      click_link "Hello World"
-      assert_selector("h2", text: "Hello World")
-    end
+    within(".exercise-wrapper") { assert_text "Hello World" }
+    click_link "Hello World"
+    assert_selector("h2", text: "Hello World")
 
     refute UserTrack.last.independent_mode?
   end
@@ -38,18 +36,16 @@ class JoinTrackSystemTest < ApplicationSystemTestCase
                       title: "Hello World",
                       core: true)
 
-    stub_repo_cache! do
-      sign_in!(user)
-      visit my_track_path(track)
-      click_on "Join the Ruby track"
+    sign_in!(user)
+    visit my_track_path(track)
+    click_on "Join the Ruby track"
 
-      assert_selector("#modal.my-track-started")
-      click_on "Independent Mode"
+    assert_selector("#modal.my-track-started")
+    click_on "Independent Mode"
 
-      within(".widget-side-exercise") { assert_text "Hello World" }
-      click_link("Hello World")
-      assert_selector("h2", text: "Hello World")
-    end
+    within(".widget-side-exercise") { assert_text "Hello World" }
+    click_link("Hello World")
+    assert_selector("h2", text: "Hello World")
 
     assert UserTrack.last.independent_mode?
   end
