@@ -1,6 +1,9 @@
 development:
   base_dir: ./tmp/git_repo_cache
+  problem_specifications: https://github.com/exercism/problem-specifications
 production:
   base_dir: ./tmp/git_repo_cache
+  problem_specifications: https://github.com/exercism/problem-specifications
 test:
   base_dir: ./test/tmp/git_repo_cache
+  problem_specifications: ./test/fixtures/problem-specifications
