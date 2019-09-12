@@ -9,6 +9,13 @@ module AnalysisServices
     end
 
     def call
+      # If we don't have an analyser, then we should just
+      # undo what we've done so far and leave this alone.
+      if analysis_status == :no_analyzer
+        remove_system_lock
+        return
+      end
+
       create_database_record
       handle_analysis
       remove_system_lock
@@ -46,7 +53,7 @@ module AnalysisServices
     end
 
     def remove_system_lock
-      solution.solution_locks.where(user_id: User::SYSTEM_USER_ID).destroy_all
+      UnlockSolution.(solution)
     end
 
     def analysis_succeeded?
