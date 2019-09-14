@@ -29,8 +29,9 @@ module AnalysisServices
     def create_database_record
       @record = IterationAnalysis.create!(
         iteration: iteration,
+        analysis: analysis,
         ops_status: ops_status,
-        analysis: analysis
+        analysis_status: analysis[:status]
       )
     end
 

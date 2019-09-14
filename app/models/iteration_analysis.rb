@@ -11,8 +11,7 @@ class IterationAnalysis < ApplicationRecord
   end
 
   def analysis_status
-    s = analysis[:status]
-    s.present?? s.to_s.to_sym : nil
+    super.try(&:to_sym)
   end
 
   def analysis_comments_data
