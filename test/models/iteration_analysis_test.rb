@@ -2,10 +2,10 @@ require 'test_helper'
 
 class IterationAnalysisTest < ActiveSupport::TestCase
   test "succeeded?" do
-    assert create(:iteration_analysis, status: :success).succeeded?
-    assert create(:iteration_analysis, status: 'success').succeeded?
-    refute create(:iteration_analysis, status: :failed).succeeded?
-    refute create(:iteration_analysis, status: :foobar).succeeded?
+    assert create(:iteration_analysis, ops_status: :success).succeeded?
+    assert create(:iteration_analysis, ops_status: 'success').succeeded?
+    refute create(:iteration_analysis, ops_status: :failed).succeeded?
+    refute create(:iteration_analysis, ops_status: :foobar).succeeded?
   end
 
   test "analysis_status" do

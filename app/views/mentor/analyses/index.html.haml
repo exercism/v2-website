@@ -30,7 +30,7 @@
             -if analysis.website_error.present?
               %code errored
             -else
-              %code= analysis.status
+              %code= analysis.ops_status
           %td
             %code= analysis.analysis_status
           %td.right= analysis.analysis_comments_data.try(&:size)

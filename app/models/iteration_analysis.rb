@@ -2,7 +2,7 @@ class IterationAnalysis < ApplicationRecord
   belongs_to :iteration
 
   def succeeded?
-    status.to_sym == :success
+    ops_status.to_sym == :success
   end
 
   def handled?

@@ -40,12 +40,12 @@ module AnalysisServices
 
     test "creates db record" do
       iteration = create :iteration
-      status = "success"
+      ops_status = "success"
 
-      ProcessAnalysis.(iteration, status, {"foo" => "bar"})
+      ProcessAnalysis.(iteration, ops_status, {"foo" => "bar"})
       ia = IterationAnalysis.last
       assert_equal iteration, ia.iteration
-      assert_equal status, ia.status
+      assert_equal ops_status, ia.ops_status
       assert_equal({foo: "bar"}, ia.analysis)
     end
 
