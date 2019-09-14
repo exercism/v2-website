@@ -10,7 +10,7 @@ class Mentor::AnalysesController < MentorController
                                   order('id DESC')
 
     @analyses = @analyses.joins(iteration: {person_solution: :exercise}).where('exercises.track_id': @track_id) if @track_id.to_i > 0
-    @analyses = @analyses.where(analysis_status: @ops_status) if @ops_status.present?
+    @analyses = @analyses.where(ops_status: @ops_status) if @ops_status.present?
     @analyses = @analyses.where(analysis_status: @analysis_status) if @analysis_status.present?
     @analyses = @analyses.page(params[:page]).per(20)
   end
