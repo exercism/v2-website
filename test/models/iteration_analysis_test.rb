@@ -1,13 +1,6 @@
 require 'test_helper'
 
 class IterationAnalysisTest < ActiveSupport::TestCase
-  test "succeeded?" do
-    assert create(:iteration_analysis, ops_status: :success).succeeded?
-    assert create(:iteration_analysis, ops_status: 'success').succeeded?
-    refute create(:iteration_analysis, ops_status: :failed).succeeded?
-    refute create(:iteration_analysis, ops_status: :foobar).succeeded?
-  end
-
   test "analysis_status" do
     assert_equal :approve, create(:iteration_analysis, analysis_status: "approve").analysis_status
     assert_equal :approve, create(:iteration_analysis, analysis_status: :approve).analysis_status
@@ -19,6 +12,7 @@ class IterationAnalysisTest < ActiveSupport::TestCase
     assert create(:iteration_analysis, analysis_status: :approve_as_optimal).handled?
     assert create(:iteration_analysis, analysis_status: :disapprove).handled?
     refute create(:iteration_analysis, analysis_status: :refer_to_mentor).handled?
+    refute create(:iteration_analysis, ops_status: :failed, analysis_status: :approve).handled?
   end
 
   test "analysis" do
