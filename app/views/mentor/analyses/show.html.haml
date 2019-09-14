@@ -23,6 +23,9 @@
     .status
       %h2 Ops Status
       #{@analysis.ops_status.titleize}
+    .status
+      %h2 Analysis Status
+      #{@analysis.analysis_status.to_s.titleize}
 
     .analysis
       %h2 Analysis
