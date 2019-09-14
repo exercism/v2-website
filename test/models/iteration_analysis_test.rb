@@ -9,18 +9,16 @@ class IterationAnalysisTest < ActiveSupport::TestCase
   end
 
   test "analysis_status" do
-    assert_equal :approve, create(:iteration_analysis, analysis: {status: "approve"}).analysis_status
-    assert_equal :approve, create(:iteration_analysis, analysis: {'status' => "approve"}).analysis_status
-    assert_equal :approve, create(:iteration_analysis, analysis: {status: :approve}).analysis_status
-    assert_equal :approve, create(:iteration_analysis, analysis: {'status' => :approve}).analysis_status
+    assert_equal :approve, create(:iteration_analysis, analysis_status: "approve").analysis_status
+    assert_equal :approve, create(:iteration_analysis, analysis_status: :approve).analysis_status
     assert_nil create(:iteration_analysis, analysis: {}).analysis_status
   end
 
   test "handled?" do
-    assert create(:iteration_analysis, analysis: {'status' => :approve}).handled?
-    assert create(:iteration_analysis, analysis: {'status' => :approve_as_optimal}).handled?
-    assert create(:iteration_analysis, analysis: {'status' => :disapprove}).handled?
-    refute create(:iteration_analysis, analysis: {'status' => :refer_to_mentor}).handled?
+    assert create(:iteration_analysis, analysis_status: :approve).handled?
+    assert create(:iteration_analysis, analysis_status: :approve_as_optimal).handled?
+    assert create(:iteration_analysis, analysis_status: :disapprove).handled?
+    refute create(:iteration_analysis, analysis_status: :refer_to_mentor).handled?
   end
 
   test "analysis" do
