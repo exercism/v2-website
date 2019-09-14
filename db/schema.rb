@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_023937) do
+ActiveRecord::Schema.define(version: 2019_09_14_171152) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
     t.index ["user_id", "active"], name: "index_auth_tokens_on_user_id_and_active"
+    t.index ["user_id"], name: "fk_rails_0d66c22f4c"
   end
 
   create_table "blog_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -191,7 +192,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
 
   create_table "iteration_analyses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "iteration_id", null: false
-    t.string "status", null: false
+    t.string "ops_status", null: false
     t.json "analysis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -233,6 +234,16 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
     t.string "alumnus"
     t.index ["track_id"], name: "fk_rails_ed46fd11a4"
     t.index ["user_id"], name: "fk_rails_5b1168410c"
+  end
+
+  create_table "mentor_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "bio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "average_rating", precision: 3, scale: 2
+    t.integer "num_solutions_mentored", default: 0, null: false
+    t.index ["user_id"], name: "fk_rails_9a3e3e5b86"
   end
 
   create_table "mentors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -379,9 +390,14 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
     t.integer "num_comments", limit: 2, default: 0, null: false
     t.integer "num_stars", limit: 2, default: 0, null: false
     t.datetime "reminder_sent_at"
+    t.index ["approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "ihid_fix_8"
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
+    t.index ["exercise_id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "ihid_fix_11"
     t.index ["exercise_id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "mentor_selection_idx_3"
+    t.index ["exercise_id", "id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors"], name: "ihid_fix_10"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
+    t.index ["exercise_id"], name: "fk_rails_8c0841e614"
+    t.index ["id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors"], name: "ihid_fix_9"
     t.index ["num_mentors", "independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_1"
     t.index ["num_mentors", "track_in_independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_2"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
@@ -406,6 +422,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id", "user_id"], name: "index_team_memberships_on_team_id_and_user_id", unique: true
+    t.index ["team_id"], name: "fk_rails_61c29b529e"
     t.index ["user_id"], name: "fk_rails_5aba9331a7"
   end
 
@@ -468,6 +485,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
     t.datetime "updated_at", null: false
     t.index ["track_id"], name: "fk_rails_4a81f96f88"
     t.index ["user_id", "track_id"], name: "index_track_mentorships_on_user_id_and_track_id", unique: true
+    t.index ["user_id"], name: "fk_rails_283ecc719a"
   end
 
   create_table "tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -564,11 +582,10 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
   add_foreign_key "iteration_files", "iterations"
   add_foreign_key "maintainers", "tracks"
   add_foreign_key "maintainers", "users"
+  add_foreign_key "mentor_profiles", "users"
   add_foreign_key "mentors", "tracks"
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "reactions", "solutions"
-  add_foreign_key "reactions", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
   add_foreign_key "solution_locks", "solutions"
   add_foreign_key "solution_locks", "users"

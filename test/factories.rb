@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :iteration_analysis do
     iteration { create :iteration }
-    status { "success" }
+    ops_status { "success" }
   end
 
   factory :user_email_log do
