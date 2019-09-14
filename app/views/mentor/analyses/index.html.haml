@@ -3,7 +3,7 @@
     =form_tag({}, method: :get) do
       =select_tag :track_id, options_for_select(@tracks.map{|t|[t.title, t.id]}, @track_id), include_blank: "Track"
       =select_tag :ops_status, options_for_select(IterationAnalysis.distinct.pluck(:ops_status), @ops_status), include_blank: "Ops status"
-      =select_tag :analysis_status, options_for_select(IterationAnalysis.distinct.pluck(:analysis_status).compact, @analysis_status), include_blank: "Analysis Status"
+      =select_tag :analysis_status, options_for_select(IterationAnalysis.distinct.pluck(:analysis_status).compact, @analysis_status), include_blank: "Analysis status"
       =button_tag "Filter", class: "pure-button"
 
     %table
