@@ -1,11 +1,16 @@
 FactoryBot.define do
+  factory :submission_test_result, class: 'SubmissionTestResults' do
+    solution { create :submission }
+    ops_status { :no_test_runner }
+  end
+
   factory :submission do
-    
+    solution { create :solution }
   end
 
   factory :iteration_analysis do
     iteration { create :iteration }
-    ops_status { "success" }
+    ops_status { :no_analyzer }
   end
 
   factory :user_email_log do
