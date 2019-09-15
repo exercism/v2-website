@@ -263,7 +263,7 @@ Exercism::PrismFileMappings = {
   "parigp": %w{gp},
   "parser": %w{},
   "pascal": %w{pas dfm dpr lpr pascal},
-  "perl": %w{pl al cgi fcgi perl ph plx pm psgi t},
+  "perl": %w{al cgi fcgi perl ph plx pm psgi t},
   "php": %w{php aw ctp inc php3 php4 php5 phps phpt},
   "php-extras": %w{},
   "powershell": %w{ps1 psd1 psm1},
