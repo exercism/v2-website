@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :submission do
+    
+  end
+
   factory :iteration_analysis do
     iteration { create :iteration }
     ops_status { "success" }
