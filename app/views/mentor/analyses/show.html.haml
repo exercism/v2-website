@@ -1,0 +1,59 @@
+-iteration = @analysis.iteration
+-solution = iteration.solution
+-exercise = solution.exercise
+-track = exercise.track
+
+#mentor-analysis
+  .lo-container
+    =notice_and_alert
+
+    %h1 Analysis ##{@analysis.id}
+    .status
+      %h2 Iteration ID
+      #{@analysis.iteration_id}
+    .status
+      %h2 Solution
+      #{link_to @analysis.iteration.solution.uuid, mentor_solution_path(@analysis.iteration.solution)}
+    .status
+      %h2 Track
+      #{@analysis.iteration.solution.exercise.track.title}
+    .status
+      %h2 Exercise
+      #{@analysis.iteration.solution.exercise.title}
+    .status
+      %h2 Ops Status
+      #{@analysis.ops_status.titleize}
+    .status
+      %h2 Analysis Status
+      #{@analysis.analysis_status.to_s.titleize}
+
+    .analysis
+      %h2 Analysis
+      %pre
+        %code= JSON.pretty_generate(@analysis.analysis)
+
+    -if @analysis.website_error.present?
+      .analysis
+        %h2 Website Error
+        %pre
+          %code= @analysis.website_error
+
+    .code
+      %h2 Submission
+      -if iteration.files.size == 1
+        -file = iteration.files.first
+        .solution.single-file
+          %pre.line-numbers.solution-code
+            %code{class: syntax_highlighter_for_filename(file.filename, track)}
+              = file.file_contents.force_encoding('utf-8')
+      -else
+        -iteration.files.each do |file|
+          .solution.multi-file
+            %h3= file.filename
+            %pre.line-numbers.solution-code
+              %code{class: syntax_highlighter_for_filename(file.filename, track)}
+                = file.file_contents.force_encoding('utf-8')
+
+    %h2 Options
+    =link_to "Replay", replay_mentor_analysis_path(@analysis), method: :patch, class: "pure-button"
+

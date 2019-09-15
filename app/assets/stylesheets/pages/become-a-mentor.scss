@@ -1,0 +1,216 @@
+@import 'variables';
+@import 'mixins';
+
+$inner-width: 800px;
+
+/*body.controller-pages.action-index {
+    footer {
+        margin-top:0;
+    }
+}*/
+
+#become-a-mentor-page {
+    .welcome-section {
+        padding:150px 0;
+        background-image:image-url('mentor-bg.jpg');
+        background-repeat:repeat;
+        background-size:400px;
+        .box {
+            text-align:center;
+            max-width:650px;
+            padding:35px 35px 25px 35px;
+            margin: 0 auto;
+            background:rgba(#fff, 0.95);
+            border:1px solid $color-2;
+            border-radius:5px;
+            h1 {
+                @include header-font;
+                @include font-size(30, 30);
+                color:$color-2;
+                margin-bottom:10px;
+            }
+            h2 {
+                @include header-font;
+                font-weight:600;
+                @include font-size(26, 26);
+                margin-bottom:10px;
+            }
+            p {
+                font-weight:$regular;
+                color:#333;
+                @include font-size(16, 22);
+                max-width:480px;
+                margin:0 auto 20px auto;
+            }
+            .pure-button {
+                @include font-size(16, 16);
+                margin-bottom:10px;
+                font-weight:$regular;
+                border-radius:2px;
+                &.register-button {
+                    background:$color-3;
+                    color:#fff;
+                    margin-right:5px;
+                    padding:15px 70px;
+                }
+                &.learn-more-button {
+                    border:1px solid $color-2;
+                    color:$color-2;
+                    background:#fff;
+                    padding:15px 30px;
+                }
+            }
+        }
+    }
+    .pr-section {
+        background:#f9f9f9;
+        border:solid #f0f0f0;
+        border-width:1px 0;
+        padding:30px 0;
+        h2 {
+            font-weight:$regular;
+            text-align:center;
+            @include font-size(14, 14);
+            color:#ccc;
+            margin-bottom:20px;
+        }
+        .logos {
+            text-align:center;
+            a {
+                display:inline-block;
+                text-decoration:none;
+                margin:0 20px 10px 0;
+                img {
+                    display:block;
+                    height:30px;
+                }
+            }
+        }
+    }
+
+    .section {
+        padding:40px 0;
+        h2 {
+            @include font-size(20, 20);
+            font-weight:$regular;
+            font-style:italic;
+            letter-spacing:-0.5px;
+            margin-bottom:7px;
+            strong {
+                color:$color-3;
+            }
+        }
+        h3 {
+            @include font-size(14, 16);
+            color:#7b7b7b;
+            max-width:500px;
+            margin:0 auto 40px auto;
+        }
+        h2, h3 {
+            text-align:center;
+        }
+        p {
+            @include font-size(16, 22);
+        }
+        li {
+            @include font-size(15, 19);
+            margin-bottom:7px;
+            a {
+                color:#333;
+                text-decoration:underline;
+                font-weight:$regular;
+            }
+        }
+    }
+    .vision-section {
+        padding:50px 0;
+        .box {
+            text-align:center;
+            border:1px solid #d4d4d4;
+            border-radius:3px;
+            padding:40px;
+            max-width:$inner-width;
+            margin:0 auto;
+        }
+        h2 {
+            margin-bottom:20px;
+            font-weight:600;
+        }
+        p+p {
+            margin-top:15px;
+        }
+    }
+    .role-section {
+        background:#fafafa;
+        .lhs {
+            text-align:right;
+        }
+        .chat {
+            width:195px;
+            height:166px;
+            vertical-align:middle;
+        }
+        .line {
+            height:123px;
+            width:15px;
+            margin-left:40px;
+            margin-right:15px;
+            vertical-align:middle;
+        }
+        ul {
+            @include font-size(15, 21);
+            margin:0;
+            padding:0;
+            list-style:none;
+            padding-top:10px;
+            li {
+                margin-bottom:10px;
+            }
+        }
+
+    }
+    .role-section,
+    .great-mentor-section,
+    .benefits-section.section,
+    .cta-section {
+        .lo-container {
+            max-width:$inner-width;
+        }
+    }
+    .benefits-section,
+    .great-mentor-section {
+        border-bottom:1px solid #ddd;
+    }
+    .cta-section {
+        .box {
+            border:1px solid #aaa;
+            background:#fafafa;
+            padding:30px;
+            .pure-button {
+                float:right;
+            }
+        }
+        .pure-button {
+            background:$color-3;
+            padding:20px 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 48em) {
+    #become-a-mentor-page {
+        .welcome-section {
+            padding: 50px 0;
+        }
+
+        .role-section .lhs {
+            display:none;
+        }
+    }
+}
+@media screen and (min-width: 48em) {
+    #become-a-mentor-page .welcome-section {
+        padding: 150px 0;
+    }
+}
+

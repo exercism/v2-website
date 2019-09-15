@@ -5,9 +5,7 @@ class My::SideExercisesHoverTest < ApplicationSystemTestCase
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
 
-    @user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     @track = create :track
     @core_exercise = create :exercise, track: @track, core: true
     @side_exercise = create :exercise, track: @track, unlocked_by: @core_exercise, title: "side-1"
@@ -18,11 +16,15 @@ class My::SideExercisesHoverTest < ApplicationSystemTestCase
   end
 
   test "default state" do
+    create :solution, exercise: @side_exercise, user: @user
+
     visit my_track_path(@track)
     assert_selector ".core-exercises .unlocked-exercises-section h3", text: "You've unlocked extra exercises!"
   end
 
   test "hover in bonus state" do
+    create :solution, exercise: @side_exercise, user: @user
+
     visit my_track_path(@track)
     find(".core-exercises .unlocked-exercises a.unlocked-exercise").hover
     assert_selector ".core-exercises .unlocked-exercises-section h3", text: "side-1: Unlocked"
@@ -62,7 +64,9 @@ class My::SideExercisesHoverTest < ApplicationSystemTestCase
     # Add another approved solution
     other_core_exercise = create :exercise, track: @track, core: true
     create :solution, exercise: other_core_exercise, user: @user, completed_at: Time.current
-    create :exercise, track: @track, unlocked_by: other_core_exercise, title: "side-2"
+    other_side_exercise = create :exercise, track: @track, unlocked_by: other_core_exercise, title: "side-2"
+    create :solution, exercise: @side_exercise, user: @user
+    create :solution, exercise: other_side_exercise, user: @user
 
     visit my_track_path(@track)
     find(".core-exercises #exercise-#{@core_exercise.slug}+.unlocked-exercises-section a.unlocked-exercise").hover

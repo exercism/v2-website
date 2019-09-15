@@ -1,0 +1,15 @@
+<%= yield %>
+The Exercism Team
+
+---
+
+This email was sent by Exercism
+
+<% if @user && @unsubscribe_key %>
+You can unsubscribe from this email at <%= unsubscribe_url(token: @user.communication_preferences.token, key: @unsubscribe_key) %>
+<% end %>
+<% if @user %>
+You can change your notification settings at <%= unsubscribe_url(token: @user.communication_preferences.token) %>
+<% end %>
+
+Exercism - Unit G3; The Franklin, 81 Bournville Lane, B30 2BZ, Birmingham

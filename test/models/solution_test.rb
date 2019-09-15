@@ -31,6 +31,13 @@ class SolutionTest < ActiveSupport::TestCase
     refute solution.auto_approve?
   end
 
+  test "solution is approved when solution is approved" do
+    exercise = build(:exercise, auto_approve: false)
+    solution = build(:solution, exercise: exercise, approved_by: build(:user))
+
+    assert solution.approved?
+  end
+
   test "active_mentors" do
     solution = create :solution
     active_mentor_on_solution = create :user
@@ -41,6 +48,7 @@ class SolutionTest < ActiveSupport::TestCase
     create :solution_mentorship, solution: solution, user: inactive_mentor_on_solution
     create :track_mentorship, user: active_mentor_on_solution
     create :track_mentorship, user: active_mentor_not_on_solution
+    create :solution_mentorship, solution: solution, user: active_mentor_on_solution, abandoned: true
 
     assert_equal [active_mentor_on_solution], solution.active_mentors
   end
@@ -56,9 +64,24 @@ class SolutionTest < ActiveSupport::TestCase
     assert_equal [unstarted_solution], Solution.not_started
   end
 
-  test "mentored_mode" do
-    refute create(:solution, independent_mode: true).mentored_mode?
-    assert create(:solution, independent_mode: false).mentored_mode?
+  test "submitted and not_submitted" do
+    user_track = create :user_track
+    submitted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    create :iteration, solution: submitted_solution
+    unsubmitted_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    downloaded_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track), downloaded_at: Time.now
+
+    assert_equal [submitted_solution], Solution.submitted
+    assert_equal [unsubmitted_solution, downloaded_solution], Solution.not_submitted
+  end
+
+  test "has_a_mentor" do
+    user_track = create :user_track
+    mentored_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+    create :solution_mentorship, solution: mentored_solution
+    unmentored_solution = create :solution, user: user_track.user, exercise: create(:exercise, track: user_track.track)
+
+    assert_equal [mentored_solution], Solution.has_a_mentor
   end
 
   test "track_in_mentored_mode" do
@@ -81,8 +104,111 @@ class SolutionTest < ActiveSupport::TestCase
     create(:solution_lock, solution: solution)
     create(:solution_mentorship, solution: solution)
     create(:ignored_solution_mentorship, solution: solution)
-    create(:reaction, solution: solution)
+    create(:solution_star, solution: solution)
 
     solution.destroy!
+  end
+
+  test "mentoring_requested?" do
+    solution = create :solution, mentoring_requested_at: nil
+    refute solution.mentoring_requested?
+
+    solution.update(mentoring_requested_at: Time.current)
+    assert solution.mentoring_requested?
+  end
+
+  test "latest_exercise_version? with same sha" do
+    track_repo_url = "repo_url"
+    locked_sha = "1234"
+
+    track = create :track, repo_url: track_repo_url
+    exercise = create :exercise, track: track
+    solution = create :solution, git_sha: locked_sha, exercise: exercise
+
+    Git::ExercismRepo.expects(:current_head).with(track_repo_url).returns(locked_sha)
+
+    assert solution.latest_exercise_version?
+  end
+
+  test "latest_exercise_version? with different sha but same tests" do
+    track_repo_url = "locked_sha"
+    locked_sha = "1234"
+    latest_sha = "5678"
+
+    locked_exercise_repo = mock
+    latest_exercise_repo = mock
+
+    test_suite = mock
+    locked_exercise_repo.stubs(test_suite: test_suite)
+    latest_exercise_repo.stubs(test_suite: test_suite)
+
+    track = create :track, repo_url: track_repo_url
+    exercise = create :exercise, track: track
+    solution = create :solution, git_sha: locked_sha, git_slug: exercise.slug, exercise: exercise
+
+    Git::ExercismRepo.expects(:current_head).with(track_repo_url).returns(latest_sha)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, locked_sha).returns(locked_exercise_repo)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, latest_sha).returns(latest_exercise_repo)
+
+    assert solution.latest_exercise_version?
+  end
+  test "latest_exercise_version? with different sha and tests" do
+    track_repo_url = "locked_sha"
+    locked_sha = "1234"
+    latest_sha = "5678"
+
+    locked_exercise_repo = mock
+    latest_exercise_repo = mock
+
+    locked_exercise_repo.stubs(test_suite: ["foobar"])
+    latest_exercise_repo.stubs(test_suite: ["barfoo"])
+
+    track = create :track, repo_url: track_repo_url
+    exercise = create :exercise, track: track
+    solution = create :solution, git_sha: locked_sha, git_slug: exercise.slug, exercise: exercise
+
+    Git::ExercismRepo.expects(:current_head).with(track_repo_url).returns(latest_sha)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, locked_sha).returns(locked_exercise_repo)
+    Git::Exercise.stubs(:new).with(exercise, exercise.slug, latest_sha).returns(latest_exercise_repo)
+
+    refute solution.latest_exercise_version?
+  end
+
+  test "only correct polymorphic iterations are returned" do
+    normal_solution = create :solution, id: 1
+    team_solution = create :team_solution, id: 1
+
+    normal_iteration = create :iteration, solution: normal_solution
+    team_iteration = create :iteration, solution: team_solution
+
+    assert_equal [normal_iteration], normal_solution.iterations
+    assert_equal [team_iteration], team_solution.iterations
+  end
+
+  test "use_auto_analysis is true normally" do
+    create(:solution).use_auto_analysis?
+  end
+
+  test "use_auto_analysis is false if solution is already approved" do
+    approver = create(:user)
+    solution = create :solution, approved_by: approver
+    refute solution.use_auto_analysis?
+  end
+
+  test "use_auto_analysis is false if someone else is mentoring" do
+    solution = create :solution
+    create :solution_mentorship, solution: solution
+    refute solution.use_auto_analysis?
+  end
+
+  test "use_auto_analysis is false  if someone else has locked" do
+    system_user = create :user, :system
+
+    solution = create :solution
+    lock = create :solution_lock, solution: solution
+    refute solution.reload.use_auto_analysis?
+
+    lock.update(user: system_user)
+    assert solution.reload.use_auto_analysis?
   end
 end

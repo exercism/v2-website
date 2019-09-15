@@ -2,9 +2,9 @@
   - unless maintainer.active?
     =render "widgets/banner", text: maintainer.alumnus.capitalize
   .pure-g
-    .pure-u-1-4
+    .pure-u-1-6.pure-u-md-1-4
       =image maintainer.avatar_url, "Avatar of #{maintainer.name}"
-    .pure-u-3-4
+    .pure-u-5-6.pure-u-md-3-4
       %h3
         =maintainer.name
         -if maintainer.link_text.present? && maintainer.link_url.present?

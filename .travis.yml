@@ -1,3 +1,4 @@
+dist: xenial
 env:
   global:
     - CC_TEST_REPORTER_ID=787a2f89b15c637323c7340d65ec17e898ac44480706b4b4122ea040c2a88f1d
@@ -6,41 +7,29 @@ sudo: true
 services:
   - mysql
   - redis-server
+  - xvfb
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - wget http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip
+  - wget http://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
   - sudo apt-get install libnss3
   - sudo apt-get --only-upgrade install google-chrome-stable
   - sudo cp chromedriver /usr/local/bin/.
   - sudo chmod +x /usr/local/bin/chromedriver
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - sleep 3
 addons:
-  sources:
-    - google-chrome
-  apt:
-    packages:
-      - google-chrome-stable
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
+  chrome: stable
 before_install:
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-  - sudo mysql_upgrade
+  - sudo cp config/secrets.yml.example config/secrets.yml
   - sudo service mysql restart
   - sudo mysql -e "CREATE USER 'exercism_reboot'@'localhost' IDENTIFIED BY 'exercism_reboot'" -u root
   - sudo mysql -e "create database exercism_reboot_test" -u root
   - sudo mysql -e "ALTER DATABASE exercism_reboot_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -u root
   - sudo mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'localhost'" -u root
 install:
-  - "bundle install"
+  - "bundle install --jobs=3 --retry=3 --deployment"
   - "npm install"
   - "bundle exec rake db:test:prepare"
 script:
@@ -50,6 +39,8 @@ cache:
   node_modules: true
   directories:
     - vendor/bundle
-
+branches:
+  only:
+  - master
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov

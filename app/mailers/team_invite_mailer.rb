@@ -1,19 +1,19 @@
 class TeamInviteMailer < ApplicationMailer
-  def new_user(invite)
-    @invite = invite
+  def new_user(invitation)
+    @invitation = invitation
 
     mail(
-      to: @invite.email,
-      subject: "#{@invite.inviter_name} has invited you to join Exercism"
+      to: @invitation.email,
+      subject: "#{@invitation.inviter_name} has invited you to join their team on Exercism"
     )
   end
 
-  def existing_user(invite)
-    @invite = invite
+  def existing_user(invitation)
+    @invitation = invitation
 
     mail(
-      to: @invite.email,
-      subject: "#{@invite.inviter_name} has invited you to join their team"
+      to: @invitation.email,
+      subject: "[Exercism] #{@invitation.inviter_name} has invited you to join their team"
     )
   end
 end

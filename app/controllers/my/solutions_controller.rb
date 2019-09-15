@@ -1,5 +1,21 @@
 class My::SolutionsController < MyController
-  before_action :set_solution, except: [:create, :walkthrough]
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  before_action :set_solution, except: [:index, :create, :walkthrough]
+
+  def index
+    @solutions = current_user.solutions.completed.includes(exercise: :track)
+    if params[:track_id].to_i > 0
+      @solutions = @solutions.
+        joins(:exercise).
+        where("exercises.track_id": params[:track_id])
+    end
+
+    track_ids = Exercise.where(id: @solutions.map(&:exercise_id)).distinct.pluck(:track_id)
+    @tracks_for_select = Track.where(id: track_ids).
+      map{|l|[l.title, l.id]}.
+      unshift(["Any", 0])
+    @track = Track.find_by_id(params[:track_id]) if params[:track_id].to_i > 0
+  end
 
   def create
     track = Track.find(params[:track_id])
@@ -41,7 +57,13 @@ class My::SolutionsController < MyController
   end
 
   def request_mentoring
-    SwitchSolutionToMentoredMode.(@solution)
+    RequestMentoringOnSolution.(@solution)
+
+    redirect_to action: :show
+  end
+
+  def cancel_mentoring_request
+    CancelMentoringRequestForSolution.(@solution)
 
     redirect_to action: :show
   end
@@ -59,14 +81,25 @@ class My::SolutionsController < MyController
   end
 
   def reflection
-    @mentor_iterations = @solution.discussion_posts.group(:user_id).count
-    render_modal("solution-reflection", "reflection")
+    show_reflection_modal
   end
 
   def reflect
-    @solution.update(reflection: params[:reflection])
-    @solution.update(published_at: Time.current) if params[:publish]
+    allow_comments = !!params[:allow_comments]
 
+    @solution.update(reflection: params[:reflection])
+    PublishSolution.(@solution) if params[:publish]
+    @solution.update(allow_comments: allow_comments)
+    current_user.update(default_allow_comments: allow_comments) if current_user.default_allow_comments === nil
+
+    if @solution.mentorships.count > 0
+      show_mentor_ratings_modal
+    else
+      show_unlocked_modal_or_redirect
+    end
+  end
+
+  def rate_mentors
     (params[:mentor_reviews] || {}).each do |mentor_id, data|
       ReviewSolutionMentoring.(
         @solution,
@@ -76,6 +109,82 @@ class My::SolutionsController < MyController
       )
     end
 
+    show_unlocked_modal_or_redirect
+  end
+
+  def publish
+    PublishSolution.(@solution) if params[:publish]
+    redirect_to [@solution]
+  end
+
+  def update_exercise
+    @solution.update!(
+      git_slug: @solution.exercise.slug,
+      git_sha: @solution.track_head
+    )
+    redirect_to [:my, @solution]
+  end
+
+  def toggle_published
+    if @solution.published?
+      @solution.update(published_at: nil)
+    else
+      PublishSolution.(@solution)
+    end
+
+    render "toggle"
+  end
+
+  def toggle_show_on_profile
+    @solution.update(show_on_profile: !@solution.show_on_profile?)
+    render "toggle"
+  end
+
+  def toggle_allow_comments
+    @solution.update(allow_comments: !@solution.allow_comments?)
+    respond_to do |format|
+      format.html { redirect_to solution_path }
+      format.js { render "toggle" }
+    end
+  end
+
+  private
+
+  def set_solution
+    @solution = Solution.find_by_uuid!(params[:id])
+    redirect_to @solution unless @solution.user == current_user
+  end
+
+  def show_unlocked
+    render :show_unlocked
+  end
+
+  def show_started
+    @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
+    @iteration = @solution.iterations.last unless @iteration
+
+    @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
+                             each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
+
+    if @exercise.core? && @user_track.mentored_mode?
+      @queue_position = SolutionsToBeMentored.index_of_core_solution(@solution)
+    end
+
+    ClearNotifications.(current_user, @iteration)
+
+    render :show
+  end
+
+  def show_reflection_modal
+    render_modal("solution-reflection", "reflection")
+  end
+
+  def show_mentor_ratings_modal
+    @mentor_interations = @solution.discussion_posts.group(:user_id).count
+    render_modal("solution-mentor-ratings", "mentor_ratings")
+  end
+
+  def show_unlocked_modal_or_redirect
     @track = @solution.exercise.track
     user_track = UserTrack.where(user: current_user, track: @track).first
 
@@ -100,32 +209,5 @@ class My::SolutionsController < MyController
     else
       js_redirect_to([:my, @solution])
     end
-  end
-
-  def publish
-    @solution.update(published_at: Time.current) if params[:publish]
-    redirect_to [:my, @solution]
-  end
-
-  private
-
-  def set_solution
-    @solution = current_user.solutions.find_by_uuid!(params[:id])
-  end
-
-  def show_unlocked
-    render :show_unlocked
-  end
-
-  def show_started
-    @iteration = @solution.iterations.offset(params[:iteration_idx].to_i - 1).first if params[:iteration_idx].to_i > 0
-    @iteration = @solution.iterations.last unless @iteration
-
-    @post_user_tracks = UserTrack.where(user_id: @iteration.discussion_posts.map(&:user_id), track: @track).
-                             each_with_object({}) { |ut, h| h["#{ut.user_id}|#{ut.track_id}"] = ut }
-
-    ClearNotifications.(current_user, @iteration)
-
-    render :show
   end
 end

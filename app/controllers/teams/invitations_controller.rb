@@ -1,20 +1,18 @@
 class Teams::InvitationsController < Teams::BaseController
-  def accept
-    invite = TeamInvitation.
-      for_user(current_user).
-      find(params[:id])
+  def show
+    @invitation = TeamInvitation.find_by_token(params[:id])
+  end
 
-    CreateTeamMembership.(current_user, invite.team)
+  def accept
+    invitation = TeamInvitation.find_by_token(params[:id])
+    CreateTeamMembership.(current_user, invitation.team)
 
     redirect_to teams_teams_path
   end
 
   def reject
-    invite = TeamInvitation.
-      for_user(current_user).
-      find(params[:id])
-
-    invite.destroy!
+    invitation = TeamInvitation.find_by_token(params[:id])
+    invitation.destroy!
 
     redirect_to teams_teams_path
   end

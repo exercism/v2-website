@@ -1,0 +1,6 @@
+.lo-container
+  %h1= @track.title
+
+  %ul
+    -@exercises.each do |exercise|
+      %li= link_to exercise.title, [:admin, :data, @track, exercise]

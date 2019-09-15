@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SetSolutionsIndependentModeTest < ActiveSupport::TestCase
   test "fix it" do
+    skip
     incorrectly_independent_solution_1 = create :solution, independent_mode: true, track_in_independent_mode: false
     incorrectly_independent_solution_2 = create :solution, independent_mode: true, track_in_independent_mode: false
     create :iteration, solution: incorrectly_independent_solution_2

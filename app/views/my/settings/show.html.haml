@@ -1,13 +1,18 @@
 #my-settings-page
   =settings_bar
+  .lo-general-header
+    .lo-container
+      %h1 Settings
+      .h1-subtitle Manage your account settings
 
   = notice_and_alert(current_user)
   .lo-container
-    %h1 Account settings
     .settings-section
       %h2 CLI token
       .token-explanation Your authentication token for the CLI is:
       =render "widgets/code_snippet", code: current_user.auth_token
+      .token-reset
+        = link_to "Reset Token", [:reset_auth_token, :my, :settings], method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to reset your CLI token?"}
 
     .settings-section
       %h2 Change your password
@@ -30,8 +35,8 @@
 
     .settings-section
       %h2 Change your handle
-      %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes reguarly.
-      %p Note that you can change the name that appears on your profile seperately by using the "Edit profile" button in your profile.
+      %p We recommend only changing your handle in rare circumstances as it is confusing for mentors if it changes regularly.
+      %p Note that you can change the name that appears on your profile separately by using the "Edit profile" button in your profile.
 
       =form_for current_user, url: [:my, :settings] do |f|
         .field
@@ -39,3 +44,38 @@
           =f.text_field :handle
 
         =button_tag "Update handle", class: 'pure-button'
+
+    .settings-section
+      %h2 Change your email
+
+      -if current_user.unconfirmed_email
+        %p.alert
+          We have sent a confirmation email to #{current_user.unconfirmed_email}. Please click the link there to finish changing your email address.
+          =link_to "Cancel", [:cancel_unconfirmed_email, :my, :settings], method: :patch
+
+      %p Change your email using the form below. We will send you a new email confirmation for you to accept.
+      =form_for current_user, url: [:my, :settings] do |f|
+        .field
+          =f.label :email, "Enter your new email address"
+          =f.email_field :email, placeholder: "Enter your new email address"
+
+        =button_tag "Update email", class: 'pure-button'
+
+    .settings-section.toggle
+      %h2 Default commenting setting
+      =form_tag [:set_default_allow_comments, :my, :settings], method: :patch do |f|
+        =check_box_tag 'allow_comments', 1, current_user.default_allow_comments
+        .toggles
+          =icon 'toggle-on'
+          =icon 'toggle-off'
+        =label_tag 'allow_comments', "Allow comments by default on published solutions"
+
+        =button_tag "Update comments preference", class: 'pure-button'
+
+    .settings-section.danger
+      %h2
+        %i.fas.fa-exclamation-triangle
+        Delete your account
+
+      %p You can choose to delete your account at any time.
+      %div= link_to "Delete my account", [:confirm_delete_account, :my, :settings], class: 'pure-button'

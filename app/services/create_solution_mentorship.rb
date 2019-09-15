@@ -10,11 +10,7 @@ class CreateSolutionMentorship
       user: user,
       solution: solution
     )
-
-    # Always do this in SQL to avoid races.
-    Solution.where(id: solution.id).update_all(
-      "num_mentors = (SELECT COUNT(*) from solution_mentorships where solution_id = #{solution.id})"
-    )
+    CacheSolutionNumMentors.(solution)
     mentorship
   end
 

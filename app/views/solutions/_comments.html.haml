@@ -1,0 +1,20 @@
+.comments-section
+  -if current_user == @solution.user && @solution.allow_comments?
+    =link_to "Disable comments", [:toggle_allow_comments, :my, @solution], method: :patch, class: 'disable-comments'
+
+  %h2 Community comments
+  .h2-subtitle
+    -if @solution.user == current_user
+      Discuss your solution with the community.
+    -else
+      Find this solution interesting? Ask the author a question to learn more.
+
+  -if @comments.size > 0
+    .comments
+      -@comments.each do |comment|
+        =solution_comment_widget(comment, @solution)
+  -else
+    /.no-comments Be the first to comment!
+    .comments{style: "display:none"}
+
+  =render "new_comment", solution: @solution if user_signed_in?

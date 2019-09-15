@@ -2,12 +2,14 @@
 %html{lang: I18n.locale}
   %head
     =stylesheet_link_tag 'application', media: 'all'
-    =stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:600,700,800'
-    =stylesheet_link_tag '//pro.fontawesome.com/releases/v5.2.0/css/all.css', integrity: 'sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno', crossorigin: 'anonymous'
-    =stylesheet_link_tag '//pro.fontawesome.com/releases/v5.2.0/css/v4-shims.css'
+    =async_stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:600,700,800'
+    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/all.css', integrity: 'sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG', crossorigin: 'anonymous'
+    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/v4-shims.css'
+    = render "layouts/prismjs"
 
     =render "layouts/meta_tags"
     =csrf_meta_tags
+    =yield(:head)
 
   %body{class: body_class}
 
@@ -21,11 +23,19 @@
 
     =javascript_include_tag 'application'
     =yield(:js)
+    =yield(:async_css)
 
     -if hotjar_enabled?
       =render "layouts/tracking_hotjar"
 
     -if Rails.env.production?
-      =render "layouts/tracking_ga"
+      :javascript
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-47528450-2', 'auto');
+        ga('send', 'pageview');
 
     -clear_flash

@@ -1,0 +1,20 @@
+#unsubscribe-page
+  .lo-container
+    =notice_and_alert
+
+    %h1 Manage your communication preferences
+
+    -if @key.present?
+      %h2 Unsubscribe from this email
+
+      =form_tag unsubscribe_path, method: :patch do
+        =hidden_field_tag :token, @token
+        =hidden_field_tag "[communication_preferences][#{@key}]", false
+        =button_tag "Unsubscribe from '#{I18n.t("communication_preferences.#{@key}")}'", class: 'pure-button'
+
+      %h2 Manage your communication preferences
+
+    =form_for @preferences, url: unsubscribe_path, method: :patch do |f|
+      =hidden_field_tag :token, @token
+      =render "my/preferences/communication_preferences", f: f
+      =button_tag "Update preferences", class: 'pure-button'

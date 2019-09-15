@@ -2,9 +2,7 @@ require 'application_system_test_case'
 
 class My::TrackTest < ApplicationSystemTestCase
   setup do
-    @user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     sign_in!(@user)
   end
 

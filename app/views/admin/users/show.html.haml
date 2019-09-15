@@ -2,7 +2,6 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Admin dashboard", [:admin, :dashboard]
-      =nav_divider
       %span User ##{@user.id}
 
   .lo-container
@@ -13,7 +12,7 @@
       %li Email: #{@user.email}
       %li Signed up on #{@user.created_at}
       %li Current session started at #{@user.current_sign_in_at}
-      %li Mentor: #{@user.mentor?? "Yes" : "No"}
+      %li Mentor: #{@user.is_mentor?? "Yes" : "No"}
       %li Tracks: #{@user.tracks.pluck(:title).sort.join(", ")}
 
     %h2 Comments

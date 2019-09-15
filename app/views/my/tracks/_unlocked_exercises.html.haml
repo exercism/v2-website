@@ -1,18 +1,4 @@
--unlocked_exercises_and_solutions.each do |exercise, solution|
-  -if solution
-    -if solution.completed?
-      - status = "Completed"
-    -elsif solution.approved?
-      - status = "Approved"
-    -elsif solution.in_progress?
-      - status = "In progress"
-    -else
-      -status = "Unlocked"
-
-    = link_to [:my, solution], class: "unlocked-exercise", data: { status: status, title: exercise.title } do
-      =graphical_image exercise.turquoise_icon_url, class: 'normal'
-      =graphical_image exercise.white_icon_url, class: 'hover'
-  -else
-    = link_to [:my, :solutions, track_id: exercise.track, exercise_id: exercise], method: :post, class: 'unlocked-exercise', data: { status: "Unlocked", title: exercise.title } do
-      =graphical_image exercise.turquoise_icon_url, class: 'normal'
-      =graphical_image exercise.white_icon_url, class: 'hover'
+- unlocked_exercises.each do |exercise|
+  = link_to [:my, exercise.solution], class: "unlocked-exercise", data: { status: exercise.status, title: exercise.title } do
+    = graphical_image exercise.turquoise_icon_url, class: 'normal'
+    = graphical_image exercise.white_icon_url, class: 'hover'

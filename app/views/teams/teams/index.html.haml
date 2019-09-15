@@ -1,29 +1,41 @@
 #teams-teams-page.teams-page
-  .lo-container
-    %h1 Your teams
+  .lo-general-header
+    .lo-container
+      %h1 Your teams
+      .h1-subtitle Get started by choosing the team you want to work within
 
+  .lo-container
     -if @invitations.present?
-      %h2 Pending invitiations
-      %table.teams-table
-        - @invitations.each do |invite|
-          %tr
-            %td= invite.team_name
-            %td
-              %ul.inline-list
-                %li= link_to "Accept",
-                accept_teams_invitation_path(invite.id),
-                method: :post
-                %li= link_to "Reject",
-                reject_teams_invitation_path(invite.id),
-                method: :post,
-                data: { confirm: "Are you sure you want to reject your invitation to #{invite.team_name}?" }
+      .invitations
+        %h2 Pending invitiations
+        .h2-subheading You have been invited to these teams
+        .pure-g
+          - @invitations.each do |invite|
+            .pure-u-1.pure-u-md-1-5
+              .team
+                .img{style: "background-image:url(#{image_url(invite.team.avatar_url)})"}
+                %h3= invite.team.name
+                .members
+                  = link_to "Accept",
+                  accept_teams_invitation_path(invite),
+                  method: :post,
+                  class: 'pure-button'
+
+                  = link_to "Reject",
+                  reject_teams_invitation_path(invite),
+                  method: :post,
+                  class: 'pure-button',
+                  data: { confirm: "Are you sure you want to reject your invitation to #{invite.team_name}?" }
+
+      %h2 Your Teams
+      .h2-subheading The teams you have created or joined
 
     .pure-g
       -if @teams.present?
         -@teams.each do |team|
-          .pure-u-1-5
+          .pure-u-1.pure-u-md-1-5
             = link_to [:teams, team], class: "team" do
-              .img
+              .img{style: "background-image:url(#{image_url(team.avatar_url)})"}
               %h3= team.name
               .members
                 =icon :group
@@ -31,7 +43,8 @@
                   = team.members.count
                   Members
 
-      .pure-u-1-5
+      .pure-u-1.pure-u-md-1-5
         = link_to [:new, :teams, :team], class: 'new-team' do
           .img
+            %i.fas.fa-plus
           %h3 Create a new team

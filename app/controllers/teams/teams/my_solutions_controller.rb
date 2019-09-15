@@ -1,30 +1,21 @@
 class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
   def index
     @solutions = TeamSolution.for_team_and_user(@team, current_user).joins(:exercise).includes(:exercise)
+    @possible_tracks = Track.where(id: @solutions.joins(:exercise).
+                                                  select("exercises.track_id").distinct)
 
-    if params[:difficulty].to_s.strip.present?
-      case params[:difficulty]
-      when 'easy'
-        @solutions = @solutions.where('exercises.difficulty': [1,2,3])
-      when 'medium'
-        @solutions = @solutions.where('exercises.difficulty': [4,5,6,7])
-      when 'hard'
-        @solutions = @solutions.where('exercises.difficulty': [8,9,10])
-      end
-    end
+    @track_id = params[:track_id]
+    @track_id_options = OptionsHelper.as_options(@possible_tracks,
+                                                 :title,
+                                                 :id)
 
-    @solutions = @solutions.joins(:exercise_topics).where("exercise_topics.topic_id": params[:topic_id]) if params[:topic_id].to_i > 0
-    @solutions = @solutions.where('exercises.length': params[:length]) if params[:length].to_i > 0
+    @exercise_id = params[:exercise_id]
+    @exercise_id_options = exercise_id_options
 
-    exercises = @solutions.map(&:exercise)
-    topic_counts = exercises.each_with_object({}) do |e, topics|
-      e.topics.each do |topic|
-        topics[topic] ||= 0
-        topics[topic] += 1
-      end
-    end
-    @topics_for_select = topic_counts.keys.map{|t|[t.name.titleize, t.id]}.sort_by{|t|t[0]}.unshift(["Any", 0])
-  end
+    @solutions = @solutions.where("exercises.track_id": @track_id) if @track_id.present?
+    @solutions = @solutions.where("exercise_id": @exercise_id) if @exercise_id.present?
+    @solutions = @solutions.includes(:user).
+                            page(params[:page]).per(21)  end
 
   def show
     @solution = TeamSolution.find_by_uuid_for_team_and_user(params[:id], @team, current_user)
@@ -66,4 +57,18 @@ class Teams::Teams::MySolutionsController < Teams::Teams::BaseController
 
     ClearNotifications.(current_user, @iteration)
   end
+
+  def exercise_id_options
+    track = Track.find_by(id: @track_id)
+    return [] unless track
+
+    exercises = TeamSolution.for_team_and_user(@team, current_user).
+                             joins(:exercise).
+                             includes(:exercise).
+                             where('exercises.track_id': @track_id).
+                             map(&:exercise)
+
+    OptionsHelper.as_options(exercises, :title, :id)
+  end
+
 end

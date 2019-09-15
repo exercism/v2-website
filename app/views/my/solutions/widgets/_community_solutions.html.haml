@@ -1,0 +1,6 @@
+.next-option
+  %p
+    %strong Explore more solutions to #{@exercise.title}.
+    There are lots of different ways to approach every exercise on Exercism. Why not see how others have solved it?
+
+  =link_to "View community solutions", track_exercise_solutions_path(@track, @exercise), class: 'pure-button'

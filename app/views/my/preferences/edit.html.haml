@@ -1,42 +1,35 @@
 #my-preferences-page
   =settings_bar
-
+  .lo-general-header
+    .lo-container
+      %h1 Preferences
+      .h1-subtitle Manage your communication and site preferences
   .lo-container
     =notice_and_alert
-    %h1 Preferences
     .settings-section
       %h2 Communication preferences
 
       =form_for current_user.communication_preferences, url: [:my, :settings, :preferences] do |f|
-        /-if current_user.admin?
-        /  %h2 Admin communications
-
-        -if current_user.mentor?
-          %h3 Mentor emails
-          =f.label :email_on_new_discussion_post_for_mentor do
-            =f.check_box :email_on_new_discussion_post_for_mentor
-            %span Email me when a student comments on a solution I'm mentoring
-
-          =f.label :email_on_new_iteration_for_mentor do
-            =f.check_box :email_on_new_iteration_for_mentor
-            %span Email me when a student posts a new iteration to a solution I'm mentoring
-
-        %h3 Usage emails
-        =f.label :email_on_new_discussion_post do
-          =f.check_box :email_on_new_discussion_post
-          %span Email me when a mentor comments on my solution
-
-        =f.label :email_on_solution_approved do
-          =f.check_box :email_on_solution_approved
-          %span Email me when a mentor approves my solution
-
-        %h3 General communications
-        =f.label :receive_product_updates do
-          =f.check_box :receive_product_updates
-          %span Email me about product updates
-
+        =render "communication_preferences", f: f
         =f.button "Save communication settings", class: 'pure-button'
-    .settings-section.dark-toggle
+
+    .settings-section.toggle
+      %h2 Communication Preferences Security
+      %p 
+        By default you can unsubscribe from emails directly from an email. 
+        %br
+        To protect against unauthorised unsubscribes, you disable this feature and require a password to edit your settings.
+      =form_tag [:my, :settings, :preferences], method: :patch do |f|
+        =hidden_field_tag 'update_require_password_to_update_communication_preferences', true
+        =check_box_tag 'require_password_to_update_communication_preferences', 1, current_user.communication_preferences.token.nil?
+        .toggles
+          =icon 'toggle-on'
+          =icon 'toggle-off'
+        =label_tag 'require_password_to_update_communication_preferences', "Require password to update communication preferences"
+
+        =button_tag "Update communication preference security", class: 'pure-button'
+
+    .settings-section.toggle
       %h2 Dark Code Theme
       =form_tag [:my, :settings, :preferences], method: :patch do |f|
         =hidden_field_tag 'update_dark_theme', true
@@ -47,3 +40,15 @@
         =label_tag 'dark_code_theme', "Enable dark theme"
 
         =button_tag "Update theme preference", class: 'pure-button'
+
+    .settings-section.toggle
+      %h2 Code viewing options
+      = form_for current_user, url: [:my, :settings, :preferences], method: :patch do |f|
+        = f.hidden_field :update_code_viewing_options, value: true
+        = f.check_box :full_width_code_panes
+        .toggles
+          = icon 'toggle-on'
+          = icon 'toggle-off'
+        = f.label :full_width_code_panes, "Enable full width code panes"
+
+        = button_tag "Update code viewing preference", class: 'pure-button'

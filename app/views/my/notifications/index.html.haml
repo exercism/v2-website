@@ -2,7 +2,6 @@
   #nav.lo-nav-bar
     .lo-container
       /=link_to "Language tracks", :tracks
-      /=nav_divider
       %span Notifications
 
   .header
@@ -13,9 +12,9 @@
   .lo-container
     -if @notifications.present?
       .pure-g
-        .pure-u-2-3
+        .pure-u-1.pure-u-md-2-3
           .header-bar
-            =link_to "Mark all as read", read_batch_my_notifications_path(ids: @notifications.map(&:id)), method: :patch, remote: true, class: "pure-button mark-all-button"
+            =link_to "Mark all as read", read_batch_my_notifications_path(ids: @notifications.map(&:id)), method: :patch, remote: true, class: "pure-button mark-all-button js-disable-on-click"
           =render @notifications
 
           =paginate @notifications

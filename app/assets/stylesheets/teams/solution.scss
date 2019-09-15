@@ -8,10 +8,12 @@
         margin-bottom:0;
     }
     .solution-header {
-        overflow:hidden;
-        background:$color-1;
-        padding:20px 0;
         margin-bottom:30px;
+        .content {
+            padding:20px 0;
+            overflow:hidden;
+            border-bottom:1px solid #ddd;
+        }
         img {
             float:left;
             margin-right:15px;
@@ -21,10 +23,38 @@
             border-radius:2px;
         }
         .inner {
-            color:#fff;
+            color:#333;
             .widget-iterations-nav {
                 float:right;
+                a, .current {
+                    .idx {
+                        color:$color-2;
+                        border-color:$color-2;
+                    }
+                    .num-comments {
+                        &:after { 
+                            color:$color-2;
+                            text-shadow:0 0 2px #fff;
+                        }
+                        .num { color:#fff; }
+                    }
+                    &.current {
+                        .idx {
+                            background: $color-2;
+                            border-color:$color-2;
+                            color:#fff;
+                        }
+                        .num-comments {
+                            &:after { 
+                                color:#fff;
+                                text-shadow: -1px -1px 0 $color-2,  1px -1px 0 $color-2, -1px 1px 0 $color-2, 1px 1px 0 $color-2;
+                            }
+                            .num { color:$color-2; }
+                        }
+                    }
+                }
             }
+
             h2 {
                 @include font-size(22, 22);
                 font-weight:$regular;
@@ -41,5 +71,11 @@
                 }
             }
         }
+    }
+}
+#teams-solution-page,
+#teams-my-solution-page {
+    .rhs {
+        padding-left:50px;
     }
 }

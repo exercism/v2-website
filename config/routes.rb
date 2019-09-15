@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # ### #
   # API #
   # ### #
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       namespace :webhooks do
         resources :repo_updates, only: [:create]
         resources :contributors, only: [:create]
+        resources :analyzers, only: [:create]
       end
     end
   end
@@ -34,17 +36,27 @@ Rails.application.routes.draw do
     resources :solutions, only: [:show] do
       resources :iterations, only: [:show]
     end
+    resources :mentors, only: [:index]
+    namespace :data do
+      resources :tracks, only: [:index, :show] do
+        resources :exercises, only: [:show]
+      end
+    end
   end
 
   # ###### #
   # Mentor #
   # ###### #
+
+  get "become-a-mentor" => "mentor/registrations#landing", as: :become_a_mentor
   namespace :mentor do
     get "/", to: redirect("mentor/dashboard")
+    resource :registrations, only: [:new, :create]
     resource :configure, only: [:show, :update], controller: "configure"
     resource :dashboard, only: [:show], controller: "dashboard" do
       get :your_solutions
       get :next_solutions
+      get :testimonials
     end
     resources :solutions, only: [:show] do
       member do
@@ -52,9 +64,14 @@ Rails.application.routes.draw do
         patch :approve
         patch :abandon
         patch :ignore
+        patch :ignore_requires_action
       end
     end
     resources :discussion_posts, only: [:create]
+    resource :exercise_notes, only: [:show, :new], controller: "exercise_notes"
+    resources :analyses do
+      patch :replay, on: :member
+    end
   end
 
   # #### #
@@ -81,7 +98,11 @@ Rails.application.routes.draw do
   resources :profiles, only: [:index, :show] do
     get :solutions, on: :member
   end
-  resources :solutions, only: [:show]
+
+  resources :solutions, only: [:show] do
+    resources :comments, controller: "solution_comments", only: [:show, :create, :update, :destroy]
+  end
+
   resources :tracks, only: [:index, :show] do
     member do
       post :join
@@ -113,23 +134,32 @@ Rails.application.routes.draw do
       member do
         patch :set_mentored_mode
         patch :set_independent_mode
-        post :leave
+        patch :pause
+        patch :unpause
+        delete :leave
       end
     end
-    resources :solutions, only: [:show, :create] do
+    resources :solutions, only: [:index, :show, :create] do
       member do
         get :walkthrough
         get :confirm_unapproved_completion
         patch :complete
         get :reflection
         patch :request_mentoring
+        patch :cancel_mentoring_request
         patch :reflect
+        patch :rate_mentors
         patch :publish
+        patch :update_exercise
+
+        patch :toggle_published
+        patch :toggle_show_on_profile
+        patch :toggle_allow_comments
       end
 
       resources :iterations, only: [:show]
     end
-    resources :reactions, only: [:index, :create]
+    resources :starred_solutions, only: [:index, :create]
 
     resources :discussion_posts, only: [:create, :update, :destroy]
     resources :notifications, only: [:index] do
@@ -140,6 +170,13 @@ Rails.application.routes.draw do
     resource :profile, controller: "profile"
 
     resource :settings do
+      patch :reset_auth_token
+      patch :cancel_unconfirmed_email
+      patch :set_default_allow_comments
+
+      get :confirm_delete_account
+      delete :delete_account
+
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
     end
@@ -157,12 +194,14 @@ Rails.application.routes.draw do
       resource :join, controller: "teams/joins"
     end
 
-    resources :invitations, only: [] do
+    resources :invitations, only: [:show] do
       post :accept, on: :member
       post :reject, on: :member
     end
 
     resources :teams do
+      patch :update_settings, on: :member
+
       resources :my_solutions, controller: "teams/my_solutions" do
         get :possible_exercises, on: :collection
       end
@@ -190,17 +229,32 @@ Rails.application.routes.draw do
     get page.to_s.dasherize => "pages##{page}", as: "#{page}_page"
   end
 
-  get "cli-walkthrough" => "pages#cli_walkthrough", as: "cli_walkthrough_page"
+  PagesController::HELP_PAGES.values.each do |page|
+    get "help/#{page.to_s.dasherize}" => "pages##{page}", as: "#{page}_help_page"
+  end
 
   PagesController::LICENCES.values.each do |licence|
     get "licences/#{licence.to_s.dasherize}" => "pages##{licence}", as: "#{licence}_licence"
   end
+
+  get "cli-walkthrough" => "pages#cli_walkthrough", as: "cli_walkthrough_page"
 
   resource :team_page, only: [:show], path: "team" do
     get :maintainers
     get :mentors
     get :contributors
   end
+
+  # #### #
+  # Blog #
+  # #### #
+  resources :blog_posts, only: [:index, :show], path: "blog"
+  resources :blog_comments, only: [:create, :update, :destroy]
+
+  # ############ #
+  # Unsubscribe  #
+  # ############ #
+  resource :unsubscribe, only: [:show, :update], controller: "unsubscribe"
 
   # ############ #
   # Weird things #

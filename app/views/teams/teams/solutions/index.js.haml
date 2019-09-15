@@ -1,4 +1,4 @@
-$('#teams-solutions-page .solutions').html("#{j render("teams/solutions/solutions", solutions: @solutions)}")
+$('#teams-solutions-page .solutions').html("#{j render("teams/teams/solutions/solutions", solutions: @solutions)}")
 $('#teams-solutions-page .num-solutions').html("#{j pluralize @solutions.size, "Solutions"}")
 
 - if @track_id && @exercise_id.blank?

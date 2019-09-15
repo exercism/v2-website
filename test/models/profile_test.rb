@@ -15,9 +15,9 @@ class ProfileTest < ActiveSupport::TestCase
 
     create :solution, published_at: nil, user: user
     create :solution, published_at: DateTime.now, exercise: bad_exercise, user: user
-    s1 = create :solution, published_at: DateTime.now, exercise: good_exercise_1, user: user, num_reactions: 2
-    s2 = create :solution, published_at: DateTime.now, exercise: good_exercise_2, user: user, num_reactions: 1
-    s3 = create :solution, published_at: DateTime.now, exercise: good_exercise_3, user: user, num_reactions: 3
+    s1 = create :solution, published_at: DateTime.now, exercise: good_exercise_1, user: user, num_stars: 2
+    s2 = create :solution, published_at: DateTime.now, exercise: good_exercise_2, user: user, num_stars: 1
+    s3 = create :solution, published_at: DateTime.now, exercise: good_exercise_3, user: user, num_stars: 3
 
     assert_equal [s3,s1,s2], profile.solutions
   end

@@ -3,6 +3,7 @@
 
 #my-track-page .danger-zone {
     .leave-track-btn,
+    .pause-track-btn,
     .change-to-independent-btn,
     .change-to-mentored-btn {
         display:block;
@@ -13,6 +14,7 @@
         padding:9px;
         width:100%;
         margin:10px 0;
+        white-space: normal;
         &:hover {
             background:$color-1;
             border-color:$color-1;
@@ -34,6 +36,7 @@
         padding-bottom:5px;
     }
     .leave-track-btn,
+    .pause-track-btn,
     .change-to-independent-btn,
     .change-to-mentored-btn {
         width:200px;

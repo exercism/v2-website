@@ -4,10 +4,11 @@ class UserTrack < ApplicationRecord
 
   validates :handle, handle: true
 
-  scope :archived, -> { where.not(archived_at: nil) }
-  scope :unarchived, -> { where(archived_at: nil) }
+  scope :active, -> { where(paused_at: nil) }
+  scope :paused, -> { where.not(paused_at: nil) }
 
-  MAX_MENTORING_SLOTS = 1
+  MAX_INDEPENDENT_MODE_MENTORING_SLOTS = 1
+  MAX_MENTORED_MODE_MENTORING_SLOTS = 3
 
   def originated_in_v1?
     created_at < Exercism::V2_MIGRATED_AT
@@ -25,7 +26,15 @@ class UserTrack < ApplicationRecord
     completed_side_exercise_ids.count
   end
 
-  def num_avaliable_core_exercises
+  def num_available_exercises
+    if mentored_mode?
+      num_available_core_exercises + num_available_side_exercises
+    else
+      solutions.not_completed.count
+    end
+  end
+
+  def num_available_core_exercises
     if mentored_mode?
       solutions.not_completed.
                 where("exercises.core": true).
@@ -38,7 +47,7 @@ class UserTrack < ApplicationRecord
     end
   end
 
-  def num_avaliable_side_exercises
+  def num_available_side_exercises
     if mentored_mode?
       solutions.not_completed.
                 where.not("exercises.unlocked_by": nil).
@@ -62,22 +71,25 @@ class UserTrack < ApplicationRecord
                    where("exercises.track_id": track_id)
   end
 
-  def archived?
-    archived_at.present?
+  def paused?
+    paused_at.present?
   end
 
-  def solutions_being_mentored
-    solutions.started.
-              where(approved_by_id: nil).
-              where(independent_mode: false)
+  def solutions_using_mentoring_allowance
+    s = solutions.started.
+                  where(approved_by_id: nil).
+                  where.not(mentoring_requested_at: nil)
+    s = s.side if mentored_mode?
+    s
   end
 
-  def num_solutions_being_mentored
-    solutions_being_mentored.count
+  def max_mentoring_slots
+    independent_mode?? MAX_INDEPENDENT_MODE_MENTORING_SLOTS :
+                       MAX_MENTORED_MODE_MENTORING_SLOTS
   end
 
   def mentoring_slots_remaining
-    MAX_MENTORING_SLOTS - num_solutions_being_mentored
+    max_mentoring_slots - solutions_using_mentoring_allowance.count
   end
 
   def mentoring_slots_remaining?

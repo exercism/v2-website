@@ -1,8 +1,8 @@
 .widget-mentor
   .pure-g
-    .pure-u-1-4
+    .pure-u-1-6.pure-u-md-1-4
       =image mentor.avatar_url ? mentor.avatar_url : 'blank.png', "Avatar of #{mentor.name}"
-    .pure-u-3-4
+    .pure-u-5-6.pure-u-md-3-4
       %h3
         =mentor.name
         -if mentor.link_text.present? && mentor.link_url.present?

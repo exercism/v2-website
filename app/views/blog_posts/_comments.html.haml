@@ -1,0 +1,17 @@
+.comments-section
+  -if @blog_post.comments.size > 0 || user_signed_in?
+    %h3 Community Comments
+
+    .comments
+      -if @blog_post.comments.size > 0
+        -@blog_post.comments.each do |comment|
+          =render "blog_comments/comment", comment: comment
+      -else user_signed_in?
+        .no-comments There are no comments yet. Be the first to add one.
+
+    -if user_signed_in?
+      = render "new_comment", blog_post: @blog_post
+
+    -content_for :js do
+      :javascript
+        window.setupBlogPost(#{@blog_post.id})

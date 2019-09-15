@@ -1,0 +1,16 @@
+#teams-edit-team-page.team-page
+  =teams_header
+
+  .lo-container
+    %h2 Edit your team
+    .h2-subheading Edit the "#{@team.name}" team
+    =form_for [:teams, @team] do |f|
+      .field
+        %h3 Team name:
+        =f.text_field :name, required: true
+
+      .logo-section
+        .field
+          %h3 Change avatar:
+          =f.file_field :avatar
+      =f.button "Save changes", class: 'pure-button'

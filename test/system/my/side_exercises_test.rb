@@ -5,9 +5,7 @@ class My::SideExercisesTest < ApplicationSystemTestCase
     Git::ExercismRepo.stubs(current_head: "dummy-sha1")
     Git::ExercismRepo.stubs(pages: [])
 
-    @user = create(:user,
-                  accepted_terms_at: Date.new(2016, 12, 25),
-                  accepted_privacy_policy_at: Date.new(2016, 12, 25))
+    @user = create(:user, :onboarded)
     @track = create :track
     @exercise = create :exercise, track: @track, core: false
     @solution = create :solution, exercise: @exercise, user: @user
@@ -20,40 +18,49 @@ class My::SideExercisesTest < ApplicationSystemTestCase
     @solution.update(completed_at: Time.current)
 
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 .widget-side-exercise.completed"
+    click_on "Continue"
+    assert_selector ".pure-u-1 .widget-side-exercise.completed"
   end
 
   test "approved" do
     @solution.update(approved_by: create(:user))
 
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 .widget-side-exercise.approved"
+    assert_selector ".pure-u-1 .widget-side-exercise.approved"
   end
 
   test "downloaded" do
     @solution.update(downloaded_at: Time.current)
 
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 .widget-side-exercise.in-progress"
+    assert_selector ".pure-u-1 .widget-side-exercise.in-progress"
   end
 
   test "iterated" do
     @solution.iterations.create
 
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 .widget-side-exercise.in-progress"
+    assert_selector ".pure-u-1 .widget-side-exercise.in-progress"
+  end
+
+  test "mentoring requested" do
+    @solution.iterations.create
+    @solution.update(mentoring_requested_at: Time.current)
+
+    visit my_track_path(@track)
+    assert_selector ".pure-u-lg-1-3 .widget-side-exercise.mentoring-requested"
   end
 
   test "unlocked" do
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 .widget-side-exercise.unlocked"
+    assert_selector ".pure-u-1 .widget-side-exercise.unlocked"
   end
 
   test "bonus" do
     @solution.destroy
 
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 a.widget-side-exercise.unlocked"
+    assert_selector ".pure-u-1 a.widget-side-exercise.unlocked"
   end
 
   test "locked" do
@@ -61,6 +68,6 @@ class My::SideExercisesTest < ApplicationSystemTestCase
     @exercise.update(unlocked_by: create(:exercise))
 
     visit my_track_path(@track)
-    assert_selector ".pure-u-1-3 .widget-side-exercise.locked"
+    assert_selector ".pure-u-1 .widget-side-exercise.locked"
   end
 end

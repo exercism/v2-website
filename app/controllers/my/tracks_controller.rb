@@ -4,7 +4,7 @@ class My::TracksController < MyController
   def index
     tracks = Track.active.order('title ASC')
     tracks = tracks.where("title like ?", "%#{params[:title]}%") if params[:title].present?
-    joined_track_ids = current_user.user_tracks.unarchived.pluck(:track_id)
+    joined_track_ids = current_user.user_tracks.active.pluck(:track_id)
 
     @joined_tracks, @other_tracks = tracks.partition {|t|joined_track_ids.include?(t.id)}
     @completed_exercise_counts = current_user.
@@ -23,7 +23,6 @@ class My::TracksController < MyController
     @track = Track.find(params[:id])
     return redirect_to @track unless user_signed_in?
     return show_not_joined unless current_user.joined_track?(@track)
-    return show_not_joined if current_user.previously_joined_track?(@track)
     return redirect_to [:my, @track], :status => :moved_permanently if request.path != my_track_path(@track)
 
     solutions = current_user.solutions.includes(:exercise).where('exercises.track_id': @track.id)
@@ -53,9 +52,7 @@ class My::TracksController < MyController
     else
       core_exercises, side_exercises = normal_exercises.partition {|e|e.core?}
 
-      core_exercises = core_exercises.map do |e|
-        ExerciseWithSolution.new(e, mapped_solutions[e.id])
-      end
+      core_exercises = ExerciseMap.new(current_user, @track).core_exercises
 
       @core_exercises_and_solutions = core_exercises.
         inject([[], [], []]) { |collection, exercise|
@@ -73,8 +70,6 @@ class My::TracksController < MyController
       @side_exercises_and_solutions = side_exercises.map{|e|[e, mapped_solutions[e.id]]}.sort_by{|e,s|
         "#{s ? (s.completed?? 0 : (s.in_progress?? 1 : 2)) : 3}#{!e.unlocked_by ? 0 : 1}"
       }
-      @side_exercises_and_solutions_by_unlocked_by = @side_exercises_and_solutions.each_with_object(Hash.new{|h,k|h[k] = []}){|(e,s), h| h[e.unlocked_by_id] << [e,s]}
-
       @num_side_exercises = @track.exercises.side.active.count
       @num_solved_core_exercises = solutions.select { |s| s.exercise.core? && s.exercise.track_id == @track.id && s.completed?}.size
       @num_solved_side_exercises = solutions.select { |s| s.exercise.side? && s.exercise.track_id == @track.id && s.exercise.active && s.completed?}.size

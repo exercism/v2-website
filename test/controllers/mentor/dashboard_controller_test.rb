@@ -6,20 +6,66 @@ class Mentor::DashboardControllerTest < ActionDispatch::IntegrationTest
     assert_response 302
   end
 
-  test "401 unless mentor" do
+  test "302 unless mentor" do
     sign_in!
     get mentor_dashboard_url
-    assert_response 401
+    assert_response 302
+    assert_redirected_to new_mentor_registrations_path
   end
 
-  test "200 if mentor" do
-    user = create :user
-    create :track_mentorship, user: user
+  test "redirects_correctly if mentor" do
+    user = create :user, :mentor, :onboarded
 
     sign_in!(user)
     get mentor_dashboard_url
+    assert_redirected_to your_solutions_mentor_dashboard_url
+  end
+
+  test "302 to next_solutions if you've not mentored" do
+    user = create :user, :mentor, :onboarded
+
+    sign_in!(user)
+    get your_solutions_mentor_dashboard_url
+    assert_redirected_to next_solutions_mentor_dashboard_url
+  end
+
+  test "200 in your_solutions if mentor with solutions" do
+    user = create :user, :mentor, :onboarded
+    create :solution_mentorship, user: user
+
+    sign_in!(user)
+    get your_solutions_mentor_dashboard_url
     assert_response :success
     assert_correct_page "mentor-dashboard-page"
+  end
+
+  test "200 in next_solutions if mentor without solutions" do
+    user = create :user, :mentor, :onboarded
+    create :track_mentorship, user: user
+
+    sign_in!(user)
+    get next_solutions_mentor_dashboard_url
+    assert_response :success
+    assert_correct_page "mentor-next-solutions-page"
+  end
+
+  test "200 in next_solutions if mentor" do
+    user = create :user, :mentor, :onboarded
+    create :track_mentorship, user: user
+    create :solution_mentorship, user: user
+
+    sign_in!(user)
+    get next_solutions_mentor_dashboard_url
+    assert_response :success
+    assert_correct_page "mentor-next-solutions-page"
+  end
+
+  test "redirects_to configure path without track" do
+    user = create :user, :mentor, :onboarded
+
+    sign_in!(user)
+    get next_solutions_mentor_dashboard_url
+    assert_redirected_to mentor_configure_path
   end
 
   test "/mentor redirects to dashboard" do

@@ -1,0 +1,29 @@
+@import 'variables';
+@import 'mixins';
+
+#mentor-analysis {
+    padding-top:20px;
+    h1 {
+        font-weight:$fw-bold;
+        @include font-size(18, 18);
+        margin-bottom:10px;
+    }
+    h2 {
+        font-weight:$fw-bold;
+        @include font-size(14, 14);
+        margin-bottom:7px;
+    }
+    .status, .analysis {
+        margin-bottom:20px;
+    }
+    .analysis {
+        pre {
+            background: #eee;
+            padding: 10px;
+            margin:0;
+        }
+    }
+    .pure-button {
+        background:$color-1;
+    }
+}

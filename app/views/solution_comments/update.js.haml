@@ -1,0 +1,5 @@
+var newComment = '#{j solution_comment_widget(@comment, @solution)}';
+$('#solution-comment-#{@comment.id}').replaceWith(newComment);
+Prism.highlightAll()
+
+=raw yield(:js).gsub(/<\/?script>/, "")

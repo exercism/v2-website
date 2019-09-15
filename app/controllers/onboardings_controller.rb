@@ -1,4 +1,6 @@
 class OnboardingsController < ApplicationController
+  skip_before_action :ensure_onboarded!
+
   before_action :authenticate_user!
   before_action :redirect_if_onboarded!
 
@@ -13,11 +15,11 @@ class OnboardingsController < ApplicationController
   end
 
   def update
-    current_user.update(
+    current_user.update!(
       accepted_privacy_policy_at: Time.current,
       accepted_terms_at: Time.current,
     )
-    current_user.communication_preferences.update(
+    current_user.communication_preferences.update!(
       email_on_new_discussion_post: true,
       receive_product_updates: true
     )

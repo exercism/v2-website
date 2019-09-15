@@ -3,7 +3,17 @@ class ApplicationController < ActionController::Base
   before_action :store_location
   before_action :set_site_context
 
+  # If someone has signed in, ensure they're onboarded
+  before_action :ensure_onboarded!, unless: :devise_controller?
+
   private
+
+  def ensure_onboarded!
+    return unless user_signed_in?
+    return if current_user.onboarded?
+
+    redirect_to onboarding_path
+  end
 
   # This saves the current user location for devise
   def store_location
@@ -45,7 +55,10 @@ class ApplicationController < ActionController::Base
 
   def render_modal(class_name, template, options = {})
     html = EscapesJavascript.escape(render_to_string(template, layout: false))
-    render js: %Q{ showModal('#{class_name}', '#{html}', '#{options.to_json}') }
+    render js: %Q{
+      showModal('#{class_name}', '#{html}', '#{options.to_json}')
+      Prism.highlightAll()
+    }
   end
 
   def js_redirect_to(*objs)
@@ -70,5 +83,9 @@ class ApplicationController < ActionController::Base
     else
       my_dashboard_path
     end
+  end
+
+  def render_404
+    render file: "#{Rails.root}/public/404", layout: false, status: :not_found
   end
 end

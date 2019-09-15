@@ -1,16 +1,14 @@
 require 'application_system_test_case'
 
 class ExerciseSolutionsTest < ApplicationSystemTestCase
-  test "shows exercise solutions ordered by number of reactions" do
+  test "shows exercise solutions ordered by published_at" do
     exercise = create(:exercise)
     solution1 = create(:solution,
-                       num_reactions: 2,
                        exercise: exercise,
-                       published_at: Time.current)
+                       published_at: Time.current - 1.week)
     solution2 = create(:solution,
-                       num_reactions: 1,
                        exercise: exercise,
-                       published_at: Time.current)
+                       published_at: Time.current - 1.year)
     expected_solutions = [solution1, solution2]
 
     visit track_exercise_path(exercise.track, exercise)

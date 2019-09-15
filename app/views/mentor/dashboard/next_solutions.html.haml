@@ -1,0 +1,68 @@
+#mentor-next-solutions-page
+  .header
+    .lo-container
+      %h1 Mentor dashboard
+      .h1-subtitle
+        You can keep track of what needs responding to here.
+        If you're stuck, check out the #{link_to "Mentoring guide", mentoring_guide_page_path}, #{link_to "Mentoring FAQs", mentoring_faqs_page_path} or ask questions on Slack.
+
+      .header-tabs
+        =link_to "Solutions you're mentoring (#{@tab_your_count})", your_solutions_mentor_dashboard_path, class: 'header-tab'
+        =link_to "New solutions (#{@tab_next_count})", next_solutions_mentor_dashboard_path, class: 'header-tab selected'
+        -if @tab_testimonials_count > 0
+          =link_to "Testimonials (#{@tab_testimonials_count})", testimonials_mentor_dashboard_path, class: 'header-tab'
+
+  .lo-container
+    .pure-g
+      .pure-u-1.pure-u-lg-2-3
+        -if @next_solutions.present?
+          =render "next_solutions_section"
+        -else
+          =render "no_solutions_section"
+
+      .pure-u-1.pure-u-lg-1-3.next-exercises-navigation
+        -if @next_track_id_options.size > 1
+          =form_tag next_solutions_mentor_dashboard_path, method: :get do
+            .widget-filter.track_id
+              .title Filter by track
+              = select_tag :next_track_id,
+                options_for_select(OptionsHelper.format_options(@next_track_id_options), @next_track_id),
+                include_blank: true
+
+        .title= link_to "Entire Queue · #{@total_count}", next_solutions_mentor_dashboard_path(next_track_id: @next_track_id), class: (@next_exercise_id.nil?? 'label selected' : 'label')
+        .subtitle
+          .label Core Exercises
+          /· #{@total_core_count}
+        %ul.exercises
+          -@core_exercise_counts.each.with_index do |(exercise, count), idx|
+            %li
+              -klass = ['label']
+              -klass << 'selected' if @next_exercise_id == exercise.id.to_s
+              -klass << 'zero-count' if count == 0
+              -klass = klass.join(" ")
+
+              =link_to next_solutions_mentor_dashboard_path(next_track_id: @next_track_id, next_exercise_id: exercise.id), class: klass do
+                #{idx+1}. #{exercise.title} · #{count}
+
+        .subtitle
+          .label Side Exercises
+          / · #{@total_side_count}
+        %ul.exercises
+          -@side_exercise_counts.each do |exercise, count|
+            %li
+              -klass = ['label']
+              -klass << 'selected' if @next_exercise_id == exercise.id.to_s
+              -klass << 'zero-count' if count == 0
+              -klass = klass.join(" ")
+
+              =link_to next_solutions_mentor_dashboard_path(next_track_id: @next_track_id, next_exercise_id: exercise.id), class: klass do
+                #{exercise.title} · #{count}
+
+-content_for :js do
+  :javascript
+    submitOnChange($('select'))
+
+-if current_user.solution_mentorships.count == 0
+  -content_for :js do
+    :javascript
+      showModal('welcome-to-mentoring', '#{j render "welcome_modal"}')

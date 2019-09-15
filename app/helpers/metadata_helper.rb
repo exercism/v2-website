@@ -8,7 +8,7 @@ module MetadataHelper
   end
 
   def metadata_image_url
-    @metadata_image_url ||= metadata.try(:fetch, :image_url, nil) || image_url("icon.png")
+    @metadata_image_url ||= metadata.try(:fetch, :image_url, nil) || "https://assets.exercism.io/social/general.png"
   end
 
   def metadata_url
@@ -19,22 +19,85 @@ module MetadataHelper
 
   def format_title(title)
     return "Exercism" unless title
-
     "#{title} | Exercism"
   end
 
   def metadata
     @metadata ||=
       case namespace_name
+      when "admin"
+        { title: "Admin" }
       when "my"
-        nil
+        case controller_name
+        when "notifications"
+          { title: "Notifications" }
+        when "settings", "track_settings", "preferences"
+          { title: "Settings" }
+        when "starred_solutions"
+          { title: "Starred solutions" }
+        when "solutions"
+          case action_name
+          when "index"
+            { title: "Completed solutions" }
+          else
+            { title: "#{@track.title} | #{@exercise.title}" }
+          end
+        when "tracks"
+          case action_name
+          when "index"
+            { title: "Tracks" }
+          when "show"
+            { title: "#{@track.title} Track" }
+          end
+        end
+      when "mentor"
+        case controller_name
+        when "registrations"
+          { title: "Become a mentor" }
+        when "solutions"
+          handle = @redact_users ? "[Redacted]" : display_handle(@solution.user, @solution_user_track)
+          {
+            title: "#{handle} | #{@track.title}/#{@exercise.title}"
+          }
+        else
+          { title: "Mentor Dashboard" }
+        end
       else
         case controller_name
+        when "blog_posts"
+          case action_name
+          when 'index'
+            {
+              title: "The Exercism Blog",
+              description: "News, interviews and articles from the Exercism community.",
+              image_url: "https://assets.exercism.io/social/blog.png"
+            }
+          else
+            {
+              title: @blog_post.title,
+              description: blog_post_summary(@blog_post),
+              image_url: @blog_post.image_url.presence || "https://assets.exercism.io/social/blog.png"
+            }
+          end
         when "pages"
           case action_name
           when :index
           else
             { title: @page_title }
+          end
+        when "solutions"
+          case action_name
+          when "show"
+            return {} unless @solution
+
+            exercise = @solution.exercise
+            track = exercise.track
+            handle = @solution.user.handle_for(track)
+            {
+              title: "#{handle}'s solution to #{exercise.title} on the #{track.title} track",
+              description: "See how #{handle} solved the #{exercise.title} exercise on the #{track.title} track",
+              image_url: track.bordered_turquoise_icon_url
+            }
           end
         when "tracks"
           case action_name
@@ -62,6 +125,13 @@ module MetadataHelper
           { title: "Reset your password" }
         when "confirmations"
           { title: "Resend confirmation email" }
+        when "profiles"
+          case action_name
+          when "show"
+            { title: @user == current_user ? "My Profile" : "#{@profile.display_name}'s Profile" }
+          when "index"
+            { title: "Profiles" }
+          end
         end
       end
   end

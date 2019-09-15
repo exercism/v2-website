@@ -1,24 +1,48 @@
+-if @redact_users
+  -user_display_handle = "[Redacted]"
+  -user_display_handle_link = "[Redacted]"
+  -user_display_avatar_url = image_url("anonymous.png")
+-else
+  -user_display_handle = display_handle(@solution.user, @solution_user_track)
+  -user_display_handle_link = display_handle_link(@solution.user, @solution_user_track)
+  -user_display_avatar_url = display_avatar_url(@solution.user, @solution_user_track)
+
 #mentor-solution-page
   #nav.lo-nav-bar
     .lo-container
       =link_to "Mentor dashboard", [:mentor, :dashboard]
-      =nav_divider
-      %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
+      %span #{user_display_handle}'s solution to #{@exercise.title}
 
   .track-header
     .lo-container
-      =image display_avatar_url(@solution.user, @solution_user_track), display_handle(@solution.user, @solution_user_track)
+      =image user_display_avatar_url, user_display_handle
       .inner
         =iterations_nav_widget(:mentor, @solution, @iteration)
         %h2
           %strong #{@exercise.title}
           on the
           %strong #{@exercise.track.title} Track
-        .byline by #{display_handle_link(@solution.user, @solution_user_track)}
+        .byline by #{user_display_handle_link}
+        .small-iterations-nav
+          =iterations_nav_widget(:mentor, @solution, @iteration)
+
+  .tools-bar
+    .lo-container
+      .pure-g
+        .pure-u-1-1.pure-u-md-1-2
+          -if current_user.mentorship_for_solution(@solution).try(&:requires_action?)
+            .notification
+              We think this solution requires your action.
+              =link_to "No action is required", [:ignore_requires_action, :mentor, @solution], method: :patch, class: 'pure-button ignore'
+
+        .pure-u-1-1.pure-u-md-1-2
+          -if @mentoring_notes_created
+            =link_to [:mentor, :exercise_notes, track_id: @exercise.track.slug, exercise_id: @exercise.slug], remote: true, class: "mentoring-notes pure-button" do
+              View community mentoring notes
 
   .lo-container
-    .pure-g.panels
-      .pure-u-1-2.lhs
+    = render_panels do
+      .lhs
         .tabs-and-panes.selected-3
           .tabs
             .tab.tab-1
@@ -29,8 +53,9 @@
               Solution
 
           =render "solutions/panes", iteration: @iteration
-      .pure-u-1-2.rhs
+      .rhs
         -if current_user.mentoring_solution?(@solution) || current_user.has_active_lock_for_solution?(@solution)
+          =render "analysis"
           =render "discussion"
           =render "new_discussion_post"
           =render "download-section"

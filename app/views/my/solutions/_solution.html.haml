@@ -1,0 +1,33 @@
+-exercise = solution.exercise
+.solution{class: "solution_#{solution.id}"}
+  .icon
+    .img{style: "background-image:url('#{image_path(exercise.white_icon_url)}')"}
+  .title-bar
+    =link_to exercise.title, [:my, solution], class: 'title'
+    .track #{exercise.track.title} track
+
+  .options.pure-g
+    .pure-u-1-1.pure-u-md-1-3
+      =link_to [:toggle_published, :my, solution], remote: true, method: :patch, class: "option on_profile #{solution.published_at ? "true" : "false"}" do
+        .true
+          %i.fas.fa-check
+        .false
+          %i.fas.fa-times
+        .desc Published
+
+    -if solution.published_at?
+      .pure-u-1-1.pure-u-md-1-3
+        =link_to [:toggle_show_on_profile, :my, solution], remote: true, method: :patch, class: "option on_profile #{solution.show_on_profile ? "true" : "false"}" do
+          .true
+            %i.fas.fa-check
+          .false
+            %i.fas.fa-times
+          .desc On profile
+
+      .pure-u-1-1.pure-u-md-1-3
+        =link_to [:toggle_allow_comments, :my, solution], remote: true, method: :patch, class: "option on_profile #{solution.allow_comments ? "true" : "false"}" do
+          .true
+            %i.fas.fa-check
+          .false
+            %i.fas.fa-times
+          .desc Allow comments

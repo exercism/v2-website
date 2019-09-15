@@ -1,15 +1,15 @@
 .solution-header
   .lo-container
-    .icon
-      =graphical_image @exercise.white_icon_url
-    .inner
-      -if @iteration
-        =render "solutions/iteration_nav", url_path: :teams_team_my_solution_path, url_parts: [@team, @solution], iteration_idx: @iteration_idx, num_iterations: @solution.num_iterations
+    .content
+      .icon
+        =graphical_image @exercise.turquoise_icon_url
+      .inner
+        -if @iteration
+          =iterations_nav_widget(@team, @solution, @iteration, url_path: :teams_team_solution_path)
+          /=render "solutions/iteration_nav", url_path: :teams_team_my_solution_path, url_parts: [@team, @solution], iteration_idx: @iteration_idx, num_iterations: @solution.num_iterations
 
-      %h2
-        %strong #{@exercise.title}
-        in
-        %strong #{@exercise.track.title}
-      .byline started #{@solution.created_at.strftime("%e#{@solution.created_at.day.ordinalize} %b %Y")}
-
-
+        %h2
+          %strong #{@exercise.title}
+          in
+          %strong #{@exercise.track.title}
+        .byline started #{@solution.created_at.strftime("#{@solution.created_at.day.ordinalize} %b %Y")}

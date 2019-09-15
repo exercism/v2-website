@@ -1,0 +1,11 @@
+-@testimonials.each do |solution_mentorship|
+  .testimonial
+    .feedback
+      %i.fas.fa-quote-left
+      = solution_mentorship.feedback
+    .about
+      .user - @#{display_handle(solution_mentorship.solution.user, UserTrack.find_by(user: solution_mentorship.solution.user_id, track: solution_mentorship.solution.exercise.track))}
+      on
+      =link_to "#{solution_mentorship.solution.exercise.title} in #{solution_mentorship.solution.exercise.track.title}", mentor_solution_path(solution_mentorship.solution), class: 'exercise'
+
+=paginate(@testimonials)

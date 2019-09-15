@@ -1,12 +1,10 @@
 .about-section
   .lo-container
-    .pure-g
-      .pure-u-3-4.about
-        %h2 About #{@track.title}
-        = raw @track.about
-        = link_to "Join the #{@track.title} track", button_url, method: :post, class: "pure-button"
-      .pure-u-1-4
-        .code-sample
-          %pre
-            %code{class: "language-#{@track.syntax_highligher_language}"}
-              =@track.code_sample
+    .about
+      %h2 About #{@track.title}
+      .code-sample
+        %pre
+          %code{class: "language-#{@track.syntax_highligher_language}"}
+            =@track.code_sample
+      = raw @track.about
+      = link_to "Join the #{@track.title} track", button_url, method: :post, class: "pure-button"

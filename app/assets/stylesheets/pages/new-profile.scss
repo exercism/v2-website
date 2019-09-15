@@ -19,7 +19,7 @@
             max-width:70%;
             @include font-size(15, 15);
             color:#fff;
-            font-weight:$light;
+            font-weight:$fw-regular;
         }
     }
     img {
@@ -29,7 +29,10 @@
 }
 
 #modal.new-profile {
-    padding:20px 35px 25px;
+    padding:20px 15px 25px 15px;
+    @include width-medium() {
+        padding:20px 35px 25px;
+    }
     .progress {
         display:block;
         text-align:center;
@@ -63,14 +66,22 @@
         margin-top:10px;
         padding:12px;
         &.start {
-            width:70%;
+            width:100%;
             margin-right:3%;
+            @include width-medium() {
+                width:70%;
+            }
         }
         &.cancel {
-            width:25%;
+            width:100%;
+            margin-bottom: 15px;
             border:1px solid $color-1;
             color:$color-1;
             background:#fff;
+            @include width-medium() {
+                width:25%;
+                margin-bottom:0;
+            }
         }
     }
     .page-1 {
@@ -116,6 +127,7 @@
         }
         button {
             display:block;
+            margin-bottom: 15px;
         }
     }
 }

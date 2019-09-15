@@ -1,0 +1,28 @@
+#blog-post
+  .header
+    .lo-container
+      .heading
+        =link_to "The Exercism Blog", blog_posts_path
+      .subheading News, interviews and articles from the Exercism community.
+  .lo-container
+    .blog-content
+      %h1= @blog_post.title
+      .byline
+        Written by
+        %span.handle #{@blog_post.author.profile ? link_to(@blog_post.author.profile.display_name, profile_path(@blog_post.author.handle)) : @blog_post.author_handle}
+        on
+        =@blog_post.published_at.strftime("#{@blog_post.published_at.day.ordinalize} %b %Y")
+      %article
+        =raw @blog_post.content
+      .categories
+        =link_to @blog_post.category.titleize, blog_posts_path(category: @blog_post.category)
+      -if @blog_post.author.try(:profile)
+        .author
+          =image_tag @blog_post.author.avatar_url
+          .name= @blog_post.author.name
+          .bio= @blog_post.author.bio
+          =link_to "View Profile", profile_path(@blog_post.author.profile), class: 'pure-button'
+
+      =render "comments"
+
+=render_cta_footer

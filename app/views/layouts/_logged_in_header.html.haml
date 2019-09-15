@@ -20,16 +20,21 @@
         .person
           Logged in as
           %strong #{current_user.handle}
-        .hr
-        = link_to "Tracks", [:my, :tracks]
-        = link_to "Your profile", [:my, :profile]
-        = link_to "Solutions you've liked", [:my, :reactions]
-        -if current_user.admin? || current_user.mentor?
-          .hr
-        -if current_user.admin?
-          = link_to "Admin dashboard", [:admin, :dashboard]
-        -if current_user.mentor?
-          = link_to "Mentor dashboard", [:mentor, :dashboard]
-        .hr
-        = link_to "Settings", [:my, :settings]
-        = link_to "Sign out", destroy_user_session_path, method: :delete
+        %ul
+          %li= link_to "Tracks", [:my, :tracks]
+          %li= link_to "Your profile", [:my, :profile]
+          %li= link_to "Starred solutions", [:my, :starred_solutions]
+        %ul
+          -if current_user.admin?
+            %li= link_to "Admin dashboard", [:admin, :dashboard]
+
+          -if current_user.is_mentor?
+            %li= link_to "Mentor dashboard", [:mentor, :dashboard]
+          -else
+            %li= link_to "Become a mentor", become_a_mentor_path
+        %ul
+          %li= link_to "Teams Edition", "https://teams.exercism.io"
+          %li= link_to "Community Blog", blog_posts_path
+        %ul
+          %li= link_to "Settings", [:my, :settings]
+          %li= link_to "Sign out", destroy_user_session_path, method: :delete

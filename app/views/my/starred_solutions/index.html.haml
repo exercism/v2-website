@@ -1,0 +1,21 @@
+#my-starred-solutions-page
+  #nav.lo-nav-bar
+    .lo-container
+      =link_to "Home", root_path
+      %span Starred solutions
+
+  .header
+    .lo-container
+      %h1 Starred solutions
+      .h1-subtitle Learn from solutions that interest you. Star solutions around the site to find them later.
+
+  .lo-container
+    -if @solutions.size > 0
+      .pure-g
+        -@solutions.each do |solution|
+          .pure-u-1.pure-u-md-1-2.pure-u-lg-1-3
+            =render "solutions/solution", solution: solution, track: solution.exercise.track, exercise: solution.exercise, user_track: @user_tracks[solution.user_id]
+
+      =paginate @solutions
+    -else
+      .no-solutions You have not starred any solutions yet.

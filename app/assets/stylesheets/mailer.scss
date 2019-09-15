@@ -136,7 +136,7 @@ h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#eee;}
 
 .collapse { margin:0!important;}
 
-p, ul {
+p, ul, ol {
 	margin-bottom: 15px;
 	font-weight: 300;
 	font-size:16px;
@@ -146,10 +146,11 @@ p.lead { font-size:16px; line-height:1.4; font-weight:500; }
 p.last { margin-bottom:0px;}
 p.italic { font-style:italic; color:#666}
 
-ul li {
-	margin-left:5px;
-  margin-bottom:8px;
-	list-style-position: inside;
+ul li,
+ol li {
+	margin-left:18px;
+    margin-bottom:8px;
+	list-style-position: outside;
 }
 
 .header-image {
@@ -241,11 +242,11 @@ ul li {
     line-height:29px;
 	margin-bottom: 15px;
 }
-p, ul {
+p, ul, ol, th, td {
 	margin-bottom: 10px;
 	font-weight: 400;
 	font-size:16px;
-	line-height:22px;
+	line-height:24px;
     a {
         color:#009cab;
         font-weight:600;

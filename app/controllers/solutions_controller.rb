@@ -1,9 +1,12 @@
 class SolutionsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
   def index
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:exercise_id])
-
-    @solutions = @exercise.solutions.published.reorder('solutions.num_reactions DESC').includes(:user)
+    @solutions = @exercise.solutions.
+                           published.
+                           includes(user: [:profile, { avatar_attachment: :blob }])
 
     if user_signed_in?
       @solutions = @solutions.where.not(user_id: current_user.id)
@@ -14,42 +17,47 @@ class SolutionsController < ApplicationController
                                     first
     end
 
+    @order = params[:order]
+    sql_order = case @order
+                when "num_stars"; "num_stars DESC"
+                when "num_comments"; "num_comments DESC"
+                when "published_at_asc"; "published_at ASC"
+                else;"published_at DESC"
+                end
+
+    @solutions = @solutions.reorder(sql_order)
     @total_solutions = @solutions.count
     @solutions = @solutions.page(params[:page]).per(21)
-    @reaction_counts = Reaction.where(solution_id: @solutions.map(&:id)).group(:solution_id, :emotion).count
-    @comment_counts = Reaction.where(solution_id: @solutions.map(&:id)).with_comments.group(:solution_id).count
     @user_tracks = UserTrack.where(user_id: @solutions.pluck(:user_id), track: @track).
                              each_with_object({}) { |ut, h| h[ut.user_id] = ut }
   end
 
   def show
-    @solution = Solution.published.find_by_uuid(params[:id])
-
-    # Allow /solutions/uuid to redirect, or if the solution isn't
-    # valid (not published etc) then redirect to sensible place if
-    # possible.
-    if @solution
-      @exercise = @solution.exercise
-      @track = @exercise.track
-      return redirect_to [@track, @exercise, @solution], :status => :moved_permanently if request.path != track_exercise_solution_path(@track, @exercise, @solution)
-
-    elsif params[:track_id].present? && params[:exercise_id].present?
-      @track = Track.find(params[:track_id])
-      @exercise = @track.exercises.find(params[:exercise_id])
-
-      begin
-        @solution = @exercise.solutions.published.find_by_uuid!(params[:id])
-      rescue
-        return redirect_to [@track, @exercise]
-      end
-    else
-      raise ActionController::RoutingError.new('Not Found')
+    begin
+      @solution = Solution.find_by_uuid!(params[:id])
+    rescue
+      return render action: "not_found", status: :not_found
     end
 
-    @iteration = @solution.iterations.last
-    @comments = @solution.reactions.with_comments.includes(user: [:profile, { avatar_attachment: :blob }])
-    @reaction_counts = @solution.reactions.group(:emotion).count.to_h
+    @exercise = @solution.exercise
+    @track = @exercise.track
 
-    @user_reaction = Reaction.where(user: current_user, solution: @solution).first if user_signed_in?
+    # If it's not published, either go to "my" page or render not_published
+    unless @solution.published?
+      if @solution.user == current_user
+        return redirect_to [:my, @solution]
+      else
+        return render action: "not_published", status: :not_found
+      end
+    end
+
+    # Redirect to the correct url for Google
+    return redirect_to [@track, @exercise, @solution], :status => :moved_permanently if request.path != track_exercise_solution_path(@track, @exercise, @solution)
+
+    ClearNotifications.(current_user, @solution)
+    @iteration = @solution.iterations.last
+    @comments = @solution.comments.
+                          order('created_at ASC').
+                          includes(user: [:profile, { avatar_attachment: :blob }])
   end
 end

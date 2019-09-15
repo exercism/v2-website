@@ -1,0 +1,35 @@
+.blog-comment.editable-text{id: "blog-comment-#{comment.id}", class: (comment.deleted?? "delete" : "")}
+  .editable-text-viewer
+    - if comment.deleted?
+      .comment-html
+        .deleted-status This message has been deleted
+    - else
+      .editable-text-html
+        = raw comment.html
+
+      - if comment.user == current_user
+        .editable-text-options
+          = link_to "Edit", "#", class: "js-edit-editable-text"
+          or
+          = link_to "Delete", blog_comment_path(comment), class: "js-delete-blog-comment", data: { confirm: "Are you sure you want to delete this comment?", remote: true, method: :delete, "disabled-with": "Deleting..." }
+      /- if comment.edited?
+      /  .edited-status (edited #{time_ago_in_words(comment.updated_at)} ago)
+
+      .comment-footer
+        Commented
+        #{time_ago_in_words(comment.created_at)} ago
+        by
+        #{comment.user.profile ? link_to(comment.user.profile.display_name, profile_path(comment.user.handle)) : comment.user.handle}.
+
+  .editable-text-editor
+    = form_for comment, url: blog_comment_path(comment), remote: true do |f|
+      = f.text_area :content
+      .buttons
+        = f.submit "Save changes", class: "pure-button update-button", data: { "disable-with": "Saving..." }
+        = link_to "Cancel", "#", class: "pure-button cancel-button js-show-editable-text"
+
+  .divider
+
+- content_for :js do
+  :javascript
+    $(function() { new EditableText("blog-comment", #{comment.id}) });

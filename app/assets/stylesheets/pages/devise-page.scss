@@ -1,14 +1,32 @@
 @import 'variables';
 @import 'mixins';
 
+body.devise {
+    background:#f7f7f7;
+    @include width-large() {
+        background:none;
+    }
+}
 .lo-devise-page {
+    .lhs #widget-code-person {
+        display: none;
+        @include width-large() {
+            display: block;
+            min-height:500px;
+        }
+    }
     .rhs {
         padding-top:30px;
-        padding-left:20px;
+        @include width-large() {
+            padding-left:20px;
+        }
     }
     .frame {
         background:#f7f7f7;
-        padding:25px 45px;
+        padding:25px 15px;
+        @include width-large() {
+            padding:25px 45px;
+        }
     }
     h1 {
         @include header-font;
@@ -30,7 +48,7 @@
             margin-right:3px;
         }
         strong {
-            font-weight:$regular;
+            font-weight:$fw-bold;
         }
     }
     .or {
@@ -60,6 +78,11 @@
         @include font-size(14, 18);
         margin-bottom:12px;
     }
+
+    .g-recaptcha {
+      margin-bottom: 12px;
+    }
+
     input {
         border:1px solid #cfcfcf;
         border-radius:2px;
@@ -76,18 +99,18 @@
         border:none;
         @include font-size(15, 15);
         margin-bottom:20px;
+        white-space:normal;
     }
     .sign-up,
     .log-in,
     .reset-password,
     .confirmation-instructions {
-        color:#666;
         @include font-size(14, 14);
         margin-bottom:10px;
         a {
             text-decoration:underline;
             color:#555;
-            font-weight:$regular;
+            font-weight:$fw-semibold;
         }
     }
     #alert, #errors,
@@ -98,6 +121,4 @@
         border:1px solid #f5fdfb;
         background:#fff;
     }
-}
-#confirmation-required-page {
 }

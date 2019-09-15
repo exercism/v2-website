@@ -1,0 +1,48 @@
+-avatar_url = user_track ?  display_avatar_url(comment.user, user_track) : comment.user.avatar_url
+-user_handle = user_track ? display_handle(comment.user, user_track) : comment.user.handle
+
+.widget-solution-comment.editable-text{id: "solution-comment-#{comment.id}", class: (comment.deleted?? "delete" : "")}
+  -if comment.user.profile
+    = link_to comment.user.profile, class: 'avatar' do
+      =image avatar_url, "Avatar of #{user_handle}"
+  -else
+    =image avatar_url, "Avatar of #{user_handle}", class: 'avatar'
+  .comment-body
+    .comment-header
+      .user-handle
+        -if comment.user.profile
+          = link_to user_handle, comment.user.profile
+        -else
+          = user_handle
+      -if comment.user == solution.user
+        .user-role
+          Solution Author
+          -if user_track && user_track.anonymous?
+            (Anonymous Mode)
+      =link_to "commented #{time_ago_in_words(comment.created_at)} ago", solution_comment_path(solution, comment), class: "created-at"
+
+    .editable-text-viewer
+      - if comment.deleted?
+        .editable-text-html
+          .deleted-status This message has been deleted
+      - else
+        .editable-text-html
+          = raw comment.html
+        - if comment.user == current_user
+          .editable-text-options
+            = link_to "Edit", "#", class: "js-edit-editable-text"
+            or
+            = link_to "Delete", solution_comment_path(solution, comment), class: "js-delete-solution-comment", data: { confirm: "Are you sure you want to delete this comment?", remote: true, method: :delete, "disabled-with": "Deleting..." }
+        - if comment.edited?
+          .edited-status (edited #{time_ago_in_words(comment.updated_at)} ago)
+
+    .editable-text-editor
+      = form_for comment, url: solution_comment_path(solution, comment), remote: true do |f|
+        = f.text_area :content
+        .buttons
+          = f.submit "Save changes", class: "pure-button update-button", data: { "disable-with": "Saving..." }
+          = link_to "Cancel", "#", class: "pure-button cancel-button js-show-editable-text"
+
+- content_for :js do
+  :javascript
+    $(function() { new EditableText("solution-comment", #{comment.id}) });

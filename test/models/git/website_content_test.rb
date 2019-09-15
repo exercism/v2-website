@@ -15,6 +15,24 @@ class Git::WebsiteContentTest < ActiveSupport::TestCase
     refute_equal repo, another_repo
   end
 
+  test "returns mentoring notes" do
+    track = create :track, slug: "ruby"
+    exercise = create :exercise, slug: "grains", track: track
+
+    Git::WebsiteContent.
+      stubs(:repo_url).
+      returns("file://#{Rails.root}/test/fixtures/website-copy")
+
+    stub_repo_cache! do
+      repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")
+
+      assert_equal(
+        "# Welcome to the Exercism mentoring guide!\n",
+        repo.mentor_notes_for(track.slug, exercise.slug)
+      )
+    end
+  end
+
   test "returns mentor data" do
     stub_repo_cache! do
       repo = Git::WebsiteContent.new("file://#{Rails.root}/test/fixtures/website-copy")

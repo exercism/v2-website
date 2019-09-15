@@ -8,10 +8,6 @@ class SwitchTrackToMentoredMode
     user_track.solutions.update_all(track_in_independent_mode: false)
 
     FixUnlockingInUserTrack.(user_track)
-
-    # Set everything that's not started to mentored mode
-    user_track.solutions.update_all(independent_mode: true)
-    user_track.solutions.not_started.update_all(independent_mode: false)
   end
 
   memoize

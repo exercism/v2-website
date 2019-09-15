@@ -1,0 +1,21 @@
+Hi #{@user.handle},
+\
+-if @introduction.present?
+  = raw @introduction
+  \
+Site Summary
+\------------
+This week #{number_with_delimiter @stats[:site][:num_learners]} people submitted #{number_with_delimiter @stats[:site][:num_solutions]} solutions across all the language tracks. Of these #{number_with_delimiter @stats[:site][:num_solutions_for_mentoring]} solutions were submitted for mentoring.
+\
+In total, #{number_with_delimiter @stats[:site][:num_mentors]} mentors gave feedback on #{number_with_delimiter @stats[:site][:num_solution_mentorships]} solutions.
+\
+
+-@stats[:tracks].each do |slug, track|
+  #{track[:title]}
+  \------------
+  -track[:stats].each do |key, value|
+    \- #{key.to_s.humanize}: #{number_with_delimiter value}
+  \
+
+-if @stats[:num_solutions_mentored_by_user] > 0
+  Thanks for all your hard work this week!

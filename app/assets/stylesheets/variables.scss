@@ -17,5 +17,10 @@ $error-red-text-color:darken(#f34a56, 5%);
 $thin: 100;
 $light: 300;
 $regular: 400;
-$bold: 500;
+$bold: 600;
 $black: 700;
+
+$fw-regular: $regular;
+$fw-semibold: 500;
+$fw-bold: $bold;
+$fw-black: $black;

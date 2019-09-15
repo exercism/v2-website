@@ -1,24 +1,21 @@
 class LockSolution
   include Mandate
 
-  LOCK_LENGTH = 30.minutes
-
-  attr_reader :user, :solution, :force
-  def initialize(user, solution, force: false)
+  attr_reader :user, :solution, :force, :lock_length
+  def initialize(user, solution, force: false, lock_length: DEFAULT_LOCK_LENGTH)
     @user = user
     @solution = solution
     @force = force
+    @lock_length = lock_length
   end
 
   def call
     if existing_user_lock
-      existing_user_lock.update(locked_until: Time.current + LOCK_LENGTH)
+      existing_user_lock.update(locked_until: Time.current + lock_length)
       return existing_user_lock
     end
 
-    unless force
-      return false if other_lock_exists?
-    end
+    return false if !force && other_lock_exists?
 
     create_lock
   end
@@ -43,7 +40,10 @@ class LockSolution
     SolutionLock.create!(
       user: user,
       solution: solution,
-      locked_until: Time.current + LOCK_LENGTH
+      locked_until: Time.current + lock_length
     )
   end
+
+  DEFAULT_LOCK_LENGTH = 30.minutes
+  private_constant :DEFAULT_LOCK_LENGTH
 end

@@ -12,10 +12,17 @@ class CreateNotification
   VALID_NOTIFICATION_TYPES = %i{
     exercise_auto_approved
     new_discussion_post
-    new_reaction
     new_discussion_post_for_mentor
     new_iteration_for_mentor
     solution_approved
+
+    new_blog_comment_for_blog_post_author
+    new_blog_comment_for_other_commenter
+
+    new_solution_comment_for_solution_user
+    new_solution_comment_for_other_commenter
+
+    new_solution_star
   }
 
   attr_reader :user, :type, :content, :link, :trigger, :about

@@ -8,7 +8,7 @@ class BootstrapUser
   end
 
   def call
-    user.auth_tokens.create!(token: SecureRandom.uuid)
+    user.create_auth_token!
 
     if initial_track_id
       track = Track.find_by_id(initial_track_id)

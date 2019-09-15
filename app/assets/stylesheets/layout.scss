@@ -2,8 +2,11 @@
 @import 'mixins';
 
 .lo-container {
-    padding:0 50px;
-    width:1200px;
+    max-width:1200px;
+    padding:0 15px;
+    @include width-medium() {
+        padding:0 50px;
+    }
     margin:0 auto;
 }
 
@@ -15,7 +18,7 @@
     @include font-size(14, 20);
     a {
         color:$error-red-text-color;
-        font-weight:400;
+        font-weight:$regular;
         text-decoration:underline;
     }
 }

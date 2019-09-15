@@ -4,32 +4,37 @@
 .widget-discussion-post {
     margin-bottom:20px;
     overflow:hidden;
+
+    &>.post-avatar {
+        margin-right:15px;
+        float:left;
+
+        .avatar {
+            width:35px;
+            height:35px;
+            border-radius:3px;
+        }
+    }
+
+    &>.post-body {
+        width:100%;
+    }
+
     &.delete {
         .avatar, .post-body {
             opacity:0.3;
         }
     }
+
     &+.widget-discussion-post {
-        border-top:1px solid #f4f4f4;
+        border-top:1px solid #eee;
         padding-top:20px;
     }
-    .avatar {
-        margin-right:3%;
-        float:left;
-        min-width:35px;
-        width:8%;
-        display:block;
-        border-radius:3px;
-    }
-    .post-body {
-        min-width:100px;
-        width:89%;
-        float:left;
-    }
+
 
     .post-header {
         overflow:hidden;
-        margin-bottom:10px;
+        margin-bottom:5px;
         .user-handle {
             display:inline-block;
             color:#333;
@@ -47,75 +52,13 @@
             font-weight:$regular;
         }
         .created-at {
-            float:right;
+            margin-top:5px;
             @include font-size(11, 13);
             color:#999;
-        }
-    }
-
-    .post-viewer {
-        overflow:hidden;
-        .post-options {
-            margin-top:7px;
-            float:right;
-            @include font-size(12, 12);
-            color: #999;
-            a {
-                color: #999;
-                font-weight:400;
-                text-decoration: underline;
-                &:hover {
-                    color:#666;
-                }
+            @include width-medium() {
+                float:right;
+                margin-top:0px;
             }
-        }
-
-        .edited-status {
-            float:left;
-            color: #999;
-            margin-top:8px;
-            @include font-size(11, 11);
-        }
-
-        .deleted-status {
-            font-style: italic;
-            margin-top:5px;
-            @include font-size(13, 15);
-        }
-    }
-
-    &.editing {
-        .post-viewer {
-            display: none;
-        }
-
-        .post-editor {
-            display: block;
-        }
-    }
-
-    .post-editor {
-        margin-top:10px;
-        display: none;
-
-        .buttons {
-            text-align:right;
-            margin-top:10px;
-            .update-button {
-                border: 1px solid $color-1;
-                background: $color-1;
-                color: #fff;
-                padding:7px 25px;
-            }
-            .cancel-button {
-                background:#fff;
-                border:1px solid #ccc;
-                color:#999;
-            }
-        }
-
-        .pure-button {
-            text-decoration: none !important;
         }
     }
 }

@@ -1,0 +1,26 @@
+/-return unless current_user.admin?
+-return unless @iteration.analyses.present?
+
+-analysis = @iteration.analyses.last
+-return unless analysis.handled?
+
+.analysis-section
+  %h3
+    Automatic Analysis
+    =link_to "https://github.com/exercism/automated-mentoring-support" do
+      %i.fa.fa-info-circle
+  .recommendation
+    %strong Recommendation:
+    =analysis.analysis_status.to_s.titleize
+    -if analysis.built_comments.size > 0
+      with comments
+
+  .comments
+    /%h4 Suggested comments
+    -analysis.built_comments.each.with_index do |comment, idx|
+      .comment.widget-code-snippet
+        =button_tag "copy", class: 'pure-button copy-button'
+        =text_area_tag "analysis-comment-#{idx}", comment, class: 'download-code', readonly: true
+        .editable-text
+          .editable-text-viewer
+            .editable-text-html= raw ParseMarkdown.(comment)

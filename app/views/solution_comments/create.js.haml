@@ -1,0 +1,5 @@
+var newComment = '#{j solution_comment_widget(@comment, @solution)}';
+$('#solution-page .comments .no-comments').hide()
+$('#solution-page .comments').show().append(newComment)
+window.location.href = "#solution-comment-#{@comment.id}"
+=raw yield(:js).gsub(/<\/?script>/, "")

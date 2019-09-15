@@ -1,13 +1,15 @@
 @import 'variables';
 @import 'mixins';
 
-#my-solution-page .rhs {
+#my-solution-page .rhs,
+#teams-solution-page .rhs,
+#teams-my-solution-page .rhs {
     h3.rhs-heading {
         padding:7px 0;
         border-bottom:1px solid #ddd;
         margin-bottom:20px;
 
-        font-weight:400;
+        font-weight:$regular;
         color:#333;
         &.disabled {
             color:#ccc;
@@ -23,8 +25,11 @@
     .next-steps {
         background:rgba($color-1, 0.05);
         border-radius:2px;
-        padding:20px 40px 20px 20px;
+        padding:20px 20px 20px 20px;
         margin-bottom:20px;
+        @include width-small() {
+            padding:20px 40px 20px 20px;
+        }
         .title {
             @include font-size(16, 16);
             font-weight:$regular;
@@ -33,19 +38,27 @@
             margin-bottom:13px;
         }
         p {
-            @include font-size(13, 19);
-            padding-left:19px;
+            @include font-size(14, 18);
+            @include width-small() {
+                padding-left:19px;
+            }
             margin-bottom:10px;
             &:last-child {
                 margin-bottom:0;
             }
             a {
                 color:#333;
-                font-weight:$light;
+                font-weight:$fw-regular;
             }
         }
         .pure-button {
-            margin-left:20px;
+            margin-top:0;
+            @include width-small() {
+                margin-left:20px;
+            }
+        }
+        .pure-button+p {
+            margin-top:10px;
         }
     }
     .pane.markdown,
@@ -70,16 +83,26 @@
         margin-top:10px;
         border-radius:2px;
         padding:8px 25px;
+        width:100%;
+        @include width-small() {
+            width:auto;
+        }
     }
     .complete-button {
         &.unapproved {
             background:#fff;
             border:1px solid #ddd;
             color:#ddd;
+            float:left;
             &:hover {
                 border:1px solid red;
                 color:red;
             }
+        }
+        &.independent {
+            background:$color-1;
+            color:#fff;
+            float:left;
         }
         &.approved {
             background:$color-1;

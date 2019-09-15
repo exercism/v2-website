@@ -37,6 +37,12 @@ class Teams::Teams::SolutionsController < Teams::Teams::BaseController
     track = Track.find_by(id: @track_id)
     return [] unless track
 
-    OptionsHelper.as_options(track.exercises, :title, :id)
+    exercises = @team.solutions.where.not(user_id: current_user.id).
+                                where("num_iterations > 0").
+                                joins(:exercise).
+                                includes(:exercise).
+                                where('exercises.track_id': @track_id).
+                                map(&:exercise)
+    OptionsHelper.as_options(exercises, :title, :id)
   end
 end

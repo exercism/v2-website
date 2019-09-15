@@ -12,7 +12,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     solution = create(:solution,
                        user: user,
                        exercise: create(:exercise, title: "Exercise 1", track: track),
-                       published_at: Date.new(2016, 12, 25))
+                       published_at: Date.new(2016, 12, 25),
+                       show_on_profile: true)
 
     get solutions_profile_path(user.handle), params: {
       track_id: track.id,
@@ -21,6 +22,6 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     xhr: true
 
     assert_response :success
-    assert_equal assigns(:solutions), [solution]
+    assert_equal assigns(:profile_view).solutions, [solution]
   end
 end

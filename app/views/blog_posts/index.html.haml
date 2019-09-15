@@ -1,0 +1,45 @@
+-content_for :head do
+  =auto_discovery_link_tag :rss, blog_posts_url(:format => :rss) , title: "Exercism's blog"
+
+#blog-posts
+  .header
+    .lo-container
+      .heading The Exercism Blog
+      .subheading News, interviews and articles from the Exercism community.
+
+  .lo-container
+    .pure-g
+      .pure-u-1-1.pure-u-md-2-3
+        %h2
+          -if @category.present?
+            All posts in "#{@category.titleize}"
+          -else
+            Latest Posts
+
+        -@blog_posts.each do |post|
+          =link_to post, class: 'blog-post' do
+            -if post.image_url.present?
+              .img{style: "background-image:url(#{image_url(post.image_url.presence)})"}
+            %h3
+              .text= post.title
+            .synopsis= blog_post_summary(post)
+            .details
+              By
+              %span.handle #{post.author.profile ? post.author.profile.display_name : post.author_handle}
+              &middot;
+              =post.published_at.strftime("#{post.published_at.day.ordinalize} %b %Y")
+              -if @comment_counts[post.id].to_i > 0
+                &middot;
+                =pluralize @comment_counts[post.id], "comment"
+
+        =paginate(@blog_posts)
+      .pure-u-1-1.pure-u-md-1-3
+        .sidebar
+          %h3 Quick Links
+          %ul
+            %li= link_to "Latest Posts", blog_posts_path
+            %li= link_to "RSS Feed", blog_posts_path(format: 'rss')
+          %h3 Categories
+          %ul
+            -BlogPost.categories_with_counts.each do |category, count|
+              %li= link_to "#{category.titleize} (#{count})", blog_posts_path(category: category)

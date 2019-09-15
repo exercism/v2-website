@@ -1,12 +1,12 @@
 %h2 Next solutions to mentor
-= render "next_solutions_filters",
-  track_id: @next_track_id,
-  track_id_options: @next_track_id_options,
-  exercise_id: @next_exercise_id,
-  exercise_id_options: @next_exercise_id_options
 
 .next-solutions{style: @next_solutions.present?? "display:block" : "display:none"}
-  .subheading These are new solutions that need feedback.
+  .subheading 
+    -if params[:next_exercise_id]
+      These are new solutions that need feedback. 
+    -else
+      These are new solutions that need feedback. They are ordered algorithmically with the most important at the top. Please use the filters on the right-hand side if you would like to mentor a specific exercise (e.g. you would like to mentor a simple exercise, or want to batch-clear one exercise).
+
   =render "next_solutions", next_solutions: @next_solutions, user_tracks: @user_tracks
 .no-next-solutions{style: @next_solutions.empty?? "display:block" : "display:none"}
   %p There are currently no new solutions that need mentoring. Great work!

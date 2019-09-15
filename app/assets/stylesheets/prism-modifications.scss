@@ -4,11 +4,17 @@
 pre.line-numbers {
     margin: 0 !important;
     padding-bottom: 1em !important;
+    font-size:70%;
+    @include width-small() {
+        font-size:100%;
+    }
     .line-numbers-rows {
         span {
-            line-height:16px;
-            padding-bottom:5px;
-            &:before {
+            line-height:13px;
+            padding-bottom:1px;
+            @include width-small() {
+                line-height:16px;
+                padding-bottom:5px;
             }
         }
     }
@@ -16,6 +22,7 @@ pre.line-numbers {
         background: rgba($color-2, 0.1);
         margin-top:0;
         &:before {
+            content: '';
             background:$color-2;
             width:6px;
             height:6px;
@@ -24,6 +31,11 @@ pre.line-numbers {
             border-radius:100%;
             left:5px;
             top:7px;
+            box-shadow: none;
         }
     }
+}
+
+pre[class*="language-"] {
+  border-radius: 0 !important;
 }

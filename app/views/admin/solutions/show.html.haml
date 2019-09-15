@@ -2,7 +2,6 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Admin dashboard", [:admin, :dashboard]
-      =nav_divider
       %span #{display_handle(@solution.user, @solution_user_track)}'s solution to #{@exercise.title}
 
   .track-header
@@ -17,8 +16,8 @@
         .byline by #{display_handle_link(@solution.user, @solution_user_track)}
 
   .lo-container
-    .pure-g.panels
-      .pure-u-1-2.lhs
+    = render_panels do
+      .lhs
         .lhs-content
           .tabs-and-panes.selected-3
             .tabs
@@ -31,7 +30,7 @@
 
             =render "solutions/panes", iteration: @iteration
 
-      .pure-u-1-2.rhs
+      .rhs
         .discussion
           %h3 Mentor discussion
           -if @iteration.discussion_posts.size > 0

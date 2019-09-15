@@ -8,18 +8,20 @@
             h3 {
                 @include font-size(15, 15);
                 margin-bottom:7px;
-                font-weight:500;
+                font-weight:$bold;
             }
             p {
-                margin-bottom:7px;
+                margin-bottom:10px;
                 color:#999;
             }
             textarea {
-                width:300px;
                 height:200px;
-                padding:10px;
-                border:1px solid #aaa;
+            }
+            input, textarea {
+                border:1px solid #ccc;
                 border-radius:3px;
+                padding:10px;
+                width:300px;
             }
         }
         .pure-button {

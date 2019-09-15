@@ -15,8 +15,4 @@ module A11yHelper
   def image(source, alt, options = {})
     image_tag source, { alt: alt }.merge(options)
   end
-
-  def nav_divider
-    image_tag 'nav-divider.png', alt: ''
-  end
 end

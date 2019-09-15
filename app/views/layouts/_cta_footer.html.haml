@@ -1,0 +1,11 @@
+-unless user_signed_in?
+  #cta-footer
+    .lo-container
+      %h2 New to Exercism?
+      %p
+        Level up your programming skills with #{number_with_delimiter Exercise.active.count} exercises across #{Track.active.count} languages, and insightful discussion with our volunteer team of welcoming mentors.
+        Exercism is
+        =succeed('.') do
+          %strong 100% free forever
+      =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
+      =link_to "Learn More", root_path, class: "pure-button languages-button"

@@ -10,7 +10,7 @@ gem 'puma', '~> 3.7'
 gem 'mysql2'
 
 gem 'dalli'
-gem 'devise', '~> 4.3'
+gem 'devise', ">= 4.7.1"
 gem 'omniauth-github'
 gem 'kaminari'
 gem 'friendly_id', '~> 5.2'
@@ -19,21 +19,31 @@ gem 'mandate'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.2'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
 
 gem 'commonmarker', require: false
 gem 'rugged'
-gem 'sidekiq'
 gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
 gem "bugsnag"
-gem 'aws-sdk-s3'
 gem 'image_processing', '~> 1.2'
+gem 'rest-client'
+gem 'rubyzip', require: false
+
+gem 'propono'
+gem 'aws-sdk-s3'
+
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem 'lograge'
+
+gem 'recaptcha'
 
 group :production do
   gem "skylight"
@@ -44,6 +54,7 @@ group :development, :test do
   gem 'capybara', '~> 3.0'
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
+  gem 'bullet'
 end
 
 group :development do
@@ -56,7 +67,6 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-yarn'
   gem 'letter_opener'
-  gem 'bullet'
 end
 
 group :test do

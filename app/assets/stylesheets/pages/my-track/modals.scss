@@ -6,9 +6,14 @@
 #modal.my-track-v1-migration,
 #modal.change-to-independent-mode,
 #modal.change-to-mentored-mode,
-#modal.leave-track {
+#modal.leave-track,
+#modal.pause-track,
+#modal.unpause-track {
     max-width:540px;
-    padding:50px 50px 50px 50px;
+    padding:50px 15px 50px 15px;
+    @include width-small() {
+        padding:50px 50px 50px 50px;
+    }
     img {
         display:block;
         width:100px;
@@ -27,7 +32,7 @@
     h3 {
         @include font-size(14, 14);
         color:#555;
-        font-weight:$light;
+        font-weight:$fw-regular;
         text-align:center;
         margin-bottom:20px;
     }
@@ -49,7 +54,9 @@
 
 #modal.my-track-started {
     max-width:530px !important;
-    max-height:85% !important;
+    @include width-small() {
+        max-height:85% !important;
+    }
     .learn-more {
         margin-top: 20px;
         border-top: 1px solid #ddd;
@@ -65,16 +72,20 @@
     .buttons {
         .pure-button {
             display:inline-block;
-            width:auto;
+            width:100%;
+            margin-bottom:20px;
+            @include width-medium() {
+                width:auto;
+                margin-bottom:0;
+            }
             border:1px solid $color-1;
             padding: 10px 13px;
-            font-weight:400;
-            margin-bottom:0;
+            font-weight:$regular;
             &.independent-mode-button {
                 border:1px solid $color-1;
                 background:#fff;
                 color:$color-1;
-                font-weight:300;
+                font-weight:$fw-regular;
             }
         }
     }
@@ -98,7 +109,7 @@
         width:auto;
         border:1px solid $color-1;
         padding: 10px 13px;
-        font-weight:400;
+        font-weight:$regular;
 
         &.normal-mode {
             width:59%;
@@ -107,7 +118,7 @@
             border:1px solid $color-1;
             background:#fff;
             color:$color-1;
-            font-weight:300;
+            font-weight:$fw-regular;
             width:40%;
         }
     }
@@ -115,7 +126,9 @@
 
 #modal.change-to-independent-mode,
 #modal.change-to-mentored-mode,
-#modal.leave-track {
+#modal.leave-track,
+#modal.pause-track,
+#modal.unpause-track {
     .pure-button {
         margin: 0 auto;
 
@@ -123,17 +136,25 @@
         width:auto;
         border:1px solid $color-1;
         padding: 10px 13px;
-        font-weight:400;
+        font-weight:$regular;
 
         &.action-button {
-            width:69%;
+            width:100%;
+            margin-bottom:15px;
+            @include width-medium() {
+                width:69%;
+                margin-bottom:0;
+            }
         }
         &.cancel-button {
             border:1px solid $color-1;
             background:#fff;
             color:$color-1;
-            font-weight:300;
-            width:30%;
+            font-weight:$fw-regular;
+            width:100%;
+            @include width-medium() {
+                width:30%;
+            }
         }
     }
 }

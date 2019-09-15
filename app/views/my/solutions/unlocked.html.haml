@@ -1,19 +1,25 @@
 .progress
-  =graphical_icon 'circle filled'
-  =graphical_icon 'circle filled'
-  =icon 'circle filled', 'Step 3 of 3'
+  - if @solution.mentorships.count == 0
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle filled'
+    =icon 'circle filled', 'Step 3 of 3'
+  - else
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle filled'
+    =graphical_icon 'circle filled'
+    =icon 'circle filled', 'Step 4 of 4'
 
 %h2 Exercises unlocked
-%h3 You have unlocked the following core exercise:
+%h3 You have unlocked the following Core Exercise:
 
 -if @next_core_solution
   =link_to [:my, @next_core_solution], class: 'core-exercise' do
     .icon= graphical_image @next_core_solution.exercise.white_icon_url
     .title
       = @next_core_solution.exercise.title
-      .topics
-        - @next_core_solution.exercise.topic_names.each do |topic_name|
-          .topic= topic_name
+      -# .topics
+      -#   - @next_core_solution.exercise.topic_names.each do |topic_name|
+      -#     .topic= topic_name
     .blurb
       = @next_core_solution.exercise.blurb
 
@@ -22,7 +28,7 @@
     %h4
       You have also unlocked
       %strong #{@unlocked_side_exercise_solutions.size}
-      bonus exercises:
+      Side Exercises:
     -@unlocked_side_exercise_solutions.each do |solution|
       =link_to [:my, solution], target: "_blank", class: 'side-exercise' do
         =graphical_image solution.exercise.turquoise_icon_url, class: 'turquoise'

@@ -14,14 +14,16 @@ body.namespace-my.controller-tracks.action-show {
         background-color: $header-color-1;
         overflow:hidden;
         .title {
-            float:left
+            @include width-medium() {
+                float:left;
+            }
         }
 
         .h1-subtitle {
             @include font-size(12, 12);
             color:#fff;
             opacity:0.75;
-            font-weight:$light;
+            font-weight:$fw-regular;
         }
         .num-solutions {
             float:right;
@@ -42,21 +44,35 @@ body.namespace-my.controller-tracks.action-show {
             border:1px solid $color-1;
             text-transform:uppercase;
             color:#555;
-            font-weight:500;
+            font-weight:$bold;
             padding:9px 15px;
+            @media screen and (max-width: 300px) {
+                @include font-size(8, 8);
+                padding:4px 5px;
+                margin-top:43px
+            }
         }
         .stats {
-            float:right;
-            margin-top:58px;
+            margin-top:15px;
+            @include width-medium() {
+                float:right;
+                margin-top:58px;
+            }
             .stat {
                 display:inline-block;
                 color:#fff;
                 @include font-size(11, 14);
                 text-transform:uppercase;
-                padding-left:20px;
-                margin-left:20px;
+                margin-right:20px;
+                @include width-medium() {
+                    padding-left:20px;
+                    margin-left:20px;
+                    margin-right:0;
+                }
                 &+.stat {
-                    border-left:1px solid rgba(#fff, 0.5);
+                    @include width-medium() {
+                        border-left:1px solid rgba(#fff, 0.5);
+                    }
                 }
                 a {
                     color:#fff;
@@ -82,13 +98,36 @@ body.namespace-my.controller-tracks.action-show {
             position:absolute;
             top:0px;
             bottom:50px;
-            left:0;
+            left:20px;
+            @include width-medium() {
+                left:0;
+            }
             background:$background-grey-1;
             width:2px;
+            z-index:-2;
         }
         .exercise-wrapper {
             position:relative;
             margin-left:58px;
+            @include width-medium() {
+                margin-left:58px;
+            }
+
+            &:last-child{
+                &:before {
+                    position:absolute;
+                    content: "";
+                    top:40px;
+                    left:-38px;
+                    @include width-medium() {
+                        left:-58px;
+                    }
+                    height:350px;
+                    width:2px;
+                    background:#fff;
+                    z-index:-1;
+                }
+            }
 
             &:after {
                 position:absolute;
@@ -103,7 +142,10 @@ body.namespace-my.controller-tracks.action-show {
             .circle {
                 position:absolute;
                 top:23px;
-                left:-83px;
+                left:-63px;
+                @include width-medium() {
+                    left:-83px;
+                }
                 border-radius:100%;
                 width:50px;
                 height:50px;
@@ -119,10 +161,14 @@ body.namespace-my.controller-tracks.action-show {
                 border-radius:2px;
                 padding:20px 25px;
                 margin-bottom:15px;
-                height:100px;
+                min-height:100px;
                 background:#fff;
                 .status {
-                    float:right;
+                    margin-bottom:10px;
+                    @include width-medium() {
+                        float:right;
+                        margin-bottom:0;
+                    }
                     @include font-size(12, 12);
                     letter-spacing:-0.5px;
                     text-transform:uppercase;
@@ -131,7 +177,7 @@ body.namespace-my.controller-tracks.action-show {
                 }
                 .position {
                     @include font-size(10, 10);
-                    font-weight:$light;
+                    font-weight:$fw-regular;
                     letter-spacing:-0.0px;
                     color:#ccc;
                     margin-bottom:5px;
@@ -148,22 +194,33 @@ body.namespace-my.controller-tracks.action-show {
                     @include font-size(13, 16);
                     color:#ccc;
                     overflow:hidden;
-                    max-height:32px;
                     max-width:400px;
                 }
                 .topics {
-                    display:inline-block;
+                    display:block;
                     vertical-align:bottom;
                     max-width: 290px;
                     overflow: hidden;
                     max-height: 23px;
                     margin-bottom:0px;
 
+                    @include width-medium() {
+                        display:inline-block;
+                    }
+
                     .topic {
                         display:inline-block;
                         @include font-size(11, 11);
                         font-weight:$regular;
                         margin-left:10px;
+                        &:first-child {
+                            margin-left:0;
+                        }
+                        @include width-medium() {
+                            &:first-child {
+                                margin-left:10px;
+                            }
+                        }
                         background:#eee;
                         color:#999;
                         padding:3px 6px 4px;
@@ -210,7 +267,10 @@ body.namespace-my.controller-tracks.action-show {
                         border:2px solid #fff;
                     }
                     top:21px;
-                    left:-85px;
+                    left:-65px;
+                    @include width-medium() {
+                        left:-85px;
+                    }
                     width:55px;
                     height:55px;
                 }
@@ -229,7 +289,9 @@ body.namespace-my.controller-tracks.action-show {
                         color:$color-1;
                         &.completed-unmentored {
                             color:#bbb;
-                            text-align:right;
+                            @include width-medium() {
+                                text-align:right;
+                            }
                             .unmentored {
                                 margin-top:4px;
                                 @include font-size(9, 10);
@@ -274,22 +336,29 @@ body.namespace-my.controller-tracks.action-show {
                     position:absolute;
                     content: "";
                     top:-50px;
-                    left:-58px;
+                    left:-38px;
+                    @include width-medium() {
+                        left:-58px;
+                    }
                     height:92px;
                     width:2px;
                     background:$color-1;
+                    z-index:-1;
                 }
             }
             &.completed + .exercise-wrapper.completed,
             &.completed + .exercise-wrapper.in-progress {
                 &:before {
-                    margin-top: -200px;
-                    height: 300px;
+                    margin-top: -250px;
+                    height: 350px;
                 }
             }
         }
         .unlocked-exercises-section {
-            margin: 0 50px;
+            @include width-medium() {
+                margin-left:50px;
+                margin-right:50px;
+            }
             border: 1px solid rgba($color-2, 0.5);
             border-radius:2px;
             margin-bottom: 20px;
@@ -343,6 +412,10 @@ body.namespace-my.controller-tracks.action-show {
     }
     .side-exercises {
         .num-extra-exercises {
+            display:none;
+            @include width-medium() {
+                display:block;
+            }
             float:right;
             padding-top:5px;
             padding-right:25px;
@@ -353,14 +426,50 @@ body.namespace-my.controller-tracks.action-show {
         .filters {
             margin-bottom:20px;
             .widget-filter {
+                display:flex;
+                align-items:stretch;
+
+                margin-bottom:10px;
+
+                @include width-medium() {
+                    display:inline-block;
+                }
+
+                .title, .selectize-control {
+                    display:flex;
+                    @include width-medium() {
+                        display:inline-block;
+                    }
+
+                }
+                .title {
+                    width:120px;
+                }
+                &.difficulty {
+                    .selectize-control {
+                        width:100%;
+                        @include width-medium() {
+                            width:120px;
+                        }
+                        max-width:100%;
+                    }
+                }
                 &.topic {
                     .selectize-control {
-                        width:250px;
+                        width:100%;
+                        @include width-medium() {
+                            width:200px;
+                        }
+                        max-width:100%;
                     }
                 }
                 &.status {
                     .selectize-control {
-                        width:120px;
+                        width:100%;
+                        @include width-medium() {
+                            width:120px;
+                        }
+                        max-width:100%;
                     }
                 }
             }
@@ -380,12 +489,15 @@ body.namespace-my.controller-tracks.action-show {
         }
         .h2-subtitle {
             @include font-size(14, 14);
-            font-weight:$light;
+            font-weight:$fw-regular;
             color:#666;
             margin-bottom:35px;
         }
         .widget-side-exercise {
-            margin: 0 20px 20px 0;
+            margin: 0 0 20px 0;
+            @include width-medium() {
+                margin: 0 20px 20px 0;
+            }
         }
     }
 }

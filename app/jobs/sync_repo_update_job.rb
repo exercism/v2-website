@@ -15,17 +15,19 @@ class SyncRepoUpdateJob < ApplicationJob
   private
 
   def fetch_repo!(repo_update)
-    Git::FetchesRepo.fetch(repo_update.repo)
+    Git::FetchRepo.(repo_update.repo)
   end
 
   def sync_repo!(repo_update)
     case repo_update.slug
     when "website-copy"
-      Git::SyncsWebsiteCopy.()
+      Git::SyncWebsiteCopy.()
+    when "blog"
+      Git::SyncBlogPosts.()
     else
       track = Track.find_by(slug: repo_update.slug)
 
-      Git::SyncsTracks.sync([track]) if track
+      Git::SyncTracks.([track]) if track
     end
   end
 end

@@ -9,6 +9,13 @@
     position:relative;
     overflow:hidden;
 
+    .pure-u-1-6 {
+        display:none;
+        @media only screen and (min-width: 490px) {
+            display:block;
+        }
+    }
+
     img {
         display:block;
         width:100%;

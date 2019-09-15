@@ -1,6 +1,10 @@
 #teams-new-team-page.teams-page
+  .lo-general-header
+    .lo-container
+      %h1 Create a new team
+      .h1-subtitle Create a team for your friends, colleagues or bootcamp
+
   .lo-container
-    %h1 Create new team
     =form_for [:teams, @team] do |f|
       .field
         %h3 Team name:
@@ -8,8 +12,8 @@
 
       .logo-section
         .field
-          %h3 Change logo:
-          =f.file_field :logo
+          %h3 Choose avatar:
+          =f.file_field :avatar
 
       .field
         %h3 Invite team members:

@@ -1,0 +1,71 @@
+@import 'variables';
+@import 'mixins';
+
+.widget-solution-comment {
+    margin-bottom:20px;
+    overflow:hidden;
+    &.delete {
+        .avatar, .comment-body {
+            opacity:0.3;
+        }
+    }
+    &+.widget-solution-comment {
+        border-top:1px solid #eee;
+        padding-top:20px;
+    }
+    .avatar {
+        margin-right:3%;
+        float:left;
+        width:8%;
+        min-height:20px;
+        display:block;
+        border-radius:3px;
+        overflow:hidden;
+        img {
+            display:block;
+            width:100%;
+        }
+    }
+    .comment-body {
+        min-width:100px;
+        width:89%;
+        float:left;
+    }
+
+    .comment-header {
+        overflow:hidden;
+        margin-bottom:5px;
+        .user-handle {
+            display:inline-block;
+            color:#333;
+            font-weight:$regular;
+            margin-right:5px;
+            @include font-size(13, 13);
+            a {
+                color:#333;
+                font-weight:$bold;
+            }
+        }
+        .user-role {
+            display:inline-block;
+            background:#eee;
+            padding:2px 5px 3px 5px;
+            border-radius:2px;
+            @include font-size(11, 11);
+            color:#888;
+            font-weight:$regular;
+        }
+        .created-at {
+            margin-top:5px;
+            @include font-size(11, 13);
+            color:#999;
+            text-decoration:none;
+            border-bottom:1px solid #eee;
+            @include width-medium() {
+                float:right;
+                margin-top:0px;
+            }
+        }
+    }
+}
+

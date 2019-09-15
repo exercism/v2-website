@@ -1,5 +1,3 @@
-require "open_source"
-
 class API::Webhooks::ContributorsController < API::WebhooksController
   before_action :verify_github_webhook
 
@@ -24,25 +22,5 @@ class API::Webhooks::ContributorsController < API::WebhooksController
 
   def payload_params
     params.permit(:ref, sender: [:login, :id, :avatar_url], repository: [:default_branch])
-  end
-
-  def verify_github_webhook
-    payload = request.body.read
-    signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), secret, payload)
-    if !Rack::Utils.secure_compare(signature, github_signature)
-      render json: {error: 'invalid signature - delivery: %s' % github_delivery}, status: 500
-    end
-  end
-
-  def secret
-    Rails.application.secrets.github_webhook_secret
-  end
-
-  def github_signature
-    request.env['HTTP_X_HUB_SIGNATURE']
-  end
-
-  def github_delivery
-    request.headers['HTTP_X_GITHUB_DELIVERY']
   end
 end

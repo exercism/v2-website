@@ -17,20 +17,11 @@ class UserTest < ActiveSupport::TestCase
     create(:user_track,
            user: user,
            track: previously_joined,
-           archived_at: Date.new(2016, 12, 25))
-    create(:user_track, track: currently_joined, user: user, archived_at: nil)
+           paused_at: Date.new(2016, 12, 25))
+    create(:user_track, track: currently_joined, user: user, paused_at: nil)
 
     assert user.previously_joined_track?(previously_joined)
     refute user.previously_joined_track?(currently_joined)
-  end
-
-  test "mentor?" do
-    user = create :user
-    refute user.mentor?
-
-    create :track_mentorship, user: user
-    user.reload
-    assert user.mentor?
   end
 
   test "record cannot be saved without a handle" do
@@ -144,6 +135,9 @@ class UserTest < ActiveSupport::TestCase
     assert user.may_unlock_exercise?(side_exercise_without_unlock)
 
     user_track.update(independent_mode: true)
+
+    # Reset user to empty caches
+    user = User.find(user.id)
     assert user.may_unlock_exercise?(core_exercise)
     assert user.may_unlock_exercise?(side_exercise_with_unlock)
     assert user.may_unlock_exercise?(side_exercise_without_unlock)
@@ -171,14 +165,31 @@ class UserTest < ActiveSupport::TestCase
 
   test "destroying a user preserves discussions as a mentor and deletes discussions as a learner" do
     user = create(:user)
+
+    # Create other models to check user can be deleted properly
+    create(:user_email_log, user: user)
+    create(:profile, user: user)
+    create(:auth_token, user: user)
+
     mentor_post = create(:discussion_post, user: user)
     solution = create(:solution, user: user)
     iteration = create(:iteration, solution: solution)
+    iteration_analysis = create(:iteration_analysis, iteration: iteration)
     learner_post = create(:discussion_post, iteration: iteration, user: user)
+    blog_comment = create(:blog_comment, user: user)
+    solution_comment = create(:solution_comment, user: user)
+    solution_star = create(:solution_star, user: user)
+
+    create :team_membership, user: user
+    create :team_invitation, invited_by: user
 
     user.destroy
 
     refute DiscussionPost.exists?(learner_post.id)
+    refute BlogComment.exists?(blog_comment.id)
+    refute SolutionComment.exists?(solution_comment.id)
+    refute SolutionStar.exists?(solution_star.id)
+    refute IterationAnalysis.exists?(iteration_analysis.id)
     mentor_post.reload
     refute mentor_post.destroyed?
     assert_nil mentor_post.user
@@ -222,5 +233,124 @@ class UserTest < ActiveSupport::TestCase
 
     lock.update(locked_until: Time.current + 1.minute)
     assert user.has_active_lock_for_solution?(solution)
+  end
+
+  test "auth_token" do
+    user = create :user
+    t1 = create :auth_token, user: user, active: false
+    t2 = create :auth_token, user: user, active: true
+    t3 = create :auth_token, user: user, active: false
+
+    assert_equal t2.token, user.auth_token
+  end
+
+  test "create_auth_token!" do
+    user = create :user
+
+    user.create_auth_token!
+    token1 = user.auth_tokens.first
+
+    assert_equal 1, user.auth_tokens.size
+    assert token1.active?
+
+    user.create_auth_token!
+    token1.reload
+    token2 = user.auth_tokens.last
+
+    assert_equal 2, user.auth_tokens.size
+    refute token1.active?
+    assert token2.active?
+  end
+
+  test "num_rated_mentored_solutions" do
+    user = create :user
+    create :solution_mentorship, user: user
+    create :solution_mentorship, user: user, rating: 2
+    create :solution_mentorship, user: user, rating: 3
+
+    assert_equal 2, user.num_rated_mentored_solutions
+  end
+
+  test "User#system_user" do
+    other_user = create :user, id: 5
+    system_user = create :user, id: User::SYSTEM_USER_ID
+
+    assert_equal system_user, User.system_user
+  end
+
+
+  test "trimmed mentor_rating when 5% is under 0.5" do
+    user = create :user
+    assert_equal 0, user.mentor_rating
+
+    create :solution_mentorship, user: user, rating: 2
+    create :solution_mentorship, user: user, rating: 5
+    create :solution_mentorship, user: user, rating: 4
+    create :solution_mentorship, user: user, rating: nil
+
+    user = User.find(user.id) # Clear the cache
+    assert_equal 3.67, user.mentor_rating
+  end
+
+  test "trimmed mentor_rating with 20 solution memberships" do
+    user = create :user
+    assert_equal 0, user.mentor_rating
+
+    2.times do
+      create :solution_mentorship, user: user, rating: 1
+    end
+
+    5.times do
+      create :solution_mentorship, user: user, rating: 2
+    end
+
+    create :solution_mentorship, user: user, rating: 3
+
+    5.times do
+      create :solution_mentorship, user: user, rating: 4
+    end
+
+    7.times do
+      create :solution_mentorship, user: user, rating: 5
+    end
+
+    create :solution_mentorship, user: user, rating: nil
+
+    user = User.find(user.id) # Clear the cache
+    assert_equal 3.63, user.mentor_rating
+  end
+
+  test "trimmed mentor rating when no ratings are present" do
+    user = create :user
+    assert_equal 0, user.mentor_rating
+
+    user = User.find(user.id) # Clear the cache
+    assert_equal 0.0, user.mentor_rating
+  end
+
+  test "starred_solution?" do
+    user = create :user
+    solution = create :solution
+
+    refute user.starred_solution?(solution)
+
+    create :solution_star, user: user, solution: solution
+    assert user.reload.starred_solution?(solution)
+  end
+
+  test "communication preferences is created automatically" do
+    user = create(:user)
+
+    refute_nil user.communication_preferences
+  end
+
+  test "user is deleted when deleted_at is present" do
+    user = create(:user, deleted_at: Time.current)
+
+    assert user.deleted?
+
+    user.deleted_at = nil
+
+    refute user.deleted?
   end
 end

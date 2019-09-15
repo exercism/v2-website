@@ -21,6 +21,6 @@ class FetchRepoUpdateJob < ApplicationJob
   def perform(repo_update_id)
     repo_update = RepoUpdate.find(repo_update_id)
 
-    Git::FetchesRepos.fetch([repo_update.repo])
+    Git::FetchRepos.([repo_update.repo])
   end
 end

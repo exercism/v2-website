@@ -1,0 +1,83 @@
+@import 'variables';
+@import 'mixins';
+
+.editable-text {
+    .editable-text-viewer {
+        overflow:hidden;
+
+        .editable-text-html {
+            margin-bottom:17px;
+        }
+
+        .editable-text-options {
+            float:right;
+            @include font-size(12, 12);
+            color: #999;
+            a {
+                color: #999;
+                font-weight:$regular;
+                text-decoration: underline;
+                &:hover {
+                    color:#666;
+                }
+            }
+        }
+
+        .edited-status {
+            float:left;
+            color: #999;
+            @include font-size(11, 13);
+        }
+
+        .deleted-status {
+            font-style: italic;
+            margin-top:5px;
+            @include font-size(13, 15);
+        }
+    }
+
+    &.editing {
+        .editable-text-viewer {
+            display: none;
+        }
+
+        .editable-text-editor {
+            display: block;
+        }
+    }
+
+    .editable-text-editor {
+        margin-top:10px;
+        display: none;
+
+        .buttons {
+            text-align:right;
+            margin-top:10px;
+            .update-button {
+                border: 1px solid $color-2;
+                background: $color-2;
+                color: #fff;
+                padding:7px 25px;
+                width:100%;
+                margin-bottom:10px;
+                @include width-small() {
+                    width:auto;
+                    margin-bottom:0;
+                }
+            }
+            .cancel-button {
+                background:#fff;
+                border:1px solid #ccc;
+                color:#999;
+                width:100%;
+                @include width-small() {
+                    width:auto;
+                }
+            }
+        }
+
+        .pure-button {
+            text-decoration: none !important;
+        }
+    }
+}

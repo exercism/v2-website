@@ -2,9 +2,7 @@
   #nav.lo-nav-bar
     .lo-container
       =link_to "Home", root_path
-      =nav_divider
       =link_to "The Exercism team", team_page_path
-      =nav_divider
       %span Our contributors
   =render "header"
 
@@ -15,5 +13,5 @@
       .lo-container
         .pure-g
           -@maintainers.each do |maintainer|
-            .pure-u-1-2.maintainer-wrapper= maintainer_widget(maintainer)
+            .pure-u-1.pure-u-md-1-2.maintainer-wrapper= maintainer_widget(maintainer)
         =paginate(@maintainers)

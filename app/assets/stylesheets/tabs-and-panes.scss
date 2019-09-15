@@ -4,16 +4,24 @@
 .tabs-and-panes {
     &>.tabs {
         border-bottom:1px solid #ddd;
-        padding-left:10px;
+        padding-left:5px;
+        margin-bottom:20px;
+        @include width-small() {
+            padding-left:10px;
+        }
         .tab {
-            padding:6px 20px;
+            padding:6px 10px;
             text-align:center;
             cursor:pointer;
             display:inline-block;
             margin-bottom:-1px;
 
-            @include font-size(14, 14);
-            font-weight:$light;
+            @include font-size(12, 12);
+            @include width-small() {
+                @include font-size(14, 14);
+                padding:6px 20px;
+            }
+            font-weight:$fw-regular;
             color:#999;
             border:solid #fff;
             border-width:2px 1px 1px 1px;
@@ -22,7 +30,6 @@
     }
     &>.panes {
         //overflow:scroll;
-        margin-top:20px;
         .pane {
             display:none;
         }

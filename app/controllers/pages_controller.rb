@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :redirect_if_signed_in!, only: [:index]
+  skip_before_action :store_location
 
   PAGES = {
     "Terms of Service": :terms_of_service,
@@ -10,13 +11,13 @@ class PagesController < ApplicationController
     "Exercism's Values": :values,
     "About Exercism": :about,
     "Getting Started": :getting_started,
-    "Become a Mentor": :become_a_mentor,
     "Become a Maintainer": :become_a_maintainer,
     "Report Abuse": :report_abuse,
     "Contact": :contact,
     "Contribute": :contribute,
     "Mentored Mode vs Independent Mode": :mentored_mode_vs_independent_mode,
 
+    "Strategy": :strategy,
     "Roadmap": :roadmap,
     "Changelog": :changelog,
 
@@ -29,21 +30,31 @@ class PagesController < ApplicationController
     "Migrating to the new CLI": :cli_v1_to_v2,
   }
 
+  HELP_PAGES = {
+    "Automated solution analysis": :automated_solution_analysis,
+    "How do mentor queues work?": :how_do_mentor_queues_work
+  }
+
   LICENCES = {
     "MIT": :mit,
     "CC-BY-SA-4.0": :cc_sa_4
   }
 
-  PAGES.merge(LICENCES).each do |title, page|
-    define_method page do
-      p Git::WebsiteContent.head.pages
-      markdown = Git::WebsiteContent.head.pages["#{page}.md"] || ""
-      @page = page
-      @page_title = title
-      @content = ParseMarkdown.(markdown.to_s)
-      render action: "generic"
+  PAGE_GENERATOR = -> (pages, repo_location) do
+    pages.each do |title, page|
+      define_method page do
+        markdown = Git::WebsiteContent.head.send(repo_location)["#{page}.md"] || ""
+        @page = page
+        @page_title = title
+        @content = ParseMarkdown.(markdown.to_s)
+        render action: "generic"
+      end
     end
   end
+
+  PAGE_GENERATOR.(PAGES, :pages)
+  PAGE_GENERATOR.(LICENCES, :licences)
+  PAGE_GENERATOR.(HELP_PAGES, :pages)
 
   # Landing page
   def index

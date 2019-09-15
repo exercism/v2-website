@@ -1,0 +1,63 @@
+@import 'variables';
+@import 'mixins';
+
+#modal-wrapper #modal.decide-allow-comments {
+    padding:50px 15px 50px 15px;
+    @include width-small() {
+        padding:50px 50px 50px 50px;
+    }
+    @include width-medium() {
+        max-width:480px;
+    }
+    img {
+        display:block;
+        width:100px;
+        margin: 0 auto 15px auto;
+    }
+    h2 {
+        @include font-size(20, 20);
+        font-weight:$regular;
+        color:#555;
+        margin-bottom:15px;
+        text-align:center;
+    }
+    p {
+        text-align:center;
+        color:#555;
+        @include font-size(14, 20);
+        margin-bottom:10px;
+    }
+    .buttons {
+        margin-top:20px;
+    }
+    .pure-button {
+        margin: 0 auto;
+
+        display:inline-block;
+        width:auto;
+        border:1px solid $color-1;
+        padding: 10px 13px;
+        font-weight:$regular;
+
+        &.yes-button {
+            width:100%;
+            margin-bottom:15px;
+            background:$color-1;
+            @include width-medium() {
+                width:63%;
+                margin-bottom:0;
+            }
+        }
+        &.no-button {
+            border:1px solid $color-1;
+            background:#fff;
+            color:$color-1;
+            font-weight:$fw-regular;
+            width:100%;
+            @include width-medium() {
+                width:35%;
+            }
+        }
+    }
+}
+

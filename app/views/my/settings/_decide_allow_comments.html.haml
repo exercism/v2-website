@@ -1,0 +1,8 @@
+=graphical_image("icon.png")
+.main-section
+  %h2 Do you want to allow comments?
+  %p Hello. We have added the ability for people to comment on your published solutions. You can choose whether you want to turn this feature on or off on a per-exercise basis, and we've also added a global default for you to use, which you can find in your settings.
+  %p Would you like to let other people comment on your existing published solutions?
+  .buttons
+    =link_to "Yes - allow comments", set_default_allow_comments_my_settings_path(allow_comments: true, update_solutions: true), method: :patch, remote: true, class: 'pure-button yes-button'
+    =link_to "No thanks", set_default_allow_comments_my_settings_path(allow_comments: false, update_solutions: true),  method: :patch, remote: true, class: "pure-button no-button"

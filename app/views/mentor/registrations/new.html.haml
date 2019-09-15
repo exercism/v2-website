@@ -1,0 +1,36 @@
+#mentor-registration-page
+  .lo-container
+    .pure-g
+      .pure-u-1.pure-u-md-3-5.lhs
+        %h1 Become an Exercism mentor
+
+        - if @errors.any?
+          #errors
+            - @errors.full_messages.each do |error|
+              %div= error
+
+        =form_tag [:mentor, :registrations], method: :post do
+          .section
+            %h2 It's great to see you here.
+            %p We're really excited that you want to become a mentor on Exercism. Thank you!
+            %p Our mentors help guide others through a language track offering feedback and encouraging people to think critically about their code. It is crucial to Exercism that our mentors share our vision and care passionately about delivering feedback empathetically and that Exercism remains a comfortable and friendly learning environment.
+
+          .section
+            %h2 Our Code of Conduct
+            %p
+              Our
+              #{link_to "Code of conduct", code_of_conduct_page_path, target: "_blank"}
+              asks that you behave in a kind, patient, and empathetic way towards others on Exercism. This is especially important for mentors, so we ask everyone to reaffirm this commitment when becoming a mentor.
+              .field
+                =label_tag :accept_code_of_conduct do
+                  =check_box_tag :accept_code_of_conduct, '', false, required: true
+                  .text Agree to our Code of Conduct
+
+          .section
+            %h2 Your language
+            %p Mentors can help on as many tracks as they line, but we ask that people choose one to get started with in order to familiarise yourself with the process.
+            %p Which language would you like to mentor?
+            =select_tag :track_id, options_for_select(@tracks), required: true
+
+          =button_tag "Become a mentor", class: 'pure-button'
+      .pure-u-1.pure-u-md-2-5.rhs= code_person_widget

@@ -31,7 +31,7 @@ class Track < ApplicationRecord
 
   def introduction
     i = super
-    i.present?? i : "TODO: The maintainers have not provided a description for this track."
+    i.present?? i : "TODO: The maintainers have not provided an introduction for this track."
   end
 
   def about

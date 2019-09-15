@@ -2,9 +2,7 @@
   #nav.lo-nav-bar
     .lo-container
       /=link_to "Dashboard", root_path
-      /=nav_divider
       =link_to "Language tracks", [:my, :tracks]
-      =nav_divider
       %span #{@track.title} Track
 
   .header
@@ -18,15 +16,15 @@
           -else
             Track in progress
     .lo-container
+      .title
+        %h1 #{@track.title} Track
+        .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
+
       .stats
         .stat= pluralize @track.exercises.active.count, "Exercise"
         .stat #{number_with_delimiter(@track.user_tracks.count)} Students
         .stat= link_to pluralize(@track.mentors.count, "Mentors"), track_mentors_path(@track)
         .stat= link_to pluralize(@track.maintainers.count, "Maintainers"), track_maintainers_path(@track)
-
-      .title
-        %h1 #{@track.title} Track
-        .h1-subtitle Joined on #{@user_track.created_at.strftime("#{@user_track.created_at.day.ordinalize} %B %Y")}
 
   -if @user_track.independent_mode?
     =render "show_independent_mode"
@@ -56,11 +54,12 @@
       });
       submitOnChange($('.side_exercises_form select'))
 
--content_for :js do
-  :javascript
-    $('.leave-track-btn').click(function() {
-      showModal("leave-track", "#{j(render "leave_track_modal", track: @track)}")
-    })
+- ['leave', 'pause'].each do |action|
+  -content_for :js do
+    :javascript
+      $('.#{action}-track-btn').click(function() {
+        showModal("#{action}-track", "#{j(render "#{action}_track_modal", track: @track)}")
+      })
 
 -if @user_track.independent_mode?
   -content_for :js do
@@ -74,3 +73,8 @@
       $('.change-to-independent-btn').click(function() {
         showModal("change-to-independent-mode", "#{j(render "change_to_independent_mode_modal", track: @track)}")
       })
+
+-if @user_track.paused?
+  -content_for :js do
+    :javascript
+      showModal('unpause-track', '#{j render "paused_modal"}')

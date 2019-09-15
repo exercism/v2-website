@@ -1,6 +1,6 @@
 var newPost = '#{j discussion_post_widget(@post, @solution, @user_track)}';
 $('.discussion .posts').show().append(newPost)
-#{yield(:js).gsub(/<\/?script>/, "")}
+=raw yield(:js).gsub(/<\/?script>/, "")
 
 $('.pass-button').remove()
 
@@ -9,5 +9,8 @@ $('.pass-button').remove()
   $('.approve-button').remove()
   $('.approve-and-comment-button').remove()
   $('.leave-button').remove()
+-else
+  $('.approve-button').attr({'disabled': false}).show()
+  $('.approve-and-comment-button').hide()
 
 window.location.href = "#discussion-post-#{@post.id}"

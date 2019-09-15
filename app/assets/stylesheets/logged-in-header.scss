@@ -27,6 +27,7 @@ header.logged-in {
     .misc-menu {
         position:relative;
         cursor:pointer;
+        outline-style: none;
 
         &:hover, &:focus {
             .dropdown {
@@ -68,7 +69,7 @@ header.logged-in {
             box-shadow: 0 0 3px rgba(#000, 0.2);
             border-radius:3px;
             padding-bottom:6px;
-            max-width:175px;
+            max-width:215px;
             i {
                 position:absolute;
                 top:-14px;
@@ -89,7 +90,7 @@ header.logged-in {
 
             .person {
                 cursor:default;
-                padding:14px 20px 6px;
+                padding:14px 20px 12px;
                 color:#666;
                 @include font-size(13, 17);
                 font-weight:$regular;
@@ -97,6 +98,17 @@ header.logged-in {
                     font-weight:$bold;
                 }
             }
+            ul{
+                list-style: none;
+                border-top: 1px solid #eee;
+                padding: 6px 0;
+                margin: 0;
+
+                &:last-child{
+                    padding-bottom: 0;
+                }
+            }
+
             a {
                 display:block;
                 padding:8px 20px;
@@ -108,18 +120,13 @@ header.logged-in {
                     background:#eee;
                 }
             }
-            .hr {
-                height:1px;
-                margin:6px 0px;
-                background:#eee;
-            }
         }
     }
     .notifications {
         color:rgba(#fff, 0.9);
         padding:7px 10px;
         position:relative;
-        margin:10px 0;
+        margin:10px 0 15px 0;
         background:rgba(#fff, 0.06);
         border-radius:2px;
         color:#bababa;

@@ -17,7 +17,10 @@
         }
     }
     .lhs {
-        padding-right:40px;
+        padding-right:0;
+        @include width-large() {
+            padding-right:40px;
+        }
     }
     .changes, .links {
         margin-top:50px;
@@ -28,7 +31,7 @@
     h2,
     h3 {
         @include font-size(18, 18);
-        font-weight:$regular;
+        font-weight:$fw-bold;
         margin:30px 0 10px 0;
         &:first-child {
             margin-top:0px;
@@ -36,7 +39,7 @@
     }
     h4 {
         font-size: 15px;
-        font-weight: 500;
+        font-weight:$fw-bold;
         margin-bottom: 5px;
         text-decoration: underline;
     }
@@ -64,7 +67,6 @@
         }
     }
     pre {
-        background: #f6f6f6;
         border: 1px solid #ddd;
         border-radius: 3px;
     }
@@ -77,10 +79,16 @@
             right:50px;
             width:150px;
         }
+        display:none;
+        @include width-large() {
+            display:block;
+        }
     }
 
 
-    &.roadmap {
+    &.roadmap,
+    &.strategy,
+    &.faqs {
         h2 {
             @include font-size(20, 20);
         }

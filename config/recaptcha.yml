@@ -1,0 +1,6 @@
+development:
+  site_key: 6LeqSrUUAAAAAOkCu13JbNnjoyf_i-mSWypA8Sxv
+  secret_key: 6LeqSrUUAAAAAJ5B41-vH_3Qcn_LsDC6w1N97DaT
+test:
+  site_key: SITE_KEY
+  secret_key: SECRET_KEY

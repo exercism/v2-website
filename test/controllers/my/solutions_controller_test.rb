@@ -10,11 +10,25 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     )
 
     @mock_repo = stub(exercise: @mock_exercise)
+    @mock_repo = stub(head: "")
     Git::Exercise.stubs(new: @mock_exercise)
     Git::ExercismRepo.stubs(new: @mock_repo)
     Git::ExercismRepo::PAGES.each do |page|
       @mock_repo.stubs("#{page}_present?", false)
     end
+  end
+
+  test "404s with invalid solution uuid" do
+    sign_in!
+    get my_solution_url("1234")
+    assert_response :missing
+  end
+
+  test "301s with someone else's solution uuid" do
+    sign_in!
+    solution = create :solution
+    get my_solution_url(solution.uuid)
+    assert_redirected_to solution_url(solution)
   end
 
   {
@@ -34,19 +48,42 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       assert_correct_page page
     end
   end
-    test "clears notifications" do
-      sign_in!
-      solution = create :solution, user: @current_user
-      iteration = create :iteration, solution: solution
-      create :user_track, user: @current_user, track: solution.exercise.track
 
-      ClearNotifications.expects(:call).with(@current_user, solution)
-      ClearNotifications.expects(:call).with(@current_user, iteration)
+  test "clears notifications" do
+    sign_in!
+    solution = create :solution, user: @current_user
+    iteration = create :iteration, solution: solution
+    create :user_track, user: @current_user, track: solution.exercise.track
 
-      get my_solution_url(solution)
-    end
+    ClearNotifications.expects(:call).with(@current_user, solution)
+    ClearNotifications.expects(:call).with(@current_user, iteration)
+
+    get my_solution_url(solution)
+  end
 
   test "reflects properly" do
+    sign_in!
+    track = create :track
+    user_track = create :user_track, track: track, user: @current_user
+
+    exercise = create :exercise, core: true, track: track
+    solution = create :solution, user: @current_user, exercise: exercise
+    iteration = create :iteration, solution: solution
+    reflection = "foobar"
+
+    # Create next core exercise for user
+    next_exercise = create :exercise, track: exercise.track, position: 2, core: true
+    create :solution, user: @current_user, exercise: next_exercise
+
+    patch reflect_my_solution_url(solution), params: { reflection: reflection }
+
+    assert_response :success
+
+    solution.reload
+    assert_equal solution.reflection, reflection
+  end
+
+  test "rate mentors properly" do
     sign_in!
     track = create :track
     user_track = create :user_track, track: track, user: @current_user
@@ -57,7 +94,6 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     discussion_post_1 = create :discussion_post, iteration: iteration
     discussion_post_2 = create :discussion_post, iteration: iteration
     discussion_post_3 = create :discussion_post, iteration: iteration
-    reflection = "foobar"
 
     create :solution_mentorship, solution: solution, user: discussion_post_1.user
     create :solution_mentorship, solution: solution, user: discussion_post_3.user
@@ -66,8 +102,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     next_exercise = create :exercise, track: exercise.track, position: 2, core: true
     create :solution, user: @current_user, exercise: next_exercise
 
-    patch reflect_my_solution_url(solution), params: {
-      reflection: reflection,
+    patch rate_mentors_my_solution_url(solution), params: {
       mentor_reviews: {
         discussion_post_1.user_id => { rating: 3, review: "asdasd" },
         discussion_post_3.user_id => { rating: 2, review: "asdaqweqwewqewq" }
@@ -77,7 +112,6 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     solution.reload
-    assert_equal solution.reflection, reflection
     assert_equal 2, SolutionMentorship.where.not(rating: nil).count
   end
 
@@ -86,7 +120,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
       sign_in!
       solution = create :solution, user: @current_user
 
-      SwitchSolutionToMentoredMode.expects(:call).with(solution)
+      RequestMentoringOnSolution.expects(:call).with(solution)
 
       patch request_mentoring_my_solution_url(solution.uuid)
       assert_redirected_to my_solution_url(solution.uuid)
@@ -95,6 +129,23 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
 
   test "reflects without next core exercise" do
     skip
+  end
+
+  test "updates exercise correctly" do
+    sign_in!
+
+    sha = SecureRandom.uuid
+    slug = "foobar"
+    Solution.any_instance.expects(:track_head).returns(sha)
+    exercise = create :exercise, slug: slug
+    solution = create :solution, user: @current_user, git_slug: "meh", exercise: exercise
+
+    patch update_exercise_my_solution_url(solution.uuid)
+    assert_redirected_to my_solution_path(solution)
+
+    solution.reload
+    assert_equal slug, solution.git_slug
+    assert_equal sha, solution.git_sha
   end
 
   def create_unlocked_solution

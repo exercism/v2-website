@@ -4,16 +4,30 @@
 
   .lo-container
     .pure-g
-      .pure-u-14-24.lhs
+      .pure-u-1.pure-u-md-14-24.lhs
         .instructions
           %h2 Introduction
-          .rendered= raw @solution.exercise.description
+          .rendered= raw @solution.instructions
 
-      .pure-u-10-24.rhs
+      .pure-u-1.pure-u-md-10-24.rhs
         .newbie
           %h3 Get started
           %p We've created a step-by-step set of instructions to help you quickly install Exercism and get started, so you can start learning.
           =link_to "Begin walk-through", walkthrough_my_solution_path(@solution), remote: true, class: 'pure-button'
         .experienced
-          %h3 Been here before?
-          =render "widgets/code_snippet", code: @exercise.download_command
+          .step
+            %h3 1. Download
+            =render "widgets/code_snippet", code: @exercise.download_command(team: @team)
+
+          .step
+            %h3 2. Solve
+            %p Use your code editor to solve the problem locally.
+
+          .step
+            %h3 3. Submit
+            =render "widgets/code_snippet", code: @exercise.submit_command
+
+        .page-links
+          %h3 Still stuck?
+          %p These guides should help you.
+          =render "track_pages/links", track: @exercise.track, target: "_blank"

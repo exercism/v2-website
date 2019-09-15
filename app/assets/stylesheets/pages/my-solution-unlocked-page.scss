@@ -8,11 +8,17 @@
     }
 
     .lhs {
-        padding-right:60px;
+        @include width-medium() {
+            padding-right:60px;
+        }
     }
     .rhs {
-        padding-left:60px;
-        border-left:1px solid #e5e5e5;
+        margin-top:15px;
+        @include width-medium() {
+            margin-top:0;
+            padding-left:60px;
+            border-left:1px solid #e5e5e5;
+        }
     }
 
     .instructions {
@@ -49,19 +55,12 @@
             p+h2 {
                 margin-top:20px;
             }
-            pre {
-                margin-bottom:10px;
-                background:#f6f6f6;
-            }
-            code {
-                @include font-size(12, 12);
-                color:#666;
-            }
             a {
                 color:#333;
                 text-decoration:none;
                 border-bottom:1px solid #ccc;
-                font-weight:$light;
+                font-weight:$fw-regular;
+                word-wrap:break-word;
             }
             li {
                 margin-bottom: 4px;
@@ -90,7 +89,7 @@
             margin-bottom:6px;
         }
         .widget-code-snippet input {
-            width:287px;
+            width:90%;
         }
         .step {
             margin-bottom:20px;
@@ -146,5 +145,19 @@
             margin-bottom:0;
         }
     }
+}
 
+body:not(.prism-dark) #my-solution-unlocked-page {
+    .instructions {
+        .rendered {
+            pre {
+                margin-bottom:10px;
+                background:#f6f6f6;
+            }
+            code {
+                @include font-size(12, 12);
+                color:#666;
+            }
+        }
+    }
 }

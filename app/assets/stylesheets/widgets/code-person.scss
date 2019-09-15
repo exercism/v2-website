@@ -1,14 +1,22 @@
 #widget-code-person {
-    height:490px;
-    width:550px;
+    max-height:490px;
+    max-width:550px;
+    height:100%;
+    width:100%;
     background-image:image-url('code-background.png');
     background-repeat:no-repeat;
-    background-size:cover;
+    background-size:contain;
+    background-position:center;
     position:relative;
     img {
         position:absolute;
         bottom:0;
         right:100px;
-        width:300px;
+        max-width:300px;
+        max-height:60%;
+        margin-left:auto;
+        margin-right:auto;
+        left:0;
+        right:0;
     }
 }

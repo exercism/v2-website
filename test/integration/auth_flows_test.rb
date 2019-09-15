@@ -3,7 +3,7 @@ require 'test_helper'
 class AuthFlowsTest < ActionDispatch::IntegrationTest
   test "password log in respects page you were on" do
     password = "foobar"
-    user = create :user, password: password
+    user = create :user, :onboarded, password: password
     user.confirm
 
     Track.any_instance.stubs(repo: repo_mock)
@@ -37,7 +37,7 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
   test "oauth log in respects page you were on" do
     provider = "foobar"
     uid = "12321321"
-    user = create :user, provider: provider, uid: uid
+    user = create :user, :onboarded, provider: provider, uid: uid
     user.confirm
 
     Track.any_instance.stubs(repo: repo_mock)
@@ -67,16 +67,26 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     get track_path(track)
     assert_response :success
 
+    handle = SecureRandom.uuid
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
       provider: provider, uid: uid,
       info: {
-        nickname: SecureRandom.uuid, email: "#{SecureRandom.uuid}@erwerew.com", name: "qwe asd", image: "http://a.com/j.jpg"
+        nickname: handle, email: "#{SecureRandom.uuid}@erwerew.com", name: "qwe asd", image: "http://a.com/j.jpg"
       }
     })
 
     post user_github_omniauth_callback_path
 
     assert_redirected_to track_path(track)
+    assert_response :redirect
+    follow_redirect!
+
+    assert_redirected_to onboarding_path
+    assert_response :redirect
+    follow_redirect!
+
+    User.find_by_handle!(handle).update!(accepted_terms_at: Time.current, accepted_privacy_policy_at: Time.current)
+    get onboarding_path
     assert_response :redirect
     follow_redirect!
 
@@ -120,16 +130,25 @@ class AuthFlowsTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
 
+    handle = SecureRandom.uuid
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
       provider: provider, uid: uid,
       info: {
-        nickname: SecureRandom.uuid, email: email, name: "qwe asd", image: "http://a.com/j.jpg"
+        nickname: handle, email: email, name: "qwe asd", image: "http://a.com/j.jpg"
       }
     })
 
     post user_github_omniauth_callback_path
-
     assert_redirected_to track_path(track)
+    assert_response :redirect
+    follow_redirect!
+
+    assert_redirected_to onboarding_path
+    assert_response :redirect
+    follow_redirect!
+
+    User.find_by_handle!(handle).update!(accepted_terms_at: Time.current, accepted_privacy_policy_at: Time.current)
+    get onboarding_path
     assert_response :redirect
     follow_redirect!
 

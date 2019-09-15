@@ -1,4 +1,16 @@
 .approved-section
   .title ↳ Solution approved!
-  %p Your solution has been approved by a mentor. Congratulations! You can now complete the exercise and move forward on the track.
-  =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved"
+  -if @solution.approved_by_id == User::SYSTEM_USER_ID
+    %p
+      Your solution has been approved by our automated #{@solution.track.title} analyser.
+      Congratulations! You can now complete the exercise and move forward on the track.
+    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved js-disable-on-click"
+    %p
+      Something wrong with this approval or want to speak to a mentor instead?
+      #{link_to "Request mentor feedback", request_mentoring_my_solution_path(@solution), method: :patch}.
+
+  -else
+    %p
+      Your solution has been approved by a mentor.
+      Congratulations! You can now complete the exercise and move forward on the track.
+    =link_to "Complete Exercise", [:complete, :my, @solution], method: :patch, remote: true, class: "pure-button complete-button approved js-disable-on-click"

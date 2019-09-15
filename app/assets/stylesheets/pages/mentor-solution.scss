@@ -6,7 +6,6 @@
         overflow:hidden;
         background:$color-1;
         padding:20px 0;
-        margin-bottom:40px;
         img {
             float:left;
             margin-right:15px;
@@ -17,8 +16,23 @@
         }
         .inner {
             color:#fff;
-            .widget-iterations-nav {
+            > .widget-iterations-nav {
                 float:right;
+                display:none;
+                @include width-small() {
+                    display:block;
+                }
+            }
+            .small-iterations-nav {
+                @include width-small() {
+                    display:none;
+                }
+                margin-top: 20px;
+                .widget-iterations-nav {
+                    .title, .iterations {
+                        text-align:left;
+                    }
+                }
             }
             h2 {
                 @include font-size(22, 22);
@@ -38,65 +52,116 @@
         }
     }
 
-    .notifications-bar {
+    .tools-bar {
         overflow:hidden;
-        margin-bottom:40px;
-        .community-solutions {
-            float:right;
-            border:1px solid #ddd;
-            border-radius:2px;
+        margin-bottom:20px;
+        background:rgba($color-1, 0.70);
+        border:1px solid rgba($color-1, 0.8);
+        padding:8px 0;
+        @include width-medium() {
+            margin-bottom:40px;
+        }
+        .mentoring-notes {
+            @include width-medium() {
+                float:right;
+            }
+            padding:6px 10px;
             background:#fff;
-            color:#aaa;
-            @include font-size(12, 12);
+            color:$color-1;
             font-weight:$regular;
-            padding:9px 20px;
-
-            i {
-                margin-right:3px;
+            &:hover {
+                background: rgba(#fff, 0.9);
             }
         }
         .notification {
-            margin-right:190px;
-            background:rgba($color-1, 0.05);
-            @include font-size(13, 13);
-            padding:8px 20px;
-            border:1px solid rgba($color-1, 0.2);
-            border-radius:2px;
+            color:#fff;
             font-weight:$regular;
-            color:$color-1;
-            a {
-                margin-left:3px;
-                color:#333;
+            vertical-align:middle;
+            .ignore {
+                font-weight:$regular;
+                color:#fff;
+                text-decoration:underline;
+                background: #fff;
+                padding: 6px 10px;
+                color: $color-1;
+                text-decoration: none;
+                vertical-align: baseline;
+                margin-left: 5px;
             }
+        }
+    }
+    .analysis-section {
+        border:1px solid $color-1;
+        margin-bottom:20px;
+        h3 {
+            background:$color-1;
+            color:#fff;
+            padding:15px;
             i {
-                @include font-size(14, 14);
-                color:$color-1;
-                margin-right:5px;
+                color:#fff;
+                margin-left:5px;
             }
-            &.action {
-                border-color:$color-1;
+        }
+        .recommendation {
+            padding:10px 15px;
+            border-bottom:1px solid #aaa;
+            font-weight:$fw-semibold;
+        }
+
+        .comments {
+            h4 {
+                font-weight:$fw-bold;
+                padding:15px;
+            }
+            .comment.widget-code-snippet {
+                position: relative;
+                border-width:0 0 1px 0;
+                border-color: #ccc;
+                overflow: hidden;
+                background:#fcfcfc;
+                padding: 10px 15px;
+                textarea {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 5px;
+                    height:5px;
+                    z-index:5
+                }
+                .copy-button {
+                    z-index:10;
+                }
+                .editable-text-html {
+                    padding-right:65px;
+                    margin-bottom:0;
+                   * {
+                        @include font-size(14, 19);
+                    }
+                    code { &, * { font-size:12px; } }
+
+                }
+                &:last-child {
+                    border-width:0;
+                }
             }
         }
     }
     .discussion,
-    .new-discussion-post {
+    .new-editable-text {
         h3 {
             padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:20px;
 
-            font-weight:400;
+            font-weight:$regular;
             color:#333;
         }
-        .pane.markdown,
-        .pane.preview {
-            padding:0;
-        }
+
         .posts {
             //margin-bottom:40px;
         }
     }
-    .new-discussion-post {
+    .new-editable-text {
         .approved {
             color:$color-1;
             padding-top:17px;
@@ -141,26 +206,30 @@
         clear:both;
         padding-top:15px;
         h3 {
-            font-weight:400;
+            font-weight:$regular;
             color:#333;
             padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:10px;
-        } 
+        }
         p {
             margin-bottom:10px;
             @include font-size(14, 19);
         }
         .pure-button {
             background:$color-1;
+            color:#fff;
             margin-bottom:15px;
+            &.mentor-button {
+                margin-bottom:30px;
+            }
         }
         .force {
             display:none;
             p {
                 strong {
                     color:red;
-                    font-weight:400;
+                    font-weight:$regular;
                 }
             }
 
@@ -181,12 +250,12 @@
         clear:both;
         padding-top:15px;
         h3 {
-            font-weight:400;
+            font-weight:$regular;
             color:#333;
             padding:7px 0;
             border-bottom:1px solid #ddd;
             margin-bottom:10px;
-        } 
+        }
         p {
             margin-bottom:10px;
             @include font-size(14, 19);
