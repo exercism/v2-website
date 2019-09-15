@@ -8,6 +8,8 @@ class CreateSubmissions < ActiveRecord::Migration[5.2]
 
       t.index [:tested, :id]
       t.index [:solution_id, :id]
+
+      t.foreign_key :solutions
     end
   end
 end
