@@ -1,0 +1,10 @@
+- return unless current_user.admin? || current_user.is_mentor? || allowed_to_mentor?
+
+%ul
+  -if current_user.admin?
+    %li= link_to "Admin dashboard", [:admin, :dashboard]
+
+  -if current_user.is_mentor?
+    %li= link_to "Mentor dashboard", [:mentor, :dashboard]
+  -elsif allowed_to_mentor?
+    %li= link_to "Become a mentor", become_a_mentor_path
