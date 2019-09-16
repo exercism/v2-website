@@ -4,8 +4,8 @@ class CreateSolutionCommentTest < ActiveSupport::TestCase
   test "creates correctly" do
     solution = create :solution
     user = create :user
-    content = "foobar"
-    html = "<p>foobar</p>"
+    content = "[Some link](http://example.com)"
+    html = %q{<p><a href="http://example.com" target="_blank" rel="nofollow">Some link</a></p>}
 
     comment = CreateSolutionComment.(solution, user, content)
 

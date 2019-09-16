@@ -24,6 +24,5 @@ module AnalysisServices
 
       text + "\n\n---\n\n"
     end
-
   end
 end

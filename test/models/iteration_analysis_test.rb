@@ -1,26 +1,18 @@
 require 'test_helper'
 
 class IterationAnalysisTest < ActiveSupport::TestCase
-  test "succeeded?" do
-    assert create(:iteration_analysis, status: :success).succeeded?
-    assert create(:iteration_analysis, status: 'success').succeeded?
-    refute create(:iteration_analysis, status: :failed).succeeded?
-    refute create(:iteration_analysis, status: :foobar).succeeded?
-  end
-
   test "analysis_status" do
-    assert_equal :approve, create(:iteration_analysis, analysis: {status: "approve"}).analysis_status
-    assert_equal :approve, create(:iteration_analysis, analysis: {'status' => "approve"}).analysis_status
-    assert_equal :approve, create(:iteration_analysis, analysis: {status: :approve}).analysis_status
-    assert_equal :approve, create(:iteration_analysis, analysis: {'status' => :approve}).analysis_status
+    assert_equal :approve, create(:iteration_analysis, analysis_status: "approve").analysis_status
+    assert_equal :approve, create(:iteration_analysis, analysis_status: :approve).analysis_status
     assert_nil create(:iteration_analysis, analysis: {}).analysis_status
   end
 
   test "handled?" do
-    assert create(:iteration_analysis, analysis: {'status' => :approve}).handled?
-    assert create(:iteration_analysis, analysis: {'status' => :approve_as_optimal}).handled?
-    assert create(:iteration_analysis, analysis: {'status' => :disapprove}).handled?
-    refute create(:iteration_analysis, analysis: {'status' => :refer_to_mentor}).handled?
+    assert create(:iteration_analysis, analysis_status: :approve).handled?
+    assert create(:iteration_analysis, analysis_status: :approve_as_optimal).handled?
+    assert create(:iteration_analysis, analysis_status: :disapprove).handled?
+    refute create(:iteration_analysis, analysis_status: :refer_to_mentor).handled?
+    refute create(:iteration_analysis, ops_status: :failed, analysis_status: :approve).handled?
   end
 
   test "analysis" do

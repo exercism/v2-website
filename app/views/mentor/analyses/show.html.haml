@@ -21,8 +21,11 @@
       %h2 Exercise
       #{@analysis.iteration.solution.exercise.title}
     .status
+      %h2 Ops Status
+      #{@analysis.ops_status.titleize}
+    .status
       %h2 Analysis Status
-      #{@analysis.status.titleize}
+      #{@analysis.analysis_status.to_s.titleize}
 
     .analysis
       %h2 Analysis

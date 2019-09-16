@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_023937) do
+ActiveRecord::Schema.define(version: 2019_09_14_172448) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -191,11 +191,12 @@ ActiveRecord::Schema.define(version: 2019_09_04_023937) do
 
   create_table "iteration_analyses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "iteration_id", null: false
-    t.string "status", null: false
+    t.string "ops_status", null: false
     t.json "analysis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "website_error"
+    t.string "analysis_status"
     t.index ["iteration_id"], name: "fk_rails_c60c42383b"
   end
 

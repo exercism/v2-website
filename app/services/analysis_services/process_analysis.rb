@@ -2,13 +2,20 @@ module AnalysisServices
   class ProcessAnalysis
     include Mandate
 
-    def initialize(iteration, analysis_status, analysis)
+    def initialize(iteration, ops_status, analysis)
       @iteration = iteration
-      @analysis_status = analysis_status.to_s.to_sym
+      @ops_status = ops_status.to_s.to_sym
       @analysis = analysis.is_a?(Hash) ? analysis.symbolize_keys : {}
     end
 
     def call
+      # If we don't have an analyser, then we should just
+      # undo what we've done so far and leave this alone.
+      if ops_status == :no_analyzer
+        remove_system_lock
+        return
+      end
+
       create_database_record
       handle_analysis
       remove_system_lock
@@ -17,13 +24,14 @@ module AnalysisServices
     end
 
     private
-    attr_reader :iteration, :analysis_status, :analysis, :record
+    attr_reader :iteration, :ops_status, :analysis, :record
 
     def create_database_record
       @record = IterationAnalysis.create!(
         iteration: iteration,
-        status: analysis_status,
-        analysis: analysis
+        analysis: analysis,
+        ops_status: ops_status,
+        analysis_status: analysis[:status]
       )
     end
 
@@ -46,11 +54,11 @@ module AnalysisServices
     end
 
     def remove_system_lock
-      solution.solution_locks.where(user_id: User::SYSTEM_USER_ID).destroy_all
+      UnlockSolution.(solution)
     end
 
     def analysis_succeeded?
-      analysis_status == :success
+      ops_status == :success
     end
 
     # This method will raise exceptions if

@@ -91,4 +91,12 @@ Done})
     HTML
     assert_equal expected, ParseMarkdown.(table)
   end
+
+  test "resepects rel_nofollow" do
+    normal = %q{<p><a href="http://example.com" target="_blank">Some link</a></p>}
+    rel_nofollow = %q{<p><a href="http://example.com" target="_blank" rel="nofollow">Some link</a></p>}
+
+    assert_equal normal.chomp, ParseMarkdown.(%q{[Some link](http://example.com)}).chomp
+    assert_equal rel_nofollow.chomp, ParseMarkdown.(%q{[Some link](http://example.com)}, nofollow_links: true).chomp
+  end
 end
