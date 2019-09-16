@@ -2,7 +2,7 @@ require 'application_system_test_case'
 
 class TracksTest < ApplicationSystemTestCase
   test "shows correct exercise count on track list" do
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     exercise = create(:exercise, track: track, core: true)
     create(:exercise,
            track: track,

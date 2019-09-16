@@ -11,8 +11,6 @@ require 'timecop'
 require 'minitest/pride'
 require 'minitest/stub_const'
 
-require "support/stub_repo_cache"
-
 OmniAuth.config.test_mode = true
 
 class ActionView::TestCase
@@ -21,7 +19,8 @@ end
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
-  include StubRepoCache
+
+  Git::RepoBase.clear!
 end
 
 class ActionMailer::TestCase

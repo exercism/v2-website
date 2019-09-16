@@ -7,7 +7,7 @@ class My::TracksTest < ApplicationSystemTestCase
   end
 
   test "shows correct exercise count on track list" do
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     exercise = create(:exercise, track: track, core: true)
     create(:exercise,
            track: track,
@@ -32,7 +32,7 @@ class My::TracksTest < ApplicationSystemTestCase
   end
 
   test "shows track progress" do
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     deprecated = create(:exercise, track: track, active: false)
     active = create(:exercise, track: track)
     create(:exercise, track: track)
