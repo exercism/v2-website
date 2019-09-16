@@ -1,11 +1,17 @@
 class Git::RepoBase
-  REPO_BASE_DIR="#{Rails.root}/tmp/git_repo_cache"
+  cattr_accessor :repo_base_dir
+
+  class << self
+    def configure
+      yield(self)
+    end
+
+    def clear!
+      FileUtils.rm_rf(repo_base_dir)
+    end
+  end
 
   attr_reader :repo_url
-
-  def self.repo_base_dir
-    REPO_BASE_DIR
-  end
 
   def initialize(repo_url, auto_fetch=false)
     @repo_url = repo_url

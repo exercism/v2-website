@@ -1,8 +1,10 @@
 class Git::ProblemSpecifications < Git::RepoBase
-  REPO_URL="https://github.com/exercism/problem-specifications"
+  class << self
+    attr_accessor :repo_url
 
-  def self.repo_url
-    REPO_URL
+    def configure
+      yield(self)
+    end
   end
 
   def self.head

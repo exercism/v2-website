@@ -19,9 +19,7 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncMentors.(repo)
-    end
+    Git::SyncMentors.(repo)
 
     mentor = Mentor.last
     assert_equal track, mentor.track
@@ -51,9 +49,7 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncMentors.(repo)
-    end
+    Git::SyncMentors.(repo)
 
     mentor = Mentor.last
     assert_equal "example.com", mentor.link_text
@@ -85,9 +81,7 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncMentors.(repo)
-    end
+    Git::SyncMentors.(repo)
 
     mentor.reload
     assert_equal "avatar.png", mentor.avatar_url
@@ -114,9 +108,7 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncMentors.(repo)
-    end
+    Git::SyncMentors.(repo)
 
     assert_equal 1, Mentor.count
   end
@@ -146,9 +138,7 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncMentors.(repo)
-    end
+    Git::SyncMentors.(repo)
 
     mentor = Mentor.last
     assert_equal "Name", mentor.name
@@ -178,9 +168,7 @@ class Git::SyncMentorsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncMentors.(repo)
-    end
+    Git::SyncMentors.(repo)
 
     mentor = Mentor.last
     assert_equal "Name", mentor.name

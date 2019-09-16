@@ -32,7 +32,7 @@ module AnalysisServices
 
     test "unlocks side exercises for a completed solution" do
       user = create(:user)
-      track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+      track = create(:track)
       exercise = create(:exercise, track: track)
       unlocked_exercise = create(:exercise, unlocked_by: exercise, track: track)
       create(:user_track, track: track, user: user)
@@ -43,9 +43,7 @@ module AnalysisServices
       create :iteration, solution: solution
       system_user = create(:user, :system)
 
-      stub_repo_cache! do
-        Approve.(solution)
-      end
+      Approve.(solution)
 
       assert unlocked_exercise.unlocked_by_user?(user)
     end

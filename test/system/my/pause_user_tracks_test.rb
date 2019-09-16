@@ -3,9 +3,7 @@ require 'application_system_test_case'
 class My::PauseUserTracksTest < ApplicationSystemTestCase
   test 'pauses the user track' do
     user = create(:user, :onboarded)
-    track = create(:track,
-                   title: "Ruby",
-                   repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
+    track = create(:track, title: "Ruby")
     user_track = create :user_track, user: user, track: track
 
     sign_in!(user)
@@ -20,9 +18,7 @@ class My::PauseUserTracksTest < ApplicationSystemTestCase
 
   test 'unpauses the user track' do
     user = create(:user, :onboarded)
-    track = create(:track,
-                   title: "Ruby",
-                   repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
+    track = create(:track, title: "Ruby")
     user_track = create :user_track, user: user, track: track, paused_at: Time.current
 
     sign_in!(user)
@@ -37,9 +33,7 @@ class My::PauseUserTracksTest < ApplicationSystemTestCase
 
   test 'cancels unpausing the user track' do
     user = create(:user, :onboarded)
-    track = create(:track,
-                   title: "Ruby",
-                   repo_url: "file://#{Rails.root}/test/fixtures/website-copy")
+    track = create(:track, title: "Ruby")
     user_track = create :user_track, user: user, track: track, paused_at: Time.current
 
     sign_in!(user)
