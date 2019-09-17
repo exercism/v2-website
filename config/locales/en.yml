@@ -17,6 +17,7 @@ en:
     mentor_timed_out: "Mentor '%{handle}' has been removed from this conversation due to inactivity. This solution has been resubmitted to the queue for a new mentor to review."
     mentor_left_conversation: "Mentor '%{handle}' has left this conversation. This solution has been resubmitted to the queue for a new mentor to review."
     solution_auto_approved: "Your solution has been automatically approved by Exercism's automated analyzers. [Read more about how this works](https://exercism.io/help/automated-solution-analysis)."
+    solution_mentoring_request_for_auto_approved: "The student has requested a mentor reviews this solution."
 
   communication_preferences: 
     receive_product_updates: "Email me about product updates"

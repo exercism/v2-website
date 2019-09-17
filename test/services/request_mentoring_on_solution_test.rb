@@ -3,6 +3,7 @@ require 'test_helper'
 class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
   test "sets values correctly" do
     Timecop.freeze do
+      create(:user, :system)
       solution = create :solution,
                         mentoring_requested_at: nil,
                         completed_at: Time.now - 1.week,
@@ -28,6 +29,7 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
 
   test "doesn't change if mentoring allowance used up" do
     Timecop.freeze do
+      create(:user, :system)
       solution = create :solution, mentoring_requested_at: nil
       ut = create :user_track, user: solution.user, track: solution.track
       UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
@@ -43,6 +45,7 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
 
   test "core non-independent exercises can always be mentored" do
     Timecop.freeze do
+      create(:user, :system)
       solution = create :solution, mentoring_requested_at: nil
       ut = create :user_track, user: solution.user, track: solution.track
       UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
@@ -69,4 +72,14 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
     end
   end
 
+  test "does not create system message if not approved by system" do
+    create(:user, :system)
+    solution = create :solution, approved_by: create(:user)
+    ut = create :user_track, user: solution.user, track: solution.track
+    UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
+
+    CreateSystemDiscussionPost.expects(:call).never
+
+    RequestMentoringOnSolution.(solution)
+  end
 end

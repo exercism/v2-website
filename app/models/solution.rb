@@ -78,6 +78,10 @@ class Solution < ApplicationRecord
     !!approved_by
   end
 
+  def approved_by_system?
+    approved_by == User.system_user
+  end
+
   def in_progress?
     downloaded? || iterations.size > 0
   end
