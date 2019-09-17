@@ -12,6 +12,18 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal assigns(:solutions), [solution]
   end
 
+  test "show should redirect_to onboarding unless onboarded" do
+    user = create :user # Not onboarded
+
+    sign_in!(user)
+    exercise = create :exercise
+    solution = create :solution, exercise: exercise, published_at: DateTime.now - 1.week
+    create :iteration, solution: solution
+
+    get track_exercise_solution_url(exercise.track, exercise, solution)
+    assert_redirected_to onboarding_path
+  end
+
   test "show should succeed for published solution" do
     exercise = create :exercise
     solution = create :solution, exercise: exercise, published_at: DateTime.now - 1.week
@@ -47,7 +59,7 @@ class SolutionsControllerTest < ActionDispatch::IntegrationTest
   test "show should clear notifications" do
     exercise = create :exercise
     solution = create :solution, exercise: exercise, published_at: DateTime.now - 1.week
-    user = create :user
+    user = create :user, :onboarded
     create :iteration, solution: solution
 
     create :notification, about: solution, user: user

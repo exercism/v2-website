@@ -1,18 +1,13 @@
 class IterationAnalysis < ApplicationRecord
   belongs_to :iteration
 
-  def succeeded?
-    status.to_sym == :success
-  end
-
   def handled?
-    succeeded? &&
+    ops_status.to_sym == :success &&
     [:approve, :approve_as_optimal, :disapprove].include?(analysis_status)
   end
 
   def analysis_status
-    s = analysis[:status]
-    s.present?? s.to_s.to_sym : nil
+    super.try(&:to_sym)
   end
 
   def analysis_comments_data

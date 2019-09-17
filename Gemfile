@@ -10,7 +10,7 @@ gem 'puma', '~> 3.7'
 gem 'mysql2'
 
 gem 'dalli'
-gem 'devise', '~> 4.6'
+gem 'devise', ">= 4.7.1"
 gem 'omniauth-github'
 gem 'kaminari'
 gem 'friendly_id', '~> 5.2'
@@ -42,6 +42,12 @@ gem 'daemons'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'lograge'
+
+gem 'recaptcha'
+
+gem 'flipper'
+gem 'flipper-active_record'
+gem 'flipper-ui'
 
 group :production do
   gem "skylight"

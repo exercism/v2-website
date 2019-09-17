@@ -24,7 +24,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
 
   test "show should clear notifications" do
     blog_post = create :blog_post, published_at: DateTime.now - 1.week
-    user = create :user
+    user = create :user, :onboarded
 
     create :notification, about: blog_post, user: user
     create :notification, about: blog_post # A different user

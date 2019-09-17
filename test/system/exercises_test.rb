@@ -44,7 +44,7 @@ class ExercisesTest < ApplicationSystemTestCase
 
   test "shows unlocked exercises for an exercise" do
     user = create(:user, :onboarded)
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     create(:user_track, user: user, track: track, independent_mode: false)
     exercise = create(:exercise, track: track, core: true)
     side_exercise = create(:exercise,

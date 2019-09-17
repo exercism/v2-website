@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :iteration_analysis do
     iteration { create :iteration }
-    status { "success" }
+    ops_status { "success" }
   end
 
   factory :user_email_log do
@@ -27,6 +27,10 @@ FactoryBot.define do
     author_handle { create(:user).handle }
     content_repository { "blog" }
     content_filepath { SecureRandom.uuid }
+
+    trait :published do
+      published_at { 2.weeks.ago }
+    end
   end
 
   factory :solution_comment do
@@ -155,14 +159,14 @@ FactoryBot.define do
     code_sample {%q{
       puts "Hello World"
     }}
-    repo_url { "http://example.com/ruby-#{SecureRandom.uuid}.git" }
+    repo_url { "file://#{Rails.root}/test/fixtures/track" }
   end
 
   factory :exercise do
     track { create :track }
     uuid { SecureRandom.uuid }
-    slug { "bob-#{SecureRandom.uuid}" }
-    title { "Bob" }
+    slug { "hello-world" }
+    title { "Hello World" }
     core { false }
     position { 1 }
   end
@@ -192,7 +196,7 @@ FactoryBot.define do
     user { create :user }
     exercise { create :exercise }
     git_sha { SecureRandom.uuid }
-    git_slug { SecureRandom.uuid }
+    git_slug { "hello-world" }
   end
 
   factory :user_track do

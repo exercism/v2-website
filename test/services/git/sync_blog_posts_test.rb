@@ -20,9 +20,7 @@ class Git::SyncBlogPostsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncBlogPosts.(repo)
-    end
+    Git::SyncBlogPosts.(repo)
 
     blog_post = BlogPost.last
     assert_equal "e1853292-1fab-4a48-babc-4234ac196ac1", blog_post.uuid
@@ -58,9 +56,7 @@ class Git::SyncBlogPostsTest < ActiveSupport::TestCase
         }
       ])
 
-    stub_repo_cache! do
-      Git::SyncBlogPosts.(repo)
-    end
+    Git::SyncBlogPosts.(repo)
 
     blog_post.reload
     assert_equal uuid, blog_post.uuid

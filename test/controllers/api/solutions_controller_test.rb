@@ -95,15 +95,15 @@ class API::SolutionsControllerTest < API::TestBase
   # Errors: Track Ambiguous
   test "latest should return array of possible tracks if multiple are possible" do
     setup_user
-    exercise1 = create :exercise, core: true
-    exercise2 = create :exercise, slug: exercise1.slug, core: true
-    exercise3 = create :exercise, core: true
+    exercise1 = create :exercise, slug: "exercise", core: true
+    exercise2 = create :exercise, slug: "exercise", core: true
+    exercise3 = create :exercise, slug: "other_exercise", core: true
 
     create :solution, user: @current_user, exercise: exercise1
     create :solution, user: @current_user, exercise: exercise2
     create :solution, user: @current_user, exercise: exercise3
 
-    get latest_api_solutions_path(exercise_id: exercise1.slug), headers: @headers, as: :json
+    get latest_api_solutions_path(exercise_id: "exercise"), headers: @headers, as: :json
     assert_response 400
     expected = {error: {
       type: "track_ambiguous",

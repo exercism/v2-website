@@ -22,7 +22,7 @@ class CreateSolutionComment < CreatesDiscussionPost
   attr_reader :comment
 
   def html
-    ParseMarkdown.(content)
+    ParseMarkdown.(content, nofollow_links: true)
   end
 
   def update_solution_comments_counter

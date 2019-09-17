@@ -1,12 +1,26 @@
 class MakeUserAMentor
   include Mandate
+  include ActiveModel::Validations
 
   initialize_with :user, :track_id
 
   def call
+    unless allowed_to_mentor?
+      errors.add(
+        :base,
+        "You must submit at least one solution before becoming a mentor."
+      )
+
+      return
+    end
+
     make_mentor
     create_track_mentorship
     invite_to_slack
+  end
+
+  def success?
+    errors.empty?
   end
 
   def make_mentor
@@ -31,5 +45,11 @@ class MakeUserAMentor
   def slack_api_invite_url
     Rails.env.production?? "https://exercism-mentors.slack.com/api/users.admin.invite" :
                            "https://dev.null.exercism.io"
+  end
+
+  private
+
+  def allowed_to_mentor?
+    AllowedToMentorPolicy.allowed?(user)
   end
 end

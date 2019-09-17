@@ -3,7 +3,17 @@ class ApplicationController < ActionController::Base
   before_action :store_location
   before_action :set_site_context
 
+  # If someone has signed in, ensure they're onboarded
+  before_action :ensure_onboarded!, unless: :devise_controller?
+
   private
+
+  def ensure_onboarded!
+    return unless user_signed_in?
+    return if current_user.onboarded?
+
+    redirect_to onboarding_path
+  end
 
   # This saves the current user location for devise
   def store_location

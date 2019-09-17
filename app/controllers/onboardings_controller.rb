@@ -1,4 +1,6 @@
 class OnboardingsController < ApplicationController
+  skip_before_action :ensure_onboarded!
+
   before_action :authenticate_user!
   before_action :redirect_if_onboarded!
 

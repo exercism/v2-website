@@ -3,20 +3,17 @@ require "application_system_test_case"
 class SolutionsTest < ApplicationSystemTestCase
   test "shows test suite" do
     user = create(:user, :onboarded)
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
+    track = create(:track)
     create(:user_track, track: track, user: user)
-    exercise = create(:exercise, track: track, slug: "hello-world")
+    exercise = create(:exercise, track: track)
     solution = create(:solution,
                       exercise: exercise,
                       user: user,
-                      git_sha: Git::ExercismRepo.current_head(track.repo_url),
-                      git_slug: "hello-world")
+                      git_sha: Git::ExercismRepo.current_head(track.repo_url))
     iteration = create(:iteration, solution: solution)
 
-    stub_repo_cache! do
-      sign_in!(user)
-      visit my_solution_path(solution)
-    end
+    sign_in!(user)
+    visit my_solution_path(solution)
 
     find(:css, ".tab", text: "Test suite").click
     assert_text "This is the test suite"
@@ -64,18 +61,10 @@ class SolutionsTest < ApplicationSystemTestCase
   end
 
   test "shows vertical split for guest" do
-    track = create(:track, repo_url: "file://#{Rails.root}/test/fixtures/track")
-    exercise = create(:exercise, track: track, slug: "hello-world")
-    solution = create(:solution,
-                      exercise: exercise,
-                      published_at: Date.new(2016, 12, 25),
-                      git_sha: Git::ExercismRepo.current_head(track.repo_url),
-                      git_slug: "hello-world")
+    solution = create(:solution, published_at: Date.new(2016, 12, 25))
     iteration = create(:iteration, solution: solution)
 
-    stub_repo_cache! do
-      visit solution_path(solution)
-    end
+    visit solution_path(solution)
 
     assert_css ".widget-panels.widget-panels--vertical-split"
   end

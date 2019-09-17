@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_064621) do
+ActiveRecord::Schema.define(version: 2019_09_16_094557) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_064621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "edited", default: false, null: false
-    t.text "previous_content"
+    t.text "previous_content", limit: 4294967295
     t.boolean "deleted", default: false, null: false
     t.string "type"
     t.index ["iteration_id"], name: "fk_rails_f58a02b68e"
@@ -168,6 +168,22 @@ ActiveRecord::Schema.define(version: 2019_07_29_064621) do
     t.index ["unlocked_by_id"], name: "fk_rails_03ec4ffbf3"
   end
 
+  create_table "flipper_features", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_flipper_features_on_key", unique: true
+  end
+
+  create_table "flipper_gates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "feature_key", null: false
+    t.string "key", null: false
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
+  end
+
   create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "slug", limit: 190, null: false
     t.integer "sluggable_id", null: false
@@ -191,11 +207,12 @@ ActiveRecord::Schema.define(version: 2019_07_29_064621) do
 
   create_table "iteration_analyses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "iteration_id", null: false
-    t.string "status", null: false
+    t.string "ops_status", null: false
     t.json "analysis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "website_error"
+    t.string "analysis_status"
     t.index ["iteration_id"], name: "fk_rails_c60c42383b"
   end
 

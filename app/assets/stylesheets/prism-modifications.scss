@@ -16,14 +16,13 @@ pre.line-numbers {
                 line-height:16px;
                 padding-bottom:5px;
             }
-            &:before {
-            }
         }
     }
     .line-highlight {
         background: rgba($color-2, 0.1);
         margin-top:0;
         &:before {
+            content: '';
             background:$color-2;
             width:6px;
             height:6px;
@@ -32,6 +31,11 @@ pre.line-numbers {
             border-radius:100%;
             left:5px;
             top:7px;
+            box-shadow: none;
         }
     }
+}
+
+pre[class*="language-"] {
+  border-radius: 0 !important;
 }

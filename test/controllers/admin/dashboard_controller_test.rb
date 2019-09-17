@@ -13,7 +13,7 @@ class Admin::DashboardControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "200 if admin" do
-    sign_in!(create :user, admin: true)
+    sign_in!(create :user, :onboarded, admin: true)
     get admin_dashboard_url
     assert_response :success
     assert_correct_page "admin-dashboard-page"

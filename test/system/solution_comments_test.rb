@@ -3,11 +3,12 @@ require "application_system_test_case"
 class SolutionCommentsTest < ApplicationSystemTestCase
   setup do
     @user = create(:user, :onboarded)
+    @user_solution = create(:solution, user: @user)
+    create(:iteration, solution: @user_solution)
 
-    @track = create :track
-    @solution = create :solution, exercise: create(:exercise, track: @track),
-                                  published_at: Time.current,
-                                  allow_comments: true
+    @solution = create :solution,
+      published_at: Time.current,
+      allow_comments: true
     @iteration = create :iteration, solution: @solution
   end
 
@@ -159,5 +160,14 @@ class SolutionCommentsTest < ApplicationSystemTestCase
     click_on "Disable comments"
 
     refute_selector(".new-editable-text textarea")
+  end
+
+  test "user can not post a comment when they haven't submitted a solution" do
+    @user_solution.destroy
+
+    sign_in!(@user)
+    visit solution_path(@solution)
+
+    refute_selector ".new-editable-text"
   end
 end

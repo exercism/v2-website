@@ -32,7 +32,7 @@ class ProfilesTest < ApplicationSystemTestCase
   end
 
   test "shows correct contributions count" do
-    user = create(:user)
+    user = create(:user, :onboarded)
     profile = create(:profile, user: user)
     4.times { create :solution_mentorship, user: user }
 

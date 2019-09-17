@@ -20,5 +20,6 @@
             = f.text_field :handle, autofocus: true, placeholder: "Choose a handle (alphanumeric)", required: true, pattern: Exercism::Magic::HandleRegexp.inspect.gsub("/", "")
             = f.password_field :password, autocomplete: "off", placeholder: "Password (#{@minimum_password_length} characters minimum)", required: true
             = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password", required: true
+            = recaptcha_tags
             = f.button "Sign up", class: 'pure-button'
           = render "devise/shared/links"

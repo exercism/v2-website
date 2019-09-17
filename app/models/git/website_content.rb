@@ -1,12 +1,10 @@
 class Git::WebsiteContent < Git::RepoBase
-  if Rails.env.development?
-    REPO_URL="file://#{Rails.root}/../website-copy"
-  else
-    REPO_URL="https://github.com/exercism/website-copy"
-  end
+  class << self
+    attr_accessor :repo_url
 
-  def self.repo_url
-    REPO_URL
+    def configure
+      yield(self)
+    end
   end
 
   def self.head
