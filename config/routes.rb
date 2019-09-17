@@ -44,6 +44,14 @@ Rails.application.routes.draw do
     end
   end
 
+  # ############### #
+  # Changelog admin #
+  # ############### #
+
+  namespace :changelog_admin do
+    resources :entries, only: [:new, :create, :show]
+  end
+
   # ###### #
   # Mentor #
   # ###### #
