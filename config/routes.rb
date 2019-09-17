@@ -266,5 +266,10 @@ Rails.application.routes.draw do
   # ################ #
   get "submissions/:uuid" => "legacy_routes#submission_to_solution"
 
+
+  constraints CanAccessFlipperUI do
+    mount Flipper::UI.app(Flipper) => '/flipper'
+  end
+
   root to: "pages#index"
 end

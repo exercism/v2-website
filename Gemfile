@@ -45,6 +45,10 @@ gem 'lograge'
 
 gem 'recaptcha'
 
+gem 'flipper'
+gem 'flipper-active_record'
+gem 'flipper-ui'
+
 group :production do
   gem "skylight"
 end
