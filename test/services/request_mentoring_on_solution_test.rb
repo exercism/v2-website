@@ -71,4 +71,15 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
       assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
     end
   end
+
+  test "does not create system message if not approved by system" do
+    create(:user, :system)
+    solution = create :solution, approved_by: create(:user)
+    ut = create :user_track, user: solution.user, track: solution.track
+    UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
+
+    CreateSystemDiscussionPost.expects(:call).never
+
+    RequestMentoringOnSolution.(solution)
+  end
 end
