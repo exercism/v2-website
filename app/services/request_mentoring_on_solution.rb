@@ -9,7 +9,7 @@ class RequestMentoringOnSolution
       return if user_track.mentoring_allowance_used_up?
     end
 
-    post_system_messages!
+    post_system_messages! if solution.approved_by_system?
     update_solution!
   end
 
@@ -20,8 +20,6 @@ class RequestMentoringOnSolution
   end
 
   def post_system_messages!
-    return unless solution.approved_by_system?
-
     CreateSystemDiscussionPost.(
       'system_messages.solution_mentoring_request_for_auto_approved',
       solution.iterations.last
