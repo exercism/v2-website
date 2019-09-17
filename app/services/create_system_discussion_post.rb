@@ -1,5 +1,9 @@
-class SystemDiscussionPost
-  def self.create!(message:, iteration:)
+class CreateSystemDiscussionPost
+  include Mandate
+
+  initialize_with :message, :iteration
+
+  def call
     content = { i18n_message: message }.to_json
     interpolated_message = I18n.t(message)
 

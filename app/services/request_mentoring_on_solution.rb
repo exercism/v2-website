@@ -22,9 +22,9 @@ class RequestMentoringOnSolution
   def post_system_messages!
     return unless solution.approved_by_system?
 
-    SystemDiscussionPost.create!(
-      message: 'system_messages.solution_mentoring_request_for_auto_approved',
-      iteration: solution.iterations.last
+    CreateSystemDiscussionPost.(
+      'system_messages.solution_mentoring_request_for_auto_approved',
+      solution.iterations.last
     )
   end
 
