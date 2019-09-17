@@ -24,14 +24,9 @@
           %li= link_to "Tracks", [:my, :tracks]
           %li= link_to "Your profile", [:my, :profile]
           %li= link_to "Starred solutions", [:my, :starred_solutions]
-        %ul
-          -if current_user.admin?
-            %li= link_to "Admin dashboard", [:admin, :dashboard]
 
-          -if current_user.is_mentor?
-            %li= link_to "Mentor dashboard", [:mentor, :dashboard]
-          -else
-            %li= link_to "Become a mentor", become_a_mentor_path
+        = render "widgets/other_role_menu"
+
         %ul
           %li= link_to "Teams Edition", "https://teams.exercism.io"
           %li= link_to "Community Blog", blog_posts_path

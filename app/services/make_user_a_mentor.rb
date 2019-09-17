@@ -50,6 +50,6 @@ class MakeUserAMentor
   private
 
   def allowed_to_mentor?
-    user.solutions.submitted.any?
+    AllowedToMentorPolicy.allowed?(user)
   end
 end
