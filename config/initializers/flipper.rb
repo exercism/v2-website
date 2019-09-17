@@ -11,5 +11,5 @@ Flipper.configure do |config|
 end
 
 Flipper.register(:admins) do |actor|
-  actor.respond_to?(:admin?) && actor.admin?
+  actor.admin?
 end
