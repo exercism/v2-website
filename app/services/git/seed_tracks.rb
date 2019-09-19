@@ -68,6 +68,7 @@ class Git::SeedTracks
     https://github.com/exercism/typescript
     https://github.com/exercism/vbnet
     https://github.com/exercism/vimscript
+    https://github.com/exercism/x86-64-assembly
   }
 
   attr_reader :repository_urls
