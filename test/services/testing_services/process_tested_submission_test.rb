@@ -18,7 +18,7 @@ module TestingServices
       tr = SubmissionTestResults.last
       assert_equal submission, tr.submission
       assert_equal ops_status, tr.ops_status
-      assert_equal results_status, tr.results_status
+      assert_equal results_status.to_sym, tr.results_status
       assert_equal message, tr.message
       assert_equal tests, tr.tests
       assert_equal results, tr.results
