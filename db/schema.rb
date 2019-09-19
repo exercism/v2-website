@@ -396,14 +396,9 @@ ActiveRecord::Schema.define(version: 2019_09_16_094557) do
     t.integer "num_comments", limit: 2, default: 0, null: false
     t.integer "num_stars", limit: 2, default: 0, null: false
     t.datetime "reminder_sent_at"
-    t.index ["approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "ihid_fix_8"
     t.index ["approved_by_id"], name: "fk_rails_4cc89d0b11"
-    t.index ["exercise_id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "ihid_fix_11"
     t.index ["exercise_id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors", "id"], name: "mentor_selection_idx_3"
-    t.index ["exercise_id", "id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors"], name: "ihid_fix_10"
     t.index ["exercise_id", "user_id"], name: "index_solutions_on_exercise_id_and_user_id", unique: true
-    t.index ["exercise_id"], name: "fk_rails_8c0841e614"
-    t.index ["id", "approved_by_id", "completed_at", "mentoring_requested_at", "num_mentors"], name: "ihid_fix_9"
     t.index ["num_mentors", "independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_1"
     t.index ["num_mentors", "track_in_independent_mode", "created_at", "exercise_id"], name: "mentor_selection_idx_2"
     t.index ["user_id"], name: "fk_rails_f83c42cef4"
