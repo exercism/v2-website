@@ -54,14 +54,7 @@ class My::SolutionsController < MyController
   def submit
     return render(json: {}) unless current_user.admin?
 
-    submission = Submission.create!(solution_id: @solution.id)
-    params[:files].each do |filename, code|
-      tmpfile = Tempfile.new("#{@solution.id}")
-      tmpfile << code
-      tmpfile.rewind
-      submission.files.attach(io: tmpfile, filename: filename)
-      tmpfile.close
-    end
+    submission = CreateSubmission.(@solution, params[:files])
 
     render json: {submission: {id: submission.id}}
   end
