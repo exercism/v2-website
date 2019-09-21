@@ -9,4 +9,3 @@ namespace :exercism do
     ListenForTestedSubmissions.()
   end
 end
-
