@@ -23,7 +23,7 @@ class CreateSubmission
       tmpfile.close
     end
 
-    ProcessNewSubmissionJob.perform_later(submission)
+    ProcessNewSubmissionJob.perform_now(submission)
 
     submission
   end
