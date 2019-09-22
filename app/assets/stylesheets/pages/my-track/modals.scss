@@ -138,9 +138,9 @@
         border:1px solid $color-1;
         padding: 10px 13px;
         font-weight:$regular;
+        width:100%;
 
         &.action-button {
-            width:100%;
             margin-bottom:15px;
             @include width-medium() {
                 width:69%;
@@ -152,7 +152,6 @@
             background:#fff;
             color:$color-1;
             font-weight:$fw-regular;
-            width:100%;
             @include width-medium() {
                 width:30%;
             }
