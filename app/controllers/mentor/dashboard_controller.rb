@@ -101,6 +101,7 @@ class Mentor::DashboardController < MentorController
     @testimonials = current_user.solution_mentorships.
                         with_feedback.
                         includes(solution: [:user, {exercise: :track}]).
+                        order('solutions.completed_at DESC').
                         page(params[:page]).per(20)
   end
 
