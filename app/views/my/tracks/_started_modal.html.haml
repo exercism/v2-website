@@ -3,15 +3,21 @@
   %h2 Welcome
   %h3 to the #{track.title} Track
 
-  %p
-    You can join this track in either
-    %strong Mentored Mode,
-    a structured approach centered around feedback, or
-    %strong Practice Mode,
-    which allows you to follow your own path at your own pace, but with limited feedback options. Which mode would you like to use? 
-  .buttons
-    =link_to "Mentored Mode", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button mentored-mode-button js-disable-on-click'
-    =link_to "Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode-button'
+  -if @track.accepting_new_students?
+    %p
+      You can join this track in either
+      %strong Mentored Mode,
+      a structured approach centered around feedback, or
+      %strong Practice Mode,
+      which allows you to follow your own path at your own pace, but with limited feedback options. Which mode would you like to use?
+    .buttons
+      =link_to "Mentored Mode", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button mentored-mode-button js-disable-on-click'
+      =link_to "Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode-button'
+  -else
+    %p This track is currently oversubscribed and only available in Practice Mode. Practice Mode let's you work through exercises at your own pace, exploring whichever concepts and challenges seem interesting, but won't have human mentors. 
+    %p You can use Practice Mode today and switch to Mentored Mode when it is accepting more students if you want mentoring.
+    .buttons
+      =link_to "Start Track in Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button'
 
   .learn-more
     You can learn more about Mentored and Practice Modes #{link_to "here", mentored_mode_vs_independent_mode_page_path, target: "_blank"}.

@@ -4,6 +4,8 @@ class SwitchTrackToMentoredMode
   initialize_with :user, :track
 
   def call
+    return unless track.accepting_new_students?
+
     user_track.update(independent_mode: false)
     user_track.solutions.update_all(track_in_independent_mode: false)
 
