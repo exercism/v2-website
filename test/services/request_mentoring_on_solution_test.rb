@@ -59,7 +59,6 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
     end
   end
 
-
   test "core non-independent exercises can always be mentored" do
     Timecop.freeze do
       create(:user, :system)
