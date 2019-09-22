@@ -43,6 +43,23 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
     end
   end
 
+  test "doesn't change if track isn't accepting students" do
+    Timecop.freeze do
+      create(:user, :system)
+      solution = create :solution, mentoring_requested_at: nil
+      ut = create :user_track, user: solution.user, track: solution.track
+      solution.track.stubs(accepting_new_students?: false)
+
+      RequestMentoringOnSolution.(solution)
+      assert_nil solution.mentoring_requested_at
+
+      solution.track.stubs(accepting_new_students?: true)
+      RequestMentoringOnSolution.(solution)
+      assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
+    end
+  end
+
+
   test "core non-independent exercises can always be mentored" do
     Timecop.freeze do
       create(:user, :system)
