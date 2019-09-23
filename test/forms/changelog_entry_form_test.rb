@@ -9,4 +9,14 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
       form.save
     end
   end
+
+  test "validates presence of title" do
+    form = ChangelogEntryForm.new(title: nil)
+
+    refute form.valid?
+
+    form = ChangelogEntryForm.new(title: "Title")
+
+    assert form.valid?
+  end
 end

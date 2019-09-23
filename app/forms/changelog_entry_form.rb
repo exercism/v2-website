@@ -7,6 +7,8 @@ class ChangelogEntryForm
 
   include ActiveModel::Model
 
+  validates :title, presence: true
+
   attr_accessor(
     :title,
     :details_markdown,

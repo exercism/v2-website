@@ -11,9 +11,13 @@ module ChangelogAdmin
     def create
       @form = ChangelogEntryForm.new(form_params)
 
-      @form.save
+      if @form.valid?
+        @form.save
 
-      redirect_to changelog_admin_entry_path(@form.entry)
+        redirect_to changelog_admin_entry_path(@form.entry)
+      else
+        render :new
+      end
     end
 
     def show

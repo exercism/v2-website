@@ -27,5 +27,28 @@ module ChangelogAdmin
 
       Flipper.disable(:changelog)
     end
+
+    test "admin views errors when creating a changelog entry" do
+      Flipper.enable(:changelog)
+      track = create(:track, title: "Ruby")
+      exercise = create(:exercise, track: track, title: "Hello world")
+      admin = create(:user,
+                     :onboarded,
+                     may_edit_changelog: true,
+                     name: "User 1")
+
+      sign_in!(admin)
+      visit new_changelog_admin_entry_path
+      fill_in "Title", with: "   "
+      fill_in "Details", with: "# We've added a new exercise!"
+      select_option "Ruby - Hello world",
+        selector: "#changelog_entry_form_referenceable_gid"
+      fill_in "Info url", with: "https://github.com/exercism"
+      click_on "Create entry"
+
+      assert_text "Title can't be blank"
+
+      Flipper.disable(:changelog)
+    end
   end
 end
