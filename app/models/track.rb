@@ -44,6 +44,6 @@ class Track < ApplicationRecord
 
   def accepting_new_students?
     median_wait_time &&
-    median_wait_time < 604800 # 1 week
+    median_wait_time < 1.week
   end
 end
