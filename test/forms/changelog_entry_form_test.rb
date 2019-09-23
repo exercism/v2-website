@@ -11,11 +11,23 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
   end
 
   test "validates presence of title" do
-    form = ChangelogEntryForm.new(title: nil)
+    user = create(:user)
+    form = ChangelogEntryForm.new(title: nil, created_by: user)
 
     refute form.valid?
 
-    form = ChangelogEntryForm.new(title: "Title")
+    form = ChangelogEntryForm.new(title: "Title", created_by: user)
+
+    assert form.valid?
+  end
+
+  test "validates presence of created_by" do
+    form = ChangelogEntryForm.new(title: "Title", created_by: nil)
+
+    refute form.valid?
+
+    user = create(:user)
+    form = ChangelogEntryForm.new(title: "Title", created_by: user)
 
     assert form.valid?
   end
