@@ -3,6 +3,7 @@ class ChangelogEntry < ApplicationRecord
   belongs_to :created_by, class_name: "User"
 
   delegate :title, to: :referenceable, prefix: true, allow_nil: true
+  delegate :name, to: :created_by, prefix: true
 
   def referenceable_gid
     referenceable.to_global_id

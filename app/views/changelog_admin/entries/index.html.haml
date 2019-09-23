@@ -1,0 +1,15 @@
+.lo-container
+  %h1 Entries
+
+  %table
+    %tr
+      %th Title
+      %th Created by
+      %th Actions
+    - @entries.each do |entry|
+      %tr
+        %td= entry.title
+        %td= entry.created_by_name
+        %th= link_to "View", changelog_admin_entry_path(entry)
+
+  = link_to "Create new entry", new_changelog_admin_entry_path

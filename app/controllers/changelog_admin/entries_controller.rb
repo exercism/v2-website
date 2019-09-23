@@ -1,5 +1,9 @@
 module ChangelogAdmin
   class EntriesController < BaseController
+    def index
+      @entries = ChangelogEntry.all
+    end
+
     def new
       @form = ChangelogEntryForm.new
     end
