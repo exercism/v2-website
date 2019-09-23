@@ -10,7 +10,10 @@
       =link_to "Cancel", "#", class: "pure-button close-modal cancel-button"
 
   -else
-    %p Sorry. This track is currently oversubscribed and only available in Practice Mode. Please check back next week.
+    %p
+      Sorry. This track is currently
+      =link_to "oversubscribed", "https://exercism.io/blog/oversubscribed-tracks", target: "_blank"
+      and only available in Practice Mode. Please check back next week.
     .buttons
       =link_to "Close", "#", class: "pure-button close-modal"
 

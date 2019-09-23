@@ -14,7 +14,10 @@
       =link_to "Mentored Mode", set_mentored_mode_my_user_track_path(@user_track), remote: true, method: :patch, class: 'pure-button mentored-mode-button js-disable-on-click'
       =link_to "Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button independent-mode-button'
   -else
-    %p This track is currently oversubscribed and only available in Practice Mode. Practice Mode let's you work through exercises at your own pace, exploring whichever concepts and challenges seem interesting, but won't have human mentors. 
+    %p
+      This track is currently
+      =link_to "oversubscribed", "https://exercism.io/blog/oversubscribed-tracks", target: "_blank"
+      and only available in Practice Mode. Practice Mode let's you work through exercises at your own pace, exploring whichever concepts and challenges seem interesting, but won't have human mentors.
     %p You can use Practice Mode today and switch to Mentored Mode when it is accepting more students if you want mentoring.
     .buttons
       =link_to "Start Track in Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button oversubscribed-button'
