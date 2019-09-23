@@ -55,9 +55,10 @@ class UserTrack < ApplicationRecord
                 count
       +
       track.exercises.side.
-                where(unlocked_by: nil).
-                where.not(id: completed_side_exercise_ids).
-                count
+                      active.
+                      where(unlocked_by: nil).
+                      where.not(id: completed_side_exercise_ids).
+                      count
     else
       track.exercises.side.
                       active.
