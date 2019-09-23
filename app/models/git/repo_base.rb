@@ -1,14 +1,10 @@
 class Git::RepoBase
-  cattr_accessor :repo_base_dir
+  def self.repo_base_dir
+    Rails.application.config_for("repos")["base_dir"]
+  end
 
-  class << self
-    def configure
-      yield(self)
-    end
-
-    def clear!
-      FileUtils.rm_rf(repo_base_dir)
-    end
+  def self.clear!
+    FileUtils.rm_rf(repo_base_dir)
   end
 
   attr_reader :repo_url
@@ -89,7 +85,7 @@ class Git::RepoBase
   end
 
   def repo_dir
-    "#{self.class.repo_base_dir}/#{url_hash}-#{local_name}"
+    "#{Git::RepoBase.repo_base_dir}/#{url_hash}-#{local_name}"
   end
 
   def url_hash
