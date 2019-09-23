@@ -17,7 +17,7 @@
     %p This track is currently oversubscribed and only available in Practice Mode. Practice Mode let's you work through exercises at your own pace, exploring whichever concepts and challenges seem interesting, but won't have human mentors. 
     %p You can use Practice Mode today and switch to Mentored Mode when it is accepting more students if you want mentoring.
     .buttons
-      =link_to "Start Track in Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button'
+      =link_to "Start Track in Practice Mode", set_independent_mode_my_user_track_path(@user_track), method: :patch, class: 'pure-button oversubscribed-button'
 
   .learn-more
     You can learn more about Mentored and Practice Modes #{link_to "here", mentored_mode_vs_independent_mode_page_path, target: "_blank"}.

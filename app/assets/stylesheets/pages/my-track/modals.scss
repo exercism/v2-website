@@ -89,6 +89,9 @@
                 color:$color-1;
                 font-weight:$fw-regular;
             }
+            &.oversubscribed-button {
+                width:100%;
+            }
         }
     }
     .main-section {
