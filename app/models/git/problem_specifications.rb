@@ -1,10 +1,6 @@
 class Git::ProblemSpecifications < Git::RepoBase
-  class << self
-    attr_accessor :repo_url
-
-    def configure
-      yield(self)
-    end
+  def self.repo_url
+    Rails.application.config_for("repos")["problem_specifications"]
   end
 
   def self.head
