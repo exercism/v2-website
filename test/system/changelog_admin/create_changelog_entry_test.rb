@@ -47,6 +47,13 @@ module ChangelogAdmin
       click_on "Create entry"
 
       assert_text "Title can't be blank"
+      assert has_select?(
+        "changelog_entry_form_referenceable_gid",
+        selected: "Ruby - Hello world",
+        visible: false
+      )
+      assert_field "Details", with: "# We've added a new exercise!"
+      assert_field "Info url", with: "https://github.com/exercism"
 
       Flipper.disable(:changelog)
     end
