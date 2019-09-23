@@ -25,5 +25,29 @@ module ChangelogAdmin
         Flipper.disable(:changelog)
       end
     end
+
+    def test_requires_feature_toggle(title, &block)
+      test "redirects user if feature off - #{title}" do
+        Flipper.disable(:changelog)
+        user = create(:user, :onboarded, may_edit_changelog: true)
+
+        sign_in!(user)
+        instance_exec(&block)
+
+        assert_equal 401, response.status
+      end
+
+      test "allows user if feature on - #{title}" do
+        Flipper.enable(:changelog)
+        user = create(:user, :onboarded, may_edit_changelog: true)
+
+        sign_in!(user)
+        instance_exec(&block)
+
+        refute_equal 401, response.status
+
+        Flipper.disable(:changelog)
+      end
+    end
   end
 end
