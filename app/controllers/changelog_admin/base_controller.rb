@@ -9,15 +9,15 @@ module ChangelogAdmin
     private
 
     def check_feature_enabled!
-      unless Flipper[:changelog].enabled?(current_user)
-        return redirect_to root_path, status: 401
-      end
+      return unauthorized! unless Flipper[:changelog].enabled?(current_user)
     end
 
     def check_authorization!
-      unless current_user.may_edit_changelog?
-        return redirect_to root_path, status: 401
-      end
+      return unauthorized! unless current_user.may_edit_changelog?
+    end
+
+    def unauthorized!
+      redirect_to root_path, status: 401
     end
   end
 end
