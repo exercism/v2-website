@@ -44,6 +44,21 @@ class My::SolutionsController < MyController
     end
   end
 
+  def solve
+    return redirect_to(action: :show) unless current_user.admin?
+
+    @exercise = @solution.exercise
+    @track = @exercise.track
+  end
+
+  def submit
+    return render(json: {}) unless current_user.admin?
+
+    submission = CreateSubmission.(@solution, params[:files])
+
+    render json: {submission: {id: submission.id}}
+  end
+
   def walkthrough
     @walkthrough = RenderUserWalkthrough.(
       current_user,

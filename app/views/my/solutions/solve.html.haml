@@ -1,0 +1,105 @@
+.lo-container
+  #solve-interface
+    #ace-editor
+      :preserve
+        class TwoFer
+          def self.two_fer(name="you")
+            "One for %s, one for me." % name
+          end
+        end
+
+    #tests-output
+      .ops-status
+        Ops Status:
+        %span
+      .results-status
+        Tests Status:
+        %span
+      .results-message
+        Message:
+        %span
+      .test-failure
+        Failed test:
+        %span.name
+        .message
+
+  %button#run-tests-button.pure-button Run Tests
+
+:scss
+  #solve-interface {
+    display:flex;
+  }
+
+  #ace-editor {
+    width:50%;
+    height:300px;
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+  #tests-output {
+    padding-left:50px;
+
+    .ops-status,
+    .results-status,
+    .results-message,
+    .test-failure {
+      display:none;
+    }
+  }
+  #run-tests-button {
+    background:green;
+  }
+
+-content_for :js do
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" type="text/javascript" charset="utf-8"></script>
+  :javascript
+    // Set interval tracker for use later
+    // Use an array to avoid races
+    var intervals = {}
+
+    var editor = ace.edit("ace-editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/#{@track.slug}");
+
+    $('#run-tests-button').click(function() {
+      var code = editor.getValue();
+      $.ajax(
+        "/my/solutions/#{@solution.uuid}/submit",
+        {
+          method: "PATCH",
+          data: {
+            files: {
+              "two_fer.rb": code
+            }
+          }
+        }
+      ).done(function(data) {
+        submissionId = data.submission.id
+        $('#tests-output .ops-status').show().children('span').html("Tests pending")
+
+        for(sid in intervals) { clearInterval(intervals[sid]) }
+
+        intervals[submissionId] = setInterval(function() {
+          $.get(
+            "/my/submissions/" + submissionId + "/test_results",
+            {},
+            function(data, status, xhr){
+              if(intervals[submissionId]) { clearInterval(intervals[submissionId]) }
+
+              $('#tests-output .ops-status').show().children('span').html("Tests finished")
+              $('#tests-output .results-status').show().children('span').html(data.status)
+
+              if(data.message) {
+                $('#tests-output .results-message').show().children('span').html(data.message)
+              }
+
+              if(data.failure) {
+                $('#tests-output .test-failure').show()
+                $('#tests-output .test-failure .name').html(data.failure.name)
+                $('#tests-output .test-failure .message').html(data.failure.message.replace("\n", "<br/>"))
+              }
+            }
+          )
+        }, 500);
+      })
+    })

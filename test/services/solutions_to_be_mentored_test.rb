@@ -359,7 +359,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     10.times.map do |idx|
       create(:solution,
          exercise: create(:exercise, track: track, core: true),
-         mentoring_requested_at: (Time.current - 30.minutes) + idx.minutes
+         mentoring_requested_at: (Time.current - 30.minutes) - idx.minutes
       ).tap do |solution|
         create :iteration, solution: solution
       end
@@ -370,24 +370,34 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
     solutions = 10.times.map do |idx|
       create(:solution,
          exercise: exercise,
-         mentoring_requested_at: (Time.current - 10.minutes) + idx.minutes
+         mentoring_requested_at: (Time.current - 10.minutes) - idx.minutes
+      ).tap do |solution|
+        create :iteration, solution: solution
+      end
+    end
+
+    # Create 3 other solutions which should be irrelevant
+    3.times.map do |idx|
+      create(:solution,
+         exercise: create(:exercise, track: track, core: true),
+         mentoring_requested_at: (Time.current - 10.minutes) - idx.minutes
       ).tap do |solution|
         create :iteration, solution: solution
       end
     end
 
     expected = {
-      track: 15,
-      exercise: 5
+      track: 17,
+      exercise: 7
     }
-    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[4])
+    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[3])
 
     # Add Non-core
     create(:solution,
       exercise: create(:exercise, track: track, core: false),
       mentoring_requested_at: Time.current - 15.minutes
     ).tap {|s| create :iteration, solution: s}
-    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[4])
+    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[3])
 
     # Add independent
     create(:solution,
@@ -395,7 +405,7 @@ class SelectSuggestedSolutionsForMentorTest < ActiveSupport::TestCase
       track_in_independent_mode: true,
       mentoring_requested_at: Time.current - 15.minutes
     ).tap {|s| create :iteration, solution: s}
-    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[4])
+    assert_equal expected, SolutionsToBeMentored.index_of_core_solution(solutions[3])
 end
 
   def create_mentor_and_track

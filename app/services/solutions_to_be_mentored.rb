@@ -56,13 +56,14 @@ class SolutionsToBeMentored
     inner_query = base_query.where('exercises.core': true).
                              where("solutions.track_in_independent_mode": false).
                              order(Arel.sql("mentoring_requested_at ASC")).
-                             joins("JOIN (SELECT @position := 0) r").
-                             select("solutions.id, @position := @position + 1 AS position")
-
+                             select("solutions.id")
     sql = %Q{
-      SELECT s.position
-      FROM (#{inner_query.to_sql}) s
-      WHERE s.id = "#{solution.id}"
+      SELECT s2.position
+      FROM (
+        SELECT s1.id, @position := @position + 1 AS position FROM (#{inner_query.to_sql}) s1
+        INNER JOIN (SELECT @position := 0) r
+      ) s2
+      WHERE s2.id = "#{solution.id}"
     }
 
     ActiveRecord::Base.connection.select_value(sql).try(&:to_i)
