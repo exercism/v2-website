@@ -1,4 +1,10 @@
 class ChangelogEntryForm
+  class UnauthorizedUserError < StandardError
+    def initialize(msg = "User isn't allowed to save an entry")
+      super
+    end
+  end
+
   include ActiveModel::Model
 
   attr_accessor(
@@ -24,6 +30,8 @@ class ChangelogEntryForm
   end
 
   def save
+    raise UnauthorizedUserError unless created_by.may_edit_changelog?
+
     entry.save
   end
 
