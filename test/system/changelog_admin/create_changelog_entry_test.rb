@@ -6,7 +6,10 @@ module ChangelogAdmin
       Flipper.enable(:changelog)
       track = create(:track, title: "Ruby")
       exercise = create(:exercise, track: track, title: "Hello world")
-      admin = create(:user, :onboarded, name: "User 1")
+      admin = create(:user,
+                     :onboarded,
+                     may_edit_changelog: true,
+                     name: "User 1")
 
       sign_in!(admin)
       visit new_changelog_admin_entry_path

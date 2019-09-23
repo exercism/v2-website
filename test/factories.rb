@@ -219,4 +219,9 @@ FactoryBot.define do
     name { "Mentor" }
     github_username { "mentor" }
   end
+
+  factory :changelog_entry do
+    title { "Entry" }
+    association :created_by, factory: :user
+  end
 end

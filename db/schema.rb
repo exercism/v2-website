@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_050728) do
+ActiveRecord::Schema.define(version: 2019_09_23_044907) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -572,6 +572,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_050728) do
     t.boolean "default_allow_comments"
     t.datetime "deleted_at"
     t.boolean "full_width_code_panes", default: false, null: false
+    t.boolean "may_edit_changelog", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
