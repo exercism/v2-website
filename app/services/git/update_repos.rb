@@ -27,5 +27,4 @@ class Git::UpdateRepos
   def update_blog
     RepoUpdate.create(slug: RepoUpdate::BLOG_SLUG)
   end
-
 end

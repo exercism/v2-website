@@ -149,6 +149,9 @@ Rails.application.routes.draw do
     end
     resources :solutions, only: [:index, :show, :create] do
       member do
+        get :solve
+        patch :submit
+
         get :walkthrough
         get :confirm_unapproved_completion
         patch :complete
@@ -167,6 +170,10 @@ Rails.application.routes.draw do
 
       resources :iterations, only: [:show]
     end
+    resources :submissions, only: [] do
+      get :test_results, on: :member
+    end
+
     resources :starred_solutions, only: [:index, :create]
 
     resources :discussion_posts, only: [:create, :update, :destroy]

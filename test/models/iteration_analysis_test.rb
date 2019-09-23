@@ -8,10 +8,10 @@ class IterationAnalysisTest < ActiveSupport::TestCase
   end
 
   test "handled?" do
-    assert create(:iteration_analysis, analysis_status: :approve).handled?
-    assert create(:iteration_analysis, analysis_status: :approve_as_optimal).handled?
-    assert create(:iteration_analysis, analysis_status: :disapprove).handled?
-    refute create(:iteration_analysis, analysis_status: :refer_to_mentor).handled?
+    assert create(:iteration_analysis, ops_status: :success, analysis_status: :approve).handled?
+    assert create(:iteration_analysis, ops_status: :success, analysis_status: :approve_as_optimal).handled?
+    assert create(:iteration_analysis, ops_status: :success, analysis_status: :disapprove).handled?
+    refute create(:iteration_analysis, ops_status: :success, analysis_status: :refer_to_mentor).handled?
     refute create(:iteration_analysis, ops_status: :failed, analysis_status: :approve).handled?
   end
 

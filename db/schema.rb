@@ -418,6 +418,27 @@ ActiveRecord::Schema.define(version: 2019_09_23_044907) do
     t.index ["uuid"], name: "index_solutions_on_uuid"
   end
 
+  create_table "submission_test_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "submission_id", null: false
+    t.string "ops_status", null: false
+    t.string "results_status"
+    t.string "message"
+    t.json "tests"
+    t.json "results"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submission_id"], name: "fk_rails_3812c45ada"
+  end
+
+  create_table "submissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "solution_id", null: false
+    t.boolean "tested", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["solution_id", "id"], name: "index_submissions_on_solution_id_and_id"
+    t.index ["tested", "id"], name: "index_submissions_on_tested_and_id"
+  end
+
   create_table "team_invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.bigint "invited_by_id", null: false
@@ -608,6 +629,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_044907) do
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"
+  add_foreign_key "submission_test_results", "submissions"
   add_foreign_key "team_invitations", "teams"
   add_foreign_key "team_invitations", "users", column: "invited_by_id"
   add_foreign_key "team_memberships", "teams"
