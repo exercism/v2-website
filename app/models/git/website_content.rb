@@ -57,6 +57,21 @@ class Git::WebsiteContent < Git::RepoBase
     nil
   end
 
+  def automated_comment_commentary_for(code)
+    ptr = head_commit.tree["automated-comments"]
+    tree = repo.lookup(ptr[:oid])
+    path = "#{code.split(".")[0...-1].join("/")}/commentary/"
+    filename = "#{code.split(".").last}.md"
+
+    tree.walk_blobs do |root, file|
+      next unless root == path
+      next unless file[:name] == filename
+      file_blob = repo.lookup(file[:oid])
+      return file_blob.text
+    end
+
+    nil
+  end
 
   def mentors
     ptr = head_commit.tree["mentors"]
