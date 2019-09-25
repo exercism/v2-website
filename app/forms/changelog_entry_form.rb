@@ -18,22 +18,16 @@ class ChangelogEntryForm
     :created_by
   )
 
-  attr_reader :entry
+  def save
+    raise UnauthorizedUserError unless created_by.may_edit_changelog?
 
-  def initialize(*args)
-    super
-
-    @entry = ChangelogEntry.new(
+    entry.assign_attributes(
       title: title,
       details_markdown: details_markdown,
       referenceable: referenceable,
       info_url: info_url,
       created_by: created_by
     )
-  end
-
-  def save
-    raise UnauthorizedUserError unless created_by.may_edit_changelog?
 
     entry.save
   end
@@ -45,5 +39,9 @@ class ChangelogEntryForm
 
   def referenceable
     GlobalID::Locator.locate(referenceable_gid)
+  end
+
+  def entry
+    @entry ||= ChangelogEntry.new
   end
 end
