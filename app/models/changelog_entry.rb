@@ -20,4 +20,8 @@ class ChangelogEntry < ApplicationRecord
   def published?
     published_at.present?
   end
+
+  def created_by?(user)
+    created_by == user
+  end
 end

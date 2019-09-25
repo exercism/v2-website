@@ -51,7 +51,12 @@ module ChangelogAdmin
     def check_if_entry_is_editable!
       @entry = ChangelogEntry.find(params[:id])
 
-      return unauthorized! if @entry.created_by != current_user
+      unless AllowedToEditEntryPolicy.allowed?(
+        user: current_user,
+        entry: @entry
+      )
+        return unauthorized!
+      end
     end
 
     def form_params
