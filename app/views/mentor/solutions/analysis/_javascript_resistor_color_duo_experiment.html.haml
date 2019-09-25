@@ -1,4 +1,4 @@
--return unless [6, 1530, 38366].include?(current_user.id)
+-return unless Flipper[:mentor_commentary].enabled?(current_user)
 
 .javascript-resistor-color-duo-experiment-analysis-section
   %h3
