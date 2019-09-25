@@ -49,7 +49,9 @@ Rails.application.routes.draw do
   # ############### #
 
   namespace :changelog_admin do
-    resources :entries, only: [:new, :create, :show, :index]
+    resources :entries, only: [:new, :create, :show, :index] do
+      post :publish, on: :member
+    end
 
     root to: "entries#index"
   end

@@ -12,4 +12,8 @@ class ChangelogEntry < ApplicationRecord
   def referenceable
     ChangelogAdmin::Referenceable.for(super)
   end
+
+  def publish!(time = Time.current)
+    update!(published_at: time)
+  end
 end

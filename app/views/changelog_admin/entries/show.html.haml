@@ -11,3 +11,12 @@
   %dd= @entry.referenceable_title
   %dt Info url
   %dd= @entry.info_url
+  %dt Published at
+  %dd= @entry.published_at
+
+%h2 Actions
+
+%ul
+  %li= link_to "Publish",
+    publish_changelog_admin_entry_path(@entry),
+    data: { method: :post, confirm: "Are you sure you want to publish this entry?" }
