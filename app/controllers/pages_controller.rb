@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     "Report Abuse": :report_abuse,
     "Contact": :contact,
     "Contribute": :contribute,
-    "Mentored Mode vs Independent Mode": :mentored_mode_vs_independent_mode,
+    "Mentored Mode vs Practice Mode": :mentored_mode_vs_independent_mode,
 
     "Strategy": :strategy,
     "Roadmap": :roadmap,

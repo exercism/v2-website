@@ -18,7 +18,7 @@
         = link_to "#{@track.title} Track", [:my, @track]
       .track-progress
         -if @user_track.independent_mode?
-          %h3 In Independent Mode
+          %h3 In Practice Mode
         -else
           -if @exercise.side?
             %h3 Side exercise

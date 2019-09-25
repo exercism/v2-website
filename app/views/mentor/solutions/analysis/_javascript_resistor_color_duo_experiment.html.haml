@@ -1,0 +1,36 @@
+-return unless [6, 1530, 38366].include?(current_user.id)
+
+.javascript-resistor-color-duo-experiment-analysis-section
+  %h3
+    Automatic Analysis
+    =link_to "https://github.com/exercism/automated-mentoring-support" do
+      %i.fa.fa-info-circle
+  .recommendation
+    %strong Recommendation:
+    =analysis.analysis_status.to_s.titleize
+    -if analysis.built_comments_with_commentary.size > 0
+      with comments
+
+  .comments
+    .beta
+      %strong Note:
+      This exercise is using an experimental analyzer, which provides a mixture of commentary for mentors and/or pastable comments. Please help us by adding your thoughts and ideas to #{link_to "this GitHub issue", "https://github.com/exercism/javascript-analyzer/issues/49"}.
+
+    -analysis.built_comments_with_commentary.each.with_index do |(commentary, comment), idx|
+      .comment-with-commentary
+        -if commentary.present?
+          .commentary
+            =raw ParseMarkdown.(commentary)
+
+        -if commentary.present? && comment.present?
+          %h5.commentary-and-comment Try suggesting the following:
+          /Suggested comment for student:
+
+        -if comment.present?
+          .comment.widget-code-snippet
+            =button_tag "copy", class: 'pure-button copy-button'
+            =text_area_tag "analysis-comment-#{idx}", comment, class: 'download-code', readonly: true
+            .editable-text
+              .editable-text-viewer
+                .editable-text-html= raw ParseMarkdown.(comment)
+

@@ -56,6 +56,20 @@ class My::TrackTest < ApplicationSystemTestCase
     within(".progress-section") { refute_text /1\n[Ee]tra [Ee]xercises/ }
   end
 
+  test "shows oversubscribed modal tracks that are oversubscribed" do
+    track = create(:track, median_wait_time: 2.weeks)
+    exercise = create(:exercise, track: track, core: true)
+
+    user_track = create(:user_track, {
+      track: track,
+      user: @user,
+      independent_mode: nil
+    })
+
+    visit track_path(track)
+    within(".main-section") { assert_text "Start Track in Practice Mode" }
+  end
+
   test "shows migration modal for user tracks created before migration" do
     track = create(:track)
     exercise = create(:exercise, track: track, core: true)
@@ -68,6 +82,21 @@ class My::TrackTest < ApplicationSystemTestCase
     })
 
     visit track_path(track)
-    within(".main-section") { assert_text "Mentored Mode (Recommended)" }
+    within(".main-section") { assert_text "Mentored Mode" }
+  end
+
+  test "shows oversubscribed migration modal for user tracks created before migration" do
+    track = create(:track, median_wait_time: 2.weeks)
+    exercise = create(:exercise, track: track, core: true)
+
+    user_track = create(:user_track, {
+      track: track,
+      user: @user,
+      created_at: Exercism::V2_MIGRATED_AT - 1.day,
+      independent_mode: nil
+    })
+
+    visit track_path(track)
+    within(".main-section") { assert_text "Start Track in Practice Mode" }
   end
 end
