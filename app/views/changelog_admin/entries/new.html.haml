@@ -6,24 +6,4 @@
       - @form.errors.full_messages.each do |error|
         %p= error
 
-  = form_for @form,
-    url: [:changelog_admin, :entries],
-    html: { class: "pure-form pure-form-stacked" } do |f|
-    = f.label :title
-    = f.text_field :title, required: true
-
-    = f.label :details_markdown, "Details"
-    = f.text_area :details_markdown
-
-    = f.label :referenceable_gid, "About"
-    = f.grouped_collection_select :referenceable_gid,
-      @form.referenceable_types,
-      :all,
-      :name,
-      :to_global_id,
-      :title
-
-    = f.label :info_url
-    = f.text_field :info_url
-
-    = f.submit "Create entry", class: "pure-button pure-button-primary"
+  = render "form", form: @form, url: changelog_admin_entries_path

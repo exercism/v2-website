@@ -32,6 +32,20 @@ module ChangelogAdmin
       redirect_to changelog_admin_entry_path(@entry)
     end
 
+    def edit
+      @entry = ChangelogEntry.find(params[:id])
+      @form = ChangelogEntryForm.from_entry(@entry)
+    end
+
+    def update
+      @entry = ChangelogEntry.find(params[:id])
+      @form = ChangelogEntryForm.new(form_params.merge(id: @entry.id))
+
+      @form.save
+
+      redirect_to changelog_admin_entry_path(@entry)
+    end
+
     private
 
     def form_params

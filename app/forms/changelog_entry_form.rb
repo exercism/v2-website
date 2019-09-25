@@ -5,12 +5,27 @@ class ChangelogEntryForm
     end
   end
 
+  def self.from_entry(entry)
+    referenceable_gid = if entry.referenceable
+                          GlobalID.create(entry.referenceable)
+                        end
+
+    new(
+      id: entry.id,
+      title: entry.title,
+      details_markdown: entry.details_markdown,
+      referenceable_gid: referenceable_gid,
+      info_url: entry.info_url,
+    )
+  end
+
   include ActiveModel::Model
 
   validates :title, presence: true
   validates :created_by, presence: true
 
   attr_accessor(
+    :id,
     :title,
     :details_markdown,
     :referenceable_gid,
@@ -42,6 +57,6 @@ class ChangelogEntryForm
   end
 
   def entry
-    @entry ||= ChangelogEntry.new
+    @entry ||= id ? ChangelogEntry.find(id) : ChangelogEntry.new
   end
 end
