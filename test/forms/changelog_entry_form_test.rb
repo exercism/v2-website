@@ -10,6 +10,19 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
     end
   end
 
+  test "#save raises an error when editing an existing entry" do
+    user = create(:user, may_edit_changelog: true)
+    other_user = create(:user, may_edit_changelog: true)
+    entry = create(:changelog_entry, created_by: user)
+
+    form = ChangelogEntryForm.from_entry(entry)
+    form.created_by = other_user
+
+    assert_raises ChangelogEntryForm::CantChangeCreatedByError do
+      form.save
+    end
+  end
+
   test "validates presence of title" do
     user = create(:user)
     form = ChangelogEntryForm.new(title: nil, created_by: user)
