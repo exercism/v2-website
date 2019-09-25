@@ -1,5 +1,7 @@
 module ChangelogAdmin
   class EntriesController < BaseController
+    before_action :check_if_entry_is_editable!, only: [:edit, :update]
+
     def index
       @entries = ChangelogEntry.all
     end
@@ -33,12 +35,10 @@ module ChangelogAdmin
     end
 
     def edit
-      @entry = ChangelogEntry.find(params[:id])
       @form = ChangelogEntryForm.from_entry(@entry)
     end
 
     def update
-      @entry = ChangelogEntry.find(params[:id])
       @form = ChangelogEntryForm.new(form_params.merge(id: @entry.id))
 
       @form.save
@@ -47,6 +47,12 @@ module ChangelogAdmin
     end
 
     private
+
+    def check_if_entry_is_editable!
+      @entry = ChangelogEntry.find(params[:id])
+
+      return unauthorized! if @entry.created_by != current_user
+    end
 
     def form_params
       params.

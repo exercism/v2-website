@@ -32,5 +32,33 @@ module ChangelogAdmin
       entry = create(:changelog_entry)
       get changelog_admin_entry_path(entry)
     }
+
+    test "raises an error when another user attempts to edit an entry" do
+      Flipper.enable(:changelog)
+      user = create(:user, :onboarded, may_edit_changelog: true)
+      other_user = create(:user, :onboarded, may_edit_changelog: true)
+      entry = create(:changelog_entry, created_by: user)
+
+      sign_in!(other_user)
+      get edit_changelog_admin_entry_path(entry)
+
+      assert_response :unauthorized
+
+      Flipper.disable(:changelog)
+    end
+
+    test "raises an error when another user attempts to update an entry" do
+      Flipper.enable(:changelog)
+      user = create(:user, :onboarded, may_edit_changelog: true)
+      other_user = create(:user, :onboarded, may_edit_changelog: true)
+      entry = create(:changelog_entry, created_by: user)
+
+      sign_in!(other_user)
+      patch changelog_admin_entry_path(entry)
+
+      assert_response :unauthorized
+
+      Flipper.disable(:changelog)
+    end
   end
 end
