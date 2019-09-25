@@ -26,6 +26,17 @@ class IterationAnalysis < ApplicationRecord
     }.compact
   end
 
+  def built_comments_with_commentary
+    return [] unless analysis_comments_data.present?
+
+    analysis_comments_data.map { |comment_data|
+      [
+        begin AnalysisServices::BuildCommentCommentary.(comment_data) rescue nil end,
+        begin AnalysisServices::BuildComment.(comment_data) rescue nil end
+      ]
+    }.compact
+  end
+
   def analysis
     (super || {}).symbolize_keys
   end

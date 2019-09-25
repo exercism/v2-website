@@ -169,6 +169,7 @@ FactoryBot.define do
       puts "Hello World"
     }}
     repo_url { "file://#{Rails.root}/test/fixtures/track" }
+    median_wait_time { 30.hours }
   end
 
   factory :exercise do

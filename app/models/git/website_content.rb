@@ -1,10 +1,6 @@
 class Git::WebsiteContent < Git::RepoBase
-  class << self
-    attr_accessor :repo_url
-
-    def configure
-      yield(self)
-    end
+  def self.repo_url
+    Rails.application.config_for("repos")["website_content"]
   end
 
   def self.head
@@ -61,6 +57,21 @@ class Git::WebsiteContent < Git::RepoBase
     nil
   end
 
+  def automated_comment_commentary_for(code)
+    ptr = head_commit.tree["automated-comments"]
+    tree = repo.lookup(ptr[:oid])
+    path = "#{code.split(".")[0...-1].join("/")}/commentary/"
+    filename = "#{code.split(".").last}.md"
+
+    tree.walk_blobs do |root, file|
+      next unless root == path
+      next unless file[:name] == filename
+      file_blob = repo.lookup(file[:oid])
+      return file_blob.text
+    end
+
+    nil
+  end
 
   def mentors
     ptr = head_commit.tree["mentors"]

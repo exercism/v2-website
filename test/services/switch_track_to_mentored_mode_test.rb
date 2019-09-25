@@ -1,6 +1,20 @@
 require 'test_helper'
 
 class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
+  test "noop if tracks aren't accepting students" do
+    user = create :user
+    track = create :track
+    ut = create :user_track, user: user, track: track, independent_mode: nil
+
+    track.update(median_wait_time: 2.weeks)
+    SwitchTrackToMentoredMode.(user, track)
+    assert_nil ut.reload.independent_mode
+
+    track.update(median_wait_time: 2.days)
+    SwitchTrackToMentoredMode.(user, track)
+    refute ut.reload.independent_mode
+  end
+
   test "sets one core solutions to have mentoring_requested_at" do
     user = create :user
     track = create :track

@@ -71,7 +71,10 @@ class Mentor::DashboardController < MentorController
     @total_solutions_count = current_user.solution_mentorships.count
     @total_students_count = current_user.mentored_solutions.select(:user_id).distinct.count
     @weekly_solutions_count = current_user.solution_mentorships.where("solution_mentorships.created_at > ?", Time.now.beginning_of_week).count
-    @feedbacks = current_user.solution_mentorships.where(show_feedback_to_mentor: true).order('updated_at desc').limit(5).pluck(:feedback)
+    # TODO: re-reenable when show_feedback_to_mentor is actually set
+    # or this feature is actually ready?
+    # @feedbacks = current_user.solution_mentorships.where(show_feedback_to_mentor: true).order('updated_at desc').limit(5).pluck(:feedback)
+    @feedbacks = []
 
     if current_user.num_rated_mentored_solutions > Exercism::MENTOR_RATING_THRESHOLD
       @rating_threshold_reached = true
@@ -101,6 +104,7 @@ class Mentor::DashboardController < MentorController
     @testimonials = current_user.solution_mentorships.
                         with_feedback.
                         includes(solution: [:user, {exercise: :track}]).
+                        order('solutions.completed_at DESC').
                         page(params[:page]).per(20)
   end
 

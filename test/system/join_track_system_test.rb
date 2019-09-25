@@ -14,7 +14,7 @@ class JoinTrackSystemTest < ApplicationSystemTestCase
     click_on "Join the Ruby track"
 
     assert_selector("#modal.my-track-started")
-    click_on "Mentored Mode (Recommended)"
+    click_on "Mentored Mode"
     click_on "Continue"
 
     within(".exercise-wrapper") { assert_text "Hello World" }
@@ -37,7 +37,7 @@ class JoinTrackSystemTest < ApplicationSystemTestCase
     click_on "Join the Ruby track"
 
     assert_selector("#modal.my-track-started")
-    click_on "Independent Mode"
+    click_on "Practice Mode"
 
     within(".widget-side-exercise") { assert_text "Hello World" }
     click_link("Hello World")

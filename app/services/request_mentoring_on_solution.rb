@@ -6,6 +6,7 @@ class RequestMentoringOnSolution
   def call
     # We guard this for exercises that are promoted to core
     unless (user_track.mentored_mode? && solution.exercise.core?)
+      return unless solution.track_accepting_new_students?
       return if user_track.mentoring_allowance_used_up?
     end
 

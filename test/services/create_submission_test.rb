@@ -9,7 +9,7 @@ class CreateSubmissionTest < ActiveSupport::TestCase
 
     files = [[filename, file_contents]]
 
-    ProcessNewSubmissionJob.expects(:perform_later).with do |submission|
+    ProcessNewSubmissionJob.expects(:perform_now).with do |submission|
       assert submission.is_a?(Submission)
     end
 
@@ -33,6 +33,10 @@ class CreateSubmissionTest < ActiveSupport::TestCase
     submission = create :submission, solution: solution
 
     files = [[filename1, file_contents1], [filename2, file_contents2]]
+
+    ProcessNewSubmissionJob.expects(:perform_now).with do |submission|
+      assert submission.is_a?(Submission)
+    end
 
     submission = CreateSubmission.(solution, files)
     assert submission.persisted?

@@ -62,6 +62,10 @@ class Solution < ApplicationRecord
     track_in_independent_mode === false
   end
 
+  def track_accepting_new_students?
+    track.accepting_new_students?
+  end
+
   def mentor_download_command
     "exercism download --uuid=#{uuid}"
   end

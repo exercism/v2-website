@@ -134,7 +134,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_selector ".notifications-bar .notification", text: "In Independent Mode you will not receive mentoring by default. You may request mentoring on 1 solution at a time."
+    assert_selector ".notifications-bar .notification", text: "In Practice Mode you will not receive mentoring by default. You may request mentoring on 1 solution at a time."
   end
 
   test "In independent mode without slots" do
@@ -144,7 +144,7 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     sign_in!(@user)
     visit my_solution_path(@solution)
 
-    assert_selector ".notifications-bar .notification", text: "In Independent Mode you will not receive mentoring by default. You may request mentoring once your existing solutions have been mentored."
+    assert_selector ".notifications-bar .notification", text: "In Practice Mode you will not receive mentoring by default. You may request mentoring once your existing solutions have been mentored."
   end
 
   test "Legacy with mentoring requested" do
