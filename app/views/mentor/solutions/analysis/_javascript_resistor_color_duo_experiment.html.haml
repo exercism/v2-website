@@ -1,4 +1,4 @@
--return unless Flipper[:mentor_commentary].enabled?(current_user)
+-return unless Flipper.enabled?(:mentor_commentary)
 
 .javascript-resistor-color-duo-experiment-analysis-section
   %h3
@@ -24,7 +24,6 @@
 
         -if commentary.present? && comment.present?
           %h5.commentary-and-comment Try suggesting the following:
-          /Suggested comment for student:
 
         -if comment.present?
           .comment.widget-code-snippet
