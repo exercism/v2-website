@@ -10,7 +10,7 @@ module ChangelogAdmin
     end
 
     def allowed?
-      entry.created_by?(user)
+      entry.created_by?(user) && !entry.published?
     end
 
     private
