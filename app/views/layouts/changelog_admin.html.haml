@@ -1,0 +1,21 @@
+!!!
+%html{lang: I18n.locale}
+  %head
+    =stylesheet_link_tag 'application', media: 'all'
+    =async_stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:600,700,800'
+    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/all.css', integrity: 'sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG', crossorigin: 'anonymous'
+    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/v4-shims.css'
+
+    =csrf_meta_tags
+    =yield(:head)
+
+  %body
+    =render_header
+    = yield
+
+    #modal-wrapper
+      #modal
+
+    =javascript_include_tag 'application'
+    =yield(:js)
+    =yield(:async_css)

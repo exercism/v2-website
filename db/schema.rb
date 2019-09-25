@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_094557) do
+ActiveRecord::Schema.define(version: 2019_09_23_044907) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,19 @@ ActiveRecord::Schema.define(version: 2019_09_16_094557) do
     t.string "image_url"
     t.index ["published_at"], name: "index_blog_posts_on_published_at"
     t.index ["slug"], name: "index_blog_posts_on_slug", unique: true
+  end
+
+  create_table "changelog_entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "created_by_id", null: false
+    t.string "title", null: false
+    t.text "details_markdown"
+    t.string "referenceable_type"
+    t.bigint "referenceable_id"
+    t.string "info_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_changelog_entries_on_created_by_id"
+    t.index ["referenceable_type", "referenceable_id"], name: "index_changelog_entries_on_referenceable"
   end
 
   create_table "communication_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -580,6 +593,7 @@ ActiveRecord::Schema.define(version: 2019_09_16_094557) do
     t.boolean "default_allow_comments"
     t.datetime "deleted_at"
     t.boolean "full_width_code_panes", default: false, null: false
+    t.boolean "may_edit_changelog", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
