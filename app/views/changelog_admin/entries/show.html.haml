@@ -16,7 +16,4 @@
 
 %h2 Actions
 
-%ul
-  %li= link_to "Publish",
-    publish_changelog_admin_entry_path(@entry),
-    data: { method: :post, confirm: "Are you sure you want to publish this entry?" }
+= render "actions", entry: @entry

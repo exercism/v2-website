@@ -9,4 +9,16 @@ class ChangelogEntryTest < ActiveSupport::TestCase
 
     assert_equal time, entry.published_at
   end
+
+  test "published? returns true if published_at is set" do
+    entry = create(:changelog_entry, published_at: Time.new(2016, 12, 25))
+
+    assert entry.published?
+  end
+
+  test "published? returns false if published_at isn't set" do
+    entry = create(:changelog_entry, published_at: nil)
+
+    refute entry.published?
+  end
 end

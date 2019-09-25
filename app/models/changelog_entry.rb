@@ -16,4 +16,8 @@ class ChangelogEntry < ApplicationRecord
   def publish!(time = Time.current)
     update!(published_at: time)
   end
+
+  def published?
+    published_at.present?
+  end
 end
