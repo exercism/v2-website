@@ -24,6 +24,14 @@ module ChangelogAdmin
       @entry = ChangelogEntry.find(params[:id])
     end
 
+    def publish
+      @entry = ChangelogEntry.find(params[:id])
+
+      @entry.publish!
+
+      redirect_to changelog_admin_entry_path(@entry)
+    end
+
     private
 
     def form_params
