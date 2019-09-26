@@ -5,7 +5,7 @@ module ChangelogAdmin
     test "admin publishes a changelog entry" do
       travel_to(Time.utc(2016, 12, 25))
       Flipper.enable(:changelog)
-      admin = create(:user, :onboarded, may_edit_changelog: true)
+      admin = create(:user, :onboarded, admin: true)
       entry = create(:changelog_entry)
 
       sign_in!(admin)
