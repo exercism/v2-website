@@ -14,6 +14,19 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
     end
   end
 
+  test "#save saves HTML version of markdown field" do
+    user = create(:user, may_edit_changelog: true)
+    form = ChangelogEntryForm.new(
+      title: "New Exercise",
+      details_markdown: "# We've added a new exercise!",
+    )
+
+    form.save
+
+    entry = form.entry
+    assert_equal "<h1>We've added a new exercise!</h1>\n", entry.details_html
+  end
+
   test "validates presence of title" do
     user = create(:user)
     form = ChangelogEntryForm.new(title: nil, created_by: user)
