@@ -10,10 +10,18 @@ module ChangelogAdmin
     end
 
     def allowed?
-      entry.created_by?(user) && !entry.published?
+      user_allowed? && unpublished?
     end
 
     private
     attr_reader :entry, :user
+
+    def user_allowed?
+      entry.created_by?(user) || user.admin?
+    end
+
+    def unpublished?
+      !entry.published?
+    end
   end
 end
