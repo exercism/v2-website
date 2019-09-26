@@ -2,18 +2,26 @@ require "test_helper"
 
 module ChangelogAdmin
   class ActionsTest < ActionView::TestCase
-    test "show publish button if entry is unpublished" do
-      entry = create(:changelog_entry, published_at: nil)
+    test "show publish button if entry is publishable" do
+      entry = create(:changelog_entry)
       view.stubs(:allowed_to_edit_changelog_entry?)
+      view.
+        stubs(:allowed_to_publish_changelog_entry?).
+        with(entry).
+        returns(true)
 
       render "changelog_admin/entries/actions", entry: entry
 
       assert_select "a", text: "Publish", exact: true
     end
 
-    test "hide publish button if entry is published" do
-      entry = create(:changelog_entry, published_at: Time.new(2016, 12, 25))
+    test "hide publish button if entry is unpublishable" do
+      entry = create(:changelog_entry)
       view.stubs(:allowed_to_edit_changelog_entry?)
+      view.
+        stubs(:allowed_to_publish_changelog_entry?).
+        with(entry).
+        returns(false)
 
       render "changelog_admin/entries/actions", entry: entry
 
@@ -22,6 +30,7 @@ module ChangelogAdmin
 
     test "show edit button if entry is editable by user" do
       entry = create(:changelog_entry)
+      view.stubs(:allowed_to_publish_changelog_entry?)
       view.
         stubs(:allowed_to_edit_changelog_entry?).
         with(entry).
@@ -34,6 +43,7 @@ module ChangelogAdmin
 
     test "hide edit button if entry is not editable by user" do
       entry = create(:changelog_entry)
+      view.stubs(:allowed_to_publish_changelog_entry?)
       view.
         stubs(:allowed_to_edit_changelog_entry?).
         with(entry).

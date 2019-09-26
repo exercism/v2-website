@@ -4,15 +4,16 @@ module ChangelogAdmin
       new(*args).allowed?
     end
 
-    def initialize(user)
+    def initialize(user:, entry:)
       @user = user
+      @entry = entry
     end
 
     def allowed?
-      user.admin?
+      user.admin? && !entry.published?
     end
 
     private
-    attr_reader :user
+    attr_reader :user, :entry
   end
 end
