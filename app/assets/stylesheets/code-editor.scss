@@ -69,7 +69,7 @@ body .md-editor {
     }
 
     p,li {
-        > code {
+        &> code {
             border:1px solid #fafafa;
             background:#f5f5f5;
             @include code-font;
