@@ -3,8 +3,9 @@ require "test_helper"
 module ChangelogAdmin
   class ActionsTest < ActionView::TestCase
     test "show publish button if entry is unpublished" do
+      user = create(:user)
       entry = create(:changelog_entry, published_at: nil)
-      controller.stubs(:current_user)
+      controller.stubs(:current_user).returns(user)
 
       render "changelog_admin/entries/actions", entry: entry
 
@@ -12,8 +13,9 @@ module ChangelogAdmin
     end
 
     test "hide publish button if entry is published" do
+      user = create(:user)
       entry = create(:changelog_entry, published_at: Time.new(2016, 12, 25))
-      controller.stubs(:current_user)
+      controller.stubs(:current_user).returns(user)
 
       render "changelog_admin/entries/actions", entry: entry
 

@@ -11,7 +11,7 @@ module ChangelogAdmin
     end
 
     def create
-      @form = ChangelogEntryForm.new(form_params)
+      @form = ChangelogEntryForm.new(form_params.merge(created_by: current_user))
 
       if @form.valid?
         @form.save
@@ -39,8 +39,9 @@ module ChangelogAdmin
     end
 
     def update
-      @form = ChangelogEntryForm.new(form_params.merge(id: @entry.id))
+      @form = ChangelogEntryForm.from_entry(@entry)
 
+      @form.assign_attributes(form_params)
       @form.save
 
       redirect_to changelog_admin_entry_path(@entry)
@@ -62,8 +63,7 @@ module ChangelogAdmin
     def form_params
       params.
         require(:changelog_entry_form).
-        permit(:title, :details_markdown, :referenceable_gid, :info_url).
-        merge(created_by: current_user)
+        permit(:title, :details_markdown, :referenceable_gid, :info_url)
     end
   end
 end

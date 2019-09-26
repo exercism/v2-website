@@ -1,10 +1,4 @@
 class ChangelogEntryForm
-  class UnauthorizedUserError < StandardError
-    def initialize(msg = "User isn't allowed to save an entry")
-      super
-    end
-  end
-
   class CantChangeCreatedByError < StandardError
     def initialize(msg = "Created by isn't allowed to be changed")
       super
@@ -22,6 +16,7 @@ class ChangelogEntryForm
       details_markdown: entry.details_markdown,
       referenceable_gid: referenceable_gid,
       info_url: entry.info_url,
+      created_by: entry.created_by
     )
   end
 
@@ -42,7 +37,6 @@ class ChangelogEntryForm
   attr_reader :created_by
 
   def save
-    raise UnauthorizedUserError unless created_by.may_edit_changelog?
     if entry.persisted? && entry.created_by != created_by
       raise CantChangeCreatedByError
     end

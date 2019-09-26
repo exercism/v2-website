@@ -19,7 +19,9 @@ module ChangelogAdmin
     end
 
     def check_authorization!
-      return unauthorized! unless current_user.may_edit_changelog?
+      unless AllowedToAccessPolicy.allowed?(current_user)
+        return unauthorized!
+      end
     end
   end
 end
