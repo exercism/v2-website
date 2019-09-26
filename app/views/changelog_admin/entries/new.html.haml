@@ -1,9 +1,4 @@
 .lo-container
   %h1 New Entry
 
-  - if @form.errors.any?
-    .errors
-      - @form.errors.full_messages.each do |error|
-        %p= error
-
   = render "form", form: @form, url: changelog_admin_entries_path

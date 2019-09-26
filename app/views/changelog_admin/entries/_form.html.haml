@@ -1,5 +1,10 @@
 - method ||= :post
 
+- if form.errors.any?
+  .errors
+    - form.errors.full_messages.each do |error|
+      %p= error
+
 = form_for form,
   url: url,
   method: method,

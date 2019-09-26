@@ -42,9 +42,14 @@ module ChangelogAdmin
       @form = ChangelogEntryForm.from_entry(@entry)
 
       @form.assign_attributes(form_params)
-      @form.save
 
-      redirect_to changelog_admin_entry_path(@entry)
+      if @form.valid?
+        @form.save
+
+        redirect_to changelog_admin_entry_path(@entry)
+      else
+        render :edit
+      end
     end
 
     private

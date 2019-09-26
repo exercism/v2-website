@@ -31,6 +31,21 @@ module ChangelogAdmin
       Flipper.disable(:changelog)
     end
 
+    test "admin see errors when editing a changelog entry" do
+      Flipper.enable(:changelog)
+      admin = create(:user, :onboarded, may_edit_changelog: true)
+      entry = create(:changelog_entry, created_by: admin)
+
+      sign_in!(admin)
+      visit edit_changelog_admin_entry_path(entry)
+      fill_in "Title", with: "  "
+      click_on "Save"
+
+      assert_text "Title can't be blank"
+
+      Flipper.disable(:changelog)
+    end
+
     test "site admin edits a changelog entry in behalf of another user" do
       Flipper.enable(:changelog)
       site_admin = create(:user, :onboarded, admin: true)
