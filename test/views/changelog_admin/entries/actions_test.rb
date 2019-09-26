@@ -9,7 +9,7 @@ module ChangelogAdmin
 
       render "changelog_admin/entries/actions", entry: entry
 
-      assert_select "a", exact_text: "Publish"
+      assert_select "a", text: "Publish", exact: true
     end
 
     test "hide publish button if entry is published" do
@@ -19,7 +19,7 @@ module ChangelogAdmin
 
       render "changelog_admin/entries/actions", entry: entry
 
-      assert_select "a", 0, exact_text: "Publish"
+      assert_select "a", text: "Publish", exact: true, count: 0
 
     end
 
@@ -34,7 +34,7 @@ module ChangelogAdmin
 
       render "changelog_admin/entries/actions", entry: entry
 
-      assert_select "a", text: "Edit"
+      assert_select "a", text: "Edit", exact: true
     end
 
     test "hide edit button if entry is not editable by user" do
@@ -49,7 +49,7 @@ module ChangelogAdmin
 
       render "changelog_admin/entries/actions", entry: entry
 
-      assert_select "a", count: 0, text: "Edit"
+      assert_select "a", count: 0, text: "Edit", exact: true
     end
   end
 end
