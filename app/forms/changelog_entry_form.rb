@@ -34,8 +34,6 @@ class ChangelogEntryForm
     :created_by,
   )
 
-  attr_reader :created_by
-
   def save
     if entry.persisted? && entry.created_by != created_by
       raise CantChangeCreatedByError
