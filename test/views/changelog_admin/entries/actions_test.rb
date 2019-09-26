@@ -5,7 +5,7 @@ module ChangelogAdmin
     test "show publish button if entry is unpublished" do
       user = create(:user)
       entry = create(:changelog_entry, published_at: nil)
-      controller.stubs(:current_user).returns(user)
+      view.stubs(:current_user).returns(user)
 
       render "changelog_admin/entries/actions", entry: entry
 
@@ -15,7 +15,7 @@ module ChangelogAdmin
     test "hide publish button if entry is published" do
       user = create(:user)
       entry = create(:changelog_entry, published_at: Time.new(2016, 12, 25))
-      controller.stubs(:current_user).returns(user)
+      view.stubs(:current_user).returns(user)
 
       render "changelog_admin/entries/actions", entry: entry
 
@@ -26,8 +26,8 @@ module ChangelogAdmin
     test "show edit button if entry is editable by user" do
       user = create(:user)
       entry = create(:changelog_entry, created_by: user)
-      controller.stubs(:current_user).returns(user)
-      controller.
+      view.stubs(:current_user).returns(user)
+      view.
         stubs(:allowed_to_edit_changelog_entry?).
         with(entry).
         returns(true)
@@ -41,8 +41,8 @@ module ChangelogAdmin
       user = create(:user)
       other_user = create(:user)
       entry = create(:changelog_entry, created_by: other_user)
-      controller.stubs(:current_user).returns(user)
-      controller.
+      view.stubs(:current_user).returns(user)
+      view.
         stubs(:allowed_to_edit_changelog_entry?).
         with(entry).
         returns(false)
