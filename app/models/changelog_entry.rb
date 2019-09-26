@@ -1,4 +1,6 @@
 class ChangelogEntry < ApplicationRecord
+  class EntryAlreadyPublishedError < StandardError; end;
+
   belongs_to :referenceable, polymorphic: true, optional: true
   belongs_to :created_by, class_name: "User"
 
@@ -11,5 +13,15 @@ class ChangelogEntry < ApplicationRecord
 
   def referenceable
     ChangelogAdmin::Referenceable.for(super)
+  end
+
+  def publish!(time = Time.current)
+    raise EntryAlreadyPublishedError if published?
+
+    update!(published_at: time)
+  end
+
+  def published?
+    published_at.present?
   end
 end

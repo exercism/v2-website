@@ -11,3 +11,9 @@
   %dd= @entry.referenceable_title
   %dt Info url
   %dd= @entry.info_url
+  %dt Published at
+  %dd= @entry.published_at
+
+%h2 Actions
+
+= render "actions", entry: @entry
