@@ -27,6 +27,21 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
     assert_equal "<h1>We've added a new exercise!</h1>\n", entry.details_html
   end
 
+  test "#save saves reference key" do
+    user = create(:user, may_edit_changelog: true)
+    track = create(:track)
+    form = ChangelogEntryForm.new(
+      title: "New Exercise",
+      details_markdown: "# We've added a new exercise!",
+      referenceable_gid: track.to_global_id,
+    )
+
+    form.save
+
+    entry = form.entry
+    assert_equal "track_#{track.id}", entry.referenceable_key
+  end
+
   test "validates presence of title" do
     user = create(:user)
     form = ChangelogEntryForm.new(title: nil, created_by: user)

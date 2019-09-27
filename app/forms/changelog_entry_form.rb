@@ -44,6 +44,7 @@ class ChangelogEntryForm
       details_markdown: details_markdown,
       details_html: details_html,
       referenceable: referenceable,
+      referenceable_key: referenceable_key,
       info_url: info_url,
       created_by: created_by
     )
@@ -68,5 +69,11 @@ class ChangelogEntryForm
 
   def details_html
     ParseMarkdown.(details_markdown)
+  end
+
+  def referenceable_key
+    return if referenceable.blank?
+
+    "#{referenceable.class.name.underscore}_#{referenceable.id}"
   end
 end
