@@ -23,4 +23,4 @@
         %pubDate= post.published_at.rfc822
         %guid{isPermaLink: 'true'}= blog_post_url(post)
         %comments= blog_post_url(post, anchor: 'comments')
-        %content:encoded <![CDATA[#{post.content}]]>
+        %content:encoded <![CDATA[#{raw post.content}]]>
