@@ -4,4 +4,4 @@
   %p Created by #{entry.created_by_handle}
   %p= raw entry.details_html
   - if entry.info_url
-    %p= link_to "View", entry.info_url
+    %p= link_to changelog_entry_info_url_text(entry.info_url), entry.info_url
