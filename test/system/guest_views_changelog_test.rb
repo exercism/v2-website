@@ -20,4 +20,18 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
     assert_link "View", href: "https://exercism.io/new-exercise"
     assert_selector "img[src='https://exercism.io/image.jpg']"
   end
+
+  test "guest views paginated changelog" do
+    create(:changelog_entry,
+           title: "New track",
+           published_at: Time.utc(2016, 12, 25, 23, 30, 0))
+    create(:changelog_entry,
+           title: "New exercise",
+           published_at: Time.utc(2016, 12, 25, 23, 59, 59))
+
+    visit changelog_path(per_page: 1, page: 1)
+
+    assert_text "New exercise"
+    refute_text "New track"
+  end
 end
