@@ -6,6 +6,12 @@ module ChangelogAdmin
 
     layout "changelog_admin"
 
+    protected
+
+    def unauthorized!
+      redirect_to root_path, status: 401
+    end
+
     private
 
     def check_feature_enabled!
@@ -13,11 +19,9 @@ module ChangelogAdmin
     end
 
     def check_authorization!
-      return unauthorized! unless current_user.may_edit_changelog?
-    end
-
-    def unauthorized!
-      redirect_to root_path, status: 401
+      unless AllowedToAccessPolicy.allowed?(current_user)
+        return unauthorized!
+      end
     end
   end
 end

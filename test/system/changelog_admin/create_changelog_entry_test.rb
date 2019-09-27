@@ -18,7 +18,7 @@ module ChangelogAdmin
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "Info url", with: "https://github.com/exercism"
-      click_on "Create entry"
+      click_on "Save"
 
       assert_text "New Exercise"
       assert_text "# We've added a new exercise!"
@@ -44,7 +44,7 @@ module ChangelogAdmin
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "Info url", with: "https://github.com/exercism"
-      click_on "Create entry"
+      click_on "Save"
 
       assert_text "Title can't be blank"
       assert has_select?(

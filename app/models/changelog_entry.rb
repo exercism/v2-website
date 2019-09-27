@@ -7,10 +7,6 @@ class ChangelogEntry < ApplicationRecord
   delegate :title, to: :referenceable, prefix: true, allow_nil: true
   delegate :name, to: :created_by, prefix: true
 
-  def referenceable_gid
-    referenceable.to_global_id
-  end
-
   def referenceable
     ChangelogAdmin::Referenceable.for(super)
   end
@@ -23,5 +19,9 @@ class ChangelogEntry < ApplicationRecord
 
   def published?
     published_at.present?
+  end
+
+  def created_by?(user)
+    created_by == user
   end
 end
