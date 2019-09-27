@@ -42,6 +42,7 @@ class ChangelogEntryForm
     entry.assign_attributes(
       title: title,
       details_markdown: details_markdown,
+      details_html: details_html,
       referenceable: referenceable,
       info_url: info_url,
       created_by: created_by
@@ -61,5 +62,11 @@ class ChangelogEntryForm
 
   def entry
     @entry ||= id ? ChangelogEntry.find(id) : ChangelogEntry.new
+  end
+
+  private
+
+  def details_html
+    ParseMarkdown.(details_markdown)
   end
 end
