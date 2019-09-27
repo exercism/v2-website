@@ -4,8 +4,10 @@ module ChangelogAdmin
       case obj
       when Exercise
         ReferenceableExercise.new(obj)
+      when Track
+        ReferenceableTrack.new(obj)
       else
-        obj
+        NullReferenceable.new
       end
     end
   end

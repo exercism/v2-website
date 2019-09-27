@@ -132,6 +132,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :changelog, only: [:show]
+
   # ######## #
   # Internal #
   # ######## #

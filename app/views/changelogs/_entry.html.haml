@@ -1,0 +1,7 @@
+%div
+  %p= image_tag entry.icon
+  %p= entry.title
+  %p Created by #{entry.created_by_handle}
+  %p= raw entry.details_html
+  - if entry.info_url
+    %p= link_to "View", entry.info_url

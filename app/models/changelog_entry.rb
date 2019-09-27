@@ -4,8 +4,15 @@ class ChangelogEntry < ApplicationRecord
   belongs_to :referenceable, polymorphic: true, optional: true
   belongs_to :created_by, class_name: "User"
 
-  delegate :title, to: :referenceable, prefix: true, allow_nil: true
-  delegate :name, to: :created_by, prefix: true
+  delegate :title, to: :referenceable, prefix: true
+  delegate :icon, to: :referenceable
+  delegate :name, :handle, to: :created_by, prefix: true
+
+  scope :published, -> { where.not(published_at: nil) }
+
+  def referenceable_gid
+    referenceable.to_global_id
+  end
 
   def referenceable
     ChangelogAdmin::Referenceable.for(super)

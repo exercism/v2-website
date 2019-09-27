@@ -1,14 +1,10 @@
 class ChangelogEntryForm
   def self.from_entry(entry)
-    referenceable_gid = if entry.referenceable
-                          GlobalID.create(entry.referenceable)
-                        end
-
     new(
       id: entry.id,
       title: entry.title,
       details_markdown: entry.details_markdown,
-      referenceable_gid: referenceable_gid,
+      referenceable_gid: entry.referenceable_gid,
       info_url: entry.info_url,
       created_by: entry.created_by
     )
