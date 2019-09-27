@@ -1,19 +1,6 @@
 require "test_helper"
 
 class ChangelogEntryFormTest < ActiveSupport::TestCase
-  test "#save raises an error when editing an existing entry" do
-    user = create(:user, may_edit_changelog: true)
-    other_user = create(:user, may_edit_changelog: true)
-    entry = create(:changelog_entry, created_by: user)
-
-    form = ChangelogEntryForm.from_entry(entry)
-    form.created_by = other_user
-
-    assert_raises ChangelogEntryForm::CantChangeCreatedByError do
-      form.save
-    end
-  end
-
   test "#save saves HTML version of markdown field" do
     user = create(:user, may_edit_changelog: true)
     form = ChangelogEntryForm.new(

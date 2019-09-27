@@ -1,10 +1,4 @@
 class ChangelogEntryForm
-  class CantChangeCreatedByError < StandardError
-    def initialize(msg = "Created by isn't allowed to be changed")
-      super
-    end
-  end
-
   def self.from_entry(entry)
     referenceable_gid = if entry.referenceable
                           GlobalID.create(entry.referenceable)
@@ -35,10 +29,6 @@ class ChangelogEntryForm
   )
 
   def save
-    if entry.persisted? && entry.created_by != created_by
-      raise CantChangeCreatedByError
-    end
-
     entry.assign_attributes(
       title: title,
       details_markdown: details_markdown,
