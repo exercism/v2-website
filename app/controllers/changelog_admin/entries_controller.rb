@@ -64,12 +64,11 @@ module ChangelogAdmin
     def check_if_entry_is_editable!
       @entry = ChangelogEntry.find(params[:id])
 
-      unless AllowedToEditEntryPolicy.allowed?(
-        user: current_user,
-        entry: @entry
-      )
-        return unauthorized!
-      end
+      return unauthorized! unless allowed_to_edit?(@entry)
+    end
+
+    def allowed_to_edit?(entry)
+      AllowedToEditEntryPolicy.allowed?(user: current_user, entry: entry)
     end
 
     def form_params
