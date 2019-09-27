@@ -29,6 +29,13 @@ module ChangelogAdmin
     def publish
       @entry = ChangelogEntry.find(params[:id])
 
+      unless AllowedToPublishEntryPolicy.allowed?(
+        user: current_user,
+        entry: @entry
+      )
+        return unauthorized!
+      end
+
       @entry.publish!
 
       redirect_to changelog_admin_entry_path(@entry)

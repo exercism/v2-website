@@ -1,5 +1,5 @@
 %ul
-  - unless entry.published?
+  - if allowed_to_publish_changelog_entry?(entry)
     %li= link_to "Publish",
         publish_changelog_admin_entry_path(entry),
         data: { method: :post,
