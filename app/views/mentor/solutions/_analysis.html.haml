@@ -3,7 +3,7 @@
 -analysis = @iteration.analyses.last
 -return unless analysis.handled?
 
--if @solution.exercise.track.slug == "javascript" && @solution.exercise.slug == "resistor-color-duo"
+-if @solution.exercise.track.slug == "javascript" && %w{resistor-color resistor-color-duo}.include?(@solution.exercise.slug)
   = render "mentor/solutions/analysis/javascript_resistor_color_duo_experiment", analysis: analysis
 -else
   .analysis-section
