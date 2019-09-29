@@ -7,4 +7,8 @@ class ChangelogEntriesController < ApplicationController
       page(params[:page]).
       per(per_page)
   end
+
+  def show
+    @entry = ChangelogEntry.find(params[:id])
+  end
 end
