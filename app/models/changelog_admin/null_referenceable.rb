@@ -1,7 +1,7 @@
 module ChangelogAdmin
   class NullReferenceable
     def icon
-      "https://https://via.placeholder.com/150"
+      "https://via.placeholder.com/150"
     end
 
     def title
