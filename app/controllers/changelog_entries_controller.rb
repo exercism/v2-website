@@ -1,5 +1,5 @@
-class ChangelogsController < ApplicationController
-  def show
+class ChangelogEntriesController < ApplicationController
+  def index
     per_page = params[:per_page] || 20
     @entries = ChangelogEntry.
       published.

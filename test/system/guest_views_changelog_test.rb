@@ -12,7 +12,7 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
                    info_url: "https://exercism.io/new-exercise",
                    published_at: Time.utc(2016, 12, 25))
 
-    visit changelog_path
+    visit changelog_entries_path
 
     assert_text "New exercise"
     assert_text "Introducing 'Hello, world!'"
@@ -29,7 +29,7 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
            title: "New exercise",
            published_at: Time.utc(2016, 12, 25, 23, 59, 59))
 
-    visit changelog_path(per_page: 1, page: 1)
+    visit changelog_entries_path(per_page: 1, page: 1)
 
     assert_text "New exercise"
     refute_text "New track"
