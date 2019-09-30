@@ -49,7 +49,9 @@ Rails.application.routes.draw do
   # ############### #
 
   namespace :changelog_admin do
-    resources :entries, only: [:new, :create, :show, :index]
+    resources :entries, only: [:new, :create, :show, :index, :edit, :update] do
+      post :publish, on: :member
+    end
 
     root to: "entries#index"
   end
@@ -129,6 +131,8 @@ Rails.application.routes.draw do
       get page => "track_pages##{page}", as: "#{page}_page"
     end
   end
+
+  resources :changelog_entries, only: [:index, :show]
 
   # ######## #
   # Internal #

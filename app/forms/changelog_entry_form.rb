@@ -1,8 +1,13 @@
 class ChangelogEntryForm
-  class UnauthorizedUserError < StandardError
-    def initialize(msg = "User isn't allowed to save an entry")
-      super
-    end
+  def self.from_entry(entry)
+    new(
+      id: entry.id,
+      title: entry.title,
+      details_markdown: entry.details_markdown,
+      referenceable_gid: entry.referenceable_gid,
+      info_url: entry.info_url,
+      created_by: entry.created_by
+    )
   end
 
   include ActiveModel::Model
@@ -11,29 +16,24 @@ class ChangelogEntryForm
   validates :created_by, presence: true
 
   attr_accessor(
+    :id,
     :title,
     :details_markdown,
     :referenceable_gid,
     :info_url,
-    :created_by
+    :created_by,
   )
 
-  attr_reader :entry
-
-  def initialize(*args)
-    super
-
-    @entry = ChangelogEntry.new(
+  def save
+    entry.assign_attributes(
       title: title,
       details_markdown: details_markdown,
+      details_html: details_html,
       referenceable: referenceable,
+      referenceable_key: referenceable_key,
       info_url: info_url,
       created_by: created_by
     )
-  end
-
-  def save
-    raise UnauthorizedUserError unless created_by.may_edit_changelog?
 
     entry.save
   end
@@ -45,5 +45,21 @@ class ChangelogEntryForm
 
   def referenceable
     GlobalID::Locator.locate(referenceable_gid)
+  end
+
+  def entry
+    @entry ||= id ? ChangelogEntry.find(id) : ChangelogEntry.new
+  end
+
+  private
+
+  def details_html
+    ParseMarkdown.(details_markdown)
+  end
+
+  def referenceable_key
+    return if referenceable.blank?
+
+    "#{referenceable.class.name.underscore}_#{referenceable.id}"
   end
 end

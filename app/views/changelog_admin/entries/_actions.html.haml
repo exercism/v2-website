@@ -1,0 +1,8 @@
+%ul
+  - if allowed_to_publish_changelog_entry?(entry)
+    %li= link_to "Publish",
+        publish_changelog_admin_entry_path(entry),
+        data: { method: :post,
+        confirm: "Are you sure you want to publish this entry?" }
+  - if allowed_to_edit_changelog_entry?(entry)
+    %li= link_to "Edit", edit_changelog_admin_entry_path(entry)
