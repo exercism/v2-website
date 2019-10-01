@@ -11,5 +11,9 @@ class ChangelogEntry
     def to_global_id
       nil
     end
+
+    def twitter_account
+      TwitterAccount.find(:main)
+    end
   end
 end

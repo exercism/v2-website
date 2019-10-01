@@ -15,5 +15,9 @@ class ChangelogEntry
     def icon
       track.bordered_green_icon_url
     end
+
+    def twitter_account
+      TwitterAccount.find(track.slug.to_sym)
+    end
   end
 end

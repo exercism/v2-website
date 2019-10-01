@@ -15,5 +15,9 @@ class ChangelogEntry
     def icon
       exercise.dark_icon_url
     end
+
+    def twitter_account
+      ReferenceableTrack.new(exercise.track).twitter_account
+    end
   end
 end
