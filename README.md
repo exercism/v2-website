@@ -108,5 +108,5 @@ Mysql2::Error: Specified key was too long; max key length is 767 bytes:
 If your system doesn't have a pre-built 5.7 package, [this install log](https://github.com/exercism/pharo/issues/103#issuecomment-420769061) may be helpful.
 
 ### Windows Subsystem For Linux
-Installation on Windows Subsystem For Linux requires Windows Version 1809 (release due October 2018).
+Installation on Windows Subsystem For Linux requires Windows Version 1809 (released in October 2018).
 Tracked at [exercism/exercism#4346](https://github.com/exercism/exercism/issues/4346).
