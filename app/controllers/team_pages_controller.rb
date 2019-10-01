@@ -1,4 +1,6 @@
 class TeamPagesController < ApplicationController
+  skip_before_action :ensure_onboarded!
+
   def show
   end
 
