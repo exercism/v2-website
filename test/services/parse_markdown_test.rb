@@ -99,4 +99,8 @@ Done})
     assert_equal normal.chomp, ParseMarkdown.(%q{[Some link](http://example.com)}).chomp
     assert_equal rel_nofollow.chomp, ParseMarkdown.(%q{[Some link](http://example.com)}, nofollow_links: true).chomp
   end
+
+  test "parses double tildes as strikethrough" do
+    assert_equal "<p><del>Hello</del></p>\n", ParseMarkdown.("~~Hello~~")
+  end
 end
