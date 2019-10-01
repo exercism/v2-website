@@ -1,4 +1,4 @@
-module ChangelogAdmin
+class ChangelogEntry
   class ReferenceableTrack
     attr_reader :track
 

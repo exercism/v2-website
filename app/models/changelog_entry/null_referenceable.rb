@@ -1,4 +1,4 @@
-module ChangelogAdmin
+class ChangelogEntry
   class NullReferenceable
     def icon
       "https://via.placeholder.com/150"

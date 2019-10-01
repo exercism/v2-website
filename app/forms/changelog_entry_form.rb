@@ -40,7 +40,7 @@ class ChangelogEntryForm
 
   def referenceable_types
     [Track, Exercise.includes(:track)].
-      map { |type| ChangelogAdmin::ReferenceableType.new(type) }
+      map { |type| ChangelogEntry::ReferenceableType.new(type) }
   end
 
   def referenceable

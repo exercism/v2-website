@@ -1,4 +1,4 @@
-module ChangelogAdmin
+class ChangelogEntry
   class ReferenceableExercise
     attr_reader :exercise
 

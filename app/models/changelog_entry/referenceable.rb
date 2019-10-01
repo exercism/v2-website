@@ -1,4 +1,4 @@
-module ChangelogAdmin
+class ChangelogEntry
   module Referenceable
     def self.for(obj)
       case obj
