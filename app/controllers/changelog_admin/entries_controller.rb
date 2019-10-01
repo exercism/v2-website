@@ -37,6 +37,7 @@ module ChangelogAdmin
       end
 
       @entry.publish!
+      @entry.tweet!
 
       redirect_to changelog_admin_entry_path(@entry)
     end
