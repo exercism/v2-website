@@ -1,0 +1,54 @@
+@import 'variables';
+@import 'mixins';
+
+$purple: #8A89C0;
+
+body.namespace-none.controller-pages.action-strategy {
+    footer {
+        margin-top:0px;
+    }
+}
+
+#strategy-page {
+    section.organisation-top-banner-section {
+        .inner {
+            background-image:image-url("company/supporter-header.png");
+        }
+    }
+    .content-section {
+        padding:50px 0;
+        .info {
+            max-width:600px;
+        }
+        h2 {
+            font-weight:$fw-black;
+            @include font-size(23, 27);
+            margin-bottom:10px;
+        }
+        h3 {
+            font-weight:$fw-black;
+            @include font-size(17, 23);
+            margin-bottom:10px;
+        }
+        p,li {
+            @include font-size(16, 22);
+        }
+        p {
+            margin-bottom:15px;
+        }
+        a {
+            color:$color-2;
+            font-weight:$fw-semibold;
+        }
+
+        p+h2 {
+            margin-top:30px;
+        }
+
+        p+h3 {
+            margin-top:30px;
+        }
+
+    }
+}
+

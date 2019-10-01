@@ -1,0 +1,39 @@
+#supporters-page.lo-organisation-page
+  =render "organisation_menu", selected: "supporters"
+
+  %section.organisation-top-banner-section
+    .lo-container
+      .inner
+        %h1 
+          .subtitle Helping fund our vision
+          .strong Our Supporters
+
+  %section.introduction-section
+    .lo-container
+      =image_tag "company/supporters-icon.png"
+      %h2 Support from our funders is crucial to achieving Exercism's goals
+      %p
+        While much of Exercism is run by our volunteer community, the website and core infrastructure are managed by a full-time team. We also undertake specific larger projects, such as the development of our automated analyzers, which require a committed team working more intensely on something over a fixed period of time.
+        In order to fund this core team and these products we rely on grant funding from companies or organisation that wish to contribute to our vision of helping providing free programming education for everyone.
+
+      .support-box
+        .cta Want to discuss how you can help Exercism?
+        =link_to "Email us", "mailto:jeremy@exercism.io", class: 'pure-button'
+
+  %section.current-supporters-section
+    .lo-container
+      %h2 Current supporters
+      .supporter
+        =link_to image_tag("supporter-logos/sloan-black.png"), supporter_sloan_page_path
+        %p The Sloan Fondation are supporting the design and development of new tracks on Exercism, in partnership with the University of Chicago. They are funding our research and prototyping, and allowing us to dramatically accelerate the creation of new educational pathways.
+        =link_to "Learn more", "#", class: 'section-link'
+
+      .supporter
+        =link_to image_tag("supporter-logos/mozilla-black.png"), supporter_mozilla_page_path
+        %p Mozilla supported us in teh creation of our automated analyzers. They funded the product design, prototype, and analyzer infrastructure, saving thousands of hours of mentors time, and dramatically reducing wait-times for students.
+        =link_to "Learn more", "#", class: 'section-link'
+
+      .supporter
+        =link_to image_tag("supporter-logos/thalamus-black.png"), supporter_thalamus_page_path
+        %p Thalamus is a team of software developers, data scientists and product experts, working with industry experts to create innovative solutions to big issues. Thalamus's team manage the website and operational sides of Exercism. Along with Katrina, they were responsible for the development of the new Exercism, helping research and design the new product, and creating the technology that powers the site.
+        =link_to "Learn more", "#", class: 'section-link'

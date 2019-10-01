@@ -1,0 +1,97 @@
+@import 'variables';
+@import 'mixins';
+
+.lo-organisation-page {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+    * {
+        font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
+    .lo-organisation-pages-menu {
+        padding-top:4px;
+        padding-bottom:13px;
+        a {
+            color:#666;
+            text-decoration:none;
+            padding-bottom:2px;
+            display:inline-block;
+            margin-right:15px;
+            padding-top:10px;
+            @include font-size(14, 14);
+            &.selected {
+                color:$color-2;
+                font-weight:$fw-bold;
+                border-bottom:2px solid $color-2;
+            }
+        }
+    }
+    .organisation-top-banner-section {
+        @include width-smaller-than-medium() {
+            .lo-container {
+                padding:0;
+            }
+        }
+        @include width-medium() {
+        }
+         .inner {
+            background-color:black;
+            color:#fff;
+            //background-image:image-url("company/about-header.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin:0 auto 0 auto;
+            display: flex;
+            padding:0;
+
+            @include width-smaller-than-medium() {
+                background-size: cover;
+            }
+            @include width-medium() {
+                min-height: 342px;
+                background-size: cover;
+                justify-content: flex-end;
+            }
+
+        }
+        h1 {
+            color:#fff;
+            background-size:cover;
+            background-repeat:no-repeat;
+            text-align:left;
+            font-weight:$fw-light;
+
+            .strong, strong {
+                font-weight:$fw-bold;
+            }
+            .subtitle {
+                @include font-size(25, 34);
+            }
+
+            @include width-smaller-than-medium() {
+                @include font-size(25, 27);
+                background:rgba(0,0,0,0.8);
+                margin:200px 5% 5% 5%;
+                padding:4% 5%;
+            }
+            @include width-medium() {
+                @include font-size(30, 34);
+                background-image:image-url('company/header-rhs.png');
+                padding:120px 4% 120px 11%;
+                width:58%;
+            }
+        }
+    }
+    .section-link {
+        color:#111;
+        text-decoration:none;
+        font-weight:$fw-semibold;
+        display:inline-block;
+        @include font-size(16, 16);
+        margin-top:10px;
+        &:after {
+            content: " ⟶"
+        }
+    }
+}
