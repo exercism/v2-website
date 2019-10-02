@@ -87,3 +87,5 @@ end
 group :development, :production do
   gem 'capistrano-checks'
 end
+
+gem 'pry-rails'
