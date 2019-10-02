@@ -16,6 +16,9 @@
         background-image:image-url('company/stats-background.png');
         background-repeat:no-repeat;
         background-size:cover;
+        @include width-smaller-than-medium() {
+            padding:40px 0;
+        }
         .hexes {
             display:flex;
             flex-wrap: wrap;
@@ -23,6 +26,9 @@
             margin: 0 auto;
             max-width: 940px;
 
+            @include width-smaller-than-medium() {
+                .lo-container { padding: 0 }
+            }
             @include width-medium() {
                 padding:0 70px;
                 padding-top:30px;
@@ -39,12 +45,13 @@
                 justify-content: center;
 
                 @include width-smaller-than-medium() {
-                    width:30%;
-                    padding:20px;
+                    width:50%;
+                    padding:20px 0;
                     border-right:1px solid #fff;
                     margin-bottom:20px;
-                    &:nth-child(3n+3),
-                    &:last-child{ border-right:0 }
+                    &:nth-child(2n+2) { border-right:0 }
+                    &:last-child { display: none }
+
                 }
 
                 @include width-medium() {
@@ -112,7 +119,6 @@
     section.vision-section {
         padding:50px 0;
         .info {
-            margin-bottom:50px;
             @include width-medium() {
                 margin-bottom:0px;
             }
@@ -199,7 +205,7 @@
                 background:#f3f3f3;
                 padding:30px 30px;
                 margin-left:-15px;
-                margin-right:15px;
+                margin-right:-15px;
 
                 h3 {
                     width:100%;
