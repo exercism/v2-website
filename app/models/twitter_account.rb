@@ -26,13 +26,15 @@ class TwitterAccount
     @access_token_secret = access_token_secret
   end
 
-  def tweet(copy)
+  def tweet(tweet)
+    return unless tweet.valid?
+
     TweetJob.perform_later(
       consumer_key: consumer_key,
       consumer_secret: consumer_secret,
       access_token: access_token,
       access_token_secret: access_token_secret,
-      copy: copy
+      text: tweet.text
     )
   end
 

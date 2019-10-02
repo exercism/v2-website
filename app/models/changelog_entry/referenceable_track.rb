@@ -3,6 +3,7 @@ class ChangelogEntry
     attr_reader :track
 
     delegate :to_global_id, to: :track
+    delegate :tweet, to: :twitter_account
 
     def initialize(track)
       @track = track

@@ -1,32 +1,32 @@
 require "test_helper"
 
-class ChangelogEntryTweetFormatterTest < ActiveSupport::TestCase
-  test "returns empty string if tweet_copy is empty" do
+class ChangelogEntryTweetTest < ActiveSupport::TestCase
+  test "#text returns empty string if copy is empty" do
     entry = create(:changelog_entry, tweet_copy: nil)
 
-    assert_equal "", ChangelogEntryTweetFormatter.format(entry)
+    assert_equal "", ChangelogEntryTweet.new(entry).text
   end
 
-  test "returns only tweet_copy if details are nil" do
+  test "#text returns only copy if details are nil" do
     entry = create(:changelog_entry,
                    tweet_copy: "Hello, world!",
                    details_html: nil)
 
-    assert_equal "Hello, world!", ChangelogEntryTweetFormatter.format(entry)
+    assert_equal "Hello, world!", ChangelogEntryTweet.new(entry).text
   end
 
-  test "returns tweet_copy with link if details are present" do
+  test "#text returns copy with link if details are present" do
     entry = create(:changelog_entry,
                    tweet_copy: "Hello, world!",
                    details_html: "<p>New exercise!</p>")
 
     assert_equal(
       "Hello, world! https://test.exercism.io/changelog_entries/#{entry.id}",
-      ChangelogEntryTweetFormatter.format(entry)
+      ChangelogEntryTweet.new(entry).text
     )
   end
 
-  test "returns tweet_copy with link if info URL is present and details are blank" do
+  test "#text returns copy with link if info URL is present and details are blank" do
     entry = create(:changelog_entry,
                    tweet_copy: "Hello, world!",
                    details_html: nil,
@@ -34,7 +34,13 @@ class ChangelogEntryTweetFormatterTest < ActiveSupport::TestCase
 
     assert_equal(
       "Hello, world! https://exercism.io",
-      ChangelogEntryTweetFormatter.format(entry)
+      ChangelogEntryTweet.new(entry).text
     )
+  end
+
+  test "invalid if copy is nil" do
+    entry = create(:changelog_entry, tweet_copy: nil)
+
+    refute ChangelogEntryTweet.new(entry).valid?
   end
 end

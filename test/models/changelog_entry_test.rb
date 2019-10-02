@@ -32,26 +32,12 @@ class ChangelogEntryTest < ActiveSupport::TestCase
   end
 
   test "#tweet! tweets a changelog entry" do
-    twitter_account = mock()
-    twitter_account.expects(:tweet).with("Text")
+    tweet = mock()
     referenceable = mock()
-    referenceable.stubs(:twitter_account).returns(twitter_account)
+    referenceable.expects(:tweet).with(tweet)
     ChangelogEntry::Referenceable.stubs(:for).returns(referenceable)
-    entry = create(:changelog_entry, tweet_copy: "Text")
-    formatter = mock()
-    formatter.stubs(:format).with(entry).returns("Text")
+    entry = create(:changelog_entry)
 
-    entry.tweet!(formatter: formatter)
-  end
-
-  test "#tweet! does not tweet when tweet copy is blank" do
-    twitter_account = mock()
-    twitter_account.expects(:tweet).never
-    referenceable = mock()
-    referenceable.stubs(:twitter_account).returns(twitter_account)
-    ChangelogEntry::Referenceable.stubs(:for).returns(referenceable)
-    entry = create(:changelog_entry, tweet_copy: nil)
-
-    entry.tweet!
+    entry.tweet!(tweet: tweet)
   end
 end

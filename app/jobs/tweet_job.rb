@@ -6,7 +6,7 @@ class TweetJob < ApplicationJob
     consumer_secret:,
     access_token:,
     access_token_secret:,
-    copy:
+    text:
   )
     client = Twitter::REST::Client.new(
       consumer_key: consumer_key,
@@ -15,6 +15,6 @@ class TweetJob < ApplicationJob
       access_token_secret: access_token_secret
     )
 
-    client.update(copy)
+    client.update(text)
   end
 end

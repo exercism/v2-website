@@ -24,12 +24,8 @@ class ChangelogEntry < ApplicationRecord
     update!(published_at: time)
   end
 
-  def tweet!(formatter: ChangelogEntryTweetFormatter)
-    return unless for_tweeting?
-
-    tweet_text = formatter.format(self)
-
-    twitter_account.tweet(tweet_text)
+  def tweet!(tweet: default_tweet)
+    referenceable.tweet(tweet)
   end
 
   def published?
@@ -41,9 +37,8 @@ class ChangelogEntry < ApplicationRecord
   end
 
   private
-  delegate :twitter_account, to: :referenceable
 
-  def for_tweeting?
-    tweet_copy.present?
+  def default_tweet
+    ChangelogEntryTweet.new(self)
   end
 end

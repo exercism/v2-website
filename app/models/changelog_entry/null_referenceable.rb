@@ -1,5 +1,7 @@
 class ChangelogEntry
   class NullReferenceable
+    delegate :tweet, to: :twitter_account
+
     def icon
       "https://via.placeholder.com/150"
     end
