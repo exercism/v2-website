@@ -81,6 +81,7 @@ class PagesController < ApplicationController
     @supporter_name = "Mozilla"
     @supporter_logo = "mozilla-white.png"
     @supporter_website_url = "https://foundation.mozilla.org"
+    @supporter_blog_posts = BlogPost.where(id: [10,8])
 
     @supporter_support_details = ParseMarkdown.(%q{
       Mozilla supported us in the creation of our automated analyzers. They funded the product design, prototype, and analyzer infrastructure, saving thousands of hours of mentors time, and dramatically reducing wait-times for students.
@@ -97,6 +98,7 @@ class PagesController < ApplicationController
     @supporter_name = "The Sloan Foundation"
     @supporter_logo = "sloan-white.png"
     @supporter_website_url = "https://sloan.org"
+    @supporter_blog_posts = BlogPost.where(id: [15])
 
     @supporter_support_details = ParseMarkdown.(%q{
 The Sloan Fondation are supporting the design and development of new tracks on Exercism, in partnership with the University of Chicago. They are funding our research and prototyping, and allowing us to dramatically accelerate the creation of new educational pathways.
@@ -115,7 +117,7 @@ Founded in 1934 by industrialist Alfred P. Sloan Jr., the Foundation is a not-fo
     @supporter_name = "Thalamus"
     @supporter_logo = "thalamus-white.png"
     @supporter_website_url = "https://thalamus.ai"
-    @supporter_blog_posts = BlogPost.where(id: [1,2])
+    @supporter_blog_posts = BlogPost.where(id: [1])
 
     @supporter_support_details = ParseMarkdown.(%q{
       Thalamus's team manage the website and operational sides of Exercism. Along with Katrina, they were responsible for the development of the new Exercism, helping research and design the new product, and creating the technology that powers the site.
