@@ -36,7 +36,6 @@
         .inner {
             background-color:black;
             color:#fff;
-            //background-image:image-url("company/about-header.png");
             background-size: cover;
             background-repeat: no-repeat;
             margin:0 auto 0 auto;
@@ -66,9 +65,9 @@
 
             @include width-smaller-than-medium() {
                 @include font-size(25, 27);
-                background:rgba(0,0,0,0.8);
-                margin:200px 5% 5% 5%;
-                padding:4% 5%;
+                background:rgba(#22333B,0.85);
+                margin:200px 5% 5% 0;
+                padding:4% 15px;
 
                 .subtitle {
                     @include font-size(22, 30);

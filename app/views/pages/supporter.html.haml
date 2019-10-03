@@ -19,9 +19,10 @@
 
         =link_to "Visit #{@supporter_name}'s website", @supporter_website_url, class: 'section-link'
       .read-more
-        %h2 Read more
+        %h2 Learn more
         -@supporter_blog_posts.each do |post|
-          =link_to post do
+          .post
             %h3= post.title
             .blurb= post.marketing_copy
-            .date Published #{time_ago_in_words(post.published_at)} ago
+
+            =link_to "Read blog post", post, class: 'section-link'

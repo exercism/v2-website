@@ -1,6 +1,12 @@
 @import 'variables';
 @import 'mixins';
 
+body.namespace-none.controller-pages.action-about {
+    footer {
+        margin-top:0;
+    }
+}
+
 #about-page {
     section.organisation-top-banner-section {
         .inner {
@@ -103,7 +109,7 @@
     section.supporters-section,
     section.methodology-section,
     section.story-section {
-        padding:50px 0;
+        padding:30px 0;
         margin-bottom:0;
 
         @include width-medium() {
@@ -117,7 +123,7 @@
         }
     }
     section.vision-section {
-        padding:50px 0;
+        padding:30px 0;
         .info {
             @include width-medium() {
                 margin-bottom:0px;
@@ -184,6 +190,9 @@
 
         @include width-smaller-than-medium() {
             padding-bottom:0;
+            a {
+                width:100%;
+            }
         }
         @include width-medium() {
             .info {
@@ -345,6 +354,9 @@
                 width:100%;
             }
 
+            @include width-smaller-than-medium() {
+                display:none;
+            }
             @include width-medium() {
                 width:55%;
                 padding-left:10%;
