@@ -51,7 +51,8 @@ class ChangelogEntryForm
         referenceable: referenceable,
         referenceable_key: referenceable_key,
         info_url: info_url,
-        created_by: created_by
+        created_by: created_by,
+        tweet_copy: tweet_copy
       )
     end
   end

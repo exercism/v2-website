@@ -75,7 +75,7 @@ module ChangelogAdmin
     def form_params
       params.
         require(:changelog_entry_form).
-        permit(:title, :details_markdown, :referenceable_gid, :info_url)
+        permit(:title, :details_markdown, :referenceable_gid, :info_url, :tweet_copy)
     end
   end
 end
