@@ -33,9 +33,7 @@
                 padding:0;
             }
         }
-        @include width-medium() {
-        }
-         .inner {
+        .inner {
             background-color:black;
             color:#fff;
             //background-image:image-url("company/about-header.png");
@@ -65,21 +63,25 @@
             .strong, strong {
                 font-weight:$fw-bold;
             }
-            .subtitle {
-                @include font-size(25, 34);
-            }
 
             @include width-smaller-than-medium() {
                 @include font-size(25, 27);
                 background:rgba(0,0,0,0.8);
                 margin:200px 5% 5% 5%;
                 padding:4% 5%;
+
+                .subtitle {
+                    @include font-size(22, 30);
+                }
             }
             @include width-medium() {
                 @include font-size(30, 34);
                 background-image:image-url('company/header-rhs.png');
                 padding:120px 4% 120px 11%;
                 width:58%;
+                .subtitle {
+                    @include font-size(25, 34);
+                }
             }
         }
     }

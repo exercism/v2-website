@@ -42,20 +42,31 @@ body.namespace-none.controller-pages.action-supporters {
         .support-box {
             background:$purple;
             color:#fff;
-            display:flex;
             padding:20px;
             border-radius:2px;
             .cta {
-                width:45%;
-                margin-right:5%;
                 @include font-size(16, 22);
+                margin-bottom:10px;
+                text-align:center;
             }
             .pure-button {
-                width:50%;
+                width:100%;
                 background:#fff;
                 color:$purple;
                 @include font-size(16, 30);
                 font-weight:$fw-black;
+            }
+            @include width-medium() {
+                display:flex;
+                .cta {
+                    width:45%;
+                    margin-right:5%;
+                    text-align:left;
+                    margin:0;
+                }
+                .pure-button {
+                    width:50%;
+                }
             }
         }
     }
