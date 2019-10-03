@@ -29,6 +29,6 @@ class TeamPagesController < ApplicationController
                                 where.not(is_maintainer: true).
                                 order("num_contributions DESC").
                                 page(@page).
-                                per(40)
+                                per(60)
   end
 end
