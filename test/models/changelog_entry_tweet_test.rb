@@ -43,4 +43,23 @@ class ChangelogEntryTweetTest < ActiveSupport::TestCase
 
     refute ChangelogEntryTweet.new(entry).valid?
   end
+
+  test "invalid if length goes over limit" do
+    ChangelogEntryTweet.stubs(:character_limit).returns(1)
+
+    entry = create(:changelog_entry, tweet_copy: "He")
+
+    refute ChangelogEntryTweet.new(entry).valid?
+  end
+
+  test "valid if URL is shortened" do
+    ChangelogEntryTweet.stubs(:character_limit).returns(6)
+    ChangelogEntryTweet.stubs(:shortened_url_length).returns(1)
+
+    entry = create(:changelog_entry,
+                   tweet_copy: "Hello",
+                   info_url: "https://exercism.io/very-very-very-long-url")
+
+    assert ChangelogEntryTweet.new(entry).valid?
+  end
 end
