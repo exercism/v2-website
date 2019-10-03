@@ -1,6 +1,12 @@
 @import 'variables';
 @import 'mixins';
 
+body.namespace-none.controller-team_pages.action-show {
+    footer {
+        margin-top:0px;
+    }
+}
+
 #team-intro-page {
     section.organisation-top-banner-section {
         .inner {
@@ -74,7 +80,7 @@
         }
         .h2-subheading  {
             width:100%;
-            margin-bottom:10px;
+            margin-bottom:20px;
             @include font-size(14, 14);
             font-weight:$fw-semibold;
             text-align:center;

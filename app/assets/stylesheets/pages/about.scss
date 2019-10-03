@@ -46,7 +46,7 @@
 
                 @include width-smaller-than-medium() {
                     width:50%;
-                    padding:20px 0;
+                    padding:20px;
                     border-right:1px solid #fff;
                     margin-bottom:20px;
                     &:nth-child(2n+2) { border-right:0 }
