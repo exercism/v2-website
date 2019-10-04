@@ -9,6 +9,6 @@ class ChangelogEntriesController < ApplicationController
   end
 
   def show
-    @entry = ChangelogEntry.find(params[:id])
+    @entry = ChangelogEntry.published.find(params[:id])
   end
 end
