@@ -24,6 +24,10 @@ class ChangelogEntry < ApplicationRecord
     update!(published_at: time)
   end
 
+  def unpublish!(time = Time.current)
+    update!(published_at: nil)
+  end
+
   def tweet!(tweet: default_tweet)
     referenceable.tweet(tweet)
   end

@@ -42,6 +42,14 @@ module ChangelogAdmin
       redirect_to changelog_admin_entry_path(@entry)
     end
 
+    def unpublish
+      @entry = ChangelogEntry.find(params[:id])
+
+      @entry.unpublish!
+
+      redirect_to changelog_admin_entry_path(@entry)
+    end
+
     def edit
       @form = ChangelogEntryForm.from_entry(@entry)
     end

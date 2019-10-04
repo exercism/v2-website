@@ -10,6 +10,13 @@ module ChangelogEntryHelper
     )
   end
 
+  def allowed_to_unpublish_changelog_entry?(entry, user: current_user)
+    ChangelogAdmin::AllowedToUnpublishEntryPolicy.allowed?(
+      entry: entry,
+      user: user
+    )
+  end
+
   def changelog_entry_info_url_text(info_url)
     case info_url
     when /https:\/\/github.com\/.*\/.*\/pull/

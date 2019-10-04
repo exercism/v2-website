@@ -23,6 +23,17 @@ class ChangelogEntryHelperTest < ActionView::TestCase
     assert allowed_to_publish_changelog_entry?(entry, user: user)
   end
 
+  test "#allowed_to_unpublish_changelog_entry? calls correct policy" do
+    entry = create(:changelog_entry)
+    user = create(:user)
+    ChangelogAdmin::AllowedToUnpublishEntryPolicy.
+      stubs(:allowed?).
+      with(entry: entry, user: user).
+      returns(true)
+
+    assert allowed_to_unpublish_changelog_entry?(entry, user: user)
+  end
+
   test "#changelog_entry_info_url_text returns unique text depending on URL" do
     assert_equal(
       "View PR on GitHub",
