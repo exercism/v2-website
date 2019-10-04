@@ -76,6 +76,14 @@ module ChangelogAdmin
       end
     end
 
+    def destroy
+      @entry = ChangelogEntry.find(params[:id])
+
+      @entry.destroy
+
+      redirect_to changelog_admin_entries_path
+    end
+
     private
 
     def check_if_entry_is_editable!
