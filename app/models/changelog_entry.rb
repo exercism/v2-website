@@ -36,9 +36,20 @@ class ChangelogEntry < ApplicationRecord
     created_by == user
   end
 
+  def tweet_link
+    case
+    when details_html?
+      Rails.application.routes.url_helpers.url_for(self)
+    when info_url?
+      info_url
+    else
+      ""
+    end
+  end
+
   private
 
   def default_tweet
-    Tweet.new(self)
+    Tweet.from_entry(self)
   end
 end
