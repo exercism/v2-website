@@ -1,10 +1,10 @@
 require "test_helper"
 
-class ChangelogEntryTweetTest < ActiveSupport::TestCase
+class ChangelogEntry::TweetTest < ActiveSupport::TestCase
   test "#text returns empty string if copy is empty" do
     entry = create(:changelog_entry, tweet_copy: nil)
 
-    assert_equal "", ChangelogEntryTweet.new(entry).text
+    assert_equal "", ChangelogEntry::Tweet.new(entry).text
   end
 
   test "#text returns only copy if details are nil" do
@@ -12,7 +12,7 @@ class ChangelogEntryTweetTest < ActiveSupport::TestCase
                    tweet_copy: "Hello, world!",
                    details_html: nil)
 
-    assert_equal "Hello, world!", ChangelogEntryTweet.new(entry).text
+    assert_equal "Hello, world!", ChangelogEntry::Tweet.new(entry).text
   end
 
   test "#text returns copy with link if details are present" do
@@ -22,7 +22,7 @@ class ChangelogEntryTweetTest < ActiveSupport::TestCase
 
     assert_equal(
       "Hello, world! https://test.exercism.io/changelog_entries/#{entry.id}",
-      ChangelogEntryTweet.new(entry).text
+      ChangelogEntry::Tweet.new(entry).text
     )
   end
 
@@ -34,32 +34,32 @@ class ChangelogEntryTweetTest < ActiveSupport::TestCase
 
     assert_equal(
       "Hello, world! https://exercism.io",
-      ChangelogEntryTweet.new(entry).text
+      ChangelogEntry::Tweet.new(entry).text
     )
   end
 
   test "invalid if copy is nil" do
     entry = create(:changelog_entry, tweet_copy: nil)
 
-    refute ChangelogEntryTweet.new(entry).valid?
+    refute ChangelogEntry::Tweet.new(entry).valid?
   end
 
   test "invalid if length goes over limit" do
-    ChangelogEntryTweet.stubs(:character_limit).returns(1)
+    ChangelogEntry::Tweet.stubs(:character_limit).returns(1)
 
     entry = create(:changelog_entry, tweet_copy: "He")
 
-    refute ChangelogEntryTweet.new(entry).valid?
+    refute ChangelogEntry::Tweet.new(entry).valid?
   end
 
   test "valid if URL is shortened" do
-    ChangelogEntryTweet.stubs(:character_limit).returns(6)
-    ChangelogEntryTweet.stubs(:shortened_url_length).returns(1)
+    ChangelogEntry::Tweet.stubs(:character_limit).returns(6)
+    ChangelogEntry::Tweet.stubs(:shortened_url_length).returns(1)
 
     entry = create(:changelog_entry,
                    tweet_copy: "Hello",
                    info_url: "https://exercism.io/very-very-very-long-url")
 
-    assert ChangelogEntryTweet.new(entry).valid?
+    assert ChangelogEntry::Tweet.new(entry).valid?
   end
 end

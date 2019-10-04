@@ -39,6 +39,6 @@ class ChangelogEntry < ApplicationRecord
   private
 
   def default_tweet
-    ChangelogEntryTweet.new(self)
+    Tweet.new(self)
   end
 end

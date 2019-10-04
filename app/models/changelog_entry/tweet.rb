@@ -1,4 +1,4 @@
-class ChangelogEntryTweet
+class ChangelogEntry::Tweet
   include ActiveModel::Validations
   CHARACTER_LIMIT = 280
   SHORTENED_URL_LENGTH = 23
