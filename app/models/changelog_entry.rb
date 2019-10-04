@@ -10,6 +10,8 @@ class ChangelogEntry < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
 
+  attr_writer :friendly_url
+
   def referenceable_gid
     referenceable.to_global_id
   end
@@ -38,13 +40,14 @@ class ChangelogEntry < ApplicationRecord
 
   def tweet_link
     case
-    when details_html?
-      Rails.application.routes.url_helpers.url_for(self)
-    when info_url?
-      info_url
-    else
-      ""
+    when details_html? then friendly_url
+    when info_url? then info_url
+    else ""
     end
+  end
+
+  def friendly_url
+    @friendly_url ||= FriendlyUrl.new(self).url
   end
 
   private
