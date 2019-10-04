@@ -1,7 +1,7 @@
 require "test_helper"
 
 class ChangelogEntryHelperTest < ActionView::TestCase
-  test "#allowed_to_edit_changelog_entry? calls correcct policy" do
+  test "#allowed_to_edit_changelog_entry? calls correct policy" do
     entry = create(:changelog_entry)
     user = create(:user)
     ChangelogAdmin::AllowedToEditEntryPolicy.
@@ -12,7 +12,7 @@ class ChangelogEntryHelperTest < ActionView::TestCase
     assert allowed_to_edit_changelog_entry?(entry, user: user)
   end
 
-  test "#allowed_to_publish_changelog_entry? calls correcct policy" do
+  test "#allowed_to_publish_changelog_entry? calls correct policy" do
     entry = create(:changelog_entry)
     user = create(:user)
     ChangelogAdmin::AllowedToPublishEntryPolicy.
