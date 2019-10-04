@@ -1,17 +1,27 @@
-#team-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      =link_to "The Exercism team", team_page_path
-      %span Our contributors
-  =render "header"
+#team-members-page.lo-organisation-page
+  =render "pages/organisation_menu", selected: "team"
 
-  %h2 Our volunteer contributors
-  %p.subheading Exercism could not be the success it is without the contributors of over 1,000 volunteers, who contribute in every way imaginable.
-  =cache ["pages/team/contributors", @last_updated_at, @page] do
-    .contributors
-      .lo-container
-        .pure-g
+  %section.organisation-top-banner-section
+    .lo-container
+      .inner
+        %h1
+          .subtitle The people behind Exercism
+          .strong Codebase Contributors
+
+  %section
+    .lo-container
+      %h2 Codebase Contributors
+      %p.subheading Exercism could not be the success it is without the contributors of over 1,000 volunteers, who contribute in every way imaginable.
+      =cache ["pages/team/contributors", @last_updated_at, @page] do
+        .people
           -@contributors.each do |contributor|
-            .pure-u-1.pure-u-md-1-4= contributor_widget(contributor)
-        =paginate(@contributors)
+            .person.contributor
+              .pure-g
+                .pure-u-1-3
+                  =image contributor.avatar_url, "Photo of #{contributor.github_username}"
+                .pure-u-2-3
+                  %h3= contributor.github_username
+                  .bio= pluralize contributor.num_contributions, "contribution"
+                  =link_to "GitHub profile", "https://github.com/#{contributor.github_username}"
+
+          =paginate(@contributors)

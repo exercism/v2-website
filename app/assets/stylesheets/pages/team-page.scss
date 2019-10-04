@@ -1,20 +1,133 @@
 @import 'variables';
 @import 'mixins';
 
-#team-page {
-    .header {
-        background-image:image-url('background-overlay-2.png');
-        background-size:cover;
-        background-color:$color-2;
-        padding:40px 0 20px 0;
-        margin-bottom:40px;
-        h1 {
-            @include font-size(38, 38);
-            @include header-font;
-            font-weight:600;
-            letter-spacing:-0.3px;
-            color:#fff;
+body.namespace-none.controller-team_pages {
+    footer {
+        margin-top:50px;
+    }
+
+
+    &.action-show {
+        footer {
+            margin-top:0px;
+        }
+    }
+}
+
+#team-intro-page {
+    section.organisation-top-banner-section {
+        .inner {
+            background-image:image-url("company/team-header.png");
+        }
+    }
+    .section-link {
+        color:$color-2;
+    }
+    section.intro-section {
+        padding:50px 0;
+        margin-bottom:0;
+
+        @include width-medium() {
+            border-bottom:none !important;
+            .lo-container {
+                display:flex;
+                align-items: center;
+            }
+        }
+
+        h2 {
+            @include font-size(23, 27);
+            font-weight:$fw-semibold;
             margin-bottom:10px;
+        }
+
+
+        p {
+            @include font-size(16, 22);
+            margin-bottom:10px;
+            a {
+                color:$color-2;
+                font-weight:$fw-semibold;
+            }
+        }
+
+        .content {
+            margin-bottom:50px;
+
+            @include width-medium() {
+                margin-bottom:0;
+                width:45%;
+            }
+        }
+
+        .map {
+            img {
+                display:block;
+                width:100%;
+            }
+
+            @include width-medium() {
+                width:55%;
+                padding-left:10%;
+            }
+        }
+    }
+
+    .details-section {
+        background:#eee;
+        padding:50px 0;
+
+        .lo-container {
+            display:flex;
+            flex-wrap: wrap;
+        }
+        h2 {
+            width:100%;
+            margin-bottom:20px;
+            @include font-size(18, 18);
+            font-weight:$bold;
+            text-align:center;
+        }
+
+        .group {
+            background:#fff;
+            padding:30px;
+            margin-bottom: 20px;
+            border-radius:2px;
+
+            @include width-medium {
+                margin: 2%;
+                width:46%;
+            }
+            h3 {
+                @include font-size(22, 22);
+                font-weight:$fw-semibold;
+                margin-bottom:20px;
+            }
+            p {
+                margin-bottom:10px;
+                @include font-size(16, 22);
+            }
+        }
+    }
+}
+
+#team-members-page {
+    section.organisation-top-banner-section {
+        .inner {
+            background-image:image-url("company/team-header.png");
+        }
+    }
+    .pagination {
+        width:100%;
+        margin: 0 auto;
+    }
+    section {
+        padding:30px 0 0 0;
+
+        &.organisation-top-banner-section {
+            padding:0;
+            margin-bottom:20px;
         }
         h3 {
             @include font-size(16, 20);
@@ -26,34 +139,19 @@
             }
         }
     }
-    .lhs {
-        padding-right:40px;
-    }
-    .changes {
-        margin-top:50px;
-        padding-top:20px;
-        border-top:1px solid #eee;
-    }
-
     h2 {
-        @include header-font;
-        font-weight:600;
-        text-align:center;
-        @include font-size(30, 30);
-        margin-bottom:20px;
+        font-weight:$fw-black;
+        @include font-size(23, 27);
+        margin-bottom:10px;
     }
     p.subheading {
-        text-align:center;
-        @include font-size(16, 20);
-        max-width: 800px;
-        color:#999;
-        margin: 0px auto 30px auto;
+        @include font-size(16, 22)
+        max-width:650px;
+        margin-bottom:20px;
     }
-
-    .core {
-        border-bottom:1px solid #eee;
-        padding-bottom:10px;
-        margin-bottom:30px;
+    .people {
+        display:flex;
+        flex-wrap:wrap;
     }
     .maintainer-wrapper, .mentor-wrapper {
         margin-bottom:20px;
@@ -69,62 +167,66 @@
             @include font-size(14, 20);
             letter-spacing:-0.3px;
         }
-    }
-    .core {
-        .pure-u-1 {
-            &:nth-child(odd) {
-                padding-right:10px;
-            }
-            &:nth-child(even) {
-                padding-left:10px;
-            }
-        }
-        .core-person {
-            display:block;
-            text-decoration:none;
-            margin-bottom:30px;
-            border:1px solid #ddd;
-            border-radius:2px;
-            padding:15px;
-            &:hover {
-                background: #fafafa;
-            }
 
-            img {
-                display:block;
-                width:100%;
-                padding-right:20px;
-                border-radius:2px;
-            }
-            h3 {
-                color:$color-2;
-                @include font-size(18, 18);
-                font-weight:$bold;
-                margin-bottom:5px;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                white-space:nowrap;
-            }
-            .bio {
-                color:#555;
-                @include font-size(14, 20);
-                letter-spacing:-0.3px;
-                margin-bottom:5px;
-            }
-            .tags {
-                .tag {
-                    display:inline-block;
-                    background:$color-2;
-                    border-radius:10px;
-                    padding:5px 10px;
-                    color:#fff;
-                    text-transform:uppercase;
-                    @include font-size(10, 10);
-                    font-weight:$bold;
+    }
+
+    .person {
+        display:block;
+        text-decoration:none;
+        @include width-smaller-than-medium {
+            padding:0 0 30px 0;
+            &.contributor {
+                width:50%;
+                padding:0 20px 20px 0;
+                img {
+                    padding-right:15%;
                 }
             }
         }
+        @include width-medium {
+            width:50%;
+            padding:0 50px 30px 0;
+            &.contributor {
+                width:33%;
+            }
+        }
+        &.contributor {
+            h3 {
+                @include font-size(15, 14);
+            }
+            a {
+                color:$color-2;
+                font-weight:$fw-semibold;
+            }
+            .bio, a {
+                @include font-size(14, 14);
+            }
+        }
 
+        img {
+            display:block;
+            width:100%;
+            padding-right:20px;
+            border-radius:2px;
+        }
+
+        h3 {
+            color:#333;
+            @include font-size(18, 18);
+            font-weight:$fw-black;
+            margin-bottom:5px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        .bio {
+            color:#333;
+            @include font-size(15, 20);
+        }
+        .holding-text {
+            color:#999;
+            @include font-size(15, 20);
+        }
     }
 
     .contributors {

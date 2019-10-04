@@ -1,0 +1,3 @@
+Hello <%= @user.handle %>,
+Welcome to Exercism. Complete setting up your account by confirming your email address - just copy and paste the link below to your browser.
+<%= confirmation_url(@user, confirmation_token: @token) %>

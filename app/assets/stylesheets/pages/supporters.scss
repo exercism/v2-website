@@ -1,0 +1,114 @@
+@import 'variables';
+@import 'mixins';
+
+$purple: #8A89C0;
+
+body.namespace-none.controller-pages.action-supporters {
+    footer {
+        margin-top:0px;
+    }
+}
+
+#supporters-page {
+    section.organisation-top-banner-section {
+        .inner {
+            background-image:image-url("company/supporters-header.png");
+        }
+    }
+    .introduction-section {
+        padding:50px 0;
+
+        .lo-container {
+            max-width: 640px;
+        }
+        img {
+            width:100%;
+            max-width: 110px;
+            margin: 0 auto 20px;
+            display:block;
+        }
+        h2 {
+            margin-bottom:15px;
+            color:$color-2;
+            font-weight:$fw-black;
+            @include font-size(23, 27);
+            text-align:center;
+        }
+        p {
+            margin-bottom:20px;
+            text-align:center;
+            @include font-size(16, 22)
+        }
+        .support-box {
+            background:$purple;
+            color:#fff;
+            padding:20px;
+            border-radius:2px;
+            .cta {
+                @include font-size(16, 22);
+                margin-bottom:10px;
+                text-align:center;
+            }
+            .pure-button {
+                width:100%;
+                background:#fff;
+                color:$purple;
+                @include font-size(16, 30);
+                font-weight:$fw-black;
+            }
+            @include width-medium() {
+                display:flex;
+                .cta {
+                    width:45%;
+                    margin-right:5%;
+                    text-align:left;
+                    margin:0;
+                }
+                .pure-button {
+                    width:50%;
+                }
+            }
+        }
+    }
+    .current-supporters-section {
+        background:#eee;
+        padding:50px 0;
+
+        .lo-container {
+            display:flex;
+            flex-wrap: wrap;
+        }
+        h2 {
+            width:100%;
+            margin-bottom:20px;
+            @include font-size(18, 18);
+            font-weight:$bold;
+            text-align:center;
+        }
+
+        .supporter {
+            background:#fff;
+            padding:30px;
+            border-radius:2px;
+            margin-bottom: 20px;
+
+            @include width-medium {
+                margin: 2%;
+                width:46%;
+            }
+
+            img {
+                height:40px;
+                display:block;
+                margin: 0 auto 20px;
+            }
+            p {
+                margin-bottom:20px;
+                @include font-size(16, 22);
+            }
+            .section-link {
+                color:$color-2;
+            }
+        }
+    }
+}

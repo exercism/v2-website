@@ -1,17 +1,32 @@
-#team-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      =link_to "The Exercism team", team_page_path
-      %span Our contributors
-  =render "header"
+#team-members-page.lo-organisation-page
+  =render "pages/organisation_menu", selected: "team"
 
-  %h2 Our track maintainers
-  %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
-  =cache ["pages/team/maintainers", @last_updated_at, @page] do
-    .maintainers
-      .lo-container
-        .pure-g
+  %section.organisation-top-banner-section
+    .lo-container
+      .inner
+        %h1
+          .subtitle The people behind Exercism
+          .strong Track Maintainers
+
+  %section
+    .lo-container
+      %h2 Track Maintainers
+      %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
+      =cache ["pages/team/maintainers", @last_updated_at, @page] do
+        .people
           -@maintainers.each do |maintainer|
-            .pure-u-1.pure-u-md-1-2.maintainer-wrapper= maintainer_widget(maintainer)
-        =paginate(@maintainers)
+            =link_to maintainer.link_url.present?? maintainer.link_url : "#", class: 'person' do
+              .pure-g
+                .pure-u-1-4
+                  =image maintainer.avatar_url, "Photo of #{maintainer.name}"
+                .pure-u-3-4
+                  %h3
+                    = maintainer.name
+                    -if maintainer.alumnus.present?
+                      %span [#{maintainer.alumnus.titleize}]
+                  -if maintainer.bio.present?
+                    %p.bio= maintainer.bio
+                  -else
+                    .holding-text This maintainer has not added their bio yet.
+
+          =paginate(@maintainers)
