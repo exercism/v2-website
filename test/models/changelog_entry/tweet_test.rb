@@ -1,12 +1,6 @@
 require "test_helper"
 
 class ChangelogEntry::TweetTest < ActiveSupport::TestCase
-  test "#text returns empty string if copy is empty" do
-    entry = create(:changelog_entry, tweet_copy: nil)
-
-    assert_equal "", ChangelogEntry::Tweet.new(entry).text
-  end
-
   test "#text returns only copy if details are nil" do
     entry = create(:changelog_entry,
                    tweet_copy: "Hello, world!",
