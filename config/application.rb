@@ -16,6 +16,7 @@ module Exercism
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.i18n.fallbacks = true
     config.active_job.queue_adapter = :delayed_job
   end
 
