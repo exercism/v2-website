@@ -5,7 +5,7 @@ class ChangelogEntry
     end
 
     def to_param
-      "#{title.parameterize}-#{id}"
+      url_slug
     end
 
     def url

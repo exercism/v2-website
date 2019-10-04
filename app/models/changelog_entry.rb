@@ -12,6 +12,12 @@ class ChangelogEntry < ApplicationRecord
 
   attr_writer :friendly_url
 
+  def self.find_by_url_slug!(slug)
+    id = slug.split("-").last
+
+    find(id)
+  end
+
   def referenceable_gid
     referenceable.to_global_id
   end
@@ -48,6 +54,10 @@ class ChangelogEntry < ApplicationRecord
 
   def friendly_url
     @friendly_url ||= FriendlyUrl.new(self).url
+  end
+
+  def url_slug
+    "#{title.parameterize}-#{id}"
   end
 
   private
