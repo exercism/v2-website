@@ -18,12 +18,14 @@ module ChangelogAdmin
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "Info url", with: "https://github.com/exercism"
+      fill_in "Tweet copy", with: "Hello, world!"
       click_on "Save"
 
       assert_text "New Exercise"
       assert_text "# We've added a new exercise!"
       assert_text "Ruby - Hello world"
       assert_text "https://github.com/exercism"
+      assert_text "Hello, world!"
 
       Flipper.disable(:changelog)
     end

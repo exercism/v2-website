@@ -37,6 +37,7 @@ module ChangelogAdmin
       end
 
       @entry.publish!
+      @entry.tweet!
 
       redirect_to changelog_admin_entry_path(@entry)
     end
@@ -74,7 +75,7 @@ module ChangelogAdmin
     def form_params
       params.
         require(:changelog_entry_form).
-        permit(:title, :details_markdown, :referenceable_gid, :info_url)
+        permit(:title, :details_markdown, :referenceable_gid, :info_url, :tweet_copy)
     end
   end
 end

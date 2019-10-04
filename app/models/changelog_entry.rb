@@ -15,7 +15,7 @@ class ChangelogEntry < ApplicationRecord
   end
 
   def referenceable
-    ChangelogAdmin::Referenceable.for(super)
+    Referenceable.for(super)
   end
 
   def publish!(time = Time.current)
@@ -24,11 +24,21 @@ class ChangelogEntry < ApplicationRecord
     update!(published_at: time)
   end
 
+  def tweet!(tweet: default_tweet)
+    referenceable.tweet(tweet)
+  end
+
   def published?
     published_at.present?
   end
 
   def created_by?(user)
     created_by == user
+  end
+
+  private
+
+  def default_tweet
+    ChangelogEntryTweet.new(self)
   end
 end

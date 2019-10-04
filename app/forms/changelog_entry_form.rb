@@ -14,6 +14,7 @@ class ChangelogEntryForm
 
   validates :title, presence: true
   validates :created_by, presence: true
+  validate :tweet_is_valid
 
   attr_accessor(
     :id,
@@ -22,25 +23,16 @@ class ChangelogEntryForm
     :referenceable_gid,
     :info_url,
     :created_by,
+    :tweet_copy,
   )
 
   def save
-    entry.assign_attributes(
-      title: title,
-      details_markdown: details_markdown,
-      details_html: details_html,
-      referenceable: referenceable,
-      referenceable_key: referenceable_key,
-      info_url: info_url,
-      created_by: created_by
-    )
-
     entry.save
   end
 
   def referenceable_types
     [Track, Exercise.includes(:track)].
-      map { |type| ChangelogAdmin::ReferenceableType.new(type) }
+      map { |type| ChangelogEntry::ReferenceableType.new(type) }
   end
 
   def referenceable
@@ -48,7 +40,21 @@ class ChangelogEntryForm
   end
 
   def entry
-    @entry ||= id ? ChangelogEntry.find(id) : ChangelogEntry.new
+    return @entry if @entry
+
+    @entry = id ? ChangelogEntry.find(id) : ChangelogEntry.new
+    @entry.tap do |entry|
+      entry.assign_attributes(
+        title: title,
+        details_markdown: details_markdown,
+        details_html: details_html,
+        referenceable: referenceable,
+        referenceable_key: referenceable_key,
+        info_url: info_url,
+        created_by: created_by,
+        tweet_copy: tweet_copy
+      )
+    end
   end
 
   private
@@ -61,5 +67,13 @@ class ChangelogEntryForm
     return if referenceable.blank?
 
     "#{referenceable.class.name.underscore}_#{referenceable.id}"
+  end
+
+  def tweet_is_valid
+    return if tweet_copy.blank?
+
+    tweet = ChangelogEntryTweet.new(entry)
+
+    errors.add(:tweet_copy, "is too long") unless tweet.valid?
   end
 end

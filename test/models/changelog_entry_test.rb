@@ -30,4 +30,14 @@ class ChangelogEntryTest < ActiveSupport::TestCase
 
     refute entry.published?
   end
+
+  test "#tweet! tweets a changelog entry" do
+    tweet = mock()
+    referenceable = mock()
+    referenceable.expects(:tweet).with(tweet)
+    ChangelogEntry::Referenceable.stubs(:for).returns(referenceable)
+    entry = create(:changelog_entry)
+
+    entry.tweet!(tweet: tweet)
+  end
 end

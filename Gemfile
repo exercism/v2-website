@@ -49,6 +49,8 @@ gem 'flipper'
 gem 'flipper-active_record'
 gem 'flipper-ui'
 
+gem 'twitter', require: false
+
 group :production do
   gem "skylight"
 end
