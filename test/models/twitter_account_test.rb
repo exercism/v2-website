@@ -4,12 +4,7 @@ class TwitterAccountTest < ActiveSupport::TestCase
   test ".find returns twitter account based on slug" do
     account = TwitterAccount.find(:ruby)
 
-    expected_account = TwitterAccount.new(
-      consumer_key: "KEY",
-      consumer_secret: "SECRET",
-      access_token: "TOKEN",
-      access_token_secret: "TOKEN_SECRET"
-    )
+    expected_account = TwitterAccount.new(slug: :ruby)
     assert_equal expected_account, account
   end
 

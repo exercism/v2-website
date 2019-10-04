@@ -1,10 +1,12 @@
 test:
-  :ruby:
+  -
+    :slug: :ruby
     :consumer_key: KEY
     :consumer_secret: SECRET
     :access_token: TOKEN
     :access_token_secret: TOKEN_SECRET
-  :main:
+  -
+    :slug: :main
     :consumer_key: MAIN_KEY
     :consumer_secret: MAIN_SECRET
     :access_token: MAIN_TOKEN

@@ -1,29 +1,25 @@
 class TwitterAccount
-  attr_reader(
-    :consumer_key,
-    :consumer_secret,
-    :access_token,
-    :access_token_secret
-  )
+  include ActiveModel::AttributeAssignment
 
   def self.config
     Rails.application.config_for("twitter_accounts")
   end
 
   def self.find(slug)
-    new(config[slug])
+    attrs = config.find { |account| account[:slug] == slug }
+    new(attrs)
   end
 
-  def initialize(
-    consumer_key:,
-    consumer_secret:,
-    access_token:,
-    access_token_secret:
+  attr_accessor(
+    :slug,
+    :consumer_key,
+    :consumer_secret,
+    :access_token,
+    :access_token_secret
   )
-    @consumer_key = consumer_key
-    @consumer_secret = consumer_secret
-    @access_token = access_token
-    @access_token_secret = access_token_secret
+
+  def initialize(attrs)
+    assign_attributes(attrs)
   end
 
   def tweet(tweet)
@@ -39,9 +35,6 @@ class TwitterAccount
   end
 
   def ==(other)
-    consumer_key == other.consumer_key &&
-      consumer_secret == other.consumer_secret &&
-      access_token == other.access_token &&
-      access_token_secret == other.access_token_secret
+    slug == other.slug
   end
 end
