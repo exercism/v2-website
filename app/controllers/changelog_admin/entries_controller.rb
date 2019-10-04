@@ -24,6 +24,7 @@ module ChangelogAdmin
 
     def show
       @entry = ChangelogEntry.find(params[:id])
+      @actions = ChangelogAdmin::ChangelogEntryAction.all
     end
 
     def publish
