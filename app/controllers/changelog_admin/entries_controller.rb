@@ -45,6 +45,13 @@ module ChangelogAdmin
     def unpublish
       @entry = ChangelogEntry.find(params[:id])
 
+      unless AllowedToUnpublishEntryPolicy.allowed?(
+        user: current_user,
+        entry: @entry
+      )
+        return unauthorized!
+      end
+
       @entry.unpublish!
 
       redirect_to changelog_admin_entry_path(@entry)
