@@ -12,7 +12,7 @@ class ChangelogEntry::Tweet
   end
 
   def self.from_entry(entry)
-    new(copy: entry.tweet_copy, link: entry.tweet_link)
+    new(copy: entry.tweet_copy, link: entry.tweet_link_url)
   end
 
   validates :copy, presence: true

@@ -41,24 +41,24 @@ class ChangelogEntryTest < ActiveSupport::TestCase
     entry.tweet!(tweet: tweet)
   end
 
-  test "#tweet_link returns link to entry if details are present" do
+  test "#tweet_link_url returns link to entry if details are present" do
     entry = create(:changelog_entry, details_html: "<p>New exercise!</p>")
     entry.friendly_url = "https://exercism.io"
 
-    assert_equal "https://exercism.io", entry.tweet_link
+    assert_equal "https://exercism.io", entry.tweet_link_url
   end
 
-  test "#tweet_link returns info URL if it is present and details are blank" do
+  test "#tweet_link_url returns info URL if it is present and details are blank" do
     entry = create(:changelog_entry,
                    details_html: nil,
                    info_url: "https://exercism.io")
 
-    assert_equal "https://exercism.io", entry.tweet_link
+    assert_equal "https://exercism.io", entry.tweet_link_url
   end
 
-  test "#tweet_link returns empty string if details are blank and info URL is blank" do
+  test "#tweet_link_url returns empty string if details are blank and info URL is blank" do
     entry = create(:changelog_entry)
 
-    assert_equal "", entry.tweet_link
+    assert_equal "", entry.tweet_link_url
   end
 end

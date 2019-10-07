@@ -44,7 +44,7 @@ class ChangelogEntry < ApplicationRecord
     created_by == user
   end
 
-  def tweet_link
+  def tweet_link_url
     case
     when details_html? then friendly_url
     when info_url? then info_url
