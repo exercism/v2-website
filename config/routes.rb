@@ -133,7 +133,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :changelog_entries, only: [:index, :show]
+  resources :changelog_entries, only: [:index, :show], param: :slug
 
   # ######## #
   # Internal #

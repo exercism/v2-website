@@ -12,11 +12,14 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
                    info_url: "https://exercism.io/new-exercise",
                    published_at: Time.utc(2016, 12, 25))
 
-    visit changelog_entries_path
+    travel_to(Time.utc(2016, 12, 26)) do
+      visit changelog_entries_path
+    end
 
     assert_text "New exercise"
     assert_text "Introducing 'Hello, world!'"
     assert_text "Created by author1"
+    assert_text "Published 1 day ago"
     assert_link "View", href: "https://exercism.io/new-exercise"
     assert_selector "img[src='https://exercism.io/image.jpg']"
   end
@@ -46,7 +49,7 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
                    info_url: "https://exercism.io/new-exercise",
                    published_at: Time.utc(2016, 12, 25))
 
-    visit changelog_entry_path(entry)
+    visit changelog_entry_path(entry.url_slug)
 
     assert_text "New exercise"
     assert_text "Introducing 'Hello, world!'"

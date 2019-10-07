@@ -1,4 +1,4 @@
-class ChangelogEntryTweet
+class ChangelogEntry::Tweet
   include ActiveModel::Validations
   CHARACTER_LIMIT = 280
   SHORTENED_URL_LENGTH = 23
@@ -11,11 +11,16 @@ class ChangelogEntryTweet
     SHORTENED_URL_LENGTH
   end
 
+  def self.from_entry(entry)
+    new(copy: entry.tweet_copy, link: entry.tweet_link_url)
+  end
+
   validates :copy, presence: true
   validate :length_is_correct
 
-  def initialize(entry)
-    @entry = entry
+  def initialize(copy:, link: nil)
+    @copy = copy || ""
+    @link = link || ""
   end
 
   def text
@@ -23,22 +28,7 @@ class ChangelogEntryTweet
   end
 
   private
-  attr_reader :entry
-
-  def copy
-    entry.tweet_copy || ""
-  end
-
-  def link
-    case
-    when entry.details_html?
-      Rails.application.routes.url_helpers.url_for(entry)
-    when entry.info_url?
-      entry.info_url
-    else
-      ""
-    end
-  end
+  attr_reader :copy, :link
 
   def length_is_correct
     errors.add(:base, "Tweet is too long") if over_limit?

@@ -72,7 +72,7 @@ class ChangelogEntryForm
   def tweet_is_valid
     return if tweet_copy.blank?
 
-    tweet = ChangelogEntryTweet.new(entry)
+    tweet = ChangelogEntry::Tweet.from_entry(entry)
 
     errors.add(:tweet_copy, "is too long") unless tweet.valid?
   end
