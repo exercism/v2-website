@@ -10,6 +10,12 @@ class ChangelogEntry < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
 
+  def self.find_by_url_slug!(slug)
+    id = slug.split("-").last
+
+    find(id)
+  end
+
   def referenceable_gid
     referenceable.to_global_id
   end
@@ -36,9 +42,25 @@ class ChangelogEntry < ApplicationRecord
     created_by == user
   end
 
+  def tweet_link_url
+    case
+    when details_html? then friendly_url
+    when info_url? then info_url
+    else ""
+    end
+  end
+
+  def url_slug
+    "#{title.parameterize}-#{id}"
+  end
+
   private
 
+  def friendly_url
+    Rails.application.routes.url_helpers.changelog_entry_url(url_slug)
+  end
+
   def default_tweet
-    ChangelogEntryTweet.new(self)
+    Tweet.from_entry(self)
   end
 end

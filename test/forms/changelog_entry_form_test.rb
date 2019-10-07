@@ -59,7 +59,7 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
       created_by: user,
       tweet_copy: "Hello, world!"
     )
-    ChangelogEntryTweet.stubs(:new).with(form.entry).returns(tweet)
+    ChangelogEntry::Tweet.stubs(:from_entry).with(form.entry).returns(tweet)
 
     refute form.valid?
   end

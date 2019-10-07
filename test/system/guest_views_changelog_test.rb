@@ -49,7 +49,7 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
                    info_url: "https://exercism.io/new-exercise",
                    published_at: Time.utc(2016, 12, 25))
 
-    visit changelog_entry_path(entry)
+    visit changelog_entry_path(entry.url_slug)
 
     assert_text "New exercise"
     assert_text "Introducing 'Hello, world!'"
