@@ -18,7 +18,7 @@
             =link_to mentor.link_url.present?? mentor.link_url : "#", class: 'person' do
               .pure-g
                 .pure-u-1-4
-                  =image mentor.avatar_url ? mentor.avatar_url : 'anonymous.png', "Photo of #{mentor.name}"
+                  = contributor_image(mentor)
                 .pure-u-3-4
                   %h3= mentor.name
                   -if mentor.bio.present?
