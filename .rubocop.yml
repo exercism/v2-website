@@ -1,0 +1,10 @@
+require:
+  - ./lib/rubocop/cop/custom/exercism_accessibility.rb
+
+AllCops:
+  DisabledByDefault: true
+
+Custom/ExercismAccessibility:
+  Enable: true
+  Exclude:
+    - ./app/helpers/a11y_helper.rb

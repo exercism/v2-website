@@ -61,6 +61,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'bullet'
+  gem 'rubocop', require: false
 end
 
 group :development do
