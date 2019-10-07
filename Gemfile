@@ -62,6 +62,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'bullet'
   gem 'rubocop', require: false
+  gem 'haml-lint', require: false
 end
 
 group :development do
