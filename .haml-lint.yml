@@ -1,6 +1,9 @@
 require:
   - ./lib/haml_lint/linter/accessible_icons.rb
 
+exclude:
+  - vendor/**/*
+
 linters:
   AccessibleIcons:
     enabled: true
