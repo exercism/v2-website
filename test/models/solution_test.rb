@@ -224,4 +224,13 @@ class SolutionTest < ActiveSupport::TestCase
     assert track.accepting_new_students?
     assert solution.reload.track_accepting_new_students?
   end
+
+  test "notifications are deleted when solution is deleted" do
+    solution = create(:solution)
+    notification = create(:notification, about: solution)
+
+    solution.destroy
+
+    refute Notification.exists?(notification.id)
+  end
 end
