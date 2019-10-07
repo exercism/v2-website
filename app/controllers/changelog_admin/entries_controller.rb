@@ -1,5 +1,7 @@
 module ChangelogAdmin
   class EntriesController < BaseController
+    before_action :set_entry!,
+      only: [:edit, :update, :show, :publish, :unpublish, :destroy]
     before_action :check_if_entry_is_editable!, only: [:edit, :update]
 
     def index
@@ -23,12 +25,10 @@ module ChangelogAdmin
     end
 
     def show
-      @entry = ChangelogEntry.find(params[:id])
+      @actions = ChangelogAdmin::ChangelogEntryAction.enabled
     end
 
     def publish
-      @entry = ChangelogEntry.find(params[:id])
-
       unless AllowedToPublishEntryPolicy.allowed?(
         user: current_user,
         entry: @entry
@@ -38,6 +38,19 @@ module ChangelogAdmin
 
       @entry.publish!
       @entry.tweet!
+
+      redirect_to changelog_admin_entry_path(@entry)
+    end
+
+    def unpublish
+      unless AllowedToUnpublishEntryPolicy.allowed?(
+        user: current_user,
+        entry: @entry
+      )
+        return unauthorized!
+      end
+
+      @entry.unpublish!
 
       redirect_to changelog_admin_entry_path(@entry)
     end
@@ -60,11 +73,19 @@ module ChangelogAdmin
       end
     end
 
+    def destroy
+      @entry.destroy
+
+      redirect_to changelog_admin_entries_path
+    end
+
     private
 
-    def check_if_entry_is_editable!
+    def set_entry!
       @entry = ChangelogEntry.find(params[:id])
+    end
 
+    def check_if_entry_is_editable!
       return unauthorized! unless allowed_to_edit?(@entry)
     end
 

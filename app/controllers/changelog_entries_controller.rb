@@ -9,6 +9,6 @@ class ChangelogEntriesController < ApplicationController
   end
 
   def show
-    @entry = ChangelogEntry.find_by_url_slug!(params[:slug])
+    @entry = ChangelogEntry.published.find_by_url_slug!(params[:slug])
   end
 end

@@ -63,6 +63,20 @@ module ChangelogAdmin
       Flipper.disable(:changelog)
     end
 
+    test "raises an error when an unauthorized user unpublishes an entry" do
+      Flipper.enable(:changelog)
+      user = create(:user, :onboarded, may_edit_changelog: true)
+      AllowedToUnpublishEntryPolicy.stubs(:allowed?).returns(false)
+      entry = create(:changelog_entry, published_at: Time.utc(2016, 12, 25))
+
+      sign_in!(user)
+      post unpublish_changelog_admin_entry_path(entry)
+
+      assert_response :unauthorized
+
+      Flipper.disable(:changelog)
+    end
+
     test "entry is tweeted after it is published" do
       Flipper.enable(:changelog)
       admin = create(:user, :onboarded, admin: true)
