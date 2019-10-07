@@ -18,7 +18,7 @@
             =link_to maintainer.link_url.present?? maintainer.link_url : "#", class: 'person' do
               .pure-g
                 .pure-u-1-4
-                  =image maintainer.avatar_url, "Photo of #{maintainer.name}"
+                  = profile_image(maintainer)
                 .pure-u-3-4
                   %h3
                     = maintainer.name

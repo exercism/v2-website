@@ -18,7 +18,7 @@
             .person.contributor
               .pure-g
                 .pure-u-1-3
-                  =image contributor.avatar_url, "Photo of #{contributor.github_username}"
+                  = profile_image(contributor)
                 .pure-u-2-3
                   %h3= contributor.github_username
                   .bio= pluralize contributor.num_contributions, "contribution"
