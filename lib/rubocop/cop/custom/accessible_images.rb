@@ -1,7 +1,7 @@
 module RuboCop
   module Cop
     module Custom
-      class ExercismAccessibility < Cop
+      class AccessibleImages < Cop
         MSG = 'Instead of `#image_tag`, replace with either #image or #graphical_image for a11y support.'
 
         def_node_matcher :bad_method?, <<~PATTERN
