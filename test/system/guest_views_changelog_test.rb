@@ -21,7 +21,7 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
     assert_text "Created by author1"
     assert_text "Published 1 day ago"
     assert_link "View", href: "https://exercism.io/new-exercise"
-    assert_selector "img[src='https://exercism.io/image.jpg']"
+    assert_selector "img[src='https://exercism.io/image.jpg']", visible: false
   end
 
   test "guest views paginated changelog" do
@@ -55,6 +55,6 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
     assert_text "Introducing 'Hello, world!'"
     assert_text "Created by author1"
     assert_link "View", href: "https://exercism.io/new-exercise"
-    assert_selector "img[src='https://exercism.io/image.jpg']"
+    assert_selector "img[src='https://exercism.io/image.jpg']", visible: false
   end
 end

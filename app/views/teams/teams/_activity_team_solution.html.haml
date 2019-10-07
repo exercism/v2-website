@@ -1,5 +1,5 @@
 .activity.solution
-  =image_tag activity.user.avatar_url
+  = image activity.user.avatar_url, "Avatar of #{activity.user.handle}"
   .title
     %strong #{activity.user.handle}
     started

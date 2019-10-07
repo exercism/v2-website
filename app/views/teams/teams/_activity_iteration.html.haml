@@ -1,5 +1,5 @@
 =link_to teams_team_solution_path(@team, activity.solution), class: 'activity iteration' do
-  =image_tag activity.solution.user.avatar_url
+  = image activity.solution.user.avatar_url, "Avatar of #{actiivty.solution.user.handle}"
   .title
     %strong #{activity.solution.user.handle} 
     posted a new iteration

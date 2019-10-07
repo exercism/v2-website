@@ -13,7 +13,7 @@
 
     .misc-menu{tabindex: "0"}
       .in-situ
-        =image_tag current_user.avatar_url || "blank.png", alt: "Avatar for #{current_user.handle}"
+        = image current_user.avatar_url || "blank.png", "Avatar for #{current_user.handle}"
         =graphical_icon 'caret-down'
       .dropdown
         =graphical_icon 'caret-up'

@@ -70,9 +70,9 @@
         =link_to "Could you support us?", supporters_page_path, class: 'pure-button'
       .current
         %h3 Current supporters
-        =link_to image_tag("supporter-logos/sloan-black.png"), supporter_sloan_page_path, class: 'logo'
-        =link_to image_tag("supporter-logos/mozilla-black.png"), supporter_mozilla_page_path, class: 'logo'
-        =link_to image_tag("supporter-logos/thalamus-black.png"), supporter_thalamus_page_path, class: 'logo'
+        =link_to image("supporter-logos/sloan-black.png", "Logo of Sloan"), supporter_sloan_page_path, class: 'logo'
+        =link_to image("supporter-logos/mozilla-black.png", "Logo of Mozilla"), supporter_mozilla_page_path, class: 'logo'
+        =link_to image("supporter-logos/thalamus-black.png", "Logo of Thalamus"), supporter_thalamus_page_path, class: 'logo'
         =link_to "Your Organisation Here", "#", class: "your-organisation-here"
 
   %section.methodology-section
@@ -108,4 +108,4 @@
         %p Exercism was originally created by Katrina Owen in 2013 as a tool to be used by her programming students. Over the next three years it grew unintentionally and organically to 200,000 users. In 2016, Katrina decided that for Exercism to fulfill its potential, it needed a professional product team to rethink Exercism from the ground up. She recruited Jeremy Walker as co-founder, and working with Nicole Chalmers and the team at Thalamus, they reconceived Exercism as the fully-fledged product you see today.
         /=link_to "More on our story", "#", class: 'section-link'
       .map
-        =image_tag "company/photo-map.png"
+        = graphical_image "company/photo-map.png"

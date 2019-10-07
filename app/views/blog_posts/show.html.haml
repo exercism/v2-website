@@ -18,7 +18,7 @@
         =link_to @blog_post.category.titleize, blog_posts_path(category: @blog_post.category)
       -if @blog_post.author.try(:profile)
         .author
-          =image_tag @blog_post.author.avatar_url
+          = image @blog_post.author.avatar_url, "Avatar of author"
           .name= @blog_post.author.name
           .bio= @blog_post.author.bio
           =link_to "View Profile", profile_path(@blog_post.author.profile), class: 'pure-button'
