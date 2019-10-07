@@ -10,8 +10,6 @@ class ChangelogEntry < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
 
-  attr_writer :friendly_url
-
   def self.find_by_url_slug!(slug)
     id = slug.split("-").last
 
@@ -52,15 +50,15 @@ class ChangelogEntry < ApplicationRecord
     end
   end
 
-  def friendly_url
-    @friendly_url ||= FriendlyUrl.new(self).url
-  end
-
   def url_slug
     "#{title.parameterize}-#{id}"
   end
 
   private
+
+  def friendly_url
+    Rails.application.routes.url_helpers.changelog_entry_url(url_slug)
+  end
 
   def default_tweet
     Tweet.from_entry(self)

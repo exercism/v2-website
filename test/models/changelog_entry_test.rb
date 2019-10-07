@@ -42,10 +42,14 @@ class ChangelogEntryTest < ActiveSupport::TestCase
   end
 
   test "#tweet_link_url returns link to entry if details are present" do
-    entry = create(:changelog_entry, details_html: "<p>New exercise!</p>")
-    entry.friendly_url = "https://exercism.io"
+    entry = create(:changelog_entry,
+                   details_html: "<p>New exercise!</p>",
+                   title: "Hello, world!")
 
-    assert_equal "https://exercism.io", entry.tweet_link_url
+    assert_equal(
+      "https://test.exercism.io/changelog_entries/hello-world-#{entry.id}",
+      entry.tweet_link_url
+    )
   end
 
   test "#tweet_link_url returns info URL if it is present and details are blank" do
