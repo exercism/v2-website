@@ -13,6 +13,7 @@ module ChangelogAdmin
           confirm: true,
           method: :post,
           action: :unpublish,
+          enabled: Flipper.enabled?(:changelog_destructive),
         ),
         ChangelogEntryAction.new(
           name: :edit,
@@ -24,16 +25,26 @@ module ChangelogAdmin
           name: :delete,
           confirm: true,
           method: :delete,
-          action: :destroy
+          action: :destroy,
+          enabled: Flipper.enabled?(:changelog_destructive),
         ),
       ]
     end
 
-    def initialize(name:, confirm:, method:, action: nil)
+    def self.enabled
+      all.select { |action| action.enabled? }
+    end
+
+    def initialize(name:, confirm:, method:, action: nil, enabled: true)
       @name = name
       @confirm = confirm
       @method = method
       @action = action
+      @enabled = enabled
+    end
+
+    def enabled?
+      enabled
     end
 
     def render_for(context, entry, user)
@@ -47,7 +58,7 @@ module ChangelogAdmin
     end
 
     private
-    attr_reader :name, :confirm, :method, :action
+    attr_reader :name, :confirm, :method, :action, :enabled
 
     def allowed?(entry, user)
       policy.allowed?(user: user, entry: entry)

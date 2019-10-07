@@ -4,6 +4,7 @@ module ChangelogAdmin
   class DeleteChangelogEntryTest < ApplicationSystemTestCase
     test "admin deletes a changelog entry" do
       Flipper.enable(:changelog)
+      Flipper.enable(:changelog_destructive)
       admin = create(:user, :onboarded, admin: true)
       entry = create(:changelog_entry)
 
@@ -14,6 +15,7 @@ module ChangelogAdmin
       assert_text "Entries"
 
       Flipper.disable(:changelog)
+      Flipper.disable(:changelog_destructive)
     end
   end
 end
