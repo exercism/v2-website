@@ -7,7 +7,7 @@ class Iteration < ApplicationRecord
 
   has_many :files, class_name: "IterationFile", dependent: :destroy
   has_many :discussion_posts, dependent: :destroy
-  has_many :notifications, as: :about
+  has_many :notifications, as: :about, dependent: :destroy
 
   has_many :analyses, class_name: "IterationAnalysis", dependent: :destroy
 
