@@ -6,14 +6,14 @@
 
   .details-bar
     .handle
-      %i.fal.fa-fw.fa-user
+      = graphical_icon "user", style: :light, fixed_width: true
       =display_handle(solution.user, user_track)
     /.published-at
     /  %i.fal.fa-fw.fa-clock
     /  #{solution.published_at.strftime("%b %d %Y")}
     .detail
-      %i.fal.fa-fw.fa-comment
+      = graphical_icon "comment", style: :light, fixed_width: true
       =solution.num_comments
     .detail
-      %i.fal.fa-fw.fa-star
+      = graphical_icon "star", style: :light, fixed_width: true
       =solution.num_stars

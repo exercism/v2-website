@@ -28,7 +28,7 @@
       .details
         -if @solution.user == current_user
           .starred-count
-            %i.fas.fa-star
+            = graphical_icon "star"
             Starred #{pluralize @solution.num_stars, "time"}
         -else
           =render "my/starred_solutions/star_button"

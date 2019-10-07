@@ -5,7 +5,7 @@
     =form_tag [:delete_account, :my, :settings], method: :delete do
       .settings-section.danger
         %h2
-          %i.fas.fa-exclamation-triangle
+          = graphical_icon "exclamation-triangle"
           Delete your account
 
         %p Deleting your account has the following consequences.
