@@ -8,4 +8,8 @@ class Contributor < ApplicationRecord
     contributor.num_contributions += 1
     contributor
   end
+
+  def name
+    github_username
+  end
 end
