@@ -7,7 +7,7 @@ class FontAwesomeIcon
     new(attrs.merge(graphical: false))
   end
 
-  def initialize(type:, label:, style: :normal, fixed_width: false, graphical:)
+  def initialize(type:, label:, style: :legacy, fixed_width: false, graphical:)
     @type = type
     @label = label
     @style = style
@@ -53,7 +53,7 @@ class FontAwesomeIcon
 
   def style_class
     case style
-    when :normal
+    when :legacy
       "fa"
     when :light
       "fal"
