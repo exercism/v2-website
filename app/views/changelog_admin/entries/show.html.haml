@@ -1,21 +1,20 @@
-%h1 Changelog Entry
+#changelog-admin-entry.lo-changelog-admin-page
+  .lo-container
+    %h1 Changelog Entry
 
-%h2 Info
+    %dl
+      %dt Title:
+      %dd= @entry.title
+      %dt Details:
+      %dd= @entry.details_markdown
+      %dt About:
+      %dd= @entry.referenceable_title
+      %dt Info url:
+      %dd= @entry.info_url
+      %dt Published at:
+      %dd= @entry.published_at
+      %dt Tweet copy:
+      %dd= @entry.tweet_copy
 
-%dl
-  %dt Title
-  %dd= @entry.title
-  %dt Details
-  %dd= @entry.details_markdown
-  %dt About
-  %dd= @entry.referenceable_title
-  %dt Info url
-  %dd= @entry.info_url
-  %dt Published at
-  %dd= @entry.published_at
-  %dt Tweet copy
-  %dd= @entry.tweet_copy
-
-%h2 Actions
-
-= render "actions", actions: @actions, entry: @entry
+    %h2 Actions
+    = render "actions", actions: @actions, entry: @entry
