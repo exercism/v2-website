@@ -18,8 +18,7 @@
       =render "my/solutions/widgets/complete_prompt"
 
     .next-option
-      = render "my/solutions/mentor_feedback_request/independent",
-        mentor_request: MentorFeedbackRequest.new(@solution)
+      = render_solution_mentor_feedback_request_section(:independent, @solution)
 
     =render "my/solutions/widgets/community_solutions"
 

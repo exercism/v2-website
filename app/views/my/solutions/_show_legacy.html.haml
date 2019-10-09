@@ -11,8 +11,7 @@
       What's next?
 
     .next-option
-      = render "my/solutions/mentor_feedback_request/legacy",
-        mentor_request: MentorFeedbackRequest.new(@solution)
+      = render_solution_mentor_feedback_request_section(:legacy, @solution)
 
     .next-option
       %p
