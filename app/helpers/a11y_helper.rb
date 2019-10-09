@@ -3,13 +3,13 @@ module A11yHelper
   def icon(type, label = nil, opts = {})
     attrs = { type: type, label: label }.merge(opts)
 
-    FontAwesomeIcon.labelled(attrs).render(self)
+    FontAwesomeIconWidget.labelled(attrs).render(self)
   end
 
   def graphical_icon(type, opts = {})
     attrs = { type: type, label: nil }.merge(opts)
 
-    FontAwesomeIcon.graphical(attrs).render(self)
+    FontAwesomeIconWidget.graphical(attrs).render(self)
   end
 
   def graphical_image(source, options = {})
