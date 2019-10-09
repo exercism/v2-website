@@ -13,6 +13,10 @@ class MentorFeedbackRequest
     @status = status || solution_status
   end
 
+  def can_be_accommodated?
+    [:mentoring_slots_remaining, :promoted_to_core].include?(status)
+  end
+
   private
   delegate :user_track, to: :solution
 
