@@ -1,0 +1,14 @@
+@import 'variables';
+@import 'mixins';
+
+.lo-changelog-admin-page {
+    padding:20px 0;
+    h1 {
+        @include font-size(20, 20);
+        margin-bottom:10px;
+    }
+    p {
+        @include font-size(15, 21);
+        margin-bottom:10px;
+    }
+}

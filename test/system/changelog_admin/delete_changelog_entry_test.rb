@@ -12,7 +12,7 @@ module ChangelogAdmin
       visit changelog_admin_entry_path(entry)
       accept_alert { click_on "Delete" }
 
-      assert_text "Entries"
+      assert_text "Changelog - Admin"
 
       Flipper.disable(:changelog)
       Flipper.disable(:changelog_destructive)
