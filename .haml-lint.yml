@@ -1,0 +1,113 @@
+require:
+  - ./lib/haml_lint/linter/accessible_icons.rb
+
+exclude:
+  - vendor/**/*
+
+linters:
+  AccessibleIcons:
+    enabled: true
+
+  AlignmentTabs:
+    enabled: false
+
+  AltText:
+    enabled: false
+
+  ClassAttributeWithStaticValue:
+    enabled: false
+
+  ClassesBeforeIds:
+    enabled: false
+
+  ConsecutiveComments:
+    enabled: false
+    max_consecutive: 1
+
+  ConsecutiveSilentScripts:
+    enabled: false
+    max_consecutive: 2
+
+  EmptyObjectReference:
+    enabled: false
+
+  EmptyScript:
+    enabled: false
+
+  FinalNewline:
+    enabled: false
+    present: false
+
+  HtmlAttributes:
+    enabled: false
+
+  IdNames:
+    enabled: false
+    style: lisp_case
+
+  ImplicitDiv:
+    enabled: false
+
+  Indentation:
+    enabled: false
+    character: space # or tab
+    width: 2 # ignored if character == tab
+
+  InlineStyles:
+    enabled: false
+
+  InstanceVariables:
+    enabled: false
+    file_types: partials
+    matchers:
+      all: .*
+      partials: \A_.*\.haml\z
+
+  LeadingCommentSpace:
+    enabled: false
+
+  LineLength:
+    enabled: false
+    max: 80
+
+  MultilinePipe:
+    enabled: false
+
+  MultilineScript:
+    enabled: false
+
+  ObjectReferenceAttributes:
+    enabled: false
+
+  RepeatedId:
+    enabled: false
+    severity: error
+
+  RuboCop:
+    enabled: true
+
+  RubyComments:
+    enabled: false
+
+  SpaceBeforeScript:
+    enabled: false
+
+  SpaceInsideHashAttributes:
+    enabled: false
+    style: space
+
+  TagName:
+    enabled: false
+
+  TrailingWhitespace:
+    enabled: false
+
+  UnnecessaryInterpolation:
+    enabled: false
+
+  UnnecessaryStringOutput:
+    enabled: false
+
+  ViewLength:
+    enabled: false
+    max: 100

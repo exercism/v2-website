@@ -15,7 +15,7 @@
     =button_tag "Comment", class: 'pure-button button comment-button'
 
     .approved{style: @solution.approved?? "" : "display:none"}
-      =icon :check
+      = icon :check, nil, style: :legacy
       Solution approved
 
     -unless @solution.approved?

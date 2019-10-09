@@ -1,5 +1,5 @@
 =link_to teams_team_solution_path(@team, activity.solution), class: 'activity' do
-  =image_tag activity.user.avatar_url
+  = image activity.user.avatar_url, "Avatar of #{actiivty.user.handle}"
   .title
     %strong #{activity.user.handle} 
     posted feedback on

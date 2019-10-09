@@ -47,13 +47,13 @@
 
               .details-bar
                 .handle
-                  %i.fal.fa-fw.fa-user
+                  = graphical_icon "user", style: :light, fixed_width: true
                   Your solution
                 .detail
-                  %i.fal.fa-fw.fa-comment
+                  = graphical_icon "comment", style: :light, fixed_width: true
                   0
                 .detail
-                  %i.fal.fa-fw.fa-star
+                  = graphical_icon "star", style: :light, fixed_width: true
                   0
 
       -@solutions.each do |solution|

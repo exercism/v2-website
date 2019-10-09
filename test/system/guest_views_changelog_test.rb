@@ -3,7 +3,8 @@ require "application_system_test_case"
 class GuestViewsChangelogTest < ApplicationSystemTestCase
   test "guest views changelog" do
     author = create(:user, handle: "author1")
-    track = create(:track, bordered_green_icon_url: "https://exercism.io/image.jpg")
+    track = create(:track,
+                   bordered_green_icon_url: "https://assets.exercism.io/social/general.png")
     entry = create(:changelog_entry,
                    title: "New exercise",
                    details_html: "<p>Introducing 'Hello, world!'</p>",
@@ -21,7 +22,7 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
     assert_text "Created by author1"
     assert_text "Published 1 day ago"
     assert_link "View", href: "https://exercism.io/new-exercise"
-    assert_selector "img[src='https://exercism.io/image.jpg']"
+    assert_selector "img[src='https://assets.exercism.io/social/general.png']"
   end
 
   test "guest views paginated changelog" do
@@ -40,7 +41,8 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
 
   test "guest views changelog entry" do
     author = create(:user, handle: "author1")
-    track = create(:track, bordered_green_icon_url: "https://exercism.io/image.jpg")
+    track = create(:track,
+                   bordered_green_icon_url: "https://assets.exercism.io/social/general.png")
     entry = create(:changelog_entry,
                    title: "New exercise",
                    details_html: "<p>Introducing 'Hello, world!'</p>",
@@ -55,6 +57,6 @@ class GuestViewsChangelogTest < ApplicationSystemTestCase
     assert_text "Introducing 'Hello, world!'"
     assert_text "Created by author1"
     assert_link "View", href: "https://exercism.io/new-exercise"
-    assert_selector "img[src='https://exercism.io/image.jpg']"
+    assert_selector "img[src='https://assets.exercism.io/social/general.png']"
   end
 end

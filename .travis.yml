@@ -33,6 +33,8 @@ install:
   - "npm install"
   - "bundle exec rake db:test:prepare"
 script:
+  - "bundle exec rubocop"
+  - "bundle exec haml-lint"
   - "bundle exec rake test"
   - "bundle exec rake test:system"
 cache:

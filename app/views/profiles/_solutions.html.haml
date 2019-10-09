@@ -9,11 +9,11 @@
         .track #{exercise.track.title} track
       .details
         .published-at
-          %i.fal.fa-clock
+          = graphical_icon "clock", style: :light
           #{solution.published_at.strftime("%b %d %Y")}
         .detail
-          %i.fal.fa-comment
+          = graphical_icon "comment", style: :light
           =solution.num_comments
         .detail
-          %i.fal.fa-star
+          = graphical_icon "star", style: :light
           =solution.num_stars

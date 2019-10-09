@@ -4,6 +4,8 @@ class ApplicationMailer < ActionMailer::Base
 
   layout 'mailer'
 
+  helper :a11y
+
   class UnableToConnectToSMTPServerError < StandardError
   end
 

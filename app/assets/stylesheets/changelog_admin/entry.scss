@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+#changelog-admin-entry {
+    h2 {
+        @include font-size(16, 16);
+        margin-bottom:10px;
+    }
+    dt {
+        font-weight:$fw-semibold;
+    }
+    dd {
+        margin-bottom:10px;
+    }
+    .pure-button {
+        background:$color-2;
+    }
+    .entries-link {
+        margin-top:10px;
+        display:block;
+    }
+}
