@@ -19,22 +19,22 @@
       .pure-u-1.pure-u-md-1-2.rhs
         %h3 Elsewhere online
         .field
-          = graphical_icon "globe"
+          = graphical_icon "globe", style: :legacy
           =f.url_field :website,
             placeholder: "Your website",
             pattern: "https?://.+",
             title: "Please enter a URL starting with http:// or https://"
         .field.twitter
-          = graphical_icon "twitter"
+          = graphical_icon "twitter", style: :legacy
           =f.text_field :twitter, placeholder: "handle"
         .field.github
-          = graphical_icon "github"
+          = graphical_icon "github", style: :legacy
           =f.text_field :github, placeholder: "handle"
         .field
-          = graphical_icon "linkedin"
+          = graphical_icon "linkedin", style: :legacy
           =f.text_field :linkedin, placeholder: "Your Linkedin public profile URL"
         .field.medium
-          = graphical_icon "medium"
+          = graphical_icon "medium", style: :legacy
           =f.text_field :medium, placeholder: "handle"
 
     =f.button "Update profile", class: 'pure-button update-button'

@@ -12,9 +12,9 @@
     .misc-menu{tabindex: "0"}
       .in-situ
         = image current_user.avatar_url ? current_user.avatar_url : "blank.png", "Avatar of #{current_user.name}"
-        =graphical_icon 'caret-down'
+        =graphical_icon 'caret-down', style: :legacy
       .dropdown
-        =graphical_icon 'caret-up'
+        =graphical_icon 'caret-up', style: :legacy
         .person
           Logged in as
           %strong #{current_user.handle}

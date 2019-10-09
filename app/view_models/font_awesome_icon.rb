@@ -7,7 +7,7 @@ class FontAwesomeIcon
     new(attrs.merge(graphical: false))
   end
 
-  def initialize(type:, label:, style: :legacy, fixed_width: false, graphical:)
+  def initialize(type:, label:, style:, fixed_width: false, graphical:)
     @type = type
     @label = label
     @style = style

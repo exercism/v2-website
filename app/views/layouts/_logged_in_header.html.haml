@@ -6,17 +6,17 @@
 
     -if current_user_has_notifications?
       = link_to [:my, :notifications], class: "notifications active", "aria-label": "New notifications" do
-        =graphical_icon "bell-o"
+        =graphical_icon "bell-o", style: :legacy
     -else
       = link_to [:my, :notifications], class: "notifications", "aria-label": "No notifications" do
-        =graphical_icon "bell-o"
+        =graphical_icon "bell-o", style: :legacy
 
     .misc-menu{tabindex: "0"}
       .in-situ
         = image current_user.avatar_url || "blank.png", "Avatar for #{current_user.handle}"
-        =graphical_icon 'caret-down'
+        =graphical_icon 'caret-down', style: :legacy
       .dropdown
-        =graphical_icon 'caret-up'
+        =graphical_icon 'caret-up', style: :legacy
         .person
           Logged in as
           %strong #{current_user.handle}
