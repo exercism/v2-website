@@ -13,11 +13,11 @@ module ChangelogAdmin
 
       sign_in!(admin)
       visit new_changelog_admin_entry_path
-      fill_in "Title", with: "New Exercise"
+      fill_in "Short", with: "New Exercise"
       fill_in "Details", with: "# We've added a new exercise!"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
-      fill_in "Info url", with: "https://github.com/exercism"
+      fill_in "More info URL", with: "https://github.com/exercism"
       fill_in "Tweet copy", with: "Hello, world!"
       click_on "Save"
 
@@ -41,11 +41,11 @@ module ChangelogAdmin
 
       sign_in!(admin)
       visit new_changelog_admin_entry_path
-      fill_in "Title", with: "   "
+      fill_in "Short", with: "   "
       fill_in "Details", with: "# We've added a new exercise!"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
-      fill_in "Info url", with: "https://github.com/exercism"
+      fill_in "More info URL", with: "https://github.com/exercism"
       click_on "Save"
 
       assert_text "Title can't be blank"
@@ -55,7 +55,7 @@ module ChangelogAdmin
         visible: false
       )
       assert_field "Details", with: "# We've added a new exercise!"
-      assert_field "Info url", with: "https://github.com/exercism"
+      assert_field "More info URL", with: "https://github.com/exercism"
 
       Flipper.disable(:changelog)
     end

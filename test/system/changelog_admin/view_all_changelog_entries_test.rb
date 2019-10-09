@@ -15,8 +15,9 @@ module ChangelogAdmin
 
       assert_text "First entry"
       assert_text "Changelog Admin"
+      assert_text "No"
       assert_link "View", href: changelog_admin_entry_path(entry)
-      assert_link "Create new entry", href: new_changelog_admin_entry_path
+      assert_link "Add a new changelog entry", href: new_changelog_admin_entry_path
 
       Flipper.disable(:changelog)
     end

@@ -12,7 +12,7 @@ module ChangelogAdmin
       visit changelog_admin_entry_path(entry)
       accept_alert { click_on "Publish" }
 
-      assert_text "Published at\n2016-12-25 00:00:00 UTC"
+      assert_text "Published at:\n2016-12-25 00:00:00 UTC"
 
       Flipper.disable(:changelog)
       travel_back

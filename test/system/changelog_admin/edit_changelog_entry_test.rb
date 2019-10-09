@@ -16,11 +16,11 @@ module ChangelogAdmin
       sign_in!(admin)
       visit edit_changelog_admin_entry_path(entry)
 
-      fill_in "Title", with: "New Exercise - Hello world"
+      fill_in "Short", with: "New Exercise - Hello world"
       fill_in "Details", with: "# We've added a new exercise named Hello world!"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
-      fill_in "Info url", with: "https://github.com/exercism/hello-world"
+      fill_in "More info URL", with: "https://github.com/exercism/hello-world"
       click_on "Save"
 
       assert_text "New Exercise - Hello world"
@@ -38,7 +38,7 @@ module ChangelogAdmin
 
       sign_in!(admin)
       visit edit_changelog_admin_entry_path(entry)
-      fill_in "Title", with: "  "
+      fill_in "Short", with: "  "
       click_on "Save"
 
       assert_text "Title can't be blank"
@@ -59,11 +59,11 @@ module ChangelogAdmin
       sign_in!(site_admin)
       visit edit_changelog_admin_entry_path(entry)
 
-      fill_in "Title", with: "New Exercise - Hello world"
+      fill_in "Short", with: "New Exercise - Hello world"
       fill_in "Details", with: "# We've added a new exercise named Hello world!"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
-      fill_in "Info url", with: "https://github.com/exercism/hello-world"
+      fill_in "More info URL", with: "https://github.com/exercism/hello-world"
       click_on "Save"
 
       assert_text "New Exercise - Hello world"
