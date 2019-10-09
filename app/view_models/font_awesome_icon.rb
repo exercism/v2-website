@@ -57,6 +57,10 @@ class FontAwesomeIcon
       "fa"
     when :light
       "fal"
+    when :solid
+      "fas"
+    when :regular
+      "far"
     end
   end
 
