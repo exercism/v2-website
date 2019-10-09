@@ -1,4 +1,4 @@
-class FontAwesomeIcon
+class FontAwesomeIconWidget
   def self.graphical(attrs = {})
     new(attrs.merge(graphical: true))
   end
