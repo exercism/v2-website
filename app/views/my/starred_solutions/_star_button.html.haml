@@ -2,7 +2,7 @@
 
 =link_to [:my, :starred_solutions, solution_id: @solution], class: "pure-button star-button", method: :post, remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving"} do
   -if current_user.starred_solution?(@solution)
-    = graphical_icon "star", style: :legacy
+    = graphical_icon "star", style: :solid
     Starred solution
   -else
     = graphical_icon "star", style: :light
