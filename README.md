@@ -89,6 +89,10 @@ Once created, paste in the GitHub key and secret into `config/secrets.yml`.
 
 ## Extra scripts and useful notes
 
+### Linters
+
+To ensure Exercism's accessibility, we've added a few tools. Before submitting a PR, please make sure to run `bundle exec rubocop` and `bundle exec haml-lint`.
+
 ### Deleting an account
 
  To delete a user, run `user.destroy.`

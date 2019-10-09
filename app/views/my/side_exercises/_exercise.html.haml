@@ -9,13 +9,13 @@
   .icon
     .img{style: "background-image:url('#{image_path(img_url)}')"}
 
-  =icon 'lock status locked'
-  =icon 'unlock status unlocked'
-  =icon 'comment status mentoring-requested'
-  =icon 'adjust status in-progress'
-  =icon 'thumbs-up status approved'
+  =icon 'lock status locked', nil, style: :legacy
+  =icon 'unlock status unlocked', nil, style: :legacy
+  =icon 'comment status mentoring-requested', nil, style: :legacy
+  =icon 'adjust status in-progress', nil, style: :legacy
+  =icon 'thumbs-up status approved', nil, style: :legacy
   .status.completed
-    =icon :check
+    =icon :check, nil, style: :legacy
 
   .title= exercise.title
   -length_word = exercise_length_word(exercise)

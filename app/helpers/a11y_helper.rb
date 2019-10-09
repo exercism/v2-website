@@ -1,11 +1,15 @@
 # Accessibilty aka a11y helpers
 module A11yHelper
-  def icon(type, label = nil)
-    content_tag :i, '', class: "fa fa-#{type}", 'aria-label': (label || type)
+  def icon(type, label = nil, opts = {})
+    attrs = { type: type, label: label }.merge(opts)
+
+    FontAwesomeIcon.labelled(attrs).render(self)
   end
 
-  def graphical_icon(type)
-    content_tag :i, '', class: "fa fa-#{type}", 'aria-hidden': true
+  def graphical_icon(type, opts = {})
+    attrs = { type: type, label: nil }.merge(opts)
+
+    FontAwesomeIcon.graphical(attrs).render(self)
   end
 
   def graphical_image(source, options = {})

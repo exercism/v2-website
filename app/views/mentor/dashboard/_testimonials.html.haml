@@ -1,7 +1,7 @@
 -@testimonials.each do |solution_mentorship|
   .testimonial
     .feedback
-      %i.fas.fa-quote-left
+      = graphical_icon "quote-left", style: :solid
       = solution_mentorship.feedback
     .about
       .user - @#{display_handle(solution_mentorship.solution.user, UserTrack.find_by(user: solution_mentorship.solution.user_id, track: solution_mentorship.solution.exercise.track))}
