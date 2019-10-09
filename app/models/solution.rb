@@ -14,6 +14,8 @@ class Solution < ApplicationRecord
   has_many :stars, class_name: "SolutionStar", dependent: :destroy
   has_many :comments, class_name: "SolutionComment", dependent: :destroy
 
+  has_many :notifications, as: :about, dependent: :destroy
+
   delegate :auto_approve?, to: :exercise
 
   scope :core, -> { joins(:exercise).merge(Exercise.core) }

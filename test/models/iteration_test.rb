@@ -19,4 +19,13 @@ class IterationTest < ActiveSupport::TestCase
     assert_equal [mentor_dp, user_dp].sort, iteration.discussion_posts.sort
     assert_equal [mentor_dp], iteration.mentor_discussion_posts
   end
+
+  test "notifications are deleted when iteration is deleted" do
+    iteration = create(:iteration)
+    notification = create(:notification, about: iteration)
+
+    iteration.destroy
+
+    refute Notification.exists?(notification.id)
+  end
 end
