@@ -20,5 +20,4 @@
     =render "my/solutions/widgets/community_solutions"
 
     .next-option
-      = render "my/solutions/mentor_feedback_request/mentored",
-        mentor_request: MentorFeedbackRequest.new(@solution)
+      = render_solution_mentor_feedback_request_section(:mentored, @solution)
