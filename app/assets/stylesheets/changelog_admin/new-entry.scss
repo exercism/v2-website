@@ -1,0 +1,15 @@
+@import 'variables';
+@import 'mixins';
+
+#changelog-admin-new-entry {
+    table {
+        margin-bottom:10px;
+        th, td {
+            border:1px solid #ddd;
+            padding:10px;
+        }
+    }
+    a {
+        color:$color-2;
+    }
+}
