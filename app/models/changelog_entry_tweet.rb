@@ -28,6 +28,8 @@ class ChangelogEntryTweet < ApplicationRecord
   end
 
   def tweet_to(account)
+    queued!
+
     ChangelogEntryTweetJob.perform_later(
       TwitterAccountSerializer.new.serialize(account),
       self

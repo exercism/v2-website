@@ -26,4 +26,13 @@ class ChangelogEntryTweetTest < ActiveSupport::TestCase
     tweet.link = "https://exercism.io/very-very-very-long-url"
     assert tweet.valid?
   end
+
+  test "#tweet_to marks tweet as queued" do
+    tweet = create(:changelog_entry_tweet)
+    account = TwitterAccount.find(:main)
+
+    tweet.tweet_to(account)
+
+    assert tweet.queued?
+  end
 end
