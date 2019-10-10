@@ -1,3 +1,5 @@
+require "twitter"
+
 class TwitterAccount
   include ActiveModel::AttributeAssignment
 
@@ -15,7 +17,8 @@ class TwitterAccount
     :consumer_key,
     :consumer_secret,
     :access_token,
-    :access_token_secret
+    :access_token_secret,
+    :client,
   )
 
   def initialize(attrs)
@@ -25,16 +28,19 @@ class TwitterAccount
   def tweet(tweet)
     return unless tweet.valid?
 
-    TweetJob.perform_later(
-      consumer_key: consumer_key,
-      consumer_secret: consumer_secret,
-      access_token: access_token,
-      access_token_secret: access_token_secret,
-      text: tweet.text
-    )
+    client.update(tweet.text)
   end
 
   def ==(other)
     slug == other.slug
+  end
+
+  def client
+    @client ||= Twitter::REST::Client.new(
+      consumer_key: consumer_key,
+      consumer_secret: consumer_secret,
+      access_token: access_token,
+      access_token_secret: access_token_secret
+    )
   end
 end

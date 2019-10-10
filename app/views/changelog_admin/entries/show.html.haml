@@ -15,6 +15,8 @@
       %dd= @entry.published_at
       %dt Tweet copy:
       %dd= @entry.tweet_copy
+      %dt Tweet status:
+      %dd= @entry.tweet_status_text
 
     %h2 Actions
     = render "actions", actions: @actions, entry: @entry

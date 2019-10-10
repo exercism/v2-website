@@ -2,6 +2,8 @@ class ChangelogEntryTweet < ApplicationRecord
   CHARACTER_LIMIT = 280
   SHORTENED_URL_LENGTH = 23
 
+  enum status: { queued: 0, published: 1 }
+
   attr_writer :link
 
   def self.character_limit
@@ -23,6 +25,13 @@ class ChangelogEntryTweet < ApplicationRecord
 
   def link
     @link ||= entry.tweet_link_url
+  end
+
+  def tweet_to(account)
+    ChangelogEntryTweetJob.perform_later(
+      TwitterAccountSerializer.new.serialize(account),
+      self
+    )
   end
 
   private
