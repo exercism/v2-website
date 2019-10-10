@@ -15,6 +15,13 @@ class ChangelogEntryPresenterTest < ActiveSupport::TestCase
       "Tweet published",
       ChangelogEntryPresenter.new(entry).tweet_status_text
     )
+
+    entry = stub(tweet_status: "failed")
+
+    assert_equal(
+      "Tweet failed... Retrying",
+      ChangelogEntryPresenter.new(entry).tweet_status_text
+    )
   end
 end
 

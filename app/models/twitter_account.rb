@@ -3,6 +3,9 @@ require "twitter"
 class TwitterAccount
   include ActiveModel::AttributeAssignment
 
+  class TweetFailed < RuntimeError
+  end
+
   def self.config
     Rails.application.config_for("twitter_accounts")
   end
@@ -28,7 +31,11 @@ class TwitterAccount
   def tweet(tweet)
     return unless tweet.valid?
 
-    client.update(tweet.text)
+    begin
+      client.update(tweet.text)
+    rescue Twitter::Error
+      raise TweetFailed
+    end
   end
 
   def ==(other)
