@@ -80,7 +80,8 @@ module ChangelogAdmin
     test "entry is tweeted after it is published" do
       Flipper.enable(:changelog)
       admin = create(:user, :onboarded, admin: true)
-      entry = create(:changelog_entry, tweet_copy: "Hello, world!")
+      entry = create(:changelog_entry)
+      create(:changelog_entry_tweet, copy: "Hello, world!", entry: entry)
       tweet_request = stub_request(
         :post,
         "https://api.twitter.com/1.1/statuses/update.json"

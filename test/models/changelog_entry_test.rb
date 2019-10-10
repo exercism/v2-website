@@ -32,13 +32,14 @@ class ChangelogEntryTest < ActiveSupport::TestCase
   end
 
   test "#tweet! tweets a changelog entry" do
-    tweet = mock()
+    tweet = build(:changelog_entry_tweet)
     referenceable = mock()
-    referenceable.expects(:tweet).with(tweet)
     ChangelogEntry::Referenceable.stubs(:for).returns(referenceable)
-    entry = create(:changelog_entry)
+    entry = build(:changelog_entry, tweet: tweet)
 
-    entry.tweet!(tweet: tweet)
+    referenceable.expects(:tweet).with(tweet)
+
+    entry.tweet!
   end
 
   test "#tweet_link_url returns link to entry if details are present" do

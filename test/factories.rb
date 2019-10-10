@@ -234,4 +234,9 @@ FactoryBot.define do
     title { "Entry" }
     association :created_by, factory: :user
   end
+
+  factory :changelog_entry_tweet do
+    copy { "Hello, world!" }
+    association :entry, factory: :changelog_entry
+  end
 end

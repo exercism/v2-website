@@ -10,6 +10,7 @@ module ChangelogAdmin
                      details_markdown: "# We've added a new exercise!",
                      info_url: "https://github.com/exercism",
                      created_by: admin)
+      tweet = create(:changelog_entry_tweet, entry: entry, copy: "Hello")
       track = create(:track, title: "Ruby")
       create(:exercise, track: track, title: "Hello world")
 
@@ -21,12 +22,14 @@ module ChangelogAdmin
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "More info URL", with: "https://github.com/exercism/hello-world"
+      fill_in "Tweet copy", with: "Hello, world!"
       click_on "Save"
 
       assert_text "New Exercise - Hello world"
       assert_text "# We've added a new exercise named Hello world!"
       assert_text "Ruby - Hello world"
       assert_text "https://github.com/exercism/hello-world"
+      assert_text "Hello, world!"
 
       Flipper.disable(:changelog)
     end

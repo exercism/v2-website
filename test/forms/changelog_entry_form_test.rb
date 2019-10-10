@@ -53,13 +53,14 @@ class ChangelogEntryFormTest < ActiveSupport::TestCase
 
   test "validates that tweet is valid" do
     user = create(:user)
-    tweet = mock(valid?: false)
+    tweet = create(:changelog_entry_tweet)
+    tweet.stubs(:valid?).returns(false)
     form = ChangelogEntryForm.new(
       title: "Title",
       created_by: user,
-      tweet_copy: "Hello, world!"
+      tweet_copy: "Hello, world!",
     )
-    ChangelogEntry::Tweet.stubs(:from_entry).with(form.entry).returns(tweet)
+    form.tweet = tweet
 
     refute form.valid?
   end
