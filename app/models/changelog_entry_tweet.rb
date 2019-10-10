@@ -2,7 +2,7 @@ class ChangelogEntryTweet < ApplicationRecord
   CHARACTER_LIMIT = 280
   SHORTENED_URL_LENGTH = 23
 
-  enum status: { queued: 0, published: 1, failed: 2 }
+  enum status: { created: 0, queued: 1, published: 2, failed: 3 }
 
   attr_writer :link
 

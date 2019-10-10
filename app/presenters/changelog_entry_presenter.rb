@@ -7,6 +7,8 @@ class ChangelogEntryPresenter < SimpleDelegator
       "Tweet published"
     when "failed"
       "Tweet failed... Retrying"
+    when "created"
+      "Waiting for entry to be published"
     end
   end
 end
