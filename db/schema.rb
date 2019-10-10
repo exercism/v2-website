@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_005342) do
+ActiveRecord::Schema.define(version: 2019_10_10_015553) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2019_10_10_005342) do
     t.datetime "published_at"
     t.text "details_html"
     t.string "referenceable_key"
-    t.text "tweet_copy"
     t.index ["created_by_id"], name: "index_changelog_entries_on_created_by_id"
     t.index ["referenceable_type", "referenceable_id"], name: "index_changelog_entries_on_referenceable"
   end
