@@ -1,7 +1,8 @@
-class ChangelogEntry::Tweet
-  include ActiveModel::Validations
+class ChangelogEntryTweet < ApplicationRecord
   CHARACTER_LIMIT = 280
   SHORTENED_URL_LENGTH = 23
+
+  attr_writer :link
 
   def self.character_limit
     CHARACTER_LIMIT
@@ -11,26 +12,24 @@ class ChangelogEntry::Tweet
     SHORTENED_URL_LENGTH
   end
 
-  def self.from_entry(entry)
-    new(copy: entry.tweet_copy, link: entry.tweet_link_url)
-  end
+  belongs_to :entry, class_name: "ChangelogEntry", foreign_key: :changelog_entry_id
 
   validates :copy, presence: true
   validate :length_is_correct
-
-  def initialize(copy:, link: nil)
-    @copy = copy || ""
-    @link = link || ""
-  end
 
   def text
     [copy, link].reject(&:empty?).join(" ")
   end
 
+  def link
+    @link ||= entry.tweet_link_url
+  end
+
   private
-  attr_reader :copy, :link
 
   def length_is_correct
+    return if copy.blank?
+
     errors.add(:base, "Tweet is too long") if over_limit?
   end
 
