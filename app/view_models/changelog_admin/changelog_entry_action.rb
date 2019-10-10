@@ -53,12 +53,19 @@ module ChangelogAdmin
       context.link_to(
         name.capitalize,
         { action: action, controller: "changelog_admin/entries", id: entry.id },
-        data: { confirm: confirmation_text, method: method }
+        data: link_data
       )
     end
 
     private
     attr_reader :name, :confirm, :method, :action, :enabled
+
+    def link_data
+      {}.tap do |data|
+        data.merge!(confirm: confirmation_text) if confirm
+        data.merge!(method: method)
+      end
+    end
 
     def allowed?(entry, user)
       policy.allowed?(user: user, entry: entry)
