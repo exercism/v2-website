@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_015553) do
+ActiveRecord::Schema.define(version: 2019_10_10_023224) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2019_10_10_015553) do
   create_table "changelog_entry_tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "changelog_entry_id", null: false
     t.text "copy", null: false
+    t.integer "status", default: 0, null: false
     t.index ["changelog_entry_id"], name: "index_changelog_entry_tweets_on_changelog_entry_id"
   end
 

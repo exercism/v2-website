@@ -10,7 +10,7 @@ class ChangelogEntry < ApplicationRecord
   delegate :title, to: :referenceable, prefix: true
   delegate :icon, to: :referenceable
   delegate :name, :handle, to: :created_by, prefix: true
-  delegate :copy, to: :tweet, prefix: true, allow_nil: true
+  delegate :copy, :status, to: :tweet, prefix: true, allow_nil: true
 
   scope :published, -> { where.not(published_at: nil) }
 
@@ -41,7 +41,7 @@ class ChangelogEntry < ApplicationRecord
   def tweet!
     return if tweet.blank?
 
-    referenceable.tweet(tweet)
+    tweet.tweet_to(referenceable.twitter_account)
   end
 
   def published?
