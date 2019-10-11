@@ -54,6 +54,10 @@ Rails.application.routes.draw do
       post :unpublish, on: :member
     end
 
+    resource :referenceables, only: [] do
+      get :search, on: :collection
+    end
+
     root to: "entries#index"
   end
 

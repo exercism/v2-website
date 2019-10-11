@@ -16,4 +16,4 @@
 //= require selectize/dist/js/standalone/selectize.js
 //= require_tree .
 
-$('select').selectize()
+$('select:not(.js-skip-selectize)').selectize()

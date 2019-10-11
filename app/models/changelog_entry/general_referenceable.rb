@@ -1,11 +1,11 @@
 class ChangelogEntry
-  class NullReferenceable
+  class GeneralReferenceable
     def icon
       "https://via.placeholder.com/150"
     end
 
     def title
-      nil
+      "General"
     end
 
     def to_global_id
@@ -14,6 +14,14 @@ class ChangelogEntry
 
     def twitter_account
       TwitterAccount.find(:main)
+    end
+
+    def key
+      nil
+    end
+
+    def object
+      nil
     end
   end
 end
