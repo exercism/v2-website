@@ -19,6 +19,7 @@ module ChangelogAdmin
 
       fill_in "Short", with: "New Exercise - Hello world"
       fill_in "Details", with: "# We've added a new exercise named Hello world!"
+      fill_in_option "#changelog_entry_form_referenceable_gid", with: "Ruby"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "More info URL", with: "https://github.com/exercism/hello-world"
@@ -64,6 +65,7 @@ module ChangelogAdmin
 
       fill_in "Short", with: "New Exercise - Hello world"
       fill_in "Details", with: "# We've added a new exercise named Hello world!"
+      fill_in_option "#changelog_entry_form_referenceable_gid", with: "Ruby"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "More info URL", with: "https://github.com/exercism/hello-world"

@@ -15,6 +15,7 @@ module ChangelogAdmin
       visit new_changelog_admin_entry_path
       fill_in "Short", with: "New Exercise"
       fill_in "Details", with: "# We've added a new exercise!"
+      fill_in_option "#changelog_entry_form_referenceable_gid", with: "Ruby"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "More info URL", with: "https://github.com/exercism"
@@ -43,6 +44,7 @@ module ChangelogAdmin
       visit new_changelog_admin_entry_path
       fill_in "Short", with: "   "
       fill_in "Details", with: "# We've added a new exercise!"
+      fill_in_option "#changelog_entry_form_referenceable_gid", with: "Ruby"
       select_option "Ruby - Hello world",
         selector: "#changelog_entry_form_referenceable_gid"
       fill_in "More info URL", with: "https://github.com/exercism"

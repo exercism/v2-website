@@ -42,12 +42,11 @@ class ChangelogEntryForm
   end
 
   def referenceable_types
-    [Track, Exercise.includes(:track)].
-      map { |type| ChangelogEntry::ReferenceableType.new(type) }
+    [referenceable]
   end
 
   def referenceable
-    GlobalID::Locator.locate(referenceable_gid)
+    ChangelogEntry::Referenceable.find(referenceable_gid)
   end
 
   def entry
@@ -59,8 +58,8 @@ class ChangelogEntryForm
         title: title,
         details_markdown: details_markdown,
         details_html: details_html,
-        referenceable: referenceable,
-        referenceable_key: referenceable_key,
+        referenceable: referenceable.object,
+        referenceable_key: referenceable.key,
         info_url: info_url,
         created_by: created_by
       )
@@ -79,12 +78,6 @@ class ChangelogEntryForm
 
   def details_html
     ParseMarkdown.(details_markdown)
-  end
-
-  def referenceable_key
-    return if referenceable.blank?
-
-    "#{referenceable.class.name.underscore}_#{referenceable.id}"
   end
 
   def tweet_is_valid
