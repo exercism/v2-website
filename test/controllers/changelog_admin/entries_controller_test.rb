@@ -1,5 +1,4 @@
 require "test_helper"
-require "webmock/minitest"
 require_relative "./authorization_test_helpers"
 
 module ChangelogAdmin
@@ -74,30 +73,6 @@ module ChangelogAdmin
 
       assert_response :unauthorized
 
-      Flipper.disable(:changelog)
-    end
-
-    test "entry is tweeted after it is published" do
-      Flipper.enable(:changelog)
-      admin = create(:user, :onboarded, admin: true)
-      entry = create(:changelog_entry, tweet_copy: "Hello, world!")
-      tweet_request = stub_request(
-        :post,
-        "https://api.twitter.com/1.1/statuses/update.json"
-      ).
-      with(body: { status: "Hello, world!" }).
-      to_return(
-        status: 200,
-        body: { id: 1 }.to_json,
-        headers: { "Content-Type" => "application/json" }
-      )
-
-      perform_enqueued_jobs do
-        sign_in!(admin)
-        post publish_changelog_admin_entry_path(entry)
-      end
-
-      assert_requested(tweet_request)
       Flipper.disable(:changelog)
     end
   end

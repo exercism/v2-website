@@ -3,7 +3,6 @@ class ChangelogEntry
     attr_reader :exercise
 
     delegate :to_global_id, to: :exercise
-    delegate :tweet, to: :twitter_account
 
     def initialize(exercise)
       @exercise = exercise

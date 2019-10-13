@@ -9,38 +9,22 @@ class TwitterAccountTest < ActiveSupport::TestCase
   end
 
   test "#tweet enqueues a tweet job" do
-    account = TwitterAccount.new(
-      consumer_key: "KEY",
-      consumer_secret: "SECRET",
-      access_token: "TOKEN",
-      access_token_secret: "TOKEN_SECRET"
-    )
+    client = mock()
+    account = TwitterAccount.new(client: client)
 
-    TweetJob.
-      expects(:perform_later).
-      with(
-        consumer_key: "KEY",
-        consumer_secret: "SECRET",
-        access_token: "TOKEN",
-        access_token_secret: "TOKEN_SECRET",
-        text: "Hello, world!"
-      )
+    client.expects(:update).with("Hello, world!")
 
-    tweet = mock(text: "Hello, world!", valid?: true)
+    tweet = stub(text: "Hello, world!", valid?: true)
     account.tweet(tweet)
   end
 
   test "#tweet does not enqueue a tweet job when invalid" do
-    account = TwitterAccount.new(
-      consumer_key: "KEY",
-      consumer_secret: "SECRET",
-      access_token: "TOKEN",
-      access_token_secret: "TOKEN_SECRET"
-    )
+    client = mock()
+    account = TwitterAccount.new(client: client)
 
-    TweetJob.expects(:perform_later).never
+    client.expects(:update).never
 
-    tweet = mock(valid?: false)
+    tweet = stub(valid?: false)
     account.tweet(tweet)
   end
 end

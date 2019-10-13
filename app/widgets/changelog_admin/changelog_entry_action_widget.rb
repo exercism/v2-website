@@ -1,27 +1,27 @@
 module ChangelogAdmin
-  class ChangelogEntryAction
+  class ChangelogEntryActionWidget
     def self.all
       [
-        ChangelogEntryAction.new(
+        new(
           name: :publish,
           confirm: true,
           method: :post,
           action: :publish,
         ),
-        ChangelogEntryAction.new(
+        new(
           name: :unpublish,
           confirm: true,
           method: :post,
           action: :unpublish,
           enabled: Flipper.enabled?(:changelog_destructive),
         ),
-        ChangelogEntryAction.new(
+        new(
           name: :edit,
           confirm: false,
           method: :get,
           action: :edit,
         ),
-        ChangelogEntryAction.new(
+        new(
           name: :delete,
           confirm: true,
           method: :delete,
@@ -53,12 +53,19 @@ module ChangelogAdmin
       context.link_to(
         name.capitalize,
         { action: action, controller: "changelog_admin/entries", id: entry.id },
-        data: { confirm: confirmation_text, method: method }
+        data: link_data
       )
     end
 
     private
     attr_reader :name, :confirm, :method, :action, :enabled
+
+    def link_data
+      {}.tap do |data|
+        data.merge!(confirm: confirmation_text) if confirm
+        data.merge!(method: method)
+      end
+    end
 
     def allowed?(entry, user)
       policy.allowed?(user: user, entry: entry)

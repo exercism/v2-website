@@ -1,5 +1,10 @@
+require "twitter"
+
 class TwitterAccount
   include ActiveModel::AttributeAssignment
+
+  class TweetFailed < RuntimeError
+  end
 
   def self.config
     Rails.application.config_for("twitter_accounts")
@@ -15,7 +20,8 @@ class TwitterAccount
     :consumer_key,
     :consumer_secret,
     :access_token,
-    :access_token_secret
+    :access_token_secret,
+    :client,
   )
 
   def initialize(attrs)
@@ -25,16 +31,23 @@ class TwitterAccount
   def tweet(tweet)
     return unless tweet.valid?
 
-    TweetJob.perform_later(
-      consumer_key: consumer_key,
-      consumer_secret: consumer_secret,
-      access_token: access_token,
-      access_token_secret: access_token_secret,
-      text: tweet.text
-    )
+    begin
+      client.update(tweet.text)
+    rescue Twitter::Error
+      raise TweetFailed
+    end
   end
 
   def ==(other)
     slug == other.slug
+  end
+
+  def client
+    @client ||= Twitter::REST::Client.new(
+      consumer_key: consumer_key,
+      consumer_secret: consumer_secret,
+      access_token: access_token,
+      access_token_secret: access_token_secret
+    )
   end
 end
