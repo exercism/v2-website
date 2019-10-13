@@ -17,6 +17,10 @@ class Solution < ApplicationRecord
   has_many :notifications, as: :about, dependent: :destroy
 
   delegate :auto_approve?, to: :exercise
+  delegate :max_mentoring_slots,
+    :mentoring_slots_remaining,
+    to: :user_track,
+    prefix: :track
 
   scope :core, -> { joins(:exercise).merge(Exercise.core) }
   scope :side, -> { joins(:exercise).merge(Exercise.side) }
@@ -56,6 +60,10 @@ class Solution < ApplicationRecord
      where("EXISTS(SELECT TRUE FROM solution_mentorships WHERE solution_mentorships.solution_id = solutions.id)")
   }
 
+  def exercise_is_core?
+    exercise.core?
+  end
+
   def display_published_at
     published_at == Exercism::V2_MIGRATED_AT ? created_at : published_at
   end
@@ -78,6 +86,10 @@ class Solution < ApplicationRecord
 
   def legacy?
     created_at < Exercism::V2_MIGRATED_AT
+  end
+
+  def last_updated_legacy?
+    last_updated_by_user_at && last_updated_by_user_at <= Exercism::V2_MIGRATED_AT
   end
 
   def approved?
