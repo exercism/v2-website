@@ -1,23 +1,23 @@
 class ChangelogEntry
   class ReferenceableTrack
-    attr_reader :object
+    attr_reader :track
 
-    delegate :to_global_id, to: :object
+    delegate :to_global_id, to: :track
 
-    def initialize(object)
-      @object = object
+    def initialize(track)
+      @track = track
     end
 
     def title
-      object.title
+      track.title
     end
 
     def icon
-      object.bordered_green_icon_url
+      track.bordered_green_icon_url
     end
 
     def twitter_account
-      TwitterAccount.find(object.slug.to_sym)
+      TwitterAccount.find(track.slug.to_sym)
     end
 
     def as_json(*args)
@@ -28,7 +28,11 @@ class ChangelogEntry
     end
 
     def key
-      "track_#{object.id}"
+      "track_#{track.id}"
+    end
+
+    def object
+      track
     end
   end
 end
