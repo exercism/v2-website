@@ -1,23 +1,23 @@
 class ChangelogEntry
   class ReferenceableExercise
-    attr_reader :object
+    attr_reader :exercise
 
-    delegate :to_global_id, to: :object
+    delegate :to_global_id, to: :exercise
 
-    def initialize(object)
-      @object = object
+    def initialize(exercise)
+      @exercise = exercise
     end
 
     def title
-      "#{object.track_title} - #{object.title}"
+      "#{exercise.track_title} - #{exercise.title}"
     end
 
     def icon
-      object.dark_icon_url
+      exercise.dark_icon_url
     end
 
     def twitter_account
-      ReferenceableTrack.new(object.track).twitter_account
+      ReferenceableTrack.new(exercise.track).twitter_account
     end
 
     def as_json(*args)
@@ -28,7 +28,11 @@ class ChangelogEntry
     end
 
     def key
-      "object_#{object.id}"
+      "exercise_#{exercise.id}"
+    end
+
+    def object
+      exercise
     end
   end
 end
