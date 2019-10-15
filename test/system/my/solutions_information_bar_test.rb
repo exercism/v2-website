@@ -126,27 +126,6 @@ class My::SolutionsInformationBarTest < ApplicationSystemTestCase
     assert_selector ".notifications-bar", text: "Your exercise has been submitted successfully."
   end
 
-  test "In independent mode with slots" do
-    @solution.update(track_in_independent_mode: true, mentoring_requested_at: nil)
-    @user_track.update(independent_mode: true)
-    UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
-
-    sign_in!(@user)
-    visit my_solution_path(@solution)
-
-    assert_selector ".notifications-bar .notification", text: "In Practice Mode you will not receive mentoring by default. You may request mentoring on 1 solution at a time."
-  end
-
-  test "In independent mode without slots" do
-    @solution.update(track_in_independent_mode: true, mentoring_requested_at: nil)
-    UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
-
-    sign_in!(@user)
-    visit my_solution_path(@solution)
-
-    assert_selector ".notifications-bar .notification", text: "In Practice Mode you will not receive mentoring by default. You may request mentoring once your existing solutions have been mentored."
-  end
-
   test "Legacy with mentoring requested" do
     @solution.update(last_updated_by_user_at: Exercism::V2_MIGRATED_AT - 1.day)
 
