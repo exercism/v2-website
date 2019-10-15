@@ -183,4 +183,56 @@ class MentorFeedbackRequestHelperTest < ActionView::TestCase
     assert_select "a", text: "Request mentor feedback"
     assert_match "You have 3 slots remaining", rendered
   end
+
+  test "renders notification for oversubscribed tracks" do
+    mentor_request = ::MentorFeedbackRequest.new(
+      create(:solution),
+      status: :oversubscribed
+    )
+
+    render_mentor_feedback_request_notification(
+      nil,
+      mentor_request
+    )
+
+    assert_match(
+      "You may request mentoring once the track isn't oversubscribed.",
+      rendered
+    )
+  end
+
+  test "renders notification for mentoring slots used" do
+    mentor_request = ::MentorFeedbackRequest.new(
+      create(:solution),
+      status: :mentoring_slots_used
+    )
+
+    render_mentor_feedback_request_notification(
+      nil,
+      mentor_request
+    )
+
+    assert_match(
+      "You may request mentoring once your existing solutions have been mentored.",
+      rendered
+    )
+  end
+
+  test "renders notification for mentoring slots remaining" do
+    mentor_request = ::MentorFeedbackRequest.new(
+      create(:solution),
+      status: :mentoring_slots_remaining
+    )
+
+    render_mentor_feedback_request_notification(
+      nil,
+      mentor_request
+    )
+
+    assert_select "a", text: "Request mentoring"
+    assert_match(
+      "You may request mentoring on one solution at a time.",
+      rendered
+    )
+  end
 end
