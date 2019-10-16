@@ -221,7 +221,6 @@ class User < ApplicationRecord
     return unless avatar.attached?
 
     unless avatar.variable?
-      avatar.purge
       errors[:avatar] << "Wrong format"
     end
   end
