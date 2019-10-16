@@ -8,10 +8,9 @@
   -user_display_avatar_url = display_avatar_url(@solution.user, @solution_user_track)
 
 #mentor-solution-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Mentor dashboard", [:mentor, :dashboard]
-      %span #{user_display_handle}'s solution to #{@exercise.title}
+  = breadcrumb_nav do
+    %li=link_to "Mentor dashboard", [:mentor, :dashboard]
+    %li=current_link "#{user_display_handle}'s solution to #{@exercise.title}"
 
   .track-header
     .lo-container

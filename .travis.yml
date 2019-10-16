@@ -1,7 +1,7 @@
 dist: xenial
 env:
   global:
-    - CC_TEST_REPORTER_ID=787a2f89b15c637323c7340d65ec17e898ac44480706b4b4122ea040c2a88f1d
+    - CC_TEST_REPORTER_ID=599d62d35ad6a8f7e72dcca84cb343f5c3863a9617ee43eb6dc13d0600bc28e8
 language: ruby
 sudo: true
 services:
@@ -33,6 +33,8 @@ install:
   - "npm install"
   - "bundle exec rake db:test:prepare"
 script:
+  - "bundle exec rubocop"
+  - "bundle exec haml-lint"
   - "bundle exec rake test"
   - "bundle exec rake test:system"
 cache:

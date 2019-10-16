@@ -1,0 +1,84 @@
+module ChangelogAdmin
+  class ChangelogEntryActionWidget
+    def self.all
+      [
+        new(
+          name: :publish,
+          confirm: true,
+          method: :post,
+          action: :publish,
+        ),
+        new(
+          name: :unpublish,
+          confirm: true,
+          method: :post,
+          action: :unpublish,
+          enabled: Flipper.enabled?(:changelog_destructive),
+        ),
+        new(
+          name: :edit,
+          confirm: false,
+          method: :get,
+          action: :edit,
+        ),
+        new(
+          name: :delete,
+          confirm: true,
+          method: :delete,
+          action: :destroy,
+          enabled: Flipper.enabled?(:changelog_destructive),
+        ),
+      ]
+    end
+
+    def self.enabled
+      all.select { |action| action.enabled? }
+    end
+
+    def initialize(name:, confirm:, method:, action: nil, enabled: true)
+      @name = name
+      @confirm = confirm
+      @method = method
+      @action = action
+      @enabled = enabled
+    end
+
+    def enabled?
+      enabled
+    end
+
+    def render_for(context, entry, user)
+      return unless allowed?(entry, user)
+
+      context.link_to(
+        name.capitalize,
+        { action: action, controller: "changelog_admin/entries", id: entry.id },
+        data: link_data
+      )
+    end
+
+    private
+    attr_reader :name, :confirm, :method, :action, :enabled
+
+    def link_data
+      {}.tap do |data|
+        data.merge!(confirm: confirmation_text) if confirm
+        data.merge!(method: method)
+      end
+    end
+
+    def allowed?(entry, user)
+      policy.allowed?(user: user, entry: entry)
+    end
+
+    def confirmation_text
+      return false unless confirm
+
+      "Are you sure you want to #{name} this entry?"
+    end
+
+    def policy
+      "ChangelogAdmin::AllowedTo#{name.capitalize}EntryPolicy".constantize
+    end
+  end
+end

@@ -203,6 +203,10 @@ class User < ApplicationRecord
     deleted_at.present?
   end
 
+  def flipper_id
+    id
+  end
+
   private
 
   def avatar_thumbnail_url

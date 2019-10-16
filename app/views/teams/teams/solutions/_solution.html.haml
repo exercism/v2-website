@@ -20,5 +20,5 @@
       .submitted-at Submitted #{time_ago_in_words(solution.iterations.last.created_at)} ago
     .status
       -if solution.needs_feedback?
-        =graphical_icon 'comments-o'
+        =graphical_icon 'comments-o', style: :legacy
         View and give feedback

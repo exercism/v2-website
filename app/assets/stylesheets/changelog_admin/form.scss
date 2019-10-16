@@ -1,0 +1,30 @@
+@import 'variables';
+@import 'mixins';
+
+.lo-changelog-admin-form {
+    input {
+        padding:10px;
+    }
+    label {
+        margin-top:20px;
+        margin-bottom:5px;
+    }
+    #changelog_entry_form_title {
+        width:100%;
+    }
+    #changelog_entry_form_details_markdown {
+        width:100%;
+        height:300px;
+    }
+    #changelog_entry_form_info_url {
+        width:400px;
+    }
+    #changelog_entry_form_tweet_copy {
+        width:400px;
+        height:100px;
+    }
+    .pure-button {
+        margin-top:20px;
+    }
+}
+

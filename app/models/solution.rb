@@ -14,7 +14,13 @@ class Solution < ApplicationRecord
   has_many :stars, class_name: "SolutionStar", dependent: :destroy
   has_many :comments, class_name: "SolutionComment", dependent: :destroy
 
+  has_many :notifications, as: :about, dependent: :destroy
+
   delegate :auto_approve?, to: :exercise
+  delegate :max_mentoring_slots,
+    :mentoring_slots_remaining,
+    to: :user_track,
+    prefix: :track
 
   scope :core, -> { joins(:exercise).merge(Exercise.core) }
   scope :side, -> { joins(:exercise).merge(Exercise.side) }
@@ -54,12 +60,20 @@ class Solution < ApplicationRecord
      where("EXISTS(SELECT TRUE FROM solution_mentorships WHERE solution_mentorships.solution_id = solutions.id)")
   }
 
+  def exercise_is_core?
+    exercise.core?
+  end
+
   def display_published_at
     published_at == Exercism::V2_MIGRATED_AT ? created_at : published_at
   end
 
   def track_in_mentored_mode?
     track_in_independent_mode === false
+  end
+
+  def track_accepting_new_students?
+    track.accepting_new_students?
   end
 
   def mentor_download_command
@@ -72,6 +86,10 @@ class Solution < ApplicationRecord
 
   def legacy?
     created_at < Exercism::V2_MIGRATED_AT
+  end
+
+  def last_updated_legacy?
+    last_updated_by_user_at && last_updated_by_user_at <= Exercism::V2_MIGRATED_AT
   end
 
   def approved?

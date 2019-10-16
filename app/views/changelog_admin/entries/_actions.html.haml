@@ -1,0 +1,4 @@
+- actions.each do |action|
+  = action.render_for(self, entry, current_user)
+
+= link_to "Back to Changelog Admin", changelog_admin_root_path, class: 'entries-link'

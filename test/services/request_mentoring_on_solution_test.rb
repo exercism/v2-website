@@ -13,7 +13,7 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
                         updated_at: Time.now - 1.week
 
       ut = create :user_track, user: solution.user, track: solution.track
-      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
+      UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
       RequestMentoringOnSolution.(solution)
 
@@ -32,12 +32,28 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
       create(:user, :system)
       solution = create :solution, mentoring_requested_at: nil
       ut = create :user_track, user: solution.user, track: solution.track
-      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
+      UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
 
       RequestMentoringOnSolution.(solution)
       assert_nil solution.mentoring_requested_at
 
-      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
+      UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
+      RequestMentoringOnSolution.(solution)
+      assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
+    end
+  end
+
+  test "doesn't change if track isn't accepting students" do
+    Timecop.freeze do
+      create(:user, :system)
+      solution = create :solution, mentoring_requested_at: nil
+      ut = create :user_track, user: solution.user, track: solution.track
+      solution.track.stubs(accepting_new_students?: false)
+
+      RequestMentoringOnSolution.(solution)
+      assert_nil solution.mentoring_requested_at
+
+      solution.track.stubs(accepting_new_students?: true)
       RequestMentoringOnSolution.(solution)
       assert_equal Time.current.to_i, solution.mentoring_requested_at.to_i
     end
@@ -48,7 +64,7 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
       create(:user, :system)
       solution = create :solution, mentoring_requested_at: nil
       ut = create :user_track, user: solution.user, track: solution.track
-      UserTrack.any_instance.stubs(mentoring_allowance_used_up?: true)
+      UserTrack.any_instance.stubs(mentoring_slots_remaining?: false)
 
       solution.exercise.update(core: true)
       ut.update(independent_mode: true)
@@ -76,7 +92,7 @@ class CancelMentoringRequestForSolutionTest < ActiveSupport::TestCase
     create(:user, :system)
     solution = create :solution, approved_by: create(:user)
     ut = create :user_track, user: solution.user, track: solution.track
-    UserTrack.any_instance.stubs(mentoring_allowance_used_up?: false)
+    UserTrack.any_instance.stubs(mentoring_slots_remaining?: true)
 
     CreateSystemDiscussionPost.expects(:call).never
 

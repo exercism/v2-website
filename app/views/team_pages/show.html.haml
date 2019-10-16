@@ -1,71 +1,42 @@
-#team-page
-  #nav.lo-nav-bar
+#team-intro-page.lo-organisation-page
+  =render "pages/organisation_menu", selected: "team"
+
+  %section.organisation-top-banner-section
     .lo-container
-      =link_to "Home", root_path
-      %span Exercism's Staff
-  =render "header"
+      .inner
+        %h1
+          .subtitle The people behind Exercism
+          .strong About the team
 
-  .core
+  %section.intro-section
     .lo-container
-      %h2 Exercism's Staff
-      %p.subheading Our staff manage the strategic and organisational sides of Exercism, the Exercism website and CLI. They are responsible for fulfilling our mission statement and maintaining our values.
-      .pure-g
-        .pure-u-1.pure-u-md-1-2
-          =link_to "http://kytrinyx.com", class: 'core-person' do
-            .pure-g
-              .pure-u-1-4
-                =image "https://avatars2.githubusercontent.com/u/276834?v=4&s=460", "Photo of Katrina Owen"
-              .pure-u-3-4
-                %h3 Katrina Owen
-                %p.bio Katrina is the co-founder and original creator of Exercism. She is a polyglot developer and Ruby Hero award winner, with a degree in molecular biology. She cares deeply about open source and contributes to several projects outside of Exercism.
-                .tags
-                  .tag Leadership
-                  .tag Product
-                  .tag CLI
+      .content
+        %h2 Thousands of people have supported our vision and helped build Exercism. 
+        %p Exercism relies on leadership team and staff, a wider team of approximately one hundred maintainers and key contributors, and small contributions from thousands of individuals. Beyond these contributions to our product, tens of thousands of members of our community have contributed by giving feedback and help to others.
+        %p If you'd like to get involved in Exercism, read our #{link_to "how to contribute guide", contribute_page_path}, or consider #{link_to "becoming a mentor", become_a_mentor_path}.
+      .map
+        = graphical_image "company/photo-map.png"
 
-        .pure-u-1.pure-u-md-1-2
-          =link_to "http://ihid.co.uk", class: 'core-person' do
-            .pure-g
-              .pure-u-1-4
-                =image "https://avatars2.githubusercontent.com/u/286476?v=4&s=460", "Photo of Jeremy Walker"
-              .pure-u-3-4
-                %h3 Jeremy Walker
-                %p.bio Jeremy is the co-founder of Exercism. He works on the strategic side of Exercism and is also the lead developer behind the website. Away from Exercism, Jeremy is the CEO of Thalamus, where he and his team develop artificial intelligence solutions to meaningful problems.
-                .tags
-                  .tag Leadership
-                  .tag Product
-                  .tag Platform
+  %section.details-section
+    .lo-container
+      %h2 Take a closer look
+      .group
+        %h3 Leadership Team and Staff
+        %p Our leadership team manage the strategic and organisational sides of Exercism. They are responsible for fulfilling our mission statement and maintaining our values.
+        %p Our staff manage our website, the CLI and the operational side of Exercism, ensuring that we provide a safe and reliable experience for everyone using Exercism. 
+        =link_to "Learn more", staff_team_page_path, class: 'section-link'
 
-        .pure-u-1.pure-u-md-1-2
-          =link_to "https://twitter.com/n_chalmers", class: 'core-person' do
-            .pure-g
-              .pure-u-1-4
-                =image "https://avatars0.githubusercontent.com/u/5421823?v=4&s=460", "Photo of Nicole Chalmers"
-              .pure-u-3-4
-                %h3 Nicole Chalmers
-                %p.bio Nicole is responsible for the product-side of Exercism. She is the brains behind the user experience and beautiful design of Exercism. She is passionate about education, equality and inclusiveness. Nicole is part of the team at Thalamus.
-                .tags
-                  .tag Leadership
-                  .tag Product
+      .group
+        %h3 Track maintainers
+        %p Our maintainers are the lynchpins of the language tracks and exercises on Exercism. They create and organise exercises for each of our 50 languages and help guide us to ensure Exercism teaches students in the most idiomatic way possible.
+        =link_to "Learn more", maintainers_team_page_path, class: 'section-link'
 
-        .pure-u-1.pure-u-md-1-2
-          =link_to "https://twitter.com/charlescare", class: 'core-person' do
-            .pure-g
-              .pure-u-1-4
-                =image "https://avatars3.githubusercontent.com/u/441154?v=4&s=460", "Photo of Charles Care"
-              .pure-u-3-4
-                %h3 Charles Care
-                %p.bio Charles manages the operations side of Exercism, ensuring the platform stays online and fast. Charles is a seasoned developer and in his spare time has an interest in real world infrastucture, such as railway lines. Charles is part of the team at Thalamus.
-                .tags
-                  .tag Platform
+      .group
+        %h3 Open source contributors
+        %p Exercism could not be the success it is without the contributors of over 1,000 volunteers, who contribute in every way imaginable. 
+        =link_to "Learn more", contributors_team_page_path, class: 'section-link'
 
-        .pure-u-1.pure-u-md-1-2
-          =link_to "https://twitter.com/kntsoriano", class: 'core-person' do
-            .pure-g
-              .pure-u-1-4
-                =image "https://avatars3.githubusercontent.com/u/1901520?s=460&v=4", "Photo of Karlo Soriano"
-              .pure-u-3-4
-                %h3 Karlo Soriano
-                %p.bio Karlo is a core part of the platform team, ensuring Exercism provides an exceptional experience to its users. Karlo is part of the team at Thalamus.
-                .tags
-                  .tag Platform
+      .group
+        %h3 Mentors
+        %p Our mentors are the human element behind Exercism, providing empathetic feedback on learners' solutions
+        =link_to "Learn more", mentors_team_page_path, class: 'section-link'

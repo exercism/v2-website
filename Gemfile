@@ -48,6 +48,8 @@ gem 'flipper'
 gem 'flipper-active_record'
 gem 'flipper-ui'
 
+gem 'twitter', require: false
+
 group :production do
   gem "skylight"
 end
@@ -58,6 +60,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'bullet'
+  gem 'rubocop', require: false
+  gem 'haml-lint', require: false
 end
 
 group :development do

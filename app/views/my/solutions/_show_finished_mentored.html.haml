@@ -3,11 +3,11 @@
 .finished-section
   .title-block
     %h3
-      =icon("check-circle", "checkmark")
+      =icon("check-circle", "checkmark", style: :legacy)
       Congratulations - you've completed this exercise!
   .next-block
     %h3
-      =graphical_icon("question-circle")
+      =graphical_icon("question-circle", style: :legacy)
       What's next?
 
     -if @solution.published?

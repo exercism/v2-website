@@ -3,6 +3,7 @@ require 'application_system_test_case'
 class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
   REQUEST_MENTORING_TEXT = "Request mentor feedback."
+  REQUEST_MENTORING_DISABLED_TEXT = "Request mentor feedback (disabled)."
   COMPLETE_TEXT = "Complete this solution."
   PUBLISH_TEXT = "Publish this solution."
   CANCEL_MENTORING_TEXT = "Don't want mentoring after all?"
@@ -40,9 +41,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    assert_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
 
     refute_selector ".discussion"
   end
@@ -54,9 +55,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    assert_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
 
     refute_selector ".discussion"
   end
@@ -73,12 +74,12 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     refute_selector ".next-steps"
 
-    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
-    assert_selector ".finished-section .next-option strong", text: WHILE_YOU_WAIT_TEXT
-    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: WHILE_YOU_WAIT_TEXT
+    assert_selector ".finished-section a", exact_text: CANCEL_MENTORING_BTN_TEXT
   end
 
   test "mentored mode / side solution with mentoring requested and abaondoned mentor" do
@@ -94,12 +95,12 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     refute_selector ".next-steps"
 
-    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
-    assert_selector ".finished-section .next-option strong", text: WHILE_YOU_WAIT_TEXT
-    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: WHILE_YOU_WAIT_TEXT
+    assert_selector ".finished-section a", exact_text: CANCEL_MENTORING_BTN_TEXT
 
   end
 
@@ -116,11 +117,11 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     refute_selector ".next-steps"
 
-    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
-    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", exact_text: CANCEL_MENTORING_BTN_TEXT
 
   end
 
@@ -170,9 +171,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
 
     refute_selector ".next-steps"
     assert_selector ".discussion h3", text: "Mentor discussion"
@@ -188,9 +189,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    refute_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
 
     refute_selector ".next-steps"
     assert_selector ".discussion h3", text: "Mentor discussion"
@@ -208,8 +209,8 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
 
-    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
-    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", exact_text: CANCEL_MENTORING_BTN_TEXT
   end
 
   test "independent mode - side - requested mentoring" do
@@ -222,10 +223,9 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
     assert_selector ".discussion h3", text: "Mentor discussion"
     assert_selector ".discussion form"
 
-    assert_selector ".finished-section .next-option strong", text: CANCEL_MENTORING_TEXT
-    assert_selector ".finished-section a", text: CANCEL_MENTORING_BTN_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: CANCEL_MENTORING_TEXT
+    assert_selector ".finished-section a", exact_text: CANCEL_MENTORING_BTN_TEXT
   end
-
 
   test "independent mode / not requested mentoring" do
     solution = create(:solution, user: @user, mentoring_requested_at: nil)
@@ -234,10 +234,16 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    assert_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
     refute_selector ".discussion"
+
+    # Check this is overriden by Track#accepting_new_students?
+    Track.any_instance.stubs(accepting_new_students?: false)
+    visit my_solution_path(solution)
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_DISABLED_TEXT
   end
 
   test "independent mode / not requested mentoring - completed" do
@@ -247,10 +253,16 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    assert_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
     refute_selector ".discussion"
+
+    # Check this is overriden by Track#accepting_new_students?
+    Track.any_instance.stubs(accepting_new_students?: false)
+    visit my_solution_path(solution)
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_DISABLED_TEXT
   end
 
   test "independent mode / not requested mentoring - published" do
@@ -260,10 +272,16 @@ class My::SolutionDiscussionSectionTest < ApplicationSystemTestCase
 
     visit my_solution_path(solution)
 
-    refute_selector ".finished-section .next-option strong", text: COMPLETE_TEXT
-    refute_selector ".finished-section .next-option strong", text: PUBLISH_TEXT
-    assert_selector ".finished-section .next-option strong", text: REQUEST_MENTORING_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: COMPLETE_TEXT
+    refute_selector ".finished-section .next-option strong", exact_text: PUBLISH_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
     refute_selector ".discussion"
+
+    # Check this is overriden by Track#accepting_new_students?
+    Track.any_instance.stubs(accepting_new_students?: false)
+    visit my_solution_path(solution)
+    refute_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_TEXT
+    assert_selector ".finished-section .next-option strong", exact_text: REQUEST_MENTORING_DISABLED_TEXT
   end
 
   test "comment button clears preview tab" do

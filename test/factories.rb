@@ -169,6 +169,7 @@ FactoryBot.define do
       puts "Hello World"
     }}
     repo_url { "file://#{Rails.root}/test/fixtures/track" }
+    median_wait_time { 30.hours }
   end
 
   factory :exercise do
@@ -227,5 +228,15 @@ FactoryBot.define do
     track
     name { "Mentor" }
     github_username { "mentor" }
+  end
+
+  factory :changelog_entry do
+    title { "Entry" }
+    association :created_by, factory: :user
+  end
+
+  factory :changelog_entry_tweet do
+    copy { "Hello, world!" }
+    association :entry, factory: :changelog_entry
   end
 end

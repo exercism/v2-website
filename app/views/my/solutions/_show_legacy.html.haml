@@ -3,26 +3,15 @@
 .finished-section
   .title-block
     %h3
-      =icon("check-circle", "checkmark")
+      =icon("check-circle", "checkmark", style: :legacy)
       Well done on solving this exercise!
   .next-block
     %h3
-      =graphical_icon("question-circle")
+      =graphical_icon("question-circle", style: :legacy)
       What's next?
 
     .next-option
-      -if @user_track.mentoring_slots_remaining?
-        %p
-          %strong Request mentor feedback.
-          This solution has been imported from an old version of the website.
-          You may request mentoring to unlock its extra exercises.
-        =link_to "Request mentor feedback", request_mentoring_my_solution_path(@solution), method: :patch, class: 'pure-button'
-      -else
-        %p
-          %strong Request mentor feedback (disabled).
-          This solution has been imported from independent mode.
-          Once your existing solutions have been mentored you will be able to request mentoring for this solution.
-        =link_to "Request mentor feedback", "#", class: 'pure-button disabled', disabled: true
+      = render_solution_mentor_feedback_request_section(:legacy, @solution)
 
     .next-option
       %p

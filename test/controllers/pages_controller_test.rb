@@ -13,7 +13,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
   PagesController::PAGES.each do |(title, page)|
     test "page works signed in: #{page}" do
-      sign_in!
+      user = create(:user)
+      sign_in!(user)
       get send("#{page}_page_path")
       assert_response :success
     end
@@ -28,7 +29,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
   PagesController::LICENCES.each do |(title, licence)|
     test "licence works signed in: #{licence}" do
-      sign_in!
+      user = create(:user)
+      sign_in!(user)
       get send("#{licence}_licence_path")
       assert_response :success
     end

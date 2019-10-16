@@ -41,4 +41,9 @@ class Track < ApplicationRecord
   def repo
     Git::ExercismRepo.new(repo_url)
   end
+
+  def accepting_new_students?
+    median_wait_time &&
+    median_wait_time < 1.week
+  end
 end

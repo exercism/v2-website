@@ -4,16 +4,17 @@ class RequestMentoringOnSolution
   initialize_with :solution
 
   def call
-    # We guard this for exercises that are promoted to core
-    unless (user_track.mentored_mode? && solution.exercise.core?)
-      return if user_track.mentoring_allowance_used_up?
-    end
+    return unless request.can_be_accommodated?
 
     post_system_messages! if solution.approved_by_system?
     update_solution!
   end
 
   private
+
+  def request
+    MentorFeedbackRequest.new(solution)
+  end
 
   def user_track
     solution.user.user_track_for(solution.track)

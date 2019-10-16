@@ -81,10 +81,71 @@ module MetadataHelper
           end
         when "pages"
           case action_name
-          when :index
+          when "about"
+            {
+              title: "About Exercism",
+              description: "Learn about Exercism's vision, team and strategy"
+            }
+          when "strategy"
+            {
+              title: "Exercism's strategy",
+              description: "Learn about what Exercism has planned for the next 12 months"
+            }
+          when "supporters"
+            {
+              title: "Exercism's supporters",
+              description: "Learn about Exercism how supports Exercism and how you can help"
+            }
+          when "supporter_mozilla"
+            {
+              title: "Mozilla supports Exercism",
+              description: "Learn about how Mozilla supports Exercism",
+              image_url: image_url("supporter-logos/mozilla-black.png")
+            }
+          when "supporter_sloan"
+            {
+              title: "The Sloan Foundation supports Exercism",
+              description: "Learn about how The Sloan Foundation supports Exercism",
+              image_url: image_url("supporter-logos/sloan-black.png")
+            }
+          when "supporter_mozilla"
+            {
+              title: "Thalamus supports Exercism",
+              description: "Learn about how Thalamus supports Exercism",
+              image_url: image_url("supporter-logos/thalamus-black.png")
+            }
           else
             { title: @page_title }
           end
+        when "team_pages"
+          case action_name
+          when "show"
+            {
+              title: "Exercism's team",
+              description: "Learn about who runs and contributes to Exercism"
+            }
+          when "staff"
+            {
+              title: "Exercism's leadership team and staff",
+              description: "Learn about Exercism's leadership team and staff"
+            }
+          when "contributors"
+            {
+              title: "Exercism's contributors",
+              description: "Learn about Exercism's contributors"
+            }
+          when "mentors"
+            {
+              title: "Exercism's mentors",
+              description: "Learn about Exercism's mentors"
+            }
+          when "maintainers"
+            {
+              title: "Exercism's contributors",
+              description: "Learn about Exercism's maintainers"
+            }
+          end
+
         when "solutions"
           case action_name
           when "show"
@@ -128,7 +189,7 @@ module MetadataHelper
         when "profiles"
           case action_name
           when "show"
-            { title: @user == current_user ? "My Profile" : "#{@profile.display_name}'s Profile" }
+            { title: @user == current_user ? "My Profile" : "#{sanitize(@profile.display_name)}'s Profile" }
           when "index"
             { title: "Profiles" }
           end

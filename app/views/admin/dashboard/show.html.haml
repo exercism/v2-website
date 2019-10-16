@@ -1,7 +1,6 @@
 #admin-dashboard-page
-  #nav.lo-nav-bar
-    .lo-container
-      %span Admin dashboard
+  = breadcrumb_nav do
+    %li=current_link "Admin dashboard"
 
   .lo-container
     %h1 Admin dashboard

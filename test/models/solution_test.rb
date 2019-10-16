@@ -211,4 +211,26 @@ class SolutionTest < ActiveSupport::TestCase
     lock.update(user: system_user)
     assert solution.reload.use_auto_analysis?
   end
+
+  test "track_accepting_new_students?" do
+    track = create(:track)
+    solution = create :solution, exercise: create(:exercise, track: track)
+
+    track.update(median_wait_time: 1.year)
+    refute track.accepting_new_students?
+    refute solution.reload.track_accepting_new_students?
+
+    track.update(median_wait_time: 1.day)
+    assert track.accepting_new_students?
+    assert solution.reload.track_accepting_new_students?
+  end
+
+  test "notifications are deleted when solution is deleted" do
+    solution = create(:solution)
+    notification = create(:notification, about: solution)
+
+    solution.destroy
+
+    refute Notification.exists?(notification.id)
+  end
 end

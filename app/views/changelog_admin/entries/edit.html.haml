@@ -1,0 +1,8 @@
+#changelog-admin-edit-entry.lo-changelog-admin-page
+  .lo-container
+    %h1 Edit Entry
+
+    = render "form",
+      form: @form,
+      url: changelog_admin_entry_path(@entry),
+      method: :patch

@@ -1,0 +1,19 @@
+#changelog-admin-entries.lo-changelog-admin-page
+  .lo-container
+    %h1 Changelog - Admin
+    %p This section allows maintainers to write updates to the exercise userbase about changes to their tracks.
+    %p All posts are checked and published by admins.
+    %p= link_to "Add a new changelog entry", new_changelog_admin_entry_path
+
+    %table
+      %tr
+        %th Title
+        %th Created by
+        %th Published?
+        %th Actions
+      - @entries.each do |entry|
+        %tr
+          %td= entry.title
+          %td= entry.created_by_name
+          %td= entry.published?? "Yes" : "No"
+          %th= link_to "View", changelog_admin_entry_path(entry)

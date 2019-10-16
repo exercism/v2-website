@@ -146,6 +146,92 @@
             }
         }
     }
+    .javascript-resistor-color-duo-experiment-analysis-section {
+        margin-bottom:20px;
+        h3 {
+            background:$color-1;
+            border:solid $color-1;
+            border-width: 0 1px;
+            color:#fff;
+            padding:15px;
+            i {
+                color:#fff;
+                margin-left:5px;
+            }
+        }
+        .recommendation {
+            padding:10px 15px;
+            border-bottom:1px solid #aaa;
+            font-weight:$fw-semibold;
+            border:solid $color-1;
+            border-width: 0 1px 1px 1px;
+            margin-bottom:10px;
+        }
+
+        .comments {
+            .beta {
+                text-color:#666;
+                font-style:italic;
+                padding:10px 15px;
+                background:$color-1-opaque;
+                border:1px solid $color-1;
+            }
+            h4 {
+                font-weight:$fw-bold;
+                padding:15px;
+            }
+            .comment-with-commentary {
+                margin-top:10px;
+                border:1px solid $color-1;
+            }
+            .commentary {
+                padding: 10px 15px;
+                background:$color-1-opaque;
+                margin-bottom:0;
+               * {
+                    @include font-size(14, 19);
+                }
+                code { &, * { font-size:13px; } }
+            }
+            .commentary-and-comment {
+                padding:0 15px 10px 15px;
+                margin:0px 0 0 0;
+                border-bottom: 1px solid $color-1;
+                background:$color-1-opaque;
+                //font-weight:$fw-bold;
+            }
+
+            .comment.widget-code-snippet {
+                position: relative;
+                overflow: hidden;
+                background:#fcfcfc;
+                padding: 10px 15px;
+                textarea {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    width: 5px;
+                    height:5px;
+                    z-index:5
+                }
+                .copy-button {
+                    z-index:10;
+                }
+                .editable-text-html {
+                    padding-right:65px;
+                    margin-bottom:0;
+                   * {
+                        @include font-size(14, 19);
+                    }
+                    code { &, * { font-size:12px; } }
+                }
+                &:last-child {
+                    border-width:0;
+                }
+            }
+        }
+    }
+
     .discussion,
     .new-editable-text {
         h3 {

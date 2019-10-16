@@ -1,0 +1,6 @@
+#changelog-admin-new-entry.lo-changelog-admin-page
+  .lo-container
+    %h1 New Entry
+    %p Use this form to create a new entry in the Changelog
+
+    = render "form", form: @form, url: changelog_admin_entries_path

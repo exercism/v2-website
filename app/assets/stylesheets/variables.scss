@@ -1,5 +1,6 @@
 $color-1: #3ab292;
 $color-2: #009cab;
+$color-1-opaque: rgba($color-1, 0.1);
 $color-2-opaque: #f3fdfd;
 $color-3: #45027b;
 
@@ -20,7 +21,8 @@ $regular: 400;
 $bold: 600;
 $black: 700;
 
+$fw-light: $light;
 $fw-regular: $regular;
-$fw-semibold: 500;
+$fw-semibold: 600;
 $fw-bold: $bold;
 $fw-black: $black;

@@ -1,21 +1,20 @@
 #solution-page
-  #nav.lo-nav-bar
-    .lo-container
-      -if user_signed_in?
-        =link_to "Language tracks", [:my, :tracks]
-        =link_to "#{@track.title} track", [:my, @track]
-        -if @user_solution
-          =link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
-        =link_to "Community solutions", [@track, @exercise, :solutions]
-        %span This solution
+  = breadcrumb_nav do
+    -if user_signed_in?
+      %li=link_to "Language tracks", [:my, :tracks]
+      %li=link_to "#{@track.title} track", [:my, @track]
+      -if @user_solution
+        %li=link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
+      %li=link_to "Community solutions", [@track, @exercise, :solutions]
+      %li=current_link "This solution"
 
-      -else
-        =link_to "Language tracks", :tracks
-        =link_to "#{@track.title} track", @track
-        =link_to "Exercises", [@track, :exercises]
-        =link_to @exercise.title, [@track, @exercise]
-        =link_to "Community solutions", [@track, @exercise, :solutions]
-        %span This solution
+    -else
+      %li=link_to "Language tracks", :tracks
+      %li=link_to "#{@track.title} track", @track
+      %li=link_to "Exercises", [@track, :exercises]
+      %li=link_to @exercise.title, [@track, @exercise]
+      %li=link_to "Community solutions", [@track, @exercise, :solutions]
+      %li=current_link "This solution"
 
   .lo-container
     .header
@@ -28,7 +27,7 @@
       .details
         -if @solution.user == current_user
           .starred-count
-            %i.fas.fa-star
+            = graphical_icon "star", style: :solid
             Starred #{pluralize @solution.num_stars, "time"}
         -else
           =render "my/starred_solutions/star_button"

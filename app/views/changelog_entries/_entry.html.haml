@@ -1,0 +1,8 @@
+%div
+  %p= graphical_image entry.icon
+  %p= entry.title
+  %p Created by #{entry.created_by_handle}
+  %p Published #{time_ago_in_words(entry.published_at)} ago
+  %p= raw entry.details_html
+  - if entry.info_url
+    %p= link_to changelog_entry_info_url_text(entry.info_url), entry.info_url

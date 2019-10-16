@@ -38,7 +38,7 @@
               .img{style: "background-image:url(#{image_url(team.avatar_url)})"}
               %h3= team.name
               .members
-                =icon :group
+                =icon :group, nil, style: :legacy
                 .text
                   = team.members.count
                   Members
@@ -46,5 +46,5 @@
       .pure-u-1.pure-u-md-1-5
         = link_to [:new, :teams, :team], class: 'new-team' do
           .img
-            %i.fas.fa-plus
+            = graphical_icon "plus", style: :solid
           %h3 Create a new team

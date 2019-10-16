@@ -1,11 +1,10 @@
 #exercise-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      =link_to "Language tracks", :tracks
-      =link_to "#{@track.title} track", @track
-      =link_to "Exercises", [@track, :exercises]
-      %span= @exercise.title
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=link_to "Language tracks", :tracks
+    %li=link_to "#{@track.title} track", @track
+    %li=link_to "Exercises", [@track, :exercises]
+    %li=current_link @exercise.title
 
   .header
     .lo-container

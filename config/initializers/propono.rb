@@ -7,6 +7,8 @@ module Propono
       config.queue_suffix = Rails.env.production?? "" : "-#{Rails.env}"
       config.application_name = Rails.env.production?? "exercism_website" :
                                                        "exercism_website_#{Rails.env}_#{`whoami`.strip}"
+
+      config.slow_queue_enabled = false
       config.logger = Rails.logger
     end
   end

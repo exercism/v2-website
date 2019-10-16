@@ -1,0 +1,72 @@
+#team-members-page.lo-organisation-page
+  =render "pages/organisation_menu", selected: "team"
+
+  %section.organisation-top-banner-section
+    .lo-container
+      .inner
+        %h1
+          .subtitle The people behind Exercism
+          .strong Leadership team and staff
+
+  %section.leadership-section
+    .lo-container
+      %h2 Leadership team
+      %p.subheading Our staff manage the strategic and organisational sides of Exercism, the Exercism website and CLI. They are responsible for fulfilling our mission statement and maintaining our values.
+      .people
+        =link_to "http://kytrinyx.com", class: 'person' do
+          .pure-g
+            .pure-u-1-4
+              =image "https://avatars2.githubusercontent.com/u/276834?v=4&s=460", "Photo of Katrina Owen"
+            .pure-u-3-4
+              %h3 Katrina Owen
+              %p.bio Katrina is the co-founder and original creator of Exercism. She is a polyglot developer and Ruby Hero award winner, with a degree in molecular biology. She cares deeply about open source and contributes to several projects outside of Exercism.
+
+        =link_to "http://ihid.co.uk", class: 'person' do
+          .pure-g
+            .pure-u-1-4
+              =image "https://avatars2.githubusercontent.com/u/286476?v=4&s=460", "Photo of Jeremy Walker"
+            .pure-u-3-4
+              %h3 Jeremy Walker
+              %p.bio Jeremy is the co-founder of Exercism. He works on the strategic side of Exercism and is also the lead developer behind the website. Away from Exercism, Jeremy is the CEO of Thalamus.
+
+        =link_to "https://twitter.com/n_chalmers", class: 'person' do
+          .pure-g
+            .pure-u-1-4
+              =image "https://avatars0.githubusercontent.com/u/5421823?v=4&s=460", "Photo of Nicole Chalmers"
+            .pure-u-3-4
+              %h3 Nicole Chalmers
+              %p.bio Nicole is responsible for product design and user experience. She takes a research-led approach, focusing on making learning fun and effective for everyone. Nicole is passionate about equal access to education and how Exercism can aid social mobility.
+
+  %section.staff-section
+    .lo-container
+      %h2 Staff
+      %p.subheading Our staff manage the strategic and organisational sides of Exercism, the Exercism website and CLI. They are responsible for fulfilling our mission statement and maintaining our values.
+      .people
+        =link_to "https://twitter.com/charlescare", class: 'person' do
+          .pure-g
+            .pure-u-1-4
+              =image "https://avatars3.githubusercontent.com/u/441154?v=4&s=460", "Photo of Charles Care"
+            .pure-u-3-4
+              %h3 Charles Care
+              %p.bio Charles manages the operations side of Exercism, ensuring the platform stays online and fast. Charles is a seasoned developer and in his spare time has an interest in real world infrastucture, such as railway lines.
+
+        =link_to "https://twitter.com/kntsoriano", class: 'person' do
+          .pure-g
+            .pure-u-1-4
+              =image "https://avatars3.githubusercontent.com/u/1901520?s=460&v=4", "Photo of Karlo Soriano"
+            .pure-u-3-4
+              %h3 Karlo Soriano
+              %p.bio Karlo is a core part of the platform team, ensuring Exercism provides an exceptional experience to its users. He is also a semi-professional dummer.
+
+        =link_to "https://twitter.com/ErikSchierboom", class: 'person' do
+          .pure-g
+            .pure-u-1-4
+              =image "https://avatars3.githubusercontent.com/u/135246?s=460&v=4", "Photo of Erk Schierboom"
+            .pure-u-3-4
+              %h3 Erik Schierboom
+              %p.bio Erik works on the open-source and track-structure areas of Exercism, helping shape our language tracks and support our open source community.
+
+
+
+
+

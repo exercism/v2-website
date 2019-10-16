@@ -1,8 +1,6 @@
 #my-tracks-page
-  #nav.lo-nav-bar
-    .lo-container
-      /=link_to "Dashboard", root_path
-      %span Language tracks
+  = breadcrumb_nav do
+    %li=current_link "Language tracks"
 
   .header
     .lo-container
