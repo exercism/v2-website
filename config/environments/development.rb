@@ -71,6 +71,8 @@ Rails.application.configure do
   config.after_initialize do
     Bullet.enable = true
   end
+
+  config.hosts << "lvh.me"
 end
 
 Rails.application.routes.default_url_options = { :host => "localhost:3000" }
