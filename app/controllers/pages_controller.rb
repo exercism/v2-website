@@ -58,7 +58,7 @@ class PagesController < ApplicationController
 
   # Landing page
   def index
-    @tracks = Track.active.reorder(SQLSnippets.random).to_a
+    @tracks = Track.active.reorder(SqlSnippets.random).to_a
   end
 
   def cli_walkthrough

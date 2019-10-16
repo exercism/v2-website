@@ -96,11 +96,11 @@ class My::TracksController < MyController
 
   def show_not_joined
     @track = Track.find(params[:id])
-    @mentors = @track.mentors.reorder(SQLSnippets.random).limit(6)
-    @maintainers = @track.maintainers.visible.reorder('alumnus DESC', SQLSnippets.random).limit(6)
-    @exercises = @track.exercises.active.reorder(SQLSnippets.random).limit(6)
-    @testimonial = @track.testimonials.order(SQLSnippets.random).first
-    @testimonial = Testimonial.generic.order(SQLSnippets.random).first unless @testimonial
+    @mentors = @track.mentors.reorder(SqlSnippets.random).limit(6)
+    @maintainers = @track.maintainers.visible.reorder('alumnus DESC', SqlSnippets.random).limit(6)
+    @exercises = @track.exercises.active.reorder(SqlSnippets.random).limit(6)
+    @testimonial = @track.testimonials.order(SqlSnippets.random).first
+    @testimonial = Testimonial.generic.order(SqlSnippets.random).first unless @testimonial
 
     render :show_not_joined
   end
