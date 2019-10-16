@@ -37,7 +37,7 @@ class My::TrackSettingsTest < ApplicationSystemTestCase
   test "can set track to stop using anonymous handle" do
     @user_track = create(:user_track, user: @user)
     anon_handle = SecureRandom.uuid
-    @user_track.update_attributes(anonymous: true, handle: anon_handle)
+    @user_track.update(anonymous: true, handle: anon_handle)
 
     visit edit_my_settings_track_settings_path
 
