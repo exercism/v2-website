@@ -1,10 +1,9 @@
 -title = title_for_track_page(@track, @page)
 #generic-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Language tracks", [:my, :tracks]
-      =link_to "#{@track.title} track", [:my, @track]
-      %span= title
+  = breadcrumb_nav do
+    %li=link_to "Language tracks", [:my, :tracks]
+    %li=link_to "#{@track.title} track", [:my, @track]
+    %li=current_link title
 
   .header
     .lo-container

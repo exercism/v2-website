@@ -1,8 +1,7 @@
 #notifications-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to 'Notifications', [:my, :notifications]
-      %span All Notifications
+  = breadcrumb_nav do
+    %li=link_to 'Notifications', [:my, :notifications]
+    %li=current_link "All Notifications"
 
   .header
     .lo-container

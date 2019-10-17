@@ -58,9 +58,6 @@
     @include width-small() {
         padding-top:0;
     }
-    #nav {
-        margin-bottom:30px;
-    }
     #notice, #alert, #errors {
         margin-top: -20px;
         margin-bottom: 20px;

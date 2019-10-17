@@ -1,8 +1,7 @@
-#nav.lo-nav-bar
-  .lo-container
-    =link_to "Language tracks", [:my, :tracks]
-    =link_to "#{@track.title} track", [:my, @track]
-    %span= @exercise.title
+= breadcrumb_nav do
+  %li=link_to "Language tracks", [:my, :tracks]
+  %li=link_to "#{@track.title} track", [:my, @track]
+  %li=current_link @exercise.title
 
 .lo-container.track-header-container
   .track-header

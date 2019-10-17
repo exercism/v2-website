@@ -1,9 +1,8 @@
 #track-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      =link_to "Language tracks", [:tracks]
-      %span #{@track.title} Track
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=link_to "Language tracks", [:tracks]
+    %li=current_link "#{@track.title} Track"
 
   =render "tracks/header", button_url: [:join, @track]
   =render "tracks/overview"
