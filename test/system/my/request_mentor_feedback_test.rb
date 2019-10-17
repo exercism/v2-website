@@ -65,4 +65,23 @@ class My::RequestMentorFeedbackTest < ApplicationSystemTestCase
 
     assert_text "A mentor will leave you feedback as soon as possible"
   end
+
+  test "requests mentor feedback in indepedent mode via notification bar" do
+    create(:user, :system)
+    user = create(:user, :onboarded)
+    track = create(:track)
+    exercise = create(:exercise, track: track, core: true)
+    create(:user_track, track: track, user: user, independent_mode: true)
+    solution = create(:solution,
+                      user: user,
+                      exercise: exercise,
+                      track_in_independent_mode: true)
+    create(:iteration, solution: solution)
+
+    sign_in!(user)
+    visit my_solution_path(solution)
+    click_on "Request mentoring"
+
+    assert_text "You have requested mentoring for this exercise"
+  end
 end
