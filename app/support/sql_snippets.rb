@@ -1,4 +1,4 @@
-module SqlSnippets
+module SQLSnippets
   def self.random
     Arel.sql("RAND()")
   end

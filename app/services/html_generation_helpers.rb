@@ -1,4 +1,4 @@
-module HtmlGenerationHelpers
+module HTMLGenerationHelpers
   def strong(text)
     "<strong>#{text}</strong>"
   end

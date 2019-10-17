@@ -1,7 +1,7 @@
 module AnalysisServices
   class Approve
     include Mandate
-    include HtmlGenerationHelpers
+    include HTMLGenerationHelpers
 
     initialize_with :solution
 

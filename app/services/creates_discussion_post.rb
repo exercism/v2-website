@@ -1,5 +1,5 @@
 class CreatesDiscussionPost
-  include HtmlGenerationHelpers
+  include HTMLGenerationHelpers
 
   attr_reader :iteration, :author, :content, :type, :discussion_post
   def initialize(iteration, author, content, type: nil)

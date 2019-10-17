@@ -1,6 +1,6 @@
 class ApproveSolution
   include Mandate
-  include HtmlGenerationHelpers
+  include HTMLGenerationHelpers
 
   initialize_with :solution, :mentor
 
