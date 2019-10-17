@@ -121,6 +121,7 @@ class SolutionLocksTest < ApplicationSystemTestCase
     find(".new-editable-text textarea").set("An example mentor comment to test the comment button!")
     click_on "Comment"
 
+    assert_text "An example mentor comment to test the comment button!"
     click_on "Leave conversation"
     assert page.has_content?("Mentor dashboard")
     assert page.has_no_link?(nil, {href: mentor_solution_path(@solution)})
