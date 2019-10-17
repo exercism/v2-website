@@ -22,3 +22,5 @@ function setupTabs() {
     if (tabId) { $container.addClass('selected-' + tabId); }
   });
 }
+
+window.setupTabs = setupTabs;

@@ -43,3 +43,6 @@ function showModal(className, html, options) {
   $("#modal-wrapper").show();
   $('body').addClass('with-modal');
 }
+
+window.closeModal = closeModal;
+window.showModal = showModal;

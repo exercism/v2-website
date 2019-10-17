@@ -50,6 +50,8 @@ gem 'flipper-ui'
 
 gem 'twitter', require: false
 
+gem 'webpacker', '~> 4.0'
+
 group :production do
   gem "skylight"
 end

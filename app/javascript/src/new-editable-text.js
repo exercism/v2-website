@@ -58,3 +58,5 @@ function setupNewEditableText(localStorageKey) {
   });
 }
 
+
+window.setupNewEditableText = setupNewEditableText;
