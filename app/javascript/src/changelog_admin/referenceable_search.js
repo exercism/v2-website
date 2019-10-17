@@ -27,3 +27,5 @@ function ReferenceableSearch(selector, url) {
     });
   }
 }
+
+window.ReferenceableSearch = ReferenceableSearch;
