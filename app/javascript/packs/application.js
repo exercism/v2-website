@@ -24,3 +24,4 @@ window.Rails = require("@rails/ujs")
 window.Rails.start()
 
 require("@rails/activestorage").start()
+require("channels")

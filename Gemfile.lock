@@ -370,6 +370,7 @@ GEM
       ffi (~> 1.0)
     recaptcha (5.1.0)
       json
+    redis (4.1.3)
     regexp_parser (1.6.0)
     request_store (1.4.1)
       rack (>= 1.4)
@@ -535,6 +536,7 @@ DEPENDENCIES
   rails (~> 6.0.0)
   rails-controller-testing
   recaptcha
+  redis
   rest-client
   rubocop
   rubyzip
