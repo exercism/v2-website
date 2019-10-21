@@ -18,8 +18,8 @@
                 opacity:0;
                 &:checked {
                     &+.toggles {
-                        i.fa.fa-toggle-on { display:block; }
-                        i.fa.fa-toggle-off { display:none; }
+                        i.fa-toggle-on { display:block; }
+                        i.fa-toggle-off { display:none; }
                     }
                 }
             }
@@ -27,11 +27,11 @@
                 display:inline-block;
                 @include font-size(20, 20);
                 margin-right:5px;
-                i.fa.fa-toggle-on {
+                i.fa-toggle-on {
                     display:none;
                     color: $color-2;
                 }
-                i.fa.fa-toggle-off {
+                i.fa-toggle-off {
                     display:block;
                     color: #aaa;
                 }
@@ -211,8 +211,8 @@
             opacity:0;
             &:checked {
                 &+.toggles {
-                    i.fa.fa-toggle-on { display:block; }
-                    i.fa.fa-toggle-off { display:none; }
+                    i.fa-toggle-on { display:block; }
+                    i.fa-toggle-off { display:none; }
                 }
             }
         }
@@ -220,11 +220,11 @@
             display:inline-block;
             @include font-size(20, 20);
             margin-right:15px;
-            i.fa.fa-toggle-on {
+            i.fa-toggle-on {
                 display:none;
                 color: $color-2;
             }
-            i.fa.fa-toggle-off {
+            i.fa-toggle-off {
                 display:block;
                 color: #aaa;
             }

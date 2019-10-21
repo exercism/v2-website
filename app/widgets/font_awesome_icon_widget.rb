@@ -53,14 +53,18 @@ class FontAwesomeIconWidget
 
   def style_class
     case style
-    when :legacy
-      "fa"
     when :light
       "fal"
     when :solid
       "fas"
     when :regular
       "far"
+    when :duotone
+      "fad"
+    when :brand
+      "fab"
+    else
+      raise "Invalid font-awesome icon style"
     end
   end
 

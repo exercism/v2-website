@@ -6,10 +6,10 @@
       -if user_signed_in? && current_user == profile.user
         .btns
           =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
-            =graphical_icon :cogs, style: :legacy
+            =graphical_icon :cogs, style: :solid
             Edit public profile
           =link_to [:my, :solutions], class: "pure-button edit-button" do
-            =graphical_icon :cogs, style: :legacy
+            =graphical_icon :cogs, style: :solid
             Change public solutions
 
   .lo-container
@@ -32,12 +32,12 @@
               .badge.maintainer #{track.title} maintainer
 
           .member-since
-            =graphical_icon 'calendar fa-fw', style: :legacy
+            =graphical_icon 'calendar', style: :solid, fixed_width: true
             Since #{profile.user.created_at.strftime("%b %Y")}
 
           -if profile_view.helped_count > 0
             .helped-count
-              =graphical_icon 'handshake-o fa-fw', style: :legacy
+              =graphical_icon 'handshake', style: :regular, fixed_width: true
               Helped
               .count #{profile_view.helped_count}
               = "student".pluralize(profile_view.helped_count)
@@ -48,27 +48,27 @@
 
             -if profile.website.present?
               =link_to profile.website, target: "_blank", class: 'external-link' do
-                =graphical_icon 'globe fa-fw', style: :legacy
+                =graphical_icon 'globe', style: :solid, fixed_width: true
                 %span My website
 
             -if profile.github.present?
               =link_to "https://github.com/#{profile.github}", target: "_blank", class: 'external-link' do
-                =graphical_icon 'github fa-fw', style: :legacy
+                =graphical_icon 'github', style: :brand, fixed_width: true
                 %span GitHub
 
             -if profile.twitter.present?
               =link_to "https://twitter.com/#{profile.twitter}", target: "_blank", class: 'external-link' do
-                =graphical_icon 'twitter fa-fw', style: :legacy
+                =graphical_icon 'twitter', style: :brand, fixed_width: true
                 %span Twitter
 
             -if profile.linkedin.present?
               =link_to url_with_protocol(profile.linkedin), target: "_blank", class: 'external-link' do
-                =graphical_icon 'linkedin fa-fw', style: :legacy
+                =graphical_icon 'linkedin', style: :brand, fixed_width: true
                 %span LinkedIn
 
             -if profile.medium.present?
               =link_to "https://medium.com/#{profile.medium}", target: "_blank", class: 'external-link' do
-                =graphical_icon 'medium fa-fw', style: :legacy
+                =graphical_icon 'medium', style: :brand, fixed_width: true
                 %span Medium
 
       .pure-u-1.pure-u-md-18-24.rhs

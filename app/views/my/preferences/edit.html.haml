@@ -23,8 +23,8 @@
         =hidden_field_tag 'update_require_password_to_update_communication_preferences', true
         =check_box_tag 'require_password_to_update_communication_preferences', 1, current_user.communication_preferences.token.nil?
         .toggles
-          =icon 'toggle-on', nil, style: :legacy
-          =icon 'toggle-off', nil, style: :legacy
+          =icon 'toggle-on', nil, style: :solid
+          =icon 'toggle-off', nil, style: :solid
         =label_tag 'require_password_to_update_communication_preferences', "Require password to update communication preferences"
 
         =button_tag "Update communication preference security", class: 'pure-button'
@@ -35,8 +35,8 @@
         =hidden_field_tag 'update_dark_theme', true
         =check_box_tag 'dark_code_theme', 1, current_user.dark_code_theme, class: 'dark-theme-toggle'
         .toggles
-          =icon 'toggle-on', nil, style: :legacy
-          =icon 'toggle-off', nil, style: :legacy
+          =icon 'toggle-on', nil, style: :solid
+          =icon 'toggle-off', nil, style: :solid
         =label_tag 'dark_code_theme', "Enable dark theme"
 
         =button_tag "Update theme preference", class: 'pure-button'
@@ -47,8 +47,8 @@
         = f.hidden_field :update_code_viewing_options, value: true
         = f.check_box :full_width_code_panes
         .toggles
-          = icon 'toggle-on', nil, style: :legacy
-          = icon 'toggle-off', nil, style: :legacy
+          = icon 'toggle-on', nil, style: :solid
+          = icon 'toggle-off', nil, style: :solid
         = f.label :full_width_code_panes, "Enable full width code panes"
 
         = button_tag "Update code viewing preference", class: 'pure-button'
