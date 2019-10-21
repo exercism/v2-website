@@ -1,9 +1,9 @@
 -mentors_word = "mentor".pluralize(@solution.mentors.size)
 .progress
-  =graphical_icon 'circle filled', style: :legacy
-  =graphical_icon 'circle filled', style: :legacy
-  =graphical_icon 'circle', style: :legacy
-  =icon 'circle', 'Step 3 of 4', style: :legacy
+  =graphical_icon 'circle filled', style: :solid
+  =graphical_icon 'circle filled', style: :solid
+  =graphical_icon 'circle', style: :solid
+  =icon 'circle', 'Step 3 of 4', style: :solid
 
 =form_tag [:rate_mentors, :my, @solution], method: :patch, remote: true do
   %h2 Rate your #{mentors_word}
