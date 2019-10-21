@@ -3,7 +3,6 @@ class ChangelogEntry
     attr_reader :exercise
 
     delegate :to_global_id, to: :exercise
-    delegate :tweet, to: :twitter_account
 
     def initialize(exercise)
       @exercise = exercise
@@ -19,6 +18,21 @@ class ChangelogEntry
 
     def twitter_account
       ReferenceableTrack.new(exercise.track).twitter_account
+    end
+
+    def as_json(*args)
+      {
+        id: to_global_id.to_s,
+        title: title,
+      }
+    end
+
+    def key
+      "exercise_#{exercise.id}"
+    end
+
+    def object
+      exercise
     end
   end
 end

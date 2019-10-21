@@ -1,19 +1,18 @@
 #solutions-page
-  #nav.lo-nav-bar
-    .lo-container
-      -if user_signed_in?
-        =link_to "Language tracks", [:my, :tracks]
-        =link_to "#{@track.title} track", [:my, @track]
-        -if @user_solution
-          =link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
-        %span Community solutions
-      -else
-        =link_to "Home", root_path
-        =link_to "Language tracks", :tracks
-        =link_to "#{@track.title} track", @track
-        =link_to "Exercises", [@track, :exercises]
-        =link_to @exercise.title, [@track, @exercise]
-        %span Solutions
+  = breadcrumb_nav do
+    -if user_signed_in?
+      %li=link_to "Language tracks", [:my, :tracks]
+      %li=link_to "#{@track.title} track", [:my, @track]
+      -if @user_solution
+        %li=link_to "Your solution to #{@exercise.title}", [:my, @user_solution]
+      %li=current_link "Community solutions"
+    -else
+      %li=link_to "Home", root_path
+      %li=link_to "Language tracks", :tracks
+      %li=link_to "#{@track.title} track", @track
+      %li=link_to "Exercises", [@track, :exercises]
+      %li=link_to @exercise.title, [@track, @exercise]
+      %li=current_link "Solutions"
 
   .header
     .lo-container
@@ -47,13 +46,13 @@
 
               .details-bar
                 .handle
-                  %i.fal.fa-fw.fa-user
+                  = graphical_icon "user", style: :light, fixed_width: true
                   Your solution
                 .detail
-                  %i.fal.fa-fw.fa-comment
+                  = graphical_icon "comment", style: :light, fixed_width: true
                   0
                 .detail
-                  %i.fal.fa-fw.fa-star
+                  = graphical_icon "star", style: :light, fixed_width: true
                   0
 
       -@solutions.each do |solution|

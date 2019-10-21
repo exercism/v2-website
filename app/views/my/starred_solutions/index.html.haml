@@ -1,8 +1,7 @@
 #my-starred-solutions-page
-  #nav.lo-nav-bar
-    .lo-container
-      =link_to "Home", root_path
-      %span Starred solutions
+  = breadcrumb_nav do
+    %li=link_to "Home", root_path
+    %li=current_link "Starred solutions"
 
   .header
     .lo-container

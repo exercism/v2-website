@@ -66,15 +66,15 @@
       =form_tag [:set_default_allow_comments, :my, :settings], method: :patch do |f|
         =check_box_tag 'allow_comments', 1, current_user.default_allow_comments
         .toggles
-          =icon 'toggle-on'
-          =icon 'toggle-off'
+          =icon 'toggle-on', nil, style: :legacy
+          =icon 'toggle-off', nil, style: :legacy
         =label_tag 'allow_comments', "Allow comments by default on published solutions"
 
         =button_tag "Update comments preference", class: 'pure-button'
 
     .settings-section.danger
       %h2
-        %i.fas.fa-exclamation-triangle
+        = graphical_icon "exclamation-triangle", style: :solid
         Delete your account
 
       %p You can choose to delete your account at any time.

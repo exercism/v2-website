@@ -1,5 +1,11 @@
 class ChangelogEntry
   module Referenceable
+    def self.find(id)
+      return GeneralReferenceable.new if id.blank?
+
+      self.for(GlobalID::Locator.locate(id))
+    end
+
     def self.for(obj)
       case obj
       when Exercise
@@ -7,7 +13,7 @@ class ChangelogEntry
       when Track
         ReferenceableTrack.new(obj)
       else
-        NullReferenceable.new
+        GeneralReferenceable.new
       end
     end
   end

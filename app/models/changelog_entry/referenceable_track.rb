@@ -3,7 +3,6 @@ class ChangelogEntry
     attr_reader :track
 
     delegate :to_global_id, to: :track
-    delegate :tweet, to: :twitter_account
 
     def initialize(track)
       @track = track
@@ -19,6 +18,21 @@ class ChangelogEntry
 
     def twitter_account
       TwitterAccount.find(track.slug.to_sym)
+    end
+
+    def as_json(*args)
+      {
+        id: to_global_id.to_s,
+        title: title,
+      }
+    end
+
+    def key
+      "track_#{track.id}"
+    end
+
+    def object
+      track
     end
   end
 end

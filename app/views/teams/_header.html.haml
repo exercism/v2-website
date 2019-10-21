@@ -1,7 +1,7 @@
 #team-header
   %h1
     .lo-container
-      =image_tag @team.avatar_url, class: 'avatar'
+      = image @team.avatar_url, "Avatar of team", class: "avatar"
       #{@team.name}
   .lo-container
     =link_to "Home", teams_team_path(@team), class: (selected == :home ? "selected" : "")

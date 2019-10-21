@@ -1,4 +1,4 @@
--if @solution.last_updated_by_user_at && @solution.last_updated_by_user_at <= Exercism::V2_MIGRATED_AT && !@solution.mentoring_requested?
+-if @solution.last_updated_legacy? && !@solution.mentoring_requested?
   / Legacy Mode
   =render "show_legacy"
   =render "show_legacy_discussion"
@@ -16,7 +16,7 @@
       .finished-section
         .title-block
           %h3
-            =icon("clock-circle", "Clock")
+            =icon("clock-circle", "Clock", style: :legacy)
             You have requested mentoring for this exercise.
         .next-block
           .next-option
@@ -33,7 +33,7 @@
       .finished-section
         .title-block
           %h3
-            =icon("clock-circle", "Clock")
+            =icon("clock-circle", "Clock", style: :legacy)
             You have requested mentoring for this exercise.
         .next-block
           .next-option

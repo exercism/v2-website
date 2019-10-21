@@ -3,10 +3,14 @@ class ChangelogEntry < ApplicationRecord
 
   belongs_to :referenceable, polymorphic: true, optional: true
   belongs_to :created_by, class_name: "User"
+  has_one :tweet,
+    class_name: "ChangelogEntryTweet",
+    foreign_key: :changelog_entry_id
 
   delegate :title, to: :referenceable, prefix: true
   delegate :icon, to: :referenceable
   delegate :name, :handle, to: :created_by, prefix: true
+  delegate :copy, :status, to: :tweet, prefix: true, allow_nil: true
 
   scope :published, -> { where.not(published_at: nil) }
 
@@ -34,8 +38,10 @@ class ChangelogEntry < ApplicationRecord
     update!(published_at: nil)
   end
 
-  def tweet!(tweet: default_tweet)
-    referenceable.tweet(tweet)
+  def tweet!
+    return if tweet.blank?
+
+    tweet.tweet_to(referenceable.twitter_account)
   end
 
   def published?
@@ -62,9 +68,5 @@ class ChangelogEntry < ApplicationRecord
 
   def friendly_url
     Rails.application.routes.url_helpers.changelog_entry_url(url_slug)
-  end
-
-  def default_tweet
-    Tweet.from_entry(self)
   end
 end

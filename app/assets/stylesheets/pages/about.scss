@@ -10,7 +10,7 @@ body.namespace-none.controller-pages.action-about {
 #about-page {
     section.organisation-top-banner-section {
         .inner {
-            background-image:image-url("company/about-header.png");
+            background-image:image-url("company/about-header.jpg");
         }
         h1 {
             text-align:left;
@@ -19,7 +19,7 @@ body.namespace-none.controller-pages.action-about {
     section.stats-section {
         padding:70px 0;
         background-color:#8A89C0;
-        background-image:image-url('company/stats-background.png');
+        background-image:image-url('company/stats-background.jpg');
         background-repeat:no-repeat;
         background-size:cover;
         @include width-smaller-than-medium() {

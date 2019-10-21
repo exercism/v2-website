@@ -1,9 +1,7 @@
 #my-track-page
-  #nav.lo-nav-bar
-    .lo-container
-      /=link_to "Dashboard", root_path
-      =link_to "Language tracks", [:my, :tracks]
-      %span #{@track.title} Track
+  = breadcrumb_nav do
+    %li=link_to "Language tracks", [:my, :tracks]
+    %li=current_link "#{@track.title} Track"
 
   .header
     .visual-section

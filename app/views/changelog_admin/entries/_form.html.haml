@@ -16,13 +16,12 @@
   = render "markdown_field", f: f, field: :details_markdown
 
   = f.label :referenceable_gid, "What track/exercise does this apply to (if appropriate)"
-  = f.grouped_collection_select :referenceable_gid,
+  = f.collection_select :referenceable_gid,
     form.referenceable_types,
-    :all,
-    :name,
     :to_global_id,
     :title,
-    { prompt: "General" }
+    {},
+    { class: "js-skip-selectize js-referenceable-search" }
 
   = f.label :info_url, "More info URL. Is there a PR, issue, or commit you can link to?"
   = f.text_field :info_url, placeholder: "e.g. https://github.com/exercism/wip/issues/35"
@@ -31,3 +30,10 @@
   = f.text_area :tweet_copy, max_length: 250
 
   = f.submit "Save", class: "pure-button pure-button-primary"
+
+- content_for :js do
+  :javascript
+    new ReferenceableSearch(
+      '.js-referenceable-search',
+      '#{search_changelog_admin_referenceables_path}',
+    ).start()

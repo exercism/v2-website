@@ -1,0 +1,10 @@
+require:
+  - ./lib/rubocop/cop/custom/accessible_images.rb
+
+AllCops:
+  DisabledByDefault: true
+
+Custom/AccessibleImages:
+  Enable: true
+  Exclude:
+    - ./app/helpers/a11y_helper.rb

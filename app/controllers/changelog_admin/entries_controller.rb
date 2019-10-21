@@ -25,7 +25,8 @@ module ChangelogAdmin
     end
 
     def show
-      @actions = ChangelogAdmin::ChangelogEntryAction.enabled
+      @entry = ChangelogEntryPresenter.new(@entry)
+      @actions = ChangelogAdmin::ChangelogEntryActionWidget.enabled
     end
 
     def publish

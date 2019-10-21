@@ -15,8 +15,7 @@ module ApplicationHelper
 
   def code_person_widget
     content_tag :div, id: "widget-code-person" do
-      image_tag random_person_image_url,
-        alt: 'Programming person with notebook'
+      image random_person_image_url, 'Programming person with notebook'
     end
   end
 
