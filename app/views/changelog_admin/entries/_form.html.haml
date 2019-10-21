@@ -13,7 +13,7 @@
   = f.text_field :title, required: true, placeholder: "e.g. New exercise! Bob has arrived on the Ruby track"
 
   = f.label :details_markdown, "Details - As much or as little as you like about what you did. What's the reason? What changes will the user see? Is this part of a set of changes?"
-  = f.text_area :details_markdown
+  = render "markdown_field", f: f, field: :details_markdown
 
   = f.label :referenceable_gid, "What track/exercise does this apply to (if appropriate)"
   = f.collection_select :referenceable_gid,
