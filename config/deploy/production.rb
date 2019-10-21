@@ -35,6 +35,7 @@ namespace :assets do
   task :upload do
     on roles(:assets), in: :groups, limit: 1, wait: 10 do
       execute "aws s3 sync --acl=public-read /opt/exercism/current/public/assets/ s3://exercism-assets/assets/"
+      execute "aws s3 sync --acl=public-read /opt/exercism/current/public/packs/ s3://exercism-assets/packs/"
     end
   end
 end
