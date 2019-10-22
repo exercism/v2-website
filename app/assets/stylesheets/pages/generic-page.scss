@@ -52,7 +52,7 @@
         margin-top:-10px;
     }
 
-    .generic{
+    .body {
         p,ul,ol {
             @include font-size(16, 23);
             margin-bottom:15px;
