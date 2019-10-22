@@ -14,6 +14,4 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'API'
   inflect.acronym 'CLI'
-  inflect.acronym 'SQL'
-  inflect.acronym 'HTML'
 end

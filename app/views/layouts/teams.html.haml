@@ -20,7 +20,7 @@
     #modal-wrapper
       #modal
 
-    = javascript_pack_tag 'application'
+    =javascript_include_tag 'application'
     =yield(:js)
 
     -if hotjar_enabled?

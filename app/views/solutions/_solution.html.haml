@@ -8,6 +8,9 @@
     .handle
       = graphical_icon "user", style: :light, fixed_width: true
       =display_handle(solution.user, user_track)
+    /.published-at
+    /  %i.fal.fa-fw.fa-clock
+    /  #{solution.published_at.strftime("%b %d %Y")}
     .detail
       = graphical_icon "comment", style: :light, fixed_width: true
       =solution.num_comments

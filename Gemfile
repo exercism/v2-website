@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 5.2'
 gem 'puma', '~> 3.7'
 gem 'mysql2'
 
@@ -13,11 +13,12 @@ gem 'dalli'
 gem 'devise', ">= 4.7.1"
 gem 'omniauth-github'
 gem 'kaminari'
-gem 'friendly_id', github: 'norman/friendly_id', branch: 'master', ref: 'cdd5971f91c40e0c05e5afb498d2ec1b452ffb44'
+gem 'friendly_id', '~> 5.2'
 gem 'mandate'
 
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'coffee-rails', '~> 4.2'
 gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
@@ -49,8 +50,6 @@ gem 'flipper-active_record'
 gem 'flipper-ui'
 
 gem 'twitter', require: false
-
-gem 'webpacker', '~> 4.0'
 
 group :production do
   gem "skylight"

@@ -48,5 +48,3 @@ var LZString=function(){function o(o,r){if(!t[o]){t[o]={};for(var n=0;n<o.length
     });
   }
 }
-
-window.Walkthrough = Walkthrough;

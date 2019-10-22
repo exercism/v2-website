@@ -1,7 +1,7 @@
 .page-1
   .progress
-    =graphical_icon 'circle filled', style: :solid
-    =graphical_icon 'circle', style: :solid
+    =graphical_icon 'circle filled', style: :legacy
+    =graphical_icon 'circle', style: :legacy
 
   %h2 Showcase your solutions
   %p Create a public profile to showcase the solutions you’re proud of and help others learn from your work.
@@ -15,8 +15,8 @@
 
 .page-2
   .progress
-    =graphical_icon 'circle filled', style: :solid
-    =graphical_icon 'circle filled', style: :solid
+    =graphical_icon 'circle filled', style: :legacy
+    =graphical_icon 'circle filled', style: :legacy
 
   =form_for @profile, url: my_profile_path do |f|
     %h2 Choose your display name

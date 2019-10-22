@@ -54,7 +54,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>.", case_sensitive: false}, allow_blank: true, if: :will_save_change_to_email?
+  validates :email, uniqueness: {message: "address is already registered. Try <a href='/users/sign_in'>logging in</a> or <a href='/users/password/new'> resetting your password</a>."}, allow_blank: true, if: :will_save_change_to_email?
   validates :handle, presence: true, handle: true
   validate :avatar_is_correct_file_type
 
@@ -225,6 +225,7 @@ class User < ApplicationRecord
     return unless avatar.attached?
 
     unless avatar.variable?
+      avatar.purge
       errors[:avatar] << "Wrong format"
     end
   end

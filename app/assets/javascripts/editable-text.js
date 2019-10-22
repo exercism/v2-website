@@ -37,5 +37,3 @@ EditableText.prototype.stopEditing = function(e) {
 
   this.bindEvents();
 };
-
-window.EditableText = EditableText;

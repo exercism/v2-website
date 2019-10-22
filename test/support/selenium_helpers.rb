@@ -1,6 +1,7 @@
+SELENIUM_HELPERS_CONFIG = Rails.application.config_for("selenium").reduce({}, :merge).freeze
 module SeleniumHelpers
   def self.hub_url
-    Rails.application.config_for("selenium")["hub_url"]
+    SELENIUM_HELPERS_CONFIG["hub_url"]
   end
 
   def self.options
@@ -8,10 +9,10 @@ module SeleniumHelpers
   end
 
   def self.default_host
-    Rails.application.config_for("selenium")["default_host"]
+    SELENIUM_HELPERS_CONFIG["default_host"]
   end
 
   def self.teams_host
-    Rails.application.config_for("selenium")["teams_host"]
+    SELENIUM_HELPERS_CONFIG["teams_host"]
   end
 end

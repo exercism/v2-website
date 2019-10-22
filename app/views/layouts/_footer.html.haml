@@ -43,20 +43,20 @@
           %ul.social
             %li
               =link_to "https://twitter.com/exercism_io", class: "icon", "aria-label": "Exercism on Twitter" do
-                =graphical_icon :twitter, style: :brand
+                =graphical_icon :twitter, style: :legacy
             %li
               =link_to "https://facebook.com/exercism.io", class: "icon", "aria-label": "Exercism on Facebook" do
-                =graphical_icon 'facebook-square', style: :brand
+                =graphical_icon 'facebook-official', style: :legacy
             %li
               =link_to "https://github.com/exercism", class: "icon", "aria-label": "Exercism on GitHub" do
-                =graphical_icon :github, style: :brand
+                =graphical_icon :github, style: :legacy
       .legal
         .copyright © #{Time.current.year} Exercism
         .created-by
           Made with
-          =icon :heart, nil, style: :solid
+          =icon :heart, nil, style: :legacy
           and
-          =icon :coffee, nil, style: :solid
+          =icon :coffee, nil, style: :legacy
           by
           #{link_to "Katrina Owen", "http://kytrinyx.com"},
           #{link_to "Thalamus", "http://thalamus.ai"}

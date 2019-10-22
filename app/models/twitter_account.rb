@@ -6,12 +6,12 @@ class TwitterAccount
   class TweetFailed < RuntimeError
   end
 
-  def self.accounts
-    Rails.application.config_for("twitter_accounts")[:accounts]
+  def self.config
+    Rails.application.config_for("twitter_accounts")
   end
 
   def self.find(slug)
-    attrs = accounts.find { |account| account[:slug] == slug }
+    attrs = config.find { |account| account[:slug] == slug }
     new(attrs)
   end
 

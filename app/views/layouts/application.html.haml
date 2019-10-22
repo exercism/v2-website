@@ -2,10 +2,11 @@
 %html{lang: I18n.locale}
   %head
     =stylesheet_link_tag 'application', media: 'all'
-
     =async_stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:600,700,800'
+    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/all.css', integrity: 'sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG', crossorigin: 'anonymous'
+    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/v4-shims.css'
+    = render "layouts/prismjs"
 
-    =render "layouts/prismjs"
     =render "layouts/meta_tags"
     =csrf_meta_tags
     =yield(:head)
@@ -20,8 +21,7 @@
     #modal-wrapper
       #modal
 
-    = javascript_pack_tag 'application'
-    = javascript_include_tag "https://kit.fontawesome.com/e26ac64253.js", crossorigin: "anonymous"
+    =javascript_include_tag 'application'
     =yield(:js)
     =yield(:async_css)
 

@@ -1,1 +1,85 @@
-= render "page", profile: @profile, profile_view: @profile_view
+#profile-page
+  .header
+    .lo-container
+      %h1 #{@profile.display_name}'s Profile
+      .h1-subtitle This is a showcase of some of the solutions that #{@profile.display_name} has published on Exercism.
+      -if user_signed_in? && current_user == @profile.user
+        .btns
+          =link_to [:edit, :my, :profile], remote: true, class: "pure-button edit-button" do
+            =graphical_icon :cogs, style: :legacy
+            Edit public profile
+          =link_to [:my, :solutions], class: "pure-button edit-button" do
+            =graphical_icon :cogs, style: :legacy
+            Change public solutions
+
+  .lo-container
+    .pure-g
+      .pure-u-1.pure-u-md-6-24.lhs
+        .sidebar
+          = image @profile.user.avatar_url, "Picture of #{@profile.user.name}", class: "avatar"
+          .name= @profile.display_name
+          -if @profile.user.bio.present?
+            .bio= @profile.user.bio
+          .hr
+
+          %h3 On Exercism
+          .badges
+            -if @profile.user.admin?
+              .badge.admin Exercism admin
+            -@profile.user.mentored_tracks.each do |track|
+              .badge.mentor #{track.title} mentor
+            -@profile.user.maintained_tracks.each do |track|
+              .badge.maintainer #{track.title} maintainer
+
+          .member-since
+            =graphical_icon 'calendar fa-fw', style: :legacy
+            Since #{@profile.user.created_at.strftime("%b %Y")}
+
+          -if @profile_view.helped_count > 0
+            .helped-count
+              =graphical_icon 'handshake-o fa-fw', style: :legacy
+              Helped
+              .count #{@profile_view.helped_count}
+              = "student".pluralize(@profile_view.helped_count)
+
+          -if @profile.has_external_links?
+            .hr
+            %h3 Elsewhere on the web
+
+            -if @profile.website.present?
+              =link_to @profile.website, target: "_blank", class: 'external-link' do
+                =graphical_icon 'globe fa-fw', style: :legacy
+                %span My website
+
+            -if @profile.github.present?
+              =link_to "https://github.com/#{@profile.github}", target: "_blank", class: 'external-link' do
+                =graphical_icon 'github fa-fw', style: :legacy
+                %span GitHub
+
+            -if @profile.twitter.present?
+              =link_to "https://twitter.com/#{@profile.twitter}", target: "_blank", class: 'external-link' do
+                =graphical_icon 'twitter fa-fw', style: :legacy
+                %span Twitter
+
+            -if @profile.linkedin.present?
+              =link_to url_with_protocol(@profile.linkedin), target: "_blank", class: 'external-link' do
+                =graphical_icon 'linkedin fa-fw', style: :legacy
+                %span LinkedIn
+
+            -if @profile.medium.present?
+              =link_to "https://medium.com/@#{@profile.medium}", target: "_blank", class: 'external-link' do
+                =graphical_icon 'medium fa-fw', style: :legacy
+                %span Medium
+
+      .pure-u-1.pure-u-md-18-24.rhs
+        .num-solutions Showing #{pluralize @profile_view.solutions.size, "solution"}
+        =form_tag [:solutions, @profile], method: :get, remote: true, class: "filters" do
+          .widget-filter
+            .title Language:
+            =select_tag :track_id, options_for_select(@profile_view.tracks_for_select, value: @profile_view.track_id), id: nil
+        .solutions.pure-g
+          =render "profiles/solutions", solutions: @profile_view.solutions
+
+  -content_for :js do
+    :javascript
+      submitOnChange($('.filters select'))

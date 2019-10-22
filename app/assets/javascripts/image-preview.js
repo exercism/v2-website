@@ -18,5 +18,3 @@ var ImagePreview = {
     });
   }
 };
-
-window.ImagePreview = ImagePreview;

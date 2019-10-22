@@ -1,13 +1,13 @@
 .progress
   - if @solution.mentorships.count == 0
-    =graphical_icon 'circle filled', style: :solid
-    =graphical_icon 'circle filled', style: :solid
-    =icon 'circle', 'Step 2 of 3', style: :solid
+    =graphical_icon 'circle filled', style: :legacy
+    =graphical_icon 'circle filled', style: :legacy
+    =icon 'circle', 'Step 2 of 3', style: :legacy
   - else
-    =graphical_icon 'circle filled', style: :solid
-    =graphical_icon 'circle filled', style: :solid
-    =graphical_icon 'circle', style: :solid
-    =icon 'circle', 'Step 2 of 4', style: :solid
+    =graphical_icon 'circle filled', style: :legacy
+    =graphical_icon 'circle filled', style: :legacy
+    =graphical_icon 'circle', style: :legacy
+    =icon 'circle', 'Step 2 of 4', style: :legacy
 
 =form_tag [:reflect, :my, @solution], method: :patch, remote: true do
   %h2 Make your solution public?
