@@ -61,7 +61,6 @@
 
     .test-suite,
     .solution.multi-file {
-        background:#f9f9f9;
         h3 {
             padding:10px 50px 10px 27px;
             font-weight:$bold;
@@ -79,9 +78,6 @@
             margin-right: 10px;
         }
     }
-    .test-suite pre {
-        background:#f9f9f9;
-    }
     .solution pre {
         background:#fff;
     }
@@ -90,6 +86,7 @@
         pre {
             padding-top:0;
             padding-bottom:0;
+            border-radius: 0;
         }
     }
     .lhs-content {
@@ -362,6 +359,23 @@ body:not(.prism-dark) #teams-my-solution-page {
     }
 }
 
+body:not(.prism-dark) {
+    #solution-page,
+    #mentor-solution-page,
+    #my-solution-page,
+    #teams-solution-page,
+    #teams-my-solution-page,
+    #my-track-not-joined-page {
+        .test-suite,
+        .solution.multi-file,
+        .test-suite pre,
+        .solution pre,
+        .code-sample pre,
+        .code-sample code {
+            background:#f9f9f9;
+        }
+    }
+}
 body.prism-dark {
     #solution-page,
     #mentor-solution-page,

@@ -147,6 +147,34 @@ body.controller-my-tracks.action-show {
             text-align:justify;
         }
 
+        .code-sample {
+            @include width-medium() {
+                display:block;
+                float:right;
+                margin:0 0 20px 50px;
+            }
+            display:none;
+            margin-top:35px;
+            background-image:image-url("code-sample-frame.png");
+            background-size:contain;
+            background-repeat:no-repeat;
+            padding:28px 6px;
+            height:200px;
+            width: 258px;
+
+            pre {
+                @include font-size(10, 13);
+                padding:10px 10px;
+                height:151px;
+                margin:0;
+                border-radius: 0 0 9px 9px;
+            }
+            img {
+                display:block;
+                width:100%;
+            }
+        }
+
         h2 {
             @include font-size(22, 22);
             font-weight:$regular;
@@ -174,36 +202,6 @@ body.controller-my-tracks.action-show {
             font-weight:$regular;
             &:hover {
             }
-        }
-    }
-
-    .code-sample {
-        @include width-medium() {
-            display:block;
-            float:right;
-            margin:0 0 20px 50px;
-        }
-        display:none;
-        margin-top:35px;
-        background-image:image-url("code-sample-frame.png");
-        background-size:contain;
-        background-repeat:no-repeat;
-        padding:30px 10px;
-        height:200px;
-        width: 258px;
-
-        pre {
-            background:#fafafa;
-            @include font-size(10, 13);
-            padding:2px 5px;
-            height:144px;
-            code {
-                background:#f8f8f8;
-            }
-        }
-        img {
-            display:block;
-            width:100%;
         }
     }
 
