@@ -150,6 +150,7 @@ class UserTrackTest < ActiveSupport::TestCase
     assert_equal 2, user_track.num_completed_side_exercises
     assert_equal 1, user_track.num_available_core_exercises
     assert_equal 1, user_track.num_available_side_exercises
+    assert_equal 2, user_track.num_available_exercises
   end
 
   test "counters in independent mode" do
@@ -178,5 +179,6 @@ class UserTrackTest < ActiveSupport::TestCase
     assert_equal 2, user_track.num_completed_side_exercises
     assert_equal 2, user_track.num_available_core_exercises
     assert_equal 4, user_track.num_available_side_exercises
+    assert_equal 6, user_track.num_available_exercises
   end
 end
