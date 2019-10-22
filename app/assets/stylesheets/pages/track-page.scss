@@ -146,6 +146,7 @@ body.controller-my-tracks.action-show {
         .about {
             text-align:justify;
         }
+
         .code-sample {
             @include width-medium() {
                 display:block;
@@ -157,24 +158,23 @@ body.controller-my-tracks.action-show {
             background-image:image-url("code-sample-frame.png");
             background-size:contain;
             background-repeat:no-repeat;
-            padding:30px 10px;
+            padding:28px 6px;
             height:200px;
             width: 258px;
 
             pre {
-                background:#fafafa;
                 @include font-size(10, 13);
-                padding:2px 5px;
-                height:144px;
-                code {
-                    background:#f8f8f8;
-                }
+                padding:10px 10px;
+                height:151px;
+                margin:0;
+                border-radius: 0 0 9px 9px;
             }
             img {
                 display:block;
                 width:100%;
             }
         }
+
         h2 {
             @include font-size(22, 22);
             font-weight:$regular;
@@ -204,6 +204,7 @@ body.controller-my-tracks.action-show {
             }
         }
     }
+
     .testimonal-section {
         padding:70px 0;
         border:solid #eee;
