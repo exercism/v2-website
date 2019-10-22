@@ -38,7 +38,7 @@
               .img{style: "background-image:url(#{image_url(team.avatar_url)})"}
               %h3= team.name
               .members
-                =icon :group, nil, style: :legacy
+                =icon :users, nil, style: :solid
                 .text
                   = team.members.count
                   Members
