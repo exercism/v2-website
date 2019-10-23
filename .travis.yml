@@ -13,7 +13,6 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - sudo apt-get install libnss3
-  - sleep 3
 addons:
   chrome: stable
 before_install:
@@ -25,7 +24,7 @@ before_install:
   - sudo mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_test.* TO 'exercism_reboot'@'localhost'" -u root
 install:
   - "bundle install --jobs=3 --retry=3 --deployment"
-  - "npm install"
+  - "yarn install"
   - "bundle exec rake db:test:prepare"
 script:
   - "bundle exec rubocop"
@@ -33,7 +32,7 @@ script:
   - "bundle exec rake test"
   - "bundle exec rake test:system"
 cache:
-  node_modules: true
+  yarn: true
   directories:
     - vendor/bundle
 branches:
