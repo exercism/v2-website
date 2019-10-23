@@ -35,7 +35,7 @@ class SolutionButtonsTest < ApplicationSystemTestCase
 
     assert_selector ".leave-button"
     assert_selector ".comment-button"
-    assert_selector ".approve-button:enabled"
+    assert_selector ".approve-button:not([disabled])"
     refute_selector ".approve-and-comment-button"
 
     fill_in "discussion_post_content", with: "Foobar"
