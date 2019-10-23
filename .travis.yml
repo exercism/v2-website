@@ -12,12 +12,10 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - wget https://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip
   - sudo apt-get install libnss3
-  - sudo cp chromedriver /usr/local/bin/.
-  - sudo chmod +x /usr/local/bin/chromedriver
   - sleep 3
+addons:
+  chrome: stable
 before_install:
   - sudo cp config/secrets.yml.example config/secrets.yml
   - sudo service mysql restart
