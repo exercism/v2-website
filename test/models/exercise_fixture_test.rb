@@ -22,4 +22,13 @@ class ExerciseFixtureTest < ActiveSupport::TestCase
     fixture = create :exercise_fixture, exercise: exercise, representation: representation
     assert_equal fixture, ExerciseFixture.lookup(exercise.track.slug, exercise.slug, representation)
   end
+
+  test "interpolate_comments_html" do
+    markdown = "I really like your use of PLACEHOLDER_1 and your use of PLACEHOLDER_2, but espeically PLACEHOLDER_1."
+    mapping = {"PLACEHOLDER_1" => "foobar", "PLACEHOLDER_2" => "barfoo"}
+    expected = "<p>I really like your use of foobar and your use of barfoo, but espeically foobar.</p>\n"
+
+    fixture = create :exercise_fixture, comments_markdown: markdown
+    assert_equal expected, fixture.interpolated_comments(mapping)
+  end
 end

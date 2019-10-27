@@ -1,13 +1,12 @@
 class ExerciseFixture < ApplicationRecord
   belongs_to :exercise
-  belongs_to :feedback_by, class_name: "User"
+  belongs_to :comments_by, class_name: "User"
 
   before_create do
     self.representation_hash = self.class.hash_representation(representation)
   end
 
   def self.lookup(track_slug, exercise_slug, representation)
-
     find_by(
       exercise: Exercise.joins(:track).
                          find_by(
@@ -16,6 +15,14 @@ class ExerciseFixture < ApplicationRecord
                          ),
       representation_hash: hash_representation(representation)
     )
+  end
+
+  def interpolated_comments(placeholder_mapping)
+    md = comments_markdown.to_s
+    placeholder_mapping.each do |placeholder, name|
+      md.gsub!(placeholder, name)
+    end
+    ParseMarkdown.(md)
   end
 
   def self.hash_representation(representation)

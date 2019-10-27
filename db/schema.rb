@@ -161,11 +161,11 @@ ActiveRecord::Schema.define(version: 2019_10_27_203129) do
 
   create_table "exercise_fixtures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "exercise_id", null: false
-    t.bigint "feedback_by_id", null: false
+    t.bigint "comments_by_id", null: false
     t.text "representation", null: false
     t.string "representation_hash", null: false
-    t.text "feedback_markdown", null: false
-    t.text "feedback_html", null: false
+    t.string "status", null: false
+    t.text "comments_markdown", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exercise_id", "representation_hash"], name: "index_exercise_fixtures_on_exercise_id_and_representation_hash", unique: true
