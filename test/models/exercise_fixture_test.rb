@@ -31,4 +31,15 @@ class ExerciseFixtureTest < ActiveSupport::TestCase
     fixture = create :exercise_fixture, comments_markdown: markdown
     assert_equal expected, fixture.interpolated_comments(mapping)
   end
+
+  test "interpolate_comments_html copes without placeholders" do
+    markdown = "I really like your use of code"
+    expected = "<p>I really like your use of code</p>\n"
+
+    fixture = create :exercise_fixture, comments_markdown: markdown
+    assert_equal expected, fixture.interpolated_comments(nil)
+    assert_equal expected, fixture.interpolated_comments({})
+    assert_equal expected, fixture.interpolated_comments({"PLACEHOLDER" => "bar"})
+  end
+
 end

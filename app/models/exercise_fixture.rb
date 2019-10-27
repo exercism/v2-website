@@ -7,6 +7,9 @@ class ExerciseFixture < ApplicationRecord
   end
 
   def self.lookup(track_slug, exercise_slug, representation)
+    # Guard against an empty representation
+    return nil unless representation.present?
+
     find_by(
       exercise: Exercise.joins(:track).
                          find_by(
@@ -21,10 +24,11 @@ class ExerciseFixture < ApplicationRecord
     md = comments_markdown.to_s
     placeholder_mapping.each do |placeholder, name|
       md.gsub!(placeholder, name)
-    end
+    end if placeholder_mapping.present?
     ParseMarkdown.(md)
   end
 
+  private
   def self.hash_representation(representation)
     OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), "notverysecret", representation)
   end

@@ -1,3 +1,9 @@
+# This is the base controller of Exercism's API.
+#
+# It is intended to be consumed by authenticated
+# user of Exercism, and is developed in parallel with 
+# Exercism's Command Line Interface (CLI)
+
 module API
   class BaseController < ApplicationController
     skip_before_action :verify_authenticity_token

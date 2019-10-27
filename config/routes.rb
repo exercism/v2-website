@@ -27,6 +27,13 @@ Rails.application.routes.draw do
   end
   get "api/(*url)", to: 'api/base#render_404'
 
+  # ### #
+  # SPI #
+  # ### #
+  namespace :spi do
+    get "exercise_fixtures/:track_slug/:exercise_slug" => "exercise_fixtures#show", as: :exercise_fixture
+  end
+
   # ##### #
   # Admin #
   # ##### #
