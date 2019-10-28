@@ -157,9 +157,6 @@ Exercism::PrismLanguageMappings = {
   "elisp" => "lisp",
   "lfe" => "lisp",
 
-  "perl5" => "perl",
-  "perl6" => "perl",
-
   "ballerina" => "go",
   "ceylon" => "kotlin",
   "cfml" => "markup",
@@ -169,6 +166,7 @@ Exercism::PrismLanguageMappings = {
   "gnu-apl" => "apl",
   "idris" => "haskell", # close enough for now
   "objective-c" => "objectivec",
+  "perl5" => "perl",
   "pharo" => "smalltalk",
   "plsql" => "sql",
   "purescript" => "haskell",
