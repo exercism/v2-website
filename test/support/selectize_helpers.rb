@@ -10,6 +10,11 @@ module SelectizeHelpers
   def select_option(option, selector:)
     within("select#{selector}+.selectize-control") do
       find('div.selectize-input').click
+
+      unless find('div.selectize-dropdown')
+        find('div.selectize-input').click
+      end
+
       find('div.option', text: option).click
     end
   end
