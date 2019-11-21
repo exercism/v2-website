@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  get "api/(*url)", to: 'api#render_404'
+  get "api/(*url)", to: 'api/base#render_404'
 
   # ##### #
   # Admin #
