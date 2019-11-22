@@ -5,7 +5,9 @@ FactoryBot.define do
   end
 
   factory :submission do
+    uuid { SecureRandom.uuid }
     solution { create :solution }
+    filenames { ["foo", "bar"] }
   end
 
   factory :iteration_analysis do

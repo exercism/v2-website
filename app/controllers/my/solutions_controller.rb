@@ -51,14 +51,6 @@ class My::SolutionsController < MyController
     @track = @exercise.track
   end
 
-  def submit
-    return render(json: {}) unless current_user.admin?
-
-    submission = CreateSubmission.(@solution, params[:files])
-
-    render json: {submission: {id: submission.id}}
-  end
-
   def walkthrough
     @walkthrough = RenderUserWalkthrough.(
       current_user,
@@ -167,7 +159,7 @@ class My::SolutionsController < MyController
 
   def set_solution
     @solution = Solution.find_by_uuid!(params[:id])
-    redirect_to @solution unless @solution.user == current_user
+    redirect_to @solution unless @solution.user_id == current_user.id
   end
 
   def show_unlocked

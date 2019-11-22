@@ -1,6 +1,19 @@
 class My::SubmissionsController < MyController
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
+  def create
+    # Temporary guard
+    return render(json: {}) unless current_user.admin?
+
+    solution = Solution.find(params[:solution_id])
+    return render(json: {}, status: 401) unless solution.user_id == current_user.id
+
+    uuid = SecureRandom.uuid
+    SubmissionServices::Create.(uuid, solution, params[:files])
+
+    render json: {submission: {uuid: uuid}}
+  end
+
   def test_results
     submission = Submission.find(params[:id])
     return render(json: {}, status: :forbidden) unless submission.solution.user_id == current_user.id

@@ -181,7 +181,7 @@ Rails.application.routes.draw do
 
       resources :iterations, only: [:show]
     end
-    resources :submissions, only: [] do
+    resources :submissions, only: [:create] do
       get :test_results, on: :member
     end
 

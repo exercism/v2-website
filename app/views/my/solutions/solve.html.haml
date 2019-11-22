@@ -64,9 +64,9 @@
     $('#run-tests-button').click(function() {
       var code = editor.getValue();
       $.ajax(
-        "/my/solutions/#{@solution.uuid}/submit",
+        "/my/submissions?solution_id=#{@solution.id}",
         {
-          method: "PATCH",
+          method: "POST",
           data: {
             files: {
               "two_fer.rb": code
@@ -74,6 +74,7 @@
           }
         }
       ).done(function(data) {
+        /*
         submissionId = data.submission.id
         $('#tests-output .ops-status').show().children('span').html("Tests pending")
 
@@ -101,5 +102,6 @@
             }
           )
         }, 500);
+        */
       })
     })
