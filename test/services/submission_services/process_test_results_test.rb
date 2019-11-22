@@ -1,7 +1,7 @@
 require 'test_helper'
 
-module TestingServices
-  class ProcessTestedSubmissionTest < ActiveSupport::TestCase
+module SubmissionServices
+  class ProcessTestResultsTest < ActiveSupport::TestCase
     test "works with results" do
       submission = create :submission
       ops_status = "success"
@@ -14,7 +14,7 @@ module TestingServices
         "tests" => tests
       }
 
-      ProcessTestedSubmission.(submission, ops_status, results)
+      ProcessTestResults.(submission, ops_status, results)
       tr = SubmissionTestResults.last
       assert_equal submission, tr.submission
       assert_equal ops_status, tr.ops_status
@@ -30,7 +30,7 @@ module TestingServices
       submission = create :submission
       ops_status = "no_test_runner"
 
-      ProcessTestedSubmission.(submission, ops_status, nil)
+      ProcessTestResults.(submission, ops_status, nil)
       tr = SubmissionTestResults.last
       assert_equal submission, tr.submission
       assert_equal ops_status, tr.ops_status

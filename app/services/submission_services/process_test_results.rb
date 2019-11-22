@@ -1,5 +1,5 @@
-module TestingServices
-  class ProcessTestedSubmission
+module SubmissionServices
+  class ProcessTestResults
     include Mandate
 
     def initialize(submission, ops_status, results)

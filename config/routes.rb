@@ -27,6 +27,13 @@ Rails.application.routes.draw do
   end
   get "api/(*url)", to: 'api/base#render_404'
 
+  # ### #
+  # SPI #
+  # ### #
+  namespace :spi do
+    post "submissions/:submission_uuid/test_results" => "submission_test_results#create", as: :submission_test_results
+  end
+
   # ##### #
   # Admin #
   # ##### #
@@ -299,7 +306,6 @@ Rails.application.routes.draw do
   # Legacy redirects #
   # ################ #
   get "submissions/:uuid" => "legacy_routes#submission_to_solution"
-
 
   constraints CanAccessFlipperUI do
     mount Flipper::UI.app(Flipper) => '/flipper'
