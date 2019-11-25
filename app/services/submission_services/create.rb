@@ -11,11 +11,18 @@ module SubmissionServices
       # TODO
       # Check max file size for each file (small!)
 
-      %i{
-        upload_for_test_running
-        upload_for_storage
-        write_to_db
-      }.map { |cmd| Thread.new { send cmd } }.each(&:join)
+      # Kick the uploading tasks off
+      threads = []
+      threads << Thread.new { upload_for_test_running }
+      threads << Thread.new { upload_for_storage }
+
+      # Make sure this happens on the main thread else
+      # we get issues with the connection pooling
+      write_to_db
+
+      # Finally wait for everyting to finish before
+      # we return
+      threads.each(&:join)
     end
 
     def upload_for_test_running
@@ -28,7 +35,7 @@ module SubmissionServices
     end
 
     def write_to_db
-      submission = Submission.create!(
+      Submission.create!(
         uuid: uuid,
         solution: solution,
         filenames: files.keys

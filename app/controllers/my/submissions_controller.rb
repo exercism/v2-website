@@ -15,7 +15,7 @@ class My::SubmissionsController < MyController
   end
 
   def test_results
-    submission = Submission.find(params[:id])
+    submission = Submission.find_by_uuid(params[:id])
     return render(json: {}, status: :forbidden) unless submission.solution.user_id == current_user.id
     return render(json: {}, status: :failed_dependency) unless submission.tested?
 
