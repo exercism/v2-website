@@ -74,8 +74,10 @@
           }
         }
       ).done(function(data) {
-        /*
-        submissionId = data.submission.id
+        return
+        submissionId = data.submission.uuid
+        console.log(submissionId)
+
         $('#tests-output .ops-status').show().children('span').html("Tests pending")
 
         for(sid in intervals) { clearInterval(intervals[sid]) }
@@ -102,6 +104,5 @@
             }
           )
         }, 500);
-        */
       })
     })
