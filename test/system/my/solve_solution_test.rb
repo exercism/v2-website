@@ -9,6 +9,6 @@ class My::SolveSolutionTest < ApplicationSystemTestCase
     sign_in!(admin)
     visit solve_my_solution_path(solution)
 
-    assert_text "Ops Status: Queued"
+    assert_text "Status: Queued"
   end
 end

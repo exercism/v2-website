@@ -8,8 +8,9 @@
           end
         end
 
-    #tests-output
-      = render "my/solutions/solve/test_output", solution: @solution
+    #submission
+      = render "my/solutions/solve/submission",
+        submission: @solution.submissions.last
 
   %button#run-tests-button.pure-button Run Tests
 
@@ -24,7 +25,7 @@
     margin-top:10px;
     margin-bottom:10px;
   }
-  #tests-output {
+  #submission {
     padding-left:50px;
   }
   #run-tests-button {
@@ -42,17 +43,8 @@
     editor.session.setMode("ace/mode/#{@track.slug}");
 
     $('#run-tests-button').click(function() {
-      $('#tests-output .ops-status').find('span').html("Queueing")
-      var code = editor.getValue();
-      $.ajax(
-        "/my/submissions?solution_id=#{@solution.id}",
-        {
-          method: "POST",
-          data: {
-            files: {
-              "two_fer.rb": code
-            }
-          }
-        }
-      )
+      $('#submission .status').find('span').html("Queueing")
+      channel.createSubmission({
+        files: { "two_fer.rb": editor.getValue() }
+      });
     })
