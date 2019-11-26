@@ -6,14 +6,20 @@ class SolutionChannel {
   }
 
   subscribe() {
-    consumer.subscriptions.create(
+    this.subscription = consumer.subscriptions.create(
       { channel: "SolutionChannel", id: this.id },
       {
-        received(html) {
-          $('#tests-output .ops-status').show().html(html)
+        received(data) {
+          if (data.event == 'submission_changed') {
+            $('#submission').html(data.html);
+          }
         }
       }
     );
+  }
+
+  createSubmission(submission) {
+    this.subscription.perform("create_submission", submission);
   }
 }
 

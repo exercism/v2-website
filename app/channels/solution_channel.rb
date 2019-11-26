@@ -6,6 +6,12 @@ class SolutionChannel < ApplicationCable::Channel
   def unsubscribed
   end
 
+  def create_submission(submission)
+    uuid = SecureRandom.uuid
+
+    SubmissionServices::Create.(uuid, solution, submission["files"])
+  end
+
   private
 
   def solution
