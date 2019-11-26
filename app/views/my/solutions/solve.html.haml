@@ -9,18 +9,7 @@
         end
 
     #tests-output
-      .ops-status
-        = render "my/solutions/solve/status", solution: @solution
-      .results-status
-        Tests Status:
-        %span
-      .results-message
-        Message:
-        %span
-      .test-failure
-        Failed test:
-        %span.name
-        .message
+      = render "my/solutions/solve/test_output", solution: @solution
 
   %button#run-tests-button.pure-button Run Tests
 
@@ -37,12 +26,6 @@
   }
   #tests-output {
     padding-left:50px;
-
-    .results-status,
-    .results-message,
-    .test-failure {
-      display:none;
-    }
   }
   #run-tests-button {
     background:green;
@@ -53,10 +36,6 @@
   :javascript
     channel = new SolutionChannel(#{@solution.id})
     channel.subscribe()
-
-    // Set interval tracker for use later
-    // Use an array to avoid races
-    var intervals = {}
 
     var editor = ace.edit("ace-editor");
     editor.setTheme("ace/theme/monokai");
@@ -75,31 +54,5 @@
             }
           }
         }
-      ).done(function(data) {
-        submissionId = data.submission.uuid
-
-        for(sid in intervals) { clearInterval(intervals[sid]) }
-
-        intervals[submissionId] = setInterval(function() {
-          $.get(
-            "/my/submissions/" + submissionId + "/test_results",
-            {},
-            function(data, status, xhr){
-              if(intervals[submissionId]) { clearInterval(intervals[submissionId]) }
-
-              $('#tests-output .results-status').show().children('span').html(data.status)
-
-              if(data.message) {
-                $('#tests-output .results-message').show().children('span').html(data.message)
-              }
-
-              if(data.failure) {
-                $('#tests-output .test-failure').show()
-                $('#tests-output .test-failure .name').html(data.failure.name)
-                $('#tests-output .test-failure .message').html(data.failure.message.replace("\n", "<br/>"))
-              }
-            }
-          )
-        }, 500);
-      })
+      )
     })
