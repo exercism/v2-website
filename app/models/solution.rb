@@ -16,6 +16,8 @@ class Solution < ApplicationRecord
 
   has_many :notifications, as: :about, dependent: :destroy
 
+  has_many :submissions
+
   delegate :auto_approve?, to: :exercise
   delegate :max_mentoring_slots,
     :mentoring_slots_remaining,
