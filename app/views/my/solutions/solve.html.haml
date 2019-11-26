@@ -42,7 +42,8 @@
     editor.session.setMode("ace/mode/#{@track.slug}");
 
     $('#run-tests-button').click(function() {
-      $('#submission .status').find('span').html("Queueing")
+      $('#submission').html("<p>Status: Queueing</p>")
+
       channel.createSubmission({
         files: { "two_fer.rb": editor.getValue() }
       });
