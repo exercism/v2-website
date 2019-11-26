@@ -9,8 +9,7 @@
         end
 
     #submission
-      = render "my/solutions/solve/submission",
-        submission: @solution.submissions.last
+      = render @solution.submissions.last if @solution.submissions.any?
 
   %button#run-tests-button.pure-button Run Tests
 
