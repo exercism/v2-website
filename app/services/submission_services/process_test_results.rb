@@ -18,6 +18,8 @@ module SubmissionServices
         results: results
       )
       submission.update!(tested: true)
+
+      submission.broadcast!
     end
 
     private

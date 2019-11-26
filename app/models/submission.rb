@@ -7,4 +7,8 @@ class Submission < ApplicationRecord
 
     test_results.pass? ? :passed : :failed
   end
+
+  def broadcast!
+    BroadcastSubmissionJob.perform_later(self)
+  end
 end

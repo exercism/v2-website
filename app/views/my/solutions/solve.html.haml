@@ -61,6 +61,7 @@
     editor.session.setMode("ace/mode/#{@track.slug}");
 
     $('#run-tests-button').click(function() {
+      $('#tests-output .ops-status').find('span').html("Queueing")
       var code = editor.getValue();
       $.ajax(
         "/my/submissions?solution_id=#{@solution.id}",
@@ -73,11 +74,10 @@
           }
         }
       ).done(function(data) {
-        return
         submissionId = data.submission.uuid
-        console.log(submissionId)
 
-        $('#tests-output .ops-status').show().children('span').html("Tests pending")
+        channel = new SubmissionChannel(submissionId)
+        channel.subscribe()
 
         for(sid in intervals) { clearInterval(intervals[sid]) }
 
@@ -88,7 +88,6 @@
             function(data, status, xhr){
               if(intervals[submissionId]) { clearInterval(intervals[submissionId]) }
 
-              $('#tests-output .ops-status').show().children('span').html("Tests finished")
               $('#tests-output .results-status').show().children('span').html(data.status)
 
               if(data.message) {
