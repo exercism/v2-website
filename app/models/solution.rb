@@ -137,4 +137,14 @@ class Solution < ApplicationRecord
 
     true
   end
+
+  def broadcast!
+    BroadcastSolutionJob.perform_later(self)
+  end
+
+  def status
+    return "" if submissions.last.blank?
+
+    submissions.last.status
+  end
 end

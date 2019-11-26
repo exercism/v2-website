@@ -45,13 +45,13 @@ module SubmissionServices
     end
 
     def write_to_db
-      submission = Submission.create!(
+      Submission.create!(
         uuid: uuid,
         solution: solution,
         filenames: files.keys
       )
 
-      submission.broadcast!
+      solution.broadcast!
     end
   end
 end
