@@ -1,7 +1,7 @@
 class BroadcastSubmissionJob < ApplicationJob
   def perform(submission)
     html = ApplicationController.render(
-      partial: "my/solutions/solve/submission",
+      partial: "my/submissions/submission",
       locals: { submission: submission }
     )
 
