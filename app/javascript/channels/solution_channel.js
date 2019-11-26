@@ -1,13 +1,13 @@
 import consumer from "./consumer"
 
-class SubmissionChannel {
-  constructor(uuid) {
-    this.uuid = uuid;
+class SolutionChannel {
+  constructor(id) {
+    this.id = id;
   }
 
   subscribe() {
     consumer.subscriptions.create(
-      { channel: "SubmissionChannel", uuid: this.uuid },
+      { channel: "SolutionChannel", id: this.id },
       {
         received(html) {
           $('#tests-output .ops-status').show().html(html)
@@ -17,4 +17,4 @@ class SubmissionChannel {
   }
 }
 
-window.SubmissionChannel = SubmissionChannel;
+window.SolutionChannel = SolutionChannel;

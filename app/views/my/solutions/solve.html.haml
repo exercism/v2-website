@@ -10,8 +10,7 @@
 
     #tests-output
       .ops-status
-        = render "my/solutions/solve/status",
-          submission: @solution.submissions.last
+        = render "my/solutions/solve/status", solution: @solution
       .results-status
         Tests Status:
         %span
@@ -52,6 +51,9 @@
 -content_for :js do
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" type="text/javascript" charset="utf-8"></script>
   :javascript
+    channel = new SolutionChannel(#{@solution.id})
+    channel.subscribe()
+
     // Set interval tracker for use later
     // Use an array to avoid races
     var intervals = {}
@@ -75,9 +77,6 @@
         }
       ).done(function(data) {
         submissionId = data.submission.uuid
-
-        channel = new SubmissionChannel(submissionId)
-        channel.subscribe()
 
         for(sid in intervals) { clearInterval(intervals[sid]) }
 
