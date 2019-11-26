@@ -19,7 +19,7 @@ class My::SubmissionsController < MyController
     return render(json: {}, status: :forbidden) unless submission.solution.user_id == current_user.id
     return render(json: {}, status: :failed_dependency) unless submission.tested?
 
-    test_results = submission.test_results.last
+    test_results = submission.test_results
     output = {
       status: test_results.results_status
     }
