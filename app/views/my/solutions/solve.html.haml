@@ -10,8 +10,8 @@
 
     #tests-output
       .ops-status
-        Ops Status:
-        %span
+        = render "my/solutions/solve/status",
+          submission: @solution.submissions.last
       .results-status
         Tests Status:
         %span
@@ -39,7 +39,6 @@
   #tests-output {
     padding-left:50px;
 
-    .ops-status,
     .results-status,
     .results-message,
     .test-failure {

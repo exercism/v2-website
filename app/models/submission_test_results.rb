@@ -5,4 +5,7 @@ class SubmissionTestResults < ApplicationRecord
     super.try(&:to_sym)
   end
 
+  def pass?
+    results_status == :pass
+  end
 end
