@@ -53,6 +53,8 @@ gem 'twitter', require: false
 
 gem 'webpacker', '~> 4.0'
 
+gem 'redis'
+
 group :production do
   #gem "skylight"
 end
