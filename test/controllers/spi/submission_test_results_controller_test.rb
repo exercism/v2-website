@@ -4,7 +4,7 @@ class SPI::SubmissionTestResultsControllerTest < SPI::TestBase
    test "creates submission test results" do
     submission = create :submission
     status = "good"
-    results = "all good things"
+    results = {"foo" => "all good things"}
 
     SubmissionServices::ProcessTestResults.expects(:call).with(submission, status, results)
 

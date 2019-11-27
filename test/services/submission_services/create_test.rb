@@ -13,7 +13,7 @@ module SubmissionServices
 
       files = {filename1 => file_contents1, filename2 => file_contents2}
 
-      UploadToS3ForTesting.expects(:call).with(uuid, solution, files)
+      UploadToS3ForTesting.expects(:call).with(uuid, solution, solution.track, files)
       UploadToS3ForStorage.expects(:call).with(uuid, files)
       RunTests.expects(:call).with(uuid, solution)
 
