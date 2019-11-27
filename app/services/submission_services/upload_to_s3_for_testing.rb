@@ -3,11 +3,12 @@ module SubmissionServices
   class UploadToS3ForTesting
     include Mandate
 
-    def initialize(submission_uuid, solution, input_files)
+    # This class must NOT access the database
+    def initialize(submission_uuid, solution, track, input_files)
       @solution = solution
+      @track = track
       @input_files = input_files
       @path = "#{Rails.env}/testing/#{submission_uuid}"
-      @track = solution.exercise.track
       @files_to_upload = {}
     end
 
