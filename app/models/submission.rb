@@ -9,6 +9,6 @@ class Submission < ApplicationRecord
   end
 
   def broadcast!
-    BroadcastSubmissionJob.perform_later(self)
+    BroadcastSubmissionJob.perform_now(self)
   end
 end
