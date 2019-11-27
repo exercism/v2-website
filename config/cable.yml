@@ -7,5 +7,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= Rails.application.secrets.action_cable_redis_url || "redis://localhost:6379/1" %>
+  url: <%= Rails.application.secrets.action_cable_redis_url %>
   channel_prefix: exercism_production
