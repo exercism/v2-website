@@ -5,7 +5,12 @@ module SubmissionServices
   class Create
     include Mandate
 
-    initialize_with :uuid, :solution, :files
+    def initialize(uuid, solution, files)
+      @uuid = uuid
+      @solution = solution
+      @track = solution.track
+      @files = files
+    end
 
     def call
       # TODO
@@ -25,11 +30,16 @@ module SubmissionServices
       threads.each(&:join)
     end
 
+    private
+    attr_reader :uuid, :solution, :track, :files
+
+    # This method must NOT access the database
     def upload_for_test_running
-      UploadToS3ForTesting.(uuid, solution, files)
+      UploadToS3ForTesting.(uuid, solution, track, files)
       RunTests.(uuid, solution)
     end
 
+    # This method must NOT access the database
     def upload_for_storage
       UploadToS3ForStorage.(uuid, files)
     end
