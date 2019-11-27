@@ -5,7 +5,7 @@ module SubmissionServices
 
     test "calls to publish_message" do
       submission = create :submission
-      RestClient.expects(:post).with('http://localhost:9292/submissions',
+      RestClient.expects(:post).with('/submissions',
         track_slug: submission.solution.exercise.track.slug,
         exercise_slug: submission.solution.exercise.slug,
         submission_uuid: submission.uuid
