@@ -76,7 +76,7 @@ module SubmissionServices
       )
 
       Aws::S3::Client.expects(:new).returns(s3_client)
-      s = UploadToS3ForTesting.new(submission.uuid, solution, files)
+      s = UploadToS3ForTesting.new(submission.uuid, solution, solution.track, files)
       s.stubs(submissions_bucket: bucket)
       s.()
     end
