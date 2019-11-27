@@ -17,12 +17,10 @@ class SubmissionTestResults < ApplicationRecord
     results_status == :fail
   end
 
-  def tests
-    super.map { |test| SubmissionTest.new(test) }
-  end
-
   def failed_tests
-    tests.select(&:failed?)
+    tests.
+      map { |test| SubmissionTest.new(test) }.
+      select(&:failed?)
   end
 
   class SubmissionTest
