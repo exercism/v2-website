@@ -419,10 +419,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    skylight (4.2.0)
-      skylight-core (= 4.2.0)
-    skylight-core (4.2.0)
-      activesupport (>= 4.2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -541,7 +537,6 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   simplecov
-  skylight
   spring
   spring-watcher-listen (~> 2.0.0)
   timecop
