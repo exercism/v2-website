@@ -1,5 +1,5 @@
 class Submission < ApplicationRecord
-  belongs_to :solution
+  belongs_to :solution, polymorphic: true
   has_one :test_results, class_name: "SubmissionTestResults"
 
   def status
