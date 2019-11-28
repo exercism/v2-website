@@ -55,6 +55,7 @@ module SubmissionServices
       }.each(&:join)
     end
 
+    memoize
     def s3_client
       @client ||= Aws::S3::Client.new(
         access_key_id: Rails.application.secrets.aws_access_key_id,
@@ -63,6 +64,7 @@ module SubmissionServices
       )
     end
 
+    memoize
     def submissions_bucket
       Rails.application.secrets.aws_submissions_bucket
     end
