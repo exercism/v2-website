@@ -1,15 +1,6 @@
 class Teams::BaseController < ApplicationController
-  layout 'teams'
   before_action :authenticate_user!
   before_action :ensure_onboarded!
-
-  def set_site_context
-    cookies["site_context"] = {
-      value: "teams",
-      domain: :all,
-      tld_length: 2
-    }
-  end
 
   def find_team
     @team = current_user.teams.find(params[:team_id])
