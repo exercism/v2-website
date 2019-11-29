@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   private
 
   def site_context
-    SiteContext.new(request.subdomain)
+    @site_context ||= SiteContext.new(request.subdomain)
   end
 
   def ensure_onboarded!
