@@ -209,8 +209,12 @@ class User < ApplicationRecord
     id
   end
 
-  def join_research!
-    update!(joined_research: true)
+  def join_research!(time: Time.current)
+    update!(joined_research_at: time)
+  end
+
+  def joined_research?
+    joined_research_at.present?
   end
 
   private
