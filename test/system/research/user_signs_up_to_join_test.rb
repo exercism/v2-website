@@ -12,7 +12,7 @@ module Research
         log_in
         onboard
 
-        assert_text "Research Section"
+        assert_text "Experiments"
       end
     end
 
@@ -28,7 +28,12 @@ module Research
     end
 
     def confirm_email
-      email = ActionMailer::Base.deliveries.last
+      email = nil
+      loop do
+        email = ActionMailer::Base.deliveries.last
+
+        break if email.present?
+      end
       token = email.text_part.body.match(/confirmation_token=\w*/).to_s
       visit "/users/confirmation?#{token}"
     end

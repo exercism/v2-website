@@ -6,7 +6,7 @@ FactoryBot.define do
 
   factory :research_experiment_solution, class: 'Research::ExperimentSolution' do
     user { create :user }
-    experiment { create :experiment }
+    experiment { create :research_experiment }
     exercise { create :exercise }
     uuid { SecureRandom.uuid }
     git_sha { SecureRandom.uuid }
@@ -15,7 +15,7 @@ FactoryBot.define do
 
   factory :research_user_experiment, class: 'Research::UserExperiment' do
     user { create :user }
-    experiment { create :experiment }
+    experiment { create :research_experiment }
   end
 
   factory :submission_test_result, class: 'SubmissionTestResults' do

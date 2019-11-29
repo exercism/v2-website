@@ -110,7 +110,7 @@ class User < ApplicationRecord
   def may_view_solution?(solution)
     return true if id == solution.user_id
 
-    if solution.research_solution?
+    if solution.research_experiment_solution?
       return false
     elsif solution.team_solution?
       return true if solution.team.members.include?(self)

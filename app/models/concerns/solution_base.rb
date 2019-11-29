@@ -65,7 +65,7 @@ module SolutionBase
     false
   end
 
-  def experiment_solution?
+  def research_experiment_solution?
     false
   end
 

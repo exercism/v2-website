@@ -9,7 +9,7 @@ module Research
       visit research_join_path
       click_on "Join Research"
 
-      assert_text "Research Section"
+      assert_text "Experiments"
     end
   end
 end

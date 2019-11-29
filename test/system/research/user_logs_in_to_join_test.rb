@@ -14,7 +14,7 @@ module Research
       fill_in "Password", with: "password"
       within("form") { click_on "Log in" }
 
-      assert_text "Research Section"
+      assert_text "Experiments"
     end
   end
 end
