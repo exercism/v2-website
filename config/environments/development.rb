@@ -73,6 +73,8 @@ Rails.application.configure do
   end
 
   config.hosts << "lvh.me"
+  config.hosts << "teams.lvh.me"
+  config.hosts << "research.lvh.me"
 end
 
 Rails.application.routes.default_url_options = { :host => "localhost:3000" }

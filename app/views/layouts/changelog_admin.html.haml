@@ -1,22 +1,13 @@
 !!!
 %html{lang: I18n.locale}
   %head
-    =stylesheet_link_tag 'application', media: 'all'
-    =async_stylesheet_link_tag '//fonts.googleapis.com/css?family=Dosis:600,700,800'
-    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/all.css', integrity: 'sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG', crossorigin: 'anonymous'
-    =async_stylesheet_link_tag '//pro.fontawesome.com/releases/v5.6.3/css/v4-shims.css'
-    = render "layouts/prismjs"
+    =render "layouts/head"
 
-    =csrf_meta_tags
-    =yield(:head)
-
-  %body
+  %body{class: body_class}
     =render_header
     = yield
+    =render "layouts/footer"
+    =render "layouts/modal"
 
-    #modal-wrapper
-      #modal
-
-    = javascript_pack_tag 'application'
-    =yield(:js)
     =yield(:async_css)
+    =render "layouts/javascript"
