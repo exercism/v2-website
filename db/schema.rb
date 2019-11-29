@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_032457) do
+ActiveRecord::Schema.define(version: 2019_11_29_055832) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -367,6 +367,40 @@ ActiveRecord::Schema.define(version: 2019_11_28_032457) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "research_experiment_solutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "experiment_id", null: false
+    t.string "uuid", null: false
+    t.bigint "exercise_id", null: false
+    t.string "git_sha", null: false
+    t.string "git_slug", null: false
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "fk_rails_1be696c295"
+    t.index ["experiment_id"], name: "fk_rails_8f6bde7fee"
+    t.index ["user_id"], name: "fk_rails_64edd0c0d3"
+  end
+
+  create_table "research_experiments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.string "repo_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_research_experiments_on_slug"
+  end
+
+  create_table "research_user_experiments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "experiment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["experiment_id"], name: "fk_rails_809b029224"
+    t.index ["user_id", "experiment_id"], name: "index_research_user_experiments_on_user_id_and_experiment_id", unique: true
+  end
+
   create_table "solution_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "solution_id", null: false
     t.bigint "user_id", null: false
@@ -666,6 +700,11 @@ ActiveRecord::Schema.define(version: 2019_11_28_032457) do
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
+  add_foreign_key "research_experiment_solutions", "exercises"
+  add_foreign_key "research_experiment_solutions", "research_experiments", column: "experiment_id"
+  add_foreign_key "research_experiment_solutions", "users"
+  add_foreign_key "research_user_experiments", "research_experiments", column: "experiment_id"
+  add_foreign_key "research_user_experiments", "users"
   add_foreign_key "solution_locks", "solutions"
   add_foreign_key "solution_locks", "users"
   add_foreign_key "solution_mentorships", "solutions"
