@@ -1,8 +1,5 @@
 module Research
   class JoinsController < BaseController
-    before_action :authenticate_user!
-    before_action :check_user_joined_research!
-
     def show
     end
 

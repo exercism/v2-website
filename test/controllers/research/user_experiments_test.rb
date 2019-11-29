@@ -3,7 +3,7 @@ require 'test_helper'
 module Research
   class UserExperimentsControllerTest < ActionDispatch::IntegrationTest
     test "copes with double clicks" do
-      user = create :user, :onboarded
+      user = create :user, :onboarded, joined_research_at: 2.days.ago
       experiment = create :research_experiment
 
       sign_in!(user)
