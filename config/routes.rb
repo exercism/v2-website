@@ -98,6 +98,19 @@ Rails.application.routes.draw do
     end
   end
 
+  # ######## #
+  # Research #
+  # ######## #
+  namespace :research, path: '', constraints: { subdomain: 'research' } do
+    get "dashboard" => "dashboard#index"
+
+    devise_scope :user do
+      post "/users/sign_in" => "sessions#create"
+    end
+
+    root to: "dashboard#index"
+  end
+
   # #### #
   # Auth #
   # #### #
@@ -252,13 +265,6 @@ Rails.application.routes.draw do
     Teams::PagesController::PAGES.values.each do |page|
       get page.to_s.dasherize => "pages##{page}"#, as: "teams_#{page}_page"
     end
-  end
-
-  # ######## #
-  # Research #
-  # ######## #
-  namespace :research, path: '', constraints: { subdomain: 'research' } do
-    get "dashboard" => "dashboard#index"
   end
 
   # ##### #

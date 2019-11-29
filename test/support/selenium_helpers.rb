@@ -14,4 +14,8 @@ module SeleniumHelpers
   def self.teams_host
     Rails.application.config_for("selenium")["teams_host"]
   end
+
+  def self.research_host
+    Rails.application.config_for("selenium")["research_host"]
+  end
 end
