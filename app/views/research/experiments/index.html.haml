@@ -1,0 +1,10 @@
+.lo-container
+  %h1 Experiments
+  .experiments
+    -@experiments.each do |experiment|
+      .experiment
+        %h3= experiment.title
+        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        =link_to "Learn More", research_experiment_path(experiment)
+        =button_to "Participate", research_user_experiments_path(experiment_id: experiment), class: "pure-button"
+

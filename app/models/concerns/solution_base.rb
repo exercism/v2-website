@@ -61,6 +61,18 @@ module SolutionBase
     true
   end
 
+  def team_solution?
+    false
+  end
+
+  def research_experiment_solution?
+    false
+  end
+
+  def use_auto_analysis?
+    false
+  end
+
   #class_methods do
   #  ...
   #end

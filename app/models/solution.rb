@@ -82,10 +82,6 @@ class Solution < ApplicationRecord
     "exercism download --uuid=#{uuid}"
   end
 
-  def team_solution?
-    false
-  end
-
   def legacy?
     created_at < Exercism::V2_MIGRATED_AT
   end

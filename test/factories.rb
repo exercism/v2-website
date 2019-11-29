@@ -1,4 +1,23 @@
 FactoryBot.define do
+  factory :research_experiment, class: 'Research::Experiment' do
+    title { "Foobar" }
+    repo_url { "https://github.com/exercism/something" }
+  end
+
+  factory :research_experiment_solution, class: 'Research::ExperimentSolution' do
+    user { create :user }
+    experiment { create :research_experiment }
+    exercise { create :exercise }
+    uuid { SecureRandom.uuid }
+    git_sha { SecureRandom.uuid }
+    git_slug { SecureRandom.uuid }
+  end
+
+  factory :research_user_experiment, class: 'Research::UserExperiment' do
+    user { create :user }
+    experiment { create :research_experiment }
+  end
+
   factory :submission_test_result, class: 'SubmissionTestResults' do
     submission { create :submission }
     ops_status { :no_test_runner }

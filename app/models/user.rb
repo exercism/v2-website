@@ -110,7 +110,9 @@ class User < ApplicationRecord
   def may_view_solution?(solution)
     return true if id == solution.user_id
 
-    if solution.team_solution?
+    if solution.research_experiment_solution?
+      return false
+    elsif solution.team_solution?
       return true if solution.team.members.include?(self)
     else
       return true if solution.published?
@@ -205,6 +207,14 @@ class User < ApplicationRecord
 
   def flipper_id
     id
+  end
+
+  def join_research!(time: Time.current)
+    update!(joined_research_at: time)
+  end
+
+  def joined_research?
+    joined_research_at.present?
   end
 
   private
