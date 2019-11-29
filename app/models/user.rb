@@ -207,6 +207,10 @@ class User < ApplicationRecord
     id
   end
 
+  def join_research!
+    update!(joined_research: true)
+  end
+
   private
 
   def avatar_thumbnail_url

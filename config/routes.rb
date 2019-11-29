@@ -103,12 +103,13 @@ Rails.application.routes.draw do
   # ######## #
   namespace :research, path: '', constraints: { subdomain: 'research' } do
     get "dashboard" => "dashboard#index"
+    get "join" => "pages#join", as: :join
 
     devise_scope :user do
       post "/users/sign_in" => "sessions#create"
     end
 
-    root to: "dashboard#index"
+    root to: "pages#home"
   end
 
   # #### #
