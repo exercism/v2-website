@@ -34,6 +34,8 @@ class User < ApplicationRecord
   has_many :team_solutions, dependent: :destroy
   has_many :team_iterations, through: :team_solutions, source: :iterations
 
+  has_many :research_experiment_solutions, dependent: :destroy, class_name: "Research::ExperimentSolution"
+
   has_many :track_mentorships, dependent: :destroy
   has_many :mentored_tracks, through: :track_mentorships, source: :track
   has_many :track_maintainerships, class_name: "Maintainer", dependent: :nullify

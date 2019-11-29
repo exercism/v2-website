@@ -2,6 +2,7 @@ class Research::ExperimentSolution < ApplicationRecord
   include SolutionBase
 
   belongs_to :user
+  belongs_to :exercise
   belongs_to :experiment
 
   has_many :submissions, as: :solution

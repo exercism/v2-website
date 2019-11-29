@@ -1,0 +1,17 @@
+.lo-container
+  %h1= @language_title
+  %h2 Part 1
+  -if @part_1_solution
+    -if @part_1_solution.submitted?
+      Done
+    -else
+      =button_to "Continue", research_experiment_solution(@part_1_solution)
+  -else
+    / TODO - This won't work until we're using current slugs
+    =button_to "Start", research_experiment_solutions_path(experiment_id: @experiment.id, language: :ruby, part: 1), method: :post
+
+  %h2 Part 2
+  -if @part_2_solution
+    Done
+  -else
+    =link_to "Start", "#"
