@@ -1,0 +1,24 @@
+@import 'mixins';
+@import 'variables';
+
+body.namespace-research {
+    a.logo {
+        color: #fff;
+        text-decoration: none;
+        img {
+            display: inline-block;
+            vertical-align: top;
+        }
+        span {
+            border-left:1px solid #fff;
+            margin-left:7px;
+            padding-left:7px;
+            display: inline-block;
+            line-height: 18px;
+            font-weight:$regular;
+            margin-top:2px;
+        }
+    }
+}
+
+

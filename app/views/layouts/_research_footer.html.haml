@@ -1,0 +1,50 @@
+=cache ["layouts/research_footer", Date.today.to_s] do
+  %footer
+    .lo-container
+      .pure-g
+        .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-5
+          %h4 About
+          =link_to "Exercism: Personal Edition", "https://exercism.io"
+          =link_to "Exercism: Research", "https://research.exercism.io"
+          =link_to "About Exercism", about_page_path
+          =link_to "Our values", values_page_path
+          =link_to "Our team", team_page_path
+        .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-5
+          %h4 Help
+          =link_to "FAQs", faqs_page_path
+          =link_to "Getting started", getting_started_page_path
+          =link_to "Installing the CLI", cli_page_path
+          =link_to "Interactive CLI walkthrough", cli_walkthrough_page_path
+        .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-6
+          %h4 Legal &amp; Privacy
+          =link_to "Terms", terms_of_service_page_path
+          =link_to "Privacy", privacy_page_path
+          =link_to "Code of conduct", code_of_conduct_page_path
+        .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-5
+          %h4 Keep in touch
+          =link_to "Newsletter", "https://tinyletter.com/exercism", target: "_blank"
+          =link_to "Discuss on GitHub", "https://github.com/exercism/exercism.io", target: "_blank"
+          =link_to "Contact us", contact_page_path
+          =link_to "Report abuse", report_abuse_page_path
+        .pure-u-1.pure-u-sm-1-2.pure-u-md-1-3.pure-u-lg-1-5
+          %h4 Follow
+          =link_to "https://twitter.com/exercism_io", class: "icon", "aria-label": "Exercism on Twitter" do
+            =graphical_icon :twitter, style: :brand
+          =link_to "https://facebook.com/exercism.io", class: "icon", "aria-label": "Exercism on Facebook" do
+            =graphical_icon 'facebook-square', style: :brand
+          =link_to "https://github.com/exercism", class: "icon", "aria-label": "Exercism on GitHub" do
+            =graphical_icon :github, style: :brand
+
+      .legal
+        .copyright © #{Time.current.year} Exercism
+        .created-by
+          Made with
+          =icon :heart, nil, style: :solid
+          and
+          =icon :coffee, nil, style: :solid
+          by
+          #{link_to "Katrina Owen", "http://kytrinyx.com"},
+          #{link_to "Thalamus", "http://thalamus.ai"}
+          and #{link_to "#{number_with_delimiter Contributor.count} wonderful volunteers", team_page_path}.
+
+

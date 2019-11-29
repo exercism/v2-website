@@ -1,3 +1,3 @@
-class Teams::BaseController < ApplicationController
+class Research::BaseController < ApplicationController
   layout 'research'
 end
