@@ -1,0 +1,9 @@
+.lo-container
+  %h1= @experiment.title
+  %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  / TODO - Kntsoriano
+  / If the user has joined the challenge (research_user_experiment exists) then it should say "View Progress" and link to the user_experiment page
+  / If the user has joined research but not this challenge, there should have a link to particpate
+  / If the user has not joined research, there should be a link to "Join Exericsm Research" which takes to the research home page.
+  =button_to "Participate", research_user_experiments_path(experiment_id: @experiment), class: "pure-button"

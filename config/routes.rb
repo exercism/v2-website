@@ -105,6 +105,8 @@ Rails.application.routes.draw do
     get "dashboard" => "dashboard#index"
 
     resource :join, only: [:show, :create]
+    resources :experiments, only: [:index, :show]
+    resources :user_experiments, only: [:create, :show]
 
     devise_scope :user do
       post "/users/sign_in" => "sessions#create"
