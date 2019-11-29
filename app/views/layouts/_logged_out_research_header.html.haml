@@ -1,0 +1,13 @@
+%header.logged-out
+  .lo-container
+    // TODO - This should be the research logo
+    =link_to root_path, class: 'logo' do
+      =image "logo-white.png", 'Exercism'
+      %span research
+
+    .options
+      = link_to "Sign up", new_user_registration_path
+      = link_to "Log in", new_user_session_path
+
+
+

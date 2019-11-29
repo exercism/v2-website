@@ -1,0 +1,21 @@
+%header.logged-in.research
+  .lo-container
+    %div.spacer
+      =link_to root_path, class: 'logo' do
+        = image "logo-white.png", "Exercism logo"
+        %span research
+
+    .misc-menu{tabindex: "0"}
+      .in-situ
+        = image current_user.avatar_url ? current_user.avatar_url : "blank.png", "Avatar of #{current_user.name}"
+        =graphical_icon 'caret-down', style: :solid
+      .dropdown
+        =graphical_icon 'caret-up', style: :solid
+        .person
+          Logged in as
+          %strong #{current_user.handle}
+        %ul
+          %li= link_to "Exercism: Personal Edition", "https://exercism.io"
+          %li= link_to "Community Blog", blog_posts_path
+        %ul
+          %li= link_to "Sign out", destroy_user_session_path, method: :delete

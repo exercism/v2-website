@@ -3,12 +3,13 @@
   %head
     =render "layouts/head"
 
-  %body{class: "#{body_class} namespace-teams"}
-    =render_teams_header
+  %body{class: "#{body_class} namespace-research"}
+    =render_research_header
     = yield
-    =render "layouts/teams_footer"
+    =render "layouts/research_footer"
     =render "layouts/modal"
 
     =yield(:async_css)
     =render "layouts/javascript"
+
 
