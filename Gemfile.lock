@@ -499,6 +499,7 @@ DEPENDENCIES
   capybara (~> 3.0)
   chromedriver-helper
   commonmarker
+  concurrent-ruby
   daemons
   dalli
   delayed_job_active_record

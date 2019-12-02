@@ -1,4 +1,3 @@
-# t = Time.now.to_f; UploadSubmissionToS3ForStorage.(submission, files); Time.now.to_f - t
 module SubmissionServices
   class UploadToS3ForStorage
     include Mandate
