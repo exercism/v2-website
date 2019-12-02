@@ -1,10 +1,24 @@
-.lo-container
-  %h1 Experiments
-  .experiments
-    -@experiments.each do |experiment|
-      .experiment
-        %h3= experiment.title
-        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        =link_to "Learn More", research_experiment_path(experiment)
-        =button_to "Participate", research_user_experiments_path(experiment_id: experiment), class: "pure-button"
+#research-experiments
+  .header
+    .lo-container
+      %h1 Exercism Research
 
+  .lo-container
+    .introduction
+      %h2 Welcome to Exercism Research.
+      %p We have created Exercism Research as a space where we can work with world-class researchers to utilize the varying knowledge and experience of Exercism's community to answers questions regarding how people learn and develop programming skills throughout their careers.
+    .experiments
+      %h2 Current Research
+      -@experiments.each do |experiment|
+        .experiment
+          %h3= experiment.title
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          .buttons
+            =link_to "Learn More", research_experiment_path(experiment), class: 'learn-more-btn pure-button'
+            =button_to "Participate", research_user_experiments_path(experiment_id: experiment), form_class: "participate-btn pure-button", method: :post
+          .researchers
+            =image "supporter-logos/mozilla-black.png", "University of Chicago"
+
+    .coming-soon
+      %h2 More coming soon
+      %p We will be launching more experiments in the future. If you are a researcher and would like to discuss projects with us, please drop us an email at #{link_to "jeremy@exercism.io", "mailto:jeremy@exercism.io"}.
