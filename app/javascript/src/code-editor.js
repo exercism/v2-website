@@ -6,6 +6,10 @@ class CodeEditor {
     $(this._setup.bind(this));
   }
 
+  getValue() {
+    this.editor.getValue();
+  }
+
   _setup() {
     this.editor = ace.edit(this.element[0]);
 

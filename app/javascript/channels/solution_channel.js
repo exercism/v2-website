@@ -11,7 +11,7 @@ class SolutionChannel {
       {
         received(data) {
           if (data.event == 'submission_changed') {
-            $('#submission').html(data.html);
+            $('.overlay').html(data.html);
           }
         }
       }
@@ -23,4 +23,4 @@ class SolutionChannel {
   }
 }
 
-window.SolutionChannel = SolutionChannel;
+export default SolutionChannel;

@@ -1,16 +1,16 @@
-.code-running {
+.submission-status {
   text-align: center;
-  > .code-running-spinner {
+  > .submission-status-spinner {
     font-size: 50px;
     margin-bottom: 50px;
   }
 
-  > .code-running-title {
+  > .submission-status-title {
     font-size: 32px;
     margin-bottom: 10px;
   }
 
-  > .code-running-message {
+  > .submission-status-message {
     font-size: 28px;
   }
 }
