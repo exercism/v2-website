@@ -18,7 +18,6 @@ import '../src/solution.js';
 import '../src/tabs.js';
 import '../src/walkthrough.js';
 import '../src/experiment-solution.js';
-import '../src/code-editor.js';
 
 window.$ = window.jQuery = require("jquery");
 
