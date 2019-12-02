@@ -8,7 +8,7 @@ class Research::ExperimentSolution < ApplicationRecord
   has_many :submissions, as: :solution
 
   scope :by_part, -> (language:, part:) {
-    slugs = exercises.map do
+    slugs = exercises.map do |exercise|
       Research::SolutionSlug.construct(
         language: language,
         part: part,
