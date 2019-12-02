@@ -12,8 +12,7 @@ module Research
     end
 
     def languages_started
-      @languages_started ||=
-        solutions.map {|s| s.exercise.slug.split("-").tap{|s|s.pop(2)}.join('-').to_sym}.uniq
+      @languages_started ||= solutions.map(&:language).uniq
     end
 
     def solutions
