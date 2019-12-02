@@ -1,11 +1,9 @@
 .lo-container
   %h1 Your contribution to #{@experiment.title}
   %h2 Languages
-  %h3 Ruby
-  -if @user_experiment.language_started?(:ruby)
-    =link_to "Continue Ruby", "#"
-  -else
-    =link_to "Start Ruby", language_research_user_experiment_path(@user_experiment, :ruby)
-
-  %h3 C#
-  %h3 F#
+  -@languages.each do |slug, title|
+    %h3= title
+    -if @user_experiment.language_started?(slug)
+      =link_to "Continue #{title}", "#"
+    -else
+      =link_to "Start #{title}", language_research_user_experiment_path(@user_experiment, slug)

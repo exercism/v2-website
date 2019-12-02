@@ -7,27 +7,27 @@ class Research::ExperimentSolution < ApplicationRecord
 
   has_many :submissions, as: :solution
 
-  scope :by_part, -> (language:, part:) {
-    slugs = exercises.map do |exercise|
-      Research::SolutionSlug.construct(
-        language: language,
-        part: part,
-        exercise: exercise
-      )
-    end
+  # Don't pass query params language into this, only pass
+  # things that have been pre-parsed via Track.find_by_slu
+  scope :by_language_part, -> (language_slug:, part:) {
 
-    where("exercises.slug": slugs)
+    # Guard against unsafe parts.
+    return [] unless %w{a b}.include?(part)
+
+    slug = Research::ExerciseSlug.construct(
+      language: language_slug,
+      part: part,
+      exercise: "%"
+    )
+
+    joins(:exercise).where("exercises.slug LIKE ?", slug)
   }
-
-  def self.exercises
-    ["a", "b"]
-  end
 
   def research_experiment_solution?
     true
   end
 
-  def language
-    Research::SolutionSlug.deconstruct(exercise.slug)[:language]
+  def language_slug
+    Research::ExerciseSlug.deconstruct(exercise.slug)[:language]
   end
 end

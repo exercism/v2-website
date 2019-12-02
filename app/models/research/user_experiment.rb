@@ -4,7 +4,7 @@ module Research
     belongs_to :experiment
 
     def to_param
-      experiment.slug
+      experiment.id
     end
 
     def language_started?(lang)
@@ -12,7 +12,7 @@ module Research
     end
 
     def languages_started
-      @languages_started ||= solutions.map(&:language).uniq
+      @languages_started ||= solutions.map(&:language_slug).uniq
     end
 
     def solutions
@@ -22,9 +22,9 @@ module Research
       ).includes(:exercise)
     end
 
-    def find_part(language:, part:)
+    def language_part(language, part)
       solutions.
-        by_part(language: language, part: part).
+        by_language_part(language_slug: language, part: part).
         first
     end
   end
