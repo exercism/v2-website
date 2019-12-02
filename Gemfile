@@ -15,6 +15,7 @@ gem 'omniauth-github'
 gem 'kaminari'
 gem 'friendly_id', github: 'norman/friendly_id', branch: 'master', ref: 'cdd5971f91c40e0c05e5afb498d2ec1b452ffb44'
 gem 'mandate'
+gem 'concurrent-ruby'
 
 gem 'haml-rails'
 gem 'jquery-rails'

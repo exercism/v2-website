@@ -11,4 +11,8 @@ class Submission < ApplicationRecord
   def broadcast!
     BroadcastSubmissionJob.perform_now(self)
   end
+
+  def files
+    SubmissionServices::DownloadFiles.(uuid, filenames)
+  end
 end
