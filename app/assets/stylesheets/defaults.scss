@@ -60,7 +60,15 @@ textarea {
     padding:7px 14px;
     line-height:17px;
 
-    // For button_to forms
+    &:focus {
+        box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset, 0 0 6px rgba(0,0,0,.2) inset;
+    }
+}
+
+// For button_to forms
+form.pure-button {
+    padding:0;
+
     input {
         background: transparent;
         border: none;
@@ -68,15 +76,8 @@ textarea {
         padding:7px 14px;
         border-radius:inherit;
         line-height:inherit;
+        width:100%;
     }
-
-    &:focus {
-        box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset, 0 0 6px rgba(0,0,0,.2) inset;
-    }
-}
-
-form.pure-button {
-    padding:0;
 }
 
 h1, h2, h3, h4, h5, h6, p {
