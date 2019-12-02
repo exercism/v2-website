@@ -1,4 +1,5 @@
-import Split from 'split.js'
+import Split from 'split.js';
+import CodeEditor from './code-editor';
 
 class ExperimentSolution {
   constructor(element) {
@@ -12,12 +13,13 @@ class ExperimentSolution {
   }
 
   _loading() {
-    this.element.addClass("experiment-solution--loading");
+    this.element.addClass('experiment-solution--loading');
   }
 
   _setup() {
     this._setupPanes();
     this._setupActions();
+    this._setupEditor();
   }
 
   _setupPanes() {
@@ -29,7 +31,11 @@ class ExperimentSolution {
   }
 
   _setupActions() {
-    this.element.find(".js-submit-code").click(() => { this.submitCode() });
+    this.element.find('.js-submit-code').click(() => { this.submitCode() });
+  }
+
+  _setupEditor() {
+    this.editor = new CodeEditor(this.element.find('.js-code-editor'))
   }
 }
 

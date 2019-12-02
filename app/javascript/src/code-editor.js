@@ -1,9 +1,17 @@
-$(function() {
-  $('#code-editor').each(function() {
-    const editor = ace.edit(this);
-    const language = $(this).data('language')
+class CodeEditor {
+  constructor(element) {
+    this.element = element
+    this.language = element.data('language')
 
-    editor.setTheme('ace/theme/monokai');
-    editor.session.setMode(`ace/mode/${language}`);
-  });
-});
+    $(this._setup.bind(this));
+  }
+
+  _setup() {
+    this.editor = ace.edit(this.element[0]);
+
+    this.editor.setTheme('ace/theme/monokai');
+    this.editor.session.setMode(`ace/mode/${this.language}`);
+  }
+}
+
+export default CodeEditor;
