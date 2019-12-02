@@ -8,7 +8,7 @@ class FontAwesomeIconWidget
   end
 
   def initialize(type:, label:, style:, fixed_width: false, graphical:)
-    @type = type
+    @type = Array(type)
     @label = label
     @style = style
     @fixed_width = fixed_width
@@ -73,6 +73,6 @@ class FontAwesomeIconWidget
   end
 
   def type_class
-    "fa-#{type}"
+    type.map { |type| "fa-#{type}" }
   end
 end

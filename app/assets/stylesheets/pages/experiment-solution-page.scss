@@ -26,6 +26,17 @@
   > .description-panel {
     overflow-y: scroll;
   }
+
+  &.experiment-solution--loading {
+    > .overlay {
+      display: flex;
+    }
+  }
+
+  > .overlay {
+    display: none;
+  }
+
 }
 
 .solution-panel {

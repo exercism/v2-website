@@ -1,0 +1,16 @@
+.code-running {
+  text-align: center;
+  > .code-running-spinner {
+    font-size: 50px;
+    margin-bottom: 50px;
+  }
+
+  > .code-running-title {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  > .code-running-message {
+    font-size: 28px;
+  }
+}
