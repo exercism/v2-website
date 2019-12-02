@@ -7,7 +7,7 @@ module Research
 
       sign_in!(user)
       visit research_join_path
-      click_on "Join Research"
+      click_on "Participate in Exercism Research"
 
       assert_text "Experiments"
     end
