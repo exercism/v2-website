@@ -2,10 +2,10 @@
   = breadcrumb_nav do
     %li=link_to "Back", :back
 
-  .experiment-solution
+  .experiment-solution{ data: { id: @solution.id } }
     .description-panel
       = render "description"
     .solution-panel
       = render "solution", solution: @solution
     .overlay
-      = render "loading_overlay"
+      = render "submission_status", submission: Submission.new

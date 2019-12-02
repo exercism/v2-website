@@ -1,5 +1,6 @@
 import Split from 'split.js';
 import CodeEditor from './code-editor';
+import SolutionChannel from '../channels/solution_channel';
 
 class ExperimentSolution {
   constructor(element) {
@@ -10,6 +11,7 @@ class ExperimentSolution {
 
   submitCode() {
     this._loading();
+    this._submit();
   }
 
   _loading() {
@@ -20,6 +22,7 @@ class ExperimentSolution {
     this._setupPanes();
     this._setupActions();
     this._setupEditor();
+    this._setupChannel();
   }
 
   _setupPanes() {
@@ -36,6 +39,17 @@ class ExperimentSolution {
 
   _setupEditor() {
     this.editor = new CodeEditor(this.element.find('.js-code-editor'))
+  }
+
+  _setupChannel() {
+    this.channel = new SolutionChannel(this.element.data('id'));
+    this.channel.subscribe();
+  }
+
+  _submit() {
+    this.channel.createSubmission({
+      files: { "two_fer.rb": this.editor.getValue() }
+    });
   }
 }
 
