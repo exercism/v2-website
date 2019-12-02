@@ -11,9 +11,9 @@ module SubmissionServices
 
     def call
       threads = []
-      files.each { |filename, code|
+      files.each do |filename, code|
         threads << Thread.new { upload_file(filename, code) }
-      }
+      end
       threads.each(&:join)
     end
 
