@@ -286,7 +286,6 @@ Rails.application.routes.draw do
     resources :experiment_solutions, only: [:show, :create]
   end
 
->>>>>>> a750c45e... Add flow for experiment 1
   # ##### #
   # Pages #
   # ##### #
