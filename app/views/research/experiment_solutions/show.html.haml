@@ -1,5 +1,9 @@
-// TODO - kntsoriano
-// This is the base place for solutions
+#experiment-solution-page
+  = breadcrumb_nav do
+    %li=link_to "Back", :back
 
-IN BROWSER CODING ZOMG.
-
+  .experiment-solution
+    .description-panel
+      = render "description"
+    .solution-panel
+      = render "solution", solution: @solution

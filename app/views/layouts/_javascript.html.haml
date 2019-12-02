@@ -1,5 +1,7 @@
 = javascript_pack_tag 'application'
 = javascript_include_tag "https://kit.fontawesome.com/e26ac64253.js", crossorigin: "anonymous"
+= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"
+
 =yield(:js)
 
 -if Rails.env.production?

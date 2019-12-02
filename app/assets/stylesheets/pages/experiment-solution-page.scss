@@ -1,0 +1,47 @@
+@import 'mixins';
+
+#experiment-solution-page {
+  $breadcrumb-height: 35px;
+
+  + footer {
+    margin-top: 0;
+  }
+
+  > .breadcrumb {
+    height: $breadcrumb-height;
+  }
+
+  > .experiment-solution {
+    @include width-small() {
+      height: calc(100vh - 50px - #{$breadcrumb-height});
+    }
+
+    height: calc(100vh - 50px);
+  }
+}
+
+.experiment-solution {
+  display: flex;
+
+  > .description-panel {
+    overflow-y: scroll;
+  }
+}
+
+.solution-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 5px;
+  background-color: #333;
+}
+
+.toolbar-status {
+  color: white;
+}
