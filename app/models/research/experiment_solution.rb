@@ -30,4 +30,14 @@ class Research::ExperimentSolution < ApplicationRecord
   def language_slug
     Research::ExerciseSlug.deconstruct(exercise.slug)[:language]
   end
+
+  def code
+    <<~CODE
+      class TwoFer
+        def self.two_fer(name="you")
+          "One for %s, one for me." % name
+        end
+      end
+    CODE
+  end
 end
