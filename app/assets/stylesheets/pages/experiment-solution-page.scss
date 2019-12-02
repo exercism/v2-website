@@ -46,13 +46,8 @@
 
 .toolbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
 
   padding: 5px;
   background-color: #333;
-}
-
-.toolbar-status {
-  color: white;
 }

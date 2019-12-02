@@ -1,5 +1,4 @@
 .code-editor#code-editor{ data: { language: solution.language } }
   = solution.code
 .toolbar
-  = render "toolbar_status"
-  = render "toolbar_button"
+  %button.js-submit-code.pure-button.pure-button-primary Run code
