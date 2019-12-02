@@ -1,7 +1,7 @@
 module Research
   class DashboardController < Research::BaseController
     def index
-      @experiments = Experiment.all
+      redirect_to research_experiments_path
     end
   end
 end

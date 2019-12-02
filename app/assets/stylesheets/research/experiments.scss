@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'mixins';
+
+#research-experiments {
+    .header {
+        background:$color-2;
+        padding:70px 0 30px;
+        margin-bottom:30px;
+        h1 {
+            color:#fff;
+            @include font-size(25, 25);
+        }
+    }
+    h2 {
+        @include font-size(16, 16);
+        font-weight:$fw-bold;
+        margin-bottom:5px;
+    }
+
+    .introduction, .experiments, .coming-soon {
+        max-width:750px;
+    }
+
+    .introduction, .coming-soon {
+        p {
+            @include font-size(15, 20);
+        }
+    }
+    .introduction {
+        margin-bottom:20px;
+    }
+    .experiments {
+        margin-bottom:20px;
+        h2 {
+            margin-bottom:10px;
+        }
+        .experiment {
+            border:1px solid #aaa;
+            border-radius:2px;
+            padding:20px;
+            h3 {
+                @include font-size(16, 16);
+                margin-bottom:5px;
+                color:$color-2;
+                font-weight:$fw-bold;
+            }
+            p {
+                @include font-size(15, 20);
+                margin-bottom:10px;
+            }
+            .buttons {
+                margin-bottom:20px;
+                .learn-more-btn {
+                    display:inline-block;
+                    margin-right:5px;
+
+                    background:#fff;
+                    color:#333;
+                    border:1px solid #999;
+                }
+                .participate-btn {
+                    display:inline-block;
+
+                    background:$color-2;
+                    color:#fff;
+                    border:1px solid $color-2;
+                }
+            }
+            .researchers {
+                border-top:1px solid #aaa;
+                margin:0 -20px -20px -20px;
+                padding:20px;
+                img {
+                    height:25px;
+                }
+            }
+        }
+    }
+}
