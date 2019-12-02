@@ -36,6 +36,7 @@ module Research
       end
       token = email.text_part.body.match(/confirmation_token=\w*/).to_s
       visit "/users/confirmation?#{token}"
+      assert_text "Your email address has been successfully confirmed."
     end
 
     def log_in
