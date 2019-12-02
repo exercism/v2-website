@@ -4,24 +4,19 @@ module Research
 
     def create
       experiment = Experiment.find(params[:experiment_id])
-      begin
-        UserExperiment.create!(
-          user: current_user,
-          experiment: experiment
-        )
-      rescue ActiveRecord::RecordNotUnique
-      end
-      redirect_to research_user_experiment_path(experiment)
+      user_experiment = CreateUserExperiment.(current_user, experiment)
+      redirect_to research_user_experiment_path(user_experiment)
     end
 
     def show
+      @languages = {
+        ruby: "Ruby",
+        csharp: "C#"
+      }
     end
 
     def language
-      @language = UserExperimentLanguage.new(
-        @user_experiment,
-        params[:language],
-      )
+      @language_track = Track.find_by_slug!(params[:language])
     end
 
     private

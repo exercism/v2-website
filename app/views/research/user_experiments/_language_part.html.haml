@@ -1,0 +1,9 @@
+-solution = @user_experiment.language_part(@language_track.slug, part)
+-if solution
+  -if solution.submitted?
+    Done
+  -else
+    =button_to "Continue", research_experiment_solution(solution)
+-else
+  / TODO - This won't work until we're using current slugs
+  =button_to "Start", research_experiment_solutions_path(experiment_id: @experiment.id, language: @language_track.slug, part: part), method: :post

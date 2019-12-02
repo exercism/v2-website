@@ -1,9 +1,9 @@
 module Research
-  class SolutionSlug
-    FORMAT = "%{language}-%{exercise}-%{part}"
+  class ExerciseSlug
+    FORMAT = "%{language}-%{part}-%{exercise}"
 
     def self.construct(language:, part:, exercise:)
-      FORMAT % { language: language, exercise: exercise, part: part }
+      FORMAT % { language: language, part: part, exercise: exercise }
     end
 
     def self.deconstruct(slug)

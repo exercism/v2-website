@@ -6,10 +6,10 @@ class Research::UserExperimentTest < ActiveSupport::TestCase
     experiment = create :research_experiment
     user_experiment = create :research_user_experiment, experiment: experiment, user: user
 
-    ruby_exercise_1 = create :exercise, slug: "ruby-1-a"
-    ruby_exercise_2 = create :exercise, slug: "ruby-2-a"
-    common_lisp_exercise = create :exercise, slug: "common-lisp-1-a"
-    csharp_exercise = create :exercise, slug: "csharp-1-a"
+    ruby_exercise_1 = create :exercise, slug: "ruby-a-1"
+    ruby_exercise_2 = create :exercise, slug: "ruby-a-2"
+    common_lisp_exercise = create :exercise, slug: "common-lisp-a-1"
+    csharp_exercise = create :exercise, slug: "csharp-a-1"
 
     solution1 = create :research_experiment_solution, user: user, experiment: experiment, exercise: ruby_exercise_1
     solution2 = create :research_experiment_solution, user: user, experiment: experiment, exercise: ruby_exercise_2
