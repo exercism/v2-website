@@ -22,5 +22,11 @@ module Research
         experiment: experiment
       ).includes(:exercise)
     end
+
+    def find_part(language:, part:)
+      solutions.
+        by_part(language: language, part: part).
+        first
+    end
   end
 end

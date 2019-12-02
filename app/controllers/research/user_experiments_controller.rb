@@ -18,10 +18,10 @@ module Research
     end
 
     def language
-      @language_slug = params[:language]
-      @language_title = Track.find_by_slug(@language_slug).title
-      @part_1_solution = @user_experiment.solutions.where('exercises.slug': ["#{@language_slug}-a-1", "#{@language_slug}-a-1"]).first
-      @part_2_solution = @user_experiment.solutions.where('exercises.slug': ["#{@language_slug}-a-2", "#{@language_slug}-b-2"]).first
+      @language = UserExperimentLanguage.new(
+        @user_experiment,
+        params[:language],
+      )
     end
 
     private
