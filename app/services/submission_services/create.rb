@@ -2,6 +2,13 @@ module SubmissionServices
   class DuplicateSubmissionError < RuntimeError
   end
 
+  # Creting a submission involves three stages:
+  # 1. Upload the files for testing
+  # 2. Upload the files for storage, with filenames as uuids for safety
+  # 3. Save the submission in the database
+  #
+  # All three stages happen in parallel with (3) on the main thread
+  # and the two upload tasks on their own threads.
   class Create
     include Mandate
 
@@ -9,7 +16,11 @@ module SubmissionServices
       @uuid = uuid
       @solution = solution
       @track = solution.track
+
       @files = files
+      @filename_mapping = files.each_with_object({}) do |(filename, _), h|
+        h[filename] = SecureRandom.uuid
+      end
     end
 
     def call
@@ -31,7 +42,7 @@ module SubmissionServices
     end
 
     private
-    attr_reader :uuid, :solution, :track, :files
+    attr_reader :uuid, :solution, :track, :files, :filename_mapping
 
     # This method must NOT access the database
     def upload_for_test_running
@@ -41,14 +52,17 @@ module SubmissionServices
 
     # This method must NOT access the database
     def upload_for_storage
-      UploadToS3ForStorage.(uuid, files)
+      mapped_files = files.each_with_object({}) do |(filename, code), h|
+        h[filename_mapping[filename]] = code
+      end
+      UploadToS3ForStorage.(uuid, mapped_files)
     end
 
     def write_to_db
       submission = Submission.create!(
         uuid: uuid,
         solution: solution,
-        filenames: files.keys
+        filenames: filename_mapping
       )
 
       submission.broadcast!
