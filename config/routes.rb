@@ -271,6 +271,21 @@ Rails.application.routes.draw do
     end
   end
 
+  # ######## #
+  # Research #
+  # ######## #
+  namespace :research, path: '', constraints: { subdomain: 'research' } do
+    get "dashboard" => "dashboard#index"
+
+    resources :experiments, only: [:index, :show]
+    resources :user_experiments, only: [:create, :show] do
+      member do
+        get "languages/:language" => "user_experiments#language", as: :language
+      end
+    end
+    resources :experiment_solutions, only: [:show, :create]
+  end
+
   # ##### #
   # Pages #
   # ##### #
