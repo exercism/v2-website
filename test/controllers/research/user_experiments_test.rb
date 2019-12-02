@@ -10,8 +10,8 @@ module Research
 
       # Check that the controller is idempotent
       2.times do
-        post research_user_experiments_url(experiment_id: experiment.to_param)
-        assert_redirected_to research_user_experiment_url(id: experiment.to_param)
+        post research_user_experiments_url(experiment_id: experiment.id)
+        assert_redirected_to research_user_experiment_url(id: experiment.id)
         assert_equal 1, UserExperiment.where(
           user: user,
           experiment: experiment
