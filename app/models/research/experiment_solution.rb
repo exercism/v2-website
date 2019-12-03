@@ -33,13 +33,7 @@ module Research
     end
 
     def code
-      <<~CODE
-        class TwoFer
-          def self.two_fer(name="you")
-            "One for %s, one for me." % name
-          end
-        end
-      CODE
+      boilerplate_code || ""
     end
   end
 end
