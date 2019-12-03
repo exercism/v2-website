@@ -1,6 +1,7 @@
 import Split from 'split.js';
 import CodeEditor from './code-editor';
 import SolutionChannel from '../channels/solution_channel';
+import SubmissionStatusView from './submission_status_view';
 
 class ExperimentSolution {
   constructor(element) {
@@ -9,20 +10,16 @@ class ExperimentSolution {
     this._setup();
   }
 
-  submitCode() {
-    this._loading();
-    this._submit();
-  }
-
-  _loading() {
-    this.element.addClass('experiment-solution--loading');
-  }
-
   _setup() {
     this._setupPanes();
     this._setupActions();
     this._setupEditor();
     this._setupChannel();
+  }
+
+  submitCode() {
+    this._setSubmissionStatus('queueing');
+    this._submit();
   }
 
   _setupPanes() {
@@ -42,14 +39,38 @@ class ExperimentSolution {
   }
 
   _setupChannel() {
-    this.channel = new SolutionChannel(this.element.data('id'));
+    this.channel = new SolutionChannel(
+      this.element.data('id'),
+      (submission) => { this._setSubmissionStatus(submission.status); }
+    );
+
     this.channel.subscribe();
+  }
+
+  _setSubmissionStatus(status) {
+    switch(status) {
+      case 'queueing': {
+        this._renderOverlay('queueing');
+        break;
+      }
+      case 'queued': {
+        this._renderOverlay('queued');
+        break;
+      }
+    }
   }
 
   _submit() {
     this.channel.createSubmission({
       files: { "two_fer.rb": this.editor.getValue() }
     });
+  }
+
+  _renderOverlay(status) {
+    this.element.addClass('experiment-solution--loading');
+
+    const html = new SubmissionStatusView(status).render();
+    this.element.find('.overlay').html(html);
   }
 }
 
