@@ -3,12 +3,12 @@ module Research
     def create
       experiment = Experiment.find(params[:experiment_id])
 
-      # TODO - Remove this placeholder
-      exercise = Exercise.find_by(slug: "two-fer", track: Track.find_by_slug("ruby"))
+      exercise_slug = "#{params[:language]}-#{params[:part]}-#{%w{a b}.sample}"
+      exercise = Exercise.find_by_slug!(exercise_slug)
 
-      # TODO - Check this is on the experiment track etc
-      #exercise_slug = "#{params[:language]}_#{%w{a b}.sample}_#{part}"
-      #exercise = Exercise.find_by_slug!(exercise_slug)
+      # Guard to ensure that someone doesn't try and access
+      # a non-research solution through this method.
+      raise "Incorrect exercise" unless exercise.track.research_track?
 
       solution = Research::CreateSolution.(
         current_user,

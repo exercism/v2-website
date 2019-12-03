@@ -11,13 +11,9 @@ module Research
     # Don't pass query params language into this, only pass
     # things that have been pre-parsed via Track.find_by_slu
     scope :by_language_part, -> (language_slug:, part:) {
-
-      # Guard against unsafe parts.
-      return [] unless %w{a b}.include?(part)
-
       slug = Research::ExerciseSlug.construct(
         language: language_slug,
-        part: part,
+        part: part.to_i,
         exercise: "%"
       )
 
@@ -26,6 +22,10 @@ module Research
 
     def research_experiment_solution?
       true
+    end
+
+    def finished?
+      finished_at.present?
     end
 
     def language_slug

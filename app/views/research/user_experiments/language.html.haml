@@ -13,7 +13,7 @@
         %p In part 1 you will lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         =render "language_part", part: 1, solution: @part1_solution, enabled: true
 
-      -part2_enabled = @part1_solution.try(&:submitted?)
+      -part2_enabled = @part1_solution.try(&:finished?)
       .part-2.part{class: part2_enabled ? "" : "disabled"}
         %h2 #{@language_track.title}: Part 2
         %p In part 2 you will lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.

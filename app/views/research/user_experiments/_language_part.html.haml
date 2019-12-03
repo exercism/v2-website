@@ -1,8 +1,7 @@
 -if solution
-  -if solution.submitted?
+  -if solution.finished?
     Done
   -else
-    =button_to "Continue Part #{part}", research_experiment_solution(solution), class: 'pure-b Iutton'
+    =link_to "Continue Part #{part}", research_experiment_solution_path(solution), class: 'pure-button'
 -else
-  / TODO - This won't work until we're using current slugs
   =button_to "Start Part #{part}", research_experiment_solutions_path(experiment_id: @experiment.id, language: @language_track.slug, part: part), method: :post, form_class: 'pure-button'
