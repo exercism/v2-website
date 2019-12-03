@@ -31,6 +31,7 @@ class SubmissionStatus {
       case 'passed':
       case 'failed': {
         this._renderOverlay('tested');
+        setTimeout(() => { new Overlay().close() }, 1000)
 
         break;
       }
