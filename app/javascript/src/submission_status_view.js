@@ -43,6 +43,17 @@ class SubmissionStatusView {
             Re-run your code
           </button>
         </div>`
+      case 'error':
+        return `<div class="submission-error">
+          <p class="submission-error-title">Sorry</p>
+          <p class="submission-error-message">
+            Uh oh, it looks like our servers aren't working and we can't run
+            your code. Rest assured your work has been saved.
+            <br />
+            <br />
+            Please try to run your code again in a few minutes.
+          </p>
+        </div>`
     }
   }
 }
