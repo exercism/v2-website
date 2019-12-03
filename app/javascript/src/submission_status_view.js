@@ -52,6 +52,9 @@ class SubmissionStatusView {
             <br />
             <br />
             Please try to run your code again in a few minutes.
+          <button class="js-overlay-close pure-button pure-button-primary">
+            Continue
+          </button>
           </p>
         </div>`
     }
