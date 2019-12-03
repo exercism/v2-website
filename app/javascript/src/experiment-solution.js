@@ -57,6 +57,11 @@ class ExperimentSolution {
         this._renderOverlay('queued');
         break;
       }
+      case 'passed':
+      case 'failed': {
+        this._renderOverlay('tested');
+        break;
+      }
     }
   }
 
