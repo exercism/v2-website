@@ -52,6 +52,32 @@ class Git::ExerciseReader
     ss.first[1]
   end
 
+  def boilerplate_code
+    possible_filenames = [
+      Regexp.new("#{exercise_slug.underscore}\.[a-z]+"),
+      Regexp.new("#{exercise_slug.dasherize}\.[a-z]+"),
+      Regexp.new("#{exercise_slug.underscore.camelize}\.[a-z]+")
+    ]
+    files = exercise_files(false).select do |f| 
+      f[:type] == :blob && (
+        f[:full].match(possible_filenames[0]) ||
+        f[:full].match(possible_filenames[1]) ||
+        f[:full].match(possible_filenames[2])
+      )
+    end
+    solutions = {}
+    files.each do |file|
+      name = file[:name]
+      solution_text = read_blob(file[:oid])
+      solutions[name] = solution_text unless solution_text.nil?
+    end
+    solutions&.first[1] || ""
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    ""
+  end
+
   def blurb
     metadata_ptr = meta_tree["metadata.yml"]
     return nil if metadata_ptr.nil?
