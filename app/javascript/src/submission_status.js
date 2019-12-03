@@ -15,33 +15,22 @@ class SubmissionStatus {
     this.timer.reset();
 
     switch(status) {
-      case 'queueing': {
-        this._renderOverlay('queueing');
-
+      case 'queueing':
+      case 'queued': {
+        this._renderOverlay(status);
         this.timer.start();
 
         break;
       }
-      case 'queued': {
-        this._renderOverlay('queued');
-
-        this.timer.start();
+      case 'timeout':
+      case 'error': {
+        this._renderOverlay(status);
 
         break;
       }
       case 'passed':
       case 'failed': {
         this._renderOverlay('tested');
-
-        break;
-      }
-      case 'timeout': {
-        this._renderOverlay('timeout');
-
-        break;
-      }
-      case 'error': {
-        this._renderOverlay('error');
 
         break;
       }
