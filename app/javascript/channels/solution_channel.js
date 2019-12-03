@@ -1,21 +1,17 @@
 import consumer from "./consumer"
 
 class SolutionChannel {
-  constructor(id) {
+  constructor(id, onReceive) {
     this.id = id;
+    this.onReceive = onReceive;
   }
 
   subscribe() {
     this.subscription = consumer.subscriptions.create(
-      { channel: "SolutionChannel", id: this.id },
-      {
-        received(data) {
-          if (data.event == 'submission_changed') {
-            $('.overlay').html(data.html);
-          }
-        }
-      }
+      { channel: "SolutionChannel", id: this.id }
     );
+
+    this.subscription.received = this.onReceive;
   }
 
   createSubmission(submission) {
