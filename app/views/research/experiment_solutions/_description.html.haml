@@ -1,3 +1,4 @@
-- if solution.submissions.last
-  = render "test_results", results: solution.submissions.last.test_results
+.js-test-results
+  - if solution.submissions.last
+    = render "test_results", results: solution.submissions.last.test_results
 
