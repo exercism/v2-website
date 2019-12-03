@@ -3,6 +3,7 @@ import CodeEditor from './code-editor';
 import SolutionChannel from '../channels/solution_channel';
 import SubmissionStatusView from './submission_status_view';
 import TimeoutTimer from './timeout_timer';
+import Overlay from './overlay';
 
 class ExperimentSolution {
   constructor(element) {
@@ -14,7 +15,7 @@ class ExperimentSolution {
 
   _setup() {
     this._setupPanes();
-    this._setupActions();
+    this._setupActions(this.element);
     this._setupEditor();
     this._setupChannel();
     this._setupTimer();
@@ -33,8 +34,8 @@ class ExperimentSolution {
     })
   }
 
-  _setupActions() {
-    this.element.find('.js-submit-code').click(() => { this.submitCode() });
+  _setupActions(container) {
+    container.find('.js-submit-code').click(this.submitCode.bind(this));
   }
 
   _setupEditor() {
@@ -82,7 +83,7 @@ class ExperimentSolution {
       }
       case 'timeout': {
         this._renderOverlay('timeout');
-        this._setupActions();
+        this._setupActions(new Overlay().getOverlay());
 
         break;
       }
@@ -101,10 +102,9 @@ class ExperimentSolution {
   }
 
   _renderOverlay(status) {
-    this.element.addClass('experiment-solution--loading');
-
     const html = new SubmissionStatusView(status).render();
-    this.element.find('.overlay').html(html);
+
+    new Overlay().show(html);
   }
 }
 
