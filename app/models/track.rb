@@ -42,6 +42,10 @@ class Track < ApplicationRecord
     Git::ExercismRepo.new(repo_url)
   end
 
+  def research_track?
+    slug.starts_with?("research")
+  end
+
   def accepting_new_students?
     median_wait_time &&
     median_wait_time < 1.week
