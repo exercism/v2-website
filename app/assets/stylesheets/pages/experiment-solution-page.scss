@@ -1,4 +1,5 @@
 @import 'mixins';
+@import 'variables';
 
 #experiment-solution-page {
   $breadcrumb-height: 35px;
@@ -39,4 +40,11 @@
 
   padding: 5px;
   background-color: #333;
+}
+
+.toolbar-button {
+    background-color: $color-2;
+    padding: 10px;
+    width: 35%;
+    font-size: 16px;
 }
