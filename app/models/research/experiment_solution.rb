@@ -31,15 +31,15 @@ module Research
     def language_slug
       Research::ExerciseSlug.deconstruct(exercise.slug)[:language]
     end
-  end
 
-  def code
-    <<~CODE
-      class TwoFer
-        def self.two_fer(name="you")
-          "One for %s, one for me." % name
+    def code
+      <<~CODE
+        class TwoFer
+          def self.two_fer(name="you")
+            "One for %s, one for me." % name
+          end
         end
-      end
-    CODE
+      CODE
+    end
   end
 end
