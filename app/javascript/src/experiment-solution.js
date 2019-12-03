@@ -1,6 +1,6 @@
 import Split from 'split.js';
 import CodeEditor from './code-editor';
-import SolutionChannel from '../channels/solution_channel';
+import ResearchSolutionChannel from '../channels/research_solution_channel';
 import SubmissionStatus from './submission_status';
 
 class ExperimentSolution {
@@ -41,7 +41,7 @@ class ExperimentSolution {
   }
 
   _setupChannel() {
-    this.channel = new SolutionChannel(
+    this.channel = new ResearchSolutionChannel(
       this.element.data('id'),
       (submission) => {
         this.submissionStatus.setStatus(submission.status);
