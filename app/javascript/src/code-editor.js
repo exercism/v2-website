@@ -7,7 +7,7 @@ class CodeEditor {
   }
 
   getValue() {
-    this.editor.getValue();
+    return this.editor.getValue();
   }
 
   _setup() {
