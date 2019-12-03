@@ -3,23 +3,23 @@ require 'test_helper'
 module Research
   class ExperimentSolutionTest < ActiveSupport::TestCase
     test "the truth" do
-      ruby_a_1 = create :exercise, slug: "ruby-a-1"
-      ruby_a_2 = create :exercise, slug: "ruby-a-2"
-      ruby_b_1 = create :exercise, slug: "ruby-b-1"
-      ruby_b_2 = create :exercise, slug: "ruby-b-2"
-      common_lisp_1_a = create :exercise, slug: "common-lisp-a-1"
-      csharp_a_1 = create :exercise, slug: "csharp-a-1"
+      ruby_1_a = create :exercise, slug: "ruby-1-a"
+      ruby_1_b = create :exercise, slug: "ruby-1-b"
+      ruby_2_a = create :exercise, slug: "ruby-2-a"
+      ruby_2_b = create :exercise, slug: "ruby-2-b"
+      common_lisp_1_a = create :exercise, slug: "common-lisp-1-a"
+      csharp_1_a = create :exercise, slug: "csharp-1-a"
 
-      s_ruby_a_1 = create :research_experiment_solution, exercise: ruby_a_1
-      s_ruby_a_2 = create :research_experiment_solution, exercise: ruby_a_2
-      s_ruby_b_1 = create :research_experiment_solution, exercise: ruby_b_1
-      s_ruby_b_2 = create :research_experiment_solution, exercise: ruby_b_2
+      s_ruby_1_a = create :research_experiment_solution, exercise: ruby_1_a
+      s_ruby_1_b = create :research_experiment_solution, exercise: ruby_1_b
+      s_ruby_2_a = create :research_experiment_solution, exercise: ruby_2_a
+      s_ruby_2_b = create :research_experiment_solution, exercise: ruby_2_b
       s_common_lisp_1_a = create :research_experiment_solution, exercise: common_lisp_1_a
-      s_csharp_a_1 = create :research_experiment_solution, exercise: csharp_a_1
+      s_csharp_1_a = create :research_experiment_solution, exercise: csharp_1_a
 
-      assert_equal [s_ruby_a_1, s_ruby_a_2].map(&:id), Research::ExperimentSolution.by_language_part(language_slug: :ruby, part: 'a').map(&:id)
-      assert_equal [s_csharp_a_1], Research::ExperimentSolution.by_language_part(language_slug: :csharp, part: 'a')
-      assert_equal [], Research::ExperimentSolution.by_language_part(language_slug: :csharp, part: 'b')
+      assert_equal [s_ruby_1_a, s_ruby_1_b].map(&:id), Research::ExperimentSolution.by_language_part(language_slug: :ruby, part: 1).map(&:id)
+      assert_equal [s_csharp_1_a], Research::ExperimentSolution.by_language_part(language_slug: :csharp, part: 1)
+      assert_equal [], Research::ExperimentSolution.by_language_part(language_slug: :csharp, part: 2)
     end
 
     test "solution pivots" do
