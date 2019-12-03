@@ -21,6 +21,14 @@ class SubmissionStatusView {
           <p class="submission-status-title">Processing</p>
           <p class="submission-status-status">Queued</p>
         </div>`
+      case 'tested':
+        return `<div class="submission-status">
+          <div class="submission-status-spinner">
+            <i aria-hidden="true" class="fas fa-check-circle"></i>
+          </div>
+          <p class="submission-status-title">Finished</p>
+          <p class="submission-status-status">Tests Complete</p>
+        </div>`
     }
   }
 }
