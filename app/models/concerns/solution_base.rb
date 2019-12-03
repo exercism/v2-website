@@ -42,6 +42,12 @@ module SolutionBase
     []
   end
 
+  def boilerplate_code
+    git_exercise.boilerplate_code
+  rescue
+    ""
+  end
+
   def git_exercise
     @git_exercise ||= Git::Exercise.new(exercise, git_slug, git_sha)
   end

@@ -17,6 +17,10 @@ class Git::Exercise
     exercise_reader.tests
   end
 
+  def boilerplate_code
+    exercise_reader.boilerplate_code
+  end
+
   private
 
   def exercise_reader
