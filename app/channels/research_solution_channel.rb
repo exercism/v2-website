@@ -1,4 +1,4 @@
-class SolutionChannel < ApplicationCable::Channel
+class ResearchSolutionChannel < ApplicationCable::Channel
   def subscribed
     stream_for solution
   end
@@ -15,6 +15,6 @@ class SolutionChannel < ApplicationCable::Channel
   private
 
   def solution
-    @solution ||= Solution.find(params[:id])
+    @solution ||= Research::ExperimentSolution.find(params[:id])
   end
 end

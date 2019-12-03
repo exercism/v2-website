@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-class SolutionChannel {
+class ResearchSolutionChannel {
   constructor(id, onReceive) {
     this.id = id;
     this.onReceive = onReceive;
@@ -8,7 +8,7 @@ class SolutionChannel {
 
   subscribe() {
     this.subscription = consumer.subscriptions.create(
-      { channel: "SolutionChannel", id: this.id }
+      { channel: "ResearchSolutionChannel", id: this.id }
     );
 
     this.subscription.received = this.onReceive;
@@ -19,4 +19,4 @@ class SolutionChannel {
   }
 }
 
-export default SolutionChannel;
+export default ResearchSolutionChannel;

@@ -5,7 +5,7 @@ class BroadcastSubmissionJob < ApplicationJob
       locals: { results: submission.test_results }
     )
 
-    SolutionChannel.broadcast_to(
+    ResearchSolutionChannel.broadcast_to(
       submission.solution,
       { status: submission.status, testResults: test_results }
     )
