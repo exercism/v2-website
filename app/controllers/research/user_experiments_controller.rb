@@ -17,7 +17,6 @@ module Research
       @language_track = Track.find_by_slug!(params[:language])
       @part1_solution = @user_experiment.language_part(@language_track.slug, 1)
       @part2_solution = @user_experiment.language_part(@language_track.slug, 2)
-
     end
 
     private
