@@ -5,6 +5,7 @@ module Research
     include ActiveJob::TestHelper
 
     test "user signs up" do
+      skip
       perform_enqueued_jobs do
         visit new_user_registration_path
         sign_up
