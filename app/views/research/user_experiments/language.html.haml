@@ -1,9 +1,23 @@
-.lo-container
-  %h1= @language_track.title
-  %h2 Part 1
-  %p In part 1 you will...
-  =render "language_part", part: 1
+#user-experiment-language
+  .header
+    .lo-container
+      %h1= @experiment.title
 
-  %h2 Part 2
-  %p In part 2 you will...
-  =render "language_part", part: 2
+  .lo-container
+    .content
+      %h2 This experiment
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+      .part-1.part
+        %h2 #{@language_track.title}: Part 1
+        %p In part 1 you will lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        =render "language_part", part: 1, solution: @part1_solution, enabled: true
+
+      -part2_enabled = @part1_solution.try(&:submitted?)
+      .part-2.part{class: part2_enabled ? "" : "disabled"}
+        %h2 #{@language_track.title}: Part 2
+        %p In part 2 you will lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        -if part2_enabled
+          =render "language_part", part: 2, solution: @part2_solution
+        -else
+          =link_to "Start", "#", class: "pure-button", disabled: true

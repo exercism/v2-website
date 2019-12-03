@@ -1,0 +1,56 @@
+@import 'variables';
+@import 'mixins';
+
+#user-experiment-language {
+    .header {
+        background:$color-2;
+        padding:70px 0 30px;
+        margin-bottom:30px;
+        h1 {
+            color:#fff;
+            @include font-size(25, 25);
+        }
+    }
+    .content {
+        max-width:1000px;
+        h2 {
+            @include font-size(16, 16);
+            font-weight:$fw-bold;
+            margin-bottom:5px;
+        }
+
+        p {
+            @include font-size(15, 20);
+            margin-bottom:10px;
+            max-width:650px;
+
+        }
+
+        p+h2 {
+            margin-top:20px;
+        }
+        .part {
+            max-width:650px;
+            border:1px solid #999;
+            padding:20px;
+
+            &.disabled {
+                opacity:0.5;
+                cursor:not-allowed;
+            }
+
+            .pure-button {
+                background:$color-2;
+                color:#fff;
+                border:1px solid $color-2;
+                width:170px;
+            }
+
+        }
+        .part-1 {
+            margin-bottom:20px;
+        }
+    }
+}
+
+

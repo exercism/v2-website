@@ -1,9 +1,20 @@
-.lo-container
-  %h1 Your contribution to #{@experiment.title}
-  %h2 Languages
-  -@languages.each do |slug, title|
-    %h3= title
-    -if @user_experiment.language_started?(slug)
-      =link_to "Continue #{title}", "#"
-    -else
-      =link_to "Start #{title}", language_research_user_experiment_path(@user_experiment, slug)
+#user-experiment
+  .header
+    .lo-container
+      %h1= @experiment.title
+
+  .lo-container
+    .content
+      %h2 This experiment
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+      .languages
+        %h2 Languages
+        -@tracks.each do |track|
+          .language
+            =image_tag track.hex_turquoise_icon_url
+            %h3= track.title
+
+            -btn_text = @user_experiment.language_started?(track.slug) ? "Continue #{track.title}" : "Start #{track.title}"
+            =link_to btn_text, language_research_user_experiment_path(@user_experiment, track.slug), class: "pure-button"
+
