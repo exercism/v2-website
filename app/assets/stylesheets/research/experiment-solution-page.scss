@@ -1,50 +1,52 @@
 @import 'mixins';
 @import 'variables';
 
-#experiment-solution-page {
-  $breadcrumb-height: 35px;
+body.namespace-research {
+    #experiment-solution-page {
+      $breadcrumb-height: 35px;
 
-  + footer {
-    margin-top: 0;
-  }
+      + footer {
+        margin-top: 0;
+      }
 
-  > .breadcrumb {
-    height: $breadcrumb-height;
-  }
+      > .breadcrumb {
+        height: $breadcrumb-height;
+      }
 
-  > .experiment-solution {
-    @include width-small() {
-      height: calc(100vh - 50px - #{$breadcrumb-height});
+      > .experiment-solution {
+        @include width-small() {
+          height: calc(100vh - 50px - #{$breadcrumb-height});
+        }
+
+        height: calc(100vh - 50px);
+      }
     }
 
-    height: calc(100vh - 50px);
-  }
-}
+    .experiment-solution {
+      display: flex;
 
-.experiment-solution {
-  display: flex;
+      > .description-panel {
+        overflow-y: scroll;
+      }
+    }
 
-  > .description-panel {
-    overflow-y: scroll;
-  }
-}
+    .solution-panel {
+      display: flex;
+      flex-direction: column;
+    }
 
-.solution-panel {
-  display: flex;
-  flex-direction: column;
-}
+    .toolbar {
+      display: flex;
+      justify-content: flex-end;
 
-.toolbar {
-  display: flex;
-  justify-content: flex-end;
+      padding: 5px;
+      background-color: #333;
+    }
 
-  padding: 5px;
-  background-color: #333;
-}
-
-.toolbar-button {
-    background-color: $color-2;
-    padding: 10px;
-    width: 35%;
-    font-size: 16px;
+    .toolbar-button {
+        background-color: $color-2;
+        padding: 10px;
+        width: 35%;
+        font-size: 16px;
+    }
 }

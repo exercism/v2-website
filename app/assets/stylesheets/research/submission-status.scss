@@ -1,74 +1,76 @@
 @import 'variables';
 
-.submission-status-queueing {
-  text-align: center;
+body.namespace-research {
+    .submission-status-queueing {
+      text-align: center;
 
-  > .submission-status-spinner {
-    font-size: 80px;
-    margin-bottom: 35px;
-  }
+      > .submission-status-spinner {
+        font-size: 80px;
+        margin-bottom: 35px;
+      }
 
-  > .submission-status-title {
-    font-size: 28px;
-    margin-bottom: 15px;
-    font-weight: $fw-regular;
-    letter-spacing: 1px;
-  }
+      > .submission-status-title {
+        font-size: 28px;
+        margin-bottom: 15px;
+        font-weight: $fw-regular;
+        letter-spacing: 1px;
+      }
 
-  > .submission-status-status {
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: $fw-regular;
-  }
-}
+      > .submission-status-status {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: $fw-regular;
+      }
+    }
 
-.submission-status-tested {
-  text-align: center;
+    .submission-status-tested {
+      text-align: center;
 
-  > .submission-status-spinner {
-    font-size: 60px;
-    margin-bottom: 25px;
-  }
+      > .submission-status-spinner {
+        font-size: 60px;
+        margin-bottom: 25px;
+      }
 
-  > .submission-status-title {
-    font-size: 28px;
-    margin-bottom: 15px;
-    font-weight: $fw-regular;
-  }
+      > .submission-status-title {
+        font-size: 28px;
+        margin-bottom: 15px;
+        font-weight: $fw-regular;
+      }
 
-  > .submission-status-status {
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: $fw-regular;
-  }
-}
+      > .submission-status-status {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: $fw-regular;
+      }
+    }
 
-.submission-status-timeout {
-  text-align: center;
+    .submission-status-timeout {
+      text-align: center;
 
-  > .submission-status-spinner {
-    font-size: 60px;
-  }
+      > .submission-status-spinner {
+        font-size: 60px;
+      }
 
-  > .submission-status-title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: $fw-regular;
-  }
+      > .submission-status-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+        font-weight: $fw-regular;
+      }
 
-  > .submission-status-status {
-    width: 60%;
-    margin: auto;
-    line-height: 1.5;
-    font-size: 16px;
-    margin-bottom: 15px;
-    font-weight: $fw-regular;
-  }
+      > .submission-status-status {
+        width: 60%;
+        margin: auto;
+        line-height: 1.5;
+        font-size: 16px;
+        margin-bottom: 15px;
+        font-weight: $fw-regular;
+      }
 
-  > .submission-status-button {
-    background-color: $color-2;
-    width: 35%;
-    padding: 10px;
-    font-size: 16px;
-  }
+      > .submission-status-button {
+        background-color: $color-2;
+        width: 35%;
+        padding: 10px;
+        font-size: 16px;
+      }
+    }
 }
