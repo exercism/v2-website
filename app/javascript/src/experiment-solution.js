@@ -2,10 +2,12 @@ import Split from 'split.js';
 import CodeEditor from './code-editor';
 import SolutionChannel from '../channels/solution_channel';
 import SubmissionStatusView from './submission_status_view';
+import TimeoutTimer from './timeout_timer';
 
 class ExperimentSolution {
   constructor(element) {
     this.element = element;
+    this.timeout = 30;
 
     this._setup();
   }
@@ -15,6 +17,7 @@ class ExperimentSolution {
     this._setupActions();
     this._setupEditor();
     this._setupChannel();
+    this._setupTimer();
   }
 
   submitCode() {
@@ -47,19 +50,40 @@ class ExperimentSolution {
     this.channel.subscribe();
   }
 
+  _setupTimer() {
+    this.timer = new TimeoutTimer(this.timeout, () => {
+      this._setSubmissionStatus('timeout');
+    });
+  }
+
   _setSubmissionStatus(status) {
+    this.timer.reset();
+
     switch(status) {
       case 'queueing': {
         this._renderOverlay('queueing');
+
+        this.timer.start();
+
         break;
       }
       case 'queued': {
         this._renderOverlay('queued');
+
+        this.timer.start();
+
         break;
       }
       case 'passed':
       case 'failed': {
         this._renderOverlay('tested');
+
+        break;
+      }
+      case 'timeout': {
+        this._renderOverlay('timeout');
+        this._setupActions();
+
         break;
       }
     }
