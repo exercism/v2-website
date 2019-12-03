@@ -21,8 +21,9 @@ $regular: 400;
 $bold: 600;
 $black: 700;
 
-$fw-light: $light;
-$fw-regular: $regular;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500; // Not usable with all fonts
 $fw-semibold: 600;
-$fw-bold: $bold;
-$fw-black: $black;
+$fw-bold: 700;
+$fw-black: 800;

@@ -2,6 +2,14 @@
 @import 'variables';
 
 body.namespace-research {
+
+    :not(i) {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+        font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
     a.logo {
         color: #fff;
         text-decoration: none;
