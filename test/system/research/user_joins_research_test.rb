@@ -9,7 +9,7 @@ module Research
       visit research_join_path
       click_on "Participate in Exercism Research"
 
-      assert_text "Experiments"
+      assert_text "Current Research"
     end
   end
 end
