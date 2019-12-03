@@ -86,6 +86,11 @@ class ExperimentSolution {
 
         break;
       }
+      case 'error': {
+        this._renderOverlay('error');
+
+        break;
+      }
     }
   }
 
