@@ -3,7 +3,6 @@ require_relative "./test_case"
 module Research
   class UserLogsInToJoinTest < TestCase
     test "user logs in" do
-      skip
       user = create(:user,
                     :onboarded,
                     email: "test@example.com",

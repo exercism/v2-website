@@ -15,4 +15,9 @@ class TrackTest < ActiveSupport::TestCase
     track.median_wait_time = 604801
     refute track.accepting_new_students?
   end
+
+  test "research_track?" do
+    refute create(:track, slug: "ruby").research_track?
+    assert create(:track, slug: "research_123").research_track?
+  end
 end

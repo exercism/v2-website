@@ -29,6 +29,13 @@ class Exercise < ApplicationRecord
     where.not(id: user.solutions.completed.select(:exercise_id))
   }
 
+  def language_track
+    return track unless track.research_track?
+
+    track_slug = Research::ExerciseSlug.deconstruct(slug)[:language]
+    Track.find_by_slug!(track_slug)
+  end
+
   def download_command(team: nil)
     cmd = "exercism download --exercise=#{slug} --track=#{track.slug}"
     cmd += " --team=#{team.slug}" if team

@@ -54,4 +54,15 @@ class ExerciseTest < ActiveSupport::TestCase
     expected = "exercism download --exercise=#{exercise.slug} --track=#{exercise.track.slug} --team=#{team.slug}"
     assert_equal expected, exercise.download_command(team: team)
   end
+
+  test "language_track" do
+    ruby_track = create :track, slug: "ruby"
+    javascript_track = create :track, slug: "javascript"
+    research_track = create :track, slug: "research_123"
+
+    assert_equal ruby_track, create(:exercise, track: ruby_track).language_track
+    assert_equal javascript_track, create(:exercise, track: javascript_track).language_track
+    assert_equal ruby_track, create(:exercise, track: research_track, slug: "ruby-1-a").language_track
+    assert_equal javascript_track, create(:exercise, track: research_track, slug: "javascript-1-a").language_track
+  end
 end
