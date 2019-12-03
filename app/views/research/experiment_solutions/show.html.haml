@@ -4,6 +4,6 @@
 
   .experiment-solution{ data: { id: @solution.id } }
     .description-panel
-      = render "description"
+      = render "description", solution: @solution
     .solution-panel
       = render "solution", solution: @solution
