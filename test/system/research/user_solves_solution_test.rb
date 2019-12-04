@@ -26,7 +26,14 @@ class Research::UserSolvesSolutionTest < Research::TestCase
 
   test "user views code" do
     user = create(:user, :onboarded, joined_research_at: 2.days.ago)
-    solution = create(:research_experiment_solution, user: user)
+    track = create(:track,
+                   repo_url: "file://#{Rails.root}/test/fixtures/research-track")
+    exercise = create(:exercise, slug: "ruby-1-a", track: track)
+    solution = create(:research_experiment_solution,
+                      git_slug: "ruby-1-a",
+                      git_sha: Git::ExercismRepo.current_head(track.repo_url),
+                      exercise: exercise,
+                      user: user)
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)

@@ -43,11 +43,5 @@ module Research
 
       files
     end
-
-    def latest_files
-      {
-        "two_fer.rb" => "TODO"
-      }
-    end
   end
 end
