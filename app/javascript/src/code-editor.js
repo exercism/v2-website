@@ -2,12 +2,16 @@ class CodeEditor {
   constructor(element) {
     this.element = element
     this.language = element.data('language')
+    this.filename = element.data('filename')
 
     $(this._setup.bind(this));
   }
 
-  getValue() {
-    return this.editor.getValue();
+  exportFile() {
+    const file = {}
+    file[this.filename] = this.editor.getValue();
+
+    return file;
   }
 
   _setup() {
