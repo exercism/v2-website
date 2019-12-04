@@ -114,6 +114,7 @@ class FilterSolutionsTest < ApplicationSystemTestCase
     sign_in!(mentor)
     visit your_solutions_mentor_dashboard_path
     select_option "Ruby", selector: "#your_track_id"
+    sleep(3)
     select_option "Sorting", selector: "#your_exercise_id"
 
     assert page.has_link?(href: mentor_solution_path(sorting_solution))
