@@ -15,6 +15,6 @@ class ResearchSolutionChannel < ApplicationCable::Channel
   private
 
   def solution
-    @solution ||= Research::ExperimentSolution.find(params[:id])
+    @solution ||= current_user.research_experiment_solutions.find(params[:id])
   end
 end
