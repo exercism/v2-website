@@ -6,10 +6,10 @@ class ResearchSolutionChannel < ApplicationCable::Channel
   def unsubscribed
   end
 
-  def create_submission(submission)
+  def create_submission(data)
     uuid = SecureRandom.uuid
 
-    SubmissionServices::Create.(uuid, solution, submission["files"])
+    SubmissionServices::Create.(uuid, solution, data["submission"])
   end
 
   private
