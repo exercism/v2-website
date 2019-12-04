@@ -54,9 +54,9 @@ class Git::ExerciseReader
 
   def boilerplate_files
     possible_filenames = [
-      Regexp.new("#{exercise_slug.underscore}\.[a-z]+"),
-      Regexp.new("#{exercise_slug.dasherize}\.[a-z]+"),
-      Regexp.new("#{exercise_slug.underscore.camelize}\.[a-z]+")
+      Regexp.new("#{exercise_slug.underscore}\\.[a-z]+"),
+      Regexp.new("#{exercise_slug.dasherize}\\.[a-z]+"),
+      Regexp.new("#{exercise_slug.underscore.camelize}\\.[a-z]+")
     ]
     git_files = exercise_files(false).select do |f|
       f[:type] == :blob && (
