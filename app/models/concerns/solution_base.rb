@@ -43,7 +43,7 @@ module SolutionBase
   end
 
   def boilerplate_files
-    p git_exercise.boilerplate_files
+    git_exercise.boilerplate_files
   rescue
     {}
   end
