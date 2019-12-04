@@ -15,7 +15,7 @@ class ResearchSolutionChannel {
   }
 
   createSubmission(submission) {
-    this.subscription.perform("create_submission", submission);
+    this.subscription.perform("create_submission", { submission: submission });
   }
 }
 
