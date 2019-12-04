@@ -32,8 +32,16 @@ module Research
       Research::ExerciseSlug.deconstruct(exercise.slug)[:language]
     end
 
-    def code
-      boilerplate_code || ""
+    def latest_files
+      files = boilerplate_files
+      last_submission = submissions.last
+
+      last_submission.files.each do |filename, code|
+        next unless files[filename]
+        files[filename] = code
+      end if last_submission
+
+      files
     end
   end
 end

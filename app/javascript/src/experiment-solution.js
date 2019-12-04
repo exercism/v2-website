@@ -61,9 +61,7 @@ class ExperimentSolution {
   }
 
   _submit() {
-    this.channel.createSubmission({
-      files: { "two_fer.rb": this.editor.getValue() }
-    });
+    this.channel.createSubmission(this.editor.exportFile());
   }
 }
 

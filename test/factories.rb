@@ -7,10 +7,10 @@ FactoryBot.define do
   factory :research_experiment_solution, class: 'Research::ExperimentSolution' do
     user { create :user }
     experiment { create :research_experiment }
-    exercise { create :exercise }
+    exercise { create(:exercise, :research) }
     uuid { SecureRandom.uuid }
-    git_sha { SecureRandom.uuid }
-    git_slug { SecureRandom.uuid }
+    git_sha { Git::ExercismRepo.current_head(track.repo_url) }
+    git_slug { "ruby-1-a" }
   end
 
   factory :research_user_experiment, class: 'Research::UserExperiment' do
@@ -191,6 +191,10 @@ FactoryBot.define do
     }}
     repo_url { "file://#{Rails.root}/test/fixtures/track" }
     median_wait_time { 30.hours }
+
+    trait :research do
+      repo_url { "file://#{Rails.root}/test/fixtures/research-track" }
+    end
   end
 
   factory :exercise do
@@ -200,6 +204,10 @@ FactoryBot.define do
     title { "Hello World" }
     core { false }
     position { 1 }
+
+    trait :research do
+      track { create(:track, :research) }
+    end
   end
 
   factory :user do
