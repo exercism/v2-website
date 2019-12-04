@@ -71,6 +71,19 @@ body.namespace-research {
       }
     }
 
+    @keyframes focus {
+      0% {
+        background-color: yellow;
+      }
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    .focus {
+      animation: focus 2s;
+    }
+
     .toolbar {
       display: flex;
       justify-content: flex-end;
