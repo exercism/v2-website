@@ -1,4 +1,4 @@
 .code-editor.js-code-editor{ data: { language: solution.language_slug } }
-  = solution.code
+  = solution.latest_files.values[0]
 .toolbar
   %button.js-submit-code.toolbar-button.pure-button.pure-button-primary Run code

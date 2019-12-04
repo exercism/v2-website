@@ -17,8 +17,8 @@ class Git::Exercise
     exercise_reader.tests
   end
 
-  def boilerplate_code
-    exercise_reader.boilerplate_code
+  def boilerplate_files
+    exercise_reader.boilerplate_files
   end
 
   private

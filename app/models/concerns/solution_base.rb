@@ -42,10 +42,10 @@ module SolutionBase
     []
   end
 
-  def boilerplate_code
-    git_exercise.boilerplate_code
+  def boilerplate_files
+    p git_exercise.boilerplate_files
   rescue
-    ""
+    {}
   end
 
   def git_exercise
