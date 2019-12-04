@@ -1,4 +1,5 @@
-.code-editor.js-code-editor{ data: { language: solution.language_slug } }
-  = solution.code
+- solution.latest_files.each do |filename, code|
+  .code-editor.js-code-editor{data: { language: solution.language_slug, filename: filename } }
+    = code
 .toolbar
   %button.js-submit-code.toolbar-button.pure-button.pure-button-primary Run code
