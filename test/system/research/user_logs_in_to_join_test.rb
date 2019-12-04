@@ -16,5 +16,22 @@ module Research
 
       assert_text "Current Research"
     end
+
+    test "user logs in via omniauth" do
+      user = create(:user, :onboarded, email: "email@example.org")
+      user.confirm
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+        info: {
+          name: "New User",
+          email: "email@example.org",
+          nickname: "newuser",
+        }
+      })
+
+      visit new_user_session_path
+      click_on "with GitHub"
+
+      assert_text "Current Research"
+    end
   end
 end

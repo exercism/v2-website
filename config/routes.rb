@@ -110,6 +110,7 @@ Rails.application.routes.draw do
 
     devise_scope :user do
       post "/users/sign_in" => "sessions#create"
+      get "/users/auth/github/callback" => "omniauth_callbacks#github"
     end
 
     root to: "pages#index"
