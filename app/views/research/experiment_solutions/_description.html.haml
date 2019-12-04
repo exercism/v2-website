@@ -1,5 +1,10 @@
-.js-test-results
+.instructions
   = raw solution.instructions
-  - if solution.submissions.last
-    = render "test_results", results: solution.submissions.last.test_results
+
+.test-results
+  %h2 Test Results
+
+  .js-test-results
+    - if solution.submissions.last
+      = render "test_results", results: solution.submissions.last.test_results
 

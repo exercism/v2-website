@@ -6,7 +6,7 @@ body.namespace-research {
       $breadcrumb-height: 35px;
 
       + footer {
-        margin-top: 0;
+        display: none;
       }
 
       > .breadcrumb {
@@ -33,6 +33,55 @@ body.namespace-research {
     .solution-panel {
       display: flex;
       flex-direction: column;
+    }
+
+    .description-panel {
+      padding: 40px;
+
+      > .instructions {
+        border-bottom: 3px solid $line-color-1;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        font-size: 18px;
+        font-weight: $fw-bold;
+        margin-bottom: 15px;
+        border-top: 3px solid $line-color-1;
+        padding-top: 30px;
+
+        &:first-child {
+          padding-top: 0;
+          border: none;
+        }
+      }
+
+      p {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+
+      pre {
+        * {
+          font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+        }
+
+        margin: 0 0 10px 0;
+      }
+    }
+
+    @keyframes focus {
+      0% {
+        background-color: yellow;
+      }
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    .focus {
+      animation: focus 2s;
     }
 
     .toolbar {
