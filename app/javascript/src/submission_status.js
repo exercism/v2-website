@@ -3,12 +3,13 @@ import TimeoutTimer from './timeout_timer';
 import Overlay from './overlay';
 
 class SubmissionStatus {
-  constructor(onRender) {
+  constructor(onRender, onTested) {
     this.timeout = 30;
     this.timer = new TimeoutTimer(this.timeout, () => {
       this.setStatus('timeout');
     });
     this.onRender = onRender;
+    this.onTested = onTested;
   }
 
   setStatus(status) {
@@ -31,7 +32,10 @@ class SubmissionStatus {
       case 'passed':
       case 'failed': {
         this._renderOverlay('tested');
-        setTimeout(() => { new Overlay().close() }, 1000)
+        setTimeout(
+          () => { new Overlay().close(); this.onTested(); },
+          1000
+        )
 
         break;
       }
