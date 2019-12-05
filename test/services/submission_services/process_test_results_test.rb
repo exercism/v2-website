@@ -41,5 +41,21 @@ module SubmissionServices
 
       assert submission.reload.tested
     end
+
+    test "works with long error message" do
+      submission = create :submission
+      ops_status = "no_test_runner"
+
+      message = 10000.times.map{'a'}.join
+
+      ProcessTestResults.(submission, ops_status, {"message": message})
+      tr = SubmissionTestResults.last
+      assert_equal submission, tr.submission
+      assert_equal ops_status, tr.ops_status
+      assert_equal message, tr.message
+
+      assert submission.reload.tested
+    end
+
   end
 end
