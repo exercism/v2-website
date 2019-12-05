@@ -12,6 +12,7 @@ class SubmissionStatusView {
           </div>
           <p class="submission-status-title">Processing</p>
           <p class="submission-status-status">Queueing...</p>
+          <button class="js-cancel-submission">Cancel build</button>
         </div>`
       case 'queued':
         return `<div class="submission-status-queueing">
@@ -20,6 +21,7 @@ class SubmissionStatusView {
           </div>
           <p class="submission-status-title">Processing</p>
           <p class="submission-status-status">Queued...</p>
+          <button class="js-cancel-submission">Cancel build</button>
         </div>`
       case 'tested':
         return `<div class="submission-status-tested">
