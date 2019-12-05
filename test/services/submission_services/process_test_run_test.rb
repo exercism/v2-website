@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module SubmissionServices
-  class ProcessTestResultsTest < ActiveSupport::TestCase
+  class ProcessTestRunTest < ActiveSupport::TestCase
     test "works with results" do
       submission = create :submission
       ops_status = 200
@@ -14,8 +14,8 @@ module SubmissionServices
         "tests" => tests
       }
 
-      ProcessTestResults.(submission, ops_status, nil, results)
-      tr = SubmissionTestResults.last
+      ProcessTestRun.(submission, ops_status, nil, results)
+      tr = SubmissionTestRun.last
       assert_equal submission, tr.submission
       assert_equal ops_status, tr.ops_status
       assert_nil tr.ops_message
@@ -32,8 +32,8 @@ module SubmissionServices
       ops_status = 104
       ops_message = "Some error happened"
 
-      ProcessTestResults.(submission, ops_status, ops_message, nil)
-      tr = SubmissionTestResults.last
+      ProcessTestRun.(submission, ops_status, ops_message, nil)
+      tr = SubmissionTestRun.last
       assert_equal submission, tr.submission
       assert_equal ops_status, tr.ops_status
       assert_equal ops_message, tr.ops_message
@@ -51,8 +51,8 @@ module SubmissionServices
 
       message = 10000.times.map{'a'}.join
 
-      ProcessTestResults.(submission, ops_status, nil, {"message": message})
-      tr = SubmissionTestResults.last
+      ProcessTestRun.(submission, ops_status, nil, {"message": message})
+      tr = SubmissionTestRun.last
       assert_equal submission, tr.submission
       assert_equal ops_status, tr.ops_status
       assert_equal message, tr.message

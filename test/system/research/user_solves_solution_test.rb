@@ -7,7 +7,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
     user = create(:user, :onboarded, joined_research_at: 2.days.ago)
     solution = create(:research_experiment_solution, user: user)
     submission = create(:submission, solution: solution)
-    create(:submission_test_result,
+    create(:submission_test_run,
            submission: submission,
            results_status: "fail",
            tests: [

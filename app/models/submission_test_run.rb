@@ -1,4 +1,4 @@
-class SubmissionTestResults < ApplicationRecord
+class SubmissionTestRun < ApplicationRecord
   belongs_to :submission
 
   delegate :solution, to: :submission

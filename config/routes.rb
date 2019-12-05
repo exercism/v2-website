@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   # SPI #
   # ### #
   namespace :spi do
-    post "submissions/:submission_uuid/test_results" => "submission_test_results#create", as: :submission_test_results
+    post "submissions/:submission_uuid/test_runs" => "submission_test_runs#create", as: :submission_test_runs
   end
 
   # ##### #
@@ -207,7 +207,7 @@ Rails.application.routes.draw do
       resources :iterations, only: [:show]
     end
     resources :submissions, only: [:create] do
-      get :test_results, on: :member
+      get :test_runs, on: :member
     end
 
     resources :starred_solutions, only: [:index, :create]
