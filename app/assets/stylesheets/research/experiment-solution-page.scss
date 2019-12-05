@@ -56,12 +56,19 @@ body.namespace-research {
         }
       }
 
-      p {
-        font-size: 15px;
-        line-height: 1.5;
-        margin-bottom: 10px;
-      }
+      p,li {
+          font-size: 15px;
+          line-height: 1.5;
+          margin-bottom: 10px;
 
+          code {
+              border:1px solid #fafafa;
+              background:#f5f5f5;
+              @include code-font;
+              font-size:13px;
+              padding:0 2px;
+          }
+      }
       pre {
         * {
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
