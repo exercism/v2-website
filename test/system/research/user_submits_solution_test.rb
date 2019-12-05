@@ -16,7 +16,7 @@ class Research::UserSubmitsSolutionTest < Research::TestCase
                       user: user,
                       experiment: experiment)
     submission = create(:submission, solution: solution)
-    create(:submission_test_result,
+    create(:submission_test_run,
            submission: submission,
            results_status: "pass")
 
