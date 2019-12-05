@@ -284,7 +284,9 @@ Rails.application.routes.draw do
         get "languages/:language" => "user_experiments#language", as: :language
       end
     end
-    resources :experiment_solutions, only: [:show, :create]
+    resources :experiment_solutions, only: [:show, :create] do
+      post :submit, on: :member
+    end
   end
 
   # ##### #
