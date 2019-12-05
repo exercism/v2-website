@@ -22,5 +22,16 @@ module Research
     def show
       @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
     end
+
+    def submit
+      solution = Research::ExperimentSolution.find_by(uuid: params[:id])
+
+      solution.submit!
+
+      redirect_to language_research_user_experiment_path(
+        solution.user_experiment,
+        solution.language_slug
+      )
+    end
   end
 end
