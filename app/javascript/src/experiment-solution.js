@@ -67,6 +67,7 @@ class ExperimentSolution {
     this.channel.createSubmission(this.editor.exportFile());
   }
 
+<<<<<<< HEAD
   _onTested() {
     this._scrollToTestRun();
     this.editor.focus();
@@ -77,15 +78,17 @@ class ExperimentSolution {
     this.editor.focus();
   }
 
+=======
+>>>>>>> master
   _scrollToTestRun() {
     this.testRun.removeClass('focus');
 
-    this.testResults[0].scrollIntoView({
+    this.testRun[0].scrollIntoView({
       behavior: "smooth",
       block: "end"
     });
 
-    this.testResults.addClass('focus');
+    this.testRun.addClass('focus');
   }
 
   _cancelBuild() {
