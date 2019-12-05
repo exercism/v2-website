@@ -5,7 +5,7 @@ module SPI
       SubmissionServices::ProcessTestResults.(
         submission,
         params[:status],
-        JSON.parse(params[:results])
+        params[:results].permit!.to_h
       )
       render json: {received: :ok}
     end
