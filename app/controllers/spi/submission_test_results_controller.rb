@@ -6,7 +6,7 @@ module SPI
         submission,
         params[:ops_status],
         params[:ops_message],
-        params[:results].permit!.to_h
+        params[:results].try {|r| r.permit!.to_h }
       )
       render json: {received: :ok}
     end

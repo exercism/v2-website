@@ -233,4 +233,12 @@ class SolutionTest < ActiveSupport::TestCase
 
     refute Notification.exists?(notification.id)
   end
+
+  test "update_git_info!" do
+    solution = create :solution, git_slug: "bar", git_sha: "foo"
+    solution.update_git_info!
+
+    assert_equal solution.exercise.slug, solution.git_slug
+    assert_equal solution.track_head, solution.git_sha
+  end
 end

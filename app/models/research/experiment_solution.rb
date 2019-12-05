@@ -43,5 +43,13 @@ module Research
 
       files
     end
+
+    def submit!(time: Time.current)
+      update!(finished_at: time)
+    end
+
+    def user_experiment
+      UserExperiment.find_by(user: user, experiment: experiment)
+    end
   end
 end
