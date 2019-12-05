@@ -4,7 +4,7 @@ import Overlay from './overlay';
 
 class SubmissionStatus {
   constructor() {
-    this.timer = new TimeoutTimer(1, () => { this.setStatus('timeout'); });
+    this.timer = new TimeoutTimer(30, () => { this.setStatus('timeout'); });
 
     this._setupShortcuts();
   }
