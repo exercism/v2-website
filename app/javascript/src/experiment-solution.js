@@ -60,7 +60,7 @@ class ExperimentSolution {
   }
 
   _setupTestRun() {
-    this.testRun = this.element.find('.js-test-results');
+    this.testRun = this.element.find('.js-test-run');
   }
 
   _submit() {
