@@ -1,8 +1,8 @@
 module SPI
-  class SubmissionTestResultsController < BaseController
+  class SubmissionTestRunsController < BaseController
     def create
       submission = Submission.find_by_uuid!(params[:submission_uuid])
-      SubmissionServices::ProcessTestResults.(
+      SubmissionServices::ProcessTestRun.(
         submission,
         params[:ops_status],
         params[:ops_message],

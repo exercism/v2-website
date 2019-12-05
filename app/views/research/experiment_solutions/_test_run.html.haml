@@ -1,0 +1,12 @@
+- return if test_run.blank?
+
+- if test_run.errored?
+  .test_run-message
+    Message:
+    %span= test_run.message
+- elsif test_run.failed?
+  - test_run.failed_tests.each do |test|
+    .test-failure
+      Failed test:
+      %span.name= test.name
+      .message= test.message

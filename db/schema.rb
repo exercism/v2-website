@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_062448) do
+ActiveRecord::Schema.define(version: 2019_12_05_063716) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -490,7 +490,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_062448) do
     t.index ["uuid"], name: "index_solutions_on_uuid"
   end
 
-  create_table "submission_test_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "submission_test_runs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "submission_id", null: false
     t.string "results_status"
     t.text "message"
@@ -714,7 +714,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_062448) do
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"
-  add_foreign_key "submission_test_results", "submissions"
+  add_foreign_key "submission_test_runs", "submissions"
   add_foreign_key "team_invitations", "teams"
   add_foreign_key "team_invitations", "users", column: "invited_by_id"
   add_foreign_key "team_memberships", "teams"

@@ -1,5 +1,5 @@
 module SubmissionServices
-  class ProcessTestResults
+  class ProcessTestRun
     include Mandate
 
     def initialize(submission, ops_status, ops_message, results)
@@ -10,7 +10,7 @@ module SubmissionServices
     end
 
     def call
-      SubmissionTestResults.create!(
+      SubmissionTestRun.create!(
         submission: submission,
         ops_status: ops_status,
         ops_message: ops_message,

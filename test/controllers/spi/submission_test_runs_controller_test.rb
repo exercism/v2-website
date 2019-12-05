@@ -1,14 +1,14 @@
 require_relative './test_base'
 
-class SPI::SubmissionTestResultsControllerTest < SPI::TestBase
-   test "creates submission test results for success" do
+class SPI::SubmissionTestRunControllerTest < SPI::TestBase
+   test "creates submission test run" do
     submission = create :submission
     ops_status = 200
     results = {"foo" => "all good things"}
 
-    SubmissionServices::ProcessTestResults.expects(:call).with(submission, ops_status, nil, results)
+    SubmissionServices::ProcessTestRun.expects(:call).with(submission, ops_status, ops_message, results)
 
-    post spi_submission_test_results_path(
+    post spi_submission_test_runs_path(
         submission_uuid: submission.uuid,
       ), {
         ops_status: ops_status,

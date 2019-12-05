@@ -18,7 +18,7 @@ FactoryBot.define do
     experiment { create :research_experiment }
   end
 
-  factory :submission_test_result, class: 'SubmissionTestResults' do
+  factory :submission_test_run do
     submission { create :submission }
     ops_status { 0 }
   end

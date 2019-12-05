@@ -16,7 +16,7 @@ class ExperimentSolution {
     this._setupEditor();
     this._setupSubmissionStatus();
     this._setupChannel();
-    this._setupTestResults();
+    this._setupTestRun();
   }
 
   submitCode() {
@@ -45,7 +45,7 @@ class ExperimentSolution {
       this.element.data('id'),
       (submission) => {
         this.submissionStatus.setStatus(submission.status);
-        this.testResults.html(submission.testResults);
+        this.testRun.html(submission.testRun);
       }
     );
 
@@ -59,8 +59,8 @@ class ExperimentSolution {
     );
   }
 
-  _setupTestResults() {
-    this.testResults = this.element.find('.js-test-results');
+  _setupTestRun() {
+    this.testRun = this.element.find('.js-test-results');
   }
 
   _submit() {

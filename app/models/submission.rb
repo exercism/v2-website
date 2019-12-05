@@ -1,11 +1,11 @@
 class Submission < ApplicationRecord
   belongs_to :solution, polymorphic: true
-  has_one :test_results, class_name: "SubmissionTestResults"
+  has_one :test_run, class_name: "SubmissionTestRun"
 
   def status
-    return :queued if test_results.nil?
+    return :queued if test_run.nil?
 
-    test_results.pass? ? :passed : :failed
+    test_run.pass? ? :passed : :failed
   end
 
   def broadcast!
