@@ -20,7 +20,7 @@ FactoryBot.define do
 
   factory :submission_test_result, class: 'SubmissionTestResults' do
     submission { create :submission }
-    ops_status { :no_test_runner }
+    ops_status { 0 }
   end
 
   factory :submission do
