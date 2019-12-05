@@ -17,6 +17,10 @@ class ResearchSolutionChannel {
   createSubmission(submission) {
     this.subscription.perform("create_submission", { submission: submission });
   }
+
+  cancelSubmission() {
+    alert('cancel sent to server');
+  }
 }
 
 export default ResearchSolutionChannel;

@@ -2,6 +2,7 @@ import Split from 'split.js';
 import CodeEditor from './code-editor';
 import ResearchSolutionChannel from '../channels/research_solution_channel';
 import SubmissionStatus from './submission_status';
+import Overlay from './overlay';
 
 class ExperimentSolution {
   constructor(element) {
@@ -24,6 +25,16 @@ class ExperimentSolution {
     this._submit();
   }
 
+  cancelBuild() {
+    const cancel = confirm("Are you sure you want to cancel this build?");
+
+    if (cancel) {
+      new Overlay().close();
+
+      this.channel.cancelSubmission();
+    }
+  }
+
   _setupPanes() {
     Split(['.description-panel', '.solution-panel'], {
       sizes: [50, 50],
@@ -34,6 +45,7 @@ class ExperimentSolution {
 
   _setupActions(container) {
     container.find('.js-submit-code').click(this.submitCode.bind(this));
+    container.find('.js-cancel-submission').click(this.cancelBuild.bind(this));
   }
 
   _setupEditor() {
