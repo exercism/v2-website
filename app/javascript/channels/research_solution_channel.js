@@ -19,7 +19,6 @@ class ResearchSolutionChannel {
   }
 
   cancelSubmission() {
-    alert('cancel sent to server');
   }
 }
 
