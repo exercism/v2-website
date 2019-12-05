@@ -55,8 +55,8 @@ class ExperimentSolution {
   _setupSubmissionStatus() {
     this.submissionStatus = new SubmissionStatus();
     this.submissionStatus.onSubmit = this.submitCode.bind(this)
-    this.submissionStatus.onTested = this._scrollToResults.bind(this)
-    this.submissionStatus.onCancel = this._cancelBuild.bind(this)
+    this.submissionStatus.onTested = this._onTested.bind(this)
+    this.submissionStatus.onCancel = this._onCancel.bind(this)
   }
 
   _setupTestRun() {
@@ -67,8 +67,18 @@ class ExperimentSolution {
     this.channel.createSubmission(this.editor.exportFile());
   }
 
-  _scrollToResults() {
-    this.testResults.removeClass('focus');
+  _onTested() {
+    this._scrollToTestRun();
+    this.editor.focus();
+  }
+
+  _onCancel() {
+    this._cancelBuild();
+    this.editor.focus();
+  }
+
+  _scrollToTestRun() {
+    this.testRun.removeClass('focus');
 
     this.testResults[0].scrollIntoView({
       behavior: "smooth",
