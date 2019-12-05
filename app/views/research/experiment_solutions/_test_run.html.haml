@@ -10,3 +10,10 @@
       Failed test:
       %span.name= test.name
       .message= test.message
+- elsif test_run.pass?
+  %p Your code ran successfully.
+
+  = button_to "Submit exercise",
+    submit_research_experiment_solution_path(test_run.solution),
+    class: "pure-button pure-button-primary submit-exercise-button"
+
