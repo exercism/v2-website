@@ -12,7 +12,7 @@ class SPI::SubmissionTestResultsControllerTest < SPI::TestBase
         submission_uuid: submission.uuid,
       ), {
         status: status,
-        results: results.to_json
+        results: results
       }
     assert_response 200
 
