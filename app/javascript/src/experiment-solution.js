@@ -2,6 +2,7 @@ import Split from 'split.js';
 import CodeEditor from './code-editor';
 import ResearchSolutionChannel from '../channels/research_solution_channel';
 import SubmissionStatus from './submission_status';
+import SubmissionStatusView from './submission_status_view';
 
 class ExperimentSolution {
   constructor(element) {
@@ -12,7 +13,7 @@ class ExperimentSolution {
 
   _setup() {
     this._setupPanes();
-    this._setupActions(this.element);
+    this._setupActions();
     this._setupEditor();
     this._setupSubmissionStatus();
     this._setupChannel();
@@ -21,6 +22,7 @@ class ExperimentSolution {
 
   submitCode() {
     this.submissionStatus.setStatus('queueing');
+    this.submissionStatus.render(new SubmissionStatusView('queueing').render());
     this._submit();
   }
 
@@ -32,24 +34,12 @@ class ExperimentSolution {
     })
   }
 
-  _setupActions(container) {
-    container.find('.js-submit-code').click(this.submitCode.bind(this));
+  _setupActions() {
+    this.element.find('.js-submit-code').click(this.submitCode.bind(this));
   }
 
   _setupEditor() {
     this.editor = new CodeEditor(this.element.find('.js-code-editor'))
-  }
-
-  _setupChannel() {
-    this.channel = new ResearchSolutionChannel(
-      this.element.data('id'),
-      (submission) => {
-        this.submissionStatus.setStatus(submission.status);
-        this.testRun.html(submission.testRun);
-      }
-    );
-
-    this.channel.subscribe();
   }
 
   _setupSubmissionStatus() {
@@ -57,6 +47,19 @@ class ExperimentSolution {
     this.submissionStatus.onSubmit = this.submitCode.bind(this)
     this.submissionStatus.onTested = this._onTested.bind(this)
     this.submissionStatus.onCancel = this._onCancel.bind(this)
+  }
+
+  _setupChannel() {
+    this.channel = new ResearchSolutionChannel(
+      this.element.data('id'),
+      (submission) => {
+        this.submissionStatus.setStatus(submission.opsStatus);
+        this.submissionStatus.render(submission.opsStatusHtml);
+        this.testRun.html(submission.testRunHtml);
+      }
+    );
+
+    this.channel.subscribe();
   }
 
   _setupTestRun() {

@@ -1,0 +1,10 @@
+.submission-error
+  .submission-error-content
+    %p.submission-error-title Sorry
+    %p.submission-error-message
+      = t("ops_status.code_#{status.code}")
+      %br
+      %br
+      Please try to run your code again in a few minutes.
+    %button.js-overlay-close.pure-button.pure-button-primary.submission-error-button
+      Continue
