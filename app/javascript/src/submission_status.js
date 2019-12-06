@@ -1,6 +1,6 @@
 import SubmissionStatusView from './submission_status_view';
 import TimeoutTimer from './timeout_timer';
-import Overlay from './overlay';
+import SubmissionCancel from './submission_cancel';
 
 class SubmissionStatus {
   constructor() {
@@ -24,27 +24,16 @@ class SubmissionStatus {
 
         break;
       }
-    }
-  }
-
-  render(html) {
-    new Overlay().show(html);
-    this._onRender();
-  }
-
-  _onRender() {
-    this._setupActions(new Overlay().getOverlay());
-
-    switch(this.status) {
       case 'cancelled': {
-        new Overlay().close();
+        this.remove();
+        this.onCancel();
 
         break;
       }
       case 'tested': {
         setTimeout(
           () => {
-            new Overlay().close();
+            this.remove();
             this.onTested();
           },
           1000
@@ -55,29 +44,51 @@ class SubmissionStatus {
     }
   }
 
+  remove() {
+    this.container.remove();
+    this.container = undefined;
+  }
+
+  render(html) {
+    if (!this.container) { this.container = $('<div />').appendTo('body'); }
+
+    this.container.html(html);
+
+    this._setupActions();
+  }
+
   _setupShortcuts() {
     $('body').keydown((e) => {
       if(e.key === 'Escape') { this._cancelBuild(); }
     });
   }
 
-  _setupActions(container) {
-    container.find('.js-submit-code').click(this.onSubmit.bind(this));
-    container.find('.js-cancel-submission').click(this._cancelBuild.bind(this));
+  _setupActions() {
+    this.container.find('.js-submit-code').click(this.onSubmit.bind(this));
+    this.
+      container.
+      find('.js-cancel-submission').
+      click(this._cancelBuild.bind(this));
+    this.
+      container.
+      find('.js-overlay-close').
+      click(() => { this.remove(); });
   }
 
   _cancelBuild() {
-    if (this.status !== 'queueing' && this.status !== 'queued') {
-      return;
-    }
+    if (this.status !== 'queueing' && this.status !== 'queued') { return; }
+    if (this.cancelling) { return; }
 
-    const cancel = confirm("Are you sure you want to cancel this build?");
+    this.cancelling = true;
 
-    if (cancel) {
+    const submissionCancel = new SubmissionCancel();
+    submissionCancel.onConfirm = () => {
       this.setStatus('cancelled');
-      this.render();
-      this.onCancel();
-    }
+      this.cancelling = false;
+    };
+    submissionCancel.onRefuse = () => { this.cancelling = false; };
+
+    submissionCancel.render();
   }
 }
 

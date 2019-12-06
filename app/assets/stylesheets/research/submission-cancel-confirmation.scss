@@ -1,0 +1,58 @@
+@import 'variables';
+
+body.namespace-research {
+    .submission-cancel-confirmation {
+      background-color: white;
+      padding: 30px;
+      color: #333;
+    }
+
+    .submission-cancel-confirmation-content {
+      width: 500px;
+      padding: 0 20px;
+      text-align: center;
+
+      > .submission-cancel-confirmation-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-weight: $fw-bold;
+        color: $color-2;
+      }
+
+      > .submission-cancel-confirmation-message {
+        font-size: 16px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+    }
+
+    .submission-cancel-confirmation-confirm-button {
+      background-color: $color-2;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .submission-cancel-confirmation-cancel-button {
+      background-color: white;
+      color: #333;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #333;
+    }
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > button {
+        width: 100%;
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+}

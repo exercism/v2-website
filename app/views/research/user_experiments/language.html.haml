@@ -21,10 +21,10 @@
           .status.not-started Not started
           .status.in-progress
             In progress
-            %i.far.fa-clock
+            = graphical_icon :clock, style: :regular
           .status.completed
             Completed
-            %i.far.fa-check-circle
+            = graphical_icon "check-circle", style: :regular
           %p In part 1 you will lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           =render "language_part", part: 1, solution: @part1_solution, status: part1_status
 
