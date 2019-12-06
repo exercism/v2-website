@@ -23,6 +23,7 @@ class SubmissionCancel {
   }
 
   _setupActions() {
+    this.container.find('.js-submission-cancel-confirm').focus();
     this.
       container.
       find('.js-submission-cancel-confirm').
