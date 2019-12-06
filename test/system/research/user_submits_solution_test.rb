@@ -24,7 +24,7 @@ class Research::UserSubmitsSolutionTest < Research::TestCase
     visit research_experiment_solution_path(solution)
     click_button "Submit exercise"
 
-    assert_text "Done"
-    assert_button "Start Part 2"
+    assert_text "Completed"
+    assert_button "Start part 2"
   end
 end
