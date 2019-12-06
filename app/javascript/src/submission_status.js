@@ -1,5 +1,6 @@
 import SubmissionStatusView from './submission_status_view';
 import TimeoutTimer from './timeout_timer';
+import SubmissionCancel from './submission_cancel';
 
 class SubmissionStatus {
   constructor() {
@@ -24,7 +25,7 @@ class SubmissionStatus {
         break;
       }
       case 'cancelled': {
-        this.container.remove();
+        this.remove();
         this.onCancel();
 
         break;
@@ -32,7 +33,7 @@ class SubmissionStatus {
       case 'tested': {
         setTimeout(
           () => {
-            this.container.remove();
+            this.remove();
             this.onTested();
           },
           1000
@@ -43,10 +44,15 @@ class SubmissionStatus {
     }
   }
 
-  render(html) {
-    if (this.container) { this.container.remove(); }
+  remove() {
+    this.container.remove();
+    this.container = undefined;
+  }
 
-    this.container = $(html).appendTo('body');
+  render(html) {
+    if (!this.container) { this.container = $('<div />').appendTo('body'); }
+
+    this.container.html(html);
 
     this._setupActions();
   }
@@ -66,17 +72,23 @@ class SubmissionStatus {
     this.
       container.
       find('.js-overlay-close').
-      click(() => { this.container.remove() });
+      click(() => { this.remove(); });
   }
 
   _cancelBuild() {
-    if (this.status !== 'queueing' && this.status !== 'queued') {
-      return;
-    }
+    if (this.status !== 'queueing' && this.status !== 'queued') { return; }
+    if (this.cancelling) { return; }
 
-    const cancel = confirm("Are you sure you want to cancel this build?");
+    this.cancelling = true;
 
-    if (cancel) { this.setStatus('cancelled'); }
+    const submissionCancel = new SubmissionCancel();
+    submissionCancel.onConfirm = () => {
+      this.setStatus('cancelled');
+      this.cancelling = false;
+    };
+    submissionCancel.onRefuse = () => { this.cancelling = false; };
+
+    submissionCancel.render();
   }
 }
 
