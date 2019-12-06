@@ -95,15 +95,16 @@ body.namespace-research {
       display: flex;
       justify-content: flex-end;
 
-      padding: 5px;
+      padding: 10px;
       background-color: #333;
     }
 
     .toolbar-button {
         background-color: $color-2;
         padding: 10px;
-        width: 35%;
-        font-size: 16px;
+        width:35%;
+        max-width: 120px;
+        @include font-size(15, 15);
     }
 
     .submit-exercise-button {
