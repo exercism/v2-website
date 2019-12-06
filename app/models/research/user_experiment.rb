@@ -11,8 +11,16 @@ module Research
       languages_started.include?(lang.to_sym)
     end
 
+    def language_completed?(lang)
+      languages_completed.include?(lang.to_sym)
+    end
+
     def languages_started
       @languages_started ||= solutions.map(&:language_slug).uniq
+    end
+
+    def languages_completed
+      @languages_completed ||= solutions.select(&:finished?).group_by(&:language_slug).map{|slug, group|group.size == 2 ? slug : nil}.compact
     end
 
     def solutions

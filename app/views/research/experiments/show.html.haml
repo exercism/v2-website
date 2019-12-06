@@ -1,6 +1,10 @@
 #research-experiment
-  .header
+  =breadcrumb_nav do
+    %li= link_to "Experiments", research_experiments_path
+
+  .research-header
     .lo-container
+      .subtitle Live experiment
       %h1= @experiment.title
 
   .lo-container
@@ -29,6 +33,7 @@
         .rhs.pure-u-1-3
           .at-a-glance
             %h3 At a glance
+            %p A quick overview of what this involves.
 
             %ul
               %li
@@ -49,3 +54,10 @@
             / If the user has joined research but not this challenge, there should have a link to particpate
             / If the user has not joined research, there should be a link to "Join Exericsm Research" which takes to the research home page.
             =button_to "Participate", research_user_experiments_path(experiment_id: @experiment), form_class: "pure-button participate-btn"
+
+            .partners
+              %h3 Research Partners
+              %ul
+                %li University of Chicago
+                %li University of Wisconsin Madison
+                %li The Sloan Foundation
