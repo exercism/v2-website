@@ -2,51 +2,36 @@
 @import 'mixins';
 
 #research-experiment {
-    .header {
-        background:$color-2;
-        padding:70px 0 30px;
-        margin-bottom:30px;
-        h1 {
-            color:#fff;
-            @include font-size(25, 25);
-        }
-    }
     .content {
         max-width:1000px;
-        h2 {
-            @include font-size(16, 16);
-            font-weight:$fw-bold;
-            margin-bottom:5px;
-        }
-
-        p {
-            @include font-size(15, 20);
-            margin-bottom:10px;
-        }
-
-        p+h2 {
-            margin-top:20px;
-        }
     }
     .lhs {
         padding-right:10%;
     }
     .at-a-glance {
-        border:1px solid #999;
+        border:1px solid #ccc;
         border-radius:2px;
         padding:15px;
 
         h3 {
-            @include font-size(15, 15);
-            font-weight:$fw-semibold;
+            @include font-size(16, 22);
+            margin-bottom:5px;
+            font-weight:$fw-bold;
         }
         ul {
+            margin:0;
             padding-left:19px;
         }
         .participate-btn {
             background:$color-2;
             color:#fff;
             width:100%;
+            margin-top:10px;
+        }
+        .partners {
+            margin-top:15px;
+            padding-top:15px;
+            border-top:1px solid #ddd;
         }
     }
 }

@@ -1,7 +1,8 @@
--if solution
-  -if solution.finished?
-    Done
-  -else
-    =link_to "Continue Part #{part}", research_experiment_solution_path(solution), class: 'pure-button'
+-if status == "completed"
+  .completed-bar Completed
+-elsif status == "in-progress"
+  =link_to "Continue part #{part}", research_experiment_solution_path(solution), class: 'pure-button'
+-elsif status == "enabled"
+  =button_to "Start part #{part}", research_experiment_solutions_path(experiment_id: @experiment.id, language: @language_track.slug, part: part), method: :post, form_class: 'pure-button'
 -else
-  =button_to "Start Part #{part}", research_experiment_solutions_path(experiment_id: @experiment.id, language: @language_track.slug, part: part), method: :post, form_class: 'pure-button'
+  =link_to "Start part #{part}", "#", class: "pure-button", disabled: true
