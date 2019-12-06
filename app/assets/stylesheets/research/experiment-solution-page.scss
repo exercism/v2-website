@@ -33,10 +33,13 @@ body.namespace-research {
     .solution-panel {
       display: flex;
       flex-direction: column;
+      padding-top:20px;
+      background:#333;
+
     }
 
     .description-panel {
-      padding: 40px;
+      padding: 20px 40px;
 
       > .instructions {
         border-bottom: 3px solid $line-color-1;
@@ -46,12 +49,13 @@ body.namespace-research {
       h2 {
         font-size: 18px;
         font-weight: $fw-bold;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         border-top: 3px solid $line-color-1;
         padding-top: 30px;
 
         &:first-child {
           padding-top: 0;
+          line-height:1;
           border: none;
         }
       }
