@@ -133,11 +133,4 @@ class Solution < ApplicationRecord
 
     true
   end
-
-  def update_git_info!
-    update!(
-      git_slug: exercise.slug,
-      git_sha: track_head
-    )
-  end
 end

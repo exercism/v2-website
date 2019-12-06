@@ -47,7 +47,10 @@ class Track < ApplicationRecord
   end
 
   def accepting_new_students?
-    median_wait_time &&
-    median_wait_time < 1.week
+    # Some exceptions
+    return true if %w{mips}.include?(slug)
+
+    # Then check we have a median time and it's reasonable
+    median_wait_time && median_wait_time < 1.week
   end
 end
