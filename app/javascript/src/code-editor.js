@@ -19,10 +19,16 @@ class CodeEditor {
 
     this.editor.setTheme('ace/theme/monokai');
     this.editor.session.setMode(`ace/mode/${this.language}`);
+
+    this.onSetup(this);
   }
 
   focus() {
     this.editor.focus();
+  }
+
+  addCommand(opts) {
+    this.editor.commands.addCommand(opts);
   }
 }
 

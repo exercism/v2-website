@@ -39,7 +39,14 @@ class ExperimentSolution {
   }
 
   _setupEditor() {
-    this.editor = new CodeEditor(this.element.find('.js-code-editor'))
+    this.editor = new CodeEditor(this.element.find('.js-code-editor'));
+    this.editor.onSetup = (editor) => {
+      editor.addCommand({
+        name: "submit",
+        bindKey: {win: "Shift-Enter", mac: "Shift-Enter"},
+        exec: this.submitCode.bind(this)
+      });
+    }
   }
 
   _setupSubmissionStatus() {
