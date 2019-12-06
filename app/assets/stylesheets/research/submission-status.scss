@@ -73,4 +73,15 @@ body.namespace-research {
         font-size: 16px;
       }
     }
+
+    .submission-cancel {
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      color: white;
+
+      > a {
+        color: white;
+      }
+    }
 }

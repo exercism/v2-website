@@ -1,6 +1,10 @@
-.submission-status-queueing
-  .submission-status-spinner
-    = graphical_icon [:spinner, :spin], style: :solid
-  %p.submission-status-title Processing
-  %p.submission-status-status Queued...
-  %button.js-cancel-submission Cancel build
+.overlay
+  .submission-status-queueing
+    .submission-status-spinner
+      = graphical_icon [:spinner, :spin], style: :solid
+    %p.submission-status-title Processing
+    %p.submission-status-status Queued...
+  .submission-cancel
+    = graphical_icon :times, style: :light
+    ESC to
+    = link_to "cancel", "#", class: "js-cancel-submission"
