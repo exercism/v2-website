@@ -12,7 +12,6 @@
         }
     }
     .content {
-        max-width:1000px;
         h2 {
             @include font-size(16, 16);
             font-weight:$fw-bold;
@@ -22,33 +21,86 @@
         p {
             @include font-size(15, 20);
             margin-bottom:10px;
-            max-width:650px;
-
+            max-width:45%;
         }
 
         p+h2 {
             margin-top:20px;
         }
-        .part {
-            max-width:650px;
-            border:1px solid #999;
-            padding:20px;
+        .parts {
+            display:flex;
+            justify-content: space-between;
+            margin-top:20px;
+            .part {
+                width:47%;
+                border:1px solid #aaa;
+                h2 {
+                    margin:0;
+                    padding:10px 0;
+                    text-align:center;
+                    border-bottom:1px solid #aaa;
+                    @include font-size(18, 18);
+                }
+                .status {
+                    @include font-size(13, 13);
+                    display:none;
+                    padding:20px 20px 10px 20px;
+                    font-weight:$fw-bold;
+                    i {
+                        @include font-size(11, 13);
+                    }
+                    &.not-started {
+                        color:#aaa;
+                    }
+                    &.in-progress {
+                        color:$color-2;
+                    }
+                    &.completed {
+                        color:$color-2;
+                    }
+                }
+                p {
+                    padding:0 20px 20px 20px;
+                    margin:0;
+                    max-width:100%;
+                }
+                .completed-bar {
+                    background:#eee;
+                    color:#666;
+                    text-align:center;
+                    padding:10px;
+                }
 
-            &.disabled {
-                opacity:0.5;
-                cursor:not-allowed;
+                .pure-button {
+                    background:$color-2;
+                    color:#fff;
+                    border:1px solid $color-2;
+                    width:auto;
+                    display:block;
+                    margin:0 20px 20px 20px;
+                }
+                &.enabled,
+                &.in-progress {
+                    border:2px solid $color-2;
+                    h2 {
+                        background:$color-2;
+                        color:#fff;
+                    }
+                }
+                &.enabled, &.disabled {
+                    .status.not-started { display:block }
+                }
+                &.in-progress {
+                    .status.in-progress { display:block }
+                }
+                &.completed {
+                    .status.completed { display:block }
+                }
+                &.disabled {
+                    opacity:0.5;
+                    cursor:not-allowed;
+                }
             }
-
-            .pure-button {
-                background:$color-2;
-                color:#fff;
-                border:1px solid $color-2;
-                width:170px;
-            }
-
-        }
-        .part-1 {
-            margin-bottom:20px;
         }
     }
 }

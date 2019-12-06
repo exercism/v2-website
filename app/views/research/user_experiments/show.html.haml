@@ -1,20 +1,44 @@
 #user-experiment
-  .header
+  =breadcrumb_nav do
+    %li= link_to "Experiments", research_experiments_path
+
+  .research-header
     .lo-container
+      .subtitle Experiment in Progress
       %h1= @experiment.title
 
   .lo-container
-    .content
-      %h2 This experiment
-      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-      .languages
+    .content.pure-g
+      .lhs.pure-u-2-3
         %h2 Languages
-        -@tracks.each do |track|
-          .language
-            =image track.hex_turquoise_icon_url, track.title
-            %h3= track.title
+        %p We hope you will try as many languages as possible. It doesn't matter how well you know a language - this might even be your first time trying it. The more data the better!
+        .languages
+          -@tracks.each do |track|
+            -if @user_experiment.language_completed?(track.slug)
+              .language.completed
+                =image track.hex_turquoise_icon_url, track.title
+                .details
+                  %h3= track.title
+                  .status Completed
 
-            -btn_text = @user_experiment.language_started?(track.slug) ? "Continue #{track.title}" : "Start #{track.title}"
-            =link_to btn_text, language_research_user_experiment_path(@user_experiment, track.slug), class: "pure-button"
+            -elsif @user_experiment.language_started?(track.slug)
+              .language.in-progress
+                =image track.hex_turquoise_icon_url, track.title
+                .details
+                  %h3= track.title
+                  .status In progress
+                =link_to "Continue", language_research_user_experiment_path(@user_experiment, track.slug), class: "pure-button"
+
+            -else
+              .language.not-started
+                =image track.hex_turquoise_icon_url, track.title
+                .details
+                  %h3= track.title
+                  .status Not started
+                =link_to "Start", language_research_user_experiment_path(@user_experiment, track.slug), class: "pure-button"
+
+      .rhs.pure-u-1-3
+        .about
+          %h2 This experiment
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 

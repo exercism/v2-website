@@ -2,12 +2,17 @@
 @import 'variables';
 
 body.namespace-research {
-
     :not(i) {
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
         font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+    .breadcrumb {
+        border-bottom:1px solid #eee;
+        li {
+            padding-top:5px;
+        }
     }
 
     a.logo {
@@ -26,6 +31,46 @@ body.namespace-research {
             font-weight:$regular;
             margin-top:2px;
         }
+    }
+
+    .research-header {
+        padding:70px 0 50px;
+        margin-bottom:30px;
+        background-image:image-url("research-header.png");
+        background-color:#eee;
+        background-size:cover;
+        border-bottom:1px solid #fafafa;
+        .subtitle {
+            @include font-size(15, 15);
+            margin-bottom:5px;
+            color:#555;
+        }
+        h1 {
+            @include font-size(22, 22);
+            font-weight:$fw-bold;
+            color:#555;
+        }
+    }
+    h2 {
+        @include font-size(18, 24);
+        font-weight:$fw-semibold;
+        margin-bottom:5px;
+    }
+
+    p,li {
+        @include font-size(15, 22);
+        font-weight:$fw-regular;
+    }
+    p {
+        margin-bottom:10px;
+    }
+    .pure-button {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    p+h2 {
+        margin-top:25px;
     }
 }
 
