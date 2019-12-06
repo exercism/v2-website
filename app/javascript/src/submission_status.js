@@ -4,59 +4,61 @@ import Overlay from './overlay';
 
 class SubmissionStatus {
   constructor() {
-    this.timer = new TimeoutTimer(30, () => { this.setStatus('timeout'); });
+    this.timer = new TimeoutTimer(30, () => {
+      this.setStatus('timeout');
+      this.render(new SubmissionStatusView('timeout').render());
+    });
 
     this._setupShortcuts();
   }
 
-  _setupShortcuts() {
-    $('body').keydown((e) => {
-      if(e.key === 'Escape') { this._cancelBuild(); }
-    });
-  }
-
   setStatus(status) {
-    this.status = status;
-
     this.timer.reset();
 
-    switch(status) {
-      case 'queueing':
-      case 'queued': {
-        this._renderOverlay(status);
+    this.status = status;
+
+    switch(this.status) {
+      case 'queued':
+      case 'queueing': {
         this.timer.start();
-
-        break;
-      }
-      case 'timeout':
-      case 'error': {
-        this._renderOverlay(status);
-
-        break;
-      }
-      case 'passed':
-      case 'failed': {
-        this._renderOverlay('tested');
-        setTimeout(
-          () => { new Overlay().close(); this.onTested(); },
-          1000
-        )
-
-        break;
-      }
-      case 'cancelled': {
-        new Overlay().close();
 
         break;
       }
     }
   }
 
-  _renderOverlay(status) {
-    const html = new SubmissionStatusView(status).render();
-
+  render(html) {
     new Overlay().show(html);
+    this._onRender();
+  }
+
+  _onRender() {
     this._setupActions(new Overlay().getOverlay());
+
+    switch(this.status) {
+      case 'cancelled': {
+        new Overlay().close();
+
+        break;
+      }
+      case 'tested': {
+        setTimeout(
+          () => {
+            new Overlay().close();
+            this.onTested();
+          },
+          1000
+        )
+
+        break;
+      }
+    }
+  }
+
+  _setupShortcuts() {
+    $('body').keydown((e) => {
+      if(e.key === 'Escape') { this._cancelBuild(); }
+    });
   }
 
   _setupActions(container) {
@@ -73,6 +75,7 @@ class SubmissionStatus {
 
     if (cancel) {
       this.setStatus('cancelled');
+      this.render();
       this.onCancel();
     }
   }
