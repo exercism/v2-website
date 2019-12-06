@@ -18,7 +18,7 @@ class SubmissionStatusView {
             <div class="submission-cancel">
               <i class="fa-times fal" />
               ESC to
-              <a href="#" class="js-cancel-submission">cancel</a>
+              <a href="#" title="Cancel" class="js-cancel-submission">cancel</a>
             </div>
           </div>
         `;
