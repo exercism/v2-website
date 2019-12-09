@@ -7,6 +7,8 @@ class Git::ExerciseReader
     @config = config
   end
 
+  delegate :test_messages, :solution_files, to: :exercise_config
+
   def readme
     readme_ptr = exercise_tree['README.md']
     return nil if readme_ptr.nil?
@@ -22,16 +24,11 @@ class Git::ExerciseReader
 
     return {} if ptr.nil?
 
-    JSON.parse(read_blob(ptr[:oid], "")).with_indifferent_access
+    Git::ExerciseConfig.from_file(read_blob(ptr[:oid]))
   rescue => e
     Bugsnag.notify(e)
 
     {}
-  end
-
-  def test_messages
-    Array(exercise_config[:test_messages]).
-      map { |message| Git::TestMessage.from_file(message) }
   end
 
   def tests
@@ -45,21 +42,6 @@ class Git::ExerciseReader
   rescue => e
     Bugsnag.notify(e)
     []
-  end
-
-  def solution_files
-    filepaths = exercise_config[:solution_files]
-
-    files = exercise_files(false).select do |f|
-      f[:type] == :blob && filepaths.include?(f[:full])
-    end
-
-    files.each_with_object({}) do |file, h|
-      h[file[:name]] = read_blob(file[:oid])
-    end
-  rescue => e
-    Bugsnag.notify(e)
-    {}
   end
 
   def blurb
