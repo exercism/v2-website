@@ -12,17 +12,17 @@ class Git::ExerciseReader
     return nil if readme_ptr.nil?
     read_blob(readme_ptr[:oid], "")
   rescue => e
-    puts e.message
-    puts e.backtrace
+    Bugsnag.notify(e)
     ""
   end
 
-  def test_messages
-    ptr = meta_tree['test-messages.json']
+  # Currently used for research area
+  def exercise_config
+    ptr = meta_tree['config.json']
 
     return {} if ptr.nil?
 
-    JSON.parse(read_blob(ptr[:oid], ""))
+    JSON.parse(read_blob(ptr[:oid], "")).with_indifferent_access
   rescue => e
     Bugsnag.notify(e)
 
@@ -38,55 +38,22 @@ class Git::ExerciseReader
     end
     test_suites
   rescue => e
-    puts "!!! #{e.message}"
-    puts "!!! #{e.backtrace}"
+    Bugsnag.notify(e)
     []
   end
 
-  def solutions
-    files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_regexp) }
-    solutions = {}
-    files.each do |file|
-      name = file[:name]
-      solution_text = read_blob(file[:oid])
-      solutions[name] = solution_text unless solution_text.nil?
-    end
-    solutions || {}
-  rescue => e
-    puts e.message
-    puts e.backtrace
-    {}
-  end
+  def solution_files
+    filepaths = exercise_config[:solution_files]
 
-  def solution
-    ss = solutions
-    return "" if ss.empty?
-    ss.first[1]
-  end
+    files = exercise_files(false).select do |f|
+      f[:type] == :blob && filepaths.include?(f[:full])
+    end
 
-  def boilerplate_files
-    possible_filenames = [
-      Regexp.new("#{exercise_slug.underscore}\\.[a-z]+"),
-      Regexp.new("#{exercise_slug.dasherize}\\.[a-z]+"),
-      Regexp.new("#{exercise_slug.underscore.camelize}\\.[a-z]+")
-    ]
-    git_files = exercise_files(false).select do |f|
-      f[:type] == :blob && (
-        f[:full].match(possible_filenames[0]) ||
-        f[:full].match(possible_filenames[1]) ||
-        f[:full].match(possible_filenames[2])
-      )
+    files.each_with_object({}) do |file, h|
+      h[file[:name]] = read_blob(file[:oid])
     end
-    files = {}
-    git_files.each do |file|
-      name = file[:name]
-      code = read_blob(file[:oid])
-      files[name] = code
-    end
-    files
   rescue => e
-    puts e.message
-    puts e.backtrace
+    Bugsnag.notify(e)
     {}
   end
 
@@ -96,8 +63,7 @@ class Git::ExerciseReader
     metadata = repo.read_yaml_blob(metadata_ptr[:oid], {})
     metadata[:blurb]
   rescue => e
-    puts e.message
-    puts e.backtrace
+    Bugsnag.notify(e)
     nil
   end
 
@@ -106,8 +72,7 @@ class Git::ExerciseReader
     return nil if desc_ptr.nil?
     read_blob(desc_ptr[:oid])
   rescue => e
-    puts e.message
-    puts e.backtrace
+    Bugsnag.notify(e)
     nil
   end
 
@@ -179,4 +144,28 @@ class Git::ExerciseReader
     oid = entry[:oid]
     lookup(oid)
   end
+
+=begin
+  def solutions
+    files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_regexp) }
+    solutions = {}
+    files.each do |file|
+      name = file[:name]
+      solution_text = read_blob(file[:oid])
+      solutions[name] = solution_text unless solution_text.nil?
+    end
+    solutions || {}
+  rescue => e
+    puts e.message
+    puts e.backtrace
+    {}
+  end
+
+  def solution
+    ss = solutions
+    return "" if ss.empty?
+    ss.first[1]
+  end
+=end
+
 end

@@ -17,12 +17,12 @@ class Git::Exercise
     exercise_reader.tests
   end
 
-  def boilerplate_files
-    exercise_reader.boilerplate_files
+  def solution_files
+    exercise_reader.solution_files
   end
 
-  def test_messages
-    exercise_reader.test_messages
+  def exercise_config
+    exercise_reader.exercise_config
   end
 
   private
