@@ -3,6 +3,7 @@ import CodeEditor from './code-editor';
 import ResearchSolutionChannel from '../channels/research_solution_channel';
 import SubmissionStatus from './submission_status';
 import SubmissionStatusView from './submission_status_view';
+import KeyboardShortcuts from './keyboard_shortcuts';
 
 class ExperimentSolution {
   constructor(element) {
@@ -36,6 +37,10 @@ class ExperimentSolution {
 
   _setupActions() {
     this.element.find('.js-submit-code').click(this.submitCode.bind(this));
+    this.
+      element.
+      find('.js-keyboard-shortcuts').
+      click(this._openShortcuts.bind(this));
   }
 
   _setupEditor() {
@@ -100,6 +105,10 @@ class ExperimentSolution {
 
   _cancelBuild() {
     this.channel.cancelSubmission();
+  }
+
+  _openShortcuts() {
+    new KeyboardShortcuts().render();
   }
 }
 
