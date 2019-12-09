@@ -18,63 +18,72 @@
     }
 
     .introduction, .experiments, .coming-soon {
-        max-width:750px;
+        max-width:500px;
     }
 
-    .introduction, .coming-soon {
-        p {
-            @include font-size(15, 20);
-        }
-    }
     .introduction {
         margin-bottom:20px;
+        padding:20px;
+        background:#f6f6f6;
+        *:last-child {
+            margin-bottom:0;
+        }
+    }
+    .lhs {
+        padding-right:50px;
     }
     .experiments {
-        margin-bottom:20px;
+        border-bottom:1px solid #ccc;
+        padding-bottom:30px;
+        margin-bottom:30px;
+
         h2 {
             margin-bottom:10px;
         }
         .experiment {
-            border:1px solid #aaa;
-            border-radius:2px;
-            padding:20px;
             h3 {
-                @include font-size(16, 16);
+                @include font-size(14, 14);
                 margin-bottom:5px;
                 color:$color-2;
                 font-weight:$fw-bold;
             }
             p {
-                @include font-size(15, 20);
                 margin-bottom:10px;
             }
+            .researchers {
+                background:#f9f9f9;
+                padding:20px;
+                text-align:center;
+                margin-bottom:10px;
+                img {
+                    height:25px;
+                    &:not(:last-child) {
+                        margin-right:20px;
+                        padding-right:20px;
+                        border-right:1px solid #ccc;
+                    }
+                }
+            }
             .buttons {
-                margin-bottom:20px;
                 .learn-more-btn {
                     display:inline-block;
                     margin-right:5px;
+                    width:140px;
 
                     background:#fff;
                     color:#333;
-                    border:1px solid #999;
+                    border:1px solid #aaa;
                 }
                 .participate-btn {
                     display:inline-block;
+                    width:200px;
 
                     background:$color-2;
                     color:#fff;
                     border:1px solid $color-2;
                 }
             }
-            .researchers {
-                border-top:1px solid #aaa;
-                margin:0 -20px -20px -20px;
-                padding:20px;
-                img {
-                    height:35px;
-                    margin-right:20px;
-                }
-            }
+
         }
     }
 }
