@@ -5,6 +5,9 @@ module Research
 
     def index
       @experiments = Experiment.all
+      @user_experiments_by_ids = current_user.research_experiments.each_with_object({}) {|ue,h|
+        h[ue.experiment_id] = ue
+      }
     end
 
     def show

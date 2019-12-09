@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :team_solutions, dependent: :destroy
   has_many :team_iterations, through: :team_solutions, source: :iterations
 
+  has_many :research_experiments, dependent: :destroy, class_name: "Research::UserExperiment"
   has_many :research_experiment_solutions, dependent: :destroy, class_name: "Research::ExperimentSolution"
 
   has_many :track_mentorships, dependent: :destroy

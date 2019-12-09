@@ -34,7 +34,7 @@ body.namespace-research {
     }
 
     .research-header {
-        padding:70px 0 50px;
+        padding:60px 0 30px;
         margin-bottom:30px;
         background-image:image-url("research-header.png");
         background-color:#eee;
@@ -63,6 +63,11 @@ body.namespace-research {
     }
     p {
         margin-bottom:10px;
+        a {
+            color:#333;
+            font-weight:$fw-medium;
+        }
+
     }
     .pure-button {
         font-size: 15px;

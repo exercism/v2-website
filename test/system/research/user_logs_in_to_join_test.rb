@@ -14,7 +14,7 @@ module Research
       fill_in "Password", with: "password"
       within("form") { click_on "Log in" }
 
-      assert_text "Current Research"
+      assert_selector 'h1', text: "Your research area"
     end
 
     test "user logs in via omniauth" do
@@ -31,7 +31,7 @@ module Research
       visit new_user_session_path
       click_on "with GitHub"
 
-      assert_text "Current Research"
+      assert_selector 'h1', text: "Your research area"
     end
   end
 end
