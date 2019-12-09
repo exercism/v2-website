@@ -4,7 +4,7 @@
       = graphical_icon [:spinner, :spin], style: :solid
     %p.submission-status-title Processing
     %p.submission-status-status Queued...
-  .submission-cancel
+  .overlay-close
     = graphical_icon :times, style: :light
     ESC to
     = link_to "cancel", "#", class: "js-cancel-submission", title: "Cancel"

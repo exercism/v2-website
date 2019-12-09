@@ -15,7 +15,7 @@ class SubmissionStatusView {
               <p class="submission-status-title">Processing</p>
               <p class="submission-status-status">Queueing...</p>
             </div>
-            <div class="submission-cancel">
+            <div class="overlay-close">
               <i class="fa-times fal" />
               ESC to
               <a href="#" title="Cancel" class="js-cancel-submission">cancel</a>
