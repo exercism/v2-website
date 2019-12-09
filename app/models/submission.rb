@@ -2,8 +2,6 @@ class Submission < ApplicationRecord
   belongs_to :solution, polymorphic: true
   has_one :test_run, class_name: "SubmissionTestRun"
 
-  delegate :tests_info, to: :solution
-
   def broadcast!
     BroadcastSubmissionJob.perform_now(self)
   end

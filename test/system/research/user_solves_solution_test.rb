@@ -12,7 +12,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
            results_status: "fail",
            tests: [
              {
-               "name" => "OneWordWithOneVowel",
+               "name" => "Test 1",
                "status" => "fail",
                "message" => "Wrong variable"
              }

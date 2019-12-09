@@ -10,7 +10,7 @@ module Git
         }]
       )
 
-      test_message = config.tests_info.first
+      test_message = config.test_messages.first
       assert_equal "OneWordWithOneVowel", test_message.name
       assert_equal "Sentence.WordWithMostVowels(\"a\")", test_message.cmd
     end
