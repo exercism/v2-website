@@ -17,12 +17,12 @@ module Git
       config = reader.exercise_config
       assert_equal(
         {
-          "solution_files"=>["ruby_1_a.rb"],
-          "test_file"=>"ruby_1_a_test.rb",
-          "test_messages"=>[
+          "solution_files" => ["ruby_1_a.rb"],
+          "test_file" => "ruby_1_a_test.rb",
+          "tests" => [
             {
-              "name"=>"OneWordWithOneVowel",
-              "cmd"=>"Sentence.WordWithMostVowels(\"a\")"
+              "name" => "OneWordWithOneVowel",
+              "cmd" => "Sentence.WordWithMostVowels(\"a\")"
             }
           ]
         },
