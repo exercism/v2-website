@@ -34,13 +34,14 @@ body.namespace-research {
     }
 
     .research-header {
-        padding:60px 0 30px;
+        position:relative;
         margin-bottom:30px;
         background-image:image-url("research-header.png");
         background-color:#eee;
         background-size:cover;
         border-bottom:1px solid #fafafa;
         .subtitle {
+            padding-top:60px;
             @include font-size(15, 15);
             margin-bottom:5px;
             color:#555;
@@ -49,6 +50,21 @@ body.namespace-research {
             @include font-size(22, 22);
             font-weight:$fw-bold;
             color:#555;
+            padding-bottom:30px;
+        }
+        .logo {
+            float:right;
+            height:100px;
+            margin-top:10px;
+            position:relative;
+        }
+        .language-line {
+            position:absolute;
+            top:60px;
+            height: 1px;
+            right:0;
+            left:50%;
+            background-image: linear-gradient(to right, #eee, $color-2)
         }
     }
     h2 {
