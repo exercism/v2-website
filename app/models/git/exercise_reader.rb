@@ -29,6 +29,11 @@ class Git::ExerciseReader
     {}
   end
 
+  def test_messages
+    Array(exercise_config[:test_messages]).
+      map { |message| TestMessage.from_file(message) }
+  end
+
   def tests
     files = exercise_files.select { |f| f[:full].match(test_regexp) }
     test_suites = {}

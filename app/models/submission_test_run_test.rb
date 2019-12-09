@@ -14,7 +14,7 @@ class SubmissionTestRunTest
   def cmd
     return if test_message.blank?
 
-    test_message["cmd"]
+    test_message.cmd
   end
 
   def message
@@ -28,10 +28,10 @@ class SubmissionTestRunTest
   private
 
   def test_message
-    solution.test_messages[name]
+    solution.test_messages.find { |message| message.name == name }
   end
 
   def template
-    test_message["msg"]
+    test_message.msg
   end
 end

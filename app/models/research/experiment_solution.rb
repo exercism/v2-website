@@ -37,7 +37,7 @@ module Research
     end
 
     def test_messages
-      git_exercise.exercise_config[:test_messages]
+      git_exercise.test_messages
     end
 
     def latest_files

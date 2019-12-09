@@ -25,6 +25,10 @@ class Git::Exercise
     exercise_reader.exercise_config
   end
 
+  def test_messages
+    exercise_reader.test_messages
+  end
+
   private
 
   def exercise_reader

@@ -56,14 +56,9 @@ module Research
       exercise = create(:exercise, slug: "ruby-1-a", track: track)
       solution = create(:research_experiment_solution, exercise: exercise)
 
-      assert_equal(
-        {
-          "OneWordWithOneVowel" => {
-            "cmd" => "Sentence.WordWithMostVowels(\"a\")"
-          }
-        },
-        solution.test_messages
-      )
+      test_message = solution.test_messages.first
+      assert_equal "OneWordWithOneVowel", test_message.name
+      assert_equal "Sentence.WordWithMostVowels(\"a\")", test_message.cmd
     end
   end
 end
