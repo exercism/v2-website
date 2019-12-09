@@ -9,9 +9,8 @@ module Git
       @data = data
     end
 
-    def test_messages
-      Array(data[:tests]).
-        map { |message| Git::TestMessage.from_file(message) }
+    def tests_info
+      Git::TestsInfo.new(data[:tests])
     end
   end
 end
