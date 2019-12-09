@@ -23,6 +23,10 @@ module Git
             {
               "name" => "OneWordWithOneVowel",
               "cmd" => "Sentence.WordWithMostVowels(\"a\")"
+            },
+            {
+              "name" => "OneWordWithTwoVowels",
+              "cmd" => "Sentence.WordWithMostVowels(\"ae\")"
             }
           ]
         },

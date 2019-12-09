@@ -7,7 +7,9 @@ module SubmissionServices
       ops_status = 200
       results_status = "pass"
       message = "Something happened"
-      tests = [{'foo' => 'bar'}]
+      tests = [{
+        "name" => "OneWordWithOneVowel"
+      }]
       results = {
         "status" => results_status,
         "message" => message,
@@ -21,7 +23,7 @@ module SubmissionServices
       assert_nil tr.ops_message
       assert_equal results_status.to_sym, tr.results_status
       assert_equal message, tr.message
-      assert_equal tests, tr.tests
+      assert_equal ["OneWordWithOneVowel"], tr.tests.map(&:name)
       assert_equal results, tr.results
 
       assert submission.reload.tested
@@ -39,7 +41,7 @@ module SubmissionServices
       assert_equal ops_message, tr.ops_message
       assert_nil tr.results_status
       assert_nil tr.message
-      assert_nil tr.tests
+      assert_empty tr.tests
       assert_equal({}, tr.results)
 
       assert submission.reload.tested
