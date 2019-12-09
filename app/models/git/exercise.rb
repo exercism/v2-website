@@ -1,7 +1,7 @@
 class Git::Exercise
   attr_reader :track, :title, :git_slug, :git_sha
 
-  delegate :test_messages, to: :exercise_reader
+  delegate :tests_info, to: :exercise_reader
 
   def initialize(exercise, git_slug, git_sha)
     @track = exercise.track
