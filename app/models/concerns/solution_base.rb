@@ -42,16 +42,6 @@ module SolutionBase
     []
   end
 
-  def boilerplate_files
-    git_exercise.boilerplate_files
-  rescue
-    {}
-  end
-
-  def test_messages
-    git_exercise.test_messages
-  end
-
   def git_exercise
     @git_exercise ||= Git::Exercise.new(exercise, git_slug, git_sha)
   end
