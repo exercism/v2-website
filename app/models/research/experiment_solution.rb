@@ -8,6 +8,8 @@ module Research
 
     has_many :submissions, as: :solution
 
+    delegate :test_messages, to: :git_exercise
+
     # Don't pass query params language into this, only pass
     # things that have been pre-parsed via Track.find_by_slu
     scope :by_language_part, -> (language_slug:, part:) {
@@ -34,10 +36,6 @@ module Research
 
     def boilerplate_files
       git_exercise.solution_files
-    end
-
-    def test_messages
-      git_exercise.test_messages
     end
 
     def latest_files
