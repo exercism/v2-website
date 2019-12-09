@@ -21,7 +21,7 @@ class SubmissionTestRun < ApplicationRecord
 
   def failed_tests
     tests.
-      map { |test| SubmissionTestRunTest.new(solution, test) }.
+      map { |test| SubmissionTestRunResult.new(solution, test) }.
       select(&:failed?)
   end
 
