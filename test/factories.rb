@@ -7,7 +7,7 @@ FactoryBot.define do
   factory :research_experiment_solution, class: 'Research::ExperimentSolution' do
     user { create :user }
     experiment { create :research_experiment }
-    exercise { create(:exercise, :research) }
+    exercise { create(:exercise, :research, slug: "ruby-1-a") }
     uuid { SecureRandom.uuid }
     git_sha { Git::ExercismRepo.current_head(track.repo_url) }
     git_slug { "ruby-1-a" }

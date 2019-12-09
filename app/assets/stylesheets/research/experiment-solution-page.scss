@@ -115,4 +115,11 @@ body.namespace-research {
         background-color: $color-2;
         padding: 10px;
     }
+
+    .test-run {
+      pre {
+        padding: 20px;
+        background: #eee;
+      }
+    }
 }
