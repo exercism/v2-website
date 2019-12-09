@@ -25,7 +25,7 @@ FactoryBot.define do
 
   factory :submission do
     uuid { SecureRandom.uuid }
-    solution { create :research_experiment_solution }
+    solution { create :solution }
     filenames { ["foo", "bar"] }
   end
 

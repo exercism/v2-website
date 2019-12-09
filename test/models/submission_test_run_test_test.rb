@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class SubmissionTestRunResultTest < ActiveSupport::TestCase
+class SubmissionTestRunTestTest < ActiveSupport::TestCase
   test "returns cmd" do
-    solution = stub(tests_info: [
+    solution = stub(test_messages: [
       stub(name: "test_a_name_given", cmd: "Test.add(1, 1)")
     ])
 
-    submission_test = SubmissionTestRunResult.new(
+    submission_test = SubmissionTestRunTest.new(
       solution,
       "name" => "test_a_name_given",
       "status" => "fail",
@@ -17,11 +17,11 @@ class SubmissionTestRunResultTest < ActiveSupport::TestCase
   end
 
   test "returns message" do
-    solution = stub(tests_info: [
+    solution = stub(test_messages: [
       stub(name: "test_a_name_given", msg: "We tried running %{output}")
     ])
 
-    submission_test = SubmissionTestRunResult.new(
+    submission_test = SubmissionTestRunTest.new(
       solution,
       "name" => "test_a_name_given",
       "status" => "fail",

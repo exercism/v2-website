@@ -7,6 +7,7 @@
 
     %pre
       %code= failed_test.output
+    - break
   - elsif failed_test.message.present?
     %p= raw failed_test.message
   - else

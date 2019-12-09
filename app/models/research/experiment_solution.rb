@@ -8,7 +8,7 @@ module Research
 
     has_many :submissions, as: :solution
 
-    delegate :tests_info, to: :git_exercise
+    delegate :test_messages, to: :git_exercise
 
     # Don't pass query params language into this, only pass
     # things that have been pre-parsed via Track.find_by_slu
