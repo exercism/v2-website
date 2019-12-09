@@ -19,10 +19,14 @@ class SubmissionTestRun < ApplicationRecord
     results_status == :fail
   end
 
+  def tests
+    tests_info.reorder(
+      Array(super).map { |test| SubmissionTestRunResult.new(solution, test) }
+    )
+  end
+
   def failed_tests
-    tests.
-      map { |test| SubmissionTestRunResult.new(solution, test) }.
-      select(&:failed?)
+    tests.select(&:failed?)
   end
 
   def to_partial_path
