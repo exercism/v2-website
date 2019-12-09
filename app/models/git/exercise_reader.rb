@@ -144,28 +144,4 @@ class Git::ExerciseReader
     oid = entry[:oid]
     lookup(oid)
   end
-
-=begin
-  def solutions
-    files = exercise_files(false).select { |f| f[:type] == :blob && f[:full].match(solution_regexp) }
-    solutions = {}
-    files.each do |file|
-      name = file[:name]
-      solution_text = read_blob(file[:oid])
-      solutions[name] = solution_text unless solution_text.nil?
-    end
-    solutions || {}
-  rescue => e
-    puts e.message
-    puts e.backtrace
-    {}
-  end
-
-  def solution
-    ss = solutions
-    return "" if ss.empty?
-    ss.first[1]
-  end
-=end
-
 end
