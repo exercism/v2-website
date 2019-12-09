@@ -14,7 +14,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
              {
                "name" => "Test 1",
                "status" => "fail",
-               message: "Wrong variable"
+               "message" => "Wrong variable"
              }
            ]
           )
@@ -22,7 +22,6 @@ class Research::UserSolvesSolutionTest < Research::TestCase
     sign_in!(user)
     visit research_experiment_solution_path(solution)
 
-    assert_text "Failed test: Test 1"
     assert_text "Wrong variable"
   end
 

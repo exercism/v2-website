@@ -48,6 +48,10 @@ module SolutionBase
     {}
   end
 
+  def test_messages
+    git_exercise.test_messages
+  end
+
   def git_exercise
     @git_exercise ||= Git::Exercise.new(exercise, git_slug, git_sha)
   end

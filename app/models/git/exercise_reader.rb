@@ -17,6 +17,18 @@ class Git::ExerciseReader
     ""
   end
 
+  def test_messages
+    ptr = meta_tree['test-messages.json']
+
+    return {} if ptr.nil?
+
+    JSON.parse(read_blob(ptr[:oid], ""))
+  rescue => e
+    Bugsnag.notify(e)
+
+    {}
+  end
+
   def tests
     files = exercise_files.select { |f| f[:full].match(test_regexp) }
     test_suites = {}

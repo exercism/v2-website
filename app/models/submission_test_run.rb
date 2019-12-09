@@ -21,20 +21,13 @@ class SubmissionTestRun < ApplicationRecord
 
   def failed_tests
     tests.
-      map { |test| SubmissionTest.new(test) }.
+      map { |test| SubmissionTestRunTest.new(solution, test) }.
       select(&:failed?)
   end
 
-  class SubmissionTest
-    attr_reader :name, :status, :message
-    def initialize(params)
-      @name = params["name"]
-      @status = params["status"]
-      @message = params["message"]
-    end
+  def to_partial_path
+    return "research/submission_test_runs/no_results" if results_status.nil?
 
-    def failed?
-      status == "fail"
-    end
+    "research/submission_test_runs/#{results_status}"
   end
 end

@@ -50,5 +50,20 @@ module Research
 
       assert_equal({ "ruby_1_a.rb" => "TODO\n" }, solution.latest_files)
     end
+
+    test "returns test messages" do
+      track = create(:track, :research)
+      exercise = create(:exercise, slug: "ruby-1-a", track: track)
+      solution = create(:research_experiment_solution, exercise: exercise)
+
+      assert_equal(
+        {
+          "OneWordWithOneVowel" => {
+            "cmd" => "Sentence.WordWithMostVowels(\"a\")"
+          }
+        },
+        solution.test_messages
+      )
+    end
   end
 end

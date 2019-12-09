@@ -1,8 +1,8 @@
 class BroadcastSubmissionJob < ApplicationJob
   def perform(submission)
     test_run_html = ApplicationController.render(
-      partial: "research/experiment_solutions/test_run",
-      locals: { test_run: submission.test_run }
+      partial: submission.test_run,
+      as: :test_run
     )
 
     ops_status_html = ApplicationController.render(
