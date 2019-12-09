@@ -1,7 +1,7 @@
 class SubmissionTestRun < ApplicationRecord
   belongs_to :submission
 
-  delegate :solution, to: :submission
+  delegate :solution, :tests_info, to: :submission
 
   def results_status
     super.try(&:to_sym)

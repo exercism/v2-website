@@ -7,7 +7,7 @@ class Git::ExerciseReader
     @config = config
   end
 
-  delegate :test_messages, :solution_files, to: :exercise_config
+  delegate :tests_info, :solution_files, to: :exercise_config
 
   def readme
     readme_ptr = exercise_tree['README.md']

@@ -28,7 +28,7 @@ class SubmissionTestRunResult
   private
 
   def test_message
-    solution.test_messages.find { |message| message.name == name }
+    solution.tests_info.find { |message| message.name == name }
   end
 
   def template
