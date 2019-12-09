@@ -2,4 +2,7 @@
   .code-editor.js-code-editor{data: { language: solution.language_slug, filename: filename } }= code
   - break
 .toolbar
-  %button.js-submit-code.toolbar-button.pure-button Run code
+  %button.js-keyboard-shortcuts.toolbar-shortcut-button.pure-button
+    Keyboard shortcuts
+    ( #{graphical_icon :question, style: :solid} )
+  %button.js-submit-code.toolbar-submit-button.pure-button Run code

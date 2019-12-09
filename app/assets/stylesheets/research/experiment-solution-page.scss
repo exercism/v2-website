@@ -97,18 +97,24 @@ body.namespace-research {
 
     .toolbar {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
 
       padding: 10px;
       background-color: #333;
     }
 
-    .toolbar-button {
+    .toolbar-submit-button {
         background-color: $color-2;
         padding: 10px;
         width:35%;
         max-width: 120px;
         @include font-size(15, 15);
+    }
+
+    .toolbar-shortcut-button {
+      background: transparent;
+      border: 1px solid white;
+      padding: 10px;
     }
 
     .submit-exercise-button {
