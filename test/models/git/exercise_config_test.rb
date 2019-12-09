@@ -4,7 +4,7 @@ module Git
   class ExerciseConfigTest < ActiveSupport::TestCase
     test "returns test messages" do
       config = Git::ExerciseConfig.new(
-        test_messages: [{
+        tests: [{
           name: "OneWordWithOneVowel",
           cmd: "Sentence.WordWithMostVowels(\"a\")"
         }]

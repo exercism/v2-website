@@ -22,12 +22,27 @@ class Git::ExerciseReader
   def exercise_config
     ptr = meta_tree['config.json']
 
-    return {} if ptr.nil?
+    data = ptr.blank? ? {} : read_blob(ptr[:oid])
 
-    Git::ExerciseConfig.from_file(read_blob(ptr[:oid]))
+    Git::ExerciseConfig.from_file(data)
   rescue => e
     Bugsnag.notify(e)
 
+    Git::ExerciseConfig.new({})
+  end
+
+  def solution_files
+    filepaths = exercise_config.data[:solution_files]
+
+    files = exercise_files(false).select do |f|
+      f[:type] == :blob && filepaths.include?(f[:full])
+    end
+
+    files.each_with_object({}) do |file, h|
+      h[file[:name]] = read_blob(file[:oid])
+    end
+  rescue => e
+    Bugsnag.notify(e)
     {}
   end
 
