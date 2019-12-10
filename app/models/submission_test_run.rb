@@ -31,10 +31,6 @@ class SubmissionTestRun < ApplicationRecord
     ordered_tests[0..limit]
   end
 
-  def failed_tests
-    tests.select(&:failed?)
-  end
-
   def to_partial_path
     return "research/submission_test_runs/no_results" if results_status.nil?
 
