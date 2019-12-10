@@ -1,7 +1,7 @@
 module Git
   class TestsInfo < SimpleDelegator
     def initialize(tests)
-      super(Array(tests).map { |test| TestInfo.new(test) })
+      super(tests.to_a.map { |test| TestInfo.new(test) })
     end
 
     def reorder_results(tests)
