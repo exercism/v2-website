@@ -3,6 +3,8 @@ class SubmissionTestRun < ApplicationRecord
 
   delegate :solution, :tests_info, to: :submission
 
+  serialize :tests, Array
+
   def results_status
     super.try(&:to_sym)
   end
@@ -19,12 +21,12 @@ class SubmissionTestRun < ApplicationRecord
     results_status == :fail
   end
 
-  def tests
-    Array(super).map { |test| SubmissionTestRunResult.new(tests_info, test) }
-  end
-
   def tests_to_display(order = tests_info)
-    ordered_tests = order.reorder(tests)
+    formatted_tests = tests.map do |test|
+      SubmissionTestRunResult.new(tests_info, test)
+    end
+
+    ordered_tests = order.reorder(formatted_tests)
 
     limit = ordered_tests.index(&:failed?)
 
