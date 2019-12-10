@@ -1,8 +1,8 @@
 class SubmissionTestRunResult
-  attr_reader :solution, :name, :status, :output
+  attr_reader :tests_info, :name, :status, :output
 
-  def initialize(solution, params)
-    @solution = solution
+  def initialize(tests_info, params)
+    @tests_info = tests_info
     @name = params["name"]
     @status = params["status"]
     @output = params["message"]
@@ -33,7 +33,7 @@ class SubmissionTestRunResult
   private
 
   def test_message
-    solution.tests_info.find { |message| message.name == name }
+    tests_info.find { |message| message.name == name }
   end
 
   def template

@@ -20,7 +20,7 @@ class SubmissionTestRun < ApplicationRecord
   end
 
   def tests
-    Array(super).map { |test| SubmissionTestRunResult.new(solution, test) }
+    Array(super).map { |test| SubmissionTestRunResult.new(tests_info, test) }
   end
 
   def tests_to_display(order = tests_info)
