@@ -28,7 +28,20 @@
         align-items: center;
         border-radius:2px;
         &.in-progress {
-            border:1px solid $color-2;
+            border:2px solid $color-2;
+            .pure-button {
+                background:$color-2;
+                color:#fff;
+                border:1px solid $color-2;
+            }
+        }
+        &.not-started {
+            border:1px solid #ccc;
+            .pure-button {
+                background:#fff;
+                color:#666;
+                border:1px solid #ccc;
+            }
         }
 
         img {
@@ -47,9 +60,6 @@
             color:#999;
         }
         .pure-button {
-            background:$color-2;
-            color:#fff;
-            border:1px solid $color-2;
             width:120px;
         }
     }
