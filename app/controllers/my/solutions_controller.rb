@@ -44,13 +44,6 @@ class My::SolutionsController < MyController
     end
   end
 
-  def solve
-    return redirect_to(action: :show) unless current_user.admin?
-
-    @exercise = @solution.exercise
-    @track = @exercise.track
-  end
-
   def walkthrough
     @walkthrough = RenderUserWalkthrough.(
       current_user,

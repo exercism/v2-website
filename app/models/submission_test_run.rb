@@ -3,6 +3,8 @@ class SubmissionTestRun < ApplicationRecord
 
   delegate :solution, :tests_info, to: :submission
 
+  serialize :tests, Array
+
   def results_status
     super.try(&:to_sym)
   end
@@ -19,20 +21,18 @@ class SubmissionTestRun < ApplicationRecord
     results_status == :fail
   end
 
-  def tests
-    tests_info.reorder(
-      Array(super).map { |test| SubmissionTestRunResult.new(solution, test) }
-    )
-  end
+  def tests_to_display(order = tests_info)
+    formatted_tests = tests.map do |test|
+      test_info = tests_info.find { |info| info.name == test["name"] }
 
-  def tests_to_display
-    limit = tests.index(&:failed?)
+      SubmissionTestRunResult.new(test_info, test)
+    end
 
-    tests[0..limit]
-  end
+    ordered_tests = order.reorder(formatted_tests)
 
-  def failed_tests
-    tests.select(&:failed?)
+    limit = ordered_tests.index(&:failed?)
+
+    ordered_tests[0..limit]
   end
 
   def to_partial_path
