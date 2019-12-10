@@ -3,7 +3,9 @@ module Research
     def create
       experiment = Experiment.find(params[:experiment_id])
 
-      exercise_slug = "#{params[:language]}-#{params[:part]}-#{%w{a b}.sample}"
+      # For now only use exercise a
+      #exercise_slug = "#{params[:language]}-#{params[:part]}-#{%w{a b}.sample}"
+      exercise_slug = "#{params[:language]}-#{params[:part]}-a"
       exercise = Exercise.find_by_slug!(exercise_slug)
 
       # Guard to ensure that someone doesn't try and access
