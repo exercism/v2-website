@@ -6,6 +6,7 @@ module Git
 
     def reorder(tests)
       tests_info.
+        reject { |info| info.cmd.blank? }.
         map { |info| tests.find { |test| info.name == test.name } }.
         compact
     end
