@@ -20,7 +20,7 @@ class SiteContext
     when "teams"
       routes.teams_dashboard_path
     when "research"
-      routes.research_dashboard_path
+      routes.research_experiments_path
     else
       routes.my_dashboard_path
     end

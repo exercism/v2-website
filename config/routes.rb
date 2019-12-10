@@ -102,8 +102,6 @@ Rails.application.routes.draw do
   # Research #
   # ######## #
   namespace :research, path: '', constraints: { subdomain: 'research' } do
-    get "dashboard" => "dashboard#index"
-
     resource :join, only: [:show, :create]
     resources :experiments, only: [:index, :show]
     resources :user_experiments, only: [:create, :show]
