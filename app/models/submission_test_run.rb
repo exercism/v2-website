@@ -1,7 +1,7 @@
 class SubmissionTestRun < ApplicationRecord
   belongs_to :submission
 
-  delegate :solution, :tests_info, to: :submission
+  delegate :solution, to: :submission
 
   def results_status
     super.try(&:to_sym)
@@ -20,6 +20,7 @@ class SubmissionTestRun < ApplicationRecord
   end
 
   def tests
+    tests_info = submission.tests_info
     tests_info.reorder_results(
       Array(super).map { |test| SubmissionTestRunResult.new(tests_info, test) }
     )
