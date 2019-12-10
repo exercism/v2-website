@@ -22,6 +22,8 @@ class ExperimentSolution {
   }
 
   submitCode() {
+    if (!this.submissionStatus.isAllowedToSubmit()) { return; }
+
     this.submissionStatus.setStatus('queueing');
     this.submissionStatus.render(new SubmissionStatusView('queueing').render());
     this._submit();
