@@ -12,6 +12,10 @@ class SubmissionStatus {
     this._setupShortcuts();
   }
 
+  isAllowedToSubmit() {
+    return this.status !== 'queueing' && this.status !== 'queued';
+  }
+
   setStatus(status) {
     this.timer.reset();
 
