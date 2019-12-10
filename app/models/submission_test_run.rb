@@ -25,6 +25,12 @@ class SubmissionTestRun < ApplicationRecord
     )
   end
 
+  def tests_to_display
+    limit = tests.index(&:failed?)
+
+    tests[0..limit]
+  end
+
   def failed_tests
     tests.select(&:failed?)
   end

@@ -13,6 +13,10 @@ class Research::UserSolvesSolutionTest < Research::TestCase
            tests: [
              {
                "name" => "OneWordWithOneVowel",
+               "status" => "pass",
+             },
+             {
+               "name" => "OneWordWithTwoVowels",
                "status" => "fail",
                "message" => "Wrong variable"
              }
@@ -22,6 +26,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
     sign_in!(user)
     visit research_experiment_solution_path(solution)
 
+    assert_text "OneWordWithOneVowel"
     assert_text "Wrong variable"
   end
 
