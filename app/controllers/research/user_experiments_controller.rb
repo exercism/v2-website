@@ -9,7 +9,7 @@ module Research
     end
 
     def show
-      slugs = %i{ruby csharp}
+      slugs = %i{ruby csharp javascript rust python x86-64-assembly}
       @tracks = Track.where(slug: slugs)
     end
 
