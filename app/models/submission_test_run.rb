@@ -23,7 +23,9 @@ class SubmissionTestRun < ApplicationRecord
 
   def tests_to_display(order = tests_info)
     formatted_tests = tests.map do |test|
-      SubmissionTestRunResult.new(tests_info, test)
+      test_info = tests_info.find { |info| info.name == test["name"] }
+
+      SubmissionTestRunResult.new(test_info, test)
     end
 
     ordered_tests = order.reorder(formatted_tests)

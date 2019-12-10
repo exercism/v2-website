@@ -1,21 +1,16 @@
 module Git
   class TestsInfo < SimpleDelegator
     def initialize(tests)
-      super(Array(tests).map { |test| TestInfo.new(test) })
+      super(tests.to_a.map { |test| TestInfo.new(test) })
     end
 
     def reorder(tests)
-      tests_info.
-        reject { |info| info.cmd.blank? }.
-        map { |info| tests.find { |test| info.name == test.name } }.
-        compact
+      reject { |info| info.cmd.blank? }.
+      map { |info| tests.find { |test| info.name == test.name } }.
+      compact
     end
 
     private
-
-    def tests_info
-      __getobj__
-    end
 
     TestInfo = Struct.new(:name, :cmd, :msg, keyword_init: true)
   end
