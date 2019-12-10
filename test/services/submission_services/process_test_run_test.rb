@@ -23,7 +23,7 @@ module SubmissionServices
       assert_nil tr.ops_message
       assert_equal results_status.to_sym, tr.results_status
       assert_equal message, tr.message
-      assert_equal ["OneWordWithOneVowel"], tr.tests.map(&:name)
+      assert_equal [{ "name" => "OneWordWithOneVowel" }], tr.tests
       assert_equal results, tr.results
 
       assert submission.reload.tested

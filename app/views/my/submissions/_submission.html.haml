@@ -1,8 +1,0 @@
-.status
-  %p
-    Status:
-    %span= submission.status.capitalize
-
-- if submission.test_run.present?
-  = render "my/submission_test_runs/submission_test_run",
-   test_run: submission.test_run

@@ -185,7 +185,6 @@ Rails.application.routes.draw do
     end
     resources :solutions, only: [:index, :show, :create] do
       member do
-        get :solve
         patch :submit
 
         get :walkthrough

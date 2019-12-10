@@ -1,7 +1,8 @@
 class SubmissionTestRunResult
-  attr_reader :solution, :name, :status, :output
-  def initialize(solution, params)
-    @solution = solution
+  attr_reader :test_info, :name, :status, :output
+
+  def initialize(test_info, params)
+    @test_info = test_info
     @name = params["name"]
     @status = params["status"]
     @output = params["message"]
@@ -12,13 +13,13 @@ class SubmissionTestRunResult
   end
 
   def cmd
-    return if test_message.blank?
+    return if test_info.blank?
 
-    test_message.cmd
+    test_info.cmd
   end
 
   def message
-    return if test_message.blank?
+    return if test_info.blank?
 
     ParseMarkdown.(
       template.gsub("%{output}", "<pre><code>#{output}</code></pre>")
@@ -31,11 +32,7 @@ class SubmissionTestRunResult
 
   private
 
-  def test_message
-    solution.tests_info.find { |message| message.name == name }
-  end
-
   def template
-    test_message.msg
+    test_info.msg
   end
 end
