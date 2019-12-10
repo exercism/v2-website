@@ -16,14 +16,14 @@
           -@tracks.each do |track|
             -if @user_experiment.language_completed?(track.slug)
               .language.completed
-                =image track.hex_turquoise_icon_url, track.title
+                =bordered_turquoise_track_icon(track)
                 .details
                   %h3= track.title
                   .status Completed
 
             -elsif @user_experiment.language_started?(track.slug)
               .language.in-progress
-                =image track.hex_turquoise_icon_url, track.title
+                =bordered_turquoise_track_icon(track)
                 .details
                   %h3= track.title
                   .status In progress
@@ -31,7 +31,7 @@
 
             -else
               .language.not-started
-                =image track.hex_turquoise_icon_url, track.title
+                =hex_white_track_icon(track)
                 .details
                   %h3= track.title
                   .status Not started
