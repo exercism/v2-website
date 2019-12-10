@@ -20,7 +20,7 @@ class SubmissionTestRun < ApplicationRecord
   end
 
   def tests
-    tests_info.reorder(
+    tests_info.reorder_results(
       Array(super).map { |test| SubmissionTestRunResult.new(solution, test) }
     )
   end
