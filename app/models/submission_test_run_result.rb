@@ -25,6 +25,10 @@ class SubmissionTestRunResult
     )
   end
 
+  def to_partial_path
+    "research/submission_test_run_results/#{status}"
+  end
+
   private
 
   def test_message

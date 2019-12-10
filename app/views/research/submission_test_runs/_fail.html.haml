@@ -1,17 +1,1 @@
-- test_run.failed_tests.each do |failed_test|
-  - if failed_test.cmd.present?
-    %p
-      We tried running
-      %code= failed_test.cmd
-      but got the following error:
-
-    %pre
-      %code= failed_test.output
-  - elsif failed_test.message.present?
-    %p= raw failed_test.message
-  - else
-    %p We tried running your code but got the following:
-
-    %pre
-      %code= failed_test.output
-  - break
+= render partial: test_run.tests_to_display, as: :test

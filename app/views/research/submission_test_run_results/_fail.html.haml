@@ -1,0 +1,15 @@
+- if test.cmd.present?
+  %p
+    We tried running
+    %code= test.cmd
+    but got the following error:
+
+  %pre
+    %code= test.output
+- elsif test.message.present?
+  %p= raw test.message
+- else
+  %p We tried running your code but got the following:
+
+  %pre
+    %code= test.output
