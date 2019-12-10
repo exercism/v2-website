@@ -22,7 +22,10 @@ class SubmissionTestRun < ApplicationRecord
   def tests
     tests_info = submission.tests_info
     tests_info.reorder_results(
-      Array(super).map { |test| SubmissionTestRunResult.new(tests_info, test) }
+      Array(super).map { |test|
+        test_info = tests_info.find { |info| info.name == test["name"] }
+        SubmissionTestRunResult.new(test_info, test)
+      }
     )
   end
 
