@@ -20,15 +20,15 @@ class SubmissionTestRun < ApplicationRecord
   end
 
   def tests
-    tests_info.reorder(
-      Array(super).map { |test| SubmissionTestRunResult.new(solution, test) }
-    )
+    Array(super).map { |test| SubmissionTestRunResult.new(solution, test) }
   end
 
-  def tests_to_display
-    limit = tests.index(&:failed?)
+  def tests_to_display(order = tests_info)
+    ordered_tests = order.reorder(tests)
 
-    tests[0..limit]
+    limit = ordered_tests.index(&:failed?)
+
+    ordered_tests[0..limit]
   end
 
   def failed_tests

@@ -1,5 +1,6 @@
 class SubmissionTestRunResult
   attr_reader :solution, :name, :status, :output
+
   def initialize(solution, params)
     @solution = solution
     @name = params["name"]
