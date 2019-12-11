@@ -1,7 +1,9 @@
+import AceEditorSettings from './ace-editor-settings';
+
 class AceEditor {
   constructor(element, settings, filename) {
     this.element = element
-    this.settings = settings
+    this.settings = new AceEditorSettings(settings)
     this.filename = filename
 
     $(this._setup.bind(this));
@@ -60,11 +62,7 @@ class AceEditor {
     this.editor = ace.edit(this.element[0]);
 
     this.editor.setShowPrintMargin(false);
-    this.editor.session.setOptions({
-      mode: `ace/mode/${this.settings.language}`,
-      tabSize: this.settings.tab_width,
-      useSoftTabs: this.settings.soft_tabs,
-    });
+    this.editor.session.setOptions(this.settings);
 
     this.onSetup(this);
   }
