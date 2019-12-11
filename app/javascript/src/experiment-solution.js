@@ -14,8 +14,8 @@ class ExperimentSolution {
 
   _setup() {
     this._setupPanes();
-    this._setupActions();
     this._setupEditor();
+    this._setupActions();
     this._setupSubmissionStatus();
     this._setupChannel();
     this._setupTestRun();
@@ -36,7 +36,12 @@ class ExperimentSolution {
   }
 
   openShortcuts() {
-    new KeyboardShortcuts().render();
+    if ($('.overlay').length > 0) { return; }
+    if (this.editor.isFocused()) { return; }
+
+    const modal = new KeyboardShortcuts();
+    modal.onRender = () => { this.element.focus() };
+    modal.render();
   }
 
   _setupPanes() {
@@ -48,7 +53,7 @@ class ExperimentSolution {
   }
 
   _setupActions() {
-    this.setCommand('?', this.openShortcuts.bind(this));
+    this.setCommand('?', () => { this.openShortcuts(); });
 
     this.element.find('.js-submit-code').click(this.submitCode.bind(this));
     this.
