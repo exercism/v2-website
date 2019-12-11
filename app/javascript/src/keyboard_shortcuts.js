@@ -26,6 +26,8 @@ class KeyboardShortcuts {
       </div>
     `).appendTo('body');
 
+    this.onRender();
+
     this._setupActions();
   }
 

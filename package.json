@@ -12,6 +12,33 @@
     "split.js": "^1.5.11"
   },
   "devDependencies": {
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
     "webpack-dev-server": "^3.8.2"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/app/javascript/tests"
+    ],
+    "setupFiles": ["<rootDir>/app/javascript/tests/setup.js"],
+    "verbose": true,
+    "testURL": "http://localhost",
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "<rootDir>/app/javascript"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1"
+    },
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
+  },
+   "scripts": {
+    "test": "jest --config package.json"
   }
 }

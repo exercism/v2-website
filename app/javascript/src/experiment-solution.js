@@ -14,8 +14,8 @@ class ExperimentSolution {
 
   _setup() {
     this._setupPanes();
-    this._setupActions();
     this._setupEditor();
+    this._setupActions();
     this._setupSubmissionStatus();
     this._setupChannel();
     this._setupTestRun();
@@ -29,6 +29,21 @@ class ExperimentSolution {
     this._submit();
   }
 
+  setCommand(key, command) {
+    $(document).on('keydown', this.container, (e) => {
+      if (e.key == key) { command(); }
+    });
+  }
+
+  openShortcuts() {
+    if ($('.overlay').length > 0) { return; }
+    if (this.editor.isFocused()) { return; }
+
+    const modal = new KeyboardShortcuts();
+    modal.onRender = () => { this.element.focus() };
+    modal.render();
+  }
+
   _setupPanes() {
     Split(['.description-panel', '.solution-panel'], {
       sizes: [50, 50],
@@ -38,11 +53,13 @@ class ExperimentSolution {
   }
 
   _setupActions() {
+    this.setCommand('?', () => { this.openShortcuts(); });
+
     this.element.find('.js-submit-code').click(this.submitCode.bind(this));
     this.
       element.
       find('.js-keyboard-shortcuts').
-      click(this._openShortcuts.bind(this));
+      click(this.openShortcuts.bind(this));
   }
 
   _setupEditor() {
@@ -108,10 +125,8 @@ class ExperimentSolution {
   _cancelBuild() {
     this.channel.cancelSubmission();
   }
-
-  _openShortcuts() {
-    new KeyboardShortcuts().render();
-  }
 }
+
+export default ExperimentSolution;
 
 $(".experiment-solution").each(function() { new ExperimentSolution($(this)); });

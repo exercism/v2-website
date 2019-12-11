@@ -27,6 +27,10 @@ class CodeEditor {
     this.editor.focus();
   }
 
+  isFocused() {
+    return this.editor.isFocused();
+  }
+
   addCommand(opts) {
     this.editor.commands.addCommand(opts);
   }
