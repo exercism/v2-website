@@ -13,3 +13,9 @@
 
   %pre
     %code= test.message
+
+- if test.output.present?
+  %p Test output:
+
+  %pre
+    %code= test.output

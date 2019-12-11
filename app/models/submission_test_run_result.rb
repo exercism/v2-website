@@ -1,11 +1,12 @@
 class SubmissionTestRunResult
-  attr_reader :test_info, :name, :status, :message
+  attr_reader :test_info, :name, :status, :message, :output
 
   def initialize(test_info, params)
     @test_info = test_info
     @name = params["name"]
     @status = params["status"]
     @message = params["message"]
+    @output = params["output"]
   end
 
   def failed?
