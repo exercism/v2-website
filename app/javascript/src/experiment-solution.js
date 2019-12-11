@@ -35,6 +35,10 @@ class ExperimentSolution {
     });
   }
 
+  openShortcuts() {
+    new KeyboardShortcuts().render();
+  }
+
   _setupPanes() {
     Split(['.description-panel', '.solution-panel'], {
       sizes: [50, 50],
@@ -44,13 +48,13 @@ class ExperimentSolution {
   }
 
   _setupActions() {
-    this.setCommand('?', this._openShortcuts.bind(this));
+    this.setCommand('?', this.openShortcuts.bind(this));
 
     this.element.find('.js-submit-code').click(this.submitCode.bind(this));
     this.
       element.
       find('.js-keyboard-shortcuts').
-      click(this._openShortcuts.bind(this));
+      click(this.openShortcuts.bind(this));
   }
 
   _setupEditor() {
@@ -115,10 +119,6 @@ class ExperimentSolution {
 
   _cancelBuild() {
     this.channel.cancelSubmission();
-  }
-
-  _openShortcuts() {
-    new KeyboardShortcuts().render();
   }
 }
 

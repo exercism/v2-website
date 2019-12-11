@@ -16,3 +16,17 @@ test('it calls commands when a hotkey is pressed', () => {
 
   expect(command).toHaveBeenCalled();
 })
+
+test('it opens keyboard shortcuts modal', () => {
+  document.body.innerHTML = `
+    <div class="experiment-solution">
+      <div class="description-panel"></div>
+      <div class="solution-panel"></div>
+    </div>
+  `;
+
+  const solution = new ExperimentSolution($('.experiment-solution'));
+  solution.openShortcuts();
+
+  expect($('.keyboard-shortcuts').length).toEqual(1);
+})
