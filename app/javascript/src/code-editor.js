@@ -18,6 +18,7 @@ class CodeEditor {
     this.editor = ace.edit(this.element[0]);
 
     this.editor.setTheme('ace/theme/monokai');
+    this.editor.setShowPrintMargin(false);
     this.editor.session.setMode(`ace/mode/${this.language}`);
 
     this.onSetup(this);
