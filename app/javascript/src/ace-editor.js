@@ -20,6 +20,23 @@ class AceEditor {
     }
   }
 
+  setKeybinding(keybinding) {
+    switch(keybinding) {
+      case 'ace':
+        this.editor.setKeyboardHandler(null);
+
+        break;
+      case 'vim':
+        this.editor.setKeyboardHandler('ace/keyboard/vim');
+
+        break;
+      case 'emacs':
+        this.editor.setKeyboardHandler('ace/keyboard/emacs');
+
+        break;
+    }
+  }
+
   exportFile() {
     const file = {}
     file[this.filename] = this.editor.getValue();

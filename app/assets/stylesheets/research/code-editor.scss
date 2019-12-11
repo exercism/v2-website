@@ -17,10 +17,20 @@ body.namespace-research {
     }
 
     .code-editor-toolbar {
+        display: flex;
         padding: 10px;
 
-        > label {
-          margin-right: 5px;
+        > .code-editor-toolbar-option {
+            margin-right: 10px;
+
+            > label {
+                margin-right: 5px;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
         }
+
     }
 }

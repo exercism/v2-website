@@ -17,6 +17,10 @@ class CodeEditorManager {
     this.editor.setTheme(e.currentTarget.value);
   }
 
+  selectKeybinding(e) {
+    this.editor.setKeybinding(e.currentTarget.value);
+  }
+
   exportFile() {
     this.editor.exportFile();
   }
@@ -40,6 +44,10 @@ class CodeEditorManager {
       element.
       find('.js-code-editor-theme').
       change(this.selectTheme.bind(this));
+    this.
+      element.
+      find('.js-code-editor-keybinding').
+      change(this.selectKeybinding.bind(this));
   }
 }
 

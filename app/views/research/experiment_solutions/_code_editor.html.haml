@@ -1,7 +1,15 @@
 .code-editor-manager.js-code-editor-manager
   .code-editor.js-code-editor{data: { language: language, filename: filename }}= code
   .code-editor-toolbar
-    = label_tag "theme", "Theme:"
-    = select_tag "theme",
-      options_for_select({ "Dark" => "dark",  "Light" => "light" }),
-      class: "js-code-editor-theme js-skip-selectize"
+    .code-editor-toolbar-option
+      = label_tag "theme", "Theme:"
+      = select_tag "theme",
+        options_for_select({ "Dark" => "dark",  "Light" => "light" }),
+        class: "js-code-editor-theme js-skip-selectize",
+        autocomplete: "off"
+    .code-editor-toolbar-option
+      = label_tag "keybinding", "Keybinding:"
+      = select_tag "keybinding",
+        options_for_select({ "Ace" => "ace",  "Vim" => "vim", "Emacs" => "emacs" }),
+        class: "js-code-editor-keybinding js-skip-selectize",
+        autocomplete: "off"

@@ -23,6 +23,10 @@ class CodeEditor {
     this.editor.setTheme(theme);
   }
 
+  setKeybinding(keybinding) {
+    this.editor.setKeybinding(keybinding);
+  }
+
   exportFile() {
     this.editor.exportFile();
   }
