@@ -1,9 +1,9 @@
-import AceEditorSettings from './ace-editor-settings';
+import AceEditorConfig from './ace-editor-config';
 
 class AceEditor {
-  constructor(element, settings, filename) {
+  constructor(element, config, filename) {
     this.element = element
-    this.settings = new AceEditorSettings(settings)
+    this.config = new AceEditorConfig(config)
     this.filename = filename
 
     $(this._setup.bind(this));
@@ -62,7 +62,7 @@ class AceEditor {
     this.editor = ace.edit(this.element[0]);
 
     this.editor.setShowPrintMargin(false);
-    this.editor.session.setOptions(this.settings);
+    this.editor.session.setOptions(this.config);
 
     this.onSetup(this);
   }

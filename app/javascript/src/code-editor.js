@@ -4,13 +4,13 @@ class CodeEditor {
   constructor(element) {
     this.element = element
     this.filename = element.data('filename')
-    this.settings = element.data('settings')
+    this.config = element.data('config')
 
     this._setup();
   }
 
   _setup() {
-    this.editor = new AceEditor(this.element, this.settings, this.filename);
+    this.editor = new AceEditor(this.element, this.config, this.filename);
 
     this.editor.onSetup = () => {
       this.editor.setTheme('dark');

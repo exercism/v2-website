@@ -1,6 +1,6 @@
 - solution.latest_files.each do |filename, code|
   = render "code_editor",
-    settings: settings,
+    config: editor_config,
     filename: filename,
     code: code
   - break
