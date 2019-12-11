@@ -14,7 +14,7 @@ class SubmissionTestRunResultTest < ActiveSupport::TestCase
     assert_equal "Test.add(1, 1)", submission_test.cmd
   end
 
-  test "returns message" do
+  test "returns text" do
     test_info = stub(name: "test_a_name_given", msg: "We tried running %{output}")
 
     submission_test = SubmissionTestRunResult.new(
@@ -25,6 +25,6 @@ class SubmissionTestRunResultTest < ActiveSupport::TestCase
     )
 
     assert_equal "<p>We tried running </p><pre><code>Failed test</code></pre>\n",
-      submission_test.message
+      submission_test.text
   end
 end

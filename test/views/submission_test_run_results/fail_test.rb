@@ -7,7 +7,7 @@ module SubmissionTestRunResults
         test_run = create(:submission_test_run, message: "Failed to run")
 
         render "research/submission_test_run_results/fail",
-          test: stub(cmd: "test_true", output: "Asserted to be true")
+          test: stub(cmd: "test_true", message: "Asserted to be true")
 
         assert_select "code", "test_true"
         assert_select "pre", text: "Asserted to be true"
@@ -17,7 +17,7 @@ module SubmissionTestRunResults
         render "research/submission_test_run_results/fail",
           test: stub(
             cmd: nil,
-            message: "This is the failed test <pre>Asserted to be true</pre>"
+            text: "This is the failed test <pre>Asserted to be true</pre>"
           )
 
         assert_select "p", "This is the failed test"
@@ -28,7 +28,7 @@ module SubmissionTestRunResults
         test_run = create(:submission_test_run, message: "Failed to run")
 
         render "research/submission_test_run_results/fail",
-          test: stub(cmd: nil, message: nil, output: "Asserted to be true")
+          test: stub(cmd: nil, text: nil, message: "Asserted to be true")
 
         assert_select "pre", text: "Asserted to be true"
       end
