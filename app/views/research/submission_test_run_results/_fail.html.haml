@@ -5,11 +5,17 @@
     but got the following error:
 
   %pre
-    %code= test.output
-- elsif test.message.present?
-  %p= raw test.message
+    %code= test.message
+- elsif test.text.present?
+  %p= raw test.text
 - else
   %p We tried running your code but got the following:
+
+  %pre
+    %code= test.message
+
+- if test.output.present?
+  %p Test output:
 
   %pre
     %code= test.output

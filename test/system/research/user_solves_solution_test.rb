@@ -18,7 +18,8 @@ class Research::UserSolvesSolutionTest < Research::TestCase
              {
                "name" => "OneWordWithTwoVowels",
                "status" => "fail",
-               "message" => "Wrong variable"
+               "message" => "Wrong variable",
+               "output" => "1 + 1"
              }
            ]
           )
@@ -28,6 +29,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
 
     assert_text "Sentence.WordWithMostVowels(\"a\")"
     assert_text "Wrong variable"
+    assert_text "1 + 1"
   end
 
   test "user views code" do
