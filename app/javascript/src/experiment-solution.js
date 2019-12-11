@@ -112,14 +112,14 @@ class ExperimentSolution {
   }
 
   _scrollToTestRun() {
-    this.testRun.removeClass('focus');
+    this.testRun.removeClass('test-result-focus');
 
     this.testRun[0].scrollIntoView({
       behavior: "smooth",
       block: "end"
     });
 
-    this.testRun.addClass('focus');
+    this.testRun.addClass('test-result-focus');
   }
 
   _cancelBuild() {
