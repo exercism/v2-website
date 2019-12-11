@@ -15,10 +15,12 @@ class CodeEditorManager {
 
   selectTheme(e) {
     this.editor.setTheme(e.currentTarget.value);
+    this.editor.focus();
   }
 
   selectKeybinding(e) {
     this.editor.setKeybinding(e.currentTarget.value);
+    this.editor.focus();
   }
 
   exportFile() {
