@@ -1,0 +1,7 @@
+.code-editor-manager.js-code-editor-manager
+  .code-editor.js-code-editor{data: { language: language, filename: filename }}= code
+  .code-editor-toolbar
+    = label_tag "theme", "Theme:"
+    = select_tag "theme",
+      options_for_select({ "Dark" => "dark",  "Light" => "light" }),
+      class: "js-code-editor-theme js-skip-selectize"

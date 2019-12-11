@@ -1,5 +1,8 @@
 - solution.latest_files.each do |filename, code|
-  .code-editor.js-code-editor{data: { language: solution.language_slug, filename: filename } }= code
+  = render "code_editor",
+    language: solution.language_slug,
+    filename: filename,
+    code: code
   - break
 .toolbar
   %button.js-keyboard-shortcuts.toolbar-shortcut-button.pure-button
