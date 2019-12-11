@@ -23,6 +23,7 @@ module Research
 
     def show
       @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
+      @editor_config = editor_config
     end
 
     def submit
@@ -34,6 +35,14 @@ module Research
         solution.user_experiment,
         solution.language_slug
       )
+    end
+
+    private
+
+    def editor_config
+      return {} unless track = Track.find_by(slug: @solution.language_slug)
+
+      track.editor_config
     end
   end
 end

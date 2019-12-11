@@ -38,6 +38,10 @@ class Track < ApplicationRecord
     repo.about.present?? ParseMarkdown.(repo.about) : nil
   end
 
+  def editor_config
+    { language: slug }.merge(repo.editor_config)
+  end
+
   def repo
     Git::ExercismRepo.new(repo_url)
   end

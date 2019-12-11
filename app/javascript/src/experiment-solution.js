@@ -1,5 +1,5 @@
 import Split from 'split.js';
-import CodeEditor from './code-editor';
+import CodeEditorManager from './code-editor-manager';
 import ResearchSolutionChannel from '../channels/research_solution_channel';
 import SubmissionStatus from './submission_status';
 import SubmissionStatusView from './submission_status_view';
@@ -63,14 +63,15 @@ class ExperimentSolution {
   }
 
   _setupEditor() {
-    this.editor = new CodeEditor(this.element.find('.js-code-editor'));
-    this.editor.onSetup = (editor) => {
-      editor.addCommand({
-        name: "submit",
-        bindKey: {win: "Shift-Enter", mac: "Shift-Enter"},
-        exec: this.submitCode.bind(this)
-      });
-    }
+    this.editor = new CodeEditorManager(
+      this.element.find('.js-code-editor-manager'),
+      (editor) => {
+        editor.addCommand({
+          name: "submit",
+          bindKey: {win: "Shift-Enter", mac: "Shift-Enter"},
+          exec: this.submitCode.bind(this)
+        });
+    });
   }
 
   _setupSubmissionStatus() {
@@ -112,14 +113,14 @@ class ExperimentSolution {
   }
 
   _scrollToTestRun() {
-    this.testRun.removeClass('focus');
+    this.testRun.removeClass('test-result-focus');
 
     this.testRun[0].scrollIntoView({
       behavior: "smooth",
       block: "end"
     });
 
-    this.testRun.addClass('focus');
+    this.testRun.addClass('test-result-focus');
   }
 
   _cancelBuild() {

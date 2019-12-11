@@ -1,26 +1,34 @@
+import AceEditor from './ace-editor';
+
 class CodeEditor {
   constructor(element) {
     this.element = element
-    this.language = element.data('language')
     this.filename = element.data('filename')
+    this.config = element.data('config')
 
-    $(this._setup.bind(this));
-  }
-
-  exportFile() {
-    const file = {}
-    file[this.filename] = this.editor.getValue();
-
-    return file;
+    this._setup();
   }
 
   _setup() {
-    this.editor = ace.edit(this.element[0]);
+    this.editor = new AceEditor(this.element, this.config, this.filename);
 
-    this.editor.setTheme('ace/theme/monokai');
-    this.editor.session.setMode(`ace/mode/${this.language}`);
+    this.editor.onSetup = () => {
+      this.editor.setTheme('dark');
 
-    this.onSetup(this);
+      this.onSetup(this);
+    }
+  }
+
+  setTheme(theme) {
+    this.editor.setTheme(theme);
+  }
+
+  setKeybinding(keybinding) {
+    this.editor.setKeybinding(keybinding);
+  }
+
+  exportFile() {
+    return this.editor.exportFile();
   }
 
   focus() {
@@ -32,7 +40,7 @@ class CodeEditor {
   }
 
   addCommand(opts) {
-    this.editor.commands.addCommand(opts);
+    this.editor.addCommand(opts);
   }
 }
 
