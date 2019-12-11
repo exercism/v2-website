@@ -20,6 +20,7 @@
     "roots": [
       "<rootDir>/app/javascript/tests"
     ],
+    "setupFiles": ["<rootDir>/app/javascript/tests/setup.js"],
     "verbose": true,
     "testURL": "http://localhost",
     "moduleFileExtensions": [

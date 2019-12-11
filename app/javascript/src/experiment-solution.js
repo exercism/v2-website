@@ -29,6 +29,12 @@ class ExperimentSolution {
     this._submit();
   }
 
+  setCommand(key, command) {
+    $(document).on('keydown', this.container, (e) => {
+      if (e.key == key) { command(); }
+    });
+  }
+
   _setupPanes() {
     Split(['.description-panel', '.solution-panel'], {
       sizes: [50, 50],
@@ -38,6 +44,8 @@ class ExperimentSolution {
   }
 
   _setupActions() {
+    this.setCommand('?', this._openShortcuts.bind(this));
+
     this.element.find('.js-submit-code').click(this.submitCode.bind(this));
     this.
       element.
@@ -113,5 +121,7 @@ class ExperimentSolution {
     new KeyboardShortcuts().render();
   }
 }
+
+export default ExperimentSolution;
 
 $(".experiment-solution").each(function() { new ExperimentSolution($(this)); });
