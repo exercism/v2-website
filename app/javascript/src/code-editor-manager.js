@@ -24,7 +24,7 @@ class CodeEditorManager {
   }
 
   exportFile() {
-    this.editor.exportFile();
+    return this.editor.exportFile();
   }
 
   focus() {
