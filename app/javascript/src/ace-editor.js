@@ -60,7 +60,11 @@ class AceEditor {
     this.editor = ace.edit(this.element[0]);
 
     this.editor.setShowPrintMargin(false);
-    this.editor.session.setMode(`ace/mode/${this.settings.language}`);
+    this.editor.session.setOptions({
+      mode: `ace/mode/${this.settings.language}`,
+      tabSize: this.settings.tab_width,
+      useSoftTabs: this.settings.soft_tabs,
+    });
 
     this.onSetup(this);
   }
