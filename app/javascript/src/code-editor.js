@@ -3,14 +3,14 @@ import AceEditor from './ace-editor';
 class CodeEditor {
   constructor(element) {
     this.element = element
-    this.language = element.data('language')
     this.filename = element.data('filename')
+    this.settings = element.data('settings')
 
     this._setup();
   }
 
   _setup() {
-    this.editor = new AceEditor(this.element, this.language, this.filename);
+    this.editor = new AceEditor(this.element, this.settings, this.filename);
 
     this.editor.onSetup = () => {
       this.editor.setTheme('dark');

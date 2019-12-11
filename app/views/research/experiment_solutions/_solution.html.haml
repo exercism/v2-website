@@ -1,6 +1,6 @@
 - solution.latest_files.each do |filename, code|
   = render "code_editor",
-    language: solution.language_slug,
+    settings: settings,
     filename: filename,
     code: code
   - break

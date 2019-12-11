@@ -1,7 +1,7 @@
 class AceEditor {
-  constructor(element, language, filename) {
+  constructor(element, settings, filename) {
     this.element = element
-    this.language = language
+    this.settings = settings
     this.filename = filename
 
     $(this._setup.bind(this));
@@ -60,7 +60,7 @@ class AceEditor {
     this.editor = ace.edit(this.element[0]);
 
     this.editor.setShowPrintMargin(false);
-    this.editor.session.setMode(`ace/mode/${this.language}`);
+    this.editor.session.setMode(`ace/mode/${this.settings.language}`);
 
     this.onSetup(this);
   }

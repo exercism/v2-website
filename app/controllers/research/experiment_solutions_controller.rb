@@ -23,6 +23,7 @@ module Research
 
     def show
       @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
+      @settings = { language: @solution.language_slug }.to_json
     end
 
     def submit
