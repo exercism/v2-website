@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   # SPI #
   # ### #
   namespace :spi do
-    post "submissions/:submission_uuid/test_runs" => "submission_test_runs#create", as: :submission_test_runs
+    get "test_runner/languages" => "test_runner#languages"
+    get "test_runner/submissions_to_test" => "test_runner#submissions_to_test"
+    post "test_runner/submission_tested/:submission_uuid" => "test_runner#submission_tested" 
   end
 
   # ##### #
