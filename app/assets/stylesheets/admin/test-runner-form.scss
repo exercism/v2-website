@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'mixins';
+
+#admin-new-test-runner,
+#admin-edit-test-runner {
+    padding-top:20px;
+    h1 {
+        font-weight:$fw-bold;
+        @include font-size(18, 18);
+        margin-bottom:20px;
+    }
+    .field {
+        margin-bottom:10px;
+        label {
+            display:block;
+            margin-bottom:4px;
+        }
+        #infrastructure_test_runner_timeout_ms {
+            width:60px;
+        }
+        #infrastructure_test_runner_container_slug {
+            width:300px;
+        }
+        #infrastructure_test_runner_num_processors {
+            width:50px;
+        }
+    }
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+    }
+    .selectize-control {
+        max-width: 200px;
+    }
+}

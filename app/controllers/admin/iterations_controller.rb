@@ -1,4 +1,6 @@
 class Admin::IterationsController < AdminController
+  before_action :restrict_to_admins!
+
   def show
     solution = Solution.find_by_uuid!(params[:solution_id])
     iteration = solution.iterations.find(params[:id])

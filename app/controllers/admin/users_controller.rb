@@ -1,4 +1,6 @@
 class Admin::UsersController < AdminController
+  before_action :restrict_to_admins!
+
   def show
     if params[:id].present?
       @user = User.find_by_id(params[:id])
