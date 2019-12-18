@@ -1,5 +1,7 @@
-#mentor-analyses
+#admin-analyses
   .lo-container
+    %h1 Analysers - Recent analyses
+
     =form_tag({}, method: :get) do
       =select_tag :track_id, options_for_select(@tracks.map{|t|[t.title, t.id]}, @track_id), include_blank: "Track"
       =select_tag :ops_status, options_for_select(IterationAnalysis.distinct.pluck(:ops_status), @ops_status), include_blank: "Ops status"
@@ -36,6 +38,6 @@
           %td
             %code= analysis.analysis_status
           %td.right= analysis.analysis_comments_data.try(&:size)
-          %td= link_to "View", mentor_analysis_path(analysis)
+          %td= link_to "View", admin_analysis_path(analysis)
 
     =paginate(@analyses)

@@ -1,20 +1,15 @@
 module SPI
   class TestRunnerController < BaseController
     def languages
-      render json: {
-        languages: {
-          ruby: {
-            timeout_ms: 3000,
-            container_version: "foobar123",
-            num_processors: 2
-          },
-          javascript: {
-            timeout_ms: 5000,
-            container_version: "barfood987",
-            num_processors: 1
-          },
+      langs = Infrastructure::TestRunner.all.each_with_object({}) do |tr, h|
+        h[tr.language_slug] = {
+          timeout_ms: tr.timeout_ms,
+          container_slug: tr.container_slug,
+          num_processors: 2
         }
-      }
+      end
+
+      render json: { languages: langs }
     end
 
     def submissions_to_test

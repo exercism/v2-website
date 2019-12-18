@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :infrastructure_test_runner, class: 'Infrastructure::TestRunner' do
+    
+  end
+
   factory :research_experiment, class: 'Research::Experiment' do
     title { "Foobar" }
     repo_url { "https://github.com/exercism/something" }

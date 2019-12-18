@@ -1,4 +1,6 @@
 class Admin::Data::ExercisesController < AdminController
+  before_action :restrict_to_admins!
+
   def show
     @track = Track.find(params[:track_id])
     @exercise = @track.exercises.find(params[:id])
