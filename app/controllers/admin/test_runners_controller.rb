@@ -19,7 +19,14 @@ class Admin::TestRunnersController < AdminController
   end
 
   def create
-    Infrastructure::TestRunner.create!(params.require(:infrastructure_test_runner).permit!)
+    @test_runner = Infrastructure::TestRunner.create!(params.require(:infrastructure_test_runner).permit!)
+    RestClient.post("#{orchestrator_url}/languages/#{@test_runner.language_slug}", {
+      settings: {
+        timeout_ms: @test_runner.timeout_ms,
+        container_slug: @test_runner.container_slug,
+        num_processors: @test_runner.num_processors
+      },
+    })
     redirect_to action: :index
   end
 

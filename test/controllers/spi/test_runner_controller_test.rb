@@ -2,16 +2,19 @@ require_relative './test_base'
 
 class SPI::SubmissionTestRunControllerTest < SPI::TestBase
   test "languages" do
+    create :infrastructure_test_runner, language_slug: "ruby", timeout_ms: 3000, container_slug: "foobar123", num_processors: 2
+    create :infrastructure_test_runner, language_slug: "javascript", timeout_ms: 5000, container_slug: "barfood987", num_processors: 1
+
     expected = {
       languages: {
         ruby: {
           timeout_ms: 3000,
-          container_version: "foobar123",
+          container_slug: "foobar123",
           num_processors: 2
         },
         javascript: {
           timeout_ms: 5000,
-          container_version: "barfood987",
+          container_slug: "barfood987",
           num_processors: 1
         },
       }
