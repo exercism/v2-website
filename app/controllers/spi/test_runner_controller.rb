@@ -5,7 +5,7 @@ module SPI
         h[tr.language_slug] = {
           timeout_ms: tr.timeout_ms,
           container_slug: tr.container_slug,
-          num_processors: 2
+          num_processors: tr.num_processors
         }
       end
 
