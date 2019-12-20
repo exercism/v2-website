@@ -61,6 +61,8 @@ Rails.application.routes.draw do
         member do
           patch :deploy
           patch :promote
+          patch :retire
+          patch :test
         end
       end
     end

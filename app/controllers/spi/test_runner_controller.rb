@@ -4,7 +4,7 @@ module SPI
       langs = Infrastructure::TestRunner.all.each_with_object({}) do |tr, h|
         h[tr.language_slug] = {
           timeout_ms: tr.timeout_ms,
-          container_slug: tr.version_slug,
+          version_slug: tr.version_slug,
           num_processors: tr.num_processors
         }
       end

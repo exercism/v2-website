@@ -12,7 +12,7 @@ class Admin::TestRunnersController < AdminController
 
   def show
     @test_runner = Infrastructure::TestRunner.find(params[:id])
-    InfrastructureServices::UpdateBuiltVersions.(@test_runner)
+    InfrastructureServices::UpdateBuiltTestRunnerVersions.(@test_runner)
   end
 
   def new
@@ -25,26 +25,13 @@ class Admin::TestRunnersController < AdminController
 
   def create
     @test_runner = Infrastructure::TestRunner.create!(params.require(:infrastructure_test_runner).permit!)
-    RestClient.post("#{orchestrator_url}/languages/#{@test_runner.language_slug}", {
-      settings: {
-        timeout_ms: @test_runner.timeout_ms,
-        container_slug: @test_runner.version_slug,
-        num_processors: @test_runner.num_processors
-      },
-    })
+
     redirect_to action: :index
   end
 
   def update
     @test_runner = Infrastructure::TestRunner.find(params[:id])
-    @test_runner.update(params.require(:infrastructure_test_runner).permit!)
-    RestClient.patch("#{orchestrator_url}/languages/#{@test_runner.language_slug}/settings", {
-      settings: {
-        timeout_ms: @test_runner.timeout_ms,
-        container_slug: @test_runner.version_slug
-      }
-    })
-    RestClient.patch("#{orchestrator_url}/languages/#{@test_runner.language_slug}/scale/#{@test_runner.num_processors}", {})
+    @test_runner.update!(params.require(:infrastructure_test_runner).permit!)
     redirect_to action: :index
   end
 
