@@ -1,7 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
-#admin-test-runners {
+#admin-test-runner {
     nav.breadcrumb {
         margin-bottom:20px;
     }
@@ -10,12 +10,24 @@
         @include font-size(18, 18);
         margin-bottom:20px;
     }
+    .field {
+        span:first-child {
+            font-weight:$fw-semibold;
+        }
+    }
     .pure-button {
+        margin-top:10px;
         background:$color-2;
         color:#fff;
     }
+    h2 {
+        font-weight:$fw-bold;
+        @include font-size(16, 18);
+        margin-top:20px;
+        margin-bottom:10px;
+    }
     table {
-        margin-bottom:20px;
+        margin-bottom:10px;
         th {
             padding:10px;
             font-weight:$fw-bold;
@@ -38,3 +50,4 @@
 
     }
 }
+

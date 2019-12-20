@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :infrastructure_test_runner_version, class: 'Infrastructure::TestRunnerVersion' do
+    
+  end
+
   factory :infrastructure_test_runner, class: 'Infrastructure::TestRunner' do
     language_slug { "ruby" }
     timeout_ms { 2000 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_152623) do
+ActiveRecord::Schema.define(version: 2019_12_20_131420) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -241,10 +241,20 @@ ActiveRecord::Schema.define(version: 2019_12_18_152623) do
     t.index ["user_id"], name: "fk_rails_7b8f6c3112"
   end
 
+  create_table "infrastructure_test_runner_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "test_runner_id", null: false
+    t.string "slug", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_infrastructure_test_runner_versions_on_slug", unique: true
+    t.index ["test_runner_id"], name: "fk_rails_63c05336de"
+  end
+
   create_table "infrastructure_test_runners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "language_slug", null: false
     t.integer "timeout_ms", null: false
-    t.string "container_slug", null: false
+    t.string "version_slug", null: false
     t.integer "num_processors", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -702,6 +712,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_152623) do
   add_foreign_key "exercises", "tracks"
   add_foreign_key "ignored_solution_mentorships", "solutions"
   add_foreign_key "ignored_solution_mentorships", "users"
+  add_foreign_key "infrastructure_test_runner_versions", "infrastructure_test_runners", column: "test_runner_id"
   add_foreign_key "iteration_analyses", "iterations"
   add_foreign_key "iteration_files", "iterations"
   add_foreign_key "maintainers", "tracks"
