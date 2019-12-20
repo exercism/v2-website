@@ -1,12 +1,13 @@
 FactoryBot.define do
   factory :infrastructure_test_runner_version, class: 'Infrastructure::TestRunnerVersion' do
-    
+    test_runner { create :infrastructure_test_runner }
+    slug { SecureRandom.uuid }
   end
 
   factory :infrastructure_test_runner, class: 'Infrastructure::TestRunner' do
     language_slug { "ruby" }
     timeout_ms { 2000 }
-    container_slug { SecureRandom.uuid }
+    version_slug { SecureRandom.uuid }
     num_processors { 3 }
   end
 

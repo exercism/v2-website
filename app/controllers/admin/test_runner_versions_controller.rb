@@ -43,10 +43,8 @@ class Admin::TestRunnerVersionsController < AdminController
 
   def test
     @version = @test_runner.versions.find(params[:id])
-    @test_results = {
-      solution_uuid: params[:solution_uuid]
-    }
-    render action: :show
+    @version.update(status: :tested)
+    redirect_to action: :show, id: @version
   end
 
   private
