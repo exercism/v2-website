@@ -35,6 +35,7 @@ gem 'rubyzip', require: false
 
 gem 'propono'
 gem 'aws-sdk-s3'
+gem 'aws-sdk-ecr'
 
 gem 'delayed_job_active_record'
 gem 'daemons'

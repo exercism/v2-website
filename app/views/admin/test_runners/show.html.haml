@@ -1,0 +1,36 @@
+#admin-test-runner
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+    %li= link_to "Test runners", admin_test_runners_path
+
+  .lo-container
+    %h1 Test Runner: #{@test_runner.language_slug}
+
+    .field
+      %span Timeout (ms):
+      %span= @test_runner.timeout_ms
+    .field
+      %span Live version:
+      %span= @test_runner.version_slug
+    .field
+      %span Num Processors:
+      %span= @test_runner.num_processors
+
+    =link_to "Edit Settings", edit_admin_test_runner_path(@test_runner), class: 'pure-button'
+
+    %h2 Versions
+
+    %table
+      %tr
+        %th Slug
+        %th Status
+        %th Options
+
+      -@test_runner.versions.each do |version|
+        %tr
+          %td= version.slug
+          %td= version.status.titleize
+          %td= link_to "Show", admin_test_runner_version_path(@test_runner, version)
+
+    =link_to "New version", new_admin_test_runner_version_path(@test_runner), class: 'pure-button'
+

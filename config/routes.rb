@@ -56,7 +56,14 @@ Rails.application.routes.draw do
       patch :replay, on: :member
     end
 
-    resources :test_runners, except: [:destroy]
+    resources :test_runners, except: [:destroy] do 
+      resources :versions, only: [:new, :create, :show], controller: "test_runner_versions" do
+        member do
+          patch :deploy
+          patch :promote
+        end
+      end
+    end
   end
 
   # ############### #

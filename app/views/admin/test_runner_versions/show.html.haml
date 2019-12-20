@@ -1,0 +1,22 @@
+#admin-test-runner
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+    %li= link_to "Test runners", admin_test_runners_path
+    %li= link_to @test_runner.language_slug, admin_test_runner_path(@test_runner)
+
+  .lo-container
+    %h1 Test Runner (#{@test_runner.language_slug}): #{@version.slug}
+
+    .field
+      %span Slug:
+      %span= @version.slug
+
+    .field
+      %span Status:
+      %span= @version.status.titleize
+
+    -if @version.built?
+      =button_to "Deploy", deploy_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
+
+    -if @version.tested?
+      =button_to "Promote to Live", promote_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'

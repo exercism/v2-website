@@ -1,4 +1,9 @@
 #admin-edit-test-runner
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+    %li= link_to "Test runners", admin_test_runners_path
+    %li= link_to @test_runner.language_slug, admin_test_runner_path(@test_runner)
+
   .lo-container
     %h1 Edit Test Runner: #{@test_runner.language_slug}
     =form_with model: @test_runner, url: admin_test_runner_path(@test_runner), data: {remote: false} do |f|
@@ -6,8 +11,8 @@
         =f.label :timeout_ms
         =f.text_field :timeout_ms
       .field
-        =f.label :container_slug
-        =f.text_field :container_slug
+        =f.label :version_slug
+        =f.text_field :version_slug
       .field
         =f.label :num_processors
         =f.text_field :num_processors
