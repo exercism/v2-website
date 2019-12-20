@@ -2,7 +2,7 @@ class Infrastructure::TestRunner < ApplicationRecord
   has_many :versions, class_name: "TestRunnerVersion"
 
   before_create do
-    self.num_processors = 0
+    self.num_processors = 0 unless self.num_processors
   end
 
   after_create do
