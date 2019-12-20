@@ -1,5 +1,5 @@
 module InfrastructureServices
-  class UpdateBuiltVersions
+  class UpdateBuiltTestRunnerVersions
     include Mandate
 
     initialize_with :test_runner

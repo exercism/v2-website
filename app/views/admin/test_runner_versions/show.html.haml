@@ -15,8 +15,21 @@
       %span Status:
       %span= @version.status.titleize
 
+    -if @version.deployed?
+
+      %h2 Test your solution
+      =form_with url: test_admin_test_runner_version_path, data: {remote: false}, method: :patch do
+        =text_field_tag :solution_uuid, @test_results[:solution_uuid], placeholder: "Solution UUID"
+        =button_tag "Test solution", class: 'pure-button'
+
+    %h2 Options
+
     -if @version.built?
-      =button_to "Deploy", deploy_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
+      =link_to "Deploy", deploy_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
 
     -if @version.tested?
-      =button_to "Promote to Live", promote_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
+      =link_to "Promote to Live", promote_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to promote this to live?"}
+
+    -unless @version.live? || @version.retired?
+      =link_to "Retire", retire_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to retire?"}
+

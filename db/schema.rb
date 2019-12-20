@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_20_131420) do
+ActiveRecord::Schema.define(version: 2019_12_20_152641) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -254,7 +254,7 @@ ActiveRecord::Schema.define(version: 2019_12_20_131420) do
   create_table "infrastructure_test_runners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "language_slug", null: false
     t.integer "timeout_ms", null: false
-    t.string "version_slug", null: false
+    t.string "version_slug"
     t.integer "num_processors", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
