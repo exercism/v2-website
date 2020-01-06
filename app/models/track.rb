@@ -52,7 +52,7 @@ class Track < ApplicationRecord
 
   def accepting_new_students?
     # Some exceptions
-    return true if %w{mips}.include?(slug)
+    return true if %w{mips delphi}.include?(slug)
 
     # Then check we have a median time and it's reasonable
     median_wait_time && median_wait_time < 1.week
