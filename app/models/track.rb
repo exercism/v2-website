@@ -51,10 +51,11 @@ class Track < ApplicationRecord
   end
 
   def accepting_new_students?
-    # Some exceptions
-    return true if %w{mips delphi}.include?(slug)
+    # Always return true if there are < 10 solutions in the queue
+    return true if SolutionsToBeMentored.new(nil, [id], []).mentored_core_solutions.count < 10
 
-    # Then check we have a median time and it's reasonable
+    # If we have a median time then use it as the guage
+    # If there's a queue and we're over the median then the track is out of order
     median_wait_time && median_wait_time < 1.week
   end
 end
