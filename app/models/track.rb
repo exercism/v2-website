@@ -51,10 +51,10 @@ class Track < ApplicationRecord
   end
 
   def accepting_new_students?
-    # Some exceptions
-    return true if %w{mips}.include?(slug)
+    # If we have a median time then use it as the guage
+    return median_wait_time < 1.week if median_wait_time 
 
-    # Then check we have a median time and it's reasonable
-    median_wait_time && median_wait_time < 1.week
+    # Otherwise check whether there are <20 in the queue
+    SolutionsToBeMentored.new(nil, [id], []).mentored_core_solutions.count < 10
   end
 end
