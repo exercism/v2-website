@@ -13,13 +13,17 @@ module TrackServices
       create_solution_with_wait_time(wait_time: 3.days, track: track2)
       create_solution_with_wait_time(wait_time: 4.days, track: track2)
       create_solution_with_wait_time(wait_time: 5.days, track: track2)
+      track3 = create(:track, median_wait_time: 100)
 
       TrackServices::UpdateMedianWaitTime.()
 
       track1.reload
-      assert_equal 3.days, track1.median_wait_time
+      assert_equal 3.days, track1.reload.median_wait_time
       track2.reload
-      assert_equal 3.5.days, track2.median_wait_time
+      assert_equal 3.5.days, track2.reload.median_wait_time
+
+      # sets median wait time to nil if there are no solutions
+      assert_nil track3.reload.median_wait_time
     end
 
     private
