@@ -4,9 +4,16 @@ class Admin::TestRunnerVersionsController < AdminController
 
   def show
     @version = @test_runner.versions.find(params[:id])
-    @test_results = {}
+    @samples = User.system_user.submissions.where("submissions.uuid LIKE '#{@version.samples_uuid_prefix}%'")
 
     InfrastructureServices::UpdateBuiltTestRunnerVersions.(@test_runner)
+
+  end
+
+  def test
+    @version = @test_runner.versions.find(params[:id])
+    @solution = User.system_user.solutions.find_by_uuid("internal-#{@version.slug}")
+    (@file1, @file2) = @solution.try {|s|s.submissions.last.try(&:files) }.to_a
   end
 
   def new
@@ -41,7 +48,7 @@ class Admin::TestRunnerVersionsController < AdminController
     redirect_to action: :show, id: @version
   end
 
-  def test
+  def tested
     @version = @test_runner.versions.find(params[:id])
     @version.update(status: :tested)
     redirect_to action: :show, id: @version

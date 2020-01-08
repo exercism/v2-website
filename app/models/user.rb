@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :tracks, through: :user_tracks
   has_many :solutions, dependent: :destroy
   has_many :iterations, through: :solutions
+  has_many :submissions, through: :solutions
 
   has_many :team_solutions, dependent: :destroy
   has_many :team_iterations, through: :team_solutions, source: :iterations

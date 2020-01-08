@@ -49,5 +49,23 @@
         }
 
     }
+    .testing-form {
+        .field {
+            display:block;
+            margin-bottom:20px;
+            label {
+                display:block;
+            }
+            input {
+                width:250px;
+            }
+            textarea {
+                width:100%;
+                height:250px;
+                padding:10px;
+                @include font-size(14, 19);
+            }
+        }
+    }
 }
 
