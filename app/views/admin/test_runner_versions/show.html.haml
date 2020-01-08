@@ -21,7 +21,7 @@
       =link_to "Deploy", deploy_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
 
     -if @version.deployed?
-      =link_to "Mark as tested", test_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
+      =link_to "Mark as tested", tested_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
 
     -if @version.tested?
       =link_to "Promote to Live", promote_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to promote this to live?"}
@@ -29,3 +29,22 @@
     -unless @version.live? || @version.retired?
       =link_to "Retire", retire_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to retire?"}
 
+    %h2 Samples
+
+    %table
+      %tr
+        %th ID
+        %th Created At
+        %th Status
+
+      -@samples.each do |sample|
+        %tr
+          %td= sample.uuid.split('-').last
+          %td= sample.created_at
+          %td
+            -if sample.test_run
+              sample.test_run.ops_status
+            -else
+              Not yet responded
+
+    =link_to "Test new sample", new_admin_test_runner_version_sample_path(@test_runner, @version), class: 'pure-button'

@@ -40,6 +40,10 @@ class Infrastructure::TestRunnerVersion < ApplicationRecord
     end
   end
 
+  def samples_uuid_prefix
+    "internal#test-runner-version##{slug}-"
+  end
+
   private
   def orchestrator_url
     Rails.application.secrets.test_runner_orchestrator_url
