@@ -3,7 +3,6 @@
     %li= link_to "Admin", admin_dashboard_path
     %li= link_to "Test runners", admin_test_runners_path
     %li= link_to @test_runner.language_slug, admin_test_runner_path(@test_runner)
-    %li= link_to "Versions", admin_test_runner_versions_path(@test_runner)
     %li= link_to "Version #{@version.slug}", admin_test_runner_version_path(@test_runner, @version)
 
   .lo-container

@@ -24,13 +24,12 @@
       %tr
         %th Slug
         %th Status
-        %th{colspan: 2} Options
+        %th Options
 
       -@test_runner.versions.not_retired.each do |version|
         %tr
           %td= version.slug
           %td= version.status.titleize
           %td= link_to "Show", admin_test_runner_version_path(@test_runner, version)
-          %td= link_to "Test", test_admin_test_runner_version_path(@test_runner, version)
 
     =link_to "New version", new_admin_test_runner_version_path(@test_runner), class: 'pure-button'
