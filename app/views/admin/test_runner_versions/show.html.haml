@@ -47,6 +47,6 @@
               =sample.test_run.ops_status
             -else
               Not yet responded
-          %td= link_to "View", admin_test_runner_version_sample_path(@test_runner, @version, sample.uuid), class: 'pure-button'
+          %td= link_to "View", admin_test_runner_version_sample_path(@test_runner, @version, sample.uuid.split('-').last), class: 'pure-button'
 
     =link_to "Test new sample", new_admin_test_runner_version_sample_path(@test_runner, @version), class: 'pure-button'
