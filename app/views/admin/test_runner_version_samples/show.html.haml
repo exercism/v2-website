@@ -9,14 +9,13 @@
     %h1 Sample #{@submission.uuid.split("-").last}
 
     -if @submission.test_run
-      .status
-        %h3 Ops Status
-        #{@submission.test_run.ops_status}
-      .status
-        %h3 Ops Message
-        #{@submission.test_run.ops_message}
+      %h2 Ops Status
+      #{@submission.test_run.ops_status}
 
-      %h3 Results
+      %h2 Ops Message
+      #{@submission.test_run.ops_message}
+
+      %h2 Results
       %pre
         %code
           =@submission.test_run.results
