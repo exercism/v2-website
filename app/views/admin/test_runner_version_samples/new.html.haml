@@ -12,22 +12,22 @@
       =form_with url: admin_test_runner_version_samples_path(@test_runner, @version), method: :post, data: {remote: false} do |f|
         .field
           =f.label :exercise_id
-          =f.select :exercise_id, @exercises
+          =f.select :exercise_id, @exercises, selected: @previous_exercise_id
 
         .field
           =f.label :file_1_filename
-          =f.text_field :file_1_filename, value: @file1.try{|f|f[0]}
+          =f.text_field :file_1_filename, value: @previous_file_1.try{|f|f[0]}
 
         .field
           =f.label :file_1_code
-          =f.text_area :file_1_code, value: @file1.try{|f|f[1]}
+          =f.text_area :file_1_code, value: @previous_file_1.try{|f|f[1]}
 
         .field
           =f.label :file_2_filename
-          =f.text_field :file_2_filename, value: @file2.try{|f|f[0]}
+          =f.text_field :file_2_filename, value: @previous_file_2.try{|f|f[0]}
 
         .field
           =f.label :file_2_code
-          =f.text_area :file_2_code, value: @file2.try{|f|f[1]}
+          =f.text_area :file_2_code, value: @previous_file_2.try{|f|f[1]}
 
         =button_tag "Submit for testing", class: 'pure-button'

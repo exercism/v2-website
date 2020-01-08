@@ -11,7 +11,7 @@
     -if @submission.test_run
       .status
         %h3 Ops Status
-        #{@submission.test_run.ops_status.titleize}
+        #{@submission.test_run.ops_status}
       .status
         %h3 Ops Message
         #{@submission.test_run.ops_message}
@@ -19,7 +19,7 @@
       %h3 Results
       %pre
         %code
-          -@submission.test_run.results
+          =@submission.test_run.results
 
     -else
       No test run yet. Please hammer refresh at will.

@@ -4,7 +4,8 @@ class Admin::TestRunnerVersionSamplesController < AdminController
   def new
     @submission = User.system_user.submissions.where("submissions.uuid LIKE '#{@version.samples_uuid_prefix}%'").first
     @exercises = Track.find_by_slug!(@test_runner.language_slug).exercises.reorder(:title).map{|e|[e.title, e.id]}
-    (@file1, @file2) = @submission.try(&:files).to_a
+    @previous_exercise_id = @submission.try(&:solution).try(&:exercise_id)
+    (@previous_file_1, @previous_file_2) = @submission.try(&:files).to_a
   end
 
   def create
