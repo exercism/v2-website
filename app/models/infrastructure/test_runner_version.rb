@@ -41,7 +41,7 @@ class Infrastructure::TestRunnerVersion < ApplicationRecord
   end
 
   def samples_uuid_prefix
-    "internal#test-runner-version##{slug}-"
+    "internal-test-runner-version-#{slug}-"
   end
 
   private
