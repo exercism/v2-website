@@ -6,11 +6,11 @@ class SwitchTrackToMentoredModeTest < ActiveSupport::TestCase
     track = create :track
     ut = create :user_track, user: user, track: track, independent_mode: nil
 
-    track.update(median_wait_time: 2.weeks)
+    track.stubs(accepting_new_students?: false)
     SwitchTrackToMentoredMode.(user, track)
     assert_nil ut.reload.independent_mode
 
-    track.update(median_wait_time: 2.days)
+    track.stubs(accepting_new_students?: true)
     SwitchTrackToMentoredMode.(user, track)
     refute ut.reload.independent_mode
   end
