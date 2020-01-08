@@ -18,7 +18,8 @@ class UserSwitchesTrackModeTest < ApplicationSystemTestCase
 
   test 'switch to mentor mode is disabled if track is oversubscribed' do
     user = create(:user, :onboarded)
-    track = create(:track, title: "Ruby", median_wait_time: 1.year)
+    track = create(:track, title: "Ruby")
+    Track.any_instance.stubs(accepting_new_students?: false)
     user_track = create :user_track, user: user, track: track, independent_mode: true
 
     sign_in!(user)
