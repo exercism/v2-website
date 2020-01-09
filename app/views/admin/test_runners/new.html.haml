@@ -7,6 +7,6 @@
         =f.select :language_slug, Track.active.map(&:slug).sort
       .field
         =f.label :timeout_ms
-        =f.text_field :timeout_ms
+        =f.text_field :timeout_ms, required: true
 
       =f.button "Add test runner", class: 'pure-button'
