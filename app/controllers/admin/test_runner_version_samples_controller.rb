@@ -26,6 +26,11 @@ class Admin::TestRunnerVersionSamplesController < AdminController
     @submission = User.system_user.submissions.find_by_uuid!("#{@version.samples_uuid_prefix}#{params[:id]}")
   end
 
+  def replay
+    @submission = User.system_user.submissions.find_by_uuid!("#{@version.samples_uuid_prefix}#{params[:id]}")
+    SubmissionServices::RunTests.(@submission.uuid, @submission.solution)
+  end
+
   private
   def set_test_runner_version
     @test_runner = Infrastructure::TestRunner.find(params[:test_runner_id])

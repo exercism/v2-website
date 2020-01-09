@@ -64,7 +64,11 @@ Rails.application.routes.draw do
           patch :retire
           patch :tested
         end
-        resources :samples, only: [:new, :create, :show], controller: "test_runner_version_samples"
+        resources :samples, only: [:new, :create, :show], controller: "test_runner_version_samples" do
+          member do
+            patch :replay
+          end
+        end
       end
     end
   end
