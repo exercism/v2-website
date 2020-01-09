@@ -5,7 +5,7 @@ class Submission < ApplicationRecord
   delegate :tests_info, to: :solution
 
   def broadcast!
-    return unless solution.research_experiment_solution
+    return unless solution.research_experiment_solution?
 
     BroadcastSubmissionJob.perform_now(self)
   end
