@@ -31,7 +31,7 @@ class Admin::TestRunnerVersionSamplesController < AdminController
 
     uuid = SecureRandom.uuid.gsub('-', '')
     faux_uuid = "#{@version.samples_uuid_prefix}#{uuid}"
-    SubmissionServices::Create.(faux_uuid, @submission.solution, @submission.files)
+    SubmissionServices::Create.(faux_uuid, @submission.solution, @submission.files, @version.slug)
 
     redirect_to action: :show, id: uuid
   end
