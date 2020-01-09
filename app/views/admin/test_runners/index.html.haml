@@ -24,7 +24,7 @@
           %td.right
             DB: #{test_runner.version_slug}
             %br
-            LV: #{orchestrator_data ? orchestrator_data[:settings][:version_slug] : "N/A"}
+            LV: #{orchestrator_data ? orchestrator_data[:settings][:version_slug].gsub("git-", '') : "N/A"}
 
           %td.right
             DB: #{test_runner.num_processors}

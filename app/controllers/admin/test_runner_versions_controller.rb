@@ -7,7 +7,6 @@ class Admin::TestRunnerVersionsController < AdminController
     @samples = User.system_user.submissions.where("submissions.uuid LIKE '#{@version.samples_uuid_prefix}%'")
 
     InfrastructureServices::UpdateBuiltTestRunnerVersions.(@test_runner)
-
   end
 
   def test
