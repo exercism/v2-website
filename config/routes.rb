@@ -66,7 +66,7 @@ Rails.application.routes.draw do
         end
         resources :samples, only: [:new, :create, :show], controller: "test_runner_version_samples" do
           member do
-            patch :replay
+            post :replay
           end
         end
       end

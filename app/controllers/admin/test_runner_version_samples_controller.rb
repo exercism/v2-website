@@ -28,7 +28,12 @@ class Admin::TestRunnerVersionSamplesController < AdminController
 
   def replay
     @submission = User.system_user.submissions.find_by_uuid!("#{@version.samples_uuid_prefix}#{params[:id]}")
-    SubmissionServices::RunTests.(@submission.uuid, @submission.solution)
+
+    uuid = SecureRandom.uuid.gsub('-', '')
+    faux_uuid = "#{@version.samples_uuid_prefix}#{uuid}"
+    SubmissionServices::Create.(faux_uuid, @submission.solution, @submission.files)
+
+    redirect_to action: :show, id: uuid
   end
 
   private

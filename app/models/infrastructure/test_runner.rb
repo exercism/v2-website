@@ -25,9 +25,11 @@ class Infrastructure::TestRunner < ApplicationRecord
     RestClient.patch("#{orchestrator_url}/languages/#{language_slug}/scale/#{num_processors}", {})
   end
 
-  def deploy_versions!
+  def deploy_versions!(append_new_version: nil)
+    slugs = versions.deployed_tested_or_live.map(&:slug)
+    slugs << append_new_version if append_new_version
     RestClient.patch("#{orchestrator_url}/languages/#{language_slug}/versions/deploy", {
-      versions_slug: versions.deployed_tested_or_live.map(&:slug)
+      version_slugs: slugs
     })
   end
 

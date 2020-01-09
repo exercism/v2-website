@@ -19,7 +19,7 @@ class Infrastructure::TestRunnerVersion < ApplicationRecord
   end
 
   def deploy!
-    test_runner.deploy_versions!
+    test_runner.deploy_versions!(append_new_version: slug)
     update(status: :deploying)
   end
 
