@@ -23,7 +23,7 @@ class SyncContributors
 
     Contributor.where(github_username: Maintainer.select(:github_username)).update_all(is_maintainer: true)
     Contributor.where(github_username: %w{
-      kytrinyx iHiD ccare nicolechalmers erikschierboom
+      kytrinyx iHiD ccare nicolechalmers kntsoriano erikschierboom
     }).update_all(is_core: true)
   end
 end
