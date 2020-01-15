@@ -30,7 +30,7 @@ class TracksController < ApplicationController
 
   def maintainers
     @track = Track.find(params[:id])
-    @maintainers = @track.maintainers
+    @maintainers = @track.maintainers.visible
   end
 
   def mentors
