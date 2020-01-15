@@ -74,7 +74,7 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
     #p Benchmark.measure { 1000.times { FixUnlockingInUserTrack.(user_track) } }.real
   end
 
-  test "submitted core solutions have mentoring_requested_at set" do
+  test "in mentored_mode submitted core solutions have mentoring_requested_at set" do
     git_sha = SecureRandom.uuid
     Git::ExercismRepo.stubs(current_head: git_sha)
 
@@ -94,7 +94,7 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
     c4_sol = create :solution, exercise: c4, user: user
     create :iteration, solution: c4_sol
 
-    user_track = create :user_track, user: user, track: track
+    user_track = create :user_track, user: user, track: track, independent_mode: false
     FixUnlockingInUserTrack.(user_track)
 
     actual = user_track.solutions
@@ -107,4 +107,39 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
     assert Solution.find_by(user: user, exercise: c3).mentoring_requested_at?
     assert Solution.find_by(user: user, exercise: c4).mentoring_requested_at?
   end
+
+  test "in independent_mode only one exercise should have mentoring requested at" do
+    git_sha = SecureRandom.uuid
+    Git::ExercismRepo.stubs(current_head: git_sha)
+
+    user = create :user
+    track = create :track
+    c1 = create :exercise, track: track, core: true, position: 1
+    c2 = create :exercise, track: track, core: true, position: 2
+    c3 = create :exercise, track: track, core: true, position: 3
+    c4 = create :exercise, track: track, core: true, position: 4
+
+    c1_sol = create :solution, exercise: c1, approved_by: create(:user), completed_at: Time.now - 1.day, user: user
+    create :iteration, solution: c1_sol
+
+    c3_sol = create :solution, exercise: c3, user: user, mentoring_requested_at: Time.now - 1.day
+    create :iteration, solution: c3_sol
+
+    c4_sol = create :solution, exercise: c4, user: user, mentoring_requested_at: Time.now - 1.day
+    create :iteration, solution: c4_sol
+
+    user_track = create :user_track, user: user, track: track, independent_mode: true
+    FixUnlockingInUserTrack.(user_track)
+
+    actual = user_track.solutions
+    assert actual.include?(c1_sol)
+    assert actual.include?(c3_sol)
+
+    expected_exercises = [c1,c3,c4].map(&:id).sort
+    assert_equal expected_exercises, user_track.solutions.map(&:exercise_id).sort
+
+    assert Solution.find_by(user: user, exercise: c3).mentoring_requested_at?
+    refute Solution.find_by(user: user, exercise: c4).mentoring_requested_at?
+  end
+
 end
