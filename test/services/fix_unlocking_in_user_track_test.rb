@@ -114,32 +114,38 @@ class FixUnlockingInUserTrackTest < ActiveSupport::TestCase
 
     user = create :user
     track = create :track
-    c1 = create :exercise, track: track, core: true, position: 1
-    c2 = create :exercise, track: track, core: true, position: 2
-    c3 = create :exercise, track: track, core: true, position: 3
-    c4 = create :exercise, track: track, core: true, position: 4
+    c1 = create :exercise, track: track
+    c2 = create :exercise, track: track
+    c3 = create :exercise, track: track
+    c4 = create :exercise, track: track
+    c5 = create :exercise, track: track
 
-    c1_sol = create :solution, exercise: c1, approved_by: create(:user), completed_at: Time.now - 1.day, user: user
+    c1_sol = create :solution, exercise: c1, mentoring_requested_at: Time.now - 1.day, approved_by: create(:user), user: user
     create :iteration, solution: c1_sol
 
-    c3_sol = create :solution, exercise: c3, user: user, mentoring_requested_at: Time.now - 1.day
+    c2_sol = create :solution, exercise: c2, mentoring_requested_at: Time.now - 1.day, completed_at: Time.now - 1.day, user: user
+    create :iteration, solution: c2_sol
+
+    c3_sol = create :solution, exercise: c3, user: user
     create :iteration, solution: c3_sol
 
     c4_sol = create :solution, exercise: c4, user: user, mentoring_requested_at: Time.now - 1.day
     create :iteration, solution: c4_sol
 
+    c5_sol = create :solution, exercise: c5, user: user, mentoring_requested_at: Time.now - 1.day, num_mentors: 1
+    create :iteration, solution: c5_sol
+
     user_track = create :user_track, user: user, track: track, independent_mode: true
     FixUnlockingInUserTrack.(user_track)
 
     actual = user_track.solutions
-    assert actual.include?(c1_sol)
-    assert actual.include?(c3_sol)
-
-    expected_exercises = [c1,c3,c4].map(&:id).sort
+    expected_exercises = [c1,c2,c3,c4,c5].map(&:id).sort
     assert_equal expected_exercises, user_track.solutions.map(&:exercise_id).sort
 
-    assert Solution.find_by(user: user, exercise: c3).mentoring_requested_at?
+    assert Solution.find_by(user: user, exercise: c1).mentoring_requested_at?
+    assert Solution.find_by(user: user, exercise: c1).mentoring_requested_at?
+    refute Solution.find_by(user: user, exercise: c3).mentoring_requested_at?
     refute Solution.find_by(user: user, exercise: c4).mentoring_requested_at?
+    assert Solution.find_by(user: user, exercise: c5).mentoring_requested_at?
   end
-
 end

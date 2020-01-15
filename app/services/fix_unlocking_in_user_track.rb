@@ -20,7 +20,12 @@ class FixUnlockingInUserTrack
 
   # We want to just have one solution submitted for mentoring at this point
   def process_independent
-    requested = user_track.solutions.where.not(mentoring_requested_at: nil).to_a
+    requested = user_track.solutions.not_approved.
+                                     not_completed.
+                                     where.not(mentoring_requested_at: nil).
+                                     order("num_mentors DESC").
+                                     to_a
+
     max = UserTrack::MAX_INDEPENDENT_MODE_MENTORING_SLOTS
 
     if requested.size > max
