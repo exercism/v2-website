@@ -7,7 +7,7 @@ module SubmissionServices
       mapped_uuid1 = "uuid-1"
       mapped_uuid2 = "uuid-2"
 
-      solution = create :solution
+      solution = create :research_experiment_solution
       code = "foobar"
       filename1 = "foobar"
       filename2 = "barfoo"
@@ -24,7 +24,7 @@ module SubmissionServices
 
       UploadToS3ForTesting.expects(:call).with(uuid, solution, solution.track, files)
       UploadToS3ForStorage.expects(:call).with(uuid, mapped_files)
-      RunTests.expects(:call).with(uuid, solution)
+      RunTests.expects(:call).with(uuid, solution, nil)
 
       Create.(uuid, solution, files)
 
