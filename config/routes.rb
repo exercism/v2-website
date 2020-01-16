@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   # SPI #
   # ### #
   namespace :spi do
-    post "submissions/:submission_uuid/test_runs" => "submission_test_runs#create", as: :submission_test_runs
+    get "test_runner/languages" => "test_runner#languages"
+    get "test_runner/submissions_to_test" => "test_runner#submissions_to_test"
+    post "test_runner/submission_tested/:submission_uuid" => "test_runner#submission_tested"
   end
 
   # ##### #
@@ -49,12 +51,31 @@ Rails.application.routes.draw do
         resources :exercises, only: [:show]
       end
     end
+
+    resources :analyses do
+      patch :replay, on: :member
+    end
+
+    resources :test_runners, except: [:destroy] do
+      resources :versions, only: [:new, :create, :show], controller: "test_runner_versions" do
+        member do
+          patch :deploy
+          patch :promote
+          patch :retire
+          patch :tested
+        end
+        resources :samples, only: [:new, :create, :show], controller: "test_runner_version_samples" do
+          member do
+            post :replay
+          end
+        end
+      end
+    end
   end
 
   # ############### #
   # Changelog admin #
   # ############### #
-
   namespace :changelog_admin do
     resources :entries do
       post :publish, on: :member
@@ -93,9 +114,6 @@ Rails.application.routes.draw do
     end
     resources :discussion_posts, only: [:create]
     resource :exercise_notes, only: [:show, :new], controller: "exercise_notes"
-    resources :analyses do
-      patch :replay, on: :member
-    end
   end
 
   # ######## #

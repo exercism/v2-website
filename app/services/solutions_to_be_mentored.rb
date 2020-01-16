@@ -78,6 +78,8 @@ class SolutionsToBeMentored
   end
 
   def base_user_query
+    return base_query unless user
+
     base_query.
 
       # Not things you already mentor

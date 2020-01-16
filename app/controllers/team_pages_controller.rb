@@ -8,9 +8,7 @@ class TeamPagesController < ApplicationController
     @page = params[:page]
     @maintainers_last_updated_at = Maintainer.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @maintainers = Maintainer.visible.reorder(Arel.sql('name ASC')).
-                                      page(@page).
-                                      group(:github_username).
-                                      per(40)
+                                      group(:github_username)
   end
 
   def mentors
@@ -26,7 +24,7 @@ class TeamPagesController < ApplicationController
     @page = params[:page]
     @last_updated_at = Contributor.order('updated_at DESC').limit(1).pluck(:updated_at)[0].to_i
     @contributors = Contributor.where.not(is_core: true).
-                                where.not(is_maintainer: true).
+                                #where.not(is_maintainer: true).
                                 order("num_contributions DESC").
                                 page(@page).
                                 per(60)

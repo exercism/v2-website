@@ -12,10 +12,11 @@ module SubmissionServices
   class Create
     include Mandate
 
-    def initialize(uuid, solution, files)
+    def initialize(uuid, solution, files, version_slug = nil)
       @uuid = uuid
       @solution = solution
       @track = solution.track
+      @version_slug = version_slug
 
       @files = files
       @filename_mapping = files.each_with_object({}) do |(filename, _), h|
@@ -42,12 +43,12 @@ module SubmissionServices
     end
 
     private
-    attr_reader :uuid, :solution, :track, :files, :filename_mapping
+    attr_reader :uuid, :solution, :files, :version_slug, :track, :filename_mapping
 
     # This method must NOT access the database
     def upload_for_test_running
       UploadToS3ForTesting.(uuid, solution, track, files)
-      RunTests.(uuid, solution)
+      RunTests.(uuid, solution, version_slug)
     end
 
     # This method must NOT access the database

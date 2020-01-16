@@ -1,4 +1,6 @@
 class Admin::Data::TracksController < AdminController
+  before_action :restrict_to_admins!
+
   def index
     @tracks = Track.order('title ASC')
   end

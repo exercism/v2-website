@@ -6,6 +6,8 @@ class SwitchTrackToIndependentMode
   def call
     user_track.update(independent_mode: true)
     user_track.solutions.update_all(track_in_independent_mode: true)
+
+    FixUnlockingInUserTrack.(user_track)
   end
 
   memoize

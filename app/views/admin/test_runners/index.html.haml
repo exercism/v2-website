@@ -1,0 +1,40 @@
+#admin-test-runners
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+
+  .lo-container
+    %h1 Test Runners
+    %table
+      %tr
+        %th Language
+        %th.right Timeout (ms)
+        %th.right Live version
+        %th.right Num Processors
+        %th Options
+
+      -@test_runners.each do |test_runner|
+        - orchestrator_data = @orchestrator_status[test_runner.language_slug]
+        %tr
+          %td= test_runner.language_slug
+          %td.right
+            DB: #{test_runner.timeout_ms}
+            %br
+            Lv: #{orchestrator_data ? orchestrator_data[:settings][:timeout_ms] : "N/A"}
+
+          %td.right
+            DB: #{test_runner.version_slug}
+            %br
+            LV: #{orchestrator_data && orchestrator_data[:settings][:version_slug].present? ? orchestrator_data[:settings][:version_slug].gsub("git-", '') : "N/A"}
+
+          %td.right
+            DB: #{test_runner.num_processors}
+            %br
+            LV: #{orchestrator_data ? orchestrator_data[:num_processors] : "N/A"}
+
+          %td
+            = link_to "Show", admin_test_runner_path(test_runner)
+            -if current_user.admin?
+              = link_to "Edit", edit_admin_test_runner_path(test_runner)
+
+    -if current_user.admin?
+      =link_to "New test runner", [:new, :admin, :test_runner], class: 'pure-button'

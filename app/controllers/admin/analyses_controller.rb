@@ -1,4 +1,4 @@
-class Mentor::AnalysesController < MentorController
+class Admin::AnalysesController < AdminController
   def index
     @tracks = Track.where(id: IterationAnalysis.joins(iteration: {person_solution: :exercise}).where('iterations.solution_type': "Solution").select("exercises.track_id"))
 

@@ -3,7 +3,8 @@ require "test_helper"
 class MentorFeedbackRequestTest < ActiveSupport::TestCase
   test "#status returns :oversubscribed when user track is oversubscribed" do
     user = create(:user)
-    track = create(:track, median_wait_time: 2.weeks)
+    track = create(:track)
+    track.stubs(accepting_new_students?: false)
     exercise = create(:exercise, track: track, core: true)
     create(:user_track, track: track, user: user)
     solution = create(:solution, user: user, exercise: exercise)

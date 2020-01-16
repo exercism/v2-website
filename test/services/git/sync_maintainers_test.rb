@@ -88,7 +88,38 @@ class Git::SyncMaintainersTest < ActiveSupport::TestCase
     assert_nil @track.maintainers.first.alumnus
   end
 
-  test "drops maintainers with no gh_user or show_on_website" do
+  test "show_on_website field defaults to false if nil" do
+    maintainers_config = {
+      maintainers: [
+        {
+          github_username: "jo1",
+          name: "Joanne Bloggs",
+        }
+      ]
+    }
+    Git::SyncMaintainers.(@track, maintainers_config)
+
+    refute @track.maintainers.first.visible?
+  end
+
+  test "honours show_on_website field beig false" do
+    maintainers_config = {
+      maintainers: [
+        {
+          github_username: "jo1",
+          name: "Joanne Bloggs",
+          show_on_website: false
+        }
+      ]
+    }
+    Git::SyncMaintainers.(@track, maintainers_config)
+
+    refute @track.maintainers.first.visible?
+  end
+
+
+
+  test "drops maintainers with no gh_user" do
     maintainers_config = {
       maintainers: [
         {
@@ -98,38 +129,11 @@ class Git::SyncMaintainersTest < ActiveSupport::TestCase
           link_text: "My Website",
           link_url: "http://example.com/jo",
           avatar_url: "http://example.com/jo/avatar"
-        },
-        {
-          github_username: "example",
-          name: "Joe Bloggs",
-          bio: "I'm a geek",
-          link_text: "My Website",
-          link_url: "http://example.com/jo",
-          avatar_url: "http://example.com/jo/avatar"
         }
       ]
     }
     Git::SyncMaintainers.(@track, maintainers_config)
     assert_empty @track.maintainers
-  end
-
-  test "drops maintainers that are not set to show_on_website" do
-    maintainers_config = {
-      maintainers: [
-        {
-          github_username: "example_jb1",
-          name: "Joanne Bloggs",
-          show_on_website: false
-        },
-        {
-          github_username: "example_jb2",
-          name: "Joseph Bloggs",
-          show_on_website: true
-        }
-      ]
-    }
-    Git::SyncMaintainers.(@track, maintainers_config)
-    assert_equal 1, @track.maintainers.size
   end
 
   test "adds single maintainer and populates all fields" do
@@ -215,14 +219,14 @@ class Git::SyncMaintainersTest < ActiveSupport::TestCase
       maintainers: [
         {
           github_username: "jo1",
-          show_on_website: false,
           name: "Joanne Bloggs"
         }
       ]
     }
     Git::SyncMaintainers.(@track, maintainers_config)
 
-    assert_empty @track.maintainers
+    assert_equal 1, @track.maintainers.size
+    assert_equal "jo1", @track.maintainers.first.github_username
   end
 
   test "avatar_url defaults to your GitHub avatar if null or absent" do

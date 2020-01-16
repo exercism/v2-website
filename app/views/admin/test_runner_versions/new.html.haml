@@ -1,0 +1,10 @@
+#admin-new-test-runner
+  .lo-container
+    %h1 New Test Runner Version (#{@test_runner.language_slug})
+    =form_with model: @version, url: admin_test_runner_versions_path(@test_runner), data: {remote: false} do |f|
+      .field
+        =f.label :slug
+        =f.text_field :slug
+
+      =f.button "Add test runner version", class: 'pure-button'
+

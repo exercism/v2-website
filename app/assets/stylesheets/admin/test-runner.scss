@@ -1,0 +1,71 @@
+@import 'variables';
+@import 'mixins';
+
+#admin-test-runner {
+    nav.breadcrumb {
+        margin-bottom:20px;
+    }
+    h1 {
+        font-weight:$fw-bold;
+        @include font-size(18, 18);
+        margin-bottom:20px;
+    }
+    .field {
+        span:first-child {
+            font-weight:$fw-semibold;
+        }
+    }
+    .pure-button {
+        margin-top:10px;
+        background:$color-2;
+        color:#fff;
+    }
+    h2 {
+        font-weight:$fw-bold;
+        @include font-size(16, 18);
+        margin-top:20px;
+        margin-bottom:10px;
+    }
+    table {
+        margin-bottom:10px;
+        th {
+            padding:10px;
+            font-weight:$fw-bold;
+            border-bottom:1px solid #aaa;
+            text-align:left;
+        }
+        td {
+            padding:10px 15px;
+            border-bottom:1px solid #ddd;
+            border-right:1px solid #eee;
+            &:last-child {
+                border-right:none;
+            }
+        }
+        th, td {
+            &.right {
+                text-align:right;
+            }
+        }
+
+    }
+    .testing-form {
+        .field {
+            display:block;
+            margin-bottom:20px;
+            label {
+                display:block;
+            }
+            input {
+                width:250px;
+            }
+            textarea {
+                width:100%;
+                height:250px;
+                padding:10px;
+                @include font-size(14, 19);
+            }
+        }
+    }
+}
+

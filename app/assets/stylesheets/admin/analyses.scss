@@ -1,8 +1,13 @@
 @import 'variables';
 @import 'mixins';
 
-#mentor-analyses {
-    padding-top:10px;
+#admin-analyses {
+    padding-top:20px;
+    h1 {
+        font-weight:$fw-bold;
+        @include font-size(18, 18);
+        margin-bottom:20px;
+    }
     form {
         padding-bottom:20px;
         .selectize-control {

@@ -6,9 +6,9 @@ module SubmissionServices
     test "calls to publish_message" do
       submission = create :submission
       RestClient.expects(:post).with('http://test-runner.example.com/submissions',
-        track_slug: submission.solution.exercise.track.slug,
-        exercise_slug: submission.solution.exercise.slug,
-        submission_uuid: submission.uuid
+        submission_uuid: submission.uuid,
+        language_slug: submission.solution.exercise.track.slug,
+        exercise_slug: submission.solution.exercise.slug
       )
       RunTests.(submission.uuid, submission.solution)
     end
@@ -21,9 +21,9 @@ module SubmissionServices
       submission = create :submission, solution: create(:research_experiment_solution, exercise: exercise)
 
       RestClient.expects(:post).with('http://test-runner.example.com/submissions',
-        track_slug: ruby_track.slug,
-        exercise_slug: exercise.slug,
-        submission_uuid: submission.uuid
+        submission_uuid: submission.uuid,
+        language_slug: ruby_track.slug,
+        exercise_slug: exercise.slug
       )
       RunTests.(submission.uuid, submission.solution)
     end

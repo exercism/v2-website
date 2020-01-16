@@ -25,12 +25,10 @@ class Git::SyncMaintainers
 
   def upsert_maintainer(m)
     gh_user = m[:github_username]
+    return unless gh_user.present?
+
     name = m[:name]
-    show_on_website = m[:show_on_website] || false
-
-    return unless gh_user.present? && show_on_website.present?
-    return unless show_on_website
-
+    show_on_website = !!m[:show_on_website]
     alumnus = alumnus_string(m[:alumnus])
 
     gh_profile = Git::GithubProfile.for_user(gh_user)
@@ -46,7 +44,8 @@ class Git::SyncMaintainers
       avatar_url: (m[:avatar_url] || gh_profile.avatar_url),
       link_url: link_url,
       link_text: link_text,
-      user_id: user_id
+      user_id: user_id,
+      visible: show_on_website
     }
     maintainer = Maintainer.find_or_create_by!(track: track, github_username: gh_user) do |mm|
       mm.assign_attributes(maintainer_data)

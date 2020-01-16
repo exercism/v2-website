@@ -23,6 +23,12 @@ class BlogPostsController < ApplicationController
 
   def show
     @blog_post = BlogPost.published.find(params[:id])
+
+    # Redirect to the correct url for Google
+    if request.path != blog_post_path(@blog_post)
+      return redirect_to blog_post_path(@blog_post), :status => :moved_permanently
+    end
+
     ClearNotifications.(current_user, @blog_post)
   end
 end
