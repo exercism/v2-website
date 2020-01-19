@@ -12,6 +12,7 @@ module ExerciseServices
       create_solution_with_wait_time(wait_time: 3.days, exercise: exercise2)
       create_solution_with_wait_time(wait_time: 4.days, exercise: exercise2)
       create_solution_with_wait_time(wait_time: 5.days, exercise: exercise2)
+      exercise3 = create(:exercise, median_wait_time: 100)
 
       ExerciseServices::UpdateMedianWaitTime.()
 
@@ -19,6 +20,9 @@ module ExerciseServices
       assert_equal 3.days, exercise1.median_wait_time
       exercise2.reload
       assert_equal 3.5.days, exercise2.median_wait_time
+
+      # sets median wait time to nil if there are no solutions
+      assert_nil exercise3.reload.median_wait_time
     end
 
     private
