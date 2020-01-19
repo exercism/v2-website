@@ -5,7 +5,7 @@ module TrackServices
     def call
       unprocessed_ids = Track.pluck(:id)
       mentored_solutions.group_by(&:track_id).each do |track_id, solutions|
-        Track.where(id: track_id).update_all(
+        Track.find(track_id).update(
           median_wait_time: calculate_median(solutions.map(&:wait_time))
         )
         unprocessed_ids.delete(track_id)
