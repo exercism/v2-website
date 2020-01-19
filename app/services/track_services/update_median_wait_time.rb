@@ -3,14 +3,12 @@ module TrackServices
     include Mandate
 
     def call
-      unprocessed_ids = Track.pluck(:id)
-      mentored_solutions.group_by(&:track_id).each do |track_id, solutions|
-        Track.where(id: track_id).update_all(
+      Track.active.each do |track|
+        solutions = mentored_solutions.where('exercises.track_id': track.id)
+        track.update(
           median_wait_time: calculate_median(solutions.map(&:wait_time))
         )
-        unprocessed_ids.delete(track_id)
       end
-      Track.where(id: unprocessed_ids).update_all(median_wait_time: nil)
     end
 
     def mentored_solutions
@@ -23,6 +21,8 @@ module TrackServices
     end
 
     def calculate_median(vals)
+      return nil if vals.empty?
+
       vals.sort!
       len = vals.length
       median = (vals[(len - 1) / 2] + vals[len / 2]) / 2.0

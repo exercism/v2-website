@@ -23,7 +23,7 @@ class Git::SeedTracks
     https://github.com/exercism/d
     https://github.com/exercism/dart
     https://github.com/exercism/delphi
-    https://github.com/exercism/elisp
+    https://github.com/exercism/emacs-lisp
     https://github.com/exercism/elixir
     https://github.com/exercism/elm
     https://github.com/exercism/erlang

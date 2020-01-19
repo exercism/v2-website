@@ -1,4 +1,6 @@
 class Admin::AnalysesController < AdminController
+  skip_before_action :restrict_to_authorised!
+
   def index
     @tracks = Track.where(id: IterationAnalysis.joins(iteration: {person_solution: :exercise}).where('iterations.solution_type': "Solution").select("exercises.track_id"))
 
