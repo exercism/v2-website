@@ -154,7 +154,7 @@ yaml
 
 Exercism::PrismLanguageMappings = {
   "common-lisp" => "lisp",
-  "elisp" => "lisp",
+  "emacs-lisp" => "lisp",
   "lfe" => "lisp",
 
   "ballerina" => "go",
@@ -209,7 +209,7 @@ Exercism::PrismFileMappings = {
   "diff": %w{diff patch},
   "docker": %w{},
   "eiffel": %w{e},
-  "elisp": %w{el},
+  "emacs-lisp": %w{el},
   "elixir": %w{ex exs},
   "elm": %w{elm},
   "erlang": %w{erl app.src escript hrl xrl yrl},
