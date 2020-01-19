@@ -8,24 +8,24 @@ module SubmissionServices
       RestClient.expects(:post).with('http://test-runner.example.com/submissions',
         submission_uuid: submission.uuid,
         language_slug: submission.solution.exercise.track.slug,
-        exercise_slug: submission.solution.exercise.slug
+        exercise_slug: submission.solution.exercise.slug,
+        version_slug: nil
       )
       RunTests.(submission.uuid, submission.solution)
     end
 
-    test "uses language_track" do
-      research_track = create :track, slug: "research_123"
-      ruby_track = create :track, slug: "ruby"
-      exercise = create :exercise, track: research_track, slug: "ruby-1-b"
-
-      submission = create :submission, solution: create(:research_experiment_solution, exercise: exercise)
+    test "uses version_slug" do
+      submission = create :submission
+      version_slug = SecureRandom.uuid
 
       RestClient.expects(:post).with('http://test-runner.example.com/submissions',
         submission_uuid: submission.uuid,
-        language_slug: ruby_track.slug,
-        exercise_slug: exercise.slug
+        language_slug: submission.solution.exercise.track.slug,
+        exercise_slug: submission.solution.exercise.slug,
+        version_slug: version_slug
       )
-      RunTests.(submission.uuid, submission.solution)
+      RunTests.(submission.uuid, submission.solution, version_slug)
     end
+
   end
 end
