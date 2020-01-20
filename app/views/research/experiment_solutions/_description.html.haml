@@ -1,9 +1,0 @@
-.instructions
-  = raw solution.instructions
-
-.test-run
-  %h2 Test Results
-
-  .js-test-run
-    - if solution.submissions.last && solution.submissions.last.test_run
-      = render partial: solution.submissions.last.test_run, as: :test_run

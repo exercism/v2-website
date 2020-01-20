@@ -45,7 +45,7 @@ class ExperimentSolution {
   }
 
   _setupPanes() {
-    Split(['.description-panel', '.solution-panel'], {
+    Split(['.info-panel', '.coding-panel'], {
       sizes: [50, 50],
       gutterSize: 10,
       split: 'vertical'

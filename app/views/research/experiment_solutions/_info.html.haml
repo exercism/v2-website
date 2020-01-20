@@ -1,0 +1,22 @@
+.tabs-and-panes.selected-1
+  .tabs
+    .tab.tab-1
+      Instructions
+    .tab.tab-2
+      Results
+  .panes
+    .pane.pane-1
+      .instructions
+        = raw solution.instructions
+
+    .pane.pane-2
+      .test-run
+        .js-test-run
+          - if solution.submissions.last && solution.submissions.last.test_run
+            = render partial: solution.submissions.last.test_run, as: :test_run
+          -else
+            Hit "Run code" to see how your solution performs.
+
+-content_for :js do
+  :javascript
+    setupTabs()

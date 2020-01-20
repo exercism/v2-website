@@ -54,7 +54,7 @@ class SubmissionStatus {
   }
 
   render(html) {
-    if (!this.container) { this.container = $('<div />').appendTo('body'); }
+    if (!this.container) { this.container = $('<div />').appendTo('.test-run'); }
 
     this.container.html(html);
 
