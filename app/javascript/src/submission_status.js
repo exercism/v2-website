@@ -3,7 +3,8 @@ import TimeoutTimer from './timeout_timer';
 import SubmissionCancel from './submission_cancel';
 
 class SubmissionStatus {
-  constructor() {
+  constructor(container) {
+    this.container = container;
     this.timer = new TimeoutTimer(30, () => {
       this.setStatus('timeout');
       this.render(new SubmissionStatusView('timeout').render());
@@ -49,13 +50,10 @@ class SubmissionStatus {
   }
 
   remove() {
-    this.container.remove();
-    this.container = undefined;
+    this.container.html('');
   }
 
   render(html) {
-    if (!this.container) { this.container = $('<div />').appendTo('.test-run'); }
-
     this.container.html(html);
 
     this._setupActions();
@@ -92,7 +90,7 @@ class SubmissionStatus {
     };
     submissionCancel.onRefuse = () => { this.cancelling = false; };
 
-    submissionCancel.render();
+    submissionCancel.render(this.container);
   }
 }
 

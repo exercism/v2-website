@@ -75,7 +75,9 @@ class ExperimentSolution {
   }
 
   _setupSubmissionStatus() {
-    this.submissionStatus = new SubmissionStatus();
+    this.submissionStatus = new SubmissionStatus(
+      this.element.find('.js-submission-status')
+    );
     this.submissionStatus.onSubmit = this.submitCode.bind(this)
     this.submissionStatus.onTested = this._onTested.bind(this)
     this.submissionStatus.onCancel = this._onCancel.bind(this)
