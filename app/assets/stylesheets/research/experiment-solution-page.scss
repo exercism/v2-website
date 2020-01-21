@@ -119,7 +119,6 @@ body.namespace-research {
     }
 
     .test-run {
-        border:2px solid orange;
         border-radius:2px;
         padding:20px;
 
@@ -127,6 +126,14 @@ body.namespace-research {
             padding: 20px;
             background: #eee;
         }
+    }
+
+    .test-run--failed {
+        border: 2px solid red;
+    }
+
+    .test-run--success {
+        border: 2px solid green;
     }
 
     .passed-test {
