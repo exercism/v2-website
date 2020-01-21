@@ -89,7 +89,9 @@ class ExperimentSolution {
       (submission) => {
         this.submissionStatus.setStatus(submission.opsStatus);
         this.submissionStatus.render(submission.opsStatusHtml);
-        this.testRun.html(submission.testRunHtml);
+        if (submission.testRunHtml) {
+          this.testRun.html(submission.testRunHtml);
+        }
       }
     );
 

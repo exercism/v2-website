@@ -18,6 +18,6 @@ class BroadcastSolutionJob < ApplicationJob
       opsStatus: submission.ops_status,
       opsStatusHtml: ops_status_html,
       testRunHtml: test_run_html,
-    })
+    }.compact)
   end
 end
