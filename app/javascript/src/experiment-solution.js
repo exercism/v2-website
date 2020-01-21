@@ -24,6 +24,7 @@ class ExperimentSolution {
   submitCode() {
     if (!this.submissionStatus.isAllowedToSubmit()) { return; }
 
+    this.element.find('.tab-2').click();
     this.submissionStatus.setStatus('queueing');
     this.submissionStatus.render(new SubmissionStatusView('queueing').render());
     this._submit();
