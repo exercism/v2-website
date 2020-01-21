@@ -25,6 +25,7 @@ class ExperimentSolution {
     if (!this.submissionStatus.isAllowedToSubmit()) { return; }
 
     this.element.find('.tab-2').click();
+    this.submitButton.attr('disabled', true);
     this.submissionStatus.setStatus('queueing');
     this.submissionStatus.render(new SubmissionStatusView('queueing').render());
     this._submit();
@@ -56,7 +57,8 @@ class ExperimentSolution {
   _setupActions() {
     this.setCommand('?', () => { this.openShortcuts(); });
 
-    this.element.find('.js-submit-code').click(this.submitCode.bind(this));
+    this.submitButton = this.element.find('.js-submit-code');
+    this.submitButton.click(this.submitCode.bind(this));
     this.
       element.
       find('.js-keyboard-shortcuts').
@@ -109,11 +111,13 @@ class ExperimentSolution {
 
   _onTested() {
     this._scrollToTestRun();
+    this.submitButton.attr('disabled', false);
     this.editor.focus();
   }
 
   _onCancel() {
     this._cancelBuild();
+    this.submitButton.attr('disabled', false);
     this.editor.focus();
   }
 
