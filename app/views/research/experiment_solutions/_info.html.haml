@@ -10,8 +10,9 @@
         = raw solution.instructions
 
     .pane.pane-2.js-submission-panel
-      - if solution.submissions.last
-        = render partial: solution.submissions.last.ops_status, as: :status
+      - if solution.submissions.tested.last
+        = render partial: solution.submissions.tested.last.ops_status,
+          as: :status
       - else
         Hit "Run code" to see how your solution performs.
 
