@@ -1,5 +1,1 @@
-.submission-status-tested
-  .submission-status-spinner
-    = graphical_icon "check-circle", style: :light
-  %p.submission-status-title Finished
-  %p.submission-status-status Tests complete
+= render partial: status.test_run, as: :test_run

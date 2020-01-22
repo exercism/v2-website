@@ -1,17 +1,15 @@
 import consumer from "./consumer"
 
 class ResearchSolutionChannel {
-  constructor(id, onReceive) {
+  constructor(id) {
     this.id = id;
-    this.onReceive = onReceive;
-  }
-
-  subscribe() {
     this.subscription = consumer.subscriptions.create(
       { channel: "ResearchSolutionChannel", id: this.id }
     );
+  }
 
-    this.subscription.received = this.onReceive;
+  received(handler) {
+    this.subscription.received = handler;
   }
 
   createSubmission(submission) {

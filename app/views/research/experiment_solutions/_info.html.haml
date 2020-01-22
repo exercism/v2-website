@@ -9,13 +9,11 @@
       .instructions
         = raw solution.instructions
 
-    .pane.pane-2
-      .js-submission-status
-      .js-test-run
-        - if solution.submissions.last && solution.submissions.last.test_run
-          = render partial: solution.submissions.last.test_run, as: :test_run
-        - else
-          Hit "Run code" to see how your solution performs.
+    .pane.pane-2.js-submission-panel
+      - if solution.submissions.last
+        = render partial: solution.submissions.last.ops_status, as: :status
+      - else
+        Hit "Run code" to see how your solution performs.
 
 -content_for :js do
   :javascript
