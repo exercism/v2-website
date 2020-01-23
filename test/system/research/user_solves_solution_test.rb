@@ -27,7 +27,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)
-    click_on "Results"
+    find(:css, '.tab .fa-terminal').click
 
     assert_text "Sentence.WordWithMostVowels(\"a\")"
     assert_text "Wrong variable"

@@ -2,6 +2,12 @@
 @import 'variables';
 
 body.namespace-research {
+    &.prism-dark {
+    }
+
+    &:not(.prism-dark) {
+    }
+
     #experiment-solution-page {
         $breadcrumb-height: 35px;
 
@@ -15,15 +21,24 @@ body.namespace-research {
             @include width-small() {
                 height: calc(100vh - 50px - #{$breadcrumb-height});
             }
+
+            .test-area {
+                &.good {
+                    border:2px solid green;
+                }
+                &.bad {
+                    border:2px solid red;
+                }
+                &.pending {
+                    border:2px solid orange;
+                }
+            }
         }
     }
 
     .experiment-solution {
         display: flex;
 
-        > .info-panel {
-            overflow-y: scroll;
-        }
     }
 
     .coding-panel {
@@ -34,12 +49,67 @@ body.namespace-research {
         color: white;
     }
 
-    .info-panel {
-        padding: 20px 40px;
+    .gutter {
+        cursor:col-resize;
+    }
 
-        > .instructions {
-            border-bottom: 3px solid $line-color-1;
-            margin-bottom: 30px;
+    .info-panel {
+        padding: 20px 20px;
+        overflow-y: scroll;
+
+        .tabs-and-panes {
+            display:flex;
+            height:100%;
+
+            .tabs {
+                padding:0;
+                margin:7px 0 0 0;
+                border:none;
+                z-index:1;
+
+                .tab {
+                    display:block;
+                    padding:0;
+                    margin:0;
+                    text-align:center;
+                    width:30px;
+                    height: 30px;
+                    line-height: 30px;
+
+                    background:transparent;
+                    border-width:1px;
+                    border-radius:3px 0 0 3px;
+                    border-color:transparent;
+
+                }
+            }
+
+            .panes {
+                max-width: calc(100% - 20px);
+                flex-grow: 1;
+                margin-left:-1px;
+                .pane {
+                    padding:20px;
+                    border:1px solid #333;
+                    border-radius:3px;
+
+                    overflow: auto;
+                    height: 100%;
+                }
+            }
+
+            &.selected-1>.tabs>.tab-1,
+            &.selected-2>.tabs>.tab-2,
+            &.selected-3>.tabs>.tab-3,
+            &.selected-4>.tabs>.tab-4,
+            &.selected-5>.tabs>.tab-5,
+            &.selected-6>.tabs>.tab-6 {
+                border-top-color:#333;
+                border-left-color:#333;
+                border-bottom-color:#333;
+                border-right-color:#fff;
+                color:#333;
+            }
         }
 
         h2 {
@@ -125,5 +195,8 @@ body.namespace-research {
 
     .passed-test {
         color: green;
+    }
+    .submission-status {
+        border: 2px solid orange;
     }
 }

@@ -8,13 +8,14 @@ module Research
                     email: "test@example.com",
                     password: "password")
       user.confirm
+      experiment = create :research_experiment
 
       visit new_user_session_path
       fill_in "Email address", with: "test@example.com"
       fill_in "Password", with: "password"
       within("form") { click_on "Log in" }
 
-      assert_selector 'h1', text: "Your research area"
+      assert_selector 'h1', text: experiment.title
     end
 
     test "user logs in via omniauth" do
@@ -28,10 +29,11 @@ module Research
         }
       })
 
+      experiment = create :research_experiment
       visit new_user_session_path
       click_on "with GitHub"
 
-      assert_selector 'h1', text: "Your research area"
+      assert_selector 'h1', text: experiment.title
     end
   end
 end

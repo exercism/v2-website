@@ -23,8 +23,9 @@
             @include font-size(14, 14);
             font-weight:$fw-semibold;
             margin-bottom:10px;
-            color:#ff9e86;
+            color:#009CA9;
             i {
+                color:#009CA9;
                 margin-right:3px;
                 @include font-size(10, 14);
                 vertical-align:top;

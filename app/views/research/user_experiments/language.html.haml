@@ -1,26 +1,27 @@
 #user-experiment-language
   %section.summary-section.lo-research-centralised-section
     .lo-research-floating-box
-      =hex_white_track_icon(@language_track, class: 'header-img')
+      =bordered_turquoise_track_icon(@language_track, class: 'header-img')
       .subtitle= @experiment.title
       %h1 Taking part in #{@language_track.title}
-      %p Each language has two parts, which target different learning goals for this experiment. Complete part 1 in order to unlock part 2.
 
       -part1_status = @part1_solution ? (@part1_solution.finished?? "completed" : "in-progress") : "enabled"
       -part2_status = @part2_solution.try(&:finished?) ? "completed" : (@part2_solution ? "in-progress" : (@part1_solution.try(&:finished?) ? "enabled" : "disabled"))
-      .parts
-        .part-1.part{class: part1_status}
-          %h2 Part 1
-          .status.not-started Not started
-          .status.in-progress
-            In progress
-            = graphical_icon :clock, style: :regular
-          .status.completed
-            Completed
-            = graphical_icon "check-circle", style: :regular
-          %p In part 1 you will be solving a short programming problem in #{@language_track.title}. We are interested in how your programming background and experience affects how you choose to shape your code. There is no right or wrong solution - just lots of tradeoffs, so do what feels good to you.
-          =render "language_part", part: 1, solution: @part1_solution, status: part1_status
+      /.parts
+      /  .part-1.part{class: part1_status}
+      /%h2 Part 1
+      /.status.not-started Not started
+      /.status.in-progress
+      /  In progress
+      /  = graphical_icon :clock, style: :regular
+      /.status.completed
+      /  Completed
+      /  = graphical_icon "check-circle", style: :regular
+      %p This experiment has two parts. We will email you about Part 2 once it launches. You can solve Part 1 now.
+      %p For Part 1, you will be solving a short programming problem in #{@language_track.title}. We are interested in how your programming background and experience affects how you choose to shape your code. There is no right or wrong solution - just lots of tradeoffs, so do what feels good to you.
+      =render "language_part", part: 1, solution: @part1_solution, status: part1_status
 
+      -#
         .part-2.part{class: part2_status}
           %h2 Part 2
           .status.not-started Not started
