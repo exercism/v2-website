@@ -6,7 +6,11 @@ class SubmissionTestRunResult
     @name = params["name"]
     @status = params["status"]
     @message = params["message"]
-    @output = params["output"]
+    @output = TerminalOutput.new(params["output"])
+  end
+
+  def output_html
+    output.to_html
   end
 
   def failed?

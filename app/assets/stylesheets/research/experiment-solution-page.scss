@@ -123,10 +123,15 @@ body.namespace-research {
     }
 
     .test-run {
-      pre {
-        padding: 20px;
-        background: #eee;
-      }
+        pre {
+            padding: 20px;
+            background: #eee;
+        }
+
+        .test-output {
+            background: black;
+            color: white;
+        }
     }
 
     .passed-test {
