@@ -7,7 +7,7 @@ class Git::ExerciseReader
     @config = config
   end
 
-  delegate :tests_info, :solution_files, to: :exercise_config
+  delegate :tests_info, to: :exercise_config
 
   def readme
     readme_ptr = exercise_tree['README.md']
@@ -23,6 +23,7 @@ class Git::ExerciseReader
     ptr = meta_tree['config.json']
 
     data = ptr.blank? ? {} : read_blob(ptr[:oid])
+    p
 
     Git::ExerciseConfig.from_file(data)
   rescue => e
@@ -39,7 +40,7 @@ class Git::ExerciseReader
     end
 
     files.each_with_object({}) do |file, h|
-      h[file[:name]] = read_blob(file[:oid])
+      h[file[:full]] = read_blob(file[:oid])
     end
   rescue => e
     Bugsnag.notify(e)
