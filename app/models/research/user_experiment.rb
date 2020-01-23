@@ -15,6 +15,10 @@ module Research
       languages_completed.include?(lang.to_sym)
     end
 
+    def language_in_progress?(lang)
+      language_started?(lang) && !language_completed?(lang)
+    end
+
     def languages_started
       @languages_started ||= solutions.map(&:language_slug).uniq
     end

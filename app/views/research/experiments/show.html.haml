@@ -1,12 +1,95 @@
 #research-experiment
-  =breadcrumb_nav do
-    %li= link_to "Your Research", research_experiments_path
-
-  .research-header
-    .lo-container
-      .subtitle Live experiment
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "https://assets.exercism.io/tracks/java-hex-white.png", class: "header-img"
+      .live
+        %i.fas.fa-circle
+        Live experiment
       %h1= @experiment.title
+      %p
+        We are exploring how the order and depth in which someone learns programming languages in programming affects how they solve different problems.
+        We will use this learning to extrapolate how we can better teach new programming languages to people from different backgrounds.
+        We hope that people with a range of different experiences and backgrounds will take part, and that they will participate in languages that they barely know and languages they know well.
+      -if @user_experiment
+        =link_to "Continue", research_user_experiment_path(@user_experiment), class: "pure-button participate-button"
+      -else
+        =button_to "Take part", research_user_experiments_path(experiment_id: @experiment), form_class: "pure-button participate-button"
 
+    .more-details
+      More details below
+      %i.far.fa-chevron-down
+
+  %section.logos-section
+    .lo-container
+      =image "research/sloan-logo.png", "The Sloan Foundation"
+      =image "research/chicago-logo.png", "University of Chicago"
+      =image "research/wisconsin-logo.png", "University of Wisconsin-Madison"
+
+  %section.scope-section
+    .floating-box
+      .info
+        =graphical_image "research/scope-icon.png"
+        %h2 The Scope of this Research
+        %h3 Background
+        %p Human knowledge is enhanced not only by tools that augment our senses like microscopes and telescopes, but also those that augment our minds such as programming languages, code libraries and development environments. Natural languages like English, French and Chinese embed mental habits that influence how we perceive, remember, categorize, and reason about space, time and math. This suggests that programming languages may be more than media for communicating with computers, but computational toolkits that facilitate some thoughts, judgments and actions, while inhibiting others. Our motivation for this area is to help identify how programming languages do this, how they could do it better, and to use that insight to improve language learning and mentorship.
+
+        %h3 Research Goals
+        %p In this experiment we want to explore how your programming background affects how you solve programming challenges in a variety of different languages. We are interested in how the order that you’ve learnt programming languages has on how your brain forms ideas about software and from that extrapolate how we can better teach new programming languages to people from different backgrounds.
+
+      .cta
+        %h3 Eligibility and time commitment
+        %p Anyone is eligable to take part. We have designed exercises so that they take 10-15mins each to complete. Each language has two parts, so a time commitment of 20-30mins. We hope people will complete a variety of languages, but even if you only have time to do one, that would be greatly appreciated.
+        -if @user_experiment
+          =link_to "Continue", research_user_experiment_path(@user_experiment), class: "pure-button participate-button"
+        -else
+          =button_to "Count me in", research_user_experiments_path(experiment_id: @experiment), form_class: "pure-button participate-button"
+
+  %section.researchers-section
+    .lo-container
+      %h2 The Researchers
+      %h3 Meet the researchers leading this experiment
+      .profiles
+        .profile
+          .photo
+            =graphical_image "research/james-evans.jpg"
+          .info
+            %p
+              %strong James Evans
+              is a professor of sociology at the University of Chicago and Santa Fe Institute who studies collective cognition and knowledge, including how languages—and programming languages—shape, accelerate and facilitate individual, group and community-level thinking.
+            %p You can read more about James on #{link_to "Knowledge Lab", "https://www.knowledgelab.org/people/detail/james_a_evans/", target: "_blank"} and this #{link_to "Santa Fe profile", "https://www.santafe.edu/people/profile/james-evans", target: "_blank"}.
+          =image "supporter-logos/chicago.jpg", "University of Chicago", class: 'uni-logo'
+
+        .profile
+          .photo
+            =graphical_image "research/gary-lupyan.jpg"
+          .info
+            %p
+              %strong Gary Lupyan
+              is an associate professor of psychology at University of Wisconsin-Madison. He works on the effects of language on cognition and the evolution of language. How do basic cognitive and perceptual processes that humans share with other animals become augmented by language? How do other symbolic systems like programming languages augment our thinking? You can find his #{link_to "lab website here", "https://sapir.psych.wisc.edu", target: "_blank"} and follow him #{link_to "on Twitter", "https://twitter.com/glupyan", target: "_blank"}.
+          =image "supporter-logos/wisconsin.png", "University of Wisconsin-Madison", class: 'uni-logo'
+
+  %section.info-section
+    .lo-container
+      .boxes
+        .box
+          =graphical_image "research/methodology-icon.png"
+          %h3 Methodology
+          %p We have previously studied large-scale code repositories like GitHub to begin to understand the skill anatomy of different programming languages, but the experiments we do here with discrete coding tasks will allow us to more deeply interrogate what skills build on and interfere with each other to tune the language learning process, and to improve programming languages.
+
+        .box
+          =graphical_image "research/funding-icon.png"
+          %h3 Funding
+          %p Funding is provided by the Sloan Foundation as part of #{link_to "this grant", "https://sloan.org/grant-detail/8001", target: "_blank"} to the University of Chicago.
+          %p The grant provides funds to support 18 months of both research and core work on Exercism, including the development of In-Browser-Coding and Representers.
+
+        .box
+          =graphical_image "research/data-icon.png"
+          %h3 Data Usage
+          %p The data you provide in the survey and the pre/post-exercise questions, along with the code you write, will be shared with our research team. We may publish anonymised data and submissions, but will not publish your code with any identifying information. Please read our #{link_to "Privacy Policy", "https://exercism.io/privacy"} to understand how we store and use data generally at Exercism.
+
+
+-#
+  %section
   .lo-container
     .content
       .pure-g
@@ -57,11 +140,6 @@
                 %strong Task:
                 Programming challenges
 
-            / TODO - Kntsoriano
-            / If the user has joined the challenge (research_user_experiment exists) then it should say "View Progress" and link to the user_experiment page
-            / If the user has joined research but not this challenge, there should have a link to particpate
-            / If the user has not joined research, there should be a link to "Join Exericsm Research" which takes to the research home page.
-            =button_to "Participate", research_user_experiments_path(experiment_id: @experiment), form_class: "pure-button participate-btn"
 
             .partners
               %h3 Research Partners

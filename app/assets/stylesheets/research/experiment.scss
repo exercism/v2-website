@@ -2,6 +2,248 @@
 @import 'mixins';
 
 #research-experiment {
+  .participate-button {
+        width:100%;
+        @include font-size(18, 50);
+        font-weight:$fw-semibold;
+        padding:0 20px;
+        background:$research-blue;
+        color:#fff;
+        border-radius:4px;
+        input {
+            padding:0 20px;
+            font-weight:inherit;
+        }
+    }
+    .summary-section {
+        .lo-research-floating-box {
+            margin-bottom:25px;
+        }
+        .live {
+            @include font-size(14, 14);
+            font-weight:$fw-semibold;
+            margin-bottom:10px;
+            color:#ff9e86;
+            i {
+                margin-right:3px;
+                @include font-size(10, 14);
+                vertical-align:top;
+                animation: pulse 2s infinite;
+                @keyframes pulse {
+                    0% {
+                        opacity:100%;
+                    }
+                    50% {
+                        opacity:20%;
+                    }
+                    100% {
+                        opacity:100%;
+                    }
+                }
+            }
+        }
+
+        p {
+            margin-bottom:20px;
+        }
+        .more-details {
+            @include font-size(14, 14);
+            font-weight:$fw-semibold;
+            color:#fff;
+            text-align:center;
+            i {
+                margin-top:5px;
+                display:block;
+            }
+        }
+    }
+    .logos-section {
+        background:#f3f3f3;
+        text-align:center;
+        padding:35px 0;
+        img {
+            width: 130px;
+            margin: 0 20px;
+            vertical-align:middle;
+        }
+    }
+    .scope-section {
+        background:#f3f3f3;
+        padding-bottom:75px;
+
+        .floating-box {
+            width:700px;
+            margin: 0 auto;
+            background:#fff;
+            position:relative;
+            border-radius:5px;
+            border:1px solid #f3f3f3;
+            box-shadow:0 0 1px #777;
+        }
+        img {
+            width:36px;
+            height:25px;
+            display:block;
+            margin:0 auto 15px;
+        }
+        .info {
+            padding:50px 75px 40px;
+            border-bottom:1px solid #f3f3f3;
+            p {
+                text-align:justify;
+                margin-bottom:30px;
+                &:last-child {
+                    margin-bottom:0;
+                }
+            }
+        }
+        .cta {
+            padding:30px 75px;
+            background:#F2F7FD;
+            p {
+                text-align:justify;
+                margin-bottom:20px;
+            }
+        }
+        h2 {
+            @include font-size(22, 22);
+            font-weight:$fw-bold;
+            margin-bottom:30px;
+            text-align:center;
+        }
+        h3 {
+            @include font-size(18, 18);
+            font-weight:$fw-bold;
+            margin-bottom:7px;
+        }
+        p {
+            text-align:justify;
+            margin-bottom:30px;
+            &:last-child {
+                margin-bottom:0;
+            }
+        }
+    }
+    .researchers-section {
+        background-color:#004E68;
+        background-image:image-url('research/researcher-background.jpg');
+        background-size:cover;
+        padding:65px 0 0;
+        h2 {
+            @include font-size(22, 22);
+            font-weight:$fw-bold;
+            margin-bottom:5px;
+            text-align:center;
+            color:#fff;
+        }
+        h3 {
+            @include font-size(18, 18);
+            font-weight:$fw-regular;
+            text-align:center;
+            color:#fff;
+            margin-bottom:70px;
+        }
+        .profiles {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: stretch;
+        }
+        .profile {
+            display:flex;
+            flex-direction:column;
+
+            width: 46%;
+            min-width: 300px;
+            align-self: auto;
+            margin:0 2% 70px;
+            background:#fff;
+            border-radius:5px;
+            padding:85px 55px 25px;
+            text-align:center;
+            position:relative;
+
+            .photo {
+                top:-55px;
+                margin-left:-55px;
+                left:50%;
+                width:110px;
+                position:absolute;
+                background:#fff;
+                border-radius:100%;
+                border:2px solid #219280;
+                img {
+                    display:block;
+                    width:100%;
+                    border-radius:100%;
+                    filter:grayscale(1);
+                }
+            }
+
+            strong {
+                @include font-size(20, 21);
+            }
+            .info {
+                margin-bottom:25px;
+                flex: 0 1 100%;
+                p {
+                    text-align:justify;
+                    margin-bottom:0;
+                }
+            }
+
+            .uni-logo {
+                width:100px;
+                filter:grayscale(1);
+                margin:0 auto;
+            }
+        }
+    }
+    .info-section {
+        background:#f4f4f4;
+        padding:40px 0 20px;
+        .boxes {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: stretch;
+        }
+        .box {
+            display:flex;
+            flex-direction:column;
+            width: 30%;
+            min-width: 280px;
+            align-self: auto;
+            border-radius:3px;
+            margin:0 1% 20px;
+            border:1px solid #e7edec;
+
+            background:#fff;
+            padding:30px 25px 20px;
+
+            img {
+                height:50px;
+                margin: 0 auto 20px;
+            }
+        }
+        h3 {
+            @include font-size(18, 18);
+            font-weight:$fw-bold;
+            text-align:center;
+            margin-bottom:20px;
+            color:#004E68;
+        }
+        p {
+            text-align:justify;
+        }
+    }
+}
+
+/*
     .content {
         max-width:1000px;
     }
@@ -35,4 +277,4 @@
         }
     }
 }
-
+*/

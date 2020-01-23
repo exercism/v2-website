@@ -1,25 +1,16 @@
 #user-experiment-language
-  =breadcrumb_nav do
-    %li= link_to "Your research area", research_experiments_path
-    %li= link_to @experiment.title, research_experiment_path(@experiment)
-
-  .research-header
-    .language-line
-    .lo-container
-      =bordered_turquoise_track_icon(@language_track, class: 'logo')
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =hex_white_track_icon(@language_track, class: 'header-img')
       .subtitle= @experiment.title
       %h1 Taking part in #{@language_track.title}
-
-  .lo-container
-    .content
-      %h2 This experiment
       %p Each language has two parts, which target different learning goals for this experiment. Complete part 1 in order to unlock part 2.
 
       -part1_status = @part1_solution ? (@part1_solution.finished?? "completed" : "in-progress") : "enabled"
       -part2_status = @part2_solution.try(&:finished?) ? "completed" : (@part2_solution ? "in-progress" : (@part1_solution.try(&:finished?) ? "enabled" : "disabled"))
       .parts
         .part-1.part{class: part1_status}
-          %h2 #{@language_track.title}: Part 1
+          %h2 Part 1
           .status.not-started Not started
           .status.in-progress
             In progress
@@ -31,7 +22,7 @@
           =render "language_part", part: 1, solution: @part1_solution, status: part1_status
 
         .part-2.part{class: part2_status}
-          %h2 #{@language_track.title}: Part 2
+          %h2 Part 2
           .status.not-started Not started
           .status.in-progress In progress
           .status.completed Completed

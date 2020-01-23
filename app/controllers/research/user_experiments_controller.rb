@@ -11,6 +11,27 @@ module Research
     def show
       slugs = %i{csharp elm go javascript python ruby rust x86-64-assembly}
       @tracks = Track.where(slug: slugs)
+      @tracks = @tracks.sort do |track_1, track_2|
+        if @user_experiment.language_in_progress?(track_1.slug)
+          if @user_experiment.language_in_progress?(track_2.slug)
+            track_1.slug <=> track_2.slug
+          else
+            -1
+          end
+        elsif @user_experiment.language_completed?(track_1.slug)
+          if @user_experiment.language_completed?(track_2.slug)
+            track_1.slug <=> track_2.slug
+          else
+            -1
+          end
+        else
+          if @user_experiment.language_started?(track_2.slug)
+            1
+          else
+            track_1.slug <=> track_2.slug
+          end
+        end
+      end
     end
 
     def language
