@@ -39,16 +39,16 @@ module Research
     test "latest_files returns latest submission file" do
       solution = create(:research_experiment_solution)
       submission = create(:submission, solution: solution)
-      submission.stubs(files: { "ruby_1_a.rb" => "NEW" })
+      submission.stubs(files: { "subdir/ruby_1_a.rb" => "NEW" })
       solution.submissions = [submission]
 
-      assert_equal({ "ruby_1_a.rb" => "NEW" }, solution.latest_files)
+      assert_equal({ "subdir/ruby_1_a.rb" => "NEW" }, solution.latest_files)
     end
 
     test "latest_files returns boilerplate file when no submissions are done" do
       solution = create(:research_experiment_solution)
 
-      assert_equal({ "ruby_1_a.rb" => "TODO\n" }, solution.latest_files)
+      assert_equal({ "subdir/ruby_1_a.rb" => "TODO\n" }, solution.latest_files)
     end
   end
 end
