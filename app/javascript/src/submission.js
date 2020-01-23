@@ -30,6 +30,8 @@ class Submission {
     this.render();
 
     this.status = status;
+
+    this.onChange(this.status);
   }
 
   render() {
@@ -63,8 +65,6 @@ class Submission {
 
   cancelled() {
     this.html = this.initialHtml;
-
-    this.onCancel();
   }
 
   timeout() {
@@ -86,8 +86,6 @@ class Submission {
 
       this.element.addClass('test-result-focus');
     }
-
-    this.onTested();
   }
 
   cancelling() {
@@ -110,7 +108,6 @@ class Submission {
   }
 
   resubmitted() {
-    this.onResubmitted();
   }
 }
 
