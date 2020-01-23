@@ -23,7 +23,6 @@ class Git::ExerciseReader
     ptr = meta_tree['config.json']
 
     data = ptr.blank? ? {} : read_blob(ptr[:oid])
-    p
 
     Git::ExerciseConfig.from_file(data)
   rescue => e
