@@ -2,54 +2,32 @@
 @import 'mixins';
 
 #user-experiment {
-    .content {
-        .lhs {
-            padding-right:100px;
-        }
-        .rhs {
-            .about {
-                background:#f3f3f3;
-                padding:20px;
-            }
-
-        }
-    }
-    .languages {
-        margin-top:20px;
-        h2 {
-            margin-bottom:10px;
-        }
+    p {
+        margin-bottom:20px;
     }
     .language {
-        border-radius:2px;
-        padding:20px;
+        display:block;
+        border-radius:4px;
+        padding:12px;
         margin-bottom:10px;
-        display: flex;
-        align-items: center;
-        border-radius:2px;
+        text-decoration:none;
+        color:#333;
+
+        &:hover {
+            background:rgba($color-2, 0.03);
+        }
         &.in-progress {
+            color:$color-2;
             border:2px solid $color-2;
-            .pure-button {
-                background:$color-2;
-                color:#fff;
-                border:1px solid $color-2;
+            .status {
             }
         }
         &.not-started {
             border:1px solid #ccc;
-            .pure-button {
-                background:#fff;
-                color:#666;
-                border:1px solid #ccc;
+            .status {
+                color:#999;
             }
-        }
 
-        img {
-            width:50px;
-            margin-right:15px;
-        }
-        .details {
-          flex-grow: 1;
         }
         h3 {
             @include font-size(18, 18);
@@ -57,7 +35,7 @@
             font-weight:$fw-bold;
         }
         .status {
-            color:#999;
+            @include font-size(14, 14);
         }
         .pure-button {
             width:120px;
