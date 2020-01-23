@@ -35,6 +35,10 @@ class CodeEditorManager {
     return this.editor.isFocused();
   }
 
+  reset() {
+    this.editor.reset();
+  }
+
   _setupEditor() {
     this.editor = new CodeEditor(this.element.find('.js-code-editor'))
 
@@ -50,6 +54,10 @@ class CodeEditorManager {
       element.
       find('.js-code-editor-keybinding').
       change(this.selectKeybinding.bind(this));
+    this.
+      element.
+      find('.js-code-editor-reset').
+      click(this.reset.bind(this));
   }
 }
 

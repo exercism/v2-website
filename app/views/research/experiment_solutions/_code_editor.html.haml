@@ -13,3 +13,5 @@
         options_for_select({ "Ace" => "ace",  "Vim" => "vim", "Emacs" => "emacs" }),
         class: "js-code-editor-keybinding js-skip-selectize",
         autocomplete: "off"
+    .code-editor-toolbar-option
+      = link_to "Reset", "#", class: "js-code-editor-reset code-editor-toolbar-link"

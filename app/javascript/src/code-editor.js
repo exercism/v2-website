@@ -5,6 +5,8 @@ class CodeEditor {
     this.element = element
     this.filename = element.data('filename')
     this.config = element.data('config')
+    this.database = localStorage
+    this.key = 'code-editor';
 
     this._setup();
   }
@@ -13,25 +15,28 @@ class CodeEditor {
     this.editor = new AceEditor(this.element, this.config, this.filename);
 
     this.editor.onSetup = () => {
+      this.initialValue = this.editor.getValue();
       this.editor.setTheme('dark');
 
-      if (localStorage.getItem('code-editor') !== null) {
-        this.editor.setValue(
-          localStorage.getItem('code-editor')
-        );
-      }
+      if (this.getValue() !== null) { this.editor.setValue(this.getValue()); }
 
       this.onSetup(this);
     }
 
+    this.editor.onChanged = this.save.bind(this);
+  }
 
-    this.editor.onChanged = () => {
-      this.save();
-    }
+  getValue() {
+    return this.database.getItem(this.key);
   }
 
   save() {
-    localStorage.setItem('code-editor', this.editor.getValue());
+    this.database.setItem(this.key, this.editor.getValue());
+  }
+
+  reset() {
+    this.database.removeItem(this.key);
+    this.editor.setValue(this.initialValue);
   }
 
   setTheme(theme) {
