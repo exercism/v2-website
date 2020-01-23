@@ -3,8 +3,8 @@ import ExperimentSolution from '../src/experiment-solution';
 test('it calls commands when a hotkey is pressed', () => {
   document.body.innerHTML = `
     <div class="experiment-solution">
-      <div class="description-panel"></div>
-      <div class="solution-panel"></div>
+      <div class="info-panel"></div>
+      <div class="coding-panel"></div>
     </div>
   `;
 
@@ -21,8 +21,8 @@ test('it calls commands when a hotkey is pressed', () => {
 test('it opens keyboard shortcuts modal', () => {
   document.body.innerHTML = `
     <div class="experiment-solution">
-      <div class="description-panel"></div>
-      <div class="solution-panel"></div>
+      <div class="info-panel"></div>
+      <div class="coding-panel"></div>
     </div>
   `;
 
@@ -36,8 +36,8 @@ test('it opens keyboard shortcuts modal', () => {
 test('it does not open keyboard shortcuts modal twice', () => {
   document.body.innerHTML = `
     <div class="experiment-solution">
-      <div class="description-panel"></div>
-      <div class="solution-panel"></div>
+      <div class="info-panel"></div>
+      <div class="coding-panel"></div>
     </div>
   `;
 
@@ -52,8 +52,8 @@ test('it does not open keyboard shortcuts modal twice', () => {
 test('it does not open keyboard shortcuts modal when editor is focused', () => {
   document.body.innerHTML = `
     <div class="experiment-solution">
-      <div class="description-panel"></div>
-      <div class="solution-panel">
+      <div class="info-panel"></div>
+      <div class="coding-panel">
         <div class="js-code-editor"></div>
       </div>
     </div>
@@ -69,8 +69,8 @@ test('it does not open keyboard shortcuts modal when editor is focused', () => {
 test('it focuses to body after rendering the keyboard shortcuts modal', () => {
   document.body.innerHTML = `
     <div class="experiment-solution">
-      <div class="description-panel"></div>
-      <div class="solution-panel"></div>
+      <div class="info-panel"></div>
+      <div class="coding-panel"></div>
     </div>
   `;
 

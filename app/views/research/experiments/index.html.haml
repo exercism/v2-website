@@ -11,7 +11,7 @@
           -@experiments.each do |experiment|
             .experiment
               %h3 
-                %i.fas.fa-circle
+                = graphical_icon :circle, style: :solid
                 Live experiment
               %h2= experiment.title
               %p 

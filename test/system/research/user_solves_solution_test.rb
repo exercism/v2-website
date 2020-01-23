@@ -6,9 +6,10 @@ class Research::UserSolvesSolutionTest < Research::TestCase
     Aws::S3::Client.stubs(:new).returns(stub_client)
     user = create(:user, :onboarded, joined_research_at: 2.days.ago)
     solution = create(:research_experiment_solution, user: user)
-    submission = create(:submission, solution: solution)
+    submission = create(:submission, tested: true, solution: solution)
     create(:submission_test_run,
            submission: submission,
+           ops_status: 200,
            results_status: "fail",
            tests: [
              {
@@ -26,6 +27,7 @@ class Research::UserSolvesSolutionTest < Research::TestCase
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)
+    click_on "Results"
 
     assert_text "Sentence.WordWithMostVowels(\"a\")"
     assert_text "Wrong variable"

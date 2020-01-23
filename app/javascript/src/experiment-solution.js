@@ -93,6 +93,7 @@ class ExperimentSolution {
   }
 
   openShortcuts() {
+    if ($('.overlay').length > 0) { return; }
     if (this.editor.isFocused()) { return; }
 
     const modal = new KeyboardShortcuts();
