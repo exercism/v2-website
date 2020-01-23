@@ -6,6 +6,7 @@ class TerminalOutput
   end
 
   def to_html
+    return nil unless output
     Ansi::To::Html.new(output).to_html
   end
 
