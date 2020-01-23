@@ -9,6 +9,7 @@ import Submission from './submission';
 class ExperimentSolution {
   constructor(element) {
     this.element = element;
+    this.initialClass = this.element.attr('class');
 
     this._setup();
   }
@@ -101,12 +102,43 @@ class ExperimentSolution {
     modal.render();
   }
 
+  updateClass(status) {
+    this.element.attr('class', `experiment-solution experiment-solution--${status}`);
+  }
+
   _newSubmission() {
     const submission = new Submission(this.element.find('.js-submission-panel'));
-
-    submission.onResubmitted = this.codeSubmitted.bind(this);
-    submission.onCancel = this._cancelBuild.bind(this);
-    submission.onTested = this.resultsReceived.bind(this);
+    submission.onChange = (status) => {
+      switch(status) {
+        case 'queueing':
+          this.updateClass('pending');
+          break;
+        case 'queued':
+          this.updateClass('pending');
+          break;
+        case 'cancelling':
+          this.updateClass('info');
+          break;
+        case 'cancelled':
+          this.element.attr('class', this.initialClass);
+          this._cancelBuild();
+          break;
+        case 'pass':
+          this.updateClass('pass');
+          this.resultsReceived();
+          break;
+        case 'fail':
+          this.updateClass('fail');
+          this.resultsReceived();
+          break;
+        case 'timeout':
+          this.updateClass('info');
+          break;
+        case 'resubmitted':
+          this.codeSubmitted();
+          break;
+      }
+    }
 
     return submission;
   }
