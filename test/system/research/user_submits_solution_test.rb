@@ -15,13 +15,15 @@ class Research::UserSubmitsSolutionTest < Research::TestCase
                       exercise: exercise,
                       user: user,
                       experiment: experiment)
-    submission = create(:submission, solution: solution)
+    submission = create(:submission, tested: true, solution: solution)
     create(:submission_test_run,
            submission: submission,
+           ops_status: 200,
            results_status: "pass")
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)
+    click_on "Results"
     click_button "Submit exercise"
 
     assert_text "Completed"

@@ -4,6 +4,8 @@ class Submission < ApplicationRecord
 
   delegate :tests_info, to: :solution
 
+  scope :tested, -> { where(tested: true) }
+
   def broadcast!
     return unless solution.research_experiment_solution?
 

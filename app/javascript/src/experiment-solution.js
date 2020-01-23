@@ -1,9 +1,10 @@
 import Split from 'split.js';
 import CodeEditorManager from './code-editor-manager';
 import ResearchSolutionChannel from '../channels/research_solution_channel';
-import SubmissionStatus from './submission_status';
-import SubmissionStatusView from './submission_status_view';
 import KeyboardShortcuts from './keyboard_shortcuts';
+import InfoPanel from './info_panel';
+import SubmitButton from './submit_button';
+import Submission from './submission';
 
 class ExperimentSolution {
   constructor(element) {
@@ -13,20 +14,76 @@ class ExperimentSolution {
   }
 
   _setup() {
-    this._setupPanes();
+    this._setupSubmitButton();
+    this._setupShortcuts();
+    this._setupInfoPanel();
+    this._setupSubmission();
     this._setupEditor();
-    this._setupActions();
-    this._setupSubmissionStatus();
     this._setupChannel();
-    this._setupTestRun();
+    this._setupSplit();
   }
 
-  submitCode() {
-    if (!this.submissionStatus.isAllowedToSubmit()) { return; }
+  _setupSubmitButton() {
+    this.submitButton = new SubmitButton(this.element.find('.js-submit-code'));
+    this.submitButton.click(this.codeSubmitted.bind(this));
+  }
 
-    this.submissionStatus.setStatus('queueing');
-    this.submissionStatus.render(new SubmissionStatusView('queueing').render());
-    this._submit();
+  _setupShortcuts() {
+    this.shortcutsButton = this.element.find('.js-keyboard-shortcuts')
+    this.shortcutsButton.click(this.openShortcuts.bind(this));
+    this.setCommand('?', () => { this.openShortcuts(); });
+  }
+
+  _setupInfoPanel() {
+    this.infoPanel = new InfoPanel(this.element.find('.info-panel'));
+  }
+
+  _setupSubmission() {
+    this.submission = this._newSubmission();
+  }
+
+  _setupEditor() {
+    this.editor = new CodeEditorManager(
+      this.element.find('.js-code-editor-manager'),
+      (editor) => {
+        editor.addCommand({
+          name: "submit",
+          bindKey: {win: "Shift-Enter", mac: "Shift-Enter"},
+          exec: this.codeSubmitted.bind(this)
+        });
+    });
+  }
+
+  _setupChannel() {
+    this.channel = new ResearchSolutionChannel(this.element.data('id'))
+    this.channel.received(function(submission) {
+      this.submission.update(submission);
+    }.bind(this));
+  }
+
+  _setupSplit() {
+    Split(['.info-panel', '.coding-panel'], {
+      sizes: [50, 50],
+      gutterSize: 10,
+      split: 'vertical'
+    })
+  }
+
+  codeSubmitted() {
+    if (this.submission.status == 'queueing' || this.submission.status == 'queued') {
+      return;
+    }
+    this.submission = this._newSubmission();
+    this.submission.setStatus('queueing');
+
+    this.infoPanel.codeSubmitted();
+    this.submitButton.submitted();
+    this.channel.createSubmission(this.editor.exportFile());
+  }
+
+  resultsReceived() {
+    this.submitButton.waitingForSubmission();
+    this.editor.focus();
   }
 
   setCommand(key, command) {
@@ -44,86 +101,18 @@ class ExperimentSolution {
     modal.render();
   }
 
-  _setupPanes() {
-    Split(['.description-panel', '.solution-panel'], {
-      sizes: [50, 50],
-      gutterSize: 10,
-      split: 'vertical'
-    })
-  }
+  _newSubmission() {
+    const submission = new Submission(this.element.find('.js-submission-panel'));
 
-  _setupActions() {
-    this.setCommand('?', () => { this.openShortcuts(); });
+    submission.onResubmitted = this.codeSubmitted.bind(this);
+    submission.onCancel = this._cancelBuild.bind(this);
+    submission.onTested = this.resultsReceived.bind(this);
 
-    this.element.find('.js-submit-code').click(this.submitCode.bind(this));
-    this.
-      element.
-      find('.js-keyboard-shortcuts').
-      click(this.openShortcuts.bind(this));
-  }
-
-  _setupEditor() {
-    this.editor = new CodeEditorManager(
-      this.element.find('.js-code-editor-manager'),
-      (editor) => {
-        editor.addCommand({
-          name: "submit",
-          bindKey: {win: "Shift-Enter", mac: "Shift-Enter"},
-          exec: this.submitCode.bind(this)
-        });
-    });
-  }
-
-  _setupSubmissionStatus() {
-    this.submissionStatus = new SubmissionStatus();
-    this.submissionStatus.onSubmit = this.submitCode.bind(this)
-    this.submissionStatus.onTested = this._onTested.bind(this)
-    this.submissionStatus.onCancel = this._onCancel.bind(this)
-  }
-
-  _setupChannel() {
-    this.channel = new ResearchSolutionChannel(
-      this.element.data('id'),
-      (submission) => {
-        this.submissionStatus.setStatus(submission.opsStatus);
-        this.submissionStatus.render(submission.opsStatusHtml);
-        this.testRun.html(submission.testRunHtml);
-      }
-    );
-
-    this.channel.subscribe();
-  }
-
-  _setupTestRun() {
-    this.testRun = this.element.find('.js-test-run');
-  }
-
-  _submit() {
-    this.channel.createSubmission(this.editor.exportFile());
-  }
-
-  _onTested() {
-    this._scrollToTestRun();
-    this.editor.focus();
-  }
-
-  _onCancel() {
-    this._cancelBuild();
-    this.editor.focus();
-  }
-
-  _scrollToTestRun() {
-    this.testRun.removeClass('test-result-focus');
-
-    this.testRun[0].scrollIntoView({
-      behavior: "smooth",
-      block: "end"
-    });
-
-    this.testRun.addClass('test-result-focus');
+    return submission;
   }
 
   _cancelBuild() {
+    this.resultsReceived();
     this.channel.cancelSubmission();
   }
 }

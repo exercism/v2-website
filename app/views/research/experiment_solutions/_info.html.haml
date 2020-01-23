@@ -1,0 +1,21 @@
+.tabs-and-panes.selected-1
+  .tabs
+    .tab.tab-1
+      Instructions
+    .tab.tab-2
+      = link_to "Results" , "#"
+  .panes
+    .pane.pane-1
+      .instructions
+        = raw solution.instructions
+
+    .pane.pane-2.js-submission-panel
+      - if solution.submissions.tested.last
+        = render partial: solution.submissions.tested.last.ops_status,
+          as: :status
+      - else
+        Hit "Run code" to see how your solution performs.
+
+-content_for :js do
+  :javascript
+    setupTabs()

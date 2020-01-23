@@ -10,16 +10,20 @@
         .experiments
           -@experiments.each do |experiment|
             .experiment
-              %h3 Latest experiment
+              %h3 
+                = graphical_icon :circle, style: :solid
+                Live experiment
               %h2= experiment.title
               %p 
                 We are exploring how the order and depth in which someone learns programming languages in programming affects how they solve different problems.
                 We will use this learning to extrapolate how we can better teach new programming languages to people from different backgrounds.
                 We hope that people with a range of different experiences and backgrounds will take part, and that they will participate in languages that they barely know and languages they know well.
               .researchers
+                %h4 In partnership with
                 =image "supporter-logos/chicago.jpg", "University of Chicago"
                 =image "supporter-logos/wisconsin.png", "University of Wisconsin-Madison"
                 =image "supporter-logos/sloan-black.png", "The Sloan Foundation"
+
               .buttons
                 =link_to "Learn More", research_experiment_path(experiment), class: 'learn-more-btn pure-button'
                 -user_experiment = @user_experiments_by_ids[experiment.id]

@@ -1,9 +1,6 @@
 #experiment-solution-page
-  = breadcrumb_nav do
-    %li=link_to "Back", :back
-
   .experiment-solution{ data: { id: @solution.id } }
-    .description-panel
-      = render "description", solution: @solution
-    .solution-panel
-      = render "solution", solution: @solution, editor_config: @editor_config
+    .info-panel
+      = render "info", solution: @solution
+    .coding-panel
+      = render "coding", solution: @solution, editor_config: @editor_config
