@@ -101,12 +101,40 @@ class ExperimentSolution {
     modal.render();
   }
 
+  updateClass(class) {
+    this.element.addClass(class);
+  }
+
   _newSubmission() {
     const submission = new Submission(this.element.find('.js-submission-panel'));
 
-    submission.onResubmitted = this.codeSubmitted.bind(this);
-    submission.onCancel = this._cancelBuild.bind(this);
-    submission.onTested = this.resultsReceived.bind(this);
+    submission.onChange = (previousStatus, status) => {
+      switch(status) {
+        case 'queueing':
+          this.updateClass('pending');
+          break;
+        case 'queued':
+          this.updateClass('pending');
+          break;
+        case 'cancelling':
+          this.updateClass('info');
+          break;
+        case 'cancelled':
+          this.updateClass(previousStatus);
+          this._cancelBuild();
+          break;
+        case 'tested':
+          this.updateClass('tested');
+          this.resultsReceived();
+          break;
+        case 'timeout':
+          this.updateClass('info');
+          break;
+        case 'resubmitted':
+          this.codeSubmitted();
+          break;
+      }
+    }
 
     return submission;
   }
