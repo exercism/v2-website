@@ -14,7 +14,7 @@ class SubmissionOpsStatus
     return :queued if test_run.nil?
 
     if code == 200
-      :tested
+      test_run.pass? ? :pass : :fail
     else
       :error
     end
