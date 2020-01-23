@@ -15,8 +15,23 @@ class CodeEditor {
     this.editor.onSetup = () => {
       this.editor.setTheme('dark');
 
+      if (localStorage.getItem('code-editor') !== null) {
+        this.editor.setValue(
+          localStorage.getItem('code-editor')
+        );
+      }
+
       this.onSetup(this);
     }
+
+
+    this.editor.onChanged = () => {
+      this.save();
+    }
+  }
+
+  save() {
+    localStorage.setItem('code-editor', this.editor.getValue());
   }
 
   setTheme(theme) {
