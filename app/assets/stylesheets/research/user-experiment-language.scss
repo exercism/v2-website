@@ -8,6 +8,21 @@
         margin-bottom:5px;
     }
 
+    .pure-button {
+        width:100%;
+        @include font-size(18, 50);
+        font-weight:$fw-semibold;
+        padding:0 20px;
+        background:$research-blue;
+        color:#fff;
+        border-radius:4px;
+        input {
+            padding:0 20px;
+            font-weight:inherit;
+        }
+    }
+
+
     .parts {
         .part {
             border:1px solid #aaa;
