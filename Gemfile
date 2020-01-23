@@ -56,6 +56,8 @@ gem 'webpacker', '~> 4.0'
 
 gem 'redis'
 
+gem 'ansi-to-html', require: false
+
 group :production do
   #gem "skylight"
 end
