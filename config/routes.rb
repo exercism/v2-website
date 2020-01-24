@@ -246,6 +246,8 @@ Rails.application.routes.draw do
       resource :preferences, only: [:edit, :update]
       resource :track_settings, only: [:edit, :update]
     end
+
+    resource :user, only: [:update]
   end
 
   # ##### #
