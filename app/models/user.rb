@@ -221,6 +221,14 @@ class User < ApplicationRecord
     joined_research_at.present?
   end
 
+  def theme
+    if dark_code_theme?
+      :dark
+    else
+      :light
+    end
+  end
+
   private
 
   def avatar_thumbnail_url
