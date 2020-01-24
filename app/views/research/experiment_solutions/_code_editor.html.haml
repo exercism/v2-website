@@ -2,7 +2,7 @@
   .code-editor.js-code-editor{data: { config: config.to_json, filename: filename }}= code
   .code-editor-toolbar
     .code-editor-toolbar-option
-      = form_with model: current_user, url: [:my, current_user] do |f|
+      = form_with model: current_user, url: update_theme_my_settings_preferences_path, method: :patch do |f|
         = f.label :theme, "Theme:"
         = f.select :theme,
           { "Dark" => "dark",  "Light" => "light" },
