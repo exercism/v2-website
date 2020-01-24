@@ -221,6 +221,15 @@ class User < ApplicationRecord
     joined_research_at.present?
   end
 
+  def theme=(theme)
+    case theme.to_s
+    when "dark"
+      assign_attributes(dark_code_theme: true)
+    when "light"
+      assign_attributes(dark_code_theme: false)
+    end
+  end
+
   def theme
     if dark_code_theme?
       :dark
