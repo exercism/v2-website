@@ -14,3 +14,7 @@
         options_for_select({ "Ace" => "ace",  "Vim" => "vim", "Emacs" => "emacs" }),
         class: "js-code-editor-keybinding js-skip-selectize",
         autocomplete: "off"
+
+- content_for :js do
+  :javascript
+    submitOnChange($('.js-theme-select'));
