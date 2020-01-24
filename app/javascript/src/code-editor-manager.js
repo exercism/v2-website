@@ -13,8 +13,8 @@ class CodeEditorManager {
     this._setupToolbar();
   }
 
-  selectTheme(e) {
-    this.editor.setTheme(e.currentTarget.value);
+  setTheme(theme) {
+    this.editor.setTheme(theme);
     this.editor.focus();
   }
 
@@ -42,10 +42,6 @@ class CodeEditorManager {
   }
 
   _setupToolbar() {
-    this.
-      element.
-      find('.js-code-editor-theme').
-      change(this.selectTheme.bind(this));
     this.
       element.
       find('.js-code-editor-keybinding').

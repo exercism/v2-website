@@ -80,3 +80,22 @@ test('it focuses to body after rendering the keyboard shortcuts modal', () => {
 
   expect($('.keyboard-shortcuts').length).toEqual(1);
 })
+
+test('it sets the editor theme', () => {
+  document.body.innerHTML = `
+    <div class="experiment-solution">
+      <div class="info-panel"></div>
+      <div class="coding-panel"></div>
+      <select class="js-theme-select">
+      </select>
+    </div>
+  `;
+
+  const solution = new ExperimentSolution($('.experiment-solution'));
+  const setTheme = jest.fn()
+  solution.editor = { setTheme: setTheme }
+
+  solution.themeSelector.trigger('change');
+
+  expect(setTheme).toHaveBeenCalled();
+});

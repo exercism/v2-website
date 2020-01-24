@@ -73,9 +73,11 @@ class ExperimentSolution {
   }
 
   _setupThemeSelector() {
-    this.themeSelector = new PageThemeSelect(
-      this.element.find('.js-theme-select')
-    );
+    this.themeSelector = new PageThemeSelect(this.element.find('.js-theme-select'));
+
+    this.themeSelector.change((theme) => {
+      this.editor.setTheme(theme);
+    });
   }
 
   codeSubmitted() {

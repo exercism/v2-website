@@ -5,7 +5,7 @@
       = label_tag "theme", "Theme:"
       = select_tag "theme",
         options_for_select({ "Dark" => "dark",  "Light" => "light" }),
-        class: "js-code-editor-theme js-skip-selectize",
+        class: "js-theme-select js-skip-selectize",
         autocomplete: "off"
     .code-editor-toolbar-option
       = label_tag "keybinding", "Keybinding:"
