@@ -14,6 +14,16 @@ class PageThemeSelect {
     this._swapThemeStylesheets();
   }
 
+  change(handler) {
+    this.element.on('change', function(e) {
+      handler(e.currentTarget.value)
+    });
+  }
+
+  trigger(e) {
+    this.element.trigger(e);
+  }
+
   _swapBodyClass() {
     if (this.theme == 'dark') {
       $('body').addClass('prism-dark');
