@@ -3,7 +3,7 @@
     .lo-research-floating-box
       =graphical_image "research/research-icon.png", class: "header-img"
       .live
-        %i.fas.fa-circle
+        =graphical_icon(:circle, style: :solid)
         Live experiment
       %h1= @experiment.title
       %p
@@ -17,7 +17,7 @@
 
     .more-details
       More details below
-      %i.far.fa-chevron-down
+      =graphical_icon(:"chevron-down", style: :solid)
 
   %section.logos-section
     .lo-container
