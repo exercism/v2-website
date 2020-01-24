@@ -22,6 +22,7 @@ class ExperimentSolution {
     this._setupEditor();
     this._setupChannel();
     this._setupSplit();
+    this._setupThemeSelector();
   }
 
   _setupSubmitButton() {
@@ -68,6 +69,18 @@ class ExperimentSolution {
       gutterSize: 10,
       split: 'vertical'
     })
+  }
+
+  _setupThemeSelector() {
+    this.themeSelector = this.element.find('.js-theme-select');
+
+    this.themeSelector.change(function() {
+      if (this.value == 'dark') {
+        $('body').addClass('prism-dark');
+      } else {
+        $('body').removeClass('prism-dark');
+      }
+    });
   }
 
   codeSubmitted() {
