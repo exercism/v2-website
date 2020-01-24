@@ -3,7 +3,8 @@
 
 - PrismJS::Theme.all.each do |theme|
   = async_stylesheet_link_tag theme.stylesheet,
-    disabled: theme.disabled?(current_user || Guest.new)
+    disabled: theme.disabled?(current_user || Guest.new),
+    data: { theme: theme.name }
 
 - content_for :js do
   - PrismJS::Component.all.each do |component|
