@@ -243,11 +243,11 @@ Rails.application.routes.draw do
       get :confirm_delete_account
       delete :delete_account
 
-      resource :preferences, only: [:edit, :update]
+      resource :preferences, only: [:edit, :update] do
+        patch :update_theme
+      end
       resource :track_settings, only: [:edit, :update]
     end
-
-    resource :user, only: [:update]
   end
 
   # ##### #
