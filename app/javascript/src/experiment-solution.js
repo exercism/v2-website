@@ -21,9 +21,9 @@ class ExperimentSolution {
     this._setupInfoPanel();
     this._setupSubmission();
     this._setupEditor();
+    this._setupThemeSelector();
     this._setupChannel();
     this._setupSplit();
-    this._setupThemeSelector();
   }
 
   _setupSubmitButton() {
@@ -54,7 +54,17 @@ class ExperimentSolution {
           bindKey: {win: "Shift-Enter", mac: "Shift-Enter"},
           exec: this.codeSubmitted.bind(this)
         });
+
+        editor.setTheme(this.themeSelector.theme);
     });
+  }
+
+  _setupThemeSelector() {
+    this.themeSelector = new PageThemeSelect(
+      this.element.find('.js-theme-select')
+    );
+
+    this.themeSelector.change((theme) => { this.editor.setTheme(theme); });
   }
 
   _setupChannel() {
@@ -70,14 +80,6 @@ class ExperimentSolution {
       gutterSize: 10,
       split: 'vertical'
     })
-  }
-
-  _setupThemeSelector() {
-    this.themeSelector = new PageThemeSelect(this.element.find('.js-theme-select'));
-
-    this.themeSelector.change((theme) => {
-      this.editor.setTheme(theme);
-    });
   }
 
   codeSubmitted() {

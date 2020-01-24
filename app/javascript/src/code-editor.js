@@ -12,11 +12,7 @@ class CodeEditor {
   _setup() {
     this.editor = new AceEditor(this.element, this.config, this.filename);
 
-    this.editor.onSetup = () => {
-      this.editor.setTheme('dark');
-
-      this.onSetup(this);
-    }
+    this.editor.onSetup = () => { this.onSetup(this); }
   }
 
   setTheme(theme) {

@@ -1,6 +1,7 @@
 class PageThemeSelect {
   constructor(element) {
     this.element = element;
+    this.theme = element.val();
 
     this.element.change(function(e) {
       this.set(e.currentTarget.value)
