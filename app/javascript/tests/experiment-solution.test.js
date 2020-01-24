@@ -18,46 +18,6 @@ test('it calls commands when a hotkey is pressed', () => {
   expect(command).toHaveBeenCalled();
 })
 
-test ('it sets the body class to prism-dark when dark theme is selected', () => {
-  document.body.innerHTML = `
-    <body>
-      <div class="experiment-solution">
-        <div class="info-panel"></div>
-        <div class="coding-panel"></div>
-        <select class="js-theme-select">
-          <option value="dark"></option>
-          <option value="light"></option>
-        </select>
-      </div>
-    </body>
-  `;
-
-  const solution = new ExperimentSolution($('.experiment-solution'));
-  $('select').val('dark').trigger('change');
-
-  expect($('body').attr('class')).toEqual('prism-dark');
-});
-
-test ('removes the body class prism-dark when light theme is selected', () => {
-  document.body.innerHTML = `
-    <body class="prism-dark">
-      <div class="experiment-solution">
-        <div class="info-panel"></div>
-        <div class="coding-panel"></div>
-        <select class="js-theme-select">
-          <option value="dark"></option>
-          <option value="light"></option>
-        </select>
-      </div>
-    </body>
-  `;
-
-  const solution = new ExperimentSolution($('.experiment-solution'));
-  $('select').val('light').trigger('change');
-
-  expect($('body').attr('class')).toEqual('');
-});
-
 test('it opens keyboard shortcuts modal', () => {
   document.body.innerHTML = `
     <div class="experiment-solution">

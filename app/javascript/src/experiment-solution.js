@@ -5,6 +5,7 @@ import KeyboardShortcuts from './keyboard_shortcuts';
 import InfoPanel from './info_panel';
 import SubmitButton from './submit_button';
 import Submission from './submission';
+import PageThemeSelect from './page_theme_select';
 
 class ExperimentSolution {
   constructor(element) {
@@ -72,15 +73,9 @@ class ExperimentSolution {
   }
 
   _setupThemeSelector() {
-    this.themeSelector = this.element.find('.js-theme-select');
-
-    this.themeSelector.change(function() {
-      if (this.value == 'dark') {
-        $('body').addClass('prism-dark');
-      } else {
-        $('body').removeClass('prism-dark');
-      }
-    });
+    this.themeSelector = new PageThemeSelect(
+      this.element.find('.js-theme-select')
+    );
   }
 
   codeSubmitted() {
