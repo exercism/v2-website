@@ -1,52 +1,190 @@
 @import 'mixins';
 @import 'variables';
 
+html {
+  --scrollbarBG: #CFD8DC;
+  --thumbBG: #90A4AE;
+}
+
+
 body.namespace-research {
-    &.prism-dark {
-    }
 
-    &:not(.prism-dark) {
-    }
+    &.prism-dark  {
 
-    #experiment-solution-page {
-        $breadcrumb-height: 35px;
+        $re-background-l1: #333;
+        $re-background-l2: #222;
+        $re-scrollbar-color: #777;
+        $re-border-color:#aaa;
 
-        + footer {
-          display: none;
+        background:$re-background-l1;
+
+        scrollbar-width: thin;
+        scrollbar-color: $re-scrollbar-color $re-background-l1;
+
+        ::-webkit-scrollbar {
+          width: 14px;
+          height: 14px;
+        }
+        ::-webkit-scrollbar-track {
+          background: $re-background-l1;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: $re-scrollbar-color;
+          border-radius: 6px;
+          border: 3px solid $re-background-l1;
         }
 
-        > .experiment-solution {
-            height: calc(100vh - 50px);
+        * {
+            scrollbar-color: red yellow;
+        }
 
-            @include width-small() {
-                height: calc(100vh - 50px - #{$breadcrumb-height});
-            }
 
-            .test-area {
-                &.good {
-                    border:2px solid green;
-                }
-                &.bad {
-                    border:2px solid red;
-                }
-                &.pending {
-                    border:2px solid orange;
-                }
+        header {
+            border-bottom:1px solid #555;
+            .lo-container {
+                padding:0 50px;
             }
         }
+
+        #experiment-solution-page {
+            .header {
+                color:#fff;
+            }
+
+            .info-panel {
+                .tabs-and-panes {
+                    .tabs {
+                        .tab {
+                            background:$re-background-l2;
+                            border-color:transparent $re-border-color transparent transparent
+                        }
+                    }
+                    .panes {
+                        .pane {
+                            background:$re-background-l2;
+                            border:1px solid $re-border-color;
+                        }
+                    }
+
+                    &.selected-1>.tabs>.tab-1,
+                    &.selected-2>.tabs>.tab-2,
+                    &.selected-3>.tabs>.tab-3,
+                    &.selected-4>.tabs>.tab-4,
+                    &.selected-5>.tabs>.tab-5,
+                    &.selected-6>.tabs>.tab-6 {
+                        border-top-color:$re-border-color;
+                        border-left-color:$re-border-color;
+                        border-bottom-color:$re-border-color;
+                        border-right-color:$re-background-l2;
+                        color:#fff;
+                    }
+                }
+
+                h2 {
+                    color:#fff;
+                    border-bottom: 1px solid #5a5a5a;
+                }
+                p, li {
+                    color:#fafafa;
+
+                    code {
+                        border:1px solid #333;
+                        background:#2a2a2a;
+                    }
+                    a {
+                        color:#fff;
+                        font-weight:$fw-semibold;
+                        text-decoration:none;
+                        border-bottom:1px solid #aaa;
+                    }
+                }
+                pre {
+                    border:1px solid #333;
+                    background:#2a2a2a;
+                }
+            }
+            .gutter {
+                background:$re-background-l1;
+            }
+        }
+    }
+
+    &:not(.prism-dark) #experiment-solution-page {
+    }
+
+    #experiment-solution-page+footer {
+        display: none;
     }
 
     .experiment-solution {
-        display: flex;
+        height: calc(100vh - 50px);
 
+        @include width-small() {
+            height: calc(100vh - 50px);
+        }
+
+        .test-area {
+            &.good {
+                border:2px solid green;
+            }
+            &.bad {
+                border:2px solid red;
+            }
+            &.pending {
+                border:2px solid orange;
+            }
+        }
+        .header {
+            display: flex;
+            padding:15px 50px;
+            .info {
+                .exercise {
+                    margin-bottom:5px;
+                    h1 {
+                        display:inline-block;
+                        @include font-size(20, 20);
+                        font-weight:$fw-bold;
+                    }
+                    i {
+                        @include font-size(14, 20);
+                        margin:0 10px;
+                    }
+                    .experiment {
+                        @include font-size(14, 20);
+                        display:inline-block;
+                    }
+                }
+                .status {
+                    background:$color-2;
+                    @include font-size(13, 28);
+                    color:#fff;
+                    font-weight:$fw-bold;
+                    display:inline-block;
+                    padding:0 10px;
+                }
+            }
+            .tools {
+                flex-grow:1;
+                display:flex;
+                justify-content:flex-end;
+                .theme-selector {
+                    //border:1px solid #fff;
+                }
+            }
+        }
+        .environment {
+            display: flex;
+            height: calc(100% - 85px); // - .header
+            padding-bottom:15px
+        }
     }
 
     .coding-panel {
         display: flex;
         flex-direction: column;
-        padding-top: 20px;
         background: #333;
         color: white;
+        padding-right:20px;
     }
 
     .gutter {
@@ -54,8 +192,8 @@ body.namespace-research {
     }
 
     .info-panel {
-        padding: 20px 20px;
-        overflow-y: scroll;
+        padding: 1px 20px;
+        height:calc(100% - 70px);
 
         .tabs-and-panes {
             display:flex;
@@ -73,14 +211,11 @@ body.namespace-research {
                     margin:0;
                     text-align:center;
                     width:30px;
-                    height: 30px;
-                    line-height: 30px;
+                    height: 40px;
+                    line-height: 40px;
 
-                    background:transparent;
                     border-width:1px;
-                    border-radius:3px 0 0 3px;
-                    border-color:transparent;
-
+                    border-radius:4px 0 0 4px;
                 }
             }
 
@@ -90,53 +225,35 @@ body.namespace-research {
                 margin-left:-1px;
                 .pane {
                     padding:20px;
-                    border:1px solid #333;
-                    border-radius:3px;
+                    border-radius:2px;
 
                     overflow: auto;
                     height: 100%;
                 }
             }
-
-            &.selected-1>.tabs>.tab-1,
-            &.selected-2>.tabs>.tab-2,
-            &.selected-3>.tabs>.tab-3,
-            &.selected-4>.tabs>.tab-4,
-            &.selected-5>.tabs>.tab-5,
-            &.selected-6>.tabs>.tab-6 {
-                border-top-color:#333;
-                border-left-color:#333;
-                border-bottom-color:#333;
-                border-right-color:#fff;
-                color:#333;
-            }
         }
 
         h2 {
-            font-size: 18px;
-            font-weight: $fw-bold;
+            @include font-size(16, 16);
+            font-weight: $fw-semibold;
+            padding-bottom:10px;
             margin-bottom: 10px;
-            border-top: 3px solid $line-color-1;
-            padding-top: 30px;
+            margin-top:30px;
 
-          &:first-child {
-              padding-top: 0;
-              line-height:1;
-              border: none;
-          }
+            &:first-child {
+                margin-top:0;
+            }
         }
 
         p, li {
-            font-size: 15px;
-            line-height: 1.5;
+            @include font-size(15, 21);
             margin-bottom: 10px;
 
             code {
-                  border:1px solid #fafafa;
-                  background:#f5f5f5;
-                  @include code-font;
-                  font-size:13px;
-                  padding:0 2px;
+                @include code-font;
+                font-size:13px;
+                @include font-size(13, 21);
+                padding:2px 2px;
             }
         }
         pre {
@@ -161,20 +278,12 @@ body.namespace-research {
         animation: focus 2s;
     }
 
-    .toolbar {
-        display: flex;
-        justify-content: space-between;
-
-        padding: 10px;
-        background-color: #333;
-    }
-
-    .toolbar-submit-button {
-          background-color: $color-2;
-          padding: 10px;
-          width:35%;
-          max-width: 120px;
-          @include font-size(15, 15);
+    .submit-code-btn {
+        margin-top:10px;
+        background-color: $color-2;
+        padding:0 20px;
+        @include font-size(15, 40);
+        align-self: flex-end;
     }
 
     .toolbar-shortcut-button {

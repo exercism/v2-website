@@ -23,6 +23,7 @@ module Research
 
     def show
       @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
+      @exercise = @solution.exercise
       @editor_config = editor_config
     end
 

@@ -1,6 +1,35 @@
 #experiment-solution-page
   .experiment-solution{ data: { id: @solution.id } }
-    .info-panel
-      = render "info", solution: @solution
-    .coding-panel
-      = render "coding", solution: @solution, editor_config: @editor_config
+    .header
+      .info
+        .exercise
+          %h1 #{@exercise.title}
+          =graphical_icon(:"chevron-right", style: :light)
+          .experiment #{@solution.experiment.title}
+        .status In Progress
+      .tools
+        = form_with model: current_user, url: update_theme_my_settings_preferences_path, method: :patch, class: 'theme-selector' do |f|
+          = f.label :theme, "Theme:"
+          = f.select :theme,
+            { "Dark" => "dark",  "Light" => "light" },
+            {},
+            { class: "js-theme-select js-skip-selectize", autocomplete: "off" }
+        %button.js-keyboard-shortcuts.toolbar-shortcut-button.pure-button
+          Keyboard shortcuts
+          ( #{graphical_icon :question, style: :solid} )
+        .keybindings
+          = label_tag "keybinding", "Keybinding:"
+          = select_tag "keybinding",
+            options_for_select({ "Ace" => "ace",  "Vim" => "vim", "Emacs" => "emacs" }),
+            class: "js-code-editor-keybinding js-skip-selectize",
+            autocomplete: "off"
+
+    .environment
+      .info-panel
+        = render "info", solution: @solution
+      .coding-panel
+        = render "coding", solution: @solution, editor_config: @editor_config
+
+- content_for :js do
+  :javascript
+    submitOnChange($('.js-theme-select'));

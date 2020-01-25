@@ -4,8 +4,9 @@
     filename: filename,
     code: code
   - break
-.toolbar
-  %button.js-keyboard-shortcuts.toolbar-shortcut-button.pure-button
-    Keyboard shortcuts
-    ( #{graphical_icon :question, style: :solid} )
-  %button.js-submit-code.toolbar-submit-button.pure-button Run code
+
+%button.js-submit-code.submit-code-btn.pure-button Run code
+
+- content_for :js do
+  :javascript
+    submitOnChange($('.js-theme-select'));
