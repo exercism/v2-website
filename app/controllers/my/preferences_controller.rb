@@ -3,7 +3,7 @@ class My::PreferencesController < MyController
   end
 
   def update_theme
-    current_user.update!(theme: params[:user][:theme])
+    current_user.update!(theme: params[:theme])
     head 200
   end
 

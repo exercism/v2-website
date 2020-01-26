@@ -18,8 +18,8 @@ class CodeEditorManager {
     this.editor.focus();
   }
 
-  selectKeybinding(e) {
-    this.editor.setKeybinding(e.currentTarget.value);
+  selectKeybinding(bindings) {
+    this.editor.setKeybinding(bindings);
     this.editor.focus();
   }
 
@@ -42,10 +42,14 @@ class CodeEditorManager {
   }
 
   _setupToolbar() {
-    this.
-      element.
-      find('.js-code-editor-keybinding').
-      change(this.selectKeybinding.bind(this));
+    var form = this.element.find('.js-code-editor-keybinding')
+    var btns = form.find('button')
+    btns.click(function(e) {
+      for(var btn of btns) { btn.removeAttribute('selected')}
+      e.currentTarget.setAttribute('selected', true)
+
+      this.selectKeybinding(e.currentTarget.value)
+    }.bind(this));
   }
 }
 

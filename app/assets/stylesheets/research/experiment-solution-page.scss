@@ -1,20 +1,12 @@
 @import 'mixins';
 @import 'variables';
 
-html {
-  --scrollbarBG: #CFD8DC;
-  --thumbBG: #90A4AE;
-}
-
-
 body.namespace-research {
-
     &.prism-dark  {
-
         $re-background-l1: #333;
         $re-background-l2: #222;
         $re-scrollbar-color: #777;
-        $re-border-color:#aaa;
+        $re-border-color:#777;
 
         background:$re-background-l1;
 
@@ -47,22 +39,24 @@ body.namespace-research {
         }
 
         #experiment-solution-page {
-            .header {
-                color:#fff;
-            }
-
             .info-panel {
+                .solution-info {
+                    color:#fff;
+                }
+
                 .tabs-and-panes {
                     .tabs {
                         .tab {
                             background:$re-background-l2;
-                            border-color:transparent $re-border-color transparent transparent
+                            &:after {
+                                background: $re-border-color;
+                            }
                         }
                     }
                     .panes {
                         .pane {
                             background:$re-background-l2;
-                            border:1px solid $re-border-color;
+                            border:2px solid $re-border-color;
                         }
                     }
 
@@ -75,8 +69,11 @@ body.namespace-research {
                         border-top-color:$re-border-color;
                         border-left-color:$re-border-color;
                         border-bottom-color:$re-border-color;
-                        border-right-color:$re-background-l2;
                         color:#fff;
+
+                        &:after {
+                            display:none;
+                        }
                     }
                 }
 
@@ -106,6 +103,35 @@ body.namespace-research {
             .gutter {
                 background:$re-background-l1;
             }
+            .coding-panel {
+                .toolbar {
+                    .toolbar-multiselect-item {
+                        border:1px solid $re-border-color;
+                        background:$re-background-l2;
+                        .label {
+                            background:$re-background-l2;
+                            color:#fff
+                        }
+                        button {
+                            background:$re-background-l2;
+                            color:#fff;
+                            border-left: 1px solid #aaa;
+                            &[selected] {
+                                background:#fff;
+                                color:$re-background-l2;
+                            }
+                        }
+                    }
+                    .toolbar-shortcuts-btn {
+                        border:1px solid $re-border-color;
+                        background:$re-background-l2;
+                    }
+                }
+                .code-editor {
+                    border:2px solid $re-border-color;
+                    border-radius:2px;
+                }
+            }
         }
     }
 
@@ -118,6 +144,7 @@ body.namespace-research {
 
     .experiment-solution {
         height: calc(100vh - 50px);
+        display:flex;
 
         @include width-small() {
             height: calc(100vh - 50px);
@@ -134,44 +161,48 @@ body.namespace-research {
                 border:2px solid orange;
             }
         }
-        .header {
-            display: flex;
-            padding:15px 50px;
-            .info {
-                .exercise {
-                    margin-bottom:5px;
-                    h1 {
-                        display:inline-block;
-                        @include font-size(20, 20);
-                        font-weight:$fw-bold;
-                    }
-                    i {
-                        @include font-size(14, 20);
-                        margin:0 10px;
-                    }
-                    .experiment {
-                        @include font-size(14, 20);
-                        display:inline-block;
-                    }
-                }
-                .status {
-                    background:$color-2;
-                    @include font-size(13, 28);
-                    color:#fff;
-                    font-weight:$fw-bold;
-                    display:inline-block;
-                    padding:0 10px;
+        .toolbar {
+            .toolbar-item {
+                height:26px;
+                &, * {
+                    @include font-size(13, 24);
                 }
             }
-            .tools {
-                flex-grow:1;
+
+            .toolbar-multiselect-item {
                 display:flex;
-                justify-content:flex-end;
-                .theme-selector {
-                    //border:1px solid #fff;
+                .label {
+                    padding:0 10px;
+                    display:block;
+                    @include font-size(13, 24);
                 }
+                button {
+                    @include font-size(13, 24);
+                    display:block;
+                    padding:0 10px;
+                    border-radius:0;
+                }
+            }
+            .toolbar-shortcuts-btn {
+                padding:0 10px;
+                margin-bottom:10px;
+                margin-right:10px;
             }
         }
+        .toolbar-1 {
+            flex-grow:1;
+            display:flex;
+            justify-content: flex-end;
+            padding-top:15px;
+        }
+        .toolbar-2 {
+            flex-grow:1;
+            display:flex;
+            justify-content: flex-start;
+            margin-bottom:15px;
+            margin-top:40px;
+        }
+
         .environment {
             display: flex;
             height: calc(100% - 85px); // - .header
@@ -185,6 +216,18 @@ body.namespace-research {
         background: #333;
         color: white;
         padding-right:20px;
+        padding-bottom:15px;
+        min-width:400px;
+        height: 100%;
+
+        .submit-code-btn {
+            margin-top:15px;
+            background-color: $color-2;
+            padding:0 20px;
+            @include font-size(15, 40);
+            align-self: flex-end;
+        }
+
     }
 
     .gutter {
@@ -192,16 +235,47 @@ body.namespace-research {
     }
 
     .info-panel {
-        padding: 1px 20px;
-        height:calc(100% - 70px);
+        padding: 20px 20px;
+        height: calc(100% - 15px);
+        min-width:400px;
+
+        .solution-info {
+            margin-bottom:15px;
+            .exercise {
+                height:22px;
+                overflow:hidden;
+                margin-bottom:5px;
+                h1 {
+                    display:inline-block;
+                    @include font-size(20, 20);
+                    font-weight:$fw-bold;
+                }
+                i {
+                    @include font-size(14, 20);
+                    margin:0 10px;
+                }
+                .experiment {
+                    @include font-size(14, 20);
+                    display:inline-block;
+                }
+            }
+            .status {
+                background:$color-2;
+                @include font-size(13, 28);
+                color:#fff;
+                font-weight:$fw-bold;
+                display:inline-block;
+                padding:0 10px;
+            }
+        }
 
         .tabs-and-panes {
             display:flex;
-            height:100%;
+            height:calc(100% - 50px);
 
             .tabs {
                 padding:0;
-                margin:7px 0 0 0;
+                margin:10px 0 0 0;
                 border:none;
                 z-index:1;
 
@@ -214,15 +288,27 @@ body.namespace-research {
                     height: 40px;
                     line-height: 40px;
 
-                    border-width:1px;
-                    border-radius:4px 0 0 4px;
+                    border-width: 2px 0 2px 2px;
+                    border-radius:5px 0 0 5px;
+                    position: relative;
+                    border-color:transparent;
+
+                    &:after {
+                        content: " ";
+                        width: 2px;
+                        height: 42px;
+                        right: 0px;
+                        top: -2px;
+                        position: absolute;
+                        z-index: 2;
+                    }
                 }
             }
 
             .panes {
                 max-width: calc(100% - 20px);
                 flex-grow: 1;
-                margin-left:-1px;
+                margin-left:-2px;
                 .pane {
                     padding:20px;
                     border-radius:2px;
@@ -276,25 +362,6 @@ body.namespace-research {
 
     .test-result-focus {
         animation: focus 2s;
-    }
-
-    .submit-code-btn {
-        margin-top:10px;
-        background-color: $color-2;
-        padding:0 20px;
-        @include font-size(15, 40);
-        align-self: flex-end;
-    }
-
-    .toolbar-shortcut-button {
-        background: transparent;
-        border: 1px solid white;
-        padding: 10px;
-    }
-
-    .submit-exercise-button {
-        background-color: $color-2;
-        padding: 10px;
     }
 
     .test-run {
