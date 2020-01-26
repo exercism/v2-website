@@ -1,0 +1,114 @@
+#experiment-solution-page {
+    background:$re-background-l2;
+
+    scrollbar-width: thin;
+    scrollbar-color: $re-scrollbar-color $re-background-l2;
+
+    ::-webkit-scrollbar {
+      width: 14px;
+      height: 14px;
+    }
+    ::-webkit-scrollbar-track {
+      background: $re-background-l2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: $re-scrollbar-color;
+      border-radius: 6px;
+      border: 3px solid $re-background-l2;
+    }
+
+    .info-panel {
+        .solution-info {
+            color:$re-foreground-color;
+        }
+
+        .tabs-and-panes {
+            .tabs {
+                .tab {
+                    background:$re-background-l1;
+                    &:after {
+                        background: $re-border-color;
+                    }
+                }
+            }
+            .panes {
+                .pane {
+                    background:$re-background-l1;
+                    border:2px solid $re-border-color;
+                }
+            }
+
+            &.selected-1>.tabs>.tab-1,
+            &.selected-2>.tabs>.tab-2,
+            &.selected-3>.tabs>.tab-3,
+            &.selected-4>.tabs>.tab-4,
+            &.selected-5>.tabs>.tab-5,
+            &.selected-6>.tabs>.tab-6 {
+                border-top-color:$re-border-color;
+                border-left-color:$re-border-color;
+                border-bottom-color:$re-border-color;
+                color:$re-foreground-color;
+
+                &:after {
+                    display:none;
+                }
+            }
+        }
+
+        h2 {
+            color:$re-foreground-color;
+            border-bottom: 1px solid $re-border-color;
+        }
+        p, li {
+            color:$re-text-color;
+
+            code {
+                border:1px solid $re-background-l2;
+                background:$re-background-l1;
+            }
+            a {
+                color:$re-foreground-color;
+                font-weight:$fw-semibold;
+                text-decoration:none;
+                border-bottom:1px solid $re-border-color;
+            }
+        }
+        pre {
+            border:1px solid $re-background-l3;
+            background:$re-background-l2;
+        }
+    }
+    .gutter {
+        background:$re-background-l2;
+    }
+    .coding-panel {
+        .toolbar {
+            .toolbar-multiselect-item {
+                border:1px solid $re-border-color;
+                background:$re-background-l1;
+                .label {
+                    background:$re-background-l3;
+                    color:$re-foreground-color
+                }
+                button {
+                    background:$re-background-l1;
+                    color:$re-foreground-color;
+                    border-left: 1px solid $re-border-color;
+                    &[selected] {
+                        background:$re-foreground-color;
+                        color:$re-background-l1;
+                    }
+                }
+            }
+            .toolbar-shortcuts-btn {
+                border:1px solid $re-border-color;
+                background:$re-background-l1;
+                color:$re-foreground-color;
+            }
+        }
+        .code-editor {
+            border:2px solid $re-border-color;
+            border-radius:2px;
+        }
+    }
+}

@@ -23,6 +23,11 @@ class CodeEditorManager {
     this.editor.focus();
   }
 
+  selectWrapping(value) {
+    this.editor.setWrapping(value);
+    this.editor.focus();
+  }
+
   exportFile() {
     return this.editor.exportFile();
   }
@@ -42,6 +47,11 @@ class CodeEditorManager {
   }
 
   _setupToolbar() {
+    this._setupKeybindingToggle();
+    this._setupWrappingToggle();
+  }
+
+  _setupKeybindingToggle() {
     var form = this.element.find('.js-code-editor-keybinding')
     var btns = form.find('button')
     btns.click(function(e) {
@@ -49,6 +59,17 @@ class CodeEditorManager {
       e.currentTarget.setAttribute('selected', true)
 
       this.selectKeybinding(e.currentTarget.value)
+    }.bind(this));
+  }
+
+  _setupWrappingToggle() {
+    var form = this.element.find('.js-code-editor-wrapping')
+    var btns = form.find('button')
+    btns.click(function(e) {
+      for(var btn of btns) { btn.removeAttribute('selected')}
+      e.currentTarget.setAttribute('selected', true)
+
+      this.selectWrapping(e.currentTarget.value)
     }.bind(this));
   }
 }

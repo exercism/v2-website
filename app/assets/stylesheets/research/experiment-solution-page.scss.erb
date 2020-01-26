@@ -3,143 +3,38 @@
 
 body.namespace-research {
     &.prism-dark  {
-        $re-background-l1: #333;
-        $re-background-l2: #222;
+        $re-foreground-color:#fff;
+        $re-text-color:#fafafa;
+        $re-background-l1: #222;
+        $re-background-l2: #333;
+        $re-background-l3: #3a3a3a;
         $re-scrollbar-color: #777;
         $re-border-color:#777;
 
-        background:$re-background-l1;
+        <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
+    } 
+   
+    &:not(.prism-dark)  {
+        $re-foreground-color:#222;
+        $re-text-color:#2a2a2a;
+        $re-background-l1: #fff;
+        $re-background-l2: #fafafa;
+        $re-background-l3: #eaeaea;
+        $re-scrollbar-color: #ccc;
+        $re-border-color:#ddd;
 
-        scrollbar-width: thin;
-        scrollbar-color: $re-scrollbar-color $re-background-l1;
-
-        ::-webkit-scrollbar {
-          width: 14px;
-          height: 14px;
-        }
-        ::-webkit-scrollbar-track {
-          background: $re-background-l1;
-        }
-        ::-webkit-scrollbar-thumb {
-          background-color: $re-scrollbar-color;
-          border-radius: 6px;
-          border: 3px solid $re-background-l1;
-        }
-
-        * {
-            scrollbar-color: red yellow;
-        }
-
-
-        header {
-            border-bottom:1px solid #555;
-            .lo-container {
-                padding:0 50px;
-            }
-        }
-
-        #experiment-solution-page {
-            .info-panel {
-                .solution-info {
-                    color:#fff;
-                }
-
-                .tabs-and-panes {
-                    .tabs {
-                        .tab {
-                            background:$re-background-l2;
-                            &:after {
-                                background: $re-border-color;
-                            }
-                        }
-                    }
-                    .panes {
-                        .pane {
-                            background:$re-background-l2;
-                            border:2px solid $re-border-color;
-                        }
-                    }
-
-                    &.selected-1>.tabs>.tab-1,
-                    &.selected-2>.tabs>.tab-2,
-                    &.selected-3>.tabs>.tab-3,
-                    &.selected-4>.tabs>.tab-4,
-                    &.selected-5>.tabs>.tab-5,
-                    &.selected-6>.tabs>.tab-6 {
-                        border-top-color:$re-border-color;
-                        border-left-color:$re-border-color;
-                        border-bottom-color:$re-border-color;
-                        color:#fff;
-
-                        &:after {
-                            display:none;
-                        }
-                    }
-                }
-
-                h2 {
-                    color:#fff;
-                    border-bottom: 1px solid #5a5a5a;
-                }
-                p, li {
-                    color:#fafafa;
-
-                    code {
-                        border:1px solid #333;
-                        background:#2a2a2a;
-                    }
-                    a {
-                        color:#fff;
-                        font-weight:$fw-semibold;
-                        text-decoration:none;
-                        border-bottom:1px solid #aaa;
-                    }
-                }
-                pre {
-                    border:1px solid #333;
-                    background:#2a2a2a;
-                }
-            }
-            .gutter {
-                background:$re-background-l1;
-            }
-            .coding-panel {
-                .toolbar {
-                    .toolbar-multiselect-item {
-                        border:1px solid $re-border-color;
-                        background:$re-background-l2;
-                        .label {
-                            background:$re-background-l2;
-                            color:#fff
-                        }
-                        button {
-                            background:$re-background-l2;
-                            color:#fff;
-                            border-left: 1px solid #aaa;
-                            &[selected] {
-                                background:#fff;
-                                color:$re-background-l2;
-                            }
-                        }
-                    }
-                    .toolbar-shortcuts-btn {
-                        border:1px solid $re-border-color;
-                        background:$re-background-l2;
-                    }
-                }
-                .code-editor {
-                    border:2px solid $re-border-color;
-                    border-radius:2px;
-                }
-            }
-        }
-    }
-
-    &:not(.prism-dark) #experiment-solution-page {
+        <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
 
     #experiment-solution-page+footer {
         display: none;
+    }
+
+    header {
+        border-bottom:1px solid #555;
+        .lo-container {
+            padding:0 50px;
+        }
     }
 
     .experiment-solution {
@@ -201,6 +96,9 @@ body.namespace-research {
             justify-content: flex-start;
             margin-bottom:15px;
             margin-top:40px;
+            &>:first-child {
+                margin-right:10px;
+            }
         }
 
         .environment {
@@ -213,8 +111,6 @@ body.namespace-research {
     .coding-panel {
         display: flex;
         flex-direction: column;
-        background: #333;
-        color: white;
         padding-right:20px;
         padding-bottom:15px;
         min-width:400px;

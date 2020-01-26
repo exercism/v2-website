@@ -9,11 +9,16 @@
       =button_tag "Dark", name: :theme, value: 'dark', class: 'pure-button', selected: current_user.dark_code_theme?
 
   .toolbar.toolbar-2
-    .keybindings.toolbar-item.toolbar-multiselect-item.js-code-editor-keybinding
+    .toolbar-item.toolbar-multiselect-item.js-code-editor-keybinding
       .label Keybindings:
       =button_tag "Default", name: :theme, value: 'ace', class: 'pure-button', selected: true
       =button_tag "Vim", name: :theme, value: 'vim', class: 'pure-button'
       =button_tag "Emacs", name: :theme, value: 'emacs', class: 'pure-button'
+
+    .toolbar-item.toolbar-multiselect-item.js-code-editor-wrapping
+      .label Wrap:
+      =button_tag "On", name: :theme, value: true, class: 'pure-button'
+      =button_tag "Off", name: :theme, value: false, class: 'pure-button', selected: true
 
   - solution.latest_files.each do |filename, code|
     .code-editor.js-code-editor{data: { config: editor_config.to_json, filename: filename }}= code
