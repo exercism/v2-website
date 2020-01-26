@@ -39,6 +39,18 @@ class AceEditor {
     }
   }
 
+  setUseWrapMode(value) {
+    switch(value) {
+      case false:
+      case 'false':
+        this.editor.getSession().setUseWrapMode(false);
+        break;
+
+      default:
+        this.editor.getSession().setUseWrapMode(true);
+    }
+  }
+
   exportFile() {
     const file = {}
     file[this.filename] = this.editor.getValue();

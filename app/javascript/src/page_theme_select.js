@@ -6,10 +6,14 @@ class PageThemeSelect {
 
     this.darkBtn.click(function(e) {
       this.set('dark')
+      this.lightBtn.attr("selected", false)
+      this.darkBtn.attr("selected", true)
     }.bind(this));
 
     this.lightBtn.click(function(e) {
       this.set('light')
+      this.darkBtn.attr("selected", false)
+      this.lightBtn.attr("selected", true)
     }.bind(this));
   }
 

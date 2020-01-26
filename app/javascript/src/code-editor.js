@@ -23,6 +23,10 @@ class CodeEditor {
     this.editor.setKeybinding(keybinding);
   }
 
+  setWrapping(value) {
+    this.editor.setUseWrapMode(value);
+  }
+
   exportFile() {
     return this.editor.exportFile();
   }
