@@ -1,10 +1,15 @@
 class PageThemeSelect {
-  constructor(element) {
-    this.element = element;
-    this.theme = element.val();
+  constructor(form) {
+    this.darkBtn = form.find('button[value=dark]');
+    this.lightBtn = form.find('button[value=light]');
+    this.theme = form.data('theme');
 
-    this.element.change(function(e) {
-      this.set(e.currentTarget.value)
+    this.darkBtn.click(function(e) {
+      this.set('dark')
+    }.bind(this));
+
+    this.lightBtn.click(function(e) {
+      this.set('light')
     }.bind(this));
   }
 
@@ -16,13 +21,8 @@ class PageThemeSelect {
   }
 
   change(handler) {
-    this.element.on('change', function(e) {
-      handler(e.currentTarget.value)
-    });
-  }
-
-  trigger(e) {
-    this.element.trigger(e);
+    this.darkBtn.on('click', function(e) { handler('dark') });
+    this.lightBtn.on('click', function(e) { handler('light') });
   }
 
   _swapBodyClass() {
