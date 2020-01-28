@@ -12,8 +12,8 @@ body.namespace-research {
         $re-border-color:#777;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
-    } 
-   
+    }
+
     &:not(.prism-dark)  {
         $re-foreground-color:#222;
         $re-text-color:#2a2a2a;
@@ -45,12 +45,36 @@ body.namespace-research {
             height: calc(100vh - 50px);
         }
 
+        &.status-fail {
+            .info-panel {
+                .tabs-and-panes {
+                    .pane-2 {
+                        border:2px solid red !important;
+                    }
+                    .tab-1:after {
+                        background:red !important;
+                    }
+
+                    &.selected-1 {
+                        .tab-2 {
+                            border-color:rgba(red, 0.5) !important;
+                            background:rgba(red, 0.1) !important;
+                        }
+                    }
+                    &.selected-2 {
+                        .tab-2 {
+                            border-color:red !important;
+                        }
+                    }
+                }
+            }
+        }
+
         .test-area {
             &.good {
                 border:2px solid green;
             }
             &.bad {
-                border:2px solid red;
             }
             &.pending {
                 border:2px solid orange;
@@ -171,14 +195,14 @@ body.namespace-research {
 
             .tabs {
                 padding:0;
-                margin:10px 0 0 0;
+                margin:15px 0 0 0;
                 border:none;
                 z-index:1;
 
                 .tab {
                     display:block;
                     padding:0;
-                    margin:0;
+                    margin:0 0 5px 0;
                     text-align:center;
                     width:30px;
                     height: 40px;
@@ -187,7 +211,6 @@ body.namespace-research {
                     border-width: 2px 0 2px 2px;
                     border-radius:5px 0 0 5px;
                     position: relative;
-                    border-color:transparent;
 
                     &:after {
                         content: " ";
@@ -261,8 +284,9 @@ body.namespace-research {
     }
 
     .test-run {
-        border-radius:2px;
-        padding:20px;
+        .run-status {
+            border-bottom:1px solid #aaa;
+        }
     }
 
     .passed-test {

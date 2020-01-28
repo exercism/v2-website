@@ -26,6 +26,7 @@
             .tabs {
                 .tab {
                     background:$re-background-l1;
+                    border-color:rgba($re-border-color, 0.8);
                     &:after {
                         background: $re-border-color;
                     }
@@ -39,11 +40,7 @@
             }
 
             &.selected-1>.tabs>.tab-1,
-            &.selected-2>.tabs>.tab-2,
-            &.selected-3>.tabs>.tab-3,
-            &.selected-4>.tabs>.tab-4,
-            &.selected-5>.tabs>.tab-5,
-            &.selected-6>.tabs>.tab-6 {
+            &.selected-2>.tabs>.tab-2 {
                 border-top-color:$re-border-color;
                 border-left-color:$re-border-color;
                 border-bottom-color:$re-border-color;
