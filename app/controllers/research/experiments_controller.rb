@@ -14,7 +14,9 @@ module Research
 
     def show
       @experiment = Experiment.find(params[:id])
-      @user_experiment = current_user.research_experiments.where(experiment_id: @experiment.id).first
+      @user_experiment = current_user ?
+                         current_user.research_experiments.where(experiment_id: @experiment.id).first :
+                         nil
     end
   end
 end
