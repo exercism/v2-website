@@ -23,4 +23,10 @@ class Git::ExercismRepoTest < ActiveSupport::TestCase
 
     refute_equal repo, another_repo
   end
+
+  test "#editor_config returns editor config" do
+    repo = Git::ExercismRepo.new("file://#{Rails.root}/test/fixtures/track")
+
+    assert_equal({ indent_style: "space", indent_size: 4 }, repo.editor_config)
+  end
 end

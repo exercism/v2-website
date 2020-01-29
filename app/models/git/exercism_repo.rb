@@ -34,7 +34,7 @@ class Git::ExercismRepo < Git::RepoBase
   end
 
   def editor_config
-    config[:editor].to_h
+    config[:online_editor].to_h
   end
 
   def maintainer_config
