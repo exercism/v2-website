@@ -143,6 +143,10 @@ class ExperimentSolution {
           this.updateClass('fail');
           this.resultsReceived();
           break;
+        case 'error':
+          this.updateClass('info');
+          this.resultsReceived();
+          break;
         case 'timeout':
           this.updateClass('info');
           break;
