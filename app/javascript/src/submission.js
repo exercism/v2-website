@@ -25,6 +25,7 @@ class Submission {
       case 'tested': { this.tested(); break; }
       case 'timeout': { this.timeout(); break; }
       case 'resubmitted': { this.resubmitted(); break; }
+      case 'error': { this.error(); break; }
     }
 
     this.render();
@@ -108,6 +109,14 @@ class Submission {
   }
 
   resubmitted() {
+  }
+
+  error() {
+    this.onRender = function() {
+      this.element.find('.js-submission-error-continue').click(() => {
+        this.setStatus('cancelled');
+      });
+    }
   }
 }
 
