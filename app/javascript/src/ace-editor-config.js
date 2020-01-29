@@ -3,8 +3,8 @@ class AceEditorConfig {
     config = config || {}
 
     this.mode = `ace/mode/${config.language}`;
-    this.tabSize = config.tab_width || 2;
-    this.useSoftTabs = config.soft_tabs || true;
+    this.tabSize = config.indent_size || 2;
+    this.useSoftTabs = config.indent_style == 'space';
   }
 }
 
