@@ -1,6 +1,7 @@
-class KeybindingSelect {
-  constructor(form) {
+class EditorPreference {
+  constructor(form, key) {
     this.form = form;
+    this.key = key;
     this.database = localStorage;
     this.buttons = this.form.find('button');
 
@@ -18,7 +19,7 @@ class KeybindingSelect {
 
   trigger(e) {
     const button = this.buttons.toArray().find((button) => {
-      return button.value == this.getKeybinding();
+      return button.value == this.getValue();
     });
 
     if(e == 'change') { $(button).trigger('click'); }
@@ -28,19 +29,19 @@ class KeybindingSelect {
     this.buttons.on('click', function(e) { handler(e.target.value) });
   }
 
-  getKeybinding() {
-    return this.database.getItem('keybinding');
+  getValue() {
+    return this.database.getItem(this.key);
   }
 
   _save(value) {
-    this.database.setItem('keybinding', value);
+    this.database.setItem(this.key, value);
   }
 
   _highlightButton() {
     this.buttons.toArray().forEach((button) => {
-      $(button).attr('selected', button.value == this.getKeybinding());
+      $(button).attr('selected', button.value == this.getValue());
     });
   }
 }
 
-export default KeybindingSelect;
+export default EditorPreference;

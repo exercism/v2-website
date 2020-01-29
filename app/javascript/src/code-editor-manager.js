@@ -1,5 +1,5 @@
 import CodeEditor from './code-editor';
-import KeybindingSelect from './keybinding-select';
+import EditorPreference from './editor-preference';
 
 class CodeEditorManager {
   constructor(element, onSetup) {
@@ -61,8 +61,9 @@ class CodeEditorManager {
   }
 
   _setupKeybindingToggle() {
-    this.keybindingSelect = new KeybindingSelect(
-      this.element.find('.js-code-editor-keybinding')
+    this.keybindingSelect = new EditorPreference(
+      this.element.find('.js-code-editor-keybinding'),
+      'keybinding'
     );
 
     this.keybindingSelect.change(this.selectKeybinding.bind(this));
