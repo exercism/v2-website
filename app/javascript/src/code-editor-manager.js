@@ -1,4 +1,5 @@
 import CodeEditor from './code-editor';
+import KeybindingSelect from './keybinding-select';
 
 class CodeEditorManager {
   constructor(element, onSetup) {
@@ -47,7 +48,10 @@ class CodeEditorManager {
   _setupEditor() {
     this.editor = new CodeEditor(this.element.find('.js-code-editor'))
 
-    this.editor.onSetup = this.onSetup;
+    this.editor.onSetup = (editor) => {
+      this.keybindingSelect.load();
+      this.onSetup(editor);
+    }
   }
 
   _setupToolbar() {
@@ -57,14 +61,11 @@ class CodeEditorManager {
   }
 
   _setupKeybindingToggle() {
-    var form = this.element.find('.js-code-editor-keybinding')
-    var btns = form.find('button')
-    btns.click(function(e) {
-      for(var btn of btns) { btn.removeAttribute('selected')}
-      e.currentTarget.setAttribute('selected', true)
+    this.keybindingSelect = new KeybindingSelect(
+      this.element.find('.js-code-editor-keybinding')
+    );
 
-      this.selectKeybinding(e.currentTarget.value)
-    }.bind(this));
+    this.keybindingSelect.change(this.selectKeybinding.bind(this));
   }
 
   _setupWrappingToggle() {

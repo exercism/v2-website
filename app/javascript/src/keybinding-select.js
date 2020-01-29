@@ -4,9 +4,11 @@ class KeybindingSelect {
     this.database = localStorage;
     this.buttons = this.form.find('button');
 
-    this.buttons.on('click', function(e) {
-      this.set(e.target.value);
-    }.bind(this));
+    this.buttons.on('click', (e) => { this.set(e.target.value); });
+  }
+
+  load() {
+    this.trigger('change');
   }
 
   set(value) {
