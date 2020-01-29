@@ -9,7 +9,8 @@ body.namespace-research {
         $re-background-l2: #333;
         $re-background-l3: #3a3a3a;
         $re-scrollbar-color: #777;
-        $re-border-color:#777;
+        $re-border-color-l1:#777;
+        $re-border-color-l2:#666;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
@@ -21,7 +22,8 @@ body.namespace-research {
         $re-background-l2: #fafafa;
         $re-background-l3: #eaeaea;
         $re-scrollbar-color: #ccc;
-        $re-border-color:#ddd;
+        $re-border-color-l1:#ddd;
+        $re-border-color-l2:#ccc;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
@@ -285,7 +287,6 @@ body.namespace-research {
 
     .test-run {
         .run-status {
-            border-bottom:1px solid #aaa;
             padding-bottom:3px;
             margin-bottom:10px;
         }
@@ -313,42 +314,36 @@ body.namespace-research {
                     flex-shrink:0;
                     margin-right:5px;
                     cursor: pointer;
-                    border: 2px solid #ddd;
                     border-radius: 2px;
-                    background: #fafafa;
                 }
             }
             .info {
                 padding:0 10px 10px 10px;
+
                 .part {
-                    border-left:1px solid #ccc;
                     padding-left:20px;
                     padding-top:15px;
                     position:relative;
 
                     i {
                         position:absolute;
-                        background: #fff;
-                        border: 2px solid #ddd;
                         border-radius: 100%;
-                        padding: 5px;
+                        padding: 0;
                         left: -11px;
                         top: 20px;
                         height: 22px;
                         width: 22px;
-                        @include font-size(9, 11);
+                        @include font-size(9, 20);
+                        text-align: center;
                     }
 
                     h4, pre {
                         padding:10px;
-                        border:1px solid #ccc;
                     }
                     h4 {
                         font-weight:$fw-semibold;
-                        border-bottom:none;
                     }
                     pre {
-                        background:#f3f3f3;
                         @include font-size(13, 17);
                         margin:0;
                     }
