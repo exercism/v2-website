@@ -17,6 +17,8 @@ class Track < ApplicationRecord
 
   delegate :head, to: :repo
 
+  attr_writer :repo
+
   [:bordered_green_icon_url,
    :bordered_turquoise_icon_url,
    :hex_green_icon_url,
@@ -43,7 +45,7 @@ class Track < ApplicationRecord
   end
 
   def repo
-    Git::ExercismRepo.new(repo_url)
+    @repo ||= Git::ExercismRepo.new(repo_url)
   end
 
   def research_track?
