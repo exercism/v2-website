@@ -5,14 +5,29 @@ class CodeEditor {
     this.element = element
     this.filename = element.data('filename')
     this.config = element.data('config')
+    this.database = localStorage;
 
     this._setup();
   }
 
   _setup() {
     this.editor = new AceEditor(this.element, this.config, this.filename);
+    this.editor.onChanged = this.save.bind(this);
+    this.editor.onSetup = () => {
+      this.load();
 
-    this.editor.onSetup = () => { this.onSetup(this); }
+      this.onSetup(this);
+    }
+  }
+
+  save() {
+    this.database.setItem(this.filename, this.editor.getValue());
+  }
+
+  load() {
+    if (!this.database.getItem(this.filename)) { return; }
+
+    this.editor.setValue(this.database.getItem(this.filename));
   }
 
   setTheme(theme) {

@@ -70,11 +70,20 @@ class AceEditor {
     this.editor.commands.addCommand(opts);
   }
 
+  getValue() {
+    return this.editor.getValue();
+  }
+
+  setValue(value) {
+    this.editor.setValue(value);
+  }
+
   _setup() {
     this.editor = ace.edit(this.element[0]);
 
     this.editor.setShowPrintMargin(false);
     this.editor.session.setOptions(this.config);
+    this.editor.getSession().on('change', this.onChanged);
 
     this.onSetup(this);
   }
