@@ -28,6 +28,10 @@ class CodeEditorManager {
     this.editor.focus();
   }
 
+  reset() {
+    this.editor.reset();
+  }
+
   exportFile() {
     return this.editor.exportFile();
   }
@@ -49,6 +53,7 @@ class CodeEditorManager {
   _setupToolbar() {
     this._setupKeybindingToggle();
     this._setupWrappingToggle();
+    this._setupResetToggle();
   }
 
   _setupKeybindingToggle() {
@@ -71,6 +76,10 @@ class CodeEditorManager {
 
       this.selectWrapping(e.currentTarget.value)
     }.bind(this));
+  }
+
+  _setupResetToggle() {
+    this.element.find('.js-code-editor-reset').click(this.editor.reset.bind(this.editor));
   }
 }
 

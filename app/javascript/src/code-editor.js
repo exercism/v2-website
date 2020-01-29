@@ -1,11 +1,12 @@
 import AceEditor from './ace-editor';
+import File from './file';
 
 class CodeEditor {
   constructor(element) {
     this.element = element
     this.filename = element.data('filename')
+    this.file = new File(this.filename, this.element.text());
     this.config = element.data('config')
-    this.database = localStorage;
 
     this._setup();
   }
@@ -21,13 +22,17 @@ class CodeEditor {
   }
 
   save() {
-    this.database.setItem(this.filename, this.editor.getValue());
+    this.file.saveLocalChange(this.editor.getValue());
   }
 
   load() {
-    if (!this.database.getItem(this.filename)) { return; }
+    this.editor.setValue(this.file.getContent());
+  }
 
-    this.editor.setValue(this.database.getItem(this.filename));
+  reset() {
+    this.file.reset();
+
+    this.editor.setValue(this.file.getContent());
   }
 
   setTheme(theme) {
