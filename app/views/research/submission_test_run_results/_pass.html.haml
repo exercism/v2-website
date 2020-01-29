@@ -1,7 +1,7 @@
 .test-run-result.closed.pass
   .header
-    %i.fas.fa-chevron-right.closed-icon
-    %i.fas.fa-chevron-down.opened-icon
+    =icon(:"chevron-right", "Click to expand", style: :solid, extra_classes: 'closed-icon')
+    =icon(:"chevron-down", "Click to close", style: :solid, extra_classes: 'opened-icon')
     %h3
       %strong Passed:
       Test ##{test_idx}

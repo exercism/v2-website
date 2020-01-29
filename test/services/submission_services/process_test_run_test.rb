@@ -9,6 +9,7 @@ module SubmissionServices
       message = "Something happened"
       tests = [{
         "name" => "OneWordWithOneVowel"
+        "status" => "pass"
       }]
       results = {
         "status" => results_status,
