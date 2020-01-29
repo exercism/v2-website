@@ -51,7 +51,7 @@ class FontAwesomeIconWidget
   def html_class
     fa_classes = [style_class, fixed_width_class, type_class].
                    reject(&:blank?).join(" ")
-    "#{fa_classes} #{extra_classes}"
+    "#{fa_classes} #{extra_classes}".strip
   end
 
   def style_class
