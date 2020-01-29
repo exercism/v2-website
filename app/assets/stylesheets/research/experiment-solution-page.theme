@@ -26,24 +26,24 @@
             .tabs {
                 .tab {
                     background:$re-background-l1;
-                    border-color:rgba($re-border-color, 0.8);
+                    border-color:rgba($re-border-color-l1, 0.8);
                     &:after {
-                        background: $re-border-color;
+                        background: $re-border-color-l1;
                     }
                 }
             }
             .panes {
                 .pane {
                     background:$re-background-l1;
-                    border:2px solid $re-border-color;
+                    border:2px solid $re-border-color-l1;
                 }
             }
 
             &.selected-1>.tabs>.tab-1,
             &.selected-2>.tabs>.tab-2 {
-                border-top-color:$re-border-color;
-                border-left-color:$re-border-color;
-                border-bottom-color:$re-border-color;
+                border-top-color:$re-border-color-l1;
+                border-left-color:$re-border-color-l1;
+                border-bottom-color:$re-border-color-l1;
                 color:$re-foreground-color;
 
                 &:after {
@@ -54,7 +54,7 @@
 
         h2 {
             color:$re-foreground-color;
-            border-bottom: 1px solid $re-border-color;
+            border-bottom: 1px solid $re-border-color-l1;
         }
         p, li {
             color:$re-text-color;
@@ -67,7 +67,7 @@
                 color:$re-foreground-color;
                 font-weight:$fw-semibold;
                 text-decoration:none;
-                border-bottom:1px solid $re-border-color;
+                border-bottom:1px solid $re-border-color-l1;
             }
         }
         .pane-1 pre {
@@ -81,7 +81,7 @@
     .coding-panel {
         .toolbar {
             .toolbar-multiselect-item {
-                border:1px solid $re-border-color;
+                border:1px solid $re-border-color-l1;
                 background:$re-background-l1;
                 .label {
                     background:$re-background-l3;
@@ -90,7 +90,7 @@
                 button {
                     background:$re-background-l1;
                     color:$re-foreground-color;
-                    border-left: 1px solid $re-border-color;
+                    border-left: 1px solid $re-border-color-l1;
                     &[selected] {
                         background:$re-foreground-color;
                         color:$re-background-l1;
@@ -98,14 +98,48 @@
                 }
             }
             .toolbar-shortcuts-btn {
-                border:1px solid $re-border-color;
+                border:1px solid $re-border-color-l1;
                 background:$re-background-l1;
                 color:$re-foreground-color;
             }
         }
         .code-editor {
-            border:2px solid $re-border-color;
+            border:2px solid $re-border-color-l1;
             border-radius:2px;
+        }
+    }
+
+    .test-run {
+        color: $re-foreground-color;
+        .run-status {
+            border-bottom:1px solid $re-border-color-l2;
+        }
+        .test-run-result {
+            .header {
+                .closed-icon,
+                .opened-icon {
+                    border: 2px solid $re-border-color-l1;
+                    background: $re-background-l2;
+                }
+            }
+            .info {
+                .part {
+                    border-left:1px solid $re-border-color-l2;
+                    i {
+                        background: $re-background-l1;
+                        border: 2px solid $re-border-color-l1;
+                    }
+                    h4, pre {
+                        border:1px solid $re-border-color-l2;
+                    }
+                    h4 {
+                        border-bottom:none;
+                    }
+                    pre {
+                        background: $re-background-l2;
+                    }
+                }
+            }
         }
     }
 }
