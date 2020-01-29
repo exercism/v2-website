@@ -50,6 +50,7 @@ class CodeEditorManager {
 
     this.editor.onSetup = (editor) => {
       this.keybindingSelect.load();
+      this.wrappingSelect.load();
       this.onSetup(editor);
     }
   }
@@ -70,14 +71,12 @@ class CodeEditorManager {
   }
 
   _setupWrappingToggle() {
-    var form = this.element.find('.js-code-editor-wrapping')
-    var btns = form.find('button')
-    btns.click(function(e) {
-      for(var btn of btns) { btn.removeAttribute('selected')}
-      e.currentTarget.setAttribute('selected', true)
+    this.wrappingSelect = new EditorPreference(
+      this.element.find('.js-code-editor-wrapping'),
+      'wrapping'
+    );
 
-      this.selectWrapping(e.currentTarget.value)
-    }.bind(this));
+    this.wrappingSelect.change(this.selectWrapping.bind(this));
   }
 
   _setupResetToggle() {
