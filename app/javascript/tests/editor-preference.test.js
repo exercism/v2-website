@@ -1,6 +1,6 @@
-import KeybindingSelect from '../src/keybinding-select';
+import EditorPreference from '../src/editor-preference';
 
-test('clicking a button sets the keybinding', () => {
+test('clicking a button sets the value', () => {
   document.body.innerHTML = `
     <body>
       <form onsubmit="return false;">
@@ -10,13 +10,13 @@ test('clicking a button sets the keybinding', () => {
     </body>
   `;
 
-  const select = new KeybindingSelect($('form'));
+  const select = new EditorPreference($('form'), 'keybinding');
   $('button[value=vim]').click();
 
-  expect(select.getKeybinding()).toEqual('vim');
+  expect(select.getValue()).toEqual('vim');
 });
 
-test('#change adds a handler when the keybinding changes', () => {
+test('#change adds a handler when the value changes', () => {
   document.body.innerHTML = `
     <body>
       <form onsubmit="return false;">
@@ -26,7 +26,7 @@ test('#change adds a handler when the keybinding changes', () => {
     </body>
   `;
 
-  const select = new KeybindingSelect($('form'));
+  const select = new EditorPreference($('form'), 'keybinding');
   const handler = jest.fn();
   select.change(handler);
 
@@ -36,7 +36,7 @@ test('#change adds a handler when the keybinding changes', () => {
   expect(handler).toHaveBeenCalledWith('vim');
 });
 
-test('#set saves keybinding to local database', () => {
+test('#set saves value to local database', () => {
   document.body.innerHTML = `
     <body>
       <form onsubmit="return false;">
@@ -46,7 +46,7 @@ test('#set saves keybinding to local database', () => {
     </body>
   `;
 
-  const select = new KeybindingSelect($('form'));
+  const select = new EditorPreference($('form'), 'keybinding');
   const command = jest.fn();
   const database = { setItem: command, getItem: jest.fn() }
   select.database = database;
@@ -66,7 +66,7 @@ test('#set highlights buttons', () => {
     </body>
   `;
 
-  const select = new KeybindingSelect($('form'));
+  const select = new EditorPreference($('form'), 'keybinding');
 
   select.set('vim');
 
@@ -74,7 +74,7 @@ test('#set highlights buttons', () => {
   expect($('button[value=emacs]').attr('selected')).toEqual(undefined);
 });
 
-test('#getKeybinding() loads keybinding from local database', () => {
+test('#getValue() loads value from local database', () => {
   document.body.innerHTML = `
     <body>
       <form onsubmit="return false;">
@@ -84,10 +84,10 @@ test('#getKeybinding() loads keybinding from local database', () => {
     </body>
   `;
 
-  const select = new KeybindingSelect($('form'));
+  const select = new EditorPreference($('form'), 'keybinding');
   const command = jest.fn().mockReturnValueOnce('vim');
   const database = { getItem: command, setItem: jest.fn() }
   select.database = database;
 
-  expect(select.getKeybinding()).toEqual('vim');
+  expect(select.getValue()).toEqual('vim');
 });
