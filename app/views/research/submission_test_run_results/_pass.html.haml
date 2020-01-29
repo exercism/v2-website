@@ -8,18 +8,20 @@
   .info
     - if test.cmd.present?
       .part
+        =graphical_icon "brackets-curly", style: :solid
         %h4 Code Run:
         %pre
           %code= test.cmd
 
       .part
+        =graphical_icon "check", style: :solid
         %h4 Expected
         %pre
           %code= test.expected
 
     - if test.output_html.present?
       .part
+        =graphical_icon "lines-columns", style: :solid
         %h4 Test Output
-
         %pre.test-output
           %code= raw test.output_html
