@@ -10,11 +10,9 @@
         = raw solution.instructions
 
     .pane.pane-2.js-submission-panel
-      - if solution.submissions.tested.last
-        = render partial: solution.submissions.tested.last.ops_status,
-          as: :status
-      - else
-        Hit "Run code" to see how your solution performs.
+      = render "research/submissions/submission",
+        submission: solution.submissions.successfully_tested.last,
+        as: :status
 
 -content_for :js do
   :javascript

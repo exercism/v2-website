@@ -5,6 +5,8 @@ class SubmissionTestRun < ApplicationRecord
 
   serialize :tests, Array
 
+  scope :successful, -> { where(ops_status: 200) }
+
   def results_status
     super.try(&:to_sym)
   end
