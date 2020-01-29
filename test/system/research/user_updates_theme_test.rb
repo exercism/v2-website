@@ -10,7 +10,7 @@ class Research::UserUpdatesThemeTest < Research::TestCase
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)
-    select "Dark", from: "Theme:"
+    click_on "Dark"
 
     assert_css "body.prism-dark"
   end

@@ -29,4 +29,8 @@ class SubmissionOpsStatus
 
     test_run.ops_status
   end
+
+  def to_s
+    status
+  end
 end
