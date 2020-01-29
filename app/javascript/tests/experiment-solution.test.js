@@ -86,8 +86,9 @@ test('it sets the editor theme', () => {
     <div class="experiment-solution">
       <div class="info-panel"></div>
       <div class="coding-panel"></div>
-      <select class="js-theme-select">
-      </select>
+      <form class="js-theme-select" onsubmit="return false;">
+        <button value="light"></button>
+      </form>
     </div>
   `;
 
@@ -95,6 +96,7 @@ test('it sets the editor theme', () => {
   const setTheme = jest.fn()
   solution.editor = { setTheme: setTheme }
 
+  solution.themeSelector.set('light');
   solution.themeSelector.trigger('change');
 
   expect(setTheme).toHaveBeenCalled();

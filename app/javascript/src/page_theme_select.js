@@ -1,20 +1,9 @@
 class PageThemeSelect {
   constructor(form) {
-    this.darkBtn = form.find('button[value=dark]');
-    this.lightBtn = form.find('button[value=light]');
+    this.buttons = form.find('button');
     this.theme = form.data('theme');
 
-    this.darkBtn.click(function(e) {
-      this.set('dark')
-      this.lightBtn.attr("selected", false)
-      this.darkBtn.attr("selected", true)
-    }.bind(this));
-
-    this.lightBtn.click(function(e) {
-      this.set('light')
-      this.darkBtn.attr("selected", false)
-      this.lightBtn.attr("selected", true)
-    }.bind(this));
+    this.buttons.click((e) => { this.set(e.target.value); });
   }
 
   set(theme) {
@@ -22,11 +11,19 @@ class PageThemeSelect {
 
     this._swapBodyClass();
     this._swapThemeStylesheets();
+    this._highlightButton();
+  }
+
+  trigger(e) {
+    const button = this.buttons.toArray().find((button) => {
+      return button.value == this.theme
+    });
+
+    if(e == 'change') { $(button).trigger('click'); }
   }
 
   change(handler) {
-    this.darkBtn.on('click', function(e) { handler('dark') });
-    this.lightBtn.on('click', function(e) { handler('light') });
+    this.buttons.click(function (e) { handler(e.target.value) });
   }
 
   _swapBodyClass() {
@@ -49,6 +46,12 @@ class PageThemeSelect {
         stylesheet.attr('disabled', 'disabled');
       }
     }.bind(this));
+  }
+
+  _highlightButton() {
+    this.buttons.toArray().forEach((button) => {
+      $(button).attr('selected', button.value == this.theme);
+    });
   }
 }
 
