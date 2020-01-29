@@ -20,6 +20,9 @@
       =button_tag "On", name: :theme, value: true, class: 'pure-button'
       =button_tag "Off", name: :theme, value: false, class: 'pure-button', selected: true
 
+    .toolbar-item.toolbar-multiselect-item
+      = button_tag "Reset", class: "pure-button js-code-editor-reset"
+
   - solution.latest_files.each do |filename, code|
     .code-editor.js-code-editor{data: { config: editor_config.to_json, filename: filename }}= code
     - break
