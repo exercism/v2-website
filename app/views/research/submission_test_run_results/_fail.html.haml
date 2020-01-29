@@ -8,6 +8,7 @@
   .info
     - if test.cmd.present?
       .part
+        =graphical_icon "brackets-curly", style: :solid
         %h4 Code Run:
         %pre
           %code= test.cmd
@@ -19,12 +20,14 @@
         /- else
 
       .part
+        =graphical_icon "bug", style: :solid
         %h4 Test Failure
         %pre
           %code= test.message
 
     - if test.output_html.present?
       .part
+        =graphical_icon "lines-columns", style: :solid
         %h4 Test Output
 
         %pre.test-output

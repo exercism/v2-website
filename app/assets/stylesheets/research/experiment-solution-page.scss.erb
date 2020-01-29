@@ -312,27 +312,45 @@ body.namespace-research {
                     width: 24px;
                     flex-shrink:0;
                     margin-right:5px;
-                }
-                .closed-icon {
-                    border:1px solid #aaa;
-                }
-                .open-icon {
-                    border:1px solid transparent;
+                    cursor: pointer;
+                    border: 2px solid #ddd;
+                    border-radius: 2px;
+                    background: #fafafa;
                 }
             }
             .info {
-                padding:10px;
+                padding:0 10px 10px 10px;
                 .part {
+                    border-left:1px solid #ccc;
+                    padding-left:20px;
+                    padding-top:15px;
+                    position:relative;
+
+                    i {
+                        position:absolute;
+                        background: #fff;
+                        border: 2px solid #ddd;
+                        border-radius: 100%;
+                        padding: 5px;
+                        left: -11px;
+                        top: 20px;
+                        height: 22px;
+                        width: 22px;
+                        @include font-size(9, 11);
+                    }
+
+                    h4, pre {
+                        padding:10px;
+                        border:1px solid #ccc;
+                    }
                     h4 {
-                        font-weight:$fw-bold;
-                        margin-bottom:5px;
+                        font-weight:$fw-semibold;
+                        border-bottom:none;
                     }
                     pre {
-                        padding:10px;
+                        background:#f3f3f3;
                         @include font-size(13, 17);
-                    }
-                    &+.part {
-                        margin-top:20px;
+                        margin:0;
                     }
                 }
             }
@@ -344,7 +362,6 @@ body.namespace-research {
                 .info { display: none; }
             }
             &.open {
-                border:1px solid #aaa;
                 .header {
                     .opened-icon { display:inline-block; }
                     .closed-icon { display:none; }

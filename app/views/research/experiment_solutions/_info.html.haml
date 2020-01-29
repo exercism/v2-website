@@ -20,12 +20,13 @@
   :javascript
     setupTabs()
 
-    $('.test-run-result').on('click', function() {
-      if($(this).hasClass('open')) {
-        $(this).removeClass('open')
-        $(this).addClass('closed')
+    $('.test-run-result .header i').on('click', function() {
+      div = $(this).parent().parent()
+      if(div.hasClass('open')) {
+        div.removeClass('open')
+        div.addClass('closed')
       } else {
-        $(this).removeClass('closed')
-        $(this).addClass('open')
+        div.removeClass('closed')
+        div.addClass('open')
       }
     })
