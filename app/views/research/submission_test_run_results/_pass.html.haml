@@ -1,3 +1,25 @@
-%p.passed-test
-  = icon :check, "Passed", style: :light
-  = test.cmd
+.test-run-result.closed.pass
+  .header
+    %i.fas.fa-chevron-right.closed-icon
+    %i.fas.fa-chevron-down.opened-icon
+    %h3
+      %strong Passed:
+      Test ##{test_idx}
+  .info
+    - if test.cmd.present?
+      .part
+        %h4 Code Run:
+        %pre
+          %code= test.cmd
+
+      .part
+        %h4 Expected
+        %pre
+          %code= test.expected
+
+    - if test.output_html.present?
+      .part
+        %h4 Test Output
+
+        %pre.test-output
+          %code= raw test.output_html
