@@ -1,21 +1,32 @@
-- if test.cmd.present?
-  %p
-    We tried running
-    %code= test.cmd
-    but got the following error:
+.test-run-result.open.fail
+  .header
+    =icon(:"chevron-right", "Click to expand", style: :solid, extra_classes: 'closed-icon')
+    =icon(:"chevron-down", "Click to close", style: :solid, extra_classes: 'opened-icon')
+    %h3
+      %strong Failed:
+      Test ##{test_idx}
+  .info
+    - if test.cmd.present?
+      .part
+        %h4 Code Run:
+        %pre
+          %code= test.cmd
 
-  %pre
-    %code= test.message
-- elsif test.text.present?
-  %p= raw test.text
-- else
-  %p We tried running your code but got the following:
+        /%pre
+        /  %code= test.message
+        /- elsif test.text.present?
+        /%p= raw test.text
+        /- else
 
-  %pre
-    %code= test.message
+      .part
+        %h4 Test Failure
+        %pre
+          %code= test.message
 
-- if test.output.present?
-  %p Test output:
+    - if test.output_html.present?
+      .part
+        %h4 Test Output
 
-  %pre.test-output
-    %code= raw test.output_html
+        %pre.test-output
+          %code= raw test.output_html
+

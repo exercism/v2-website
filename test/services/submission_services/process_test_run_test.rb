@@ -3,12 +3,15 @@ require 'test_helper'
 module SubmissionServices
   class ProcessTestRunTest < ActiveSupport::TestCase
     test "works with results" do
+      skip # TODO: TEST RUN
+
       submission = create :submission
       ops_status = 200
       results_status = "pass"
       message = "Something happened"
       tests = [{
-        "name" => "OneWordWithOneVowel"
+        "name" => "OneWordWithOneVowel",
+        "status" => "pass"
       }]
       results = {
         "status" => results_status,

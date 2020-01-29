@@ -19,3 +19,13 @@
 -content_for :js do
   :javascript
     setupTabs()
+
+    $('.test-run-result').on('click', function() {
+      if($(this).hasClass('open')) {
+        $(this).removeClass('open')
+        $(this).addClass('closed')
+      } else {
+        $(this).removeClass('closed')
+        $(this).addClass('open')
+      }
+    })

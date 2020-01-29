@@ -286,6 +286,77 @@ body.namespace-research {
     .test-run {
         .run-status {
             border-bottom:1px solid #aaa;
+            padding-bottom:3px;
+            margin-bottom:10px;
+        }
+        .test-run-result {
+            margin-bottom:10px;
+            .header {
+                display:flex;
+                padding:0px;
+                h3 {
+                    flex-grow:1;
+                    padding-top:4px;
+                    @include font-size(14, 17);
+                    strong {
+                        color:red;
+                        font-weight:$fw-semibold;
+                    }
+                }
+                .closed-icon,
+                .opened-icon {
+                    text-align:center;
+                    font-size: 10px;
+                    line-height: 24px;
+                    height: 24px;
+                    width: 24px;
+                    flex-shrink:0;
+                    margin-right:5px;
+                }
+                .closed-icon {
+                    border:1px solid #aaa;
+                }
+                .open-icon {
+                    border:1px solid transparent;
+                }
+            }
+            .info {
+                padding:10px;
+                .part {
+                    h4 {
+                        font-weight:$fw-bold;
+                        margin-bottom:5px;
+                    }
+                    pre {
+                        padding:10px;
+                        @include font-size(13, 17);
+                    }
+                    &+.part {
+                        margin-top:20px;
+                    }
+                }
+            }
+            &.closed {
+                .header {
+                    .opened-icon { display:none; }
+                    .closed-icon { display:inline-block; }
+                }
+                .info { display: none; }
+            }
+            &.open {
+                border:1px solid #aaa;
+                .header {
+                    .opened-icon { display:inline-block; }
+                    .closed-icon { display:none; }
+                }
+                .info { display: block; }
+            }
+            &.fail {
+                .header h3 strong { color:red; }
+            }
+            &.pass {
+                .header h3 strong { color:green; }
+            }
         }
     }
 

@@ -21,17 +21,30 @@ class SubmissionTestRun < ApplicationRecord
     results_status == :fail
   end
 
-  def tests_to_display(order = tests_info)
+  def num_passed_tests
+    test_results.select(&:passed?).length
+  end
+
+  def num_failed_tests
+    test_results.select(&:failed?).length > 0 ? 1 : 0
+  end
+
+  def num_skipped_tests
+    num_fails = test_results.select(&:failed?).length
+    num_fails < 2 ? 0 : num_fails - 1
+  end
+
+  def test_results
     formatted_tests = tests.map do |test|
       test_info = tests_info.find { |info| info.name == test["name"] }
 
       SubmissionTestRunResult.new(test_info, test)
     end
+  end
 
-    ordered_tests = order.reorder(formatted_tests)
-
+  def tests_to_display(order = tests_info)
+    ordered_tests = order.reorder(test_results)
     limit = ordered_tests.index(&:failed?)
-
     ordered_tests[0..limit]
   end
 
