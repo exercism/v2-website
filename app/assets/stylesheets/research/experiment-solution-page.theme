@@ -150,4 +150,21 @@
             }
         }
     }
+
+    .submission-status,
+    .submission-cancel-confirmation {
+        .submission-status-spinner {
+             color: $re-border-color-l1;
+        }
+        .confirm-btn {
+            border:1px solid $color-2;
+            background-color:$color-2;
+            color:#fff;
+        }
+        .cancel-btn {
+             border:1px solid $re-border-color-l1;
+             background:$re-background-l1;
+             color: $re-text-color;
+         }
+     }
 }

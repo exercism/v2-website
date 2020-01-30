@@ -1,76 +1,79 @@
+@import 'mixins';
 @import 'variables';
 
 body.namespace-research {
-    .submission-status-queueing {
-      text-align: center;
+    .submission-status,
+    .submission-cancel-confirmation {
+        text-align: center;
+        padding:40px 0;
 
-      > .submission-status-spinner {
-        font-size: 80px;
-        margin-bottom: 35px;
-      }
+        .submission-status-spinner {
+            @include font-size(40, 60);
+            margin-bottom: 20px;
+        }
 
-      > .submission-status-title {
-        font-size: 28px;
-        margin-bottom: 15px;
-        font-weight: $fw-regular;
-        letter-spacing: 1px;
-      }
+        .submission-status-title {
+            @include font-size(18, 18);
+            margin-bottom: 10px;
+            font-weight: $fw-semibold;
+        }
 
-      > .submission-status-status {
-        font-size: 16px;
-        margin-bottom: 20px;
-        font-weight: $fw-regular;
-      }
-    }
-
-    .submission-status-tested {
-      text-align: center;
-
-      > .submission-status-spinner {
-        font-size: 60px;
-        margin-bottom: 25px;
-      }
-
-      > .submission-status-title {
-        font-size: 28px;
-        margin-bottom: 15px;
-        font-weight: $fw-regular;
-      }
-
-      > .submission-status-status {
-        font-size: 16px;
-        margin-bottom: 20px;
-        font-weight: $fw-regular;
-      }
+        .submission-status-status {
+            @include font-size(15, 20);
+            margin-bottom: 20px;
+            font-weight: $fw-regular;
+        }
+        .confirm-btn,
+        .cancel-btn {
+            @include font-size(15, 40);
+            padding:0 20px;
+        }
     }
 
     .submission-status-timeout {
-      text-align: center;
+        text-align: center;
 
-      > .submission-status-spinner {
-        font-size: 60px;
-      }
+        > .submission-status-spinner {
+            font-size: 60px;
+        }
 
-      > .submission-status-title {
-        font-size: 28px;
-        margin-bottom: 20px;
-        font-weight: $fw-regular;
-      }
+        > .submission-status-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: $fw-regular;
+        }
 
-      > .submission-status-status {
-        width: 60%;
-        margin: auto;
-        line-height: 1.5;
-        font-size: 16px;
-        margin-bottom: 15px;
-        font-weight: $fw-regular;
-      }
+        > .submission-status-status {
+            width: 60%;
+            margin: auto;
+            line-height: 1.5;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: $fw-regular;
+        }
 
-      > .submission-status-button {
-        background-color: $color-2;
-        width: 35%;
-        padding: 10px;
-        font-size: 16px;
-      }
+        > .submission-status-button {
+            background-color: $color-2;
+            width: 35%;
+            padding: 10px;
+            font-size: 16px;
+        }
+    }
+
+    .submission-cancel-confirmation {
+        .button-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                width: 100%;
+                margin-right: 10px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
     }
 }

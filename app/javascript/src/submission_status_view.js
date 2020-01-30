@@ -7,16 +7,14 @@ class SubmissionStatusView {
     switch(this.status) {
       case 'queueing':
         return `
-          <div class="submission-status-queueing">
+          <div class="submission-status queueing">
             <div class="submission-status-spinner">
               <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
             </div>
             <p class="submission-status-title">Processing</p>
             <p class="submission-status-status">Queueing...</p>
-          </div>
-            <i class="fa-times fal" />
-            ESC to
-            <a href="#" title="Cancel" class="js-cancel-submission">cancel</a>
+
+            <a href="#" title="Cancel build" class="js-cancel-submission pure-button cancel-btn">Cancel build</a>
           </div>
         `;
       case 'timeout':
@@ -38,17 +36,13 @@ class SubmissionStatusView {
       case 'cancelling':
         return `
           <div class="submission-cancel-confirmation">
-            <div class="submission-cancel-confirmation-content">
-              <p class="submission-cancel-confirmation-title">
-                Cancel running code
-              </p>
-              <p class="submission-cancel-confirmation-message">
-                Are you sure you want to cancel running this code?
-              </p>
-              <div class="button-group">
-                <button class="submission-cancel-confirmation-confirm-button js-submission-cancel-confirm pure-button">Yes, cancel</button>
-                <button class="submission-cancel-confirmation-cancel-button js-submission-cancel-refuse pure-button">Continue waiting</button>
-              </div>
+            <p class="submission-status-title">Cancel running code</p>
+            <p class="submission-status-status">
+              Are you sure you want to cancel running this code?
+            </p>
+            <div class="button-group">
+              <button class="confirm-btn js-submission-cancel-confirm pure-button">Yes, cancel</button>
+              <button class="cancel-btn js-submission-cancel-refuse pure-button">Continue waiting</button>
             </div>
           </div>
         `
