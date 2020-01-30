@@ -43,12 +43,6 @@ class TrackTest < ActiveSupport::TestCase
     go = create(:track, slug: "go")
 
     assert_equal "ruby", ruby.editor_language
-    assert_equal "golang", track.editor_language
-  end
-
-  test "#editor_language returns slug when there is no config" do
-    track = create(:track, slug: "ruby")
-
-    assert_equal "ruby", track.editor_language
+    assert_equal "golang", go.editor_language
   end
 end
