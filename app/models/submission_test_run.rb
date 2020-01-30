@@ -24,11 +24,19 @@ class SubmissionTestRun < ApplicationRecord
   end
 
   def num_passed_tests
-    test_results.select(&:passed?).length
+    passed_tests.length
+  end
+
+  def passed_tests
+    test_results.select(&:passed?)
   end
 
   def num_failed_tests
-    test_results.select(&:failed?).length > 0 ? 1 : 0
+    failed_tests.length > 0 ? 1 : 0
+  end
+
+  def failed_tests
+    test_results.select(&:failed?)
   end
 
   def num_skipped_tests
@@ -46,9 +54,10 @@ class SubmissionTestRun < ApplicationRecord
 
   def tests_to_display(order = tests_info)
     ordered_tests = order.reorder(test_results)
-    limit = ordered_tests.index(&:failed?)
 
-    ordered_tests[0..limit]
+    [ordered_tests.select(&:passed?), ordered_tests.find(&:failed?)].
+      compact.
+      flatten
   end
 
   def to_partial_path

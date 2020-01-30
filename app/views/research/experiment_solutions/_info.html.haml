@@ -17,14 +17,3 @@
 -content_for :js do
   :javascript
     setupTabs()
-
-    $('.test-run-result .header i').on('click', function() {
-      div = $(this).parent().parent()
-      if(div.hasClass('open')) {
-        div.removeClass('open')
-        div.addClass('closed')
-      } else {
-        div.removeClass('closed')
-        div.addClass('open')
-      }
-    })

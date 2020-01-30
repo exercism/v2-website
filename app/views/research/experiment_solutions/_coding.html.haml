@@ -20,14 +20,14 @@
       =button_tag "On", name: :theme, value: true, class: 'pure-button'
       =button_tag "Off", name: :theme, value: false, class: 'pure-button', selected: true
 
-    .toolbar-item.toolbar-multiselect-item
-      = button_tag "Reset", class: "pure-button js-code-editor-reset"
-
   - solution.latest_files.each do |filename, code|
     .code-editor.js-code-editor{data: { config: editor_config.to_json, filename: filename }}= code
     - break
 
-  %button.js-submit-code.submit-code-btn.pure-button Run code
+
+  .bottom-toolbar
+    .revert-btn.js-code-editor-reset Revert to last run code
+    %button.js-submit-code.submit-code-btn.pure-button Run code
 
 - content_for :js do
   :javascript

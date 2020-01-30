@@ -1,27 +1,8 @@
 require 'test_helper'
 
 class SubmissionTestRunTest < ActiveSupport::TestCase
-  test "#tests_to_display retruns tests based on test info order" do
-    order = ReverseOrder.new
-    test_run = create(:submission_test_run,
-                      tests: [
-                        {
-                          "name" => "OneWordWithTwoVowels",
-                          "status" => "pass",
-                        },
-                        {
-                          "name" => "OneWordWithOneVowel",
-                          "status" => "pass",
-                        }
-                      ])
-
-    assert_equal(
-      ["OneWordWithOneVowel", "OneWordWithTwoVowels"],
-      test_run.tests_to_display(order).map(&:test)
-    )
-  end
-
-  test "#tests_to_display retruns tests until the first failed test" do
+  test "#tests_to_display retruns all passed tests and the first failed test" do
+    order = NormalOrder.new
     test_run = create(:submission_test_run,
                       tests: [
                         {
@@ -32,17 +13,25 @@ class SubmissionTestRunTest < ActiveSupport::TestCase
                           "name" => "OneWordWithTwoVowels",
                           "status" => "fail",
                         },
+                        {
+                          "name" => "OneWordWithThreeVowels",
+                          "status" => "pass",
+                        },
+                        {
+                          "name" => "OneWordWithFourVowels",
+                          "status" => "fail",
+                        },
                       ])
 
     assert_equal(
-      ["OneWordWithOneVowel", "OneWordWithTwoVowels"],
-      test_run.tests_to_display.map(&:test)
+      ["OneWordWithOneVowel", "OneWordWithThreeVowels", "OneWordWithTwoVowels"],
+      test_run.tests_to_display(order).map(&:test)
     )
   end
 
-  class ReverseOrder
+  class NormalOrder
     def reorder(tests)
-      tests.reverse
+      tests
     end
   end
 end

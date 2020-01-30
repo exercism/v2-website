@@ -1,11 +1,16 @@
 import SubmissionStatusView from './submission_status_view';
 import TimeoutTimer from './timeout_timer';
+import Collapse from './collapse';
 
 class Submission {
   constructor(element) {
     this.element = element;
     this.timer = new TimeoutTimer(30, () => { this.setStatus('timeout'); });
     this.initialHtml = element.html();
+
+    this.element.find('.test-run-result').each(function () {
+      new Collapse($(this));
+    });
   }
 
   update(params) {
