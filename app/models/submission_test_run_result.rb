@@ -28,7 +28,7 @@ class SubmissionTestRunResult
   end
 
   def expected
-    '"This is a stub"'
+    test_info.expected
   end
 
   def text
