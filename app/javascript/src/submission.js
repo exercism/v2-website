@@ -7,10 +7,6 @@ class Submission {
     this.element = element;
     this.timer = new TimeoutTimer(30, () => { this.setStatus('timeout'); });
     this.initialHtml = element.html();
-
-    this.element.find('.test-run-result').each(function () {
-      new Collapse($(this));
-    });
   }
 
   update(params) {
@@ -42,6 +38,10 @@ class Submission {
 
   render() {
     this.element.html(this.html);
+
+    this.element.find('.test-run-result').each(function () {
+      new Collapse($(this));
+    });
 
     if (this.onRender) { this.onRender(); }
   }
