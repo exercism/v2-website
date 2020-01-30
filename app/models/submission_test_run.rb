@@ -46,10 +46,9 @@ class SubmissionTestRun < ApplicationRecord
 
   def tests_to_display(order = tests_info)
     ordered_tests = order.reorder(test_results)
-    p order
-    p test_results
     limit = ordered_tests.index(&:failed?)
-    limit ?  ordered_tests[0..limit] : ordered_tests
+
+    ordered_tests[0..limit]
   end
 
   def to_partial_path
