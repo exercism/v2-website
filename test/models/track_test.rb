@@ -39,13 +39,11 @@ class TrackTest < ActiveSupport::TestCase
   end
 
   test "#editor_language returns language from config" do
-    previous_mapping = Exercism::AceMappings
-    Exercism::AceMappings = { "ruby" => "rubylang" }
-    track = create(:track, slug: "ruby")
+    ruby = create(:track, slug: "ruby")
+    go = create(:track, slug: "go")
 
-    assert_equal "rubylang", track.editor_language
-
-    Exercism::AceMappings = previous_mapping
+    assert_equal "ruby", ruby.editor_language
+    assert_equal "golang", track.editor_language
   end
 
   test "#editor_language returns slug when there is no config" do
