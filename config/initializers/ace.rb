@@ -1,0 +1,3 @@
+Exercism::AceMappings = {
+  "go" => "golang"
+}

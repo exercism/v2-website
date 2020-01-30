@@ -31,9 +31,26 @@ class TrackTest < ActiveSupport::TestCase
   end
 
   test "#editor_config merges language with track editor config" do
-    track = create(:track, slug: "ruby")
+    track = create(:track)
     track.repo = stub(editor_config: { indent_size: 4 })
+    track.editor_language = "ruby"
 
     assert_equal({ language: "ruby", indent_size: 4 }, track.editor_config)
+  end
+
+  test "#editor_language returns language from config" do
+    previous_mapping = Exercism::AceMappings
+    Exercism::AceMappings = { "ruby" => "rubylang" }
+    track = create(:track, slug: "ruby")
+
+    assert_equal "rubylang", track.editor_language
+
+    Exercism::AceMappings = previous_mapping
+  end
+
+  test "#editor_language returns slug when there is no config" do
+    track = create(:track, slug: "ruby")
+
+    assert_equal "ruby", track.editor_language
   end
 end
