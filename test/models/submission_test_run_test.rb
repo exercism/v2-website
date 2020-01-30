@@ -17,7 +17,7 @@ class SubmissionTestRunTest < ActiveSupport::TestCase
 
     assert_equal(
       ["OneWordWithOneVowel", "OneWordWithTwoVowels"],
-      test_run.tests_to_display(order).map(&:name)
+      test_run.tests_to_display(order).map(&:test)
     )
   end
 
@@ -36,7 +36,7 @@ class SubmissionTestRunTest < ActiveSupport::TestCase
 
     assert_equal(
       ["OneWordWithOneVowel", "OneWordWithTwoVowels"],
-      test_run.tests_to_display.map(&:name)
+      test_run.tests_to_display.map(&:test)
     )
   end
 
