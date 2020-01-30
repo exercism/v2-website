@@ -37,5 +37,4 @@ class Infrastructure::TestRunner < ApplicationRecord
   def orchestrator_url
     Rails.application.secrets.test_runner_orchestrator_url
   end
-
 end

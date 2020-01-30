@@ -29,4 +29,11 @@ class TrackTest < ActiveSupport::TestCase
     refute create(:track, slug: "ruby").research_track?
     assert create(:track, slug: "research_123").research_track?
   end
+
+  test "#editor_config merges language with track editor config" do
+    track = create(:track, slug: "ruby")
+    track.repo = stub(editor_config: { indent_size: 4 })
+
+    assert_equal({ language: "ruby", indent_size: 4 }, track.editor_config)
+  end
 end

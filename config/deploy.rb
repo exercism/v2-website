@@ -8,7 +8,16 @@ set :repo_url, "git@github.com:exercism/website.git"
 set :branch, 'master'
 
 set :linked_files, %w{config/database.yml config/secrets.yml config/smtp.yml config/recaptcha.yml config/twitter_accounts.yml}
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_dirs, fetch(:linked_dirs, []).push(
+  'log',
+  'tmp/pids',
+  'tmp/cache',
+  'tmp/sockets',
+  'vendor/bundle',
+  'public/system',
+  'public/uploads',
+  "node_modules"
+)
 
 set :deploy_to, "/opt/#{@application}"
 
