@@ -2,7 +2,6 @@ class SubmissionTestRunResult
   attr_reader :test_info, :name, :status, :message
 
   def initialize(test_info, params)
-    p params
     @test_info = test_info
     @name = params["name"]
     @status = params["status"].to_sym
