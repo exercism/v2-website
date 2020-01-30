@@ -142,12 +142,22 @@ body.namespace-research {
         min-width:400px;
         height: 100%;
 
-        .submit-code-btn {
+        .bottom-toolbar {
             margin-top:15px;
-            background-color: $color-2;
-            padding:0 20px;
-            @include font-size(15, 40);
-            align-self: flex-end;
+            display:flex;
+            justify-content: space-between;
+
+            .revert-btn {
+                @include font-size(15, 40);
+                text-decoration:underline;
+                font-weight:$fw-medium;
+            }
+            .submit-code-btn {
+                background-color: $color-2;
+                padding:0 20px;
+                @include font-size(15, 40);
+                align-self: flex-end;
+            }
         }
 
     }
