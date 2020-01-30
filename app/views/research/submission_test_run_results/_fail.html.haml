@@ -4,7 +4,7 @@
     =icon(:"chevron-down", "Click to close", style: :solid, extra_classes: 'opened-icon js-collapse-trigger')
     %h3
       %strong Failed:
-      Test ##{test_idx}
+      #{test.name}
   .info
     - if test.cmd.present?
       .part
@@ -12,12 +12,6 @@
         %h4 Code Run:
         %pre
           %code= test.cmd
-
-        /%pre
-        /  %code= test.message
-        /- elsif test.text.present?
-        /%p= raw test.text
-        /- else
 
       .part
         =graphical_icon "bug", style: :solid

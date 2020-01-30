@@ -60,8 +60,8 @@
             color:$re-text-color;
 
             code {
-                border:1px solid $re-background-l2;
-                background:$re-background-l1;
+                border:1px solid $re-background-l3;
+                background:$re-background-l2;
             }
             a {
                 color:$re-foreground-color;

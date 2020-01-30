@@ -46,7 +46,7 @@ class SubmissionTestRun < ApplicationRecord
 
   def test_results
     formatted_tests = tests.map do |test|
-      test_info = tests_info.find { |info| info.name == test["name"] }
+      test_info = tests_info.find { |info| info.test == test["name"] }
 
       SubmissionTestRunResult.new(test_info, test)
     end
