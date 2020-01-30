@@ -47,15 +47,49 @@ body.namespace-research {
             height: calc(100vh - 50px);
         }
 
+        &.status-pending {
+            .info-panel {
+                .tabs-and-panes {
+                    .pane-2 { border:2px solid orange !important; }
+                    .tab-1:after { background:orange !important; }
+
+                    &.selected-1 {
+                        .tab-2 {
+                            border-color:rgba(orange, 0.5) !important;
+                            background:rgba(orange, 0.1) !important;
+                        }
+                    }
+                    &.selected-2 {
+                        .tab-2 { border-color:orange !important; }
+                    }
+                }
+            }
+        }
+
+        &.status-pass {
+            .info-panel {
+                .tabs-and-panes {
+                    .pane-2 { border:2px solid green !important; }
+                    .tab-1:after { background:green !important; }
+
+                    &.selected-1 {
+                        .tab-2 {
+                            border-color:rgba(green, 0.5) !important;
+                            background:rgba(green, 0.1) !important;
+                        }
+                    }
+                    &.selected-2 {
+                        .tab-2 { border-color:green !important; }
+                    }
+                }
+            }
+        }
+
         &.status-fail {
             .info-panel {
                 .tabs-and-panes {
-                    .pane-2 {
-                        border:2px solid red !important;
-                    }
-                    .tab-1:after {
-                        background:red !important;
-                    }
+                    .pane-2 { border:2px solid red !important; }
+                    .tab-1:after { background:red !important; }
 
                     &.selected-1 {
                         .tab-2 {
@@ -64,9 +98,7 @@ body.namespace-research {
                         }
                     }
                     &.selected-2 {
-                        .tab-2 {
-                            border-color:red !important;
-                        }
+                        .tab-2 { border-color:red !important; }
                     }
                 }
             }
