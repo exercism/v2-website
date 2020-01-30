@@ -4,10 +4,7 @@ class Infrastructure::TestRunnerVersion < ApplicationRecord
   enum status: [:pending, :building, :built, :deploying, :deployed, :tested, :live, :retired]
 
   after_create do
-    RestClient.post("#{orchestrator_url}/languages/#{test_runner.language_slug}/versions", {
-      version: { slug: slug },
-    })
-    update(status: :building)
+    build!
   end
 
   def self.deployed_tested_or_live
@@ -16,6 +13,13 @@ class Infrastructure::TestRunnerVersion < ApplicationRecord
 
   def self.not_retired
     where.not(status: :retired)
+  end
+
+  def build!
+    RestClient.post("#{orchestrator_url}/languages/#{test_runner.language_slug}/versions", {
+      version: { slug: slug },
+    })
+    update(status: :building)
   end
 
   def deploy!
