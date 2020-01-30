@@ -17,7 +17,7 @@ class Track < ApplicationRecord
 
   delegate :head, to: :repo
 
-  attr_writer :repo
+  attr_writer :repo, :editor_language
 
   [:bordered_green_icon_url,
    :bordered_turquoise_icon_url,
@@ -41,7 +41,11 @@ class Track < ApplicationRecord
   end
 
   def editor_config
-    { language: slug }.merge(repo.editor_config)
+    { language: editor_language }.merge(repo.editor_config)
+  end
+
+  def editor_language
+    @editor_language ||= Exercism::AceMappings.fetch(slug, slug)
   end
 
   def repo
