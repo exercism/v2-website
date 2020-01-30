@@ -8,7 +8,7 @@ module Git
 
     def reorder(tests)
       reject { |info| info.cmd.blank? }.
-      map { |info| tests.find { |test| info.name == test.name } }.
+        map { |info| tests.find { |test| info.test == test.test } }.
       compact
     end
   end

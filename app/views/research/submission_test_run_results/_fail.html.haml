@@ -4,7 +4,7 @@
     =icon(:"chevron-down", "Click to close", style: :solid, extra_classes: 'opened-icon')
     %h3
       %strong Failed:
-      Test ##{test_idx}
+      #{test.name}
   .info
     - if test.cmd.present?
       .part

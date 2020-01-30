@@ -1,13 +1,16 @@
 class SubmissionTestRunResult
-  attr_reader :test_info, :name, :status, :message
+  attr_reader :test_info, :test, :status, :message
 
   def initialize(test_info, params)
-    p params
     @test_info = test_info
-    @name = params["name"]
+    @test = params["name"]
     @status = params["status"].to_sym
     @message = params["message"]
     @output = TerminalOutput.new(params["output"])
+  end
+
+  def name
+    test_info.name
   end
 
   def output_html
