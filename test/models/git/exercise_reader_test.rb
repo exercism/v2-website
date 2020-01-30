@@ -21,11 +21,13 @@ module Git
           "test_file" => "ruby_1_a_test.rb",
           "tests" => [
             {
-              "name" => "OneWordWithOneVowel",
+              "test" => "OneWordWithOneVowel",
+              "name" => "One word with 1 vowel",
               "cmd" => "Sentence.WordWithMostVowels(\"a\")"
             },
             {
-              "name" => "OneWordWithTwoVowels",
+              "test" => "OneWordWithTwoVowels",
+              "name" => "One word with 2 vowels",
               "cmd" => "Sentence.WordWithMostVowels(\"ae\")"
             }
           ]
