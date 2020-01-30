@@ -3,8 +3,8 @@ class BroadcastSolutionJob < ApplicationJob
     submission = solution.submissions.last
 
     html = ApplicationController.render(
-      partial: submission.ops_status,
-      as: :status
+      partial: "research/submissions/submission",
+      locals: { submission: submission }
     )
 
     ResearchSolutionChannel.broadcast_to(solution, {

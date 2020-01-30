@@ -5,6 +5,9 @@ class Submission < ApplicationRecord
   delegate :tests_info, to: :solution
 
   scope :tested, -> { where(tested: true) }
+  scope :successfully_tested, -> {
+    tested.joins(:test_run).merge(SubmissionTestRun.successful)
+  }
 
   def broadcast!
     return unless solution.research_experiment_solution?

@@ -137,10 +137,16 @@ class ExperimentSolution {
           break;
         case 'pass':
           this.updateClass('pass');
+          this.initialClass = this.element.attr('class');
           this.resultsReceived();
           break;
         case 'fail':
           this.updateClass('fail');
+          this.initialClass = this.element.attr('class');
+          this.resultsReceived();
+          break;
+        case 'error':
+          this.updateClass('info');
           this.resultsReceived();
           break;
         case 'timeout':
