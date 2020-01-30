@@ -115,7 +115,7 @@ class ExperimentSolution {
   }
 
   updateClass(status) {
-    this.element.attr('class', `experiment-solution experiment-solution--${status}`);
+    this.element.attr('class', `experiment-solution status-${status}`);
   }
 
   _newSubmission() {
