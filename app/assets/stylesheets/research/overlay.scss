@@ -1,12 +1,27 @@
 body.namespace-research {
-  .overlay-close {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    color: white;
+    .overlay {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 4;
 
-    > a {
-      color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
     }
-  }
+
+    .overlay-close {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+        color: white;
+
+        > a {
+            color: white;
+        }
+    }
 }
