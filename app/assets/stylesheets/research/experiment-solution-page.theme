@@ -56,7 +56,7 @@
             color:$re-foreground-color;
             border-bottom: 1px solid $re-border-color-l1;
         }
-        p, li {
+        p, li, table {
             color:$re-text-color;
 
             code {
@@ -68,6 +68,14 @@
                 font-weight:$fw-semibold;
                 text-decoration:none;
                 border-bottom:1px solid $re-border-color-l1;
+            }
+        }
+        table {
+            td, th {
+                border: 1px solid $re-border-color-l1;
+            }
+            th {
+                border-bottom:2px solid $re-border-color-l1;
             }
         }
         .pane-1 pre {
