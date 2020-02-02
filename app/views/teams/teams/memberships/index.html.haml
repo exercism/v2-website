@@ -45,8 +45,10 @@
                   teams_team_membership_path(membership.team, membership),
                   method: :delete,
                   data: { confirm: "Are you sure you want to remove #{membership.name} from your team?" }
-        - if current_user_is_admin
-          = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
+
+        .warning Note: Inviting by email is disabled due to abuse. Please share the URL below to invite your teammates.
+        /- if current_user_is_admin
+        /  = link_to "Invite new member", [:new, :teams, @team, :invitation], class: 'pure-button'
 
     - if current_user_is_admin
       = render "teams/teams/memberships/settings", team: @team

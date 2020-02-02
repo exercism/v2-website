@@ -279,9 +279,7 @@ Rails.application.routes.draw do
       resources :memberships,
         only: [:index, :destroy],
         controller: "teams/memberships"
-      resources :invitations,
-        only: [:new, :create, :destroy],
-        controller: "teams/invitations"
+      resources :invitations, only: [:destroy], controller: "teams/invitations"
     end
 
     Teams::PagesController::PAGES.values.each do |page|
