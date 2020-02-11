@@ -16,8 +16,8 @@ module InfrastructureServices
 
     memoize
     def deployed_versions
-      json = RestClient.get("#{orchestrator_url}/languages/#{test_runner.language_slug}/versions/deployed")
-      JSON.parse(json)[:version_slugs]
+      json = RestClient.get("#{orchestrator_url}/languages/#{language_slug}/versions/deployed")
+      HashWithIndifferentAccess.new(JSON.parse(json)[:version_slugs])
     end
 
     private
