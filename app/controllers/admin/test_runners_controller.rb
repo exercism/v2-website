@@ -13,6 +13,7 @@ class Admin::TestRunnersController < AdminController
   def show
     @test_runner = Infrastructure::TestRunner.find(params[:id])
     InfrastructureServices::UpdateBuiltTestRunnerVersions.(@test_runner)
+    InfrastructureServices::UpdateDeployedTestRunnerVersions.(@test_runner)
   end
 
   def new

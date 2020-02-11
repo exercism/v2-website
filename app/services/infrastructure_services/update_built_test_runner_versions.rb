@@ -6,8 +6,11 @@ module InfrastructureServices
 
     def call
       test_runner.versions.building.each do |version|
-        # TODO - This is super-racey
-        version.update(status: :built) if image_tags.include?(version.slug)
+        next unless image_tags.include?(version.slug)
+
+        # Only allow building -> build through this method
+        TestRunnerVersion.where(id: version.id, status: :building).
+                          update_all(status: :built) 
       end
     end
 
