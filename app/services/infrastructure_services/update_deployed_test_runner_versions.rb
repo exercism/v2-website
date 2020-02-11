@@ -19,6 +19,11 @@ module InfrastructureServices
       json = RestClient.get("#{orchestrator_url}/languages/#{test_runner.language_slug}/versions/deployed")
       JSON.parse(json)[:version_slugs]
     end
+
+    private
+    def orchestrator_url
+      Rails.application.secrets.test_runner_orchestrator_url
+    end
   end
 end
 
