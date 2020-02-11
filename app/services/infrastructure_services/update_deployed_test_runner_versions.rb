@@ -9,8 +9,8 @@ module InfrastructureServices
         next unless deployed_versions.include?(version.slug)
 
         # Only allow deploying -> deployed through this method
-        TestRunnerVersion.where(id: version.id, status: :deploying).
-                          update_all(status: :deployed)
+        Infrastructure::TestRunnerVersion.where(id: version.id, status: :deploying).
+                                           update_all(status: :deployed)
       end
     end
 

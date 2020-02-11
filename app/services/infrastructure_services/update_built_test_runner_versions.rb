@@ -9,8 +9,8 @@ module InfrastructureServices
         next unless image_tags.include?(version.slug)
 
         # Only allow building -> build through this method
-        TestRunnerVersion.where(id: version.id, status: :building).
-                          update_all(status: :built) 
+        Infrastructure::TestRunnerVersion.where(id: version.id, status: :building).
+                                          update_all(status: :built) 
       end
     end
 
