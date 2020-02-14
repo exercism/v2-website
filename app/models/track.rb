@@ -17,6 +17,8 @@ class Track < ApplicationRecord
 
   delegate :head, to: :repo
 
+  attr_writer :repo, :editor_language
+
   [:bordered_green_icon_url,
    :bordered_turquoise_icon_url,
    :hex_green_icon_url,
@@ -38,12 +40,28 @@ class Track < ApplicationRecord
     repo.about.present?? ParseMarkdown.(repo.about) : nil
   end
 
+  def editor_config
+    { language: editor_language }.merge(repo.editor_config)
+  end
+
+  def editor_language
+    @editor_language ||= Exercism::AceMappings.fetch(slug, slug)
+  end
+
   def repo
-    Git::ExercismRepo.new(repo_url)
+    @repo ||= Git::ExercismRepo.new(repo_url)
+  end
+
+  def research_track?
+    slug.starts_with?("research")
   end
 
   def accepting_new_students?
-    median_wait_time &&
-    median_wait_time < 1.week
+    # Always return true if there are < 10 solutions in the queue
+    return true if SolutionsToBeMentored.new(nil, [id], []).mentored_core_solutions.count < 10
+
+    # If we have a median time then use it as the guage
+    # If there's a queue and we're over the median then the track is out of order
+    median_wait_time && median_wait_time < 1.week
   end
 end

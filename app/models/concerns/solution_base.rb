@@ -61,6 +61,26 @@ module SolutionBase
     true
   end
 
+  def team_solution?
+    false
+  end
+
+  def research_experiment_solution?
+    false
+  end
+
+  def use_auto_analysis?
+    false
+  end
+
+  def update_git_info!
+    update!(
+      git_slug: exercise.slug,
+      git_sha: track_head
+    )
+  end
+
+
   #class_methods do
   #  ...
   #end

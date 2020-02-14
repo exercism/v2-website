@@ -1,0 +1,88 @@
+@import 'variables';
+@import 'mixins';
+
+body.controller-research-pages.action footer {
+    margin-top:0;
+}
+#research-landing-page {
+    .welcome-section {
+        .lhs {
+            display:none;
+            @include width-medium() {
+                display: block;
+            }
+            @include width-medium() {
+                padding-bottom:50px; 
+            }
+            z-index: -1;
+        }
+        .rhs {
+            padding-top:50px;
+            margin-bottom:50px;
+            @include width-medium() {
+                padding-top:80px;
+                margin-bottom:130px;
+            }
+            h1 {
+                @include header-font;
+                font-weight:$bold;
+                @include font-size(30,24);
+                color:$color-2;
+                margin-bottom:10px;
+                position:relative;
+                img {
+                    height:25px;
+                    background:white;
+                    position:absolute;
+                    top:0;
+                    left:0;
+                }
+                span {
+                    width:145px;
+                    display:inline-block;
+                }
+            }
+            h2 {
+                @include header-font;
+                font-weight:600;
+                @include font-size(26, 26);
+                margin-bottom:10px;
+            }
+            p {
+                color:#333;
+                @include font-size(16, 22);
+                max-width:450px;
+                margin-bottom:20px;
+            }
+            .pure-button {
+                @include font-size(16, 16);
+                border-radius:2px;
+                width:100%;
+                margin-bottom:15px;
+                @include width-small() {
+                    width:auto;
+                    margin-bottom:0;
+                }
+                &.sign-up-button {
+                    background:$color-3;
+                    color:#fff;
+                    margin-right:5px;
+                    padding:15px 70px;
+                }
+                &.languages-button {
+                    border:1px solid $color-2;
+                    color:$color-2;
+                    background:#fff;
+                    padding:15px 30px;
+                }
+                &.participate-button {
+                    background:$color-3;
+                    color:#fff;
+                    display:block;
+                    width:100%;
+                    padding:15px 70px;
+                }
+            }
+        }
+    }
+}

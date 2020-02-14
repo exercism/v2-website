@@ -1,0 +1,34 @@
+.code-editor-manager.js-code-editor-manager
+  .toolbar.toolbar-1
+    %button.js-keyboard-shortcuts.toolbar-item.toolbar-shortcuts-btn.pure-button
+      Keyboard shortcuts
+
+    = form_with model: current_user, url: update_theme_my_settings_preferences_path, method: :patch, class: 'js-theme-select toolbar-theme-selector toolbar-item toolbar-multiselect-item', data: {theme: current_user.dark_code_theme?? "dark" : "light"} do |f|
+      .label Theme:
+      =button_tag "Light", name: :theme, value: 'light', class: 'pure-button', selected: !current_user.dark_code_theme?
+      =button_tag "Dark", name: :theme, value: 'dark', class: 'pure-button', selected: current_user.dark_code_theme?
+
+  .toolbar.toolbar-2
+    .toolbar-item.toolbar-multiselect-item.js-code-editor-keybinding
+      .label Keybindings:
+      =button_tag "Default", name: :theme, value: 'ace', class: 'pure-button', selected: true
+      =button_tag "Vim", name: :theme, value: 'vim', class: 'pure-button'
+      =button_tag "Emacs", name: :theme, value: 'emacs', class: 'pure-button'
+
+    .toolbar-item.toolbar-multiselect-item.js-code-editor-wrapping
+      .label Wrap:
+      =button_tag "On", name: :theme, value: true, class: 'pure-button'
+      =button_tag "Off", name: :theme, value: false, class: 'pure-button', selected: true
+
+  - solution.latest_files.each do |filename, code|
+    .code-editor.js-code-editor{data: { config: editor_config.to_json, filename: filename }}= code
+    - break
+
+
+  .bottom-toolbar
+    .revert-btn.js-code-editor-reset Revert to last run code
+    %button.js-submit-code.submit-code-btn.pure-button Run code
+
+- content_for :js do
+  :javascript
+    submitOnChange($('.js-theme-select'));

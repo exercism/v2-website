@@ -2,6 +2,11 @@ class My::PreferencesController < MyController
   def edit
   end
 
+  def update_theme
+    current_user.update!(theme: params[:theme])
+    head 200
+  end
+
   def update
     if params[:communication_preferences].present?
       current_user.communication_preferences.update(

@@ -1,0 +1,127 @@
+@import 'variables';
+@import 'mixins';
+
+#research-experiments {
+    .header {
+        background:$color-2;
+        padding:70px 0 30px;
+        margin-bottom:30px;
+        h1 {
+            color:#fff;
+            @include font-size(25, 25);
+        }
+    }
+
+    h2 {
+        @include font-size(17, 17);
+        font-weight:$fw-bold;
+        margin-bottom:5px;
+    }
+
+    .introduction, .experiments, .coming-soon {
+        max-width:500px;
+    }
+
+    .introduction {
+        margin-bottom:20px;
+        padding:20px;
+        background:#f6f6f6;
+        *:last-child {
+            margin-bottom:0;
+        }
+    }
+    .lhs {
+        padding-right:50px;
+    }
+    .experiments {
+        border-bottom:1px solid #ccc;
+        padding-bottom:30px;
+        margin-bottom:30px;
+
+        h2 {
+            margin-bottom:10px;
+        }
+        .experiment {
+            h3 {
+                i {
+                    animation: pulse 2s infinite;
+                    @keyframes pulse {
+                      0% {
+                        opacity:100%;
+                      }
+                      50% {
+                        opacity:0;
+                      }
+                      100% {
+                        opacity:100%;
+                      }
+                    }
+                }
+                //@include font-size(14, 14);
+                //font-weight:$fw-bold;
+                margin-bottom:5px;
+                color:$color-2;
+
+                color: #009cab;
+                font-weight: $fw-black;
+                text-transform: uppercase;
+                @include font-size(11, 11);
+            }
+            p {
+                margin-bottom:10px;
+            }
+
+            .buttons {
+                display:flex;
+
+                .learn-more-btn,
+                .participate-btn {
+                    padding: 12px;
+                }
+                .learn-more-btn {
+                    display:inline-block;
+                    margin-right:5px;
+                    width:33%;
+                    flex-shrink: 0;
+
+                    background:#fff;
+                    @include font-size(15, 16);
+                    color:#666;
+                    border:1px solid #aaa;
+                }
+                .participate-btn {
+                    display:inline-block;
+                    width:100%;
+                    font-weight: 600;
+                    @include font-size(16, 16);
+
+                    background:$color-2;
+                    color:#fff;
+                    border:1px solid $color-2;
+                }
+            }
+            .researchers {
+                background:#f9f9f9;
+                border:1px solid #eee;
+                padding:15px;
+                text-align:center;
+                margin-bottom:15px;
+                h4 {
+                    text-align:center;
+                    @include font-size(13, 13);
+                    margin-bottom:15px;
+                    font-weight:$fw-semibold;
+                    color:#999;
+                }
+                img {
+                    height:25px;
+                    &:not(:last-child) {
+                        margin-right:20px;
+                        padding-right:20px;
+                        border-right:1px solid #ccc;
+                    }
+                }
+            }
+        }
+    }
+}

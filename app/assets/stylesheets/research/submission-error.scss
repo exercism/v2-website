@@ -1,0 +1,33 @@
+@import 'variables';
+
+body.namespace-research {
+    .submission-error {
+      background-color: white;
+      padding: 30px;
+      color: #333;
+    }
+
+    .submission-error-content {
+      width: 500px;
+      padding: 0 20px;
+
+      > .submission-error-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-weight: $fw-bold;
+      }
+
+      > .submission-error-message {
+        font-size: 16px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      > .submission-error-button {
+        background-color: $color-2;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+      }
+    }
+}

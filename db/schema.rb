@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_045517) do
+ActiveRecord::Schema.define(version: 2019_12_20_152641) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -241,6 +241,25 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
     t.index ["user_id"], name: "fk_rails_7b8f6c3112"
   end
 
+  create_table "infrastructure_test_runner_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "test_runner_id", null: false
+    t.string "slug", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_infrastructure_test_runner_versions_on_slug", unique: true
+    t.index ["test_runner_id"], name: "fk_rails_63c05336de"
+  end
+
+  create_table "infrastructure_test_runners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "language_slug", null: false
+    t.integer "timeout_ms", null: false
+    t.string "version_slug"
+    t.integer "num_processors", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "iteration_analyses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "iteration_id", null: false
     t.string "ops_status", null: false
@@ -367,6 +386,40 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "research_experiment_solutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "experiment_id", null: false
+    t.string "uuid", null: false
+    t.bigint "exercise_id", null: false
+    t.string "git_sha", null: false
+    t.string "git_slug", null: false
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "fk_rails_1be696c295"
+    t.index ["experiment_id"], name: "fk_rails_8f6bde7fee"
+    t.index ["user_id", "experiment_id", "exercise_id"], name: "research_solutions_uniq", unique: true
+  end
+
+  create_table "research_experiments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.string "repo_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_research_experiments_on_slug"
+  end
+
+  create_table "research_user_experiments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "experiment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["experiment_id"], name: "fk_rails_809b029224"
+    t.index ["user_id", "experiment_id"], name: "index_research_user_experiments_on_user_id_and_experiment_id", unique: true
+  end
+
   create_table "solution_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "solution_id", null: false
     t.bigint "user_id", null: false
@@ -456,15 +509,16 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
     t.index ["uuid"], name: "index_solutions_on_uuid"
   end
 
-  create_table "submission_test_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "submission_test_runs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "submission_id", null: false
-    t.string "ops_status", null: false
     t.string "results_status"
-    t.string "message"
+    t.text "message"
     t.json "tests"
     t.json "results"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ops_status", limit: 2, null: false
+    t.text "ops_message"
     t.index ["submission_id"], name: "fk_rails_3812c45ada"
   end
 
@@ -475,7 +529,9 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
     t.datetime "updated_at", null: false
     t.string "uuid", null: false
     t.json "filenames", null: false
+    t.string "solution_type", null: false
     t.index ["solution_id", "id"], name: "index_submissions_on_solution_id_and_id"
+    t.index ["solution_type", "solution_id"], name: "index_submissions_on_solution_type_and_solution_id"
     t.index ["tested", "id"], name: "index_submissions_on_tested_and_id"
     t.index ["uuid"], name: "index_submissions_on_uuid", unique: true
   end
@@ -637,6 +693,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
     t.datetime "deleted_at"
     t.boolean "full_width_code_panes", default: false, null: false
     t.boolean "may_edit_changelog", default: false, null: false
+    t.datetime "joined_research_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
@@ -655,6 +712,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
   add_foreign_key "exercises", "tracks"
   add_foreign_key "ignored_solution_mentorships", "solutions"
   add_foreign_key "ignored_solution_mentorships", "users"
+  add_foreign_key "infrastructure_test_runner_versions", "infrastructure_test_runners", column: "test_runner_id"
   add_foreign_key "iteration_analyses", "iterations"
   add_foreign_key "iteration_files", "iterations"
   add_foreign_key "maintainers", "tracks"
@@ -664,6 +722,11 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "repo_update_fetches", "repo_updates"
+  add_foreign_key "research_experiment_solutions", "exercises"
+  add_foreign_key "research_experiment_solutions", "research_experiments", column: "experiment_id"
+  add_foreign_key "research_experiment_solutions", "users"
+  add_foreign_key "research_user_experiments", "research_experiments", column: "experiment_id"
+  add_foreign_key "research_user_experiments", "users"
   add_foreign_key "solution_locks", "solutions"
   add_foreign_key "solution_locks", "users"
   add_foreign_key "solution_mentorships", "solutions"
@@ -671,7 +734,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_045517) do
   add_foreign_key "solutions", "exercises"
   add_foreign_key "solutions", "users"
   add_foreign_key "solutions", "users", column: "approved_by_id"
-  add_foreign_key "submission_test_results", "submissions"
+  add_foreign_key "submission_test_runs", "submissions"
   add_foreign_key "team_invitations", "teams"
   add_foreign_key "team_invitations", "users", column: "invited_by_id"
   add_foreign_key "team_memberships", "teams"

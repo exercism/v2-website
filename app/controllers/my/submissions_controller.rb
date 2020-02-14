@@ -1,6 +1,8 @@
 class My::SubmissionsController < MyController
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
+=begin
+
   def create
     # Temporary guard
     return render(json: {}) unless current_user.admin?
@@ -32,4 +34,6 @@ class My::SubmissionsController < MyController
 
     render json: output
   end
+
+=end
 end

@@ -1,4 +1,3 @@
-# t = Time.now.to_f; UploadSubmissionToS3ForStorage.(submission, files); Time.now.to_f - t
 module SubmissionServices
   class UploadToS3ForStorage
     include Mandate
@@ -11,9 +10,9 @@ module SubmissionServices
 
     def call
       threads = []
-      files.each { |filename, code|
+      files.each do |filename, code|
         threads << Thread.new { upload_file(filename, code) }
-      }
+      end
       threads.each(&:join)
     end
 

@@ -57,7 +57,8 @@ class My::TrackTest < ApplicationSystemTestCase
   end
 
   test "shows oversubscribed modal tracks that are oversubscribed" do
-    track = create(:track, median_wait_time: 2.weeks)
+    Track.any_instance.stubs(accepting_new_students?: false)
+    track = create :track
     exercise = create(:exercise, track: track, core: true)
 
     user_track = create(:user_track, {
@@ -86,7 +87,8 @@ class My::TrackTest < ApplicationSystemTestCase
   end
 
   test "shows oversubscribed migration modal for user tracks created before migration" do
-    track = create(:track, median_wait_time: 2.weeks)
+    Track.any_instance.stubs(accepting_new_students?: false)
+    track = create :track
     exercise = create(:exercise, track: track, core: true)
 
     user_track = create(:user_track, {

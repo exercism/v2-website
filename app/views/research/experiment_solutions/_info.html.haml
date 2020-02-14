@@ -1,0 +1,19 @@
+.tabs-and-panes.selected-1
+  .tabs
+    .tab.tab-1
+      =icon(:info, "Instructions", style: :solid)
+    .tab.tab-2
+      =icon(:terminal, "Results", style: :solid)
+  .panes
+    .pane.pane-1
+      .instructions
+        = raw solution.instructions
+
+    .pane.pane-2.js-submission-panel
+      = render "research/submissions/submission",
+        submission: solution.submissions.successfully_tested.last,
+        as: :status
+
+-content_for :js do
+  :javascript
+    setupTabs()

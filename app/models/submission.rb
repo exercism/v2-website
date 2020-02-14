@@ -1,14 +1,25 @@
 class Submission < ApplicationRecord
-  belongs_to :solution
-  has_one :test_results, class_name: "SubmissionTestResults"
+  belongs_to :solution, polymorphic: true
+  has_one :test_run, class_name: "SubmissionTestRun"
 
-  def status
-    return :queued if test_results.nil?
+  delegate :tests_info, to: :solution
 
-    test_results.pass? ? :passed : :failed
-  end
+  scope :tested, -> { where(tested: true) }
+  scope :successfully_tested, -> {
+    tested.joins(:test_run).merge(SubmissionTestRun.successful)
+  }
 
   def broadcast!
+    return unless solution.research_experiment_solution?
+
     BroadcastSubmissionJob.perform_now(self)
+  end
+
+  def files
+    SubmissionServices::DownloadFiles.(uuid, filenames)
+  end
+
+  def ops_status
+    SubmissionOpsStatus.new(test_run)
   end
 end

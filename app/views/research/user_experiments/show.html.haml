@@ -1,0 +1,28 @@
+#user-experiment
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      %h1 Choose a language
+      %p We hope you will try as many languages as possible. It doesn't matter how well you know a language - this might even be your first time trying it. The more data the better!
+
+      .languages
+        -@tracks.each do |track|
+          -if @user_experiment.language_completed?(track.slug)
+            .language.completed
+              .details
+                %h3= track.title
+                .status Completed
+
+          -elsif @user_experiment.language_started?(track.slug)
+            =link_to language_research_user_experiment_path(@user_experiment, track.slug), class: "language in-progress" do
+              .details
+                %h3= track.title
+                .status In progress
+
+          -else
+            =link_to language_research_user_experiment_path(@user_experiment, track.slug), class: "language not-started" do
+              .details
+                %h3= track.title
+                .status Not started

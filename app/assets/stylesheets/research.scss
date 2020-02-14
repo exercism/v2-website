@@ -1,0 +1,224 @@
+@import 'mixins';
+@import 'variables';
+
+body.namespace-research {
+    :not(i) {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+        font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
+    header {
+        a.logo {
+            color: #fff;
+            text-decoration: none;
+            img {
+                display: inline-block;
+                vertical-align: top;
+            }
+            span {
+                border-left:1px solid #fff;
+                margin-left:7px;
+                padding-left:7px;
+                display: inline-block;
+                line-height: 18px;
+                font-weight:$regular;
+                margin-top:2px;
+            }
+        }
+    }
+
+    footer {
+        margin-top:0;
+    }
+
+    .lo-container {
+        max-width: 1240px;
+    }
+
+    .lo-research-centralised-section {
+        background:image-url("research/background.jpg");
+        background-color:#4B4468;
+        background-size:cover;
+
+        padding-top:80px;
+        padding-bottom:30px;
+
+        .lo-research-floating-box {
+            width:460px;
+            margin: 0 auto;
+            padding:20px;
+            box-shadow: 0 0 1px black;
+            background:#fff;
+            text-align:center;
+            position:relative;
+            border-radius:10px;
+            padding:65px 30px 30px 30px;
+
+            p {
+                text-align:justify;
+                margin-bottom:15px;
+            }
+
+            .header-img {
+                top:-50px;
+                left:50%;
+                margin-left:-50px;
+                position:absolute;
+                height:100px;
+            }
+            .subtitle {
+                color:#999;
+                @include font-size(14, 19);
+                font-weight:$fw-semibold;
+                margin-bottom:10px;
+            }
+
+            h1 {
+                @include font-size(22, 27);
+                font-weight:$fw-semibold;
+                max-width:340px;
+                margin:0 auto 10px;
+            }
+        }
+    }
+
+    p,li {
+        @include font-size(15, 21);
+        font-weight:$fw-regular;
+    }
+    p {
+        margin-bottom:10px;
+        a {
+            color:#333;
+            font-weight:$fw-medium;
+        }
+    }
+
+}
+/*
+    .breadcrumb {
+        border-bottom:1px solid #eee;
+        li {
+            padding-top:5px;
+        }
+    }
+    footer {
+        margin-top:0;
+    }
+
+    .lo-container {
+        max-width: 1240px;
+    }
+
+    .lo-research-centralised-section {
+        background:#6d4185;
+        padding-top:80px;
+        padding-bottom:30px;
+
+        .lo-research-floating-box {
+            width:460px;
+            margin: 0 auto;
+            padding:20px;
+            box-shadow: 0 0 1px black;
+            background:#fff;
+            text-align:center;
+            position:relative;
+            border-radius:10px;
+            padding:65px 30px 30px 30px;
+
+            p {
+                text-align:justify;
+                margin-bottom:15px;
+            }
+
+            .header-img {
+                top:-50px;
+                left:50%;
+                margin-left:-50px;
+                position:absolute;
+                height:100px;
+            }
+
+            h1 {
+                @include font-size(22, 27);
+                font-weight:$fw-semibold;
+                max-width:340px;
+                margin:0 auto 10px;
+            }
+        }
+    }
+
+    p,li {
+        @include font-size(15, 21);
+        font-weight:$fw-regular;
+    }
+    p {
+        margin-bottom:10px;
+        a {
+            color:#333;
+            font-weight:$fw-medium;
+        }
+    }
+
+}
+/*
+>>>>>>> Stashed changes
+    .breadcrumb {
+        border-bottom:1px solid #eee;
+        li {
+            padding-top:5px;
+        }
+    }
+
+    .research-header {
+        position:relative;
+        margin-bottom:30px;
+        background-image:image-url("research-header.png");
+        background-color:#eee;
+        background-size:cover;
+        border-bottom:1px solid #fafafa;
+        .subtitle {
+            padding-top:60px;
+            @include font-size(15, 15);
+            margin-bottom:5px;
+            color:#555;
+        }
+        h1 {
+            @include font-size(22, 22);
+            font-weight:$fw-bold;
+            color:#555;
+            padding-bottom:30px;
+        }
+        .logo {
+            float:right;
+            height:100px;
+            margin-top:10px;
+            position:relative;
+        }
+        .language-line {
+            position:absolute;
+            top:60px;
+            height: 1px;
+            right:0;
+            left:50%;
+            background-image: linear-gradient(to right, #eee, $color-2)
+        }
+    }
+    h2 {
+        @include font-size(18, 24);
+        font-weight:$fw-semibold;
+        margin-bottom:5px;
+    }
+
+    .pure-button {
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    p+h2 {
+        margin-top:25px;
+    }
+}
+*/

@@ -1,3 +1,9 @@
+require "prism_js"
+
+PrismJS.configure do |config|
+  config.cdn = "//cdnjs.cloudflare.com/ajax/libs/prism/1.17.1"
+end
+
 Exercism::PrismLanguages = %w{
 markup
 css
@@ -154,7 +160,7 @@ yaml
 
 Exercism::PrismLanguageMappings = {
   "common-lisp" => "lisp",
-  "elisp" => "lisp",
+  "emacs-lisp" => "lisp",
   "lfe" => "lisp",
 
   "ballerina" => "go",
@@ -209,7 +215,7 @@ Exercism::PrismFileMappings = {
   "diff": %w{diff patch},
   "docker": %w{},
   "eiffel": %w{e},
-  "elisp": %w{el},
+  "emacs-lisp": %w{el},
   "elixir": %w{ex exs},
   "elm": %w{elm},
   "erlang": %w{erl app.src escript hrl xrl yrl},

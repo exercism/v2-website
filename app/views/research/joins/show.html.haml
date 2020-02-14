@@ -1,0 +1,18 @@
+#research-landing-page
+  .welcome-section
+    .lo-container
+      .pure-g
+        .pure-u-1.pure-u-md-1-2.lhs
+        .pure-u-1.pure-u-md-1-2.rhs
+          %h1
+            =image "logo-green.png", "Exercism logo", title: "Exercism"
+            %span exercism
+            |&nbsp;research
+
+          %h2 Working with leading researchers to understand how we develop programming skills
+          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          %p
+            Exercism is a
+            %strong not-for-profit
+            organisation.
+          = button_to "Participate in Exercism Research", research_join_path, method: :post, class: 'pure-button participate-button'

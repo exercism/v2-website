@@ -16,7 +16,7 @@ class Solution < ApplicationRecord
 
   has_many :notifications, as: :about, dependent: :destroy
 
-  has_many :submissions
+  has_many :submissions, as: :solution
 
   delegate :auto_approve?, to: :exercise
   delegate :max_mentoring_slots,
@@ -80,10 +80,6 @@ class Solution < ApplicationRecord
 
   def mentor_download_command
     "exercism download --uuid=#{uuid}"
-  end
-
-  def team_solution?
-    false
   end
 
   def legacy?

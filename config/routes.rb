@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   # SPI #
   # ### #
   namespace :spi do
-    post "submissions/:submission_uuid/test_results" => "submission_test_results#create", as: :submission_test_results
+    get "test_runner/languages" => "test_runner#languages"
+    get "test_runner/submissions_to_test" => "test_runner#submissions_to_test"
+    post "test_runner/submission_tested/:submission_uuid" => "test_runner#submission_tested"
   end
 
   # ##### #
@@ -49,12 +51,31 @@ Rails.application.routes.draw do
         resources :exercises, only: [:show]
       end
     end
+
+    resources :analyses do
+      patch :replay, on: :member
+    end
+
+    resources :test_runners, except: [:destroy] do
+      resources :versions, only: [:new, :create, :show], controller: "test_runner_versions" do
+        member do
+          patch :deploy
+          patch :promote
+          patch :retire
+          patch :tested
+        end
+        resources :samples, only: [:new, :create, :show], controller: "test_runner_version_samples" do
+          member do
+            post :replay
+          end
+        end
+      end
+    end
   end
 
   # ############### #
   # Changelog admin #
   # ############### #
-
   namespace :changelog_admin do
     resources :entries do
       post :publish, on: :member
@@ -93,9 +114,22 @@ Rails.application.routes.draw do
     end
     resources :discussion_posts, only: [:create]
     resource :exercise_notes, only: [:show, :new], controller: "exercise_notes"
-    resources :analyses do
-      patch :replay, on: :member
+  end
+
+  # ######## #
+  # Research #
+  # ######## #
+  namespace :research, path: '', constraints: { subdomain: 'research' } do
+    resource :join, only: [:show, :create]
+    resources :experiments, only: [:index, :show]
+    resources :user_experiments, only: [:create, :show]
+
+    devise_scope :user do
+      post "/users/sign_in" => "sessions#create"
+      get "/users/auth/github/callback" => "omniauth_callbacks#github"
     end
+
+    root to: "pages#index"
   end
 
   # #### #
@@ -167,7 +201,6 @@ Rails.application.routes.draw do
     end
     resources :solutions, only: [:index, :show, :create] do
       member do
-        get :solve
         patch :submit
 
         get :walkthrough
@@ -189,7 +222,7 @@ Rails.application.routes.draw do
       resources :iterations, only: [:show]
     end
     resources :submissions, only: [:create] do
-      get :test_results, on: :member
+      get :test_runs, on: :member
     end
 
     resources :starred_solutions, only: [:index, :create]
@@ -210,7 +243,9 @@ Rails.application.routes.draw do
       get :confirm_delete_account
       delete :delete_account
 
-      resource :preferences, only: [:edit, :update]
+      resource :preferences, only: [:edit, :update] do
+        patch :update_theme
+      end
       resource :track_settings, only: [:edit, :update]
     end
   end
@@ -218,7 +253,6 @@ Rails.application.routes.draw do
   # ##### #
   # Teams #
   # ##### #
-  # namespace :teams do
   namespace :teams, path: '', constraints: { subdomain: 'teams' } do
     get "/" => "pages#index"
     get "dashboard" => "dashboard#index"
@@ -245,13 +279,28 @@ Rails.application.routes.draw do
       resources :memberships,
         only: [:index, :destroy],
         controller: "teams/memberships"
-      resources :invitations,
-        only: [:new, :create, :destroy],
-        controller: "teams/invitations"
+      resources :invitations, only: [:destroy], controller: "teams/invitations"
     end
 
     Teams::PagesController::PAGES.values.each do |page|
       get page.to_s.dasherize => "pages##{page}"#, as: "teams_#{page}_page"
+    end
+  end
+
+  # ######## #
+  # Research #
+  # ######## #
+  namespace :research, path: '', constraints: { subdomain: 'research' } do
+    get "dashboard" => "dashboard#index"
+
+    resources :experiments, only: [:index, :show]
+    resources :user_experiments, only: [:create, :show] do
+      member do
+        get "languages/:language" => "user_experiments#language", as: :language
+      end
+    end
+    resources :experiment_solutions, only: [:show, :create] do
+      post :submit, on: :member
     end
   end
 

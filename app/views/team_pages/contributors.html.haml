@@ -12,7 +12,7 @@
     .lo-container
       %h2 Codebase Contributors
       %p.subheading Exercism could not be the success it is without the contributors of over 1,000 volunteers, who contribute in every way imaginable.
-      =cache ["pages/team/contributors", @last_updated_at, @page] do
+      =cache ["pages/team/contributors/with_maintainers", @last_updated_at, @page] do
         .people
           -@contributors.each do |contributor|
             .person.contributor

@@ -1,0 +1,33 @@
+#admin-test-runner
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+    %li= link_to "Test runners", admin_test_runners_path
+    %li= link_to @test_runner.language_slug, admin_test_runner_path(@test_runner)
+    %li= link_to "Version #{@version.slug}", admin_test_runner_version_path(@test_runner, @version)
+
+  .lo-container
+    %h1 New Sample
+
+    .testing-form
+      =form_with url: admin_test_runner_version_samples_path(@test_runner, @version), method: :post, data: {remote: false} do |f|
+        .field
+          =f.label :exercise_id
+          =f.select :exercise_id, @exercises, selected: @previous_exercise_id
+
+        .field
+          =f.label :file_1_filename
+          =f.text_field :file_1_filename, value: @previous_file_1.try{|f|f[0]}
+
+        .field
+          =f.label :file_1_code
+          =f.text_area :file_1_code, value: @previous_file_1.try{|f|f[1]}
+
+        .field
+          =f.label :file_2_filename
+          =f.text_field :file_2_filename, value: @previous_file_2.try{|f|f[0]}
+
+        .field
+          =f.label :file_2_code
+          =f.text_area :file_2_code, value: @previous_file_2.try{|f|f[1]}
+
+        =button_tag "Submit for testing", class: 'pure-button'

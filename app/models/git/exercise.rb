@@ -1,5 +1,8 @@
 class Git::Exercise
   attr_reader :track, :title, :git_slug, :git_sha
+
+  delegate :tests_info, to: :exercise_reader
+
   def initialize(exercise, git_slug, git_sha)
     @track = exercise.track
     @title = exercise.title
@@ -15,6 +18,14 @@ class Git::Exercise
 
   def test_suite
     exercise_reader.tests
+  end
+
+  def solution_files
+    exercise_reader.solution_files
+  end
+
+  def exercise_config
+    exercise_reader.exercise_config
   end
 
   private

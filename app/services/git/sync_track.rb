@@ -127,15 +127,9 @@ class Git::SyncTrack
   end
 
   def code_sample
-    code_sample = repo.snippet_file
-    return code_sample unless code_sample.nil?
-    first_exercise = exercises.first
-    first_exercise_slug = first_exercise[:slug]
-    ex = repo.exercise(first_exercise_slug, repo.head)
-    ex.solution || ""
+    repo.snippet_file || ""
   rescue => e
-    puts e.message
-    puts e.backtrace
+    Bugsnag.notify(e)
     ""
   end
 

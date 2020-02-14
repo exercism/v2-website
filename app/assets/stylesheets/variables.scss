@@ -4,6 +4,8 @@ $color-1-opaque: rgba($color-1, 0.1);
 $color-2-opaque: #f3fdfd;
 $color-3: #45027b;
 
+$research-blue: #1987e4;
+
 $line-color-1:#ccc;
 $background-grey-1:#eee;
 $background-grey-2:#fafafa;
@@ -21,8 +23,9 @@ $regular: 400;
 $bold: 600;
 $black: 700;
 
-$fw-light: $light;
-$fw-regular: $regular;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500; // Not usable with all fonts
 $fw-semibold: 600;
-$fw-bold: $bold;
-$fw-black: $black;
+$fw-bold: 700;
+$fw-black: 800;

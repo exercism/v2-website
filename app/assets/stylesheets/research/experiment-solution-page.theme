@@ -1,0 +1,170 @@
+#experiment-solution-page {
+    background:$re-background-l2;
+
+    scrollbar-width: thin;
+    scrollbar-color: $re-scrollbar-color $re-background-l2;
+
+    ::-webkit-scrollbar {
+      width: 14px;
+      height: 14px;
+    }
+    ::-webkit-scrollbar-track {
+      background: $re-background-l2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: $re-scrollbar-color;
+      border-radius: 6px;
+      border: 3px solid $re-background-l2;
+    }
+
+    .info-panel {
+        .solution-info {
+            color:$re-foreground-color;
+        }
+
+        .tabs-and-panes {
+            .tabs {
+                .tab {
+                    background:$re-background-l1;
+                    border-color:rgba($re-border-color-l1, 0.8);
+                    &:after {
+                        background: $re-border-color-l1;
+                    }
+                }
+            }
+            .panes {
+                .pane {
+                    background:$re-background-l1;
+                    border:2px solid $re-border-color-l1;
+                }
+            }
+
+            &.selected-1>.tabs>.tab-1,
+            &.selected-2>.tabs>.tab-2 {
+                border-top-color:$re-border-color-l1;
+                border-left-color:$re-border-color-l1;
+                border-bottom-color:$re-border-color-l1;
+                color:$re-foreground-color;
+
+                &:after {
+                    display:none;
+                }
+            }
+        }
+
+        h2 {
+            color:$re-foreground-color;
+            border-bottom: 1px solid $re-border-color-l1;
+        }
+        p, li, table {
+            color:$re-text-color;
+
+            code {
+                border:1px solid $re-background-l3;
+                background:$re-background-l2;
+            }
+            a {
+                color:$re-foreground-color;
+                font-weight:$fw-semibold;
+                text-decoration:none;
+                border-bottom:1px solid $re-border-color-l1;
+            }
+        }
+        table {
+            td, th {
+                border: 1px solid $re-border-color-l1;
+            }
+            th {
+                border-bottom:2px solid $re-border-color-l1;
+            }
+        }
+        .pane-1 pre {
+            border:1px solid $re-background-l3;
+            background:$re-background-l2;
+        }
+    }
+    .gutter {
+        background:$re-background-l2;
+    }
+    .coding-panel {
+        .toolbar {
+            .toolbar-multiselect-item {
+                border:1px solid $re-border-color-l1;
+                background:$re-background-l1;
+                .label {
+                    background:$re-background-l3;
+                    color:$re-foreground-color
+                }
+                button {
+                    background:$re-background-l1;
+                    color:$re-foreground-color;
+                    border-left: 1px solid $re-border-color-l1;
+                    &[selected] {
+                        background:$re-foreground-color;
+                        color:$re-background-l1;
+                    }
+                }
+            }
+            .toolbar-shortcuts-btn {
+                border:1px solid $re-border-color-l1;
+                background:$re-background-l1;
+                color:$re-foreground-color;
+            }
+        }
+        .code-editor {
+            border:2px solid $re-border-color-l1;
+            border-radius:2px;
+        }
+    }
+
+    .test-run {
+        color: $re-foreground-color;
+        .run-status {
+            border-bottom:1px solid $re-border-color-l2;
+        }
+        .test-run-result {
+            .header {
+                .closed-icon,
+                .opened-icon {
+                    border: 2px solid $re-border-color-l1;
+                    background: $re-background-l2;
+                }
+            }
+            .info {
+                .part {
+                    border-left:1px solid $re-border-color-l2;
+                    i {
+                        background: $re-background-l1;
+                        border: 2px solid $re-border-color-l1;
+                    }
+                    h4, pre {
+                        border:1px solid $re-border-color-l2;
+                    }
+                    h4 {
+                        border-bottom:none;
+                    }
+                    pre {
+                        background: $re-background-l2;
+                    }
+                }
+            }
+        }
+    }
+
+    .submission-status,
+    .submission-cancel-confirmation {
+        .submission-status-spinner {
+             color: $re-border-color-l1;
+        }
+        .confirm-btn {
+            border:1px solid $color-2;
+            background-color:$color-2;
+            color:#fff;
+        }
+        .cancel-btn {
+             border:1px solid $re-border-color-l1;
+             background:$re-background-l1;
+             color: $re-text-color;
+         }
+     }
+}

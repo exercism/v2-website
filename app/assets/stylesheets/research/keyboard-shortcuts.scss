@@ -1,0 +1,32 @@
+@import 'variables';
+
+body.namespace-research {
+    .keyboard-shortcuts {
+      background-color: white;
+      padding: 30px;
+      color: #333;
+    }
+
+    .keyboard-shortcuts-content {
+      width: 500px;
+      padding: 0 20px;
+
+      > h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        font-weight: $fw-bold;
+      }
+
+      > table {
+        width: 100%;
+      }
+
+      table, td {
+        border: 1px solid black;
+      }
+
+      td {
+        padding: 10px;
+      }
+    }
+}

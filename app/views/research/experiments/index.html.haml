@@ -1,0 +1,41 @@
+#research-experiments
+  .research-header
+    .lo-container
+      .subtitle Manage the experiments you are participating in
+      %h1 Your research area
+
+  .lo-container
+    .content.pure-g
+      .pure-u-2-3.lhs
+        .experiments
+          -@experiments.each do |experiment|
+            .experiment
+              %h3 
+                = graphical_icon :circle, style: :solid
+                Live experiment
+              %h2= experiment.title
+              %p 
+                We are exploring how the order and depth in which someone learns programming languages in programming affects how they solve different problems.
+                We will use this learning to extrapolate how we can better teach new programming languages to people from different backgrounds.
+                We hope that people with a range of different experiences and backgrounds will take part, and that they will participate in languages that they barely know and languages they know well.
+              .researchers
+                %h4 In partnership with
+                =image "supporter-logos/chicago.jpg", "University of Chicago"
+                =image "supporter-logos/wisconsin.png", "University of Wisconsin-Madison"
+                =image "supporter-logos/sloan-black.png", "The Sloan Foundation"
+
+              .buttons
+                =link_to "Learn More", research_experiment_path(experiment), class: 'learn-more-btn pure-button'
+                -user_experiment = @user_experiments_by_ids[experiment.id]
+                -if user_experiment
+                  =link_to "Continue", research_user_experiment_path(user_experiment), class: "participate-btn pure-button"
+                -else
+                  =button_to "Participate", research_user_experiments_path(experiment_id: experiment), form_class: "participate-btn pure-button", method: :post
+
+        .coming-soon
+          %h2 More coming soon
+          %p We will be launching more experiments in the future. If you are a researcher and would like to discuss projects with us, please drop us an email at #{link_to "research@exercism.io", "mailto:research@exercism.io"}.
+      .rhs.pure-u-1-3
+        .introduction
+          %h2 Welcome to Exercism Research.
+          %p We have created Exercism Research as a space where we can work with world-class researchers to utilize the varying knowledge and experience of Exercism's community to answers questions regarding how people learn and develop programming skills throughout their careers.

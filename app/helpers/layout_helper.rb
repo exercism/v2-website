@@ -70,6 +70,16 @@ module LayoutHelper
     end
   end
 
+  def render_research_header
+    if devise_controller?
+      render "layouts/logged_out_research_header"
+    elsif user_signed_in?
+      render "layouts/logged_in_research_header"
+    else
+      render "layouts/logged_out_research_header"
+    end
+  end
+
   def render_cta_footer
     render "layouts/cta_footer"
   end

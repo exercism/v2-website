@@ -1,0 +1,12 @@
+.test-run
+  .run-status
+    #{test_run.num_passed_tests} passed,
+    #{test_run.num_failed_tests} failed,
+    #{test_run.num_skipped_tests} skipped
+
+  -test_run.tests_to_display.each.with_index do |test, idx|
+    = render partial: test, as: :test, locals: {test_idx: idx + 1}
+
+  = button_to "Submit exercise",
+    submit_research_experiment_solution_path(test_run.solution),
+    class: "pure-button pure-button-primary submit-exercise-button"

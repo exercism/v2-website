@@ -1,0 +1,27 @@
+#admin-test-runner
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+    %li= link_to "Test runners", admin_test_runners_path
+    %li= link_to @test_runner.language_slug, admin_test_runner_path(@test_runner)
+    %li= link_to "Version #{@version.slug}", admin_test_runner_version_path(@test_runner, @version)
+
+  .lo-container
+    %h1 Sample #{@submission.uuid.split("-").last}
+
+    -if @submission.test_run
+      %h2 Ops Status
+      #{@submission.test_run.ops_status}
+
+      %h2 Ops Message
+      #{@submission.test_run.ops_message}
+
+      %h2 Results
+      %pre
+        %code
+          =@submission.test_run.results
+
+    -else
+      No test run yet. Please hammer refresh at will.
+
+    .options
+      =link_to "Replay", replay_admin_test_runner_version_sample_path(@test_runner, @version, @submission.uuid.split('-').last), method: :post, class: 'pure-button'

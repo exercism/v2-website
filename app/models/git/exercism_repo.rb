@@ -33,6 +33,10 @@ class Git::ExercismRepo < Git::RepoBase
     read_config(head_commit)
   end
 
+  def editor_config
+    config[:online_editor].to_h
+  end
+
   def maintainer_config
     read_maintainer_config(head_commit)
   end

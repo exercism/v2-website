@@ -1,12 +1,43 @@
 FactoryBot.define do
-  factory :submission_test_result, class: 'SubmissionTestResults' do
+  factory :infrastructure_test_runner_version, class: 'Infrastructure::TestRunnerVersion' do
+    test_runner { create :infrastructure_test_runner }
+    slug { SecureRandom.uuid }
+  end
+
+  factory :infrastructure_test_runner, class: 'Infrastructure::TestRunner' do
+    language_slug { "ruby" }
+    timeout_ms { 2000 }
+    version_slug { SecureRandom.uuid }
+    num_processors { 3 }
+  end
+
+  factory :research_experiment, class: 'Research::Experiment' do
+    title { "Foobar" }
+    repo_url { "https://github.com/exercism/something" }
+  end
+
+  factory :research_experiment_solution, class: 'Research::ExperimentSolution' do
+    user { create :user }
+    experiment { create :research_experiment }
+    exercise { create(:exercise, :research, slug: "ruby-1-a") }
+    uuid { SecureRandom.uuid }
+    git_sha { Git::ExercismRepo.current_head(track.repo_url) }
+    git_slug { "ruby-1-a" }
+  end
+
+  factory :research_user_experiment, class: 'Research::UserExperiment' do
+    user { create :user }
+    experiment { create :research_experiment }
+  end
+
+  factory :submission_test_run do
     submission { create :submission }
-    ops_status { :no_test_runner }
+    ops_status { 0 }
   end
 
   factory :submission do
     uuid { SecureRandom.uuid }
-    solution { create :solution }
+    solution { create :research_experiment_solution }
     filenames { ["foo", "bar"] }
   end
 
@@ -172,6 +203,10 @@ FactoryBot.define do
     }}
     repo_url { "file://#{Rails.root}/test/fixtures/track" }
     median_wait_time { 30.hours }
+
+    trait :research do
+      repo_url { "file://#{Rails.root}/test/fixtures/research-track" }
+    end
   end
 
   factory :exercise do
@@ -181,6 +216,10 @@ FactoryBot.define do
     title { "Hello World" }
     core { false }
     position { 1 }
+
+    trait :research do
+      track { create(:track, :research) }
+    end
   end
 
   factory :user do

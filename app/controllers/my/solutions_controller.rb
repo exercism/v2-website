@@ -44,13 +44,6 @@ class My::SolutionsController < MyController
     end
   end
 
-  def solve
-    return redirect_to(action: :show) unless current_user.admin?
-
-    @exercise = @solution.exercise
-    @track = @exercise.track
-  end
-
   def walkthrough
     @walkthrough = RenderUserWalkthrough.(
       current_user,
@@ -125,10 +118,7 @@ class My::SolutionsController < MyController
   end
 
   def update_exercise
-    @solution.update!(
-      git_slug: @solution.exercise.slug,
-      git_sha: @solution.track_head
-    )
+    @solution.update_git_info!
     redirect_to [:my, @solution]
   end
 

@@ -1,0 +1,43 @@
+#admin-analyses
+  .lo-container
+    %h1 Analysers - Recent analyses
+
+    =form_tag({}, method: :get) do
+      =select_tag :track_id, options_for_select(@tracks.map{|t|[t.title, t.id]}, @track_id), include_blank: "Track"
+      =select_tag :ops_status, options_for_select(IterationAnalysis.distinct.pluck(:ops_status), @ops_status), include_blank: "Ops status"
+      =select_tag :analysis_status, options_for_select(IterationAnalysis.distinct.pluck(:analysis_status).compact, @analysis_status), include_blank: "Analysis status"
+      =button_tag "Filter", class: "pure-button"
+
+    %table
+      %tr
+        %th Id
+        %th Iteration Id
+        %th Analysed at
+        %th Language
+        %th Exercise
+        %th Ops Status
+        %th Analysis Status
+        %th.right # Comments
+        %th
+      -@analyses.each do |analysis|
+        -iteration = analysis.iteration
+        -solution = iteration.solution
+        -exercise = solution.exercise
+        -track = exercise.track
+        %tr
+          %td= analysis.id
+          %td= iteration.id
+          %td= analysis.created_at
+          %td= track.slug
+          %td= exercise.slug
+          %td
+            -if analysis.website_error.present?
+              %code errored
+            -else
+              %code= analysis.ops_status
+          %td
+            %code= analysis.analysis_status
+          %td.right= analysis.analysis_comments_data.try(&:size)
+          %td= link_to "View", admin_analysis_path(analysis)
+
+    =paginate(@analyses)

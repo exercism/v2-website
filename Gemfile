@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 6.0.0'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'mysql2'
 
 gem 'dalli'
@@ -15,6 +15,7 @@ gem 'omniauth-github'
 gem 'kaminari'
 gem 'friendly_id', github: 'norman/friendly_id', branch: 'master', ref: 'cdd5971f91c40e0c05e5afb498d2ec1b452ffb44'
 gem 'mandate'
+gem 'concurrent-ruby'
 
 gem 'haml-rails'
 gem 'jquery-rails'
@@ -34,6 +35,7 @@ gem 'rubyzip', require: false
 
 gem 'propono'
 gem 'aws-sdk-s3'
+gem 'aws-sdk-ecr'
 
 gem 'delayed_job_active_record'
 gem 'daemons'
@@ -53,6 +55,8 @@ gem 'twitter', require: false
 gem 'webpacker', '~> 4.0'
 
 gem 'redis'
+
+gem 'ansi-to-html', require: false
 
 group :production do
   #gem "skylight"

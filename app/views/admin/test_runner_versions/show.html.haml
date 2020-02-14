@@ -1,0 +1,52 @@
+#admin-test-runner
+  =breadcrumb_nav do
+    %li= link_to "Admin", admin_dashboard_path
+    %li= link_to "Test runners", admin_test_runners_path
+    %li= link_to @test_runner.language_slug, admin_test_runner_path(@test_runner)
+
+  .lo-container
+    %h1 Test Runner (#{@test_runner.language_slug}): #{@version.slug}
+
+    .field
+      %span Slug:
+      %span= @version.slug
+
+    .field
+      %span Status:
+      %span= @version.status.titleize
+
+    %h2 Options
+
+    -if @version.built?
+      =link_to "Deploy", deploy_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
+
+    -if @version.deployed?
+      =link_to "Mark as tested", tested_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button'
+
+    -if @version.tested?
+      =link_to "Promote to Live", promote_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to promote this to live?"}
+
+    -unless @version.live? || @version.retired?
+      =link_to "Retire", retire_admin_test_runner_version_path(@test_runner, @version), method: :patch, class: 'pure-button', data: {confirm: "Are you sure you want to retire?"}
+
+    %h2 Samples
+
+    %table
+      %tr
+        %th ID
+        %th Created At
+        %th Status
+        %th Options
+
+      -@samples.each do |sample|
+        %tr
+          %td= sample.uuid.split('-').last
+          %td= sample.created_at
+          %td
+            -if sample.test_run
+              =sample.test_run.ops_status
+            -else
+              Not yet responded
+          %td= link_to "View", admin_test_runner_version_sample_path(@test_runner, @version, sample.uuid.split('-').last), class: 'pure-button'
+
+    =link_to "Test new sample", new_admin_test_runner_version_sample_path(@test_runner, @version), class: 'pure-button'

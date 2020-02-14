@@ -8,11 +8,11 @@ require "capistrano/deploy"
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
-require 'capistrano/yarn'
 require 'capistrano/rails'
 require 'capistrano/rvm'
 require 'capistrano/bundler'
 require "capistrano/checks"
+require 'capistrano/yarn'
 require 'capistrano/rails/migrations'
 require 'capistrano/rails/assets'
 

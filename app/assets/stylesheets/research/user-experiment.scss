@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'mixins';
+
+#user-experiment {
+    p {
+        margin-bottom:20px;
+    }
+    .language {
+        display:block;
+        border-radius:4px;
+        padding:12px;
+        margin-bottom:10px;
+        text-decoration:none;
+        color:#333;
+
+        &:hover {
+            background:rgba($color-2, 0.03);
+        }
+        &.in-progress {
+            color:$color-2;
+            border:2px solid $color-2;
+            .status {
+            }
+        }
+        &.not-started {
+            border:1px solid #ccc;
+            .status {
+                color:#999;
+            }
+
+        }
+        h3 {
+            @include font-size(18, 18);
+            margin-bottom:5px;
+            font-weight:$fw-bold;
+        }
+        .status {
+            @include font-size(14, 14);
+        }
+        .pure-button {
+            width:120px;
+        }
+    }
+}
+
+
+

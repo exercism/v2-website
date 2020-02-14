@@ -216,13 +216,11 @@ class SolutionTest < ActiveSupport::TestCase
     track = create(:track)
     solution = create :solution, exercise: create(:exercise, track: track)
 
-    track.update(median_wait_time: 1.year)
-    refute track.accepting_new_students?
-    refute solution.reload.track_accepting_new_students?
+    track.stubs(accepting_new_students?: false)
+    refute solution.track_accepting_new_students?
 
-    track.update(median_wait_time: 1.day)
-    assert track.accepting_new_students?
-    assert solution.reload.track_accepting_new_students?
+    track.stubs(accepting_new_students?: true)
+    assert solution.track_accepting_new_students?
   end
 
   test "notifications are deleted when solution is deleted" do
@@ -232,5 +230,13 @@ class SolutionTest < ActiveSupport::TestCase
     solution.destroy
 
     refute Notification.exists?(notification.id)
+  end
+
+  test "update_git_info!" do
+    solution = create :solution, git_slug: "bar", git_sha: "foo"
+    solution.update_git_info!
+
+    assert_equal solution.exercise.slug, solution.git_slug
+    assert_equal solution.track_head, solution.git_sha
   end
 end

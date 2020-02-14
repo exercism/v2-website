@@ -7,10 +7,11 @@ class FontAwesomeIconWidget
     new(attrs.merge(graphical: false))
   end
 
-  def initialize(type:, label:, style:, fixed_width: false, graphical:)
-    @type = type
+  def initialize(type:, label:, style:, fixed_width: false, graphical:, extra_classes: "")
+    @type = Array(type)
     @label = label
     @style = style
+    @extra_classes = extra_classes
     @fixed_width = fixed_width
     @graphical = graphical
   end
@@ -20,7 +21,7 @@ class FontAwesomeIconWidget
   end
 
   private
-  attr_reader :type, :label, :style, :fixed_width, :graphical
+  attr_reader :type, :label, :style, :fixed_width, :graphical, :extra_classes
 
   def graphical?
     graphical
@@ -48,7 +49,9 @@ class FontAwesomeIconWidget
   end
 
   def html_class
-    [style_class, fixed_width_class, type_class].reject(&:blank?).join(" ")
+    fa_classes = [style_class, fixed_width_class, type_class].
+                   reject(&:blank?).join(" ")
+    "#{fa_classes} #{extra_classes}".strip
   end
 
   def style_class
@@ -73,6 +76,6 @@ class FontAwesomeIconWidget
   end
 
   def type_class
-    "fa-#{type}"
+    type.map { |type| "fa-#{type}" }
   end
 end

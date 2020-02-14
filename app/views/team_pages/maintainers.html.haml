@@ -12,7 +12,7 @@
     .lo-container
       %h2 Track Maintainers
       %p.subheading Our maintainers are the lynchpins of the language tracks and exercises on Exercism.
-      =cache ["pages/team/maintainers", @last_updated_at, @page] do
+      =cache ["pages/team/maintainers/unpaged", @last_updated_at] do
         .people
           -@maintainers.each do |maintainer|
             =link_to maintainer.link_url.present?? maintainer.link_url : "#", class: 'person' do
@@ -28,5 +28,3 @@
                     %p.bio= maintainer.bio
                   -else
                     .holding-text This maintainer has not added their bio yet.
-
-          =paginate(@maintainers)

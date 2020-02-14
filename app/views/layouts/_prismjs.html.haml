@@ -1,10 +1,13 @@
-= async_stylesheet_link_tag "#{prism_js_cdn}/themes/#{prism_js_theme}"
-= async_stylesheet_link_tag "#{prism_js_cdn}/plugins/line-numbers/prism-line-numbers.css"
-= async_stylesheet_link_tag "#{prism_js_cdn}/plugins/line-highlight/prism-line-highlight.css"
+- PrismJS::Plugin.stylesheets.each do |plugin|
+  = async_stylesheet_link_tag plugin.stylesheet
 
--content_for :js do
-  = javascript_include_tag "#{prism_js_cdn}/components/prism-core.js"
-  = javascript_include_tag "#{prism_js_cdn}/plugins/line-highlight/prism-line-highlight.js"
-  = javascript_include_tag "#{prism_js_cdn}/plugins/line-numbers/prism-line-numbers.js"
-  = javascript_include_tag "#{prism_js_cdn}/plugins/autoloader/prism-autoloader.js",
-    "data-autoloader-path" => "#{prism_js_cdn}/components"
+- PrismJS::Theme.all.each do |theme|
+  = async_stylesheet_link_tag theme.stylesheet,
+    disabled: theme.disabled?(current_user || Guest.new),
+    data: { theme: theme.name }
+
+- content_for :js do
+  - PrismJS::Component.all.each do |component|
+    = javascript_include_tag component.javascript
+  - PrismJS::Plugin.all.each do |plugin|
+    = javascript_include_tag plugin.javascript, plugin.params

@@ -30,9 +30,13 @@ class User < ApplicationRecord
   has_many :tracks, through: :user_tracks
   has_many :solutions, dependent: :destroy
   has_many :iterations, through: :solutions
+  has_many :submissions, through: :solutions
 
   has_many :team_solutions, dependent: :destroy
   has_many :team_iterations, through: :team_solutions, source: :iterations
+
+  has_many :research_experiments, dependent: :destroy, class_name: "Research::UserExperiment"
+  has_many :research_experiment_solutions, dependent: :destroy, class_name: "Research::ExperimentSolution"
 
   has_many :track_mentorships, dependent: :destroy
   has_many :mentored_tracks, through: :track_mentorships, source: :track
@@ -110,7 +114,9 @@ class User < ApplicationRecord
   def may_view_solution?(solution)
     return true if id == solution.user_id
 
-    if solution.team_solution?
+    if solution.research_experiment_solution?
+      return false
+    elsif solution.team_solution?
       return true if solution.team.members.include?(self)
     else
       return true if solution.published?
@@ -205,6 +211,31 @@ class User < ApplicationRecord
 
   def flipper_id
     id
+  end
+
+  def join_research!(time: Time.current)
+    update!(joined_research_at: time)
+  end
+
+  def joined_research?
+    joined_research_at.present?
+  end
+
+  def theme=(theme)
+    case theme.to_s
+    when "dark"
+      assign_attributes(dark_code_theme: true)
+    when "light"
+      assign_attributes(dark_code_theme: false)
+    end
+  end
+
+  def theme
+    if dark_code_theme?
+      :dark
+    else
+      :light
+    end
   end
 
   private
