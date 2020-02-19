@@ -33,6 +33,7 @@ module Research
         experiment: experiment
       ).
       includes(:exercise).
+      joins(:exercise).
       where('exercises.slug NOT LIKE "%-a"') # TODO - Remove for research launch
     end
 
