@@ -31,7 +31,9 @@ module Research
       ExperimentSolution.where(
         user: user,
         experiment: experiment
-      ).includes(:exercise)
+      ).
+      includes(:exercise).
+      where('exercises.slug NOT LIKE "%-a"') # TODO - Remove for research launch
     end
 
     def language_part(language, part)
