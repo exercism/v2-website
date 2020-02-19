@@ -1,0 +1,24 @@
+.icon
+  =hex_turquoise_track_icon(@solution.exercise.language_track, class: 'exercise-icon')
+  =graphical_image "tick-white.png", class: "tick"
+
+%h2 Well done
+%h3 You've completed #{@solution.prettified_slug}
+
+=form_with url: submit_research_experiment_solution_path, method: :post, data: {remote: false} do
+  .question How difficult did you find this problem?
+  .range
+    %input{type: "range", min: 1, max: 5, step: 1, name: "survey[difficulty_rating]"}
+    .options
+      .range-start Trival
+      .range-end Painful
+
+  =button_tag "Submit to researchers", class: 'pure-button js-disable-on-click'
+
+:javascript
+  $('input[type="range"]').rangeslider({polyfill: false});
+
+  setTimeout(function() {
+    $('#modal .icon img.exercise-icon').fadeOut(500)
+    $('#modal .icon img.tick').fadeIn(500)
+  }, 1000)

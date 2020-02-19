@@ -1,0 +1,78 @@
+@import 'variables';
+@import 'mixins';
+
+#modal.post_exercise_survey {
+    padding:30px 15px 50px 15px;
+    @include width-medium() {
+        padding:30px 50px;
+    }
+
+    .icon {
+        display:block;
+        width:100px;
+        height:100px;
+        padding:10px;
+        margin:0 auto 20px auto;
+        border-radius: 100%;
+        overflow:hidden;
+        background:$color-2;
+        //padding:35px 30px;
+        img {
+            display:block;
+            &.exercise-icon {
+                height:75px;
+                margin:2px auto;
+            }
+            &.tick {
+                display:block;
+                display:none;
+                height:32px;
+                margin-top:25px;
+                padding:0 21px;
+            }
+        }
+    }
+    h2 {
+        @include font-size(20, 20);
+        font-weight:$fw-bold;
+        color:#555;
+        margin-bottom:4px;
+        text-align:center;
+    }
+    h3 {
+        @include font-size(15, 15);
+        color:#555;
+        font-weight:$fw-semibold;
+        text-align:center;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
+    }
+    .question {
+        text-align:center;
+        color:#555;
+        @include font-size(15, 21);
+        margin-bottom:20px;
+        font-weight:$fw-semibold;
+    }
+    .range {
+        .options {
+            margin:15px 0 20px;
+            display:flex;
+            justify-content: space-between;
+            font-weight: $fw-semibold;
+        }
+    }
+    .pure-button {
+        background: $color-2;
+        @include font-size(15, 40);
+        padding: 0;
+        display:block;
+        width:280px;
+        max-width:100%;
+        word-wrap:normal;
+        text-align:center;
+        margin: 0 auto;
+    }
+}
+

@@ -34,6 +34,11 @@ module Research
       Research::ExerciseSlug.deconstruct(exercise.slug)[:language]
     end
 
+    def prettified_slug
+      parts = Research::ExerciseSlug.deconstruct(exercise.slug)
+      "#{Track.find_by_slug(parts[:language]).title} Part #{parts[:part]}"
+    end
+
     def boilerplate_files
       git_exercise.solution_files
     end

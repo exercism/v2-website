@@ -27,15 +27,19 @@ module Research
       @editor_config = editor_config
     end
 
+    def post_exercise_survey
+      @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
+      @exercise = @solution.exercise
+      render_modal("post_exercise_survey", "post_exercise_survey")
+    end
+
     def submit
       solution = Research::ExperimentSolution.find_by(uuid: params[:id])
+      solution.update!(difficulty_rating: params[:survey][:difficulty_rating])
 
       solution.submit!
 
-      redirect_to language_research_user_experiment_path(
-        solution.user_experiment,
-        solution.language_slug
-      )
+      redirect_to research_user_experiment_path(solution.user_experiment)
     end
 
     private

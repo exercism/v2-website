@@ -27,7 +27,12 @@
             .status {
                 color:#999;
             }
-
+        }
+        &.completed {
+            background:$color-2;
+            color:#fff;
+            .status {
+            }
         }
         h3 {
             @include font-size(18, 18);

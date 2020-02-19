@@ -1,4 +1,5 @@
 import 'selectize/dist/js/selectize.min.js';
+import 'rangeslider.js/dist/rangeslider.js';
 import '../src/libs/bootstrap-markdown.js';
 
 import '../src/changelog_admin/referenceable_search.js';

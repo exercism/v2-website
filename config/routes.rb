@@ -300,6 +300,7 @@ Rails.application.routes.draw do
       end
     end
     resources :experiment_solutions, only: [:show, :create] do
+      get :post_exercise_survey, on: :member
       post :submit, on: :member
     end
   end
