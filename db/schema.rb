@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_20_152641) do
+ActiveRecord::Schema.define(version: 2020_02_19_150933) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -397,6 +397,7 @@ ActiveRecord::Schema.define(version: 2019_12_20_152641) do
     t.datetime "finished_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "difficulty_rating"
     t.index ["exercise_id"], name: "fk_rails_1be696c295"
     t.index ["experiment_id"], name: "fk_rails_8f6bde7fee"
     t.index ["user_id", "experiment_id", "exercise_id"], name: "research_solutions_uniq", unique: true

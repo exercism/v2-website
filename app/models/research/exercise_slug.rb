@@ -7,8 +7,14 @@ module Research
     end
 
     def self.deconstruct(slug)
+      bits = slug.split("-")
+      exercise = bits.pop
+      part = bits.pop
+      language = bits.join('-').to_sym
       {
-        language: slug.split("-").tap{ |s| s.pop(2) }.join('-').to_sym
+        language: language,
+        part: part,
+        exericse: exercise
       }
     end
   end

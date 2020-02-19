@@ -23,8 +23,13 @@ module Research
       @languages_started ||= solutions.map(&:language_slug).uniq
     end
 
+    # TODO Change the 1 to 2 when doing both parts!
     def languages_completed
-      @languages_completed ||= solutions.select(&:finished?).group_by(&:language_slug).map{|slug, group|group.size == 2 ? slug : nil}.compact
+      @languages_completed ||= 
+        solutions.select(&:finished?).
+                  group_by(&:language_slug).
+                  map{|slug, group|group.size == 1 ? slug : nil}.
+                  compact
     end
 
     def solutions

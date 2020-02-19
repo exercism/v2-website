@@ -8,6 +8,7 @@
     "@rails/webpacker": "^4.0.7",
     "jquery": "^3.4.1",
     "purecss": "^0.6.2",
+    "rangeslider.js": "^2.3.3",
     "selectize": "^0.12.6",
     "split.js": "^1.5.11"
   },
@@ -20,7 +21,9 @@
     "roots": [
       "<rootDir>/app/javascript/tests"
     ],
-    "setupFiles": ["<rootDir>/app/javascript/tests/setup.js"],
+    "setupFiles": [
+      "<rootDir>/app/javascript/tests/setup.js"
+    ],
     "verbose": true,
     "testURL": "http://localhost",
     "moduleFileExtensions": [
@@ -38,7 +41,7 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     }
   },
-   "scripts": {
+  "scripts": {
     "test": "jest --config package.json"
   }
 }

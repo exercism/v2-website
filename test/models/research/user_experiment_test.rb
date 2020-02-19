@@ -41,7 +41,9 @@ module Research
       refute user_experiment.language_started?(:prolog)
     end
 
+    # TODO - unskip this when research goes into production
     test "solutions and lang_completed" do
+      skip
       user = create :user
       experiment = create :research_experiment
       user_experiment = create :research_user_experiment, experiment: experiment, user: user

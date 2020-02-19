@@ -10,7 +10,7 @@ class Research::UserSubmitsSolutionTest < Research::TestCase
                              user: user,
                              experiment: experiment)
     track = create(:track, :research, slug: "ruby")
-    exercise = create(:exercise, track: track, slug: "ruby-1-a")
+    exercise = create(:exercise, track: track, slug: "ruby-1-b")
     solution = create(:research_experiment_solution,
                       exercise: exercise,
                       user: user,
@@ -25,8 +25,13 @@ class Research::UserSubmitsSolutionTest < Research::TestCase
     visit research_experiment_solution_path(solution)
     find(:css, '.tab .fa-terminal').click
     click_button "Submit exercise"
+    click_button "Submit to researchers"
 
     assert_text "Completed"
+
+    assert solution.reload.finished?
+    assert_equal 3, solution.reload.difficulty_rating
+
     # This is currently not implement
     # assert_button "Start part 2"
   end
