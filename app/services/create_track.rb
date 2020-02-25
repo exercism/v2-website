@@ -22,6 +22,7 @@ class CreateTrack
     track = Track.create!(
       title: language,
       slug: track_slug,
+      syntax_highlighter_language: prism_language,
       syntax_highligher_language: prism_language,
       repo_url: repo_url,
       active: active,

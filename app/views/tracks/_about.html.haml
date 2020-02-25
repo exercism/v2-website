@@ -4,7 +4,7 @@
       %h2 About #{@track.title}
       .code-sample
         %pre
-          %code{class: "language-#{@track.syntax_highligher_language}"}
+          %code{class: "language-#{@track.syntax_highlighter_language}"}
             =@track.code_sample
       = raw @track.about
       = link_to "Join the #{@track.title} track", button_url, method: :post, class: "pure-button"
