@@ -75,7 +75,7 @@ class AceEditor {
   }
 
   setValue(value) {
-    this.editor.setValue(value);
+    this.editor.setValue(value, -1);
   }
 
   _setup() {
