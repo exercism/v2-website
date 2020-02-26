@@ -52,7 +52,17 @@ class CodeEditorManager {
       this.keybindingSelect.load();
       this.wrappingSelect.load();
       this.onSetup(editor);
-    }
+    };
+
+    this.editor.beforeSave(() => {
+      this.element.find('.js-code-editor-status').text('Saving...');
+    });
+
+    this.editor.afterSave(() => {
+      setTimeout(() => {
+        this.element.find('.js-code-editor-status').text('Changes saved');
+      }, 300)
+    });
   }
 
   _setupToolbar() {

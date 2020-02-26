@@ -7,13 +7,16 @@ class CodeEditor {
     this.filename = element.data('filename')
     this.file = new File(this.filename, this.element.text());
     this.config = element.data('config')
+    this.beforeSaveHandlers = []
+    this.afterSaveHandlers = []
 
     this._setup();
   }
 
   _setup() {
     this.editor = new AceEditor(this.element, this.config, this.filename);
-    this.editor.onChanged = this.save.bind(this);
+    this.change(this.save.bind(this));
+
     this.editor.onSetup = () => {
       this.load();
 
@@ -21,8 +24,30 @@ class CodeEditor {
     }
   }
 
+  change(handler) {
+    this.editor.change(handler);
+  }
+
+  beforeSave(handler) {
+    this.beforeSaveHandlers.push(handler);
+  };
+
+  afterSave(handler) {
+    this.afterSaveHandlers.push(handler);
+  };
+
   save() {
+    this.onBeforeSave();
     this.file.saveLocalChange(this.editor.getValue());
+    this.onAfterSave();
+  }
+
+  onBeforeSave() {
+    this.beforeSaveHandlers.forEach((handler) => handler());
+  }
+
+  onAfterSave() {
+    this.afterSaveHandlers.forEach((handler) => handler());
   }
 
   load() {

@@ -5,6 +5,7 @@ class AceEditor {
     this.element = element
     this.config = new AceEditorConfig(config)
     this.filename = filename
+    this.changeHandlers = []
 
     $(this._setup.bind(this));
   }
@@ -83,9 +84,17 @@ class AceEditor {
 
     this.editor.setShowPrintMargin(false);
     this.editor.session.setOptions(this.config);
-    this.editor.getSession().on('change', this.onChanged);
+    this.editor.getSession().on('change', this.onChange.bind(this));
 
     this.onSetup(this);
+  }
+
+  change(handler) {
+    this.changeHandlers.push(handler);
+  }
+
+  onChange() {
+    this.changeHandlers.forEach((handler) => handler());
   }
 }
 
