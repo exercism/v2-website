@@ -91,7 +91,7 @@ group :test do
   gem 'mocha'
   gem 'rails-controller-testing'
   gem 'timecop'
-  gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 4.0'
   gem 'webmock'
 end
 
