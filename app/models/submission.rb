@@ -3,6 +3,7 @@ class Submission < ApplicationRecord
   has_one :test_run, class_name: "SubmissionTestRun"
 
   delegate :tests_info, to: :solution
+  delegate :pass?, to: :test_run
 
   scope :tested, -> { where(tested: true) }
   scope :successfully_tested, -> {
