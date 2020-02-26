@@ -25,6 +25,7 @@ module Research
       @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
       @exercise = @solution.exercise
       @editor_config = editor_config
+      @syntax_highlighter_language = syntax_highlighter_language
     end
 
     def post_exercise_survey
@@ -44,10 +45,20 @@ module Research
 
     private
 
+    def track
+      @track ||= Track.find_by(slug: @solution.language_slug)
+    end
+
     def editor_config
-      return {} unless track = Track.find_by(slug: @solution.language_slug)
+      return {} unless track
 
       track.editor_config
+    end
+
+    def syntax_highlighter_language
+      return unless track
+
+      track.syntax_highlighter_language
     end
   end
 end

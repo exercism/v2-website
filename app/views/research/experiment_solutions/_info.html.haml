@@ -9,7 +9,7 @@
       .instructions
         = raw solution.instructions
 
-    .pane.pane-2.js-submission-panel
+    .pane.pane-2.js-submission-panel{data: { syntax_highlighter_language: syntax_highlighter_language } }
       = render "research/submissions/submission",
         submission: solution.submissions.successfully_tested.last,
         as: :status

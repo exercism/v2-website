@@ -1,12 +1,17 @@
 import SubmissionStatusView from './submission_status_view';
 import TimeoutTimer from './timeout_timer';
 import Collapse from './collapse';
+import CodeBlock from './code-block';
 
 class Submission {
   constructor(element) {
     this.element = element;
+    this.syntaxHighlighterLanguage = element.data('syntax-highlighter-language');
     this.timer = new TimeoutTimer(30, () => { this.setStatus('timeout'); });
     this.initialHtml = element.html();
+    this.html = element.html();
+
+    this.render();
   }
 
   update(params) {
@@ -41,6 +46,11 @@ class Submission {
 
     this.element.find('.test-run-result').each(function () {
       new Collapse($(this));
+    });
+
+    const self = this;
+    this.element.find('[data-behavior=code-block]').each(function () {
+      new CodeBlock($(this), self.syntaxHighlighterLanguage);
     });
 
     if (this.onRender) { this.onRender(); }

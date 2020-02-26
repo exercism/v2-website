@@ -7,7 +7,9 @@
           =graphical_icon(:"chevron-right", style: :light)
           .experiment #{@solution.experiment.title}
         .status In Progress
-      = render "info", solution: @solution
+      = render "info",
+        solution: @solution,
+        syntax_highlighter_language: @syntax_highlighter_language
     .coding-panel
       = render "coding", solution: @solution, editor_config: @editor_config
 

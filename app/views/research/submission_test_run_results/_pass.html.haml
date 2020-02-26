@@ -11,13 +11,13 @@
         =graphical_icon "brackets-curly", style: :solid
         %h4 Code Run:
         %pre
-          %code= test.cmd
+          %code{ data: { behavior: "code-block" } }= test.cmd
 
       .part
         =graphical_icon "check", style: :solid
         %h4 Expected
         %pre
-          %code= test.expected
+          %code{ data: { behavior: "code-block" } }= test.expected
 
     - if test.output_html.present?
       .part
