@@ -11,7 +11,7 @@
         =graphical_icon "brackets-curly", style: :solid
         %h4 Code Run:
         %pre
-          %code= test.cmd
+          %code{ data: { behavior: "code-block" } }= test.cmd
 
       .part
         =graphical_icon "bug", style: :solid

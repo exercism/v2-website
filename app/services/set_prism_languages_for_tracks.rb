@@ -12,7 +12,7 @@ class SetPrismLanguagesForTracks
         end
       end
 
-      track.update(syntax_highligher_language: prism_language)
+      track.update(syntax_highlighter_language: prism_language)
     end
   end
 end

@@ -196,6 +196,7 @@ FactoryBot.define do
   factory :track do
     title { "Ruby" }
     slug { "ruby-#{SecureRandom.uuid}" }
+    syntax_highlighter_language { slug }
     syntax_highligher_language { slug }
     introduction { "Master the Ruby language" }
     code_sample {%q{
