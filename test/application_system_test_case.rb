@@ -2,6 +2,7 @@ require "test_helper"
 require "support/selectize_helpers"
 require "support/selenium_helpers"
 require "support/bullet_helpers"
+require "support/webmock"
 require "webmock/minitest"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
@@ -19,7 +20,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   Git::RepoBase.clear!
-  WebMock.disable_net_connect!(allow_localhost: true)
 
   protected
 
