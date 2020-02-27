@@ -50,5 +50,28 @@ module Research
 
       assert_equal({ "subdir/ruby_1_a.rb" => "TODO\n" }, solution.latest_files)
     end
+
+    test "#submit! records submission time" do
+      solution = build(:research_experiment_solution)
+      submission = build(:submission)
+      submission.stubs(:pass?).returns(true)
+      solution.submissions = [submission]
+
+      solution.submit!(time: Date.new(2016, 12, 25))
+
+      solution.reload
+      assert_equal Date.new(2016, 12, 25), solution.finished_at
+    end
+
+    test "#submit! raises an error when last submission hasn't passed" do
+      solution = build(:research_experiment_solution)
+      submission = build(:submission)
+      submission.stubs(:pass?).returns(false)
+      solution.submissions = [submission]
+
+      assert_raises ExperimentSolution::NotAllowedToSubmitError do
+        solution.submit!
+      end
+    end
   end
 end

@@ -6,6 +6,7 @@ import InfoPanel from './info_panel';
 import SubmitButton from './submit_button';
 import Submission from './submission';
 import PageThemeSelect from './page_theme_select';
+import WebsocketsCompatibilityMessage from './websockets_compatibility_message';
 
 class ExperimentSolution {
   constructor(element) {
@@ -16,6 +17,7 @@ class ExperimentSolution {
   }
 
   _setup() {
+    this._checkWebsocketsCompatibility();
     this._setupSubmitButton();
     this._setupShortcuts();
     this._setupInfoPanel();
@@ -24,6 +26,13 @@ class ExperimentSolution {
     this._setupThemeSelector();
     this._setupChannel();
     this._setupSplit();
+  }
+
+  _checkWebsocketsCompatibility() {
+    if(!('WebSocket' in window) && !('MozWebSocket' in window)) {
+      const modal = new WebsocketsCompatibilityMessage();
+      modal.render();
+    }
   }
 
   _setupSubmitButton() {

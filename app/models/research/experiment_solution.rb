@@ -1,5 +1,8 @@
 module Research
   class ExperimentSolution < ApplicationRecord
+    class NotAllowedToSubmitError < StandardError
+    end
+
     include SolutionBase
 
     belongs_to :user
@@ -56,6 +59,8 @@ module Research
     end
 
     def submit!(time: Time.current)
+      raise NotAllowedToSubmitError unless submissions.last.pass?
+
       update!(finished_at: time)
     end
 
