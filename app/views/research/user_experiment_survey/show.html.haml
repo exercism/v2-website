@@ -1,0 +1,20 @@
+#research-survey
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      .dots
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+
+      %h1 Research Survey
+      %p In order to carry out our research we need to understand a little about your background. This survey should take no more than 5 minutes to complete. It is split into three parts:
+      %ul
+        %li Your programming background (required)
+        %li The programming languages you know (required)
+        %li Demographic information (optional)
+      %p Thank you for helping us with our research!
+
+      =link_to "Start survey", history_research_user_experiment_survey_path, class: 'pure-button js-disable-on-click'

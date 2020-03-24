@@ -45,13 +45,20 @@ body.controller-research-pages.action footer {
             h2 {
                 @include header-font;
                 font-weight:600;
-                @include font-size(26, 26);
+                @include font-size(26, 31);
                 margin-bottom:10px;
+                max-width:500px;
             }
             p {
                 color:#333;
                 @include font-size(16, 22);
-                max-width:450px;
+                max-width:480px;
+                margin-bottom:10px;
+                a {
+                    font-weight:$fw-semibold;
+                }
+            }
+            .btns {
                 margin-bottom:20px;
             }
             .pure-button {
@@ -59,12 +66,12 @@ body.controller-research-pages.action footer {
                 border-radius:2px;
                 width:100%;
                 margin-bottom:15px;
-                @include width-small() {
+                @include width-medium() {
                     width:auto;
                     margin-bottom:0;
                 }
                 &.sign-up-button {
-                    background:$color-3;
+                    background:$color-2;
                     color:#fff;
                     margin-right:5px;
                     padding:15px 70px;

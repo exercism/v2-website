@@ -32,6 +32,11 @@ body.namespace-research {
     footer {
         margin-top:0;
     }
+    &.devise {
+        footer {
+            margin-top:100px;
+        }
+    }
 
     .lo-container {
         max-width: 1240px;

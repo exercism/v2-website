@@ -24,8 +24,9 @@ module Research
     def show
       @solution = current_user.research_experiment_solutions.find_by_uuid(params[:id])
       @exercise = @solution.exercise
-      @editor_config = editor_config
-      @syntax_highlighter_language = syntax_highlighter_language
+      @track = Track.find_by(slug: @solution.language_slug)
+      @editor_config = @track.try(&:editor_config)
+      @syntax_highlighter_language = @track.try(&:syntax_highlighter_language)
     end
 
     def post_exercise_survey
@@ -40,25 +41,12 @@ module Research
 
       solution.submit!
 
-      redirect_to research_user_experiment_path(solution.user_experiment)
-    end
-
-    private
-
-    def track
-      @track ||= Track.find_by(slug: @solution.language_slug)
-    end
-
-    def editor_config
-      return {} unless track
-
-      track.editor_config
-    end
-
-    def syntax_highlighter_language
-      return unless track
-
-      track.syntax_highlighter_language
+      user_experiment = solution.user_experiment
+      if user_experiment.survey_completed?
+        redirect_to research_user_experiment_path(user_experiment)
+      else
+        redirect_to research_user_experiment_survey_path(user_experiment)
+      end
     end
   end
 end

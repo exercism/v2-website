@@ -27,7 +27,7 @@ class Research::UserSubmitsSolutionTest < Research::TestCase
     click_button "Submit exercise"
     click_button "Submit to researchers"
 
-    assert_text "Completed"
+    assert_text "Start survey"
 
     assert solution.reload.finished?
     assert_equal 3, solution.reload.difficulty_rating

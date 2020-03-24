@@ -1,0 +1,25 @@
+#research-survey
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      .dots
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+
+      %h1 Your languages
+      .intro
+        %p We're interested in understanding the languages you are proficient in, how much experience you have in eech, and which one you would call your "go-to" language.
+      =form_with url: set_languages_research_user_experiment_survey_path, method: :patch, data: {remote: false} do |f|
+        .question-section
+          .question-number 1.
+          .question Select all the languages that you would at some point have been comfortable writing a basic program in:
+        .languages-selection
+          -@languages.each do |track|
+            =label_tag "survey[languages][#{track.slug}]", class: 'language' do
+              =check_box_tag "survey[languages][#{track.slug}]", 1, @user_experiment.survey.dig('languages', track.slug).to_i == 1
+              .title= track.title
+
+        =button_tag "Continue", class: 'pure-button js-disable-on-click'

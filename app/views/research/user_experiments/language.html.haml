@@ -17,8 +17,8 @@
       /.status.completed
       /  Completed
       /  = graphical_icon "check-circle", style: :regular
-      %p This experiment has two parts. We will email you about Part 2 once it launches. You can solve Part 1 now.
-      %p For Part 1, you will be solving a short programming problem in #{@language_track.title}. We are interested in how your programming background and experience affects how you choose to shape your code. There is no right or wrong solution - just lots of tradeoffs, so do what feels good to you.
+      %p This experiment has two parts. You can solve Part 1 now. We will email you about Part 2 once it launches.
+      %p In Part 1 you will be solving a programming problem. It has been design to only take a 10-15 minutes for proficient #{@language_track.title} developers, but will take a bit longer if you're less familiar with #{@language_track.title}. There is no right or wrong solution - just lots of tradeoffs, so do what feels good to you. Enjoy!
       =render "language_part", part: 1, solution: @part1_solution, status: part1_status
 
       /

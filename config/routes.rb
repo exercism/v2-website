@@ -122,7 +122,20 @@ Rails.application.routes.draw do
   namespace :research, path: '', constraints: { subdomain: 'research' } do
     resource :join, only: [:show, :create]
     resources :experiments, only: [:index, :show]
-    resources :user_experiments, only: [:create, :show]
+    resources :user_experiments, only: [:create, :show] do
+      resource :survey, only: [:show], controller: "user_experiment_survey" do
+        get :show
+        get :history
+        get :languages
+        get :languages_2
+        get :demographics
+        get :thanks
+        patch :set_history
+        patch :set_languages
+        patch :set_languages_2
+        patch :set_demographics
+      end
+    end
 
     devise_scope :user do
       post "/users/sign_in" => "sessions#create"

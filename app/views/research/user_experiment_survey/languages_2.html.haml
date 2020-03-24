@@ -1,0 +1,70 @@
+#research-survey
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      .dots
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+
+      %h1 Your languages
+      .intro
+        %p We're interested in understanding the languages you are proficient in, how much experience you have in each, and which one you would call your "go-to" language.
+      =form_with url: set_languages_2_research_user_experiment_survey_path, method: :patch, data: {remote: false} do |f|
+        .question-section
+          .question-number 2.
+          .question How comfortable are (or were) you in each language?
+        .language-ranges
+          .options
+            .range-start Barely
+            .range-end Very
+
+          -@languages.each do |track|
+            .lang
+              .title= track.title
+              .range
+                %input{type: "range", min: 1, max: 100, step: 1, name: "survey[difficulty_rating][#{track.slug}]", value: @user_experiment.survey.dig('difficulty_rating', track.slug)}
+
+        .question-section
+          .question-number 3.
+          .question
+            In roughly what order did you learn each language?
+            %em (Drag and drop. Earliest language at the top)
+
+        -learning_order = @user_experiment.survey['learning_order'].to_s.split(',')
+        =hidden_field_tag "survey[learning_order]", '', class: 'survey_learning_order'
+        .language-order
+          -@languages.sort_by{|l|learning_order.index(l.slug)}.each.with_index do |track, idx|
+            .lang{data: {id: track.slug}}
+              .order= idx + 1
+              %span.title= track.title
+
+        .question-section
+          .question-number 4.
+          .question Finally, which language is your "go-to" language.
+        .languages-selection
+          -@languages.each do |track|
+            =label_tag "survey_go_to_language_#{track.slug}", class: 'language' do
+              =radio_button_tag "survey[go_to_language]", track.slug, @user_experiment.survey['go_to_language'] == track.slug
+              .title= track.title
+
+        =button_tag "Continue", class: 'pure-button js-disable-on-click'
+
+-content_for :js do
+  :javascript
+    $('input[type="range"]').rangeslider({polyfill: false});
+
+    var $langsElem = $('.language-order')
+    var $langs = $langsElem.children().toArray()
+    var sortable = Sortable.create($langsElem[0], {
+      onChange: function(e) {
+        $langsElem.children().toArray().forEach(function($lang, idx) {
+          $($lang).children(".order").html((idx + 1))
+        })
+      },
+      onEnd: function(e) {
+        $('.survey_learning_order').val(sortable.toArray().join(","));
+      }
+    });

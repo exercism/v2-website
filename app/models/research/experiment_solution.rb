@@ -67,5 +67,9 @@ module Research
     def user_experiment
       UserExperiment.find_by(user: user, experiment: experiment)
     end
+
+    def pre_survey_completed?
+      false
+    end
   end
 end

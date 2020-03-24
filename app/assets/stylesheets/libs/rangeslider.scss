@@ -9,7 +9,7 @@
 
 .rangeslider {
     background: #eee;
-    box-shadow: 0 0 0 1px rgba($color-2, 0.5);
+    box-shadow: 0 0 0 1px rgba($color-2, 0.2);
     position: relative;
 }
 
@@ -49,8 +49,8 @@
     box-shadow: 0 0 0 2px $color-2;
     cursor: pointer;
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     position: absolute;
     background-color:#fff;
     border-radius: 2px;
@@ -58,8 +58,8 @@
 .rangeslider__handle:after {
     content: "";
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     margin: auto;
     position: absolute;
     top: 0;
@@ -71,15 +71,15 @@
 
 }
 .rangeslider__handle:active, .rangeslider--active .rangeslider__handle {
-    background-color:lighten($color-2, 60%);
+    box-shadow:0 0 2px 2px #009cab;
 }
 .rangeslider--horizontal .rangeslider__handle {
-    top: -10px;
+    top: -7px;
     touch-action: pan-y;
     -ms-touch-action: pan-y;
 }
 .rangeslider--vertical .rangeslider__handle {
-    left: -10px;
+    left: -7px;
     touch-action: pan-x;
     -ms-touch-action: pan-x;
 }

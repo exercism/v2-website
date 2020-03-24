@@ -7,9 +7,10 @@
         Live experiment
       %h1= @experiment.title
       %p
-        We are exploring how the order and depth in which someone learns programming languages in programming affects how they solve different problems.
+        We are exploring how the order and depth in which someone learns programming languages affects how they solve different problems.
         We will use this learning to extrapolate how we can better teach new programming languages to people from different backgrounds.
-        We hope that people with a range of different experiences and backgrounds will take part, and that they will participate in languages that they barely know and languages they know well.
+      %p
+        We hope that you will participate in both languages that you barely know and languages that you know well.
       -if @user_experiment
         =link_to "Continue", research_user_experiment_path(@user_experiment), class: "pure-button participate-button"
       -else

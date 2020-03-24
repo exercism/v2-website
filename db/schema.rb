@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_005918) do
+ActiveRecord::Schema.define(version: 2020_03_18_194204) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -417,6 +417,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_005918) do
     t.bigint "experiment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.json "survey"
     t.index ["experiment_id"], name: "fk_rails_809b029224"
     t.index ["user_id", "experiment_id"], name: "index_research_user_experiments_on_user_id_and_experiment_id", unique: true
   end
