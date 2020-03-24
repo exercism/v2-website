@@ -9,6 +9,8 @@ class Research::UserSolvesSolutionTest < Research::TestCase
     user = create(:user, :onboarded, joined_research_at: 2.days.ago)
     solution = create(:research_experiment_solution, user: user)
     submission = create(:submission, tested: true, solution: solution)
+    create(:research_user_experiment, user: user, experiment: solution.experiment)
+    create :track, slug: solution.language_slug
     create(:submission_test_run,
            submission: submission,
            ops_status: 200,
@@ -39,6 +41,8 @@ class Research::UserSolvesSolutionTest < Research::TestCase
   test "user views code" do
     user = create(:user, :onboarded, joined_research_at: 2.days.ago)
     solution = create(:research_experiment_solution, user: user)
+    create(:research_user_experiment, user: user, experiment: solution.experiment)
+    create :track, slug: solution.language_slug
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)

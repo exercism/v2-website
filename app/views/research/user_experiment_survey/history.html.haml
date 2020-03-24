@@ -22,7 +22,9 @@
         .question-section
           .question-number 2.
           .multipart-question
-            .statement Which of these statements describe you?
+            .statement 
+              Which of these statements describe you?
+              %em (Tick all that apply)
             =research_multipart_checkbox(:job, "I write software for a living ")
             =research_multipart_checkbox(:job, "I write software to do research")
             =research_multipart_checkbox(:job, "I use code to solve problems at work")

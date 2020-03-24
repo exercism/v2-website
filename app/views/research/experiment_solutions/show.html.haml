@@ -1,17 +1,17 @@
-#experiment-solution-page
-  .experiment-solution{ data: { id: @solution.id }, class: "status-#{@solution.submissions.tested.last&.ops_status&.to_s}" }
-    .info-panel
-      .solution-info
-        .exercise
-          %h1 #{@exercise.title}
-          =graphical_icon(:"chevron-right", style: :light)
-          .experiment #{@solution.experiment.title}
-        .status In Progress
-      = render "info",
-        solution: @solution,
-        syntax_highlighter_language: @syntax_highlighter_language
-    .coding-panel
-      = render "coding", solution: @solution, editor_config: @editor_config
+#experiment-solution-page.js-experiment-solution.experiment-solution{ data: { id: @solution.id }, class: "status-#{@solution.submissions.tested.last&.ops_status&.to_s}" }
+  .js-code-editor-manager
+    .top-panel
+      =link_to research_user_experiment_path(@solution.user_experiment), class: 'back-btn' do
+        =graphical_icon :"arrow-left", style: :regular
+      %h1 #{@track.title}
+      = render "top", solution: @solution, editor_config: @editor_config
+    .panels
+      .info-panel
+        = render "info",
+          solution: @solution,
+          syntax_highlighter_language: @syntax_highlighter_language
+      .coding-panel
+        = render "coding", solution: @solution, editor_config: @editor_config
 
 - content_for :js do
   :javascript

@@ -7,6 +7,8 @@ class Research::UserUpdatesThemeTest < Research::TestCase
                   joined_research_at: 2.days.ago,
                   dark_code_theme: false)
     solution = create(:research_experiment_solution, user: user)
+    create(:research_user_experiment, user: user, experiment: solution.experiment)
+    create :track, slug: solution.language_slug
 
     sign_in!(user)
     visit research_experiment_solution_path(solution)
