@@ -221,12 +221,12 @@
     }
 
     .pure-button {
+        width:100%;
         background: $color-2;
-        @include font-size(15, 40);
+        @include font-size(18, 50);
+        font-weight:$fw-semibold;
         padding: 0;
         display:block;
-        width:280px;
-        max-width:100%;
         word-wrap:normal;
         text-align:center;
         margin: 20px auto 0 auto;

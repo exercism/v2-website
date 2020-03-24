@@ -4,9 +4,15 @@
       =graphical_image "research/choose-icon.png", class: "header-img"
 
       .subtitle= @experiment.title
+
+      -if @user_experiment.languages_completed.present? && !@user_experiment.survey_completed?
+        .survey
+          %h1 Complete the survey
+          %p This short survey looks at your programming background. It should take under 5 minutes to complete and is required for your solutions to be analyzed. Thanks!
+          =link_to "Continue survey", research_user_experiment_survey_path(@user_experiment), class: 'pure-button js-disable-on-click participate-button'
+
       %h1 Choose a language
       %p We hope you will try as many languages as possible. It doesn't matter how well you know a language - this might even be your first time trying it. The more data the better!
-
       .languages
         -@tracks.each do |track|
           -if @user_experiment.language_completed?(track.slug)
