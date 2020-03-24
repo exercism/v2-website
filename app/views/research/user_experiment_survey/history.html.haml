@@ -1,0 +1,87 @@
+#research-survey
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      .dots
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot"
+
+      %h1 Your Background
+      =form_with url: set_history_research_user_experiment_survey_path, method: :patch, data: {remote: false} do |f|
+        .intro
+          %p In these first questions we learn to understand a little more about your programming background, and the systems you have experience of working on. Please answer them all.
+
+        .question-section
+          .question-number 1.
+          .question How old were you when you first started to program?
+          =number_field_tag 'survey[initial_programming_age]', @user_experiment.survey['initial_programming_age'], required: true
+
+        .question-section
+          .question-number 2.
+          .multipart-question
+            .statement Which of these statements describe you?
+            =research_multipart_checkbox(:job, "I write software for a living ")
+            =research_multipart_checkbox(:job, "I write software to do research")
+            =research_multipart_checkbox(:job, "I use code to solve problems at work")
+            =research_multipart_checkbox(:job, "I write software as part of my studies/classes")
+            =research_multipart_checkbox(:job, "I am learning to code")
+            =research_multipart_checkbox(:job, "I code as a hobby")
+
+        .question-section
+          .question-number 3.
+          .multipart-question
+            .statement
+              How did you first learn to program?
+              %em (Tick all that apply)
+            =research_multipart_checkbox(:learn, "Programming course in school")
+            =research_multipart_checkbox(:learn, "Programming course in university")
+            =research_multipart_checkbox(:learn, "Massive online open class (MOOC)")
+            =research_multipart_checkbox(:learn, "Independent study using books")
+            =research_multipart_checkbox(:learn, "Independent study using online material")
+            =research_multipart_checkbox(:learn, "Coding bootcamp")
+            =research_multipart_checkbox(:learn, "On-the-job training")
+            =research_multipart_checkbox(:learn, "Taught by family or friends")
+
+        .question-section
+          .question-number 4.
+          .multipart-question
+            .statement
+              What types of projects do you normally work on?
+            =research_multipart_checkbox(:projects, "Web development (frontend)")
+            =research_multipart_checkbox(:projects, "Web development (backend)")
+            =research_multipart_checkbox(:projects, "Mobile development")
+            =research_multipart_checkbox(:projects, "Desktop development")
+            =research_multipart_checkbox(:projects, "Video game development")
+            =research_multipart_checkbox(:projects, "Embedded systems")
+            =research_multipart_checkbox(:projects, "Data science")
+            =research_multipart_checkbox(:projects, "Tools and enterprise")
+            =research_multipart_checkbox(:projects, "Cloud development")
+            =research_multipart_checkbox(:projects, "Dev Ops")
+
+        .question-section
+          .question-number 5.
+          .multipart-question
+            .statement
+              When thinking about the largest codebase you've signficantly contributed to on, how many other people worked to it?
+            =research_multipart_radio(:codebase_size, "Just me")
+            =research_multipart_radio(:codebase_size, "Me and one other")
+            =research_multipart_radio(:codebase_size, "3 - 5 people")
+            =research_multipart_radio(:codebase_size, "6 - 14 people")
+            =research_multipart_radio(:codebase_size, "15 - 20 people")
+            =research_multipart_radio(:codebase_size, "21 - 99 people")
+            =research_multipart_radio(:codebase_size, "100+ people")
+
+        .question-section
+          .question-number 6.
+          .multipart-question
+            .statement
+              Do you use a version control systems when you code?
+            =research_multipart_checkbox(:vcs, "Yes, Git")
+            =research_multipart_checkbox(:vcs, "Yes, Subversion")
+            =research_multipart_checkbox(:vcs, "Yes, Another system")
+            =research_multipart_checkbox(:vcs, "No, I don't use a version control system")
+
+        =button_tag "Continue", class: 'pure-button js-disable-on-click'

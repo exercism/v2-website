@@ -1,0 +1,14 @@
+#research-survey
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      .dots
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+
+      %h1 Thank you!
+      %p Thanks for completing the survey! You can now continue solving exercises in other languages.
+      =link_to "Continue", research_user_experiment_path(@user_experiment), class: 'pure-button js-disable-on-click'

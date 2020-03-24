@@ -1,0 +1,34 @@
+#research-survey
+  %section.summary-section.lo-research-centralised-section
+    .lo-research-floating-box
+      =graphical_image "research/choose-icon.png", class: "header-img"
+
+      .subtitle= @experiment.title
+      .dots
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+        =graphical_icon :circle, style: :solid, extra_classes: "dot filled"
+
+      %h1 Demographic Information
+      =form_with url: set_demographics_research_user_experiment_survey_path, method: :patch, data: {remote: false} do |f|
+        .intro
+          %p
+            This demographic information will be used to remove varience caused by variables that do not directly answer our questions about programming background affecting decisions. Your age will also be used to help calculate what learning tools have been available since you started programming.
+          %p
+            %strong This information is optional. Leave the boxes blank if you would prefer not to answer.
+
+        .question-section.age-question
+          .question-number 1.
+          .question How old are you?
+          =number_field_tag 'survey[age]', @user_experiment.survey['age']
+
+        .question-section
+          .question-number 2.
+          .question With which gender do you most identify?
+          =text_field_tag 'survey[gender]', @user_experiment.survey['gender']
+
+        =button_tag "Submit survey to reseachers", class: 'pure-button js-disable-on-click'
+
+-content_for :js do
+  :javascript
+    $('input[type="range"]').rangeslider({polyfill: false});

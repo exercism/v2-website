@@ -25,7 +25,7 @@ module Research
 
     # TODO Change the 1 to 2 when doing both parts!
     def languages_completed
-      @languages_completed ||= 
+      @languages_completed ||=
         solutions.select(&:finished?).
                   group_by(&:language_slug).
                   map{|slug, group|group.size == 1 ? slug : nil}.
@@ -46,6 +46,21 @@ module Research
       solutions.
         by_language_part(language_slug: language, part: part).
         first
+    end
+
+    def update_survey!(answers)
+      update(survey: (survey || {}).merge(answers))
+    end
+
+    def survey
+      super || {}
+    end
+
+    def survey_completed?
+      ["codebase_size", "difficulty_rating", "go_to_language", "initial_programming_age",
+       "job", "languages", "learn", "learning_order", "projects", "vcs"].all? do |key|
+        survey.keys.include?(key)
+      end
     end
   end
 end

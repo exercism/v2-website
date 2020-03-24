@@ -10,6 +10,7 @@
     "purecss": "^0.6.2",
     "rangeslider.js": "^2.3.3",
     "selectize": "^0.12.6",
+    "sortablejs": "^1.10.2",
     "split.js": "^1.5.11"
   },
   "devDependencies": {

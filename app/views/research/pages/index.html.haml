@@ -9,11 +9,16 @@
             %span exercism
             |&nbsp;research
 
-          %h2 Working with leading researchers to understand how we develop programming skills
-          %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          %p
-            Exercism is a
-            %strong not-for-profit
-            organisation.
-          =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
-          =link_to "Log in", new_user_session_path, class: "pure-button languages-button"
+          %h2 Working with leading researchers to understand how we develop programming skills.
+          %p We are contributing to the world's knowledge about how people learn and use programming skills. We're using this knowledge to improve Exercism in order to provide opportunity for people of all backgrounds by helping them develop their programming skills through practice and mentorship. 
+          %p Please join in and help us!
+          .btns
+            =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
+            =link_to "Log in", new_user_session_path, class: "pure-button languages-button"
+
+          %p.nfp
+            Exercism is an 
+            =link_to about_page_url, target: "_blank" do
+              independent
+              not-for-profit
+              organisation.
