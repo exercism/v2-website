@@ -1,32 +1,66 @@
 #experiment-solution-page {
-    background:$re-background-l2;
-
     scrollbar-width: thin;
-    scrollbar-color: $re-scrollbar-color $re-background-l2;
+    scrollbar-color: $re-scrollbar-background $re-scrollbar-color;
 
     ::-webkit-scrollbar {
       width: 14px;
       height: 14px;
     }
     ::-webkit-scrollbar-track {
-      background: $re-background-l2;
+      background: $re-scrollbar-background;
+      padding:1px;
     }
     ::-webkit-scrollbar-thumb {
       background-color: $re-scrollbar-color;
-      border-radius: 6px;
-      border: 3px solid $re-background-l2;
+      border-radius: 0px;
+      //border: 3px solid $re-color-1;
+    }
+
+    .top-panel {
+        background: $re-toolbar-bg-color;
+        border-bottom-color:$re-color-1;
+
+        .back-btn {
+            color:$re-text-color;
+        }
+        h1 {
+            color:$re-text-color;
+        }
+        .toolbar {
+            .toolbar-multiselect-item {
+                background:$re-toolbar-bg-color;
+                .label {
+                    background:$re-toolbar-bg-color;
+                    color:$re-toolbar-btn-unselected-color;
+                }
+                button {
+                    background:$re-toolbar-bg-color;
+                    color:$re-toolbar-btn-unselected-color;
+                    border: 1px solid $re-toolbar-btn-unselected-border-color;
+                    &[selected] {
+                        background:$re-toolbar-btn-selected-bg-color;
+                        border:1px solid $re-toolbar-btn-selected-border-color;
+                        color:$re-toolbar-btn-selected-color;
+                        z-index:1;
+                    }
+                }
+            }
+            .toolbar-shortcuts-btn {
+                border:1px solid $re-toolbar-btn-unselected-border-color;
+                background:$re-toolbar-bg-color;
+                color:$re-toolbar-btn-selected-color;
+            }
+        }
     }
 
     .info-panel {
-        .solution-info {
-            color:$re-foreground-color;
-        }
-
+        border-right:3px solid $re-bg-color;
         .tabs-and-panes {
             .tabs {
+                background:$re-tabs-bg-color;
+                border-right:1px solid $re-tabs-bg-color;
                 .tab {
-                    background:$re-background-l1;
-                    border-color:rgba($re-border-color-l1, 0.8);
+                    border-bottom:1px solid $re-tabs-border-color;
                     &:after {
                         background: $re-border-color-l1;
                     }
@@ -34,17 +68,14 @@
             }
             .panes {
                 .pane {
-                    background:$re-background-l1;
-                    border:2px solid $re-border-color-l1;
+                    background:$re-instructions-bg-color;
+                    color:$re-text-color;
                 }
             }
 
             &.selected-1>.tabs>.tab-1,
             &.selected-2>.tabs>.tab-2 {
-                border-top-color:$re-border-color-l1;
-                border-left-color:$re-border-color-l1;
-                border-bottom-color:$re-border-color-l1;
-                color:$re-foreground-color;
+                color:$re-text-highlight-color;
 
                 &:after {
                     display:none;
@@ -53,18 +84,20 @@
         }
 
         h2 {
-            color:$re-foreground-color;
-            border-bottom: 1px solid $re-border-color-l1;
+            background:$re-instructions-header-bg-color;
+            border-top:1px solid $re-instructions-header-border-color;
+            border-bottom:1px solid $re-instructions-header-border-color;
+            color:$re-text-color;
         }
         p, li, table {
             color:$re-text-color;
 
             code {
-                border:1px solid $re-background-l3;
-                background:$re-background-l2;
+                border:1px solid $re-inline-code-border-color;
+                background:$re-inline-code-bg-color;
             }
             a {
-                color:$re-foreground-color;
+                color:$re-text-highlight-color;
                 font-weight:$fw-semibold;
                 text-decoration:none;
                 border-bottom:1px solid $re-border-color-l1;
@@ -79,72 +112,59 @@
             }
         }
         .pane-1 pre {
-            border:1px solid $re-background-l3;
-            background:$re-background-l2;
+            border:1px solid $re-inline-code-border-color;
+            background:$re-inline-code-bg-color;
         }
     }
     .gutter {
-        background:$re-background-l2;
+        background:$re-bg-color;
     }
+
     .coding-panel {
-        .toolbar {
-            .toolbar-multiselect-item {
-                border:1px solid $re-border-color-l1;
-                background:$re-background-l1;
-                .label {
-                    background:$re-background-l3;
-                    color:$re-foreground-color
-                }
-                button {
-                    background:$re-background-l1;
-                    color:$re-foreground-color;
-                    border-left: 1px solid $re-border-color-l1;
-                    &[selected] {
-                        background:$re-foreground-color;
-                        color:$re-background-l1;
-                    }
-                }
-            }
-            .toolbar-shortcuts-btn {
-                border:1px solid $re-border-color-l1;
-                background:$re-background-l1;
-                color:$re-foreground-color;
-            }
+    }
+
+    .bottom-toolbar {
+        border-top:3px solid $re-bg-color;
+        background:$re-bottom-bar-bg-colour;
+
+        .revert-btn {
+            background:$re-bottom-bar-bg-colour;
+            border:1px solid $re-bottom-bar-colour;
+            color:$re-bottom-bar-colour;
         }
-        .code-editor {
-            border:2px solid $re-border-color-l1;
-            border-radius:2px;
+        .editor-status {
+            color: $re-text-color;
         }
     }
 
     .test-run {
-        color: $re-foreground-color;
+        color: $re-text-color;
         .run-status {
-            border-bottom:1px solid $re-border-color-l2;
+            border-bottom:1px solid $re-test-run-header-border-color;
         }
         .test-run-result {
             .header {
                 .closed-icon,
                 .opened-icon {
                     border: 2px solid $re-border-color-l1;
-                    background: $re-background-l2;
+                    background: $re-inline-code-bg-color;
                 }
             }
             .info {
                 .part {
-                    border-left:1px solid $re-border-color-l2;
+                    border-left:1px solid $re-test-run-header-border-color;
                     i {
                         background: $re-background-l1;
                         border: 2px solid $re-border-color-l1;
                     }
                     h4, pre {
-                        border:1px solid $re-border-color-l2;
+                        border:1px solid $re-test-run-header-border-color;
                     }
                     h4 {
                         border-bottom:none;
                     }
                     pre {
-                        background: $re-background-l2;
+                        background: $re-inline-code-bg-color;
                     }
                 }
             }
@@ -163,7 +183,7 @@
         }
         .cancel-btn {
              border:1px solid $re-border-color-l1;
-             background:$re-background-l1;
+             background:transparent;
              color: $re-text-color;
          }
      }

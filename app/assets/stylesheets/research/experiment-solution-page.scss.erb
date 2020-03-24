@@ -1,16 +1,40 @@
 @import 'mixins';
 @import 'variables';
 
+$re-color-1: #000;
+$re-color-2: #111111;
+$re-color-2: #272727;
+$re-color-3: #303030;
+$re-color-4: #3D3D3D;
+$re-color-5: #4B4B4B;
+
+$re-bg-color: $re-color-1;
+$re-toolbar-bg-color: $re-color-3; // Buttons are transparent
+$re-toolbar-btn-selected-bg-color: #1F3D40;
+$re-toolbar-btn-selected-border-color: $color-2;
+$re-toolbar-btn-selected-color: #fff;
+$re-toolbar-btn-unselected-color: #BABABA;
+$re-toolbar-btn-unselected-border-color: #646464;
+$re-tabs-bg-color: $re-color-5;
+$re-tabs-border-color: #646464;
+$re-instructions-header-bg-color: #2C3637;
+$re-instructions-header-border-color: $re-color-5;
+$re-instructions-bg-color: $re-color-3;
+$re-text-color: #F2F2F2;
+$re-text-highlight-color: #fff;
+$re-bottom-bar-bg-colour: $re-instructions-bg-color;
+$re-bottom-bar-colour: #ddd;
+$re-editor-bg-color:$re-color-2;
+$re-scrollbar-background: $re-color-5;
+$re-scrollbar-color: $re-color-1;
+$re-inline-code-bg-color: $re-color-1;
+$re-inline-code-border-color: $re-color-2;
+$re-test-run-header-border-color: $re-color-5;
+
 body.namespace-research {
     &.prism-dark  {
-        $re-foreground-color:#fff;
-        $re-text-color:#fafafa;
-        $re-background-l1: #222;
-        $re-background-l2: #333;
-        $re-background-l3: #3a3a3a;
-        $re-scrollbar-color: #777;
-        $re-border-color-l1:#777;
-        $re-border-color-l2:#666;
+        $re-background-l1: red;
+        $re-border-color-l1:yellow;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
@@ -24,6 +48,7 @@ body.namespace-research {
         $re-scrollbar-color: #ccc;
         $re-border-color-l1:#ddd;
         $re-border-color-l2:#ccc;
+        $re-border-color-l3:#fff;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
@@ -33,18 +58,74 @@ body.namespace-research {
     }
 
     header {
-        border-bottom:1px solid #555;
-        .lo-container {
-            padding:0 50px;
-        }
+        display:none;
     }
 
     .experiment-solution {
-        height: calc(100vh - 50px);
-        display:flex;
+        .top-panel {
+            padding:10px 10px;
+            border-bottom:4px solid;
+            display:flex;
+            justify-content: space-between;
+            .back-btn {
+                i {
+                    margin-right:5px;
+                    @include font-size(16, 26);
+                    margin-right:10px;
+                }
+            }
+            h1 {
+                @include font-size(18, 26);
+                font-weight:$fw-semibold;
+                flex-grow:1;
+            }
 
-        @include width-small() {
+            .toolbar {
+                display:flex;
+                .toolbar-item {
+                    height:26px;
+                    &, * {
+                        @include font-size(13, 24);
+                    }
+                }
+
+                .toolbar-multiselect-item {
+                    display:flex;
+                    margin-right:10px;
+                    .label {
+                        padding:0 10px;
+                        display:block;
+                        @include font-size(13, 24);
+                    }
+                    button {
+                        @include font-size(13, 24);
+                        display:block;
+                        padding:0 10px;
+                        border-radius:0;
+                        z-index:0;
+                        &:nth-child(n+1) {
+                          margin-left:-1px;
+                        }
+                        &[selected] {
+                            z-index:1;
+                        }
+                    }
+                }
+                .toolbar-shortcuts-btn {
+                    padding:0 10px;
+                    i {
+                        margin-right:5px;
+                    }
+                }
+            }
+        }
+        .panels {
             height: calc(100vh - 50px);
+            display:flex;
+
+            @include width-small() {
+                height: calc(100vh - 50px);
+            }
         }
 
         &.status-pending {
@@ -54,13 +135,16 @@ body.namespace-research {
                     .tab-1:after { background:orange !important; }
 
                     &.selected-1 {
+                        .tab { border-color:orange !important; }
                         .tab-2 {
-                            border-color:rgba(orange, 0.5) !important;
                             background:rgba(orange, 0.1) !important;
                         }
                     }
                     &.selected-2 {
-                        .tab-2 { border-color:orange !important; }
+                        .tab { border-color:orange !important; }
+                        .tab-2 {
+                            background:rgba(orange, 0.1) !important;
+                        }
                     }
                 }
             }
@@ -114,50 +198,6 @@ body.namespace-research {
                 border:2px solid orange;
             }
         }
-        .toolbar {
-            .toolbar-item {
-                height:26px;
-                &, * {
-                    @include font-size(13, 24);
-                }
-            }
-
-            .toolbar-multiselect-item {
-                display:flex;
-                .label {
-                    padding:0 10px;
-                    display:block;
-                    @include font-size(13, 24);
-                }
-                button {
-                    @include font-size(13, 24);
-                    display:block;
-                    padding:0 10px;
-                    border-radius:0;
-                }
-            }
-            .toolbar-shortcuts-btn {
-                padding:0 10px;
-                margin-bottom:10px;
-                margin-right:10px;
-            }
-        }
-        .toolbar-1 {
-            flex-grow:1;
-            display:flex;
-            justify-content: flex-end;
-            padding-top:15px;
-        }
-        .toolbar-2 {
-            flex-grow:1;
-            display:flex;
-            justify-content: flex-start;
-            margin-bottom:15px;
-            margin-top:40px;
-            &>:first-child {
-                margin-right:10px;
-            }
-        }
 
         .environment {
             display: flex;
@@ -169,158 +209,146 @@ body.namespace-research {
     .coding-panel {
         display: flex;
         flex-direction: column;
-        padding-right:20px;
-        padding-bottom:15px;
         min-width:400px;
         height: 100%;
 
         .bottom-toolbar {
-            margin-top:15px;
             display:flex;
             justify-content: space-between;
+            align-items:center;
+            padding:10px;
 
             .revert-btn {
-                @include font-size(15, 40);
+                @include font-size(15, 34);
+                padding:0 20px;
                 text-decoration:underline;
-                font-weight:$fw-medium;
+                font-weight:$fw-regular;
+                text-decoration:none;
+            }
+            .editor-status {
+                text-align:right;
+                margin-right:15px;
+                flex-grow:1;
             }
             .submit-code-btn {
                 background-color: $color-2;
+                color: #fff;
                 padding:0 20px;
-                @include font-size(15, 40);
+                @include font-size(15, 34);
                 align-self: flex-end;
+                i {
+                    @include font-size(21, 29);
+                    margin-right:5px;
+                    vertical-align:middle;
+                }
             }
         }
-
     }
 
     .gutter {
         cursor:col-resize;
+        flex-shrink: 0;
     }
 
     .info-panel {
-        padding: 20px 20px;
-        height: calc(100% - 15px);
+        height: 100%;
         min-width:400px;
-
-        .solution-info {
-            margin-bottom:15px;
-            .exercise {
-                height:22px;
-                overflow:hidden;
-                margin-bottom:5px;
-                h1 {
-                    display:inline-block;
-                    @include font-size(20, 20);
-                    font-weight:$fw-bold;
-                }
-                i {
-                    @include font-size(14, 20);
-                    margin:0 10px;
-                }
-                .experiment {
-                    @include font-size(14, 20);
-                    display:inline-block;
-                }
-            }
-            .status {
-                background:$color-2;
-                @include font-size(13, 28);
-                color:#fff;
-                font-weight:$fw-bold;
-                display:inline-block;
-                padding:0 10px;
-            }
-        }
 
         .tabs-and-panes {
             display:flex;
-            height:calc(100% - 50px);
+            height: 100%;
 
             .tabs {
+                margin:0;
                 padding:0;
-                margin:15px 0 0 0;
                 border:none;
                 z-index:1;
 
                 .tab {
+                    border:none;
                     display:block;
                     padding:0;
-                    margin:0 0 5px 0;
+                    margin:0 0 0px 0;
                     text-align:center;
                     width:30px;
-                    height: 40px;
-                    line-height: 40px;
+                    height: 45px;
+                    line-height: 45px;
 
-                    border-width: 2px 0 2px 2px;
-                    border-radius:5px 0 0 5px;
                     position: relative;
 
-                    &:after {
+                    /*&:after {
                         content: " ";
                         width: 2px;
                         height: 42px;
-                        right: 0px;
+                        left: 0px;
                         top: -2px;
                         position: absolute;
                         z-index: 2;
-                    }
+                    }*/
                 }
             }
 
             .panes {
                 max-width: calc(100% - 20px);
                 flex-grow: 1;
-                margin-left:-2px;
                 .pane {
-                    padding:20px;
-                    border-radius:2px;
+                    @include font-size(15, 20);
 
                     overflow: auto;
                     height: 100%;
+
                 }
             }
         }
 
-        h2 {
-            @include font-size(16, 16);
-            font-weight: $fw-semibold;
-            padding-bottom:10px;
-            margin-bottom: 10px;
-            margin-top:30px;
+        .instructions {
+            &>* {
+                margin-left:30px;
+                margin-right:30px;
+            }
+            h2 {
+                @include font-size(16, 16);
+                font-weight: $fw-semibold;
+                margin:30px 0 10px 0;
+                padding:10px 30px;
 
-            &:first-child {
-                margin-top:0;
+                &:first-child {
+                    margin-top:0;
+                    border-top:0;
+                }
+            }
+
+            p, li {
+                @include font-size(15, 21);
+                margin-bottom: 10px;
+
+                code {
+                    @include code-font;
+                    @include font-size(14, 20);
+                    padding:2px 2px;
+                }
+            }
+            table {
+                width:100%;
+                margin-bottom:20px;
+                td, th {
+                    text-align:left;
+                    padding: 5px;
+                }
+                th {
+                }
+            }
+            pre {
+                margin-bottom: 10px;
+
+                * {
+                    @include code-font;
+                    @include font-size(14, 20);
+                }
             }
         }
-
-        p, li {
-            @include font-size(15, 21);
-            margin-bottom: 10px;
-
-            code {
-                @include code-font;
-                font-size:13px;
-                @include font-size(13, 21);
-                padding:2px 2px;
-            }
-        }
-        table {
-            width:100%;
-            margin-bottom:20px;
-            td, th {
-                text-align:left;
-                padding: 5px;
-            }
-            th {
-            }
-        }
-        pre {
-            margin: 0 0 10px 0;
-
-            * {
-                font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
-            }
+        .pane-2 {
+            padding:20px;
         }
     }
 
@@ -370,11 +398,11 @@ body.namespace-research {
                     padding-top:4px;
                     @include font-size(14, 17);
                     strong {
-                        color:red; 
-                        font-weight:$fw-semibold; 
+                        color:red;
+                        font-weight:$fw-semibold;
                     }
                 }
-                .closed-icon, 
+                .closed-icon,
                 .opened-icon {
                     text-align:center;
                     font-size: 10px;
@@ -414,7 +442,7 @@ body.namespace-research {
                         font-weight:$fw-semibold;
                     }
                     pre {
-                        @include font-size(13, 17);
+                        @include font-size(14, 20);
                         margin:0;
                     }
                 }

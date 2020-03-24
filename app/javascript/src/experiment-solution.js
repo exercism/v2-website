@@ -178,4 +178,4 @@ class ExperimentSolution {
 
 export default ExperimentSolution;
 
-$(".experiment-solution").each(function() { new ExperimentSolution($(this)); });
+$(".js-experiment-solution").each(function() { new ExperimentSolution($(this)); });

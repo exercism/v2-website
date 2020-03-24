@@ -5,6 +5,7 @@ class CodeEditorManager {
   constructor(element, onSetup) {
     this.element = element
     this.onSetup = onSetup;
+    console.log(element)
 
     this._setup();
   }

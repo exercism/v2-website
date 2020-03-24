@@ -1,7 +1,7 @@
 @import 'mixins';
 @import 'variables';
 
-body.namespace-research {
+#experiment-solution-page {
     .submission-status,
     .submission-cancel-confirmation {
         text-align: center;
@@ -13,7 +13,7 @@ body.namespace-research {
         }
 
         .submission-status-title {
-            @include font-size(18, 18);
+            @include font-size(20, 20);
             margin-bottom: 10px;
             font-weight: $fw-semibold;
         }
@@ -46,8 +46,7 @@ body.namespace-research {
         > .submission-status-status {
             width: 60%;
             margin: auto;
-            line-height: 1.5;
-            font-size: 16px;
+            @include font-size(15, 21);
             margin-bottom: 15px;
             font-weight: $fw-regular;
         }
