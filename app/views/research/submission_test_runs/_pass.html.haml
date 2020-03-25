@@ -1,49 +1,18 @@
-<div class="test-run">
-<div class="run-status">
-0 passed,
-1 failed,
-6 skipped
-</div>
-<div class="test-run-result fail open">
-<div class="header">
-<i aria-label="Click to expand" class="fas fa-chevron-right closed-icon js-collapse-trigger" aria-hidden="true"></i>
-<i aria-label="Click to close" class="fas fa-chevron-down opened-icon js-collapse-trigger" aria-hidden="true"></i>
-<h3>
-<strong>Failed:</strong>
-Only empty queue is queue 1
-</h3>
-</div>
-<div class="info">
-<div class="part">
-<i aria-hidden="true" class="fas fa-brackets-curly"></i>
-<h4>Code Run:</h4>
-<pre class="  language-csharp"><code data-behavior="code-block" class="  language-csharp">Store<span class="token punctuation">.</span><span class="token function">QueueWithMinimalWaitingTime</span><span class="token punctuation">(</span>customersInQueue1<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> customersInQueue2<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> customersInQueue3<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span></code></pre>
-</div>
-<div class="part">
-<i aria-hidden="true" class="fas fa-bug"></i>
-<h4>Test Failure</h4>
-<pre><code>Please implement the Store.QueueWithMinimalWaitingTime method</code></pre>
-</div>
-</div>
-</div>
+.test-run
+  .run-status
+    #{test_run.num_passed_tests} passed,
+    #{test_run.num_failed_tests} failed,
+    #{test_run.num_skipped_tests} skipped
 
-</div>
--#
-  .test-run
-    .run-status
-      #{test_run.num_passed_tests} passed,
-      #{test_run.num_failed_tests} failed,
-      #{test_run.num_skipped_tests} skipped
+  -test_run.tests_to_display.each.with_index do |test, idx|
+    = render partial: test, as: :test, locals: {test_idx: idx + 1}
 
-    -test_run.tests_to_display.each.with_index do |test, idx|
-      = render partial: test, as: :test, locals: {test_idx: idx + 1}
-
-    .submit-exercise-section
-      %h3 Congratulations!
-      %p Your solution has passed all the tests. You can continue to refine it or submit it to our researchers for analysis. 
-      %p Thank you for your help!
-      = button_to "Submit exercise",
-        post_exercise_survey_research_experiment_solution_path(test_run.solution),
-        method: :get,
-        remote: true,
-        class: "pure-button pure-button-primary submit-exercise-button"
+  .submit-exercise-section
+    %h3 Congratulations!
+    %p Your solution has passed all the tests. You can continue to refine it or submit it to our researchers for analysis. 
+    %p Thank you for your help!
+    = button_to "Submit exercise",
+      post_exercise_survey_research_experiment_solution_path(test_run.solution),
+      method: :get,
+      remote: true,
+      class: "pure-button pure-button-primary submit-exercise-button"

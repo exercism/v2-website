@@ -140,6 +140,13 @@
             background:$re-instructions-header-bg-color;
             color:$re-text-color;
         }
+        .test-run-error {
+            pre {
+                border:1px solid $re-inline-code-border-color;
+                background:$re-inline-code-bg-color;
+            }
+        }
+
         .test-run-result {
             .header {
                 .closed-icon,

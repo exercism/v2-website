@@ -1,5 +1,8 @@
 .test-run
-  %p We got the following error message when we ran your code:
+  .run-status An error occurred
 
-  %pre
-    %code= test_run.message
+  .test-run-error
+    %p We got the following error message when we ran your code:
+
+    %pre
+      %code= test_run.message

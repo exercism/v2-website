@@ -366,16 +366,23 @@ body.namespace-research {
     .test-result-focus {
         animation: focus 2s;
     }
-
+ 
     .test-run {
         .run-status {
             @include font-size(15, 15);
             font-weight: $fw-semibold;
             margin:0 0 10px 0;
             padding:10px 20px;
+            text-align:center;
         }
         .test-run-result {
             padding:10px 20px;
+        }
+        .test-run-error {
+            padding:10px 20px;
+            pre {
+                padding:10px;
+            }
         }
         .submit-exercise-section {
             margin-top:10px;
