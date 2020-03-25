@@ -87,7 +87,13 @@ class ExperimentSolution {
     Split(['.info-panel', '.coding-panel'], {
       sizes: [50, 50],
       gutterSize: 10,
-      split: 'vertical'
+      split: 'vertical',
+      elementStyle: (dimension, size, gutterSize) => ({
+        'flex-basis': `calc(${size}% - ${gutterSize}px)`,
+      }),
+      gutterStyle: (dimension, gutterSize) => ({
+        'flex-basis':  `${gutterSize}px`,
+      })
     })
   }
 

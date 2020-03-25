@@ -1,54 +1,61 @@
 @import 'mixins';
 @import 'variables';
 
-$re-color-1: #000;
-$re-color-2: #111111;
-$re-color-2: #272727;
-$re-color-3: #303030;
-$re-color-4: #3D3D3D;
-$re-color-5: #4B4B4B;
-
-$re-bg-color: $re-color-1;
-$re-toolbar-bg-color: $re-color-3; // Buttons are transparent
-$re-toolbar-btn-selected-bg-color: #1F3D40;
-$re-toolbar-btn-selected-border-color: $color-2;
-$re-toolbar-btn-selected-color: #fff;
-$re-toolbar-btn-unselected-color: #BABABA;
-$re-toolbar-btn-unselected-border-color: #646464;
-$re-tabs-bg-color: $re-color-5;
-$re-tabs-border-color: #646464;
-$re-instructions-header-bg-color: #2C3637;
-$re-instructions-header-border-color: $re-color-5;
-$re-instructions-bg-color: $re-color-3;
-$re-text-color: #F2F2F2;
-$re-text-highlight-color: #fff;
-$re-bottom-bar-bg-colour: $re-instructions-bg-color;
-$re-bottom-bar-colour: #ddd;
-$re-editor-bg-color:$re-color-2;
-$re-scrollbar-background: $re-color-5;
-$re-scrollbar-color: $re-color-1;
-$re-inline-code-bg-color: $re-color-1;
-$re-inline-code-border-color: $re-color-2;
-$re-test-run-header-border-color: $re-color-5;
+$re-red: #D0021B;
+$re-orange: #F5A623;
+$re-green: #009C59;
 
 body.namespace-research {
     &.prism-dark  {
-        $re-background-l1: red;
-        $re-border-color-l1:yellow;
+        $re-bg-color: #000;
+        $re-toolbar-bg-color: #303030;
+        $re-toolbar-btn-selected-bg-color: #1F3D40;
+        $re-toolbar-btn-selected-border-color: $color-2;
+        $re-toolbar-btn-selected-color: #fff;
+        $re-toolbar-btn-unselected-color: #BABABA;
+        $re-toolbar-btn-unselected-border-color: #707070;
+        $re-tabs-bg-color: #3c3d3c;
+        $re-tabs-border-color: #646464;
+        $re-tabs-unselected-color: #aaa;
+        $re-tabs-selected-color: #fff;
+        $re-instructions-header-bg-color: #2D4C50;
+        $re-instructions-bg-color: #2f302f;
+        $re-text-color: #F2F2F2;
+        $re-text-highlight-color: #fff;
+        $re-bottom-bar-bg-colour: $re-instructions-bg-color;
+        $re-bottom-bar-colour: #ddd;
+        $re-editor-bg-color:#272727;
+        $re-scrollbar-color: #6D6D6D;
+        $re-inline-code-bg-color: #111;
+        $re-inline-code-border-color: #272727;
+        $re-test-run-header-border-color: #4B4B4B;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
 
     &:not(.prism-dark)  {
-        $re-foreground-color:#222;
-        $re-text-color:#2a2a2a;
-        $re-background-l1: #fff;
-        $re-background-l2: #fafafa;
-        $re-background-l3: #eaeaea;
-        $re-scrollbar-color: #ccc;
-        $re-border-color-l1:#ddd;
-        $re-border-color-l2:#ccc;
-        $re-border-color-l3:#fff;
+        $re-bg-color: #fff;
+        $re-toolbar-bg-color: #F0F0F0;
+        $re-toolbar-btn-selected-bg-color: #E0C2BF;
+        $re-toolbar-btn-selected-border-color: $color-2;
+        $re-toolbar-btn-selected-color: #000;
+        $re-toolbar-btn-unselected-color: #454545;
+        $re-toolbar-btn-unselected-border-color: #8F8F8F;
+        $re-tabs-bg-color: #C3C2C3; 
+        $re-tabs-border-color: #9B9B9B;
+        $re-tabs-unselected-color: #777;
+        $re-tabs-selected-color: #000;
+        $re-instructions-header-bg-color: #D2B3AF;
+        $re-instructions-bg-color: #f0f0f0;
+        $re-text-color: #111;
+        $re-text-highlight-color: #000;
+        $re-bottom-bar-bg-colour: $re-instructions-bg-color;
+        $re-bottom-bar-colour: #222222;
+        $re-editor-bg-color:#D8D8D8;
+        $re-scrollbar-color: #929292;
+        $re-inline-code-bg-color: #eeeeee;
+        $re-inline-code-border-color: #D8D8D8;
+        $re-test-run-header-border-color: #B4B4B4; 
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
@@ -84,6 +91,7 @@ body.namespace-research {
                 display:flex;
                 .toolbar-item {
                     height:26px;
+                    margin-left:20px;
                     &, * {
                         @include font-size(13, 24);
                     }
@@ -91,11 +99,11 @@ body.namespace-research {
 
                 .toolbar-multiselect-item {
                     display:flex;
-                    margin-right:10px;
                     .label {
-                        padding:0 10px;
                         display:block;
-                        @include font-size(13, 24);
+                        @include font-size(13, 26);
+                        font-weight:$fw-semibold;
+                        margin:0 6px 0 0;
                     }
                     button {
                         @include font-size(13, 24);
@@ -103,6 +111,12 @@ body.namespace-research {
                         padding:0 10px;
                         border-radius:0;
                         z-index:0;
+                        &:first-of-type {
+                            border-radius:4px 0 0 4px;
+                        }
+                        &:last-child {
+                            border-radius:0 4px 4px 0;
+                        }
                         &:nth-child(n+1) {
                           margin-left:-1px;
                         }
@@ -113,6 +127,7 @@ body.namespace-research {
                 }
                 .toolbar-shortcuts-btn {
                     padding:0 10px;
+                    border-radius:4px;
                     i {
                         margin-right:5px;
                     }
@@ -131,21 +146,11 @@ body.namespace-research {
         &.status-pending {
             .info-panel {
                 .tabs-and-panes {
-                    .pane-2 { border:2px solid orange !important; }
-                    .tab-1:after { background:orange !important; }
+                    .run-status { background:$re-orange !important; }
+                    .pane-2 { border-left:1px solid $re-orange !important; }
+                    .tab { border-color:$re-orange !important; }
+                    .tab-2 { background:rgba($re-orange, 0.1) !important; }
 
-                    &.selected-1 {
-                        .tab { border-color:orange !important; }
-                        .tab-2 {
-                            background:rgba(orange, 0.1) !important;
-                        }
-                    }
-                    &.selected-2 {
-                        .tab { border-color:orange !important; }
-                        .tab-2 {
-                            background:rgba(orange, 0.1) !important;
-                        }
-                    }
                 }
             }
         }
@@ -153,18 +158,10 @@ body.namespace-research {
         &.status-pass {
             .info-panel {
                 .tabs-and-panes {
-                    .pane-2 { border:2px solid green !important; }
-                    .tab-1:after { background:green !important; }
-
-                    &.selected-1 {
-                        .tab-2 {
-                            border-color:rgba(green, 0.5) !important;
-                            background:rgba(green, 0.1) !important;
-                        }
-                    }
-                    &.selected-2 {
-                        .tab-2 { border-color:green !important; }
-                    }
+                    .run-status { background:$re-green !important; }
+                    .pane-2 { border-left:1px solid $re-green !important; }
+                    .tab { border-color:$re-green !important; }
+                    .tab-2 { background:rgba($re-green, 0.2) !important; }
                 }
             }
         }
@@ -172,30 +169,22 @@ body.namespace-research {
         &.status-fail {
             .info-panel {
                 .tabs-and-panes {
-                    .pane-2 { border:2px solid red !important; }
-                    .tab-1:after { background:red !important; }
-
-                    &.selected-1 {
-                        .tab-2 {
-                            border-color:rgba(red, 0.5) !important;
-                            background:rgba(red, 0.1) !important;
-                        }
-                    }
-                    &.selected-2 {
-                        .tab-2 { border-color:red !important; }
-                    }
+                    .run-status { background:$re-red !important; }
+                    .pane-2 { border-left:1px solid $re-red !important; }
+                    .tab { border-color:$re-red !important; }
+                    .tab-2 { background:rgba($re-red, 0.1) !important; }
                 }
             }
         }
 
         .test-area {
             &.good {
-                border:2px solid green;
+                border:2px solid $re-green;
             }
             &.bad {
             }
             &.pending {
-                border:2px solid orange;
+                border:2px solid $re-orange;
             }
         }
 
@@ -211,6 +200,7 @@ body.namespace-research {
         flex-direction: column;
         min-width:400px;
         height: 100%;
+        pointer-events: all !important;
 
         .bottom-toolbar {
             display:flex;
@@ -246,13 +236,15 @@ body.namespace-research {
     }
 
     .gutter {
-        cursor:col-resize;
+        cursor: ew-resize;
         flex-shrink: 0;
+        width:5px;
     }
 
     .info-panel {
         height: 100%;
         min-width:400px;
+        pointer-events: all !important;
 
         .tabs-and-panes {
             display:flex;
@@ -289,7 +281,7 @@ body.namespace-research {
             }
 
             .panes {
-                max-width: calc(100% - 20px);
+                max-width: calc(100% - 26px);
                 flex-grow: 1;
                 .pane {
                     @include font-size(15, 20);
@@ -298,6 +290,19 @@ body.namespace-research {
                     height: 100%;
 
                 }
+                .pane-2 {
+                    margin-left: -1px;
+                    z-index: 1;
+                    position: relative;
+                }
+            }
+
+            code, code * {
+                @include code-font;
+                @include font-size(14, 20);
+            }
+            pre {
+                border-radius:0;
             }
         }
 
@@ -347,9 +352,6 @@ body.namespace-research {
                 }
             }
         }
-        .pane-2 {
-            padding:20px;
-        }
     }
 
     @keyframes focus {
@@ -367,8 +369,13 @@ body.namespace-research {
 
     .test-run {
         .run-status {
-            padding-bottom:3px;
-            margin-bottom:10px;
+            @include font-size(15, 15);
+            font-weight: $fw-semibold;
+            margin:0 0 10px 0;
+            padding:10px 20px;
+        }
+        .test-run-result {
+            padding:10px 20px;
         }
         .submit-exercise-section {
             margin-top:10px;
@@ -395,10 +402,9 @@ body.namespace-research {
                 padding:0px;
                 h3 {
                     flex-grow:1;
-                    padding-top:4px;
-                    @include font-size(14, 17);
+                    @include font-size(15, 23);
                     strong {
-                        color:red;
+                        color:$re-red;
                         font-weight:$fw-semibold;
                     }
                 }
@@ -406,11 +412,11 @@ body.namespace-research {
                 .opened-icon {
                     text-align:center;
                     font-size: 10px;
-                    line-height: 24px;
+                    line-height: 22px;
                     height: 24px;
                     width: 24px;
                     flex-shrink:0;
-                    margin-right:5px;
+                    margin-right:6px;
                     cursor: pointer;
                     border-radius: 2px;
                 }
@@ -431,7 +437,7 @@ body.namespace-research {
                         top: 20px;
                         height: 22px;
                         width: 22px;
-                        @include font-size(9, 20);
+                        @include font-size(9, 19.5);
                         text-align: center;
                     }
 
@@ -440,9 +446,9 @@ body.namespace-research {
                     }
                     h4 {
                         font-weight:$fw-semibold;
+                        @include font-size(15, 15);
                     }
                     pre {
-                        @include font-size(14, 20);
                         margin:0;
                     }
                 }
@@ -462,15 +468,15 @@ body.namespace-research {
                 .info { display: block; }
             }
             &.fail {
-                .header h3 strong { color:red; }
+                .header h3 strong { color:$re-red; }
             }
             &.pass {
-                .header h3 strong { color:green; }
+                .header h3 strong { color:$re-green; }
             }
         }
     }
 
     .passed-test {
-        color: green;
+        color: $re-green;
     }
 }

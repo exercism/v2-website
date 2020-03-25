@@ -1,24 +1,23 @@
 #experiment-solution-page {
     scrollbar-width: thin;
-    scrollbar-color: $re-scrollbar-background $re-scrollbar-color;
+    scrollbar-color: transparent $re-scrollbar-color;
 
     ::-webkit-scrollbar {
-      width: 14px;
-      height: 14px;
+      width: 8px;
+      height: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: $re-scrollbar-background;
+      background: transparent;
       padding:1px;
     }
     ::-webkit-scrollbar-thumb {
       background-color: $re-scrollbar-color;
-      border-radius: 0px;
-      //border: 3px solid $re-color-1;
+      border-radius: 10px;
     }
 
     .top-panel {
         background: $re-toolbar-bg-color;
-        border-bottom-color:$re-color-1;
+        border-bottom-color:$re-bg-color;
 
         .back-btn {
             color:$re-text-color;
@@ -54,15 +53,15 @@
     }
 
     .info-panel {
-        border-right:3px solid $re-bg-color;
         .tabs-and-panes {
             .tabs {
                 background:$re-tabs-bg-color;
-                border-right:1px solid $re-tabs-bg-color;
+                border-right:1px solid $re-tabs-border-color;
                 .tab {
+                    color:$re-tabs-unselected-color;
                     border-bottom:1px solid $re-tabs-border-color;
                     &:after {
-                        background: $re-border-color-l1;
+                        background: $re-tabs-border-color;
                     }
                 }
             }
@@ -75,7 +74,7 @@
 
             &.selected-1>.tabs>.tab-1,
             &.selected-2>.tabs>.tab-2 {
-                color:$re-text-highlight-color;
+                color:$re-tabs-selected-color;
 
                 &:after {
                     display:none;
@@ -85,8 +84,6 @@
 
         h2 {
             background:$re-instructions-header-bg-color;
-            border-top:1px solid $re-instructions-header-border-color;
-            border-bottom:1px solid $re-instructions-header-border-color;
             color:$re-text-color;
         }
         p, li, table {
@@ -100,15 +97,15 @@
                 color:$re-text-highlight-color;
                 font-weight:$fw-semibold;
                 text-decoration:none;
-                border-bottom:1px solid $re-border-color-l1;
+                border-bottom:1px solid $re-tabs-border-color;
             }
         }
         table {
             td, th {
-                border: 1px solid $re-border-color-l1;
+                border: 1px solid $re-tabs-border-color;
             }
             th {
-                border-bottom:2px solid $re-border-color-l1;
+                border-bottom:2px solid $re-tabs-border-color;
             }
         }
         .pane-1 pre {
@@ -129,7 +126,7 @@
 
         .revert-btn {
             background:$re-bottom-bar-bg-colour;
-            border:1px solid $re-bottom-bar-colour;
+            border:1px solid $re-toolbar-btn-unselected-color;
             color:$re-bottom-bar-colour;
         }
         .editor-status {
@@ -140,22 +137,23 @@
     .test-run {
         color: $re-text-color;
         .run-status {
-            border-bottom:1px solid $re-test-run-header-border-color;
+            background:$re-instructions-header-bg-color;
+            color:$re-text-color;
         }
         .test-run-result {
             .header {
                 .closed-icon,
                 .opened-icon {
-                    border: 2px solid $re-border-color-l1;
-                    background: $re-inline-code-bg-color;
+                    border: 2px solid $re-tabs-border-color;
+                    background: $re-instructions-bg-color;
                 }
             }
             .info {
                 .part {
                     border-left:1px solid $re-test-run-header-border-color;
                     i {
-                        background: $re-background-l1;
-                        border: 2px solid $re-border-color-l1;
+                        background: $re-instructions-bg-color;
+                        border: 2px solid $re-tabs-border-color;
                     }
                     h4, pre {
                         border:1px solid $re-test-run-header-border-color;
@@ -174,7 +172,7 @@
     .submission-status,
     .submission-cancel-confirmation {
         .submission-status-spinner {
-             color: $re-border-color-l1;
+             color: $re-tabs-border-color;
         }
         .confirm-btn {
             border:1px solid $color-2;
@@ -182,7 +180,7 @@
             color:#fff;
         }
         .cancel-btn {
-             border:1px solid $re-border-color-l1;
+             border:1px solid $re-tabs-border-color;
              background:transparent;
              color: $re-text-color;
          }
