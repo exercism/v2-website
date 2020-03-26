@@ -35,10 +35,6 @@ class Submission {
     }
 
     this.render();
-
-    this.status = status;
-
-    this.onChange(this.status);
   }
 
   render() {
@@ -66,6 +62,9 @@ class Submission {
         if(e.key === 'Escape') { this.setStatus('cancelling'); }
       });
     }
+
+    this.status = 'queueing';
+    this.onChange('queueing');
   }
 
   queued() {
@@ -77,10 +76,16 @@ class Submission {
         if(e.key === 'Escape') { this.setStatus('cancelling'); }
       });
     }
+
+    this.status = 'queued';
+    this.onChange('queued');
   }
 
   cancelled() {
     this.html = this.initialHtml;
+
+    this.status = 'cancelled';
+    this.onChange('cancelled');
   }
 
   timeout() {
@@ -89,6 +94,9 @@ class Submission {
     this.onRender = function() {
       this.element.find('.js-submit-code').click(() => { this.setStatus('resubmitted') });
     }
+
+    this.status = 'timeout';
+    this.onChange('timeout');
   }
 
   tested() {
@@ -102,6 +110,9 @@ class Submission {
 
       this.element.addClass('test-result-focus');
     }
+
+    this.status = 'tested';
+    this.onChange('tested');
   }
 
   cancelling() {
@@ -121,9 +132,14 @@ class Submission {
         this.setStatus(previousStatus);
       });
     }
+
+    this.status = 'cancelling';
+    this.onChange('cancelling');
   }
 
   resubmitted() {
+    this.status = 'resubmitted';
+    this.onChange('resubmitted');
   }
 
   error() {
@@ -132,6 +148,9 @@ class Submission {
         this.setStatus('cancelled');
       });
     }
+
+    this.status = 'error';
+    this.onChange('error');
   }
 }
 
