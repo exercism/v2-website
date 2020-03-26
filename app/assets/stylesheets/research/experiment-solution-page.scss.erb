@@ -24,6 +24,8 @@ body.namespace-research {
         $re-text-highlight-color: #fff;
         $re-bottom-bar-bg-colour: $re-instructions-bg-color;
         $re-bottom-bar-colour: #ddd;
+        $re-bottom-bar-button-bg-colour:$re-instructions-bg-color;
+        $re-bottom-bar-button-border-colour:$re-toolbar-btn-unselected-border-color;
         $re-editor-bg-color:#272727;
         $re-scrollbar-color: #6D6D6D;
         $re-inline-code-bg-color: #111;
@@ -35,27 +37,29 @@ body.namespace-research {
 
     &:not(.prism-dark)  {
         $re-bg-color: #fff;
-        $re-toolbar-bg-color: #F0F0F0;
-        $re-toolbar-btn-selected-bg-color: #E0C2BF;
-        $re-toolbar-btn-selected-border-color: $color-2;
+        $re-toolbar-bg-color: #EFEFEF;
+        $re-toolbar-btn-selected-bg-color: #fff;
+        $re-toolbar-btn-selected-border-color: #9E9E9E;
         $re-toolbar-btn-selected-color: #000;
         $re-toolbar-btn-unselected-color: #454545;
-        $re-toolbar-btn-unselected-border-color: #8F8F8F;
-        $re-tabs-bg-color: #C3C2C3; 
+        $re-toolbar-btn-unselected-border-color: #C6C6C6;
+        $re-tabs-bg-color: #C3C2C3;
         $re-tabs-border-color: #9B9B9B;
-        $re-tabs-unselected-color: #777;
-        $re-tabs-selected-color: #000;
+        $re-tabs-unselected-color: #999;
+        $re-tabs-selected-color: #333;
         $re-instructions-header-bg-color: #D2B3AF;
         $re-instructions-bg-color: #f0f0f0;
-        $re-text-color: #111;
+        $re-text-color: #333;
         $re-text-highlight-color: #000;
         $re-bottom-bar-bg-colour: $re-instructions-bg-color;
         $re-bottom-bar-colour: #222222;
+        $re-bottom-bar-button-bg-colour:#fff;
+        $re-bottom-bar-button-border-colour:#bbb;
         $re-editor-bg-color:#D8D8D8;
         $re-scrollbar-color: #929292;
         $re-inline-code-bg-color: #eeeeee;
         $re-inline-code-border-color: #D8D8D8;
-        $re-test-run-header-border-color: #B4B4B4; 
+        $re-test-run-header-border-color: #B4B4B4;
 
         <%= File.read(File.dirname(__FILE__) + "/experiment-solution-page.theme") %>
     }
@@ -146,7 +150,7 @@ body.namespace-research {
         &.status-pending {
             .info-panel {
                 .tabs-and-panes {
-                    .run-status { background:$re-orange !important; }
+                    .run-status { background:$re-orange !important; color:#fff; }
                     .pane-2 { border-left:1px solid $re-orange !important; }
                     .tab { border-color:$re-orange !important; }
                     .tab-2 { background:rgba($re-orange, 0.1) !important; }
@@ -158,7 +162,7 @@ body.namespace-research {
         &.status-pass {
             .info-panel {
                 .tabs-and-panes {
-                    .run-status { background:$re-green !important; }
+                    .run-status { background:$re-green !important; color:#fff; }
                     .pane-2 { border-left:1px solid $re-green !important; }
                     .tab { border-color:$re-green !important; }
                     .tab-2 { background:rgba($re-green, 0.2) !important; }
@@ -169,7 +173,7 @@ body.namespace-research {
         &.status-fail {
             .info-panel {
                 .tabs-and-panes {
-                    .run-status { background:$re-red !important; }
+                    .run-status { background:$re-red !important; color:#fff; }
                     .pane-2 { border-left:1px solid $re-red !important; }
                     .tab { border-color:$re-red !important; }
                     .tab-2 { background:rgba($re-red, 0.1) !important; }
@@ -209,8 +213,9 @@ body.namespace-research {
             padding:10px;
 
             .revert-btn {
-                @include font-size(15, 34);
-                padding:0 20px;
+                border-radius:5px;
+                @include font-size(15, 28);
+                padding:0 10px;
                 text-decoration:underline;
                 font-weight:$fw-regular;
                 text-decoration:none;
@@ -226,6 +231,7 @@ body.namespace-research {
                 padding:0 20px;
                 @include font-size(15, 34);
                 align-self: flex-end;
+                border-radius:5px;
                 i {
                     @include font-size(21, 29);
                     margin-right:5px;
@@ -308,14 +314,14 @@ body.namespace-research {
 
         .instructions {
             &>* {
-                margin-left:30px;
-                margin-right:30px;
+                margin-left:20px;
+                margin-right:20px;
             }
             h2 {
                 @include font-size(16, 16);
                 font-weight: $fw-semibold;
                 margin:30px 0 10px 0;
-                padding:10px 30px;
+                padding:10px 20px;
 
                 &:first-child {
                     margin-top:0;
@@ -366,7 +372,7 @@ body.namespace-research {
     .test-result-focus {
         animation: focus 2s;
     }
- 
+
     .test-run {
         .run-status {
             @include font-size(15, 15);
@@ -385,7 +391,7 @@ body.namespace-research {
             }
         }
         .submit-exercise-section {
-            margin-top:10px;
+            padding:0 20px;
             h3 {
                 @include font-size(16, 22);
                 font-weight:$fw-semibold;

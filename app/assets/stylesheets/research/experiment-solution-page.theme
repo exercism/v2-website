@@ -125,8 +125,8 @@
         background:$re-bottom-bar-bg-colour;
 
         .revert-btn {
-            background:$re-bottom-bar-bg-colour;
-            border:1px solid $re-toolbar-btn-unselected-color;
+            background:$re-bottom-bar-button-bg-colour;
+            border:1px solid $re-bottom-bar-button-border-colour;
             color:$re-bottom-bar-colour;
         }
         .editor-status {
@@ -138,7 +138,6 @@
         color: $re-text-color;
         .run-status {
             background:$re-instructions-header-bg-color;
-            color:$re-text-color;
         }
         .test-run-error {
             pre {
