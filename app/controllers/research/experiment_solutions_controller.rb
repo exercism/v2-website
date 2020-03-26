@@ -3,12 +3,10 @@ module Research
     def create
       experiment = Experiment.find(params[:experiment_id])
 
-      # For now only use exercise a
-      #exercise_slug = "#{params[:language]}-#{params[:part]}-#{%w{a b}.sample}"
-      exercise_slug = "#{params[:language]}-#{params[:part]}-b"
+      exercise_slug = "#{params[:language]}-#{params[:part]}-#{%w{a b}.sample}"
       exercise = Exercise.find_by_slug!(exercise_slug)
 
-      # Guard to ensure that someone doesn't try and access
+      # Guard to ensure that someone doesn't try to access
       # a non-research solution through this method.
       raise "Incorrect exercise" unless exercise.track.research_track?
 
