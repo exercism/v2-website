@@ -62,7 +62,9 @@ body.controller-research-pages.action footer {
                 margin-bottom:20px;
             }
             .pure-button {
-                @include font-size(16, 16);
+                @include font-size(17, 17);
+                font-weight:$fw-semibold;
+
                 border-radius:2px;
                 width:100%;
                 margin-bottom:15px;
@@ -83,10 +85,9 @@ body.controller-research-pages.action footer {
                     padding:15px 30px;
                 }
                 &.participate-button {
-                    background:$color-3;
+                    background:$color-2;
                     color:#fff;
                     display:block;
-                    width:100%;
                     padding:15px 70px;
                 }
             }
