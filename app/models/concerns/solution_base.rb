@@ -79,9 +79,4 @@ module SolutionBase
       git_sha: track_head
     )
   end
-
-
-  #class_methods do
-  #  ...
-  #end
 end
