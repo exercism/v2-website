@@ -9,6 +9,18 @@ body.namespace-research {
         font-family: Nunito, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }
 
+    // Spread the middle of the page out
+    display: flex;
+    flex-direction: column;
+    header+div {
+        flex: 1 0 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .lo-research-centralised-section {
+        flex: 1;
+    }
+
     header {
         a.logo {
             color: #fff;
