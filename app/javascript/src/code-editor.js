@@ -52,6 +52,7 @@ class CodeEditor {
 
   load() {
     this.editor.setValue(this.file.getContent());
+    this.element.addClass('loaded')
   }
 
   reset() {

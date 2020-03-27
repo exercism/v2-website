@@ -9,6 +9,11 @@ body.namespace-research {
         > .code-editor {
             width: 100%;
             height: 100%;
+
+            visibility:hidden;
+            &.loaded {
+                visibility:visible;
+            }
         }
     }
 
