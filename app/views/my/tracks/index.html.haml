@@ -41,8 +41,12 @@
       .tracks.pure-g
         =render 'tracks', joined: false, tracks: @other_tracks, completed_exercise_counts: @completed_exercise_counts, all_exercise_counts: @all_exercise_counts, all_user_tracks_counts: @all_user_tracks_counts
 
--if show_decide_default_allow_comments_modal?
+-if current_user.show_v3_patience_modal?
+  -content_for :js do
+    :javascript
+      showModal('v3-patience', '#{j render "my/settings/v3_patience_modal"}')
+
+-elsif show_decide_default_allow_comments_modal?
   -content_for :js do
     :javascript
       showModal('decide-allow-comments', '#{j render "my/settings/decide_allow_comments"}')
-

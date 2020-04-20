@@ -229,6 +229,7 @@ FactoryBot.define do
     email { "jez.walker+#{SecureRandom.uuid}@gmail.com" }
     password { "foobar123" }
     current_sign_in_at { Time.now }
+    show_v3_patience_modal { false }
 
     trait :mentor do
       is_mentor { true }

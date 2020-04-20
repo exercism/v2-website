@@ -1,0 +1,42 @@
+@import 'variables';
+@import 'mixins';
+
+#modal-wrapper #modal.v3-patience {
+    padding:30px 15px;
+    max-height:90%;
+
+    @include width-small() {
+        padding:30px 50px;
+    }
+    @include width-medium() {
+        max-width:580px;
+    }
+
+    h2 {
+        @include font-size(25, 25);
+        font-weight:$regular;
+        color:#555;
+        margin-bottom:15px;
+        text-align:center;
+    }
+    p {
+        text-align:center;
+        color:#555;
+        @include font-size(14, 20);
+        margin-bottom:10px;
+    }
+    .buttons {
+        margin-top:20px;
+    }
+    .pure-button {
+        margin: 0 auto;
+
+        display:inline-block;
+        width:auto;
+        border:1px solid $color-2;
+        padding: 10px 13px;
+        font-weight:$regular;
+        width:100%;
+        background:$color-2;
+    }
+}
