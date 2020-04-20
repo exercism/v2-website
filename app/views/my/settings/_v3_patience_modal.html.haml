@@ -1,0 +1,7 @@
+.main-section
+  %h2 Exercism is evolving
+  %p Hello. Our community is currently working hard on version 3 of Exercism. This means our mentors are responding slower than normal. We therefore recommend either completing tracks in Practice Mode or allowing extra time for responses. Watch this video to learn more:
+  <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/XiV_vYn1Ea8' frameborder='0' allowfullscreen></iframe></div>
+
+  .buttons
+    =link_to "Continue", set_viewed_v3_patience_modal_my_settings_path, method: :patch, remote: true, class: 'pure-button'

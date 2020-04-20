@@ -51,6 +51,15 @@ class My::SettingsController < MyController
     end
   end
 
+  def set_viewed_v3_patience_modal
+    current_user.update!(show_v3_patience_modal: false)
+
+    respond_to do |format|
+      format.html { redirect_to my_tracks_path }
+      format.js { render js: "window.closeModal()" }
+    end
+  end
+
   private
 
   def update_password
