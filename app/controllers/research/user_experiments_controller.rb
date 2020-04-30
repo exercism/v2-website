@@ -9,7 +9,7 @@ module Research
     end
 
     def show
-      slugs = %i{csharp elm go javascript python ruby rust x86-64-assembly}
+      slugs = %i{common-lisp csharp elm go javascript python ruby rust x86-64-assembly}
       @tracks = Track.where(slug: slugs)
       @tracks = @tracks.sort do |track_1, track_2|
         if @user_experiment.language_in_progress?(track_1.slug)
