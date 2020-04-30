@@ -36,7 +36,7 @@ class SubmissionTestRun < ApplicationRecord
   end
 
   def failed_tests
-    test_results.select(&:failed?)
+    test_results.select(&:failed?) + test_results.select(&:errored?)
   end
 
   def num_skipped_tests
