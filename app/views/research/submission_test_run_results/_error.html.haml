@@ -1,0 +1,28 @@
+.test-run-result.fail.open
+  .header
+    =icon(:"chevron-right", "Click to expand", style: :solid, extra_classes: 'closed-icon js-collapse-trigger')
+    =icon(:"chevron-down", "Click to close", style: :solid, extra_classes: 'opened-icon js-collapse-trigger')
+    %h3
+      %strong Errored:
+      #{test.name}
+  .info
+    - if test.cmd.present?
+      .part
+        =graphical_icon "brackets-curly", style: :solid
+        %h4 Code Run:
+        %pre
+          %code{ data: { behavior: "code-block" } }= test.cmd
+
+      .part
+        =graphical_icon "bug", style: :solid
+        %h4 Test Error
+        %pre
+          %code= test.message
+
+    - if test.output_html.present?
+      .part
+        =graphical_icon "lines-columns", style: :solid
+        %h4 Test Output
+
+        %pre.test-output
+          %code= raw test.output_html

@@ -25,6 +25,10 @@ class SubmissionTestRunResult
     status == :fail
   end
 
+  def errored?
+    status == :error
+  end
+
   def cmd
     return if test_info.blank?
 
