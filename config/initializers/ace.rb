@@ -1,3 +1,4 @@
 Exercism::AceMappings = {
-  "go" => "golang"
+  "go" => "golang",
+  "common-lisp" => "lisp"
 }
