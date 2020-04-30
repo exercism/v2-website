@@ -55,7 +55,7 @@ class SubmissionTestRun < ApplicationRecord
   def tests_to_display(order = tests_info)
     ordered_tests = order.reorder(test_results)
 
-    [ordered_tests.select(&:passed?), ordered_tests.find(&:failed?)].
+    [ordered_tests.select(&:passed?), ordered_tests.find(&:failed?), ordered_tests.find(&:errored?)].
       compact.
       flatten
   end
