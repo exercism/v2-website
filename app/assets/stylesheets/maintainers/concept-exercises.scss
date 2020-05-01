@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'mixins';
+
+#maintainers-concept-exercises {
+    padding-top:20px;
+
+    h1 {
+        font-weight:$fw-bold;
+        @include font-size(18, 18);
+        margin-bottom:10px;
+    }
+    .pure-button {
+        background:$color-2;
+        color:#fff;
+    }
+    table {
+        margin-bottom:20px;
+        th {
+            padding:10px;
+            font-weight:$fw-bold;
+            border-bottom:1px solid #aaa;
+            text-align:left;
+        }
+        td {
+            padding:10px 15px;
+            border-bottom:1px solid #ddd;
+            border-right:1px solid #eee;
+            &:last-child {
+                border-right:none;
+            }
+        }
+        th, td {
+            &.right {
+                text-align:right;
+            }
+        }
+
+    }
+}
+

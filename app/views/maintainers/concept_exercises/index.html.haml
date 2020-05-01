@@ -1,0 +1,17 @@
+#maintainers-concept-exercises
+  .lo-container
+    %h1 Concept Exercises
+    %table
+      %tr
+        %th Exercise name
+        %th Status
+        %th{colspan: 2}
+
+      -@concept_exercises.each do |exercise|
+        %tr
+          %td= exercise.name
+          %td= exercise.status
+          %td= link_to "View", exercise
+          %td= link_to "Edit", [:edit, exercise]
+
+    =link_to "New Concept Exercise", new_maintainers_concept_exercise_path, class: 'pure-button'

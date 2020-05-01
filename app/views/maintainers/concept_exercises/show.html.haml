@@ -1,0 +1,22 @@
+#maintainers-concept-exercise
+  .lo-container
+    =form_for @concept_exercise do |f|
+      %h1= @concept_exercise.name
+      .status= @concept_exercise.status
+
+      %h2 Introduction
+      =raw @concept_exercise.introduction_html
+
+      %h2 Instructions
+      =raw @concept_exercise.instructions_html
+
+      %h2 Example
+      %h3= @concept_exercise.example_filename
+
+      %pre
+        =@concept_exercise.example_content
+
+      %td= link_to "Edit", [:edit, @concept_exercise]
+      %td= link_to "Submit", [:submit, @concept_exercise], data: {confirm: "Are you sure you want to submit?"}, method: :patch
+
+

@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :maintainers_concept_exercise, class: 'Maintainers::ConceptExercise' do
+    
+  end
+
   factory :infrastructure_test_runner_version, class: 'Infrastructure::TestRunnerVersion' do
     test_runner { create :infrastructure_test_runner }
     slug { SecureRandom.uuid }

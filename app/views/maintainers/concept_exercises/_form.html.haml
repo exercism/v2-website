@@ -1,0 +1,57 @@
+=form_for @concept_exercise do |f|
+  %h1 Create a Concept Exercise
+  %p Thanks for working on a new Concept Exercise. The purpose of this form is to get the three key files in place and agreed by other maintainers to streamline the process for you.
+
+
+  .field
+    %h2 Exercise name
+    %p This is a name for you to use to identify the exercise. We will use it as the folder name when submitting the draft PR.
+    =f.text_field :name, required: true
+
+  .field
+    %h2 Related issue
+    %p Has this exercise been discssused with other track maintainers? If so paste the link here. If not, you might like to do that before continuing.
+    =f.text_field :issue_url
+
+  .field
+    %h2 Introduction
+    %p Lorem ipsum
+    =render "textarea", textarea: f.text_area(:introduction_content)
+
+  .field
+    %h2 Instructions
+    %p Lorem ipsum
+    =render "textarea", textarea: f.text_area(:instructions_content)
+
+  .field
+    %h2 Examplar Solution
+    %p This solution should be the ideal solution a student would submit for this exercise, given the prerequisites and what is in and out of scope for this exercise.
+    =f.text_field :example_filename, placeholder: "filename"
+    =f.text_area :example_content
+
+  =button_tag "Save Exercise", class: 'pure-button'
+
+-content_for :js do
+  :javascript
+    setupTabs();
+
+    $(".tabs-and-panes textarea").each(function(i, textarea) {
+      var $textarea = $(textarea);
+      var $tap = $textarea.parents('.tabs-and-panes')
+
+      $textarea.markdown({
+        iconlibrary: 'fa',
+        hiddenButtons: 'cmdHeading cmdImage cmdPreview',
+        resize: 'vertical'
+      });
+
+      $textarea.keyup();
+
+      $tap.find('.preview-tab').click(function() {
+        var markdown = $textarea.val();
+        $.post("/markdown/parse", {markdown: markdown}, function (x,y,z) {
+          $tap.find('.preview-area').html(x);
+          Prism.highlightAll();
+        });
+      });
+    });

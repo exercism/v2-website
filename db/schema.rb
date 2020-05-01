@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_144100) do
+ActiveRecord::Schema.define(version: 2020_05_01_111656) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -305,6 +305,19 @@ ActiveRecord::Schema.define(version: 2020_04_20_144100) do
     t.string "alumnus"
     t.index ["track_id"], name: "fk_rails_ed46fd11a4"
     t.index ["user_id"], name: "fk_rails_5b1168410c"
+  end
+
+  create_table "maintainers_concept_exercises", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "status", default: 0, null: false
+    t.string "name", null: false
+    t.string "issue_url"
+    t.text "introduction_content"
+    t.text "instructions_content"
+    t.text "example_content"
+    t.string "example_filename"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "mentor_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

@@ -73,6 +73,15 @@ Rails.application.routes.draw do
     end
   end
 
+  # ########### #
+  # Maintainers #
+  # ########### #
+  namespace :maintainers do
+    resources :concept_exercises, only: [:index, :show, :new, :create, :edit, :update] do
+      patch :submit, on: :member
+    end
+  end
+
   # ############### #
   # Changelog admin #
   # ############### #
