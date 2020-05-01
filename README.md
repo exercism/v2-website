@@ -23,8 +23,8 @@ Something like this will then get a working database setup:
 
 ```bash
 mysql -e "CREATE USER 'exercism_reboot'@'localhost' IDENTIFIED BY 'exercism_reboot'" -u root -p
-mysql -e "create database exercism_reboot_development" -u root -p
-mysql -e "create database exercism_reboot_test" -u root -p
+mysql -e "CREATE DATABASE exercism_reboot_development" -u root -p
+mysql -e "CREATE DATABASE exercism_reboot_test" -u root -p
 mysql -e "ALTER DATABASE exercism_reboot_development CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -u root -p
 mysql -e "ALTER DATABASE exercism_reboot_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -u root -p
 mysql -e "GRANT ALL PRIVILEGES ON exercism_reboot_development.* TO 'exercism_reboot'@'localhost'" -u root -p
