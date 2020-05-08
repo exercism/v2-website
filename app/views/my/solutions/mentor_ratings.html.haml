@@ -25,7 +25,7 @@
           =label_tag "mentor_reviews_#{mentor.id}_rating_#{i}", ""
 
       .feedback
-        %p Leave a public testimonial for this mentor (optional):
+        %p Leave a public testimonial for this mentor (optional). Avoid pronouns (she/he his/her).
         =text_area_tag "mentor_reviews[#{mentor.id}][feedback]"
 
   =button_tag "Continue", class: 'pure-button'#, disabled: true
