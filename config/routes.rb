@@ -24,6 +24,9 @@ Rails.application.routes.draw do
         resources :analyzers, only: [:create]
       end
     end
+    namespace :maintaining do
+      resources :concept_exercises, only: [:create]
+    end
   end
   get "api/(*url)", to: 'api/base#render_404'
 
