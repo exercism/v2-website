@@ -48,8 +48,7 @@ module API
 
         p tmp_path
 
-        # TODO: use v3 concept exercise repo
-        `git clone https://github.com/ErikSchierboom/v3.git #{tmp_path}`
+        `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-bot/v3.git #{tmp_path}`
 
         Dir.chdir(tmp_path) {
           `git remote add upstream https://github.com/exercism/v3.git`
@@ -63,6 +62,8 @@ module API
 
         Dir.chdir(tmp_path) {
           `git add .`
+          `git config user.name #{current_user.name}`
+          `git config user.email #{current_user.email}`
           `git commit -m "[#{params[:exercise_track]}] Add #{params[:exercise_slug]} Concept Exercise"`
           `git push origin #{branch_name}`
         }
