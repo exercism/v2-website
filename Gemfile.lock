@@ -327,6 +327,8 @@ GEM
     public_suffix (4.0.5)
     puma (3.12.6)
     rack (2.2.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.0.8.1)
       rack
     rack-proxy (0.6.5)
@@ -538,6 +540,7 @@ DEPENDENCIES
   premailer-rails
   propono
   puma (~> 3.12)
+  rack-cors
   rails (~> 6.0.0)
   rails-controller-testing
   recaptcha

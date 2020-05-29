@@ -8,6 +8,7 @@ end
 gem 'rails', '~> 6.0.0'
 gem 'puma', '~> 3.12'
 gem 'mysql2'
+gem 'rack-cors'
 
 gem 'dalli'
 gem 'devise', ">= 4.7.1"
