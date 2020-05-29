@@ -56,7 +56,7 @@ module API
           `git checkout --no-track -b #{branch_name} upstream/master`
         end
 
-        File.open(tmp_path / "introduction.md", "w") {|f|f.write params[:introduction_markdown] }
+        File.open(tmp_path / "instructions.md", "w") {|f|f.write params[:instructions_markdown] }
         File.open(tmp_path / "design.md", "w") {|f|f.write params[:design_markdown] }
         File.open(tmp_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
 
