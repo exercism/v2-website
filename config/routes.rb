@@ -24,9 +24,6 @@ Rails.application.routes.draw do
         resources :analyzers, only: [:create]
       end
     end
-    namespace :maintaining do
-      resources :concept_exercises, only: [:create]
-    end
   end
   get "api/(*url)", to: 'api/base#render_404'
 
@@ -37,6 +34,13 @@ Rails.application.routes.draw do
     get "test_runner/languages" => "test_runner#languages"
     get "test_runner/submissions_to_test" => "test_runner#submissions_to_test"
     post "test_runner/submission_tested/:submission_uuid" => "test_runner#submission_tested"
+  end
+
+  # ### #
+  # SPI #
+  # ### #
+  namespace :git_api do
+    resources :concept_exercises, only: [:create]
   end
 
   # ##### #
