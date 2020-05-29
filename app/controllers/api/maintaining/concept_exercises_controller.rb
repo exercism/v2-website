@@ -50,23 +50,23 @@ module API
 
         `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-bot/v3.git #{tmp_path}`
 
-        Dir.chdir(tmp_path) {
+        Dir.chdir(tmp_path) do
           `git remote add upstream https://github.com/exercism/v3.git`
           `git fetch upstream master`
           `git checkout --no-track -b #{branch_name} upstream/master`
-        }
+        end
 
         File.open(tmp_path / "introduction.md", "w") {|f|f.write params[:introduction_markdown] }
         File.open(tmp_path / "design.md", "w") {|f|f.write params[:design_markdown] }
         File.open(tmp_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
 
-        Dir.chdir(tmp_path) {
+        Dir.chdir(tmp_path) do
           `git add .`
           `git config user.name #{current_user.name}`
           `git config user.email #{current_user.email}`
           `git commit -m "[#{params[:exercise_track]}] Add #{params[:exercise_slug]} Concept Exercise"`
           `git push origin #{branch_name}`
-        }
+        end
 
         render json: {
           branch_name: branch_name
