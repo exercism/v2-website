@@ -42,6 +42,20 @@ module API
           )
         end
 
+        unless params[:design_markdown].present?
+          return render_error(
+            :missing_design_markdown,
+            "Design markdown is missing"
+          )
+        end
+
+        unless params[:instructions_markdown].present?
+          return render_error(
+            :missing_instructions_markdown,
+            "Instructions markdown is missing"
+          )
+        end
+
         uuid = SecureRandom.uuid
         tmp_path = Pathname.new("/tmp/#{uuid}")
         branch_name = "#{params[:exercise_track]}/#{params[:exercise_slug]}-#{uuid}"
