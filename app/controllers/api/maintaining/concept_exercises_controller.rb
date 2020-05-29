@@ -12,8 +12,6 @@ module API
           )
         end
 
-        # TODO: verify/normalize track name
-
         unless params[:exercise_slug].present?
           return render_error(
             :missing_exercise_slug,
@@ -56,6 +54,15 @@ module API
           )
         end
 
+        begin
+          track = Track.find(params[:exercise_track])
+        rescue
+          return render_error(
+            :track_not_found,
+            "Track not found"
+          )
+        end
+
         uuid = SecureRandom.uuid
         tmp_path = Pathname.new("/tmp/#{uuid}")
         branch_name = "#{params[:exercise_track]}/#{params[:exercise_slug]}-#{uuid}"
@@ -78,7 +85,7 @@ module API
           `git add .`
           `git config user.name #{current_user.name}`
           `git config user.email #{current_user.email}`
-          `git commit -m "[#{params[:exercise_track]}] Add #{params[:exercise_slug]} Concept Exercise"`
+          `git commit -m "[#{track.title}] Add #{params[:exercise_slug]} Concept Exercise"`
           `git push origin #{branch_name}`
         end
 
