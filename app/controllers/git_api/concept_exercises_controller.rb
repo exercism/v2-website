@@ -1,72 +1,26 @@
 module GitAPI
   class ConceptExercisesController < BaseController
     def create
-      example_filename_regexp = "[^a-zA-Z0-9._-]"
-      exercise_slug_regexp = "[^a-zA-Z0-9-]"
-
-      unless params[:track_slug].present?
-        return render_error(
-          :missing_track_slug,
-          "Exercise track is missing"
-        )
+      # Validate presence and size of fields
+      %i{ 
+        track_slug exercise_slug example_filename example_code
+        design_markdown instructions_markdown
+      }.each do |param|
+        return render_error(:"missing_#{param}") unless params[param].present?
+        return render_error(:"too_large_#{param}") if params[param].size > 1.megabyte
       end
 
-      unless params[:exercise_slug].present?
-        return render_error(
-          :missing_exercise_slug,
-          "Exercise slug is missing"
-        )
-      end
+      # Validate regexps
+      return render_error(:invalid_exercise_slug) if params[:exercise_slug] =~ Regexp.new("[^a-zA-Z0-9-]")
+      return render_error(:invalid_example_filename) if params[:example_filename] =~ Regexp.new("[^a-zA-Z0-9._-]")
 
-      if params[:exercise_slug] =~ Regexp.new(exercise_slug_regexp)
-        return render_error(
-          :invalid_exercise_slug,
-          "Exercise slug must match #{exercise_slug_regexp}"
-        )
-      end
+      # Get the track and get out of here if it doesn't exist
+      track = Track.find_by_slug(params[:track_slug])
+      return render_error(:track_not_found) unless track
 
-      unless params[:example_filename].present?
-        return render_error(
-          :missing_example_filename,
-          "Example filename is missing"
-        )
-      end
-
-      if params[:example_filename] =~ Regexp.new(example_filename_regexp)
-        return render_error(
-          :invalid_example_filename,
-          "Example filename must match #{example_filename_regexp}"
-        )
-      end
-
-      unless params[:design_markdown].present?
-        return render_error(
-          :missing_design_markdown,
-          "Design markdown is missing"
-        )
-      end
-
-      unless params[:instructions_markdown].present?
-        return render_error(
-          :missing_instructions_markdown,
-          "Instructions markdown is missing"
-        )
-      end
-
-      begin
-        track = Track.find(params[:exercise_track])
-      rescue
-        return render_error(
-          :track_not_found,
-          "Track not found"
-        )
-      end
-
-      uuid = SecureRandom.uuid
+      uuid = SecureRandom.uuid.gsub('-', '')
       tmp_path = Pathname.new("/tmp/#{uuid}")
       branch_name = "#{params[:track_slug]}/#{params[:exercise_slug]}-#{uuid}"
-
-      p tmp_path
 
       `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-bot/v3.git #{tmp_path}`
 
@@ -93,12 +47,10 @@ module GitAPI
       }, status: 201
     end
 
-    def render_error(type, msg)
+    def render_error(type)
+      p "Error: #{type}"
       render json: {
-        error: {
-          type: type,
-          message: msg
-        }
+        error: { type: type }
       }, status: 400
     end
   end
