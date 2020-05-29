@@ -25,7 +25,7 @@ end
 
 class ActionMailer::TestCase
   def assert_body_includes(email, string)
-    html = email.html_part.body.to_s.gsub("\n", ' ')
+    html = email.html_part.body.to_s.gsub(/[\n\r]/, ' ').squeeze(" ")
     stripped = ActionController::Base.helpers.strip_tags(html)
     assert stripped.include?(string)
   end
