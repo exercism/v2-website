@@ -50,7 +50,9 @@ module GitAPI
             :updatedAt => issue.node.updatedAt,
             :labels => issue.node.labels.edges.map { |label| label.node.name }
           }
-        end.select { |issue| issue[:labels].include?('type/new-exercise') }  
+        end
+        .select { |issue| issue[:labels].include?('type/new-exercise') }  
+        .sort_by { |issue| issue[:title] }
 
       render json: issues
     end
