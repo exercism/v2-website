@@ -47,7 +47,7 @@ module GitAPI
             :title => issue.node.title,
             :body => issue.node.body,
             :url => issue.node.url,
-            :updated_at => issue.node.updated_at,
+            :updatedAt => issue.node.updatedAt,
             :labels => issue.node.labels.edges.map { |label| label.node.name }
           }
         end.select { |issue| issue[:labels].include?('type/new-exercise') }  
