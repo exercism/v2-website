@@ -8,19 +8,19 @@ module GitAPI
 
     def creation_issues
       p params[:id]
-      issues = fetch_issues(params[:id], 'type/new-exercise')
+      issues = fetch_issues('type/new-exercise')
       render json: issues
     end
 
     def improve_issues
       p params[:id]
-      issues = fetch_issues(params[:id], 'type/improve-exercise')
+      issues = fetch_issues('type/improve-exercise')
       render json: issues
     end
 
     private
 
-    def fetch_issues(track, filter_label)
+    def fetch_issues(filter_label)
       client = Octokit::Client.new(:access_token => Rails.application.secrets.exercism_bot_token)
       query = %Q{
         { 
@@ -29,7 +29,7 @@ module GitAPI
             issues(
               first: 100
               states: [OPEN]
-              filterBy: { labels: ["track/#{track}"] }
+              filterBy: { labels: ["track/#{params[:id]}"] }
             ) {
               edges {
                 node {
