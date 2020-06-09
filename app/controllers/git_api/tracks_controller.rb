@@ -22,7 +22,22 @@ module GitAPI
 
     def fetch_issues(filter_label)
       client = Octokit::Client.new(:access_token => Rails.application.secrets.exercism_bot_token)
-      query = %Q{
+      response = client.post '/graphql', { query: query }.to_json
+      response.data.repository.issues.edges.map do |issue|
+          {
+            :number => issue.node.number,
+            :title => issue.node.title,
+            :body => issue.node.body,
+            :url => issue.node.url,
+            :updatedAt => issue.node.updatedAt,
+            :labels => issue.node.labels.edges.map { |label| label.node.name }
+          }
+        end
+        .select { |issue| issue[:labels].include?(filter_label) }
+    end
+
+    def query
+      %Q{
         { 
           repository(name: "v3", owner: "exercism") {
             id
@@ -51,19 +66,6 @@ module GitAPI
           }
         }
       }
-
-      response = client.post '/graphql', { query: query }.to_json
-      response.data.repository.issues.edges.map do |issue|
-          {
-            :number => issue.node.number,
-            :title => issue.node.title,
-            :body => issue.node.body,
-            :url => issue.node.url,
-            :updatedAt => issue.node.updatedAt,
-            :labels => issue.node.labels.edges.map { |label| label.node.name }
-          }
-        end
-        .select { |issue| issue[:labels].include?(filter_label) }
     end
   end
 end
