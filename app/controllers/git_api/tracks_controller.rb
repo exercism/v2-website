@@ -1,0 +1,67 @@
+module GitAPI
+  class TracksController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
+    layout false
+
+    def creation_issues
+      issues = fetch_issues('type/new-exercise')
+      render json: issues
+    end
+
+    def improve_issues
+      issues = fetch_issues('type/improve-exercise')
+      render json: issues
+    end
+
+    private
+
+    def fetch_issues(filter_label)
+      client = Octokit::Client.new(access_token: Rails.application.secrets.exercism_bot_token)
+      response = client.post '/graphql', { query: query }.to_json
+      response.data.repository.issues.edges.map do |issue|
+          {
+            number: issue.node.number,
+            title: issue.node.title,
+            body: issue.node.body,
+            url: issue.node.url,
+            updatedAt: issue.node.updatedAt,
+            labels: issue.node.labels.edges.map { |label| label.node.name }
+          }
+        end
+        .select { |issue| issue[:labels].include?(filter_label) }
+    end
+
+    def query
+      %Q{
+        { 
+          repository(name: "v3", owner: "exercism") {
+            id
+            issues(
+              first: 100
+              states: [OPEN]
+              filterBy: { labels: ["track/#{params[:id]}"] }
+            ) {
+              edges {
+                node {
+                  number
+                  title
+                  body
+                  url
+                  updatedAt
+                  labels(first: 20) {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    end
+  end
+end

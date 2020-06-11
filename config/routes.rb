@@ -41,6 +41,12 @@ Rails.application.routes.draw do
   # ### #
   namespace :git_api do
     resources :concept_exercises, only: [:create]
+    resources :tracks, only: [] do
+      member do
+        get :creation_issues
+        get :improve_issues
+      end
+    end
   end
 
   # ##### #
