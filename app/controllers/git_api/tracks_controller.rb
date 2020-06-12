@@ -5,17 +5,17 @@ module GitAPI
 
     layout false
 
-    def creation_issues
+    def open_creation_issues
       issues = fetch_issues(%w(type/new-exercise status/help-wanted), %w(OPEN))
       render json: issues
     end
 
-    def creation_issues_count
+    def num_creation_issues
       issues = fetch_issues(%w(type/new-exercise), %w(OPEN CLOSED))
       render json: issues.length
     end
 
-    def improve_issues
+    def open_improve_issues
       issues = fetch_issues(%w(type/improve-exercise status/help-wanted), %w(OPEN))
       render json: issues
     end
@@ -32,11 +32,11 @@ module GitAPI
             body: issue.node.body,
             url: issue.node.url,
             updatedAt: issue.node.updatedAt,
-            labels: issue.node.labels.edges.map { |label| label.node.name }
+            labels: issue.node.labels.edges.map{|label| label.node.name }
           }
         end
-        .select { |issue| filter_labels.all? { |filter_label| issue[:labels].include?(filter_label) } }
-        .sort_by{|a|a[:title]}
+        .select{|issue| filter_labels.all?{|filter_label| issue[:labels].include?(filter_label)}}
+        .sort_by{|issue|issue[:title]}
     end
 
     def query(states)

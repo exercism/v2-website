@@ -43,9 +43,9 @@ Rails.application.routes.draw do
     resources :concept_exercises, only: [:create]
     resources :tracks, only: [] do
       member do
-        get :creation_issues
-        get :creation_issues_count
-        get :improve_issues
+        get :open_creation_issues
+        get :num_creation_issues
+        get :open_improve_issues
       end
     end
   end
