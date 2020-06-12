@@ -65,6 +65,7 @@ module GitAPI
       }
     end
 
+    private
     def set_track
       @track = Track.find_by_slug(params[:id])
       render_error(:track_not_found) unless @track
