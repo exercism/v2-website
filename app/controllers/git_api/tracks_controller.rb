@@ -83,6 +83,7 @@ module GitAPI
       render json: {
         error: { type: type }
       }, status: 400
+    end
 
     def state
       case params[:state]
