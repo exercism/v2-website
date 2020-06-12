@@ -1,6 +1,7 @@
 module GitAPI
   class TracksController < ApplicationController
     skip_before_action :verify_authenticity_token
+    before_action :set_track
 
     layout false
 
@@ -40,7 +41,7 @@ module GitAPI
             issues(
               first: 100
               states: [OPEN]
-              filterBy: { labels: ["track/#{params[:id]}"] }
+              filterBy: { labels: ["track/#{@track.slug}"] }
             ) {
               edges {
                 node {
@@ -62,6 +63,19 @@ module GitAPI
           }
         }
       }
+    end
+
+    private
+    def set_track
+      @track = Track.find_by_slug(params[:id])
+      render_error(:track_not_found) unless @track
+    end
+
+    def render_error(type)
+      p "Error: #{type}"
+      render json: {
+        error: { type: type }
+      }, status: 400
     end
   end
 end
