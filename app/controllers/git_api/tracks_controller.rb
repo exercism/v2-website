@@ -84,18 +84,5 @@ module GitAPI
         error: { type: type }
       }, status: 400
     end
-
-    def state
-      case params[:state]
-      when "open"
-        "OPEN"
-      when "closed"
-        "CLOSED"
-      when "all"
-        "OPEN,CLOSED"
-      else
-        "OPEN"
-      end
-    end
   end
 end
