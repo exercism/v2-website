@@ -40,7 +40,7 @@ module GitAPI
             id
             issues(
               first: 100
-              states: [OPEN]
+              states: [#{state}]
               filterBy: { labels: ["track/#{@track.slug}"] }
             ) {
               edges {
@@ -66,6 +66,7 @@ module GitAPI
     end
 
     private
+
     def set_track
       @track = Track.find_by_slug(params[:id])
       render_error(:track_not_found) unless @track
@@ -76,6 +77,18 @@ module GitAPI
       render json: {
         error: { type: type }
       }, status: 400
+
+    def state
+      case params[:state]
+      when "open"
+        "OPEN"
+      when "closed"
+        "CLOSED"
+      when "all"
+        "OPEN,CLOSED"
+      else
+        "OPEN"
+      end
     end
   end
 end
