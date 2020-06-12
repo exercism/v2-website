@@ -5,11 +5,17 @@ module GitAPI
     layout false
 
     def creation_issues
+      track = Track.find_by_slug(params[:id])
+      return render_error(:track_not_found) unless track
+
       issues = fetch_issues('type/new-exercise')
       render json: issues
     end
 
     def improve_issues
+      track = Track.find_by_slug(params[:id])
+      return render_error(:track_not_found) unless track
+
       issues = fetch_issues('type/improve-exercise')
       render json: issues
     end
@@ -62,6 +68,13 @@ module GitAPI
           }
         }
       }
+    end
+
+    def render_error(type)
+      p "Error: #{type}"
+      render json: {
+        error: { type: type }
+      }, status: 400
     end
   end
 end
