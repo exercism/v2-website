@@ -36,7 +36,7 @@ module GitAPI
           }
         end
         .select { |issue| filter_labels.all? { |filter_label| issue[:labels].include?(filter_label) } }
-        .sort { |a, b| a[:title] <=> b[:title] } 
+        .sort_by{|a|a[:title]}
     end
 
     def query(states)
