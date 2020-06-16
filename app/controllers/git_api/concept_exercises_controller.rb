@@ -1,7 +1,7 @@
 module GitAPI
   class ConceptExercisesController < BaseController
     def create
-      # Validate presence and size of fields
+      # Validate presence and size of required fields
       %i{ 
         track_slug exercise_slug example_filename example_code
         design_markdown instructions_markdown
@@ -9,6 +9,9 @@ module GitAPI
         return render_error(:"missing_#{param}") unless params[param].present?
         return render_error(:"too_large_#{param}") if params[param].size > 1.megabyte
       end
+
+      # Validate size of optional fields
+      return render_error(:"too_large_introduction_markdown") if params[:introduction_markdown].present? && params[:introduction_markdown].size > 1.megabyte
 
       # Validate regexps
       return render_error(:invalid_exercise_slug) if params[:exercise_slug] =~ Regexp.new("[^a-zA-Z0-9-]")
@@ -37,6 +40,7 @@ module GitAPI
         Dir.mkdir(exercise_meta_path)
 
         File.open(exercise_docs_path / "instructions.md", "w") {|f|f.write params[:instructions_markdown] }
+        File.open(exercise_docs_path / "introduction.md", "w") {|f|f.write params[:introduction_markdown] } if params[:introduction_markdown].present?
         File.open(exercise_meta_path / "design.md", "w") {|f|f.write params[:design_markdown] }
         File.open(exercise_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
 
