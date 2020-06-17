@@ -76,8 +76,7 @@ module GitAPI
     end
 
     def branch_name_not_unique(branch_name)
-      `git show-ref --verify --quiet refs/remotes/origin/#{branch_name}`
-      return $?.success?
+      system("git show-ref --verify --quiet refs/remotes/origin/#{branch_name}")
     end
   end
 end
