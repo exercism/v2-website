@@ -28,21 +28,19 @@ module GitAPI
         `git remote add upstream https://github.com/exercism/v3.git`
         `git fetch upstream master`
         `git checkout --no-track -b #{branch_name} upstream/master`
-      end
 
-      exercise_path = tmp_path / "languages" / params[:track_slug] / "exercises" / "concept" / params[:exercise_slug]
-      exercise_docs_path = exercise_path / ".docs"
-      exercise_meta_path = exercise_path / ".meta"
+        exercise_path = tmp_path / "languages" / params[:track_slug] / "exercises" / "concept" / params[:exercise_slug]
+        exercise_docs_path = exercise_path / ".docs"
+        exercise_meta_path = exercise_path / ".meta"
 
-      Dir.mkdir(exercise_path)
-      Dir.mkdir(exercise_docs_path)
-      Dir.mkdir(exercise_meta_path)
+        Dir.mkdir(exercise_path)
+        Dir.mkdir(exercise_docs_path)
+        Dir.mkdir(exercise_meta_path)
 
-      File.open(exercise_docs_path / "instructions.md", "w") {|f|f.write params[:instructions_markdown] }
-      File.open(exercise_meta_path / "design.md", "w") {|f|f.write params[:design_markdown] }
-      File.open(exercise_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
+        File.open(exercise_docs_path / "instructions.md", "w") {|f|f.write params[:instructions_markdown] }
+        File.open(exercise_meta_path / "design.md", "w") {|f|f.write params[:design_markdown] }
+        File.open(exercise_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
 
-      Dir.chdir(tmp_path) do
         `git add .`
         `git config user.name #{current_user.name}`
         `git config user.email #{current_user.email}`
