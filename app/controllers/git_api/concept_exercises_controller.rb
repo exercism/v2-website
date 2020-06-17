@@ -20,13 +20,12 @@ module GitAPI
 
       uuid = SecureRandom.uuid.gsub('-', '')
       tmp_path = Pathname.new("/tmp/#{uuid}")
-      branch_name = "#{params[:track_slug]}/#{params[:exercise_slug]}-#{uuid}"
 
       `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-bot/v3.git #{tmp_path}`
 
       Dir.chdir(tmp_path) do
         `git remote add upstream https://github.com/exercism/v3.git`
-        `git fetch upstream master`
+        `git fetch upstream`
         `git checkout --no-track -b #{branch_name} upstream/master`
 
         exercise_path = tmp_path / "languages" / params[:track_slug] / "exercises" / "concept" / params[:exercise_slug]
@@ -58,6 +57,27 @@ module GitAPI
       render json: {
         error: { type: type }
       }, status: 400
+    end
+
+    private
+
+    def branch_name
+      @branch_name ||= begin
+        potential_branch_name = "#{params[:track_slug]}/#{params[:exercise_slug]}"
+        suffix = 1
+
+        while branch_name_not_unique(potential_branch_name)
+          potential_branch_name = "#{params[:track_slug]}/#{params[:exercise_slug]}-#{suffix}"
+          suffix += 1
+        end
+
+        potential_branch_name
+      end
+    end
+
+    def branch_name_not_unique(branch_name)
+      `git show-ref --verify --quiet refs/remotes/origin/#{branch_name}`
+      return $?.success?
     end
   end
 end
