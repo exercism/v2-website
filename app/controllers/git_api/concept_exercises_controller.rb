@@ -11,7 +11,7 @@ module GitAPI
       end
 
       # Validate size of optional fields
-      return render_error(:"too_large_introduction_markdown") if params[:introduction_markdown].present? && params[:introduction_markdown].size > 1.megabyte
+      return render_error(:too_large_introduction_markdown) if params[:introduction_markdown]&.size.to_i > 1.megabyte
 
       # Validate regexps
       return render_error(:invalid_exercise_slug) if params[:exercise_slug] =~ Regexp.new("[^a-zA-Z0-9-]")
