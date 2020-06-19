@@ -25,7 +25,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
 
 gem 'commonmarker', require: false
-platforms: [:mingw, :mswin, :x64_mingw] do
+platforms :mingw, :mswin, :x64_mingw do
   gem 'rugged', '<= 0.27'
   gem 'tzinfo-data'
   gem 'wdm', '>= 0.1.0'
