@@ -25,7 +25,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
 
 gem 'commonmarker', require: false
-gem 'rugged'
+gem 'rugged' if !Gem.win_platform?
+gem 'rugged', '<= 0.27' if Gem.win_platform?
+gem 'tzinfo-data' if Gem.win_platform?
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'loofah'
 gem 'lmdb'
 gem 'octokit'

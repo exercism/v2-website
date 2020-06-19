@@ -170,6 +170,7 @@ GEM
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
+    ffi (1.12.2-x64-mingw32)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -280,10 +281,12 @@ GEM
     minitest-stub-const (0.6)
     mocha (1.11.2)
     msgpack (1.3.3)
+    msgpack (1.3.3-x64-mingw32)
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     mysql2 (0.5.3)
+    mysql2 (0.5.3-x64-mingw32)
     naught (1.1.0)
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
@@ -291,6 +294,8 @@ GEM
     netrc (0.11.0)
     nio4r (2.5.2)
     nokogiri (1.10.9)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.9-x64-mingw32)
       mini_portile2 (~> 2.4.0)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
@@ -384,6 +389,12 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rest-client (2.1.0-x64-mingw32)
+      ffi (~> 1.9)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rexml (3.2.4)
     rubocop (0.84.0)
       parallel (~> 1.10)
@@ -404,9 +415,11 @@ GEM
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
     rubyzip (2.3.0)
-    rugged (1.0.0)
+    rugged (0.27.0)
     safe_yaml (1.0.5)
     sassc (2.3.0)
+      ffi (~> 1.9)
+    sassc (2.3.0-x64-mingw32)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
@@ -459,15 +472,19 @@ GEM
       simple_oauth (~> 0.3.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.1)
+      tzinfo (>= 1.0.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    unf_ext (0.0.7.7-x64-mingw32)
     unicode-display_width (1.7.0)
     uniform_notifier (1.13.0)
     warden (1.2.8)
       rack (>= 2.0.6)
+    wdm (0.1.1)
     web-console (4.0.2)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -494,6 +511,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   ansi-to-html
@@ -548,7 +566,7 @@ DEPENDENCIES
   rest-client
   rubocop
   rubyzip
-  rugged
+  rugged (<= 0.27)
   sassc-rails
   selenium-webdriver
   simplecov
@@ -556,7 +574,9 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   timecop
   twitter
+  tzinfo-data
   uglifier (>= 1.3.0)
+  wdm (>= 0.1.0)
   web-console (>= 3.3.0)
   webdrivers (~> 4.0)
   webmock
