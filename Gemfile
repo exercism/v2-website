@@ -31,7 +31,7 @@ platforms :mingw, :mswin, :x64_mingw do
   gem 'wdm', '>= 0.1.0'
 end
 
-platforms: [:ruby] do
+platforms :ruby do
   gem 'rugged'
 end
 gem 'loofah'
