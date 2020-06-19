@@ -25,10 +25,15 @@ gem 'uglifier', '>= 1.3.0'
 gem 'premailer-rails'
 
 gem 'commonmarker', require: false
-gem 'rugged' if !Gem.win_platform?
-gem 'rugged', '<= 0.27' if Gem.win_platform?
-gem 'tzinfo-data' if Gem.win_platform?
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+platforms: [:mingw, :mswin, :x64_mingw] do
+  gem 'rugged', '<= 0.27'
+  gem 'tzinfo-data'
+  gem 'wdm', '>= 0.1.0'
+end
+
+platforms: [:ruby] do
+  gem 'rugged'
+end
 gem 'loofah'
 gem 'lmdb'
 gem 'octokit'
