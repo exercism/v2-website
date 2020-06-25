@@ -41,6 +41,10 @@ module Research
       joins(:exercise)
     end
 
+    def submissions
+      Submission.where(solution: solutions)
+    end
+
     def language_part(language, part)
       solutions.
         by_language_part(language_slug: language, part: part).
