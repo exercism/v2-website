@@ -42,7 +42,7 @@ module GitAPI
         File.open(exercise_docs_path / "instructions.md", "w") {|f|f.write params[:instructions_markdown] }
         File.open(exercise_docs_path / "introduction.md", "w") {|f|f.write params[:introduction_markdown] } if params[:introduction_markdown].present?
         File.open(exercise_meta_path / "design.md", "w") {|f|f.write params[:design_markdown] }
-        File.open(exercise_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
+        File.open(exercise_meta_path / params[:example_filename], "w") {|f|f.write params[:example_code] }
 
         `git add .`
         `git config user.name #{current_user.name}`
