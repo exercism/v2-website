@@ -60,6 +60,16 @@ class My::SettingsController < MyController
     end
   end
 
+  def set_introducing_research_modal
+    current_user.update!(show_introducing_research_modal: false)
+
+    respond_to do |format|
+      format.html { redirect_to "https://research.exercism.io" }
+      format.js { render js: "window.closeModal()" }
+    end
+  end
+
+
   private
 
   def update_password

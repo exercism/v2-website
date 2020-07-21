@@ -267,6 +267,7 @@ Rails.application.routes.draw do
       patch :cancel_unconfirmed_email
       patch :set_default_allow_comments
       patch :set_viewed_v3_patience_modal
+      patch :set_introducing_research_modal
 
       get :confirm_delete_account
       delete :delete_account

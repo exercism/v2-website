@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_144100) do
+ActiveRecord::Schema.define(version: 2020_07_21_124114) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -698,6 +698,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_144100) do
     t.boolean "may_edit_changelog", default: false, null: false
     t.datetime "joined_research_at"
     t.boolean "show_v3_patience_modal", default: true, null: false
+    t.boolean "show_introducing_research_modal", default: true, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true

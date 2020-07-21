@@ -3,15 +3,18 @@
     .lo-container
       .pure-g
         .pure-u-1.pure-u-md-1-2.lhs
+          =graphical_image "laptop-people.png"
         .pure-u-1.pure-u-md-1-2.rhs
           %h1
             =image "logo-green.png", "Exercism logo", title: "Exercism"
             %span exercism
             |&nbsp;research
 
-          %h2 Working with leading researchers to understand how we develop programming skills.
-          %p We are contributing to the world's knowledge about how people learn and use programming skills. We're using this knowledge to improve Exercism in order to provide opportunity for people of all backgrounds by helping them develop their programming skills through practice and mentorship. 
-          %p Come and help us, and have some fun along the way.
+          %h2 Crowd-sourcing coding examples to develop new understandings of how we program
+          %p We are working with our community and leading researchers to build a deeper understanding of how people code and think. We're using this knowledge to improve Exercism in order to provide opportunity for people of all backgrounds by helping them develop their programming skills through practice and mentorship. 
+          %p 
+            %strong Come and help us, 
+            and have some fun along the way.
           .btns
             =link_to "Sign up", new_user_registration_path, class: "pure-button sign-up-button"
             =link_to "Log in", new_user_session_path, class: "pure-button languages-button"
@@ -22,3 +25,10 @@
               independent
               not-for-profit
               organisation.
+
+  %section.logos-section
+    .lo-container
+      %h3 In partnership with:
+      =image "research/sloan-logo.png", "The Sloan Foundation"
+      =image "research/chicago-logo.png", "University of Chicago"
+      =image "research/wisconsin-logo.png", "University of Wisconsin-Madison"

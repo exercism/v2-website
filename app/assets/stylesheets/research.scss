@@ -16,6 +16,9 @@ body.namespace-research {
         flex: 1 0 100%;
         display: flex;
         flex-direction: column;
+        .lo-container {
+            width:100%;
+        }
     }
     .lo-research-centralised-section {
         flex: 1;
