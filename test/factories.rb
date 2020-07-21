@@ -230,6 +230,7 @@ FactoryBot.define do
     password { "foobar123" }
     current_sign_in_at { Time.now }
     show_v3_patience_modal { false }
+    show_introducing_research_modal { false }
 
     trait :mentor do
       is_mentor { true }

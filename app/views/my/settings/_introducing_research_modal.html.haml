@@ -1,0 +1,23 @@
+.main-section
+  %h2 Introducing Exercism Research 🎉
+  %p 
+    Over the last few months we've been working on building 
+    %strong Exercism Research 
+    \- a new part of Exercism where we work with leading researchers to help evolve our collective knowledge about programming. 
+  %p Our first experiment explores how people think differently based on the programming languages they know, and how we use that understanding to improve the way we teach new languages.
+  %p 
+    Please help us by 
+    %strong solving some 15-minute challenges 
+    in a variety of languages!
+
+  .buttons
+    =link_to "Visit Exercism Research", set_introducing_research_modal_my_settings_path, class: 'pure-button yes-button',  method: :patch
+    =link_to "Close", set_introducing_research_modal_my_settings_path(allow_comments: false, update_solutions: true),  method: :patch, remote: true, class: "pure-button no-button"
+
+  .sponsors
+    %h3 In partnership with
+    =image "research/sloan-logo.png", "The Sloan Foundation"
+    =image "research/chicago-logo.png", "University of Chicago"
+    =image "research/wisconsin-logo.png", "University of Wisconsin-Madison"
+
+

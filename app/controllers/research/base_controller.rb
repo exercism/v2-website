@@ -4,7 +4,7 @@ module Research
     before_action :check_user_joined_research!
 
     def check_user_joined_research!
-      redirect_to research_join_path unless current_user.joined_research?
+      redirect_to research_join_path unless user_signed_in? && current_user.joined_research?
     end
   end
 end

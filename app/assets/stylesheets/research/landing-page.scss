@@ -7,21 +7,29 @@ body.controller-research-pages.action footer {
 #research-landing-page {
     .welcome-section {
         .lhs {
-            display:none;
-            @include width-medium() {
-                display: block;
+            z-index: -1;
+            padding-top:30px;
+            img {
+                width:100%;
+                display:block;
             }
             @include width-medium() {
                 padding-bottom:50px; 
+                padding-top:0px;
+
+                img {
+                    width:80%;
+                    margin-top:80px;
+                }
             }
-            z-index: -1;
+
         }
         .rhs {
             padding-top:50px;
             margin-bottom:50px;
             @include width-medium() {
                 padding-top:80px;
-                margin-bottom:130px;
+                margin-bottom:80px;
             }
             h1 {
                 @include header-font;
@@ -91,6 +99,23 @@ body.controller-research-pages.action footer {
                     padding:15px 70px;
                 }
             }
+        }
+    }
+    .logos-section {
+        background: #f3f3f3;
+        border-top: 1px solid #ddd;
+        text-align: center;
+        padding: 30px 0;
+        h3 {
+            @include font-size(15, 15);
+            margin-bottom: 5px;
+            color: #999;
+            font-weight: $fw-regular;
+        }
+        img {
+            width: 150px;
+            margin: 0 15px;
+            vertical-align: middle;
         }
     }
 }

@@ -46,6 +46,11 @@
     :javascript
       showModal('v3-patience', '#{j render "my/settings/v3_patience_modal"}')
 
+-elsif current_user.show_introducing_research_modal?
+  -content_for :js do
+    :javascript
+      showModal('introducing-research', '#{j render "my/settings/introducing_research_modal"}')
+
 -elsif show_decide_default_allow_comments_modal?
   -content_for :js do
     :javascript
