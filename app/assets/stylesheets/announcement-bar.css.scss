@@ -5,9 +5,9 @@
     background:#fff;//$error-red-color;
     padding:10px;
     text-align:center;
-    color: #666;
+    color: #333;
     a {
-        color: #666;
-        font-weight:normal;
+        color: #444;
+        font-weight:$fw-semibold;
     }
 }
