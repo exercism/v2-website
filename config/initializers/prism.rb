@@ -165,6 +165,7 @@ Exercism::PrismLanguageMappings = {
 
   "ballerina" => "go",
   "ceylon" => "kotlin",
+  "clojurescript" => "clojure",
   "cfml" => "markup",
   "coq" => "verilog", # close enough for now
   "delphi" => "pascal",
@@ -202,6 +203,7 @@ Exercism::PrismFileMappings = {
   "bro": %w{bro},
   "c": %w{c cats idc},
   "clojure": %w{clj boot cl2 cljc cljs cljs.hl cljscm cljx hic},
+  "clojurescript": %w{cljs},
   "csharp": %w{cs csx},
   "css": %w{css},
   "clike": %w{},
