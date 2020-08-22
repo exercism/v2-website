@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     end
     resources :mentors, only: [:index]
     namespace :data do
+      resource :experiment, only: [:show]
       resources :tracks, only: [:index, :show] do
         resources :exercises, only: [:show]
       end
