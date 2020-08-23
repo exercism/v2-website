@@ -24,7 +24,7 @@ module GitAPI
       uuid = SecureRandom.uuid.gsub('-', '')
       tmp_path = Pathname.new("/tmp/#{uuid}")
 
-      `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-bot/v3.git #{tmp_path}`
+      `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-external-bot/v3.git #{tmp_path}`
 
       Dir.chdir(tmp_path) do
         `git remote add upstream https://github.com/exercism/v3.git`
