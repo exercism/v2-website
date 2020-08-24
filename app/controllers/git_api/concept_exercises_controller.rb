@@ -24,7 +24,7 @@ module GitAPI
       uuid = SecureRandom.uuid.gsub('-', '')
       tmp_path = Pathname.new("/tmp/#{uuid}")
 
-      `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-bot/v3.git #{tmp_path}`
+      `git clone https://#{Rails.application.secrets.exercism_bot_credentials}@github.com/exercism-external-bot/v3.git #{tmp_path}`
 
       Dir.chdir(tmp_path) do
         `git remote add upstream https://github.com/exercism/v3.git`
@@ -35,9 +35,9 @@ module GitAPI
         exercise_docs_path = exercise_path / ".docs"
         exercise_meta_path = exercise_path / ".meta"
 
-        Dir.mkdir(exercise_path)
-        Dir.mkdir(exercise_docs_path)
-        Dir.mkdir(exercise_meta_path)
+        FileUtils.mkdir_p(exercise_path)
+        FileUtils.mkdir_p(exercise_docs_path)
+        FileUtils.mkdir_p(exercise_meta_path)
 
         File.open(exercise_docs_path / "instructions.md", "w") {|f|f.write params[:instructions_markdown] }
         File.open(exercise_docs_path / "introduction.md", "w") {|f|f.write params[:introduction_markdown] } if params[:introduction_markdown].present?
