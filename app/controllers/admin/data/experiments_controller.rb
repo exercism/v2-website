@@ -1,4 +1,4 @@
-class Admin::Data::ExperimentController < AdminController
+class Admin::Data::ExperimentsController < AdminController
   before_action :restrict_to_admins!
 
   def show
