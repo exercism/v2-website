@@ -6,7 +6,7 @@
 
 ## Development setup
 
-This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to run it locally:
+Welcome to the helping file :-This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to run it locally:
 1) Setup a local development environment with the steps below.
 2) Use a pre-made Docker setup. We don't maintain an official Docker repo, but you can try [this version](https://github.com/unused/exercism-docker) kindly maintained by [@unused](https://github.com/unused).
 
