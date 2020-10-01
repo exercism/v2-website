@@ -13,7 +13,7 @@ Please remember our [Code of Conduct](https://exercism.io/code-of-conduct) when 
 These are our style guidelines which are constantly evolving.
 
 ### Ruby Code
-- Use parenthesis in Ruby. e.g. `some_method(arg1, arg2)` rather than `some_method arg1, arg2`
+- Use parentheses in Ruby. e.g. `some_method(arg1, arg2)` rather than `some_method arg1, arg2`
 
 ### Ruby Tests
 - The Ruby Code guidelines apply, other than for calling factories, where we prefer the style `create :user, name: "Jeremy Walker", handle: "iHiD"`
