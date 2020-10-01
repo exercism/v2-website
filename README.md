@@ -98,6 +98,7 @@ CreateSolution.(u, Exercise.find_by(track: t, slug: 'triangle'))
 
 
 ### Linters
+thanks
 
 To ensure Exercism's accessibility, we've added a few tools. Before submitting a PR, please make sure to run `bundle exec rubocop` and `bundle exec haml-lint`.
 
