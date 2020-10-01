@@ -10,7 +10,7 @@ This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to
 1) Setup a local development environment with the steps below.
 2) Use a pre-made Docker setup. We don't maintain an official Docker repo, but you can try [this version](https://github.com/unused/exercism-docker) kindly maintained by [@unused](https://github.com/unused).
 
-### Things to install
+### Necessary installs : 
 
 - **Ruby**: We recommend Ruby >=2.4 (and this will soon become a requirement). We recommend using [RVM](http://rvm.io/)
 - **MySQL**: MySQL >=5.7 required. Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
