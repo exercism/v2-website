@@ -1,4 +1,4 @@
-# Exercism website
+# Best Exercism website
 
 [![Build Status](https://travis-ci.com/exercism/website.svg?branch=master)](https://travis-ci.com/exercism/website)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a287df685c8499df632e/maintainability)](https://codeclimate.com/github/exercism/website/maintainability)
