@@ -4,20 +4,20 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a287df685c8499df632e/maintainability)](https://codeclimate.com/github/exercism/website/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a287df685c8499df632e/test_coverage)](https://codeclimate.com/github/exercism/website/test_coverage)
 
-## Development setup
+## Development Setup
 
 This is a Ruby on Rails (5.2) application backed by MySQL. There are two ways to run it locally:
 1) Setup a local development environment with the steps below.
 2) Use a pre-made Docker setup. We don't maintain an official Docker repo, but you can try [this version](https://github.com/unused/exercism-docker) kindly maintained by [@unused](https://github.com/unused).
 
-### Things to install
+### Things To Install
 
 - **Ruby**: We recommend Ruby >=2.4 (and this will soon become a requirement). We recommend using [RVM](http://rvm.io/)
 - **MySQL**: MySQL >=5.7 required. Install via your system's package manager or follow the official [Installation instructions](https://dev.mysql.com/downloads/mysql/)
 - **Yarn**: Yarn handles front-end dependencies. See Yarn's [installation instructions](https://yarnpkg.com/lang/en/docs/install).
 - **Redis**: Redis >=2.8 required. Sidekiq uses Redis to store all of its job and operational data. [Installation instructions](https://redis.io/topics/quickstart) or checkout your OS's package manager.
 
-### Configure the database
+### Configure The Database
 
 Something like this will then get a working database setup:
 
