@@ -1,7 +1,7 @@
 require "prism_js"
 
 PrismJS.configure do |config|
-  config.cdn = "//cdnjs.cloudflare.com/ajax/libs/prism/1.21.0"
+  config.cdn = "//cdnjs.cloudflare.com/ajax/libs/prism/1.23.0"
 end
 
 Exercism::PrismLanguages = %w{
