@@ -2,6 +2,8 @@ module API
   module Webhooks
     class AnalyzersController < WebhooksController
       def create
+        return head :ok
+
         repo = params[:repository][:name]
         track_slug = repo.gsub(/-analyzer$/, '').to_sym
 

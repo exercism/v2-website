@@ -4,6 +4,8 @@ module API
       before_action :verify_github_webhook
 
       def create
+        return head :ok
+
         contribution = OpenSource::Contribution.new(payload_params)
 
         unless contribution.complete?

@@ -6,6 +6,8 @@ module API
       MASTER_REF = "refs/heads/master"
 
       def create
+        return head :ok
+
         return unless pushed_to_master?
 
         repo_update = RepoUpdate.new(slug: slug)
