@@ -13,6 +13,15 @@ namespace :puma_service do
 end
 
 namespace :git_sync do
+  task :stop do
+    on roles(:git_fetch), in: :groups, limit: 3, wait: 10 do
+      execute "sudo /usr/sbin/service exercism_git_fetch stop"
+    end
+    on roles(:git_sync), in: :groups, limit: 3, wait: 10 do
+      execute "sudo /usr/sbin/service exercism_git_sync stop"
+    end
+  end
+
   task :restart do
     on roles(:git_fetch), in: :groups, limit: 3, wait: 10 do
       execute "sudo /usr/sbin/service exercism_git_fetch restart"
@@ -76,6 +85,6 @@ end
 after "deploy:assets:precompile", "assets:upload"
 
 after "deploy:published", "delayed_job:restart"
-after "deploy:published", "git_sync:restart"
+#after "deploy:published", "git_sync:restart"
 after "deploy:published", "puma_service:restart"
 after "deploy:published", "processors:restart"
