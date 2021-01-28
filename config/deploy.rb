@@ -4,8 +4,8 @@ lock "~> 3.8"
 @application = "exercism"
 
 set :application, @application
-set :repo_url, "git@github.com:exercism/website.git"
-set :branch, 'master'
+set :repo_url, "git@github.com:exercism/v2-website.git"
+set :branch, 'main'
 
 set :linked_files, %w{config/database.yml config/secrets.yml config/smtp.yml config/recaptcha.yml config/twitter_accounts.yml}
 set :linked_dirs, fetch(:linked_dirs, []).push(

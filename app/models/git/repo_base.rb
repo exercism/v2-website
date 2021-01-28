@@ -73,7 +73,7 @@ class Git::RepoBase
   end
 
   def main_branch_ref
-    "origin/master"
+    "origin/main"
   end
 
   def auto_fetch?
