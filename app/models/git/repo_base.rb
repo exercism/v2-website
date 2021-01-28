@@ -15,7 +15,7 @@ class Git::RepoBase
   end
 
   def fetch!
-    repo.fetch('origin')
+    #repo.fetch('origin')
   end
 
   def head
@@ -53,7 +53,7 @@ class Git::RepoBase
   def repo
     @repo ||= if repo_dir_exists?
       r = Rugged::Repository.new(repo_dir)
-      r.fetch('origin') if auto_fetch?
+      #r.fetch('origin') if auto_fetch?
       r
     else
       Rugged::Repository.clone_at(repo_url, repo_dir, bare: true)

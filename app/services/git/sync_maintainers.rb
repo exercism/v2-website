@@ -6,6 +6,7 @@ class Git::SyncMaintainers
   initialize_with :track, :maintainer_config
 
   def call
+    return
     if maintainer_config.nil?
       Rails.logger.warn "Skipping due to nil maintainer config"
       return

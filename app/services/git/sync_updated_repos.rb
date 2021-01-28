@@ -14,6 +14,7 @@ class Git::SyncUpdatedRepos
   end
 
   def run
+    return
     loop do
       sync
       sleep QUIET_PERIOD

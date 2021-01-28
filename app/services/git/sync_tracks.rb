@@ -10,6 +10,7 @@ class Git::SyncTracks
   end
 
   def call
+    return
     stdout.puts "Syncing tracks"
     fetch_problem_specs
     sync_tracks

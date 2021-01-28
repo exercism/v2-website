@@ -10,6 +10,8 @@ class Git::SyncTrack
   end
 
   def call
+    return
+
     if repo_url.start_with?("http://example.com")
       puts "Skipping sync for #{repo_url}"
       state_db.mark_synced(track)

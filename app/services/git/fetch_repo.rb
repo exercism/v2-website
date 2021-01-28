@@ -6,6 +6,7 @@ class Git::FetchRepo
   initialize_with :repo
 
   def call
+    return
     Rails.logger.info "Fetching #{repo.repo_url}"
     repo.fetch!
     Rails.logger.info "Done #{repo.repo_url}. Current HEAD commit is #{repo.head}"

@@ -10,6 +10,7 @@ class Git::FetchUpdatedRepos
   end
 
   def run
+    return
     loop do
       fetch
       sleep QUIET_PERIOD
@@ -17,6 +18,7 @@ class Git::FetchUpdatedRepos
   end
 
   def fetch
+    return
     repo_updates.each do |update|
       begin
         FetchRepoUpdateJob.perform_now(update.id)

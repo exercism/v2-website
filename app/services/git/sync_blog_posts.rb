@@ -6,6 +6,7 @@ class Git::SyncBlogPosts
   end
 
   def call
+    return
     upsert_blog_posts!
     delete_old_blog_posts!
   end

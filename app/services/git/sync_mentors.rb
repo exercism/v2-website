@@ -6,6 +6,7 @@ class Git::SyncMentors
   end
 
   def call
+    return
     sync_mentors!
   end
 

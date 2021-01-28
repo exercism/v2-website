@@ -2,6 +2,7 @@ class Git::UpdateRepos
   include Mandate
 
   def call
+    return
     update_tracks
     update_problem_specs
     update_website_copy
