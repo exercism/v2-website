@@ -272,7 +272,9 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2020.0512)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -325,7 +327,8 @@ GEM
       aws-sdk-sns
       aws-sdk-sqs
     public_suffix (4.0.5)
-    puma (3.12.6)
+    puma (4.3.8)
+      nio4r (~> 2.0)
     rack (2.2.2)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -539,7 +542,7 @@ DEPENDENCIES
   omniauth-github
   premailer-rails
   propono
-  puma (~> 3.12)
+  puma (~> 4.3)
   rack-cors
   rails (~> 6.0.0)
   rails-controller-testing
